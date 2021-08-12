@@ -1,8 +1,8 @@
 {
-  "name": "svelte-ui-kit",
+  "name": "svelte-ux",
   "author": "Sean Lynch <techniq35@gmail.com>",
   "license": "MIT",
-  "repository": "techniq/svelte-ui-kit",
+  "repository": "techniq/svelte-ux",
   "version": "0.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
