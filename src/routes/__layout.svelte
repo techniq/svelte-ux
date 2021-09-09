@@ -9,12 +9,12 @@
 	<nav slot="nav" class="nav h-full">
 		<div class="pt-4 pb-2 pl-4 text-sm text-gray-200 font-bold">Components</div>
 
-		<MenuItem text="AppBar" path="/docs/AppBar" class="pl-6 py-3" />
-		<MenuItem text="Breadcrumb" path="/docs/Breadcrumb" class="pl-6 py-3" />
-		<MenuItem text="Button" path="/docs/Button" class="pl-6 py-3" />
-		<MenuItem text="Grid" path="/docs/Grid" class="pl-6 py-3" />
-		<MenuItem text="Icon" path="/docs/Icon" class="pl-6 py-3" />
-		<MenuItem text="Stack" path="/docs/Stack" class="pl-6 py-3" />
+		<MenuItem text="AppBar" path="/docs/components/AppBar" class="pl-6 py-2" />
+		<MenuItem text="Breadcrumb" path="/docs/components/Breadcrumb" class="pl-6 py-2" />
+		<MenuItem text="Button" path="/docs/components/Button" class="pl-6 py-2" />
+		<MenuItem text="Grid" path="/docs/components/Grid" class="pl-6 py-2" />
+		<MenuItem text="Icon" path="/docs/components/Icon" class="pl-6 py-2" />
+		<MenuItem text="Stack" path="/docs/components/Stack" class="pl-6 py-2" />
 	</nav>
 
 	<slot />
