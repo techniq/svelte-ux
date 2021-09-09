@@ -4,7 +4,7 @@
 </script>
 
 <div class="border border-black/20 rounded bg-white">
-	<div class="p-2">
+	<div class="p-4">
 		<slot />
 	</div>
 

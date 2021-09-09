@@ -10,10 +10,13 @@
 		<div class="pt-4 pb-2 pl-4 text-sm text-gray-200 font-bold">Components</div>
 
 		<MenuItem text="AppBar" path="/docs/components/AppBar" class="pl-6 py-2" />
+		<MenuItem text="Avatar" path="/docs/components/Avatar" class="pl-6 py-2" />
 		<MenuItem text="Breadcrumb" path="/docs/components/Breadcrumb" class="pl-6 py-2" />
 		<MenuItem text="Button" path="/docs/components/Button" class="pl-6 py-2" />
+		<MenuItem text="Card" path="/docs/components/Card" class="pl-6 py-2" />
 		<MenuItem text="Grid" path="/docs/components/Grid" class="pl-6 py-2" />
 		<MenuItem text="Icon" path="/docs/components/Icon" class="pl-6 py-2" />
+		<MenuItem text="Progress" path="/docs/components/Progress" class="pl-6 py-2" />
 		<MenuItem text="Stack" path="/docs/components/Stack" class="pl-6 py-2" />
 	</nav>
 
