@@ -23,7 +23,7 @@
 	$: _class = clsx(
 		'button',
 		'transition duration-300 ring-black/20',
-		!filled && 'hover:bg-black/4',
+		!filled && 'hover:bg-black/5',
 		'focus:outline-none focus-visible:ring-1',
 		circle ? 'rounded-full' : 'rounded',
 		small ? 'text-xs' : 'text-sm',
