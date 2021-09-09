@@ -28,6 +28,6 @@ function codePreview() {
 export default {
 	extensions: ['.md', '.svx'],
 	layout: './src/docs/Layout.svelte',
-	remarkPlugins: [codePreview],
-	highlight: false
+	remarkPlugins: [codePreview]
+	// highlight: false
 };
