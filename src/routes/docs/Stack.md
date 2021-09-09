@@ -1,10 +1,10 @@
 <script lang="ts">
+  import { mdiFilterVariant } from '@mdi/js';
+
 	import Button from '$lib/components/Button.svelte';
 	import Stack from '$lib/components/Stack.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 	import SectionDivider from '$lib/components/SectionDivider.svelte';
-
-  const mdiFilterVariant = 'M6,13H18V11H6M3,6V8H21V6M10,18H14V16H10V18Z'
 </script>
 
 <SectionDivider>Horizontal</SectionDivider>
