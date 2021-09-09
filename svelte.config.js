@@ -11,8 +11,8 @@ const config = {
 
 	kit: {
 		adapter: staticAdapter(),
-		target: '#svelte'
-		// ssr: false
+		target: '#svelte',
+		ssr: false // TODO: Re-enable after identifing/fixing layout shift
 	}
 };
 
