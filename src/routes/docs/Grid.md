@@ -5,63 +5,75 @@
 
 ## Default
 
-<Grid>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-</Grid>
+<Preview>
+  <Grid>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+  </Grid>
+</Preview>
 
 ## Gap
 
-<Grid gap={8}>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-</Grid>
+<Preview>
+  <Grid gap={8}>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+  </Grid>
+</Preview>
 
 ## Columns
 
-<Grid columns={4}>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-</Grid>
+<Preview>
+  <Grid columns={4}>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+  </Grid>
+</Preview>
 
 ## Columns with gap
 
-<Grid columns={4} gap={8}>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-</Grid>
+<Preview>
+  <Grid columns={4} gap={8}>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+  </Grid>
+</Preview>
 
 ## Auto Columns
 
-<Grid autoColumns="160px" gap={8}>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-</Grid>
+<Preview>
+  <Grid autoColumns="160px" gap={8}>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+  </Grid>
+</Preview>
 
 ## Template
 
-<Grid template="auto 1fr auto" gap={8}>
-  <div class="border">item</div>
-  <div class="border">item</div>
-  <div class="border">item</div>
-</Grid>
+<Preview>
+  <Grid template="auto 1fr auto" gap={8}>
+    <div class="border">item</div>
+    <div class="border">item</div>
+    <div class="border">item</div>
+  </Grid>
+</Preview>

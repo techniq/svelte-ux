@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let code;
+	export let code = null;
 	export let language = 'svelte';
 </script>
 
@@ -8,11 +8,13 @@
 		<slot />
 	</div>
 
-	<pre
-		class="language-{language} rounded-lg"
-		style="margin: 0">
+	{#if code}
+		<pre
+			class="language-{language} rounded-lg"
+			style="margin: 0">
 		<code class="language-{language}">
 			{@html code}
 		</code>
 	</pre>
+	{/if}
 </div>

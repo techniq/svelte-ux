@@ -13,4 +13,6 @@
 
 ## Material design icons
 
-<Icon path={mdiAccountPath} />
+<Preview>
+	<Icon path={mdiAccountPath} />
+</Preview>

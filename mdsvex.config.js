@@ -7,16 +7,22 @@ import 'prism-svelte';
 
 const { format } = prettier;
 
+/**
+ * Inject `code` prop to <Preview>
+ */
 function codePreview() {
 	function visitor(node) {
-		if (node.lang !== 'svelte' && !node.value.startsWith('<script')) {
-			const formattedCode = format(node.value, {
+		if (node.value.startsWith('<Preview>')) {
+			// Get contents between <Preview> tag
+			const code = node.value.match(/<Preview>([^]*)<\/Preview>/)[1];
+
+			const formattedCode = format(code, {
 				parser: 'svelte',
 				plugins: [typescriptPlugin, sveltePlugin],
 				svelteBracketNewLine: true
 			});
 			const highlightedCode = Prism.highlight(formattedCode, Prism.languages.svelte, 'svelte');
-			node.value = `<Preview code="{\`${highlightedCode}\`}" language="svelte">${node.value}</Preview>`;
+			node.value = `<Preview code="{\`${highlightedCode}\`}" language="svelte">${code}</Preview>`;
 		}
 	}
 
