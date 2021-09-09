@@ -14,8 +14,11 @@
 		<MenuItem text="Breadcrumb" path="/docs/components/Breadcrumb" class="pl-6 py-2" />
 		<MenuItem text="Button" path="/docs/components/Button" class="pl-6 py-2" />
 		<MenuItem text="Card" path="/docs/components/Card" class="pl-6 py-2" />
+		<MenuItem text="Dialog" path="/docs/components/Dialog" class="pl-6 py-2" />
+		<MenuItem text="Drawer" path="/docs/components/Drawer" class="pl-6 py-2" />
 		<MenuItem text="Grid" path="/docs/components/Grid" class="pl-6 py-2" />
 		<MenuItem text="Icon" path="/docs/components/Icon" class="pl-6 py-2" />
+		<MenuItem text="Notification" path="/docs/components/Notification" class="pl-6 py-2" />
 		<MenuItem text="Progress" path="/docs/components/Progress" class="pl-6 py-2" />
 		<MenuItem text="Stack" path="/docs/components/Stack" class="pl-6 py-2" />
 	</nav>

@@ -1,0 +1,87 @@
+<script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+  // https://twitter.com/SvelteSociety/status/1306310173393186816
+  // https://svelte.dev/repl/033e824fad0a4e34907666e7196caec4?version=3.25.1
+  import { scale } from 'svelte/transition';
+  import { quadIn } from 'svelte/easing';
+
+  import portalAction from '$lib/actions/portal';
+
+  import Backdrop from './Backdrop.svelte';
+
+  const dispatch = createEventDispatcher();
+
+  export let open = false;
+  export let portal = true;
+  export let clickAway = false;
+
+  let dialogEl: HTMLDivElement;
+  let actionsEl: HTMLDivElement;
+
+  function onClick(e: MouseEvent) {
+    try {
+      // https://stackoverflow.com/questions/28900077/why-is-event-target-not-element-in-typescript
+      if (!(e.target instanceof Element)) {
+        return;
+      }
+
+      if (actionsEl == null) {
+        // Dialog element not open and e.target no longer within trigger (ex. clear button pressed on TableSelectField)
+      } else if (e.target != actionsEl && actionsEl.contains(e.target)) {
+        // Close if action button clicked on (but not container).  Can be disabled with `e.stopPropagation()`
+        // console.log('clicked:actions', e.target, actionsEl);
+        open = false;
+      } else if (dialogEl.contains(e.target)) {
+        // console.log('clicked:within', e.target);
+      } else {
+        // console.log('clicked:other', e.target);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  $: if (open === false) {
+    dispatch('close', { open });
+  }
+</script>
+
+{#if open}
+  <Backdrop
+    on:click={() => {
+      if (clickAway) {
+        open = false;
+      }
+    }}
+  />
+
+  <div
+    class="dialog fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center pointer-events-none"
+    on:click={onClick}
+    use:portalAction={{ enabled: portal }}
+  >
+    <div
+      class="rounded bg-white elevation-4 overflow-y-auto pointer-events-auto {$$props.class}"
+      style={$$props.style}
+      transition:scale={{ duration: 150, easing: quadIn, delay: 150 }}
+      bind:this={dialogEl}
+    >
+      <slot name="header">
+        {#if $$slots.title}
+          <div class="text-xl font-bold pt-4 pb-2 px-6">
+            <slot name="title" />
+          </div>
+        {/if}
+      </slot>
+
+      <slot />
+
+      <div
+        class="actions flex w-full justify-end p-2 bg-black/4 border-t"
+        bind:this={actionsEl}
+      >
+        <slot name="actions" />
+      </div>
+    </div>
+  </div>
+{/if}
