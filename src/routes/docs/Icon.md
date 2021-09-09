@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mdiAccountPath, adjustmentsOutline } from '@mdi/js';
+	import { mdiAccount } from '@mdi/js';
 
 	import Icon from '$lib/components/Icon.svelte';
 	import Preview from '$lib/components/Preview.svelte';
@@ -8,5 +8,5 @@
 ## Material design icons
 
 <Preview>
-	<Icon path={mdiAccountPath} />
+	<Icon path={mdiAccount} />
 </Preview>

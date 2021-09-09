@@ -64,19 +64,17 @@
 
 ## Custom item and divider
 
-<!-- <Preview>
+<Preview>
   <Breadcrumb items={labeledItems}>
     <span slot="item" let:item>
       <span class="text-secondary text-sm font-extrabold">{item.label}:</span>
       <span class="text-secondary text-sm">{item.value}</span>
     </span>
-
     <span slot="divider">
       <DividerDot class="text-secondary" />
     </span>
-
   </Breadcrumb>
-</Preview> -->
+</Preview>
 
 ## Color w/ inherit
 
