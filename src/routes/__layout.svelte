@@ -12,7 +12,7 @@
 	:global(h2) {
 		@apply text-lg font-semibold mt-8 mb-1 ml-2;
 	}
-	:global(h2:first-of-type) {
+	:global(h2:first-child) {
 		@apply mt-0;
 	}
 </style>
