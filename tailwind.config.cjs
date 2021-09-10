@@ -9,6 +9,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				accent: colors.blue,
 				sky: colors.sky
 			}
 		}
