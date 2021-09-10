@@ -43,7 +43,7 @@
 <Preview>
   <Breadcrumb items={labeledItems}>
     <span slot="item" let:item>
-      <div class="text-secondary text-xs uppercase">{item.label}</div>
+      <div class="text-black/50 text-xs uppercase">{item.label}</div>
       <div>{item.value}</div>
     </span>
   </Breadcrumb>
@@ -55,7 +55,7 @@
   <Breadcrumb items={labeledItems}>
     <span slot="item" let:item>
       <Button>
-        <div class="text-secondary text-xs uppercase">{item.label}</div>
+        <div class="text-black/50 text-xs uppercase">{item.label}</div>
         <div>{item.value}</div>
       </Button>
     </span>
@@ -67,11 +67,11 @@
 <Preview>
   <Breadcrumb items={labeledItems}>
     <span slot="item" let:item>
-      <span class="text-secondary text-sm font-extrabold">{item.label}:</span>
-      <span class="text-secondary text-sm">{item.value}</span>
+      <span class="text-black/50 text-sm font-extrabold">{item.label}:</span>
+      <span class="text-black/50 text-sm">{item.value}</span>
     </span>
     <span slot="divider">
-      <DividerDot class="text-secondary" />
+      <DividerDot class="text-black/50" />
     </span>
   </Breadcrumb>
 </Preview>

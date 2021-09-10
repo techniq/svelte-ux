@@ -25,7 +25,7 @@
         {track}
       >
         {#if label}
-          <span class="text-secondary text-xs">
+          <span class="text-black/50 text-xs">
             {#if indeterminate}Loading...{:else}{value}%{/if}
           </span>
         {/if}
@@ -100,22 +100,22 @@
 <Preview>
 <Stack horizontal justify="start" gap={32}>
 <CircularProgress value={0}>
-<span class="text-secondary text-xs">0%</span>
+<span class="text-black/50 text-xs">0%</span>
 </CircularProgress>
 <CircularProgress value={20}>
-<span class="text-secondary text-xs">20%</span>
+<span class="text-black/50 text-xs">20%</span>
 </CircularProgress>
 <CircularProgress value={40}>
-<span class="text-secondary text-xs">40%</span>
+<span class="text-black/50 text-xs">40%</span>
 </CircularProgress>
 <CircularProgress value={60}>
-<span class="text-secondary text-xs">60%</span>
+<span class="text-black/50 text-xs">60%</span>
 </CircularProgress>
 <CircularProgress value={80}>
-<span class="text-secondary text-xs">80%</span>
+<span class="text-black/50 text-xs">80%</span>
 </CircularProgress>
 <CircularProgress value={100}>
-<span class="text-secondary text-xs">100%</span>
+<span class="text-black/50 text-xs">100%</span>
 </CircularProgress>
 </Stack>
 </Preview>
@@ -125,22 +125,22 @@
 <Preview>
   <Stack horizontal justify="start" gap={32}>
     <CircularProgress value={0} track>
-      <span class="text-secondary text-xs">0%</span>
+      <span class="text-black/50 text-xs">0%</span>
     </CircularProgress>
     <CircularProgress value={20} track>
-      <span class="text-secondary text-xs">20%</span>
+      <span class="text-black/50 text-xs">20%</span>
     </CircularProgress>
     <CircularProgress value={40} track>
-      <span class="text-secondary text-xs">40%</span>
+      <span class="text-black/50 text-xs">40%</span>
     </CircularProgress>
     <CircularProgress value={60} track>
-      <span class="text-secondary text-xs">60%</span>
+      <span class="text-black/50 text-xs">60%</span>
     </CircularProgress>
     <CircularProgress value={80} track>
-      <span class="text-secondary text-xs">80%</span>
+      <span class="text-black/50 text-xs">80%</span>
     </CircularProgress>
     <CircularProgress value={100} track>
-      <span class="text-secondary text-xs">100%</span>
+      <span class="text-black/50 text-xs">100%</span>
     </CircularProgress>
   </Stack>
 </Preview>

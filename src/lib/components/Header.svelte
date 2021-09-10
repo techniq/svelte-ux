@@ -23,7 +23,7 @@
 
 		<slot name="subheading">
 			{#if subheading}
-				<div class="text-sm text-secondary">{subheading}</div>
+				<div class="text-sm text-black/50">{subheading}</div>
 			{/if}
 		</slot>
 	</div>
