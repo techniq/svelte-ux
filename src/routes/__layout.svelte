@@ -7,6 +7,8 @@
 
 <AppLayout>
 	<nav slot="nav" class="nav h-full">
+		<MenuItem text="Home" path="/" class="pl-6 py-2 mt-4" />
+
 		<div class="pt-4 pb-2 pl-4 text-sm text-gray-200 font-bold">Components</div>
 
 		<MenuItem text="AppBar" path="/docs/components/AppBar" class="pl-6 py-2" />
@@ -20,13 +22,16 @@
 		<MenuItem text="Field" path="/docs/components/Field" class="pl-6 py-2" />
 		<MenuItem text="Grid" path="/docs/components/Grid" class="pl-6 py-2" />
 		<MenuItem text="Icon" path="/docs/components/Icon" class="pl-6 py-2" />
+		<MenuItem text="Menu" path="/docs/components/Menu" class="pl-6 py-2" />
 		<MenuItem text="Notification" path="/docs/components/Notification" class="pl-6 py-2" />
+		<MenuItem text="Popover" path="/docs/components/Popover" class="pl-6 py-2" />
 		<MenuItem text="Progress" path="/docs/components/Progress" class="pl-6 py-2" />
 		<MenuItem text="Radio" path="/docs/components/Radio" class="pl-6 py-2" />
 		<MenuItem text="Stack" path="/docs/components/Stack" class="pl-6 py-2" />
 		<MenuItem text="Switch" path="/docs/components/Switch" class="pl-6 py-2" />
 		<MenuItem text="Tabs" path="/docs/components/Tabs" class="pl-6 py-2" />
 		<MenuItem text="TextField" path="/docs/components/TextField" class="pl-6 py-2" />
+		<MenuItem text="Tooltip" path="/docs/components/Tooltip" class="pl-6 py-2" />
 	</nav>
 
 	<slot />
