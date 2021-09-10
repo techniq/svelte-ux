@@ -12,6 +12,7 @@ const { format } = prettier;
  */
 function codePreview() {
 	function visitor(node) {
+		// TODO: Support updating Preview nested in other markup.  https://stackoverflow.com/questions/14768735/regex-replace-only-inside-tag-need-help-writing-regex
 		if (node.value.startsWith('<Preview>')) {
 			// Get contents between <Preview> tag
 			const code = node.value.match(/<Preview>([^]*)<\/Preview>/)[1];
