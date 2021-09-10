@@ -17,6 +17,7 @@
 		<MenuItem text="Checkbox" path="/docs/components/Checkbox" class="pl-6 py-2" />
 		<MenuItem text="Dialog" path="/docs/components/Dialog" class="pl-6 py-2" />
 		<MenuItem text="Drawer" path="/docs/components/Drawer" class="pl-6 py-2" />
+		<MenuItem text="Field" path="/docs/components/Field" class="pl-6 py-2" />
 		<MenuItem text="Grid" path="/docs/components/Grid" class="pl-6 py-2" />
 		<MenuItem text="Icon" path="/docs/components/Icon" class="pl-6 py-2" />
 		<MenuItem text="Notification" path="/docs/components/Notification" class="pl-6 py-2" />
@@ -25,6 +26,7 @@
 		<MenuItem text="Stack" path="/docs/components/Stack" class="pl-6 py-2" />
 		<MenuItem text="Switch" path="/docs/components/Switch" class="pl-6 py-2" />
 		<MenuItem text="Tabs" path="/docs/components/Tabs" class="pl-6 py-2" />
+		<MenuItem text="TextField" path="/docs/components/TextField" class="pl-6 py-2" />
 	</nav>
 
 	<slot />

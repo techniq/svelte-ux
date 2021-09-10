@@ -34,6 +34,7 @@
 	"type": "module",
 	"dependencies": {
 		"@mdi/js": "^6.1.95",
-		"clsx": "^1.1.1"
+		"clsx": "^1.1.1",
+		"lodash-es": "^4.17.21"
 	}
 }
