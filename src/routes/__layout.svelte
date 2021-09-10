@@ -23,6 +23,8 @@
 		<MenuItem text="Progress" path="/docs/components/Progress" class="pl-6 py-2" />
 		<MenuItem text="Radio" path="/docs/components/Radio" class="pl-6 py-2" />
 		<MenuItem text="Stack" path="/docs/components/Stack" class="pl-6 py-2" />
+		<MenuItem text="Switch" path="/docs/components/Switch" class="pl-6 py-2" />
+		<MenuItem text="Tabs" path="/docs/components/Tabs" class="pl-6 py-2" />
 	</nav>
 
 	<slot />
