@@ -21,6 +21,7 @@
 <MenuItem text="Collapse" path="/docs/components/Collapse" class="pl-6 py-2" />
 <MenuItem text="Expansion Panel" path="/docs/components/ExpansionPanel" class="pl-6 py-2" />
 <MenuItem text="Icon" path="/docs/components/Icon" class="pl-6 py-2" />
+<MenuItem text="List Item" path="/docs/components/ListItem" class="pl-6 py-2" />
 <MenuItem text="Progress" path="/docs/components/Progress" class="pl-6 py-2" />
 <MenuItem text="Tabs" path="/docs/components/Tabs" class="pl-6 py-2" />
 
