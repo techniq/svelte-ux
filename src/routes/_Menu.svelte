@@ -29,6 +29,7 @@
 <MenuItem text="Checkbox" path="/docs/components/Checkbox" class="pl-6 py-2" />
 <MenuItem text="Field" path="/docs/components/Field" class="pl-6 py-2" />
 <MenuItem text="Radio" path="/docs/components/Radio" class="pl-6 py-2" />
+<MenuItem text="Select Field" path="/docs/components/SelectField" class="pl-6 py-2" />
 <MenuItem text="Switch" path="/docs/components/Switch" class="pl-6 py-2" />
 <MenuItem text="Text Field" path="/docs/components/TextField" class="pl-6 py-2" />
 
