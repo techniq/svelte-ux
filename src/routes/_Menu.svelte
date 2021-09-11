@@ -18,6 +18,8 @@
 <MenuItem text="Avatar" path="/docs/components/Avatar" class="pl-6 py-2" />
 <MenuItem text="Button" path="/docs/components/Button" class="pl-6 py-2" />
 <MenuItem text="Card" path="/docs/components/Card" class="pl-6 py-2" />
+<MenuItem text="Collapse" path="/docs/components/Collapse" class="pl-6 py-2" />
+<MenuItem text="Expansion Panel" path="/docs/components/ExpansionPanel" class="pl-6 py-2" />
 <MenuItem text="Icon" path="/docs/components/Icon" class="pl-6 py-2" />
 <MenuItem text="Progress" path="/docs/components/Progress" class="pl-6 py-2" />
 <MenuItem text="Tabs" path="/docs/components/Tabs" class="pl-6 py-2" />
@@ -27,7 +29,7 @@
 <MenuItem text="Field" path="/docs/components/Field" class="pl-6 py-2" />
 <MenuItem text="Radio" path="/docs/components/Radio" class="pl-6 py-2" />
 <MenuItem text="Switch" path="/docs/components/Switch" class="pl-6 py-2" />
-<MenuItem text="TextField" path="/docs/components/TextField" class="pl-6 py-2" />
+<MenuItem text="Text Field" path="/docs/components/TextField" class="pl-6 py-2" />
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Layout</div>
 <MenuItem text="Grid" path="/docs/components/Grid" class="pl-6 py-2" />
