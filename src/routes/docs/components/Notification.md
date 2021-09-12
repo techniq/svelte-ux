@@ -30,7 +30,7 @@
     <Notification open actions="right" closeIcon>
       <div slot="title">Discussion archived</div>
       <div slot="actions">
-        <Button class="text-blue-500 hover:bg-blue-500 ">Undo</Button>
+        <Button class="text-blue-500 hover:bg-blue-50 ">Undo</Button>
       </div>
     </Notification>
   </Stack>
@@ -50,7 +50,7 @@
         tenetur.
       </div>
       <div slot="actions">
-        <Button class="text-blue-500 hover:bg-blue-500">Undo</Button>
+        <Button class="text-blue-500 hover:bg-blue-50">Undo</Button>
         <Button>Dismiss</Button>
       </div>
     </Notification>
@@ -68,7 +68,7 @@
       </div>
       <div slot="actions" class="h-full">
         <Stack vertical class="border-l divide-y h-full">
-          <Button class="text-blue-500 hover:bg-blue-500">Reply</Button>
+          <Button class="text-blue-500 hover:bg-blue-50">Reply</Button>
           <Button>Don't Allow</Button>
         </Stack>
       </div>
