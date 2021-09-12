@@ -46,3 +46,8 @@
 <MenuItem text="Notification" path="/docs/components/Notification" class="pl-6 py-2" />
 <MenuItem text="Popover" path="/docs/components/Popover" class="pl-6 py-2" />
 <MenuItem text="Tooltip" path="/docs/components/Tooltip" class="pl-6 py-2" />
+
+<div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">State</div>
+<MenuItem text="Immer" path="/docs/components/Immer" class="pl-6 py-2" />
+<MenuItem text="State" path="/docs/components/State" class="pl-6 py-2" />
+<MenuItem text="Toggle" path="/docs/components/Toggle" class="pl-6 py-2" />
