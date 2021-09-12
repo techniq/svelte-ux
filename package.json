@@ -35,6 +35,7 @@
 	"dependencies": {
 		"@mdi/js": "^6.1.95",
 		"clsx": "^1.1.1",
+		"graphql": "^15.5.3",
 		"lodash-es": "^4.17.21",
 		"tailwindcss-elevation": "^1.0.1"
 	}
