@@ -1,5 +1,5 @@
 import { format as dateFormat } from 'date-fns';
-import { formatDate, utcToLocalDate, PeriodType } from '$lib/utils/date';
+import { formatDate, utcToLocalDate, PeriodType } from './date';
 
 type DateDisplayOptions = {
 	periodType?: PeriodType | null;
