@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AppBar from '../components/AppBar.svelte';
+	import AppBar from '$lib/components/AppBar.svelte';
 </script>
 
 <AppBar title="svelte-ux" />

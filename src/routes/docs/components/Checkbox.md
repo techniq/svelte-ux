@@ -1,8 +1,8 @@
 <script>
-  import AppBar from '../components/AppBar.svelte';
-  import Checkbox from '../components/Checkbox.svelte';
-  import Preview from '../components/Preview.svelte';
-  import SectionDivider from '../components/SectionDivider.svelte';
+  import AppBar from '$lib/components/AppBar.svelte';
+  import Checkbox from '$lib/components/Checkbox.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
 <SectionDivider>Basic</SectionDivider>

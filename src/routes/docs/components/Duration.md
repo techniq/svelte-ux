@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { subDays, subMonths } from 'date-fns';
 
-	import Preview from '../components/Preview.svelte';
+	import Preview from '$lib/components/Preview.svelte';
 
-	import { humanizeDuration } from '../utils/duration';
+	import { humanizeDuration } from '$lib/utils/duration';
 </script>
 
 ## 3 days ago

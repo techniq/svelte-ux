@@ -1,5 +1,5 @@
 <script lang="ts">
-	import NavItem from '../components/NavItem.svelte';
+	import NavItem from '$lib/components/NavItem.svelte';
 </script>
 
 <NavItem text="Home" path="/" class="pl-6 py-2 mt-4" />

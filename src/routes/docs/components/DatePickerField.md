@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Preview from '../components/Preview.svelte';
-  import DatePickerField from '../components/DatePickerField.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import DatePickerField from '$lib/components/DatePickerField.svelte';
 
-  import { PeriodType } from '../utils/date';
+  import { PeriodType } from '$lib/utils/date';
 
   let value = new Date();
 </script>

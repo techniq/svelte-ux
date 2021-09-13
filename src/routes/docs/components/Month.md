@@ -10,9 +10,9 @@
     startOfMonth,
   } from 'date-fns';
 
-  import Month from '../components/Month.svelte';
-  import Preview from '../components/Preview.svelte';
-  import Stack from '../components/Stack.svelte';
+  import Month from '$lib/components/Month.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import Stack from '$lib/components/Stack.svelte';
 
   let selected = null;
   let selectedArr = [];

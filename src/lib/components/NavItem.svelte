@@ -2,7 +2,7 @@
 	import clsx from 'clsx';
 	import { isActive, url } from '../utils/routing';
 
-	import Icon from '../components/Icon.svelte';
+	import Icon from './Icon.svelte';
 	import { scrollIntoView } from '../actions/scroll';
 	import { getScrollParent } from '../utils/dom';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Grid from '../components/Grid.svelte';
-	import Preview from '../components/Preview.svelte';
+	import Grid from '$lib/components/Grid.svelte';
+	import Preview from '$lib/components/Preview.svelte';
 </script>
 
 ## Default

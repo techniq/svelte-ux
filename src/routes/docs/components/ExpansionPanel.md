@@ -1,8 +1,8 @@
 <script>
-  import Button from '../components/Button.svelte';
-  import Card from '../components/Card.svelte';
-  import ExpansionPanel from '../components/ExpansionPanel.svelte';
-  import Preview from '../components/Preview.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Card from '$lib/components/Card.svelte';
+  import ExpansionPanel from '$lib/components/ExpansionPanel.svelte';
+  import Preview from '$lib/components/Preview.svelte';
 </script>
 
 ## Simple

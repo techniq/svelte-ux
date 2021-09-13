@@ -8,10 +8,10 @@
     endOfQuarter,
   } from 'date-fns';
 
-  import Grid from '../components/Grid.svelte';
-  import MonthList from '../components/MonthList.svelte';
-  import Preview from '../components/Preview.svelte';
-  import Stack from '../components/Stack.svelte';
+  import Grid from '$lib/components/Grid.svelte';
+  import MonthList from '$lib/components/MonthList.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import Stack from '$lib/components/Stack.svelte';
 
   let selected = null;
   let selectedArr = [];

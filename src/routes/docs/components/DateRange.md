@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Preview from '../components/Preview.svelte';
-  import DateRange from '../components/DateRange.svelte';
-  import { PeriodType } from '../utils/date';
+  import Preview from '$lib/components/Preview.svelte';
+  import DateRange from '$lib/components/DateRange.svelte';
+  import { PeriodType } from '$lib/utils/date';
 
   let selected = {
     from: new Date('1982-03-01T00:00:00'),

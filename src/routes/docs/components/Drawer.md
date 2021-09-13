@@ -1,8 +1,8 @@
 <script>
-  import Button from '../components/Button.svelte';
-  import Drawer from '../components/Drawer.svelte';
-  import Preview from '../components/Preview.svelte';
-  import Toggle from '../components/Toggle.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Drawer from '$lib/components/Drawer.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
 
   let leftOpen = false;
   let rightOpen = false;

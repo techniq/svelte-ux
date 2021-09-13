@@ -1,7 +1,7 @@
 <script lang="ts">
 	import 'prism-themes/themes/prism-vsc-dark-plus.css';
 
-	import AppLayout from '../components/AppLayout.svelte';
+	import AppLayout from '$lib/components/AppLayout.svelte';
 	import NavMenu from './_NavMenu.svelte';
 </script>
 

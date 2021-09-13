@@ -1,7 +1,7 @@
 <script>
-  import AppBar from '../components/AppBar.svelte';
-  import Preview from '../components/Preview.svelte';
-  import Radio from '../components/Radio.svelte';
+  import AppBar from '$lib/components/AppBar.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import Radio from '$lib/components/Radio.svelte';
 
   let group = undefined;
 </script>

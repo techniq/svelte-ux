@@ -1,12 +1,12 @@
 <script lang="ts">
   import { mdiInbox, mdiCheckCircleOutline } from '@mdi/js';
 
-  import AppBar from '../components/AppBar.svelte';
-  import Button from '../components/Button.svelte';
-  import Icon from '../components/Icon.svelte';
-  import Preview from '../components/Preview.svelte';
-  import Notification from '../components/Notification.svelte';
-  import Stack from '../components/Stack.svelte';
+  import AppBar from '$lib/components/AppBar.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Icon from '$lib/components/Icon.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import Notification from '$lib/components/Notification.svelte';
+  import Stack from '$lib/components/Stack.svelte';
 </script>
 
 ## Basic
