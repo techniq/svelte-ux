@@ -10,7 +10,7 @@ export * as logger from './logger';
 export * as object from './object';
 export * as promise from './promise';
 export * as rollup from './rollup';
-export * as routing from './routing';
+// export * as routing from './routing'; TODO: Fix `error: Could not resolve "$app/..." (mark it as external to exclude it from the bundle)` when importing package
 export * as serialize from './serialize';
 export * as styles from './styles';
 export * as transition from './transition';
