@@ -2,12 +2,12 @@
 	import 'prism-themes/themes/prism-vsc-dark-plus.css';
 
 	import AppLayout from '$lib/components/AppLayout.svelte';
-	import Menu from './_Menu.svelte';
+	import NavMenu from './_NavMenu.svelte';
 </script>
 
 <AppLayout>
 	<nav slot="nav" class="nav h-full">
-		<Menu />
+		<NavMenu />
 	</nav>
 
 	<slot />
