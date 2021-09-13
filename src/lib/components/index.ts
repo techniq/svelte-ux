@@ -9,7 +9,7 @@ export { default as Checkbox } from './Checkbox.svelte';
 export { default as CircularProgress } from './CircularProgress.svelte';
 export { default as Collapse } from './Collapse.svelte';
 export { default as DateButton } from './DateButton.svelte';
-export { default as DatePickerButton } from './DatePickerButton.svelte';
+export { default as DatePickerField } from './DatePickerField.svelte';
 export { default as DateRange } from './DateRange.svelte';
 export { default as DateRangeDisplay } from './DateRangeDisplay.svelte';
 export { default as DateRangeField } from './DateRangeField.svelte';
