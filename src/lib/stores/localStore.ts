@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 import { isFunction } from 'lodash-es';
 
-import { decode, encode } from '$lib/utils/json';
-import { expireObject } from '$lib/utils/object';
-import type { Expiry } from '$lib/utils/object';
+import { decode, encode } from '../utils/json';
+import { expireObject } from '../utils/object';
+import type { Expiry } from '../utils/object';
 
 // https://stackoverflow.com/questions/56488202/how-to-persist-svelte-store
 // https://github.com/joshnuss/svelte-local-storage-store/blob/master/src/index.js

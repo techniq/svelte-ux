@@ -2,10 +2,11 @@ import { derived } from 'svelte/store';
 import type { Readable } from 'svelte/store';
 import type { Page } from '@sveltejs/kit';
 import { isEqual, isFunction } from 'lodash-es';
-import * as Serialize from '$lib/utils/serialize';
 
-import rollup from '$lib/utils/rollup';
-import type { ValueOf } from '$lib/utils/typeHelpers';
+import * as Serialize from '../utils/serialize';
+
+import rollup from '../utils/rollup';
+import type { ValueOf } from '../utils/typeHelpers';
 
 export type ParamType =
 	| 'string'
