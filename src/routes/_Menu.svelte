@@ -21,7 +21,7 @@
 <MenuItem text="Collapse" path="/docs/components/Collapse" class="pl-6 py-2" />
 <MenuItem text="Expansion Panel" path="/docs/components/ExpansionPanel" class="pl-6 py-2" />
 <MenuItem text="Icon" path="/docs/components/Icon" class="pl-6 py-2" />
-<MenuItem text="List Item" path="/docs/components/ListItem" class="pl-6 py-2" />
+<MenuItem text="ListItem" path="/docs/components/ListItem" class="pl-6 py-2" />
 <MenuItem text="Paginate" path="/docs/components/Paginate" class="pl-6 py-2" />
 <MenuItem text="Pagination" path="/docs/components/Pagination" class="pl-6 py-2" />
 <MenuItem text="Progress" path="/docs/components/Progress" class="pl-6 py-2" />
@@ -33,7 +33,7 @@
 <MenuItem text="Radio" path="/docs/components/Radio" class="pl-6 py-2" />
 <MenuItem text="Select Field" path="/docs/components/SelectField" class="pl-6 py-2" />
 <MenuItem text="Switch" path="/docs/components/Switch" class="pl-6 py-2" />
-<MenuItem text="Text Field" path="/docs/components/TextField" class="pl-6 py-2" />
+<MenuItem text="TextField" path="/docs/components/TextField" class="pl-6 py-2" />
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Layout</div>
 <MenuItem text="Grid" path="/docs/components/Grid" class="pl-6 py-2" />
@@ -51,3 +51,14 @@
 <MenuItem text="Immer" path="/docs/components/Immer" class="pl-6 py-2" />
 <MenuItem text="State" path="/docs/components/State" class="pl-6 py-2" />
 <MenuItem text="Toggle" path="/docs/components/Toggle" class="pl-6 py-2" />
+
+<div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Date</div>
+<MenuItem text="DateDisplay" path="/docs/components/DateDisplay" class="pl-6 py-2" />
+<MenuItem text="DatePickerField" path="/docs/components/DatePickerField" class="pl-6 py-2" />
+<MenuItem text="DateRange" path="/docs/components/DateRange" class="pl-6 py-2" />
+<MenuItem text="DateRangeField" path="/docs/components/DateRangeField" class="pl-6 py-2" />
+<MenuItem text="Duration" path="/docs/components/Duration" class="pl-6 py-2" />
+<MenuItem text="Month" path="/docs/components/Month" class="pl-6 py-2" />
+<MenuItem text="MonthList" path="/docs/components/MonthList" class="pl-6 py-2" />
+<MenuItem text="MonthListByYear" path="/docs/components/MonthListByYear" class="pl-6 py-2" />
+<MenuItem text="YearList" path="/docs/components/YearList" class="pl-6 py-2" />

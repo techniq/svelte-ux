@@ -1,0 +1,36 @@
+<script lang="ts">
+	/*
+    TODO:
+      - [ ] Set max-height / overflow on MonthListByYear, YearList
+  */
+	import type { SelectedDate } from '$lib/utils/date';
+	import { PeriodType } from '$lib/utils/date';
+
+	import Month from './Month.svelte';
+	import MonthListByYear from './MonthListByYear.svelte';
+	import YearList from './YearList.svelte';
+
+	export let selected: SelectedDate = {
+		from: null,
+		to: null,
+		periodType: null
+	};
+	export let periodType: PeriodType = PeriodType.Day;
+</script>
+
+{#if periodType === PeriodType.Month || periodType === PeriodType.Quarter}
+	<MonthListByYear {selected} on:dateChange />
+{:else if periodType === PeriodType.CalendarYear}
+	<YearList {selected} on:dateChange />
+{:else if periodType === PeriodType.FiscalYearOctober}
+	<!-- dateFuncs={{
+        startOfYear: startOfFiscalYear,
+        endOfYear: endOfFiscalYear,
+        isSameYear: isSameFiscalYear,
+        getYear: getFiscalYear,
+      }} -->
+	<YearList {selected} on:dateChange />
+{:else}
+	<!-- Day, Week, etc -->
+	<Month {selected} on:dateChange />
+{/if}
