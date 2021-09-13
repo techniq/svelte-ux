@@ -5,7 +5,7 @@
 	import { scale } from 'svelte/transition';
 	import { quadIn } from 'svelte/easing';
 
-	import portalAction from '$lib/actions/portal';
+	import portalAction from '../actions/portal';
 
 	import Backdrop from './Backdrop.svelte';
 

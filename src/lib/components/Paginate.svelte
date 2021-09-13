@@ -1,13 +1,13 @@
 <script lang="ts">
-  import paginationStore from '$lib/stores/paginationStore';
+	import paginationStore from '../stores/paginationStore';
 
-  export let items: any[];
-  export let perPage = 10;
+	export let items: any[];
+	export let perPage = 10;
 
-  const pagination = paginationStore({ perPage });
-  $: pagination.setPerPage(perPage);
-  $: pagination.setTotal(items.length);
-  $: pageItems = $pagination.slice(items);
+	const pagination = paginationStore({ perPage });
+	$: pagination.setPerPage(perPage);
+	$: pagination.setTotal(items.length);
+	$: pageItems = $pagination.slice(items);
 </script>
 
 <slot {pagination} {pageItems} />

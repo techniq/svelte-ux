@@ -1,10 +1,10 @@
 <script lang="ts">
 	import clsx from 'clsx';
-	import { isActive, url } from '$lib/utils/routing';
+	import { isActive, url } from '../utils/routing';
 
-	import Icon from '$lib/components/Icon.svelte';
-	import { scrollIntoView } from '$lib/actions/scroll';
-	import { getScrollParent } from '$lib/utils/dom';
+	import Icon from '../components/Icon.svelte';
+	import { scrollIntoView } from '../actions/scroll';
+	import { getScrollParent } from '../utils/dom';
 
 	export let path: string;
 	export let text: string;

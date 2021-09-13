@@ -1,11 +1,11 @@
 <script lang="ts">
   import { mdiArrowRight } from '@mdi/js';
 
-  import Breadcrumb from '$lib/components/Breadcrumb.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import DividerDot from '$lib/components/DividerDot.svelte';
-  import Icon from '$lib/components/Icon.svelte';
-  import Preview from '$lib/components/Preview.svelte';
+  import Breadcrumb from '../components/Breadcrumb.svelte';
+  import Button from '../components/Button.svelte';
+  import DividerDot from '../components/DividerDot.svelte';
+  import Icon from '../components/Icon.svelte';
+  import Preview from '../components/Preview.svelte';
 
   let items = ['First', 'Second', 'Third'];
 

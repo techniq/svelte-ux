@@ -3,8 +3,8 @@
     TODO:
       - [ ] Set max-height / overflow on MonthListByYear, YearList
   */
-	import type { SelectedDate } from '$lib/utils/date';
-	import { PeriodType } from '$lib/utils/date';
+	import type { SelectedDate } from '../utils/date';
+	import { PeriodType } from '../utils/date';
 
 	import Month from './Month.svelte';
 	import MonthListByYear from './MonthListByYear.svelte';

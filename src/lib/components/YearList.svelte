@@ -12,9 +12,9 @@
 	import DateButton from './DateButton.svelte';
 	import Stack from './Stack.svelte';
 
-	import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '$lib/utils/date';
-	import type { SelectedDate } from '$lib/utils/date';
-	import { scrollIntoView } from '$lib/actions/scroll';
+	import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date';
+	import type { SelectedDate } from '../utils/date';
+	import { scrollIntoView } from '../actions/scroll';
 
 	export let selected: SelectedDate | undefined = undefined;
 	export let minDate: Date | undefined = undefined;

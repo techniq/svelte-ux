@@ -6,7 +6,7 @@
 	import Popover from './Popover.svelte';
 	import type { PopoverOrigin, PopoverPlacement } from './Popover.svelte';
 
-	import { remainingViewportHeight } from '$lib/actions/layout';
+	import { remainingViewportHeight } from '../actions/layout';
 
 	const dispatch = createEventDispatcher();
 

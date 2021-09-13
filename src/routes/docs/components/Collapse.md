@@ -1,7 +1,7 @@
 <script>
-  import Card from '$lib/components/Card.svelte';
-  import Collapse from '$lib/components/Collapse.svelte';
-  import Preview from '$lib/components/Preview.svelte';
+  import Card from '../components/Card.svelte';
+  import Collapse from '../components/Collapse.svelte';
+  import Preview from '../components/Preview.svelte';
 
   let group = 'expansionGroup';
 </script>

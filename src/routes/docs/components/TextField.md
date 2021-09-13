@@ -16,14 +16,14 @@
     mdiPlus,
   } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Grid from '$lib/components/Grid.svelte';
-  import Icon from '$lib/components/Icon.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
-  import TextField from '$lib/components/TextField.svelte';
+  import Button from '../components/Button.svelte';
+  import Grid from '../components/Grid.svelte';
+  import Icon from '../components/Icon.svelte';
+  import Preview from '../components/Preview.svelte';
+  import SectionDivider from '../components/SectionDivider.svelte';
+  import TextField from '../components/TextField.svelte';
 
-  import { autoHeight } from '$lib/actions/input';
+  import { autoHeight } from '../actions/input';
 
   const numberOperators = [
     { label: '=', value: 'equal' },

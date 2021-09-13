@@ -1,10 +1,10 @@
 <script lang="ts">
   import { subDays } from 'date-fns';
 
-  import Preview from '$lib/components/Preview.svelte';
-  import DateRangeField from '$lib/components/DateRangeField.svelte';
+  import Preview from '../components/Preview.svelte';
+  import DateRangeField from '../components/DateRangeField.svelte';
 
-  import { PeriodType } from '$lib/utils/date';
+  import { PeriodType } from '../utils/date';
 
   let today = new Date();
   let value = {

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Preview from '$lib/components/Preview.svelte';
+  import Preview from '../components/Preview.svelte';
 
-  import { dateDisplay } from '$lib/utils/dateDisplay';
-  import { PeriodType } from '$lib/utils/date';
+  import { dateDisplay } from '../utils/dateDisplay';
+  import { PeriodType } from '../utils/date';
 </script>
 
 ## No format

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import cssVars from '$lib/actions/cssVars';
+	import cssVars from '../actions/cssVars';
 
 	export let columns = 0;
 	export let gap = 0;

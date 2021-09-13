@@ -1,7 +1,7 @@
 <script>
-  import AppBar from '$lib/components/AppBar.svelte';
-  import Avatar from '$lib/components/Avatar.svelte';
-  import Preview from '$lib/components/Preview.svelte';
+  import AppBar from '../components/AppBar.svelte';
+  import Avatar from '../components/Avatar.svelte';
+  import Preview from '../components/Preview.svelte';
 </script>
 
 ## Default

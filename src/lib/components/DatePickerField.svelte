@@ -5,9 +5,9 @@
 	import Button from './Button.svelte';
 	import Field from './Field.svelte';
 	import Dialog from './Dialog.svelte';
-	import { getDateFuncsByPeriodType, PeriodType } from '$lib/utils/date';
+	import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
 	import DateSelect from './DateSelect.svelte';
-	import { dateDisplay } from '$lib/utils/dateDisplay';
+	import { dateDisplay } from '../utils/dateDisplay';
 
 	const dispatch = createEventDispatcher();
 

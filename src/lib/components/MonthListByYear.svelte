@@ -6,9 +6,9 @@
 	import Grid from './Grid.svelte';
 	import Stack from './Stack.svelte';
 
-	import { getMinSelectedDate, getMaxSelectedDate } from '$lib/utils/date';
-	import type { SelectedDate } from '$lib/utils/date';
-	import { scrollIntoView } from '$lib/actions/scroll';
+	import { getMinSelectedDate, getMaxSelectedDate } from '../utils/date';
+	import type { SelectedDate } from '../utils/date';
+	import { scrollIntoView } from '../actions/scroll';
 
 	export let selected: SelectedDate | undefined = undefined;
 	export let minDate: Date | undefined = undefined;

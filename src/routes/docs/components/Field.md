@@ -5,15 +5,15 @@
     mdiAccountOutline,
   } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Grid from '$lib/components/Grid.svelte';
-  import Field from '$lib/components/Field.svelte';
-  import Icon from '$lib/components/Icon.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
-  import Switch from '$lib/components/Switch.svelte';
-  import Tab from '$lib/components/Tab.svelte';
-  import Tabs from '$lib/components/Tabs.svelte';
+  import Button from '../components/Button.svelte';
+  import Grid from '../components/Grid.svelte';
+  import Field from '../components/Field.svelte';
+  import Icon from '../components/Icon.svelte';
+  import Preview from '../components/Preview.svelte';
+  import SectionDivider from '../components/SectionDivider.svelte';
+  import Switch from '../components/Switch.svelte';
+  import Tab from '../components/Tab.svelte';
+  import Tabs from '../components/Tabs.svelte';
 </script>
 
 <SectionDivider>Basic</SectionDivider>

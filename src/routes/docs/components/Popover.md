@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Button from '$lib/components/Button.svelte';
-  import Grid from '$lib/components/Grid.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import Popover from '$lib/components/Popover.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
+  import Button from '../components/Button.svelte';
+  import Grid from '../components/Grid.svelte';
+  import Preview from '../components/Preview.svelte';
+  import Popover from '../components/Popover.svelte';
+  import Toggle from '../components/Toggle.svelte';
 
   let open = false;
 

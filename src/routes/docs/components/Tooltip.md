@@ -1,10 +1,10 @@
 <script>
   import { mdiTrashCan } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Grid from '$lib/components/Grid.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
+  import Button from '../components/Button.svelte';
+  import Grid from '../components/Grid.svelte';
+  import Preview from '../components/Preview.svelte';
+  import Tooltip from '../components/Tooltip.svelte';
 </script>
 
 ## Button

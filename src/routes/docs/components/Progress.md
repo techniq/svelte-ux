@@ -1,8 +1,8 @@
 <script>
-  import CircularProgress from '$lib/components/CircularProgress.svelte';
-  // import LinearProgress from '$lib/components/LinearProgress.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import Stack from '$lib/components/Stack.svelte';
+  import CircularProgress from '../components/CircularProgress.svelte';
+  // import LinearProgress from '../components/LinearProgress.svelte';
+  import Preview from '../components/Preview.svelte';
+  import Stack from '../components/Stack.svelte';
 
   let value = 50;
   let size = 40;

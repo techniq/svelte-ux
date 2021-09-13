@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { mdiChevronLeft, mdiChevronRight, mdiPageFirst, mdiPageLast } from '@mdi/js';
 
-	import type paginationStore from '$lib/stores/paginationStore';
+	import type paginationStore from '../stores/paginationStore';
 
 	import Button from './Button.svelte';
 	import Grid from './Grid.svelte';

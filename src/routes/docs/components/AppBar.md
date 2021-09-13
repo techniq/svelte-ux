@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { mdiRefresh } from '@mdi/js';
 
-	import AppBar from '$lib/components/AppBar.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import Preview from '$lib/components/Preview.svelte';
+	import AppBar from '../components/AppBar.svelte';
+	import Button from '../components/Button.svelte';
+	import Preview from '../components/Preview.svelte';
 </script>
 
 ## Usage

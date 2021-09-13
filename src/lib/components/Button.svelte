@@ -3,7 +3,7 @@
 
 	import Icon from './Icon.svelte';
 
-	import cssVars from '$lib/actions/cssVars';
+	import cssVars from '../actions/cssVars';
 
 	export let href: string | undefined = undefined;
 	export let target: string | undefined = undefined;

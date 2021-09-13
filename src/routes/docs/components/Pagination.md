@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Pagination from '$lib/components/Pagination.svelte';
-	import Preview from '$lib/components/Preview.svelte';
+	import Pagination from '../components/Pagination.svelte';
+	import Preview from '../components/Preview.svelte';
 
-	import paginationStore from '$lib/stores/paginationStore';
+	import paginationStore from '../stores/paginationStore';
 
 	const pagination = paginationStore();
 	pagination.setTotal(100);
@@ -12,10 +12,10 @@
 
 ```svelte
 <script lang="ts">
-  import { Pagination, paginationStore } from 'svelte-ux';
+	import { Pagination, paginationStore } from 'svelte-ux';
 
-  const pagination = paginationStore();
-  pagination.setTotal(100);
+	const pagination = paginationStore();
+	pagination.setTotal(100);
 </script>
 
 <Pagination {pagination} />

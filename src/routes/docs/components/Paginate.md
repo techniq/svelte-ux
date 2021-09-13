@@ -1,8 +1,8 @@
 <script lang="ts">
-	import ListItem from '$lib/components/ListItem.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
-	import Paginate from '$lib/components/Paginate.svelte';
-	import Preview from '$lib/components/Preview.svelte';
+	import ListItem from '../components/ListItem.svelte';
+	import Pagination from '../components/Pagination.svelte';
+	import Paginate from '../components/Paginate.svelte';
+	import Preview from '../components/Preview.svelte';
 
 	const items = Array(100).fill().map((x, i) => ({ name: `Item: ${i + 1}`}))
 </script>

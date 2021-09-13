@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 
-	import portalAction from '$lib/actions/portal';
+	import portalAction from '../actions/portal';
 
 	export let blur: boolean = false;
 	export let portal = false;

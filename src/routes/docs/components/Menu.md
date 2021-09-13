@@ -1,8 +1,8 @@
 <script>
-  import Button from '$lib/components/Button.svelte';
-  import Menu from '$lib/components/Menu.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
+  import Button from '../components/Button.svelte';
+  import Menu from '../components/Menu.svelte';
+  import Preview from '../components/Preview.svelte';
+  import Toggle from '../components/Toggle.svelte';
 </script>
 
 ## Basic

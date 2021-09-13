@@ -4,14 +4,14 @@
 	import { mdiClose, mdiCurrencyUsd, mdiInformationOutline, mdiPercent } from '@mdi/js';
 	import { uniqueId } from 'lodash-es';
 
-	import cssVars from '$lib/actions/cssVars';
-	import multi from '$lib/actions/multi';
-	import type { Actions } from '$lib/actions/multi';
+	import cssVars from '../actions/cssVars';
+	import multi from '../actions/multi';
+	import type { Actions } from '../actions/multi';
 
 	import Button from './Button.svelte';
 	import Icon from './Icon.svelte';
 	import Stack from './Stack.svelte';
-	import { isLiteralObject } from '$lib/utils/object';
+	import { isLiteralObject } from '../utils/object';
 
 	type InputValue = string | number;
 

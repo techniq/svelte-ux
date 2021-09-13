@@ -9,8 +9,8 @@
 	import Dialog from './Dialog.svelte';
 	import Field from './Field.svelte';
 
-	import { getDateFuncsByPeriodType, getPeriodTypeName } from '$lib/utils/date';
-	import type { DateRange as DateRangeType } from '$lib/utils/dateRange';
+	import { getDateFuncsByPeriodType, getPeriodTypeName } from '../utils/date';
+	import type { DateRange as DateRangeType } from '../utils/dateRange';
 
 	const dispatch = createEventDispatcher();
 

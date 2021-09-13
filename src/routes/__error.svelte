@@ -7,8 +7,8 @@
 </script>
 
 <script lang="ts">
-	import AppBar from '$lib/components/AppBar.svelte';
-	import Stack from '$lib/components/Stack.svelte';
+	import AppBar from '../components/AppBar.svelte';
+	import Stack from '../components/Stack.svelte';
 
 	export let status: number;
 	export let error: Error & { frame?: string } & { loc?: object };

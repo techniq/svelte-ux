@@ -1,9 +1,9 @@
 <script>
-  import Button from '$lib/components/Button.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import Tab from '$lib/components/Tab.svelte';
-  import Tabs from '$lib/components/Tabs.svelte';
-  import TabPanel from '$lib/components/TabPanel.svelte';
+  import Button from '../components/Button.svelte';
+  import Preview from '../components/Preview.svelte';
+  import Tab from '../components/Tab.svelte';
+  import Tabs from '../components/Tabs.svelte';
+  import TabPanel from '../components/TabPanel.svelte';
 
   const allValue = {};
   const missedValue = {};

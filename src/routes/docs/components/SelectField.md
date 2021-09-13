@@ -1,14 +1,14 @@
 <script>
-  import Button from '$lib/components/Button.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import Stack from '$lib/components/Stack.svelte';
-  import SelectField from '$lib/components/SelectField.svelte';
-  import Tab from '$lib/components/Tab.svelte';
-  import Tabs from '$lib/components/Tabs.svelte';
+  import Button from '../components/Button.svelte';
+  import Preview from '../components/Preview.svelte';
+  import Stack from '../components/Stack.svelte';
+  import SelectField from '../components/SelectField.svelte';
+  import Tab from '../components/Tab.svelte';
+  import Tabs from '../components/Tabs.svelte';
 
-  import { scrollIntoView } from '$lib/actions/scroll';
+  import { scrollIntoView } from '../actions/scroll';
 
-  import { delay } from '$lib/utils/promise';
+  import { delay } from '../utils/promise';
 
   const items = [
     { name: 'One', value: 1 },

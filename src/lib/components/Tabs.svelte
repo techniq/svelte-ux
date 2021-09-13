@@ -6,7 +6,7 @@
 	import { setContext, createEventDispatcher } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { crossfade, fade } from 'svelte/transition';
-	import cssVars from '$lib/actions/cssVars';
+	import cssVars from '../actions/cssVars';
 
 	export let selected: any = undefined; // index or value
 

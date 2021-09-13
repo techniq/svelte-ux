@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { formatDate, PeriodType, getDateFuncsByPeriodType } from '$lib/utils/date';
-	import type { DateRange } from '$lib/utils/dateRange';
+	import { formatDate, PeriodType, getDateFuncsByPeriodType } from '../utils/date';
+	import type { DateRange } from '../utils/dateRange';
 
-	import { dateDisplay } from '$lib/utils/dateDisplay';
+	import { dateDisplay } from '../utils/dateDisplay';
 
 	export let value: DateRange | null | undefined;
 	export let variant: Parameters<typeof formatDate>[2] = undefined;

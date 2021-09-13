@@ -4,8 +4,8 @@
 
 	import Backdrop from './Backdrop.svelte';
 
-	import portalAction from '$lib/actions/portal';
-	import { fly } from '$lib/utils/transition';
+	import portalAction from '../actions/portal';
+	import { fly } from '../utils/transition';
 
 	const dispatch = createEventDispatcher();
 

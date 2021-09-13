@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { mdiAccount, mdiChevronRight } from '@mdi/js';
 
-	import Button from '$lib/components/Button.svelte';
-	import Icon from '$lib/components/Icon.svelte';
-	import ListItem from '$lib/components/ListItem.svelte';
-	import Preview from '$lib/components/Preview.svelte';
+	import Button from '../components/Button.svelte';
+	import Icon from '../components/Icon.svelte';
+	import ListItem from '../components/ListItem.svelte';
+	import Preview from '../components/Preview.svelte';
 </script>
 
 ## Title only

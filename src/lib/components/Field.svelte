@@ -4,7 +4,7 @@
 	import { mdiClose, mdiInformationOutline } from '@mdi/js';
 	import { uniqueId } from 'lodash-es';
 
-	import cssVars from '$lib/actions/cssVars';
+	import cssVars from '../actions/cssVars';
 
 	import Button from './Button.svelte';
 	import Icon from './Icon.svelte';

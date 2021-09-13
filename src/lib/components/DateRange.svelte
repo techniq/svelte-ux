@@ -8,9 +8,9 @@
 		hasDayOfWeek,
 		replaceDayOfWeek,
 		getPeriodTypeName
-	} from '$lib/utils/date';
-	import { getDateRangePresets } from '$lib/utils/dateRange';
-	import type { DateRange } from '$lib/utils/dateRange';
+	} from '../utils/date';
+	import { getDateRangePresets } from '../utils/dateRange';
+	import type { DateRange } from '../utils/dateRange';
 
 	import DateSelect from './DateSelect.svelte';
 	import Grid from './Grid.svelte';

@@ -3,9 +3,9 @@
 
 	import { mdiChevronDown, mdiClose } from '@mdi/js';
 
-	import Logger from '$lib/utils/logger';
-	import { selectOnFocus } from '$lib/actions/input';
-	import { scrollIntoView } from '$lib/actions/scroll';
+	import Logger from '../utils/logger';
+	import { selectOnFocus } from '../actions/input';
+	import { scrollIntoView } from '../actions/scroll';
 
 	import Button from './Button.svelte';
 	import CircularProgress from './CircularProgress.svelte';

@@ -80,7 +80,7 @@
 <script lang="ts">
 	import { createEventDispatcher, tick } from 'svelte';
 
-	import { objectToString } from '$lib/utils/styles';
+	import { objectToString } from '../utils/styles';
 
 	const dispatch = createEventDispatcher();
 

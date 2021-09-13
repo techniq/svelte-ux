@@ -2,9 +2,9 @@
 	import { createEventDispatcher } from 'svelte';
 	import { format as dateFormat, isWithinInterval } from 'date-fns';
 
-	import cssVars from '$lib/actions/cssVars';
-	import { getDateFuncsByPeriodType, PeriodType } from '$lib/utils/date';
-	import type { SelectedDate } from '$lib/utils/date';
+	import cssVars from '../actions/cssVars';
+	import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
+	import type { SelectedDate } from '../utils/date';
 
 	const dispatch = createEventDispatcher();
 

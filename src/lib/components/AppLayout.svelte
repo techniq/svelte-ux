@@ -8,8 +8,8 @@
 
 	import Backdrop from './Backdrop.svelte';
 
-	import matchMedia from '$lib/stores/matchMedia';
-	import cssVars from '$lib/actions/cssVars';
+	import matchMedia from '../stores/matchMedia';
+	import cssVars from '../actions/cssVars';
 
 	export let navWidth = 240;
 

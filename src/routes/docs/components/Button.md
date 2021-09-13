@@ -1,9 +1,9 @@
 <script lang="ts">
   import { mdiMenu, mdiTrashCan } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
+  import Button from '../components/Button.svelte';
+  import Preview from '../components/Preview.svelte';
+  import SectionDivider from '../components/SectionDivider.svelte';
 </script>
 
 ## Usage
