@@ -16,6 +16,7 @@
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">General</div>
 <NavItem text="Avatar" path="/docs/components/Avatar" class="pl-6 py-2" />
+<NavItem text="Badge" path="/docs/components/Badge" class="pl-6 py-2" />
 <NavItem text="Button" path="/docs/components/Button" class="pl-6 py-2" />
 <NavItem text="Card" path="/docs/components/Card" class="pl-6 py-2" />
 <NavItem text="Collapse" path="/docs/components/Collapse" class="pl-6 py-2" />
