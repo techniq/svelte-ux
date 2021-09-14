@@ -52,6 +52,10 @@
 <NavItem text="State" path="/docs/components/State" class="pl-6 py-2" />
 <NavItem text="Toggle" path="/docs/components/Toggle" class="pl-6 py-2" />
 
+<div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Table</div>
+<NavItem text="Table" path="/docs/components/Table" class="pl-6 py-2" />
+<NavItem text="TablePagination" path="/docs/components/TablePagination" class="pl-6 py-2" />
+
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Date</div>
 <NavItem text="DateDisplay" path="/docs/components/DateDisplay" class="pl-6 py-2" />
 <NavItem text="DatePickerField" path="/docs/components/DatePickerField" class="pl-6 py-2" />

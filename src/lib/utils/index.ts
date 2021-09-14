@@ -16,4 +16,5 @@ export * as rollup from './rollup';
 export * as serialize from './serialize';
 export * as sort from './sort';
 export * as styles from './styles';
+export * as table from './table';
 export * as transition from './transition';
