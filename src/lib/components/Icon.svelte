@@ -1,4 +1,6 @@
 <script lang="ts">
+	import clsx from 'clsx';
+
 	export let size = '1.5em';
 	export let width = size;
 	export let height = size;
@@ -6,6 +8,6 @@
 	export let path = '';
 </script>
 
-<svg {width} {height} {viewBox} class="inline-block {$$props.class}" style={$$props.style}>
+<svg {width} {height} {viewBox} class={clsx('inline-block', $$props.class)} style={$$props.style}>
 	<path d={path} fill="currentColor" />
 </svg>
