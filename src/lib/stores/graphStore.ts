@@ -9,7 +9,7 @@ import type { FetchConfig } from './fetchStore';
 
 type ClientConfig = {
 	url: string;
-	options: () => RequestInit;
+	options?: () => RequestInit;
 };
 
 export type GraphQLError = {
@@ -30,7 +30,7 @@ export type QueryConfig = {
 };
 
 export default function graphStore(baseQueryConfig?: QueryConfig) {
-	const client = getContext<ClientConfig>(CONTEXT_KEY);
+	const client = getContext<ClientConfig>(CONTEXT_KEY) ?? { url: '/graphql' };
 	const { subscribe, fetch, refresh, clear, fetchConfig } = fetchStore();
 
 	// Save for building derived requests (ex. exports)
