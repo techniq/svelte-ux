@@ -71,6 +71,8 @@
 			}
 		)}
 	>
-		{value || ''}
+		{#if !dot}
+			{value || ''}
+		{/if}
 	</div>
 </Stack>

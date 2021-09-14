@@ -3,6 +3,7 @@
 
   import Badge from '$lib/components/Badge.svelte';
   import Button from '$lib/components/Button.svelte';
+  import Grid from '$lib/components/Grid.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Stack from '$lib/components/Stack.svelte';
@@ -55,7 +56,7 @@
 ## Dot
 
 <Preview>
-  <Badge dot>
+  <Badge {value} dot>
     <Button icon={mdiFilterVariant} class="border p-3" />
   </Badge>
 </Preview>
@@ -63,7 +64,7 @@
 ## Dot w/ small
 
 <Preview>
-  <Badge dot small>
+  <Badge {value} dot small>
     <Button icon={mdiFilterVariant} class="border p-3" />
   </Badge>
 </Preview>
@@ -83,9 +84,9 @@
 
 <SectionDivider>Placement</SectionDivider>
 
-<Stack horizontal gap={16}>
+<Grid columns={5} gap={16}>
   <div>
-    ## Button w/ default
+    <div class="text-sm text-black/50">Button w/ default</div>
     <Preview>
       <Badge {value}>
         <Button class="border">Example</Button>
@@ -94,7 +95,7 @@
   </div>
 
   <div>
-    ## Button w/ top-left
+    <span class="text-sm text-black/50">Button w/ top-left</span>
     <Preview>
       <Badge {value} placement="top-left">
         <Button class="border">Example</Button>
@@ -103,7 +104,7 @@
   </div>
 
   <div>
-    ## Button w/ top-right
+    <span class="text-sm text-black/50">Button w/ top-right</span>
     <Preview>
       <Badge {value} placement="top-right">
         <Button class="border">Example</Button>
@@ -112,7 +113,7 @@
   </div>
 
   <div>
-    ## Button w/ bottom-left
+    <span class="text-sm text-black/50">Button w/ bottom-left</span>
     <Preview>
       <Badge {value} placement="bottom-left">
         <Button class="border">Example</Button>
@@ -121,18 +122,16 @@
   </div>
 
   <div>
-    ## Button w/ bottom-right
+    <span class="text-sm text-black/50">Button w/ bottom-right</span>
     <Preview>
       <Badge {value} placement="bottom-right">
         <Button class="border">Example</Button>
       </Badge>
     </Preview>
   </div>
-</Stack>
 
-<Stack horizontal gap={16}>
   <div>
-    ## Button w/ default
+    <span class="text-sm text-black/50">Button w/ default</span>
     <Preview>
       <Badge {value} small>
         <Button class="border">Example</Button>
@@ -141,7 +140,7 @@
   </div>
 
   <div>
-    ## Button w/ top-left
+    <span class="text-sm text-black/50">Button w/ top-left</span>
     <Preview>
       <Badge {value} small placement="top-left">
         <Button class="border">Example</Button>
@@ -150,7 +149,7 @@
   </div>
 
   <div>
-    ## Button w/ top-right
+    <span class="text-sm text-black/50">Button w/ top-right</span>
     <Preview>
       <Badge {value} small placement="top-right">
         <Button class="border">Example</Button>
@@ -159,7 +158,7 @@
   </div>
 
   <div>
-    ## Button w/ bottom-left
+    <span class="text-sm text-black/50">Button w/ bottom-left</span>
     <Preview>
       <Badge {value} small placement="bottom-left">
         <Button class="border">Example</Button>
@@ -168,18 +167,16 @@
   </div>
 
   <div>
-    ## Button w/ bottom-right
+    <span class="text-sm text-black/50">Button w/ bottom-right</span>
     <Preview>
       <Badge {value} small placement="bottom-right">
         <Button class="border">Example</Button>
       </Badge>
     </Preview>
   </div>
-</Stack>
 
-<Stack horizontal gap={16}>
   <div>
-    ## Icon Button w/ default
+    <span class="text-sm text-black/50">Icon Button w/ default</span>
     <Preview>
       <Badge {value} circle>
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -188,7 +185,7 @@
   </div>
 
   <div>
-    ## Icon Button w/ top-left
+    <span class="text-sm text-black/50">Icon Button w/ top-left</span>
     <Preview>
       <Badge {value} circle placement="top-left">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -197,7 +194,7 @@
   </div>
 
   <div>
-    ## Icon Button w/ top-right
+    <span class="text-sm text-black/50">Icon Button w/ top-right</span>
     <Preview>
       <Badge {value} circle placement="top-right">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -206,7 +203,7 @@
   </div>
 
   <div>
-    ## Icon Button w/ bottom-left
+    <span class="text-sm text-black/50">Icon Button w/ bottom-left</span>
     <Preview>
       <Badge {value} circle placement="bottom-left">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -215,18 +212,16 @@
   </div>
 
   <div>
-    ## Icon Button w/ bottom-right
+    <span class="text-sm text-black/50">Icon Button w/ bottom-right</span>
     <Preview>
       <Badge {value} circle placement="bottom-right">
         <Button icon={mdiFilterVariant} class="border p-3" />
       </Badge>
     </Preview>
   </div>
-</Stack>
 
-<Stack horizontal gap={16}>
   <div>
-    ## Icon Button w/ default
+    <span class="text-sm text-black/50">Icon Button w/ default</span>
     <Preview>
       <Badge {value} circle small>
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -235,7 +230,7 @@
   </div>
 
   <div>
-    ## Icon Button w/ top-left
+    <span class="text-sm text-black/50">Icon Button w/ top-left</span>
     <Preview>
       <Badge {value} circle small placement="top-left">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -244,7 +239,7 @@
   </div>
 
   <div>
-    ## Icon Button w/ top-right
+    <span class="text-sm text-black/50">Icon Button w/ top-right</span>
     <Preview>
       <Badge {value} circle small placement="top-right">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -253,7 +248,7 @@
   </div>
 
   <div>
-    ## Icon Button w/ bottom-left
+    <span class="text-sm text-black/50">Icon Button w/ bottom-left</span>
     <Preview>
       <Badge {value} circle small placement="bottom-left">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -262,11 +257,11 @@
   </div>
 
   <div>
-    ## Icon Button w/ bottom-right
+    <span class="text-sm text-black/50">Icon Button w/ bottom-right</span>
     <Preview>
       <Badge {value} circle small placement="bottom-right">
         <Button icon={mdiFilterVariant} class="border p-3" />
       </Badge>
     </Preview>
   </div>
-</Stack>
+</Grid>
