@@ -40,6 +40,7 @@
 			: 'first:border-t-0 first:rounded-t last:rounded-b',
 		$$props.class
 	)}
+	on:click
 >
 	<slot name="avatar">
 		{#if icon != null}
