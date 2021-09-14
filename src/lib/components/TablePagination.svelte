@@ -2,7 +2,7 @@
 	import clsx from 'clsx';
 	import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js';
 
-	import type paginationStore from '$lib/stores/paginationStore';
+	import type paginationStore from '../stores/paginationStore';
 
 	import Button from './Button.svelte';
 	import Grid from './Grid.svelte';
@@ -10,7 +10,7 @@
 	import Menu from './Menu.svelte';
 	import Toggle from './Toggle.svelte';
 
-	import { formatNumberAsStyle } from '$lib/utils/number';
+	import { formatNumberAsStyle } from '../utils/number';
 
 	export let pagination: ReturnType<typeof paginationStore>;
 	export let perPageOptions = [10, 25, 50, 100, 1000];
