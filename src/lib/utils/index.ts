@@ -14,5 +14,3 @@ export * as rollup from './rollup';
 export * as serialize from './serialize';
 export * as styles from './styles';
 export * as transition from './transition';
-export * as typeGuards from './typeGuards';
-export * as typeHelpers from './typeHelpers';

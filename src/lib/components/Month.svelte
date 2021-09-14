@@ -15,7 +15,7 @@
 
 	import { getMonthDaysByWeek, PeriodType } from '../utils/date';
 	import type { SelectedDate } from '../utils/date';
-	import { hasKeyOf } from '../utils/typeGuards';
+	import { hasKeyOf } from '../types/typeGuards';
 
 	import Button from './Button.svelte';
 	import DateButton from './DateButton.svelte';

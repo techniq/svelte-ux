@@ -33,7 +33,7 @@ import {
 
 import { timeDays } from 'd3-time';
 
-import { hasKeyOf } from './typeGuards';
+import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
 

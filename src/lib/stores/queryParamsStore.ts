@@ -6,7 +6,7 @@ import { isEqual, isFunction } from 'lodash-es';
 import * as Serialize from '../utils/serialize';
 
 import rollup from '../utils/rollup';
-import type { ValueOf } from '../utils/typeHelpers';
+import type { ValueOf } from '../types/typeHelpers';
 
 export type ParamType =
 	| 'string'
