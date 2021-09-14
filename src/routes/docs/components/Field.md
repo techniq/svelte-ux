@@ -103,12 +103,7 @@
 ## Custom input
 
 <Preview>
-  <Grid columns={2} gap={8}>
-    <Field label="First Name" let:id>
-      <input {id} class="bg-black/5 w-full focus:outline-none" />
-    </Field>
-    <Field label="Last Name" let:id>
-      <input {id} class="bg-black/5 w-full focus:outline-none" />
-    </Field>
-  </Grid>
+  <Field label="Date of Birth" let:id>
+    <input {id} type="date" class="text-sm w-full outline-none" />
+  </Field>
 </Preview>
