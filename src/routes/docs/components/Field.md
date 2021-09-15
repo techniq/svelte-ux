@@ -100,10 +100,23 @@
   </Grid>
 </Preview>
 
-## Custom input
+## Date input
 
 <Preview>
   <Field label="Date of Birth" let:id>
     <input {id} type="date" class="text-sm w-full outline-none" />
+  </Field>
+</Preview>
+
+## Select
+
+<Preview>
+  <Field label="Position" let:id>
+    <select {id} class="text-sm w-full outline-none">
+      <option value={1}>First</option>
+      <option value={2}>Second</option>
+      <option value={3}>Third</option>
+      <option value={4}>Fourth</option>
+    </select>
   </Field>
 </Preview>
