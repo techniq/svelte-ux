@@ -1,0 +1,1 @@
+import{bf as t}from"./vendor-3daaceab.js";function o(t){return t&&"object"==typeof t&&t.constructor===Object}function n(o){return"function"==typeof o?o:"string"==typeof o?n=>t(n,o):t=>t}export{o as i,n as p};

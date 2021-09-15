@@ -1,0 +1,1 @@
+function o(o,n){function t(n){var t;("boolean"==typeof n.condition?n.condition:n.condition(o))&&setTimeout((()=>{o.scrollIntoView({block:"center",behavior:"smooth"})}),null!=(t=n.delay)?t:0)}return!1!==n.initial&&t(n),{update:t}}export{o as s};
