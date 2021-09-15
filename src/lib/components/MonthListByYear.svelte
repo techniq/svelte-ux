@@ -35,7 +35,7 @@
 <Stack vertical class="divide-y">
 	<Button on:click={() => (minYear -= 1)}>More</Button>
 
-	{#each years as year (year)}
+	{#each years ?? [] as year (year)}
 		<Grid template="auto 1fr" columnGap={8} items="center" class="p-2">
 			<div class="text-xl font-bold" use:scrollIntoView={{ condition: year === selectedYear }}>
 				{year}

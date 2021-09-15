@@ -253,7 +253,7 @@
 							class="appearance-none bg-black/5 border border-black/20 rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
 							style="text-align-last: center;"
 						>
-							{#each operators as { label, value }}
+							{#each operators ?? [] as { label, value }}
 								<option {value}>{label}</option>
 							{/each}
 						</select>

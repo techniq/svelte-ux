@@ -90,7 +90,7 @@
 	</div>
 
 	<div class="flex">
-		{#each monthDaysByWeek[0] as day (day.getDate())}
+		{#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
 			<div class="flex-1 text-center">
 				<span class="text-xs text-black/50"> {format(day, 'eee')[0]} </span>
 			</div>
@@ -98,8 +98,8 @@
 	</div>
 
 	<Grid columns={7} rowGap={16}>
-		{#each monthDaysByWeek as week, weekIndex (weekIndex)}
-			{#each week as day (day.valueOf())}
+		{#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
+			{#each week ?? [] as day (day.valueOf())}
 				<DateButton
 					date={day}
 					periodType={PeriodType.Day}

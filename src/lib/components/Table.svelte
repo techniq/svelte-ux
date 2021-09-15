@@ -29,9 +29,9 @@
 		<table class="w-full {$$props.class}">
 			<slot name="headers" {headers}>
 				<thead>
-					{#each headers as headerRow}
+					{#each headers ?? [] as headerRow}
 						<tr>
-							{#each headerRow as column}
+							{#each headerRow ?? [] as column}
 								<th
 									use:tableCell={{ column }}
 									class="column-{column.name} {classes.th}"
@@ -54,7 +54,7 @@
 				<tbody>
 					{#each data ?? [] as rowData, rowIndex}
 						<tr>
-							{#each rowColumns as column}
+							{#each rowColumns ?? [] as column}
 								<td
 									use:tableCell={{ column, rowData, rowIndex }}
 									class="column-{column.name} {classes.td}"

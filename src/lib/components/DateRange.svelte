@@ -133,7 +133,7 @@
 			</div>
 			<Tabs contained bind:selected={selected.periodType} vertical>
 				<div class="tabList flex flex-col w-full border">
-					{#each periodTypeOptions as pt}
+					{#each periodTypeOptions ?? [] as pt}
 						<Tab value={adjustPeriodType(pt)} class="flex-1">
 							{getPeriodTypeName(adjustPeriodType(pt))}
 						</Tab>
@@ -145,7 +145,7 @@
 				<div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
 				<Tabs contained bind:selected vertical>
 					<div class="tabList flex flex-col w-full border">
-						{#each getDateRangePresets(selected.periodType) as preset}
+						{#each getDateRangePresets(selected.periodType) ?? [] as preset}
 							<Tab value={preset.value} class="flex-1">{preset.label}</Tab>
 						{/each}
 					</div>

@@ -34,7 +34,7 @@
 			? maxDate.getFullYear()
 			: addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
 
-	$: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
+	$: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i) ?? [];
 
 	// TODO: Scroll into view not typically centered
 	$: selectedYear = (getMinSelectedDate(selected) || new Date()).getFullYear();

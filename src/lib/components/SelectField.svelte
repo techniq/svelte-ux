@@ -340,7 +340,7 @@
 					}
 				}}
 			>
-				{#each filteredItems as item, index}
+				{#each filteredItems ?? [] as item, index}
 					<slot name="item" {item} {index} {highlightIndex}>
 						<div
 							class="p-2 bg-opacity-5 hover:bg-black/5 cursor-pointer"

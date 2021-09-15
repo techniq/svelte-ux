@@ -27,7 +27,7 @@
 </script>
 
 <!-- TODO: `bind:selected` not working -->
-{#each getMonths(year) as month (month.valueOf())}
+{#each getMonths(year) ?? [] as month (month.valueOf())}
 	<DateButton
 		date={month}
 		periodType={PeriodType.Month}

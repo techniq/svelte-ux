@@ -9,7 +9,7 @@
 </script>
 
 <Stack horizontal justify="start" items="center" gap={8} {...$$restProps}>
-	{#each items as item, index}
+	{#each items ?? [] as item, index}
 		<slot name="item" {item}>
 			<div class="item">{item}</div>
 		</slot>
