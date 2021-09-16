@@ -13,6 +13,7 @@
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">App</div>
 <NavItem text="AppBar" path="/docs/components/AppBar" class="pl-6 py-2" />
 <NavItem text="Breadcrumb" path="/docs/components/Breadcrumb" class="pl-6 py-2" />
+<NavItem text="Steps" path="/docs/components/Steps" class="pl-6 py-2" />
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">General</div>
 <NavItem text="Avatar" path="/docs/components/Avatar" class="pl-6 py-2" />
