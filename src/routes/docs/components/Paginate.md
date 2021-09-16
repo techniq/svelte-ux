@@ -11,13 +11,13 @@
 
 ```svelte
 <script lang="ts">
-	import { Paginate } from 'svelte-ux';
+  import { Paginate } from 'svelte-ux';
 </script>
 
 <Paginate {items} let:pagination let pageItems>
-	{#each pageItems as child}
-		<!-- render item -->
-	{/each}
+  {#each pageItems as child}
+    <!-- render item -->
+  {/each}
 </Paginate>
 ```
 

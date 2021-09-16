@@ -1,6 +1,6 @@
 type PortalOptions = {
-	enabled?: boolean;
-	target?: HTMLElement | string;
+  enabled?: boolean;
+  target?: HTMLElement | string;
 };
 
 /**
@@ -12,24 +12,24 @@ type PortalOptions = {
  *  - https://github.com/sveltejs/svelte/issues/3088#issuecomment-505785516
  */
 export default function portal(node: HTMLElement, options?: PortalOptions) {
-	moveNode(node, options);
+  moveNode(node, options);
 
-	return {
-		update(options) {
-			moveNode(node, options);
-		}
-	};
+  return {
+    update(options) {
+      moveNode(node, options);
+    },
+  };
 }
 
 function moveNode(node: HTMLElement, options: PortalOptions = {}) {
-	let { enabled, target } = options;
+  let { enabled, target } = options;
 
-	if (enabled === false) return;
+  if (enabled === false) return;
 
-	if (typeof target === 'string') {
-		target = document.getElementById(target);
-	}
-	if (!target) target = document.body;
+  if (typeof target === 'string') {
+    target = document.getElementById(target);
+  }
+  if (!target) target = document.body;
 
-	target.appendChild(node);
+  target.appendChild(node);
 }

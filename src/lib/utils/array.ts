@@ -96,11 +96,7 @@ export function unique(values: any[]) {
 /**
  * Join values up to a maximum with `separator`, then truncate with total
  */
-export function joinValues(
-  values: string[] = [],
-  max: number = 3,
-  separator = ', '
-) {
+export function joinValues(values: string[] = [], max: number = 3, separator = ', ') {
   const total = values.length;
 
   if (total <= max) {
@@ -161,11 +157,7 @@ export function nestedFindByPredicate(
     for (var item of arr) {
       const children = getChildrenProp(item);
       if (children) {
-        match = nestedFindByPredicate(
-          getChildrenProp(item),
-          predicate,
-          childrenProp
-        );
+        match = nestedFindByPredicate(getChildrenProp(item), predicate, childrenProp);
         if (match) {
           return match;
         }

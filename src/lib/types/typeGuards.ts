@@ -11,10 +11,7 @@ export function hasKeyOf<T>(object: any, key: string): object is T {
 
 // Similar to Object.hasOwnProperty
 // http://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards
-export function hasProperty<T>(
-  o: T,
-  name: string | number | symbol
-): name is keyof T {
+export function hasProperty<T>(o: T, name: string | number | symbol): name is keyof T {
   return name in o;
 }
 
@@ -43,9 +40,7 @@ export function isSVGSVGElement(elem?: Element | null): elem is SVGSVGElement {
   return !!elem && 'createSVGPoint' in elem;
 }
 
-export function isSVGGraphicsElement(
-  elem?: Element | null
-): elem is SVGGraphicsElement {
+export function isSVGGraphicsElement(elem?: Element | null): elem is SVGGraphicsElement {
   return !!elem && 'getScreenCTM' in elem;
 }
 

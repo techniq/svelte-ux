@@ -6,113 +6,113 @@ import { PeriodType } from '../utils/date';
 import { format } from '../utils/format';
 
 export function getHeaders(columns: ColumnDef[]) {
-	const maxDepth = getDepth(columns);
-	const result: ColumnDef[][] = Array.from({
-		length: maxDepth
-	}).map(() => []);
+  const maxDepth = getDepth(columns);
+  const result: ColumnDef[][] = Array.from({
+    length: maxDepth,
+  }).map(() => []);
 
-	function addItems(columns: ColumnDef[], depth: number) {
-		columns.forEach((column) => {
-			const columnDef: ColumnDef = {
-				...column
-			};
-			delete columnDef.columns;
+  function addItems(columns: ColumnDef[], depth: number) {
+    columns.forEach((column) => {
+      const columnDef: ColumnDef = {
+        ...column,
+      };
+      delete columnDef.columns;
 
-			if (column.columns) {
-				const colSpan = getWidth(column);
-				if (colSpan > 1) {
-					columnDef.colSpan = colSpan;
-				}
-				addItems(column.columns, depth + 1);
-			} else {
-				const rowSpan = maxDepth - depth;
-				if (rowSpan > 1) {
-					columnDef.rowSpan = maxDepth - depth;
-				}
-			}
-			result[depth].push(columnDef);
-		});
-	}
-	addItems(columns, 0);
+      if (column.columns) {
+        const colSpan = getWidth(column);
+        if (colSpan > 1) {
+          columnDef.colSpan = colSpan;
+        }
+        addItems(column.columns, depth + 1);
+      } else {
+        const rowSpan = maxDepth - depth;
+        if (rowSpan > 1) {
+          columnDef.rowSpan = maxDepth - depth;
+        }
+      }
+      result[depth].push(columnDef);
+    });
+  }
+  addItems(columns, 0);
 
-	return result;
+  return result;
 }
 
 export function getRowColumns(columns: ColumnDef[]) {
-	const result: ColumnDef[] = [];
+  const result: ColumnDef[] = [];
 
-	function setColumns(column: ColumnDef) {
-		if (column.columns == null) {
-			result.push(column);
-			return;
-		}
+  function setColumns(column: ColumnDef) {
+    if (column.columns == null) {
+      result.push(column);
+      return;
+    }
 
-		column.columns.forEach((child) => setColumns(child));
-	}
-	columns.forEach((column) => setColumns(column));
+    column.columns.forEach((child) => setColumns(child));
+  }
+  columns.forEach((column) => setColumns(column));
 
-	return result;
+  return result;
 }
 
 export function getDepth(columns: ColumnDef[] | undefined) {
-	if (columns == null) {
-		return 0;
-	}
+  if (columns == null) {
+    return 0;
+  }
 
-	let depth = 0;
-	columns.forEach((item) => {
-		depth = Math.max(depth, getDepth(item.columns));
-	});
+  let depth = 0;
+  columns.forEach((item) => {
+    depth = Math.max(depth, getDepth(item.columns));
+  });
 
-	return depth + 1;
+  return depth + 1;
 }
 
 export function getWidth(column: ColumnDef) {
-	if (column.columns == null) {
-		return 1;
-	}
+  if (column.columns == null) {
+    return 1;
+  }
 
-	let width = 0;
-	column.columns.forEach((child) => {
-		width += getWidth(child);
-	});
+  let width = 0;
+  column.columns.forEach((child) => {
+    width += getWidth(child);
+  });
 
-	return width;
+  return width;
 }
 
 export function getCellHeader(column: ColumnDef) {
-	if (column.header != null) {
-		return column.header;
-	}
+  if (column.header != null) {
+    return column.header;
+  }
 
-	let header = column.name.split('.')[0]; // Use first section before dot (`Organization.Identifier` => `Organization`)
-	header = header.replace(/([a-z])([A-Z])/g, '$1 $2'); // Add space before capital letters - https://stackoverflow.com/questions/5582228/insert-space-before-capital-letters
-	return header;
+  let header = column.name.split('.')[0]; // Use first section before dot (`Organization.Identifier` => `Organization`)
+  header = header.replace(/([a-z])([A-Z])/g, '$1 $2'); // Add space before capital letters - https://stackoverflow.com/questions/5582228/insert-space-before-capital-letters
+  return header;
 }
 
 export function getCellValue(column: ColumnDef, rowData: any, rowIndex: number) {
-	let value = undefined;
-	if (isFunction(column.value)) {
-		value = column.value?.(rowData, rowIndex);
-	}
+  let value = undefined;
+  if (isFunction(column.value)) {
+    value = column.value?.(rowData, rowIndex);
+  }
 
-	if (value === undefined) {
-		value = get(rowData, typeof column.value === 'string' ? column.value : column.name);
-	}
+  if (value === undefined) {
+    value = get(rowData, typeof column.value === 'string' ? column.value : column.name);
+  }
 
-	if (typeof value === 'string' && !isFunction(column.format) && column.format in PeriodType) {
-		// Convert date string to Date instance
-		// TODO: Shoud dateFns.parseISO() be used?
-		// TODO: Should we handle date-only strings different?
-		// value = new Date(value);
-		// console.log({ column: column.name, value });
-		value = parseISO(value);
-	}
+  if (typeof value === 'string' && !isFunction(column.format) && column.format in PeriodType) {
+    // Convert date string to Date instance
+    // TODO: Shoud dateFns.parseISO() be used?
+    // TODO: Should we handle date-only strings different?
+    // value = new Date(value);
+    // console.log({ column: column.name, value });
+    value = parseISO(value);
+  }
 
-	return value;
+  return value;
 }
 
 export function getCellContent(column: ColumnDef, rowData: any, rowIndex: number) {
-	const value = getCellValue(column, rowData, rowIndex);
-	return format(value, column?.format, rowData, rowIndex);
+  const value = getCellValue(column, rowData, rowIndex);
+  return format(value, column?.format, rowData, rowIndex);
 }

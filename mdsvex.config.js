@@ -11,30 +11,30 @@ const { format } = prettier;
  * Inject `code` prop to <Preview>
  */
 function codePreview() {
-	function visitor(node) {
-		// TODO: Support updating Preview nested in other markup.  https://stackoverflow.com/questions/14768735/regex-replace-only-inside-tag-need-help-writing-regex
-		if (node.value.startsWith('<Preview>')) {
-			// Get contents between <Preview> tag
-			const code = node.value.match(/<Preview>([^]*)<\/Preview>/)[1];
+  function visitor(node) {
+    // TODO: Support updating Preview nested in other markup.  https://stackoverflow.com/questions/14768735/regex-replace-only-inside-tag-need-help-writing-regex
+    if (node.value.startsWith('<Preview>')) {
+      // Get contents between <Preview> tag
+      const code = node.value.match(/<Preview>([^]*)<\/Preview>/)[1];
 
-			const formattedCode = format(code, {
-				parser: 'svelte',
-				plugins: [typescriptPlugin, sveltePlugin],
-				svelteBracketNewLine: true
-			});
-			const highlightedCode = Prism.highlight(formattedCode, Prism.languages.svelte, 'svelte');
-			node.value = `<Preview code="{\`${highlightedCode}\`}" language="svelte">${code}</Preview>`;
-		}
-	}
+      const formattedCode = format(code, {
+        parser: 'svelte',
+        plugins: [typescriptPlugin, sveltePlugin],
+        svelteBracketNewLine: true,
+      });
+      const highlightedCode = Prism.highlight(formattedCode, Prism.languages.svelte, 'svelte');
+      node.value = `<Preview code="{\`${highlightedCode}\`}" language="svelte">${code}</Preview>`;
+    }
+  }
 
-	return (tree) => {
-		visit(tree, 'html', visitor);
-	};
+  return (tree) => {
+    visit(tree, 'html', visitor);
+  };
 }
 
 export default {
-	extensions: ['.md', '.svx'],
-	layout: './src/docs/Layout.svelte',
-	remarkPlugins: [codePreview]
-	// highlight: false
+  extensions: ['.md', '.svx'],
+  layout: './src/docs/Layout.svelte',
+  remarkPlugins: [codePreview],
+  // highlight: false
 };

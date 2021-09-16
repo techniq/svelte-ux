@@ -12,10 +12,10 @@
 
 ```svelte
 <script lang="ts">
-	import { Pagination, paginationStore } from 'svelte-ux';
+  import { Pagination, paginationStore } from 'svelte-ux';
 
-	const pagination = paginationStore();
-	pagination.setTotal(100);
+  const pagination = paginationStore();
+  pagination.setTotal(100);
 </script>
 
 <Pagination {pagination} />

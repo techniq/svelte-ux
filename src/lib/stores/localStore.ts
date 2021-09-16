@@ -12,52 +12,52 @@ import type { Expiry } from '../utils/object';
 // https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_stores#implementing_our_custom_todos_store
 
 type LocalStoreOptions<Value> = {
-	expiry?: Expiry | ((previousExpiry: Expiry | undefined | null) => Expiry);
-	override?: Value;
+  expiry?: Expiry | ((previousExpiry: Expiry | undefined | null) => Expiry);
+  override?: Value;
 };
 
 function localStore<Value>(key: string, initialValue: Value, options?: LocalStoreOptions<Value>) {
-	let value = initialValue;
-	let previousExpiry: Expiry | null = null;
+  let value = initialValue;
+  let previousExpiry: Expiry | null = null;
 
-	if (options?.override != null) {
-		value = options?.override;
-	} else {
-		const storedValue = localStorage.getItem(key);
-		if (storedValue !== null) {
-			const decodedValue = decode(storedValue);
-			if (options?.expiry) {
-				// TODO: if object returned, merge with initialValue (sub-properties)?
-				value = expireObject<Value>(decodedValue.value, decodedValue.expiry) ?? initialValue;
+  if (options?.override != null) {
+    value = options?.override;
+  } else {
+    const storedValue = localStorage.getItem(key);
+    if (storedValue !== null) {
+      const decodedValue = decode(storedValue);
+      if (options?.expiry) {
+        // TODO: if object returned, merge with initialValue (sub-properties)?
+        value = expireObject<Value>(decodedValue.value, decodedValue.expiry) ?? initialValue;
 
-				previousExpiry = decodedValue.expiry;
-			} else {
-				value = decodedValue;
-			}
-		}
-	}
+        previousExpiry = decodedValue.expiry;
+      } else {
+        value = decodedValue;
+      }
+    }
+  }
 
-	const store = writable<Value>(value);
+  const store = writable<Value>(value);
 
-	store.subscribe((val) => {
-		if (options?.expiry) {
-			// Remove all expired expiry
-			const prunedPreviousExpiry = previousExpiry
-				? expireObject(previousExpiry, previousExpiry)
-				: previousExpiry;
+  store.subscribe((val) => {
+    if (options?.expiry) {
+      // Remove all expired expiry
+      const prunedPreviousExpiry = previousExpiry
+        ? expireObject(previousExpiry, previousExpiry)
+        : previousExpiry;
 
-			const expiry = isFunction(options?.expiry)
-				? options?.expiry(prunedPreviousExpiry) // Update expiry on write
-				: options?.expiry;
-			previousExpiry = expiry;
+      const expiry = isFunction(options?.expiry)
+        ? options?.expiry(prunedPreviousExpiry) // Update expiry on write
+        : options?.expiry;
+      previousExpiry = expiry;
 
-			localStorage.setItem(key, encode({ value: val, expiry }));
-		} else {
-			localStorage.setItem(key, encode(val));
-		}
-	});
+      localStorage.setItem(key, encode({ value: val, expiry }));
+    } else {
+      localStorage.setItem(key, encode(val));
+    }
+  });
 
-	return store;
+  return store;
 }
 
 export default localStore;

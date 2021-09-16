@@ -42,9 +42,7 @@ export function fly(
     duration,
     easing,
     css: (t, u) => `
-				transform: ${transform} translate(${(1 - t) * xValue}${xUnit}, ${
-      (1 - t) * yValue
-    }${yUnit});
+				transform: ${transform} translate(${(1 - t) * xValue}${xUnit}, ${(1 - t) * yValue}${yUnit});
 				opacity: ${target_opacity - od * u}`,
   };
 }

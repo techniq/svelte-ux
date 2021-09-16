@@ -5,8 +5,7 @@
 
   export let value: any;
 
-  const { registerTab, unregisterTab, selectTab, selectedTab, crossfade } =
-    getContext(tabsKey);
+  const { registerTab, unregisterTab, selectTab, selectedTab, crossfade } = getContext(tabsKey);
   const [send, receive] = crossfade;
 
   let tabElement: HTMLElement = null;

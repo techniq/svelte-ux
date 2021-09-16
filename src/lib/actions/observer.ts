@@ -33,10 +33,7 @@ export function intersection(node) {
   };
 }
 
-export function mutate(
-  node: HTMLElement | SVGElement,
-  options: MutationObserverInit
-) {
+export function mutate(node: HTMLElement | SVGElement, options: MutationObserverInit) {
   let observer: MutationObserver | null = null;
 
   function update(options: MutationObserverInit) {

@@ -10,11 +10,7 @@ export type FetchConfig<TData = any> = {
   options?: () => RequestInit;
   disabled?: boolean;
   force?: boolean;
-  as?:
-    | 'auto'
-    | BodyMethods
-    | ((response: Response) => Promise<any>)
-    | ResponseMapping;
+  as?: 'auto' | BodyMethods | ((response: Response) => Promise<any>) | ResponseMapping;
   onDataChange?: (newData: TData, data: TData) => any;
   onResponseChange?: (response: Response) => any;
   once?: boolean;
@@ -46,15 +42,12 @@ const DEFAULT_STATE = {
 
 export default function fetchStore() {
   const localErrors = writable([]);
-  const { subscribe, set, update } = writable<FetchState>(
-    { ...DEFAULT_STATE },
-    () => {
-      return () => {
-        // Remove errors from global errors when no longer subscribed (component unmounted which uses store instance)
-        removeGlobalErrors(localErrors);
-      };
-    }
-  );
+  const { subscribe, set, update } = writable<FetchState>({ ...DEFAULT_STATE }, () => {
+    return () => {
+      // Remove errors from global errors when no longer subscribed (component unmounted which uses store instance)
+      removeGlobalErrors(localErrors);
+    };
+  });
 
   // Track first data load for `once`
   let loaded = false;
@@ -90,9 +83,7 @@ export default function fetchStore() {
       removeGlobalErrors(localErrors);
       localErrors.set([]);
 
-      update((currentState) =>
-        doUpdate(currentState, { request, loading: true }, null, config)
-      );
+      update((currentState) => doUpdate(currentState, { request, loading: true }, null, config));
 
       const as = config?.as || 'auto';
 
@@ -117,9 +108,7 @@ export default function fetchStore() {
               error: response.ok ? undefined : data,
               response,
             };
-            update((currentState) =>
-              doUpdate(currentState, newState, promise, config)
-            );
+            update((currentState) => doUpdate(currentState, newState, promise, config));
             loaded = true;
           } catch (error) {
             const newState = {
@@ -129,9 +118,7 @@ export default function fetchStore() {
               error: response.ok ? undefined : error,
               response,
             };
-            update((currentState) =>
-              doUpdate(currentState, newState, promise, config)
-            );
+            update((currentState) => doUpdate(currentState, newState, promise, config));
           }
         })
         .catch((error) => {
@@ -143,9 +130,7 @@ export default function fetchStore() {
             loading: false,
           };
 
-          update((currentState) =>
-            doUpdate(currentState, newState, promise, config)
-          );
+          update((currentState) => doUpdate(currentState, newState, promise, config));
 
           // Rethrow so not to swallow errors, especially from errors within handlers (children func / onChange)
           throw error;
@@ -179,11 +164,7 @@ export default function fetchStore() {
     }
 
     let data = undefined;
-    if (
-      nextState.data &&
-      nextState.data !== currentState.data &&
-      config?.onDataChange
-    ) {
+    if (nextState.data && nextState.data !== currentState.data && config?.onDataChange) {
       data = config.onDataChange(nextState.data, currentState.data);
     }
 
@@ -231,9 +212,7 @@ export default function fetchStore() {
     },
     clear() {
       const { config } = get(fetchConfigStore);
-      update((currentState) =>
-        doUpdate(currentState, { ...DEFAULT_STATE }, null, config)
-      );
+      update((currentState) => doUpdate(currentState, { ...DEFAULT_STATE }, null, config));
     },
     fetchConfig: fetchConfigStore,
   };
@@ -289,8 +268,6 @@ function parseBody(response: Response, mapping: ResponseMapping = {}) {
     // https://mimesniff.spec.whatwg.org/#xml-mime-type
     return 'xml' in mapping ? mapping['xml'](response) : response.text();
   } else {
-    return 'other' in mapping
-      ? mapping['other'](response)
-      : response.arrayBuffer();
+    return 'other' in mapping ? mapping['other'](response) : response.arrayBuffer();
   }
 }

@@ -34,43 +34,23 @@ export default class Logger {
     if (shouldLog) {
       switch (level) {
         case 'TRACE':
-          console.trace(
-            `%c ${level}`,
-            'color: hsl(200deg, 40%, 50%)',
-            ...message
-          );
+          console.trace(`%c ${level}`, 'color: hsl(200deg, 40%, 50%)', ...message);
           break;
 
         case 'DEBUG':
-          console.log(
-            `%c ${level}`,
-            'color: hsl(200deg, 40%, 50%)',
-            ...message
-          );
+          console.log(`%c ${level}`, 'color: hsl(200deg, 40%, 50%)', ...message);
           break;
 
         case 'INFO':
-          console.log(
-            `%c ${level}`,
-            'color: hsl(60deg, 100%, 50%)',
-            ...message
-          );
+          console.log(`%c ${level}`, 'color: hsl(60deg, 100%, 50%)', ...message);
           break;
 
         case 'WARN':
-          console.warn(
-            `%c ${level}`,
-            'color: hsl(30deg, 100%, 50%)',
-            ...message
-          );
+          console.warn(`%c ${level}`, 'color: hsl(30deg, 100%, 50%)', ...message);
           break;
 
         case 'ERROR':
-          console.warn(
-            `%c ${level}`,
-            'color: hsl(0deg, 100%, 50%)',
-            ...message
-          );
+          console.warn(`%c ${level}`, 'color: hsl(0deg, 100%, 50%)', ...message);
           break;
       }
     }

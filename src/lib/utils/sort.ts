@@ -14,10 +14,7 @@ export function createCompoundSort(...sortFns: { (a: any, b: any): any }[]) {
   };
 }
 
-export function createSortFunc(
-  valueFn: (a: any) => any,
-  direction: 'asc' | 'desc' = 'asc'
-) {
+export function createSortFunc(valueFn: (a: any) => any, direction: 'asc' | 'desc' = 'asc') {
   const sortDirection = direction === 'asc' ? 1 : -1;
 
   return (a: any, b: any) => {
@@ -35,18 +32,11 @@ export function createSortFunc(
       }
     }
 
-    return aValue < bValue
-      ? -sortDirection
-      : aValue > bValue
-      ? sortDirection
-      : 0;
+    return aValue < bValue ? -sortDirection : aValue > bValue ? sortDirection : 0;
   };
 }
 
-export function createPropertySortFunc(
-  prop?: PropAccessorArg,
-  direction: 'asc' | 'desc' = 'asc'
-) {
+export function createPropertySortFunc(prop?: PropAccessorArg, direction: 'asc' | 'desc' = 'asc') {
   return createSortFunc(propAccessor(prop), direction);
 }
 

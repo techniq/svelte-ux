@@ -5,10 +5,7 @@ export function isLiteralObject(obj: any) {
 }
 
 export function camelCaseKeys(obj: any) {
-  return Object.keys(obj).reduce(
-    (acc, key) => ((acc[camelCase(key)] = obj[key]), acc),
-    {} as any
-  );
+  return Object.keys(obj).reduce((acc, key) => ((acc[camelCase(key)] = obj[key]), acc), {} as any);
 }
 
 // https://codereview.stackexchange.com/questions/73714/find-a-nested-property-in-an-object
@@ -56,9 +53,7 @@ export function objectId(object: any) {
 }
 
 export function distinctKeys(...objs: object[]) {
-  const keys: string[] = [
-    ...new Set(flatten(objs.map((x: object) => Object.keys(x)))),
-  ];
+  const keys: string[] = [...new Set(flatten(objs.map((x: object) => Object.keys(x))))];
   return keys;
 }
 
@@ -87,10 +82,7 @@ export type Expiry = Date | { [prop: string]: Date | { [prop: string]: Date } };
 /**
  * Remove properties from object based on expiration
  */
-export function expireObject<TObject>(
-  object,
-  expiry: Expiry
-): Partial<TObject> | null {
+export function expireObject<TObject>(object, expiry: Expiry): Partial<TObject> | null {
   const now = new Date();
 
   if (expiry instanceof Date && expiry < now) {
@@ -130,18 +122,13 @@ export function expireObject<TObject>(
     }
   }
 
-  return isLiteralObject(object) && Object.keys(object).length === 0
-    ? null
-    : object;
+  return isLiteralObject(object) && Object.keys(object).length === 0 ? null : object;
 }
 
 /**
  * Remove properties from an object.  See also lodash `_.omit()`
  */
-export function omit<T extends object = {}>(
-  obj: T,
-  keys: string[]
-): Partial<T> {
+export function omit<T extends object = {}>(obj: T, keys: string[]): Partial<T> {
   if (keys.length === 0) {
     return obj;
   } else {

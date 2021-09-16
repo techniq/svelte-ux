@@ -15,25 +15,17 @@ export default function paginationStore(props?: PaginationProps) {
   return {
     subscribe: state.subscribe,
     nextPage() {
-      state.update((state) =>
-        createState(state.page + 1, state.perPage, state.total)
-      );
+      state.update((state) => createState(state.page + 1, state.perPage, state.total));
     },
     prevPage() {
-      state.update((state) =>
-        createState(state.page - 1, state.perPage, state.total)
-      );
+      state.update((state) => createState(state.page - 1, state.perPage, state.total));
     },
     firstPage() {
       state.update((state) => createState(1, state.perPage, state.total));
     },
     lastPage() {
       state.update((state) =>
-        createState(
-          Math.ceil(state.total / state.perPage),
-          state.perPage,
-          state.total
-        )
+        createState(Math.ceil(state.total / state.perPage), state.perPage, state.total)
       );
     },
     setPage(page: number) {

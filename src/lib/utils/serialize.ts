@@ -15,10 +15,7 @@ function getEncodedValue(
     return input;
   }
   // '' or []
-  if (
-    input.length === 0 &&
-    (!allowEmptyString || (allowEmptyString && input !== ''))
-  ) {
+  if (input.length === 0 && (!allowEmptyString || (allowEmptyString && input !== ''))) {
     return null;
   }
 
@@ -54,9 +51,7 @@ function getEncodedValueArray(
  * @param {Date} date
  * @return {String} the encoded date
  */
-export function encodeDate(
-  date: Date | null | undefined
-): string | null | undefined {
+export function encodeDate(date: Date | null | undefined): string | null | undefined {
   if (date == null) {
     return date;
   }
@@ -65,9 +60,7 @@ export function encodeDate(
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  return `${year}-${month < 10 ? `0${month}` : month}-${
-    day < 10 ? `0${day}` : day
-  }`;
+  return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
 }
 
 /**
@@ -112,9 +105,7 @@ export function decodeDate(
  * @param {Date} date
  * @return {String} the encoded date
  */
-export function encodeDateTime(
-  date: Date | null | undefined
-): string | null | undefined {
+export function encodeDateTime(date: Date | null | undefined): string | null | undefined {
   if (date == null) {
     return date;
   }
@@ -154,9 +145,7 @@ export function decodeDateTime(
  * @param {Boolean} bool
  * @return {String} the encoded boolean
  */
-export function encodeBoolean(
-  bool: boolean | null | undefined
-): string | null | undefined {
+export function encodeBoolean(bool: boolean | null | undefined): string | null | undefined {
   if (bool == null) {
     return bool;
   }
@@ -194,9 +183,7 @@ export function decodeBoolean(
  * @param {Number} num
  * @return {String} the encoded number
  */
-export function encodeNumber(
-  num: number | null | undefined
-): string | null | undefined {
+export function encodeNumber(num: number | null | undefined): string | null | undefined {
   if (num == null) {
     return num;
   }
@@ -281,9 +268,7 @@ export function decodeEnum<T extends string>(
  * @param {Any} any The thing to be encoded
  * @return {String} The JSON string representation of any
  */
-export function encodeJson(
-  any: any | null | undefined
-): string | null | undefined {
+export function encodeJson(any: any | null | undefined): string | null | undefined {
   if (any == null) {
     return any;
   }

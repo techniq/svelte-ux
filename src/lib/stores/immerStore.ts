@@ -1,11 +1,5 @@
 import { writable, get } from 'svelte/store';
-import {
-  applyPatches,
-  createDraft,
-  finishDraft,
-  enablePatches,
-  setAutoFreeze,
-} from 'immer';
+import { applyPatches, createDraft, finishDraft, enablePatches, setAutoFreeze } from 'immer';
 
 // Needed for finishDraft() patches/inverseChanges - https://immerjs.github.io/immer/patches
 enablePatches();

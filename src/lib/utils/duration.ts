@@ -106,10 +106,7 @@ export function humanizeDuration(config: {
     const unitNum = unitNums[i];
     let unitName = unitNames[i];
 
-    if (
-      unitNum !== 0 ||
-      (sentenceArr.length === 0 && Number(i) === DurationUnits.Millisecond)
-    ) {
+    if (unitNum !== 0 || (sentenceArr.length === 0 && Number(i) === DurationUnits.Millisecond)) {
       switch (variant) {
         case 'short':
           sentenceArr.push(unitNum + unitName);

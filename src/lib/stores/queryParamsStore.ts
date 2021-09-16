@@ -9,15 +9,15 @@ import rollup from '../utils/rollup';
 import type { ValueOf } from '../types/typeHelpers';
 
 export type ParamType =
-	| 'string'
-	| 'string[]'
-	| 'number'
-	| 'number[]'
-	| 'boolean'
-	| 'date'
-	| 'datetime'
-	| 'json'
-	| 'object';
+  | 'string'
+  | 'string[]'
+  | 'number'
+  | 'number[]'
+  | 'boolean'
+  | 'date'
+  | 'datetime'
+  | 'json'
+  | 'object';
 
 /**
  * Set a single querystring param
@@ -26,27 +26,27 @@ export type ParamType =
  * @returns
  */
 export function queryParamStore<Value>(
-	name: string,
-	page: Readable<Page>,
-	defaultValue?: Value,
-	paramType?: ParamType
+  name: string,
+  page: Readable<Page>,
+  defaultValue?: Value,
+  paramType?: ParamType
 ) {
-	const store = derived(page, ($page) => {
-		const values = $page.query.getAll(name);
-		return decodeParam(values, paramType) ?? defaultValue;
-	});
+  const store = derived(page, ($page) => {
+    const values = $page.query.getAll(name);
+    return decodeParam(values, paramType) ?? defaultValue;
+  });
 
-	function apply(params: URLSearchParams, newValue: Value) {
-		//  Do not update querystring with initialValue..
-		if (typeof window !== 'undefined') {
-			applyParam(params, name, newValue, defaultValue, paramType);
-		}
-	}
+  function apply(params: URLSearchParams, newValue: Value) {
+    //  Do not update querystring with initialValue..
+    if (typeof window !== 'undefined') {
+      applyParam(params, name, newValue, defaultValue, paramType);
+    }
+  }
 
-	return {
-		subscribe: store.subscribe,
-		apply
-	};
+  return {
+    subscribe: store.subscribe,
+    apply,
+  };
 }
 
 /**
@@ -55,130 +55,130 @@ export function queryParamStore<Value>(
  * @returns
  */
 export function queryParamsStore<Values extends { [key: string]: any }>(
-	page: Readable<Page>,
-	defaultValues?: Values,
-	paramTypes?: { [key: string]: ParamType } | ((key: keyof Values) => ParamType)
+  page: Readable<Page>,
+  defaultValues?: Values,
+  paramTypes?: { [key: string]: ParamType } | ((key: keyof Values) => ParamType)
 ) {
-	const store = derived(page, ($page) => {
-		const state = { ...defaultValues };
+  const store = derived(page, ($page) => {
+    const state = { ...defaultValues };
 
-		// Group by key
-		const groupedParams: Map<keyof Values, ValueOf<Values>> = rollup(
-			[...$page.query],
-			(items) => items.map((x) => x[1]),
-			[([key, value]) => key]
-		);
+    // Group by key
+    const groupedParams: Map<keyof Values, ValueOf<Values>> = rollup(
+      [...$page.query],
+      (items) => items.map((x) => x[1]),
+      [([key, value]) => key]
+    );
 
-		for (const [key, values] of groupedParams) {
-			const paramType = isFunction(paramTypes)
-				? paramTypes(key as string)
-				: paramTypes?.[key as string];
+    for (const [key, values] of groupedParams) {
+      const paramType = isFunction(paramTypes)
+        ? paramTypes(key as string)
+        : paramTypes?.[key as string];
 
-			state[key] = decodeParam(values, paramType);
-		}
+      state[key] = decodeParam(values, paramType);
+    }
 
-		return state;
-	});
+    return state;
+  });
 
-	function create(newValues: Values) {
-		//  Do not update querystring with initialValue..
-		if (typeof window !== 'undefined') {
-			const params = new URLSearchParams(); // queryParamsStore controls full params so start fresh
+  function create(newValues: Values) {
+    //  Do not update querystring with initialValue..
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(); // queryParamsStore controls full params so start fresh
 
-			if (newValues != null) {
-				Object.entries(newValues).forEach(([key, value]) => {
-					const paramType = isFunction(paramTypes)
-						? paramTypes(key as string)
-						: paramTypes?.[key as string];
+      if (newValues != null) {
+        Object.entries(newValues).forEach(([key, value]) => {
+          const paramType = isFunction(paramTypes)
+            ? paramTypes(key as string)
+            : paramTypes?.[key as string];
 
-					applyParam(params, key, value, defaultValues?.[key], paramType);
-				});
-			}
+          applyParam(params, key, value, defaultValues?.[key], paramType);
+        });
+      }
 
-			return params;
-		}
-	}
+      return params;
+    }
+  }
 
-	return {
-		subscribe: store.subscribe,
-		create
-	};
+  return {
+    subscribe: store.subscribe,
+    create,
+  };
 }
 
 function applyParam(
-	params: URLSearchParams,
-	key: string,
-	value: any,
-	defaultValue: any,
-	paramType?: ParamType
+  params: URLSearchParams,
+  key: string,
+  value: any,
+  defaultValue: any,
+  paramType?: ParamType
 ) {
-	const config = getParamConfig(paramType);
+  const config = getParamConfig(paramType);
 
-	if (isEqual(defaultValue, value)) {
-		// Skip - only update param if different from default
-	} else if (value == null || (Array.isArray(value) && value.length === 0)) {
-		params.delete(key);
-	} else {
-		params.set(key, config.encode(value));
-	}
+  if (isEqual(defaultValue, value)) {
+    // Skip - only update param if different from default
+  } else if (value == null || (Array.isArray(value) && value.length === 0)) {
+    params.delete(key);
+  } else {
+    params.set(key, config.encode(value));
+  }
 }
 
 function decodeParam(values: string[], paramType?: ParamType) {
-	const config = getParamConfig(paramType);
+  const config = getParamConfig(paramType);
 
-	return config.decode(values);
+  return config.decode(values);
 }
 
 function getParamConfig(paramType: ParamType) {
-	switch (paramType) {
-		case 'string':
-			return {
-				encode: Serialize.encodeString,
-				decode: Serialize.decodeString
-			};
-		case 'string[]':
-			return {
-				encode: Serialize.encodeDelimitedArray,
-				decode: Serialize.decodeDelimitedArray
-			};
-		case 'number':
-			return {
-				encode: Serialize.encodeNumber,
-				decode: Serialize.decodeNumber
-			};
-		case 'number[]':
-			return {
-				encode: Serialize.encodeDelimitedNumericArray,
-				decode: Serialize.decodeDelimitedNumericArray
-			};
-		case 'boolean':
-			return {
-				encode: Serialize.encodeBoolean,
-				decode: Serialize.decodeBoolean
-			};
-		case 'date':
-			return {
-				encode: Serialize.encodeDate,
-				decode: Serialize.decodeDate
-			};
-		case 'datetime':
-			return {
-				encode: Serialize.encodeDateTime,
-				decode: Serialize.decodeDateTime
-			};
-		case 'json':
-			return {
-				encode: Serialize.encodeJson,
-				decode: Serialize.decodeJson
-			};
-		case 'object':
-			return {
-				encode: Serialize.encodeObject,
-				decode: Serialize.decodeObject
-			};
-		default:
-			throw new Error('No param config found');
-	}
+  switch (paramType) {
+    case 'string':
+      return {
+        encode: Serialize.encodeString,
+        decode: Serialize.decodeString,
+      };
+    case 'string[]':
+      return {
+        encode: Serialize.encodeDelimitedArray,
+        decode: Serialize.decodeDelimitedArray,
+      };
+    case 'number':
+      return {
+        encode: Serialize.encodeNumber,
+        decode: Serialize.decodeNumber,
+      };
+    case 'number[]':
+      return {
+        encode: Serialize.encodeDelimitedNumericArray,
+        decode: Serialize.decodeDelimitedNumericArray,
+      };
+    case 'boolean':
+      return {
+        encode: Serialize.encodeBoolean,
+        decode: Serialize.decodeBoolean,
+      };
+    case 'date':
+      return {
+        encode: Serialize.encodeDate,
+        decode: Serialize.decodeDate,
+      };
+    case 'datetime':
+      return {
+        encode: Serialize.encodeDateTime,
+        decode: Serialize.decodeDateTime,
+      };
+    case 'json':
+      return {
+        encode: Serialize.encodeJson,
+        decode: Serialize.decodeJson,
+      };
+    case 'object':
+      return {
+        encode: Serialize.encodeObject,
+        decode: Serialize.decodeObject,
+      };
+    default:
+      throw new Error('No param config found');
+  }
 }
 
 /**
@@ -187,10 +187,10 @@ function getParamConfig(paramType: ParamType) {
  * @returns
  */
 function stringify(params: URLSearchParams) {
-	// Use `encodeURIComponent` instead of `params.toString()` as is more lenient (doesn't encode `(` or `)` where are used )
-	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
-	// https://stackoverflow.com/a/62969380/191902
-	return Object.entries(params)
-		.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-		.join('&');
+  // Use `encodeURIComponent` instead of `params.toString()` as is more lenient (doesn't encode `(` or `)` where are used )
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+  // https://stackoverflow.com/a/62969380/191902
+  return Object.entries(params)
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .join('&');
 }
