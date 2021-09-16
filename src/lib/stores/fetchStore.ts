@@ -114,8 +114,8 @@ export default function fetchStore() {
             const newState = {
               request,
               loading: false,
-              data: response.ok ? error : undefined, // Clear last response
-              error: response.ok ? undefined : error,
+              data: undefined, // Clear last response
+              error: error,
               response,
             };
             update((currentState) => doUpdate(currentState, newState, promise, config));
