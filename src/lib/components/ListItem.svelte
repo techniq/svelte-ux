@@ -14,8 +14,15 @@
 	 */
 	export let avatar: Avatar['$$prop_def'] = null;
 
-	// Support styles to be nested within a wrapping div (useful for `animate:flip`)
+	/**
+	 * Support styles to be nested within a wrapping div (useful for `animate:flip`)
+	 */
 	export let nested = false;
+
+	/**
+	 * Disable shadow (useful when using `ring`)
+	 */
+	export let noShadow = false;
 
 	export let classes: {
 		avatar?: string;
@@ -34,7 +41,8 @@
 	gap={16}
 	items="center"
 	class={clsx(
-		'bg-white elevation-1 border-t py-2 px-4',
+		'bg-white border-t py-2 px-4',
+		noShadow !== true && 'elevation-1',
 		nested
 			? 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b'
 			: 'first:border-t-0 first:rounded-t last:rounded-b',
