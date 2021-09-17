@@ -74,6 +74,8 @@
 
 ## Radio Group
 
+<div class="text-xs text-black/50 -mt-2 ml-2 mb-1">example 1</div>
+
 <Preview>
 	<div class="rounded border">
 		{#each choices as choice}
@@ -82,7 +84,8 @@
 				subheading={choice.description}
 				on:click={() => (selectedId = choice.id)}
 				class={clsx(
-					'cursor-pointer ',
+					'cursor-pointer',
+					'hover:bg-blue-50',
 					selectedId == choice.id ? 'bg-blue-50' : ''
 				)}
 			>
@@ -96,28 +99,7 @@
 
 ## Radio Group
 
-<Preview>
-	<div class="elevation-1 rounded">
-		{#each choices as choice}
-			<ListItem
-				title={choice.name}
-				subheading={choice.description}
-				on:click={() => (selectedId = choice.id)}
-				class={clsx(
-					'cursor-pointer ring ring-inset ring-blue-500 transition-shadow duration-100',
-					selectedId == choice.id ? 'ring-1' : 'ring-0'
-				)}
-				noShadow
-			>
-				<div slot="avatar" class="contents">
-					<Radio checked={selectedId === choice.id} />
-				</div>
-			</ListItem>
-		{/each}
-	</div>
-</Preview>
-
-## Radio Group
+<div class="text-xs text-black/50 -mt-2 ml-2 mb-1">example 2</div>
 
 <Preview>
 	<Stack vertical gap={16}>
@@ -130,7 +112,8 @@
 					class={clsx(
 						'px-8 py-4',
 						'cursor-pointer ring ring-inset ring-blue-500 transition-shadow duration-100',
-						selectedId == choice.id ? 'ring-1' : 'ring-0'
+						'hover:bg-blue-50',
+						selectedId == choice.id ? 'ring-1 bg-blue-50' : 'ring-0'
 					)}
 					noShadow
 				/>
