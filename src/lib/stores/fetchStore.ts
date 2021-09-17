@@ -12,7 +12,7 @@ export type FetchConfig<TData = any> = {
   force?: boolean;
   as?: 'auto' | BodyMethods | ((response: Response) => Promise<any>) | ResponseMapping;
   onDataChange?: (newData: TData, data: TData) => any;
-  onResponseChange?: (response: Response) => any;
+  onResponseChange?: (response: Response, state: FetchState) => any;
   once?: boolean;
 };
 
@@ -168,13 +168,24 @@ export default function fetchStore() {
       data = config.onDataChange(nextState.data, currentState.data);
     }
 
+    let newState = {
+      ...currentState,
+      ...nextState,
+      ...(data !== undefined && { data }), // If `onDataChange` returned a value, we use it for data passed down to the children function
+    };
+
     if (
       nextState.response &&
       nextState.response !== currentState.response &&
       config?.onResponseChange
     ) {
-      data = config.onResponseChange(nextState.response);
+      data = config.onResponseChange(nextState.response, newState);
     }
+
+    newState = {
+      ...newState,
+      ...(data !== undefined && { data }), // If `onResponseChange` returned a value, we use it for data passed down to the children function
+    };
 
     // if (isFunction(onChange)) {
     //   // Always call onChange even if unmounted.  Useful for `POST` requests with a redirect
@@ -184,12 +195,6 @@ export default function fetchStore() {
     //     ...(data !== undefined && { data }),
     //   });
     // }
-
-    const newState = {
-      ...currentState,
-      ...nextState,
-      ...(data !== undefined && { data }), // If `onDataChange` prop returned a value, we use it for data passed down to the children function
-    };
 
     if (newState.error) {
       // Add errors to global `errors` store
