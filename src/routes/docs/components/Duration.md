@@ -3,18 +3,22 @@
 
 	import Preview from '$lib/components/Preview.svelte';
 
-	import { humanizeDuration } from '$lib/utils/duration';
+	import { getDuration, humanizeDuration } from '$lib/utils/duration';
 </script>
 
-## 3 days ago
+## Duration
+
+<Preview>{JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}</Preview>
+
+## Humanize Duration (3 days ago)
 
 <Preview>{humanizeDuration({ start: subDays(new Date(), 3) })}</Preview>
 
-## 3 months ago w/ default
+## Humanize Duration (3 months ago)
 
 <Preview>{humanizeDuration({ start: subMonths(new Date(), 3) })}</Preview>
 
-## 3 months ago w/ long variant
+## Humanize Duration (3 months ago w/ long variant)
 
 <Preview>
 	{humanizeDuration({ start: subMonths(new Date(), 3), variant: 'long' })}
