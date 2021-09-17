@@ -4,6 +4,7 @@
   // https://svelte.dev/repl/033e824fad0a4e34907666e7196caec4?version=3.25.1
   import { scale } from 'svelte/transition';
   import { quadIn } from 'svelte/easing';
+  import clsx from 'clsx';
 
   import portalAction from '../actions/portal';
 
@@ -14,6 +15,13 @@
   export let open = false;
   export let portal = true;
   export let clickAway = false;
+
+  export let classes: {
+    root?: string;
+    dialog?: string;
+    title?: string;
+    actions?: string;
+  } = {};
 
   let dialogEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
@@ -56,19 +64,26 @@
   />
 
   <div
-    class="dialog fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center pointer-events-none"
+    class={clsx(
+      'fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center pointer-events-none',
+      classes.root
+    )}
     on:click={onClick}
     use:portalAction={{ enabled: portal }}
   >
     <div
-      class="rounded bg-white elevation-4 overflow-y-auto pointer-events-auto {$$props.class}"
+      class={clsx(
+        'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto',
+        classes.dialog,
+        $$props.class
+      )}
       style={$$props.style}
       transition:scale={{ duration: 150, easing: quadIn, delay: 150 }}
       bind:this={dialogEl}
     >
       <slot name="header">
         {#if $$slots.title}
-          <div class="text-xl font-bold pt-4 pb-2 px-6">
+          <div class={clsx('text-xl font-bold pt-4 pb-2 px-6', classes.title)}>
             <slot name="title" />
           </div>
         {/if}
@@ -76,7 +91,10 @@
 
       <slot />
 
-      <div class="actions flex w-full justify-end p-2 bg-black/5 border-t" bind:this={actionsEl}>
+      <div
+        class={clsx('actions flex w-full justify-end p-2 bg-black/5 border-t', classes.actions)}
+        bind:this={actionsEl}
+      >
         <slot name="actions" />
       </div>
     </div>
