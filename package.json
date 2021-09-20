@@ -37,7 +37,7 @@
   "dependencies": {
     "@mdi/js": "^6.1.95",
     "clsx": "^1.1.1",
-    "d3-array": "^3.0.2",
+    "d3-array": "^3.0.3",
     "d3-format": "^3.0.1",
     "d3-time": "^3.0.0",
     "date-fns": "^2.24.0",
