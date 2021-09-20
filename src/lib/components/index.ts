@@ -19,6 +19,7 @@ export { default as Dialog } from './Dialog.svelte';
 export { default as DividerDot } from './DividerDot.svelte';
 export { default as Drawer } from './Drawer.svelte';
 export { default as EmptyMessage } from './EmptyMessage.svelte';
+export { default as ErrorNotification } from './ErrorNotification.svelte';
 export { default as ExpansionPanel } from './ExpansionPanel.svelte';
 export { default as Field } from './Field.svelte';
 export { default as Grid } from './Grid.svelte';
