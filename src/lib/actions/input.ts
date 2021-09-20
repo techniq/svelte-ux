@@ -50,6 +50,7 @@ export function blurOnEscape(node: HTMLInputElement) {
 }
 
 /**
+ * Automatically resize textarea based on content
  * See:
  *  - https://svelte.dev/repl/ead0f1fcd2d4402bbbd64eca1d665341?version=3.14.1
  *  - https://svelte.dev/repl/f1a7e24a08a54947bb4447f295c741fb?version=3.14.1

@@ -68,3 +68,11 @@
 <NavItem text="MonthList" path="/docs/components/MonthList" class="pl-6 py-2" />
 <NavItem text="MonthListByYear" path="/docs/components/MonthListByYear" class="pl-6 py-2" />
 <NavItem text="YearList" path="/docs/components/YearList" class="pl-6 py-2" />
+
+<div
+  class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
+>
+  Actions
+</div>
+
+<NavItem text="input" path="/docs/actions/input" class="pl-6 py-2" />
