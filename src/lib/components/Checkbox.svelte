@@ -71,13 +71,14 @@
       )}
     />
 
-    {#if checked}
-      <Icon
-        path={indeterminate ? mdiMinus : mdiCheck}
-        class="pointer-events-none text-white"
-        size={dense ? '1em' : '1.2em'}
-      />
-    {/if}
+    <Icon
+      path={indeterminate ? mdiMinus : mdiCheck}
+      class={clsx(
+        'pointer-events-none text-white transition-transform',
+        checked ? 'scale-100' : 'scale-0'
+      )}
+      size={dense ? '1em' : '1.2em'}
+    />
   </Stack>
   <slot />
 </div>

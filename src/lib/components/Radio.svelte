@@ -56,13 +56,15 @@
       )}
     />
 
-    {#if checked}
-      <Icon
-        path={mdiCircleMedium}
-        size={dense ? '1.5em' : '2em'}
-        class={clsx('pointer-events-none', disabled ? 'text-gray-500' : 'text-accent-500')}
-      />
-    {/if}
+    <Icon
+      path={mdiCircleMedium}
+      size={dense ? '1.5em' : '2em'}
+      class={clsx(
+        'pointer-events-none transition-transform',
+        disabled ? 'text-gray-500' : 'text-accent-500',
+        checked ? 'scale-100' : 'scale-0'
+      )}
+    />
   </Stack>
 
   <slot />
