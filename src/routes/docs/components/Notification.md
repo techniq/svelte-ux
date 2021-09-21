@@ -12,7 +12,7 @@
 ## Basic
 
 <Preview>
-  <Stack vertical class="w-100">
+  <Stack vertical class="w-[400px]">
     <Notification open closeIcon>
       <div slot="icon">
         <Icon path={mdiCheckCircleOutline} class="text-green-500" />
@@ -26,7 +26,7 @@
 ## Condensed
 
 <Preview>
-  <Stack vertical class="w-100">
+  <Stack vertical class="w-[400px]">
     <Notification open actions="right" closeIcon>
       <div slot="title">Discussion archived</div>
       <div slot="actions">
@@ -39,7 +39,7 @@
 ## Actions below
 
 <Preview>
-  <Stack vertical class="w-100">
+  <Stack vertical class="w-[400px]">
     <Notification actions="below" closeIcon>
       <div slot="icon" class="self-start">
         <Icon path={mdiInbox} />
@@ -60,7 +60,7 @@
 ## Actions split
 
 <Preview>
-  <Stack vertical class="w-160">
+  <Stack vertical class="w-[640px]">
     <Notification actions="split">
       <div slot="title">Receive notifications</div>
       <div slot="description">

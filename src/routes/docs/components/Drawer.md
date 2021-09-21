@@ -13,7 +13,7 @@
 ## Location
 
 <Preview>
-  <Drawer bind:open={leftOpen} class="w-100">
+  <Drawer bind:open={leftOpen} class="w-[400px]">
     <h1>Contents</h1>
     <div
       class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
@@ -23,7 +23,7 @@
     </div>
   </Drawer>
   <Button on:click={() => (leftOpen = true)}>Left</Button>
-  <Drawer bind:open={rightOpen} right class="w-100">
+  <Drawer bind:open={rightOpen} right class="w-[400px]">
     <h1>Contents</h1>
     <div
       class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
@@ -59,7 +59,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} right clickAway class="w-100">
+    <Drawer {open} on:close={toggleOff} right clickAway class="w-[400px]">
       <h1>Contents</h1>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
