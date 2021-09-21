@@ -20,10 +20,14 @@
   export let color: string | undefined = undefined;
   export let disabled: boolean = false;
 
+  $: hasClassOverride = (str: string) => {
+    return $$props.class?.includes(str) ?? false;
+  };
+
   $: _class = clsx(
     'button',
     'transition duration-300 ring-black/20',
-    !filled && 'hover:bg-black/5',
+    !filled && !hasClassOverride('hover:bg-') && 'hover:bg-black/5',
     'focus:outline-none focus-visible:ring-1',
     circle ? 'rounded-full' : 'rounded',
     small ? 'text-xs' : 'text-sm',
