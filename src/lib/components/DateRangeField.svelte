@@ -121,7 +121,7 @@
     </div>
   </div>
 
-  <div class="p-2 w-160 bg-gray-100 border-b">
+  <div class="p-2 w-[640px] bg-gray-100 border-b">
     <DateRange bind:selected={currentValue} />
   </div>
 
