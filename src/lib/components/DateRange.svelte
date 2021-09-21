@@ -13,8 +13,6 @@
   import type { DateRange } from '../utils/dateRange';
 
   import DateSelect from './DateSelect.svelte';
-  import Grid from './Grid.svelte';
-  import Stack from './Stack.svelte';
   import Tab from './Tab.svelte';
   import Tabs from './Tabs.svelte';
 
@@ -101,7 +99,7 @@
   }
 </script>
 
-<Grid template="2fr 3fr" gap={8} class="bg-gray-100">
+<div class="grid grid-cols-[2fr,3fr] gap-2 bg-gray-100">
   <div class="col-start-2">
     <Tabs contained bind:selected={activeDate}>
       <div class="tabList w-full border">
@@ -126,7 +124,7 @@
     </Tabs>
   </div>
 
-  <Stack vertical gap={8}>
+  <div class="grid gap-2">
     <div>
       <div class="text-xs text-black/50 uppercase" style="margin-top: -22px; margin-bottom: 4px;">
         Type
@@ -167,7 +165,7 @@
         </Tabs>
       {/if}
     </div>
-  </Stack>
+  </div>
 
   <div class="bg-white border rounded">
     <DateSelect
@@ -176,4 +174,4 @@
       on:dateChange={(e) => onDateChange(e.detail)}
     />
   </div>
-</Grid>
+</div>
