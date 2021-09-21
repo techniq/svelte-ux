@@ -56,16 +56,18 @@
   {...$$restProps}
 >
   <slot name="title">
-    <div
-      class="text-white text-xs bg-gray-900/90 px-2 py-1 rounded whitespace-nowrap pointer-events-none"
-      transition:fly={{
-        x: placement === 'left' ? 6 : placement === 'right' ? -6 : 0,
-        y: placement === 'top' ? 6 : placement === 'bottom' ? -6 : 0,
-        duration: 300,
-      }}
-    >
-      {title}
-    </div>
+    {#if title}
+      <div
+        class="text-white text-xs bg-gray-900/90 px-2 py-1 rounded whitespace-nowrap pointer-events-none"
+        transition:fly={{
+          x: placement === 'left' ? 6 : placement === 'right' ? -6 : 0,
+          y: placement === 'top' ? 6 : placement === 'bottom' ? -6 : 0,
+          duration: 300,
+        }}
+      >
+        {title}
+      </div>
+    {/if}
   </slot>
 </Popover>
 
