@@ -3,7 +3,7 @@
 
   import Stack from './Stack.svelte';
 
-  export let value: number;
+  export let value: number = $$slots.value ? 1 : 0;
   export let small = false;
   export let circle = false;
   export let dot = false;
