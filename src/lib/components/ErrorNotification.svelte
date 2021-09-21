@@ -36,7 +36,7 @@
             e.stopPropagation();
             toggle();
           }}
-          class="text-blue-500 hover:bg-blue-500"
+          class="text-blue-500"
         >
           View Details
         </Button>

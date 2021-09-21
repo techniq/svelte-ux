@@ -77,7 +77,7 @@
           value = currentValue;
           dispatch('change', value);
         }}
-        class="text-blue-500 hover:bg-blue-500">OK</Button
+        class="text-blue-500">OK</Button
       >
       <Button
         on:click={() => {
