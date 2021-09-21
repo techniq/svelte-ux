@@ -4,6 +4,7 @@
   import Badge from '$lib/components/Badge.svelte';
   import Button from '$lib/components/Button.svelte';
   import Grid from '$lib/components/Grid.svelte';
+  import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Stack from '$lib/components/Stack.svelte';
@@ -66,6 +67,17 @@
 <Preview>
   <Badge {value} dot small>
     <Button icon={mdiFilterVariant} class="border p-3" />
+  </Badge>
+</Preview>
+
+<SectionDivider>Value slot</SectionDivider>
+
+<Preview>
+  <Badge {value} circle>
+    <Button icon={mdiFilterVariant} class="border p-3" />
+    <div slot="value" class="border bg-green-500 text-white rounded-full">
+      <Icon path={mdiPlus} />
+    </div>
   </Badge>
 </Preview>
 

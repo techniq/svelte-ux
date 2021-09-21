@@ -17,7 +17,7 @@
     class={clsx(
       'rounded-full flex items-center justify-center transform transition-transform',
 
-      'bg-blue-500 text-white',
+      !$$slots.value && 'bg-blue-500 text-white',
 
       {
         'self-start': placement.startsWith('top'),
@@ -71,8 +71,10 @@
       }
     )}
   >
-    {#if !dot}
-      {value || ''}
-    {/if}
+    <slot name="value">
+      {#if !dot}
+        {value || ''}
+      {/if}
+    </slot>
   </div>
 </Stack>
