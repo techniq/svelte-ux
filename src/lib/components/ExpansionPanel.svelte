@@ -40,7 +40,7 @@
 
   <slot name="actions" />
   {#if enabled}
-    <div class="px-3 pt-2 pb-3 bg-gray-200 border-t">
+    <div class="px-3 pt-2 pb-3 bg-gray-200 border-t border-gray-300">
       <slot />
     </div>
   {/if}
