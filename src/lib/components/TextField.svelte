@@ -140,7 +140,7 @@
         {#if label}
           <label
             class={clsx(
-              'z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var cursor-pointer',
+              'z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
               error ? 'text-red-500/80' : 'text-black/50',
               (shrinkLabel || hasInputValue) && 'shrink'
             )}
