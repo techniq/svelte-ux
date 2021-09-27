@@ -18,30 +18,30 @@
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.19",
     "@sveltejs/kit": "^1.0.0-next.169",
-    "autoprefixer": "^10.3.4",
+    "autoprefixer": "^10.3.6",
     "mdsvex": "^0.9.8",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
     "prism-themes": "^1.9.0",
-    "svelte": "^3.42.6",
+    "svelte": "^3.43.0",
     "svelte-check": "^2.2.6",
     "svelte-preprocess": "^4.0.0",
     "svelte2tsx": "^0.4.6",
-    "tailwindcss": "^2.2.15",
+    "tailwindcss": "^2.2.16",
     "tailwindcss-elevation": "^1.0.1",
     "tslib": "^2.3.1",
     "typescript": "^4.0.0",
-    "unist-util-visit": "^4.0.0"
+    "unist-util-visit": "^4.1.0"
   },
   "type": "module",
   "dependencies": {
     "@mdi/js": "^6.1.95",
     "clsx": "^1.1.1",
-    "d3-array": "^3.0.3",
+    "d3-array": "^3.0.4",
     "d3-format": "^3.0.1",
     "d3-time": "^3.0.0",
     "date-fns": "^2.24.0",
-    "graphql": "^15.5.3",
+    "graphql": "^15.6.0",
     "immer": "^9.0.6",
     "lodash-es": "^4.17.21"
   }
