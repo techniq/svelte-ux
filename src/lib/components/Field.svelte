@@ -93,7 +93,7 @@
       <Stack stack items="initial" justifyItems="initial" on:click>
         <label
           class={clsx(
-            'z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var cursor-pointer',
+            'z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var cursor-pointer group-hover:group-focus-within:text-color-var',
             center && 'justify-center',
             error ? 'text-red-500/80' : 'text-black/50',
             (shrinkLabel || hasValue) && 'shrink'
