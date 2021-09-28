@@ -67,7 +67,7 @@
     </Stack>
 
     <div slot="actions">
-      <Button on:click={toggle} class="text-blue-500 hover:bg-blue-500">Close</Button>
+      <Button on:click={toggle} class="text-blue-500 hover:bg-blue-50">Close</Button>
     </div>
   </Dialog>
 </Toggle>
