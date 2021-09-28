@@ -46,3 +46,13 @@
     </Switch>
   </div>
 </Preview>
+
+## Size
+
+<Preview>
+  <div class="grid gap-2">
+    <Switch size="sm" />
+    <Switch size="md" />
+    <Switch size="lg" />
+  </div>
+</Preview>

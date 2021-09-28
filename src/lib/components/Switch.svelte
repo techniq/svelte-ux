@@ -6,6 +6,7 @@
   export let checked: boolean = false;
   export let disabled: boolean = false;
   export let id: string = undefined;
+  export let size: 'sm' | 'md' | 'lg' = 'lg';
 
   const dispatch = createEventDispatcher();
 
@@ -22,7 +23,12 @@
 <div
   class={clsx(
     'switch',
-    'w-10 h-6 border rounded-full flex align-items p-[3px]',
+    'border rounded-full flex align-items p-[3px]',
+    {
+      'w-6 h-4': size === 'sm',
+      'w-8 h-5': size === 'md',
+      'w-10 h-6': size === 'lg',
+    },
     disabled ? 'opacity-50' : 'cursor-pointer',
     checked ? 'bg-blue-400 border-blue-400' : 'bg-gray-300 border-gray-300',
 
