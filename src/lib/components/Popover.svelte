@@ -165,8 +165,16 @@
   }
 
   function getPopoverOffset(popoverRect: DOMRect) {
-    const topOffset = placement === 'top' ? offset : placement === 'bottom' ? -offset : 0;
-    const leftOffset = placement === 'left' ? offset : placement === 'right' ? -offset : 0;
+    const topOffset = placement.startsWith('top')
+      ? offset
+      : placement.startsWith('bottom')
+      ? -offset
+      : 0;
+    const leftOffset = placement.startsWith('left')
+      ? offset
+      : placement.startsWith('right')
+      ? -offset
+      : 0;
 
     return {
       top: getOffsetTop(popoverRect, popoverOrigin.vertical) + topOffset,
