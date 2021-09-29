@@ -57,7 +57,7 @@ export default function fetchStore() {
   const { subscribe, set, update } = writable<FetchState>({ ...DEFAULT_STATE }, () => {
     return () => {
       // Remove errors from global errors when no longer subscribed (component unmounted which uses store instance)
-      removeGlobalErrors(globalConfig.errors, localErrors);
+      removeGlobalErrors(globalConfig?.errors, localErrors);
     };
   });
 
@@ -97,7 +97,7 @@ export default function fetchStore() {
       const request = { url, options };
 
       // Remove local errors from global errors and clear all local errors when loading new request
-      removeGlobalErrors(globalConfig.errors, localErrors);
+      removeGlobalErrors(globalConfig?.errors, localErrors);
       localErrors.set([]);
 
       update((currentState) =>
@@ -217,7 +217,7 @@ export default function fetchStore() {
 
     if (newState.error) {
       // Add errors to global `errors` store
-      addError(globalConfig.errors, newState.error);
+      addError(globalConfig?.errors, newState.error);
 
       // Track errors specific to this store instance as well to support removal from global errors on unsubscribe (component unmount)
       addError(localErrors, newState.error);
