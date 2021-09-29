@@ -1,3 +1,4 @@
+import { getContext, setContext } from 'svelte';
 import { get, writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import { merge } from 'lodash-es';
@@ -14,7 +15,18 @@ export type FetchConfig<TData = any> = {
   onDataChange?: (newData: TData, data: TData) => any;
   onResponseChange?: (response: Response, state: FetchState) => any;
   once?: boolean;
+
+  /**
+   * Writable store used to track all errors.  Useful to handle all errors consistently.  Typically passed via initFetchClient
+   */
+  errors?: Writable<any[]>;
 };
+
+const CONTEXT_KEY = {};
+
+export function initFetchClient(config: FetchConfig<any>) {
+  setContext(CONTEXT_KEY, config);
+}
 
 export type FetchState = {
   loading: boolean | undefined;
@@ -30,8 +42,6 @@ export const defaultOptions: RequestInit = {
   },
 };
 
-export const errors = writable([]);
-
 const DEFAULT_STATE = {
   loading: null,
   data: undefined,
@@ -41,11 +51,13 @@ const DEFAULT_STATE = {
 };
 
 export default function fetchStore() {
+  const globalConfig = getContext<FetchConfig>(CONTEXT_KEY);
+
   const localErrors = writable([]);
   const { subscribe, set, update } = writable<FetchState>({ ...DEFAULT_STATE }, () => {
     return () => {
       // Remove errors from global errors when no longer subscribed (component unmounted which uses store instance)
-      removeGlobalErrors(localErrors);
+      removeGlobalErrors(globalConfig.errors, localErrors);
     };
   });
 
@@ -59,33 +71,40 @@ export default function fetchStore() {
   });
 
   function doFetch(url: string, config?: FetchConfig) {
+    const mergedConfig: FetchConfig = merge({}, globalConfig, config);
+
     const prevFetchConfig = get(fetchConfigStore);
 
     // Save for refreshing or other building derived requests (ex. exports)
-    fetchConfigStore.set({ url, config });
+    fetchConfigStore.set({ url, config: mergedConfig });
 
-    if (config?.disabled === true || (config?.once && loaded)) {
-      // do nothing
+    if (mergedConfig?.disabled === true || (mergedConfig?.once && loaded)) {
+      // disabled or request already loaded and `once` set - do nothing
     } else if (
-      config?.force !== true &&
+      mergedConfig?.force !== true &&
       url === prevFetchConfig.url &&
-      config?.options?.().body === prevFetchConfig?.config?.options?.().body &&
-      config?.disabled === prevFetchConfig?.config?.disabled
+      mergedConfig?.options?.().body === prevFetchConfig?.config?.options?.().body &&
+      mergedConfig?.disabled === prevFetchConfig?.config?.disabled
     ) {
       // skip identifical request as last unless force enabled
-      // console.log('skipping...');
     } else {
-      const options: RequestInit = merge(defaultOptions, config?.options?.());
+      const options: RequestInit = merge(
+        defaultOptions,
+        globalConfig?.options?.(),
+        config?.options?.()
+      );
 
       const request = { url, options };
 
       // Remove local errors from global errors and clear all local errors when loading new request
-      removeGlobalErrors(localErrors);
+      removeGlobalErrors(globalConfig.errors, localErrors);
       localErrors.set([]);
 
-      update((currentState) => doUpdate(currentState, { request, loading: true }, null, config));
+      update((currentState) =>
+        doUpdate(currentState, { request, loading: true }, null, mergedConfig)
+      );
 
-      const as = config?.as || 'auto';
+      const as = mergedConfig?.as || 'auto';
 
       const promise = fetch(url, options)
         .then(async (response) => {
@@ -108,7 +127,7 @@ export default function fetchStore() {
               error: response.ok ? undefined : data,
               response,
             };
-            update((currentState) => doUpdate(currentState, newState, promise, config));
+            update((currentState) => doUpdate(currentState, newState, promise, mergedConfig));
             loaded = true;
           } catch (error) {
             const newState = {
@@ -118,7 +137,7 @@ export default function fetchStore() {
               error: error,
               response,
             };
-            update((currentState) => doUpdate(currentState, newState, promise, config));
+            update((currentState) => doUpdate(currentState, newState, promise, mergedConfig));
           }
         })
         .catch((error) => {
@@ -130,7 +149,7 @@ export default function fetchStore() {
             loading: false,
           };
 
-          update((currentState) => doUpdate(currentState, newState, promise, config));
+          update((currentState) => doUpdate(currentState, newState, promise, mergedConfig));
 
           // Rethrow so not to swallow errors, especially from errors within handlers (children func / onChange)
           throw error;
@@ -198,7 +217,7 @@ export default function fetchStore() {
 
     if (newState.error) {
       // Add errors to global `errors` store
-      addError(errors, newState.error);
+      addError(globalConfig.errors, newState.error);
 
       // Track errors specific to this store instance as well to support removal from global errors on unsubscribe (component unmount)
       addError(localErrors, newState.error);
@@ -224,22 +243,29 @@ export default function fetchStore() {
 }
 
 function addError(store: Writable<any[]>, error: any) {
-  store.update((current) => {
-    const result = [...current];
+  if (store) {
+    store.update((current) => {
+      const result = [...current];
 
-    if (Array.isArray(error)) {
-      error.forEach((e) => result.push(e));
-    } else {
-      result.push(error);
-    }
+      if (Array.isArray(error)) {
+        error.forEach((e) => result.push(e));
+      } else {
+        result.push(error);
+      }
 
-    return result;
-  });
+      return result;
+    });
+  }
 }
 
-function removeGlobalErrors(localErrors: Writable<any[]>) {
-  const $localErrors = get(localErrors);
-  errors.update(($errors) => $errors.filter((e) => !$localErrors.includes(e)));
+function removeGlobalErrors(
+  globalErrors: Writable<any[]> | undefined,
+  localErrors: Writable<any[]>
+) {
+  if (globalErrors) {
+    const $localErrors = get(localErrors);
+    globalErrors.update(($errors) => $errors.filter((e) => !$localErrors.includes(e)));
+  }
 }
 
 function parseBody(response: Response, mapping: ResponseMapping = {}) {

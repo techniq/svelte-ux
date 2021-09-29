@@ -9,7 +9,7 @@ import type { FetchConfig } from './fetchStore';
 
 type ClientConfig = {
   url: string;
-  options?: () => RequestInit;
+  config?: FetchConfig;
 };
 
 export type GraphQLError = {
@@ -30,14 +30,14 @@ export type QueryConfig = {
 };
 
 export default function graphStore(baseQueryConfig?: QueryConfig) {
-  const client = getContext<ClientConfig>(CONTEXT_KEY) ?? { url: '/graphql' };
+  const globalConfig = getContext<ClientConfig>(CONTEXT_KEY) ?? { url: '/graphql' };
   const { subscribe, fetch, refresh, clear, fetchConfig } = fetchStore();
 
   // Save for building derived requests (ex. exports)
   const queryConfigStore = writable(baseQueryConfig);
 
   function doFetch(queryConfig?: QueryConfig) {
-    const mergedQueryConfig = merge(baseQueryConfig, queryConfig, {});
+    const mergedQueryConfig = merge({}, baseQueryConfig, queryConfig);
     queryConfigStore.set(mergedQueryConfig);
 
     const { query, variables, config } = mergedQueryConfig;
@@ -53,11 +53,12 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
         },
         body: JSON.stringify({ query: queryAsString, variables }),
       },
-      client.options?.(),
+      globalConfig.config?.options?.(),
       config?.options?.()
     );
 
-    const mergedConfig: FetchConfig = merge(
+    const mergedFetchConfig: FetchConfig = merge(
+      globalConfig.config,
       {
         as: async (res) => {
           const body = await res.json();
@@ -72,7 +73,7 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
       config
     );
 
-    return fetch(client.url, mergedConfig);
+    return fetch(globalConfig.url, mergedFetchConfig);
   }
 
   return {
