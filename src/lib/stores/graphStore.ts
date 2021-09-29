@@ -4,7 +4,7 @@ import { print } from 'graphql';
 import type { DocumentNode } from 'graphql';
 import { merge } from 'lodash-es';
 
-import fetchStore from './fetchStore';
+import fetchStore, { initFetchClient } from './fetchStore';
 import type { FetchConfig } from './fetchStore';
 
 type ClientConfig = {
@@ -21,6 +21,7 @@ const CONTEXT_KEY = {};
 
 export function initGraphClient(config: ClientConfig) {
   setContext(CONTEXT_KEY, config);
+  initFetchClient(config.config);
 }
 
 export type QueryConfig = {
