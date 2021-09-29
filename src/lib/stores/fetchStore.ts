@@ -89,6 +89,7 @@ export default function fetchStore() {
       // skip identifical request as last unless force enabled
     } else {
       const options: RequestInit = merge(
+        {},
         defaultOptions,
         globalConfig?.options?.(),
         config?.options?.()

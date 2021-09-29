@@ -58,6 +58,7 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
     );
 
     const mergedFetchConfig: FetchConfig = merge(
+      {},
       globalConfig.config,
       {
         as: async (res) => {
