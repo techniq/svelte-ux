@@ -1,7 +1,12 @@
 <script lang="ts">
   import { mdiAlertCircle } from '@mdi/js';
 
-  import { Button, Dialog, Icon, Notification, Stack, Toggle } from 'svelte-ux';
+  import Button from './Button.svelte';
+  import Dialog from './Dialog.svelte';
+  import Icon from './Icon.svelte';
+  import Notification from './Notification.svelte';
+  import Stack from './Stack.svelte';
+  import Toggle from './Toggle.svelte';
 
   export let title: string;
   export let description: string;
