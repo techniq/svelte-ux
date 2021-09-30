@@ -3,6 +3,7 @@
     mdiAccount,
     mdiAccountMultipleOutline,
     mdiAccountOutline,
+    mdiChevronDown,
   } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
@@ -112,11 +113,14 @@
 
 <Preview>
   <Field label="Position" let:id>
-    <select {id} class="text-sm w-full outline-none">
+    <select {id} class="text-sm w-full outline-none appearance-none cursor-pointer">
       <option value={1}>First</option>
       <option value={2}>Second</option>
       <option value={3}>Third</option>
       <option value={4}>Fourth</option>
     </select>
+    <span slot="append">
+      <Icon path={mdiChevronDown} />
+    </span>
   </Field>
 </Preview>
