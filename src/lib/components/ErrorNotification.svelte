@@ -46,7 +46,7 @@
           View Details
         </Button>
       {/if}
-      <Button>Dismiss</Button>
+      <Button class={hasDetails ? '' : 'text-blue-500'}>Dismiss</Button>
     </div>
   </Notification>
 
