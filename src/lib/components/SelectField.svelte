@@ -291,6 +291,7 @@
     on:keypress={onKeyPress}
     actions={(node) => [selectOnFocus(node)]}
     class="h-full"
+    {...$$restProps}
   >
     <span slot="append">
       {#if loading}
