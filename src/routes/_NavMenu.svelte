@@ -50,7 +50,7 @@
 <NavItem text="Tooltip" path="/docs/components/Tooltip" class="pl-6 py-2" />
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">State</div>
-<NavItem text="Immer" path="/docs/components/Immer" class="pl-6 py-2" />
+<NavItem text="Form" path="/docs/components/Form" class="pl-6 py-2" />
 <NavItem text="State" path="/docs/components/State" class="pl-6 py-2" />
 <NavItem text="Toggle" path="/docs/components/Toggle" class="pl-6 py-2" />
 

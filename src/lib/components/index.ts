@@ -25,7 +25,7 @@ export { default as Field } from './Field.svelte';
 export { default as Grid } from './Grid.svelte';
 export { default as Header } from './Header.svelte';
 export { default as Icon } from './Icon.svelte';
-export { default as Immer } from './Immer.svelte';
+export { default as Form } from './Form.svelte';
 export { default as ListItem } from './ListItem.svelte';
 export { default as Menu } from './Menu.svelte';
 export { default as Month } from './Month.svelte';

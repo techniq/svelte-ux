@@ -1,5 +1,5 @@
 ```svelte
-<Immer
+<Form
   initial={{ example }}
   on:change={(e) => (example = e.detail.example)}
   let:draft
@@ -10,5 +10,5 @@
 
   <Button on:click={() => commit()}>Apply</Button>
   <Button on:click={() => revert()}>Cancel</Button>
-</Immer>
+</Form>
 ```

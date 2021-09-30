@@ -1,13 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
-  import immerStore from '../stores/immerStore';
+  import formStore from '../stores/formStore';
 
   const dispatch = createEventDispatcher();
 
   export let initial: any = null;
 
-  const [state, draft] = immerStore(initial);
+  const [state, draft, error] = formStore(initial);
 
   $: dispatch('change', $state);
 </script>
