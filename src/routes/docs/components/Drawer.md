@@ -71,3 +71,20 @@
     <Button on:click={toggle}>Click me</Button>
   </Toggle>
 </Preview>
+
+## Loading
+
+<Preview>
+  <Toggle let:on={open} let:toggle let:toggleOff>
+    <Drawer {open} on:close={toggleOff} right clickAway class="w-[400px]" loading>
+      <h1>Contents</h1>
+      <div
+        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
+    p-1 border-t border-gray-400"
+      >
+        <Button on:click={toggleOff}>Close</Button>
+      </div>
+    </Drawer>
+    <Button on:click={toggle}>Click me</Button>
+  </Toggle>
+</Preview>

@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import clsx from 'clsx';
 
   import Backdrop from './Backdrop.svelte';
+  import CircularProgress from './CircularProgress.svelte';
+  import Overlay from './Overlay.svelte';
 
   import portalAction from '../actions/portal';
   import { fly } from '../utils/transition';
@@ -12,6 +14,7 @@
   export let open = true;
   export let portal = true;
   export let clickAway = false;
+  export let loading: boolean | null = null;
 
   export let right = false;
   export let top = false;
@@ -54,6 +57,12 @@
     }}
     use:portalAction={{ enabled: portal }}
   >
+    {#if loading}
+      <Overlay center class="rounded">
+        <CircularProgress />
+      </Overlay>
+    {/if}
+
     <slot {open} />
   </div>
 {/if}

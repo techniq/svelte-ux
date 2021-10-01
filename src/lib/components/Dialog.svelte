@@ -9,12 +9,15 @@
   import portalAction from '../actions/portal';
 
   import Backdrop from './Backdrop.svelte';
+  import CircularProgress from './CircularProgress.svelte';
+  import Overlay from './Overlay.svelte';
 
   const dispatch = createEventDispatcher();
 
   export let open = false;
   export let portal = true;
   export let clickAway = false;
+  export let loading: boolean | null = null;
 
   export let classes: {
     root?: string;
@@ -73,7 +76,7 @@
   >
     <div
       class={clsx(
-        'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto',
+        'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto relative',
         classes.dialog,
         $$props.class
       )}
@@ -81,6 +84,12 @@
       transition:scale={{ duration: 150, easing: quadIn, delay: 150 }}
       bind:this={dialogEl}
     >
+      {#if loading}
+        <Overlay center class="rounded">
+          <CircularProgress />
+        </Overlay>
+      {/if}
+
       <slot name="header">
         {#if $$slots.title}
           <div class={clsx('text-xl font-bold pt-4 pb-2 px-6', classes.title)}>
