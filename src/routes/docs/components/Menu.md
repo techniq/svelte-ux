@@ -12,10 +12,10 @@
     <span>
       <Button on:click={toggle}>Click me</Button>
       <Menu {open} on:close={toggle}>
-        <div class="p-2 hover:bg-black/5">Refresh</div>
-        <div class="p-2 hover:bg-black/5">Settings</div>
-        <div class="p-2 hover:bg-black/5">Help</div>
-        <div class="p-2 hover:bg-black/5">Sign In</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Refresh</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Settings</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Help</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Sign In</div>
       </Menu>
     </span>
   </Toggle>
@@ -28,10 +28,10 @@
     <span>
       <Button on:click={toggle}>Click me</Button>
       <Menu {open} on:close={toggle} matchWidth>
-        <div class="p-2 hover:bg-black/5">Refresh</div>
-        <div class="p-2 hover:bg-black/5">Settings</div>
-        <div class="p-2 hover:bg-black/5">Help</div>
-        <div class="p-2 hover:bg-black/5">Sign In</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Refresh</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Settings</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Help</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Sign In</div>
       </Menu>
     </span>
   </Toggle>
@@ -46,10 +46,10 @@
     <span>
       <Button on:click={toggle}>Click me</Button>
       <Menu {open} on:close={toggle} matchWidth disableTransition>
-        <div class="p-2 hover:bg-black/5">Refresh</div>
-        <div class="p-2 hover:bg-black/5">Settings</div>
-        <div class="p-2 hover:bg-black/5">Help</div>
-        <div class="p-2 hover:bg-black/5">Sign In</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Refresh</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Settings</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Help</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Sign In</div>
       </Menu>
     </span>
   </Toggle>
@@ -64,10 +64,10 @@
     <span>
       <Button on:click={toggle}>Click me</Button>
       <Menu {open} on:close={toggle} matchWidth maxViewportHeight>
-        <div class="p-2 hover:bg-black/5">Refresh</div>
-        <div class="p-2 hover:bg-black/5">Settings</div>
-        <div class="p-2 hover:bg-black/5">Help</div>
-        <div class="p-2 hover:bg-black/5">Sign In</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Refresh</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Settings</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Help</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Sign In</div>
       </Menu>
     </span>
   </Toggle>
