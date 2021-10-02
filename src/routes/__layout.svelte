@@ -28,4 +28,8 @@
   :global(h2:first-child) {
     @apply mt-0;
   }
+
+  :global(h3) {
+    @apply text-xs text-black/50 -mt-2 ml-2 mb-1;
+  }
 </style>

@@ -84,7 +84,7 @@ A list item that provides a standard layout and works best with multiple instanc
 
 ## Radio Group
 
-<div class="text-xs text-black/50 -mt-2 ml-2 mb-1">example 1</div>
+### example 1
 
 <Preview>
 	<div class="rounded border">
@@ -109,7 +109,7 @@ A list item that provides a standard layout and works best with multiple instanc
 
 ## Radio Group
 
-<div class="text-xs text-black/50 -mt-2 ml-2 mb-1">example 2</div>
+### example 2
 
 <Preview>
 	<Stack vertical gap={16}>

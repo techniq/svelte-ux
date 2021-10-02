@@ -149,8 +149,10 @@
 
 <SectionDivider>Type</SectionDivider>
 
-<div class="text-lg font-semibold mt-8 ml-2">Examples</div>
-<div class="text-xs font-semibold text-black/50 mb-1 ml-2">Sets input type and add prefix/suffix when appropriate</div>
+## Examples
+
+### Sets input type and add prefix/suffix when appropriate
+
 <Preview>
   <Grid columns={2} gap={8}>
     <TextField label="default" />
