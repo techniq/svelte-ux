@@ -78,6 +78,8 @@
 </script>
 
 <script lang="ts">
+  import { getScrollParent } from '$lib/utils/dom';
+
   import { createEventDispatcher, tick } from 'svelte';
 
   import { objectToString } from '../utils/styles';
@@ -298,11 +300,22 @@
       close('clickOutside');
     }
   }
+
+  // Wait for popover element to be displayed, then attach scroll event listener to update position as scrolled within container
+  let scrollParent;
+  $: {
+    if (popoverEl) {
+      // Popover shown (mounted)
+      scrollParent = getScrollParent(popoverEl);
+      scrollParent.addEventListener('scroll', setPosition);
+    } else if (scrollParent) {
+      // Popover Hidden (unmounted)
+      scrollParent.removeEventListener('scroll', setPosition);
+    }
+  }
 </script>
 
-<!-- TODO: Handle other scrollable containers.  Find closest in DOM, use Intersection Observer, etc  -->
 <svelte:window
-  on:scroll|passive={() => setPosition()}
   on:resize|passive={() => setPosition()}
   on:keydown|capture={onKeydown}
   on:click|capture={onClickOutside}
