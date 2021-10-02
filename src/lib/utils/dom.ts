@@ -5,7 +5,7 @@
  */
 export function getScrollParent(node): HTMLElement | null {
   const isElement = node instanceof HTMLElement;
-  const overflowY = isElement && window.getComputedStyle(node).overflowY;
+  const overflowY = isElement && (window?.getComputedStyle(node).overflowY ?? 'visible');
   const isScrollable = overflowY !== 'visible' && overflowY !== 'hidden';
 
   if (!node) {
