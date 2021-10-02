@@ -78,10 +78,9 @@
 </script>
 
 <script lang="ts">
-  import { getScrollParent } from '$lib/utils/dom';
-
   import { createEventDispatcher, tick } from 'svelte';
 
+  import { getScrollParent } from '../utils/dom';
   import { objectToString } from '../utils/styles';
 
   const dispatch = createEventDispatcher();
