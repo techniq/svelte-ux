@@ -21,6 +21,11 @@
     ? (node: HTMLElement, params: any) => null as TransitionConfig
     : slide;
 
+  /**
+   * Set height to remaining height of viewport
+   */
+  export let maxViewportHeight = false;
+
   export let placement: PopoverPlacement = 'bottom';
   export let anchorOrigin: PopoverOrigin = undefined;
   export let popoverOrigin: PopoverOrigin = undefined;
@@ -55,17 +60,24 @@
   {matchWidth}
   {open}
   on:close
+  let:setPosition
 >
   <ul
     class="menu-items overflow-x-hidden overflow-y-visible bg-white rounded shadow border outline-none"
     use:remainingViewportHeight={{
       max: true,
       offset: 8,
-      enabled: placement !== 'top',
+      enabled: maxViewportHeight,
     }}
     bind:this={menuItemsEl}
     on:click={onClick}
     transition:transition
+    on:introend={() => {
+      // Update position after transition finishes (full height of menu is available for popover calculation)
+      if (!maxViewportHeight) {
+        setPosition();
+      }
+    }}
   >
     <slot />
   </ul>

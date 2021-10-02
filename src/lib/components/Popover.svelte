@@ -328,6 +328,6 @@
     tabindex="-1"
     bind:this={popoverEl}
   >
-    <slot />
+    <slot {setPosition} />
   </div>
 {/if}
