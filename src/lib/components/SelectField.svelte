@@ -34,6 +34,14 @@
   export let filled = false;
   export let dense = false;
 
+  // Menu props
+  export let placement: PopoverPlacement = 'bottom';
+  export let anchorOrigin: PopoverOrigin = undefined;
+  export let popoverOrigin: PopoverOrigin = undefined;
+  export let matchWidth: boolean = true;
+  export let disableTransition = false;
+  export let maxViewportHeight = false;
+
   $: filteredItems = items ?? [];
   let searchText = '';
 
@@ -99,11 +107,6 @@
       });
     }
   };
-
-  export let placement: PopoverPlacement = 'bottom';
-  export let anchorOrigin: PopoverOrigin = undefined;
-  export let popoverOrigin: PopoverOrigin = undefined;
-  export let matchWidth: boolean = true;
 
   // UI state
   export let open = false;
@@ -324,6 +327,8 @@
       {anchorOrigin}
       {popoverOrigin}
       {matchWidth}
+      {maxViewportHeight}
+      {disableTransition}
       bind:open
       on:close={() => (open = false)}
     >
