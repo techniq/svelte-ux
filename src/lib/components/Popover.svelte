@@ -341,7 +341,9 @@
       scrollParent.addEventListener('scroll', setPosition);
     } else if (scrollParent) {
       // Popover Hidden (unmounted)
-      scrollParent.removeEventListener('scroll', setPosition);
+      // TODO: Remove once determined how to re-add on second open (currently being ignored...?)
+      // logger.debug('Removing listener from parent', scrollParent);
+      // scrollParent.removeEventListener('scroll', setPosition);
     }
   }
 </script>
