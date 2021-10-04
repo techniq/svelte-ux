@@ -92,12 +92,21 @@
 
   export let open: boolean = false;
   export let marginThreshold = 8;
+
+  /**
+   * Offset between anchor and popover
+   */
   export let offset = 0;
 
   /**
    * Set width of popover element the same as anchor element
    */
   export let matchWidth: boolean = false;
+
+  /**
+   * Set max-height of popover element to the remaining height from anchor element to bottom of viewport
+   */
+  export let maxViewportHeight: boolean | { padding: number } = false;
 
   export let anchorEl: HTMLElement = undefined;
   let popoverEl: HTMLElement;
@@ -243,6 +252,8 @@
       top: null,
       left: null,
       transformOrigin: null,
+      maxHeight: null,
+      overflow: null,
     };
 
     const popoverRect = popoverEl.getBoundingClientRect();
@@ -263,15 +274,28 @@
     }
     newPopoverStyles.transformOrigin = transformOrigin;
 
+    if (maxViewportHeight) {
+      const pagePadding = typeof maxViewportHeight === 'object' ? maxViewportHeight.padding : 8;
+      if (placement.startsWith('top')) {
+        newPopoverStyles.maxHeight = `calc(${anchorRect.top}px - ${pagePadding}px)`;
+      } else if (placement.startsWith('bottom')) {
+        newPopoverStyles.maxHeight = `calc(100vh - ${anchorRect.bottom}px - ${pagePadding}px)`;
+      }
+      newPopoverStyles.overflow = 'auto';
+    }
+
     popoverStyles = newPopoverStyles;
   }
 
   $: {
     anchorEl = anchorEl ?? popoverEl?.parentElement;
 
-    if (matchWidth && anchorEl) {
+    if (anchorEl) {
       const anchorRect = anchorEl.getBoundingClientRect();
-      width = `${anchorRect.width}px`;
+
+      if (matchWidth) {
+        width = `${anchorRect.width}px`;
+      }
     }
 
     // Update position after width has been set in the DOM

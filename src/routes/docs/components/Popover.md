@@ -36,21 +36,55 @@
     bottom: false,
     bottomEnd: false,
   };
-
-  function onPopoverClick() {
-    console.log('onPopoverClick');
-  }
 </script>
 
-## Inferred anchor w/ uses parent
+## Inferred anchor
+
+### Uses the parent element of `Popover` if `anchorEl` not provided
 
 <Preview>
   <div class="inline-block">
-    <Popover bind:open on:click={onPopoverClick}>
+    <Popover bind:open>
       <div class="p-2 bg-white border shadow">Example contents</div>
     </Popover>
-    <Button on:click={() => (open = true)}>Show</Button>
+    <Button on:click={() => (open = true)}>Click me</Button>
   </div>
+</Preview>
+
+## Max viewport height
+
+### below
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <div class="inline-block">
+      <Popover {open} on:close={toggle} maxViewportHeight class="bg-white border shadow">
+        <div class="p-2 h-[80vh] grid grid-rows-[auto,1fr,auto] items-center">
+          <div>Top</div>
+          <div>Middle</div>
+          <div>Bottom</div>
+        </div>
+      </Popover>
+      <Button on:click={toggle}>Click me</Button>
+    </div>
+  </Toggle>
+</Preview>
+
+### above
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <div class="inline-block">
+      <Popover {open} placement="top" on:close={toggle} maxViewportHeight class="bg-white border shadow">
+        <div class="p-2 h-[80vh] grid grid-rows-[auto,1fr,auto] items-center">
+          <div>Top</div>
+          <div>Middle</div>
+          <div>Bottom</div>
+        </div>
+      </Popover>
+      <Button on:click={toggle}>Click me</Button>
+    </div>
+  </Toggle>
 </Preview>
 
 ## Placement
@@ -342,7 +376,9 @@
   </div>
 </Preview>
 
-## Origins w/ custom
+## Custom origins
+
+### Overlap popover on top of anchor
 
 <Preview>
   <Toggle let:on={open} let:toggle>

@@ -2,11 +2,10 @@
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
+  import clsx from 'clsx';
 
   import Popover from './Popover.svelte';
   import type { PopoverOrigin, PopoverPlacement } from './Popover.svelte';
-
-  import { remainingViewportHeight } from '../actions/layout';
 
   const dispatch = createEventDispatcher();
 
@@ -51,7 +50,7 @@
 </script>
 
 <Popover
-  class={className}
+  class={clsx('bg-white rounded shadow border', className)}
   {style}
   {placement}
   {anchorOrigin}
@@ -59,21 +58,17 @@
   {offset}
   {matchWidth}
   {open}
+  {maxViewportHeight}
   on:close
   let:setPosition
 >
   <ul
-    class="menu-items overflow-x-hidden overflow-y-visible bg-white rounded shadow border outline-none"
-    use:remainingViewportHeight={{
-      max: true,
-      offset: 8,
-      enabled: maxViewportHeight,
-    }}
+    class="menu-items outline-none"
     bind:this={menuItemsEl}
     on:click={onClick}
     transition:transition
     on:introend={() => {
-      // Update position after transition finishes (full height of menu is available for popover calculation)
+      // Update position after intro transition finishes (full height of menu is available for popover calculation)
       if (!maxViewportHeight) {
         setPosition();
       }

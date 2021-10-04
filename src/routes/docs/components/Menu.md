@@ -57,13 +57,29 @@
 
 ## maxViewportHeight
 
-### Useful for long menus. Currently not compatible when menu initially rendered out of viewport (i.e. need to scroll into view)
+### Useful for long menus.
 
 <Preview>
   <Toggle let:on={open} let:toggle>
     <span>
       <Button on:click={toggle}>Click me</Button>
       <Menu {open} on:close={toggle} matchWidth maxViewportHeight>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Refresh</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Settings</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Help</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Sign In</div>
+      </Menu>
+    </span>
+  </Toggle>
+</Preview>
+
+### top placement currently requires disabling transitions to allow proper calculation
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <span>
+      <Button on:click={toggle}>Click me</Button>
+      <Menu {open} on:close={toggle} matchWidth maxViewportHeight placement="top" disableTransition>
         <div class="p-2 hover:bg-black/5 cursor-pointer">Refresh</div>
         <div class="p-2 hover:bg-black/5 cursor-pointer">Settings</div>
         <div class="p-2 hover:bg-black/5 cursor-pointer">Help</div>
