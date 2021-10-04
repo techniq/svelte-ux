@@ -306,10 +306,14 @@
       if (matchWidth) {
         popoverStyles.width = `${anchorRect.width}px`;
       }
+
+      if (maxViewportHeight) {
+        popoverStyles.maxHeight = getPopoverMaxHeight(anchorRect);
+        popoverStyles.overflow = 'auto';
       }
     }
 
-    // Update position after width has been set in the DOM
+    // Update position after width/maxHeight has been set in the DOM
     tick().then(() => {
       setPosition();
     });
