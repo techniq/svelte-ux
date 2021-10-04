@@ -117,8 +117,10 @@
     top: null,
     left: null,
     transformOrigin: null,
+    width: null,
+    maxHeight: null,
+    overflow: null,
   };
-  let width = matchWidth && anchorEl ? `${anchorEl.getBoundingClientRect().width}px` : 'initial';
 
   function getOffsetTop(rect: DOMRect, vertical: PopoverOrigin['vertical']) {
     if (typeof vertical === 'number') {
@@ -194,6 +196,16 @@
     };
   }
 
+  function getPopoverMaxHeight(anchorRect: DOMRect) {
+    const pagePadding = typeof maxViewportHeight === 'object' ? maxViewportHeight.padding : 8;
+    if (placement.startsWith('top')) {
+      // Height from top of page to top of anchor (minus padding)
+      return `calc(${anchorRect.top}px - ${pagePadding}px - ${offset}px)`;
+    } else if (placement.startsWith('bottom')) {
+      return `calc(100vh - ${anchorRect.bottom}px - ${pagePadding}px - ${offset}px)`;
+    }
+  }
+
   function getTransformOriginValue(transformOrigin: PopoverOrigin) {
     return [transformOrigin.horizontal, transformOrigin.vertical]
       .map((n) => (typeof n === 'number' ? `${n}px` : n))
@@ -259,14 +271,6 @@
 
     const anchorRect = anchorEl.getBoundingClientRect();
 
-    const newPopoverStyles = {
-      top: null,
-      left: null,
-      transformOrigin: null,
-      maxHeight: null,
-      overflow: null,
-    };
-
     const popoverRect = popoverEl.getBoundingClientRect();
 
     // If anchor is scrolled offscreen, close popover
@@ -278,24 +282,19 @@
     const { top, left, transformOrigin } = getPosition(anchorRect, popoverRect);
 
     if (top !== null) {
-      newPopoverStyles.top = `${top}px`;
+      popoverStyles.top = `${top}px`;
     }
     if (left !== null) {
-      newPopoverStyles.left = `${left}px`;
+      popoverStyles.left = `${left}px`;
     }
-    newPopoverStyles.transformOrigin = transformOrigin;
+    popoverStyles.transformOrigin = transformOrigin;
 
     if (maxViewportHeight) {
-      const pagePadding = typeof maxViewportHeight === 'object' ? maxViewportHeight.padding : 8;
-      if (placement.startsWith('top')) {
-        newPopoverStyles.maxHeight = `calc(${anchorRect.top}px - ${pagePadding}px)`;
-      } else if (placement.startsWith('bottom')) {
-        newPopoverStyles.maxHeight = `calc(100vh - ${anchorRect.bottom}px - ${pagePadding}px)`;
-      }
-      newPopoverStyles.overflow = 'auto';
+      popoverStyles.maxHeight = getPopoverMaxHeight(anchorRect);
+      popoverStyles.overflow = 'auto';
     }
 
-    popoverStyles = newPopoverStyles;
+    logger.debug({ popoverStyles });
   }
 
   $: {
@@ -305,7 +304,8 @@
       const anchorRect = anchorEl.getBoundingClientRect();
 
       if (matchWidth) {
-        width = `${anchorRect.width}px`;
+        popoverStyles.width = `${anchorRect.width}px`;
+      }
       }
     }
 
@@ -361,7 +361,7 @@
 {#if open}
   <div
     class="popover fixed z-50 outline-none {$$props.class ?? ''}"
-    style="width: {width}; {objectToString(popoverStyles)} {$$props.style ?? ''}"
+    style="{objectToString(popoverStyles)} {$$props.style ?? ''}"
     tabindex="-1"
     bind:this={popoverEl}
   >
