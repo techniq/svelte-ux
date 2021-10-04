@@ -218,14 +218,18 @@
     logger.debug({ heightThreshold, widthThreshold });
 
     // Check if the vertical axis needs shifting
-    if (top < marginThreshold) {
-      const diff = top - marginThreshold;
-      top -= diff;
-      popoverOffset.top += diff;
-    } else if (bottom > heightThreshold) {
-      const diff = bottom - heightThreshold;
-      top -= diff;
-      popoverOffset.top += diff;
+    if (maxViewportHeight) {
+      // resizing instead of repositioning
+    } else {
+      if (top < marginThreshold) {
+        const diff = top - marginThreshold;
+        top -= diff;
+        popoverOffset.top += diff;
+      } else if (bottom > heightThreshold) {
+        const diff = bottom - heightThreshold;
+        top -= diff;
+        popoverOffset.top += diff;
+      }
     }
 
     // Check if the horizontal axis needs shifting
