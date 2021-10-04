@@ -9,16 +9,8 @@
 
   const dispatch = createEventDispatcher();
 
-  export { className as class };
-
   export let open = false;
   export let offset = 4;
-  export let className = '';
-  export let style = null;
-  export let disableTransition = false;
-  export let transition = disableTransition
-    ? (node: HTMLElement, params: any) => null as TransitionConfig
-    : slide;
 
   /**
    * Set height to remaining height of viewport
@@ -26,6 +18,10 @@
   export let maxViewportHeight = false;
 
   export let placement: PopoverPlacement = 'bottom';
+  export let disableTransition = placement.startsWith('top'); // TODO: Remove default if can be handled differently
+  export let transition = disableTransition
+    ? (node: HTMLElement, params: any) => null as TransitionConfig
+    : slide;
   export let anchorOrigin: PopoverOrigin = undefined;
   export let popoverOrigin: PopoverOrigin = undefined;
   export let matchWidth: boolean = false;
@@ -50,8 +46,6 @@
 </script>
 
 <Popover
-  class={clsx('bg-white rounded shadow border', className)}
-  {style}
   {placement}
   {anchorOrigin}
   {popoverOrigin}
@@ -59,6 +53,8 @@
   {matchWidth}
   {open}
   {maxViewportHeight}
+  class={clsx('bg-white rounded shadow border', $$props.class)}
+  style={$$props.style}
   on:close
   let:setPosition
 >

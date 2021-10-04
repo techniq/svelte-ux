@@ -73,13 +73,13 @@
   </Toggle>
 </Preview>
 
-### top placement currently requires disabling transitions to allow proper calculation
+### top placement (currently disables transitions by default to allow proper calculation)
 
 <Preview>
   <Toggle let:on={open} let:toggle>
     <span>
       <Button on:click={toggle}>Click me</Button>
-      <Menu {open} on:close={toggle} matchWidth maxViewportHeight placement="top" disableTransition>
+      <Menu {open} on:close={toggle} matchWidth maxViewportHeight placement="top">
         <div class="p-2 hover:bg-black/5 cursor-pointer">Refresh</div>
         <div class="p-2 hover:bg-black/5 cursor-pointer">Settings</div>
         <div class="p-2 hover:bg-black/5 cursor-pointer">Help</div>
