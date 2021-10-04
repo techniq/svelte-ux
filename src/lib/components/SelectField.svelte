@@ -39,8 +39,8 @@
   export let anchorOrigin: PopoverOrigin = undefined;
   export let popoverOrigin: PopoverOrigin = undefined;
   export let matchWidth: boolean = true;
-  export let disableTransition = false;
-  export let maxViewportHeight = false;
+  export let maxViewportHeight = true; // Makes sense for SelectField to default to true (resize instead of reposition) compared to underlying Menu/Popover
+  export let disableTransition = placement.startsWith('top'); // TODO: Remove default if can be handled differently
 
   $: filteredItems = items ?? [];
   let searchText = '';
