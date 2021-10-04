@@ -82,8 +82,10 @@
 
   import { getScrollParent } from '../utils/dom';
   import { objectToString } from '../utils/styles';
+  import Logger from '../utils/logger';
 
   const dispatch = createEventDispatcher();
+  const logger = new Logger({ level: 'WARN' });
 
   export let placement: PopoverPlacement = 'bottom';
 
@@ -156,7 +158,7 @@
       const transform = getComputedStyle(parent).transform;
 
       if (transform !== 'none') {
-        // console.log('transform parent detected:', parent);
+        logger.debug('transform parent detected:', parent);
         transformParent = {
           top: parent.offsetTop,
           left: parent.offsetLeft,
@@ -201,16 +203,19 @@
   function getPosition(anchorRect: DOMRect, popoverRect: DOMRect) {
     const anchorOffset = getAnchorOffset(anchorRect);
     const popoverOffset = getPopoverOffset(popoverRect);
+    logger.debug({ anchorOffset, popoverOffset });
 
     // Calculate element positioning
     let top = anchorOffset.top - popoverOffset.top;
     let left = anchorOffset.left - popoverOffset.left;
     const bottom = top + popoverRect.height;
     const right = left + popoverRect.width;
+    logger.debug('element position (before shift)', { top, bottom, left, right });
 
     // Window thresholds taking required margin into account
     const heightThreshold = window.innerHeight - marginThreshold;
     const widthThreshold = window.innerWidth - marginThreshold;
+    logger.debug({ heightThreshold, widthThreshold });
 
     // Check if the vertical axis needs shifting
     if (top < marginThreshold) {
@@ -233,6 +238,7 @@
       left -= diff;
       popoverOffset.left += diff;
     }
+    logger.debug('element position (after shift)', { top, bottom, left, right });
 
     return {
       top: Math.round(top),
@@ -243,6 +249,7 @@
 
   function setPosition() {
     if (!open || !anchorEl || !popoverEl) {
+      logger.debug('skipping setPosition()', { open, anchorEl, popoverEl });
       return;
     }
 
@@ -330,6 +337,7 @@
     if (popoverEl) {
       // Popover shown (mounted)
       scrollParent = getScrollParent(popoverEl);
+      logger.debug('Adding scroll listener to parent', scrollParent, setPosition);
       scrollParent.addEventListener('scroll', setPosition);
     } else if (scrollParent) {
       // Popover Hidden (unmounted)
