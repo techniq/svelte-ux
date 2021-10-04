@@ -57,7 +57,7 @@
 
 ## maxViewportHeight
 
-### Useful for long menus.
+### Useful for long menus. Resizes (maxHeight w/ overflow) instead of repositions
 
 <Preview>
   <Toggle let:on={open} let:toggle>
