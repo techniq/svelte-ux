@@ -263,9 +263,9 @@
     };
   }
 
-  function setPosition() {
+  export function updatePosition() {
     if (!open || !anchorEl || !popoverEl) {
-      logger.debug('skipping setPosition()', { open, anchorEl, popoverEl });
+      logger.debug('skipping updatePosition()', { open, anchorEl, popoverEl });
       return;
     }
 
@@ -315,7 +315,7 @@
 
     // Update position after width/maxHeight has been set in the DOM
     tick().then(() => {
-      setPosition();
+      updatePosition();
     });
   }
 
@@ -345,19 +345,19 @@
     if (popoverEl) {
       // Popover shown (mounted)
       scrollParent = getScrollParent(popoverEl);
-      logger.debug('Adding scroll listener to parent', scrollParent, setPosition);
-      scrollParent.addEventListener('scroll', setPosition);
+      logger.debug('Adding scroll listener to parent', scrollParent, updatePosition);
+      scrollParent.addEventListener('scroll', updatePosition);
     } else if (scrollParent) {
       // Popover Hidden (unmounted)
       // TODO: Remove once determined how to re-add on second open (currently being ignored...?)
       // logger.debug('Removing listener from parent', scrollParent);
-      // scrollParent.removeEventListener('scroll', setPosition);
+      // scrollParent.removeEventListener('scroll', updatePosition);
     }
   }
 </script>
 
 <svelte:window
-  on:resize|passive={() => setPosition()}
+  on:resize|passive={() => updatePosition()}
   on:keydown|capture={onKeydown}
   on:click|capture={onClickOutside}
 />
@@ -369,6 +369,6 @@
     tabindex="-1"
     bind:this={popoverEl}
   >
-    <slot {setPosition} />
+    <slot {updatePosition} />
   </div>
 {/if}

@@ -56,7 +56,7 @@
   class={clsx('bg-white rounded shadow border', $$props.class)}
   style={$$props.style}
   on:close
-  let:setPosition
+  let:updatePosition
 >
   <ul
     class="menu-items outline-none"
@@ -66,7 +66,7 @@
     on:introend={() => {
       // Update position after intro transition finishes (full height of menu is available for popover calculation)
       if (!maxViewportHeight) {
-        setPosition();
+        updatePosition();
       }
     }}
   >
