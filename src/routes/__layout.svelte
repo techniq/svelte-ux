@@ -30,6 +30,9 @@
   }
 
   :global(h3) {
-    @apply text-xs text-black/50 -mt-2 ml-2 mb-1;
+    @apply text-xs text-black/50 ml-2 mb-1;
+  }
+  :global(h2 + h3) {
+    @apply -mt-1;
   }
 </style>
