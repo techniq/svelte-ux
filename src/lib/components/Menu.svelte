@@ -26,6 +26,7 @@
   export let popoverOrigin: PopoverOrigin = undefined;
   export let matchWidth: boolean = false;
 
+  let popoverRef: any; // TODO: Improve type (Popover)
   let menuItemsEl: HTMLUListElement;
 
   function onClick(e) {
@@ -43,6 +44,10 @@
       console.error(err);
     }
   }
+
+  export function updatePosition() {
+    popoverRef?.updatePosition();
+  }
 </script>
 
 <Popover
@@ -57,6 +62,7 @@
   style={$$props.style}
   on:close
   let:updatePosition
+  bind:this={popoverRef}
 >
   <ul
     class="menu-items outline-none"
@@ -70,6 +76,6 @@
       }
     }}
   >
-    <slot />
+    <slot {updatePosition} />
   </ul>
 </Popover>

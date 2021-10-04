@@ -22,17 +22,7 @@
 ## Basic
 
 <Preview>
-  <SelectField
-    {items}
-    on:change={(e) => {
-      console.log('on:change', e.detail);
-    }}
-    _search={async () => {
-      console.log('search override...');
-      await delay(1000);
-      console.log('search override done');
-    }}
-  />
+  <SelectField {items} on:change={(e) => console.log('on:change', e.detail)} />
 </Preview>
 
 ## bind:value
@@ -50,24 +40,13 @@
 ## Loading
 
 <Preview>
-  <SelectField
-    {items}
-    on:change={(e) => {
-      console.log('on:change', e.detail);
-    }}
-    loading
-  />
+  <SelectField {items} on:change={(e) => console.log('on:change', e.detail)} loading />
 </Preview>
 
 ## Item Slot
 
 <Preview>
-  <SelectField
-    {items}
-    on:change={(e) => {
-      console.log('on:change', e.detail);
-    }}
-  >
+  <SelectField {items} on:change={(e) => console.log('on:change', e.detail)}>
     <div slot="item" let:item let:index let:highlightIndex>
       <div
         class="p-2 bg-opacity-5 hover:bg-black/5 cursor-pointer"
@@ -89,14 +68,22 @@
 <Preview>
   <SelectField
     {items}
-    on:change={(e) => {
-      console.log('on:change', e.detail);
-    }}
+    on:change={(e) => console.log('on:change', e.detail)}
     search={async () => {
       console.log('search override...');
       await delay(1000);
       console.log('search override done');
     }}
+  />
+</Preview>
+
+## Placement
+
+<Preview>
+  <SelectField
+    {items}
+    on:change={(e) => console.log('on:change', e.detail)}
+    placement="top"
   />
 </Preview>
 

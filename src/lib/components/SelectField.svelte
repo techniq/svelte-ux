@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, tick } from 'svelte';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
 
@@ -12,6 +12,8 @@
   import Menu from './Menu.svelte';
   import type { PopoverOrigin, PopoverPlacement } from './Popover.svelte';
   import TextField from './TextField.svelte';
+
+  let menuRef;
 
   const dispatch = createEventDispatcher<{
     change: { value: any; item: any };
@@ -273,6 +275,12 @@
     filteredItems = items;
     //inputEl?.focus();
   }
+
+  // Update menu position after items have updated (menu size change needs repositioned)
+  $: {
+    filteredItems;
+    tick().then(() => menuRef?.updatePosition());
+  }
 </script>
 
 <div class={$$props.class} on:click={onClick}>
@@ -331,6 +339,7 @@
       {disableTransition}
       bind:open
       on:close={() => (open = false)}
+      bind:this={menuRef}
     >
       <div
         class="items focus:outline-none"
