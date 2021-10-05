@@ -29,18 +29,16 @@
 
 <Preview>
   <SelectField {items} bind:value />
-  <Stack horizontal>
-    <Button on:click={() => (value = 1)}>Pick 1</Button>
-    <Button on:click={() => (value = 2)}>Pick 2</Button>
-    <Button on:click={() => (value = 3)}>Pick 3</Button>
-    <Button on:click={() => (value = 4)}>Pick 4</Button>
-  </Stack>
+  <Button on:click={() => (value = 1)}>Pick 1</Button>
+  <Button on:click={() => (value = 2)}>Pick 2</Button>
+  <Button on:click={() => (value = 3)}>Pick 3</Button>
+  <Button on:click={() => (value = 4)}>Pick 4</Button>
 </Preview>
 
 ## Loading
 
 <Preview>
-  <SelectField {items} on:change={(e) => console.log('on:change', e.detail)} loading />
+  <SelectField {items} loading />
 </Preview>
 
 ## Item Slot
