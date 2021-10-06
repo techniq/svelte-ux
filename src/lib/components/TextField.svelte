@@ -85,17 +85,10 @@
   $: hasInputValue = inputValue != null && inputValue !== '';
   $: hasLabel = label !== '';
 
-  /**
-   * Support overriding $$slots (workaround for https://github.com/sveltejs/svelte/issues/6059)
-   */
-  export let slots: typeof $$slots = undefined;
-
-  $: hasPrepend = (slots ? slots.prepend : $$slots.prepend) || icon != null;
-  $: hasAppend = (slots ? slots.append : $$slots.append) || clearable || error || operators;
-  $: hasPrefix = (slots ? slots.prefix : $$slots.prefix) || type === 'currency';
-  $: hasSuffix = (slots ? slots.suffix : $$slots.suffix) || type === 'percent';
-
-  $: console.log(hasPrepend, slots, $$slots, icon);
+  $: hasPrepend = $$slots.prepend || icon != null;
+  $: hasAppend = $$slots.append || clearable || error || operators;
+  $: hasPrefix = $$slots.prefix || type === 'currency';
+  $: hasSuffix = $$slots.suffix || type === 'percent';
 
   const id = uniqueId('field_');
   let labelEl: HTMLLabelElement | null = null;
@@ -124,7 +117,7 @@
       disabled ? '' : error ? 'hover:border-red-700' : 'hover:border-gray-700',
       {
         'px-2': !rounded,
-        'px-6': rounded && !hasPrepend,
+        'px-6': rounded && !hasPrepend, // TODO: `hasPrepend` always true for SelectField, etc.  See: https://github.com/sveltejs/svelte/issues/6059
       },
       !base && [rounded ? 'rounded-full' : 'rounded', filled ? 'bg-black/10' : 'bg-white'],
       error ? 'border-red-500' : 'border-black/20',
@@ -133,13 +126,10 @@
   >
     <div class="flex items-center">
       {#if hasPrepend}
-        <div class="prepend whitespace-nowrap">
+        <div class={clsx('prepend whitespace-nowrap', rounded && 'pl-3')}>
           <slot name="prepend" />
-
           {#if icon}
-            <span
-              class={clsx('mr-3', rounded && !(slots ? slots.prepend : $$slots.prepend) && 'ml-3')}
-            >
+            <span class="mr-3">
               <Icon path={icon} class="text-black/50" />
             </span>
           {/if}

@@ -122,10 +122,37 @@
   <SelectField {items} icon={mdiMagnify} />
 </Preview>
 
-## Rounded w/ icon
+## Rounded
+
+<Preview>
+  <SelectField {items} rounded />
+</Preview>
+
+## Rounded with icon
 
 <Preview>
   <SelectField {items} icon={mdiMagnify} rounded />
+</Preview>
+
+## Rounded with append slot and icon
+
+<Preview>
+  <SelectField {items} icon={mdiMagnify} rounded>
+    <span slot="prepend" on:click|stopPropagation>
+      <select
+        class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
+        style="text-align-last: center;"
+      >
+        <!-- <option /> -->
+        <option>{'='}</option>
+        <option>{'!='}</option>
+        <option>{'>'}</option>
+        <option>{'>='}</option>
+        <option>{'<'}</option>
+        <option>{'<='}</option>
+      </select>
+    </span>
+  </SelectField>
 </Preview>
 
 ## Search

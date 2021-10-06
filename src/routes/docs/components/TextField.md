@@ -347,6 +347,12 @@
   <TextField label="Search" rounded />
 </Preview>
 
+## Rounded with icon
+
+<Preview>
+  <TextField label="Search" rounded icon={mdiMagnify} />
+</Preview>
+
 ## Filled
 
 <Preview>
