@@ -1,10 +1,15 @@
 <script>
+  import { mdiMagnify, mdiPlus } from '@mdi/js';
+
   import Button from '$lib/components/Button.svelte';
+  import Dialog from '$lib/components/Dialog.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Stack from '$lib/components/Stack.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
   import Tab from '$lib/components/Tab.svelte';
   import Tabs from '$lib/components/Tabs.svelte';
+  import TextField from '$lib/components/TextField.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
 
   import { scrollIntoView } from '$lib/actions/scroll';
 
@@ -59,6 +64,62 @@
       </div>
     </div>
   </SelectField>
+</Preview>
+
+## Prepend slot
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <SelectField {items}>
+      <div slot="prepend" on:click|stopPropagation>
+        <select
+          class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
+          style="text-align-last: center;"
+        >
+          <!-- <option /> -->
+          <option>{'='}</option>
+          <option>{'!='}</option>
+          <option>{'>'}</option>
+          <option>{'>='}</option>
+          <option>{'<'}</option>
+          <option>{'<='}</option>
+        </select>
+      </div>
+    </SelectField>
+  </Toggle>
+</Preview>
+
+## Append slot (actions)
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <SelectField {items}>
+      <span slot="append" on:click|stopPropagation>
+        <Button icon={mdiPlus} class="text-black/50 p-2" on:click={toggle} />
+      </span>
+    </SelectField>
+    <Dialog {open} on:close={toggle}>
+      <div slot="title">Create new item</div>
+      <div class="px-6 py-3 w-96">
+        <TextField label="Name" autofocus />
+      </div>
+      <div slot="actions">
+        <Button
+          on:click={() => console.log('Adding item...')}
+          class="text-blue-500"
+        >
+          Add item
+        </Button>
+        <Button>Cancel</Button>
+      </div>
+    </Dialog>
+  </Toggle>
+</Preview>
+
+## Icon
+
+<Preview>
+  <SelectField {items} icon={mdiMagnify} />
 </Preview>
 
 ## Search

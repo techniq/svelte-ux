@@ -20,7 +20,7 @@
     inputChange: string;
   }>();
 
-  const logger = new Logger({ level: 'WARN' });
+  const logger = new Logger({ level: 'DEBUG' });
 
   export let items: any[] = [];
   export let itemText = (item: any) => (item?.name as string) ?? '';
@@ -271,6 +271,7 @@
   }
 
   function clear() {
+    logger.info('clear');
     selectItem(null);
     filteredItems = items;
     //inputEl?.focus();
@@ -304,7 +305,11 @@
     class="h-full"
     {...$$restProps}
   >
+    <slot slot="prepend" name="prepend" />
+
     <span slot="append">
+      <slot name="append" />
+
       {#if loading}
         <CircularProgress size={16} width={2} class="text-gray-500" />
       {/if}
@@ -351,6 +356,7 @@
             // Use `.items > ` in case slot is nested (ex. GraphQLSelect with slot)
             const slotEl = e.target.closest('.items > [slot=item]') ?? e.target;
             const itemIndex = slotEl ? Array.from(menuItemsEl.children).indexOf(slotEl) : -1;
+            logger.debug({ slotEl, itemIndex });
             selectIndex(itemIndex);
           }
         }}
