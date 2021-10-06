@@ -3,7 +3,7 @@ import { tick } from 'svelte';
 /**
  * Auto focus node when rendered.  Useful for inputs
  */
-export function autoFocus(node: HTMLInputElement) {
+export function autoFocus(node: HTMLInputElement | HTMLTextAreaElement) {
   // TODO: Determine why `setTimeout` (`tick` used to work) is required on page transitions for some reason
   // tick().then(() => {
   //   node.focus();
@@ -16,7 +16,7 @@ export function autoFocus(node: HTMLInputElement) {
 /**
  * Selects the text inside a text node when the node is focused
  */
-export function selectOnFocus(node: HTMLInputElement) {
+export function selectOnFocus(node: HTMLInputElement | HTMLTextAreaElement) {
   const handleFocus = (event: FocusEvent) => {
     node.select();
   };
@@ -33,7 +33,7 @@ export function selectOnFocus(node: HTMLInputElement) {
 /**
  * Blurs the node when Escape is pressed
  */
-export function blurOnEscape(node: HTMLInputElement) {
+export function blurOnEscape(node: HTMLInputElement | HTMLTextAreaElement) {
   const handleKey = (event) => {
     if (event.key === 'Escape') {
       node.blur();
