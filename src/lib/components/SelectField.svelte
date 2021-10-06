@@ -20,7 +20,7 @@
     inputChange: string;
   }>();
 
-  const logger = new Logger({ level: 'DEBUG' });
+  const logger = new Logger({ level: 'WARN' });
 
   export let items: any[] = [];
   export let itemText = (item: any) => (item?.name as string) ?? '';
