@@ -12,6 +12,7 @@
   import Icon from './Icon.svelte';
   import Stack from './Stack.svelte';
   import { isLiteralObject } from '../utils/object';
+  import { autoFocus } from '$lib/actions';
 
   type InputValue = string | number;
 
@@ -37,8 +38,11 @@
   export let icon: string | null = null;
   export let align: 'left' | 'center' | 'right' = 'left';
   export let shrinkLabel = false;
+  export let autofocus = false;
   // TODO: Find way to conditionally set type based on `multiline` value
-  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> = undefined;
+  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> = autofocus
+    ? (node) => [autoFocus(node)]
+    : undefined;
   export let operators: { label: string; value: string }[] = undefined;
   export let inputEl: HTMLInputElement | null = null;
 
