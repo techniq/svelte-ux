@@ -70,7 +70,7 @@
   </Grid>
 </Preview>
 
-## Label w/ with placeholder
+## Label with placeholder
 
 <Preview>
   <Grid columns={2} gap={8}>
@@ -91,7 +91,7 @@
   </Grid>
 </Preview>
 
-## Always shrink label w/ with placeholder
+## Always shrink label with placeholder
 
 <Preview>
   <Grid columns={2} gap={8}>
@@ -234,7 +234,7 @@
   </div>
 
   <div>
-    <div class="text-lg font-semibold mt-8 ml-2">Suffix w/ with align right</div>
+    <div class="text-lg font-semibold mt-8 ml-2">Suffix with align right</div>
     <Preview>
       <TextField label="Ratio" align="right">
         <div slot="suffix">
@@ -249,19 +249,19 @@
   </div>
 </Grid>
 
-## Icon w/ convienent prepend
+## Icon with convienent prepend
 
 <Preview>
   <TextField label="Search" icon={mdiMagnify} />
 </Preview>
 
-## Clearable w/ convienent append
+## Clearable with convienent append
 
 <Preview>
   <TextField label="Search" clearable />
 </Preview>
 
-## Clearable w/ with additional append
+## Clearable with additional append
 
 <Preview>
   <TextField label="Search" clearable>
@@ -271,13 +271,13 @@
   </TextField>
 </Preview>
 
-## Operators w/ number
+## Operators with number
 
 <Preview>
   <TextField label="Search" operators={numberOperators} bind:value />
 </Preview>
 
-## Operators w/ string
+## Operators with string
 
 <Preview>
   <TextField label="Search" operators={stringOperators} />
@@ -323,13 +323,13 @@
   <TextField label="Comment" multiline />
 </Preview>
 
-## Multiline w/ with placeholder
+## Multiline with placeholder
 
 <Preview>
   <TextField label="Comment" multiline placeholder="Please leave a comment" />
 </Preview>
 
-## Multiline w/ with autoHeight
+## Multiline with autoHeight
 
 <Preview>
   <TextField
