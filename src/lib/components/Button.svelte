@@ -29,7 +29,7 @@
     'transition duration-300 ring-black/20',
     !filled && !hasClassOverride('hover:bg-') && 'hover:bg-black/5',
     'focus:outline-none focus-visible:ring-1',
-    circle ? 'rounded-full' : 'rounded',
+    circle ? 'rounded-full' : !base ? 'rounded' : '',
     small ? 'text-xs' : 'text-sm',
     fullWidth ? 'block' : 'inline-block',
     base ? '' : 'px-4 uppercase font-medium tracking-wider whitespace-nowrap',
