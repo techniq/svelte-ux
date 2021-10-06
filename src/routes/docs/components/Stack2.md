@@ -158,10 +158,10 @@
 ## Default
 
 <Preview>
-  <div class="inline-grid items-center justify-items-center">
+  <div class="inline-grid place-items-center">
     <Button class="col-span-full row-span-full border">Example</Button>
     <div
-      class="col-span-full row-span-full bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center "
+      class="col-span-full row-span-full bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center"
     >
       3
     </div>
@@ -171,7 +171,7 @@
 ## Corner w/ Button
 
 <Preview>
-  <div class="inline-grid items-center justify-items-center">
+  <div class="inline-grid">
     <Button class="col-span-full row-span-full border">Example</Button>
     <div
       class="col-span-full row-span-full bg-red-500 rounded-full h-4 w-4 -mr-1 -mt-1 text-xs text-white flex items-center justify-center self-start justify-self-end"
@@ -184,7 +184,7 @@
 ## Corner /w Icon Button
 
 <Preview>
-  <div class="inline-grid items-center justify-items-center">
+  <div class="inline-grid">
     <Button icon={mdiFilterVariant} class="col-span-full row-span-full border p-3" />
     <div
       class="col-span-full row-span-full bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center self-start justify-self-end"
@@ -197,9 +197,9 @@
 ## Corner (multi) /w Icon Button
 
 <Preview>
-  <div class="inline-grid items-center justify-items-center">
+  <div class="inline-grid">
     <Button icon={mdiFilterVariant} class="col-span-full row-span-full border p-3" />
-    <div class="col-span-full row-span-full bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center self-start justify-self-end border border-white" />
-    <div class="col-span-full row-span-full bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center self-end justify-self-end border border-white" />
+    <div class="col-span-full row-span-full self-start justify-self-end bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center border border-white" />
+    <div class="col-span-full row-span-full self-end justify-self-end bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center border border-white" />
   </div>
 </Preview>
