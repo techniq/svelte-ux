@@ -122,6 +122,12 @@
   <SelectField {items} icon={mdiMagnify} />
 </Preview>
 
+## Rounded w/ icon
+
+<Preview>
+  <SelectField {items} icon={mdiMagnify} rounded />
+</Preview>
+
 ## Search
 
 <Preview>
