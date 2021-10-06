@@ -89,12 +89,13 @@
   /**
    * Support overriding $$slots (workaround for https://github.com/sveltejs/svelte/issues/6059)
    */
-  export let slots: typeof $$slots;
+  export let slotsDefined: typeof $$slots;
 
-  $: hasPrepend = (slots ? slots.prepend : $$slots.prepend) || icon != null;
-  $: hasAppend = (slots ? slots.append : $$slots.append) || clearable || error || operators;
-  $: hasPrefix = (slots ? slots.prefix : $$slots.prefix) || type === 'currency';
-  $: hasSuffix = (slots ? slots.suffix : $$slots.suffix) || type === 'percent';
+  $: hasPrepend = (slotsDefined ? slotsDefined.prepend : $$slots.prepend) || icon != null;
+  $: hasAppend =
+    (slotsDefined ? slotsDefined.append : $$slots.append) || clearable || error || operators;
+  $: hasPrefix = (slotsDefined ? slotsDefined.prefix : $$slots.prefix) || type === 'currency';
+  $: hasSuffix = (slotsDefined ? slotsDefined.suffix : $$slots.suffix) || type === 'percent';
 
   $: hStackTemplate = `${hasPrepend ? 'auto' : ''} 1fr ${hasAppend ? ' auto' : ''}`;
 
@@ -139,7 +140,10 @@
 
           {#if icon}
             <span
-              class={clsx('mr-3', rounded && !(slots ? slots.prepend : $$slots.prepend) && 'ml-3')}
+              class={clsx(
+                'mr-3',
+                rounded && !(slotsDefined ? slotsDefined.prepend : $$slots.prepend) && 'ml-3'
+              )}
             >
               <Icon path={icon} class="text-black/50" />
             </span>

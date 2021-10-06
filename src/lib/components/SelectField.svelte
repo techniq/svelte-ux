@@ -303,7 +303,7 @@
     on:keypress={onKeyPress}
     actions={(node) => [selectOnFocus(node)]}
     class="h-full"
-    slots={$$slots}
+    slotsDefined={$$slots}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
