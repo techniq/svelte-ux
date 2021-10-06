@@ -91,10 +91,12 @@
    */
   export let slots: typeof $$slots = undefined;
 
-  const hasPrepend = (slots ? slots.prepend : $$slots.prepend) || icon != null;
-  const hasAppend = (slots ? slots.append : $$slots.append) || clearable || error || operators;
-  const hasPrefix = (slots ? slots.prefix : $$slots.prefix) || type === 'currency';
-  const hasSuffix = (slots ? slots.suffix : $$slots.suffix) || type === 'percent';
+  $: hasPrepend = (slots ? slots.prepend : $$slots.prepend) || icon != null;
+  $: hasAppend = (slots ? slots.append : $$slots.append) || clearable || error || operators;
+  $: hasPrefix = (slots ? slots.prefix : $$slots.prefix) || type === 'currency';
+  $: hasSuffix = (slots ? slots.suffix : $$slots.suffix) || type === 'percent';
+
+  $: console.log(hasPrepend, slots, $$slots, icon);
 
   $: hStackTemplate = `${hasPrepend ? 'auto' : ''} 1fr ${hasAppend ? ' auto' : ''}`;
 
