@@ -10,7 +10,6 @@
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
-  import Stack from './Stack.svelte';
   import { isLiteralObject } from '../utils/object';
   import { autoFocus } from '$lib/actions';
 
@@ -98,8 +97,6 @@
 
   $: console.log(hasPrepend, slots, $$slots, icon);
 
-  $: hStackTemplate = `${hasPrepend ? 'auto' : ''} 1fr ${hasAppend ? ' auto' : ''}`;
-
   const id = uniqueId('field_');
   let labelEl: HTMLLabelElement | null = null;
 </script>
@@ -134,7 +131,7 @@
       'group-focus-within:shadow-md group-focus-within:border-color-var'
     )}
   >
-    <Stack horizontal template={hStackTemplate} items="center">
+    <div class="flex items-center">
       {#if hasPrepend}
         <div class="prepend whitespace-nowrap">
           <slot name="prepend" />
@@ -149,11 +146,11 @@
         </div>
       {/if}
 
-      <Stack stack items="initial" justifyItems="initial" on:click>
+      <div class="flex-grow inline-grid" on:click>
         {#if label}
           <label
             class={clsx(
-              'z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
+              'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
               error ? 'text-red-500/80' : 'text-black/50',
               (shrinkLabel || hasInputValue) && 'shrink'
             )}
@@ -166,7 +163,7 @@
 
         <div
           class={clsx(
-            'input flex items-center',
+            'col-span-full row-span-full input flex items-center',
             hasLabel && 'pt-4',
             dense ? 'my-1' : 'my-2',
             (hasPrefix || hasSuffix) &&
@@ -237,7 +234,7 @@
 
           <slot name="suffix" />
         </div>
-      </Stack>
+      </div>
 
       {#if hasAppend}
         <div class="append whitespace-nowrap">
@@ -279,7 +276,7 @@
           {/if}
         </div>
       {/if}
-    </Stack>
+    </div>
   </div>
   <div
     class={clsx(
