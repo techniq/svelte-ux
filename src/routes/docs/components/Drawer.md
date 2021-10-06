@@ -55,11 +55,11 @@
   <Button on:click={() => (bottomOpen = true)}>Bottom</Button>
 </Preview>
 
-## Click away
+## Persistent
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} right clickAway class="w-[400px]">
+    <Drawer {open} on:close={toggleOff} right persistent class="w-[400px]">
       <h1>Contents</h1>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
@@ -76,7 +76,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} right clickAway class="w-[400px]" loading>
+    <Drawer {open} on:close={toggleOff} right class="w-[400px]" loading>
       <h1>Contents</h1>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25

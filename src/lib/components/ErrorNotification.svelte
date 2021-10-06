@@ -50,7 +50,7 @@
     </div>
   </Notification>
 
-  <Dialog {open} clickAway style="max-width: 90vw">
+  <Dialog {open} style="max-width: 90vw">
     <div slot="title">
       {#if message}
         {#each message.split('\n') as message}

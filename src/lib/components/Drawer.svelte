@@ -13,7 +13,7 @@
 
   export let open = true;
   export let portal = true;
-  export let clickAway = false;
+  export let persistent = false;
   export let loading: boolean | null = null;
 
   export let right = false;
@@ -31,7 +31,7 @@
 {#if open}
   <Backdrop
     on:click={() => {
-      if (clickAway) {
+      if (!persistent) {
         open = false;
       }
     }}
@@ -66,3 +66,11 @@
     <slot {open} />
   </div>
 {/if}
+
+<svelte:window
+  on:keydown={(e) => {
+    if (e.key === 'Escape' && !persistent) {
+      open = false;
+    }
+  }}
+/>

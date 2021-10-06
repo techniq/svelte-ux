@@ -56,7 +56,26 @@
 <Preview>
   <Toggle let:on={open} let:toggle>
     <Button on:click={toggle}>Show Dialog</Button>
-    <Dialog {open} on:close={toggle} clickAway loading>
+    <Dialog {open} on:close={toggle} loading>
+      <div slot="title">Are you sure you want to do that?</div>
+      <div slot="actions">
+        <Button
+          on:click={() => (open = false)}
+          class="text-blue-500 hover:bg-blue-50"
+        >
+          Close
+        </Button>
+      </div>
+    </Dialog>
+  </Toggle>
+</Preview>
+
+## Persistent
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <Button on:click={toggle}>Show Dialog</Button>
+    <Dialog {open} on:close={toggle} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
         <Button

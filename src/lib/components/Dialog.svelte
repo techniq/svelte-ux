@@ -16,7 +16,7 @@
 
   export let open = false;
   export let portal = true;
-  export let clickAway = false;
+  export let persistent = false;
   export let loading: boolean | null = null;
 
   export let classes: {
@@ -60,7 +60,7 @@
 {#if open}
   <Backdrop
     on:click={() => {
-      if (clickAway) {
+      if (!persistent) {
         open = false;
       }
     }}
@@ -109,3 +109,11 @@
     </div>
   </div>
 {/if}
+
+<svelte:window
+  on:keydown={(e) => {
+    if (e.key === 'Escape' && !persistent) {
+      open = false;
+    }
+  }}
+/>
