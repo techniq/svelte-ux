@@ -369,9 +369,11 @@
             </div>
           </slot>
         {:else}
-          <div class="p-3 text-black/50 italic">
-            {loading ? 'Loading...' : 'No items found'}
-          </div>
+          <slot name="empty" {searchText}>
+            <div class="p-3 text-black/50 italic">
+              {loading ? 'Loading...' : 'No items found'}
+            </div>
+          </slot>
         {/each}
       </div>
     </Menu>
