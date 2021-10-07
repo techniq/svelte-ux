@@ -313,7 +313,9 @@
       <slot name="append" />
 
       {#if loading}
-        <CircularProgress size={16} width={2} class="text-gray-500" />
+        <span class="inline-block w-[29px] h-[28px] text-center">
+          <CircularProgress size={16} width={2} class="text-black/50" />
+        </span>
       {:else if value}
         <Button
           icon={mdiClose}
