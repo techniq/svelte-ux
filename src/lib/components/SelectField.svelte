@@ -314,9 +314,7 @@
 
       {#if loading}
         <CircularProgress size={16} width={2} class="text-gray-500" />
-      {/if}
-
-      {#if value}
+      {:else if value}
         <Button
           icon={mdiClose}
           class="text-black/50 p-1"
