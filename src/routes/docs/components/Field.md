@@ -7,7 +7,6 @@
   } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
-  import Grid from '$lib/components/Grid.svelte';
   import Field from '$lib/components/Field.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -22,10 +21,10 @@
 ## Text (display only)
 
 <Preview>
-  <Grid columns={2} gap={8}>
+  <div class="grid grid-flow-col gap-2">
     <Field label="First Name">Sean</Field>
     <Field label="Last Name">Lynch</Field>
-  </Grid>
+  </div>
 </Preview>
 
 ## Switch
@@ -36,7 +35,7 @@
   </Field>
 </Preview>
 
-<Grid columns={2} gap={8}>
+<div class="grid grid-cols-2 gap-2">
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">Tabs</div>
     <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full width</div>
@@ -89,16 +88,14 @@
       </Field>
     </Preview>
   </div>
-</Grid>
+</div>
 
 ## Button
 
 <Preview>
-  <Grid columns={2} gap={8}>
-    <Field label="Action" let:id>
-      <Button {id} on:click={() => console.log('clicked')}>Click me</Button>
-    </Field>
-  </Grid>
+  <Field label="Action" let:id>
+    <Button {id} on:click={() => console.log('clicked')}>Click me</Button>
+  </Field>
 </Preview>
 
 ## Date input
