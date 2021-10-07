@@ -21,7 +21,7 @@
     'bg-white elevation-1 border-t',
     nested
       ? 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b'
-      : 'first:border-t-0 first:rounded-t last:rounded-b',
+      : 'first-of-type:border-t-0 first-of-type:rounded-t last:rounded-b',
     $$props.class
   )}
   style={$$props.style}
