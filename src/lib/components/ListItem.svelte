@@ -3,7 +3,6 @@
 
   import Avatar from './Avatar.svelte';
   import Icon from './Icon.svelte';
-  import Stack from './Stack.svelte';
 
   export let title: string | number | null = null;
   export let subheading: string | number | null = null;
@@ -30,22 +29,15 @@
     title?: string;
     subheading?: string;
   } = {};
-
-  $: hasAvatar = $$slots.avatar || icon;
-  $: hasActions = $$slots.actions;
 </script>
 
-<Stack
-  horizontal
-  template="{hasAvatar ? 'auto' : ''} 1fr {hasActions ? 'auto' : ''}"
-  gap={16}
-  items="center"
+<li
   class={clsx(
-    'bg-white border-t py-2 px-4',
+    'flex gap-4 items-center bg-white border-t py-2 px-4',
     noShadow !== true && 'elevation-1',
     nested
       ? 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b'
-      : 'first:border-t-0 first:rounded-t last:rounded-b',
+      : 'first-of-type::border-t-0 first-of-type:rounded-t last:rounded-b',
     $$props.class
   )}
   on:click
@@ -62,7 +54,7 @@
     {/if}
   </slot>
 
-  <div>
+  <div class="flex-grow">
     <slot name="title">
       {#if title != null}
         <div class={classes.title}>{title}</div>
@@ -79,4 +71,4 @@
   </div>
 
   <slot name="actions" />
-</Stack>
+</li>
