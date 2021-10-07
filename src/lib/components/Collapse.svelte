@@ -25,10 +25,10 @@
   class={$$props.class}
   class:transition-all={popout}
   class:duration-all={popout}
-  class:first:mt-0={popout && !nested}
-  class:last:mb-0={popout && !nested}
-  class:group-first:mt-0={popout && nested}
-  class:group-last:mb-0={popout && nested}
+  class:first-of-type:mt-0={popout && !nested}
+  class:last-of-type:mb-0={popout && !nested}
+  class:group-first-of-type:mt-0={popout && nested}
+  class:group-last-of-type:mb-0={popout && nested}
   class:my-3={popout && active}
   style={$$props.style}
 >

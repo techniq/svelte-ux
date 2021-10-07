@@ -37,7 +37,7 @@
     noShadow !== true && 'elevation-1',
     nested
       ? 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b'
-      : 'first-of-type::border-t-0 first-of-type:rounded-t last:rounded-b',
+      : 'first-of-type:border-t-0 first-of-type:rounded-t last:rounded-b',
     $$props.class
   )}
   on:click
