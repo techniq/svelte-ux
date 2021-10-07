@@ -3,7 +3,6 @@
 
   import Badge from '$lib/components/Badge.svelte';
   import Button from '$lib/components/Button.svelte';
-  import Grid from '$lib/components/Grid.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
@@ -96,7 +95,7 @@
 
 <SectionDivider>Placement</SectionDivider>
 
-<Grid columns={5} gap={16}>
+<div class="grid grid-cols-5 gap-4">
   <div>
     <div class="text-sm text-black/50">Button w/ default</div>
     <Preview>
@@ -276,4 +275,4 @@
       </Badge>
     </Preview>
   </div>
-</Grid>
+</div>
