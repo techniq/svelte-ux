@@ -1,6 +1,5 @@
 <script lang="ts">
   import Button from '$lib/components/Button.svelte';
-  import Grid from '$lib/components/Grid.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Popover from '$lib/components/Popover.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
@@ -91,8 +90,8 @@
 
 <Preview>
   <div class="mx-20">
-    <Grid columns={5}>
-      <div class="text-right" style="grid-column: 2">
+    <div class="grid grid-cols-5">
+      <div class="text-right col-start-2">
         <div class="inline-block">
           <Popover bind:open={placementOpen.topStart} placement="top-start">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -102,7 +101,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-center" style="grid-column: 3">
+      <div class="text-center col-start-3">
         <div class="inline-block">
           <Popover bind:open={placementOpen.top} placement="top">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -110,7 +109,7 @@
           <Button on:click={() => (placementOpen.top = true)}>Top</Button>
         </div>
       </div>
-      <div class="text-left" style="grid-column: 4">
+      <div class="text-left col-start-4">
         <div class="inline-block">
           <Popover bind:open={placementOpen.topEnd} placement="top-end">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -118,7 +117,7 @@
           <Button on:click={() => (placementOpen.topEnd = true)}>Top End</Button>
         </div>
       </div>
-      <div class="text-right" style="grid-column: 1">
+      <div class="text-right col-start-1">
         <div class="inline-block">
           <Popover bind:open={placementOpen.leftStart} placement="left-start">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -128,7 +127,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-left" style="grid-column: 5">
+      <div class="text-left col-start-5">
         <div class="inline-block">
           <Popover bind:open={placementOpen.rightStart} placement="right-start">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -138,7 +137,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-right" style="grid-column: 1">
+      <div class="text-right col-start-1">
         <div class="inline-block">
           <Popover bind:open={placementOpen.left} placement="left">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -146,7 +145,7 @@
           <Button on:click={() => (placementOpen.left = true)}>Left</Button>
         </div>
       </div>
-      <div class="text-left" style="grid-column: 5">
+      <div class="text-left col-start-5">
         <div class="inline-block">
           <Popover bind:open={placementOpen.right} placement="right">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -154,7 +153,7 @@
           <Button on:click={() => (placementOpen.right = true)}>Right</Button>
         </div>
       </div>
-      <div class="text-right" style="grid-column: 1">
+      <div class="text-right col-start-1">
         <div class="inline-block">
           <Popover bind:open={placementOpen.leftEnd} placement="left-end">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -164,7 +163,7 @@
           >
         </div>
       </div>
-      <div class="text-left" style="grid-column: 5">
+      <div class="text-left col-start-5">
         <div class="inline-block">
           <Popover bind:open={placementOpen.rightEnd} placement="right-end">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -174,7 +173,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-right" style="grid-column: 2">
+      <div class="text-right col-start-2">
         <div class="inline-block">
           <Popover
             bind:open={placementOpen.bottomStart}
@@ -187,7 +186,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-center" style="grid-column: 3">
+      <div class="text-center col-start-3">
         <div class="inline-block">
           <Popover bind:open={placementOpen.bottom} placement="bottom">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -195,7 +194,7 @@
           <Button on:click={() => (placementOpen.bottom = true)}>Bottom</Button>
         </div>
       </div>
-      <div class="text-left" style="grid-column: 4">
+      <div class="text-left col-start-4">
         <div class="inline-block">
           <Popover bind:open={placementOpen.bottomEnd} placement="bottom-end">
             <div class="px-4 py-8 bg-white border shadow">Contents</div>
@@ -205,7 +204,7 @@
           </Button>
         </div>
       </div>
-    </Grid>
+    </div>
   </div>
 </Preview>
 
@@ -213,8 +212,8 @@
 
 <Preview>
   <div class="mx-20">
-    <Grid columns={5}>
-      <div class="text-right" style="grid-column: 2">
+    <div class="grid grid-cols-5">
+      <div class="text-right col-start-2">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.topStart}
@@ -228,7 +227,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-center" style="grid-column: 3">
+      <div class="text-center col-start-3">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.top}
@@ -240,7 +239,7 @@
           <Button on:click={() => (originOpen.top = true)}>Top</Button>
         </div>
       </div>
-      <div class="text-left" style="grid-column: 4">
+      <div class="text-left col-start-4">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.topEnd}
@@ -252,7 +251,7 @@
           <Button on:click={() => (originOpen.topEnd = true)}>Top End</Button>
         </div>
       </div>
-      <div class="text-right" style="grid-column: 1">
+      <div class="text-right col-start-1">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.leftStart}
@@ -266,7 +265,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-left" style="grid-column: 5">
+      <div class="text-left col-start-5">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.rightStart}
@@ -280,7 +279,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-right" style="grid-column: 1">
+      <div class="text-right col-start-1">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.left}
@@ -292,7 +291,7 @@
           <Button on:click={() => (originOpen.left = true)}>Left</Button>
         </div>
       </div>
-      <div class="text-left" style="grid-column: 5">
+      <div class="text-left col-start-5">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.right}
@@ -304,7 +303,7 @@
           <Button on:click={() => (originOpen.right = true)}>Right</Button>
         </div>
       </div>
-      <div class="text-right" style="grid-column: 1">
+      <div class="text-right col-start-1">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.leftEnd}
@@ -318,7 +317,7 @@
           >
         </div>
       </div>
-      <div class="text-left" style="grid-column: 5">
+      <div class="text-left col-start-5">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.rightEnd}
@@ -332,7 +331,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-right" style="grid-column: 2">
+      <div class="text-right col-start-2">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.bottomStart}
@@ -346,7 +345,7 @@
           </Button>
         </div>
       </div>
-      <div class="text-center" style="grid-column: 3">
+      <div class="text-center col-start-3">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.bottom}
@@ -358,7 +357,7 @@
           <Button on:click={() => (originOpen.bottom = true)}>Bottom</Button>
         </div>
       </div>
-      <div class="text-left" style="grid-column: 4">
+      <div class="text-left col-start-4">
         <div class="inline-block">
           <Popover
             bind:open={originOpen.bottomEnd}
@@ -372,7 +371,7 @@
           </Button>
         </div>
       </div>
-    </Grid>
+    </div>
   </div>
 </Preview>
 
