@@ -72,6 +72,12 @@
       classes.root
     )}
     on:click={onClick}
+    on:keydown={(e) => {
+      if (e.key === 'Escape' && !persistent) {
+        e.stopPropagation();
+        open = false;
+      }
+    }}
     use:portalAction={{ enabled: portal }}
   >
     <div
@@ -109,11 +115,3 @@
     </div>
   </div>
 {/if}
-
-<svelte:window
-  on:keydown={(e) => {
-    if (e.key === 'Escape' && !persistent) {
-      open = false;
-    }
-  }}
-/>

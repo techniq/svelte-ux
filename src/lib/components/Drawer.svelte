@@ -55,6 +55,12 @@
       x: left ? '-100%' : right ? '100%' : 0,
       y: top ? '-100%' : bottom ? '100%' : 0,
     }}
+    on:keydown={(e) => {
+      if (e.key === 'Escape' && !persistent) {
+        e.stopPropagation();
+        open = false;
+      }
+    }}
     use:portalAction={{ enabled: portal }}
   >
     {#if loading}
@@ -66,11 +72,3 @@
     <slot {open} />
   </div>
 {/if}
-
-<svelte:window
-  on:keydown={(e) => {
-    if (e.key === 'Escape' && !persistent) {
-      open = false;
-    }
-  }}
-/>
