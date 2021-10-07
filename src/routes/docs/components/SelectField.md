@@ -46,6 +46,12 @@
   <SelectField {items} loading />
 </Preview>
 
+## Disabled
+
+<Preview>
+  <SelectField {items} disabled />
+</Preview>
+
 ## Item Slot
 
 <Preview>

@@ -212,8 +212,10 @@
   function show() {
     logger.debug('show');
 
-    open = true;
-    inputEl?.focus();
+    if (!disabled) {
+      open = true;
+      inputEl?.focus();
+    }
   }
 
   function hide() {
