@@ -17,7 +17,6 @@
   } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
-  import Grid from '$lib/components/Grid.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
@@ -55,46 +54,46 @@
 ## Label
 
 <Preview>
-  <Grid columns={2} gap={8}>
+  <div class="grid grid-flow-col gap-2">
     <TextField label="First Name" />
     <TextField label="Last Name" />
-  </Grid>
+  </div>
 </Preview>
 
 ## Placeholder only
 
 <Preview>
-  <Grid columns={2} gap={8}>
+  <div class="grid grid-flow-col gap-2">
     <TextField placeholder="First Name" />
     <TextField placeholder="Last Name" />
-  </Grid>
+  </div>
 </Preview>
 
 ## Label with placeholder
 
 <Preview>
-  <Grid columns={2} gap={8}>
+  <div class="grid grid-flow-col gap-2">
     <TextField
       label="First Name"
       placeholder="Please enter your first name"
     />
     <TextField label="Last Name" placeholder="Please enter your last name" />
-  </Grid>
+  </div>
 </Preview>
 
 ## Always shrink label
 
 <Preview>
-  <Grid columns={2} gap={8}>
+  <div class="grid grid-flow-col gap-2">
     <TextField label="First Name" shrinkLabel />
     <TextField label="Last Name" shrinkLabel />
-  </Grid>
+  </div>
 </Preview>
 
 ## Always shrink label with placeholder
 
 <Preview>
-  <Grid columns={2} gap={8}>
+  <div class="grid grid-flow-col gap-2">
     <TextField
       label="First Name"
       shrinkLabel
@@ -105,13 +104,13 @@
       shrinkLabel
       placeholder="Please enter your last name"
     />
-  </Grid>
+  </div>
 </Preview>
 
 ## Dense
 
 <Preview>
-  <Grid columns={2} gap={8}>
+  <div class="grid grid-flow-col gap-2">
     <TextField
       label="First Name"
       placeholder="Please enter your first name"
@@ -122,7 +121,7 @@
       placeholder="Please enter your last name"
       dense
     />
-  </Grid>
+  </div>
 </Preview>
 
 ## Error
@@ -154,7 +153,7 @@
 ### Sets input type and add prefix/suffix when appropriate
 
 <Preview>
-  <Grid columns={2} gap={8}>
+  <div class="grid grid-flow-col gap-2">
     <TextField label="default" />
     <div />
     <TextField label="text" type="text" />
@@ -163,12 +162,12 @@
     <TextField label="decimal" type="decimal" />
     <TextField label="currency" type="currency" />
     <TextField label="percent" type="percent" />
-  </Grid>
+  </div>
 </Preview>
 
 <SectionDivider>Adornments</SectionDivider>
 
-<Grid columns={2} gap={8} items="end">
+<div class="grid grid-flow-col gap-2">
   <div>
         <div class="text-lg font-semibold mt-8 ml-2">Prepend</div>
     <Preview>
@@ -201,7 +200,7 @@
       </TextField>
     </Preview>
   </div>
-</Grid>
+</div>
 
 ## Append
 
@@ -223,7 +222,7 @@
   </TextField>
 </Preview>
 
-<Grid columns={2} gap={8} items="end">
+<div class="grid grid-flow-col gap-2">
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">Suffix</div>
     <Preview>
@@ -247,7 +246,7 @@
       </TextField>
     </Preview>
   </div>
-</Grid>
+</div>
 
 ## Icon with convienent prepend
 
