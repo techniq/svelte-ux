@@ -132,8 +132,21 @@ export function omit<T extends object = {}>(obj: T, keys: string[]): Partial<T> 
   if (keys.length === 0) {
     return obj;
   } else {
-    let result = { ...obj };
-    keys.forEach((key) => delete obj[key]);
-    return result;
+    return Object.fromEntries(
+      Object.entries(obj).filter(([key, value]) => !keys.includes(key))
+    ) as Partial<T>;
+  }
+}
+
+/**
+ * Pick properties from an object.  See also lodash `_.pick()`
+ */
+export function pick<T extends object = {}>(obj: T, keys: string[]): Partial<T> {
+  if (keys.length === 0) {
+    return obj;
+  } else {
+    return Object.fromEntries(
+      keys.filter((key) => key in obj).map((key) => [key, obj[key]])
+    ) as Partial<T>;
   }
 }
