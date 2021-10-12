@@ -16,7 +16,7 @@ type FormStoreOptions<T> = {
 export default function formStore<T = any>(initialState: T, options?: FormStoreOptions<T>) {
   const stateStore = writable(initialState);
   const draftStore = writable(createDraft(initialState));
-  const errorsStore = writable({});
+  const errorsStore = writable({} as { [key: string]: string }); // TODO: Improve type (`{ [key in keyof T]: string }`?)
 
   const undoList = [];
 
