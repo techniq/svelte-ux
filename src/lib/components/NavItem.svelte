@@ -46,7 +46,7 @@
   {/if}
 
   {#if icon}
-    <Icon path={icon} class="mr-3" />
+    <Icon path={icon} class="mr-3 flex-shrink-0" />
   {/if}
 
   {text}
