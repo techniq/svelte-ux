@@ -6,8 +6,8 @@
   import { scrollIntoView } from '../actions/scroll';
   import { getScrollParent } from '../utils/dom';
 
-  export let path: string;
-  export let text: string;
+  export let path: string = null;
+  export let text: string = '';
   export let icon: string | null = null;
 
   $: isPathActive = path ? $isActive(path) : false;
