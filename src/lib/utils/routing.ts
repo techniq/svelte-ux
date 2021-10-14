@@ -64,7 +64,9 @@ export function url(path: string, page?: any) {
 
   // console.log({ $page, path });
 
-  if (path.match(/^\.\.?\//)) {
+  if (path == null) {
+    return path;
+  } else if (path.match(/^\.\.?\//)) {
     // Relative path (starts wtih `./` or `../`)
     // console.log('relative path');
     let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/);
@@ -76,7 +78,7 @@ export function url(path: string, page?: any) {
     traverse.forEach(() => (dir = dir.replace(/\/[^\/]+\/?$/, '')));
     path = `${dir}/${relativePath}`.replace(/\/$/, '');
     path = path || '/'; // empty means root
-    console.groupEnd();
+    // console.groupEnd();
   } else if (path.match(/^\//)) {
     // Absolute path (starts with `/`)
     // console.log('absoute path');

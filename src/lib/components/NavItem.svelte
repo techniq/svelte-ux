@@ -10,7 +10,7 @@
   export let text: string;
   export let icon: string | null = null;
 
-  $: isPathActive = $isActive(path);
+  $: isPathActive = path ? $isActive(path) : false;
 </script>
 
 <a
