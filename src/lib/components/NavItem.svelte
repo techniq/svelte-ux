@@ -35,6 +35,7 @@
     },
     delay: 500,
   }}
+  on:click
 >
   {#if isPathActive}
     <div class="absolute left-0 top-0 w-1 h-full bg-sky-500" />
