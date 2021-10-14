@@ -37,7 +37,7 @@
   }}
 >
   {#if isPathActive}
-    <div class="absolute left-0 top-0 w-1 h-full bg-light-blue-300" />
+    <div class="absolute left-0 top-0 w-1 h-full bg-sky-500" />
   {/if}
 
   {#if $$slots.avatar}
@@ -49,4 +49,6 @@
   {/if}
 
   {text}
+
+  <slot />
 </a>
