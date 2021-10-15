@@ -40,23 +40,25 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
 
   const store = writable<Value>(value);
 
-  store.subscribe((val) => {
-    if (options?.expiry) {
-      // Remove all expired expiry
-      const prunedPreviousExpiry = previousExpiry
-        ? expireObject(previousExpiry, previousExpiry)
-        : previousExpiry;
+  if (browser) {
+    store.subscribe((val) => {
+      if (options?.expiry) {
+        // Remove all expired expiry
+        const prunedPreviousExpiry = previousExpiry
+          ? expireObject(previousExpiry, previousExpiry)
+          : previousExpiry;
 
-      const expiry = isFunction(options?.expiry)
-        ? options?.expiry(prunedPreviousExpiry) // Update expiry on write
-        : options?.expiry;
-      previousExpiry = expiry;
+        const expiry = isFunction(options?.expiry)
+          ? options?.expiry(prunedPreviousExpiry) // Update expiry on write
+          : options?.expiry;
+        previousExpiry = expiry;
 
-      localStorage.setItem(key, encode({ value: val, expiry }));
-    } else {
-      localStorage.setItem(key, encode(val));
-    }
-  });
+        localStorage.setItem(key, encode({ value: val, expiry }));
+      } else {
+        localStorage.setItem(key, encode(val));
+      }
+    });
+  }
 
   return store;
 }
