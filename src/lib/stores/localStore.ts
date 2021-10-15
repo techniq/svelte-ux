@@ -24,7 +24,7 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
   if (options?.override != null) {
     value = options?.override;
   } else {
-    const storedValue = browser ? localStorage.getItem(key) ?? null;
+    const storedValue = browser ? localStorage.getItem(key) : null;
     if (storedValue !== null) {
       const decodedValue = decode(storedValue);
       if (options?.expiry) {
