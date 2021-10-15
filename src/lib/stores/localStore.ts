@@ -23,7 +23,7 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
   if (options?.override != null) {
     value = options?.override;
   } else {
-    const storedValue = localStorage.getItem(key);
+    const storedValue = window?.localStorage.getItem(key) ?? null;
     if (storedValue !== null) {
       const decodedValue = decode(storedValue);
       if (options?.expiry) {
