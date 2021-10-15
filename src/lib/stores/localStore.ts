@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { isFunction } from 'lodash-es';
+import { browser } from '$app/env';
 
 import { decode, encode } from '../utils/json';
 import { expireObject } from '../utils/object';
@@ -23,7 +24,7 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
   if (options?.override != null) {
     value = options?.override;
   } else {
-    const storedValue = window?.localStorage.getItem(key) ?? null;
+    const storedValue = browser ? localStorage.getItem(key) ?? null;
     if (storedValue !== null) {
       const decodedValue = decode(storedValue);
       if (options?.expiry) {
