@@ -3,11 +3,11 @@
 	import { mdiAccount, mdiFileDocumentEditOutline, mdiChevronRight } from '@mdi/js';
 
 	import Button from '$lib/components/Button.svelte';
+	import Checkbox from '$lib/components/Checkbox.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import ListItem from '$lib/components/ListItem.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 	import Radio from '$lib/components/Radio.svelte';
-	import Stack from '$lib/components/Stack.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 
 	let selectedId = 1;
@@ -112,7 +112,7 @@ A list item that provides a standard layout and works best with multiple instanc
 ### example 2
 
 <Preview>
-	<Stack vertical gap={16}>
+	<div class="grid gap-4">
 		{#each choices as choice}
 			<div class="elevation-1 rounded">
 				<ListItem
@@ -129,5 +129,33 @@ A list item that provides a standard layout and works best with multiple instanc
 				/>
 			</div>
 		{/each}
-	</Stack>
+	</div>
+</Preview>
+
+### example 3
+
+<Preview>
+	<div class="grid gap-4 bg-gray-100 p-4">
+		{#each choices as choice}
+			<div>
+				<ListItem
+					title={choice.name}
+					subheading={choice.description}
+					on:click={() => (selectedId = choice.id)}
+					class={clsx(
+						'px-8 py-4',
+						'cursor-pointer transition-shadow duration-100 border',
+						'hover:bg-white',
+						selectedId == choice.id ? 'bg-white shadow-md' : ''
+					)}
+					noBackground
+					noShadow
+				>
+					<div slot="actions">
+						<Checkbox circle dense checked={selectedId == choice.id} />
+					</div>
+				</ListItem>
+			</div>
+		{/each}
+	</div>
 </Preview>

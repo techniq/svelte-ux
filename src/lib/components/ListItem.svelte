@@ -19,9 +19,14 @@
   export let nested = false;
 
   /**
-   * Disable shadow (useful when using `ring`)
+   * Remove shadow (useful when using `ring`)
    */
   export let noShadow = false;
+
+  /**
+   * Remove background
+   */
+  export let noBackground = false;
 
   export let classes: {
     avatar?: string;
@@ -33,7 +38,8 @@
 
 <li
   class={clsx(
-    'flex gap-4 items-center bg-white border-t py-2 px-4',
+    'flex gap-4 items-center border-t py-2 px-4',
+    noBackground !== true && 'bg-white',
     noShadow !== true && 'elevation-1',
     nested
       ? 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b'
