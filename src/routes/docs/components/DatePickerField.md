@@ -54,3 +54,9 @@
 <Preview>
   <DatePickerField label="Start Date" />
 </Preview>
+
+## Clearable
+
+<Preview>
+  <DatePickerField label="Start Date" clearable />
+</Preview>

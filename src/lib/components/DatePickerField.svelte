@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { mdiCalendar, mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+  import { mdiCalendar, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
   import Field from './Field.svelte';
@@ -22,7 +22,7 @@
   export let error = '';
   export let hint = '';
   export let disabled = false;
-  // export let clearable = false;
+  export let clearable = false;
   export let base = false;
   export let rounded = false;
   export let filled = false;
@@ -130,6 +130,17 @@
       </button>
 
       <div slot="append">
+        {#if clearable && value}
+          <Button
+            icon={mdiClose}
+            class="text-black/50 p-1"
+            on:click={() => {
+              value = null;
+              dispatch('clear');
+            }}
+          />
+        {/if}
+
         {#if stepper}
           <Button
             icon={mdiChevronRight}
