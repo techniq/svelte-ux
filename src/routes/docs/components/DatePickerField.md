@@ -48,3 +48,9 @@
 <Preview>
   <DatePickerField iconOnly />
 </Preview>
+
+## Label only
+
+<Preview>
+  <DatePickerField label="Start Date" />
+</Preview>

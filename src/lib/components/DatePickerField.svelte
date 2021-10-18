@@ -121,7 +121,7 @@
       </span>
 
       <button
-        class="text-sm whitespace-nowrap w-full focus:outline-none"
+        class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-none"
         style="text-align: inherit"
         on:click={() => (open = true)}
         {id}
