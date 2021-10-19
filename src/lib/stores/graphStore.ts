@@ -6,6 +6,7 @@ import { merge } from 'lodash-es';
 
 import fetchStore, { initFetchClient } from './fetchStore';
 import type { FetchConfig } from './fetchStore';
+import { decode } from '$lib/utils/json';
 
 type ClientConfig = {
   url: string;
@@ -63,7 +64,10 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
       globalConfig.config,
       {
         as: async (res) => {
-          const body = await res.json();
+          // Use custom JSON reviver to convert Date strings to Date objects
+          // const body = await res.json();
+          const text = await res.text();
+          const body = decode(text);
           if (body.errors) {
             throw body.errors;
           } else {
