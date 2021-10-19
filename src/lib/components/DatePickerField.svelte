@@ -137,6 +137,7 @@
             on:click={() => {
               value = null;
               dispatch('clear');
+              dispatch('change', value);
             }}
           />
         {/if}
