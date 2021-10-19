@@ -1,4 +1,6 @@
-const DATETIME_FORMAT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/; // yyyy-mm-ddThh:mm:ssZ
+const UTC_DATETIME_FORMAT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/; // yyyy-mm-ddThh:mm:ssZ
+const OFFSET_DATETIME_FORMAT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}-\d{2}:\d{2}$/; // yyyy-mm-ddThh:mm:ss-ZZ:ZZ
+const UTC_OR_OFFSET_DATETIME_FORMAT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}(Z|-\d{2}:\d{2})$/;
 
 export function encode(value: any): string {
   // if (isPlainObject(value) || Array.isArray(value)) {
@@ -43,7 +45,7 @@ export function decode(value: string): any {
  * Convert date strings to Date instances
  */
 export function reviver(key: string, value: string) {
-  if (typeof value === 'string' && DATETIME_FORMAT.test(value)) {
+  if (typeof value === 'string' && UTC_OR_OFFSET_DATETIME_FORMAT.test(value)) {
     return new Date(value);
   }
 
