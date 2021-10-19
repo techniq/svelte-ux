@@ -1,6 +1,7 @@
-const UTC_DATETIME_FORMAT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/; // yyyy-mm-ddThh:mm:ssZ
-const OFFSET_DATETIME_FORMAT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}-\d{2}:\d{2}$/; // yyyy-mm-ddThh:mm:ss-ZZ:ZZ
-const UTC_OR_OFFSET_DATETIME_FORMAT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}(Z|-\d{2}:\d{2})$/;
+import { parseISO } from 'date-fns';
+
+// UTC (yyyy-mm-ddThh:mm:ssZ) or Offset (yyyy-mm-ddThh:mm:ss-ZZ:ZZ) or Date-only (yyyy-mm-dd)
+const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}.\d{3}(Z|-\d{2}:\d{2}))?$/;
 
 export function encode(value: any): string {
   // if (isPlainObject(value) || Array.isArray(value)) {
@@ -45,8 +46,8 @@ export function decode(value: string): any {
  * Convert date strings to Date instances
  */
 export function reviver(key: string, value: string) {
-  if (typeof value === 'string' && UTC_OR_OFFSET_DATETIME_FORMAT.test(value)) {
-    return new Date(value);
+  if (typeof value === 'string' && DATE_FORMAT.test(value)) {
+    return parseISO(value);
   }
 
   return value;
