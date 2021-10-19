@@ -25,7 +25,7 @@
 <div class="layout grid h-screen" use:cssVars={styleVars}>
   <!-- Render backdrop first to fix stacking order with <aside> nav -->
   {#if $showDrawer && temporaryDrawer}
-    <Backdrop on:click={() => ($showDrawer = false)} />
+    <Backdrop on:click={() => ($showDrawer = false)} class="z-20" />
   {/if}
 
   <aside

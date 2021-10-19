@@ -35,6 +35,7 @@
         open = false;
       }
     }}
+    class="z-50"
     {portal}
   />
 
