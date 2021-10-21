@@ -12,7 +12,7 @@
 ## Playground
 
 <Preview>
-  <DateField label="Birth date" {value} on:change={e => value = e.detail.value } clearable />
+  <DateField label="Birth date" {value} on:change={e => value = e.detail.value } picker clearable />
   value: {value}
 </Preview>
 
@@ -24,6 +24,12 @@
   <Button on:click={() => value = addDays(new Date(), -1)}>Yesterday</Button>
   <Button on:click={() => value = addDays(new Date(), -7)}>Last Week</Button>
   <Button on:click={() => value = addDays(new Date(), 7)}>Next Week</Button>
+</Preview>
+
+## Picker
+
+<Preview>
+  <DateField {value} on:change={e => value = e.detail.value } picker />
 </Preview>
 
 ## Clearable

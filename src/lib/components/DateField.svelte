@@ -11,6 +11,7 @@
   export let format = 'MM/dd/yyyy';
   export let mask = format.toLowerCase();
   export let replace = 'dmyh';
+  export let picker = false;
 
   // Field props
   export let label = '';
@@ -66,14 +67,16 @@
     on:change={onInputChange}
   />
   <span slot="append">
-    <DatePickerField
-      iconOnly
-      {value}
-      on:change={(e) => {
-        value = e.detail;
-        dispatch('change', { value });
-      }}
-      class="p-1 text-black/50"
-    />
+    {#if picker}
+      <DatePickerField
+        iconOnly
+        {value}
+        on:change={(e) => {
+          value = e.detail;
+          dispatch('change', { value });
+        }}
+        class="p-1 text-black/50"
+      />
+    {/if}
   </span>
 </Field>
