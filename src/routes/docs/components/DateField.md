@@ -35,6 +35,7 @@
 
 <Preview>
   <DateField {value} on:change={e => value = e.detail.value } clearable />
+  {value}
 </Preview>
 
 ## Label

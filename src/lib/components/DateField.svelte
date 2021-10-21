@@ -40,12 +40,16 @@
   const dispatch = createEventDispatcher();
 
   function onInputChange(e) {
-    console.log('onInputChange', e.detail);
+    // console.log('onInputChange', e.detail);
 
-    const parsedValue = parseDate(e.detail.value, format, new Date());
+    const inputValue = e.detail.value;
+
+    const parsedValue = parseDate(inputValue, format, new Date());
     if (isNaN(parsedValue)) {
-      value = null;
-      dispatch('change', { value });
+      if (inputValue === mask) {
+        value = null;
+        dispatch('change', { value });
+      }
     } else {
       value = parsedValue;
       dispatch('change', { value });
