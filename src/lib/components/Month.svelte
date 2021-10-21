@@ -72,44 +72,42 @@
   };
 </script>
 
-<Stack vertical>
-  <div class="flex m-2">
-    <Button
-      icon={mdiChevronLeft}
-      class="p-2"
-      on:click={() => (startOfMonth = subMonths(startOfMonth, 1))}
-    />
-    <div class="flex flex-1 items-center justify-center">
-      <span>{format(startOfMonth, 'MMMM yyyy')}</span>
+<div class="flex m-2">
+  <Button
+    icon={mdiChevronLeft}
+    class="p-2"
+    on:click={() => (startOfMonth = subMonths(startOfMonth, 1))}
+  />
+  <div class="flex flex-1 items-center justify-center">
+    <span>{format(startOfMonth, 'MMMM yyyy')}</span>
+  </div>
+  <Button
+    icon={mdiChevronRight}
+    class="p-2"
+    on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
+  />
+</div>
+
+<div class="flex">
+  {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
+    <div class="flex-1 text-center">
+      <span class="text-xs text-black/50"> {format(day, 'eee')[0]} </span>
     </div>
-    <Button
-      icon={mdiChevronRight}
-      class="p-2"
-      on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
-    />
-  </div>
+  {/each}
+</div>
 
-  <div class="flex">
-    {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
-      <div class="flex-1 text-center">
-        <span class="text-xs text-black/50"> {format(day, 'eee')[0]} </span>
-      </div>
+<Grid columns={7} rowGap={16}>
+  {#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
+    {#each week ?? [] as day (day.valueOf())}
+      <DateButton
+        date={day}
+        periodType={PeriodType.Day}
+        bind:selected
+        hidden={isDayHidden(day)}
+        fade={isDayFaded(day)}
+        disabled={isDayDisabled(day)}
+        on:dateChange
+      />
     {/each}
-  </div>
-
-  <Grid columns={7} rowGap={16}>
-    {#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
-      {#each week ?? [] as day (day.valueOf())}
-        <DateButton
-          date={day}
-          periodType={PeriodType.Day}
-          bind:selected
-          hidden={isDayHidden(day)}
-          fade={isDayFaded(day)}
-          disabled={isDayDisabled(day)}
-          on:dateChange
-        />
-      {/each}
-    {/each}
-  </Grid>
-</Stack>
+  {/each}
+</Grid>
