@@ -7,6 +7,7 @@
       - [ ] Clear value on blur if incomplete
       - [ ] on:change only if value changes (and only parsed value.
         - Maybe `dispatch('change', { value })` to allow other values (raw/string) to be returned as well
+      - [ ] on:blur null/clear if invalid...?
   */
 
   import { createEventDispatcher } from 'svelte';
@@ -59,7 +60,7 @@
 <Field {label} {icon} {error} {hint} {disabled} {base} {rounded} {filled} {dense} let:id>
   <Input value={formatted} {mask} {replace} {id} on:change={onInputChange} />
 
-  <div slot="append">
+  <span slot="append">
     {#if clearable && value}
       <Button
         icon={mdiClose}
@@ -67,11 +68,18 @@
         on:click={() => {
           value = null;
           dispatch('clear');
-          // dispatch('change', { value });
+          dispatch('change', { value });
         }}
       />
     {/if}
 
-    <DatePickerField iconOnly on:change={(e) => (value = e.detail)} />
-  </div>
+    <DatePickerField
+      iconOnly
+      on:change={(e) => {
+        value = e.detail;
+        dispatch('change', { value });
+      }}
+      class="p-1"
+    />
+  </span>
 </Field>

@@ -52,7 +52,7 @@
 </script>
 
 {#if iconOnly}
-  <Button icon={mdiCalendar} on:click={() => (open = true)} />
+  <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
     label={label ?? dateDisplay(value, { format: secondaryFormat })}
