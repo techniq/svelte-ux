@@ -1,13 +1,13 @@
 <script lang="ts">
   /*
     TODO:
-      - [ ] Show remaining mask as separate element under input
+      - [ ] Show remaining mask as separate element under input (instead of input.value)
         - Set opacity to match TextField placeholder (30%)
         - Replace completed slots as spaces (for spacing)
   */
   import { createEventDispatcher } from 'svelte';
 
-  export let value;
+  export let value = '';
   export let mask: string;
   export let replace = '_';
   export let accept = '\\d';
@@ -15,7 +15,6 @@
 
   const dispatch = createEventDispatcher();
 
-  let el: HTMLInputElement;
   let back = false;
 
   const replaceSet = new Set(replace);
@@ -28,29 +27,34 @@
     return Array.from(mask, (c) => (input[0] === c || replaceSet.has(c) ? input.shift() || c : c));
   }
 
-  function format() {
+  function onInput(e) {
+    const el = e.target;
+
     const [i, j] = [el.selectionStart, el.selectionEnd].map((i) => {
       i = clean(el.value.slice(0, i)).findIndex((c) => replaceSet.has(c));
       return i < 0 ? prev[prev.length - 1] : back ? prev[i - 1] || first : i;
     });
-    el.value = clean(el.value).join('');
+    value = clean(el.value).join('');
+    el.value = value;
     el.setSelectionRange(i, j);
     back = false;
-  }
 
-  $: if (el) {
-    dispatch('change', { value: el.value });
+    dispatch('change', { value });
   }
 </script>
 
 <input
-  bind:value
-  bind:this={el}
+  {value}
   placeholder={mask}
   on:keydown={(e) => (back = e.key === 'Backspace')}
-  on:input={format}
-  on:focus={format}
-  on:blur={() => el.value === mask && (el.value = '')}
+  on:input={onInput}
+  on:blur={() => {
+    // TODO: Consider clearing value if any mask is still shown?
+    // TODO: Dispatch blur as well to allow DateField/etc to do the same if no value is set?
+    if (value === mask) {
+      value = '';
+    }
+  }}
   class="font-mono text-sm w-full outline-none bg-transparent selection:bg-gray-500/30"
   {id}
 />

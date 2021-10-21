@@ -9,16 +9,11 @@
   let value;
 </script>
 
-## Default
+## Playground
 
 <Preview>
-  <DateField />
-</Preview>
-
-## Value
-
-<Preview>
-  <DateField value={parseISO('1982-03-30')} />
+  <DateField label="Birth date" {value} on:change={e => value = e.detail.value } clearable />
+  value: {value}
 </Preview>
 
 ## Controlled
@@ -35,7 +30,6 @@
 
 <Preview>
   <DateField {value} on:change={e => value = e.detail.value } clearable />
-  {value}
 </Preview>
 
 ## Label
