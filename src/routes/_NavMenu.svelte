@@ -32,6 +32,7 @@
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Inputs</div>
 <NavItem text="Checkbox" path="/docs/components/Checkbox" class="pl-6 py-2" />
 <NavItem text="Field" path="/docs/components/Field" class="pl-6 py-2" />
+<NavItem text="Input" path="/docs/components/Input" class="pl-6 py-2" />
 <NavItem text="Radio" path="/docs/components/Radio" class="pl-6 py-2" />
 <NavItem text="Select Field" path="/docs/components/SelectField" class="pl-6 py-2" />
 <NavItem text="Switch" path="/docs/components/Switch" class="pl-6 py-2" />
@@ -60,6 +61,7 @@
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Date</div>
 <NavItem text="DateDisplay" path="/docs/components/DateDisplay" class="pl-6 py-2" />
+<NavItem text="DateField" path="/docs/components/DateField" class="pl-6 py-2" />
 <NavItem text="DatePickerField" path="/docs/components/DatePickerField" class="pl-6 py-2" />
 <NavItem text="DateRange" path="/docs/components/DateRange" class="pl-6 py-2" />
 <NavItem text="DateRangeField" path="/docs/components/DateRangeField" class="pl-6 py-2" />
