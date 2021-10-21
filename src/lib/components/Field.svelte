@@ -34,8 +34,9 @@
   // export let inputEl: HTMLInputElement | null = null;
   export let center = false;
 
-  $: hasValue =
-    (Array.isArray(value) && value.length > 0) || (typeof value === 'string' && value != '');
+  $: hasValue = Array.isArray(value)
+    ? value.length > 0
+    : !!value /* anything truthy such as object, non-empty string, etc */;
   $: hasLabel = label !== '';
 
   $: hasPrepend = $$slots.prepend || icon != null;
