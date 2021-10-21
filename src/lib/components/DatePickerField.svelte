@@ -51,111 +51,109 @@
   $: currentValue = value;
 </script>
 
-<div>
-  <Dialog bind:open>
-    <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24">
-      <div class="text-sm text-white/50">
-        {dateDisplay(currentValue, { format: secondaryFormat })}
-      </div>
-      <div class="text-3xl text-white">
-        {dateDisplay(currentValue, { format: primaryFormat })}
-      </div>
-    </div>
-
-    <div class="p-2 w-80">
-      <DateSelect
-        bind:selected={currentValue}
-        {periodType}
-        on:dateChange={(e) => (currentValue = e.detail)}
-      />
-    </div>
-
-    <div slot="actions">
-      <Button
-        on:click={() => {
-          open = false;
-          value = currentValue;
-          dispatch('change', value);
-        }}
-        class="text-blue-500">OK</Button
-      >
-      <Button
-        on:click={() => {
-          open = false;
-          currentValue = value;
-        }}>Cancel</Button
-      >
-    </div>
-  </Dialog>
-
-  {#if iconOnly}
-    <Button icon={mdiCalendar} on:click={() => (open = true)} />
-  {:else}
-    <Field
-      label={label ?? dateDisplay(value, { format: secondaryFormat })}
-      icon={icon ?? center ? undefined : mdiCalendar}
-      {error}
-      {hint}
-      {disabled}
-      {base}
-      {rounded}
-      {filled}
-      {dense}
-      {center}
-      let:id
-    >
-      <span slot="prepend">
-        {#if stepper}
-          <Button
-            icon={mdiChevronLeft}
-            class="p-2"
-            on:click={() => {
-              if (value && periodType) {
-                const { add } = getDateFuncsByPeriodType(periodType);
-                value = add(value, -1);
-                dispatch('change', value);
-              }
-            }}
-          />
-        {/if}
-      </span>
-
-      <button
-        class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-none"
-        style="text-align: inherit"
-        on:click={() => (open = true)}
-        {id}
-      >
-        {dateDisplay(value, { format: primaryFormat })}
-      </button>
-
-      <div slot="append">
-        {#if clearable && value}
-          <Button
-            icon={mdiClose}
-            class="text-black/50 p-1"
-            on:click={() => {
-              value = null;
-              dispatch('clear');
+{#if iconOnly}
+  <Button icon={mdiCalendar} on:click={() => (open = true)} />
+{:else}
+  <Field
+    label={label ?? dateDisplay(value, { format: secondaryFormat })}
+    icon={icon ?? center ? undefined : mdiCalendar}
+    {error}
+    {hint}
+    {disabled}
+    {base}
+    {rounded}
+    {filled}
+    {dense}
+    {center}
+    let:id
+  >
+    <span slot="prepend">
+      {#if stepper}
+        <Button
+          icon={mdiChevronLeft}
+          class="p-2"
+          on:click={() => {
+            if (value && periodType) {
+              const { add } = getDateFuncsByPeriodType(periodType);
+              value = add(value, -1);
               dispatch('change', value);
-            }}
-          />
-        {/if}
+            }
+          }}
+        />
+      {/if}
+    </span>
 
-        {#if stepper}
-          <Button
-            icon={mdiChevronRight}
-            class="p-2"
-            on:click={() => {
-              if (value && periodType) {
-                const { add } = getDateFuncsByPeriodType(periodType);
-                value = add(value, 1);
-                dispatch('change', value);
-              }
-            }}
-          />
-        {/if}
-      </div>
-    </Field>
-  {/if}
-</div>
+    <button
+      class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-none"
+      style="text-align: inherit"
+      on:click={() => (open = true)}
+      {id}
+    >
+      {dateDisplay(value, { format: primaryFormat })}
+    </button>
+
+    <div slot="append">
+      {#if clearable && value}
+        <Button
+          icon={mdiClose}
+          class="text-black/50 p-1"
+          on:click={() => {
+            value = null;
+            dispatch('clear');
+            dispatch('change', value);
+          }}
+        />
+      {/if}
+
+      {#if stepper}
+        <Button
+          icon={mdiChevronRight}
+          class="p-2"
+          on:click={() => {
+            if (value && periodType) {
+              const { add } = getDateFuncsByPeriodType(periodType);
+              value = add(value, 1);
+              dispatch('change', value);
+            }
+          }}
+        />
+      {/if}
+    </div>
+  </Field>
+{/if}
+
+<Dialog bind:open>
+  <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24">
+    <div class="text-sm text-white/50">
+      {dateDisplay(currentValue, { format: secondaryFormat })}
+    </div>
+    <div class="text-3xl text-white">
+      {dateDisplay(currentValue, { format: primaryFormat })}
+    </div>
+  </div>
+
+  <div class="p-2 w-80">
+    <DateSelect
+      bind:selected={currentValue}
+      {periodType}
+      on:dateChange={(e) => (currentValue = e.detail)}
+    />
+  </div>
+
+  <div slot="actions">
+    <Button
+      on:click={() => {
+        open = false;
+        value = currentValue;
+        dispatch('change', value);
+      }}
+      class="text-blue-500">OK</Button
+    >
+    <Button
+      on:click={() => {
+        open = false;
+        currentValue = value;
+      }}>Cancel</Button
+    >
+  </div>
+</Dialog>
