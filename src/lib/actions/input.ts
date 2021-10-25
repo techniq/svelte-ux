@@ -73,3 +73,27 @@ export function autoHeight(node: HTMLTextAreaElement) {
     },
   };
 }
+
+/**
+ * Debounce event handler (change, input, etc)
+ */
+export function debounceEvent(
+  node: HTMLInputElement | HTMLTextAreaElement,
+  { type, listener, timeout }: { type: string; listener: (e: Event) => any; timeout?: number }
+) {
+  let lastTimeoutId;
+
+  function onEvent(e) {
+    clearTimeout(lastTimeoutId);
+    lastTimeoutId = setTimeout(() => {
+      listener(e);
+    }, timeout ?? 300);
+  }
+
+  node.addEventListener(type, onEvent);
+  return {
+    destory() {
+      node.removeEventListener(type, onEvent);
+    },
+  };
+}
