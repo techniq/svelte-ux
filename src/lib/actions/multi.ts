@@ -1,6 +1,6 @@
 export type Actions<TNode = HTMLElement | SVGElement> = (
   node: TNode
-) => (void | { destroy: () => void })[];
+) => (void | { destroy: () => void } | { destroy(): void })[];
 
 /**
  * Helper action to handle multiple actions as a single action.  Useful for adding actions for custom components
@@ -15,7 +15,7 @@ export default function multi<TNode = HTMLElement | SVGElement>(
     destroy();
     destroyFuncs = actions?.(node)
       .filter((x) => x)
-      .map((x) => x.destroy);
+      .map((x) => (x ? x.destroy : () => {}));
   }
 
   function destroy() {
