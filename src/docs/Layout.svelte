@@ -1,7 +1,9 @@
 <script context="module">
   // Custom components: https://mdsvex.com/docs#custom-components
-  // import code from './Code.svelte';
-  // export { code };
+  import blockquote from './Blockquote.svelte';
+  import a from './Link.svelte';
+
+  export { a, blockquote };
 </script>
 
 <script>
