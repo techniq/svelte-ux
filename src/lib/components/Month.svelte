@@ -19,8 +19,6 @@
 
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
-  import Grid from './Grid.svelte';
-  import Stack from './Stack.svelte';
 
   export let selected: SelectedDate | undefined = undefined;
 
@@ -96,7 +94,7 @@
   {/each}
 </div>
 
-<Grid columns={7} rowGap={16}>
+<div class="grid grid-cols-7 gap-y-4">
   {#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
     {#each week ?? [] as day (day.valueOf())}
       <DateButton
@@ -110,4 +108,4 @@
       />
     {/each}
   {/each}
-</Grid>
+</div>
