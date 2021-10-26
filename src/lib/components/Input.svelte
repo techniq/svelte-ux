@@ -6,23 +6,26 @@
         - Replace completed slots as spaces (for spacing)
   */
   import { createEventDispatcher, onMount } from 'svelte';
+  import multi from '$lib/actions/multi';
+  import type { Actions } from '$lib/actions/multi';
 
   export let value = '';
-  export let mask: string;
+  export let id = undefined;
+  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> = undefined;
+  export let inputEl: HTMLInputElement | null = null;
+
+  export let mask = '';
   export let replace = '_';
   export let accept = '\\d';
-  export let id = undefined;
 
   const dispatch = createEventDispatcher();
 
   let backspace = false;
 
-  const replaceSet = new Set(replace); // Set of characters to replace
-
-  // For each character in mask, if character marked for replacement
-  const prev = ((j) => Array.from(mask, (c, i) => (replaceSet.has(c) ? (j = i + 1) : j)))(0);
-  const firstPlaceholderPos = [...mask].findIndex((c) => replaceSet.has(c));
-  const acceptRegEx = new RegExp(accept, 'g');
+  $: replaceSet = new Set(replace); // Set of characters to replace
+  $: prev = ((j) => Array.from(mask, (c, i) => (replaceSet.has(c) ? (j = i + 1) : j)))(0);
+  $: firstPlaceholderPos = [...mask].findIndex((c) => replaceSet.has(c));
+  $: acceptRegEx = new RegExp(accept, 'g');
 
   function clean(inputValue) {
     // Get only accepted characters (no mask)
@@ -46,42 +49,67 @@
   function onInput(e: Event & { currentTarget: HTMLInputElement }) {
     const el = e.currentTarget;
 
-    // For selection (including just cursor position),
-    const [i, j] = [el.selectionStart, el.selectionEnd].map((i) => {
-      i = clean(el.value.slice(0, i)).findIndex((c) => replaceSet.has(c));
-      return i < 0 ? prev[prev.length - 1] : backspace ? prev[i - 1] || firstPlaceholderPos : i;
-    });
-    value = clean(el.value).join('');
-    el.value = value;
-    el.setSelectionRange(i, j);
-    backspace = false;
+    if (mask) {
+      // For selection (including just cursor position), ...
+      const [i, j] = [el.selectionStart, el.selectionEnd].map((i) => {
+        i = clean(el.value.slice(0, i)).findIndex((c) => replaceSet.has(c));
+        return i < 0 ? prev[prev.length - 1] : backspace ? prev[i - 1] || firstPlaceholderPos : i;
+      });
+      value = clean(el.value).join('');
+      el.value = value;
+      el.setSelectionRange(i, j);
+      backspace = false;
+    }
 
     dispatch('change', { value });
   }
 
-  // Format on initial to handle partial values as well as different (but compatible) formats (ex. phone numbers)
   onMount(() => {
-    const initialValue = value;
-    value = clean(value).join('');
-    if (value != initialValue) {
-      // console.log('change', { initialValue, value });
-      dispatch('change', { value });
+    // Format on initial to handle partial values as well as different (but compatible) formats (ex. phone numbers)
+    if (mask) {
+      const initialValue = value;
+      value = clean(value).join('');
+      if (value != initialValue) {
+        // console.log('change', { initialValue, value });
+        dispatch('change', { value });
+      }
     }
   });
 </script>
 
 <input
+  {id}
   {value}
   placeholder={mask}
+  bind:this={inputEl}
   on:keydown={(e) => (backspace = e.key === 'Backspace')}
+  on:keydown
+  on:keypress
   on:input={onInput}
-  on:blur={() => {
+  on:input
+  on:focus
+  on:blur={(e) => {
     // TODO: Consider clearing value if any mask is still shown?
     // TODO: Dispatch blur as well to allow DateField/etc to do the same if no value is set?
     if (value === mask) {
       value = '';
     }
+    dispatch('blur', e);
   }}
-  class="font-mono text-sm w-full outline-none bg-transparent selection:bg-gray-500/30"
-  {id}
+  on:blur
+  use:multi={actions}
+  class:font-mono={mask}
+  class="text-sm w-full outline-none bg-transparent selection:bg-gray-500/30"
+  {...$$restProps}
 />
+
+<style>
+  /* Hide +/- buttons */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+</style>

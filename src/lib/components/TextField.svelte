@@ -10,6 +10,7 @@
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
+  import Input from './Input.svelte';
   import { isLiteralObject } from '../utils/object';
   import { autoFocus } from '$lib/actions';
 
@@ -182,7 +183,8 @@
               on:keydown
               on:keypress
               class={clsx(
-                'text-sm placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30 resize-none',
+                'text-sm border-none w-full bg-transparent outline-none resize-none',
+                'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
                 (shrinkLabel || !hasLabel) && 'placeholder-opacity-30',
                 {
                   'text-left': align === 'left',
@@ -193,20 +195,23 @@
               use:multi={actions}
             />
           {:else}
-            <input
+            <Input
               {id}
               {placeholder}
               {autocomplete}
               type={inputType}
-              bind:this={inputEl}
               value={inputValue}
+              {actions}
+              bind:inputEl
               on:input={handleInput}
               on:focus
               on:blur
               on:keydown
               on:keypress
               class={clsx(
-                'text-sm truncate placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30 selection:bg-gray-500/30',
+                'text-sm border-none w-full bg-transparent outline-none truncate',
+                'selection:bg-gray-500/30',
+                'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
                 (shrinkLabel || !hasLabel) && 'placeholder-opacity-30',
                 {
                   'text-left': align === 'left',
@@ -214,7 +219,6 @@
                   'text-right': align === 'right',
                 }
               )}
-              use:multi={actions}
             />
           {/if}
 
@@ -307,23 +311,8 @@
     /* background: rgba(0, 255, 0, 0.1); */
   }
 
-  input,
-  textarea {
-    @apply border-none w-full bg-transparent outline-none /*leading-4*/;
-    /* background: rgba(0, 0, 255, 0.1); */
-  }
-
-  input::placeholder,
+  :global(input::placeholder),
   textarea::placeholder {
     transition: color 200ms; /* Move to tailwind plugin? */
-  }
-
-  /* Hide +/- buttons */
-  input[type='number'] {
-    -moz-appearance: textfield;
-  }
-  input[type='number']::-webkit-inner-spin-button,
-  input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
   }
 </style>
