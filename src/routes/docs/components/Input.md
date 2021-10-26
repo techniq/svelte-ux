@@ -47,8 +47,38 @@
 
 ## Value
 
+### Formatted
+
 <Preview>
 	<Input mask="mm/dd/yyyy" replace="dmyh" value="03/30/1982" />
+	<Input mask="+1 (___) ___-____" replace="_" value="+1 (234) 567-8901" />
+	<Input mask="+1 (___) ___-____" replace="_" value="(234) 567-8901" />
+</Preview>
+
+## Value
+
+### Unformatted
+
+<Preview>
+	<Input mask="mm/dd/yyyy" replace="dmyh" value="03301982" />
+	<Input mask="+1 (___) ___-____" replace="_" value="2345678901" />
+</Preview>
+
+## Value
+
+### Different (but compatible) format
+
+<Preview>
+	<Input mask="+1 (___) ___-____" replace="_" value="234-567-8901" />
+</Preview>
+
+## Value
+
+### Partial
+
+<Preview>
+	<Input mask="mm/dd/yyyy" replace="dmyh" value="03/30" />
+	<Input mask="+1 (___) ___-____" replace="_" value="234" />
 </Preview>
 
 ## Change event

@@ -5,7 +5,7 @@
         - Set opacity to match TextField placeholder (30%)
         - Replace completed slots as spaces (for spacing)
   */
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
 
   export let value = '';
   export let mask: string;
@@ -24,13 +24,17 @@
   const firstPlaceholderPos = [...mask].findIndex((c) => replaceSet.has(c));
   const acceptRegEx = new RegExp(accept, 'g');
 
-  function clean(input) {
+  function clean(inputValue) {
     // Get only accepted characters (no mask)
-    const inputOnly = input.match(acceptRegEx) || [];
+    const inputOnly = inputValue.match(acceptRegEx) || [];
 
-    // Apply mask to input.  For each mask position,
+    if (inputOnly.length === 0) {
+      return [];
+    }
+
+    // Apply mask to input
     return Array.from(mask, (maskChar) => {
-      // If input character matches mask, or is contained in replacement placeholders
+      // If input character matches mask, or aligns with replacement placeholders
       if (inputOnly[0] === maskChar || replaceSet.has(maskChar)) {
         return inputOnly.shift() ?? maskChar;
       } else {
@@ -54,6 +58,16 @@
 
     dispatch('change', { value });
   }
+
+  // Format on initial to handle partial values as well as different (but compatible) formats (ex. phone numbers)
+  onMount(() => {
+    const initialValue = value;
+    value = clean(value).join('');
+    if (value != initialValue) {
+      // console.log('change', { initialValue, value });
+      dispatch('change', { value });
+    }
+  });
 </script>
 
 <input
