@@ -24,7 +24,7 @@
   export let label = '';
   export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
   export let type: 'text' | 'password' | 'integer' | 'decimal' | 'currency' | 'percent' = 'text';
-  export let placeholder = '';
+  export let placeholder = undefined;
   export let error = '';
   export let hint = '';
   export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
@@ -45,6 +45,11 @@
     : undefined;
   export let operators: { label: string; value: string }[] = undefined;
   export let inputEl: HTMLInputElement | null = null;
+
+  // Input props
+  export let mask = undefined;
+  export let replace = undefined;
+  export let accept = undefined;
 
   let inputType = 'text';
   $: switch (type) {
@@ -201,6 +206,9 @@
               {autocomplete}
               type={inputType}
               value={inputValue}
+              {mask}
+              {replace}
+              {accept}
               {actions}
               bind:inputEl
               on:input={handleInput}

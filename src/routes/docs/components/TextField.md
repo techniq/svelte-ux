@@ -314,7 +314,7 @@
   </TextField>
 </Preview>
 
-<SectionDivider>Type</SectionDivider>
+<SectionDivider>Multiline</SectionDivider>
 
 ## Multiline
 
@@ -337,6 +337,22 @@
     actions={(node) => [autoHeight(node)]}
   />
 </Preview>
+
+<SectionDivider>Mask</SectionDivider>
+
+## Date
+
+<Preview>
+  <TextField mask="mm/dd/yyyy" replace="dmyh" />
+</Preview>
+
+## Telephone
+
+<Preview>
+	<TextField mask="+1 (___) ___-____" replace="_" />
+</Preview>
+
+> See [Input](./Input) for more mask examples
 
 <SectionDivider>Style</SectionDivider>
 

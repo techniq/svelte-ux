@@ -17,6 +17,7 @@
   export let mask = '';
   export let replace = '_';
   export let accept = '\\d';
+  export let placeholder = mask;
 
   const dispatch = createEventDispatcher();
 
@@ -80,7 +81,7 @@
 <input
   {id}
   {value}
-  placeholder={mask}
+  {placeholder}
   bind:this={inputEl}
   on:keydown={(e) => (backspace = e.key === 'Backspace')}
   on:keydown
