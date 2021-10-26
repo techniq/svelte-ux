@@ -15,29 +15,42 @@
 
   const dispatch = createEventDispatcher();
 
-  let back = false;
+  let backspace = false;
 
-  const replaceSet = new Set(replace);
+  const replaceSet = new Set(replace); // Set of characters to replace
+
+  // For each character in mask, if character marked for replacement
   const prev = ((j) => Array.from(mask, (c, i) => (replaceSet.has(c) ? (j = i + 1) : j)))(0);
-  const first = [...mask].findIndex((c) => replaceSet.has(c));
+  const firstPlaceholderPos = [...mask].findIndex((c) => replaceSet.has(c));
   const acceptRegEx = new RegExp(accept, 'g');
 
   function clean(input) {
-    input = input.match(acceptRegEx) || [];
-    return Array.from(mask, (c) => (input[0] === c || replaceSet.has(c) ? input.shift() || c : c));
+    // Get only accepted characters (no mask)
+    const inputOnly = input.match(acceptRegEx) || [];
+
+    // Apply mask to input.  For each mask position,
+    return Array.from(mask, (maskChar) => {
+      // If input character matches mask, or is contained in replacement placeholders
+      if (inputOnly[0] === maskChar || replaceSet.has(maskChar)) {
+        return inputOnly.shift() ?? maskChar;
+      } else {
+        return maskChar;
+      }
+    });
   }
 
-  function onInput(e) {
-    const el = e.target;
+  function onInput(e: Event & { currentTarget: HTMLInputElement }) {
+    const el = e.currentTarget;
 
+    // For selection (including just cursor position),
     const [i, j] = [el.selectionStart, el.selectionEnd].map((i) => {
       i = clean(el.value.slice(0, i)).findIndex((c) => replaceSet.has(c));
-      return i < 0 ? prev[prev.length - 1] : back ? prev[i - 1] || first : i;
+      return i < 0 ? prev[prev.length - 1] : backspace ? prev[i - 1] || firstPlaceholderPos : i;
     });
     value = clean(el.value).join('');
     el.value = value;
     el.setSelectionRange(i, j);
-    back = false;
+    backspace = false;
 
     dispatch('change', { value });
   }
@@ -46,7 +59,7 @@
 <input
   {value}
   placeholder={mask}
-  on:keydown={(e) => (back = e.key === 'Backspace')}
+  on:keydown={(e) => (backspace = e.key === 'Backspace')}
   on:input={onInput}
   on:blur={() => {
     // TODO: Consider clearing value if any mask is still shown?
