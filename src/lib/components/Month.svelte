@@ -94,7 +94,7 @@
   {/each}
 </div>
 
-<div class="grid grid-cols-7 gap-y-4">
+<div class="grid grid-cols-7 grid-rows-6 gap-y-4">
   {#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
     {#each week ?? [] as day (day.valueOf())}
       <DateButton
