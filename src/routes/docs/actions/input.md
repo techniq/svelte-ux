@@ -3,7 +3,7 @@
 
 	import Preview from '$lib/components/Preview.svelte';
 
-	import { autoFocus, autoHeight, blurOnEscape, selectOnFocus  } from '$lib/actions/input';
+	import { autoFocus, autoHeight, blurOnEscape, selectOnFocus, debounceEvent } from '$lib/actions/input';
 </script>
 
 ## autoFocus
@@ -36,4 +36,12 @@
 
 <Preview>
   <textarea value="Example text" use:autoHeight class="border" />
+</Preview>
+
+## debounceEvent
+
+### Debounce any event (input, change, etc)
+
+<Preview>
+  <input value="Example text" use:debounceEvent={{ type: 'input', listener: (e) => { console.log(e.target.value) }, timeout: 1000 }} class="border">
 </Preview>
