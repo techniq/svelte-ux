@@ -24,8 +24,8 @@
   let backspace = false;
 
   $: replaceSet = new Set(replace); // Set of characters to replace
-  $: prev = ((j) => Array.from(mask, (c, i) => (replaceSet.has(c) ? (j = i + 1) : j)))(0);
-  $: firstPlaceholderPos = [...mask].findIndex((c) => replaceSet.has(c));
+  $: prev = ((j) => Array.from(mask ?? '', (c, i) => (replaceSet.has(c) ? (j = i + 1) : j)))(0);
+  $: firstPlaceholderPos = [...(mask ?? '')].findIndex((c) => replaceSet.has(c));
   $: acceptRegEx = new RegExp(accept, 'g');
 
   function clean(inputValue) {
