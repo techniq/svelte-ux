@@ -172,6 +172,7 @@
       {selected}
       periodType={selected?.periodType}
       on:dateChange={(e) => onDateChange(e.detail)}
+      {activeDate}
     />
   </div>
 </div>

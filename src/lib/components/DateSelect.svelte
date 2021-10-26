@@ -3,6 +3,7 @@
     TODO:
       - [ ] Set max-height / overflow on MonthListByYear, YearList
   */
+  import { startOfMonth as startOfMonthFunc } from 'date-fns';
   import type { SelectedDate } from '../utils/date';
   import { PeriodType } from '../utils/date';
 
@@ -16,6 +17,9 @@
     periodType: null,
   };
   export let periodType: PeriodType = PeriodType.Day;
+  export let activeDate: 'from' | 'to' = 'from';
+
+  $: startOfMonth = selected?.[activeDate] ? startOfMonthFunc(selected[activeDate]) : undefined;
 </script>
 
 {#if periodType === PeriodType.Month || periodType === PeriodType.Quarter}
@@ -32,5 +36,5 @@
   <YearList {selected} on:dateChange />
 {:else}
   <!-- Day, Week, etc -->
-  <Month {selected} on:dateChange />
+  <Month {selected} on:dateChange {startOfMonth} />
 {/if}
