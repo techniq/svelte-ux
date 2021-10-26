@@ -18,18 +18,29 @@ export default function portal(node: HTMLElement, options?: PortalOptions) {
     update(options) {
       moveNode(node, options);
     },
+    destroy() {
+      const target = getTarget(options);
+      // If target still contains node that was moved, remove it.  Not sure if required
+      if (target.contains(node)) {
+        target.removeChild(node);
+      }
+    },
   };
 }
 
 function moveNode(node: HTMLElement, options: PortalOptions = {}) {
-  let { enabled, target } = options;
+  if (options.enabled === false) return;
 
-  if (enabled === false) return;
-
-  if (typeof target === 'string') {
-    target = document.getElementById(target);
-  }
-  if (!target) target = document.body;
-
+  const target = getTarget(options);
   target.appendChild(node);
+}
+
+function getTarget(options: PortalOptions = {}) {
+  if (options.target instanceof HTMLElement) {
+    return options.target;
+  } else if (typeof options.target === 'string') {
+    return document.getElementById(options.target);
+  } else {
+    return document.body;
+  }
 }
