@@ -99,7 +99,8 @@
     class:disabled
     {disabled}
     on:click={() => {
-      selected = date;
+      // Do not set selected date as this is causing issues with controlled selected (ex. date ranges, arrays, etc) / changing from date to { from: ..., to: ... }
+      // selected = date;
       dispatch('dateChange', date);
     }}
   >
