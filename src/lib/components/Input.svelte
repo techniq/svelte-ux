@@ -30,17 +30,17 @@
 
   function clean(inputValue) {
     // Get only accepted characters (no mask)
-    const inputOnly = inputValue.match(acceptRegEx) || [];
+    const inputMatch = inputValue?.match(acceptRegEx) || [];
 
-    if (inputOnly.length === 0) {
+    if (inputMatch.length === 0) {
       return [];
     }
 
     // Apply mask to input
     return Array.from(mask, (maskChar) => {
       // If input character matches mask, or aligns with replacement placeholders
-      if (inputOnly[0] === maskChar || replaceSet.has(maskChar)) {
-        return inputOnly.shift() ?? maskChar;
+      if (inputMatch[0] === maskChar || replaceSet.has(maskChar)) {
+        return inputMatch.shift() ?? maskChar;
       } else {
         return maskChar;
       }
