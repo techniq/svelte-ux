@@ -39,3 +39,12 @@ import { AppBar } from 'svelte-ux';
 		</div>
 	</AppBar>
 </Preview>
+
+## Color
+
+<Preview>
+	<div class="grid gap-2">
+		<AppBar title="Example" class="bg-purple-500" />
+		<AppBar title="Example" class="bg-white text-black" />
+	</div>
+</Preview>

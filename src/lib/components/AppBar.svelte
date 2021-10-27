@@ -1,5 +1,6 @@
 <script lang="ts">
   import { mdiMenu } from '@mdi/js';
+  import clsx from 'clsx';
 
   import { showDrawer } from './AppLayout.svelte';
   import Breadcrumb from './Breadcrumb.svelte';
@@ -8,7 +9,12 @@
   export let title: string | number | Array<string | number> = '';
 </script>
 
-<header class="h-16 px-4 bg-blue-500 text-white flex items-center shadow-md relative">
+<header
+  class={clsx(
+    'h-16 px-4 bg-blue-500 text-white flex items-center shadow-md relative',
+    $$restProps.class
+  )}
+>
   <Button icon={mdiMenu} on:click={() => ($showDrawer = !$showDrawer)} class="p-3" />
   <div class="ml-2 text-lg">
     {#if typeof title === 'string' || typeof title === 'number'}
