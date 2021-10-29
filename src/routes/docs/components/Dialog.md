@@ -45,7 +45,7 @@
 
 <Preview>
   <Button on:click={() => openAsync = true}>Show Dialog</Button>
-  <Dialog bind:open={openAsync} {loading}>
+  <Dialog bind:open={openAsync} {loading} persistent={loading}>
     <div slot="title">Are you sure you want to do that?</div>
     <div slot="actions">
       <Button
@@ -72,7 +72,7 @@
 <Preview>
   <Toggle let:on={open} let:toggleOn let:toggleOff>
     <Button on:click={toggleOn}>Show Dialog</Button>
-    <Dialog {open} on:close={toggleOff} {loading}>
+    <Dialog {open} on:close={toggleOff} {loading} persistent={loading}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
         <Button
