@@ -25,6 +25,12 @@
 	<Input mask="+1 (___) ___-____" replace="_" />
 </Preview>
 
+## Credit Card
+
+<Preview>
+	<Input mask=".... .... .... ...." replace="." accept="\d" />
+</Preview>
+
 ## MAC Address
 
 <Preview>
@@ -35,12 +41,6 @@
 
 <Preview>
 	<Input mask="__-__-__-____" replace="_" accept="\w" />
-</Preview>
-
-## Credit Card
-
-<Preview>
-	<Input mask=".... .... .... ...." replace="." accept="\d" />
 </Preview>
 
 <SectionDivider>Props</SectionDivider>
@@ -97,4 +97,10 @@
   <Field label="Birth Date" let:id>
     <Input {id} mask="mm/dd/yyyy" replace="dmyh" />
   </Field>
+</Preview>
+
+## Placeholder
+
+<Preview>
+	<Input placeholder="Please enter your birthday" mask="mm/dd/yyyy" replace="dmyh" />
 </Preview>

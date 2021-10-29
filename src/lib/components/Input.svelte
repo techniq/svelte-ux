@@ -6,6 +6,8 @@
         - Replace completed slots as spaces (for spacing)
   */
   import { createEventDispatcher, onMount } from 'svelte';
+  import clsx from 'clsx';
+
   import multi from '$lib/actions/multi';
   import type { Actions } from '$lib/actions/multi';
 
@@ -18,6 +20,8 @@
   export let replace = '_';
   export let accept = '\\d';
   export let placeholder = mask;
+
+  let isFocused = false;
 
   const dispatch = createEventDispatcher();
 
@@ -81,15 +85,20 @@
 <input
   {id}
   {value}
-  {placeholder}
+  placeholder={isFocused ? mask : placeholder}
   bind:this={inputEl}
   on:keydown={(e) => (backspace = e.key === 'Backspace')}
   on:keydown
   on:keypress
   on:input={onInput}
   on:input
+  on:focus={(e) => {
+    isFocused = true;
+  }}
   on:focus
   on:blur={(e) => {
+    isFocused = false;
+
     // TODO: Consider clearing value if any mask is still shown?
     // TODO: Dispatch blur as well to allow DateField/etc to do the same if no value is set?
     if (value === mask) {
@@ -99,8 +108,10 @@
   }}
   on:blur
   use:multi={actions}
-  class:font-mono={mask}
-  class="text-sm w-full outline-none bg-transparent selection:bg-gray-500/30"
+  class={clsx(
+    'text-sm w-full outline-none bg-transparent selection:bg-gray-500/30',
+    ((mask && mask == placeholder) || (mask && isFocused)) && 'font-mono'
+  )}
   {...$$restProps}
 />
 
