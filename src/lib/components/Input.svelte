@@ -85,7 +85,7 @@
 <input
   {id}
   {value}
-  placeholder={isFocused ? mask : placeholder}
+  placeholder={isFocused && mask ? mask : placeholder}
   bind:this={inputEl}
   on:keydown={(e) => (backspace = e.key === 'Backspace')}
   on:keydown
