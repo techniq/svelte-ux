@@ -11,7 +11,7 @@ type StickyOptions = {
   TODO
     - [ ] Consider raising a `stuck` event for styling (example: https://svelte.dev/repl/4ad71e00c86c47d29806e17f09ff0869?version=3.35.0)
 */
-export function sticky(node: HTMLElement, options?: StickyOptions) {
+export function sticky(node: HTMLElement, options?: StickyOptions): SvelteActionReturnType {
   // Track changes so they can be reversed on an update
   const tracker = new DomTracker(node);
 
@@ -71,7 +71,10 @@ export function sticky(node: HTMLElement, options?: StickyOptions) {
   };
 }
 
-export function stickyContext(node: HTMLElement, options?: { type: 'page' | 'container' }) {
+export function stickyContext(
+  node: HTMLElement,
+  options?: { type: 'page' | 'container' }
+): SvelteActionReturnType {
   const type = options?.type ?? 'page';
 
   function setSticky() {

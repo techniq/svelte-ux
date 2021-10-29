@@ -22,7 +22,7 @@
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import TextField from '$lib/components/TextField.svelte';
 
-  import { autoHeight } from '$lib/actions/input';
+  import { autoHeight, debounceEvent } from '$lib/actions/input';
 
   const numberOperators = [
     { label: '=', value: 'equal' },
@@ -144,6 +144,21 @@
 
 <Preview>
   <TextField label="Name" disabled />
+</Preview>
+
+## Actions
+
+<Preview>
+  <TextField
+    label="Name"
+    actions={(node) => [
+      debounceEvent(node, {
+        type: 'input',
+        listener: e => { console.log(e.target.value) },
+        timeout: 500
+      })
+    ]}
+  />
 </Preview>
 
 <SectionDivider>Type</SectionDivider>

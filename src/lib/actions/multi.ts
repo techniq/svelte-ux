@@ -1,6 +1,4 @@
-export type Actions<TNode = HTMLElement | SVGElement> = (
-  node: TNode
-) => (void | { destroy: () => void } | { destroy(): void })[];
+export type Actions<TNode = HTMLElement | SVGElement> = (node: TNode) => SvelteActionReturnType[];
 
 /**
  * Helper action to handle multiple actions as a single action.  Useful for adding actions for custom components
@@ -8,14 +6,16 @@ export type Actions<TNode = HTMLElement | SVGElement> = (
 export default function multi<TNode = HTMLElement | SVGElement>(
   node: TNode,
   actions?: Actions<TNode>
-) {
+): SvelteActionReturnType {
   let destroyFuncs: (() => void)[] | undefined = undefined;
 
   function update() {
     destroy();
-    destroyFuncs = actions?.(node)
-      .filter((x) => x)
-      .map((x) => (x ? x.destroy : () => {}));
+    if (actions) {
+      destroyFuncs = actions(node)
+        .filter((x) => x)
+        .map((x) => (x ? x.destroy : () => {}));
+    }
   }
 
   function destroy() {

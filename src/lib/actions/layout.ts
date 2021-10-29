@@ -4,7 +4,7 @@
 export function remainingViewportHeight(
   node: HTMLElement,
   options?: { max?: boolean; offset?: number; enabled?: boolean }
-) {
+): SvelteActionReturnType {
   const max = options?.max ?? false;
   const offset = options?.offset ?? 0;
 

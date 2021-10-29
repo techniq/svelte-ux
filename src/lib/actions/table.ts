@@ -15,7 +15,7 @@ type TableCellOptions = {
   overrides?: Partial<ColumnDef>;
 };
 
-export function tableCell(node: HTMLElement, options: TableCellOptions) {
+export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteActionReturnType {
   // Track changes so they can be reversed on an update
   const tracker = new DomTracker(node);
 

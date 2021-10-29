@@ -1,4 +1,4 @@
-export function resize(node) {
+export function resize(node: HTMLElement): SvelteActionReturnType {
   let observer = new ResizeObserver((entries, observer) => {
     entries.forEach((entry) => {
       node.dispatchEvent(new CustomEvent('resize', { detail: entry }));
@@ -13,7 +13,7 @@ export function resize(node) {
   };
 }
 
-export function intersection(node) {
+export function intersection(node: HTMLElement): SvelteActionReturnType {
   const options = {
     root: node.parentNode,
     threshold: 1,
@@ -33,7 +33,10 @@ export function intersection(node) {
   };
 }
 
-export function mutate(node: HTMLElement | SVGElement, options: MutationObserverInit) {
+export function mutate(
+  node: HTMLElement | SVGElement,
+  options: MutationObserverInit
+): SvelteActionReturnType {
   let observer: MutationObserver | null = null;
 
   function update(options: MutationObserverInit) {

@@ -11,7 +11,7 @@ type PortalOptions = {
  *  - https://svelte.dev/repl/86ec36c27be2471f86590e0c18c7198c?version=3.23.2
  *  - https://github.com/sveltejs/svelte/issues/3088#issuecomment-505785516
  */
-export default function portal(node: HTMLElement, options?: PortalOptions) {
+export default function portal(node: HTMLElement, options?: PortalOptions): SvelteActionReturnType {
   moveNode(node, options);
 
   return {
@@ -28,7 +28,7 @@ export default function portal(node: HTMLElement, options?: PortalOptions) {
   };
 }
 
-function moveNode(node: HTMLElement, options: PortalOptions = {}) {
+function moveNode(node: HTMLElement, options: PortalOptions = {}): SvelteActionReturnType {
   if (options.enabled === false) return;
 
   const target = getTarget(options);

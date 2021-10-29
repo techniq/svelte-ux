@@ -1,6 +1,6 @@
 type CSSProps = { [key: string]: string | number | boolean | null | undefined };
 
-export default (node: HTMLElement, props: CSSProps) => {
+export default function cssVars(node: HTMLElement, props: CSSProps): SvelteActionReturnType {
   Object.entries(props).forEach(([key, value]) => {
     // Ignore if null or undefined
     if (value != null) {
@@ -29,4 +29,4 @@ export default (node: HTMLElement, props: CSSProps) => {
       lastProps = newProps;
     },
   };
-};
+}

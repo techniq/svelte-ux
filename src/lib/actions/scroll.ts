@@ -5,7 +5,7 @@ export function scrollIntoView(
     initial?: boolean;
     delay?: number;
   }
-) {
+): SvelteActionReturnType {
   // TODO: scroll options not supported by Safari or IE: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
 
   function update(options: Parameters<typeof scrollIntoView>[1]) {
