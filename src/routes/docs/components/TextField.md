@@ -146,6 +146,21 @@
   <TextField label="Name" disabled />
 </Preview>
 
+## on:change event
+
+<Preview>
+  <TextField label="Name" on:change={e => console.log(e.detail)} />
+</Preview>
+
+## debounceChange
+
+<Preview>
+  <div class="grid gap-2">
+    <TextField label="Name" on:change={e => console.log(e.detail)} debounceChange />
+    <TextField label="Name" on:change={e => console.log(e.detail)} debounceChange={1000} />
+  </div>
+</Preview>
+
 ## Actions
 
 <Preview>

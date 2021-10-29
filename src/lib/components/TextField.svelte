@@ -45,6 +45,7 @@
     : undefined;
   export let operators: { label: string; value: string }[] = undefined;
   export let inputEl: HTMLInputElement | null = null;
+  export let debounceChange: boolean | number = false;
 
   // Input props
   export let mask = undefined;
@@ -70,6 +71,7 @@
   $: inputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
   $: operator = isLiteralObject(value) ? Object.keys(value)[0] : operators?.[0].value;
 
+  let lastTimeoutId;
   function updateValue() {
     let newValue;
     if (inputValue && operator) {
@@ -80,7 +82,17 @@
     }
 
     value = newValue;
-    dispatch('change', { value, inputValue, operator });
+    if (debounceChange) {
+      clearTimeout(lastTimeoutId);
+      lastTimeoutId = setTimeout(
+        () => {
+          dispatch('change', { value, inputValue, operator });
+        },
+        debounceChange === true ? 300 : debounceChange
+      );
+    } else {
+      dispatch('change', { value, inputValue, operator });
+    }
   }
 
   function handleInput(e) {
