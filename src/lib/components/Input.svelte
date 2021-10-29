@@ -110,7 +110,7 @@
   use:multi={actions}
   class={clsx(
     'text-sm w-full outline-none bg-transparent selection:bg-gray-500/30',
-    ((mask && mask == placeholder) || (mask && isFocused)) && 'font-mono'
+    mask && (mask == placeholder || isFocused || value) && 'font-mono'
   )}
   {...$$restProps}
 />
