@@ -17,17 +17,17 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.21",
-    "@sveltejs/kit": "^1.0.0-next.190",
-    "autoprefixer": "^10.3.7",
+    "@sveltejs/kit": "^1.0.0-next.192",
+    "autoprefixer": "^10.4.0",
     "mdsvex": "^0.9.8",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
     "prism-themes": "^1.9.0",
     "svelte": "^3.44.0",
-    "svelte-check": "^2.2.7",
+    "svelte-check": "^2.2.8",
     "svelte-preprocess": "^4.9.8",
-    "svelte2tsx": "^0.4.7",
-    "tailwindcss": "^2.2.17",
+    "svelte2tsx": "^0.4.8",
+    "tailwindcss": "^2.2.19",
     "tailwindcss-elevation": "^1.0.1",
     "tslib": "^2.3.1",
     "typescript": "^4.4.4",
@@ -44,6 +44,6 @@
     "graphql": "^15.6.1",
     "immer": "^9.0.6",
     "lodash-es": "^4.17.21",
-    "zod": "^3.11.4"
+    "zod": "^3.11.6"
   }
 }
