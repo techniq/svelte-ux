@@ -13,7 +13,7 @@
 ### Smootly scroll element into center of view
 
 <Preview>
-  <input type="range" bind:value={scrolledIndex} min={0} max={itemCount} /> {scrolledIndex}
+  <input type="range" bind:value={scrolledIndex} min={0} max={itemCount - 1} /> {scrolledIndex}
   <div class="h-40 overflow-auto border rounded">
     {#each items as item, i}
       <div
