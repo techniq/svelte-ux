@@ -267,7 +267,6 @@
           {/if}
 
           {#if operators}
-            <!-- svelte-ignore a11y-no-onchange -->
             <select
               value={operator}
               on:change={(e) => {
