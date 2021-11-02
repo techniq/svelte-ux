@@ -8,6 +8,8 @@
 <AppLayout>
   <nav slot="nav" class="nav h-full">
     <NavMenu />
+    <!-- Spacer -->
+    <div class="h-4" />
   </nav>
 
   <slot />
