@@ -1,3 +1,5 @@
+import { parseISO } from 'date-fns';
+
 export type Duration = {
   milliseconds: number;
   seconds: number;
@@ -16,8 +18,11 @@ export enum DurationUnits {
   Millisecond,
 }
 
-export function getDuration(start: Date, end?: Date | null): Duration | null {
-  const difference = Number(end || new Date()) - Number(start);
+export function getDuration(start: Date | string, end?: Date | string | null): Duration | null {
+  const startDate = typeof start === 'string' ? parseISO(start) : start;
+  const endDate = typeof end === 'string' ? parseISO(end) : end;
+
+  const difference = Number(endDate || new Date()) - Number(startDate);
   const durationInMs = Math.abs(difference);
   const sign = Math.sign(difference);
 

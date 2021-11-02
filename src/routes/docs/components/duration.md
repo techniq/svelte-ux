@@ -10,16 +10,17 @@
 
 <Preview>{JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}</Preview>
 
-## Humanize Duration (3 days ago)
-
-<Preview>{humanizeDuration({ start: subDays(new Date(), 3) })}</Preview>
-
-## Humanize Duration (3 months ago)
-
-<Preview>{humanizeDuration({ start: subMonths(new Date(), 3) })}</Preview>
-
-## Humanize Duration (3 months ago w/ long variant)
+## Humanize Duration
 
 <Preview>
-	{humanizeDuration({ start: subMonths(new Date(), 3), variant: 'long' })}
+	<div>{humanizeDuration({ start: subDays(new Date(), 3) })}</div>
+	<div>{humanizeDuration({ start: subMonths(new Date(), 3) })}</div>
+	<div>{humanizeDuration({ start: subMonths(new Date(), 3), variant: 'long' })}</div>
+</Preview>
+
+## Humanize Duration (string)
+
+<Preview>
+	<div>{humanizeDuration({ start: '1982-03-30' })}</div>
+	<div>{humanizeDuration({ start: '2021-01-01', end: '2021-01-07' })}</div>
 </Preview>
