@@ -1,6 +1,6 @@
 <script>
-  import { parseISO, addDays } from 'date-fns';
-  
+  import { addDays } from 'date-fns';
+
   import Button from '$lib/components/Button.svelte';
   import DateField from '$lib/components/DateField.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -12,7 +12,13 @@
 ## Playground
 
 <Preview>
-  <DateField label="Birth date" {value} on:change={e => value = e.detail.value } picker clearable />
+  <DateField
+    label="Birth date"
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+    picker
+    clearable
+  />
   value: {value}
 </Preview>
 
@@ -20,22 +26,22 @@
 
 <Preview>
   <DateField {value} />
-  <Button on:click={() => value = new Date()}>Today</Button>
-  <Button on:click={() => value = addDays(new Date(), -1)}>Yesterday</Button>
-  <Button on:click={() => value = addDays(new Date(), -7)}>Last Week</Button>
-  <Button on:click={() => value = addDays(new Date(), 7)}>Next Week</Button>
+  <Button on:click={() => (value = new Date())}>Today</Button>
+  <Button on:click={() => (value = addDays(new Date(), -1))}>Yesterday</Button>
+  <Button on:click={() => (value = addDays(new Date(), -7))}>Last Week</Button>
+  <Button on:click={() => (value = addDays(new Date(), 7))}>Next Week</Button>
 </Preview>
 
 ## Picker
 
 <Preview>
-  <DateField {value} on:change={e => value = e.detail.value } picker />
+  <DateField {value} on:change={(e) => (value = e.detail.value)} picker />
 </Preview>
 
 ## Clearable
 
 <Preview>
-  <DateField {value} on:change={e => value = e.detail.value } clearable />
+  <DateField {value} on:change={(e) => (value = e.detail.value)} clearable />
 </Preview>
 
 ## Label
@@ -59,5 +65,6 @@
 ## on:change event
 
 <Preview>
-  <DateField label="Birth date" on:change={e => console.log(e.detail)} />
+  <DateField label="Birth date" on:change={(e) => console.log(e.detail)} />
+</Preview>
 </Preview>
