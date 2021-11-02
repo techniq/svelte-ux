@@ -67,4 +67,3 @@
 <Preview>
   <DateField label="Birth date" on:change={(e) => console.log(e.detail)} />
 </Preview>
-</Preview>
