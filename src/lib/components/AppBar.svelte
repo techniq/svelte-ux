@@ -20,7 +20,7 @@
     {#if typeof title === 'string' || typeof title === 'number'}
       {title}
     {:else}
-      <Breadcrumb items={title} />
+      <Breadcrumb items={title} class="gap-2" />
     {/if}
   </div>
 
