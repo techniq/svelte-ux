@@ -11,7 +11,7 @@
   /**
    * Wrap icon in Avatar
    */
-  export let avatar: Avatar['$$prop_def'] = null;
+  export let avatar: boolean | Avatar['$$prop_def'] = null;
 
   /**
    * Support styles to be nested within a wrapping div (useful for `animate:flip`)
