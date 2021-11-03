@@ -1,14 +1,14 @@
 <script lang="ts">
+  import clsx from 'clsx';
   import { mdiChevronRight } from '@mdi/js';
 
-  import Stack from './Stack.svelte';
   import Icon from './Icon.svelte';
 
   export let items = [];
   export let divider: string | undefined = undefined;
 </script>
 
-<Stack horizontal justify="start" items="center" gap={8} {...$$restProps}>
+<div {...$$restProps} class={clsx('flex items-center justify-start', $$restProps.class)}>
   {#each items ?? [] as item, index}
     <slot name="item" {item}>
       <div class="item">{item}</div>
@@ -24,4 +24,4 @@
       </slot>
     {/if}
   {/each}
-</Stack>
+</div>

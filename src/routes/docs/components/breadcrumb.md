@@ -22,26 +22,38 @@
   <Breadcrumb {items} />
 </Preview>
 
-## Custom divider w/ prop
+## With gap
 
 <Preview>
-  <Breadcrumb {items} divider="\" />
+  <Breadcrumb {items} class="gap-1" />
 </Preview>
 
-## Custom divider w/ slot Icon
+## Custom divider
+
+### with prop
 
 <Preview>
-  <Breadcrumb {items}>
+  <Breadcrumb {items} divider="\" class="gap-2" />
+</Preview>
+
+## Custom divider
+
+### with slot Icon
+
+<Preview>
+  <Breadcrumb {items} class="gap-2">
     <span slot="divider">
       <Icon path={mdiArrowRight} class="text-black/25" />
     </span>
   </Breadcrumb>
 </Preview>
 
-## Custom item w/ slot
+## Custom item
+
+### with markup
 
 <Preview>
-  <Breadcrumb items={labeledItems}>
+  <Breadcrumb items={labeledItems} class="gap-2">
     <span slot="item" let:item>
       <div class="text-black/50 text-xs uppercase">{item.label}</div>
       <div>{item.value}</div>
@@ -49,7 +61,9 @@
   </Breadcrumb>
 </Preview>
 
-## Custom item w/ button
+## Custom item
+
+### with Button
 
 <Preview>
   <Breadcrumb items={labeledItems}>
@@ -65,7 +79,7 @@
 ## Custom item and divider
 
 <Preview>
-  <Breadcrumb items={labeledItems}>
+  <Breadcrumb items={labeledItems} class="gap-2">
     <span slot="item" let:item>
       <span class="text-black/50 text-sm font-extrabold">{item.label}:</span>
       <span class="text-black/50 text-sm">{item.value}</span>
@@ -76,14 +90,20 @@
   </Breadcrumb>
 </Preview>
 
-## Color w/ inherit
+## Color
 
-<Preview isDark class="text-white">
-  <Breadcrumb {items} />
+### inherit
+
+<Preview>
+  <div class="bg-black text-white p-2 rounded">
+    <Breadcrumb {items} />
+  </div>
 </Preview>
 
-## Color w/ prop
+## Color
 
-<Preview isDark>
+### text class
+
+<Preview>
   <Breadcrumb {items} class="text-blue-500" />
 </Preview>
