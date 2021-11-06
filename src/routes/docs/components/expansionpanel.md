@@ -66,6 +66,54 @@
 
 ## Mix ExpansionPanel with ListItem
 
+### first and last items
+
+<Preview>
+  <ExpansionPanel list="parent">
+    <ListItem
+      slot="trigger"
+      title="Item 1"
+      subheading="Expansion Panel"
+      icon={mdiAccount}
+      avatar={{ class: 'bg-gray-400 text-white/90' }}
+      class="flex-1"
+      noShadow
+    />
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
+      omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
+      Inventore laborum rerum at id?
+    </div>
+  </ExpansionPanel>
+  <ListItem
+    title="Item 2"
+    subheading="List Item"
+    icon={mdiAccount}
+    avatar={{ class: 'bg-gray-400 text-white/90' }}
+    list="parent"
+  />
+  <ExpansionPanel list="parent">
+    <ListItem
+      slot="trigger"
+      title="Item 3"
+      subheading="Expansion Panel"
+      icon={mdiAccount}
+      avatar={{ class: 'bg-gray-400 text-white/90' }}
+      class="flex-1"
+      noShadow
+    />
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
+      omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
+      Inventore laborum rerum at id?
+    </div>
+  </ExpansionPanel>
+</Preview>
+
+## Mix ExpansionPanel with ListItem
+
+### middle item
+
 <Preview>
   <ListItem
     title="Item 1"
