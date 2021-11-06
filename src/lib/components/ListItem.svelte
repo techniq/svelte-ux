@@ -14,9 +14,12 @@
   export let avatar: boolean | Avatar['$$prop_def'] = null;
 
   /**
-   * Support styles to be nested within a wrapping div (useful for `animate:flip`)
+   * Controls how first, last, and gap between are calculated
+   *   - type: items are of the same type
+   *   - parent: items share a common parent
+   *   - group: closest element with 'group' class.  Useful for `animate:flip` or other wrapping element
    */
-  export let nested = false;
+  export let list: 'type' | 'parent' | 'group' = 'type';
 
   /**
    * Remove shadow (useful when using `ring`)
@@ -39,11 +42,11 @@
 <li
   class={clsx(
     'flex gap-4 items-center border-t py-2 px-4',
-    noBackground !== true && 'bg-white',
+    list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
+    list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
+    list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
     noShadow !== true && 'elevation-1',
-    nested
-      ? 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b'
-      : 'first-of-type:border-t-0 first-of-type:rounded-t last:rounded-b',
+    noBackground !== true && 'bg-white',
     $$props.class
   )}
   on:click

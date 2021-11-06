@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+  import clsx from 'clsx';
+
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
   import { mdiChevronDown } from '@mdi/js';
@@ -11,8 +13,15 @@
   export let group = '';
   export let open = false;
   export let popout = false;
-  export let nested = false;
   export let disabled = false;
+
+  /**
+   * Controls how first, last, and gap between are calculated
+   *   - type: items are of the same type
+   *   - parent: items share a common parent
+   *   - group: closest element with 'group' class
+   */
+  export let list: 'type' | 'parent' | 'group' = 'type';
 
   $: if (open) {
     group = name;
@@ -22,15 +31,15 @@
 </script>
 
 <div
-  class={$$props.class}
-  class:transition-all={popout}
-  class:duration-all={popout}
-  class:first-of-type:mt-0={popout && !nested}
-  class:last-of-type:mb-0={popout && !nested}
-  class:group-first-of-type:mt-0={popout && nested}
-  class:group-last-of-type:mb-0={popout && nested}
-  class:my-3={popout && active}
-  style={$$props.style}
+  {...$$restProps}
+  class={clsx(
+    popout && 'transition-all duration-all',
+    popout && active && 'my-3',
+    popout && list === 'type' && 'first-of-type:mt-0 last-of-type:mb-0',
+    popout && list === 'parent' && 'first:mt-0 last:mb-0',
+    popout && list === 'group' && 'group-first:mt-0 group-last:mb-0',
+    $$props.class
+  )}
 >
   <button
     class="flex items-center w-full text-left select-text focus:outline-none"

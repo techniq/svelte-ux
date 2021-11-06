@@ -5,8 +5,13 @@
   import Collapse from './Collapse.svelte';
   import Icon from './Icon.svelte';
 
-  // Support styles to be nested within a wrapping div (useful for `animate:flip`)
-  export let nested = false;
+  /**
+   * Controls how first, last, and gap between are calculated
+   *   - type: items are of the same type
+   *   - parent: items share a common parent
+   *   - group: closest element with 'group' class
+   */
+  export let list: 'type' | 'parent' | 'group' = 'type';
 
   // TODO: Is it possible to hide if defined but no contents (contents within #if) and not require the extra `disabled` prop?
   // https://svelte.dev/repl/4ad13ff353154720b684b0d73e034e61?version=3.32.1
@@ -19,14 +24,14 @@
   {...$$restProps}
   class={clsx(
     'bg-white elevation-1 border-t',
-    nested
-      ? 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b'
-      : 'first-of-type:border-t-0 first-of-type:rounded-t last:rounded-b',
+    list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
+    list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
+    list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
     $$props.class
   )}
   style={$$props.style}
   popout
-  {nested}
+  {list}
   {disabled}
   on:change
 >
