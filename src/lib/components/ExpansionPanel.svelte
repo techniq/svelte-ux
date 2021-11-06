@@ -11,7 +11,7 @@
    *   - parent: items share a common parent
    *   - group: closest element with 'group' class
    */
-  export let list: 'type' | 'parent' | 'group' = 'type';
+  export let list: 'type' | 'parent' | 'group' = 'parent';
 
   // TODO: Is it possible to hide if defined but no contents (contents within #if) and not require the extra `disabled` prop?
   // https://svelte.dev/repl/4ad13ff353154720b684b0d73e034e61?version=3.32.1

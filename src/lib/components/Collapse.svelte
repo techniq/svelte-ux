@@ -21,7 +21,7 @@
    *   - parent: items share a common parent
    *   - group: closest element with 'group' class
    */
-  export let list: 'type' | 'parent' | 'group' = 'type';
+  export let list: 'type' | 'parent' | 'group' = 'parent';
 
   $: if (open) {
     group = name;

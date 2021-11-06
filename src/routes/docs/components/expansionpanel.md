@@ -69,7 +69,7 @@
 ### first and last items
 
 <Preview>
-  <ExpansionPanel list="parent">
+  <ExpansionPanel>
     <ListItem
       slot="trigger"
       title="Item 1"
@@ -90,9 +90,8 @@
     subheading="List Item"
     icon={mdiAccount}
     avatar={{ class: 'bg-gray-400 text-white/90' }}
-    list="parent"
   />
-  <ExpansionPanel list="parent">
+  <ExpansionPanel>
     <ListItem
       slot="trigger"
       title="Item 3"
@@ -121,7 +120,7 @@
     icon={mdiAccount}
     avatar={{ class: 'bg-gray-400 text-white/90' }}
   />
-  <ExpansionPanel list="parent">
+  <ExpansionPanel>
     <ListItem
       slot="trigger"
       title="Item 2"

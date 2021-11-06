@@ -19,7 +19,7 @@
    *   - parent: items share a common parent
    *   - group: closest element with 'group' class.  Useful for `animate:flip` or other wrapping element
    */
-  export let list: 'type' | 'parent' | 'group' = 'type';
+  export let list: 'type' | 'parent' | 'group' = 'parent';
 
   /**
    * Remove shadow (useful when using `ring`)
