@@ -1,7 +1,7 @@
 import { derived, get } from 'svelte/store';
 
 import { page as pageStore } from '$app/stores';
-import { goto as gotoApp } from '$app/navigation';
+// import { goto as gotoApp } from '$app/navigation';
 
 /*
 export const url = {
@@ -92,11 +92,11 @@ export function url(path: string, page?: any) {
   return path;
 }
 
-export function goto(path: string, page?: any) {
-  const newPath = url(path, page);
-  // console.log('goto', { path, newPath });
-  return gotoApp(newPath);
-}
+// export function goto(path: string, page?: any) {
+//   const newPath = url(path, page);
+//   // console.log('goto', { path, newPath });
+//   return gotoApp(newPath);
+// }
 
 export const isActive = {
   subscribe(listener) {
