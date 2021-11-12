@@ -1,8 +1,9 @@
 import { readable } from 'svelte/store';
+import { browser } from '$app/env';
 
 function matchMedia(queryString: string) {
   return readable(null, (set) => {
-    if (window) {
+    if (browser) {
       const query = window.matchMedia(queryString);
       const listener = (e) => set(e.matches);
 
