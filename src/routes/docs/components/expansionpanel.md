@@ -41,6 +41,21 @@
   {/each}
 </Preview>
 
+## Disabled items
+
+<Preview>
+  {#each Array(5) as _, i}
+    <ExpansionPanel disabled={i % 2}>
+      <div slot="trigger" class="flex-1 p-3">Item {i + 1}</div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
+        omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
+        Inventore laborum rerum at id?
+      </div>
+    </ExpansionPanel>
+  {/each}
+</Preview>
+
 ## ListItem trigger
 
 <Preview>
