@@ -6,9 +6,13 @@
 
   export let items = [];
   export let divider: string | undefined = undefined;
+  export let inline = false;
 </script>
 
-<div {...$$restProps} class={clsx('flex items-center justify-start', $$restProps.class)}>
+<div
+  {...$$restProps}
+  class={clsx(inline ? 'inline-flex' : 'flex', 'items-center justify-start', $$restProps.class)}
+>
   {#each items ?? [] as item, index}
     <slot name="item" {item}>
       <div class="item">{item}</div>
