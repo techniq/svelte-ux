@@ -3,7 +3,7 @@
 </script>
 
 <div
-  class="rounded-full inline-flex items-center justify-center {$$props.class}"
+  class="rounded-full inline-flex items-center justify-center flex-shrink-0 {$$props.class}"
   class:w-6={size === 'sm'}
   class:h-6={size === 'sm'}
   class:w-10={size === 'md'}
