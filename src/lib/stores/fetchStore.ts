@@ -185,7 +185,11 @@ export default function fetchStore() {
 
     let data = undefined;
     if (nextState.data && nextState.data !== currentState.data && config?.onDataChange) {
-      data = config.onDataChange(nextState.data, currentState.data);
+      try {
+        data = config.onDataChange(nextState.data, currentState.data);
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     let newState = {
@@ -199,7 +203,11 @@ export default function fetchStore() {
       nextState.response !== currentState.response &&
       config?.onResponseChange
     ) {
-      data = config.onResponseChange(nextState.response, newState);
+      try {
+        data = config.onResponseChange(nextState.response, newState);
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     newState = {
