@@ -5,6 +5,7 @@ export * as dateDisplay from './dateDisplay';
 export * as dateRange from './dateRange';
 export * as dom from './dom';
 export * as duration from './duration';
+export * as excel from './excel';
 export * as file from './file';
 export * as format from './format';
 export * as json from './json';
