@@ -89,7 +89,7 @@
         $$props.class
       )}
       style={$$props.style}
-      transition:scale={{ duration: 150, easing: quadIn }}
+      transition:scale|local={{ duration: 150, easing: quadIn }}
       bind:this={dialogEl}
     >
       {#if loading}
