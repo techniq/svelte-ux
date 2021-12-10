@@ -132,7 +132,7 @@
     </div>
   </div>
 
-  <div class="p-2 w-80">
+  <div class="p-2 w-96">
     <DateSelect
       bind:selected={currentValue}
       {periodType}
