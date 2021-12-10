@@ -11,11 +11,7 @@
   import MonthListByYear from './MonthListByYear.svelte';
   import YearList from './YearList.svelte';
 
-  export let selected: SelectedDate = {
-    from: null,
-    to: null,
-    periodType: null,
-  };
+  export let selected: SelectedDate = null;
   export let periodType: PeriodType = PeriodType.Day;
   export let activeDate: 'from' | 'to' = 'from';
 
