@@ -2,7 +2,9 @@
   import { spring } from 'svelte/motion';
 
 	import Preview from '$lib/components/Preview.svelte';
-	import { pannable } from '$lib/actions/mouse';
+	import { pannable, longpress } from '$lib/actions/mouse';
+
+  let longpressed = false;
 
 	const coords = spring({ x: 0, y: 0 }, {
 		stiffness: 0.2,
@@ -14,7 +16,21 @@
 		coords.damping = 0.4;
 		coords.set({ x: 0, y: 0 });
 	}
+
 </script>
+
+## longpress
+
+### Dispatch event after element has been pressed for a duration of time
+
+<Preview>
+  <button class="border rounded p-2 text-sm hover:bg-black/5" use:longpress={1000} on:longpress={() => longpressed = !longpressed}>
+    Click and hold
+  </button>
+  {#if longpressed}
+    <span class="text-xs text-black/50">Success!  Repeat to hide</span>
+  {/if}
+</Preview>
 
 ## pannable
 

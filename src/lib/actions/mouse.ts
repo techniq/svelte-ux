@@ -1,4 +1,34 @@
 /**
+ * Dispatch event after element has been pressed for a duration of time
+ */
+export function longpress(node: HTMLElement, duration: number) {
+  let timeoutID: number;
+
+  const handleMousedown = () => {
+    timeoutID = window.setTimeout(() => {
+      node.dispatchEvent(new CustomEvent('longpress'));
+    }, duration);
+  };
+
+  const handleMouseup = () => {
+    clearTimeout(timeoutID);
+  };
+
+  node.addEventListener('mousedown', handleMousedown);
+  node.addEventListener('mouseup', handleMouseup);
+
+  return {
+    update(newDuration) {
+      duration = newDuration;
+    },
+    destroy() {
+      node.removeEventListener('mousedown', handleMousedown);
+      node.removeEventListener('mouseup', handleMouseup);
+    },
+  };
+}
+
+/**
  * Track mouse position changes from mouse down on node to mouse up
  */
 export function pannable(node: HTMLElement): SvelteActionReturnType {
