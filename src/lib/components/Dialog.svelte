@@ -90,6 +90,10 @@
       )}
       style={$$props.style}
       transition:scale|local={{ duration: 150, easing: quadIn }}
+      on:introstart
+      on:outrostart
+      on:introend
+      on:outroend
       bind:this={dialogEl}
     >
       {#if loading}
