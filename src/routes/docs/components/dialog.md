@@ -154,16 +154,18 @@
 ## Disabled action
 
 <Preview>
-  <Button on:click={() => open = true}>Show Dialog</Button>
-  <Dialog bind:open>
-    <div slot="title">Are you sure you want to do that?</div>
-    <div slot="actions">
-      <Button class="text-blue-500" disabled>
-        Don't touch
-      </Button>
-      <Button class="text-blue-500">
-        Close
-      </Button>
-    </div>
-  </Dialog>
+  <Toggle let:on={open} let:toggle>
+    <Button on:click={toggle}>Show Dialog</Button>
+    <Dialog {open} on:close={toggle}>
+      <div slot="title">Are you sure you want to do that?</div>
+      <div slot="actions">
+        <Button class="text-blue-500" disabled>
+          Don't touch
+        </Button>
+        <Button class="text-blue-500">
+          Close
+        </Button>
+      </div>
+    </Dialog>
+  </Toggle>
 </Preview>
