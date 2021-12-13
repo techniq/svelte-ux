@@ -3,7 +3,7 @@
 
   import portalAction from '../actions/portal';
 
-  export let blur: boolean = true;
+  export let blur: boolean = false;
   export let portal = false;
 
   export let fadeParams: FadeParams = { duration: 300 };
