@@ -65,6 +65,7 @@
       }
     }}
     class="z-50"
+    fadeParams={{ duration: 150 }}
     {portal}
   />
 
