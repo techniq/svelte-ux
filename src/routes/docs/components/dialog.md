@@ -18,7 +18,7 @@
   <Dialog bind:open>
     <div slot="title">Are you sure you want to do that?</div>
     <div slot="actions">
-      <Button class="text-blue-500">
+      <Button class="bg-blue-500 text-white hover:bg-blue-600">
         Close
       </Button>
     </div>
@@ -33,7 +33,7 @@
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button class="text-blue-500">
+        <Button class="bg-blue-500 text-white hover:bg-blue-600">
           Close
         </Button>
       </div>
@@ -58,7 +58,7 @@
             openAsync = false
           }, 1000)
         }}
-        class="text-blue-500"
+        class="bg-blue-500 text-white hover:bg-blue-600"
       >
         Save
       </Button>
@@ -85,7 +85,7 @@
               toggleOff();
             }, 1000)
           }}
-          class="text-blue-500"
+          class="bg-blue-500 text-white hover:bg-blue-600"
         >
           Save
         </Button>
@@ -110,7 +110,7 @@
       <div slot="actions">
         <Button
           on:click={() => { console.log('Deleting item...') }}
-          class="text-red-500"
+          class="bg-red-500 text-white hover:bg-red-600"
         >
           Yes, delete item
         </Button>
@@ -128,7 +128,7 @@
     <Dialog {open} on:close={toggle} loading>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button class="text-blue-500">
+        <Button class="bg-blue-500 text-white hover:bg-blue-600">
           Close
         </Button>
       </div>
@@ -144,7 +144,7 @@
     <Dialog {open} on:close={toggle} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button class="text-blue-500">Yes</Button>
+        <Button class="bg-blue-500 text-white hover:bg-blue-600">Yes</Button>
         <Button>No</Button>
       </div>
     </Dialog>
@@ -159,10 +159,10 @@
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button class="text-blue-500" disabled>
+        <Button class="bg-blue-500 text-white hover:bg-blue-600" disabled>
           Don't touch
         </Button>
-        <Button class="text-blue-500">
+        <Button>
           Close
         </Button>
       </div>
