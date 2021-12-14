@@ -14,7 +14,7 @@ export * as number from './number';
 export * as object from './object';
 export * as promise from './promise';
 export * as rollup from './rollup';
-// export * as routing from './routing'; TODO: Fix `error: Could not resolve "$app/..." (mark it as external to exclude it from the bundle)` when importing package
+// export * as routing from './routing'; TODO: Fix `error: Could not resolve "$app/..." (mark it as external to exclude it from the bundle)` when importing package.  Related: https://github.com/sveltejs/kit/issues/3010
 export * as serialize from './serialize';
 export * as sort from './sort';
 export * as styles from './styles';
