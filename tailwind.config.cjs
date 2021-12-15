@@ -8,7 +8,6 @@ module.exports = {
       colors: {
         'color-var': 'var(--color)',
         accent: colors.blue,
-        sky: colors.sky,
       },
     },
   },
