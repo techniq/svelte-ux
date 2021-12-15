@@ -65,9 +65,6 @@
     vertical-align: middle;
     justify-content: center;
     align-items: center;
-
-    --path-color: currentColor;
-    --track-color: rgba(0, 0, 0, 0.1);
   }
 
   svg {
@@ -101,13 +98,13 @@
   }
 
   .track {
-    stroke: var(--track-color);
+    stroke: var(--track-color, rgba(0, 0, 0, 0.1));
     z-index: 1;
   }
 
   .path {
     /* stroke: currentColor; */
-    stroke: var(--path-color);
+    stroke: var(--path-color, currentColor);
     z-index: 2;
     transition: all 0.6s ease-in-out;
   }

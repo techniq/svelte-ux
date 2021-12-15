@@ -183,28 +183,23 @@
 <Preview>
   <Stack horizontal justify="start" gap={32}>
     <CircularProgress
-      class="text-blue-500"
-      style="--track-color: var(--color-blue-100)"
+      class="text-blue-500 [--track-color:theme(colors.blue.100)]"
       track
     />
     <CircularProgress
-      class="text-red-500"
-      style="--track-color: var(--color-red-100)"
+      class="text-red-500 [--track-color:theme(colors.red.100)]"
       track
     />
     <CircularProgress
-      class="text-purple-500"
-      style="--track-color: var(--color-purple-100)"
+      class="text-purple-500 [--track-color:theme(colors.purple.100)]"
       track
     />
     <CircularProgress
-      class="text-green-500"
-      style="--track-color: var(--color-green-100)"
+      class="text-green-500 [--track-color:theme(colors.green.100)]"
       track
     />
     <CircularProgress
-      class="text-orange-500"
-      style="--track-color: var(--color-orange-100)"
+      class="text-orange-500 [--track-color:theme(colors.orange.100)]"
       track
     />
   </Stack>

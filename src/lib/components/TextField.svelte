@@ -4,7 +4,6 @@
   import { mdiClose, mdiCurrencyUsd, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
-  import cssVars from '../actions/cssVars';
   import multi from '../actions/multi';
   import type { Actions } from '../actions/multi';
 
@@ -114,15 +113,13 @@
 
 <fieldset
   {disabled}
-  use:cssVars={{
-    color: error
-      ? 'var(--color-red-500)'
-      : filled
-      ? 'var(--color-gray-600)'
-      : 'var(--color-blue-500)',
-  }}
   class={clsx(
     'group',
+    error
+      ? '[--color:theme(colors.red.500)]'
+      : filled
+      ? '[--color:theme(colors.gray.600)]'
+      : '[--color:theme(colors.blue.500)]',
     disabled && 'opacity-50',
     !base && (rounded ? 'rounded-full' : 'rounded'),
     $$props.class

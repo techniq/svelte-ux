@@ -4,8 +4,6 @@
   import { mdiClose, mdiInformationOutline } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
-  import cssVars from '../actions/cssVars';
-
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import Stack from './Stack.svelte';
@@ -50,15 +48,13 @@
 
 <fieldset
   {disabled}
-  use:cssVars={{
-    color: error
-      ? 'var(--color-red-500)'
-      : filled
-      ? 'var(--color-gray-600)'
-      : 'var(--color-blue-500)',
-  }}
   class={clsx(
     'group',
+    error
+      ? '[--color:theme(colors.red.500)]'
+      : filled
+      ? '[--color:theme(colors.gray.600)]'
+      : '[--color:theme(colors.blue.500)]',
     disabled && 'opacity-50',
     !base && (rounded ? 'rounded-full' : 'rounded'),
     $$props.class
