@@ -21,7 +21,7 @@
 <NavItem text="Button" path="/docs/components/button" class="pl-6 py-2" />
 <NavItem text="Card" path="/docs/components/card" class="pl-6 py-2" />
 <NavItem text="Collapse" path="/docs/components/collapse" class="pl-6 py-2" />
-<NavItem text="Expansion Panel" path="/docs/components/expansionpanel" class="pl-6 py-2" />
+<NavItem text="ExpansionPanel" path="/docs/components/expansionpanel" class="pl-6 py-2" />
 <NavItem text="Icon" path="/docs/components/icon" class="pl-6 py-2" />
 <NavItem text="ListItem" path="/docs/components/listitem" class="pl-6 py-2" />
 <NavItem text="Paginate" path="/docs/components/paginate" class="pl-6 py-2" />
@@ -35,6 +35,7 @@
 <NavItem text="Input" path="/docs/components/input" class="pl-6 py-2" />
 <NavItem text="Radio" path="/docs/components/radio" class="pl-6 py-2" />
 <NavItem text="Select Field" path="/docs/components/selectfield" class="pl-6 py-2" />
+<NavItem text="SelectField" path="/docs/components/selectfield" class="pl-6 py-2" />
 <NavItem text="Switch" path="/docs/components/switch" class="pl-6 py-2" />
 <NavItem text="TextField" path="/docs/components/textfield" class="pl-6 py-2" />
 
