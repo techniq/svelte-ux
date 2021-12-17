@@ -40,6 +40,7 @@ export { default as Paginate } from './Paginate.svelte';
 export { default as Pagination } from './Pagination.svelte';
 export { default as Popover } from './Popover.svelte';
 export { default as Radio } from './Radio.svelte';
+export { default as RangeSlider } from './RangeSlider.svelte';
 export { default as SectionDivider } from './SectionDivider.svelte';
 export { default as SelectField } from './SelectField.svelte';
 export { default as Stack } from './Stack.svelte';
