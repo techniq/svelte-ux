@@ -79,3 +79,10 @@ export function formatNumberAsStyle(
 
   return d3Format(formula)(value);
 }
+
+/**
+ * Clamps value within min and max
+ */
+export function clamp(value: number, min: number, max: number) {
+  return value < min ? min : value > max ? max : value;
+}
