@@ -34,7 +34,7 @@
 <NavItem text="Field" path="/docs/components/field" class="pl-6 py-2" />
 <NavItem text="Input" path="/docs/components/input" class="pl-6 py-2" />
 <NavItem text="Radio" path="/docs/components/radio" class="pl-6 py-2" />
-<NavItem text="Select Field" path="/docs/components/selectfield" class="pl-6 py-2" />
+<NavItem text="RangeSlider" path="/docs/components/RangeSlider" class="pl-6 py-2" />
 <NavItem text="SelectField" path="/docs/components/selectfield" class="pl-6 py-2" />
 <NavItem text="Switch" path="/docs/components/switch" class="pl-6 py-2" />
 <NavItem text="TextField" path="/docs/components/textfield" class="pl-6 py-2" />

@@ -13,6 +13,11 @@ const config = {
     adapter: staticAdapter(),
     target: '#svelte',
     ssr: false, // TODO: Re-enable after identifing/fixing layout shift
+    vite: {
+      optimizeDeps: {
+        include: ['d3-scale'],
+      },
+    },
   },
 };
 
