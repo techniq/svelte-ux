@@ -86,3 +86,17 @@ export function formatNumberAsStyle(
 export function clamp(value: number, min: number, max: number) {
   return value < min ? min : value > max ? max : value;
 }
+
+/**
+ * Return the number of decimal positions (ex. 123.45 => 2, 123 => 0)
+ */
+export function decimalCount(value: number) {
+  return value?.toString().split('.')[1]?.length ?? 0;
+}
+
+/**
+ * Round to the number of decimals (ex. round(123.45, 1) => 123.5)
+ */
+export function round(value: number, decimals: number) {
+  return Number(value.toFixed(decimals));
+}
