@@ -50,7 +50,7 @@
   let showEndValue = false;
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
-    return function (e) {
+    return function (e: MouseEvent) {
       isMoving = true;
       switch (which) {
         case 'start':
@@ -73,7 +73,7 @@
   }
 
   function onMove(which: 'start' | 'range' | 'end') {
-    return function (e) {
+    return function (e: MouseEvent) {
       const parentEl = e.target.parentElement;
       const parentRect = parentEl.getBoundingClientRect();
 
@@ -118,7 +118,7 @@
   }
 
   function onMoveEnd(which: 'start' | 'range' | 'end') {
-    return function (e) {
+    return function (e: MouseEvent) {
       isMoving = null;
       showStartValue = false;
       showEndValue = false;
@@ -126,7 +126,7 @@
   }
 
   function onMouseEnter(which: 'start' | 'range' | 'end') {
-    return function (e) {
+    return function (e: MouseEvent) {
       if (isMoving == null) {
         switch (which) {
           case 'start':
@@ -147,7 +147,7 @@
   }
 
   function onMouseLeave(which: 'start' | 'range' | 'end') {
-    return function (e) {
+    return function (e: MouseEvent) {
       if (isMoving == null) {
         showStartValue = false;
         showEndValue = false;
@@ -155,7 +155,7 @@
     };
   }
 
-  function onKeyDown(e) {
+  function onKeyDown(e: KeyboardEvent) {
     console.log(e);
     switch (e.key) {
       case 'ArrowLeft':
@@ -167,7 +167,7 @@
     }
   }
 
-  function onClick(e) {
+  function onClick(e: MouseEvent) {
     // Focus for key input
     e.target.focus();
   }
