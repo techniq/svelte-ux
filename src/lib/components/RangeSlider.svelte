@@ -9,14 +9,14 @@
       - [x] Tween changes
       - [ ] Clicking on track moves ranges
       - [ ] Double click thumb to jump to min/max
-      - [ ] Support single and double thumb (array)
-        - single: clicking range/track jumps to value
-        - double: clicking range/track jumps range
-      - [ ] Keyboard input
+      - [x] Keyboard input
         - left/right arrows move range
         - shift + left moves start, shift + right moves end
         - consider last item clicked gets events (both, start, end)...
       - [x] Ignore dy changes from pannable
+      - [ ] Support single and double thumb (array)
+        - single: clicking range/track jumps to value
+        - double: clicking range/track jumps range
       - [ ] Circular variant
         - https://svelte.dev/repl/e5db52ead53643c381eb626c7ee0f5a8?version=3.44.3
       - [ ] Support Dates, and possible other non-numbers (but has valueOf?)
@@ -44,26 +44,28 @@
   const end = spring(0);
   $: end.set(scale(value[1]));
 
-  let isMoving: 'start' | 'range' | 'end' | null = null;
+  let isMoving = false;
+  let lastMoved: 'start' | 'range' | 'end' = 'range';
   let showStartValue = false;
   let showEndValue = false;
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
     return function (e) {
+      isMoving = true;
       switch (which) {
         case 'start':
-          isMoving = 'start';
+          lastMoved = 'start';
           showStartValue = true;
           break;
 
         case 'range':
-          isMoving = 'range';
+          lastMoved = 'range';
           showStartValue = true;
           showEndValue = true;
           break;
 
         case 'end':
-          isMoving = 'end';
+          lastMoved = 'end';
           showEndValue = true;
           break;
       }
@@ -78,36 +80,41 @@
       const deltaPercent = e.detail.dx / parentRect.width;
       const deltaValue = (max - min) * deltaPercent;
 
-      const [currentStartValue, currentEndValue] = value;
-      const newStartValue = round(currentStartValue + deltaValue, stepDecimals);
-      const newEndValue = round(currentEndValue + deltaValue, stepDecimals);
-
-      switch (which) {
-        case 'start':
-          if (newStartValue >= min && newStartValue <= max) {
-            value = [newStartValue, Math.max(currentEndValue, newStartValue)];
-          } else {
-            // Ignore
-          }
-          break;
-
-        case 'range':
-          if (newStartValue >= min && newEndValue <= max) {
-            value = [newStartValue, newEndValue];
-          } else {
-            // Ignore
-          }
-          break;
-
-        case 'end':
-          if (newEndValue >= min && newEndValue <= max) {
-            value = [Math.min(newEndValue, currentStartValue), newEndValue];
-          } else {
-            // Ignore
-          }
-          break;
-      }
+      applyMove(which, deltaValue);
     };
+  }
+
+  function applyMove(which: 'start' | 'range' | 'end', deltaValue: number) {
+    const [currentStartValue, currentEndValue] = value;
+    // Round to fix float math (ex. 0.1 + 0.2 or 0.3 - 0.1)
+    const newStartValue = round(currentStartValue + deltaValue, stepDecimals);
+    const newEndValue = round(currentEndValue + deltaValue, stepDecimals);
+
+    switch (which) {
+      case 'start':
+        if (newStartValue >= min && newStartValue <= max) {
+          value = [newStartValue, Math.max(currentEndValue, newStartValue)];
+        } else {
+          // Ignore
+        }
+        break;
+
+      case 'range':
+        if (newStartValue >= min && newEndValue <= max) {
+          value = [newStartValue, newEndValue];
+        } else {
+          // Ignore
+        }
+        break;
+
+      case 'end':
+        if (newEndValue >= min && newEndValue <= max) {
+          value = [Math.min(newEndValue, currentStartValue), newEndValue];
+        } else {
+          // Ignore
+        }
+        break;
+    }
   }
 
   function onMoveEnd(which: 'start' | 'range' | 'end') {
@@ -147,11 +154,31 @@
       }
     };
   }
+
+  function onKeyDown(e) {
+    console.log(e);
+    switch (e.key) {
+      case 'ArrowLeft':
+        applyMove(lastMoved, -step);
+        break;
+      case 'ArrowRight':
+        applyMove(lastMoved, step);
+        break;
+    }
+  }
+
+  function onClick(e) {
+    // Focus for key input
+    e.target.focus();
+  }
 </script>
 
 <div
-  class="range-slider relative h-2 bg-black/10 rounded-full select-none"
+  class="range-slider relative h-2 bg-black/10 rounded-full select-none outline-none"
   style="--start: {$start}; --end: {$end};"
+  tabindex="0"
+  on:click={onClick}
+  on:keydown={onKeyDown}
   {...$$restProps}
 >
   <div
