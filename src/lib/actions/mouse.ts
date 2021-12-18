@@ -63,6 +63,7 @@ export function pannable(node: HTMLElement, options: PannableOptions = {}): Svel
   }
 
   function handleMouseMove(event: MouseEvent) {
+    // TODO: Handle page scroll?  clientX/Y is based on viewport (apply to parent?)
     let dx = event.clientX - lastX;
     let dy = event.clientY - lastY;
 
