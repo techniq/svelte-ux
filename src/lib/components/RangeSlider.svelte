@@ -8,7 +8,7 @@
         - https://svelte.dev/repl/8af0c98cc61d4f7fbca233282b885eaa?version=3.44.3
       - [x] Tween changes
       - [ ] Clicking on track moves ranges
-      - [ ] Double click thumb to jump to min/max
+      - [x] Double click thumb to jump to min/max
       - [x] Keyboard input
         - left/right arrows move range
         - shift + left moves start, shift + right moves end
@@ -188,6 +188,7 @@
     on:panend={onMoveEnd('range')}
     on:mouseenter={onMouseEnter('range')}
     on:mouseleave={onMouseLeave('range')}
+    on:dblclick={() => (value = [min, max])}
     style="
       left:  calc(100 * var(--start)     * 1%);
       right: calc(100 * (1 - var(--end)) * 1%);
@@ -202,6 +203,7 @@
     on:panend={onMoveEnd('start')}
     on:mouseenter={onMouseEnter('start')}
     on:mouseleave={onMouseLeave('start')}
+    on:dblclick={() => (value = [min, value[1]])}
     style="left: calc(100 * var(--start) * 1%);"
     class="thumb absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2 border border-black/30 bg-white rounded-full outline-4 hover:outline hover:outline-accent-500/20 active:outline active:outline-accent-500/30"
   />
@@ -213,6 +215,7 @@
     on:panend={onMoveEnd('end')}
     on:mouseenter={onMouseEnter('end')}
     on:mouseleave={onMouseLeave('end')}
+    on:dblclick={() => (value = [value[0], max])}
     style="left: calc(100 * var(--end) * 1%);"
     class="thumb absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2 border border-black/30 bg-white rounded-full outline-4 hover:outline hover:outline-accent-500/20 active:outline active:outline-accent-500/30"
   />
