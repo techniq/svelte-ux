@@ -21,7 +21,7 @@
         - https://svelte.dev/repl/e5db52ead53643c381eb626c7ee0f5a8?version=3.44.3
       - [ ] Support Dates, and possible other non-numbers (but has valueOf?)
       - [x] Maintain step precision / fix float math
-      - [ ] Disabled state
+      - [x] Disabled state
   */
   import { spring } from 'svelte/motion';
   import { fly } from 'svelte/transition';
@@ -54,8 +54,6 @@
   $: end.set(scale(value[1]));
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
-    if (disabled) return;
-
     return function (e: MouseEvent) {
       isMoving = true;
       switch (which) {
@@ -79,8 +77,6 @@
   }
 
   function onMove(which: 'start' | 'range' | 'end') {
-    if (disabled) return;
-
     return function (e: MouseEvent) {
       const parentEl = e.target.parentElement;
       const parentRect = parentEl.getBoundingClientRect();
@@ -126,8 +122,6 @@
   }
 
   function onMoveEnd(which: 'start' | 'range' | 'end') {
-    if (disabled) return;
-
     return function (e: MouseEvent) {
       isMoving = null;
       showStartValue = false;
@@ -136,8 +130,6 @@
   }
 
   function onMouseEnter(which: 'start' | 'range' | 'end') {
-    if (disabled) return;
-
     return function (e: MouseEvent) {
       if (isMoving == null) {
         switch (which) {
@@ -159,8 +151,6 @@
   }
 
   function onMouseLeave(which: 'start' | 'range' | 'end') {
-    if (disabled) return;
-
     return function (e: MouseEvent) {
       if (isMoving == null) {
         showStartValue = false;
@@ -170,8 +160,6 @@
   }
 
   function onKeyDown(e: KeyboardEvent) {
-    if (disabled) return;
-
     switch (e.key) {
       case 'ArrowLeft':
         applyMove(lastMoved, -step);
@@ -183,8 +171,6 @@
   }
 
   function onClick(e: MouseEvent) {
-    if (disabled) return;
-
     // Focus for key input
     e.target.focus();
 
@@ -217,11 +203,11 @@
 <div
   class={clsx(
     'range-slider group relative h-2 bg-black/10 rounded-full select-none outline-none',
-    disabled && 'opacity-50'
+    disabled && ' pointer-events-none opacity-50'
   )}
   style="--start: {$start}; --end: {$end};"
   {disabled}
-  tabindex="0"
+  tabindex={disabled ? -1 : 0}
   on:click={onClick}
   on:keydown={onKeyDown}
   {...$$restProps}
@@ -275,7 +261,6 @@
       'border border-black/30 bg-white rounded-full outline-4',
       'outline-accent-500/20',
       'hover:outline hover:outline-accent-500/20',
-      'group-disabled:opacity-50',
       (lastMoved === 'end' || lastMoved === 'range') &&
         'group-focus:outline group-focus:outline-accent-500/40'
     )}
