@@ -170,6 +170,30 @@
   function onClick(e: MouseEvent) {
     // Focus for key input
     e.target.focus();
+
+    // const targetRect = e.target.getBoundingClientRect();
+
+    // console.log(e.clientX, targetRect);
+
+    // const dx = e.clientX - targetRect.x;
+    // const deltaPercent = dx / targetRect.width;
+    // const newValue = min + (max - min) * deltaPercent;
+    // console.log({ value });
+
+    // switch (lastMoved) {
+    //   case 'start':
+    //     value = [round(newValue, stepDecimals), value[1]];
+    //     break;
+
+    //   case 'range':
+    //     // TODO: Determine what makes since here...
+    //     value = [round(newValue, stepDecimals), value[1]];
+    //     break;
+
+    //   case 'end':
+    //     value = [value[0], round(newValue, stepDecimals)];
+    //     break;
+    // }
   }
 </script>
 
