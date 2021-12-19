@@ -16,6 +16,12 @@
   <RangeSlider />
 </Preview>
 
+## disabled
+
+<Preview>
+  <RangeSlider disabled />
+</Preview>
+
 ## bind:value
 
 <Preview>
