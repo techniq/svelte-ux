@@ -7,6 +7,9 @@
   let value = [25, 75];
 </script>
 
+- Double click start, end or range to set min/max
+- Keyboard control start, end, or range based on last set
+
 ## Basic
 
 <Preview>

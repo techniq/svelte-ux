@@ -21,33 +21,37 @@
         - https://svelte.dev/repl/e5db52ead53643c381eb626c7ee0f5a8?version=3.44.3
       - [ ] Support Dates, and possible other non-numbers (but has valueOf?)
       - [x] Maintain step precision / fix float math
+      - [ ] Disabled state
   */
   import { spring } from 'svelte/motion';
-  import { scaleLinear } from 'd3-scale';
-  import { pannable } from '$lib/actions/mouse';
   import { fly } from 'svelte/transition';
+  import { scaleLinear } from 'd3-scale';
+  import clsx from 'clsx';
+
+  import { pannable } from '$lib/actions/mouse';
   import { decimalCount, round } from '$lib/utils/number';
 
   export let min = 0;
   export let max = 100;
   export let step = 1;
   export let value = [min, max];
+  export let disabled = false;
 
   $: stepPercent = step / (max - min);
   $: stepDecimals = decimalCount(step);
 
   $: scale = scaleLinear().domain([min, max]).range([0, 1]).clamp(true);
 
+  let isMoving = false;
+  let lastMoved: 'start' | 'range' | 'end' = 'range';
+  let showStartValue = false;
+  let showEndValue = false;
+
   const start = spring(0);
   $: start.set(scale(value[0]));
 
   const end = spring(0);
   $: end.set(scale(value[1]));
-
-  let isMoving = false;
-  let lastMoved: 'start' | 'range' | 'end' = 'range';
-  let showStartValue = false;
-  let showEndValue = false;
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
@@ -198,7 +202,7 @@
 </script>
 
 <div
-  class="range-slider relative h-2 bg-black/10 rounded-full select-none outline-none"
+  class="range-slider group relative h-2 bg-black/10 rounded-full select-none outline-none"
   style="--start: {$start}; --end: {$end};"
   tabindex="0"
   on:click={onClick}
@@ -229,7 +233,14 @@
     on:mouseleave={onMouseLeave('start')}
     on:dblclick={() => (value = [min, value[1]])}
     style="left: calc(100 * var(--start) * 1%);"
-    class="thumb absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2 border border-black/30 bg-white rounded-full outline-4 hover:outline hover:outline-accent-500/20 active:outline active:outline-accent-500/30"
+    class={clsx(
+      'thumb',
+      'absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2',
+      'border border-black/30 bg-white rounded-full outline-4',
+      'hover:outline hover:outline-accent-500/20',
+      (lastMoved === 'start' || lastMoved === 'range') &&
+        'group-focus:outline group-focus:outline-accent-500/40'
+    )}
   />
 
   <div
@@ -241,7 +252,15 @@
     on:mouseleave={onMouseLeave('end')}
     on:dblclick={() => (value = [value[0], max])}
     style="left: calc(100 * var(--end) * 1%);"
-    class="thumb absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2 border border-black/30 bg-white rounded-full outline-4 hover:outline hover:outline-accent-500/20 active:outline active:outline-accent-500/30"
+    class={clsx(
+      'thumb',
+      'absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2',
+      'border border-black/30 bg-white rounded-full outline-4',
+      'outline-accent-500/20',
+      'hover:outline hover:outline-accent-500/20',
+      (lastMoved === 'end' || lastMoved === 'range') &&
+        'group-focus:outline group-focus:outline-accent-500/40'
+    )}
   />
 
   {#if showStartValue}
