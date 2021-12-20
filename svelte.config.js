@@ -15,7 +15,7 @@ const config = {
     ssr: false, // TODO: Re-enable after identifing/fixing layout shift
     vite: {
       optimizeDeps: {
-        include: ['d3-scale'],
+        include: ['d3-scale', 'd3-format'],
       },
     },
   },

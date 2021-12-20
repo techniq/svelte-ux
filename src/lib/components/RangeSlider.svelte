@@ -22,6 +22,7 @@
       - [ ] Support Dates, and possible other non-numbers (but has valueOf?)
       - [x] Maintain step precision / fix float math
       - [x] Disabled state
+      - [ ] Change range color / gradient
   */
   import { spring } from 'svelte/motion';
   import { fly } from 'svelte/transition';
