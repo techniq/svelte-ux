@@ -1,3 +1,4 @@
+import slug from 'rehype-slug';
 import { visit } from 'unist-util-visit';
 import prettier from 'prettier/esm/standalone.mjs';
 import typescriptPlugin from 'prettier/esm/parser-typescript.mjs';
@@ -36,5 +37,6 @@ export default {
   extensions: ['.md', '.svx'],
   layout: './src/docs/Layout.svelte',
   remarkPlugins: [codePreview],
+  rehypePlugins: [slug],
   // highlight: false
 };
