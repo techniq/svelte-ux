@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script lang="ts">
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';

@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import Paginate from '$lib/components/Paginate.svelte';
   import Preview from '$lib/components/Preview.svelte';

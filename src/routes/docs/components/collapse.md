@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import Card from '$lib/components/Card.svelte';
   import Collapse from '$lib/components/Collapse.svelte';

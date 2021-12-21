@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 ```svelte
 <Toggle let:on={open} let:toggle>
   <Button on:click={toggle}>Show dialog</Button>

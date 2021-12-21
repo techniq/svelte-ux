@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import Button from '$lib/components/Button.svelte';
   import Drawer from '$lib/components/Drawer.svelte';

@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import AppBar from '$lib/components/AppBar.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';

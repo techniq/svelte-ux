@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import { addDays } from 'date-fns';
 

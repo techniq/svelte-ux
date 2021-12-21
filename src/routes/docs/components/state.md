@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 ```svelte
 <State initial={selected} let:value let:set>
 	{#each items as item}

@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import { mdiFilterVariant, mdiPlus, mdiMinus } from '@mdi/js';
 

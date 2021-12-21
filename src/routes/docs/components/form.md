@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 ```svelte
 <Form
   initial={{ example }}

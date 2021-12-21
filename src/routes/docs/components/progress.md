@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import CircularProgress from '$lib/components/CircularProgress.svelte';
   // import LinearProgress from '$lib/components/LinearProgress.svelte';

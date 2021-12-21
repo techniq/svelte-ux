@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import { mdiMagnify, mdiPlus } from '@mdi/js';
 
@@ -6,6 +11,8 @@
 
   let value = [25, 75];
 </script>
+
+## Description
 
 <div class="prose">
 

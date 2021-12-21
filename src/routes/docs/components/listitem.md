@@ -1,6 +1,12 @@
+---
+component: $component
+filename: $filename
+description: A list item that provides a standard layout and works best with multiple instances in the same parent element.
+---
+
 <script lang="ts">
 	import clsx from 'clsx';
-	import { mdiAccount, mdiFileDocumentEditOutline, mdiChevronRight } from '@mdi/js';
+	import { mdiAccount, mdiChevronRight } from '@mdi/js';
 
 	import Button from '$lib/components/Button.svelte';
 	import Checkbox from '$lib/components/Checkbox.svelte';
@@ -8,7 +14,6 @@
 	import ListItem from '$lib/components/ListItem.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 	import Radio from '$lib/components/Radio.svelte';
-	import Tooltip from '$lib/components/Tooltip.svelte';
 
 	let selectedId = 1;
 	const choices = [
@@ -18,15 +23,6 @@
 		{ id: 4, name: 'Allow select actions', description: 'Only actions that match specified criteria, plus actions defined in a repository within techniq, can be used.' },
 	]
 </script>
-
-<div class="flex items-center gap-2">
-	<span class="text-2xl font-bold">ListItem</span>
-	<Tooltip title="Edit this page">
-		<Button class="text-black/50" icon={mdiFileDocumentEditOutline} href="https://github.com/techniq/svelte-ux/blob/master/src/routes/docs/components/ListItem.md" target="_blank" />
-	</Tooltip>
-</div>
-
-A list item that provides a standard layout and works best with multiple instances in the same parent element.
 
 ## Title only
 

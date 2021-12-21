@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script lang="ts">
 	import { mdiRefresh } from '@mdi/js';
 

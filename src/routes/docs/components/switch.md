@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import { mdiCheck, mdiClose } from '@mdi/js';
 

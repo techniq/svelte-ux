@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import Field from '$lib/components/Field.svelte';
   import Input from '$lib/components/Input.svelte';

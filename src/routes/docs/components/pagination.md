@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script lang="ts">
 	import Pagination from '$lib/components/Pagination.svelte';
 	import Preview from '$lib/components/Preview.svelte';

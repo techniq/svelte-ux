@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script lang="ts">
 	import clsx from 'clsx';
 	import { format } from 'date-fns';

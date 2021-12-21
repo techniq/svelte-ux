@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script lang="ts">
   import { mdiInbox, mdiCheckCircleOutline } from '@mdi/js';
 

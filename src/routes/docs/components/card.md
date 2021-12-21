@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script lang="ts">
   import { mdiDotsVertical } from '@mdi/js';
 

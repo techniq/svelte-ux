@@ -1,3 +1,8 @@
+---
+component: $component
+filename: $filename
+---
+
 <script>
   import AppBar from '$lib/components/AppBar.svelte';
   import Avatar from '$lib/components/Avatar.svelte';
