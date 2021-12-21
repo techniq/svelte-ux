@@ -9,8 +9,9 @@
 
 <div class="prose">
 
+- Drag start and end points individually, or drag the middle together
 - Double click start, end or range to set min/max
-- Keyboard control start, end, or range based on last set
+- Use keyboard arrow keys to adjust last changed
 
 </div>
 

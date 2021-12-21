@@ -7,7 +7,7 @@
       - [x] Show value while hovered/dragging
         - https://svelte.dev/repl/8af0c98cc61d4f7fbca233282b885eaa?version=3.44.3
       - [x] Tween changes
-      - [ ] Clicking on track moves ranges
+      - [x] Clicking on track moves ranges
       - [x] Double click thumb to jump to min/max
       - [x] Keyboard input
         - left/right arrows move range
@@ -23,14 +23,17 @@
       - [x] Maintain step precision / fix float math
       - [x] Disabled state
       - [ ] Change range color / gradient
+      - [ ] Show min/max scale (opt in as prop).  Show above, below, option?
   */
   import { spring } from 'svelte/motion';
   import { fly } from 'svelte/transition';
   import { scaleLinear } from 'd3-scale';
   import clsx from 'clsx';
+  import { mdiDragHorizontal } from '@mdi/js';
 
   import { pannable } from '$lib/actions/mouse';
   import { decimalCount, round } from '$lib/utils/number';
+  import Icon from './Icon.svelte';
 
   export let min = 0;
   export let max = 100;
@@ -47,6 +50,7 @@
   let lastMoved: 'start' | 'range' | 'end' = 'range';
   let showStartValue = false;
   let showEndValue = false;
+  let ignoreClickEvents = false;
 
   const start = spring(0);
   $: start.set(scale(value[0]));
@@ -56,6 +60,8 @@
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
+      ignoreClickEvents = true;
+
       isMoving = true;
       switch (which) {
         case 'start':
@@ -124,7 +130,12 @@
 
   function onMoveEnd(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
-      isMoving = null;
+      // Ignore immediate click events after a drag (also fired on mouse up)
+      setTimeout(() => {
+        ignoreClickEvents = false;
+      }, 100);
+
+      isMoving = false;
       showStartValue = false;
       showEndValue = false;
     };
@@ -132,7 +143,7 @@
 
   function onMouseEnter(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
-      if (isMoving == null) {
+      if (isMoving === false) {
         switch (which) {
           case 'start':
             showStartValue = true;
@@ -153,7 +164,7 @@
 
   function onMouseLeave(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
-      if (isMoving == null) {
+      if (isMoving === false) {
         showStartValue = false;
         showEndValue = false;
       }
@@ -172,32 +183,37 @@
   }
 
   function onClick(e: MouseEvent) {
-    // Focus for key input
+    // Focus for keyboard input
     e.target.focus();
 
-    // const targetRect = e.target.getBoundingClientRect();
+    if (ignoreClickEvents) {
+      return;
+    }
 
-    // console.log(e.clientX, targetRect);
+    let sliderRect: DOMRect;
+    if (e.target.classList.contains('range-slider')) {
+      // Root / track
+      sliderRect = e.target.getBoundingClientRect();
+    } else if (e.target.classList.contains('range')) {
+      // Range selection
+      sliderRect = e.target.parentElement.getBoundingClientRect();
+    } else {
+      // Ignore clicks on thumbs, etc
+      return;
+    }
 
-    // const dx = e.clientX - targetRect.x;
-    // const deltaPercent = dx / targetRect.width;
-    // const newValue = min + (max - min) * deltaPercent;
-    // console.log({ value });
+    const dx = e.clientX - sliderRect.x;
+    const deltaPercent = dx / sliderRect.width;
+    const newValue = min + (max - min) * deltaPercent;
 
-    // switch (lastMoved) {
-    //   case 'start':
-    //     value = [round(newValue, stepDecimals), value[1]];
-    //     break;
-
-    //   case 'range':
-    //     // TODO: Determine what makes since here...
-    //     value = [round(newValue, stepDecimals), value[1]];
-    //     break;
-
-    //   case 'end':
-    //     value = [value[0], round(newValue, stepDecimals)];
-    //     break;
-    // }
+    // Move value closest to clicked point
+    if (Math.abs(value[0] - newValue) < Math.abs(value[1] - newValue)) {
+      value = [round(newValue, stepDecimals), value[1]];
+      lastMoved = 'start';
+    } else {
+      value = [value[0], round(newValue, stepDecimals)];
+      lastMoved = 'end';
+    }
   }
 </script>
 
@@ -214,6 +230,16 @@
   {...$$restProps}
 >
   <div
+    on:mouseenter={onMouseEnter('range')}
+    on:mouseleave={onMouseLeave('range')}
+    style="
+      left:  calc(var(--start) * 100%);
+      right: calc((1 - var(--end)) * 100%);
+    "
+    class="range absolute top-0 bottom-0 bg-accent-400 active:bg-accent-500"
+  />
+
+  <div
     use:pannable={{ axis: 'x', stepPercent }}
     on:panstart={onMoveStart('range')}
     on:panmove={onMove('range')}
@@ -221,12 +247,18 @@
     on:mouseenter={onMouseEnter('range')}
     on:mouseleave={onMouseLeave('range')}
     on:dblclick={() => (value = [min, max])}
-    style="
-      left:  calc(100 * var(--start)     * 1%);
-      right: calc(100 * (1 - var(--end)) * 1%);
-    "
-    class="range absolute top-0 bottom-0 bg-accent-400 cursor-ew-resize active:bg-accent-500"
-  />
+    style="left: calc((((var(--end) - var(--start)) / 2 ) + var(--start)) * 100%);"
+    class={clsx(
+      'range-thumb',
+      'absolute top-1/2 w-8 h-4 -translate-x-1/2 -translate-y-1/2',
+      'rounded-full',
+      'flex items-center justify-center',
+      showStartValue || showEndValue ? 'opacity-100' : 'opacity-0',
+      'transition-opacity'
+    )}
+  >
+    <Icon path={mdiDragHorizontal} class="text-white" />
+  </div>
 
   <div
     use:pannable={{ axis: 'x', stepPercent }}
@@ -236,7 +268,7 @@
     on:mouseenter={onMouseEnter('start')}
     on:mouseleave={onMouseLeave('start')}
     on:dblclick={() => (value = [min, value[1]])}
-    style="left: calc(100 * var(--start) * 1%);"
+    style="left: calc(var(--start) * 100%);"
     class={clsx(
       'thumb',
       'absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2',
@@ -255,7 +287,7 @@
     on:mouseenter={onMouseEnter('end')}
     on:mouseleave={onMouseLeave('end')}
     on:dblclick={() => (value = [value[0], max])}
-    style="left: calc(100 * var(--end) * 1%);"
+    style="left: calc(var(--end) * 100%);"
     class={clsx(
       'thumb',
       'absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2',
@@ -269,7 +301,7 @@
 
   {#if showStartValue}
     <output
-      style="left: calc(100 * var(--start) * 1%);"
+      style="left: calc(var(--start) * 100%);"
       class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
       transition:fly={{ y: 4, duration: 300 }}
     >
@@ -279,7 +311,7 @@
 
   {#if showEndValue}
     <output
-      style="left: calc(100 * var(--end) * 1%);"
+      style="left: calc(var(--end) * 100%);"
       class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
       transition:fly={{ y: 4, duration: 300 }}
     >
