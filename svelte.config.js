@@ -35,7 +35,7 @@ const config = {
             },
           });
 
-          const githubFilename = filename.match('svelte-ux/(.*)')[1];
+          const githubFilename = 'src/' + filename.match('src/(.*)')[1];
           const component = filename.match('.*/(.*).md')[1];
 
           return {
