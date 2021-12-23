@@ -2,6 +2,7 @@ import { parse, walk } from 'svelte/compiler';
 import staticAdapter from '@sveltejs/adapter-static';
 import sveltePreprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
+import sveld from 'vite-plugin-sveld';
 
 import mdsvexConfig from './mdsvex.config.js';
 
@@ -81,8 +82,9 @@ const config = {
     target: '#svelte',
     ssr: false, // TODO: Re-enable after identifing/fixing layout shift
     vite: {
+      plugins: [sveld()],
       optimizeDeps: {
-        include: ['d3-scale', 'd3-format', 'd3-time'],
+        include: ['d3-scale', 'd3-format', 'd3-time', 'd3-array'],
       },
     },
   },
