@@ -147,9 +147,9 @@ filename: $filename
     circle
   >
     <div class="tabList">
-      <Tab value={1} class="h-12 w-12">1</Tab>
-      <Tab value={2} class="1h-12 w-12">2</Tab>
-      <Tab value={3} class="h-12 w-12">3</Tab>
+      <Tab value={1} class="h-10 aspect-square">1</Tab>
+      <Tab value={2} class="h-10 aspect-square">2</Tab>
+      <Tab value={3} class="h-10 aspect-square">3</Tab>
     </div>
   </Tabs>
 </Preview>

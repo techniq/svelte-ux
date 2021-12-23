@@ -103,7 +103,7 @@
 	 * Contained (Apple) style
 	 */
   .contained :global(.tabList) {
-    @apply inline-grid overflow-hidden p-1 text-sm bg-black/10 border-black/20 transition-shadow;
+    @apply inline-grid overflow-hidden p-1 text-sm bg-black/10 border-black/20 transition-shadow border;
     grid-auto-flow: var(--flow);
     border-radius: var(--borderRadius, 10px);
   }
@@ -140,39 +140,30 @@
 	 * Underline (Twitter) style
 	 */
   .underlined :global(.tabList) {
-    border-bottom: 1px solid #ddd;
-    /* min-height: 53px; */
-    display: flex;
-    font-size: 0.9375rem;
-    font-weight: 700;
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    @apply flex border-b text-sm h-10;
   }
 
   .underlined :global(.tabContainer) {
-    font-size: 0.9375rem;
-    font-weight: 700;
-    color: #657786;
+    @apply text-black/50 font-bold;
   }
 
   .underlined :global(.selected) {
-    color: #1da1f2;
+    @apply text-accent-500;
   }
 
   .underlined :global(.indicator) {
-    width: 100%;
-    height: 100%;
-    border-bottom: 2px solid #1da1f2;
+    @apply h-full border-b-2 border-accent-500;
   }
 
   .underlined :global(.circle .tabList) {
-    width: 144px;
+    /* width: 144px;
     height: 48px;
     border-radius: 24px;
-    min-height: 48px;
+    min-height: 48px; */
   }
 
   .underlined :global(.circle .indicator) {
-    border-radius: 24px;
-    border: 2px solid #1da1f2;
+    /* border-radius: 24px;
+    border: 2px solid #1da1f2; */
   }
 </style>
