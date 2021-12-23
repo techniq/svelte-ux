@@ -2,13 +2,14 @@
   // Custom components: https://mdsvex.com/docs#custom-components
   import blockquote from './Blockquote.svelte';
   import a from './Link.svelte';
+  import h1 from './Header1.svelte';
 
   // Used by injected info via svelte preprocessor
   import { mdiFileDocumentEditOutline } from '@mdi/js';
   import Button from '$lib/components/Button.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
 
-  export { a, blockquote };
+  export { a, blockquote, h1 };
 </script>
 
 <script>
