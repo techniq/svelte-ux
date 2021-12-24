@@ -59,8 +59,6 @@ filename: $filename
 
 # Examples
 
-<SectionDivider>Basic</SectionDivider>
-
 ## Label
 
 <Preview>

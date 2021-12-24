@@ -1,5 +1,7 @@
 <script lang="ts">
   import Card from './Card.svelte';
+  import DividerDot from './DividerDot.svelte';
+  import ListItem from './ListItem.svelte';
   import Table from './Table.svelte';
 
   export let api: SveldJson;
@@ -8,48 +10,95 @@
 </script>
 
 <div class="grid gap-8">
-  <Card title="Props" id="props">
-    <Table
-      columns={[
-        // TODO: Determine required
-        { name: 'name', align: 'left' },
-        { name: 'type', align: 'left' },
-        { name: 'value', header: 'default', align: 'left' },
-        { name: 'description', align: 'left', class: { data: 'whitespace-pre' } },
-        // { name: 'kind', align: 'left' },
-        // { name: 'isFunction', align: 'left' },
-        // { name: 'isFunctionDeclaration', align: 'left' },
-        // { name: 'constant', align: 'left' },
-        // { name: 'reactive', align: 'left' },
-      ]}
-      data={api.props}
-      slot="contents"
-    />
-  </Card>
+  <div>
+    <div
+      id="props"
+      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
+    >
+      Props
+    </div>
+    {#each api.props as prop}
+      <ListItem list="type">
+        <div slot="title">{prop.name}</div>
 
-  <Card title="Slots" id="slots">
-    <Table
-      columns={[
-        { name: 'name', align: 'left' },
-        { name: 'default', align: 'left' },
-        { name: 'slot_props', header: 'props', align: 'left' },
-      ]}
-      data={api.slots}
-      slot="contents"
-    />
-  </Card>
+        <div slot="subheading" class="text-black/50 text-xs">
+          {#if prop.description}
+            {prop.description}
+          {/if}
+        </div>
 
-  <Card title="Events" id="events">
-    <Table
-      columns={[
-        { name: 'name', align: 'left' },
-        { name: 'element', align: 'left' },
-        { name: 'type', align: 'left' },
-      ]}
-      data={api.events}
-      slot="contents"
-    />
-  </Card>
+        <div slot="actions">
+          {#if prop.value != null}
+            <div
+              class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+            >
+              {prop.value}
+            </div>
+          {/if}
+          <div
+            class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
+          >
+            {prop.type ?? '-'}
+          </div>
+        </div>
+      </ListItem>
+    {/each}
+  </div>
+
+  <div>
+    <div
+      id="slots"
+      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
+    >
+      Slots
+    </div>
+    {#each api.slots as slot}
+      <ListItem list="type">
+        <div slot="title">{slot.name}</div>
+
+        <!-- <div slot="actions">
+          {#if slot.slot_props != null}
+            {#each Object.entries(slot.slot_props) as [key, value]}
+              <div
+                class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+              >
+                {key}: {value}
+              </div>
+            {/each}
+          {/if}
+        </div> -->
+      </ListItem>
+    {/each}
+  </div>
+
+  <div>
+    <div
+      id="events"
+      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
+    >
+      Events
+    </div>
+    {#each api.events as event}
+      <ListItem list="type">
+        <div slot="title">{event.name}</div>
+
+        <div slot="actions">
+          {#if event.element != null}
+            <div
+              class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+            >
+              {event.element}
+            </div>
+          {/if}
+          <div
+            class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
+          >
+            {event.type}
+          </div>
+        </div>
+      </ListItem>
+    {/each}
+  </div>
 
   <!-- <Card title="Types" id="types">
   <Table
