@@ -6,6 +6,9 @@ filename: $filename
 <script lang="ts">
   import { mdiMenu, mdiTrashCan } from '@mdi/js';
 
+  import api from '$lib/components/Button.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
@@ -16,6 +19,8 @@ filename: $filename
 ```js
 import { Button } from 'svelte-ux';
 ```
+
+# Examples
 
 ## Default
 
@@ -84,3 +89,7 @@ import { Button } from 'svelte-ux';
 <Preview>
   <Button icon={mdiTrashCan} class="text-red-500">Delete</Button>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

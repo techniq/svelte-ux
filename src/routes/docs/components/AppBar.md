@@ -6,16 +6,21 @@ filename: $filename
 <script lang="ts">
 	import { mdiRefresh } from '@mdi/js';
 
+	import api from '$lib/components/AppBar.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 	import AppBar from '$lib/components/AppBar.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { AppBar } from 'svelte-ux';
 ```
+
+# Examples
 
 ## Default
 
@@ -53,3 +58,7 @@ import { AppBar } from 'svelte-ux';
 		<AppBar title="Example" class="bg-white text-black" />
 	</div>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

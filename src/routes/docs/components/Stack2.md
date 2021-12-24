@@ -12,6 +12,8 @@ filename: $filename
 	import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
+# Examples
+
 <SectionDivider>Horizontal</SectionDivider>
 
 ## Default
@@ -208,3 +210,7 @@ filename: $filename
     <div class="col-span-full row-span-full self-end justify-self-end bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center border border-white" />
   </div>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

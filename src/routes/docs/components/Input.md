@@ -4,13 +4,16 @@ filename: $filename
 ---
 
 <script>
+	import api from '$lib/components/Input.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Field from '$lib/components/Field.svelte';
   import Input from '$lib/components/Input.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
-<SectionDivider>Mask examples</SectionDivider>
+# Examples
 
 ## Date
 
@@ -109,3 +112,7 @@ filename: $filename
 <Preview>
 	<Input placeholder="Please enter your birthday" mask="mm/dd/yyyy" replace="dmyh" />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

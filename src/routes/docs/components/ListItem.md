@@ -8,6 +8,9 @@ description: A list item that provides a standard layout and works best with mul
 	import clsx from 'clsx';
 	import { mdiAccount, mdiChevronRight } from '@mdi/js';
 
+	import api from '$lib/components/ListItem.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 	import Button from '$lib/components/Button.svelte';
 	import Checkbox from '$lib/components/Checkbox.svelte';
 	import Icon from '$lib/components/Icon.svelte';
@@ -23,6 +26,8 @@ description: A list item that provides a standard layout and works best with mul
 		{ id: 4, name: 'Allow select actions', description: 'Only actions that match specified criteria, plus actions defined in a repository within techniq, can be used.' },
 	]
 </script>
+
+# Examples
 
 ## Title only
 
@@ -155,3 +160,7 @@ description: A list item that provides a standard layout and works best with mul
 		{/each}
 	</div>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

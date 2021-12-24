@@ -3,6 +3,13 @@ component: $component
 filename: $filename
 ---
 
+<script lang="ts">
+  import api from '$lib/components/Toggle.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+</script>
+
+# Examples
+
 ```svelte
 <Toggle let:on={open} let:toggle>
   <Button on:click={toggle}>Show dialog</Button>
@@ -12,3 +19,7 @@ filename: $filename
   </Dialog>
 </Toggle>
 ```
+
+# API
+
+<ApiDocs {api} />

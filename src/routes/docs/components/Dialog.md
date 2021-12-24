@@ -6,6 +6,9 @@ filename: $filename
 <script>
   import { mdiTrashCan } from '@mdi/js';
 
+  import api from '$lib/components/Dialog.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -15,6 +18,8 @@ filename: $filename
   let openAsync = false;
   let loading = false;
 </script>
+
+# Examples
 
 ## Basic
 
@@ -174,3 +179,7 @@ filename: $filename
     </Dialog>
   </Toggle>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

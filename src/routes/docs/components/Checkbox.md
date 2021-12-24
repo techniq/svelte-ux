@@ -4,11 +4,16 @@ filename: $filename
 ---
 
 <script>
+  import api from '$lib/components/Checkbox.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import AppBar from '$lib/components/AppBar.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
+
+# Examples
 
 <SectionDivider>Basic</SectionDivider>
 
@@ -87,3 +92,7 @@ filename: $filename
   <Checkbox circle dense />
   <Checkbox circle dense checked />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

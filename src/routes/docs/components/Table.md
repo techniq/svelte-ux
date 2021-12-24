@@ -4,6 +4,9 @@ filename: $filename
 ---
 
 <script>
+  import api from '$lib/components/Table.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Paginate from '$lib/components/Paginate.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Table from '$lib/components/Table.svelte';
@@ -36,6 +39,8 @@ filename: $filename
   $: sortFunc = createPropertySortFunc($order.by, $order.direction);
   $: sortedData = [...data].sort(sortFunc);
 </script>
+
+# Examples
 
 ## Basic
 
@@ -148,3 +153,7 @@ filename: $filename
     }}
   />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

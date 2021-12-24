@@ -11,6 +11,9 @@ filename: $filename
     mdiChevronDown,
   } from '@mdi/js';
 
+  import api from '$lib/components/Field.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Field from '$lib/components/Field.svelte';
   import Icon from '$lib/components/Icon.svelte';
@@ -21,7 +24,7 @@ filename: $filename
   import Tabs from '$lib/components/Tabs.svelte';
 </script>
 
-<SectionDivider>Basic</SectionDivider>
+# Examples
 
 ## Text (display only)
 
@@ -126,3 +129,7 @@ filename: $filename
     </span>
   </Field>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

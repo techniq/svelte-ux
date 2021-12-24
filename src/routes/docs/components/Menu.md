@@ -4,11 +4,16 @@ filename: $filename
 ---
 
 <script>
+  import api from '$lib/components/Menu.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Menu from '$lib/components/Menu.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 </script>
+
+# Examples
 
 ## Basic
 
@@ -93,3 +98,7 @@ filename: $filename
     </span>
   </Toggle>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

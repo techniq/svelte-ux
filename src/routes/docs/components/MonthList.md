@@ -13,6 +13,9 @@ filename: $filename
     endOfQuarter,
   } from 'date-fns';
 
+  import api from '$lib/components/MonthList.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Grid from '$lib/components/Grid.svelte';
   import MonthList from '$lib/components/MonthList.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -23,6 +26,8 @@ filename: $filename
   let selectedRange = { from: null, to: null };
   let selectedQuarter = { from: null, to: null };
 </script>
+
+# Examples
 
 ## Default
 
@@ -213,3 +218,7 @@ filename: $filename
     />
   </Grid>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

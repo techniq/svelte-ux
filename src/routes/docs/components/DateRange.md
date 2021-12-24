@@ -4,6 +4,9 @@ filename: $filename
 ---
 
 <script lang="ts">
+  import api from '$lib/components/DateRange.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Preview from '$lib/components/Preview.svelte';
   import DateRange from '$lib/components/DateRange.svelte';
   import { PeriodType } from '$lib/utils/date';
@@ -15,6 +18,8 @@ filename: $filename
   };
   // $: console.log({ selected });
 </script>
+
+# Examples
 
 ## Default
 
@@ -40,3 +45,7 @@ filename: $filename
 <Preview>
   <DateRange bind:selected />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

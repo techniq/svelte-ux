@@ -4,9 +4,10 @@ filename: $filename
 ---
 
 <script lang="ts">
-	import Grid from '$lib/components/Grid.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 </script>
+
+# Examples
 
 ## Default
 

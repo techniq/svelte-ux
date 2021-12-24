@@ -11,6 +11,8 @@ filename: $filename
 	import { getDuration, humanizeDuration } from '$lib/utils/duration';
 </script>
 
+# Examples
+
 ## Duration
 
 <Preview>{JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}</Preview>

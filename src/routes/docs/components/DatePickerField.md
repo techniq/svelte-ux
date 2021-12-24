@@ -4,6 +4,9 @@ filename: $filename
 ---
 
 <script lang="ts">
+  import api from '$lib/components/DatePickerField.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Preview from '$lib/components/Preview.svelte';
   import DatePickerField from '$lib/components/DatePickerField.svelte';
 
@@ -11,6 +14,8 @@ filename: $filename
 
   let value = new Date();
 </script>
+
+# Examples
 
 ## Default
 
@@ -65,3 +70,7 @@ filename: $filename
 <Preview>
   <DatePickerField label="Start Date" clearable />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

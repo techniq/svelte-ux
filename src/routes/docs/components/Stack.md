@@ -6,13 +6,16 @@ filename: $filename
 <script lang="ts">
   import { mdiFilterVariant } from '@mdi/js';
 
+  import api from '$lib/components/Stack.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 	import Button from '$lib/components/Button.svelte';
 	import Stack from '$lib/components/Stack.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 	import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
-<SectionDivider>Horizontal</SectionDivider>
+# Examples
 
 ## Default
 
@@ -208,3 +211,7 @@ filename: $filename
     <div class="bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center self-end justify-self-end border border-white" />
   </Stack>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

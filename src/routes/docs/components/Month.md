@@ -15,6 +15,9 @@ filename: $filename
     startOfMonth,
   } from 'date-fns';
 
+  import api from '$lib/components/Month.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Month from '$lib/components/Month.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Stack from '$lib/components/Stack.svelte';
@@ -25,6 +28,8 @@ filename: $filename
   let selectedWeek = { from: null, to: null };
   let selectedMultiMonth = { from: null, to: null };
 </script>
+
+# Examples
 
 <!-- TODO: Add playground -->
 
@@ -223,3 +228,7 @@ filename: $filename
     />
   </Stack>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

@@ -4,6 +4,9 @@ filename: $filename
 ---
 
 <script>
+  import api from '$lib/components/Drawer.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -14,6 +17,8 @@ filename: $filename
   let topOpen = false;
   let bottomOpen = false;
 </script>
+
+# Examples
 
 ## Location
 
@@ -93,3 +98,7 @@ filename: $filename
     <Button on:click={toggle}>Click me</Button>
   </Toggle>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

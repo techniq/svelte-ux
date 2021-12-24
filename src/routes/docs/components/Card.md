@@ -6,6 +6,9 @@ filename: $filename
 <script lang="ts">
   import { mdiDotsVertical } from '@mdi/js';
 
+  import api from '$lib/components/Card.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import AppBar from '$lib/components/AppBar.svelte';
   import Avatar from '$lib/components/Avatar.svelte';
   import Button from '$lib/components/Button.svelte';
@@ -14,11 +17,13 @@ filename: $filename
   import Preview from '$lib/components/Preview.svelte';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { Card } from 'svelte-ux';
 ```
+
+# Examples
 
 ## Default
 
@@ -101,3 +106,7 @@ import { Card } from 'svelte-ux';
 <Preview>
   <Card title="Title" loading />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

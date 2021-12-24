@@ -4,6 +4,10 @@ filename: $filename
 ---
 
 <script>
+  import tabsApi from '$lib/components/Tabs.svelte?raw&sveld';
+  import tabApi from '$lib/components/Tab.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Tab from '$lib/components/Tab.svelte';
@@ -34,6 +38,8 @@ filename: $filename
   - Reference:
     - https://svelte.dev/repl/8e68120858e5322272dc9136c4bb79cc?version=3.7.0
 -->
+
+# Examples
 
 ## Style
 
@@ -231,3 +237,11 @@ filename: $filename
 <Button on:click={() => (selectedObj = callsValue)}>Calls</Button>
 
 </div>
+
+# Tabs API
+
+<ApiDocs api={tabsApi} />
+
+# Tab API
+
+<ApiDocs api={tabApi} />

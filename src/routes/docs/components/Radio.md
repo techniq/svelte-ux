@@ -4,12 +4,17 @@ filename: $filename
 ---
 
 <script>
+  import api from '$lib/components/Radio.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import AppBar from '$lib/components/AppBar.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Radio from '$lib/components/Radio.svelte';
 
   let group = undefined;
 </script>
+
+# Examples
 
 ## Controlled via checked prop
 
@@ -50,3 +55,7 @@ filename: $filename
   <Radio dense checked />
   <Radio dense>Label</Radio>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

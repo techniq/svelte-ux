@@ -6,11 +6,16 @@ filename: $filename
 <script>
   import { mdiAccount } from '@mdi/js';
 
+  import api from '$lib/components/ExpansionPanel.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import ExpansionPanel from '$lib/components/ExpansionPanel.svelte';
   import ListItem from '$lib/components/ListItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
 </script>
+
+# Examples
 
 ## Simple
 
@@ -163,3 +168,7 @@ filename: $filename
     avatar={{ class: 'bg-gray-400 text-white/90' }}
   />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

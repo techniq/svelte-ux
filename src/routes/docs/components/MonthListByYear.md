@@ -6,11 +6,16 @@ filename: $filename
 <script lang="ts">
   import { addYears, startOfYear, subYears } from 'date-fns';
 
+  import api from '$lib/components/MonthListByYear.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import MonthListByYear from '$lib/components/MonthListByYear.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
   let selected = new Date('1982-03-30');
 </script>
+
+# Examples
 
 ## Default
 
@@ -52,3 +57,7 @@ filename: $filename
     maxDate={new Date()}
   />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

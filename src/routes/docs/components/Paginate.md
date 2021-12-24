@@ -4,6 +4,9 @@ filename: $filename
 ---
 
 <script lang="ts">
+	import api from '$lib/components/Paginate.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 	import ListItem from '$lib/components/ListItem.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
 	import Paginate from '$lib/components/Paginate.svelte';
@@ -11,6 +14,8 @@ filename: $filename
 
 	const items = Array(100).fill().map((x, i) => ({ name: `Item: ${i + 1}`}))
 </script>
+
+# Examples
 
 ## Usage
 
@@ -51,3 +56,7 @@ filename: $filename
 		{/if}
 	</Paginate>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

@@ -6,6 +6,9 @@ filename: $filename
 <script lang="ts">
   import { mdiArrowRight } from '@mdi/js';
 
+  import api from '$lib/components/Breadcrumb.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
   import Button from '$lib/components/Button.svelte';
   import DividerDot from '$lib/components/DividerDot.svelte';
@@ -20,6 +23,8 @@ filename: $filename
     { label: 'Third', value: 'Three' },
   ];
 </script>
+
+# Examples
 
 ## Basic
 
@@ -112,3 +117,7 @@ filename: $filename
 <Preview>
   <Breadcrumb {items} class="text-blue-500" />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

@@ -4,6 +4,9 @@ filename: $filename
 ---
 
 <script lang="ts">
+  import api from '$lib/components/Popover.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Popover from '$lib/components/Popover.svelte';
@@ -41,6 +44,8 @@ filename: $filename
     bottomEnd: false,
   };
 </script>
+
+# Examples
 
 ## Inferred anchor
 
@@ -399,3 +404,7 @@ filename: $filename
     </div>
   </Toggle>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

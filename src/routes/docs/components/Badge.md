@@ -6,6 +6,9 @@ filename: $filename
 <script>
   import { mdiFilterVariant, mdiPlus, mdiMinus } from '@mdi/js';
 
+  import api from '$lib/components/Badge.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Badge from '$lib/components/Badge.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
@@ -16,6 +19,8 @@ filename: $filename
 
   let value = 1;
 </script>
+
+# Examples
 
 <TextField type="integer" bind:value align="center" class="w-24">
   <div slot="prepend">
@@ -281,3 +286,7 @@ filename: $filename
     </Preview>
   </div>
 </div>
+
+# API
+
+<ApiDocs {api} />

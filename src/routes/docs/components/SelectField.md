@@ -6,6 +6,9 @@ filename: $filename
 <script>
   import { mdiMagnify, mdiPlus } from '@mdi/js';
 
+  import api from '$lib/components/SelectField.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -28,6 +31,8 @@ filename: $filename
   ];
   let value = 3;
 </script>
+
+# Examples
 
 ## Basic
 
@@ -211,3 +216,7 @@ filename: $filename
 </Preview>
 
 <div class="h-96" /> -->
+
+# API
+
+<ApiDocs {api} />

@@ -6,6 +6,9 @@ filename: $filename
 <script>
   import { addDays } from 'date-fns';
 
+  import api from '$lib/components/DateField.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import DateField from '$lib/components/DateField.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -13,6 +16,8 @@ filename: $filename
 
   let value;
 </script>
+
+# Examples
 
 ## Playground
 
@@ -72,3 +77,7 @@ filename: $filename
 <Preview>
   <DateField label="Birth date" on:change={(e) => console.log(e.detail)} />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

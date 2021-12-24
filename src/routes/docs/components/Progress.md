@@ -4,6 +4,9 @@ filename: $filename
 ---
 
 <script>
+  import api from '$lib/components/CircularProgress.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import CircularProgress from '$lib/components/CircularProgress.svelte';
   // import LinearProgress from '$lib/components/LinearProgress.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -17,6 +20,8 @@ filename: $filename
   let indeterminate = true;
   let label = false;
 </script>
+
+# Examples
 
 ## Demo
 
@@ -209,3 +214,7 @@ filename: $filename
     />
   </Stack>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

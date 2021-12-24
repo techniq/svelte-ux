@@ -6,11 +6,16 @@ filename: $filename
 <script>
   import { mdiCheck, mdiClose } from '@mdi/js';
 
+  import api from '$lib/components/Switch.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import AppBar from '$lib/components/AppBar.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Switch from '$lib/components/Switch.svelte';
   import Preview from '$lib/components/Preview.svelte';
 </script>
+
+# Examples
 
 ## Basic
 
@@ -61,3 +66,7 @@ filename: $filename
     <Switch size="lg" />
   </div>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

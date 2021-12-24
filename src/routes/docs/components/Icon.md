@@ -6,9 +6,14 @@ filename: $filename
 <script lang="ts">
 	import { mdiAccount } from '@mdi/js';
 
+	import api from '$lib/components/Icon.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 	import Icon from '$lib/components/Icon.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 </script>
+
+# Examples
 
 ## Material design icons
 
@@ -36,3 +41,7 @@ filename: $filename
 	<Icon path={mdiAccount} class="text-green-500" />
 	<Icon path={mdiAccount} class="text-black/50" />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

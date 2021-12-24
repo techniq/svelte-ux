@@ -10,6 +10,8 @@ filename: $filename
   import { PeriodType } from '$lib/utils/date';
 </script>
 
+# Examples
+
 ## No format
 
 <Preview>

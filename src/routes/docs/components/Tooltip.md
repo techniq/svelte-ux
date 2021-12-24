@@ -6,10 +6,15 @@ filename: $filename
 <script>
   import { mdiTrashCan } from '@mdi/js';
 
+  import api from '$lib/components/Tooltip.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
+
+# Examples
 
 ## Button
 
@@ -82,3 +87,7 @@ filename: $filename
 </Preview>
 
 <!-- TODO: Slot with custom transition -->
+
+# API
+
+<ApiDocs {api} />

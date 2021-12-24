@@ -6,6 +6,9 @@ filename: $filename
 <script lang="ts">
   import { mdiInbox, mdiCheckCircleOutline } from '@mdi/js';
 
+  import api from '$lib/components/Notification.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
@@ -13,6 +16,8 @@ filename: $filename
   import Notification from '$lib/components/Notification.svelte';
   import Stack from '$lib/components/Stack.svelte';
 </script>
+
+# Examples
 
 ## Basic
 
@@ -80,3 +85,7 @@ filename: $filename
     </Notification>
   </Stack>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

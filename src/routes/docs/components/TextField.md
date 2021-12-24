@@ -21,6 +21,9 @@ filename: $filename
     mdiPlus,
   } from '@mdi/js';
 
+  import api from '$lib/components/TextField.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -53,6 +56,8 @@ filename: $filename
   TODO:
     - [ ] Add Playground
  -->
+
+# Examples
 
 <SectionDivider>Basic</SectionDivider>
 
@@ -457,3 +462,7 @@ filename: $filename
   />
 </Preview>
 -->
+
+# API
+
+<ApiDocs {api} />

@@ -6,6 +6,9 @@ filename: $filename
 <script lang="ts">
   import { subDays } from 'date-fns';
 
+  import api from '$lib/components/DateRangeField.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Preview from '$lib/components/Preview.svelte';
   import DateRangeField from '$lib/components/DateRangeField.svelte';
 
@@ -18,6 +21,8 @@ filename: $filename
     periodType: PeriodType.Day,
   };
 </script>
+
+# Examples
 
 ## Default
 
@@ -42,3 +47,7 @@ filename: $filename
 <Preview>
   <DateRangeField bind:value stepper rounded filled />
 </Preview>
+
+# API
+
+<ApiDocs {api} />

@@ -4,9 +4,14 @@ filename: $filename
 ---
 
 <script lang="ts">
+  import api from '$lib/components/Grid.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 	import Grid from '$lib/components/Grid.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 </script>
+
+# Examples
 
 ## Default
 
@@ -82,3 +87,7 @@ filename: $filename
     <div class="border">item</div>
   </Grid>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

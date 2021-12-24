@@ -8,6 +8,9 @@ filename: $filename
 	import { format } from 'date-fns';
 	import { mdiCheck, mdiCircle, mdiClockOutline, mdiClose, mdiMapMarker } from '@mdi/js';
 
+	import api from '$lib/components/Steps.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 	import Icon from '$lib/components/Icon.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 	import Steps from '$lib/components/Steps.svelte';
@@ -52,6 +55,8 @@ filename: $filename
 	];
 </script>
 
+# Examples
+
 ## Basic
 
 <Preview>
@@ -86,3 +91,7 @@ filename: $filename
 		</div>
 	</Steps>
 </Preview>
+
+# API
+
+<ApiDocs {api} />

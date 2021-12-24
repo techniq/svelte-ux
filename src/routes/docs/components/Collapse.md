@@ -4,12 +4,17 @@ filename: $filename
 ---
 
 <script>
+  import api from '$lib/components/Collapse.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
   import Card from '$lib/components/Card.svelte';
   import Collapse from '$lib/components/Collapse.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
   let group = 'expansionGroup';
 </script>
+
+# Examples
 
 ## Simple without bind:group
 
@@ -82,3 +87,7 @@ filename: $filename
     </Collapse>
   {/each}
 </Preview>
+
+# API
+
+<ApiDocs {api} />

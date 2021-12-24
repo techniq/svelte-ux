@@ -66,6 +66,14 @@ const config = {
                           .join('')}
                         </ul>
                       </li>
+                      <li>
+                        <a href="#api">API</a>
+                        <ul>
+                          <li><a href="#props">Props</a></li>
+                          <li><a href="#slots">Slots</a></li>
+                          <li><a href="#events">Events</a></li>
+                        </ul>
+                      </li>
                     </ul>
                   </div>
                   </Layout_MDSVEX_DEFAULT>

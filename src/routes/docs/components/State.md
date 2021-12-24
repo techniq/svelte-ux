@@ -3,6 +3,13 @@ component: $component
 filename: $filename
 ---
 
+<script lang="ts">
+	import api from '$lib/components/State.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+</script>
+
+# Examples
+
 ```svelte
 <State initial={selected} let:value let:set>
 	{#each items as item}
@@ -12,3 +19,7 @@ filename: $filename
 	{/each}
 </Toggle>
 ```
+
+# API
+
+<ApiDocs {api} />
