@@ -1,5 +1,6 @@
 <script lang="ts">
   import DividerDot from './DividerDot.svelte';
+  import EmptyMessage from './EmptyMessage.svelte';
   import ListItem from './ListItem.svelte';
 
   export let api: SveldJson;
@@ -42,6 +43,8 @@
           </div>
         </div>
       </ListItem>
+    {:else}
+      <EmptyMessage>>No props</EmptyMessage>
     {/each}
   </div>
 
@@ -68,6 +71,8 @@
           {/if}
         </div> -->
       </ListItem>
+    {:else}
+      <EmptyMessage>No slots</EmptyMessage>
     {/each}
   </div>
 
@@ -97,6 +102,8 @@
           </div>
         </div>
       </ListItem>
+    {:else}
+      <EmptyMessage>No events</EmptyMessage>
     {/each}
   </div>
 
