@@ -15,8 +15,6 @@ filename: $filename
 
 # Examples
 
-<SectionDivider>Basic</SectionDivider>
-
 ## Default
 
 <Preview>
@@ -54,7 +52,7 @@ filename: $filename
   <Checkbox dense checked />
 </Preview>
 
-<SectionDivider>Default</SectionDivider>
+<SectionDivider>Circle</SectionDivider>
 
 ## Default
 
