@@ -15,7 +15,7 @@
   z-index of children (ex. Overlay, sticky columns, etc) from overlapping other components
 -->
 
-<div class="card relative z-0 bg-white border rounded elevation-1 {$$props.class}" {...$$restProps}>
+<div {...$$restProps} class="card relative z-0 bg-white border rounded elevation-1 {$$props.class}">
   {#if loading}
     <Overlay center class="rounded">
       <CircularProgress />
