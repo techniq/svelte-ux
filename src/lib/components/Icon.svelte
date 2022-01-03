@@ -8,6 +8,13 @@
   export let path = '';
 </script>
 
-<svg {width} {height} {viewBox} class={clsx('inline-block', $$props.class)} style={$$props.style}>
+<svg
+  {width}
+  {height}
+  {viewBox}
+  class={clsx('inline-block', $$props.class)}
+  style={$$props.style}
+  on:click
+>
   <path d={path} fill="currentColor" />
 </svg>
