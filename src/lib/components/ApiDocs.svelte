@@ -23,7 +23,9 @@
 
         <div slot="subheading" class="text-black/50 text-xs">
           {#if prop.description}
-            {prop.description}
+            <span class="whitespace-pre">
+              {prop.description}
+            </span>
           {/if}
         </div>
 
