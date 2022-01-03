@@ -1,8 +1,6 @@
 <script lang="ts">
-  import Card from './Card.svelte';
   import DividerDot from './DividerDot.svelte';
   import ListItem from './ListItem.svelte';
-  import Table from './Table.svelte';
 
   export let api: SveldJson;
 
@@ -30,7 +28,7 @@
         </div>
 
         <div slot="actions">
-          {#if prop.value != null}
+          {#if prop.value != null && prop.value !== 'null'}
             <div
               class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
             >
