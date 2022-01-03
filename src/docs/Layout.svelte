@@ -5,7 +5,7 @@
   import h1 from './Header1.svelte';
 
   // Used by injected info via svelte preprocessor
-  import { mdiFileDocumentEditOutline } from '@mdi/js';
+  import { mdiCodeTags, mdiFileDocumentEditOutline } from '@mdi/js';
   import Button from '$lib/components/Button.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
 
@@ -22,6 +22,17 @@
 {#if component}
   <div class="flex items-center gap-2">
     <span class="text-2xl font-bold">{component}</span>
+    {#if component}
+      <Tooltip title="View source">
+        <Button
+          class="text-black/50"
+          icon={mdiCodeTags}
+          href="https://github.com/techniq/svelte-ux/blob/master/src/lib/components/{component}.svelte"
+          target="_blank"
+        />
+      </Tooltip>
+    {/if}
+
     {#if filename}
       <Tooltip title="Edit this page">
         <Button
