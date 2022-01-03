@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { mdiBullhorn, mdiCodeBraces, mdiGoogleCirclesGroup } from '@mdi/js';
+
   import DividerDot from './DividerDot.svelte';
   import EmptyMessage from './EmptyMessage.svelte';
   import ListItem from './ListItem.svelte';
@@ -17,7 +19,11 @@
       Props
     </div>
     {#each api.props as prop}
-      <ListItem list="type">
+      <ListItem
+        list="type"
+        icon={mdiCodeBraces}
+        avatar={{ size: 'sm', class: 'text-xs text-white bg-blue-500' }}
+      >
         <div slot="title">{prop.name}</div>
 
         <div slot="subheading" class="text-black/50 text-xs">
@@ -56,8 +62,18 @@
       Slots
     </div>
     {#each api.slots as slot}
-      <ListItem list="type">
-        <div slot="title">{slot.name}</div>
+      <ListItem
+        list="type"
+        icon={mdiGoogleCirclesGroup}
+        avatar={{ size: 'sm', class: 'text-xs text-white bg-purple-500' }}
+      >
+        <div slot="title">
+          {#if slot.default}
+            <i>default</i>
+          {:else}
+            {slot.name}
+          {/if}
+        </div>
 
         <!-- <div slot="actions">
           {#if slot.slot_props != null}
@@ -79,12 +95,16 @@
   <div>
     <div
       id="events"
-      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
+      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/40"
     >
       Events
     </div>
     {#each api.events as event}
-      <ListItem list="type">
+      <ListItem
+        list="type"
+        icon={mdiBullhorn}
+        avatar={{ size: 'sm', class: 'text-xs text-white bg-green-500' }}
+      >
         <div slot="title">{event.name}</div>
 
         <div slot="actions">
