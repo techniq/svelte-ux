@@ -50,7 +50,7 @@
         </div>
       </ListItem>
     {:else}
-      <EmptyMessage class="h-10">No props</EmptyMessage>
+      <EmptyMessage>No props</EmptyMessage>
     {/each}
   </div>
 
@@ -88,7 +88,7 @@
         </div> -->
       </ListItem>
     {:else}
-      <EmptyMessage class="h-10">No slots</EmptyMessage>
+      <EmptyMessage>No slots</EmptyMessage>
     {/each}
   </div>
 
@@ -123,7 +123,7 @@
         </div>
       </ListItem>
     {:else}
-      <EmptyMessage class="h-10">No events</EmptyMessage>
+      <EmptyMessage>No events</EmptyMessage>
     {/each}
   </div>
 
