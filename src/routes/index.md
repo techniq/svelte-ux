@@ -4,7 +4,9 @@
 
 <AppBar title="svelte-ux" />
 
-<main class="p-4 prose">
+<main class="p-2 prose">
+
+<div class="bg-white rounded border p-4">
 
 ## Installation
 
@@ -75,4 +77,5 @@ Import Tailwind base layers in `src/routes/__layout.svelte`
 </style>
 ```
 
+</div>
 </main>
