@@ -2,7 +2,7 @@
   import NavItem from '$lib/components/NavItem.svelte';
 </script>
 
-<NavItem text="Home" path="/" class="pl-6 py-2 mt-4" />
+<NavItem text="Getting Started" path="/" class="pl-6 py-2 mt-4" />
 
 <div
   class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
