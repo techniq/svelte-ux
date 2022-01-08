@@ -35,7 +35,14 @@
   $: endOfMonth2 = endOfMonthFunc(startOfMonth);
   $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth);
 
+  /**
+   * Show days before and after selected month
+   */
   export let showOutsideDays: boolean | undefined = undefined;
+
+  /**
+   * Day(s) to disable (not selectable)
+   */
   export let disabledDays: any = undefined; // TODO: Improve types - See isDayDisabled
 
   $: isDayDisabled = (date: Date) => {
