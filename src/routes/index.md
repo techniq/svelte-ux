@@ -86,7 +86,7 @@ Lastly, use `components` (or `actions`, `stores`, or `utils`) by importing from 
 <Button>Click here</Button>
 ```
 
-All `components` and `stores` are available as top-level imports as shown above, although utils must currently be imported with a deeper path as to not poluate the top-level imports. This may change in the future.
+All `components` and `stores` are available as top-level imports as shown above, although `utils` must be imported with a deeper path as to not polute the top-level imports. This may change in the future.
 
 ```js
 import { dateDisplay } from 'svelte-ux/utils/dateDisplay';
