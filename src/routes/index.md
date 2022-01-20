@@ -5,7 +5,7 @@
 <AppBar title="svelte-ux" />
 
 <main class="p-2">
-<div class="prose bg-white rounded border p-4">
+<div class="prose max-w-none bg-white rounded border p-4">
 
 ## Installation
 
@@ -15,10 +15,33 @@ Install `svelte-ux` package
 npm install svelte-ux
 ```
 
-as well as `TailwindCSS` and dependencies
+Add install `svelte-preprocess` if not already available. Typescript projects with SvelteKit will already have this installed.
+
+```sh
+npm install svelte-preprocess
+```
+
+Lastly, add `TailwindCSS` and dependencies
 
 ```sh
 npm install tailwindcss tailwindcss-elevation autoprefixer
+```
+
+## Setup svelte-preprocess
+
+Update `svelte.config.js` and add `svelte-preprocess` if not already added.
+
+```js
+import sveltePreprocess from 'svelte-preprocess';
+
+const config = {
+  preprocess: [sveltePreprocess()],
+
+  kit: {
+    target: '#svelte',
+    // ...
+  },
+};
 ```
 
 ## Setup TailwindCSS
