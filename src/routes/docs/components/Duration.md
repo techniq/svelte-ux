@@ -8,12 +8,12 @@ filename: $filename
 
 	import Preview from '$lib/components/Preview.svelte';
 
-	import { getDuration, humanizeDuration } from '$lib/utils/duration';
+	import { getDuration, humanizeDuration, DurationUnits } from '$lib/utils/duration';
 </script>
 
 # Examples
 
-## Duration
+## getDuration
 
 <Preview>{JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}</Preview>
 
@@ -30,4 +30,6 @@ filename: $filename
 <Preview>
 	<div>{humanizeDuration({ start: '1982-03-30' })}</div>
 	<div>{humanizeDuration({ start: '2021-01-01', end: '2021-01-07' })}</div>
+	<div>{humanizeDuration({ start: '1982-03-30', totalUnits: 2 })}</div>
+	<div>{humanizeDuration({ start: '1982-03-30', minUnits: DurationUnits.Hour })}</div>
 </Preview>
