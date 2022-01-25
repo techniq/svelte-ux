@@ -25,7 +25,7 @@
     {#if component}
       <Tooltip title="View source">
         <Button
-          class="text-black/50"
+          class="text-black/50 p-1"
           icon={mdiCodeTags}
           href="https://github.com/techniq/svelte-ux/blob/master/src/lib/components/{component}.svelte"
           target="_blank"
@@ -36,7 +36,7 @@
     {#if filename}
       <Tooltip title="Edit this page">
         <Button
-          class="text-black/50"
+          class="text-black/50 p-1"
           icon={mdiFileDocumentEditOutline}
           href="https://github.com/techniq/svelte-ux/blob/master/{filename}"
           target="_blank"
