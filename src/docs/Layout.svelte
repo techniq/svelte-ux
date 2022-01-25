@@ -50,6 +50,11 @@
   {description}
 {/if}
 
-<slot name="toc" />
+<div class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50 mt-4">
+  Contents
+</div>
+<div class="border border-black/20 rounded bg-white">
+  <slot name="toc" />
+</div>
 
 <slot />
