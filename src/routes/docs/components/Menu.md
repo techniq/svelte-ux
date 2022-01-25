@@ -67,7 +67,7 @@ filename: $filename
 
 ## maxViewportHeight
 
-### Useful for long menus. Resizes (maxHeight w/ overflow) instead of repositions
+### Useful for long menus. Resizes (maxHeight w/ overflow) instead of repositioning
 
 <Preview>
   <Toggle let:on={open} let:toggle>
