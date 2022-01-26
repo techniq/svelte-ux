@@ -21,7 +21,7 @@ Add install `svelte-preprocess` if not already available. Typescript projects wi
 npm install svelte-preprocess
 ```
 
-Lastly, add `TailwindCSS` and dependencies
+Lastly, add `TailwindCSS` and dependencies. Requires the latest (v3.0+) with built-in JIT support.
 
 ```sh
 npm install tailwindcss tailwindcss-elevation autoprefixer
