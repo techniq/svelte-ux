@@ -60,7 +60,7 @@
     {/each}
 
     {#if api.rest_props}
-      <div class="text-black/50 text-xs flex gap-2 mt-2 ml-2 items-center">
+      <div class="text-black/50 text-xs flex gap-2 mt-2 ml-4 items-center">
         <Icon path={mdiInformationOutline} />
         <span>
           Remaining props are passed to underlying
