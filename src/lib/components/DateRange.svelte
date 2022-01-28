@@ -129,7 +129,21 @@
       <div class="text-xs text-black/50 uppercase" style="margin-top: -22px; margin-bottom: 4px;">
         Type
       </div>
-      <Tabs contained bind:selected={selected.periodType} vertical>
+      <Tabs
+        contained
+        bind:selected={selected.periodType}
+        on:change={(e) => {
+          // Expand selection range to match period type (day => month, etc)
+          const { start, end } = getDateFuncsByPeriodType(e.detail.value);
+          if (selected.from) {
+            selected.from = start(selected.from);
+          }
+          if (selected.to) {
+            selected.to = end(selected.to);
+          }
+        }}
+        vertical
+      >
         <div class="tabList flex flex-col w-full border">
           {#each periodTypeOptions ?? [] as pt}
             <Tab value={adjustPeriodType(pt)} class="flex-1">
