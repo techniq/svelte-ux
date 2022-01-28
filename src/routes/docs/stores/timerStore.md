@@ -19,16 +19,16 @@ const timer = timerStore()
 ```
 
 ```svelte
-const timer = timerStore({ delay: 1000 })
-$now
-```
-
-```svelte
-const timer = timerStore({ delay: 1000, onTick: () => ({ now: new Date() }) })
-$timer.now
+const timer = timerStore({ delay: number, onTick: () => {...}, disabled: boolean })
 ```
 
 ## Example
+
+```svelte
+<script>
+  const dateTimer = timerStore();
+</script>
+```
 
 <Preview>
   {$dateTimer}
@@ -36,6 +36,12 @@ $timer.now
 </Preview>
 
 ## Tick count
+
+```svelte
+<script>
+  const tickTimer = timerStore({ onTick: () => (ticks += 1) });
+</script>
+```
 
 <Preview>
   {$tickTimer}
