@@ -81,3 +81,11 @@
 <NavItem text="input" path="/docs/actions/input" class="pl-6 py-2" />
 <NavItem text="mouse" path="/docs/actions/mouse" class="pl-6 py-2" />
 <NavItem text="scroll" path="/docs/actions/scroll" class="pl-6 py-2" />
+
+<div
+  class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
+>
+  Stores
+</div>
+
+<NavItem text="timerStore" path="/docs/stores/timerStore" class="pl-6 py-2" />
