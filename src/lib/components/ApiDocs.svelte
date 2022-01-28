@@ -1,8 +1,14 @@
 <script lang="ts">
-  import { mdiBullhorn, mdiCodeBraces, mdiGoogleCirclesGroup } from '@mdi/js';
+  import {
+    mdiBullhorn,
+    mdiCodeBraces,
+    mdiGoogleCirclesGroup,
+    mdiInformationOutline,
+  } from '@mdi/js';
 
   import DividerDot from './DividerDot.svelte';
   import EmptyMessage from './EmptyMessage.svelte';
+  import Icon from './Icon.svelte';
   import ListItem from './ListItem.svelte';
 
   export let api: SveldJson;
@@ -52,6 +58,19 @@
     {:else}
       <EmptyMessage>No props</EmptyMessage>
     {/each}
+
+    {#if api.rest_props}
+      <div class="text-black/50 text-xs flex gap-2 mt-2 ml-2 items-center">
+        <Icon path={mdiInformationOutline} />
+        <span>
+          Remaining props are passed to underlying
+          <div class="inline-block font-semibold bg-white border border-black/30 px-2 rounded-full">
+            &lt;{api.rest_props.name}&gt;
+          </div>
+          {api.rest_props.type === 'InlineComponent' ? 'component' : 'element'}
+        </span>
+      </div>
+    {/if}
   </div>
 
   <div>
