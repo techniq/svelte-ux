@@ -15,6 +15,7 @@
   import DateSelect from './DateSelect.svelte';
   import Tab from './Tab.svelte';
   import Tabs from './Tabs.svelte';
+  import DateField from './DateField.svelte';
 
   export let selected: DateRange = { from: null, to: null, periodType: null };
   export let periodTypeOptions: PeriodType[] = [
@@ -110,6 +111,19 @@
           {:else}
             <div class="italic">Empty</div>
           {/if}
+          <!-- <div class="p-1">
+            <DateField
+              label="Start"
+              value={selected.from}
+              on:change={(e) => {
+                // Ignore null / incomplete dates
+                if (e.detail.value) {
+                  selected.from = e.detail.value;
+                }
+              }}
+              dense
+            />
+          </div> -->
         </Tab>
 
         <Tab value="to" class="flex-1">
@@ -119,6 +133,19 @@
           {:else}
             <div class="italic">Empty</div>
           {/if}
+          <!-- <div class="p-1">
+            <DateField
+              label="End"
+              value={selected.to}
+              on:change={(e) => {
+                // Ignore null / incomplete dates
+                if (e.detail.value) {
+                  selected.to = e.detail.value;
+                }
+              }}
+              dense
+            />
+          </div> -->
         </Tab>
       </div>
     </Tabs>
