@@ -17,6 +17,14 @@ export enum DurationUnits {
   Second,
   Millisecond,
 }
+// export enum DurationUnits {
+//   Millisecond = 1,
+//   Second = 1000 * Millisecond,
+//   Minute = 60 * Second,
+//   Hour = 60 * Minute,
+//   Day = 24 * Hour,
+//   Year = 365 * Day,
+// }
 
 export function getDuration(start: Date | string, end?: Date | string | null): Duration | null {
   const startDate = typeof start === 'string' ? parseISO(start) : start;
@@ -111,7 +119,8 @@ export function humanizeDuration(config: {
     const unitNum = unitNums[i];
     let unitName = unitNames[i];
 
-    if (unitNum !== 0 || (sentenceArr.length === 0 && Number(i) === DurationUnits.Millisecond)) {
+    // Hide `0` values unless last unit (and none shown before)
+    if (unitNum !== 0 || (sentenceArr.length === 0 && Number(i) === unitNums.length - 1)) {
       switch (variant) {
         case 'short':
           sentenceArr.push(unitNum + unitName);
