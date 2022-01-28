@@ -4,20 +4,40 @@ filename: $filename
 ---
 
 <script lang="ts">
-	import { subDays, subMonths } from 'date-fns';
+	import { subDays, subMonths, subSeconds } from 'date-fns';
 
 	import Preview from '$lib/components/Preview.svelte';
 
+	import Duration from '$lib/components/Duration.svelte';
 	import { getDuration, humanizeDuration, DurationUnits } from '$lib/utils/duration';
 </script>
 
 # Examples
 
-## getDuration
+## Duration
 
-<Preview>{JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}</Preview>
+<Preview>
+	<div class="grid">
+		<Duration start={new Date()} />
+		<Duration start={new Date()} totalUnits={1} />
+		<Duration start={new Date()} totalUnits={2} />
+		<Duration start={new Date()} totalUnits={2} minUnits={DurationUnits.Second} />
+		<Duration start={new Date()} minUnits={DurationUnits.Minute} />
+		<Duration start={subSeconds(new Date(), 55)} totalUnits={1} />
+	</div>
+</Preview>
 
-## Humanize Duration
+## Fixed range
+
+<Preview>
+	<Duration start={subDays(new Date(), 3)} end={subDays(new Date(), 1)} />
+</Preview>
+
+# Utils
+
+## humanizeDuration
+
+### date
 
 <Preview>
 	<div>{humanizeDuration({ start: subDays(new Date(), 3) })}</div>
@@ -25,7 +45,7 @@ filename: $filename
 	<div>{humanizeDuration({ start: subMonths(new Date(), 3), variant: 'long' })}</div>
 </Preview>
 
-## Humanize Duration (string)
+### string
 
 <Preview>
 	<div>{humanizeDuration({ start: '1982-03-30' })}</div>
@@ -33,3 +53,7 @@ filename: $filename
 	<div>{humanizeDuration({ start: '1982-03-30', totalUnits: 2 })}</div>
 	<div>{humanizeDuration({ start: '1982-03-30', minUnits: DurationUnits.Hour })}</div>
 </Preview>
+
+## getDuration
+
+<Preview>{JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}</Preview>
