@@ -1,5 +1,4 @@
 ---
-component: $component
 filename: $filename
 ---
 
