@@ -78,9 +78,16 @@
   Actions
 </div>
 
+<NavItem text="cssVars" path="/docs/actions/cssVars" class="pl-6 py-2" />
 <NavItem text="input" path="/docs/actions/input" class="pl-6 py-2" />
+<NavItem text="layout" path="/docs/actions/layout" class="pl-6 py-2" />
 <NavItem text="mouse" path="/docs/actions/mouse" class="pl-6 py-2" />
+<NavItem text="multi" path="/docs/actions/multi" class="pl-6 py-2" />
+<NavItem text="observer" path="/docs/actions/observer" class="pl-6 py-2" />
+<NavItem text="portal" path="/docs/actions/portal" class="pl-6 py-2" />
 <NavItem text="scroll" path="/docs/actions/scroll" class="pl-6 py-2" />
+<NavItem text="sticky" path="/docs/actions/sticky" class="pl-6 py-2" />
+<NavItem text="table" path="/docs/actions/table" class="pl-6 py-2" />
 
 <div
   class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
@@ -88,4 +95,13 @@
   Stores
 </div>
 
+<NavItem text="debounceStore" path="/docs/stores/debounceStore" class="pl-6 py-2" />
+<NavItem text="fetchStore" path="/docs/stores/fetchStore" class="pl-6 py-2" />
+<NavItem text="formStore" path="/docs/stores/formStore" class="pl-6 py-2" />
+<NavItem text="graphStore" path="/docs/stores/graphStore" class="pl-6 py-2" />
+<NavItem text="localStore" path="/docs/stores/localStore" class="pl-6 py-2" />
+<NavItem text="matchMedia" path="/docs/stores/matchMedia" class="pl-6 py-2" />
+<NavItem text="paginationStore" path="/docs/stores/paginationStore" class="pl-6 py-2" />
+<NavItem text="queryParamsStore" path="/docs/stores/queryParamsStore" class="pl-6 py-2" />
+<NavItem text="tableOrderStore" path="/docs/stores/tableOrderStore" class="pl-6 py-2" />
 <NavItem text="timerStore" path="/docs/stores/timerStore" class="pl-6 py-2" />
