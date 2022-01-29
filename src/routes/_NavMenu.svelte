@@ -41,7 +41,9 @@
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Layout</div>
 <NavItem text="Grid" path="/docs/components/Grid" class="pl-6 py-2" />
+<NavItem text="Grid (class)" path="/docs/components/GridTailwind" class="pl-6 py-2" />
 <NavItem text="Stack" path="/docs/components/Stack" class="pl-6 py-2" />
+<NavItem text="Stack (class)" path="/docs/components/StackTailwind" class="pl-6 py-2" />
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">Modal</div>
 <NavItem text="Dialog" path="/docs/components/Dialog" class="pl-6 py-2" />
