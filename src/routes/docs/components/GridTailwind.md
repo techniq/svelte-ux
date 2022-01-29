@@ -11,7 +11,7 @@ filename: $filename
 ## Default
 
 <Preview>
-  <div display="grid">
+  <div class="grid">
     <div class="border">item</div>
     <div class="border">item</div>
     <div class="border">item</div>
