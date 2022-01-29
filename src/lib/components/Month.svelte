@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { fade, slide } from 'svelte/transition';
+  import { fly } from '$lib/utils/transition';
   import {
     startOfDay as startOfDayFunc,
     endOfDay as endOfDayFunc,
@@ -116,3 +118,32 @@
     {/each}
   {/each}
 </div>
+
+<!-- 
+  TODO:
+    - [ ] Detect direction and set +/- accordingly (left-to-right or right-to-left)
+    - [ ] Fix changing period types on DateRange (|local not a workaround)
+-->
+<!-- <div class="grid overflow-hidden">
+  {#key startOfMonth.valueOf()}
+    <div
+      class="col-span-full row-span-full grid grid-cols-7 grid-rows-6 gap-y-4"
+      in:fly={{ x: '-100%' }}
+      out:fly={{ x: '100%' }}
+    >
+      {#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
+        {#each week ?? [] as day (day.valueOf())}
+          <DateButton
+            date={day}
+            periodType={PeriodType.Day}
+            bind:selected
+            hidden={isDayHidden(day)}
+            fade={isDayFaded(day)}
+            disabled={isDayDisabled(day)}
+            on:dateChange
+          />
+        {/each}
+      {/each}
+    </div>
+  {/key}
+</div> -->
