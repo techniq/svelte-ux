@@ -14,8 +14,9 @@
 
 <div
   class={clsx(
-    'absolute top-0 bottom-0 left-0 right-0 z-30 bg-white/75',
+    'absolute top-0 bottom-0 left-0 right-0 z-30',
     center && 'flex items-center justify-center',
+    !$$props.class?.includes('bg-') && 'bg-white/75',
     $$props.class
   )}
   transition:transitionFn|local={transitionConfig}
