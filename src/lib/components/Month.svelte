@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { fade, slide } from 'svelte/transition';
-  import { fly } from '$lib/utils/transition';
+  // import { fade, slide } from 'svelte/transition';
+  // import { fly } from '../utils/transition';
   import {
     startOfDay as startOfDayFunc,
     endOfDay as endOfDayFunc,
@@ -120,7 +120,7 @@
 </div>
 
 <!-- 
-  TODO:
+  TODO: Transition
     - [ ] Detect direction and set +/- accordingly (left-to-right or right-to-left)
     - [ ] Fix changing period types on DateRange (|local not a workaround)
 -->
