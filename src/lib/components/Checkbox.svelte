@@ -54,8 +54,8 @@
     <div
       class={clsx(
         'overlay',
-        'bg-black/10 rounded-full w-10 h-10 opacity-0',
-        dense && 'w-6 h-6',
+        'bg-black/10 rounded-full opacity-0',
+        dense ? 'w-6 h-6' : 'w-10 h-10',
         !disabled && 'hover:opacity-100'
       )}
     />
@@ -63,10 +63,10 @@
     <div
       class={clsx(
         'box',
-        'w-5 h-5 pointer-events-none',
+        'pointer-events-none',
         checked ? 'bg-accent-500' : 'border-2 border-gray-500',
         checked && disabled && 'bg-gray-500',
-        dense && 'w-4 h-4',
+        dense ? 'w-4 h-4' : 'w-5 h-5',
         circle ? 'rounded-full' : 'rounded'
       )}
     />
