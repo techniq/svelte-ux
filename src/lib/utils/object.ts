@@ -115,7 +115,7 @@ export function expireObject<TObject>(object, expiry: Expiry): Partial<TObject> 
         expireObject(object[prop], propExpiry);
 
         // Remove property if empty object (all properties removed)
-        if (Object.keys(object[prop]).length === 0) {
+        if (isLiteralObject(object[prop]) && Object.keys(object[prop]).length === 0) {
           delete object[prop];
         }
       }
