@@ -111,8 +111,10 @@ export function expireObject<TObject>(object, expiry: Expiry): Partial<TObject> 
           // Keep value
         }
       } else {
-        // Check each property in object
-        expireObject(object[prop], propExpiry);
+        // Check expiry for each property in object.  Skip if prop not in object (expiry only)
+        if (prop in object) {
+          expireObject(object[prop], propExpiry);
+        }
 
         // Remove property if empty object (all properties removed)
         if (isLiteralObject(object[prop]) && Object.keys(object[prop]).length === 0) {
