@@ -1,7 +1,7 @@
 import { derived } from 'svelte/store';
 import type { Readable } from 'svelte/store';
 import type { Page } from '@sveltejs/kit';
-import { isEqual, isFunction } from 'lodash-es';
+import { isEqual } from 'lodash-es';
 
 import * as Serialize from '../utils/serialize';
 
@@ -36,6 +36,9 @@ export function queryParamStore<Value>(
     return decodeParam(values, paramType) ?? defaultValue;
   });
 
+  /**
+   * Apply new value to existing `URLSearchParams`
+   */
   function apply(params: URLSearchParams, newValue: Value) {
     //  Do not update querystring with initialValue..
     if (typeof window !== 'undefined') {
@@ -70,9 +73,8 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
     );
 
     for (const [key, values] of groupedParams) {
-      const paramType = isFunction(paramTypes)
-        ? paramTypes(key as string)
-        : paramTypes?.[key as string];
+      const paramType =
+        typeof paramTypes === 'function' ? paramTypes(key as string) : paramTypes?.[key as string];
 
       state[key] = decodeParam(values, paramType);
     }
@@ -80,6 +82,9 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
     return state;
   });
 
+  /**
+   * Create new `URLSearchParams` from values and paramTypes mapping
+   */
   function create(newValues: Values) {
     //  Do not update querystring with initialValue..
     if (typeof window !== 'undefined') {
@@ -87,9 +92,10 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
 
       if (newValues != null) {
         Object.entries(newValues).forEach(([key, value]) => {
-          const paramType = isFunction(paramTypes)
-            ? paramTypes(key as string)
-            : paramTypes?.[key as string];
+          const paramType =
+            typeof paramTypes === 'function'
+              ? paramTypes(key as string)
+              : paramTypes?.[key as string];
 
           applyParam(params, key, value, defaultValues?.[key], paramType);
         });
