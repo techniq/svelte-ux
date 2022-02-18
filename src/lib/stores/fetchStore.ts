@@ -78,8 +78,11 @@ export default function fetchStore() {
     // Save for refreshing or other building derived requests (ex. exports)
     fetchConfigStore.set({ url, config: mergedConfig });
 
-    if (mergedConfig?.disabled === true || (mergedConfig?.once && loaded)) {
-      // disabled or request already loaded and `once` set - do nothing
+    if (
+      mergedConfig?.disabled === true ||
+      (mergedConfig?.once && loaded && mergedConfig?.force !== true)
+    ) {
+      // disabled or request already loaded and `once` set (and not forced) - do nothing
     } else if (
       mergedConfig?.force !== true &&
       url === prevFetchConfig.url &&
