@@ -52,9 +52,7 @@ filename: $filename
 
 <Preview>
   <Breadcrumb {items} class="gap-2">
-    <span slot="divider">
-      <Icon path={mdiArrowRight} class="text-black/25" />
-    </span>
+    <Icon slot="divider" path={mdiArrowRight} class="text-black/25" />
   </Breadcrumb>
 </Preview>
 
@@ -77,12 +75,10 @@ filename: $filename
 
 <Preview>
   <Breadcrumb items={labeledItems}>
-    <span slot="item" let:item>
-      <Button>
-        <div class="text-black/50 text-xs uppercase">{item.label}</div>
-        <div>{item.value}</div>
-      </Button>
-    </span>
+    <Button slot="item" let:item>
+      <div class="text-black/50 text-xs uppercase">{item.label}</div>
+      <div>{item.value}</div>
+    </Button>
   </Breadcrumb>
 </Preview>
 
@@ -94,9 +90,7 @@ filename: $filename
       <span class="text-black/50 text-sm font-extrabold">{item.label}:</span>
       <span class="text-black/50 text-sm">{item.value}</span>
     </span>
-    <span slot="divider">
-      <DividerDot class="text-black/50" />
-    </span>
+    <DividerDot slot="divider" class="text-black/50" />
   </Breadcrumb>
 </Preview>
 
