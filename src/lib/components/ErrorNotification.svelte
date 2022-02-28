@@ -24,7 +24,7 @@
     </div>
     <div slot="title">{title}</div>
 
-    <div slot="description" class="w-80">
+    <div slot="description" class="max-w-3xl overflow-auto whitespace-pre">
       {#if description}
         <Stack vertical gap={8}>
           {#each description.split('\n') as line}
@@ -63,8 +63,7 @@
       {#if stackTrace}
         <div>
           <div class="text-xs text-black/50 mb-1">Stacktrace:</div>
-          <pre
-            class="bg-gray-100 border rounded p-2 text-xs">
+          <pre class="bg-gray-100 border rounded p-2 text-xs">
             {stackTrace ?? '<Empty>'}
           </pre>
         </div>
