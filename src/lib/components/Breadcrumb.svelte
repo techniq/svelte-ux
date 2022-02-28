@@ -11,7 +11,11 @@
 
 <div
   {...$$restProps}
-  class={clsx(inline ? 'inline-flex' : 'flex', 'items-center justify-start', $$restProps.class)}
+  class={clsx(
+    inline ? 'inline-flex' : 'flex',
+    'items-center justify-start flex-wrap',
+    $$restProps.class
+  )}
 >
   {#each items ?? [] as item, index}
     <slot name="item" {item}>

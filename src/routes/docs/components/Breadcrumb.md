@@ -94,6 +94,12 @@ filename: $filename
   </Breadcrumb>
 </Preview>
 
+## Many items
+
+<Preview>
+  <Breadcrumb items={Array.from({ length: 20 }).map((_, i) => 'Item ' + (++i))} />
+</Preview>
+
 ## Color
 
 ### inherit
