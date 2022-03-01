@@ -24,7 +24,7 @@
     </div>
     <div slot="title">{title}</div>
 
-    <div slot="description" class="max-w-3xl overflow-auto whitespace-pre">
+    <div slot="description" class="max-w-3xl max-h-64 overflow-auto whitespace-pre">
       {#if description}
         <Stack vertical gap={8}>
           {#each description.split('\n') as line}
