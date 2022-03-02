@@ -34,6 +34,9 @@
   const dispatch = createEventDispatcher();
 
   function onClick(e: MouseEvent) {
+    // TODO: Find why to only stop propagation if passed to on:change listener
+    e.stopPropagation();
+
     if (disabled) return;
     checked = !checked;
     dispatch('change', checked);
