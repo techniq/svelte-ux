@@ -1,5 +1,8 @@
 <script lang="ts">
+  import Icon from './Icon.svelte';
+
   export let size: 'sm' | 'md' | 'lg' | 'unset' = 'md';
+  export let icon: string | undefined = undefined;
 </script>
 
 <div
@@ -11,5 +14,9 @@
   class:w-14={size === 'lg'}
   class:h-14={size === 'lg'}
 >
-  <slot />
+  <slot>
+    {#if icon}
+      <Icon path={icon} />
+    {/if}
+  </slot>
 </div>

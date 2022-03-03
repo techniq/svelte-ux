@@ -4,11 +4,14 @@ filename: $filename
 ---
 
 <script>
+  import { mdiAccount } from '@mdi/js';
+
   import api from '$lib/components/Avatar.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import AppBar from '$lib/components/AppBar.svelte';
   import Avatar from '$lib/components/Avatar.svelte';
+  import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
 </script>
 
@@ -35,9 +38,23 @@ filename: $filename
 ## Size
 
 <Preview>
-  <Avatar class="bg-blue-500 text-white font-bold" size="sm">sm</Avatar>
+  <Avatar class="bg-blue-500 text-white font-bold text-xs" size="sm">sm</Avatar>
   <Avatar class="bg-blue-500 text-white font-bold" size="md">md</Avatar>
   <Avatar class="bg-blue-500 text-white font-bold" size="lg">lg</Avatar>
+</Preview>
+
+## Icon (prop)
+
+<Preview>
+  <Avatar class="bg-blue-500 text-white" icon={mdiAccount} />
+</Preview>
+
+## Icon (slot)
+
+<Preview>
+  <Avatar class="bg-blue-500">
+    <Icon path={mdiAccount} class="text-white" />
+  </Avatar>
 </Preview>
 
 # API
