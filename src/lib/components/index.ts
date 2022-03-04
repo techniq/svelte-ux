@@ -47,6 +47,7 @@ export { default as SectionDivider } from './SectionDivider.svelte';
 export { default as SelectField } from './SelectField.svelte';
 export { default as Stack } from './Stack.svelte';
 export { default as State } from './State.svelte';
+export { default as StoreSubscribe } from './StoreSubscribe.svelte';
 export { default as Switch } from './Switch.svelte';
 export { default as Tab } from './Tab.svelte';
 export { default as Table } from './Table.svelte';
