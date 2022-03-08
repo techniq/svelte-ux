@@ -83,6 +83,15 @@ description: A list item that provides a standard layout and works best with mul
 	<ListItem title="Title" />
 </Preview>
 
+## Loading
+
+<Preview>
+	<ListItem title="Title" subheading="Subheading" />
+	<ListItem title="Title" subheading="Subheading" />
+	<ListItem title="Title" subheading="Subheading" loading />
+	<ListItem title="Title" subheading="Subheading" />
+</Preview>
+
 ## Radio Group
 
 ### example 1

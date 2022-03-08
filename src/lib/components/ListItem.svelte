@@ -2,7 +2,9 @@
   import clsx from 'clsx';
 
   import Avatar from './Avatar.svelte';
+  import CircularProgress from './CircularProgress.svelte';
   import Icon from './Icon.svelte';
+  import Overlay from './Overlay.svelte';
 
   export let title: string | number | null = null;
   export let subheading: string | number | null = null;
@@ -37,11 +39,16 @@
     title?: string;
     subheading?: string;
   } = {};
+
+  /**
+   * Show loading overlay
+   */
+  export let loading: boolean | null = null;
 </script>
 
 <li
   class={clsx(
-    'flex gap-4 items-center border-t py-2 px-4',
+    'flex gap-4 items-center border-t py-2 px-4 relative',
     list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
     list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
     list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
@@ -51,6 +58,12 @@
   )}
   on:click
 >
+  {#if loading}
+    <Overlay center class="rounded">
+      <CircularProgress />
+    </Overlay>
+  {/if}
+
   <slot name="avatar">
     {#if icon != null}
       {#if avatar}
