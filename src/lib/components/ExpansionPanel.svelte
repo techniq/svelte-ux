@@ -24,6 +24,7 @@
   {...$$restProps}
   class={clsx(
     'bg-white elevation-1 border-t',
+    'relative', // Match ListItem (used for loading) so Stacking Context is consistent (else causes a solid line between ExpansionPanel and ListItem)
     list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
     list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
     list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
