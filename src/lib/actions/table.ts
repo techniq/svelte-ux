@@ -45,29 +45,35 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
       tracker.addAttribute('rowspan', column.rowSpan.toString());
     }
 
-    // Right align cells formatted as numbers.  Can be overridden by `align` below
-    switch (column.format) {
-      case 'currency':
-      case 'decimal':
-      case 'integer':
-      case 'percent':
-        tracker.addClass('text-right');
-        break;
-    }
-
-    switch (column.align) {
-      case 'left':
-        tracker.addClass('text-left');
-        break;
-      case 'center':
-        tracker.addClass('text-center');
-        break;
-      case 'right':
-        tracker.addClass('text-right');
-        break;
-      case 'justify':
-        tracker.addClass('text-justify');
-        break;
+    if (column.align) {
+      // Explicit column alignment
+      switch (column.align) {
+        case 'left':
+          tracker.addClass('text-left');
+          break;
+        case 'center':
+          tracker.addClass('text-center');
+          break;
+        case 'right':
+          tracker.addClass('text-right');
+          break;
+        case 'justify':
+          tracker.addClass('text-justify');
+          break;
+      }
+    } else if (column.format) {
+      // Implicit column alignment based on format
+      switch (column.format) {
+        case 'currency':
+        case 'decimal':
+        case 'integer':
+        case 'percent':
+          tracker.addClass('text-right');
+          break;
+      }
+    } else {
+      // Default column alignment
+      tracker.addClass('text-left');
     }
 
     const context: ResolveContext = {
