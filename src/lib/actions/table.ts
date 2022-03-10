@@ -61,7 +61,7 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
           tracker.addClass('text-justify');
           break;
       }
-    } else if (column.format) {
+    } else if (typeof column.format === 'string') {
       // Implicit column alignment based on format
       switch (column.format) {
         case 'currency':
