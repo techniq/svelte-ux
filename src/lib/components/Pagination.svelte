@@ -1,17 +1,17 @@
 <script lang="ts">
+  import clsx from 'clsx';
   import { mdiChevronLeft, mdiChevronRight, mdiPageFirst, mdiPageLast } from '@mdi/js';
 
   import type paginationStore from '../stores/paginationStore';
 
   import Button from './Button.svelte';
-  import Grid from './Grid.svelte';
 
   export let pagination: ReturnType<typeof paginationStore>;
   export let hideSinglePage = false;
 </script>
 
 {#if $pagination.totalPages > 1 || !hideSinglePage}
-  <Grid template="1fr auto auto auto" gap={32} items="center" class="p-1 {$$props.class}">
+  <div class={clsx('grid grid-cols-[1fr,auto,auto,auto] items-center gap-8 p-1', $$props.class)}>
     <slot name="actions">
       <div />
     </slot>
@@ -57,5 +57,5 @@
         class="p-2"
       />
     </div>
-  </Grid>
+  </div>
 {/if}
