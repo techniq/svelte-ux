@@ -30,6 +30,7 @@
   export let placeholder = '';
   export let loading: boolean = false;
   export let disabled: boolean = false;
+  export let readonly: boolean = false;
   export let icon: string | null = null;
   export let base = false;
   export let rounded = false;
@@ -141,7 +142,7 @@
   function onFocus() {
     logger.debug('onFocus');
 
-    open = true;
+    show();
   }
 
   function onBlur(e: FocusEvent) {
@@ -212,7 +213,7 @@
   function show() {
     logger.debug('show');
 
-    if (!disabled) {
+    if (!disabled && !readonly) {
       open = true;
       inputEl?.focus();
     }
@@ -316,6 +317,8 @@
         <span class="inline-block w-[29px] h-[28px] text-center">
           <CircularProgress size={16} width={2} class="text-black/50" />
         </span>
+      {:else if readonly}
+        <!-- Do not show chevron or clear buttons -->
       {:else if value}
         <Button
           icon={mdiClose}

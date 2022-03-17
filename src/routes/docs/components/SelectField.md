@@ -62,6 +62,12 @@ filename: $filename
   <SelectField {items} disabled />
 </Preview>
 
+## Readonly
+
+<Preview>
+  <SelectField {items} value={1} readonly />
+</Preview>
+
 ## Item Slot
 
 <Preview>
