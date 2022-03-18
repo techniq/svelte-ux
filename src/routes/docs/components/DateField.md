@@ -6,6 +6,8 @@ filename: $filename
 <script>
   import { addDays } from 'date-fns';
 
+  import { mdiCalendarStart, mdiCalendarEnd } from '@mdi/js';
+
   import api from '$lib/components/DateField.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -58,6 +60,15 @@ filename: $filename
 
 <Preview>
   <DateField label="Birth date" />
+</Preview>
+
+## Icon
+
+<Preview>
+  <div class="grid gap-2">
+    <DateField label="Start date" icon={mdiCalendarStart} />
+    <DateField label="End date" icon={mdiCalendarEnd} />
+  </div>
 </Preview>
 
 ## Error
