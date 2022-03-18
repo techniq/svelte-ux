@@ -76,8 +76,10 @@ filename: $filename
 <Preview>
   <Breadcrumb items={labeledItems}>
     <Button slot="item" let:item>
-      <div class="text-black/50 text-xs uppercase">{item.label}</div>
-      <div>{item.value}</div>
+      <div>
+        <div class="text-black/50 text-xs uppercase">{item.label}</div>
+        <div>{item.value}</div>
+      </div>
     </Button>
   </Breadcrumb>
 </Preview>
