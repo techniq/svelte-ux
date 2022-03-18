@@ -32,7 +32,9 @@
     circle ? 'rounded-full' : !base ? 'rounded' : '',
     small ? 'text-xs' : 'text-sm',
     fullWidth ? 'flex' : 'inline-flex',
-    base ? '' : 'px-4 uppercase font-medium tracking-wider whitespace-nowrap items-center',
+    base
+      ? ''
+      : 'px-4 uppercase font-medium tracking-wider whitespace-nowrap items-center justify-center',
     !base && !small && 'py-2',
     disabled && 'opacity-50 pointer-events-none',
     filled && 'bg-black/10 border border-black/20 hover:border-gray-700',
