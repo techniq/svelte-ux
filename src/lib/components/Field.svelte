@@ -76,7 +76,7 @@
   >
     <Stack horizontal template={hStackTemplate} items="center">
       {#if hasPrepend}
-        <div class="prepend whitespace-nowrap">
+        <div class="prepend whitespace-nowrap flex items-center">
           <slot name="prepend" />
 
           {#if icon}
