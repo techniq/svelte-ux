@@ -1,8 +1,7 @@
 <script lang="ts">
-  import clsx from 'clsx';
-
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
+  import clsx from 'clsx';
   import { mdiChevronDown } from '@mdi/js';
 
   import Icon from './Icon.svelte';
@@ -60,7 +59,7 @@
   </button>
 
   {#if active}
-    <div transition:slide>
+    <div transition:slide|local>
       <slot {active} />
     </div>
   {/if}
