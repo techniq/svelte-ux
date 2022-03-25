@@ -45,7 +45,9 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
     const { query, variables, config } = mergedQueryConfig;
 
     // https://github.com/apollographql/graphql-tag/issues/144
-    const queryAsString = typeof query === 'object' ? print(query) : query;
+    const queryAsString: string = typeof query === 'object' ? print(query) : query;
+
+    const isMutation = queryAsString.toLowerCase().includes('mutation');
 
     const options: RequestInit = merge(
       {
@@ -60,7 +62,7 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
     );
 
     const mergedFetchConfig: FetchConfig = merge(
-      {},
+      { force: isMutation ? true : undefined } as FetchConfig,
       globalConfig.config,
       {
         as: async (res) => {
