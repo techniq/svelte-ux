@@ -12,6 +12,7 @@ filename: $filename
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
+  import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
 ## Usage
@@ -88,6 +89,22 @@ import { Button } from 'svelte-ux';
 
 <Preview>
   <Button icon={mdiTrashCan} class="text-red-500">Delete</Button>
+</Preview>
+
+## Tooltip
+
+<Preview>
+  <Tooltip title="Really, do it!" placement="right" offset={2}>
+    <Button>Click me</Button>
+  </Tooltip>
+</Preview>
+
+## Tooltip (disabled)
+
+<Preview>
+  <Tooltip title="Really, do it!" placement="right" offset={2}>
+    <Button disabled>Click me</Button>
+  </Tooltip>
 </Preview>
 
 # API
