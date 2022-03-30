@@ -95,7 +95,13 @@
   }
 
   function handleInput(e) {
-    inputValue = inputType === 'number' ? Number(e.target.value) : e.target.value;
+    // console.log({ value: e.target.value, parsed: Number(e.target.value) });
+    if (inputType === 'number') {
+      // TODO: Improve handling of `1234.05` and backspacing the `5`, which results in `1234` (`.0` removed)
+      inputValue = e.target.value === '' ? null : Number(e.target.value);
+    } else {
+      inputValue = e.target.value;
+    }
     updateValue();
   }
 
