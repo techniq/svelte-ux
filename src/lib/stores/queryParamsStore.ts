@@ -32,7 +32,7 @@ export function queryParamStore<Value>(
   paramType?: ParamType
 ) {
   const store = derived(page, ($page) => {
-    const values = $page.query.getAll(name);
+    const values = $page.url.searchParams.getAll(name);
     return decodeParam(values, paramType) ?? defaultValue;
   });
 
@@ -67,7 +67,7 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
 
     // Group by key
     const groupedParams: Map<keyof Values, ValueOf<Values>> = rollup(
-      [...$page.query],
+      [...$page.url.searchParams],
       (items) => items.map((x) => x[1]),
       [([key, value]) => key]
     );

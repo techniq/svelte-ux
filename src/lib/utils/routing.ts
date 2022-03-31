@@ -53,9 +53,9 @@ export const isActive = {
 
           if (path === '/') {
             // home must be direct match (otherwise matches all)
-            return $page.path === path;
+            return $page.url.pathname === path;
           } else {
-            return $page.path.startsWith(path);
+            return $page.url.pathname.startsWith(path);
           }
 
           // TODO: Support parent routes, likely somehting like routify...
