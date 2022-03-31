@@ -9,12 +9,8 @@
   </div>
 
   {#if code}
-    <pre
-      class="language-{language} rounded"
-      style="margin: 0">
-		<code class="language-{language}">
-			{@html code}
-		</code>
-	</pre>
+    <pre class="language-{language} rounded" style="margin: 0; white-space: normal;">
+      <code class="language-{language}">{@html code}</code>
+    </pre>
   {/if}
 </div>
