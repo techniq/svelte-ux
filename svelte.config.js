@@ -16,7 +16,7 @@ const config = {
     vite: {
       plugins: [sveld()],
       optimizeDeps: {
-        include: ['d3-scale', 'd3-format', 'd3-time', 'd3-array'],
+        // include: ['d3-scale', 'd3-format', 'd3-time', 'd3-array'],
       },
     },
   },
