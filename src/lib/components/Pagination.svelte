@@ -34,7 +34,7 @@
       />
     </div>
 
-    <div class="text-xs text-black/50">
+    <div class="text-xs text-black/50 tabular-nums">
       {$pagination.from.toLocaleString()}-{$pagination.to.toLocaleString()}
       of
       {$pagination.total.toLocaleString()}
