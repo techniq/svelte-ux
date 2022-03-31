@@ -23,10 +23,10 @@ filename: $filename
 # Examples
 
 <TextField type="integer" bind:value align="center" class="w-24">
-  <div slot="prepend">
+  <div slot="prepend" class="flex">
     <Button icon={mdiMinus} on:click={() => (value -= 1)} />
   </div>
-  <div slot="append">
+  <div slot="append" class="flex">
     <Button icon={mdiPlus} on:click={() => (value += 1)} />
   </div>
 </TextField>

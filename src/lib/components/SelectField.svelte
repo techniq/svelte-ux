@@ -310,7 +310,7 @@
   >
     <slot slot="prepend" name="prepend" />
 
-    <span slot="append">
+    <span slot="append" class="flex items-center">
       <slot name="append" />
 
       {#if loading}

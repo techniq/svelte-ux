@@ -341,11 +341,11 @@ filename: $filename
 
 <Preview>
   <TextField label="Date Range">
-    <div slot="prepend">
+    <div slot="prepend" class="flex items-center">
       <Button icon={mdiChevronLeft} class="text-black/50 p-2" />
       <Icon path={mdiCalendar} class="text-black/50 mr-2" />
     </div>
-    <div slot="append">
+    <div slot="append" class="flex items-center">
       <Icon path={mdiRefresh} class="text-black/50 mr-2" />
       <Button icon={mdiChevronRight} class="text-black/50 p-2" />
     </div>
@@ -440,10 +440,10 @@ filename: $filename
     align="center"
     class="w-24"
   >
-    <div slot="prepend">
+    <div slot="prepend" class="flex">
       <Button icon={mdiMinus} on:click={() => (numberValue -= 1)} />
     </div>
-    <div slot="append">
+    <div slot="append" class="flex">
       <Button icon={mdiPlus} on:click={() => (numberValue += 1)} />
     </div>
   </TextField>

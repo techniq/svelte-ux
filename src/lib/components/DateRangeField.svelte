@@ -54,7 +54,7 @@
   let:id
   {...$$restProps}
 >
-  <span slot="prepend">
+  <span slot="prepend" class="flex items-center">
     <slot name="prepend" />
 
     {#if stepper}
@@ -87,7 +87,7 @@
     <DateRangeDisplay {value} {format} />
   </button>
 
-  <div slot="append">
+  <div slot="append" class="flex items-center">
     <slot name="append" />
 
     {#if stepper}

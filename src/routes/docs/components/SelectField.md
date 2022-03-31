@@ -93,7 +93,7 @@ filename: $filename
 <Preview>
   <Toggle let:on={open} let:toggle>
     <SelectField {items}>
-      <div slot="prepend" on:click|stopPropagation>
+      <div slot="prepend" on:click|stopPropagation class="flex items-center">
         <select
           class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
           style="text-align-last: center;"
