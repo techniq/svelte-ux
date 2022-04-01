@@ -4,6 +4,8 @@ filename: $filename
 ---
 
 <script lang="ts">
+  import { mdiCalendar } from '@mdi/js';
+
   import api from '$lib/components/DatePickerField.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -27,6 +29,18 @@ filename: $filename
 
 <Preview>
   <DatePickerField bind:value />
+</Preview>
+
+## Icon
+
+<Preview>
+  <DatePickerField icon={mdiCalendar} bind:value />
+</Preview>
+
+## Label
+
+<Preview>
+  <DatePickerField label="Date of Birth" icon={mdiCalendar} bind:value />
 </Preview>
 
 ## Stepper w/ default (day)

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import clsx from 'clsx';
-  import { mdiCalendarRange, mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+  import { mdiCheck, mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 
   import Button from './Button.svelte';
   import DateRange from './DateRange.svelte';
@@ -20,7 +20,7 @@
     periodType: null,
   };
   export let stepper: boolean = false;
-  export let fullWidth: boolean = false;
+  export let center: boolean = false;
 
   // Field props
   export let label: string | null = null;
@@ -43,7 +43,7 @@
 
 <Field
   label={label ?? (value.periodType ? getPeriodTypeName(value.periodType) : '')}
-  icon={icon ?? mdiCalendarRange}
+  {icon}
   {error}
   {hint}
   {disabled}
@@ -51,6 +51,7 @@
   {rounded}
   {filled}
   {dense}
+  {center}
   let:id
   {...$$restProps}
 >
@@ -78,9 +79,10 @@
   </span>
 
   <button
-    class={clsx('text-sm whitespace-nowrap w-full focus:outline-none', {
-      'text-left': fullWidth,
-    })}
+    class={clsx(
+      'text-sm whitespace-nowrap w-full focus:outline-none',
+      center ? 'text-center' : 'text-left'
+    )}
     on:click={() => (open = true)}
     {id}
   >
@@ -125,14 +127,15 @@
     <DateRange bind:selected={currentValue} />
   </div>
 
-  <div slot="actions">
+  <div slot="actions" class="flex items-center gap-2">
     <Button
+      icon={mdiCheck}
       on:click={() => {
         open = false;
         value = currentValue;
         dispatch('change', value);
       }}
-      class="text-blue-500">OK</Button
+      class="bg-blue-500 text-white hover:bg-blue-600">OK</Button
     >
     <Button
       on:click={() => {

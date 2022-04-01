@@ -6,6 +6,8 @@ filename: $filename
 <script lang="ts">
   import { subDays } from 'date-fns';
 
+  import { mdiCalendarRange } from '@mdi/js';
+
   import api from '$lib/components/DateRangeField.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -42,10 +44,16 @@ filename: $filename
   <DateRangeField bind:value stepper />
 </Preview>
 
-## Stepper w/ rounded & filled
+## Stepper w/ icon
 
 <Preview>
-  <DateRangeField bind:value stepper rounded filled />
+  <DateRangeField bind:value stepper icon={mdiCalendarRange} />
+</Preview>
+
+## Stepper w/ rounded & filled & centered
+
+<Preview>
+  <DateRangeField  bind:value stepper rounded filled center />
 </Preview>
 
 # API

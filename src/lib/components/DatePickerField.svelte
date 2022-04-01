@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { mdiCalendar, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
+  import { mdiCalendar, mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
   import Field from './Field.svelte';
@@ -56,7 +56,7 @@
 {:else}
   <Field
     label={label ?? dateDisplay(value, { format: secondaryFormat })}
-    icon={icon ?? center ? undefined : mdiCalendar}
+    {icon}
     {error}
     {hint}
     {disabled}
@@ -140,14 +140,15 @@
     />
   </div>
 
-  <div slot="actions">
+  <div slot="actions" class="flex items-center gap-2">
     <Button
+      icon={mdiCheck}
       on:click={() => {
         open = false;
         value = currentValue;
         dispatch('change', value);
       }}
-      class="text-blue-500">OK</Button
+      class="bg-blue-500 text-white hover:bg-blue-600">OK</Button
     >
     <Button
       on:click={() => {

@@ -69,7 +69,7 @@
 {#if value?.from}
   {dateDisplay(value.from, { periodType, format, variant, utc })}
 {:else}
-  <div class="italic">Empty</div>
+  <div>&nbsp;</div>
 {/if}
 
 {#if value?.to && showToValue}
