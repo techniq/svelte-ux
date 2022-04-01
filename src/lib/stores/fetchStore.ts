@@ -20,6 +20,10 @@ export type FetchConfig<TData = any> = {
    * Writable store used to track all errors.  Useful to handle all errors consistently.  Typically passed via initFetchClient
    */
   errors?: Writable<any[]>;
+  /**
+   * Do not pass errors up to context
+   */
+  suppressErrors?: boolean;
 };
 
 const CONTEXT_KEY = {};
@@ -227,7 +231,7 @@ export default function fetchStore() {
     //   });
     // }
 
-    if (newState.error) {
+    if (newState.error && config?.suppressErrors !== true) {
       // Add errors to global `errors` store
       addError(globalConfig?.errors, newState.error);
 
