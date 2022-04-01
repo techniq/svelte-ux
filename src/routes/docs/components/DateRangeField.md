@@ -38,6 +38,18 @@ filename: $filename
   <DateRangeField bind:value />
 </Preview>
 
+## Clearable
+
+<Preview>
+  <DateRangeField bind:value clearable />
+</Preview>
+
+## Icon
+
+<Preview>
+  <DateRangeField bind:value  icon={mdiCalendarRange} />
+</Preview>
+
 ## Stepper
 
 <Preview>

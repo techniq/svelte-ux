@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import clsx from 'clsx';
-  import { mdiCheck, mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+  import { mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
   import DateRange from './DateRange.svelte';
@@ -14,11 +14,13 @@
 
   const dispatch = createEventDispatcher();
 
-  export let value: DateRangeType = {
+  const _defaultValue: DateRangeType = {
     from: null,
     to: null,
     periodType: null,
   };
+
+  export let value: DateRangeType = _defaultValue;
   export let stepper: boolean = false;
   export let center: boolean = false;
 
@@ -28,7 +30,7 @@
   export let error = '';
   export let hint = '';
   export let disabled = false;
-  // export let clearable = false;
+  export let clearable = false;
   export let base = false;
   export let rounded = false;
   export let filled = false;
@@ -90,6 +92,18 @@
   </button>
 
   <div slot="append" class="flex items-center">
+    {#if clearable && (value?.periodType || value?.from || value?.to)}
+      <Button
+        icon={mdiClose}
+        class="text-black/50 p-1"
+        on:click={() => {
+          value = _defaultValue;
+          dispatch('clear');
+          dispatch('change', value);
+        }}
+      />
+    {/if}
+
     <slot name="append" />
 
     {#if stepper}
