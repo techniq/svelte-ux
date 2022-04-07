@@ -168,6 +168,19 @@ export function nestedFindByPredicate(
   return undefined;
 }
 
+/**
+ * Transverse array tree in depth-first order and execute callback for each item
+ */
+export function walk(arr: any[], children: Function, callback: Function) {
+  arr.forEach((item) => {
+    callback(item);
+
+    if (children(item)) {
+      walk(children(item), children, callback);
+    }
+  });
+}
+
 export function chunk(array: any[], size: number) {
   return array.reduce((acc, item, index) => {
     const bucket = Math.floor(index / size);
