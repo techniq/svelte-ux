@@ -82,6 +82,7 @@
 </div>
 
 <NavItem text="cssVars" path="/docs/actions/cssVars" class="pl-6 py-2" />
+<NavItem text="dataBackground" path="/docs/actions/dataBackground" class="pl-6 py-2" />
 <NavItem text="input" path="/docs/actions/input" class="pl-6 py-2" />
 <NavItem text="layout" path="/docs/actions/layout" class="pl-6 py-2" />
 <NavItem text="mouse" path="/docs/actions/mouse" class="pl-6 py-2" />
