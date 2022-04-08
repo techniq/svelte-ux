@@ -28,6 +28,7 @@ export function remainingViewportWidth(
   const max = options?.max ?? false;
   const offset = options?.offset ?? 0;
 
+  // TODO: Find way to watch/update when viewport location changes (ex. closing side drawer).  Resizer observer does not work for these cases.  Using the absolute positioned sentinel element sounds promising: https://stackoverflow.com/questions/40251082/an-event-or-observer-for-changes-to-getboundingclientrect
   const viewportClientLeft = node.getBoundingClientRect().left;
 
   if (options?.enabled !== false) {
