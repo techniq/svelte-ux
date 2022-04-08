@@ -17,3 +17,23 @@ export function remainingViewportHeight(
     );
   }
 }
+
+/**
+ * Set `width` or `max-width` to viewport width excluding node's current viewport left
+ */
+export function remainingViewportWidth(
+  node: HTMLElement,
+  options?: { max?: boolean; offset?: number; enabled?: boolean }
+): SvelteActionReturnType {
+  const max = options?.max ?? false;
+  const offset = options?.offset ?? 0;
+
+  const viewportClientLeft = node.getBoundingClientRect().left;
+
+  if (options?.enabled !== false) {
+    node.style.setProperty(
+      max ? 'max-width' : 'width',
+      `calc(100vw - ${viewportClientLeft}px - ${offset}px)`
+    );
+  }
+}
