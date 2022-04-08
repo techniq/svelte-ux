@@ -181,6 +181,16 @@ export function walk(arr: any[], children: Function, callback: Function) {
   });
 }
 
+/**
+ * Build flatten array in depth-first order (using `walk`)
+ */
+export function flattenTree(arr: any[], children: Function) {
+  const flatArray = [];
+  walk(arr, children, (item) => flatArray.push(item));
+
+  return flatArray;
+}
+
 export function chunk(array: any[], size: number) {
   return array.reduce((acc, item, index) => {
     const bucket = Math.floor(index / size);
