@@ -1,6 +1,6 @@
 import { scaleLinear } from 'd3-scale';
 
-type DataBackgroundOptions = {
+export type DataBackgroundOptions = {
   value: number;
   domain: [number, number];
   /**
@@ -25,6 +25,7 @@ export function dataBackground(
       node.style.backgroundRepeat = '';
       node.style.backgroundSize = '';
     } else {
+      // Map values from 0% to 100%
       const scale = scaleLinear()
         .domain(options.domain ?? [-100, 100])
         .range([0, 100]);

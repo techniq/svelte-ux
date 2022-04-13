@@ -1,3 +1,4 @@
+import type { DataBackgroundOptions } from '../actions/dataBackground';
 import type { Edge } from '../actions/sticky';
 import type { FormatType } from '../utils/format';
 
@@ -36,6 +37,8 @@ export type ColumnDef<TData = any> = {
     header?: ResolvePropType<TData, string | string[]>;
     data?: ResolvePropType<TData, string | string[]>;
   };
+
+  dataBackground?: DataBackgroundOptions;
 
   /** Set by getHeaders() util */
   colSpan?: number;
