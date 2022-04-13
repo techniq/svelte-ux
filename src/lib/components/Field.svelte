@@ -55,7 +55,7 @@
       : filled
       ? '[--color:theme(colors.gray.600)]'
       : '[--color:theme(colors.blue.500)]',
-    disabled && 'opacity-50',
+    disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
     $$props.class
   )}
