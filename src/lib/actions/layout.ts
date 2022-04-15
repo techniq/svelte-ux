@@ -10,12 +10,18 @@ export function remainingViewportHeight(
 
   const viewportClientTop = node.getBoundingClientRect().top;
 
-  if (options?.enabled !== false) {
-    node.style.setProperty(
-      max ? 'max-height' : 'height',
-      `calc(100vh - ${viewportClientTop}px - ${offset}px)`
-    );
+  function update(options) {
+    const property = max ? 'max-height' : 'height';
+
+    if (options.enabled === false) {
+      node.style.removeProperty(property);
+    } else {
+      node.style.setProperty(property, `calc(100vh - ${viewportClientTop}px - ${offset}px)`);
+    }
   }
+
+  update(options);
+  return { update };
 }
 
 /**
@@ -31,10 +37,16 @@ export function remainingViewportWidth(
   // TODO: Find way to watch/update when viewport location changes (ex. closing side drawer).  Resizer observer does not work for these cases.  Using the absolute positioned sentinel element sounds promising: https://stackoverflow.com/questions/40251082/an-event-or-observer-for-changes-to-getboundingclientrect
   const viewportClientLeft = node.getBoundingClientRect().left;
 
-  if (options?.enabled !== false) {
-    node.style.setProperty(
-      max ? 'max-width' : 'width',
-      `calc(100vw - ${viewportClientLeft}px - ${offset}px)`
-    );
+  function update(options) {
+    const property = max ? 'max-width' : 'width';
+
+    if (options.enabled === false) {
+      node.style.removeProperty(property);
+    } else {
+      node.style.setProperty(property, `calc(100vw - ${viewportClientLeft}px - ${offset}px)`);
+    }
   }
+
+  update(options);
+  return { update };
 }
