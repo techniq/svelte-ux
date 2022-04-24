@@ -36,7 +36,7 @@
     <div />
   </slot>
 
-  <div class="text-sm">
+  <div class="text-sm text-center">
     Rows per page:
     <Toggle let:on={open} let:toggle>
       <span>
@@ -59,13 +59,13 @@
     </Toggle>
   </div>
 
-  <div class="text-sm">
+  <div class="text-sm text-center">
     {$pagination.from.toLocaleString()}-{$pagination.to.toLocaleString()}
     of
     {$pagination.total.toLocaleString()}
   </div>
 
-  <div>
+  <div class="flex gap-1">
     <Button
       icon={mdiChevronLeft}
       on:click={() => pagination.prevPage()}
