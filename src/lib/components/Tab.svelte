@@ -42,7 +42,6 @@
 <style lang="postcss">
   button {
     border: 0;
-    background-color: transparent;
     cursor: pointer;
     margin: 0;
     padding: 0;

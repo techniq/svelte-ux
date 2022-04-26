@@ -146,6 +146,9 @@
   .underlined :global(.tabContainer) {
     @apply text-black/50 font-bold;
   }
+  .underlined :global(.tabContainer:hover) {
+    @apply text-accent-500 bg-accent-500/10;
+  }
 
   .underlined :global(.selected) {
     @apply text-accent-500;
