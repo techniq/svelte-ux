@@ -56,7 +56,9 @@ import { Button } from 'svelte-ux';
 ## Outlined w/ color
 
 <Preview>
-  <Button class="border border-current text-blue-500 hover:bg-blue-50"> Click me</Button>
+  <Button class="border border-current text-blue-500 hover:bg-blue-50">
+    Click me
+  </Button>
 </Preview>
 
 ## Link
@@ -89,6 +91,17 @@ import { Button } from 'svelte-ux';
 
 <Preview>
   <Button icon={mdiTrashCan} class="text-red-500">Delete</Button>
+</Preview>
+
+## Loading
+
+<Preview>
+  <Button class="border border-current text-blue-500 hover:bg-blue-50" loading>
+    Click me
+  </Button>
+  <Button loading >
+    Click me
+  </Button>
 </Preview>
 
 ## Tooltip

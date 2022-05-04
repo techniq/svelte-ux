@@ -4,6 +4,7 @@
   import Icon from './Icon.svelte';
 
   import cssVars from '../actions/cssVars';
+  import CircularProgress from './CircularProgress.svelte';
 
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
@@ -13,6 +14,7 @@
 
   export let small: boolean = false;
   export let filled: boolean = false;
+  export let loading: boolean = false;
 
   export let circle: boolean = iconOnly;
   export let base: boolean = iconOnly;
@@ -51,7 +53,9 @@
     style={$$props.style ?? ''}
     {disabled}
   >
-    {#if icon}
+    {#if loading}
+      <CircularProgress size={16} />
+    {:else if icon}
       <Icon path={icon} class={clsx($$slots.default && 'mr-1')} />
     {/if}
     <slot />
@@ -65,7 +69,9 @@
     style={$$props.style ?? ''}
     {disabled}
   >
-    {#if icon}
+    {#if loading}
+      <CircularProgress size={16} width={2} class="mr-2" />
+    {:else if icon}
       <Icon path={icon} class={clsx($$slots.default && 'mr-1')} />
     {/if}
     <slot />
