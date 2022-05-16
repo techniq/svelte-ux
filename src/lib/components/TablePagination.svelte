@@ -5,7 +5,6 @@
   import type paginationStore from '../stores/paginationStore';
 
   import Button from './Button.svelte';
-  import Grid from './Grid.svelte';
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import Toggle from './Toggle.svelte';
@@ -22,12 +21,9 @@
     - [ ] Actions including Refresh, Export
   -->
 
-<Grid
-  template="1fr auto auto auto"
-  gap={32}
-  items="center"
+<div
   class={clsx(
-    'border-t p-1',
+    'grid grid-cols-[1fr,auto,auto,auto] items-center gap-8 border-t p-1',
     'z-20', // Match highest z-index of sticky columns
     $$props.class
   )}
@@ -81,4 +77,4 @@
       class="w-12 h-12"
     />
   </div>
-</Grid>
+</div>
