@@ -10,6 +10,7 @@ export * as file from './file';
 export * as format from './format';
 export * as json from './json';
 export * as logger from './logger';
+export * as map from './map';
 export * as number from './number';
 export * as object from './object';
 export * as promise from './promise';
