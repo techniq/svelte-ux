@@ -5,7 +5,8 @@
 export function get<K, V>(map: Map<K, V>, path: string[]) {
   let key = null;
   let value = map;
-  while ((key = path.shift())) {
+  const currentPath = [...path]; // Copy since .shift() mutates original array
+  while ((key = currentPath.shift())) {
     if (value instanceof Map && value.has(key)) {
       value = value.get(key);
     } else {
