@@ -205,6 +205,19 @@ export function chunk(array: any[], size: number) {
 }
 
 /**
+ * Get evenly spaced samples from array
+ * see: https://observablehq.com/@mbostock/evenly-spaced-sampling
+ * see also: https://observablehq.com/@jonhelfman/uniform-sampling-variants
+ */
+export function samples(array: any[], size: number) {
+  if (!((size = Math.floor(size)) > 0)) return []; // return nothing
+  const n = array.length;
+  if (!(n > size)) return [...array]; // return everything
+  if (size === 1) return [array[n >> 1]]; // return the midpoint
+  return Array.from({ length: size }, (_, i) => array[Math.round((i / (size - 1)) * (n - 1))]);
+}
+
+/**
  * Adds item at `index` and returns array
  * Note: mutates, wrap with immer `produce(array, draft => addItem(draft))` for immutable
  */
