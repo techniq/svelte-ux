@@ -24,7 +24,7 @@ npm install svelte-preprocess
 Lastly, add `TailwindCSS` and dependencies. Requires the latest (v3.0+) with built-in JIT support.
 
 ```sh
-npm install tailwindcss tailwindcss-elevation autoprefixer
+npm install tailwindcss autoprefixer
 ```
 
 ## Setup svelte-preprocess
@@ -76,14 +76,14 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('tailwindcss-elevation')(['responsive'])],
+  plugins: [require('svelte-ux/plugins/tailwind')],
 };
 ```
 
 A few notes regarding the config
 
 - Define `accent` color of your choice. Many components utilize this color and more are being updated to do so.
-- Currently `svelte-ux` uses the [tailwindcss-elevation](https://github.com/jonaskay/tailwindcss-elevation) plugin to use more [realistic shadows](https://www.joshwcomeau.com/css/designing-shadows/) by having multiple shadow layers, unlike the current Tailwind [shadows](https://tailwindcss.com/docs/box-shadow) which have at most 2 layers. This may change in the future.
+- Currently `svelte-ux` provides a tailwind plugin to use more [realistic shadows](https://www.joshwcomeau.com/css/designing-shadows/) by having multiple shadow layers, unlike the current Tailwind [shadows](https://tailwindcss.com/docs/box-shadow) which have at most 2 layers, exposed as `elevation-#` classes. This may change in the future.
 
 Next, import Tailwind layers in `src/routes/__layout.svelte` style block
 
@@ -109,7 +109,7 @@ Lastly, use `components` (or `actions`, `stores`, or `utils`) by importing from 
 <Button>Click here</Button>
 ```
 
-All `components` and `stores` are available as top-level imports as shown above, although `utils` must be imported with a deeper path as to not polute the top-level imports. This may change in the future.
+All `components` `actions` and `stores` are available as top-level imports as shown above, although `utils` must be imported with a deeper path as to not polute the top-level imports. This may change in the future.
 
 ```js
 import { dateDisplay } from 'svelte-ux/utils/dateDisplay';
