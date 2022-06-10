@@ -131,7 +131,7 @@ filename: $filename
 <Preview>
   <div class="w-[300px] border">
     <Breadcrumb items={['Example', 'of', 'really really really long text']} class="flex-nowrap">
-      <span slot="item" class="last:truncate" let:item>{item}</span>
+      <span slot="item" class="last:truncate" let:item title={item}>{item}</span>
     </Breadcrumb>
   </div>
 </Preview>
