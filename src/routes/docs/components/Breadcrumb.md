@@ -126,6 +126,16 @@ filename: $filename
   <Breadcrumb {items} class="text-blue-500" />
 </Preview>
 
+## Truncate long text
+
+<Preview>
+  <div class="w-[300px] border">
+    <Breadcrumb items={['Example', 'of', 'really really really long text']} class="flex-nowrap">
+      <span slot="item" class="last:truncate" let:item>{item}</span>
+    </Breadcrumb>
+  </div>
+</Preview>
+
 # API
 
 <ApiDocs {api} />
