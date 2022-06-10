@@ -12,7 +12,7 @@
   {width}
   {height}
   {viewBox}
-  class={clsx('inline-block', $$props.class)}
+  class={clsx('inline-block flex-shrink-0', $$props.class)}
   style={$$props.style}
   on:click
 >
