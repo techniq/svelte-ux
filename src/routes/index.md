@@ -38,7 +38,6 @@ const config = {
   preprocess: [sveltePreprocess()],
 
   kit: {
-    target: '#svelte',
     // ...
   },
 };
