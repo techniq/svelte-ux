@@ -1,7 +1,12 @@
 import { parseISO } from 'date-fns';
 
 // UTC (yyyy-mm-ddThh:mm:ssZ) or Offset (yyyy-mm-ddThh:mm:ss-ZZ:ZZ) or Date-only (yyyy-mm-dd)
-const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}.\d{3}(Z|-\d{2}:\d{2}))?$/;
+// '1982-03-30'
+// '1982-03-30T11:25:59Z'
+// '1982-03-30T11:25:59-04:00'
+// '1982-03-30T11:25:59.123Z'
+// '1982-03-30T11:25:59.1234567Z'
+const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(.\d{3,7}|)(Z|-\d{2}:\d{2}))?$/;
 
 export function encode(value: any): string {
   // if (isPlainObject(value) || Array.isArray(value)) {
