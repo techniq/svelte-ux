@@ -6,7 +6,7 @@ import { parseISO } from 'date-fns';
 // '1982-03-30T11:25:59-04:00'
 // '1982-03-30T11:25:59.123Z'
 // '1982-03-30T11:25:59.1234567Z'
-const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(.\d{3,7}|)(Z|(-|\+)\d{2}:\d{2}))?$/;
+const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(.\d+|)(Z|(-|\+)\d{2}:\d{2}))?$/;
 
 export function encode(value: any): string {
   // if (isPlainObject(value) || Array.isArray(value)) {
