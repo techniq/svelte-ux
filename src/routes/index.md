@@ -1,8 +1,23 @@
 <script lang="ts">
+  import { mdiGithub } from '@mdi/js';
+
   import AppBar from '$lib/components/AppBar.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-<AppBar title="svelte-ux" />
+<AppBar title="svelte-ux">
+  <div slot="actions">
+    <Tooltip title="View repository" placement="left" offset={2}>
+      <Button
+        icon={mdiGithub}
+        href="https://github.com/techniq/svelte-ux"
+        class="p-2"
+        target="_blank"
+      />
+    </Tooltip>
+  </div>
+</AppBar>
 
 <main class="p-2">
 <div class="prose max-w-none bg-white rounded border p-4">
@@ -21,7 +36,7 @@ Add install `svelte-preprocess` if not already available. Typescript projects wi
 npm install svelte-preprocess
 ```
 
-Lastly, add `TailwindCSS` and dependencies. Requires the latest (v3.0+) with built-in JIT support.
+Lastly, add `tailwindcss` and dependencies. Requires the latest (v3.0+) with built-in JIT support.
 
 ```sh
 npm install tailwindcss autoprefixer
@@ -43,7 +58,7 @@ const config = {
 };
 ```
 
-## Setup TailwindCSS
+## Setup Tailwind
 
 Create `postcss.config.cjs`
 
