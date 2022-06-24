@@ -7,6 +7,18 @@
   import Button from './Button.svelte';
 
   export let title: string | number | Array<string | number> = '';
+
+  /**
+   * Update head / document.title
+   */
+  export let head = true;
+
+  $: titleString = Array.isArray(title) ? title.join(' › ') : title.toString();
+
+  // Not sure if this is truely needed with <title> below
+  // $: if (head) {
+  //   document.title = titleString;
+  // }
 </script>
 
 <header
@@ -30,3 +42,9 @@
     <slot name="actions" />
   </div>
 </header>
+
+<svelte:head>
+  {#if head}
+    <title>{titleString}</title>
+  {/if}
+</svelte:head>
