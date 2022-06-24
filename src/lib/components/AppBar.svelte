@@ -9,16 +9,16 @@
   export let title: string | number | Array<string | number> = '';
 
   /**
-   * Update head / document.title
+   * Update head / document.title.  Set to false to disable
    */
   export let head = true;
 
   $: titleString = Array.isArray(title) ? title.join(' › ') : title.toString();
 
-  // Not sure if this is truely needed with <title> below
-  // $: if (head) {
-  //   document.title = titleString;
-  // }
+  $: if (head) {
+    // Appears to be needed for some reactive updates
+    document.title = titleString;
+  }
 </script>
 
 <header
