@@ -452,7 +452,7 @@ export function decodeDelimitedNumericArray(
  * @return {String} The encoded object
  */
 export function encodeObject(
-  obj: { [key: string]: string | null | number | undefined } | null | undefined,
+  obj: { [key: string]: any } | null | undefined,
   keyValSeparator = '-',
   entrySeparator = '_'
 ): string | null | undefined {
@@ -484,7 +484,7 @@ export function decodeObject(
   input: string | (string | null)[] | null | undefined,
   keyValSeparator = '-',
   entrySeparator = '_'
-): { [key: string]: string } | null | undefined {
+): { [key: string]: any } | null | undefined {
   const objStr = getEncodedValue(input, true);
   if (objStr == null) return objStr;
   if (objStr === '') return {};
