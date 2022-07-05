@@ -1,6 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 
 module.exports = plugin(function ({ addUtilities }) {
+  // Add `elevation-#` classes
   addUtilities({
     '.elevation-0': {
       'box-shadow':
