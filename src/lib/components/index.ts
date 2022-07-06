@@ -41,6 +41,7 @@ export { default as Overlay } from './Overlay.svelte';
 export { default as Paginate } from './Paginate.svelte';
 export { default as Pagination } from './Pagination.svelte';
 export { default as Popover } from './Popover.svelte';
+export { default as Preview } from './Preview.svelte';
 export { default as Radio } from './Radio.svelte';
 export { default as RangeSlider } from './RangeSlider.svelte';
 export { default as SectionDivider } from './SectionDivider.svelte';
