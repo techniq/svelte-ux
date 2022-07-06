@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Prism from 'prismjs';
+  import 'prism-svelte';
   import { mdiCodeTags, mdiContentCopy } from '@mdi/js';
 
   import { slide } from 'svelte/transition';
@@ -6,8 +8,8 @@
   import Button from './Button.svelte';
 
   export let code = null;
-  export let highlightedCode = null;
   export let language = 'svelte';
+  export let highlightedCode = Prism.highlight(code, Prism.languages.svelte, language);
   export let showCode = false;
 </script>
 
