@@ -23,7 +23,7 @@ export function codePreview() {
         plugins: [typescriptPlugin, sveltePlugin],
       });
       const highlightedCode = Prism.highlight(formattedCode, Prism.languages.svelte, 'svelte');
-      node.value = `<Preview code="{\`${highlightedCode}\`}" language="svelte">${code}</Preview>`;
+      node.value = `<Preview code={\`${code}\`} highlightedCode="{\`${highlightedCode}\`}" language="svelte">${code}</Preview>`;
     }
   }
 
