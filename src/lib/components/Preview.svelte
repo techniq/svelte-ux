@@ -9,7 +9,7 @@
 
   export let code = null;
   export let language = 'svelte';
-  export let highlightedCode = Prism.highlight(code, Prism.languages.svelte, language);
+  export let highlightedCode = code ? Prism.highlight(code, Prism.languages.svelte, language) : '';
   export let showCode = false;
 </script>
 
