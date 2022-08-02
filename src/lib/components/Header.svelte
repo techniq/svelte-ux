@@ -1,8 +1,9 @@
 <script lang="ts">
+  import Breadcrumb from './Breadcrumb.svelte';
   import Stack from './Stack.svelte';
 
-  export let title: string | null = null;
-  export let subheading: string | null = null;
+  export let title: string | string[] | null = null;
+  export let subheading: string | string[] | null = null;
 </script>
 
 <Stack
@@ -17,13 +18,21 @@
   <div>
     <slot name="title">
       {#if title}
-        <div class="text-lg">{title}</div>
+        {#if Array.isArray(title)}
+          <Breadcrumb items={title} class="text-lg" />
+        {:else}
+          <div class="text-lg">{title}</div>
+        {/if}
       {/if}
     </slot>
 
     <slot name="subheading">
       {#if subheading}
-        <div class="text-sm text-black/50">{subheading}</div>
+        {#if Array.isArray(subheading)}
+          <Breadcrumb items={subheading} class="text-sm text-black/50" />
+        {:else}
+          <div class="text-sm text-black/50">{subheading}</div>
+        {/if}
       {/if}
     </slot>
   </div>

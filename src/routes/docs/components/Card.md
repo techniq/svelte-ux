@@ -43,6 +43,18 @@ import { Card } from 'svelte-ux';
   <Card title="Title" subheading="Subheading" />
 </Preview>
 
+## Title as array
+
+<Preview>
+  <Card title={['One', 'Two', 'Three']} />
+</Preview>
+
+## Title with subheading as array
+
+<Preview>
+  <Card title="Title" subheading={['One', 'Two', 'Three']} />
+</Preview>
+
 ## Header with Avatar
 
 <Preview>

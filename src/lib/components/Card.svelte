@@ -3,8 +3,8 @@
   import Header from './Header.svelte';
   import Overlay from './Overlay.svelte';
 
-  export let title: string | null = null;
-  export let subheading: string | null = null;
+  export let title: string | string[] | null = null;
+  export let subheading: string | string[] | null = null;
   export let loading: boolean | null = null;
 </script>
 
