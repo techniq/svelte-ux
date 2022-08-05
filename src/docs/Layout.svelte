@@ -14,31 +14,32 @@
 
 <script>
   // frontmatter: https://mdsvex.com/docs#frontmatter-1
-  export let component;
-  export let filename;
+  export let name;
+  export let sourceUrl;
+  export let docUrl;
   export let description;
 </script>
 
-{#if component}
+{#if name}
   <div class="flex items-center gap-2">
-    <span class="text-2xl font-bold">{component}</span>
-    {#if component}
+    <span class="text-2xl font-bold">{name}</span>
+    {#if sourceUrl}
       <Tooltip title="View source">
         <Button
           class="text-black/50 p-1"
           icon={mdiCodeTags}
-          href="https://github.com/techniq/svelte-ux/blob/master/src/lib/components/{component}.svelte"
+          href="https://github.com/techniq/svelte-ux/blob/master/{sourceUrl}"
           target="_blank"
         />
       </Tooltip>
     {/if}
 
-    {#if filename}
+    {#if docUrl}
       <Tooltip title="Edit this page">
         <Button
           class="text-black/50 p-1"
           icon={mdiFileDocumentEditOutline}
-          href="https://github.com/techniq/svelte-ux/blob/master/{filename}"
+          href="https://github.com/techniq/svelte-ux/blob/master/{docUrl}"
           target="_blank"
         />
       </Tooltip>

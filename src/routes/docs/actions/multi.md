@@ -1,3 +1,9 @@
+---
+name: $name
+sourceUrl: $sourceUrl
+docUrl: $docUrl
+---
+
 <script lang="ts">
 	import { subDays, subMonths } from 'date-fns';
 
@@ -5,7 +11,5 @@
 
 	import multi from '$lib/actions/multi';
 </script>
-
-## multi
 
 > TODO

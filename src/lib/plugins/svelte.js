@@ -10,7 +10,7 @@ export function markdownToc() {
 
       if (/node_modules/.test(filename)) return null;
 
-      if (filename.endsWith('.md') && filename.match(/routes\/docs\/(components)/)) {
+      if (filename.endsWith('.md') && filename.match(/routes\/docs/)) {
         const toc = [];
 
         walk(parse(content), {
@@ -27,13 +27,17 @@ export function markdownToc() {
           },
         });
 
-        const githubFilename = 'src/' + filename.match('src/(.*)')[1];
-        const component = filename.match('.*/(.*).md')[1];
+        const name = filename.match('.*/(.*).md')[1];
+        const docUrl = 'src/' + filename.match('src/(.*)')[1] + '?plain=1';
+        const sourceUrl = docUrl
+          .replace('routes/docs', 'lib')
+          .replace('.md', docUrl.includes('component') ? '.svelte' : '.ts');
 
         return {
           code: content
-            .replace('$filename', githubFilename)
-            .replace('$component', component)
+            .replace('$name', name)
+            .replace('$sourceUrl', sourceUrl)
+            .replace('$docUrl', docUrl)
             .replace(
               '</Layout_MDSVEX_DEFAULT>',
               `

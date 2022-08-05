@@ -1,3 +1,9 @@
+---
+name: $name
+sourceUrl: $sourceUrl
+docUrl: $docUrl
+---
+
 <script lang="ts">
   import { spring } from 'svelte/motion';
 

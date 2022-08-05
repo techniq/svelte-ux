@@ -1,3 +1,10 @@
+---
+name: $name
+description: Reactively set CSS variables using a single object
+sourceUrl: $sourceUrl
+docUrl: $docUrl
+---
+
 <script lang="ts">
 	import { subDays, subMonths } from 'date-fns';
 
@@ -8,10 +15,6 @@
 
 	let styleVars = { background: '#ddd', border: '1px solid #aaa' };
 </script>
-
-## cssVars
-
-### Reactively set CSS variables using a single object
 
 <Preview>
 	<div class="grid gap-4" use:cssVars={styleVars}>

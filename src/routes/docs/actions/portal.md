@@ -1,3 +1,9 @@
+---
+name: $name
+sourceUrl: $sourceUrl
+docUrl: $docUrl
+---
+
 <script lang="ts">
 	import { subDays, subMonths } from 'date-fns';
 
@@ -5,7 +11,5 @@
 
 	import portal from '$lib/actions/portal';
 </script>
-
-## portal
 
 > TODO
