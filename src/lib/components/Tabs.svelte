@@ -103,7 +103,7 @@
 	 * Contained (Apple) style
 	 */
   .contained :global(.tabList) {
-    @apply inline-grid overflow-hidden p-1 text-sm bg-black/10 border-black/20 transition-shadow border;
+    @apply inline-grid overflow-auto p-1 text-sm bg-black/10 border-black/20 transition-shadow border;
     grid-auto-flow: var(--flow);
     border-radius: var(--borderRadius, 10px);
   }
