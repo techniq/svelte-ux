@@ -1,4 +1,6 @@
 <script lang="ts">
+  import clsx from 'clsx';
+
   import CircularProgress from './CircularProgress.svelte';
   import Header from './Header.svelte';
   import Overlay from './Overlay.svelte';
@@ -15,7 +17,13 @@
   z-index of children (ex. Overlay, sticky columns, etc) from overlapping other components
 -->
 
-<div {...$$restProps} class="card relative z-0 bg-white border rounded elevation-1 {$$props.class}">
+<div
+  {...$$restProps}
+  class={clsx(
+    'card relative z-0 bg-white border rounded elevation-1 flex flex-col justify-between',
+    $$props.class
+  )}
+>
   {#if loading}
     <Overlay center class="rounded">
       <CircularProgress />
@@ -33,7 +41,7 @@
   <slot />
 
   {#if $$slots.contents}
-    <div class="px-4">
+    <div class="px-4 flex-1">
       <slot name="contents" />
     </div>
   {/if}

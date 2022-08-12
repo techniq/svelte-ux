@@ -114,6 +114,29 @@ import { Card } from 'svelte-ux';
   </Card>
 </Preview>
 
+## Actions slot alignment (always bottom)
+
+<Preview>
+  <div class="grid grid-cols-3 gap-3">
+    <Card title="Title" subheading="with actions">
+      <div slot="actions">
+        <Button>Action 1</Button>
+        <Button>Action 2</Button>
+      </div>
+    </Card>
+    <Card title="Title" subheading="with content">
+      <div slot="contents" class="bg-red-500">
+        Contents
+      </div>
+    </Card>
+    <Card title="Title" subheading="with tall content">
+      <div slot="contents" class="bg-red-500 h-40">
+        Contents
+      </div>
+    </Card>
+  </div>
+</Preview>
+
 ## Loading
 
 <Preview>
