@@ -10,7 +10,7 @@ export type DataBackgroundOptions = {
    */
   color?: string;
   bar?: boolean;
-  inset?: number;
+  inset?: number | [number, number];
   enabled?: boolean;
 };
 
@@ -41,10 +41,13 @@ export function dataBackground(
       node.style.setProperty('--color-from', options.color ?? 'var(--tw-gradient-from)');
       node.style.setProperty('--color-to', options.color ?? 'var(--tw-gradient-to)');
 
+      const insetX = Array.isArray(options.inset) ? options.inset[0] : options.inset;
+      const insetY = Array.isArray(options.inset) ? options.inset[1] : options.inset;
+
       node.style.backgroundSize = `
-			calc(100% - (${options.inset}px * 2))
-			calc(100% - (${options.inset}px * 2))`;
-      node.style.backgroundPosition = `${options.inset}px ${options.inset}px`;
+			calc(100% - (${insetX}px * 2))
+			calc(100% - (${insetY}px * 2))`;
+      node.style.backgroundPosition = `${insetX}px ${insetY}px`;
 
       // Show black baseline at `0` first, then value bar
       // TODO: Handle baseline at `100%` (only negative numbers)

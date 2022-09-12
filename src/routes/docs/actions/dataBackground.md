@@ -22,7 +22,7 @@ docUrl: $docUrl
 	let values = getValues();
 	let domainSelected = 'original' // 'derived'
 	let sorted = false;
-	let inset = false;
+	let inset = [0, 0];
 	
 	// Use original domain (ex. -100 => 100) or derive based on data
 	$: domain = domainSelected === 'original'
@@ -52,7 +52,10 @@ docUrl: $docUrl
 
 <div>
   <label>
-    Inset: <input type="number" bind:value={inset} min={0} max={10} style="width: 100px" />
+    Inset X: <input type="number" bind:value={inset[0]} min={0} max={10} style="width: 100px" />
+  </label>
+  <label>
+    Inset Y: <input type="number" bind:value={inset[1]} min={0} max={10} style="width: 100px" />
   </label>
 </div>
 
