@@ -1,4 +1,5 @@
 import { scaleLinear } from 'd3-scale';
+import { tweened } from 'svelte/motion';
 
 export type DataBackgroundOptions = {
   value: number;
@@ -25,12 +26,19 @@ export type DataBackgroundOptions = {
    * Show baseline
    */
   baseline?: boolean;
+
+  tweened?: Parameters<typeof tweened>;
 };
 
 export function dataBackground(
   node: HTMLElement,
   options: DataBackgroundOptions
 ): SvelteActionReturnType {
+  // Set duration to 0 by default to be instantaneous
+  const baseline = tweened(0, { duration: 0, ...options.tweened });
+  const barStart = tweened(0, { duration: 0, ...options.tweened });
+  const barEnd = tweened(0, { duration: 0, ...options.tweened });
+
   function update(options) {
     if (options.enabled === false) {
       // remove styles
@@ -43,13 +51,20 @@ export function dataBackground(
         .domain(options.domain ?? [-100, 100])
         .range([0, 100]);
 
-      const baseline = scale(0);
-      const barStart = scale(Math.min(0, options.value));
-      const barEnd = scale(Math.max(0, options.value));
+      baseline.set(scale(0));
+      baseline.subscribe((value) => {
+        node.style.setProperty('--baseline', `${value}%`);
+      });
 
-      node.style.setProperty('--baseline', `${baseline}%`);
-      node.style.setProperty('--barStart', `${barStart}%`);
-      node.style.setProperty('--barEnd', `${barEnd}%`);
+      barStart.set(scale(Math.min(0, options.value)));
+      barStart.subscribe((value) => {
+        node.style.setProperty('--barStart', `${value}%`);
+      });
+
+      barEnd.set(scale(Math.max(0, options.value)));
+      barEnd.subscribe((value) => {
+        node.style.setProperty('--barEnd', `${value}%`);
+      });
 
       node.style.setProperty('--color-from', options.color ?? 'var(--tw-gradient-from)');
       node.style.setProperty('--color-to', options.color ?? 'var(--tw-gradient-to)');

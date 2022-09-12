@@ -24,6 +24,7 @@ docUrl: $docUrl
 	let sorted = false;
 	let inset = [0, 0];
 	let baseline = false;
+	let duration = 300;
 	
 	// Use original domain (ex. -100 => 100) or derive based on data
 	$: domain = domainSelected === 'original'
@@ -70,14 +71,21 @@ docUrl: $docUrl
 	Max: <input type="number" bind:value={originalDomain[1]} style="width: 100px" />
 </div>
 
+<div>
+	Tweened duration: <input type="number" bind:value={duration} style="width: 100px" />
+</div>
+
 ## dataBackground
 
 <Preview>
   <table class="w-40 border">
     {#each (sorted ? sort(values) : values) as value}
-      <tr>
-        <td class="text-right" use:dataBackground={{ value, color: value > 0 ? 'hsl(140 100% 80%)' : 'hsl(0 100% 80%)', domain, bar: true, inset, baseline }}>{value}%</td>
-      </tr>
+			 <!-- re-mount if duration changes so action is updated -->
+			{#key duration}
+				<tr>
+					<td class="text-right" use:dataBackground={{ value, color: value > 0 ? 'hsl(140 100% 80%)' : 'hsl(0 100% 80%)', domain, bar: true, inset, baseline, tweened: { duration } }}>{value}%</td>
+				</tr>
+			{/key}
     {/each}
   </table>
 </Preview>
