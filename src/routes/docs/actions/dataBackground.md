@@ -23,6 +23,7 @@ docUrl: $docUrl
 	let domainSelected = 'original' // 'derived'
 	let sorted = false;
 	let inset = [0, 0];
+	let baseline = false;
 	
 	// Use original domain (ex. -100 => 100) or derive based on data
 	$: domain = domainSelected === 'original'
@@ -50,6 +51,11 @@ docUrl: $docUrl
 	Sorted
 </label>
 
+<label>
+	<input type="checkbox" bind:checked={baseline} />
+	Baseline
+</label>
+
 <div>
   <label>
     Inset X: <input type="number" bind:value={inset[0]} min={0} max={10} style="width: 100px" />
@@ -70,7 +76,7 @@ docUrl: $docUrl
   <table class="w-40 border">
     {#each (sorted ? sort(values) : values) as value}
       <tr>
-        <td class="text-right" use:dataBackground={{ value, color: value > 0 ? 'hsl(140 100% 80%)' : 'hsl(0 100% 80%)', domain, bar: true, inset }}>{value}%</td>
+        <td class="text-right" use:dataBackground={{ value, color: value > 0 ? 'hsl(140 100% 80%)' : 'hsl(0 100% 80%)', domain, bar: true, inset, baseline }}>{value}%</td>
       </tr>
     {/each}
   </table>

@@ -3,15 +3,28 @@ import { scaleLinear } from 'd3-scale';
 export type DataBackgroundOptions = {
   value: number;
   domain: [number, number];
+
   /**
    * Set color explicitly.  Can also use the following:
    *   - tailwind gradient classes (`from-blue-200 to-blue-400`)
    *   - Set CSS variables `--color-from` and `--color-to`
    */
   color?: string;
+
+  /**
+   * Render as bar.  Default to fill (heatmap)
+   */
   bar?: boolean;
+
+  /** Inset bar.  Pass as [x,y] to specify per axis */
   inset?: number | [number, number];
+
   enabled?: boolean;
+
+  /**
+   * Show baseline
+   */
+  baseline?: boolean;
 };
 
 export function dataBackground(
@@ -52,7 +65,9 @@ export function dataBackground(
       // Show black baseline at `0` first, then value bar
       // TODO: Handle baseline at `100%` (only negative numbers)
       node.style.backgroundImage = options.bar
-        ? `
+        ? `${
+            options.baseline
+              ? `
           linear-gradient(
             to right,
             transparent var(--baseline),
@@ -61,6 +76,9 @@ export function dataBackground(
             transparent 0%,
             transparent 100%
           ),
+        `
+              : ''
+          }
           linear-gradient(
             to right,
             transparent var(--barStart),
