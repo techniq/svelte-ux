@@ -2,7 +2,8 @@ import { readable } from 'svelte/store';
 // import { browser } from '$app/env';
 
 // TODO: Replace with `browser` from `$app/env` once better supported when imported as package
-const browser = !import.meta.env.SSR;
+// const browser = !import.meta.env.SSR;
+const browser = typeof window !== 'undefined';
 
 function matchMedia(queryString: string) {
   return readable(null, (set) => {

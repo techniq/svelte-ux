@@ -7,7 +7,8 @@ import { expireObject } from '../utils/object';
 import type { Expiry } from '../utils/object';
 
 // TODO: Replace with `browser` from `$app/env` once better supported when imported as package
-const browser = !import.meta.env.SSR;
+// const browser = !import.meta.env.SSR;
+const browser = typeof window !== 'undefined';
 
 // https://stackoverflow.com/questions/56488202/how-to-persist-svelte-store
 // https://github.com/joshnuss/svelte-local-storage-store/blob/master/src/index.js
