@@ -1,8 +1,11 @@
 <script lang="ts">
   import { tweened } from 'svelte/motion';
 
-  export let value: number;
-  export let options: Parameters<typeof tweened>[1];
+  type T = $$Generic;
+  type TweenedOptions = Parameters<typeof tweened<T>>[1];
+
+  export let value: T;
+  export let options: TweenedOptions;
 
   const tweenedValue = tweened(value, options);
   $: $tweenedValue = value;
