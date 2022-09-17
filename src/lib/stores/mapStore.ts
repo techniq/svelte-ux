@@ -31,5 +31,14 @@ export default function mapStore<TKey, TValue>(
         return map;
       });
     },
+
+    /**
+     * Force a reactive update in case of internal changes to entries
+     */
+    refresh() {
+      store.update((map) => {
+        return map;
+      });
+    },
   };
 }
