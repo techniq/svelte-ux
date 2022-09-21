@@ -28,7 +28,7 @@ export function keys<T>(o: T) {
 
 // Get entries (array of [key, value] arrays) of object (strongly-typed)
 export function entries<T>(o: T) {
-  return Object.entries(o) as [keyof T, any][]; // TODO: Can value type be improved from any
+  return Object.entries(o) as [keyof T, T[keyof T]][]; // TODO: Improve based on key/value pair - https://stackoverflow.com/questions/60141960/typescript-key-value-relation-preserving-object-entries-type
 }
 
 // https://github.com/Microsoft/TypeScript/issues/17198#issuecomment-315400819
