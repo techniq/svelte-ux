@@ -5,6 +5,7 @@
   import CircularProgress from './CircularProgress.svelte';
   import Icon from './Icon.svelte';
   import Overlay from './Overlay.svelte';
+  import type { ComponentProps } from '../types';
 
   export let title: string | number | null = null;
   export let subheading: string | number | null = null;
@@ -13,7 +14,7 @@
   /**
    * Wrap icon in Avatar
    */
-  export let avatar: boolean | Avatar['$$prop_def'] = null;
+  export let avatar: boolean | ComponentProps<Avatar> = null;
 
   /**
    * Controls how first, last, and gap between are calculated

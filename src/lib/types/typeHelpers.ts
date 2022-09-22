@@ -1,4 +1,7 @@
 // https://basarat.gitbooks.io/typescript/docs/types/never.html#use-case-exhaustive-checks
+
+import type { SvelteComponentTyped } from 'svelte';
+
 // https://www.typescriptlang.org/docs/handbook/basic-types.html#never
 export function fail(message: string): never {
   throw new Error(message);
@@ -66,3 +69,8 @@ export type RecursivePartial<T> = {
 export type FilterPropKeys<T, Match> = {
   [P in keyof T]: T[P] extends Match ? P : never;
 }[keyof T];
+
+// https://stackoverflow.com/a/72297256/191902
+export type ComponentProps<T> = T extends SvelteComponentTyped<infer P, any, any> ? P : never;
+export type ComponentEvents<T> = T extends SvelteComponentTyped<any, infer E, any> ? E : never;
+export type ComponentSlots<T> = T extends SvelteComponentTyped<any, any, infer S> ? S : never;
