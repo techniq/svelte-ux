@@ -60,11 +60,11 @@ docUrl: $docUrl
     underlined={optionStyle === 'underlined'}
   >
     <div class="options">
-      <ToggleOption value="all" style="width: 120px">All</ToggleOption>
-      <ToggleOption value="missed" style="width: 120px">Missed</ToggleOption>
-      <ToggleOption value="calls" style="width: 120px">Calls</ToggleOption>
+      <ToggleOption value="all" class="w-32">All</ToggleOption>
+      <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
+      <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
     </div>
-    <div style="margin-top: 8px; padding: 16px">
+    <div class="mt-2 p-4 bg-black/5 rounded border">
       <TogglePanel>All panel</TogglePanel>
       <TogglePanel>Missed panel</TogglePanel>
       <TogglePanel>Calls panel</TogglePanel>
@@ -126,11 +126,7 @@ docUrl: $docUrl
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
   >
-    <div
-      class="options"
-      style="display: grid; grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 48px)"
-    >
+    <div class="options !grid grid-rows-3 grid-cols-3">
       <ToggleOption value={1}>1</ToggleOption>
       <ToggleOption value={2}>2</ToggleOption>
       <ToggleOption value={3}>3</ToggleOption>
@@ -169,9 +165,9 @@ docUrl: $docUrl
     value={selected}
   >
     <div class="options">
-      <ToggleOption value="all" style="width: 120px">All</ToggleOption>
-      <ToggleOption value="missed" style="width: 120px">Missed</ToggleOption>
-      <ToggleOption value="calls" style="width: 120px">Calls</ToggleOption>
+      <ToggleOption value="all" class="w-32">All</ToggleOption>
+      <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
+      <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
     </div>
   </ToggleGroup>
 </Preview>
@@ -192,9 +188,9 @@ docUrl: $docUrl
     value={selectedStr}
   >
     <div class="options">
-      <ToggleOption value="all" style="width: 120px">All</ToggleOption>
-      <ToggleOption value="missed" style="width: 120px">Missed</ToggleOption>
-      <ToggleOption value="calls" style="width: 120px">Calls</ToggleOption>
+      <ToggleOption value="all" class="w-32">All</ToggleOption>
+      <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
+      <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
     </div>
   </ToggleGroup>
 </Preview>
@@ -215,9 +211,9 @@ docUrl: $docUrl
     value={selectedObj}
   >
     <div class="options">
-      <ToggleOption value={allValue} style="width: 120px">All</ToggleOption>
-      <ToggleOption value={missedValue} style="width: 120px">Missed</ToggleOption>
-      <ToggleOption value={callsValue} style="width: 120px">Calls</ToggleOption>
+      <ToggleOption value={allValue} class="w-32">All</ToggleOption>
+      <ToggleOption value={missedValue} class="w-32">Missed</ToggleOption>
+      <ToggleOption value={callsValue} class="w-32">Calls</ToggleOption>
     </div>
   </ToggleGroup>
 </Preview>

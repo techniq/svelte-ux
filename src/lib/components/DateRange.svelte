@@ -153,9 +153,7 @@
 
   <div class="grid gap-2">
     <div>
-      <div class="text-xs text-black/50 uppercase" style="margin-top: -22px; margin-bottom: 4px;">
-        Type
-      </div>
+      <div class="text-xs text-black/50 uppercase mb-1 -mt-5">Type</div>
       <ToggleGroup
         contained
         bind:value={selected.periodType}
