@@ -166,7 +166,7 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
-    {selected}
+    value={selected}
   >
     <div class="options">
       <ToggleOption value="all" style="width: 120px">All</ToggleOption>
@@ -179,11 +179,8 @@ docUrl: $docUrl
 <div class="mt-4">
   Select:
   <Button on:click={() => (selected = 0)}>All</Button>
-
-<Button on:click={() => (selected = 1)}>Missed</Button>
-
-<Button on:click={() => (selected = 2)}>Calls</Button>
-
+  <Button on:click={() => (selected = 1)}>Missed</Button>
+  <Button on:click={() => (selected = 2)}>Calls</Button>
 </div>
 
 ## Controlled w/ with value (string)
@@ -192,7 +189,7 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
-    selected={selectedStr}
+    value={selectedStr}
   >
     <div class="options">
       <ToggleOption value="all" style="width: 120px">All</ToggleOption>
@@ -205,11 +202,8 @@ docUrl: $docUrl
 <div class="mt-4">
   Select:
   <Button on:click={() => (selectedStr = 'all')}>All</Button>
-
-<Button on:click={() => (selectedStr = 'missed')}>Missed</Button>
-
-<Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
-
+  <Button on:click={() => (selectedStr = 'missed')}>Missed</Button>
+  <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
 </div>
 
 ## Controlled w/ with value (object)
@@ -218,7 +212,7 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
-    selected={selectedObj}
+    value={selectedObj}
   >
     <div class="options">
       <ToggleOption value={allValue} style="width: 120px">All</ToggleOption>

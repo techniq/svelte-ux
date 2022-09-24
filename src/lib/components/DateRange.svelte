@@ -102,7 +102,7 @@
 
 <div class="grid grid-cols-[2fr,3fr] gap-2 bg-gray-100">
   <div class="col-start-2">
-    <ToggleGroup contained bind:selected={activeDate}>
+    <ToggleGroup contained bind:value={activeDate}>
       <div class="options w-full border">
         <ToggleOption value="from" class="flex-1">
           <div class="text-xs text-black/50">Start</div>
@@ -158,7 +158,7 @@
       </div>
       <ToggleGroup
         contained
-        bind:selected={selected.periodType}
+        bind:value={selected.periodType}
         on:change={(e) => {
           // Expand selection range to match period type (day => month, etc)
           const { start, end } = getDateFuncsByPeriodType(e.detail.value);
@@ -182,7 +182,7 @@
 
       {#if selected.periodType}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
-        <ToggleGroup contained bind:selected vertical>
+        <ToggleGroup contained bind:value={selected} vertical>
           <div class="options flex flex-col w-full border">
             {#each getDateRangePresets(selected.periodType) ?? [] as preset}
               <ToggleOption value={preset.value} class="flex-1">{preset.label}</ToggleOption>
@@ -193,7 +193,7 @@
 
       {#if selected.periodType && hasDayOfWeek(selected.periodType)}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Start day of week</div>
-        <ToggleGroup contained bind:selected={selectedDayOfWeek}>
+        <ToggleGroup contained bind:value={selectedDayOfWeek}>
           <div class="options flex w-full border">
             <ToggleOption value={DayOfWeek.SUN} class="flex-1">Sun</ToggleOption>
             <ToggleOption value={DayOfWeek.MON} class="flex-1">Mon</ToggleOption>

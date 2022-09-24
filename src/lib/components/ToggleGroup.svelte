@@ -8,7 +8,7 @@
   import { crossfade, fade } from 'svelte/transition';
   import cssVars from '../actions/cssVars';
 
-  export let selected: any = undefined; // index or value
+  export let value: any = undefined; // index or value
 
   // styles
   export let contained: boolean = false;
@@ -29,33 +29,33 @@
   const [send, receive] = crossfade({ fallback: fade });
   const dispatch = createEventDispatcher();
 
-  // Selected changed (controlled)
+  // Value changed (controlled)
   $: {
     // Find selected option element based on selected value/index
-    const newSelectedOption = optionsByValue.get(selected) || options[selected];
+    const newSelectedOption = optionsByValue.get(value) || options[value];
     // console.log({ selected, newSelectedOption });
-    selectOption(newSelectedOption, selected);
+    selectOption(newSelectedOption, value);
   }
 
-  function registerOption(option: HTMLElement, value: any) {
+  function registerOption(option: HTMLElement, optionValue: any) {
     options.push(option);
     // if (value != null) {
-    optionsByValue.set(value, option);
+    optionsByValue.set(optionValue, option);
     // }
 
     // Select option if selected after being registered
-    if (/*selected != null &&*/ value === selected) {
-      selectOption(option, value);
+    if (/*selected != null &&*/ optionValue === value) {
+      selectOption(option, optionValue);
     }
   }
 
-  function unregisterOption(option: HTMLElement, value: any) {
+  function unregisterOption(option: HTMLElement, optionValue: any) {
     const i = options.indexOf(option);
     options.splice(i, 1);
     selectedOption.update((current) =>
       current === option ? options[i] || options[options.length - 1] : current
     );
-    optionsByValue.delete(value);
+    optionsByValue.delete(optionValue);
   }
 
   function registerPanel(panel: HTMLElement) {
@@ -71,13 +71,13 @@
     );
   }
 
-  function selectOption(option: HTMLElement, value: any) {
-    // console.log('selectOption', option, value);
+  function selectOption(option: HTMLElement, optionValue: any) {
+    // console.log('selectOption', option, optionValue);
 
     if (option) {
-      dispatch('change', { value });
+      dispatch('change', { value: optionValue });
       $selectedOption = option;
-      selected = value;
+      value = optionValue;
 
       const i = options.indexOf(option);
       $selectedPanel = panels[i];
