@@ -1,10 +1,10 @@
 <script>
   import { getContext, onDestroy } from 'svelte';
 
-  import { tabsKey } from './Tabs.svelte';
+  import { groupKey } from './ToggleGroup.svelte';
 
   const panel = {};
-  const { registerPanel, unregisterPanel, selectedPanel } = getContext(tabsKey);
+  const { registerPanel, unregisterPanel, selectedPanel } = getContext(groupKey);
 
   registerPanel(panel);
 

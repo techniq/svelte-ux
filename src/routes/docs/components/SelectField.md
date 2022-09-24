@@ -211,13 +211,13 @@ docUrl: $docUrl
   }}
 >
   <div slot="actions" class="p-2">
-    <Tabs contained class="w-full" selected="active">
-      <div class="tabList w-full border">
-        <Tab value="active">Active</Tab>
-        <Tab value="inaction">Inactive</Tab>
-        <Tab value="all">All</Tab>
+    <ToggleGroup contained class="w-full" selected="active">
+      <div class="options w-full border">
+        <ToggleOption value="active">Active</ToggleOption>
+        <ToggleOption value="inaction">Inactive</ToggleOption>
+        <ToggleOption value="all">All</ToggleOption>
       </div>
-    </Tabs>
+    </ToggleGroup>
   </div>
 </SelectField>
 </Preview>

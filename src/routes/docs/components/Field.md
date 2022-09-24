@@ -21,8 +21,8 @@ docUrl: $docUrl
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Switch from '$lib/components/Switch.svelte';
-  import Tab from '$lib/components/Tab.svelte';
-  import Tabs from '$lib/components/Tabs.svelte';
+  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
+  import ToggleOption from '$lib/components/ToggleOption.svelte';
 </script>
 
 # Examples
@@ -46,54 +46,54 @@ docUrl: $docUrl
 
 <div class="grid grid-cols-2 gap-2">
   <div>
-    <div class="text-lg font-semibold mt-8 ml-2">Tabs</div>
+    <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
     <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full width</div>
     <Preview>
       <Field label="Is Active">
-        <Tabs contained class="w-full">
-          <div class="tabList w-full border">
-            <Tab>Yes</Tab>
-            <Tab>No</Tab>
-            <Tab>All</Tab>
+        <ToggleGroup contained class="w-full">
+          <div class="options w-full border">
+            <ToggleOption>Yes</ToggleOption>
+            <ToggleOption>No</ToggleOption>
+            <ToggleOption>All</ToggleOption>
           </div>
-        </Tabs>
+        </ToggleGroup>
       </Field>
     </Preview>
   </div>
 
   <div>
-    <div class="text-lg font-semibold mt-8 ml-2">Tabs</div>
+    <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
     <div class="text-xs font-semibold text-black/50 mb-1 ml-2">fixed width</div>
     <Preview>
       <Field label="Is Active">
-        <Tabs contained class="w-96">
-          <div class="tabList w-full border">
-            <Tab>Yes</Tab>
-            <Tab>No</Tab>
-            <Tab>All</Tab>
+        <ToggleGroup contained class="w-96">
+          <div class="options w-full border">
+            <ToggleOption>Yes</ToggleOption>
+            <ToggleOption>No</ToggleOption>
+            <ToggleOption>All</ToggleOption>
           </div>
-        </Tabs>
+        </ToggleGroup>
       </Field>
     </Preview>
   </div>
 
   <div>
-    <div class="text-lg font-semibold mt-8 mb-1 ml-2">Tabs with icons</div>
+    <div class="text-lg font-semibold mt-8 mb-1 ml-2">ToggleGroup with icons</div>
     <Preview>
       <Field label="Is Active">
-        <Tabs contained circle>
-          <div class="tabList h-12 w-32 border rounded-full">
-            <Tab>
+        <ToggleGroup contained circle>
+          <div class="options h-12 w-32 border rounded-full">
+            <ToggleOption>
               <Icon path={mdiAccount} />
-            </Tab>
-            <Tab>
+            </ToggleOption>
+            <ToggleOption>
               <Icon path={mdiAccountOutline} />
-            </Tab>
-            <Tab>
+            </ToggleOption>
+            <ToggleOption>
               <Icon path={mdiAccountMultipleOutline} />
-            </Tab>
+            </ToggleOption>
           </div>
-        </Tabs>
+        </ToggleGroup>
       </Field>
     </Preview>
   </div>

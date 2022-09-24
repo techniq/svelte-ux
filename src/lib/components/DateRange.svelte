@@ -13,8 +13,8 @@
   import type { DateRange } from '../utils/dateRange';
 
   import DateSelect from './DateSelect.svelte';
-  import Tab from './Tab.svelte';
-  import Tabs from './Tabs.svelte';
+  import ToggleGroup from './ToggleGroup.svelte';
+  import ToggleOption from './ToggleOption.svelte';
   import DateField from './DateField.svelte';
 
   export let selected: DateRange = { from: null, to: null, periodType: null };
@@ -102,9 +102,9 @@
 
 <div class="grid grid-cols-[2fr,3fr] gap-2 bg-gray-100">
   <div class="col-start-2">
-    <Tabs contained bind:selected={activeDate}>
-      <div class="tabList w-full border">
-        <Tab value="from" class="flex-1">
+    <ToggleGroup contained bind:selected={activeDate}>
+      <div class="options w-full border">
+        <ToggleOption value="from" class="flex-1">
           <div class="text-xs text-black/50">Start</div>
           {#if selected.from}
             <div class="font-medium">{format(selected.from, 'M/d/yyyy')}</div>
@@ -124,9 +124,9 @@
               dense
             />
           </div> -->
-        </Tab>
+        </ToggleOption>
 
-        <Tab value="to" class="flex-1">
+        <ToggleOption value="to" class="flex-1">
           <div class="text-xs text-black/50">End</div>
           {#if selected.to}
             <div class="font-medium">{format(selected.to, 'M/d/yyyy')}</div>
@@ -146,9 +146,9 @@
               dense
             />
           </div> -->
-        </Tab>
+        </ToggleOption>
       </div>
-    </Tabs>
+    </ToggleGroup>
   </div>
 
   <div class="grid gap-2">
@@ -156,7 +156,7 @@
       <div class="text-xs text-black/50 uppercase" style="margin-top: -22px; margin-bottom: 4px;">
         Type
       </div>
-      <Tabs
+      <ToggleGroup
         contained
         bind:selected={selected.periodType}
         on:change={(e) => {
@@ -171,39 +171,39 @@
         }}
         vertical
       >
-        <div class="tabList flex flex-col w-full border">
+        <div class="options flex flex-col w-full border">
           {#each periodTypeOptions ?? [] as pt}
-            <Tab value={adjustPeriodType(pt)} class="flex-1">
+            <ToggleOption value={adjustPeriodType(pt)} class="flex-1">
               {getPeriodTypeName(adjustPeriodType(pt))}
-            </Tab>
+            </ToggleOption>
           {/each}
         </div>
-      </Tabs>
+      </ToggleGroup>
 
       {#if selected.periodType}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
-        <Tabs contained bind:selected vertical>
-          <div class="tabList flex flex-col w-full border">
+        <ToggleGroup contained bind:selected vertical>
+          <div class="options flex flex-col w-full border">
             {#each getDateRangePresets(selected.periodType) ?? [] as preset}
-              <Tab value={preset.value} class="flex-1">{preset.label}</Tab>
+              <ToggleOption value={preset.value} class="flex-1">{preset.label}</ToggleOption>
             {/each}
           </div>
-        </Tabs>
+        </ToggleGroup>
       {/if}
 
       {#if selected.periodType && hasDayOfWeek(selected.periodType)}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Start day of week</div>
-        <Tabs contained bind:selected={selectedDayOfWeek}>
-          <div class="tabList flex w-full border">
-            <Tab value={DayOfWeek.SUN} class="flex-1">Sun</Tab>
-            <Tab value={DayOfWeek.MON} class="flex-1">Mon</Tab>
-            <Tab value={DayOfWeek.TUE} class="flex-1">Tue</Tab>
-            <Tab value={DayOfWeek.WED} class="flex-1">Wed</Tab>
-            <Tab value={DayOfWeek.THU} class="flex-1">Thu</Tab>
-            <Tab value={DayOfWeek.FRI} class="flex-1">Fri</Tab>
-            <Tab value={DayOfWeek.SAT} class="flex-1">Sat</Tab>
+        <ToggleGroup contained bind:selected={selectedDayOfWeek}>
+          <div class="options flex w-full border">
+            <ToggleOption value={DayOfWeek.SUN} class="flex-1">Sun</ToggleOption>
+            <ToggleOption value={DayOfWeek.MON} class="flex-1">Mon</ToggleOption>
+            <ToggleOption value={DayOfWeek.TUE} class="flex-1">Tue</ToggleOption>
+            <ToggleOption value={DayOfWeek.WED} class="flex-1">Wed</ToggleOption>
+            <ToggleOption value={DayOfWeek.THU} class="flex-1">Thu</ToggleOption>
+            <ToggleOption value={DayOfWeek.FRI} class="flex-1">Fri</ToggleOption>
+            <ToggleOption value={DayOfWeek.SAT} class="flex-1">Sat</ToggleOption>
           </div>
-        </Tabs>
+        </ToggleGroup>
       {/if}
     </div>
   </div>

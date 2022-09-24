@@ -1,36 +1,37 @@
 <script lang="ts">
   import { onMount, onDestroy, getContext } from 'svelte';
 
-  import { tabsKey } from './Tabs.svelte';
+  import { groupKey } from './ToggleGroup.svelte';
 
   export let value: any;
 
-  const { registerTab, unregisterTab, selectTab, selectedTab, crossfade } = getContext(tabsKey);
+  const { registerOption, unregisterOption, selectOption, selectedOption, crossfade } =
+    getContext(groupKey);
   const [send, receive] = crossfade;
 
-  let tabElement: HTMLElement = null;
+  let optionElement: HTMLElement = null;
 
   onMount(() => {
-    registerTab(tabElement, value);
+    registerOption(optionElement, value);
   });
 
   onDestroy(() => {
-    unregisterTab(tabElement, value);
+    unregisterOption(optionElement, value);
   });
 </script>
 
 <button
-  class:selected={$selectedTab === tabElement}
-  on:click={() => selectTab(tabElement, value)}
-  bind:this={tabElement}
+  class:selected={$selectedOption === optionElement}
+  on:click={() => selectOption(optionElement, value)}
+  bind:this={optionElement}
   {...$$restProps}
-  class="tabContainer {$$props.class}"
+  class="optionContainer {$$props.class}"
 >
-  <div class="tab">
+  <div class="option">
     <slot />
   </div>
 
-  {#if $selectedTab === tabElement}
+  {#if $selectedOption === optionElement}
     <div
       class="indicator"
       in:receive={{ key: 'indicator' }}

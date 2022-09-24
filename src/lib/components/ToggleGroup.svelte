@@ -1,5 +1,5 @@
 <script context="module">
-  export const tabsKey = {};
+  export const groupKey = {};
 </script>
 
 <script lang="ts">
@@ -21,39 +21,41 @@
     borderRadius: circle ? '9999px' : null,
   };
 
-  const tabs: HTMLElement[] = [];
-  const tabsByValue: Map<any, HTMLElement> = new Map();
+  const options: HTMLElement[] = [];
+  const optionsByValue: Map<any, HTMLElement> = new Map();
   const panels: HTMLElement[] = [];
-  const selectedTab = writable(undefined);
+  const selectedOption = writable(undefined);
   const selectedPanel = writable(undefined);
   const [send, receive] = crossfade({ fallback: fade });
   const dispatch = createEventDispatcher();
 
   // Selected changed (controlled)
   $: {
-    // Find selected tab element based on selected value/index
-    const newSelectedTab = tabsByValue.get(selected) || tabs[selected];
-    // console.log({ selected, newSelectedTab });
-    selectTab(newSelectedTab, selected);
+    // Find selected option element based on selected value/index
+    const newSelectedOption = optionsByValue.get(selected) || options[selected];
+    // console.log({ selected, newSelectedOption });
+    selectOption(newSelectedOption, selected);
   }
 
-  function registerTab(tab: HTMLElement, value: any) {
-    tabs.push(tab);
+  function registerOption(option: HTMLElement, value: any) {
+    options.push(option);
     // if (value != null) {
-    tabsByValue.set(value, tab);
+    optionsByValue.set(value, option);
     // }
 
-    // Select tab if selected after being registered
+    // Select option if selected after being registered
     if (/*selected != null &&*/ value === selected) {
-      selectTab(tab, value);
+      selectOption(option, value);
     }
   }
 
-  function unregisterTab(tab: HTMLElement, value: any) {
-    const i = tabs.indexOf(tab);
-    tabs.splice(i, 1);
-    selectedTab.update((current) => (current === tab ? tabs[i] || tabs[tabs.length - 1] : current));
-    tabsByValue.delete(value);
+  function unregisterOption(option: HTMLElement, value: any) {
+    const i = options.indexOf(option);
+    options.splice(i, 1);
+    selectedOption.update((current) =>
+      current === option ? options[i] || options[options.length - 1] : current
+    );
+    optionsByValue.delete(value);
   }
 
   function registerPanel(panel: HTMLElement) {
@@ -69,32 +71,32 @@
     );
   }
 
-  function selectTab(tab: HTMLElement, value: any) {
-    // console.log('selectTab', tab, value);
+  function selectOption(option: HTMLElement, value: any) {
+    // console.log('selectOption', option, value);
 
-    if (tab) {
+    if (option) {
       dispatch('change', { value });
-      $selectedTab = tab;
+      $selectedOption = option;
       selected = value;
 
-      const i = tabs.indexOf(tab);
+      const i = options.indexOf(option);
       $selectedPanel = panels[i];
     }
   }
 
-  setContext(tabsKey, {
-    registerTab,
-    unregisterTab,
+  setContext(groupKey, {
+    registerOption,
+    unregisterOption,
     registerPanel,
     unregisterPanel,
-    selectTab,
-    selectedTab,
+    selectOption,
+    selectedOption,
     selectedPanel,
     crossfade: [send, receive],
   });
 </script>
 
-<div class="tabs" class:contained class:underlined use:cssVars={styleVars} {...$$restProps}>
+<div class="toggle-group" class:contained class:underlined use:cssVars={styleVars} {...$$restProps}>
   <slot />
 </div>
 
@@ -102,32 +104,32 @@
   /*
 	 * Contained (Apple) style
 	 */
-  .contained :global(.tabList) {
+  .contained :global(.options) {
     @apply inline-grid overflow-auto p-1 text-sm bg-black/10 border-black/20 transition-shadow border;
     grid-auto-flow: var(--flow);
     border-radius: var(--borderRadius, 10px);
   }
-  .contained :global(.tabList:hover) {
+  .contained :global(.options:hover) {
     @apply shadow border-gray-700;
   }
 
   /* TODO: Determine why this no longer works.  Could be due to recent Svelte change with :global() or Tailwind */
-  /* .contained :global(.tabContainer) {
+  /* .contained :global(.optionContainer) {
     @apply text-black/50 hover:text-opacity-100 hover:bg-black/5 ring-black/40 focus-visible:ring-1;
     border-radius: var(--borderRadius, 8px);
   } */
-  .contained :global(.tabContainer) {
+  .contained :global(.optionContainer) {
     @apply text-black/50 ring-black/40;
     border-radius: var(--borderRadius, 8px);
   }
-  .contained :global(.tabContainer:hover) {
+  .contained :global(.optionContainer:hover) {
     @apply text-opacity-100 bg-black/5;
   }
-  .contained :global(.tabContainer:focus-visible) {
+  .contained :global(.optionContainer:focus-visible) {
     @apply ring-1;
   }
 
-  .contained :global(.tabContainer.selected) {
+  .contained :global(.optionContainer.selected) {
     @apply text-black;
   }
 
@@ -139,14 +141,14 @@
   /*
 	 * Underline (Twitter) style
 	 */
-  .underlined :global(.tabList) {
+  .underlined :global(.options) {
     @apply flex border-b text-sm h-10;
   }
 
-  .underlined :global(.tabContainer) {
+  .underlined :global(.optionContainer) {
     @apply text-black/50 font-bold;
   }
-  .underlined :global(.tabContainer:hover) {
+  .underlined :global(.optionContainer:hover) {
     @apply text-accent-500 bg-accent-500/10;
   }
 
@@ -158,7 +160,7 @@
     @apply h-full border-b-2 border-accent-500;
   }
 
-  .underlined :global(.circle .tabList) {
+  .underlined :global(.circle .options) {
     /* width: 144px;
     height: 48px;
     border-radius: 24px;
