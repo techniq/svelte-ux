@@ -1,9 +1,16 @@
 <script lang="ts">
+  import clsx from 'clsx';
   import { onMount, onDestroy, getContext } from 'svelte';
 
   import { groupKey } from './ToggleGroup.svelte';
 
   export let value: any;
+
+  export let classes: {
+    root?: string;
+    option?: string;
+    indicator?: string;
+  } = {};
 
   const { registerOption, unregisterOption, selectOption, selectedOption, crossfade } =
     getContext(groupKey);
@@ -25,15 +32,15 @@
   on:click={() => selectOption(optionElement, value)}
   bind:this={optionElement}
   {...$$restProps}
-  class="optionContainer {$$props.class}"
+  class={clsx('optionContainer', classes.root, $$props.class)}
 >
-  <div class="option">
+  <div class={clsx('option', classes.option)}>
     <slot />
   </div>
 
   {#if $selectedOption === optionElement}
     <div
-      class="indicator"
+      class={clsx('indicator', classes.option)}
       in:receive={{ key: 'indicator' }}
       out:send|local={{ key: 'indicator' }}
     />

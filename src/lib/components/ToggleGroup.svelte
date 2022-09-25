@@ -3,6 +3,8 @@
 </script>
 
 <script lang="ts">
+  import clsx from 'clsx';
+
   import { setContext, createEventDispatcher } from 'svelte';
   import { writable } from 'svelte/store';
   import { crossfade, fade } from 'svelte/transition';
@@ -96,7 +98,13 @@
   });
 </script>
 
-<div class="toggle-group" class:contained class:underlined use:cssVars={styleVars} {...$$restProps}>
+<div
+  class={clsx('toggle-group', $$props.class)}
+  class:contained
+  class:underlined
+  use:cssVars={styleVars}
+  {...$$restProps}
+>
   <slot />
 </div>
 
