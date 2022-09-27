@@ -15,8 +15,6 @@ docUrl: $docUrl
   import Preview from '$lib/components/Preview.svelte';
   import Stack from '$lib/components/Stack.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
-  import Tab from '$lib/components/Tab.svelte';
-  import Tabs from '$lib/components/Tabs.svelte';
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 
