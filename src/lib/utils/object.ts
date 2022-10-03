@@ -1,4 +1,5 @@
 import { get, camelCase, mergeWith } from 'lodash-es';
+import { entries } from '../types/typeHelpers';
 
 export function isLiteralObject(obj: any) {
   return obj && typeof obj === 'object' && obj.constructor === Object;
@@ -151,4 +152,11 @@ export function pick<T extends object = {}>(obj: T, keys: string[]): Partial<T> 
       keys.filter((key) => key in obj).map((key) => [key, obj[key]])
     ) as Partial<T>;
   }
+}
+
+/**
+ * Create new object with keys and values swapped.  Last value's key is used if duplicated
+ */
+export function keysByValues<T extends object = {}>(obj: T) {
+  return Object.fromEntries(entries(obj).map(([key, value]) => [value, key]));
 }
