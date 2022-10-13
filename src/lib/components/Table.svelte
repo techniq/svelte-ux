@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import clsx from 'clsx';
 
   import { tableCell } from '../actions/table';
   import type { ColumnDef } from '../types/table';
@@ -15,8 +16,20 @@
   export let orderBy: string | undefined = undefined;
   export let orderDirection: 'asc' | 'desc' | undefined = undefined;
 
-  export let classes: { th?: string; td?: string } = {};
-  export let styles: { th?: string; td?: string } = {};
+  export let classes: {
+    container?: string;
+    wrapper?: string;
+    table?: string;
+    th?: string;
+    td?: string;
+  } = {};
+  export let styles: {
+    container?: string;
+    wrapper?: string;
+    table?: string;
+    th?: string;
+    td?: string;
+  } = {};
 
   $: order = { by: orderBy, direction: orderDirection };
 
@@ -24,9 +37,9 @@
   $: rowColumns = getRowColumns(columns);
 </script>
 
-<div class="table-container">
-  <div class="table-wrapper">
-    <table class="w-full {$$props.class}">
+<div class={clsx('table-container"', classes.container, $$props.class)} style={styles.container}>
+  <div class={clsx('table-wrapper"', classes.wrapper)} style={styles.wrapper}>
+    <table class={clsx('w-full', classes.table)} style={styles.table}>
       <slot name="headers" {headers}>
         <thead>
           {#each headers ?? [] as headerRow}
