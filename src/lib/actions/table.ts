@@ -112,7 +112,7 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
         tracker.addAction(sticky(node, { ...column.sticky, bottom: false }));
 
         // Increase z-index for other sticky headers (scrolled left) as well as sticky cells below (scrolled up)
-        // Only need to incrase z-index for first and last headers (and higher than sticky data cells below them)
+        // Only need to increase z-index for first and last headers (and higher than sticky data cells below them)
         if (column.sticky.left || column.sticky.right) {
           tracker.addClass('z-20');
         }
@@ -131,14 +131,12 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
           })
         );
 
-        // Add vertical line on opposite edge using boxShadow (border scrolls away)
+        // Increase column z-index for sticky columns
         if (column.sticky.left) {
           tracker.addClass('z-10');
-          tracker.addStyle('box-shadow', 'inset -0.5px 0px 0px 0px var(--color-gray-300)');
         }
         if (column.sticky.right) {
           tracker.addClass('z-10');
-          tracker.addStyle('box-shadow', 'inset 0.5px 0px 0px 0px var(--color-gray-300)');
         }
       }
     }
