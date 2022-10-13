@@ -79,6 +79,7 @@
 
 <script lang="ts">
   import { createEventDispatcher, tick } from 'svelte';
+  import clsx from 'clsx';
 
   import { getScrollParent } from '../utils/dom';
   import { objectToString } from '../utils/styles';
@@ -364,7 +365,7 @@
 
 {#if open}
   <div
-    class="popover fixed z-50 outline-none {$$props.class ?? ''}"
+    class={clsx('popover fixed z-50 outline-none', $$props.class)}
     style="{objectToString(popoverStyles)} {$$props.style ?? ''}"
     tabindex="-1"
     bind:this={popoverEl}

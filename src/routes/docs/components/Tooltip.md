@@ -87,6 +87,14 @@ docUrl: $docUrl
   </Tooltip>
 </Preview>
 
+## Overlap
+
+<Preview>
+  <Tooltip title="Hello" offset={-8}>
+    <Button>Hover me</Button>
+  </Tooltip>
+</Preview>
+
 <!-- TODO: Slot with custom transition -->
 
 # API
