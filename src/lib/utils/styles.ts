@@ -7,11 +7,11 @@ export function objectToString(styleObj: { [key: string]: string }) {
       if (value) {
         // Convert camelCase into kaboob-case (ex.  (transformOrigin => transform-origin))
         const propertyName = key.replace(/([A-Z])/g, '-$1').toLowerCase();
-        return `${propertyName}: ${value}`;
+        return `${propertyName}: ${value};`;
       } else {
         return null;
       }
     })
     .filter((x) => x)
-    .join('; ');
+    .join(' ');
 }
