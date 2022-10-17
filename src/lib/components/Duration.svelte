@@ -2,23 +2,24 @@
   import { DurationUnits, getDuration, humanizeDuration } from '../utils/duration';
   import timerStore from '../stores/timerStore';
 
-  export let start: Date;
+  export let start: Date = undefined;
   export let end: Date = undefined;
+  export let duration: Partial<Duration> = undefined;
   export let minUnits: DurationUnits = DurationUnits.Millisecond;
   export let totalUnits: number = undefined;
   export let variant: 'short' | 'long' = undefined;
 
   function getDelay() {
-    const duration = getDuration(start, end ?? $timer);
+    const newDuration = getDuration(start, end ?? $timer, duration);
 
     const unitsMoreThanSeconds = [
-      duration.years,
-      duration.days,
-      duration.hours,
-      duration.minutes,
+      newDuration.years,
+      newDuration.days,
+      newDuration.hours,
+      newDuration.minutes,
     ].filter((x) => x).length;
 
-    // DurationUnits is indexed biggested (Year) to smallest (Milliseconds)
+    // DurationUnits is indexed biggest (Year) to smallest (Milliseconds)
     if (minUnits < DurationUnits.Second) {
       // Never showing seconds, so only update once a minute
       return 60 * 1000;
@@ -45,6 +46,7 @@
   $: displayDuration = humanizeDuration({
     start,
     end: end ?? $timer,
+    duration,
     minUnits,
     totalUnits,
     variant,

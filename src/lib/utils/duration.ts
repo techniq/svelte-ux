@@ -26,48 +26,57 @@ export enum DurationUnits {
 //   Year = 365 * Day,
 // }
 
-export function getDuration(start: Date | string, end?: Date | string | null): Duration | null {
+export function getDuration(
+  start?: Date | string,
+  end?: Date | string | null,
+  duration?: Partial<Duration>
+): Duration | null {
   const startDate = typeof start === 'string' ? parseISO(start) : start;
   const endDate = typeof end === 'string' ? parseISO(end) : end;
 
-  const difference = Number(endDate || new Date()) - Number(startDate);
-  const durationInMs = Math.abs(difference);
-  const sign = Math.sign(difference);
+  const differenceInMs = startDate
+    ? Math.abs(Number(endDate || new Date()) - Number(startDate))
+    : undefined;
 
-  if (!Number.isFinite(durationInMs)) {
+  if (!Number.isFinite(differenceInMs) && duration == null) {
     return null;
   }
 
-  var milliseconds = durationInMs;
-  var seconds = 0;
-  var minutes = 0;
-  var hours = 0;
-  var days = 0;
-  var years = 0;
+  var milliseconds = duration?.milliseconds ?? differenceInMs ?? 0;
+  var seconds = duration?.seconds ?? 0;
+  var minutes = duration?.minutes ?? 0;
+  var hours = duration?.hours ?? 0;
+  var days = duration?.days ?? 0;
+  var years = duration?.years ?? 0;
 
   if (milliseconds >= 1000) {
-    seconds = (durationInMs - (durationInMs % 1000)) / 1000;
-    milliseconds = milliseconds - seconds * 1000;
+    const carrySeconds = (milliseconds - (milliseconds % 1000)) / 1000;
+    seconds += carrySeconds;
+    milliseconds = milliseconds - carrySeconds * 1000;
   }
 
   if (seconds >= 60) {
-    minutes = (seconds - (seconds % 60)) / 60;
-    seconds = seconds - minutes * 60;
+    const carryMinutes = (seconds - (seconds % 60)) / 60;
+    minutes += carryMinutes;
+    seconds = seconds - carryMinutes * 60;
   }
 
   if (minutes >= 60) {
-    hours = (minutes - (minutes % 60)) / 60;
-    minutes = minutes - hours * 60;
+    const carryHours = (minutes - (minutes % 60)) / 60;
+    hours += carryHours;
+    minutes = minutes - carryHours * 60;
   }
 
   if (hours >= 24) {
-    days = (hours - (hours % 24)) / 24;
-    hours = hours - days * 24;
+    const carryDays = (hours - (hours % 24)) / 24;
+    days += carryDays;
+    hours = hours - carryDays * 24;
   }
 
   if (days >= 365) {
-    years = (days - (days % 365)) / 365;
-    days = days - years * 365;
+    const carryYears = (days - (days % 365)) / 365;
+    years += carryYears;
+    days = days - carryYears * 365;
   }
 
   return {
@@ -82,15 +91,16 @@ export function getDuration(start: Date | string, end?: Date | string | null): D
 
 // See also: https://stackoverflow.com/questions/19700283/how-to-convert-time-milliseconds-to-hours-min-sec-format-in-javascript/33909506
 export function humanizeDuration(config: {
-  start: Date;
+  start?: Date;
   end?: Date | null;
+  duration?: Partial<Duration>;
   minUnits?: DurationUnits;
   totalUnits?: number;
   variant?: 'short' | 'long';
 }) {
   const { start, end, minUnits, totalUnits = 99, variant = 'short' } = config;
 
-  const duration = getDuration(start, end);
+  const duration = getDuration(start, end, config.duration);
 
   if (duration === null) {
     return 'unknown';

@@ -34,6 +34,12 @@ docUrl: $docUrl
 	<Duration start={subDays(new Date(), 3)} end={subDays(new Date(), 1)} />
 </Preview>
 
+## Explicit duration
+
+<Preview>
+	<Duration duration={{ milliseconds: 54321 }} />
+</Preview>
+
 # Utils
 
 ## humanizeDuration
@@ -53,6 +59,14 @@ docUrl: $docUrl
 	<div>{humanizeDuration({ start: '2021-01-01', end: '2021-01-07' })}</div>
 	<div>{humanizeDuration({ start: '1982-03-30', totalUnits: 2 })}</div>
 	<div>{humanizeDuration({ start: '1982-03-30', minUnits: DurationUnits.Hour })}</div>
+</Preview>
+
+### duration
+
+<Preview>
+	<div>{humanizeDuration({ duration: { milliseconds: 300 } })}</div>
+	<div>{humanizeDuration({ duration: { hours: 1, minutes: 30 } })}</div>
+	<div>{humanizeDuration({ duration: { days: 5, hours: 26 } })}</div>
 </Preview>
 
 ## getDuration
