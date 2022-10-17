@@ -27,7 +27,7 @@ export type DataBackgroundOptions = {
    */
   baseline?: boolean;
 
-  tweened?: Parameters<typeof tweened>;
+  tweened?: Parameters<typeof tweened>[1];
 };
 
 export function dataBackground(
