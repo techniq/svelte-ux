@@ -49,8 +49,30 @@ docUrl: $docUrl
 ## Dense
 
 <Preview>
-  <Checkbox dense />
-  <Checkbox dense checked />
+  <div>
+    <Checkbox size="xs" />
+    <Checkbox size="xs" checked />
+    <Checkbox size="xs">Label</Checkbox>
+    <Checkbox size="xs" checked>Label</Checkbox>
+  </div>
+  <div>
+    <Checkbox size="sm" />
+    <Checkbox size="sm" checked />
+    <Checkbox size="sm">Label</Checkbox>
+    <Checkbox size="sm" checked>Label</Checkbox>
+  </div>
+    <div>
+    <Checkbox size="md" />
+    <Checkbox size="md" checked />
+    <Checkbox size="md">Label</Checkbox>
+    <Checkbox size="md" checked>Label</Checkbox>
+  </div>
+    <div>
+    <Checkbox size="lg" />
+    <Checkbox size="lg" checked />
+    <Checkbox size="lg">Label</Checkbox>
+    <Checkbox size="lg" checked>Label</Checkbox>
+  </div>
 </Preview>
 
 <SectionDivider>Circle</SectionDivider>
