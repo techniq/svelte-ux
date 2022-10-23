@@ -46,7 +46,7 @@ docUrl: $docUrl
   <Checkbox indeterminate checked />
 </Preview>
 
-## Dense
+## Size
 
 <Preview>
   <div>

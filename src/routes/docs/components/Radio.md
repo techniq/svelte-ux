@@ -49,12 +49,33 @@ docUrl: $docUrl
   <Radio disabled>Label</Radio>
 </Preview>
 
-## Dense
+## Size
 
 <Preview>
-  <Radio dense />
-  <Radio dense checked />
-  <Radio dense>Label</Radio>
+  <div>
+    <Radio size="xs" />
+    <Radio size="xs" checked />
+    <Radio size="xs">Label</Radio>
+    <Radio size="xs" checked>Label</Radio>
+  </div>
+  <div>
+    <Radio size="sm" />
+    <Radio size="sm" checked />
+    <Radio size="sm">Label</Radio>
+    <Radio size="sm" checked>Label</Radio>
+  </div>
+  <div>
+    <Radio size="md" />
+    <Radio size="md" checked />
+    <Radio size="md">Label</Radio>
+    <Radio size="md" checked>Label</Radio>
+  </div>
+  <div>
+    <Radio size="lg" />
+    <Radio size="lg" checked />
+    <Radio size="lg">Label</Radio>
+    <Radio size="lg" checked>Label</Radio>
+  </div>
 </Preview>
 
 # API

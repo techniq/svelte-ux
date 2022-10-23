@@ -1,6 +1,84 @@
 <script lang="ts">
   /*
     TODO:
+			- [ ] change color
+      - [ ] bind:group (array of values)
+        - Smelte
+          - https://github.com/matyunya/smelte/blob/2bdabb642fbba956757a7bec5a5896fc356ed51e/src/components/Checkbox/Checkbox.svelte#L24
+          - https://github.com/matyunya/smelte/pull/184
+          - https://svelte.dev/repl/1565708677134e418e256234984d90ef?version=3.29.0
+        - svelte-mui
+          - https://github.com/vikignt/svelte-mui/blob/master/src/Checkbox.svelte
+          - https://svelte-mui.now.sh/checkbox/checkbox-group
+        - Svelte Material UI
+          - https://sveltematerialui.com/demo/checkbox
+          - https://github.com/hperrin/svelte-material-ui/blob/master/packages/checkbox/Checkbox.svelte
+      - [ ] use:draw
+  */
+
+  import clsx from 'clsx';
+  import { mdiCheck, mdiCheckboxBlankCircle, mdiCircleMedium, mdiMinus } from '@mdi/js';
+
+  import Icon from './Icon.svelte';
+  import { uniqueId } from '$lib/utils/string';
+
+  export let id = uniqueId('checkbox_');
+  export let value: any = undefined;
+  export let group: any = undefined;
+  export let checked: boolean = false;
+  export let disabled: boolean = false;
+  export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+
+  $: checked = group !== undefined ? group === value : checked;
+</script>
+
+<div class="inline-block">
+  <input {id} type="radio" bind:group on:change {value} class="peer appearance-none" {disabled} />
+  <label
+    for={id}
+    class={clsx(
+      'inline-grid place-items-center border-2 rounded-full bg-white',
+      'peer-disabled:opacity-50 transition-shadow duration-300',
+      !disabled &&
+        'peer-hover:ring peer-focus:ring peer-hover:border-accent-500 peer-focus:border-accent-500 ring-accent-300 ring-offset-0',
+      checked ? (disabled ? ' border-gray-500' : 'border-accent-500') : 'border-gray-500'
+    )}
+  >
+    <Icon
+      path={mdiCheckboxBlankCircle}
+      class={clsx(
+        'pointer-events-none transition-transform',
+        disabled ? 'text-gray-500' : 'text-accent-500',
+        checked ? 'scale-100' : 'scale-0'
+      )}
+      size={{
+        xs: '.75rem', // 12px
+        sm: '.875rem', // 14px
+        md: '1rem', // 16px
+        lg: '1.125rem', // 18px
+      }[size]}
+    />
+  </label>
+
+  <label
+    for={id}
+    class={clsx(
+      'peer-disabled:opacity-50',
+      {
+        xs: 'text-xs', // 12px
+        sm: 'text-sm', // 14px
+        md: 'text-md', // 16px
+        lg: 'text-lg', // 18px
+      }[size]
+    )}
+  >
+    <slot />
+  </label>
+</div>
+
+<!-- <script lang="ts">
+  /*
+    TODO:
       - [ ] change color
   */
 
@@ -68,4 +146,4 @@
   </Stack>
 
   <slot />
-</div>
+</div> -->
