@@ -30,6 +30,7 @@
 <button
   class:selected={$selectedOption === optionElement}
   on:click={() => selectOption(optionElement, value)}
+  on:click
   bind:this={optionElement}
   {...$$restProps}
   class={clsx('optionContainer', classes.root, $$props.class)}
