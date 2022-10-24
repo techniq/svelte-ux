@@ -38,7 +38,7 @@
     bind:checked
     on:change
     {value}
-    class="peer appearance-none"
+    class="peer appearance-none inline"
     {disabled}
   />
   <label

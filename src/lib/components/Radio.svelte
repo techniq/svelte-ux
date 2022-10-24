@@ -33,7 +33,15 @@
 </script>
 
 <div class="inline-block">
-  <input {id} type="radio" bind:group on:change {value} class="peer appearance-none" {disabled} />
+  <input
+    {id}
+    type="radio"
+    bind:group
+    on:change
+    {value}
+    class="peer appearance-none inline"
+    {disabled}
+  />
   <label
     for={id}
     class={clsx(
