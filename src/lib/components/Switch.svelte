@@ -24,7 +24,7 @@
     for={id}
     class={clsx(
       'switch',
-      'border rounded-full flex align-items p-[3px]',
+      'border rounded-full flex align-items p-[3px] transition-shadow',
       {
         'w-6 h-4': size === 'sm',
         'w-8 h-5': size === 'md',
