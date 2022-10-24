@@ -48,7 +48,7 @@
       'inline-grid place-items-center border-2 rounded-full bg-white',
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
-        'peer-focus-visible:ring peer-hover:border-accent-500 peer-focus-visible:border-accent-500 ring-accent-300 ring-offset-0',
+        'peer-focus-visible:ring-2 peer-hover:border-accent-500 peer-focus-visible:border-accent-500 ring-accent-300 ring-offset-0',
       checked ? (disabled ? ' border-gray-500' : 'border-accent-500') : 'border-gray-500'
     )}
   >
