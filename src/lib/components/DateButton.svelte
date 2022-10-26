@@ -86,6 +86,7 @@
 >
   <!-- TODO: Use <Button base>, although doesn't support `class:...` -->
   <button
+    type="button"
     class={clsx(
       'w-8 h-8 rounded-full flex items-center justify-center text-xs cursor-pointer hover:bg-black/5 hover:text-black focus:outline-none',
       periodType != PeriodType.Day && 'flex-1',

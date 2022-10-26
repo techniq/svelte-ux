@@ -84,6 +84,7 @@
     </span>
 
     <button
+      type="button"
       class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-none"
       style="text-align: inherit"
       on:click={() => (open = true)}

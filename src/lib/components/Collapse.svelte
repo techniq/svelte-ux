@@ -41,6 +41,7 @@
   )}
 >
   <button
+    type="button"
     class="flex items-center w-full text-left select-text focus:outline-none"
     class:cursor-default={disabled}
     on:click={() => {

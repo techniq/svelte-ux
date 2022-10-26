@@ -81,6 +81,7 @@
   </span>
 
   <button
+    type="button"
     class={clsx(
       'text-sm whitespace-nowrap w-full focus:outline-none',
       center ? 'text-center' : 'text-left'

@@ -28,6 +28,7 @@
 </script>
 
 <button
+  type="button"
   class:selected={$selectedOption === optionElement}
   on:click={() => selectOption(optionElement, value)}
   on:click
