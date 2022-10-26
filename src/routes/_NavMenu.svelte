@@ -53,6 +53,7 @@
 <NavItem text="Dialog" path="/docs/components/Dialog" class="pl-6 py-2" />
 <NavItem text="Drawer" path="/docs/components/Drawer" class="pl-6 py-2" />
 <NavItem text="Menu" path="/docs/components/Menu" class="pl-6 py-2" />
+<NavItem text="MenuField" path="/docs/components/MenuField" class="pl-6 py-2" />
 <NavItem text="Notification" path="/docs/components/Notification" class="pl-6 py-2" />
 <NavItem text="Popover" path="/docs/components/Popover" class="pl-6 py-2" />
 <NavItem text="Tooltip" path="/docs/components/Tooltip" class="pl-6 py-2" />

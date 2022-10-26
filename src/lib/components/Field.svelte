@@ -149,6 +149,8 @@
   >
     {error || hint}
   </div>
+
+  <slot name="fieldset" />
 </fieldset>
 
 <style lang="postcss">
