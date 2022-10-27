@@ -23,12 +23,17 @@
     </div>
   </slot>
 
-  <span slot="append" on:click={() => (open = !open)}>
+  <slot slot="prepend" name="prepend" />
+
+  <span slot="append" class="flex items-center">
+    <slot name="append" />
+
     <Icon
       path={menuIcon}
       class={clsx('text-black/50 mr-1 transform transition-all duration-300', {
         '-rotate-180': open,
       })}
+      on:click={() => (open = !open)}
     />
   </span>
 

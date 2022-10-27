@@ -5,7 +5,7 @@ docUrl: $docUrl
 ---
 
 <script>
-  import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify } from '@mdi/js';
+  import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify, mdiRefresh } from '@mdi/js';
 
   import api from '$lib/components/MenuField.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -79,6 +79,16 @@ docUrl: $docUrl
         </li>
       {/each}
     </menu>
+  </MenuField>
+</Preview>
+
+## append slot
+
+<Preview>
+  <MenuField {options}>
+    <div slot="append">
+      <Button icon={mdiRefresh} class="p-2 text-black/50" />
+    </div>
   </MenuField>
 </Preview>
 
