@@ -4,13 +4,15 @@
   type T = $$Generic;
   type SpringOptions = Parameters<typeof spring<T>>[1];
 
-  export let value: T;
+  export let value: T | 0;
   export let options: SpringOptions;
+  export let disabled = false;
 
   const springValue = spring(value, options);
-  $: $springValue = value;
+  $: $springValue = value ?? 0;
+  $: displayValue = disabled || value == null ? value : $springValue;
 </script>
 
-<slot value={$springValue}>
-  {$springValue}
+<slot value={displayValue}>
+  {displayValue}
 </slot>

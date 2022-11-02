@@ -23,7 +23,8 @@ docUrl: $docUrl
 
 # Examples
 
-<Button on:click={update}>Update value</Button>
+<Button class="bg-blue-500 hover:bg-blue-600 text-white" on:click={update}>Update value</Button>
+<Button on:click={() => value = null}>Set null</Button>
 
 ## Basic
 
@@ -45,6 +46,12 @@ docUrl: $docUrl
   <SpringValue {value} options={{ stiffness: 0.01, damping: 0.25 }} let:value>
     {formatNumberAsStyle(value, 'decimal')}
   </SpringValue>
+</Preview>
+
+## Disabled
+
+<Preview>
+  <SpringValue {value} disabled />
 </Preview>
 
 # API

@@ -24,7 +24,8 @@ docUrl: $docUrl
 
 # Examples
 
-<Button on:click={update}>Update value</Button>
+<Button class="bg-blue-500 hover:bg-blue-600 text-white" on:click={update}>Update value</Button>
+<Button on:click={() => value = null}>Set null</Button>
 
 ## Basic
 
@@ -46,6 +47,12 @@ docUrl: $docUrl
   <TweenedValue {value} options={{ duration: 1000, easing: easings.expoOut }} let:value>
     {formatNumberAsStyle(value, 'decimal')}
   </TweenedValue>
+</Preview>
+
+## Disabled
+
+<Preview>
+  <TweenedValue {value} disabled />
 </Preview>
 
 # API
