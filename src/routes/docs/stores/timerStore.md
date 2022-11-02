@@ -20,11 +20,11 @@ docUrl: $docUrl
 
 ## Usage
 
-```svelte
-const timer = timerStore()
+```js
+const timer = timerStore();
 ```
 
-```svelte
+```js
 const timer = timerStore({ delay: number, onTick: () => {...}, disabled: boolean })
 ```
 
