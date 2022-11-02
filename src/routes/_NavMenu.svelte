@@ -111,5 +111,6 @@
 <NavItem text="matchMedia" path="/docs/stores/matchMedia" class="pl-6 py-2" />
 <NavItem text="paginationStore" path="/docs/stores/paginationStore" class="pl-6 py-2" />
 <NavItem text="queryParamsStore" path="/docs/stores/queryParamsStore" class="pl-6 py-2" />
+<NavItem text="selectionStore" path="/docs/stores/selectionStore" class="pl-6 py-2" />
 <NavItem text="tableOrderStore" path="/docs/stores/tableOrderStore" class="pl-6 py-2" />
 <NavItem text="timerStore" path="/docs/stores/timerStore" class="pl-6 py-2" />
