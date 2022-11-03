@@ -7,10 +7,11 @@ export type SelectionProps<T> = {
 };
 
 export default function selectionStore<T>(props: SelectionProps<T> = {}) {
-  const { initial = [], all = [], single = false } = props;
-  const selected = writable(initial);
+  const selected = writable(props.initial);
+  const all = writable(props.all);
+  const single = props.single ?? false;
 
-  return derived(selected, ($selected) => {
+  return derived([selected, all], ([$selected, $all]) => {
     function isSelected(value: T) {
       return $selected.includes(value);
     }
@@ -31,11 +32,11 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
     }
 
     function isAllSelected() {
-      return all.length && all.every((v) => $selected.includes(v));
+      return $all.length && $all.every((v) => $selected.includes(v));
     }
 
     function isAnySelected() {
-      return all.length && all.some((v) => $selected.includes(v));
+      return $all.length && $all.some((v) => $selected.includes(v));
     }
 
     function isPartialSelected() {
@@ -48,7 +49,7 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
         selected.set([]);
       } else {
         // Select all
-        selected.set(all);
+        selected.set($all);
       }
     }
 
@@ -60,6 +61,7 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
       isAllSelected,
       isAnySelected,
       isPartialSelected,
+      all,
     };
   });
 }

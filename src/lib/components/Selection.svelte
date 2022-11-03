@@ -19,4 +19,5 @@
   isAllSelected={$selection.isAllSelected}
   isAnySelected={$selection.isAnySelected}
   isPartialSelected={$selection.isPartialSelected}
+  all={$selection.all}
 />
