@@ -60,6 +60,7 @@
 
 <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">State</div>
 <NavItem text="Form" path="/docs/components/Form" class="pl-6 py-2" />
+<NavItem text="Selection" path="/docs/components/Selection" class="pl-6 py-2" />
 <NavItem text="State" path="/docs/components/State" class="pl-6 py-2" />
 <NavItem text="Toggle" path="/docs/components/Toggle" class="pl-6 py-2" />
 

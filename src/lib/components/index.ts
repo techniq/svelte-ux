@@ -46,6 +46,7 @@ export { default as Popover } from './Popover.svelte';
 export { default as Radio } from './Radio.svelte';
 export { default as RangeSlider } from './RangeSlider.svelte';
 export { default as SectionDivider } from './SectionDivider.svelte';
+export { default as Selection } from './Selection.svelte';
 export { default as SelectField } from './SelectField.svelte';
 export { default as SpringValue } from './SpringValue.svelte';
 export { default as Stack } from './Stack.svelte';

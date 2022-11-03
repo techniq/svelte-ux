@@ -11,7 +11,7 @@ docUrl: $docUrl
 
 	import selectionStore from '$lib/stores/selectionStore';
 
-    const items = Array.from({ length: 5 }).map((_,i) => {
+  const items = Array.from({ length: 5 }).map((_,i) => {
     return {
       id: i + 1
     }
