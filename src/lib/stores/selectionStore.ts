@@ -7,8 +7,8 @@ export type SelectionProps<T> = {
 };
 
 export default function selectionStore<T>(props: SelectionProps<T> = {}) {
-  const selected = writable(props.initial);
-  const all = writable(props.all);
+  const selected = writable(props.initial ?? []);
+  const all = writable(props.all ?? []);
   const single = props.single ?? false;
 
   return derived([selected, all], ([$selected, $all]) => {
