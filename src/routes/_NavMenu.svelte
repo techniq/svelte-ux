@@ -28,6 +28,7 @@
 <NavItem text="Paginate" path="/docs/components/Paginate" class="pl-6 py-2" />
 <NavItem text="Pagination" path="/docs/components/Pagination" class="pl-6 py-2" />
 <NavItem text="Progress" path="/docs/components/Progress" class="pl-6 py-2" />
+<NavItem text="Scroll" path="/docs/components/Scroll" class="pl-6 py-2" />
 <NavItem text="SpringValue" path="/docs/components/SpringValue" class="pl-6 py-2" />
 <NavItem text="ToggleGroup" path="/docs/components/ToggleGroup" class="pl-6 py-2" />
 <NavItem text="TweenedValue" path="/docs/components/TweenedValue" class="pl-6 py-2" />
