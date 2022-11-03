@@ -7,7 +7,7 @@ export default function uniqueStore<T = string>(initialValues?: T[]) {
   const store = writable<Set<T>>(new Set(initialValues ?? []));
 
   return {
-    subscribe: store.subscribe,
+    ...store,
 
     add(value: T) {
       store.update((set) => {

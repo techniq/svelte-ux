@@ -8,6 +8,7 @@
   export let single = false;
 
   const selection = selectionStore({ initial, all, single });
+  $: $selection.all.set(all);
 </script>
 
 <!-- TOOD: `<slot {...$selection} />` does not play well with sveld -->
@@ -18,6 +19,5 @@
   toggleSelected={$selection.toggleSelected}
   isAllSelected={$selection.isAllSelected}
   isAnySelected={$selection.isAnySelected}
-  isPartialSelected={$selection.isPartialSelected}
-  all={$selection.all}
+  clear={$selection.clear}
 />
