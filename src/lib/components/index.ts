@@ -45,6 +45,7 @@ export { default as Popover } from './Popover.svelte';
 // export { default as Preview } from './Preview.svelte'; // TODO: Export after `SyntaxError: The requested module '/node_modules/prismjs/prism.js?v=fe9edf62' does not provide an export named 'default'` is fixed
 export { default as Radio } from './Radio.svelte';
 export { default as RangeSlider } from './RangeSlider.svelte';
+export { default as Scroll } from './Scroll.svelte';
 export { default as SectionDivider } from './SectionDivider.svelte';
 export { default as Selection } from './Selection.svelte';
 export { default as SelectField } from './SelectField.svelte';
