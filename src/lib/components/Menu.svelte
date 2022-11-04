@@ -25,6 +25,7 @@
   export let anchorOrigin: PopoverOrigin = undefined;
   export let popoverOrigin: PopoverOrigin = undefined;
   export let matchWidth: boolean = false;
+  export let explicitClose = false;
 
   let popoverRef: any; // TODO: Improve type (Popover)
   let menuItemsEl: HTMLUListElement;
@@ -34,7 +35,7 @@
       if (e.target === menuItemsEl) {
         // Clicked within menu but outside of any items
         // console.log('clicked:menuItems', e.target, menuEl);
-      } else {
+      } else if (!explicitClose) {
         //
         // console.log('clicked:menuItem', e.target);
         open = false;
@@ -62,6 +63,7 @@
   style={$$props.style}
   on:close
   let:updatePosition
+  let:close
   bind:this={popoverRef}
 >
   <ul
@@ -76,6 +78,6 @@
       }
     }}
   >
-    <slot {updatePosition} />
+    <slot {updatePosition} {close} />
   </ul>
 </Popover>
