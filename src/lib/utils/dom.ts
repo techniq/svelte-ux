@@ -10,7 +10,7 @@ export function getScrollParent(node): HTMLElement | null {
 
   if (!node) {
     return null;
-  } else if (isScrollable && node.scrollHeight >= node.clientHeight) {
+  } else if (isScrollable && node.scrollHeight > node.clientHeight) {
     return node;
   }
 
