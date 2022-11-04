@@ -13,6 +13,7 @@ docUrl: $docUrl
   import Button from '$lib/components/Button.svelte';
   import MenuField from '$lib/components/MenuField.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import TextField from '$lib/components/TextField.svelte';
 
   const options = [
     { label: 'Cut', value: 'cut' },
@@ -74,6 +75,29 @@ docUrl: $docUrl
         <li
           class="cursor-pointer p-2 text-sm hover:bg-black/5"
           on:click={() => setValue(option.value)}
+        >
+          {option.label}
+        </li>
+      {/each}
+    </menu>
+  </MenuField>
+</Preview>
+
+## explicitClose
+
+<Preview>
+  <MenuField {options} menuProps={{ explicitClose: true }} let:options let:setValue let:close>
+    <div class="p-2">
+      <TextField icon={mdiMagnify} placeholder="Search" />
+    </div>
+    <menu>
+      {#each options as option}
+        <li
+          class="cursor-pointer p-2 text-sm hover:bg-black/5"
+          on:click={() => {
+            setValue(option.value);
+            close();
+          }}
         >
           {option.label}
         </li>
