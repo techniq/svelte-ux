@@ -293,6 +293,12 @@ docUrl: $docUrl
   <TextField label="Search" icon={mdiMagnify} />
 </Preview>
 
+## Icon with convienent append
+
+<Preview>
+  <TextField label="Search" iconRight={mdiMagnify} />
+</Preview>
+
 ## Clearable with convienent append
 
 <Preview>

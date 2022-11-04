@@ -26,6 +26,7 @@
   export let filled = false;
   export let dense = false;
   export let icon: string | null = null;
+  export let iconRight: string | null = null;
   // export let align: 'left' | 'center' | 'right' = 'left';
   export let shrinkLabel = true; // $$slots.prefix || $$slots.suffix;
   // export let actions: Actions = undefined;
@@ -38,7 +39,7 @@
   $: hasLabel = label !== '';
 
   $: hasPrepend = $$slots.prepend || icon != null;
-  $: hasAppend = $$slots.append || clearable || error;
+  $: hasAppend = $$slots.append || iconRight != null || clearable || error;
 
   $: hStackTemplate = `${hasPrepend ? 'auto' : ''} 1fr ${hasAppend ? ' auto' : ''}`;
 
@@ -135,6 +136,8 @@
 
           {#if error}
             <Icon path={mdiInformationOutline} class="text-red-500" />
+          {:else if iconRight}
+            <Icon path={iconRight} class="text-black/50" />
           {/if}
         </div>
       {/if}

@@ -35,6 +35,7 @@
   export let filled = false;
   export let dense = false;
   export let icon: string | null = null;
+  export let iconRight: string | null = null;
   export let align: 'left' | 'center' | 'right' = 'left';
   export let shrinkLabel = false;
   export let autofocus = false;
@@ -109,7 +110,7 @@
   $: hasLabel = label !== '';
 
   $: hasPrepend = $$slots.prepend || icon != null;
-  $: hasAppend = $$slots.append || clearable || error || operators;
+  $: hasAppend = $$slots.append || iconRight != null || clearable || error || operators;
   $: hasPrefix = $$slots.prefix || type === 'currency';
   $: hasSuffix = $$slots.suffix || type === 'percent';
 
@@ -289,6 +290,8 @@
 
           {#if error}
             <Icon path={mdiInformationOutline} class="text-red-500" />
+          {:else if iconRight}
+            <Icon path={iconRight} class="text-black/50" />
           {/if}
         </div>
       {/if}
