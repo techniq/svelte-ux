@@ -49,20 +49,13 @@ export const isActive = {
       pageStore,
       ($page) =>
         function isActive(path: string) {
-          // console.log({ $page, path });
-
           if (path === '/') {
             // home must be direct match (otherwise matches all)
             return $page.url.pathname === path;
           } else {
-            return $page.url.pathname.startsWith(path);
+            // Matches full path next character is `/`
+            return path.match($page.url.pathname + '($|\\/)') != null;
           }
-
-          // TODO: Support parent routes, likely somehting like routify...
-          // path = url(path, null, { strict });
-          // const currentPath = url(page.path, null, { strict });
-          // const re = new RegExp('^' + path + '($|/)');
-          // return !!currentPath.match(re);
         }
     ).subscribe(listener);
   },
