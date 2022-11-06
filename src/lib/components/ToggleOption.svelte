@@ -25,6 +25,10 @@
   onDestroy(() => {
     unregisterOption(optionElement, value);
   });
+
+  $: if ($selectedOption === optionElement) {
+    optionElement.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+  }
 </script>
 
 <button

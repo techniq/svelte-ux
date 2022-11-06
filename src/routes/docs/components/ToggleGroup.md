@@ -225,6 +225,43 @@ docUrl: $docUrl
   <Button on:click={() => (selectedObj = callsValue)}>Calls</Button>
 </div>
 
+## Overflow scrollIntoView
+
+<Preview>
+  <ToggleGroup
+    contained={optionStyle === 'contained'}
+    underlined={optionStyle === 'underlined'}
+    value={selected}
+  >
+    <div class="options overflow-auto w-full">
+      <ToggleOption value={1} class="w-32">One</ToggleOption>
+      <ToggleOption value={2} class="w-32">Two</ToggleOption>
+      <ToggleOption value={3} class="w-32">Three</ToggleOption>
+      <ToggleOption value={4} class="w-32">Four</ToggleOption>
+      <ToggleOption value={5} class="w-32">Five</ToggleOption>
+      <ToggleOption value={6} class="w-32">Six</ToggleOption>
+      <ToggleOption value={7} class="w-32">Seven</ToggleOption>
+      <ToggleOption value={8} class="w-32">Eight</ToggleOption>
+      <ToggleOption value={9} class="w-32">Nine</ToggleOption>
+      <ToggleOption value={10} class="w-32">Ten</ToggleOption>
+    </div>
+  </ToggleGroup>
+</Preview>
+
+<div class="mt-4">
+  Select:
+  <Button on:click={() => (selected = 1)}>1</Button>
+  <Button on:click={() => (selected = 2)}>2</Button>
+  <Button on:click={() => (selected = 3)}>3</Button>
+  <Button on:click={() => (selected = 4)}>4</Button>
+  <Button on:click={() => (selected = 5)}>5</Button>
+  <Button on:click={() => (selected = 6)}>6</Button>
+  <Button on:click={() => (selected = 7)}>7</Button>
+  <Button on:click={() => (selected = 8)}>8</Button>
+  <Button on:click={() => (selected = 9)}>9</Button>
+  <Button on:click={() => (selected = 10)}>10</Button>
+</div>
+
 # ToggleGroup API
 
 <ApiDocs api={toggleGroupApi} />
