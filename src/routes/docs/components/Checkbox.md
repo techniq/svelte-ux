@@ -117,11 +117,33 @@ docUrl: $docUrl
   <Checkbox circle indeterminate checked />
 </Preview>
 
-## Dense
+## Size
 
 <Preview>
-  <Checkbox circle dense />
-  <Checkbox circle dense checked />
+  <div>
+    <Checkbox size="xs" circle />
+    <Checkbox size="xs" circle checked />
+    <Checkbox size="xs" circle>Label</Checkbox>
+    <Checkbox size="xs" circle checked>Label</Checkbox>
+  </div>
+  <div>
+    <Checkbox size="sm" circle />
+    <Checkbox size="sm" circle checked />
+    <Checkbox size="sm" circle>Label</Checkbox>
+    <Checkbox size="sm" circle checked>Label</Checkbox>
+  </div>
+    <div>
+    <Checkbox size="md" circle />
+    <Checkbox size="md" circle checked />
+    <Checkbox size="md" circle>Label</Checkbox>
+    <Checkbox size="md" circle checked>Label</Checkbox>
+  </div>
+    <div>
+    <Checkbox size="lg" circle />
+    <Checkbox size="lg" circle checked />
+    <Checkbox size="lg" circle>Label</Checkbox>
+    <Checkbox size="lg" circle checked>Label</Checkbox>
+  </div>
 </Preview>
 
 # API
