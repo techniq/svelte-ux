@@ -32,14 +32,14 @@
   $: checked = group !== undefined ? group === value : checked;
 </script>
 
-<div class="inline-block">
+<div class="inline-flex gap-x-1 items-center">
   <input
     {id}
     type="radio"
     bind:group
     on:change
     {value}
-    class="peer appearance-none inline"
+    class="peer appearance-none absolute"
     {disabled}
   />
   <label
@@ -68,18 +68,20 @@
     />
   </label>
 
-  <label
-    for={id}
-    class={clsx(
-      'peer-disabled:opacity-50',
-      {
-        xs: 'text-xs', // 12px
-        sm: 'text-sm', // 14px
-        md: 'text-md', // 16px
-        lg: 'text-lg', // 18px
-      }[size]
-    )}
-  >
-    <slot />
-  </label>
+  {#if $$slots.default}
+    <label
+      for={id}
+      class={clsx(
+        'peer-disabled:opacity-50',
+        {
+          xs: 'text-xs', // 12px
+          sm: 'text-sm', // 14px
+          md: 'text-md', // 16px
+          lg: 'text-lg', // 18px
+        }[size]
+      )}
+    >
+      <slot />
+    </label>
+  {/if}
 </div>

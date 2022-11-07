@@ -30,6 +30,16 @@ docUrl: $docUrl
   <Checkbox checked>Label</Checkbox>
 </Preview>
 
+## Long labels
+
+<Preview>
+  <div class="border w-[150px] overflow-auto p-1">
+    {#each { length: 5 } as _}
+      <Checkbox>This is a really long label</Checkbox>
+    {/each}
+  </div>
+</Preview>
+
 ## Disabled
 
 <Preview>

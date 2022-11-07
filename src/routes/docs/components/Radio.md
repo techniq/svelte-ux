@@ -41,6 +41,16 @@ docUrl: $docUrl
   <Radio bind:group value={3}>Third</Radio>
 </Preview>
 
+## Long labels
+
+<Preview>
+  <div class="border w-[150px] overflow-auto p-1">
+    {#each { length: 5 } as _, i}
+      <Radio bind:group value={i}>This is a really long label {i}</Radio>
+    {/each}
+  </div>
+</Preview>
+
 ## Disabled
 
 <Preview>
