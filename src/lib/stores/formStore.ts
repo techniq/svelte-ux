@@ -1,5 +1,12 @@
 import { writable, get } from 'svelte/store';
-import { applyPatches, createDraft, finishDraft, enablePatches, setAutoFreeze } from 'immer';
+import {
+  applyPatches,
+  createDraft,
+  finishDraft,
+  enablePatches,
+  setAutoFreeze,
+  current,
+} from 'immer';
 import type { Schema } from 'zod';
 import { set } from 'lodash-es';
 
@@ -21,6 +28,8 @@ export default function formStore<T = any>(initialState: T, options?: FormStoreO
   const undoList = [];
 
   const storeApi = { subscribe: stateStore.subscribe };
+
+  let currentDraftValue = writable<T>(current(get(draftStore)));
 
   const draftApi = {
     ...draftStore,
@@ -58,6 +67,7 @@ export default function formStore<T = any>(initialState: T, options?: FormStoreO
     revert() {
       const currentState = get(stateStore);
       draftStore.set(createDraft(currentState));
+      currentDraftValue.set(currentState);
     },
     undo() {
       if (undoList.length) {
@@ -70,6 +80,10 @@ export default function formStore<T = any>(initialState: T, options?: FormStoreO
         draftStore.set(createDraft(newState));
       }
     },
+    refresh() {
+      currentDraftValue.set(current(get(draftStore)));
+    },
+    current: currentDraftValue,
   };
 
   const errorsApi = { subscribe: errorsStore.subscribe };

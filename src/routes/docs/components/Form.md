@@ -8,25 +8,43 @@ docUrl: $docUrl
   import api from '$lib/components/Form.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
-  import Button from '$lib/components/Form.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Form from '$lib/components/Form.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import TextField from '$lib/components/TextField.svelte';
+
+  let data = {
+    name: 'Sean Lynch'
+  }
 </script>
 
 # Examples
 
-```svelte
-<Form
-  initial={{ example }}
-  on:change={(e) => (example = e.detail.example)}
-  let:draft
-  let:commit
-  let:revert
->
-  <TextField label="Name" value={draft.name} on:change={(e) => (draft.name = e.detail.value)} />
-
-  <Button on:click={() => commit()}>Apply</Button>
-  <Button on:click={() => revert()}>Cancel</Button>
-</Form>
-```
+<Preview>
+  <Form
+    initial={data}
+    on:change={(e) => (data = e.detail)}
+    let:draft
+    let:state
+    let:commit
+    let:revert
+    let:current
+    let:refresh
+  >
+    <TextField label="Name" value={draft.name} on:change={(e) => {
+        draft.name = e.detail.value;
+        // Call "refresh" as often as you want "current" updated (on:blur, etc)
+        refresh();
+      }}
+    />
+    <Button on:click={() => commit()} disabled={current.name == null}>Apply</Button>
+    <Button on:click={() => revert()}>Cancel</Button>
+    <div class="mt-2">
+      <div>current: {JSON.stringify(current)}</div>
+      <div>state: {JSON.stringify(state)}</div>
+    </div>
+  </Form>
+</Preview>
 
 # API
 
