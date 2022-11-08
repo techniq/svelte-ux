@@ -104,7 +104,7 @@
 
         <div
           class={clsx(
-            'input flex items-center',
+            'input flex items-center overflow-hidden',
             hasLabel && 'pt-4',
             dense ? 'my-1' : 'my-2',
             center && 'text-center'

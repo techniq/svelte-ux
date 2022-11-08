@@ -19,7 +19,7 @@
 
 <Field on:click={() => (open = !open)} class="cursor-pointer" {...$$restProps}>
   <slot name="selection">
-    <div class="w-full whitespace-nowrap text-sm ">
+    <div class="truncate text-sm">
       {selected?.label ?? 'No selection'}
     </div>
   </slot>
