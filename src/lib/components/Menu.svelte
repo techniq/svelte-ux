@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { slide } from 'svelte/transition';
+  import { slide, SlideParams } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
   import clsx from 'clsx';
 
@@ -22,6 +22,7 @@
   export let transition = disableTransition
     ? (node: HTMLElement, params: any) => null as TransitionConfig
     : slide;
+  export let transitionParams: any = undefined; // TODO: Provider interface of all *Params (SlideParams, FlyParams, etc)
   export let anchorOrigin: PopoverOrigin = undefined;
   export let popoverOrigin: PopoverOrigin = undefined;
   export let matchWidth: boolean = false;
@@ -70,7 +71,7 @@
     class="menu-items outline-none"
     bind:this={menuItemsEl}
     on:click={onClick}
-    transition:transition
+    transition:transition={transitionParams}
     on:introend={() => {
       // Update position after intro transition finishes (full height of menu is available for popover calculation)
       if (!maxViewportHeight) {

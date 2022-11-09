@@ -88,6 +88,22 @@ docUrl: $docUrl
   </Toggle>
 </Preview>
 
+## transition params
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <span>
+      <Button on:click={toggle}>Click me</Button>
+      <Menu {open} on:close={toggle} matchWidth transitionParams={{ duration: 2000 }}>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Refresh</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Settings</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Help</div>
+        <div class="p-2 hover:bg-black/5 cursor-pointer">Sign In</div>
+      </Menu>
+    </span>
+  </Toggle>
+</Preview>
+
 ## maxViewportHeight
 
 ### Useful for long menus. Resizes (maxHeight w/ overflow) instead of repositioning
