@@ -6,6 +6,7 @@
   import cssVars from '../actions/cssVars';
   import CircularProgress from './CircularProgress.svelte';
 
+  export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
@@ -62,6 +63,7 @@
   </a>
 {:else}
   <button
+    {type}
     {...$$restProps}
     on:click
     class={_class}
