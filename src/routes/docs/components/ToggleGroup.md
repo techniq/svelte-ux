@@ -26,19 +26,6 @@ docUrl: $docUrl
   let optionStyle = 'contained';
 </script>
 
-<!--
-  - [ ] Selection
-    - `data-key` only allows string keys, but allows attaching to dom element
-    - what about enum / toggle button use cases?
-  - [ ] Support changing color of indicator based on selection
-  - [ ] Support coloring options based on selection (.selected class?, add bold font, etc)
-  - [ ] Pass fallback transition to <ToggleGroup contained={optionStyle==='contained'} underlined={optionStyle==='underlined'}> (fade, scale, etc)
-  - [x] Rename `key` to `value`?
-  - [ ] Support overflow scrolling (with button)
-  - Reference:
-    - https://svelte.dev/repl/8e68120858e5322272dc9136c4bb79cc?version=3.7.0
--->
-
 # Examples
 
 ## Style
@@ -59,12 +46,10 @@ docUrl: $docUrl
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
   >
-    <div class="options">
-      <ToggleOption value="all" class="w-32">All</ToggleOption>
-      <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
-      <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
-    </div>
-    <div class="mt-2 p-4 bg-black/5 rounded border">
+    <ToggleOption value="all" class="w-32">All</ToggleOption>
+    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
+    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
+    <div slot="panes" class="mt-2 p-4 bg-black/5 rounded border">
       <TogglePanel>All panel</TogglePanel>
       <TogglePanel>Missed panel</TogglePanel>
       <TogglePanel>Calls panel</TogglePanel>
@@ -80,11 +65,9 @@ docUrl: $docUrl
     underlined={optionStyle === 'underlined'}
     vertical
   >
-    <div class="options">
-      <ToggleOption value="all">All</ToggleOption>
-      <ToggleOption value="missed">Missed</ToggleOption>
-      <ToggleOption value="calls">Calls</ToggleOption>
-    </div>
+    <ToggleOption value="all">All</ToggleOption>
+    <ToggleOption value="missed">Missed</ToggleOption>
+    <ToggleOption value="calls">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -94,12 +77,11 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
+    classes={{ options: 'w-full' }}
   >
-    <div class="options w-full">
-      <ToggleOption value="all">All</ToggleOption>
-      <ToggleOption value="missed">Missed</ToggleOption>
-      <ToggleOption value="calls">Calls</ToggleOption>
-    </div>
+    <ToggleOption value="all">All</ToggleOption>
+    <ToggleOption value="missed">Missed</ToggleOption>
+    <ToggleOption value="calls">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -109,13 +91,12 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
+    classes={{ options: 'w-full' }}
     vertical
   >
-    <div class="options w-full">
-      <ToggleOption value="all">All</ToggleOption>
-      <ToggleOption value="missed">Missed</ToggleOption>
-      <ToggleOption value="calls">Calls</ToggleOption>
-    </div>
+    <ToggleOption value="all">All</ToggleOption>
+    <ToggleOption value="missed">Missed</ToggleOption>
+    <ToggleOption value="calls">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -125,18 +106,17 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
+    classes={{ options: '!grid grid-rows-3 grid-cols-3' }}
   >
-    <div class="options !grid grid-rows-3 grid-cols-3">
-      <ToggleOption value={1}>1</ToggleOption>
-      <ToggleOption value={2}>2</ToggleOption>
-      <ToggleOption value={3}>3</ToggleOption>
-      <ToggleOption value={4}>4</ToggleOption>
-      <ToggleOption value={5}>5</ToggleOption>
-      <ToggleOption value={6}>6</ToggleOption>
-      <ToggleOption value={7}>7</ToggleOption>
-      <ToggleOption value={8}>8</ToggleOption>
-      <ToggleOption value={9}>9</ToggleOption>
-    </div>
+    <ToggleOption value={1}>1</ToggleOption>
+    <ToggleOption value={2}>2</ToggleOption>
+    <ToggleOption value={3}>3</ToggleOption>
+    <ToggleOption value={4}>4</ToggleOption>
+    <ToggleOption value={5}>5</ToggleOption>
+    <ToggleOption value={6}>6</ToggleOption>
+    <ToggleOption value={7}>7</ToggleOption>
+    <ToggleOption value={8}>8</ToggleOption>
+    <ToggleOption value={9}>9</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -148,11 +128,9 @@ docUrl: $docUrl
     underlined={optionStyle === 'underlined'}
     circle
   >
-    <div class="options">
-      <ToggleOption value={1} class="h-10 aspect-square">1</ToggleOption>
-      <ToggleOption value={2} class="h-10 aspect-square">2</ToggleOption>
-      <ToggleOption value={3} class="h-10 aspect-square">3</ToggleOption>
-    </div>
+    <ToggleOption value={1} class="h-10 aspect-square">1</ToggleOption>
+    <ToggleOption value={2} class="h-10 aspect-square">2</ToggleOption>
+    <ToggleOption value={3} class="h-10 aspect-square">3</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -164,11 +142,9 @@ docUrl: $docUrl
     underlined={optionStyle === 'underlined'}
     value={selected}
   >
-    <div class="options">
-      <ToggleOption value="all" class="w-32">All</ToggleOption>
-      <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
-      <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
-    </div>
+    <ToggleOption value="all" class="w-32">All</ToggleOption>
+    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
+    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -187,11 +163,9 @@ docUrl: $docUrl
     underlined={optionStyle === 'underlined'}
     value={selectedStr}
   >
-    <div class="options">
-      <ToggleOption value="all" class="w-32">All</ToggleOption>
-      <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
-      <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
-    </div>
+    <ToggleOption value="all" class="w-32">All</ToggleOption>
+    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
+    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -210,11 +184,9 @@ docUrl: $docUrl
     underlined={optionStyle === 'underlined'}
     value={selectedObj}
   >
-    <div class="options">
-      <ToggleOption value={allValue} class="w-32">All</ToggleOption>
-      <ToggleOption value={missedValue} class="w-32">Missed</ToggleOption>
-      <ToggleOption value={callsValue} class="w-32">Calls</ToggleOption>
-    </div>
+    <ToggleOption value={allValue} class="w-32">All</ToggleOption>
+    <ToggleOption value={missedValue} class="w-32">Missed</ToggleOption>
+    <ToggleOption value={callsValue} class="w-32">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -232,19 +204,18 @@ docUrl: $docUrl
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
     value={selected}
+    classes={{ options: 'overflow-auto w-full' }}
   >
-    <div class="options overflow-auto w-full">
-      <ToggleOption value={1} class="w-32">One</ToggleOption>
-      <ToggleOption value={2} class="w-32">Two</ToggleOption>
-      <ToggleOption value={3} class="w-32">Three</ToggleOption>
-      <ToggleOption value={4} class="w-32">Four</ToggleOption>
-      <ToggleOption value={5} class="w-32">Five</ToggleOption>
-      <ToggleOption value={6} class="w-32">Six</ToggleOption>
-      <ToggleOption value={7} class="w-32">Seven</ToggleOption>
-      <ToggleOption value={8} class="w-32">Eight</ToggleOption>
-      <ToggleOption value={9} class="w-32">Nine</ToggleOption>
-      <ToggleOption value={10} class="w-32">Ten</ToggleOption>
-    </div>
+    <ToggleOption value={1} class="w-32">One</ToggleOption>
+    <ToggleOption value={2} class="w-32">Two</ToggleOption>
+    <ToggleOption value={3} class="w-32">Three</ToggleOption>
+    <ToggleOption value={4} class="w-32">Four</ToggleOption>
+    <ToggleOption value={5} class="w-32">Five</ToggleOption>
+    <ToggleOption value={6} class="w-32">Six</ToggleOption>
+    <ToggleOption value={7} class="w-32">Seven</ToggleOption>
+    <ToggleOption value={8} class="w-32">Eight</ToggleOption>
+    <ToggleOption value={9} class="w-32">Nine</ToggleOption>
+    <ToggleOption value={10} class="w-32">Ten</ToggleOption>
   </ToggleGroup>
 </Preview>
 

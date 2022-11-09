@@ -8,7 +8,6 @@
   import { setContext, createEventDispatcher } from 'svelte';
   import { writable } from 'svelte/store';
   import { crossfade, fade } from 'svelte/transition';
-  import cssVars from '../actions/cssVars';
 
   export let value: any = undefined; // index or value
 
@@ -18,10 +17,13 @@
   export let vertical: boolean = false;
   export let circle: boolean = false;
 
-  $: styleVars = {
-    flow: vertical ? 'row' : 'column',
-    borderRadius: circle ? '9999px' : null,
-  };
+  export let classes: {
+    root?: string;
+    options?: string;
+    optionContainer?: string;
+    option?: string;
+    indicator?: string;
+  } = {};
 
   const options: HTMLElement[] = [];
   const optionsByValue: Map<any, HTMLElement> = new Map();
@@ -86,6 +88,41 @@
     }
   }
 
+  // Toss classes into a store so it can be reactively read from context
+  const classesStore = writable(classes);
+  $: $classesStore = contained
+    ? {
+        options: clsx(
+          'inline-grid overflow-auto p-1 text-sm bg-black/10 border-black/20 transition-shadow border',
+          'hover:shadow hover:border-gray-700',
+          circle ? 'rounded-full' : 'rounded-[10px]',
+          vertical ? 'grid-flow-row' : 'grid-flow-col',
+          classes.options
+        ),
+        optionContainer: clsx(
+          'text-black/50 ring-black/40',
+          circle ? 'rounded-full' : 'rounded-[8px]',
+          'hover:text-opacity-100 hover:bg-black/5',
+          'focus-visible:ring-1',
+          '[&.selected]:text-black'
+        ),
+        indicator: clsx(
+          'bg-white w-full h-full shadow-md ring-black/20 ring-1',
+          circle ? 'rounded-full' : 'rounded-[8px]'
+        ),
+      }
+    : underlined
+    ? {
+        options: clsx('flex border-b text-sm h-10', classes.options),
+        optionContainer: clsx(
+          'text-black/50 font-bold',
+          'hover:text-accent-500 hover:bg-accent-500/10',
+          '[&.selected]:text-accent-500'
+        ),
+        indicator: clsx('h-full border-b-2 border-accent-500'),
+      }
+    : classes;
+
   setContext(groupKey, {
     registerOption,
     unregisterOption,
@@ -95,88 +132,18 @@
     selectedOption,
     selectedPanel,
     crossfade: [send, receive],
+    classes: classesStore,
   });
 </script>
 
 <div
-  class={clsx('toggle-group', $$props.class)}
+  class={clsx('toggle-group', $classesStore.root, $$props.class)}
   class:contained
   class:underlined
-  use:cssVars={styleVars}
   {...$$restProps}
 >
-  <slot />
+  <div class={clsx('options', $classesStore.options)}>
+    <slot />
+  </div>
+  <slot name="panes" />
 </div>
-
-<style lang="postcss">
-  /*
-	 * Contained (Apple) style
-	 */
-  .contained :global(.options) {
-    @apply inline-grid overflow-auto p-1 text-sm bg-black/10 border-black/20 transition-shadow border;
-    grid-auto-flow: var(--flow);
-    border-radius: var(--borderRadius, 10px);
-  }
-  .contained :global(.options:hover) {
-    @apply shadow border-gray-700;
-  }
-
-  /* TODO: Determine why this no longer works.  Could be due to recent Svelte change with :global() or Tailwind */
-  /* .contained :global(.optionContainer) {
-    @apply text-black/50 hover:text-opacity-100 hover:bg-black/5 ring-black/40 focus-visible:ring-1;
-    border-radius: var(--borderRadius, 8px);
-  } */
-  .contained :global(.optionContainer) {
-    @apply text-black/50 ring-black/40;
-    border-radius: var(--borderRadius, 8px);
-  }
-  .contained :global(.optionContainer:hover) {
-    @apply text-opacity-100 bg-black/5;
-  }
-  .contained :global(.optionContainer:focus-visible) {
-    @apply ring-1;
-  }
-
-  .contained :global(.optionContainer.selected) {
-    @apply text-black;
-  }
-
-  .contained :global(.indicator) {
-    @apply bg-white w-full h-full z-0 shadow-md ring-black/20 ring-1;
-    border-radius: var(--borderRadius, 8px);
-  }
-
-  /*
-	 * Underline (Twitter) style
-	 */
-  .underlined :global(.options) {
-    @apply flex border-b text-sm h-10;
-  }
-
-  .underlined :global(.optionContainer) {
-    @apply text-black/50 font-bold;
-  }
-  .underlined :global(.optionContainer:hover) {
-    @apply text-accent-500 bg-accent-500/10;
-  }
-
-  .underlined :global(.selected) {
-    @apply text-accent-500;
-  }
-
-  .underlined :global(.indicator) {
-    @apply h-full border-b-2 border-accent-500;
-  }
-
-  .underlined :global(.circle .options) {
-    /* width: 144px;
-    height: 48px;
-    border-radius: 24px;
-    min-height: 48px; */
-  }
-
-  .underlined :global(.circle .indicator) {
-    /* border-radius: 24px;
-    border: 2px solid #1da1f2; */
-  }
-</style>

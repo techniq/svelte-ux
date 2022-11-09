@@ -12,8 +12,14 @@
     indicator?: string;
   } = {};
 
-  const { registerOption, unregisterOption, selectOption, selectedOption, crossfade } =
-    getContext(groupKey);
+  const {
+    registerOption,
+    unregisterOption,
+    selectOption,
+    selectedOption,
+    crossfade,
+    classes: classesContext,
+  } = getContext(groupKey);
   const [send, receive] = crossfade;
 
   let optionElement: HTMLElement = null;
@@ -38,43 +44,29 @@
   on:click
   bind:this={optionElement}
   {...$$restProps}
-  class={clsx('optionContainer', classes.root, $$props.class)}
+  class={clsx(
+    'optionContainer',
+    'grid items-center',
+    $classesContext.optionContainer,
+    classes.root,
+    $$props.class
+  )}
 >
-  <div class={clsx('option', classes.option)}>
-    <slot />
-  </div>
-
+  <!-- Stack indicator under option -->
   {#if $selectedOption === optionElement}
     <div
-      class={clsx('indicator', classes.option)}
+      class={clsx('indicator', $classesContext.indicator, classes.indicator)}
       in:receive={{ key: 'indicator' }}
       out:send|local={{ key: 'indicator' }}
     />
   {/if}
+
+  <div class={clsx('option', $classesContext.option, classes.option)}>
+    <slot />
+  </div>
 </button>
 
 <style lang="postcss">
-  button {
-    border: 0;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    user-select: none;
-
-    display: grid;
-    align-items: center;
-
-    -webkit-appearance: none;
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  button:hover {
-    /* 		background-color: rgba(0,0,0,.05); */
-    /*  		background-color: rgba(255,255,255,.4); */
-  }
-
   /* Stack contents */
   button > * {
     grid-column: 1;
