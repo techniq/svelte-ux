@@ -20,6 +20,8 @@ docUrl: $docUrl
 
 # Examples
 
+## Basic
+
 <Preview>
   <Form
     initial={data}
@@ -41,6 +43,27 @@ docUrl: $docUrl
     <Button on:click={() => revert()}>Cancel</Button>
     <div class="mt-2">
       <div>current: {JSON.stringify(current)}</div>
+      <div>state: {JSON.stringify(state)}</div>
+    </div>
+  </Form>
+</Preview>
+
+## Form submit button
+
+<Preview>
+  <Form
+    initial={data}
+    on:change={(e) => (data = e.detail)}
+    let:draft
+    let:state
+  >
+    <TextField label="Name" value={draft.name} on:change={(e) => {
+        draft.name = e.detail.value;
+      }}
+    />
+    <Button type="submit">Apply</Button>
+    <Button type="reset">Cancel</Button>
+    <div class="mt-2">
       <div>state: {JSON.stringify(state)}</div>
     </div>
   </Form>
