@@ -32,6 +32,10 @@
   // export let actions: Actions = undefined;
   // export let inputEl: HTMLInputElement | null = null;
   export let center = false;
+  export let classes: {
+    root?: string;
+    container?: string;
+  } = {};
 
   $: hasValue = Array.isArray(value)
     ? value.length > 0
@@ -58,6 +62,7 @@
       : '[--color:theme(colors.blue.500)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
+    classes.root,
     $$props.class
   )}
 >
@@ -72,7 +77,8 @@
       },
       !base && [rounded ? 'rounded-full' : 'rounded', filled ? 'bg-black/10' : 'bg-white'],
       error ? 'border-red-500' : 'border-black/20',
-      'group-focus-within:shadow-md group-focus-within:border-color-var'
+      'group-focus-within:shadow-md group-focus-within:border-color-var',
+      classes.container
     )}
   >
     <Stack horizontal template={hStackTemplate} items="center">
