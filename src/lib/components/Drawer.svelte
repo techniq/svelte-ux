@@ -6,6 +6,7 @@
   import CircularProgress from './CircularProgress.svelte';
   import Overlay from './Overlay.svelte';
 
+  import { focusMove } from '../actions/focus';
   import portalAction from '../actions/portal';
   import { fly } from '../utils/transition';
 
@@ -64,6 +65,7 @@
       }
     }}
     use:portalAction={{ enabled: portal }}
+    use:focusMove
   >
     {#if loading}
       <Overlay center class="rounded">

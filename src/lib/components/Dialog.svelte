@@ -6,6 +6,7 @@
   import { quadIn } from 'svelte/easing';
   import clsx from 'clsx';
 
+  import { focusMove } from '../actions/focus';
   import portalAction from '../actions/portal';
 
   import Backdrop from './Backdrop.svelte';
@@ -96,6 +97,7 @@
       on:introend
       on:outroend
       bind:this={dialogEl}
+      use:focusMove
     >
       {#if loading}
         <Overlay center class="rounded">
