@@ -19,6 +19,7 @@
     selectedOption,
     crossfade,
     classes: classesContext,
+    autoscroll,
   } = getContext(groupKey);
   const [send, receive] = crossfade;
 
@@ -32,7 +33,7 @@
     unregisterOption(optionElement, value);
   });
 
-  $: if ($selectedOption === optionElement) {
+  $: if (autoscroll && $selectedOption === optionElement) {
     optionElement.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
   }
 </script>

@@ -205,6 +205,7 @@ docUrl: $docUrl
     underlined={optionStyle === 'underlined'}
     value={selected}
     classes={{ options: 'overflow-auto w-full' }}
+    autoscroll
   >
     <ToggleOption value={1} class="w-32">One</ToggleOption>
     <ToggleOption value={2} class="w-32">Two</ToggleOption>

@@ -10,6 +10,7 @@
   import { crossfade, fade } from 'svelte/transition';
 
   export let value: any = undefined; // index or value
+  export let autoscroll: boolean = false;
 
   // styles
   export let contained: boolean = false;
@@ -133,6 +134,7 @@
     selectedPanel,
     crossfade: [send, receive],
     classes: classesStore,
+    autoscroll,
   });
 </script>
 
