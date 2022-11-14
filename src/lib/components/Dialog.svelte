@@ -86,7 +86,7 @@
   >
     <div
       class={clsx(
-        'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto relative',
+        'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
         classes.dialog,
         $$props.class
       )}

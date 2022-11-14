@@ -42,7 +42,7 @@
 
   <div
     class={clsx(
-      'bg-white fixed overflow-auto transform z-50',
+      'bg-white fixed overflow-auto transform z-50 outline-none',
       {
         'h-full': left || right,
         'w-full': top || bottom,
