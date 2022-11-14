@@ -9,6 +9,7 @@ docUrl: $docUrl
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Button from '$lib/components/Button.svelte';
+  import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
@@ -89,6 +90,35 @@ docUrl: $docUrl
   <Toggle let:on={open} let:toggle let:toggleOff>
     <Drawer {open} on:close={toggleOff} right class="w-[400px]" loading>
       <h1>Contents</h1>
+      <div
+        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
+    p-1 border-t border-gray-400"
+      >
+        <Button on:click={toggleOff}>Close</Button>
+      </div>
+    </Drawer>
+    <Button on:click={toggle}>Click me</Button>
+  </Toggle>
+</Preview>
+
+## Dialog within Drawer
+
+<Preview>
+  <Toggle let:on={open} let:toggle let:toggleOff>
+    <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+      <div class="p-2">
+        <Toggle let:on={open} let:toggle>
+          <Button on:click={toggle}>Show Dialog</Button>
+          <Dialog {open} on:close={toggle}>
+            <div slot="title">Are you sure you want to do that?</div>
+            <div slot="actions">
+              <Button class="bg-blue-500 text-white hover:bg-blue-600">
+                Close
+              </Button>
+            </div>
+          </Dialog>
+        </Toggle>
+      </div>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
     p-1 border-t border-gray-400"
