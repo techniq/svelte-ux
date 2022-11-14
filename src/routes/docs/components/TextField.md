@@ -193,14 +193,14 @@ docUrl: $docUrl
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
-    <TextField label="default" />
+    <TextField label="default" on:change={e => console.log(e.detail)}  />
     <div />
-    <TextField label="text" type="text" />
-    <TextField label="password" type="password" />
-    <TextField label="integer" type="integer" />
-    <TextField label="decimal" type="decimal" />
-    <TextField label="currency" type="currency" />
-    <TextField label="percent" type="percent" />
+    <TextField label="text" type="text" on:change={e => console.log(e.detail)} />
+    <TextField label="password" type="password" on:change={e => console.log(e.detail)}  />
+    <TextField label="integer" type="integer" on:change={e => console.log(e.detail)}  />
+    <TextField label="decimal" type="decimal" on:change={e => console.log(e.detail)}  />
+    <TextField label="currency" type="currency" on:change={e => console.log(e.detail)}  />
+    <TextField label="percent" type="percent" on:change={e => console.log(e.detail)}  />
   </div>
 </Preview>
 
@@ -383,7 +383,7 @@ docUrl: $docUrl
   />
 </Preview>
 
-<SectionDivider>Mask</SectionDivider>
+<SectionDivider>Mask & Accept</SectionDivider>
 
 ## Date
 
@@ -395,6 +395,12 @@ docUrl: $docUrl
 
 <Preview>
 	<TextField mask="+1 (___) ___-____" replace="_" />
+</Preview>
+
+## `accept` without `mask`
+
+<Preview>
+  <TextField label="Zip code" accept={/[0-9]{0,5}/} />
 </Preview>
 
 > See [Input](./Input) for more mask examples

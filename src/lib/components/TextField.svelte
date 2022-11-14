@@ -78,11 +78,13 @@
   let lastTimeoutId;
   function updateValue() {
     let newValue;
+    // TODO: Improve handling of `1234.05` and backspacing the `5`, which results in `1234` (`.0` removed)
+    const valueAsType = inputType === 'number' ? Number(inputValue) : inputValue;
     if (inputValue && operator) {
       // Add with operator if used
-      newValue = { [operator]: inputValue };
+      newValue = { [operator]: valueAsType };
     } else {
-      newValue = inputValue === '' ? null : inputValue;
+      newValue = inputValue === '' ? null : valueAsType;
     }
 
     value = newValue;
@@ -100,10 +102,11 @@
   }
 
   function handleInput(e) {
-    // console.log({ value: e.target.value, parsed: Number(e.target.value) });
-    if (inputType === 'number') {
-      // TODO: Improve handling of `1234.05` and backspacing the `5`, which results in `1234` (`.0` removed)
-      inputValue = e.target.value === '' ? null : Number(e.target.value);
+    if (accept) {
+      // filter input based on accepted characters
+      const regex = new RegExp(accept, 'g');
+      inputValue = e.target.value.match(regex)?.[0] ?? '';
+      e.target.value = inputValue;
     } else {
       inputValue = e.target.value;
     }
