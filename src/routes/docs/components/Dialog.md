@@ -13,6 +13,7 @@ docUrl: $docUrl
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 
   let open = false;
@@ -157,6 +158,24 @@ docUrl: $docUrl
       <div slot="actions">
         <Button class="bg-blue-500 text-white hover:bg-blue-600">Yes</Button>
         <Button>No</Button>
+      </div>
+    </Dialog>
+  </Toggle>
+</Preview>
+
+## With autofocus TextField
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <Button on:click={toggle}>Show Dialog</Button>
+    <Dialog {open} on:close={toggle}>
+      <div slot="title">How old are you?</div>
+      <div class="p-2">
+        <TextField label="Age" autofocus />
+      </div>
+      <div slot="actions">
+        <Button class="bg-blue-500 text-white hover:bg-blue-600">OK</Button>
+        <Button>Cancel</Button>
       </div>
     </Dialog>
   </Toggle>

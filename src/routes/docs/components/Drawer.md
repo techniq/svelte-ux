@@ -12,6 +12,7 @@ docUrl: $docUrl
   import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 
   let leftOpen = false;
@@ -90,6 +91,25 @@ docUrl: $docUrl
   <Toggle let:on={open} let:toggle let:toggleOff>
     <Drawer {open} on:close={toggleOff} right class="w-[400px]" loading>
       <h1>Contents</h1>
+      <div
+        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
+    p-1 border-t border-gray-400"
+      >
+        <Button on:click={toggleOff}>Close</Button>
+      </div>
+    </Drawer>
+    <Button on:click={toggle}>Click me</Button>
+  </Toggle>
+</Preview>
+
+## With autofocus TextField
+
+<Preview>
+  <Toggle let:on={open} let:toggle let:toggleOff>
+    <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+      <div class="p-2">
+        <TextField autofocus />
+      </div>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
     p-1 border-t border-gray-400"
