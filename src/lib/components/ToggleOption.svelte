@@ -34,7 +34,24 @@
   });
 
   $: if (autoscroll && $selectedOption === optionElement) {
-    optionElement.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    // TODO: Only scroll if needed / out of view
+    const optionOffset = {
+      top: optionElement.offsetTop - optionElement.parentElement.offsetTop,
+      left: optionElement.offsetLeft - optionElement.parentElement.offsetLeft,
+    };
+    const optionCenter = {
+      left: optionElement.clientWidth / 2,
+      top: optionElement.clientHeight / 2,
+    };
+    const containerCenter = {
+      left: optionElement.parentElement.clientWidth / 2,
+      top: optionElement.parentElement.clientHeight / 2,
+    };
+    optionElement.parentElement.scroll({
+      top: optionOffset.top + optionCenter.top - containerCenter.top,
+      left: optionOffset.left + optionCenter.left - containerCenter.left,
+      behavior: 'smooth',
+    });
   }
 </script>
 
