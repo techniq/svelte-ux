@@ -359,8 +359,8 @@
 
 <svelte:window
   on:resize|passive={() => updatePosition()}
-  on:keydown|capture={onKeydown}
-  on:click|capture={onClickOutside}
+  on:keydown={onKeydown}
+  on:click={onClickOutside}
 />
 
 {#if open}

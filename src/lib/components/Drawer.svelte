@@ -31,7 +31,9 @@
 
 {#if open}
   <Backdrop
-    on:click={() => {
+    on:click={(e) => {
+      // Do not allow event to reach Popover's clickOutside
+      e.stopPropagation();
       if (!persistent) {
         open = false;
       }
@@ -59,10 +61,15 @@
       y: top ? '-100%' : bottom ? '100%' : 0,
     }}
     on:keydown={(e) => {
+      // Do not allow event to reach Popover's onKeydown
+      e.stopPropagation();
       if (e.key === 'Escape' && !persistent) {
-        e.stopPropagation();
         open = false;
       }
+    }}
+    on:click={(e) => {
+      // Do not allow click to reach Popover's clickOutside
+      e.stopPropagation();
     }}
     use:portalAction={{ enabled: portal }}
     use:focusMove
