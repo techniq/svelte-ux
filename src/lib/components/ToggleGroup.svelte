@@ -93,6 +93,7 @@
   const classesStore = writable(classes);
   $: $classesStore = contained
     ? {
+        ...classes,
         options: clsx(
           'inline-grid overflow-auto p-1 text-sm bg-black/10 border-black/20 transition-shadow border',
           'hover:shadow hover:border-gray-700',
@@ -105,22 +106,26 @@
           circle ? 'rounded-full' : 'rounded-[8px]',
           'hover:text-opacity-100 hover:bg-black/5',
           'focus-visible:ring-1',
-          '[&.selected]:text-black'
+          '[&.selected]:text-black',
+          classes.optionContainer
         ),
         indicator: clsx(
           'bg-white w-full h-full shadow-md ring-black/20 ring-1',
-          circle ? 'rounded-full' : 'rounded-[8px]'
+          circle ? 'rounded-full' : 'rounded-[8px]',
+          classes.indicator
         ),
       }
     : underlined
     ? {
+        ...classes,
         options: clsx('flex border-b text-sm h-10', classes.options),
         optionContainer: clsx(
           'text-black/50 font-bold',
           'hover:text-accent-500 hover:bg-accent-500/10',
-          '[&.selected]:text-accent-500'
+          '[&.selected]:text-accent-500',
+          classes.optionContainer
         ),
-        indicator: clsx('h-full border-b-2 border-accent-500'),
+        indicator: clsx('h-full border-b-2 border-accent-500', classes.indicator),
       }
     : classes;
 
