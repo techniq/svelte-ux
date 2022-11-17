@@ -7,9 +7,9 @@ docUrl: $docUrl
 <script lang="ts">
 	import Preview from '$lib/components/Preview.svelte';
 
-	import { scrollIntoView } from '$lib/actions/scroll';
+	import { scrollIntoView, scrollShadow } from '$lib/actions/scroll';
 
-  const itemCount = 20;
+  const itemCount = 10;
   const items = Array.from({ length: itemCount }).map((_, i) => `Item: ${i}`)
   let scrolledIndex = 0;
 </script>
@@ -28,6 +28,26 @@ docUrl: $docUrl
       >
         {item}
       </div>
+    {/each}
+  </div>
+</Preview>
+
+## scrollShadow
+
+### Add shadows to indicate scrolling available
+
+<Preview>
+  <div class="h-40 overflow-auto border rounded" use:scrollShadow>
+    {#each items as item, i}
+      <div>{item}</div>
+    {/each}
+  </div>
+</Preview>
+
+<Preview>
+  <div class="overflow-auto border rounded flex whitespace-nowrap gap-8 p-2" use:scrollShadow>
+    {#each items as item, i}
+      <div class="p-4 border">{item}</div>
     {/each}
   </div>
 </Preview>
