@@ -9,7 +9,7 @@ docUrl: $docUrl
 
 	import { scrollIntoView, scrollShadow } from '$lib/actions/scroll';
 
-  const itemCount = 10;
+  const itemCount = 30;
   const items = Array.from({ length: itemCount }).map((_, i) => `Item: ${i}`)
   let scrolledIndex = 0;
 </script>

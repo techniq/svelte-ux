@@ -112,13 +112,9 @@ export function scrollShadow(
 
     node.style.boxShadow = shadows.join(', ');
   }
-  node.addEventListener('scroll', onScroll);
+  node.addEventListener('scroll', onScroll, { passive: true });
 
-  // Resize observer will be called once
-  // Initial before first scroll
-  // onScroll({ target: node });
-
-  // Update shadows when resized
+  // Update when node resized (and on initial mount)
   let observer = new ResizeObserver((entries, observer) => {
     onScroll({ target: node });
   });
