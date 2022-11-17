@@ -115,15 +115,21 @@ export function scrollShadow(
   node.addEventListener('scroll', onScroll, { passive: true });
 
   // Update when node resized (and on initial mount)
-  let observer = new ResizeObserver((entries, observer) => {
+  let resizeObserver = new ResizeObserver((entries, observer) => {
     onScroll({ target: node });
   });
-  observer.observe(node);
+  resizeObserver.observe(node);
+
+  let mutationObserver = new MutationObserver((entries, observer) => {
+    onScroll({ target: node });
+  });
+  mutationObserver.observe(node, { childList: true, attributes: true, subtree: true });
 
   return {
     destroy() {
       node.removeEventListener('scroll', onScroll);
-      observer.disconnect();
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
     },
   };
 }
