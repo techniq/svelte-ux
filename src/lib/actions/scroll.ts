@@ -109,7 +109,21 @@ export function scrollShadow(
       shadows.push(`inset -${offset}px 0px ${blur}px ${spread}px ${color}`);
     }
 
-    node.style.boxShadow = shadows.join(', ');
+    node.style.setProperty('--shadow', shadows.join(', '));
+
+    node.classList.add(
+      'relative',
+      'overflow-auto',
+
+      'after:block',
+      'after:h-full',
+      'after:w-full',
+      'after:sticky',
+      'after:top-0',
+      'after:left-0',
+      'after:mt-[-9999px]',
+      'after:[box-shadow:var(--shadow)]'
+    );
   }
   node.addEventListener('scroll', onScroll, { passive: true });
 
@@ -122,7 +136,7 @@ export function scrollShadow(
   let mutationObserver = new MutationObserver((entries, observer) => {
     onScroll({ target: node });
   });
-  mutationObserver.observe(node, { childList: true, attributes: true, subtree: true });
+  mutationObserver.observe(node, { childList: true, subtree: true /*attributes: true, */ }); // TODO: Attributes without filter cause browser to lock up
 
   return {
     destroy() {

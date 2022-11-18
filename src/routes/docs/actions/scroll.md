@@ -37,17 +37,31 @@ docUrl: $docUrl
 ### Add shadows to indicate scrolling available
 
 <Preview>
-  <div class="h-40 overflow-auto border rounded" use:scrollShadow>
+  <div class="h-40 border rounded" use:scrollShadow>
     {#each items as item, i}
       <div>{item}</div>
     {/each}
   </div>
 </Preview>
 
+### Horizontal scroll
+
 <Preview>
-  <div class="overflow-auto border rounded flex whitespace-nowrap gap-8 p-2" use:scrollShadow>
+  <div class="h-20 border rounded" use:scrollShadow>
+    <div class="flex whitespace-nowrap gap-2 p-2">
+      {#each items as item, i}
+        <div class="p-4 border">{item}</div>
+      {/each}
+    </div>
+  </div>
+</Preview>
+
+### White shadow on bottom (fade content)
+
+<Preview>
+  <div class="h-40 border rounded" use:scrollShadow={{ bottom: { color: 'rgb(255 255 255 / 1)', offset: 30, blur: 30, scrollRatio: 0 }}}>
     {#each items as item, i}
-      <div class="p-4 border">{item}</div>
+      <div>{item}</div>
     {/each}
   </div>
 </Preview>
