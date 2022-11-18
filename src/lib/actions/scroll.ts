@@ -46,8 +46,11 @@ export function scrollShadow(
   }
 ): SvelteActionReturnType {
   const defaultOptions = {
+    offset: 10,
+    blur: 6,
+    spread: -7,
     color: 'rgba(0,0,0,0.2)',
-    length: 10,
+    scrollRatio: 5,
   };
 
   const resolvedOptions = {
@@ -76,38 +79,34 @@ export function scrollShadow(
     const verticalScrollPercent = scrollTop / (scrollHeight - clientHeight);
     const horizontalScrollPercent = scrollLeft / (scrollWidth - clientWidth);
 
-    const shadowScrollRatio = 5;
-
     const shadows = [];
 
     // Top shadow
     if (verticalScrollPercent > 0) {
-      const offset = Math.min(scrollTop / shadowScrollRatio, resolvedOptions.top.length);
-      shadows.push(`inset 0px ${offset}px 8px -7px ${resolvedOptions.top.color}`);
+      let { offset, blur, spread, color, scrollRatio } = resolvedOptions.top;
+      offset = Math.min(scrollTop / scrollRatio, offset);
+      shadows.push(`inset 0px ${offset}px ${blur}px ${spread}px ${color}`);
     }
 
     // Bottom shadow
     if (verticalScrollPercent < 1) {
-      const offset = Math.min(
-        (scrollHeight - clientHeight - scrollTop) / shadowScrollRatio,
-        resolvedOptions.bottom.length
-      );
-      shadows.push(`inset 0px -${offset}px 8px -7px ${resolvedOptions.bottom.color}`);
+      let { offset, blur, spread, color, scrollRatio } = resolvedOptions.bottom;
+      offset = Math.min((scrollHeight - clientHeight - scrollTop) / scrollRatio, offset);
+      shadows.push(`inset 0px -${offset}px ${blur}px ${spread}px ${color}`);
     }
 
     // Left shadow
     if (horizontalScrollPercent > 0) {
-      const offset = Math.min(scrollLeft / shadowScrollRatio, resolvedOptions.left.length);
-      shadows.push(`inset ${offset}px 0px 8px -7px ${resolvedOptions.left.color}`);
+      let { offset, blur, spread, color, scrollRatio } = resolvedOptions.left;
+      offset = Math.min(scrollLeft / scrollRatio, offset);
+      shadows.push(`inset ${offset}px 0px ${blur}px ${spread}px ${color}`);
     }
 
     // Right shadow
     if (horizontalScrollPercent < 1) {
-      const offset = Math.min(
-        (scrollWidth - clientWidth - scrollLeft) / shadowScrollRatio,
-        resolvedOptions.right.length
-      );
-      shadows.push(`inset -${offset}px 0px 8px -7px ${resolvedOptions.right.color}`);
+      let { offset, blur, spread, color, scrollRatio } = resolvedOptions.right;
+      offset = Math.min((scrollWidth - clientWidth - scrollLeft) / scrollRatio, offset);
+      shadows.push(`inset -${offset}px 0px ${blur}px ${spread}px ${color}`);
     }
 
     node.style.boxShadow = shadows.join(', ');
