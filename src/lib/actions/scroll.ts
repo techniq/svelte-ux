@@ -122,6 +122,7 @@ export function scrollShadow(
       'after:top-0',
       'after:left-0',
       'after:mt-[-9999px]',
+      'after:pointer-events-none',
       'after:[box-shadow:var(--shadow)]'
     );
   }
