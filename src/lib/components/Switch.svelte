@@ -30,11 +30,10 @@
         'w-8 h-5': size === 'md',
         'w-10 h-6': size === 'lg',
       },
-      checked ? 'bg-blue-400 border-blue-400' : 'bg-gray-300 border-gray-300',
+      checked ? 'bg-accent-500 border-accent-500' : 'bg-gray-300 border-gray-300',
       disabled
         ? 'opacity-50'
         : 'cursor-pointer peer-focus-visible:ring-2 ring-accent-400 ring-offset-1',
-
       $$props.class
     )}
   >
