@@ -51,6 +51,16 @@ docUrl: $docUrl
   </div>
 </Preview>
 
+## Long labels (truncate)
+
+<Preview>
+  <div class="border w-[150px] overflow-auto p-1">
+    {#each { length: 5 } as _, i}
+      <Radio bind:group value={i} classes={{ root: 'truncate max-w-full', label: 'truncate' }}>This is a really long label {i}</Radio>
+    {/each}
+  </div>
+</Preview>
+
 ## Disabled
 
 <Preview>

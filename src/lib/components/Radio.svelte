@@ -17,7 +17,7 @@
   */
 
   import clsx from 'clsx';
-  import { mdiCheck, mdiCheckboxBlankCircle, mdiCircleMedium, mdiMinus } from '@mdi/js';
+  import { mdiCheckboxBlankCircle } from '@mdi/js';
 
   import Icon from './Icon.svelte';
   import { uniqueId } from '$lib/utils/string';
@@ -29,10 +29,17 @@
   export let disabled: boolean = false;
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
 
+  export let classes: {
+    root?: string;
+    checkbox?: string;
+    label?: string;
+    icon?: string;
+  } = {};
+
   $: checked = group !== undefined ? group === value : checked;
 </script>
 
-<div class="inline-flex gap-x-1 items-center">
+<div class={clsx('inline-flex gap-x-1 items-center', classes.root, $$props.class)}>
   <input
     {id}
     type="radio"
@@ -49,7 +56,8 @@
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
         'peer-focus-visible:ring-2 peer-hover:border-accent-500 peer-focus-visible:border-accent-500 ring-accent-300 ring-offset-0',
-      checked ? (disabled ? ' border-gray-500' : 'border-accent-500') : 'border-gray-500'
+      checked ? (disabled ? ' border-gray-500' : 'border-accent-500') : 'border-gray-500',
+      classes.checkbox
     )}
   >
     <Icon
@@ -57,7 +65,8 @@
       class={clsx(
         'pointer-events-none transition-transform',
         disabled ? 'text-gray-500' : 'text-accent-500',
-        checked ? 'scale-100' : 'scale-0'
+        checked ? 'scale-100' : 'scale-0',
+        classes.icon
       )}
       size={{
         xs: '.75rem', // 12px
@@ -78,7 +87,8 @@
           sm: 'text-sm', // 14px
           md: 'text-md', // 16px
           lg: 'text-lg', // 18px
-        }[size]
+        }[size],
+        classes.label
       )}
     >
       <slot />

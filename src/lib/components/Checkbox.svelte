@@ -29,9 +29,16 @@
   export let disabled: boolean = false;
   export let circle: boolean = false;
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+
+  export let classes: {
+    root?: string;
+    checkbox?: string;
+    label?: string;
+    icon?: string;
+  } = {};
 </script>
 
-<div class="inline-flex gap-x-1 items-center">
+<div class={clsx('inline-flex gap-x-1 items-center', classes.root, $$props.class)}>
   <input
     {id}
     type="checkbox"
@@ -53,14 +60,16 @@
         ? disabled
           ? 'bg-gray-500 border-gray-500'
           : 'bg-accent-500 border-accent-500'
-        : 'border-gray-500'
+        : 'border-gray-500',
+      classes.checkbox
     )}
   >
     <Icon
       path={indeterminate ? mdiMinus : mdiCheck}
       class={clsx(
         'pointer-events-none text-white transition-transform',
-        checked ? 'scale-100' : 'scale-0'
+        checked ? 'scale-100' : 'scale-0',
+        classes.icon
       )}
       size={{
         xs: '.75rem', // 12px
@@ -81,7 +90,8 @@
           sm: 'text-sm', // 14px
           md: 'text-md', // 16px
           lg: 'text-lg', // 18px
-        }[size]
+        }[size],
+        classes.label
       )}
     >
       <slot />
