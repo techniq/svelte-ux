@@ -65,3 +65,13 @@ docUrl: $docUrl
     {/each}
   </div>
 </Preview>
+
+### with truncation
+
+<Preview>
+  <div class="w-[200px] h-40 border rounded" use:scrollShadow>
+    {#each items as item, i}
+      <div class="truncate">{item} with a really long description</div>
+    {/each}
+  </div>
+</Preview>
