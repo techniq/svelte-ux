@@ -147,3 +147,89 @@ export function scrollShadow(
     },
   };
 }
+
+export function scrollFade(
+  node: HTMLElement,
+  options?: {
+    length?: number;
+    scrollRatio?: number;
+  }
+): SvelteActionReturnType {
+  const length = options?.length ?? 50;
+  const scrollRatio = options?.scrollRatio ?? 5;
+
+  function onScroll(e) {
+    const { clientWidth, clientHeight, scrollWidth, scrollHeight, scrollTop, scrollLeft } =
+      e.target;
+
+    const verticalScrollPercent = scrollTop / (scrollHeight - clientHeight);
+    const horizontalScrollPercent = scrollLeft / (scrollWidth - clientWidth);
+
+    let gradient: string | undefined = undefined;
+
+    if (scrollHeight != clientHeight) {
+      // Vertically scrollable
+      const gradients = [];
+
+      if (verticalScrollPercent > 0) {
+        // Top fade
+        const topLength = Math.min(scrollTop / scrollRatio, length);
+        gradients.push(`rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) ${topLength}px`);
+      }
+
+      // Bottom fade
+      if (verticalScrollPercent < 1) {
+        const bottomLength = Math.min(
+          (scrollHeight - clientHeight - scrollTop) / scrollRatio,
+          length
+        );
+        gradients.push(`rgba(0, 0, 0, 1) calc(100% - ${bottomLength}px), rgba(0, 0, 0, 0)`);
+      }
+
+      gradient = `linear-gradient(to bottom, ${gradients.join(',')})`;
+    } else if (scrollWidth !== clientWidth) {
+      // Horizontally scrollable
+      const gradients = [];
+
+      if (horizontalScrollPercent > 0) {
+        // Left fade
+        const leftLength = Math.min(scrollLeft / scrollRatio, length);
+        gradients.push(`rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) ${leftLength}px`);
+      }
+
+      // Right fade
+      if (horizontalScrollPercent < 1) {
+        const rightLength = Math.min(
+          (scrollWidth - clientWidth - scrollLeft) / scrollRatio,
+          length
+        );
+        gradients.push(`rgba(0, 0, 0, 1) calc(100% - ${rightLength}px), rgba(0, 0, 0, 0)`);
+      }
+
+      gradient = `linear-gradient(to right, ${gradients.join(',')})`;
+    }
+    node.style.webkitMaskImage = gradient;
+    node.style.maskImage = gradient;
+    node.classList.add('overflow-auto');
+  }
+  node.addEventListener('scroll', onScroll, { passive: true });
+
+  // Update when node resized (and on initial mount)
+  let resizeObserver = new ResizeObserver((entries, observer) => {
+    onScroll({ target: node });
+  });
+  resizeObserver.observe(node);
+
+  let mutationObserver = new MutationObserver((entries, observer) => {
+    onScroll({ target: node });
+  });
+  mutationObserver.observe(node, { childList: true, subtree: true /*attributes: true, */ }); // TODO: Attributes without filter cause browser to lock up
+
+  return {
+    destroy() {
+      node.removeEventListener('scroll', onScroll);
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+    },
+  };
+}

@@ -7,7 +7,7 @@ docUrl: $docUrl
 <script lang="ts">
 	import Preview from '$lib/components/Preview.svelte';
 
-	import { scrollIntoView, scrollShadow } from '$lib/actions/scroll';
+	import { scrollIntoView, scrollFade, scrollShadow } from '$lib/actions/scroll';
 
   const itemCount = 30;
   const items = Array.from({ length: itemCount }).map((_, i) => `Item: ${i}`)
@@ -73,5 +73,29 @@ docUrl: $docUrl
     {#each items as item, i}
       <div class="truncate">{item} with a really long description</div>
     {/each}
+  </div>
+</Preview>
+
+## scrollFade
+
+### Add shadows to indicate scrolling available
+
+<Preview>
+  <div class="h-40 border rounded" use:scrollFade>
+    {#each items as item, i}
+      <div>{item}</div>
+    {/each}
+  </div>
+</Preview>
+
+### Horizontal scroll
+
+<Preview>
+  <div class="h-20 border rounded" use:scrollFade>
+    <div class="flex whitespace-nowrap gap-2 p-2">
+      {#each items as item, i}
+        <div class="p-4 border">{item}</div>
+      {/each}
+    </div>
   </div>
 </Preview>
