@@ -5,12 +5,16 @@
  */
 export function getScrollParent(node): HTMLElement | null {
   const isElement = node instanceof HTMLElement;
+  const overflowX = isElement && (window?.getComputedStyle(node).overflowX ?? 'visible');
   const overflowY = isElement && (window?.getComputedStyle(node).overflowY ?? 'visible');
-  const isScrollable = overflowY !== 'visible' && overflowY !== 'hidden';
+  const isHorozontalScrollable =
+    !['visible', 'hidden'].includes(overflowX) && node.scrollWidth > node.clientWidth;
+  const isVerticalScrollable =
+    !['visible', 'hidden'].includes(overflowY) && node.scrollHeight > node.clientHeight;
 
   if (!node) {
     return null;
-  } else if (isScrollable && node.scrollHeight > node.clientHeight) {
+  } else if (isHorozontalScrollable || isVerticalScrollable) {
     return node;
   }
 
