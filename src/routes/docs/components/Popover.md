@@ -73,276 +73,127 @@ docUrl: $docUrl
   <div class="mx-20">
     <div class="grid grid-cols-5">
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-2">
-          <Popover {open} placement="top-start">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Top Start</Button>
+        <div class="col-start-2 text-right">
+          <div class="inline-block">
+            <Popover {open} placement="top-start">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Top Start</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-center col-start-3">
-          <Popover {open} placement="top">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Top</Button>
+        <div class="col-start-3 text-center">
+          <div class="inline-block">
+            <Popover {open} placement="top">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Top</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-4">
-          <Popover {open} placement="top-end">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Top End</Button>
+        <div class="col-start-4 text-left">
+          <div class="inline-block">
+            <Popover {open} placement="top-end">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Top End</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-1">
-          <Popover {open} placement="left-start">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Left Start</Button>
+        <div class="col-start-1 text-right">
+          <div class="inline-block">
+            <Popover {open} placement="left-start">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Left Start</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-5">
-          <Popover {open} placement="right-start">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Right Start</Button>
+        <div class="col-start-5 text-left">
+          <div class="inline-block">
+            <Popover {open} placement="right-start">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Right Start</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-1">
-          <Popover {open} placement="left">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Left</Button>
+        <div class="col-start-1 text-right">
+          <div class="inline-block">
+            <Popover {open} placement="left">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Left</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-5">
-          <Popover {open} placement="right">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Right</Button>
+        <div class="col-start-5 text-left">
+          <div class="inline-block">
+            <Popover {open} placement="right">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Right</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-1">
-          <Popover {open} placement="left-end">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Left End</Button>
+        <div class="col-start-1 text-right">
+          <div class="inline-block">
+            <Popover {open} placement="left-end">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Left End</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-5">
-          <Popover {open} placement="right-end">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Right End</Button>
+        <div class="col-start-5 text-left">
+          <div class="inline-block">
+            <Popover {open} placement="right-end">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Right End</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-2">
-          <Popover {open} placement="bottom-start">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Bottom Start</Button>
+        <div class="col-start-2 text-right">
+          <div class="inline-block">
+            <Popover {open} placement="bottom-start">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Bottom Start</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-center col-start-3">
-          <Popover {open} placement="bottom">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Bottom</Button>
+        <div class="col-start-3 text-center">
+          <div class="inline-block">
+            <Popover {open} placement="bottom">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Bottom</Button>
+          </div>
         </div>
       </Toggle>
       <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-4">
-          <Popover {open} placement="bottom-end">
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Bottom End</Button>
+        <div class="col-start-4 text-left">
+          <div class="inline-block">
+            <Popover {open} placement="bottom-end">
+              <div class="px-4 py-8 bg-white border shadow">Contents</div>
+            </Popover>
+            <Button on:click={toggle}>Bottom End</Button>
+          </div>
         </div>
       </Toggle>
     </div>
   </div>
-</Preview>
-
-## Origins
-
-<Preview>
-  <div class="mx-20">
-    <div class="grid grid-cols-5">
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-2">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-            popoverOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Top Start</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-center col-start-3">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            popoverOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Top</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-4">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            popoverOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Top End</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-1">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-            popoverOrigin={{ vertical: 'top', horizontal: 'right' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Left Start</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-5">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            popoverOrigin={{ vertical: 'top', horizontal: 'left' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Right Start</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-1">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'center', horizontal: 'left' }}
-            popoverOrigin={{ vertical: 'center', horizontal: 'right' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Left</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-5">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
-            popoverOrigin={{ vertical: 'center', horizontal: 'left' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Right</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-1">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            popoverOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Left End</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-5">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-            popoverOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Right End</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-right col-start-2">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            popoverOrigin={{ vertical: 'top', horizontal: 'left' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Bottom Start</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-center col-start-3">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            popoverOrigin={{ vertical: 'top', horizontal: 'center' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Bottom</Button>
-        </div>
-      </Toggle>
-      <Toggle let:on={open} let:toggle>
-        <div class="inline-block text-left col-start-4">
-          <Popover
-            {open}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-            popoverOrigin={{ vertical: 'top', horizontal: 'right' }}
-          >
-            <div class="px-4 py-8 bg-white border shadow">Contents</div>
-          </Popover>
-          <Button on:click={toggle}>Bottom End</Button>
-        </div>
-      </Toggle>
-    </div>
-  </div>
-</Preview>
-
-## Custom origins
-
-### Overlap popover on top of anchor
-
-<Preview>
-  <Toggle let:on={open} let:toggle>
-    <div class="inline-block">
-      <Popover
-        {open}
-        on:close={toggle}
-        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-        popoverOrigin={{ vertical: 'top', horizontal: 'left' }}
-      >
-        <div class="px-8 py-8 bg-white border shadow">Contents</div>
-      </Popover>
-      <Button on:click={toggle}>Click me</Button>
-    </div>
-  </Toggle>
 </Preview>
 
 # API
