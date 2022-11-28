@@ -20,3 +20,32 @@ export function getScrollParent(node): HTMLElement | null {
 
   return getScrollParent(node.parentNode) || document.body;
 }
+
+/**
+ * Scroll node into view of closely scrollable (overflown) parent.  Like `node.scrollIntoView()` but will only scroll immediate container (not viewport)
+ */
+export function scrollIntoView(node) {
+  // TODO: Consider only scrolling if needed
+  const scrollParent = getScrollParent(node);
+
+  const nodeOffset = {
+    top: node.offsetTop - scrollParent.offsetTop,
+    left: node.offsetLeft - scrollParent.offsetLeft,
+  };
+
+  const optionCenter = {
+    left: node.clientWidth / 2,
+    top: node.clientHeight / 2,
+  };
+
+  const containerCenter = {
+    left: scrollParent.clientWidth / 2,
+    top: scrollParent.clientHeight / 2,
+  };
+
+  scrollParent.scroll({
+    top: nodeOffset.top + optionCenter.top - containerCenter.top,
+    left: nodeOffset.left + optionCenter.left - containerCenter.left,
+    behavior: 'smooth',
+  });
+}

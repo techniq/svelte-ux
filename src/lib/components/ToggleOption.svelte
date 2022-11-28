@@ -3,6 +3,7 @@
   import { onMount, onDestroy, getContext } from 'svelte';
 
   import { groupKey } from './ToggleGroup.svelte';
+  import { scrollIntoView } from '../utils/dom';
 
   export let value: any;
 
@@ -35,23 +36,7 @@
 
   $: if (autoscroll && $selectedOption === optionElement) {
     // TODO: Only scroll if needed / out of view
-    const optionOffset = {
-      top: optionElement.offsetTop - optionElement.parentElement.offsetTop,
-      left: optionElement.offsetLeft - optionElement.parentElement.offsetLeft,
-    };
-    const optionCenter = {
-      left: optionElement.clientWidth / 2,
-      top: optionElement.clientHeight / 2,
-    };
-    const containerCenter = {
-      left: optionElement.parentElement.clientWidth / 2,
-      top: optionElement.parentElement.clientHeight / 2,
-    };
-    optionElement.parentElement.scroll({
-      top: optionOffset.top + optionCenter.top - containerCenter.top,
-      left: optionOffset.left + optionCenter.left - containerCenter.left,
-      behavior: 'smooth',
-    });
+    scrollIntoView(optionElement);
   }
 </script>
 

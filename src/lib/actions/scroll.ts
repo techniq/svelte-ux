@@ -1,3 +1,5 @@
+import { scrollIntoView as _scrollIntoView } from '$lib/utils/dom';
+
 export function scrollIntoView(
   node: HTMLElement,
   options: {
@@ -6,18 +8,10 @@ export function scrollIntoView(
     delay?: number;
   }
 ): SvelteActionReturnType {
-  // TODO: scroll options not supported by Safari or IE: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
-
   function update(options: Parameters<typeof scrollIntoView>[1]) {
     if (typeof options.condition === 'boolean' ? options.condition : options.condition(node)) {
       setTimeout(() => {
-        node.scrollIntoView({
-          block: 'center',
-          behavior: 'smooth',
-        });
-        // node.scrollIntoViewIfNeeded({
-        //   block: 'center',
-        // });
+        _scrollIntoView(node);
       }, options.delay ?? 0);
     }
   }
@@ -111,6 +105,7 @@ export function scrollShadow(
 
     node.style.setProperty('--shadow', shadows.join(', '));
 
+    // Apply box-shadow to after pseudo element so it's rendered on top of content
     node.classList.add(
       'relative',
       'overflow-auto',
