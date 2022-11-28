@@ -63,7 +63,7 @@ docUrl: $docUrl
 ## menuProps
 
 <Preview>
-  <MenuField {options} menuProps={{ placement: 'top' }} />
+  <MenuField {options} menuProps={{ placement: 'top-start' }} />
 </Preview>
 
 ## options slot

@@ -121,7 +121,7 @@ docUrl: $docUrl
 
 ## disableTransition
 
-### Useful when menu will exceed window and need repositioned. Applies immediate without initial render offscreen
+### Useful when menu will exceed window and need repositioned.
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -171,7 +171,7 @@ docUrl: $docUrl
   </Toggle>
 </Preview>
 
-### top placement (currently disables transitions by default to allow proper calculation)
+### top placement
 
 <Preview>
   <Toggle let:on={open} let:toggle>

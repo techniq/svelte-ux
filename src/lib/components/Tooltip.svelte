@@ -5,9 +5,9 @@
 <script lang="ts">
   import { fly, fade, scale, slide, blur } from 'svelte/transition';
   import clsx from 'clsx';
+  import type { Placement } from '@floating-ui/dom';
 
   import Popover from './Popover.svelte';
-  import type { PopoverOrigin, PopoverPlacement } from './Popover.svelte';
 
   export let title = '';
   export let open = false;
@@ -15,9 +15,8 @@
   export let delay = 500;
   export let underline = false;
 
-  export let placement: PopoverPlacement = 'bottom';
-  export let anchorOrigin: PopoverOrigin = undefined;
-  export let popoverOrigin: PopoverOrigin = undefined;
+  // Popover props
+  export let placement: Placement = 'bottom';
   export let matchWidth: boolean = false;
 
   let containerEl: HTMLDivElement;
@@ -48,8 +47,6 @@
 <Popover
   anchorEl={containerEl?.firstElementChild}
   {placement}
-  {anchorOrigin}
-  {popoverOrigin}
   {offset}
   {matchWidth}
   {open}

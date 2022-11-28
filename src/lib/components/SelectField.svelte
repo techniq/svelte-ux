@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { createEventDispatcher, tick } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
+  import type { Placement } from '@floating-ui/dom';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
 
@@ -10,10 +11,7 @@
   import Button from './Button.svelte';
   import CircularProgress from './CircularProgress.svelte';
   import Menu from './Menu.svelte';
-  import type { PopoverOrigin, PopoverPlacement } from './Popover.svelte';
   import TextField from './TextField.svelte';
-
-  let menuRef;
 
   const dispatch = createEventDispatcher<{
     change: { value: any; item: any };
@@ -38,12 +36,10 @@
   export let dense = false;
 
   // Menu props
-  export let placement: PopoverPlacement = 'bottom';
-  export let anchorOrigin: PopoverOrigin = undefined;
-  export let popoverOrigin: PopoverOrigin = undefined;
+  export let placement: Placement = 'bottom-start';
   export let matchWidth: boolean = true;
   export let maxViewportHeight = true; // Makes sense for SelectField to default to true (resize instead of reposition) compared to underlying Menu/Popover
-  export let disableTransition = placement.startsWith('top'); // TODO: Remove default if can be handled differently
+  export let disableTransition = false;
 
   $: filteredItems = items ?? [];
   let searchText = '';
@@ -279,12 +275,6 @@
     filteredItems = items;
     //inputEl?.focus();
   }
-
-  // Update menu position after items have updated (menu size change needs repositioned)
-  $: {
-    filteredItems;
-    tick().then(() => menuRef?.updatePosition());
-  }
 </script>
 
 <div class={$$props.class} on:click={onClick}>
@@ -342,14 +332,11 @@
   {#if items?.length > 0 || loading !== true}
     <Menu
       {placement}
-      {anchorOrigin}
-      {popoverOrigin}
       {matchWidth}
       {maxViewportHeight}
       {disableTransition}
       bind:open
       on:close={() => (open = false)}
-      bind:this={menuRef}
     >
       <div
         class="items focus:outline-none"

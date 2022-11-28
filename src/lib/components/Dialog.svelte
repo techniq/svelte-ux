@@ -31,7 +31,7 @@
   let actionsEl: HTMLDivElement;
 
   function onClick(e: MouseEvent) {
-    // Do not allow event to reach Popover's clickOutside
+    // Do not allow event to reach popover's clickOutside
     e.stopPropagation();
 
     try {

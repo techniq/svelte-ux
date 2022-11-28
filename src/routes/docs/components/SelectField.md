@@ -196,7 +196,7 @@ docUrl: $docUrl
   <SelectField
     {items}
     on:change={(e) => console.log('on:change', e.detail)}
-    placement="top"
+    placement="top-start"
   />
 </Preview>
 

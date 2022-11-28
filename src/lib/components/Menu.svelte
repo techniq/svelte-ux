@@ -3,9 +3,9 @@
   import { slide, SlideParams } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
   import clsx from 'clsx';
+  import type { Placement } from '@floating-ui/dom';
 
   import Popover from './Popover.svelte';
-  import type { PopoverOrigin, PopoverPlacement } from './Popover.svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -17,18 +17,15 @@
    */
   export let maxViewportHeight = false;
 
-  export let placement: PopoverPlacement = 'bottom';
-  export let disableTransition = placement.startsWith('top'); // TODO: Remove default if can be handled differently
+  export let matchWidth: boolean = false;
+  export let placement: Placement = matchWidth ? 'bottom-start' : 'bottom';
+  export let disableTransition = false;
   export let transition = disableTransition
     ? (node: HTMLElement, params: any) => null as TransitionConfig
     : slide;
   export let transitionParams: any = undefined; // TODO: Provider interface of all *Params (SlideParams, FlyParams, etc)
-  export let anchorOrigin: PopoverOrigin = undefined;
-  export let popoverOrigin: PopoverOrigin = undefined;
-  export let matchWidth: boolean = false;
   export let explicitClose = false;
 
-  let popoverRef: any; // TODO: Improve type (Popover)
   let menuItemsEl: HTMLUListElement;
 
   function onClick(e) {
@@ -46,16 +43,10 @@
       console.error(err);
     }
   }
-
-  export function updatePosition() {
-    popoverRef?.updatePosition();
-  }
 </script>
 
 <Popover
   {placement}
-  {anchorOrigin}
-  {popoverOrigin}
   {offset}
   {matchWidth}
   {open}
@@ -63,22 +54,14 @@
   class={clsx('bg-white rounded shadow border', $$props.class)}
   style={$$props.style}
   on:close
-  let:updatePosition
   let:close
-  bind:this={popoverRef}
 >
   <ul
     class="menu-items outline-none"
     bind:this={menuItemsEl}
     on:click={onClick}
     transition:transition={transitionParams}
-    on:introend={() => {
-      // Update position after intro transition finishes (full height of menu is available for popover calculation)
-      if (!maxViewportHeight) {
-        updatePosition();
-      }
-    }}
   >
-    <slot {updatePosition} {close} />
+    <slot {close} />
   </ul>
 </Popover>

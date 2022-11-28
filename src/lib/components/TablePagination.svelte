@@ -41,7 +41,7 @@
           <Icon path={mdiMenuDown} />
         </Button>
 
-        <Menu {open} on:close={toggle} matchWidth placement="top" offset={12} disableTransition>
+        <Menu {open} on:close={toggle} placement="top" offset={12}>
           {#each perPageOptions ?? [] as option}
             <div
               class="p-2 hover:bg-black/4 text-right cursor-pointer font-medium"
