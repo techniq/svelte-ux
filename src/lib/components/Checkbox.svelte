@@ -56,6 +56,7 @@
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
         'peer-hover:border-accent-500 peer-focus-visible:ring-2 ring-accent-400 ring-offset-1',
+      !checked && !disabled && 'peer-hover:bg-accent-100',
       checked
         ? disabled
           ? 'bg-gray-500 border-gray-500'
