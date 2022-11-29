@@ -19,18 +19,7 @@ type PopoverOptions = {
 
 /*
   TODO:
-    - [x] Position
-    - [x] Update on scroll
-    - [x] matchWidth
-    - [x] updatePosition?
-      - Not needed anymore (handled by autoUpdate)
-    - [x] explicit close
-    - [x] Escape to close
-    - [ ] Components
-      - [ ] Tooltip
-      - [ ] Menu
-    - [ ] maxViewportHeight
-      - Removed (for now).  See: https://floating-ui.com/docs/size
+    - [ ] Add `maxViewportHeight` / `resize`.  See: https://floating-ui.com/docs/size
 */
 
 export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActionReturnType {
