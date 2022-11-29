@@ -23,6 +23,12 @@
   export let color: string | undefined = undefined;
   export let disabled: boolean = false;
 
+  export let classes: {
+    root?: string;
+    icon?: string;
+    loading?: string;
+  } = {};
+
   $: hasClassOverride = (str: string) => {
     return $$props.class?.includes(str) ?? false;
   };
@@ -40,6 +46,7 @@
     !base && !small && 'py-2',
     disabled && 'opacity-50 pointer-events-none',
     filled && 'bg-black/10 border border-black/20 hover:border-gray-700',
+    classes.root,
     $$props.class
   );
 </script>
@@ -55,9 +62,9 @@
     {disabled}
   >
     {#if loading}
-      <CircularProgress size={16} />
+      <CircularProgress size={16} class={clsx(classes.loading)} />
     {:else if icon}
-      <Icon path={icon} class={clsx($$slots.default && 'mr-1')} />
+      <Icon path={icon} class={clsx(!iconOnly && 'mr-1', classes.icon)} />
     {/if}
     <slot />
   </a>
@@ -72,9 +79,9 @@
     {disabled}
   >
     {#if loading}
-      <CircularProgress size={16} width={2} class="mr-2" />
+      <CircularProgress size={16} width={2} class={clsx('mr-2', classes.loading)} />
     {:else if icon}
-      <Icon path={icon} class={clsx($$slots.default && 'mr-1')} />
+      <Icon path={icon} class={clsx(!iconOnly && 'mr-1', classes.icon)} />
     {/if}
     <slot />
   </button>
