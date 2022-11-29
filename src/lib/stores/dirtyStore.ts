@@ -1,18 +1,22 @@
-import { derived } from 'svelte/store';
-import type { Stores } from '$lib/types';
+import { Readable, Subscriber, writable } from 'svelte/store';
 
-function dirtyStore<T extends Stores>(store: T) {
-  let dirty = false;
-  return derived(store, ($store) => {
-    if (dirty) {
-      // Subsequent updates
-      return true;
-    } else {
-      // First update
-      dirty = true;
-      return false;
-    }
-  });
+function dirtyStore<T extends Readable<any>>(store: T) {
+  const count = writable(-1);
+
+  const unsubStore = store.subscribe(() => count.update((x) => ++x));
+
+  return {
+    subscribe(run: Subscriber<boolean>) {
+      const unsubCount = count.subscribe(($count) => run($count > 0));
+      return () => {
+        unsubStore();
+        unsubCount();
+      };
+    },
+    reset() {
+      count.set(0);
+    },
+  };
 }
 
 export default dirtyStore;
