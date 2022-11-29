@@ -53,7 +53,7 @@
 
 {#if open}
   <div
-    class={clsx('popover absolute z-10 outline-none', $$props.class)}
+    class={clsx('popover absolute z-50 outline-none', $$props.class)}
     tabindex="-1"
     use:popover={{ anchorEl, placement, offset, padding, matchWidth }}
     on:clickOutside={(e) => {
