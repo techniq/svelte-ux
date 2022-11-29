@@ -31,42 +31,6 @@ docUrl: $docUrl
   </div>
 </Preview>
 
-## Max viewport height
-
-### below
-
-<Preview>
-  <Toggle let:on={open} let:toggle let:toggleOff>
-    <div class="inline-block">
-      <Popover {open} on:close={toggleOff} on:close={toggle} maxViewportHeight class="bg-white border shadow">
-        <div class="p-2 h-[80vh] grid grid-rows-[auto,1fr,auto] items-center">
-          <div>Top</div>
-          <div>Middle</div>
-          <div>Bottom</div>
-        </div>
-      </Popover>
-      <Button on:click={toggle}>Click me</Button>
-    </div>
-  </Toggle>
-</Preview>
-
-### above
-
-<Preview>
-  <Toggle let:on={open} let:toggle let:toggleOff>
-    <div class="inline-block">
-      <Popover {open} on:close={toggleOff} placement="top" on:close={toggle} maxViewportHeight class="bg-white border shadow">
-        <div class="p-2 h-[80vh] grid grid-rows-[auto,1fr,auto] items-center">
-          <div>Top</div>
-          <div>Middle</div>
-          <div>Bottom</div>
-        </div>
-      </Popover>
-      <Button on:click={toggle}>Click me</Button>
-    </div>
-  </Toggle>
-</Preview>
-
 ## Placement
 
 <Preview>

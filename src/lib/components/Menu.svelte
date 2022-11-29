@@ -12,11 +12,6 @@
   export let open = false;
   export let offset = 4;
 
-  /**
-   * Set height to remaining height of viewport
-   */
-  export let maxViewportHeight = false;
-
   export let matchWidth: boolean = false;
   export let placement: Placement = matchWidth ? 'bottom-start' : 'bottom';
   export let disableTransition = false;
@@ -50,7 +45,6 @@
   {offset}
   {matchWidth}
   {open}
-  {maxViewportHeight}
   class={clsx('bg-white rounded shadow border', $$props.class)}
   style={$$props.style}
   on:close

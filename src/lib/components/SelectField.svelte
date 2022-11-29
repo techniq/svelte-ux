@@ -38,7 +38,6 @@
   // Menu props
   export let placement: Placement = 'bottom-start';
   export let matchWidth: boolean = true;
-  export let maxViewportHeight = true; // Makes sense for SelectField to default to true (resize instead of reposition) compared to underlying Menu/Popover
   export let disableTransition = false;
 
   $: filteredItems = items ?? [];
@@ -330,14 +329,7 @@
 
   <!-- Improve initial open display, still needs work when switching from No items found (items.length === 0) -->
   {#if items?.length > 0 || loading !== true}
-    <Menu
-      {placement}
-      {matchWidth}
-      {maxViewportHeight}
-      {disableTransition}
-      bind:open
-      on:close={() => (open = false)}
-    >
+    <Menu {placement} {matchWidth} {disableTransition} bind:open on:close={() => (open = false)}>
       <div
         class="items focus:outline-none"
         class:opacity-50={loading}

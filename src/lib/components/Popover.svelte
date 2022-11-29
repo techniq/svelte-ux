@@ -32,7 +32,7 @@
   /**
    * Set max-height of popover element to the remaining height from anchor element to bottom of viewport
    */
-  export let maxViewportHeight: boolean | { padding: number } = false;
+  // export let maxViewportHeight: boolean | { padding: number } = false;
 
   const dispatch = createEventDispatcher();
 
