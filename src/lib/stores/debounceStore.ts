@@ -1,6 +1,5 @@
 import { derived, get } from 'svelte/store';
-
-type Stores = Parameters<typeof derived>[0];
+import type { Stores } from '$lib/types';
 
 function debounceStore<T extends Stores>(original: T, timeout = 300) {
   return derived(

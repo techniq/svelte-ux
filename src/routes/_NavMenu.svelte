@@ -106,6 +106,7 @@
 </div>
 
 <NavItem text="debounceStore" path="/docs/stores/debounceStore" class="pl-6 py-2" />
+<NavItem text="dirtyStore" path="/docs/stores/dirtyStore" class="pl-6 py-2" />
 <NavItem text="fetchStore" path="/docs/stores/fetchStore" class="pl-6 py-2" />
 <NavItem text="formStore" path="/docs/stores/formStore" class="pl-6 py-2" />
 <NavItem text="graphStore" path="/docs/stores/graphStore" class="pl-6 py-2" />
