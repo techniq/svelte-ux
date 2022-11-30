@@ -36,7 +36,7 @@ export { default as MenuField } from './MenuField.svelte';
 export { default as Month } from './Month.svelte';
 export { default as MonthList } from './MonthList.svelte';
 export { default as MonthListByYear } from './MonthListByYear.svelte';
-export { default as NavItem } from './NavItem.svelte';
+// export { default as NavItem } from './NavItem.svelte'; // TODO: Exclude from top-level export until better handling of `$app`
 export { default as Notification } from './Notification.svelte';
 export { default as Overlay } from './Overlay.svelte';
 export { default as Paginate } from './Paginate.svelte';
