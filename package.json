@@ -18,7 +18,7 @@
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^1.0.0-next.59",
     "@sveltejs/kit": "^1.0.0-next.355",
-    "@tailwindcss/typography": "^0.5.2",
+    "@tailwindcss/typography": "^0.5.8",
     "@types/d3-array": "^3.0.3",
     "@types/lodash-es": "^4.17.6",
     "autoprefixer": "^10.4.13",
@@ -29,7 +29,7 @@
     "svelte": "^3.53.1",
     "svelte-check": "^2.10.0",
     "svelte-preprocess": "^4.10.7",
-    "svelte2tsx": "^0.5.11",
+    "svelte2tsx": "^0.5.21",
     "tailwindcss": "^3.2.4",
     "tslib": "^2.4.1",
     "typescript": "^4.9.3",
@@ -39,7 +39,7 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/dom": "^1.0.7",
-    "@mdi/js": "^6.7.96",
+    "@mdi/js": "^7.0.96",
     "clsx": "^1.2.1",
     "d3-array": "^3.2.0",
     "d3-format": "^3.1.0",
