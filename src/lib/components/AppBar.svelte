@@ -2,6 +2,8 @@
   import { mdiMenu } from '@mdi/js';
   import clsx from 'clsx';
 
+  import { browser } from '$app/environment';
+
   import { showDrawer } from './AppLayout.svelte';
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
@@ -15,7 +17,7 @@
 
   $: titleString = Array.isArray(title) ? title.join(' › ') : title.toString();
 
-  $: if (head) {
+  $: if (browser && head) {
     // Appears to be needed for some reactive updates
     document.title = titleString;
   }

@@ -27,7 +27,7 @@ export function markdownToc() {
           },
         });
 
-        const name = filename.match('.*/(.*).md')[1];
+        const name = filename.match('.*/(.*)/.*.md')[1];
         const docUrl = 'src/' + filename.match('src/(.*)')[1] + '?plain=1';
         const sourceUrl = docUrl
           .replace('routes/docs', 'lib')
