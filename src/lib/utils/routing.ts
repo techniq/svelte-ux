@@ -1,12 +1,5 @@
-import { derived, get } from 'svelte/store';
-
-import { page as pageStore } from '$app/stores';
-// import { goto as gotoApp } from '$app/navigation';
-
 // See: routify's helpers: https://github.com/roxiness/routify/blob/9a1b7f5f8fc950a344cf20f7cbaa760593ded8fb/runtime/helpers.js#L244-L268
-export function url(path: string, page?: any) {
-  const pageValue = page ?? get(pageStore);
-
+export function url(currentUrl: URL, path: string) {
   // console.log({ $page, path });
 
   if (path == null) {
@@ -15,7 +8,7 @@ export function url(path: string, page?: any) {
     // Relative path (starts wtih `./` or `../`)
     // console.log('relative path');
     let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/);
-    let dir = pageValue.path.replace(/\/$/, '');
+    let dir = currentUrl.pathname.replace(/\/$/, '');
     // console.log({ dir, breadcrumbs, relativePath });
     const traverse = breadcrumbs.match(/\.\.\//g) || [];
     // if this is a page, we want to traverse one step back to its folder
@@ -37,26 +30,12 @@ export function url(path: string, page?: any) {
   return path;
 }
 
-// export function goto(path: string, page?: any) {
-//   const newPath = url(path, page);
-//   // console.log('goto', { path, newPath });
-//   return gotoApp(newPath);
-// }
-
-export const isActive = {
-  subscribe(listener) {
-    return derived(
-      pageStore,
-      ($page) =>
-        function isActive(path: string) {
-          if (path === '/') {
-            // home must be direct match (otherwise matches all)
-            return $page.url.pathname === path;
-          } else {
-            // Matches full path next character is `/`
-            return path.match($page.url.pathname + '($|\\/)') != null;
-          }
-        }
-    ).subscribe(listener);
-  },
-};
+export function isActive(currentUrl: URL, path: string) {
+  if (path === '/') {
+    // home must be direct match (otherwise matches all)
+    return currentUrl.pathname === path;
+  } else {
+    // Matches full path next character is `/`
+    return path.match(currentUrl.pathname + '($|\\/)') != null;
+  }
+}

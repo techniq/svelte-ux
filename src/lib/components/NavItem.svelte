@@ -6,15 +6,16 @@
   import { scrollIntoView } from '../actions/scroll';
   import { getScrollParent } from '../utils/dom';
 
+  export let currentUrl: URL;
   export let path: string = null;
   export let text: string = '';
   export let icon: string | null = null;
 
-  $: isPathActive = path ? $isActive(path) : false;
+  $: isPathActive = path ? isActive(currentUrl, path) : false;
 </script>
 
 <a
-  href={url(path)}
+  href={url(currentUrl, path)}
   class={clsx(
     'flex items-center text-sm p-1 hover:text-white hover:bg-gray-300/10 relative',
     isPathActive ? ['text-sky-400', 'bg-gray-500/10'] : 'text-gray-400',
