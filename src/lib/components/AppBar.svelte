@@ -2,11 +2,10 @@
   import { mdiMenu } from '@mdi/js';
   import clsx from 'clsx';
 
-  import { browser } from '$app/environment';
-
   import { showDrawer } from './AppLayout.svelte';
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
+  import { browser } from '../utils/env';
 
   export let title: string | number | Array<string | number> = '';
 
