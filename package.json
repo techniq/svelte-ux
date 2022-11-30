@@ -5,9 +5,9 @@
   "repository": "techniq/svelte-ux",
   "version": "0.20.5",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "preview": "svelte-kit preview",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
     "package": "svelte-kit package",
     "publish": "svelte-kit package && npm publish ./package",
     "check": "svelte-check --tsconfig ./tsconfig.json",
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^1.0.0-next.59",
-    "@sveltejs/kit": "^1.0.0-next.355",
+    "@sveltejs/kit": "^1.0.0-next.405",
     "@tailwindcss/typography": "^0.5.8",
     "@types/d3-array": "^3.0.3",
     "@types/lodash-es": "^4.17.6",
@@ -34,6 +34,7 @@
     "tslib": "^2.4.1",
     "typescript": "^4.9.3",
     "unist-util-visit": "^4.1.1",
+    "vite": "^3.2.4",
     "vite-plugin-sveld": "^1.1.0"
   },
   "type": "module",
