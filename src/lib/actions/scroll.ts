@@ -160,7 +160,7 @@ export function scrollFade(
     const verticalScrollPercent = scrollTop / (scrollHeight - clientHeight);
     const horizontalScrollPercent = scrollLeft / (scrollWidth - clientWidth);
 
-    let gradient: string | undefined = undefined;
+    let gradient: string | null = null;
 
     if (scrollHeight != clientHeight) {
       // Vertically scrollable
@@ -205,8 +205,8 @@ export function scrollFade(
     }
     node.style.webkitMaskImage = gradient;
     node.style.maskImage = gradient;
-    node.classList.add('overflow-auto');
   }
+  node.classList.add('overflow-auto');
   node.addEventListener('scroll', onScroll, { passive: true });
 
   // Update when node resized (and on initial mount)
