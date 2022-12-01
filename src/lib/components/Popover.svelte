@@ -9,6 +9,11 @@
   export let placement: Placement = undefined;
 
   /**
+   * Place popover based on which side of the viewport has more space
+   */
+  export let autoPlacement = false;
+
+  /**
    * Provide element to anchor.  If not provided, uses direct parent of Popover
    */
   export let anchorEl: HTMLElement = undefined;
@@ -55,7 +60,7 @@
   <div
     class={clsx('popover absolute z-50 outline-none', $$props.class)}
     tabindex="-1"
-    use:popover={{ anchorEl, placement, offset, padding, matchWidth }}
+    use:popover={{ anchorEl, placement, autoPlacement, offset, padding, matchWidth }}
     on:clickOutside={(e) => {
       e.stopPropagation();
       close('clickOutside');

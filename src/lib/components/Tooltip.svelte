@@ -17,6 +17,7 @@
 
   // Popover props
   export let placement: Placement = 'bottom';
+  export let autoPlacement = false;
   export let matchWidth: boolean = false;
 
   let containerEl: HTMLDivElement;
@@ -47,6 +48,7 @@
 <Popover
   anchorEl={containerEl?.firstElementChild}
   {placement}
+  {autoPlacement}
   {offset}
   {matchWidth}
   {open}
