@@ -45,7 +45,7 @@ docUrl: $docUrl
       <Button on:click={toggle}>Click me</Button>
       <Menu {open} on:close={toggle} explicitClose let:close>
         <div class="p-2">
-          <TextField icon={mdiMagnify} placeholder="Search" class="mb-2" />
+          <TextField icon={mdiMagnify} placeholder="Search" class="mb-2" autofocus={{ delay: 50 }} />
           <div class="p-2 hover:bg-black/5 cursor-pointer" on:click={close}>Refresh</div>
           <div class="p-2 hover:bg-black/5 cursor-pointer" on:click={close}>Settings</div>
           <div class="p-2 hover:bg-black/5 cursor-pointer" on:click={close}>Help</div>

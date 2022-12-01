@@ -38,10 +38,10 @@
   export let iconRight: string | null = null;
   export let align: 'left' | 'center' | 'right' = 'left';
   export let shrinkLabel = false;
-  export let autofocus = false;
+  export let autofocus: boolean | Parameters<typeof autoFocus>[1] = false;
   // TODO: Find way to conditionally set type based on `multiline` value
   export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> = autofocus
-    ? (node) => [autoFocus(node)]
+    ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined)]
     : undefined;
   export let operators: { label: string; value: string }[] = undefined;
   export let inputEl: HTMLInputElement | null = null;
