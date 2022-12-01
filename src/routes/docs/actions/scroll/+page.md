@@ -5,12 +5,17 @@ docUrl: $docUrl
 ---
 
 <script lang="ts">
+  import { flip } from 'svelte/animate';
+
+	import Button from '$lib/components/Button.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 
 	import { scrollIntoView, scrollFade, scrollShadow } from '$lib/actions/scroll';
 
+  let filterItems = false;
+
   const itemCount = 30;
-  const items = Array.from({ length: itemCount }).map((_, i) => `Item: ${i}`)
+  $: items = Array.from({ length: itemCount }).map((_, i) => `Item: ${i}`).filter((_, i) => filterItems ? i > 25 : true)
   let scrolledIndex = 0;
 </script>
 
@@ -38,8 +43,18 @@ docUrl: $docUrl
 
 <Preview>
   <div class="h-40 border rounded" use:scrollShadow>
-    {#each items as item, i}
+    {#each items as item, i (item)}
       <div>{item}</div>
+    {/each}
+  </div>
+</Preview>
+
+### with flip'd children
+
+<Preview>
+  <div class="h-40 border rounded" use:scrollShadow>
+    {#each items as item, i (item)}
+      <div animate:flip={{ duration: 300 }}>{item}</div>
     {/each}
   </div>
 </Preview>
@@ -81,9 +96,19 @@ docUrl: $docUrl
 ### Add shadows to indicate scrolling available
 
 <Preview>
-  <div class="h-40 border rounded" use:scrollFade>
-    {#each items as item, i}
+  <div class="max-h-40 border rounded" use:scrollFade>
+    {#each items as item, i (item)}
       <div>{item}</div>
+    {/each}
+  </div>
+</Preview>
+
+### with flip'd children
+
+<Preview>
+  <div class="max-h-40 border rounded" use:scrollFade>
+    {#each items as item, i (item)}
+      <div animate:flip={{ duration: 3000 }}>{item}</div>
     {/each}
   </div>
 </Preview>
@@ -99,3 +124,7 @@ docUrl: $docUrl
     </div>
   </div>
 </Preview>
+
+<div>
+  <Button on:click={() => filterItems = !filterItems}>Toggle filter</Button>
+</div>

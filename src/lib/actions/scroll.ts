@@ -68,7 +68,7 @@ export function scrollShadow(
 
   function onScroll(e) {
     const { clientWidth, clientHeight, scrollWidth, scrollHeight, scrollTop, scrollLeft } =
-      e.target;
+      e.currentTarget ?? e.target;
 
     const verticalScrollPercent = scrollTop / (scrollHeight - clientHeight);
     const horizontalScrollPercent = scrollLeft / (scrollWidth - clientWidth);
@@ -123,6 +123,10 @@ export function scrollShadow(
   }
   node.addEventListener('scroll', onScroll, { passive: true });
 
+  // Update if transitions are used (ex. children with `animate:flip`)
+  node.addEventListener('transitionend', onScroll);
+  node.addEventListener('animationend', onScroll);
+
   // Update when node resized (and on initial mount)
   let resizeObserver = new ResizeObserver((entries, observer) => {
     onScroll({ target: node });
@@ -137,6 +141,8 @@ export function scrollShadow(
   return {
     destroy() {
       node.removeEventListener('scroll', onScroll);
+      node.removeEventListener('transitionend', onScroll);
+      node.removeEventListener('animationend', onScroll);
       resizeObserver.disconnect();
       mutationObserver.disconnect();
     },
@@ -155,7 +161,7 @@ export function scrollFade(
 
   function onScroll(e) {
     const { clientWidth, clientHeight, scrollWidth, scrollHeight, scrollTop, scrollLeft } =
-      e.target;
+      e.currentTarget ?? e.target;
 
     const verticalScrollPercent = scrollTop / (scrollHeight - clientHeight);
     const horizontalScrollPercent = scrollLeft / (scrollWidth - clientWidth);
@@ -209,6 +215,10 @@ export function scrollFade(
   node.classList.add('overflow-auto');
   node.addEventListener('scroll', onScroll, { passive: true });
 
+  // Update if transitions are used (ex. children with `animate:flip`)
+  node.addEventListener('transitionend', onScroll);
+  node.addEventListener('animationend', onScroll);
+
   // Update when node resized (and on initial mount)
   let resizeObserver = new ResizeObserver((entries, observer) => {
     onScroll({ target: node });
@@ -223,6 +233,8 @@ export function scrollFade(
   return {
     destroy() {
       node.removeEventListener('scroll', onScroll);
+      node.removeEventListener('transitionend', onScroll);
+      node.removeEventListener('animationend', onScroll);
       resizeObserver.disconnect();
       mutationObserver.disconnect();
     },
