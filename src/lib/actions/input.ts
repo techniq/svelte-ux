@@ -1,19 +1,15 @@
-import { tick } from 'svelte';
-
 /**
  * Auto focus node when rendered.  Useful for inputs
  */
-export function autoFocus(node: HTMLInputElement | HTMLTextAreaElement): SvelteActionReturnType {
+export function autoFocus(
+  node: HTMLInputElement | HTMLTextAreaElement,
+  options?: { delay?: number }
+): SvelteActionReturnType {
   // TODO: Add options to "restoreFocus" on destroy()
   // const elementFocused = document.activeElement as HTMLElement;
-
-  // TODO: Determine why `setTimeout` (`tick` used to work) is required on page transitions for some reason
-  // tick().then(() => {
-  //   node.focus();
-  // });
   setTimeout(() => {
     node.focus();
-  }, 0);
+  }, options?.delay ?? 0);
 }
 
 /**
