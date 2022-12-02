@@ -5,7 +5,7 @@ docUrl: $docUrl
 ---
 
 <script lang="ts">
-	import { mdiAccount, mdiCheck, mdiDecagramOutline, mdiLoading, mdiDownload, mdiReload, mdiCircleMedium } from '@mdi/js';
+	import { mdiAccount, mdiCheck, mdiDecagramOutline, mdiLoading, mdiDownload, mdiReload, mdiCircleMedium, mdiArrowRight } from '@mdi/js';
 	import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 	import api from '$lib/components/Icon.svelte?raw&sveld';
@@ -55,6 +55,15 @@ docUrl: $docUrl
 
 <Preview>
 	<Icon path={[mdiDecagramOutline, mdiCheck]} classes={{ path: ['', 'text-blue-500 scale-50 origin-center'] }} />
+</Preview>
+
+## Rotate / Scale / Flip
+
+<Preview>
+	<Icon path={mdiArrowRight} class="-rotate-45" />
+	<Icon path={mdiArrowRight} class="scale-75" />
+	<Icon path={mdiArrowRight} class="-scale-x-100" />
+	<Icon path={mdiAccount} class="-scale-y-100" />
 </Preview>
 
 ## Animation
