@@ -1,6 +1,7 @@
 <script lang="ts">
   import clsx from 'clsx';
   import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
+  import { uniqueId } from '$lib/utils/string';
 
   export let size = '1.5em';
   export let width = size;
@@ -8,6 +9,13 @@
   export let viewBox = '0 0 24 24';
   export let path: string | string[] = '';
   export let data: IconDefinition | string = undefined;
+
+  // Accessibility
+  export let label: string | undefined = undefined;
+  export let desc: string | undefined = undefined;
+  export let titleId: string | undefined = label ? uniqueId('svg') : '';
+  export let descId: string | undefined = desc ? uniqueId('svg') : '';
+  $: isLabelled = label || desc;
 
   export let classes: {
     root?: string;
@@ -33,8 +41,17 @@
   {viewBox}
   class={clsx('inline-block flex-shrink-0', classes.root, $$props.class)}
   style={$$props.style}
+  role={isLabelled ? 'img' : 'presentation'}
+  aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
   on:click
 >
+  {#if label}
+    <title id={titleId}>{label}</title>
+  {/if}
+  {#if desc}
+    <desc id={descId}>{desc}</desc>
+  {/if}
+
   {#each Array.isArray(path) ? path : [path] as d, i}
     <path
       {d}
