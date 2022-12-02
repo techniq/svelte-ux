@@ -31,6 +31,7 @@ export function markdownToc() {
         const docUrl = 'src/' + filename.match('src/(.*)')[1] + '?plain=1';
         const sourceUrl = docUrl
           .replace('routes/docs', 'lib')
+          .replace('/+page', '')
           .replace('.md', docUrl.includes('component') ? '.svelte' : '.ts');
 
         return {
