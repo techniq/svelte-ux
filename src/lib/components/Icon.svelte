@@ -6,7 +6,6 @@
   export let height = size;
   export let viewBox = '0 0 24 24';
   export let path: string | string[] = '';
-
   export let data = undefined;
 
   export let classes: {
@@ -22,7 +21,7 @@
     width = '1.0rem';
     height = '1.0rem';
   } else if (typeof data === 'string') {
-    // Convenient accept path as data
+    // Also conveniently accept path as data
     path = data;
   }
 </script>
