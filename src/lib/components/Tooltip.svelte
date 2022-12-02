@@ -24,9 +24,13 @@
 
   let timeoutId;
 
-  function onMouseEnter() {
-    if (delay === 0 || new Date().valueOf() - lastShown?.valueOf() < 500) {
-      // If no delay or any tooltips shown in the last 1/2 second, show immediately
+  function showTooltip(e) {
+    if (
+      delay === 0 ||
+      e instanceof FocusEvent ||
+      new Date().valueOf() - lastShown?.valueOf() < 500
+    ) {
+      // If no delay, focus event, or any tooltips shown in the last 1/2 second, show immediately
       lastShown = new Date();
       open = true;
     } else {
@@ -36,7 +40,7 @@
       }, delay);
     }
   }
-  function onMouseLeave() {
+  function hideTooltip() {
     clearTimeout(timeoutId);
     if (open) {
       lastShown = new Date();
@@ -73,8 +77,10 @@
 
 <div
   class="contents"
-  on:mouseenter={onMouseEnter}
-  on:mouseleave={onMouseLeave}
+  on:mouseenter={showTooltip}
+  on:mouseleave={hideTooltip}
+  on:focusin={showTooltip}
+  on:focusout={hideTooltip}
   bind:this={containerEl}
 >
   {#if $$props['class'] || underline}
