@@ -1,21 +1,22 @@
 <script lang="ts">
   import clsx from 'clsx';
+  import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
   export let size = '1.5em';
   export let width = size;
   export let height = size;
   export let viewBox = '0 0 24 24';
   export let path: string | string[] = '';
-  export let data = undefined;
+  export let data: IconDefinition | string = undefined;
 
   export let classes: {
     root?: string;
     path?: string | string[];
   } = {};
 
-  $: if (data?.icon) {
+  $: if (typeof data === 'object' && 'icon' in data) {
     // Font Awesome
-    const [_width, _height, _ignore1, _ignore2, _path] = data.icon;
+    const [_width, _height, _ligatures, _unicode, _path] = data.icon;
     viewBox = `0 0 ${_width} ${_height}`;
     path = _path;
     width = '1.0rem';
