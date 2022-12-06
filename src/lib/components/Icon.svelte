@@ -11,11 +11,11 @@
   export let data: IconDefinition | string = undefined;
 
   // Accessibility
-  export let label: string | undefined = undefined;
+  export let title: string | undefined = undefined;
   export let desc: string | undefined = undefined;
-  export let titleId: string | undefined = label ? uniqueId('svg') : '';
+  export let titleId: string | undefined = title ? uniqueId('svg') : '';
   export let descId: string | undefined = desc ? uniqueId('svg') : '';
-  $: isLabelled = label || desc;
+  $: isLabelled = title || desc;
 
   export let classes: {
     root?: string;
@@ -45,8 +45,8 @@
   aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
   on:click
 >
-  {#if label}
-    <title id={titleId}>{label}</title>
+  {#if title}
+    <title id={titleId}>{title}</title>
   {/if}
   {#if desc}
     <desc id={descId}>{desc}</desc>
