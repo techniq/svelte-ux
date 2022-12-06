@@ -3,7 +3,7 @@
   import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
   import { uniqueId } from '$lib/utils/string';
 
-  export let size = '1.5em';
+  export let size: string | number = '1.5em';
   export let width = size;
   export let height = size;
   export let viewBox = '0 0 24 24';
