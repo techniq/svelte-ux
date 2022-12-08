@@ -4,6 +4,7 @@
   import type { TransitionConfig } from 'svelte/transition';
   import clsx from 'clsx';
   import type { Placement } from '@floating-ui/dom';
+  import { focusMove } from '../actions/focus';
 
   import Popover from './Popover.svelte';
 
@@ -52,12 +53,13 @@
   on:close
   let:close
 >
-  <ul
+  <menu
     class="menu-items outline-none"
     bind:this={menuItemsEl}
     on:click={onClick}
     transition:transition={transitionParams}
+    use:focusMove
   >
     <slot {close} />
-  </ul>
+  </menu>
 </Popover>
