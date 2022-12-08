@@ -6,6 +6,7 @@
   import Field from './Field.svelte';
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
+  import MenuItem from './MenuItem.svelte';
 
   export let options: Array<{ label: string; value: any; icon?: string }> = undefined;
   export let value = null;
@@ -52,15 +53,9 @@
     <slot {options} {selected} close={() => (open = false)} setValue={(val) => (value = val)}>
       <menu>
         {#each options as option}
-          <li
-            class="cursor-pointer p-2 text-sm hover:bg-black/5 flex gap-2"
-            on:click={() => (value = option.value)}
-          >
-            {#if option.icon}
-              <Icon path={option.icon} class="text-black/50" />
-            {/if}
+          <MenuItem icon={option.icon} on:click={() => (value = option.value)}>
             {option.label}
-          </li>
+          </MenuItem>
         {/each}
       </menu>
     </slot>

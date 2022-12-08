@@ -141,6 +141,12 @@
 <NavItem text="Drawer" currentUrl={$page.url} path="/docs/components/Drawer" class="pl-6 py-2" />
 <NavItem text="Menu" currentUrl={$page.url} path="/docs/components/Menu" class="pl-6 py-2" />
 <NavItem
+  text="MenuItem"
+  currentUrl={$page.url}
+  path="/docs/components/MenuItem"
+  class="pl-6 py-2"
+/>
+<NavItem
   text="MenuField"
   currentUrl={$page.url}
   path="/docs/components/MenuField"
