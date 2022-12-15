@@ -10,6 +10,15 @@ const config = {
   extensions: ['.svelte', ...mdsvexConfig.extensions],
   preprocess: [mdsvex(mdsvexConfig), sveltePreprocess(), markdownToc()],
 
+  vitePlugin: {
+    experimental: {
+      inspector: {
+        toggleKeyCombo: 'alt-shift',
+        toggleButtonPos: 'bottom-right',
+      },
+    },
+  },
+
   kit: {
     adapter: vercelAdapter(),
   },
