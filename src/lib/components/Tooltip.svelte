@@ -14,11 +14,14 @@
   export let offset = 0;
   export let delay = 500;
   export let underline = false;
+  export let cursor = false;
 
   // Popover props
   export let placement: Placement = 'bottom';
   export let autoPlacement = false;
   export let matchWidth: boolean = false;
+
+  $: hasTitle = title || $$slots.title;
 
   let containerEl: HTMLDivElement;
 
@@ -84,7 +87,13 @@
   bind:this={containerEl}
 >
   {#if $$props['class'] || underline}
-    <span class={clsx($$props['class'], underline && 'border-b border-dotted')}>
+    <span
+      class={clsx(
+        $$props['class'],
+        hasTitle && underline && 'border-b border-dotted',
+        hasTitle && cursor && 'cursor-help'
+      )}
+    >
       <slot />
     </span>
   {:else}

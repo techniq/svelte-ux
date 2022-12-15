@@ -95,6 +95,14 @@ docUrl: $docUrl
   </Tooltip>
 </Preview>
 
+## Underline & cursor
+
+<Preview>
+  <Tooltip title="Hello" underline cursor>
+    Hover me
+  </Tooltip>
+</Preview>
+
 <!-- TODO: Slot with custom transition -->
 
 # API
