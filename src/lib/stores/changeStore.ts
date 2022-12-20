@@ -1,14 +1,20 @@
 import { derived } from 'svelte/store';
-import type { Stores } from '$lib/types';
+import type { Stores, StoresValues } from '$lib/types';
 
 function changeStore<T extends Stores>(
   store: T,
-  onChange?: ({ previous, current }: { previous: T; current: T }) => any
+  onChange?: ({
+    previous,
+    current,
+  }: {
+    previous: StoresValues<T> | undefined;
+    current: StoresValues<T>;
+  }) => any
 ) {
-  let previous = null;
+  let previous = undefined;
   return derived(store, ($store) => {
     const value = { previous, current: $store };
-    if (previous == null) {
+    if (previous === undefined) {
       // First update
     } else if (onChange) {
       onChange(value);

@@ -1,7 +1,7 @@
 // https://basarat.gitbooks.io/typescript/docs/types/never.html#use-case-exhaustive-checks
 
 import type { SvelteComponentTyped } from 'svelte';
-import type { derived } from 'svelte/store';
+import type { derived, Readable } from 'svelte/store';
 
 // https://www.typescriptlang.org/docs/handbook/basic-types.html#never
 export function fail(message: string): never {
@@ -76,5 +76,10 @@ export type ComponentProps<T> = T extends SvelteComponentTyped<infer P, any, any
 export type ComponentEvents<T> = T extends SvelteComponentTyped<any, infer E, any> ? E : never;
 export type ComponentSlots<T> = T extends SvelteComponentTyped<any, any, infer S> ? S : never;
 
-// Export until `Stores` is exported from svelte -  https://github.com/sveltejs/svelte/blob/master/src/runtime/store/index.ts#L111-L112
+// Export until `Stores` and `StoresValues` are exported from svelte -  https://github.com/sveltejs/svelte/blob/master/src/runtime/store/index.ts#L111-L112
 export type Stores = Parameters<typeof derived>[0];
+export type StoresValues<T> = T extends Readable<infer U>
+  ? U
+  : {
+      [K in keyof T]: T[K] extends Readable<infer U> ? U : never;
+    };
