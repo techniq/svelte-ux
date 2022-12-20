@@ -22,7 +22,7 @@ docUrl: $docUrl
 ```svelte
 <script>
   import { writable } from 'svelte/store';
-  import { debounceStore } from 'svelte-ux';
+  import { dirtyStore } from 'svelte-ux';
 
   const value = writable('');
   const isDirty = dirtyStore(value);
