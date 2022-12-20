@@ -86,7 +86,7 @@
   on:focusout={hideTooltip}
   bind:this={containerEl}
 >
-  {#if $$props['class'] || underline}
+  {#if $$props['class'] || underline || cursor}
     <span
       class={clsx(
         $$props['class'],
