@@ -1,3 +1,4 @@
+export { default as changeStore } from './changeStore';
 export { default as debounceStore } from './debounceStore';
 export { default as dirtyStore } from './dirtyStore';
 export { default as fetchStore } from './fetchStore';

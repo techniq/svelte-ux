@@ -268,6 +268,12 @@
 </div>
 
 <NavItem
+  text="changeStore"
+  currentUrl={$page.url}
+  path="/docs/stores/changeStore"
+  class="pl-6 py-2"
+/>
+<NavItem
   text="debounceStore"
   currentUrl={$page.url}
   path="/docs/stores/debounceStore"
