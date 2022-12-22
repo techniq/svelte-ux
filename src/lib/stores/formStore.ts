@@ -71,6 +71,12 @@ export default function formStore<T = any>(initialState: T, options?: FormStoreO
       draftStore.set(createDraft(currentState));
       currentDraftValue.set(currentState);
     },
+    /** Revert draft and state to initial state */
+    revertAll() {
+      stateStore.set(initialState);
+      draftStore.set(createDraft(initialState));
+      currentDraftValue.set(initialState);
+    },
     /** Undo last committed change */
     undo() {
       if (undoList.length) {

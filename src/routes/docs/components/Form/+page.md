@@ -30,6 +30,7 @@ docUrl: $docUrl
     let:state
     let:commit
     let:revert
+    let:revertAll
     let:undo
     let:current
     let:refresh
@@ -43,6 +44,7 @@ docUrl: $docUrl
     <Button on:click={() => commit()} disabled={current.name == null}>Apply</Button>
     <Button on:click={() => revert()}>Cancel</Button>
     <Button on:click={() => undo()}>Undo</Button>
+    <Button on:click={() => revertAll()}>Reset</Button>
     <div class="mt-2">
       <div>current: {JSON.stringify(current)}</div>
       <div>state: {JSON.stringify(state)}</div>

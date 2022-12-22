@@ -28,6 +28,7 @@
     draft={$draft}
     commit={draft.commit}
     revert={draft.revert}
+    revertAll={draft.revertAll}
     undo={draft.undo}
     refresh={draft.refresh}
     current={$current}
