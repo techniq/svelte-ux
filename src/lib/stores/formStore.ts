@@ -36,6 +36,7 @@ export default function formStore<T = any>(initialState: T, options?: FormStoreO
     set(newState) {
       draftStore.set(createDraft(newState));
     },
+    /** Apply draft to state after verifying with schema (if available).  Append change to undo stack */
     commit() {
       const draft = get(draftStore);
 
@@ -64,11 +65,13 @@ export default function formStore<T = any>(initialState: T, options?: FormStoreO
 
       return true;
     },
+    /** Revert draft to last committed state */
     revert() {
       const currentState = get(stateStore);
       draftStore.set(createDraft(currentState));
       currentDraftValue.set(currentState);
     },
+    /** Undo last committed change */
     undo() {
       if (undoList.length) {
         const undo = undoList.pop();
@@ -78,8 +81,10 @@ export default function formStore<T = any>(initialState: T, options?: FormStoreO
 
         stateStore.set(newState);
         draftStore.set(createDraft(newState));
+        currentDraftValue.set(newState);
       }
     },
+    /** Refresh `current` draft value (un-proxied) */
     refresh() {
       currentDraftValue.set(current(get(draftStore)));
     },
