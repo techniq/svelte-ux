@@ -140,27 +140,6 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
-    value={selected}
-  >
-    <ToggleOption value="all" class="w-32">All</ToggleOption>
-    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
-    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
-  </ToggleGroup>
-</Preview>
-
-<div class="mt-4">
-  Select:
-  <Button on:click={() => (selected = 0)}>All</Button>
-  <Button on:click={() => (selected = 1)}>Missed</Button>
-  <Button on:click={() => (selected = 2)}>Calls</Button>
-</div>
-
-## Controlled w/ with value (string)
-
-<Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
     value={selectedStr}
   >
     <ToggleOption value="all" class="w-32">All</ToggleOption>
@@ -176,7 +155,7 @@ docUrl: $docUrl
   <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
 </div>
 
-## Controlled w/ with value (object)
+## Controlled (object value)
 
 <Preview>
   <ToggleGroup
