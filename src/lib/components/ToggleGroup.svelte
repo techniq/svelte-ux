@@ -80,7 +80,10 @@
     // console.log('selectOption', option, optionValue);
 
     if (option) {
-      dispatch('change', { value: optionValue });
+      if (value !== optionValue) {
+        dispatch('change', { value: optionValue });
+      }
+
       $selectedOption = option;
       value = optionValue;
 
