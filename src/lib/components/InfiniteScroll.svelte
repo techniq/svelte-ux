@@ -8,9 +8,8 @@
   $: visibleItems = items.slice(0, page * perPage);
 </script>
 
-{#each visibleItems as item}
-  <slot {item} />
-{/each}
+<slot {visibleItems} />
+
 <div
   use:intersection={{}}
   on:intersecting={(e) => {

@@ -21,8 +21,10 @@ docUrl: $docUrl
 
 <Preview>
 	<div class="h-[400px] p-1 overflow-auto">
-		<InfiniteScroll {items} let:item>
-			<ListItem title={item.name} />
+		<InfiniteScroll {items} let:visibleItems>
+			{#each visibleItems as item}
+				<ListItem title={item.name} />
+			{/each}
 		</InfiniteScroll>
 	</div>
 </Preview>
@@ -31,8 +33,10 @@ docUrl: $docUrl
 
 <Preview>
 	<div class="h-[400px] p-1 overflow-auto">
-		<InfiniteScroll {items} perPage={5} let:item>
-			<ListItem title={item.name} />
+		<InfiniteScroll {items} perPage={5} let:visibleItems>
+			{#each visibleItems as item}
+				<ListItem title={item.name} />
+			{/each}
 		</InfiniteScroll>
 	</div>
 </Preview>
