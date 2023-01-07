@@ -12,6 +12,7 @@
       'Collapse',
       'ExpansionPanel',
       'Icon',
+      'InfiniteScroll',
       'ListItem',
       'Paginate',
       'Pagination',

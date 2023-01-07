@@ -13,16 +13,20 @@ export function resize(node: HTMLElement): SvelteActionReturnType {
   };
 }
 
-export function intersection(node: HTMLElement): SvelteActionReturnType {
-  const options = {
-    root: node.parentNode,
-    threshold: 1,
-  };
+export function intersection(
+  node: HTMLElement,
+  options: IntersectionObserverInit = undefined
+): SvelteActionReturnType {
+  // TODO: Support definiinting `options.root = node.parentNode` easily
 
   let observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      node.dispatchEvent(new CustomEvent('intersecting', { detail: entry }));
-    });
+    const entry = entries[0];
+    node.dispatchEvent(new CustomEvent('intersecting', { detail: entry }));
+    // if (entry.intersectionRatio > 0) {
+    //   node.dispatchEvent(new CustomEvent('visible', { detail: entry }));
+    // } else {
+    //   node.dispatchEvent(new CustomEvent('invisible', { detail: entry }));
+    // }
   }, options);
   observer.observe(node);
 
