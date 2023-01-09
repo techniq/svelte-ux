@@ -72,7 +72,7 @@
       e.stopPropagation();
     }}
     use:portalAction={{ enabled: portal }}
-    use:focusMove
+    use:focusMove={{ restoreFocus: true }}
   >
     {#if loading}
       <Overlay center class="rounded">

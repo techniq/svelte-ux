@@ -103,7 +103,7 @@
       on:introend
       on:outroend
       bind:this={dialogEl}
-      use:focusMove
+      use:focusMove={{ restoreFocus: true }}
     >
       {#if loading}
         <Overlay center class="rounded">

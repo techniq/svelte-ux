@@ -1,6 +1,9 @@
 import { tick } from 'svelte';
 
-export function focusMove(node: HTMLElement): SvelteActionReturnType {
+export function focusMove(
+  node: HTMLElement,
+  options: { restoreFocus: boolean } = { restoreFocus: false }
+): SvelteActionReturnType {
   let previousActiveElement = document.activeElement;
 
   // Set `tabIndex` to `-1` which makes any element (ex. div) focusable programmaitcally (and mouse), but not via keyboard navigation - https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
@@ -13,7 +16,7 @@ export function focusMove(node: HTMLElement): SvelteActionReturnType {
   return {
     destroy() {
       // Restore previous active element
-      if (previousActiveElement instanceof HTMLElement) {
+      if (options.restoreFocus && previousActiveElement instanceof HTMLElement) {
         previousActiveElement.focus();
       }
     },
