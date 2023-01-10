@@ -201,6 +201,8 @@ docUrl: $docUrl
     <TextField label="decimal" type="decimal" on:change={e => console.log(e.detail)}  />
     <TextField label="currency" type="currency" on:change={e => console.log(e.detail)}  />
     <TextField label="percent" type="percent" on:change={e => console.log(e.detail)}  />
+    <TextField label="email" type="email" on:change={e => console.log(e.detail)}  />
+    <TextField label="search" type="search" on:change={e => console.log(e.detail)}  />
   </div>
 </Preview>
 
