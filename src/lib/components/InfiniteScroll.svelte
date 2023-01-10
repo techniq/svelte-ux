@@ -11,7 +11,7 @@
 <slot {visibleItems} />
 
 <div
-  use:intersection={{}}
+  use:intersection
   on:intersecting={(e) => {
     if (e.detail.isIntersecting) {
       page += 1;
