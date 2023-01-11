@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
+  import clsx from 'clsx';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
 
@@ -34,6 +35,15 @@
   export let rounded = false;
   export let filled = false;
   export let dense = false;
+
+  export let classes: {
+    root?: string;
+    field?: string;
+    items?: string;
+    item?: string;
+    group?: string;
+    empty?: string;
+  } = {};
 
   // Menu props
   export let placement: Placement = 'bottom';
@@ -279,7 +289,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={$$props.class} on:click={onClick}>
+<div class={clsx(classes.root, $$props.class)} on:click={onClick}>
   <TextField
     {label}
     {placeholder}
@@ -297,7 +307,7 @@
     on:keydown={onKeyDown}
     on:keypress={onKeyPress}
     actions={(node) => [selectOnFocus(node)]}
-    class="h-full"
+    class={clsx(classes.field, 'h-full')}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
@@ -342,7 +352,7 @@
       on:close={() => (open = false)}
     >
       <div
-        class="items focus:outline-none"
+        class={clsx('items focus:outline-none', classes.items)}
         class:opacity-50={loading}
         bind:this={menuItemsEl}
         on:click|stopPropagation={(e) => {
@@ -350,16 +360,37 @@
             // Find slot parent of click target item, fallback to `e.target` if slot is not overridden
             // Use `.items > ` in case slot is nested (ex. GraphQLSelect with slot)
             const slotEl = e.target.closest('.items > [slot=item]') ?? e.target;
-            const itemIndex = slotEl ? Array.from(menuItemsEl.children).indexOf(slotEl) : -1;
+            // Find the index of the clicked on element (ignoring group headers)
+            const itemIndex = slotEl
+              ? [...menuItemsEl.children]
+                  .filter((el) => !el.classList.contains('group-header'))
+                  .indexOf(slotEl)
+              : -1;
             logger.debug({ slotEl, itemIndex });
             selectIndex(itemIndex);
           }
         }}
       >
         {#each filteredItems ?? [] as item, index}
+          {@const previousItem = filteredItems[index - 1]}
+          {#if item.group && item.group !== previousItem?.group}
+            <div
+              class={clsx(
+                'group-header text-xs uppercase leading-8 tracking-widest text-black/50 px-2',
+                classes.group
+              )}
+            >
+              {item.group}
+            </div>
+          {/if}
+
           <slot name="item" {item} {index} {highlightIndex}>
             <div
-              class="p-2 bg-opacity-5 hover:bg-black/5 cursor-pointer"
+              class={clsx(
+                'py-2 bg-opacity-5 hover:bg-black/5 cursor-pointer',
+                item.group ? 'px-4' : 'px-2',
+                classes.item
+              )}
               class:bg-black={index === highlightIndex}
               use:scrollIntoView={{
                 condition: index === highlightIndex,
@@ -371,7 +402,7 @@
           </slot>
         {:else}
           <slot name="empty" {searchText}>
-            <div class="p-3 text-black/50 italic">
+            <div class={clsx('p-3 text-black/50 italic', classes.empty)}>
               {loading ? 'Loading...' : 'No items found'}
             </div>
           </slot>

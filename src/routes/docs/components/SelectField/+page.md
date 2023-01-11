@@ -28,6 +28,16 @@ docUrl: $docUrl
     { name: 'Three', value: 3 },
     { name: 'Four', value: 4 },
   ];
+  const itemsWithGroup = [
+    { name: 'One', value: 1, group: "First" },
+    { name: 'Two', value: 2, group: "First" },
+    { name: 'Three', value: 3, group: "Second" },
+    { name: 'Four', value: 4, group: "Second" },
+    { name: 'Five', value: 5, group: "Second" },
+    { name: 'Six', value: 6, group: "Third" },
+    { name: 'Seven', value: 7, group: "Third" },
+  ];
+
   let value = 3;
 </script>
 
@@ -47,6 +57,12 @@ docUrl: $docUrl
   <Button on:click={() => (value = 2)}>Pick 2</Button>
   <Button on:click={() => (value = 3)}>Pick 3</Button>
   <Button on:click={() => (value = 4)}>Pick 4</Button>
+</Preview>
+
+## Grouped options
+
+<Preview>
+  <SelectField items={itemsWithGroup} on:change={(e) => console.log('on:change', e.detail)} />
 </Preview>
 
 ## Loading
