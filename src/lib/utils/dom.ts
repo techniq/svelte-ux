@@ -12,13 +12,13 @@ export function getScrollParent(node): HTMLElement | null {
   const isVerticalScrollable =
     !['visible', 'hidden'].includes(overflowY) && node.scrollHeight > node.clientHeight;
 
-  if (!node) {
-    return null;
-  } else if (isHorozontalScrollable || isVerticalScrollable) {
+  if (isHorozontalScrollable || isVerticalScrollable) {
     return node;
+  } else if (node.parentNode) {
+    return getScrollParent(node.parentNode);
+  } else {
+    return document.body;
   }
-
-  return getScrollParent(node.parentNode) || document.body;
 }
 
 /**
