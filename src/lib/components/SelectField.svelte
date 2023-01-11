@@ -111,7 +111,7 @@
       // Reset items
       filteredItems = items;
     } else {
-      const words = text.toLowerCase().split(' ');
+      const words = text?.toLowerCase().split(' ') ?? [];
       filteredItems = items.filter((item) => {
         const _itemText = itemText(item).toLowerCase();
         return words.every((word) => _itemText.includes(word));
