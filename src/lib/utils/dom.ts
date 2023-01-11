@@ -29,8 +29,8 @@ export function scrollIntoView(node) {
   const scrollParent = getScrollParent(node);
 
   const nodeOffset = {
-    top: node.offsetTop - scrollParent.offsetTop,
-    left: node.offsetLeft - scrollParent.offsetLeft,
+    top: node.offsetTop,
+    left: node.offsetLeft,
   };
 
   const optionCenter = {
