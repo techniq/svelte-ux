@@ -36,8 +36,10 @@
   export let dense = false;
 
   // Menu props
-  export let placement: Placement = 'bottom-start';
-  export let matchWidth: boolean = true;
+  export let placement: Placement = 'bottom';
+  export let autoPlacement = true;
+  export let matchWidth = true;
+  export let resize = true;
   export let disableTransition = false;
 
   $: filteredItems = items ?? [];
@@ -276,6 +278,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class={$$props.class} on:click={onClick}>
   <TextField
     {label}
@@ -329,7 +332,15 @@
 
   <!-- Improve initial open display, still needs work when switching from No items found (items.length === 0) -->
   {#if items?.length > 0 || loading !== true}
-    <Menu {placement} {matchWidth} {disableTransition} bind:open on:close={() => (open = false)}>
+    <Menu
+      {placement}
+      {autoPlacement}
+      {matchWidth}
+      {resize}
+      {disableTransition}
+      bind:open
+      on:close={() => (open = false)}
+    >
       <div
         class="items focus:outline-none"
         class:opacity-50={loading}

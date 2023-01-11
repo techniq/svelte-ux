@@ -16,6 +16,7 @@
   export let matchWidth: boolean = false;
   export let placement: Placement = matchWidth ? 'bottom-start' : 'bottom';
   export let autoPlacement = false;
+  export let resize = false;
   export let disableTransition = false;
   export let transition = disableTransition
     ? (node: HTMLElement, params: any) => null as TransitionConfig
@@ -47,6 +48,7 @@
   {autoPlacement}
   {offset}
   {matchWidth}
+  {resize}
   {open}
   class={clsx('bg-white rounded shadow border', $$props.class)}
   style={$$props.style}

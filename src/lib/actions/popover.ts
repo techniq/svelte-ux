@@ -7,6 +7,7 @@ import {
   offset,
   shift,
   autoPlacement,
+  size,
 } from '@floating-ui/dom';
 import portal from './portal';
 
@@ -17,12 +18,8 @@ type PopoverOptions = {
   padding?: number;
   autoPlacement?: boolean;
   matchWidth?: boolean;
+  resize?: boolean;
 };
-
-/*
-  TODO:
-    - [ ] Add `maxViewportHeight` / `resize`.  See: https://floating-ui.com/docs/size
-*/
 
 export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActionReturnType {
   const popoverEl = node;
@@ -40,6 +37,16 @@ export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActi
       middleware: [
         offset(options?.offset),
         options?.autoPlacement ? autoPlacement({ allowedPlacements }) : flip(),
+        options?.resize &&
+          size({
+            padding: options?.padding,
+            apply({ availableWidth, availableHeight, elements }) {
+              Object.assign(elements.floating.style, {
+                maxWidth: `${availableWidth}px`,
+                maxHeight: `${availableHeight}px`,
+              });
+            },
+          }),
         shift({ padding: options?.padding }),
       ],
     };

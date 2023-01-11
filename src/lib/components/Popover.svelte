@@ -31,13 +31,12 @@
   /**
    * Set width of popover element the same as anchor element
    */
-  export let matchWidth: boolean = false;
+  export let matchWidth = false;
 
-  // TODO: Consider bringing back: https://floating-ui.com/docs/size
   /**
    * Set max-height of popover element to the remaining height from anchor element to bottom of viewport
    */
-  // export let maxViewportHeight: boolean | { padding: number } = false;
+  export let resize = false;
 
   const dispatch = createEventDispatcher();
 
@@ -60,7 +59,7 @@
   <div
     class={clsx('popover absolute z-50 outline-none', $$props.class)}
     tabindex="-1"
-    use:popover={{ anchorEl, placement, autoPlacement, offset, padding, matchWidth }}
+    use:popover={{ anchorEl, placement, autoPlacement, offset, padding, matchWidth, resize }}
     on:clickOutside={(e) => {
       e.stopPropagation();
       close('clickOutside');
