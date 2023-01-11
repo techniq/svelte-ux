@@ -50,7 +50,7 @@
   {matchWidth}
   {resize}
   {open}
-  class={clsx('bg-white rounded shadow border', $$props.class)}
+  class={clsx('bg-white rounded shadow border overflow-auto', $$props.class)}
   style={$$props.style}
   on:close
   let:close
