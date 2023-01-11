@@ -22,7 +22,15 @@
 
   export let label = '';
   export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
-  export let type: 'text' | 'password' | 'integer' | 'decimal' | 'currency' | 'percent' | 'search' | 'email' = 'text';
+  export let type:
+    | 'text'
+    | 'password'
+    | 'integer'
+    | 'decimal'
+    | 'currency'
+    | 'percent'
+    | 'search'
+    | 'email' = 'text';
   export let placeholder = undefined;
   export let error = '';
   export let hint = '';
@@ -139,7 +147,7 @@
       ? '[--color:theme(colors.red.500)]'
       : filled
       ? '[--color:theme(colors.gray.600)]'
-      : '[--color:theme(colors.blue.500)]',
+      : '[--color:theme(colors.accent.500)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
     classes.root,

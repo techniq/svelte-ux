@@ -28,7 +28,7 @@
       <ListItem
         list="type"
         icon={mdiCodeBraces}
-        avatar={{ size: 'sm', class: 'text-xs text-white bg-blue-500' }}
+        avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
       >
         <div slot="title">{prop.name}</div>
 

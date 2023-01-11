@@ -59,7 +59,7 @@
       ? '[--color:theme(colors.red.500)]'
       : filled
       ? '[--color:theme(colors.gray.600)]'
-      : '[--color:theme(colors.blue.500)]',
+      : '[--color:theme(colors.accent.500)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
     classes.root,

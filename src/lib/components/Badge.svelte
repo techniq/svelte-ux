@@ -17,7 +17,7 @@
     class={clsx(
       'rounded-full flex items-center justify-center transform transition-transform',
 
-      !$$slots.value && 'bg-blue-500 text-white',
+      !$$slots.value && 'bg-accent-500 text-white',
 
       {
         'self-start': placement.startsWith('top'),

@@ -149,7 +149,7 @@
         value = currentValue;
         dispatch('change', value);
       }}
-      class="bg-blue-500 text-white hover:bg-blue-600">OK</Button
+      class="bg-accent-500 text-white hover:bg-accent-600">OK</Button
     >
     <Button
       on:click={() => {
