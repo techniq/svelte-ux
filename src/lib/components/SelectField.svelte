@@ -354,6 +354,7 @@
       {matchWidth}
       {resize}
       {disableTransition}
+      moveFocus={false}
       bind:open
       on:close={() => (open = false)}
     >

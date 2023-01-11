@@ -24,6 +24,7 @@
     : slide;
   export let transitionParams: any = undefined; // TODO: Provider interface of all *Params (SlideParams, FlyParams, etc)
   export let explicitClose = false;
+  export let moveFocus = true;
 
   let menuItemsEl: HTMLMenuElement;
 
@@ -62,7 +63,7 @@
     bind:this={menuItemsEl}
     on:click={onClick}
     transition:transition={transitionParams}
-    use:focusMove
+    use:focusMove={{ disabled: !moveFocus }}
   >
     <slot {close} />
   </menu>
