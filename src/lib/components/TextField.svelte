@@ -22,7 +22,7 @@
 
   export let label = '';
   export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
-  export let type: 'text' | 'password' | 'integer' | 'decimal' | 'currency' | 'percent' = 'text';
+  export let type: 'text' | 'password' | 'integer' | 'decimal' | 'currency' | 'percent' | 'search' | 'email' = 'text';
   export let placeholder = undefined;
   export let error = '';
   export let hint = '';
@@ -66,6 +66,12 @@
       break;
     case 'password':
       inputType = 'password';
+      break;
+    case 'email':
+      inputType = 'email';
+      break;
+    case 'search':
+      inputType = 'search';
       break;
     case 'text':
     default:
