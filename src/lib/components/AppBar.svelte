@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mdiMenu } from '@mdi/js';
-  import clsx from 'clsx';
+  import { twMerge } from 'tailwind-merge';
 
   import { showDrawer } from './AppLayout.svelte';
   import Breadcrumb from './Breadcrumb.svelte';
@@ -23,7 +23,7 @@
 </script>
 
 <header
-  class={clsx(
+  class={twMerge(
     'h-16 px-4 bg-blue-500 text-white flex items-center shadow-md relative',
     $$restProps.class
   )}
