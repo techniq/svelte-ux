@@ -41,12 +41,12 @@
             e.stopPropagation();
             toggle();
           }}
-          class="text-blue-500"
+          class="text-accent-500"
         >
           View Details
         </Button>
       {/if}
-      <Button class={hasDetails ? '' : 'text-blue-500'}>Dismiss</Button>
+      <Button class={hasDetails ? '' : 'text-accent-500'}>Dismiss</Button>
     </div>
   </Notification>
 
@@ -71,7 +71,7 @@
     </Stack>
 
     <div slot="actions">
-      <Button on:click={toggle} class="text-blue-500 hover:bg-blue-50">Close</Button>
+      <Button on:click={toggle} class="text-accent-500 hover:bg-accent-50">Close</Button>
     </div>
   </Dialog>
 </Toggle>

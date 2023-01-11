@@ -24,7 +24,7 @@
 
 <header
   class={clsx(
-    'h-16 px-4 bg-blue-500 text-white flex items-center shadow-md relative',
+    'h-16 px-4 bg-accent-500 text-white flex items-center shadow-md relative',
     $$restProps.class
   )}
 >
