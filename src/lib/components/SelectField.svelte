@@ -35,6 +35,7 @@
   export let rounded = false;
   export let filled = false;
   export let dense = false;
+  export let clearSearchOnFocus = false;
 
   export let classes: {
     root?: string;
@@ -148,7 +149,9 @@
 
   function onFocus() {
     logger.debug('onFocus');
-
+    if (clearSearchOnFocus) {
+      searchText = ''; // Show all items on focus
+    }
     show();
   }
 
@@ -213,7 +216,9 @@
 
   function onClick() {
     logger.debug('onClick');
-
+    if (clearSearchOnFocus) {
+      searchText = ''; // Show all items on focus
+    }
     show();
   }
 
@@ -228,7 +233,6 @@
 
   function hide() {
     logger.debug('hide');
-
     open = false;
     highlightIndex = 0;
   }
@@ -275,6 +279,8 @@
     // Only hide if value changed (do not hide if opening initially and loading list)
     if (value != previousValue) {
       hide();
+    } else {
+      logger.debug('same value selected', { previousValue, value });
     }
 
     return item;
@@ -394,7 +400,6 @@
               class:bg-black={index === highlightIndex}
               use:scrollIntoView={{
                 condition: index === highlightIndex,
-                initial: false,
               }}
             >
               {itemText(item)}
