@@ -1,9 +1,9 @@
 <script lang="ts">
   import { mdiChevronDown } from '@mdi/js';
-  import clsx from 'clsx';
 
   import Collapse from './Collapse.svelte';
   import Icon from './Icon.svelte';
+  import { cls } from '../utils/styles';
 
   /**
    * Controls how first, last, and gap between are calculated
@@ -22,7 +22,7 @@
 
 <Collapse
   {...$$restProps}
-  class={clsx(
+  class={cls(
     'bg-white elevation-1 border-t',
     'relative', // Match ListItem (used for loading) so Stacking Context is consistent (else causes a solid line between ExpansionPanel and ListItem)
     list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',

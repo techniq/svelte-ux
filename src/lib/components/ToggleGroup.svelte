@@ -3,11 +3,11 @@
 </script>
 
 <script lang="ts">
-  import clsx from 'clsx';
-
   import { setContext, createEventDispatcher } from 'svelte';
   import { writable } from 'svelte/store';
   import { crossfade, fade } from 'svelte/transition';
+
+  import { cls } from '../utils/styles';
 
   export let value: any = undefined; // index or value
   export let autoscroll: boolean = false;
@@ -97,14 +97,14 @@
   $: $classesStore = contained
     ? {
         ...classes,
-        options: clsx(
+        options: cls(
           'inline-grid overflow-auto p-1 text-sm bg-black/10 border-black/20 transition-shadow border',
           'hover:shadow hover:border-gray-700',
           circle ? 'rounded-full' : 'rounded-[10px]',
           vertical ? 'grid-flow-row' : 'grid-flow-col',
           classes.options
         ),
-        optionContainer: clsx(
+        optionContainer: cls(
           'text-black/50 ring-black/40',
           circle ? 'rounded-full' : 'rounded-[8px]',
           'hover:text-opacity-100 hover:bg-black/5',
@@ -112,7 +112,7 @@
           '[&.selected]:text-black',
           classes.optionContainer
         ),
-        indicator: clsx(
+        indicator: cls(
           'bg-white w-full h-full shadow-md ring-black/20 ring-1',
           circle ? 'rounded-full' : 'rounded-[8px]',
           classes.indicator
@@ -121,14 +121,14 @@
     : underlined
     ? {
         ...classes,
-        options: clsx('flex border-b text-sm h-10', classes.options),
-        optionContainer: clsx(
+        options: cls('flex border-b text-sm h-10', classes.options),
+        optionContainer: cls(
           'text-black/50 font-bold',
           'hover:text-accent-500 hover:bg-accent-500/10',
           '[&.selected]:text-accent-500',
           classes.optionContainer
         ),
-        indicator: clsx('h-full border-b-2 border-accent-500', classes.indicator),
+        indicator: cls('h-full border-b-2 border-accent-500', classes.indicator),
       }
     : classes;
 
@@ -147,12 +147,12 @@
 </script>
 
 <div
-  class={clsx('toggle-group', $classesStore.root, $$props.class)}
+  class={cls('toggle-group', $classesStore.root, $$props.class)}
   class:contained
   class:underlined
   {...$$restProps}
 >
-  <div class={clsx('options', $classesStore.options)}>
+  <div class={cls('options', $classesStore.options)}>
     <slot />
   </div>
   <slot name="panes" />

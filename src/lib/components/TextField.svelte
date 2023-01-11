@@ -1,11 +1,11 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import clsx from 'clsx';
   import { mdiClose, mdiCurrencyUsd, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
   import multi from '../actions/multi';
   import type { Actions } from '../actions/multi';
+  import { cls } from '../utils/styles';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -141,7 +141,7 @@
 
 <fieldset
   {disabled}
-  class={clsx(
+  class={cls(
     'group',
     error
       ? '[--color:theme(colors.red.500)]'
@@ -155,7 +155,7 @@
   )}
 >
   <div
-    class={clsx(
+    class={cls(
       'border py-0 transition-shadow',
       disabled ? '' : 'hover:shadow',
       disabled ? '' : error ? 'hover:border-red-700' : 'hover:border-gray-700',
@@ -171,7 +171,7 @@
   >
     <div class="flex items-center">
       {#if hasPrepend}
-        <div class={clsx('prepend whitespace-nowrap', rounded && 'pl-3')}>
+        <div class={cls('prepend whitespace-nowrap', rounded && 'pl-3')}>
           <slot name="prepend" />
           {#if icon}
             <span class="mr-3">
@@ -184,7 +184,7 @@
       <div class="flex-grow inline-grid" on:click>
         {#if label}
           <label
-            class={clsx(
+            class={cls(
               'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
               error ? 'text-red-500/80' : 'text-black/50',
               (shrinkLabel || hasInputValue) && 'shrink'
@@ -197,7 +197,7 @@
         {/if}
 
         <div
-          class={clsx(
+          class={cls(
             'col-span-full row-span-full input flex items-center',
             hasLabel && 'pt-4',
             dense ? 'my-1' : 'my-2',
@@ -226,7 +226,7 @@
               on:blur
               on:keydown
               on:keypress
-              class={clsx(
+              class={cls(
                 'text-sm border-none w-full bg-transparent outline-none resize-none',
                 'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
                 (shrinkLabel || !hasLabel) && 'placeholder-opacity-30',
@@ -255,7 +255,7 @@
               on:blur
               on:keydown
               on:keypress
-              class={clsx(
+              class={cls(
                 'text-sm border-none w-full bg-transparent outline-none truncate',
                 'selection:bg-gray-500/30',
                 'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
@@ -321,7 +321,7 @@
     </div>
   </div>
   <div
-    class={clsx(
+    class={cls(
       'hint',
       'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
       error ? 'text-red-500' : 'text-black/50 scale-y-0'

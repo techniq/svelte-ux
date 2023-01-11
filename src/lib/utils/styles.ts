@@ -1,3 +1,6 @@
+import clsx, { type ClassValue } from 'clsx';
+import { extendTailwindMerge } from 'tailwind-merge';
+
 /**
  * Convert object to style string
  */
@@ -15,3 +18,14 @@ export function objectToString(styleObj: { [key: string]: string }) {
     .filter((x) => x)
     .join(' ');
 }
+
+/**
+ * Wrapper around `tailwind-merge` and `clsx`
+ */
+const twMerge = extendTailwindMerge({
+  classGroups: {
+    shadow: ['shadow-border-l', 'shadow-border-r', 'shadow-border-t', 'shadow-border-b'],
+  },
+});
+
+export const cls = (...inputs: ClassValue[]) => twMerge(clsx(...inputs));

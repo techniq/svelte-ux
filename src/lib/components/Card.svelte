@@ -1,9 +1,8 @@
 <script lang="ts">
-  import clsx from 'clsx';
-
   import CircularProgress from './CircularProgress.svelte';
   import Header from './Header.svelte';
   import Overlay from './Overlay.svelte';
+  import { cls } from '../utils/styles';
 
   export let title: string | string[] | null = null;
   export let subheading: string | string[] | null = null;
@@ -19,7 +18,7 @@
 
 <div
   {...$$restProps}
-  class={clsx(
+  class={cls(
     'card relative z-0 bg-white border rounded elevation-1 flex flex-col justify-between',
     $$props.class
   )}

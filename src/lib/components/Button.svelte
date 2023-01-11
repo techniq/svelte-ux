@@ -1,10 +1,9 @@
 <script lang="ts">
-  import clsx from 'clsx';
-
   import Icon from './Icon.svelte';
 
   import cssVars from '../actions/cssVars';
   import CircularProgress from './CircularProgress.svelte';
+  import { cls } from '../utils/styles';
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
@@ -29,14 +28,10 @@
     loading?: string;
   } = {};
 
-  $: hasClassOverride = (str: string) => {
-    return $$props.class?.includes(str) ?? false;
-  };
-
-  $: _class = clsx(
+  $: _class = cls(
     'button',
     'transition duration-300 ring-black/20',
-    !filled && !hasClassOverride('hover:bg-') && 'hover:bg-black/5',
+    !filled && 'hover:bg-black/5',
     'focus:outline-none focus-visible:ring-1',
     circle ? 'rounded-full' : !base ? 'rounded' : '',
     small ? 'text-xs' : 'text-sm',
@@ -62,9 +57,9 @@
     {disabled}
   >
     {#if loading}
-      <CircularProgress size={16} class={clsx(classes.loading)} />
+      <CircularProgress size={16} class={cls(classes.loading)} />
     {:else if icon}
-      <Icon path={icon} class={clsx(!iconOnly && 'mr-1', classes.icon)} />
+      <Icon path={icon} class={cls(!iconOnly && 'mr-1', classes.icon)} />
     {/if}
     <slot />
   </a>
@@ -79,9 +74,9 @@
     {disabled}
   >
     {#if loading}
-      <CircularProgress size={16} width={2} class={clsx('mr-2', classes.loading)} />
+      <CircularProgress size={16} width={2} class={cls('mr-2', classes.loading)} />
     {:else if icon}
-      <Icon path={icon} class={clsx(!iconOnly && 'mr-1', classes.icon)} />
+      <Icon path={icon} class={cls(!iconOnly && 'mr-1', classes.icon)} />
     {/if}
     <slot />
   </button>

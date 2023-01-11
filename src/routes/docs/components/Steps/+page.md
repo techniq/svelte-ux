@@ -5,7 +5,6 @@ docUrl: $docUrl
 ---
 
 <script lang="ts">
-	import clsx from 'clsx';
 	import { format } from 'date-fns';
 	import { mdiCheck, mdiCircle, mdiClockOutline, mdiClose, mdiMapMarker } from '@mdi/js';
 
@@ -15,6 +14,8 @@ docUrl: $docUrl
 	import Icon from '$lib/components/Icon.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 	import Steps from '$lib/components/Steps.svelte';
+
+	import { cls } from '$lib/utils/styles';
 
 	const items = [
 		{
@@ -75,7 +76,7 @@ docUrl: $docUrl
 		</div>
 		<div slot="marker" let:item>
 			<div
-				class={clsx('w-4 h-4 flex-shrink-0 rounded-full flex items-center', {
+				class={cls('w-4 h-4 flex-shrink-0 rounded-full flex items-center', {
 					'bg-green-500': item.status === 'completed',
 					'border-2 border-blue-500 bg-blue-100': item.status === 'in-progress',
 					'bg-red-500': item.status === 'failed'

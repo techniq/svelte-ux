@@ -2,9 +2,10 @@
   import { createEventDispatcher } from 'svelte';
   import { slide, SlideParams } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
-  import clsx from 'clsx';
   import type { Placement } from '@floating-ui/dom';
+
   import { focusMove } from '../actions/focus';
+  import { cls } from '../utils/styles';
 
   import Popover from './Popover.svelte';
 
@@ -24,7 +25,7 @@
   export let transitionParams: any = undefined; // TODO: Provider interface of all *Params (SlideParams, FlyParams, etc)
   export let explicitClose = false;
 
-  let menuItemsEl: HTMLUListElement;
+  let menuItemsEl: HTMLMenuElement;
 
   function onClick(e) {
     try {
@@ -50,11 +51,12 @@
   {matchWidth}
   {resize}
   {open}
-  class={clsx('bg-white rounded shadow border overflow-auto', $$props.class)}
+  class={cls('bg-white rounded shadow border overflow-auto', $$props.class)}
   style={$$props.style}
   on:close
   let:close
 >
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <menu
     class="menu-items outline-none"
     bind:this={menuItemsEl}

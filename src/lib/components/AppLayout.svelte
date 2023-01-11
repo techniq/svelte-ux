@@ -4,12 +4,11 @@
 </script>
 
 <script>
-  import clsx from 'clsx';
-
   import Backdrop from './Backdrop.svelte';
 
   import matchMedia from '../stores/matchMedia';
   import cssVars from '../actions/cssVars';
+  import { cls } from '../utils/styles';
 
   export let navWidth = 240;
 
@@ -29,7 +28,7 @@
   {/if}
 
   <aside
-    class={clsx(
+    class={cls(
       'w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
       temporaryDrawer && 'fixed h-full z-30 temporary'
     )}

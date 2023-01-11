@@ -1,7 +1,8 @@
 <script lang="ts">
-  import clsx from 'clsx';
   import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
-  import { uniqueId } from '$lib/utils/string';
+
+  import { uniqueId } from '../utils/string';
+  import { cls } from '../utils/styles';
 
   export let size: string | number = '1.5em';
   export let width = size;
@@ -39,7 +40,7 @@
   {width}
   {height}
   {viewBox}
-  class={clsx('inline-block flex-shrink-0', classes.root, $$props.class)}
+  class={cls('inline-block flex-shrink-0', classes.root, $$props.class)}
   style={$$props.style}
   role={isLabelled ? 'img' : 'presentation'}
   aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}

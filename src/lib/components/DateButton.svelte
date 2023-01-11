@@ -1,10 +1,10 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { format as dateFormat, isWithinInterval } from 'date-fns';
-  import clsx from 'clsx';
 
   import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
+  import { cls } from '../utils/styles';
 
   const dispatch = createEventDispatcher();
 
@@ -72,7 +72,7 @@
 
 <div
   style="--tw-gradient-stops: var(--tw-gradient-from) 50%, var(--tw-gradient-to) 50%"
-  class={clsx(
+  class={cls(
     'inline-flex items-center justify-center',
     isSelectedStart
       ? '[--tw-gradient-from:transparent]'
@@ -87,7 +87,7 @@
   <!-- TODO: Use <Button base>, although doesn't support `class:...` -->
   <button
     type="button"
-    class={clsx(
+    class={cls(
       'w-8 h-8 rounded-full flex items-center justify-center text-xs cursor-pointer hover:bg-black/5 hover:text-black focus:outline-none',
       periodType != PeriodType.Day && 'flex-1',
       isSelected ? 'bg-accent-500 text-white' : 'text-black',

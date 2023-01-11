@@ -6,10 +6,10 @@
         - Replace completed slots as spaces (for spacing)
   */
   import { createEventDispatcher, onMount } from 'svelte';
-  import clsx from 'clsx';
 
-  import multi from '$lib/actions/multi';
-  import type { Actions } from '$lib/actions/multi';
+  import multi from '../actions/multi';
+  import type { Actions } from '../actions/multi';
+  import { cls } from '../utils/styles';
 
   export let value = '';
   export let id = undefined;
@@ -108,7 +108,7 @@
   }}
   on:blur
   use:multi={actions}
-  class={clsx(
+  class={cls(
     'text-sm w-full outline-none bg-transparent selection:bg-gray-500/30',
     mask && (mask == placeholder || isFocused || value) && 'font-mono'
   )}

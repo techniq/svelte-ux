@@ -1,8 +1,8 @@
 <script lang="ts">
-  import clsx from 'clsx';
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js';
 
   import type paginationStore from '../stores/paginationStore';
+  import { cls } from '../utils/styles';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -17,12 +17,12 @@
 
 <!--
   TODO:
-  - [ ] Add docs
+    - [ ] Add docs
     - [ ] Actions including Refresh, Export
   -->
 
 <div
-  class={clsx(
+  class={cls(
     'grid grid-cols-[1fr,auto,auto,auto] items-center gap-8 border-t p-1',
     'z-20', // Match highest z-index of sticky columns
     $$props.class

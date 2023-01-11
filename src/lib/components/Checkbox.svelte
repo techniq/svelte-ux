@@ -16,11 +16,11 @@
       - [ ] use:draw
   */
 
-  import clsx from 'clsx';
   import { mdiCheck, mdiMinus } from '@mdi/js';
 
   import Icon from './Icon.svelte';
-  import { uniqueId } from '$lib/utils/string';
+  import { uniqueId } from '../utils/string';
+  import { cls } from '../utils/styles';
 
   export let id = uniqueId('checkbox_');
   export let value: any = undefined;
@@ -38,7 +38,7 @@
   } = {};
 </script>
 
-<div class={clsx('inline-flex gap-x-1 items-center', classes.root, $$props.class)}>
+<div class={cls('inline-flex gap-x-1 items-center', classes.root, $$props.class)}>
   <input
     {id}
     type="checkbox"
@@ -50,7 +50,7 @@
   />
   <label
     for={id}
-    class={clsx(
+    class={cls(
       'inline-grid place-items-center border-2',
       circle ? 'rounded-full' : 'rounded',
       'peer-disabled:opacity-50 transition-shadow duration-300',
@@ -67,7 +67,7 @@
   >
     <Icon
       path={indeterminate ? mdiMinus : mdiCheck}
-      class={clsx(
+      class={cls(
         'pointer-events-none text-white transition-transform',
         checked ? 'scale-100' : 'scale-0',
         classes.icon
@@ -84,7 +84,7 @@
   {#if $$slots.default}
     <label
       for={id}
-      class={clsx(
+      class={cls(
         'peer-disabled:opacity-50',
         {
           xs: 'text-xs', // 12px

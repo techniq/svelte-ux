@@ -1,11 +1,10 @@
 <script lang="ts">
-  import clsx from 'clsx';
-
   import Avatar from './Avatar.svelte';
   import CircularProgress from './CircularProgress.svelte';
   import Icon from './Icon.svelte';
   import Overlay from './Overlay.svelte';
   import type { ComponentProps } from '../types';
+  import { cls } from '../utils/styles';
 
   export let title: string | number | null = null;
   export let subheading: string | number | null = null;
@@ -47,8 +46,9 @@
   export let loading: boolean | null = null;
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <li
-  class={clsx(
+  class={cls(
     'flex gap-4 items-center border-t py-2 px-4',
     'relative', // Needed for loading overlay
     list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
@@ -87,7 +87,7 @@
 
     <slot name="subheading">
       {#if subheading != null}
-        <div class={clsx('text-sm text-black/50', classes.subheading)}>
+        <div class={cls('text-sm text-black/50', classes.subheading)}>
           {subheading}
         </div>
       {/if}

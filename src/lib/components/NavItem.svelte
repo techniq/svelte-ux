@@ -1,10 +1,10 @@
 <script lang="ts">
-  import clsx from 'clsx';
   import { isActive, url } from '../utils/routing';
 
   import Icon from './Icon.svelte';
   import { scrollIntoView } from '../actions/scroll';
   import { getScrollParent } from '../utils/dom';
+  import { cls } from '../utils/styles';
 
   export let currentUrl: URL;
   export let path: string = null;
@@ -16,7 +16,7 @@
 
 <a
   href={url(currentUrl, path)}
-  class={clsx(
+  class={cls(
     'flex items-center text-sm p-1 hover:text-white hover:bg-gray-300/10 relative',
     isPathActive ? ['text-sky-400', 'bg-gray-500/10'] : 'text-gray-400',
     $$props.class

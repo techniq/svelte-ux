@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
-  import clsx from 'clsx';
 
   import { popover } from '../actions/popover';
+  import { cls } from '../utils/styles';
 
   export let open = false;
   export let placement: Placement = undefined;
@@ -57,7 +57,7 @@
 
 {#if open}
   <div
-    class={clsx('popover absolute z-50 outline-none', $$props.class)}
+    class={cls('popover absolute z-50 outline-none', $$props.class)}
     tabindex="-1"
     use:popover={{ anchorEl, placement, autoPlacement, offset, padding, matchWidth, resize }}
     on:clickOutside={(e) => {

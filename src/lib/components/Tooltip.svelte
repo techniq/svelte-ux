@@ -4,10 +4,10 @@
 
 <script lang="ts">
   import { fly, fade, scale, slide, blur } from 'svelte/transition';
-  import clsx from 'clsx';
   import type { Placement } from '@floating-ui/dom';
 
   import Popover from './Popover.svelte';
+  import { cls } from '../utils/styles';
 
   export let title = '';
   export let open = false;
@@ -86,12 +86,12 @@
   on:focusout={hideTooltip}
   bind:this={containerEl}
 >
-  {#if $$props['class'] || underline || cursor}
+  {#if $$props.class || underline || cursor}
     <span
-      class={clsx(
-        $$props['class'],
+      class={cls(
         hasTitle && underline && 'border-b border-dotted',
-        hasTitle && cursor && 'cursor-help'
+        hasTitle && cursor && 'cursor-help',
+        $$props.class
       )}
     >
       <slot />

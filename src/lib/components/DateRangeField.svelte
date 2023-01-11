@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import clsx from 'clsx';
   import { mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
@@ -11,6 +10,7 @@
 
   import { getDateFuncsByPeriodType, getPeriodTypeName } from '../utils/date';
   import type { DateRange as DateRangeType } from '../utils/dateRange';
+  import { cls } from '../utils/styles';
 
   const dispatch = createEventDispatcher();
 
@@ -82,7 +82,7 @@
 
   <button
     type="button"
-    class={clsx(
+    class={cls(
       'text-sm whitespace-nowrap w-full focus:outline-none',
       center ? 'text-center' : 'text-left'
     )}

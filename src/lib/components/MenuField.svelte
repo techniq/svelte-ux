@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { ComponentProps } from '$lib/types';
   import { mdiMenuDown } from '@mdi/js';
-  import clsx from 'clsx';
+
+  import { cls } from '../utils/styles';
 
   import Field from './Field.svelte';
   import Icon from './Icon.svelte';
@@ -32,7 +33,7 @@
 
     <Icon
       path={menuIcon}
-      class={clsx('text-black/50 mr-1 transform transition-all duration-300', {
+      class={cls('text-black/50 mr-1 transform transition-all duration-300', {
         '-rotate-180': open,
       })}
       on:click={() => (open = !open)}

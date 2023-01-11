@@ -1,9 +1,9 @@
 <script lang="ts">
-  import clsx from 'clsx';
   import { onMount, onDestroy, getContext } from 'svelte';
 
   import { groupKey } from './ToggleGroup.svelte';
   import { scrollIntoView } from '../utils/dom';
+  import { cls } from '../utils/styles';
 
   export let value: any;
 
@@ -47,7 +47,7 @@
   on:click
   bind:this={optionElement}
   {...$$restProps}
-  class={clsx(
+  class={cls(
     'optionContainer',
     'grid items-center',
     $classesContext.optionContainer,
@@ -58,13 +58,13 @@
   <!-- Stack indicator under option -->
   {#if $selectedOption === optionElement}
     <div
-      class={clsx('indicator', $classesContext.indicator, classes.indicator)}
+      class={cls('indicator', $classesContext.indicator, classes.indicator)}
       in:receive={{ key: 'indicator' }}
       out:send|local={{ key: 'indicator' }}
     />
   {/if}
 
-  <div class={clsx('option', $classesContext.option, classes.option)}>
+  <div class={cls('option', $classesContext.option, classes.option)}>
     <slot />
   </div>
 </button>

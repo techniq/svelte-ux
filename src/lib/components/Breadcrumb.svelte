@@ -1,8 +1,8 @@
 <script lang="ts">
-  import clsx from 'clsx';
   import { mdiChevronRight } from '@mdi/js';
 
   import Icon from './Icon.svelte';
+  import { cls } from '../utils/styles';
 
   export let items = [];
   export let divider: string | undefined = undefined;
@@ -13,7 +13,7 @@
 
 <div
   {...$$restProps}
-  class={clsx(
+  class={cls(
     inline ? 'inline-flex' : 'flex',
     'items-center justify-start flex-wrap',
     $$restProps.class

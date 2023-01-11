@@ -1,11 +1,11 @@
 <script lang="ts">
   import { mdiMenu } from '@mdi/js';
-  import clsx from 'clsx';
 
   import { showDrawer } from './AppLayout.svelte';
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
   import { browser } from '../utils/env';
+  import { cls } from '../utils/styles';
 
   export let title: string | number | Array<string | number> = '';
 
@@ -23,7 +23,7 @@
 </script>
 
 <header
-  class={clsx(
+  class={cls(
     'h-16 px-4 bg-accent-500 text-white flex items-center shadow-md relative',
     $$restProps.class
   )}

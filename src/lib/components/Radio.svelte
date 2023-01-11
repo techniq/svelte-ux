@@ -16,11 +16,11 @@
       - [ ] use:draw
   */
 
-  import clsx from 'clsx';
   import { mdiCheckboxBlankCircle } from '@mdi/js';
 
   import Icon from './Icon.svelte';
-  import { uniqueId } from '$lib/utils/string';
+  import { uniqueId } from '../utils/string';
+  import { cls } from '../utils/styles';
 
   export let id = uniqueId('checkbox_');
   export let value: any = undefined;
@@ -39,7 +39,7 @@
   $: checked = group !== undefined ? group === value : checked;
 </script>
 
-<div class={clsx('inline-flex gap-x-1 items-center', classes.root, $$props.class)}>
+<div class={cls('inline-flex gap-x-1 items-center', classes.root, $$props.class)}>
   <input
     {id}
     type="radio"
@@ -51,7 +51,7 @@
   />
   <label
     for={id}
-    class={clsx(
+    class={cls(
       'inline-grid place-items-center border-2 rounded-full bg-white',
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
@@ -63,7 +63,7 @@
   >
     <Icon
       path={mdiCheckboxBlankCircle}
-      class={clsx(
+      class={cls(
         'pointer-events-none transition-transform',
         disabled ? 'text-gray-500' : 'text-accent-500',
         checked ? 'scale-100' : 'scale-0',
@@ -81,7 +81,7 @@
   {#if $$slots.default}
     <label
       for={id}
-      class={clsx(
+      class={cls(
         'peer-disabled:opacity-50',
         {
           xs: 'text-xs', // 12px

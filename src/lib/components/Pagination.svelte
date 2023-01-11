@@ -1,8 +1,8 @@
 <script lang="ts">
-  import clsx from 'clsx';
   import { mdiChevronLeft, mdiChevronRight, mdiPageFirst, mdiPageLast } from '@mdi/js';
 
   import type paginationStore from '../stores/paginationStore';
+  import { cls } from '../utils/styles';
 
   import Button from './Button.svelte';
 
@@ -11,7 +11,7 @@
 </script>
 
 {#if $pagination.totalPages > 1 || !hideSinglePage}
-  <div class={clsx('grid grid-cols-[1fr,auto,auto,auto] items-center gap-8 p-1', $$props.class)}>
+  <div class={cls('grid grid-cols-[1fr,auto,auto,auto] items-center gap-8 p-1', $$props.class)}>
     <slot name="actions">
       <div />
     </slot>

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import clsx from 'clsx';
   import { uniqueId } from '$lib/utils/string';
+  import { cls } from '../utils/styles';
 
   export let id: string = uniqueId('switch_');
   export let value: any = undefined;
@@ -22,7 +22,7 @@
 
   <label
     for={id}
-    class={clsx(
+    class={cls(
       'switch',
       'border rounded-full grid align-items p-[3px] transition-shadow',
       {
@@ -38,7 +38,7 @@
     )}
   >
     <div
-      class={clsx(
+      class={cls(
         'toggle w-1/2 h-full rounded-full transition-all duration-200 bg-white grid items-center justify-center transform',
         checked && 'translate-x-full'
       )}

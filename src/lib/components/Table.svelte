@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import clsx from 'clsx';
 
   import { tableCell } from '../actions/table';
   import type { ColumnDef } from '../types/table';
+  import { cls } from '../utils/styles';
 
   import { getCellContent, getCellHeader, getHeaders, getRowColumns } from '../utils/table';
 
@@ -37,9 +37,9 @@
   $: rowColumns = getRowColumns(columns);
 </script>
 
-<div class={clsx('table-container"', classes.container, $$props.class)} style={styles.container}>
-  <div class={clsx('table-wrapper"', classes.wrapper)} style={styles.wrapper}>
-    <table class={clsx('w-full', classes.table)} style={styles.table}>
+<div class={cls('table-container"', classes.container, $$props.class)} style={styles.container}>
+  <div class={cls('table-wrapper"', classes.wrapper)} style={styles.wrapper}>
+    <table class={cls('w-full', classes.table)} style={styles.table}>
       <slot name="headers" {headers}>
         <thead>
           {#each headers ?? [] as headerRow}

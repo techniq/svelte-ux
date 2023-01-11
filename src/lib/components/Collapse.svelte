@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
-  import clsx from 'clsx';
   import { mdiChevronDown } from '@mdi/js';
+  import { cls } from '../utils/styles';
 
   import Icon from './Icon.svelte';
 
@@ -31,7 +31,7 @@
 
 <div
   {...$$restProps}
-  class={clsx(
+  class={cls(
     popout && 'transition-all duration-all',
     popout && active && 'my-3',
     popout && list === 'type' && 'first-of-type:mt-0 last-of-type:mb-0',

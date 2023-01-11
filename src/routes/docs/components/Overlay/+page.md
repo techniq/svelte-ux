@@ -33,7 +33,7 @@ docUrl: $docUrl
 
 <Preview>
   <div class="relative">
-    <Overlay center class="bg-orange-50">
+    <Overlay center class="bg-black/10">
       <CircularProgress />
     </Overlay>
     <div>Some content</div>

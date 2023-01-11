@@ -1,10 +1,10 @@
 <script lang="ts">
-  import clsx from 'clsx';
+  import { cls } from '../utils/styles';
 </script>
 
 <div
   {...$$restProps}
-  class={clsx(
+  class={cls(
     'grid place-items-center',
     'p-1 bg-black/10 shadow-inner ring-1 ring-black/30',
     'text-black/50 text-xs tracking-wider',

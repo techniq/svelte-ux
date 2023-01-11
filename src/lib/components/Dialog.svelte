@@ -4,10 +4,10 @@
   // https://svelte.dev/repl/033e824fad0a4e34907666e7196caec4?version=3.25.1
   import { scale } from 'svelte/transition';
   import { quadIn } from 'svelte/easing';
-  import clsx from 'clsx';
 
   import { focusMove } from '../actions/focus';
   import portalAction from '../actions/portal';
+  import { cls } from '../utils/styles';
 
   import Backdrop from './Backdrop.svelte';
   import CircularProgress from './CircularProgress.svelte';
@@ -76,7 +76,7 @@
   />
 
   <div
-    class={clsx(
+    class={cls(
       'fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center pointer-events-none',
       classes.root
     )}
@@ -91,7 +91,7 @@
     use:portalAction={{ enabled: portal }}
   >
     <div
-      class={clsx(
+      class={cls(
         'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
         classes.dialog,
         $$props.class
@@ -113,7 +113,7 @@
 
       <slot name="header">
         {#if $$slots.title}
-          <div class={clsx('text-xl font-bold pt-4 pb-2 px-6', classes.title)}>
+          <div class={cls('text-xl font-bold pt-4 pb-2 px-6', classes.title)}>
             <slot name="title" />
           </div>
         {/if}
@@ -122,7 +122,7 @@
       <slot />
 
       <div
-        class={clsx('actions flex w-full justify-end p-2 bg-black/5 border-t', classes.actions)}
+        class={cls('actions flex w-full justify-end p-2 bg-black/5 border-t', classes.actions)}
         bind:this={actionsEl}
       >
         <slot name="actions" />

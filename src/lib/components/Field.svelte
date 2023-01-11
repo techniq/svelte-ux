@@ -1,12 +1,12 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import clsx from 'clsx';
   import { mdiClose, mdiInformationOutline } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import Stack from './Stack.svelte';
+  import { cls } from '../utils/styles';
 
   const dispatch = createEventDispatcher<{
     clear: null;
@@ -53,7 +53,7 @@
 
 <fieldset
   {disabled}
-  class={clsx(
+  class={cls(
     'group',
     error
       ? '[--color:theme(colors.red.500)]'
@@ -67,7 +67,7 @@
   )}
 >
   <div
-    class={clsx(
+    class={cls(
       'border py-0 transition-shadow',
       disabled ? '' : 'hover:shadow',
       disabled ? '' : error ? 'hover:border-red-700' : 'hover:border-gray-700',
@@ -87,7 +87,7 @@
           <slot name="prepend" />
 
           {#if icon}
-            <span class={clsx('mr-3', rounded && !$$slots.prepend && 'ml-3')}>
+            <span class={cls('mr-3', rounded && !$$slots.prepend && 'ml-3')}>
               <Icon path={icon} class="text-black/50" />
             </span>
           {/if}
@@ -96,7 +96,7 @@
 
       <Stack stack items="initial" justifyItems="initial" on:click>
         <label
-          class={clsx(
+          class={cls(
             'z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var cursor-pointer group-hover:group-focus-within:text-color-var',
             center && 'justify-center',
             error ? 'text-red-500/80' : 'text-black/50',
@@ -109,7 +109,7 @@
         </label>
 
         <div
-          class={clsx(
+          class={cls(
             'input flex items-center overflow-hidden',
             hasLabel && 'pt-4',
             dense ? 'my-1' : 'my-2',
@@ -150,7 +150,7 @@
     </Stack>
   </div>
   <div
-    class={clsx(
+    class={cls(
       'hint',
       'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
       error ? 'text-red-500' : 'text-black/50 scale-y-0'

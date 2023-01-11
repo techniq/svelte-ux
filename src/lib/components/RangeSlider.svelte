@@ -28,12 +28,12 @@
   import { spring } from 'svelte/motion';
   import { fly } from 'svelte/transition';
   import { scaleLinear } from 'd3-scale';
-  import clsx from 'clsx';
   import { mdiDragHorizontal } from '@mdi/js';
 
   import { pannable } from '$lib/actions/mouse';
   import { decimalCount, round } from '$lib/utils/number';
   import Icon from './Icon.svelte';
+  import { cls } from '../utils/styles';
 
   export let min = 0;
   export let max = 100;
@@ -217,8 +217,9 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
-  class={clsx(
+  class={cls(
     'range-slider group relative h-2 bg-black/10 rounded-full select-none outline-none',
     disabled && ' pointer-events-none opacity-50'
   )}
@@ -248,7 +249,7 @@
     on:mouseleave={onMouseLeave('range')}
     on:dblclick={() => (value = [min, max])}
     style="left: calc((((var(--end) - var(--start)) / 2 ) + var(--start)) * 100%);"
-    class={clsx(
+    class={cls(
       'range-thumb',
       'absolute top-1/2 w-8 h-4 -translate-x-1/2 -translate-y-1/2',
       'rounded-full',
@@ -269,7 +270,7 @@
     on:mouseleave={onMouseLeave('start')}
     on:dblclick={() => (value = [min, value[1]])}
     style="left: calc(var(--start) * 100%);"
-    class={clsx(
+    class={cls(
       'thumb',
       'absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2',
       'border border-black/30 bg-white rounded-full outline-4',
@@ -288,7 +289,7 @@
     on:mouseleave={onMouseLeave('end')}
     on:dblclick={() => (value = [value[0], max])}
     style="left: calc(var(--end) * 100%);"
-    class={clsx(
+    class={cls(
       'thumb',
       'absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2',
       'border border-black/30 bg-white rounded-full outline-4',

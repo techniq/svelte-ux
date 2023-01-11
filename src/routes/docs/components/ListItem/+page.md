@@ -5,7 +5,6 @@ description: A list item that provides a standard layout and works best with mul
 ---
 
 <script lang="ts">
-	import clsx from 'clsx';
 	import { mdiAccount, mdiChevronRight } from '@mdi/js';
 
 	import api from '$lib/components/ListItem.svelte?raw&sveld';
@@ -17,6 +16,7 @@ description: A list item that provides a standard layout and works best with mul
 	import ListItem from '$lib/components/ListItem.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 	import Radio from '$lib/components/Radio.svelte';
+	import { cls } from '$lib/utils/styles';
 
 	let selectedId = 1;
 	const choices = [
@@ -103,7 +103,7 @@ description: A list item that provides a standard layout and works best with mul
 				title={choice.name}
 				subheading={choice.description}
 				on:click={() => (selectedId = choice.id)}
-				class={clsx(
+				class={cls(
 					'cursor-pointer',
 					'hover:bg-blue-50',
 					selectedId == choice.id ? 'bg-blue-50' : ''
@@ -129,7 +129,7 @@ description: A list item that provides a standard layout and works best with mul
 					title={choice.name}
 					subheading={choice.description}
 					on:click={() => (selectedId = choice.id)}
-					class={clsx(
+					class={cls(
 						'px-8 py-4',
 						'cursor-pointer ring ring-inset ring-blue-500 transition-shadow duration-100',
 						'hover:bg-blue-50',
@@ -152,7 +152,7 @@ description: A list item that provides a standard layout and works best with mul
 					title={choice.name}
 					subheading={choice.description}
 					on:click={() => (selectedId = choice.id)}
-					class={clsx(
+					class={cls(
 						'px-8 py-4',
 						'cursor-pointer transition-shadow duration-100 border',
 						'hover:bg-white',

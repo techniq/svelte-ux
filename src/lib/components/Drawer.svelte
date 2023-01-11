@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import clsx from 'clsx';
 
   import Backdrop from './Backdrop.svelte';
   import CircularProgress from './CircularProgress.svelte';
@@ -9,6 +8,7 @@
   import { focusMove } from '../actions/focus';
   import portalAction from '../actions/portal';
   import { fly } from '../utils/transition';
+  import { cls } from '../utils/styles';
 
   const dispatch = createEventDispatcher();
 
@@ -43,7 +43,7 @@
   />
 
   <div
-    class={clsx(
+    class={cls(
       'bg-white fixed overflow-auto transform z-50 outline-none',
       {
         'h-full': left || right,

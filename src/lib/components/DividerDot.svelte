@@ -1,1 +1,5 @@
-<span class="mx-1 {$$props.class}"> • </span>
+<script lang="ts">
+  import { cls } from '../utils/styles';
+</script>
+
+<span class={cls('mx-1', $$props.class)}> • </span>

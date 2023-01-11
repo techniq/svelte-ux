@@ -1,13 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
-  import clsx from 'clsx';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
 
   import Logger from '../utils/logger';
   import { selectOnFocus } from '../actions/input';
   import { scrollIntoView } from '../actions/scroll';
+  import { cls } from '../utils/styles';
 
   import Button from './Button.svelte';
   import CircularProgress from './CircularProgress.svelte';
@@ -289,7 +289,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={clsx(classes.root, $$props.class)} on:click={onClick}>
+<div class={cls(classes.root, $$props.class)} on:click={onClick}>
   <TextField
     {label}
     {placeholder}
@@ -307,7 +307,7 @@
     on:keydown={onKeyDown}
     on:keypress={onKeyPress}
     actions={(node) => [selectOnFocus(node)]}
-    class={clsx(classes.field, 'h-full')}
+    class={cls(classes.field, 'h-full')}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
@@ -352,7 +352,7 @@
       on:close={() => (open = false)}
     >
       <div
-        class={clsx('items focus:outline-none', classes.items)}
+        class={cls('items focus:outline-none', classes.items)}
         class:opacity-50={loading}
         bind:this={menuItemsEl}
         on:click|stopPropagation={(e) => {
@@ -375,7 +375,7 @@
           {@const previousItem = filteredItems[index - 1]}
           {#if item.group && item.group !== previousItem?.group}
             <div
-              class={clsx(
+              class={cls(
                 'group-header text-xs uppercase leading-8 tracking-widest text-black/50 px-2',
                 classes.group
               )}
@@ -386,7 +386,7 @@
 
           <slot name="item" {item} {index} {highlightIndex}>
             <div
-              class={clsx(
+              class={cls(
                 'py-2 bg-opacity-5 hover:bg-black/5 cursor-pointer',
                 item.group ? 'px-4' : 'px-2',
                 classes.item
@@ -402,7 +402,7 @@
           </slot>
         {:else}
           <slot name="empty" {searchText}>
-            <div class={clsx('p-3 text-black/50 italic', classes.empty)}>
+            <div class={cls('p-3 text-black/50 italic', classes.empty)}>
               {loading ? 'Loading...' : 'No items found'}
             </div>
           </slot>
