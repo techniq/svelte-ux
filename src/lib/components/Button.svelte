@@ -4,6 +4,8 @@
   import cssVars from '../actions/cssVars';
   import CircularProgress from './CircularProgress.svelte';
   import { cls } from '../utils/styles';
+  import multi from '../actions/multi';
+  import type { Actions } from '../actions/multi';
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
@@ -11,6 +13,7 @@
   export let fullWidth: boolean = false;
   export let icon: string | undefined = undefined;
   export let iconOnly = icon !== undefined && $$slots.default !== true;
+  export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> = undefined;
 
   export let small: boolean = false;
   export let filled: boolean = false;
@@ -55,6 +58,7 @@
     use:cssVars={{ color }}
     style={$$props.style ?? ''}
     {disabled}
+    use:multi={actions}
   >
     {#if loading}
       <CircularProgress size={16} class={cls(classes.loading)} />
@@ -72,6 +76,7 @@
     use:cssVars={{ color }}
     style={$$props.style ?? ''}
     {disabled}
+    use:multi={actions}
   >
     {#if loading}
       <CircularProgress size={16} width={2} class={cls('mr-2', classes.loading)} />
