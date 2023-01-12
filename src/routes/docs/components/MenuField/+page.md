@@ -12,6 +12,7 @@ docUrl: $docUrl
 
   import Button from '$lib/components/Button.svelte';
   import MenuField from '$lib/components/MenuField.svelte';
+  import MenuItem from '$lib/components/MenuItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import TextField from '$lib/components/TextField.svelte';
 
@@ -72,12 +73,9 @@ docUrl: $docUrl
   <MenuField {options} let:options let:setValue>
     <menu>
       {#each options as option}
-        <li
-          class="cursor-pointer p-2 text-sm hover:bg-black/5"
-          on:click={() => setValue(option.value)}
-        >
+        <MenuItem on:click={() => setValue(option.value)}>
           {option.label}
-        </li>
+        </MenuItem>
       {/each}
     </menu>
   </MenuField>
@@ -92,15 +90,14 @@ docUrl: $docUrl
     </div>
     <menu>
       {#each options as option}
-        <li
-          class="cursor-pointer p-2 text-sm hover:bg-black/5"
+        <MenuItem
           on:click={() => {
             setValue(option.value);
             close();
           }}
         >
           {option.label}
-        </li>
+        </MenuItem>
       {/each}
     </menu>
   </MenuField>

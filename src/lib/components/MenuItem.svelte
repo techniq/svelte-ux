@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from './Button.svelte';
   import type { ComponentProps } from '../types';
+  import { cls } from '../utils/styles';
 
   type ButtonProps = ComponentProps<Button>;
 
@@ -10,6 +11,6 @@
   };
 </script>
 
-<Button base {icon} {classes} fullWidth class="p-2" on:click>
+<Button base {icon} {classes} fullWidth class={cls('text-left p-2', $$props.class)} on:click>
   <slot />
 </Button>
