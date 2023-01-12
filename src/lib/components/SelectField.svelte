@@ -19,7 +19,7 @@
     inputChange: string;
   }>();
 
-  const logger = new Logger({ level: 'WARN' });
+  const logger = new Logger('SelectField');
 
   export let items: any[] = [];
   export let itemText = (item: any) => (item?.name as string) ?? '';

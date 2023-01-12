@@ -1,11 +1,19 @@
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'] as const;
 type LogLevel = typeof logLevels[number];
 
-export default class Logger {
-  level: LogLevel = 'INFO';
+/**
+ * Enable:
+ *   localStorage.logger = 'SelectField'
+ *   localStorage.logger = 'SelectField:INFO'
+ *   localStorage.logger = 'SelectField,Dialog'
+ *   localStorage.logger = 'SelectField:INFO,Dialog'
+ */
 
-  constructor(options?: { level: LogLevel }) {
-    this.level = options?.level ?? 'INFO';
+export default class Logger {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
   }
 
   trace(...message: any[]) {
@@ -29,28 +37,63 @@ export default class Logger {
   }
 
   log(level: LogLevel, ...message: any) {
-    const shouldLog = logLevels.indexOf(level) >= logLevels.indexOf(this.level);
+    const enabledLoggers =
+      localStorage
+        .getItem('logger')
+        ?.split(',')
+        .map((x) => x.split(':') as [string, LogLevel?]) ?? [];
+
+    const enabledLogger = enabledLoggers.find((x) => x[0] === this.name);
+
+    const shouldLog =
+      enabledLogger != null &&
+      logLevels.indexOf(level) >= logLevels.indexOf(enabledLogger[1] ?? 'DEBUG');
 
     if (shouldLog) {
       switch (level) {
         case 'TRACE':
-          console.trace(`%c ${level}`, 'color: hsl(200deg, 40%, 50%)', ...message);
+          console.trace(
+            `%c${this.name} %c${level}`,
+            'color: hsl(200deg, 10%, 50%)',
+            'color: hsl(200deg, 40%, 50%)',
+            ...message
+          );
           break;
 
         case 'DEBUG':
-          console.log(`%c ${level}`, 'color: hsl(200deg, 40%, 50%)', ...message);
+          console.log(
+            `%c${this.name} %c${level}`,
+            'color: hsl(200deg, 10%, 50%)',
+            'color: hsl(200deg, 40%, 50%)',
+            ...message
+          );
           break;
 
         case 'INFO':
-          console.log(`%c ${level}`, 'color: hsl(60deg, 100%, 50%)', ...message);
+          console.log(
+            `%c${this.name} %c${level}`,
+            'color: hsl(200deg, 10%, 50%)',
+            'color: hsl(60deg, 100%, 50%)',
+            ...message
+          );
           break;
 
         case 'WARN':
-          console.warn(`%c ${level}`, 'color: hsl(30deg, 100%, 50%)', ...message);
+          console.warn(
+            `%c${this.name} %c${level}`,
+            'color: hsl(200deg, 10%, 50%)',
+            'color: hsl(30deg, 100%, 50%)',
+            ...message
+          );
           break;
 
         case 'ERROR':
-          console.warn(`%c ${level}`, 'color: hsl(0deg, 100%, 50%)', ...message);
+          console.warn(
+            `%c${this.name} %c${level}`,
+            'color: hsl(200deg, 10%, 50%)',
+            'color: hsl(0deg, 100%, 50%)',
+            ...message
+          );
           break;
       }
     }
