@@ -105,7 +105,7 @@
           {#if slot.slot_props != '{}'}
             {#each parseSlotProps(slot.slot_props) as { key, value }}
               <div
-                class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+                class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
               >
                 {key}: {value}
               </div>
