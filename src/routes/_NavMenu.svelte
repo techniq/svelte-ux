@@ -17,7 +17,7 @@
       'Paginate',
       'Pagination',
       'Progress',
-      'Scroll',
+      'ScrollContainer',
       'SpringValue',
       'ToggleGroup',
       'TweenedValue',
