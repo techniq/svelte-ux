@@ -6,12 +6,19 @@
     mdiInformationOutline,
   } from '@mdi/js';
 
-  import DividerDot from './DividerDot.svelte';
   import EmptyMessage from './EmptyMessage.svelte';
   import Icon from './Icon.svelte';
   import ListItem from './ListItem.svelte';
 
   export let api: SveldJson;
+
+  function parseSlotProps(slot_props: string) {
+    return slot_props
+      .slice(1, slot_props.length - 1) // remove '{' and '}'
+      .split(',')
+      .map((x) => x.split(':').map((x) => x.trim()))
+      .map((x) => ({ key: x[0], value: x[1] }));
+  }
 
   // $: console.log({ api });
 </script>
@@ -94,9 +101,9 @@
           {/if}
         </div>
 
-        <!-- <div slot="actions">
-          {#if slot.slot_props != null}
-            {#each Object.entries(slot.slot_props) as [key, value]}
+        <div slot="actions" class="flex gap-1">
+          {#if slot.slot_props != '{}'}
+            {#each parseSlotProps(slot.slot_props) as { key, value }}
               <div
                 class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
               >
@@ -104,7 +111,7 @@
               </div>
             {/each}
           {/if}
-        </div> -->
+        </div>
       </ListItem>
     {:else}
       <EmptyMessage>No slots</EmptyMessage>
