@@ -19,10 +19,11 @@ export default function multi<TNode = HTMLElement | SVGElement>(
   }
 
   function destroy() {
-    destroyFuncs?.forEach((fn) => fn());
+    destroyFuncs?.forEach((fn) => fn?.());
   }
 
-  update();
-
-  return { update, destroy };
+  if (actions?.length) {
+    update();
+    return { update, destroy };
+  }
 }
