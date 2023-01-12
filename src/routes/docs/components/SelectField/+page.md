@@ -5,13 +5,14 @@ docUrl: $docUrl
 ---
 
 <script>
-  import { mdiMagnify, mdiPlus } from '@mdi/js';
+  import { mdiMagnify, mdiPlus, mdiPencil } from '@mdi/js';
 
   import api from '$lib/components/SelectField.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
+  import Drawer from '$lib/components/Drawer.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import Stack from '$lib/components/Stack.svelte';
@@ -93,6 +94,38 @@ docUrl: $docUrl
         <div>
           <div>{item.name}</div>
           <div class="text-sm text-black/50">{item.value}</div>
+        </div>
+      </MenuItem>
+    </div>
+  </SelectField>
+</Preview>
+
+## Item with action
+
+<Preview>
+  <SelectField {items} on:change={(e) => console.log('on:change', e.detail)}>
+    <div slot="item" let:item let:index let:highlightIndex>
+      <MenuItem class={cls(index === highlightIndex && 'bg-black/5')} scrollIntoView={index === highlightIndex}>
+        <div class="grid grid-cols-[1fr,auto] items-center w-full">
+          <div>
+            <div>{item.name}</div>
+            <div class="text-sm text-black/50">{item.value}</div>
+          </div>
+          <Toggle let:on={open} let:toggle let:toggleOff>
+            <Button
+              icon={mdiPencil}
+              class="-m-1 p-1 text-xs text-gray-400 z-[9999]"
+              on:click={toggle}
+            />
+            <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+              <div class="p-4">
+                Editing item: {item.name}
+              </div>
+              <div class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400">
+                <Button on:click={toggleOff}>Close</Button>
+              </div>
+            </Drawer>
+          </Toggle>
         </div>
       </MenuItem>
     </div>

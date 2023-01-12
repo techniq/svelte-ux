@@ -156,11 +156,13 @@
   }
 
   function onBlur(e: FocusEvent) {
-    logger.debug('onBlur');
+    logger.debug('onBlur', { relatedTarget: e.relatedTarget, menuItemsEl });
 
-    // Hide if focus not moved to menu (item click)
-    if (e.relatedTarget instanceof Node && !e.relatedTarget.contains(menuItemsEl)) {
+    // Hide if focus not moved to menu (item clicked)
+    if (e.relatedTarget instanceof Node && !menuItemsEl.contains(e.relatedTarget)) {
       hide();
+    } else {
+      logger.debug('ignoring blur');
     }
   }
 
@@ -363,6 +365,8 @@
         class:opacity-50={loading}
         bind:this={menuItemsEl}
         on:click|stopPropagation={(e) => {
+          console.log('container click');
+
           if (e.target instanceof HTMLElement) {
             // Find slot parent of click target item, fallback to `e.target` if slot is not overridden
             // Use `.items > ` in case slot is nested (ex. GraphQLSelect with slot)
