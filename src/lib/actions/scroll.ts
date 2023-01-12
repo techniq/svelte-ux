@@ -1,4 +1,4 @@
-import { scrollIntoView as _scrollIntoView } from '$lib/utils/dom';
+import { scrollIntoView as scrollIntoViewUtil } from '$lib/utils/dom';
 
 export function scrollIntoView(
   node: HTMLElement,
@@ -11,7 +11,7 @@ export function scrollIntoView(
   function update(options: Parameters<typeof scrollIntoView>[1]) {
     if (typeof options.condition === 'boolean' ? options.condition : options.condition(node)) {
       setTimeout(() => {
-        _scrollIntoView(node);
+        scrollIntoViewUtil(node);
       }, options.delay ?? 0);
     }
   }

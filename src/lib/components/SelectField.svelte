@@ -6,12 +6,12 @@
 
   import Logger from '../utils/logger';
   import { selectOnFocus } from '../actions/input';
-  import { scrollIntoView } from '../actions/scroll';
   import { cls } from '../utils/styles';
 
   import Button from './Button.svelte';
   import CircularProgress from './CircularProgress.svelte';
   import Menu from './Menu.svelte';
+  import MenuItem from './MenuItem.svelte';
   import TextField from './TextField.svelte';
 
   const dispatch = createEventDispatcher<{
@@ -392,19 +392,16 @@
           {/if}
 
           <slot name="item" {item} {index} {highlightIndex}>
-            <div
+            <MenuItem
               class={cls(
-                'py-2 bg-opacity-5 hover:bg-black/5 cursor-pointer',
+                index === highlightIndex && 'bg-black/5',
                 item.group ? 'px-4' : 'px-2',
                 classes.item
               )}
-              class:bg-black={index === highlightIndex}
-              use:scrollIntoView={{
-                condition: index === highlightIndex,
-              }}
+              scrollIntoView={index === highlightIndex}
             >
               {itemText(item)}
-            </div>
+            </MenuItem>
           </slot>
         {:else}
           <slot name="empty" {searchText}>

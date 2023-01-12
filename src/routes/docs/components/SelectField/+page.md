@@ -13,14 +13,15 @@ docUrl: $docUrl
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import MenuItem from '$lib/components/MenuItem.svelte';
   import Stack from '$lib/components/Stack.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 
-  import { scrollIntoView } from '$lib/actions/scroll';
 
   import { delay } from '$lib/utils/promise';
+  import { cls } from '$lib/utils/styles';
 
   const items = [
     { name: 'One', value: 1 },
@@ -88,17 +89,12 @@ docUrl: $docUrl
 <Preview>
   <SelectField {items} on:change={(e) => console.log('on:change', e.detail)}>
     <div slot="item" let:item let:index let:highlightIndex>
-      <div
-        class="p-2 bg-opacity-5 hover:bg-black/5 cursor-pointer"
-        class:bg-black={index === highlightIndex}
-        use:scrollIntoView={{
-          condition: index === highlightIndex,
-          initial: false,
-        }}
-      >
-        <div>{item.name}</div>
-        <div class="text-sm text-black/50">{item.value}</div>
-      </div>
+      <MenuItem class={cls(index === highlightIndex && 'bg-black/5')} scrollIntoView={index === highlightIndex}>
+        <div>
+          <div>{item.name}</div>
+          <div class="text-sm text-black/50">{item.value}</div>
+        </div>
+      </MenuItem>
     </div>
   </SelectField>
 </Preview>
