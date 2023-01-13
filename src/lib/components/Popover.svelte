@@ -40,7 +40,7 @@
 
   const dispatch = createEventDispatcher();
 
-  function close(reason: string) {
+  function close(reason: string = 'unknown') {
     dispatch('close', reason);
     open = false;
   }
