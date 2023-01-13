@@ -50,12 +50,10 @@ docUrl: $docUrl
     <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full width</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup contained class="w-full">
-          <div class="options w-full border">
-            <ToggleOption>Yes</ToggleOption>
-            <ToggleOption>No</ToggleOption>
-            <ToggleOption>All</ToggleOption>
-          </div>
+        <ToggleGroup contained classes={{ root: 'w-full', options: 'w-full' }}>
+          <ToggleOption>Yes</ToggleOption>
+          <ToggleOption>No</ToggleOption>
+          <ToggleOption>All</ToggleOption>
         </ToggleGroup>
       </Field>
     </Preview>
@@ -66,12 +64,10 @@ docUrl: $docUrl
     <div class="text-xs font-semibold text-black/50 mb-1 ml-2">fixed width</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup contained class="w-96">
-          <div class="options w-full border">
-            <ToggleOption>Yes</ToggleOption>
-            <ToggleOption>No</ToggleOption>
-            <ToggleOption>All</ToggleOption>
-          </div>
+        <ToggleGroup contained classes={{ root: 'w-96', options: 'w-full' }}>
+          <ToggleOption>Yes</ToggleOption>
+          <ToggleOption>No</ToggleOption>
+          <ToggleOption>All</ToggleOption>
         </ToggleGroup>
       </Field>
     </Preview>
@@ -81,18 +77,16 @@ docUrl: $docUrl
     <div class="text-lg font-semibold mt-8 mb-1 ml-2">ToggleGroup with icons</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup contained circle>
-          <div class="options h-12 w-32 border rounded-full">
-            <ToggleOption>
-              <Icon path={mdiAccount} />
-            </ToggleOption>
-            <ToggleOption>
-              <Icon path={mdiAccountOutline} />
-            </ToggleOption>
-            <ToggleOption>
-              <Icon path={mdiAccountMultipleOutline} />
-            </ToggleOption>
-          </div>
+        <ToggleGroup contained circle classes={{ options: 'h-12 w-32' }}>
+          <ToggleOption>
+            <Icon path={mdiAccount} />
+          </ToggleOption>
+          <ToggleOption>
+            <Icon path={mdiAccountOutline} />
+          </ToggleOption>
+          <ToggleOption>
+            <Icon path={mdiAccountMultipleOutline} />
+          </ToggleOption>
         </ToggleGroup>
       </Field>
     </Preview>
