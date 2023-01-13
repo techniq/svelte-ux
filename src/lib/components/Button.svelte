@@ -54,6 +54,7 @@
     {...$$restProps}
     {href}
     {target}
+    on:click
     class={_class}
     use:cssVars={{ color }}
     style={$$props.style ?? ''}
