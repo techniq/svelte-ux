@@ -55,6 +55,7 @@
 
   $: filteredItems = items ?? [];
   let searchText = '';
+  $: logger.debug({ searchText });
 
   export let value: any = undefined;
   let prevValue = undefined;
