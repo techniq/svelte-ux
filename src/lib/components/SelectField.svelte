@@ -365,7 +365,7 @@
         class:opacity-50={loading}
         bind:this={menuItemsEl}
         on:click|stopPropagation={(e) => {
-          console.log('container click');
+          logger.debug('Items container clicked');
 
           if (e.target instanceof HTMLElement) {
             // Find slot parent of click target item, fallback to `e.target` if slot is not overridden
