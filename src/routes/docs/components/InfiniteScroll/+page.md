@@ -5,7 +5,7 @@ docUrl: $docUrl
 ---
 
 <script lang="ts">
-	import api from '$lib/components/Paginate.svelte?raw&sveld';
+	import api from '$lib/components/InfiniteScroll.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
 	import InfiniteScroll from '$lib/components/InfiniteScroll.svelte';
