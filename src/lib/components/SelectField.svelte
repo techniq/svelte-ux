@@ -410,7 +410,7 @@
           </slot>
         {:else}
           <slot name="empty" {loading} {searchText}>
-            <div class={cls('p-3 text-black/50 italic', classes.empty)}>
+            <div class={cls('p-3 text-black/50 italic text-sm', classes.empty)}>
               {loading ? 'Loading...' : 'No items found'}
             </div>
           </slot>
