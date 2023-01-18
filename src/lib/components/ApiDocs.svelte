@@ -101,6 +101,10 @@
           {/if}
         </div>
 
+        <div slot="subheading" class="text-black/50 text-xs">
+          {slot.description ?? ''}
+        </div>
+
         <div slot="actions" class="flex gap-1">
           {#if slot.slot_props != '{}'}
             {#each parseSlotProps(slot.slot_props) as { key, value }}

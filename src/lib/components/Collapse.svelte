@@ -6,6 +6,10 @@
 
   import Icon from './Icon.svelte';
 
+  /**
+   * @slot {{ active: number }} trigger - Primary content to trigger the show/hide
+   */
+
   const dispatch = createEventDispatcher();
 
   export let name = 'default';
