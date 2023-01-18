@@ -29,6 +29,9 @@
   let menuItemsEl: HTMLMenuElement;
 
   function onClick(e) {
+    // Do not allow event to reach Popover's clickOutside
+    e.stopPropagation();
+
     try {
       if (e.target === menuItemsEl) {
         // Clicked within menu but outside of any items
