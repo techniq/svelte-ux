@@ -383,7 +383,7 @@
           }
         }}
       >
-        {#each filteredItems ?? [] as item, index}
+        {#each filteredItems ?? [] as item, index (itemValue(item))}
           {@const previousItem = filteredItems[index - 1]}
           {#if item.group && item.group !== previousItem?.group}
             <div
