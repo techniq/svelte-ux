@@ -19,15 +19,18 @@ export function intersection(
 ): SvelteActionReturnType {
   // TODO: Support definiinting `options.root = node.parentNode` easily
 
-  let observer = new IntersectionObserver((entries, observer) => {
-    const entry = entries[0];
-    node.dispatchEvent(new CustomEvent('intersecting', { detail: entry }));
-    // if (entry.intersectionRatio > 0) {
-    //   node.dispatchEvent(new CustomEvent('visible', { detail: entry }));
-    // } else {
-    //   node.dispatchEvent(new CustomEvent('invisible', { detail: entry }));
-    // }
-  }, options);
+  let observer = new IntersectionObserver(
+    (entries, observer) => {
+      const entry = entries[0];
+      node.dispatchEvent(new CustomEvent('intersecting', { detail: entry }));
+      // if (entry.intersectionRatio > 0) {
+      //   node.dispatchEvent(new CustomEvent('visible', { detail: entry }));
+      // } else {
+      //   node.dispatchEvent(new CustomEvent('invisible', { detail: entry }));
+      // }
+    },
+    { root: node.parentElement, ...options }
+  );
   observer.observe(node);
 
   return {
