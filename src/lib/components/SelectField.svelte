@@ -74,7 +74,7 @@
     });
 
     if (loading === true) {
-      // wait to apply any changes (initially could be loading selected item)
+      // wait to apply any changes (initially could be loading selected option)
     } else {
       if (selected !== undefined && itemValue(selected) !== itemValue(prevSelected)) {
         logger.info('selected changed', {
@@ -102,8 +102,7 @@
         prevValue = value;
         prevSelected = selectValue(value);
       } else {
-        logger.info('neither selected or value changed (previous option re-selected)');
-        hide();
+        logger.info('neither selected or value changed (items only)');
       }
     }
   }
@@ -285,11 +284,12 @@
     dispatch('change', { item, value: itemValue(item) });
 
     // Only hide if value changed (do not hide if opening initially and loading list)
-    if (value != previousValue) {
-      hide();
-    } else {
-      logger.debug('same value selected', { previousValue, value });
-    }
+    // if (value != previousValue) {
+    //   hide();
+    // } else {
+    //   logger.debug('same value selected', { previousValue, value });
+    // }
+    hide();
 
     return item;
   }
