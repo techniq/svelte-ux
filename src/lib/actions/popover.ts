@@ -8,6 +8,7 @@ import {
   shift,
   autoPlacement,
   size,
+  Alignment,
 } from '@floating-ui/dom';
 import portal from './portal';
 
@@ -27,6 +28,10 @@ export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActi
 
   const cleanup = autoUpdate(anchorEl, popoverEl, () => {
     // Only allow autoPlacement to swap sides (ex. top/bottom) and not also axises (ex. left/right).  Mathces flip behavor
+    const alignment =
+      options?.autoPlacement && options?.placement
+        ? (options?.placement.split('-')[1] as Alignment)
+        : undefined;
     const allowedPlacements =
       options?.autoPlacement && options?.placement
         ? [options?.placement, getOppositePlacement(options?.placement)]
@@ -36,7 +41,7 @@ export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActi
       placement: options?.placement,
       middleware: [
         offset(options?.offset),
-        options?.autoPlacement ? autoPlacement({ allowedPlacements }) : flip(),
+        options?.autoPlacement ? autoPlacement({ alignment, allowedPlacements }) : flip(),
         options?.resize &&
           size({
             padding: options?.padding,
