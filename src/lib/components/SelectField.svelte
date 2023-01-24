@@ -164,7 +164,7 @@
     logger.debug('onBlur', { relatedTarget: e.relatedTarget, menuItemsEl });
 
     // Hide if focus not moved to menu (item clicked)
-    if (e.relatedTarget instanceof Node && !menuItemsEl.contains(e.relatedTarget)) {
+    if (e.relatedTarget instanceof Node && !menuItemsEl?.contains(e.relatedTarget)) {
       hide();
     } else {
       logger.debug('ignoring blur');
