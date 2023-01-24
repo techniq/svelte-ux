@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { ComponentProps, createEventDispatcher } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
@@ -47,11 +47,12 @@
   } = {};
 
   // Menu props
-  export let placement: Placement = 'bottom';
+  export let placement: Placement = 'bottom-start';
   export let autoPlacement = true;
   export let matchWidth = true;
   export let resize = true;
   export let disableTransition = false;
+  export let menuProps: ComponentProps<Menu> = undefined;
 
   $: filteredItems = items ?? [];
   let searchText = '';
@@ -364,6 +365,7 @@
       moveFocus={false}
       bind:open
       on:close={() => (open = false)}
+      {...menuProps}
     >
       <div
         class={cls('items focus:outline-none', classes.items)}
