@@ -40,6 +40,8 @@ docUrl: $docUrl
     { name: 'Seven', value: 7, group: "Third" },
   ];
 
+  const manyItems = Array.from({ length: 100 }).map((_, i) => ({ name: i + 1, value: i + 1 }))
+
   let value = 3;
 </script>
 
@@ -71,6 +73,12 @@ docUrl: $docUrl
 
 <Preview>
   <SelectField items={itemsWithGroup} on:change={(e) => console.log('on:change', e.detail)} />
+</Preview>
+
+## Many options
+
+<Preview>
+  <SelectField items={manyItems} />
 </Preview>
 
 ## Loading
