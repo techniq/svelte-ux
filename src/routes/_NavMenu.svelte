@@ -13,6 +13,7 @@
       'ExpansionPanel',
       'Icon',
       'InfiniteScroll',
+      'Lazy',
       'ListItem',
       'Paginate',
       'Pagination',
