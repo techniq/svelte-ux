@@ -61,6 +61,12 @@ docUrl: $docUrl
   <Button on:click={() => (value = 4)}>Pick 4</Button>
 </Preview>
 
+## clearSearchOnFocus
+
+<Preview>
+  <SelectField {items} bind:value clearSearchOnFocus />
+</Preview>
+
 ## Grouped options
 
 <Preview>

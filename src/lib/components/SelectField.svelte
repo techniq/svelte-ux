@@ -62,7 +62,6 @@
   export let selected = undefined;
   let prevSelected = undefined;
 
-  $: updateSelected(selected, value, items);
   function updateSelected(selected, value, items) {
     logger.debug('updateSelected', {
       value,
@@ -101,9 +100,14 @@
         // Capture for next change
         prevValue = value;
         prevSelected = selectValue(value);
+      } else {
+        logger.info('neither selected or value changed (previous option re-selected)');
+        hide();
       }
     }
   }
+  // Reactively call anytime `selected`, `value`, or `items` change
+  $: updateSelected(selected, value, items);
 
   export let search = async (text: string) => {
     logger.debug('search', text);
