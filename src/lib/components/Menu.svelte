@@ -62,7 +62,7 @@
 >
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <menu
-    class="menu-items outline-none"
+    class="menu-items outline-none max-h-screen"
     bind:this={menuItemsEl}
     on:click={onClick}
     transition:transition={transitionParams}
