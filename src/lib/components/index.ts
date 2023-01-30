@@ -40,6 +40,7 @@ export { default as MonthList } from './MonthList.svelte';
 export { default as MonthListByYear } from './MonthListByYear.svelte';
 export { default as NavItem } from './NavItem.svelte';
 export { default as Notification } from './Notification.svelte';
+export { default as Overflow } from './Overflow.svelte';
 export { default as Overlay } from './Overlay.svelte';
 export { default as Paginate } from './Paginate.svelte';
 export { default as Pagination } from './Pagination.svelte';
