@@ -49,3 +49,50 @@ export function remainingViewportWidth(
   update(options);
   return { update };
 }
+
+/**
+ * Watch for overflow changes (x or y) and dispatch `overflowX` / `overflowY` events with amount
+ */
+export function overflow(node: HTMLElement) {
+  let overflowedX = 0;
+  let overflowedY = 0;
+
+  function update() {
+    const prevOverflowedX = overflowedX;
+    overflowedX = node.scrollWidth - node.clientWidth;
+    if (overflowedX !== prevOverflowedX) {
+      console.log('change');
+      node.dispatchEvent(
+        new CustomEvent('overflowX', { detail: node.scrollWidth - node.clientWidth })
+      );
+    }
+
+    const prevOverflowedY = overflowedY;
+    overflowedY = node.scrollHeight - node.clientHeight;
+    if (overflowedY !== prevOverflowedY) {
+      node.dispatchEvent(
+        new CustomEvent('overflowY', { detail: node.scrollHeight - node.clientHeight })
+      );
+    }
+  }
+
+  // Update when node resized (and on initial mount)
+  const resizeObserver = new ResizeObserver((entries, observer) => {
+    update();
+  });
+  resizeObserver.observe(node);
+
+  // Update when new children (or grandchildren) are added/removed
+  const mutationObserver = new MutationObserver((entries, observer) => {
+    update();
+  });
+  mutationObserver.observe(node, { childList: true, subtree: true /*attributes: true, */ }); // TODO: Attributes without filter cause browser to lock up
+
+  return {
+    update,
+    destroy() {
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+    },
+  };
+}
