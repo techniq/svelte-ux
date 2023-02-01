@@ -6,6 +6,7 @@
     mdiInformationOutline,
   } from '@mdi/js';
 
+  import Button from './Button.svelte';
   import EmptyMessage from './EmptyMessage.svelte';
   import Icon from './Icon.svelte';
   import ListItem from './ListItem.svelte';
@@ -71,10 +72,28 @@
         <Icon path={mdiInformationOutline} />
         <span>
           Remaining props are passed to underlying
-          <div class="inline-block font-semibold bg-white border border-black/30 px-2 rounded-full">
-            &lt;{api.rest_props.name}&gt;
-          </div>
-          {api.rest_props.type === 'InlineComponent' ? 'component' : 'element'}
+          {#if api.rest_props.type === 'InlineComponent'}
+            <Button
+              href="/docs/components/{api.rest_props.name}#props"
+              target="_blank"
+              base
+              class="text-xs font-semibold bg-white border border-black/30 px-2 rounded-full"
+            >
+              &lt;{api.rest_props.name}&gt;
+            </Button>
+            component
+          {:else}
+            <Button
+              href="https://developer.mozilla.org/docs/Web/HTML/Element/{api.rest_props
+                .name}#attributes"
+              target="_blank"
+              base
+              class="text-xs font-semibold bg-white border border-black/30 px-2 rounded-full"
+            >
+              &lt;{api.rest_props.name}&gt;
+            </Button>
+            element
+          {/if}
         </span>
       </div>
     {/if}
