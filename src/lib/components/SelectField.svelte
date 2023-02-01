@@ -161,9 +161,10 @@
   }
 
   function onBlur(e: FocusEvent) {
-    logger.debug('onBlur', { relatedTarget: e.relatedTarget, menuItemsEl });
+    logger.debug('onBlur', { target: e.target, relatedTarget: e.relatedTarget, menuItemsEl });
 
     // Hide if focus not moved to menu (item clicked)
+    // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu item (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.items` after setting `tabindex="-1"
     if (e.relatedTarget instanceof Node && !menuItemsEl?.contains(e.relatedTarget)) {
       hide();
     } else {
@@ -368,6 +369,7 @@
       {...menuProps}
     >
       <div
+        tabindex="-1"
         class={cls('items focus:outline-none', classes.items)}
         class:opacity-50={loading}
         bind:this={menuItemsEl}
