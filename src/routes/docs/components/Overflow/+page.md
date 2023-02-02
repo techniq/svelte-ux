@@ -39,11 +39,7 @@ docUrl: $docUrl
 
 <Preview>
 	<Overflow class="w-1/2 truncate border" let:overflowX>
-	{#if overflowX}
-		<Tooltip title={text}>{text}</Tooltip>
-	{:else}
-		{text}
-	{/if}
+		<Tooltip title={text} enabled={overflowX}>{text}</Tooltip>
 	</Overflow>
 </Preview>
 
