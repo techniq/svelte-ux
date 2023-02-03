@@ -10,7 +10,7 @@ export type DataBackgroundOptions = {
    *   - tailwind gradient classes (`from-blue-200 to-blue-400`)
    *   - Set CSS variables `--color-from` and `--color-to`
    */
-  color?: string;
+  color?: string | ((value: number) => string);
 
   /**
    * Render as bar.  Default to fill (heatmap)
@@ -39,7 +39,7 @@ export function dataBackground(
   const barStart = tweened(0, { duration: 0, ...options.tweened });
   const barEnd = tweened(0, { duration: 0, ...options.tweened });
 
-  function update(options) {
+  function update(options: DataBackgroundOptions) {
     if (options.enabled === false) {
       // remove styles
       node.style.backgroundImage = '';
@@ -66,8 +66,16 @@ export function dataBackground(
         node.style.setProperty('--barEnd', `${value}%`);
       });
 
-      node.style.setProperty('--color-from', options.color ?? 'var(--tw-gradient-from)');
-      node.style.setProperty('--color-to', options.color ?? 'var(--tw-gradient-to)');
+      node.style.setProperty(
+        '--color-from',
+        (typeof options.color === 'function' ? options.color(options.value) : options.color) ??
+          'var(--tw-gradient-from)'
+      );
+      node.style.setProperty(
+        '--color-to',
+        (typeof options.color === 'function' ? options.color(options.value) : options.color) ??
+          'var(--tw-gradient-to)'
+      );
 
       const insetX = Array.isArray(options.inset) ? options.inset[0] : options.inset;
       const insetY = Array.isArray(options.inset) ? options.inset[1] : options.inset;
