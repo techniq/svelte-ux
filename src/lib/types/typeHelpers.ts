@@ -2,6 +2,13 @@
 
 import type { SvelteComponentTyped } from 'svelte';
 import type { derived, Readable } from 'svelte/store';
+import type {
+  FlyParams,
+  SlideParams,
+  BlurParams,
+  FadeParams,
+  ScaleParams,
+} from 'svelte/transition';
 
 // https://www.typescriptlang.org/docs/handbook/basic-types.html#never
 export function fail(message: string): never {
@@ -83,3 +90,5 @@ export type StoresValues<T> = T extends Readable<infer U>
   : {
       [K in keyof T]: T[K] extends Readable<infer U> ? U : never;
     };
+
+export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;

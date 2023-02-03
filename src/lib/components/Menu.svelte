@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { slide, SlideParams } from 'svelte/transition';
+  import { slide } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
   import type { Placement } from '@floating-ui/dom';
 
@@ -8,6 +8,7 @@
   import { cls } from '../utils/styles';
 
   import Popover from './Popover.svelte';
+  import type { TransitionParams } from '$lib/types';
 
   const dispatch = createEventDispatcher();
 
@@ -20,9 +21,9 @@
   export let resize = false;
   export let disableTransition = false;
   export let transition = disableTransition
-    ? (node: HTMLElement, params: any) => null as TransitionConfig
+    ? (node: HTMLElement, params: TransitionParams) => null as TransitionConfig
     : slide;
-  export let transitionParams: any = undefined; // TODO: Provider interface of all *Params (SlideParams, FlyParams, etc)
+  export let transitionParams: TransitionParams = {};
   export let explicitClose = false;
   export let moveFocus = true;
 

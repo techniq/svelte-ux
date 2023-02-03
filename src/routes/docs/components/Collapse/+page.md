@@ -5,6 +5,8 @@ docUrl: $docUrl
 ---
 
 <script>
+  import { fade } from 'svelte/transition';
+
   import api from '$lib/components/Collapse.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -73,6 +75,34 @@ docUrl: $docUrl
       </div>
     </Collapse>
   {/each}
+</Preview>
+
+## Custom transition
+
+<Preview>
+  <Card>
+    {#each Array(5) as _, i}
+      <Collapse name="Item {i + 1}" transition={fade}>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit! Inventore laborum rerum at id?
+        </div>
+      </Collapse>
+    {/each}
+  </Card>
+</Preview>
+
+## Transition params
+
+<Preview>
+  <Card>
+    {#each Array(5) as _, i}
+      <Collapse name="Item {i + 1}" transitionParams={{ duration: 2000 }}>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit! Inventore laborum rerum at id?
+        </div>
+      </Collapse>
+    {/each}
+  </Card>
 </Preview>
 
 # API

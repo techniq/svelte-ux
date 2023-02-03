@@ -5,6 +5,7 @@
   import { cls } from '../utils/styles';
 
   import Icon from './Icon.svelte';
+  import type { TransitionParams } from '$lib/types';
 
   /**
    * @slot {{ active: number }} trigger - Primary content to trigger the show/hide
@@ -17,6 +18,9 @@
   export let open = false;
   export let popout = false;
   export let disabled = false;
+
+  export let transition = slide;
+  export let transitionParams: TransitionParams = {};
 
   /**
    * Controls how first, last, and gap between are calculated
@@ -57,14 +61,18 @@
     <slot name="trigger" {active}><span class="flex-1">{name}</span></slot>
 
     <slot name="icon" {active}>
-      <div class="transition-all duration-300 transform" class:-rotate-180={active}>
+      <div
+        style:--duration="{transitionParams.duration ?? 300}ms"
+        class="transition-all duration-[var(--duration)] transform"
+        class:-rotate-180={active}
+      >
         <Icon path={mdiChevronDown} />
       </div>
     </slot>
   </button>
 
   {#if active}
-    <div transition:slide|local>
+    <div transition:transition|local={transitionParams}>
       <slot {active} />
     </div>
   {/if}
