@@ -17,20 +17,6 @@ docUrl: $docUrl
 
 # Examples
 
-## Simple without bind:group
-
-<Preview>
-  <Card>
-    {#each Array(5) as _, i}
-      <Collapse name="Item {i + 1}">
-        <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit! Inventore laborum rerum at id?
-        </div>
-      </Collapse>
-    {/each}
-  </Card>
-</Preview>
-
 ## Separate without bind:group
 
 <Preview>
