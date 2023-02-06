@@ -38,8 +38,8 @@
 >
   <slot name="trigger" slot="trigger" />
 
-  <div slot="icon" class="text-gray-500 px-2" let:active>
-    <div class="transition-all duration-300 transform" class:-rotate-180={active}>
+  <div slot="icon" class="text-gray-500 px-2" let:open>
+    <div class="transition-all duration-300 transform" class:-rotate-180={open}>
       <Icon path={enabled ? mdiChevronDown : null} />
     </div>
   </div>

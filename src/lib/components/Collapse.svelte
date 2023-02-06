@@ -13,8 +13,9 @@
 
   const dispatch = createEventDispatcher();
 
-  export let name = 'default';
-  export let group = '';
+  export let name = '';
+  export let value = undefined;
+  export let group = undefined;
   export let open = false;
   export let popout = false;
   export let disabled = false;
@@ -30,18 +31,15 @@
    */
   export let list: 'type' | 'parent' | 'group' = 'parent';
 
-  $: if (open) {
-    group = name;
-  }
-  $: active = group === name;
-  $: dispatch('change', { open: active, name });
+  $: open = group !== undefined ? group === value : open;
+  $: dispatch('change', { open, name });
 </script>
 
 <div
   {...$$restProps}
   class={cls(
     popout && 'transition-all duration-all',
-    popout && active && 'my-3',
+    popout && open && 'my-3',
     popout && list === 'type' && 'first-of-type:mt-0 last-of-type:mb-0',
     popout && list === 'parent' && 'first:mt-0 last:mb-0',
     popout && list === 'group' && 'group-first:mt-0 group-last:mb-0',
@@ -54,26 +52,27 @@
     class:cursor-default={disabled}
     on:click={() => {
       if (!disabled) {
-        group = group === name ? '' : name;
+        open = !open;
+        group = group === value ? undefined : value;
       }
     }}
   >
-    <slot name="trigger" {active}><span class="flex-1">{name}</span></slot>
+    <slot name="trigger" {open}><span class="flex-1">{name}</span></slot>
 
-    <slot name="icon" {active}>
+    <slot name="icon" {open}>
       <div
         style:--duration="{transitionParams.duration ?? 300}ms"
         class="transition-all duration-[var(--duration)] transform"
-        class:-rotate-180={active}
+        class:-rotate-180={open}
       >
         <Icon path={mdiChevronDown} />
       </div>
     </slot>
   </button>
 
-  {#if active}
+  {#if open}
     <div transition:transition|local={transitionParams}>
-      <slot {active} />
+      <slot {open} />
     </div>
   {/if}
 </div>
