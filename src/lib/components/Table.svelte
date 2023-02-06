@@ -20,6 +20,9 @@
     container?: string;
     wrapper?: string;
     table?: string;
+    thead?: string;
+    tbody?: string;
+    tr?: string;
     th?: string;
     td?: string;
   } = {};
@@ -27,27 +30,51 @@
     container?: string;
     wrapper?: string;
     table?: string;
+    thead?: string;
+    tbody?: string;
+    tr?: string;
     th?: string;
     td?: string;
   } = {};
 
   $: order = { by: orderBy, direction: orderDirection };
 
-  $: headers = getHeaders(columns);
-  $: rowColumns = getRowColumns(columns);
+  $: headers = getHeaders(columns).map((headerRow) => {
+    return headerRow.map((column) => {
+      return {
+        ...column,
+        class: {
+          header: cls(classes.th, column.class?.header),
+          data: cls(classes.td, column.class?.data),
+        },
+      };
+    });
+  });
+  $: rowColumns = getRowColumns(columns).map((column) => {
+    return {
+      ...column,
+      class: {
+        header: cls(classes.th, column.class?.header),
+        data: cls(classes.td, column.class?.data),
+      },
+    };
+  });
+
+  $: console.log({ rowColumns });
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class={cls('table-container"', classes.container, $$props.class)} style={styles.container}>
   <div class={cls('table-wrapper"', classes.wrapper)} style={styles.wrapper}>
     <table class={cls('w-full', classes.table)} style={styles.table}>
       <slot name="headers" {headers}>
-        <thead>
+        <thead class={cls(classes.thead)} style={styles.thead}>
           {#each headers ?? [] as headerRow}
-            <tr>
+            <tr class={cls(classes.tr)} style={styles.tr}>
               {#each headerRow ?? [] as column}
                 <th
                   use:tableCell={{ column }}
-                  class="column-{column.name} {classes.th}"
+                  class="column-{column.name}"
                   class:whitespace-nowrap={orderBy}
                   style={styles.th}
                   on:click={(e) => dispatch('headerClick', { column })}
@@ -64,13 +91,13 @@
       <slot />
 
       <slot name="data" {data} columns={rowColumns}>
-        <tbody>
+        <tbody class={cls(classes.tbody)} style={styles.tbody}>
           {#each data ?? [] as rowData, rowIndex}
-            <tr>
+            <tr class={cls(classes.tr)} style={styles.tr}>
               {#each rowColumns ?? [] as column}
                 <td
                   use:tableCell={{ column, rowData, rowIndex }}
-                  class="column-{column.name} {classes.td}"
+                  class="column-{column.name}"
                   style={styles.td}
                   on:click={(e) => dispatch('cellClick', { column, rowData })}
                 >
