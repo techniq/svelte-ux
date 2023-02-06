@@ -13,7 +13,7 @@ docUrl: $docUrl
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
-  import { formatNumberAsStyle } from '$lib/utils/number';
+  import { format } from '$lib/utils/format';
 
   let value = 0;
 
@@ -36,16 +36,20 @@ docUrl: $docUrl
 ## Formatted
 
 <Preview>
-  <TweenedValue {value} let:value>
-    {formatNumberAsStyle(value, 'currency')}
-  </TweenedValue>
+  <TweenedValue {value} format="currency" />
 </Preview>
 
 ## Options
 
 <Preview>
-  <TweenedValue {value} options={{ duration: 1000, easing: easings.expoOut }} let:value>
-    {formatNumberAsStyle(value, 'decimal')}
+  <TweenedValue {value} format="decimal" options={{ duration: 1000, easing: easings.expoOut }} />
+</Preview>
+
+## Style
+
+<Preview>
+  <TweenedValue {value} let:value>
+    <span style:color={value < 5 ? 'red' : 'green'}>{value}</span>
   </TweenedValue>
 </Preview>
 

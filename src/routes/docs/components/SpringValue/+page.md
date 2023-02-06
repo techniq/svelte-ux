@@ -35,16 +35,20 @@ docUrl: $docUrl
 ## Formatted
 
 <Preview>
-  <SpringValue {value} let:value>
-    {formatNumberAsStyle(value, 'currency')}
-  </SpringValue>
+  <SpringValue {value} format="currency" />
 </Preview>
 
 ## Options
 
 <Preview>
-  <SpringValue {value} options={{ stiffness: 0.01, damping: 0.25 }} let:value>
-    {formatNumberAsStyle(value, 'decimal')}
+  <SpringValue {value} format="decimal" options={{ stiffness: 0.01, damping: 0.25 }} />
+</Preview>
+
+## Style
+
+<Preview>
+  <SpringValue {value} let:value>
+    <span style:color={value < 5 ? 'red' : 'green'}>{value}</span>
   </SpringValue>
 </Preview>
 

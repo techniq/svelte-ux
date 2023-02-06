@@ -9,11 +9,7 @@ export type FormatType = FormatNumberStyle | PeriodType | ((value: any, ...extra
 /**
  * Generic format which can handle Dates, Numbers, or custom format function
  */
-export function format(
-  value: any,
-  format?: FormatNumberStyle | PeriodType | ((value: any, ...extraArgs) => any),
-  ...extraFuncArgs
-) {
+export function format(value: any, format?: FormatType, ...extraFuncArgs) {
   let formattedValue = value ?? ''; // Do not render `null`
 
   if (isFunction(format)) {
