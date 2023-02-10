@@ -19,9 +19,17 @@
   export let open = false;
   export let popout = false;
   export let disabled = false;
+  export let icon = mdiChevronDown;
 
   export let transition = slide;
   export let transitionParams: TransitionParams = {};
+
+  export let classes: {
+    root?: string;
+    trigger?: string;
+    icon?: string;
+    content?: string;
+  } = {};
 
   /**
    * Controls how first, last, and gap between are calculated
@@ -43,35 +51,39 @@
     popout && list === 'type' && 'first-of-type:mt-0 last-of-type:mb-0',
     popout && list === 'parent' && 'first:mt-0 last:mb-0',
     popout && list === 'group' && 'group-first:mt-0 group-last:mb-0',
+    classes.root,
     $$props.class
   )}
+  aria-expanded={open}
 >
   <button
     type="button"
     class="flex items-center w-full text-left select-text focus:outline-none"
-    class:cursor-default={disabled}
+    {disabled}
     on:click={() => {
-      if (!disabled) {
-        open = !open;
-        group = group === value ? undefined : value;
-      }
+      open = !open;
+      group = group === value ? undefined : value;
     }}
   >
-    <slot name="trigger" {open}><span class="flex-1">{name}</span></slot>
+    <slot name="trigger" {open}><span class={cls('flex-1', classes.trigger)}>{name}</span></slot>
 
     <slot name="icon" {open}>
       <div
+        data-open={open}
         style:--duration="{transitionParams.duration ?? 300}ms"
-        class="transition-all duration-[var(--duration)] transform"
-        class:-rotate-180={open}
+        class={cls(
+          'transition-all duration-[var(--duration)] transform',
+          'data-[open=true]:-rotate-180',
+          classes.icon
+        )}
       >
-        <Icon path={mdiChevronDown} />
+        <Icon path={icon} />
       </div>
     </slot>
   </button>
 
   {#if open}
-    <div transition:transition|local={transitionParams}>
+    <div transition:transition|local={transitionParams} class={classes.content}>
       <slot {open} />
     </div>
   {/if}

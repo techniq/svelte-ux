@@ -6,6 +6,7 @@ docUrl: $docUrl
 
 <script>
   import { fade } from 'svelte/transition';
+  import { mdiArrowRight } from '@mdi/js';
 
   import api from '$lib/components/Collapse.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -119,6 +120,34 @@ docUrl: $docUrl
   <Card>
     {#each Array(5) as _, i}
       <Collapse name="Item {i + 1}" transitionParams={{ duration: 2000 }}>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit! Inventore laborum rerum at id?
+        </div>
+      </Collapse>
+    {/each}
+  </Card>
+</Preview>
+
+## Custom icon and transition
+
+<Preview>
+  <Card>
+    {#each Array(5) as _, i}
+      <Collapse name="Item {i + 1}" icon={mdiArrowRight} classes={{ icon: 'data-[open=true]:rotate-90' }}>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit! Inventore laborum rerum at id?
+        </div>
+      </Collapse>
+    {/each}
+  </Card>
+</Preview>
+
+## Flip icon transition
+
+<Preview>
+  <Card>
+    {#each Array(5) as _, i}
+      <Collapse name="Item {i + 1}" classes={{ icon: 'data-[open=true]:rotate-0 data-[open=true]:-scale-y-100' }}>
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit! Inventore laborum rerum at id?
         </div>
