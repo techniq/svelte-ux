@@ -90,7 +90,7 @@ export function getCellHeader(column: ColumnDef) {
   return header;
 }
 
-export function getCellValue(column: ColumnDef, rowData: any, rowIndex: number) {
+export function getCellValue(column: ColumnDef, rowData: any, rowIndex?: number) {
   let value = undefined;
   if (isFunction(column.value)) {
     value = column.value?.(rowData, rowIndex);
@@ -112,7 +112,7 @@ export function getCellValue(column: ColumnDef, rowData: any, rowIndex: number) 
   return value;
 }
 
-export function getCellContent(column: ColumnDef, rowData: any, rowIndex: number) {
+export function getCellContent(column: ColumnDef, rowData: any, rowIndex?: number) {
   const value = getCellValue(column, rowData, rowIndex);
   return format(value, column?.format, rowData, rowIndex);
 }

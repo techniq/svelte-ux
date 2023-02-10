@@ -17,7 +17,7 @@ export type ResolvePropType<TData, T> =
 export type ColumnDef<TData = any> = {
   name: string;
   header?: string;
-  value?: string | ((rowData: TData, rowIndex: number) => any);
+  value?: string | ((rowData: TData, rowIndex?: number) => any);
   format?: FormatType;
   orderBy?: string | boolean | ((a: any, b: any) => number);
   columns?: ColumnDef<TData>[];
