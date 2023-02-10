@@ -5,6 +5,7 @@ docUrl: $docUrl
 ---
 
 <script>
+  import { max } from 'd3-array';
   import api from '$lib/components/Table.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -17,6 +18,7 @@ docUrl: $docUrl
   import tableOrderStore from '$lib/stores/tableOrderStore';
 
   import { createPropertySortFunc } from '$lib/utils/sort';
+  import { getCellValue } from '$lib/utils/table';
 
   const pagination = paginationStore();
   const order = tableOrderStore({ initialBy: 'name' });
@@ -152,6 +154,64 @@ docUrl: $docUrl
         order.onHeaderClick(e.detail.column);
       }
     }}
+  />
+</Preview>
+
+## Data background
+
+<Preview>
+  <Table
+    {data}
+    columns={[
+      {
+        name: 'name',
+        align: 'left',
+      },
+      {
+        name: 'calories',
+        align: 'right',
+        format: 'integer',
+        dataBackground: ({ column, value }) => ({
+          domain: [0, max(data, (d) => getCellValue(column, d)) ?? 0],
+          bar: true,
+          inset: [1, 2],
+          color: 'var(--color-blue-100)',
+        })
+      },
+      {
+        name: 'fat',
+        align: 'right',
+        format: 'integer',
+        dataBackground: ({ column, value }) => ({
+          domain: [0, max(data, (d) => getCellValue(column, d)) ?? 0],
+          bar: true,
+          inset: [1, 2],
+          color: 'var(--color-purple-100)',
+        })
+      },
+      {
+        name: 'carbs',
+        align: 'right',
+        format: 'integer',
+        dataBackground: ({ column, value }) => ({
+          domain: [0, max(data, (d) => getCellValue(column, d)) ?? 0],
+          bar: true,
+          inset: [1, 2],
+          color: 'var(--color-orange-100)',
+        })
+      },
+      {
+        name: 'protein',
+        align: 'right',
+        format: 'integer',
+        dataBackground: ({ column, value }) => ({
+          domain: [0, max(data, (d) => getCellValue(column, d)) ?? 0],
+          bar: true,
+          inset: [1, 2],
+          color: 'var(--color-red-100)',
+        })
+      },
+    ]}
   />
 </Preview>
 

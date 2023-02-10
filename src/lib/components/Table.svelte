@@ -2,10 +2,17 @@
   import { createEventDispatcher } from 'svelte';
 
   import { tableCell } from '../actions/table';
+  import { dataBackground } from '../actions/dataBackground';
   import type { ColumnDef } from '../types/table';
   import { cls } from '../utils/styles';
 
-  import { getCellContent, getCellHeader, getHeaders, getRowColumns } from '../utils/table';
+  import {
+    getCellContent,
+    getCellHeader,
+    getCellValue,
+    getHeaders,
+    getRowColumns,
+  } from '../utils/table';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
 
@@ -93,8 +100,15 @@
           {#each data ?? [] as rowData, rowIndex}
             <tr class={cls(classes.tr)} style={styles.tr}>
               {#each rowColumns ?? [] as column}
+                {@const cellValue = getCellValue(column, rowData, rowIndex)}
                 <td
                   use:tableCell={{ column, rowData, rowIndex }}
+                  use:dataBackground={{
+                    value: cellValue,
+                    domain: [0, 100],
+                    enabled: column.dataBackground != null,
+                    ...column.dataBackground?.({ column, cellValue, rowData }),
+                  }}
                   class="column-{column.name}"
                   style={styles.td}
                   on:click={(e) => dispatch('cellClick', { column, rowData })}
