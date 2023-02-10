@@ -3,14 +3,17 @@ import { merge } from 'lodash-es';
 import type { ColumnDef, ResolveContext } from '../types/table';
 import type tableOrderStore from '../stores/tableOrderStore';
 
+import { dataBackground } from './dataBackground';
 import { sticky } from './sticky';
 import { getCellValue } from '../utils/table';
 import DomTracker from './_domTracker';
+import { extent, max, min } from 'd3-array';
 
 type TableCellOptions = {
   column?: ColumnDef;
   rowData?: any;
   rowIndex?: number;
+  tableData?: any[];
   order?: ReturnType<typeof tableOrderStore>;
   overrides?: Partial<ColumnDef>;
 };
@@ -20,7 +23,7 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
   const tracker = new DomTracker(node);
 
   function update(options: TableCellOptions) {
-    const { order, rowData, rowIndex } = options;
+    const { order, rowData, rowIndex, tableData } = options;
     const column = merge({}, options.column, options.overrides);
 
     // TODO: Should we keep a stingified copy of the resolved `column` config in `lastChanges` and exit early if no changes.  Maybe just add it if performance dictates
@@ -139,6 +142,20 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
           tracker.addClass('z-10');
         }
       }
+    }
+
+    if (column.dataBackground) {
+      const extents = extent(tableData ?? [], (d) => getCellValue(column, d));
+
+      tracker.addAction(
+        dataBackground(node, {
+          value: context.cellValue,
+          domain: tableData ? [min([0, extents[0]]), max([0, extents[1]])] : undefined,
+          ...(typeof column.dataBackground === 'function'
+            ? column.dataBackground?.({ column, cellValue: context.cellValue, rowData })
+            : column.dataBackground),
+        })
+      );
     }
   }
 

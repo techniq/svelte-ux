@@ -10,7 +10,7 @@ export default class DomTracker {
     styles: { property: string; value: string }[];
     attributes: { qualifiedName: string; value: string }[];
     eventListeners: { type: string; listener: () => any }[];
-    actions: { update?: (options: any) => any; destroy?: () => any }[];
+    actions: SvelteActionReturnType[];
   };
 
   constructor(node: HTMLElement) {
@@ -45,7 +45,7 @@ export default class DomTracker {
     this.changes.eventListeners.push({ type, listener });
   }
 
-  addAction(action: { update?: (options: any) => any; destroy?: () => any }) {
+  addAction(action: SvelteActionReturnType) {
     // Action added in creation
     this.changes.actions.push(action);
   }
