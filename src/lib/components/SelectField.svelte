@@ -164,8 +164,11 @@
     logger.debug('onBlur', { target: e.target, relatedTarget: e.relatedTarget, menuItemsEl });
 
     // Hide if focus not moved to menu (item clicked)
-    // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu item (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.items` after setting `tabindex="-1"
-    if (e.relatedTarget instanceof Node && !menuItemsEl?.contains(e.relatedTarget)) {
+    if (
+      e.relatedTarget instanceof Node &&
+      !menuItemsEl?.contains(e.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu item (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.items` after setting `tabindex="-1"
+      e.relatedTarget !== menuItemsEl?.offsetParent // click on scroll bar
+    ) {
       hide();
     } else {
       logger.debug('ignoring blur');
