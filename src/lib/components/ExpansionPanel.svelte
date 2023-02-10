@@ -1,8 +1,5 @@
 <script lang="ts">
-  import { mdiChevronDown } from '@mdi/js';
-
   import Collapse from './Collapse.svelte';
-  import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
 
   /**
@@ -22,29 +19,25 @@
 
 <Collapse
   {...$$restProps}
-  class={cls(
-    'bg-white elevation-1 border-t',
-    'relative', // Match ListItem (used for loading) so Stacking Context is consistent (else causes a solid line between ExpansionPanel and ListItem)
-    list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
-    list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
-    list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
-    $$props.class
-  )}
-  style={$$props.style}
+  classes={{
+    root: cls(
+      'bg-white elevation-1 border-t',
+      'relative', // Match ListItem (used for loading) so Stacking Context is consistent (else causes a solid line between ExpansionPanel and ListItem)
+      list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
+      list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
+      list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
+      $$props.class
+    ),
+    icon: cls('text-gray-500 px-2', !enabled && 'hidden'),
+  }}
   popout
   {list}
   {disabled}
   on:change
 >
   <slot name="trigger" slot="trigger" />
-
-  <div slot="icon" class="text-gray-500 px-2" let:open>
-    <div class="transition-all duration-300 transform" class:-rotate-180={open}>
-      <Icon path={enabled ? mdiChevronDown : null} />
-    </div>
-  </div>
-
   <slot name="actions" />
+
   {#if enabled}
     <div class="px-3 pt-2 pb-3 bg-gray-200 border-t border-gray-300">
       <slot />
