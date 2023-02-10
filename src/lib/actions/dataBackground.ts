@@ -13,9 +13,9 @@ export type DataBackgroundOptions = {
   color?: string | ((value: number) => string);
 
   /**
-   * Render as bar.  Default to fill (heatmap)
+   * Render as bar or fill (heatmap)
    */
-  bar?: boolean;
+  mode?: 'bar' | 'fill';
 
   /** Inset bar.  Pass as [x,y] to specify per axis */
   inset?: number | [number, number];
@@ -40,7 +40,9 @@ export function dataBackground(
   const barEnd = tweened(0, { duration: 0, ...options.tweened });
 
   function update(options: DataBackgroundOptions) {
-    if (options.enabled === false) {
+    const { value, domain, color, mode = 'bar', inset, enabled } = options;
+
+    if (enabled === false) {
       // remove styles
       node.style.backgroundImage = '';
       node.style.backgroundRepeat = '';
@@ -48,7 +50,7 @@ export function dataBackground(
     } else {
       // Map values from 0% to 100%
       const scale = scaleLinear()
-        .domain(options.domain ?? [-100, 100])
+        .domain(domain ?? [-100, 100])
         .range([0, 100]);
 
       baseline.set(scale(0));
@@ -56,29 +58,27 @@ export function dataBackground(
         node.style.setProperty('--baseline', `${value}%`);
       });
 
-      barStart.set(scale(Math.min(0, options.value)));
+      barStart.set(scale(Math.min(0, value)));
       barStart.subscribe((value) => {
         node.style.setProperty('--barStart', `${value}%`);
       });
 
-      barEnd.set(scale(Math.max(0, options.value)));
+      barEnd.set(scale(Math.max(0, value)));
       barEnd.subscribe((value) => {
         node.style.setProperty('--barEnd', `${value}%`);
       });
 
       node.style.setProperty(
         '--color-from',
-        (typeof options.color === 'function' ? options.color(options.value) : options.color) ??
-          'var(--tw-gradient-from)'
+        (typeof color === 'function' ? color(value) : color) ?? 'var(--tw-gradient-from)'
       );
       node.style.setProperty(
         '--color-to',
-        (typeof options.color === 'function' ? options.color(options.value) : options.color) ??
-          'var(--tw-gradient-to)'
+        (typeof color === 'function' ? color(value) : color) ?? 'var(--tw-gradient-to)'
       );
 
-      const insetX = Array.isArray(options.inset) ? options.inset[0] : options.inset;
-      const insetY = Array.isArray(options.inset) ? options.inset[1] : options.inset;
+      const insetX = Array.isArray(inset) ? inset[0] : inset;
+      const insetY = Array.isArray(inset) ? inset[1] : inset;
 
       node.style.backgroundSize = `
 			calc(100% - (${insetX}px * 2))
@@ -87,10 +87,11 @@ export function dataBackground(
 
       // Show black baseline at `0` first, then value bar
       // TODO: Handle baseline at `100%` (only negative numbers)
-      node.style.backgroundImage = options.bar
-        ? `${
-            options.baseline
-              ? `
+      node.style.backgroundImage =
+        mode === 'bar'
+          ? `${
+              options.baseline
+                ? `
           linear-gradient(
             to right,
             transparent var(--baseline),
@@ -100,8 +101,8 @@ export function dataBackground(
             transparent 100%
           ),
         `
-              : ''
-          }
+                : ''
+            }
           linear-gradient(
             to right,
             transparent var(--barStart),
@@ -111,7 +112,7 @@ export function dataBackground(
             transparent 100%
           )
         `
-        : `linear-gradient(
+          : `linear-gradient(
         to right,
         var(--color-from),
         var(--color-to)
