@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { extent, min, max } from 'd3-array';
 
   import { tableCell } from '../actions/table';
   import { dataBackground } from '../actions/dataBackground';
@@ -101,12 +102,16 @@
             <tr class={cls(classes.tr)} style={styles.tr}>
               {#each rowColumns ?? [] as column}
                 {@const cellValue = getCellValue(column, rowData, rowIndex)}
+                {@const extents = extent(data, (d) => getCellValue(column, d))}
                 <td
                   use:tableCell={{ column, rowData, rowIndex }}
                   use:dataBackground={{
                     value: cellValue,
+                    domain: [min([0, extents[0]]), max([0, extents[1]])],
                     enabled: column.dataBackground != null,
-                    ...column.dataBackground?.({ column, cellValue, rowData }),
+                    ...(typeof column.dataBackground === 'function'
+                      ? column.dataBackground?.({ column, cellValue, rowData })
+                      : column.dataBackground),
                   }}
                   class="column-{column.name}"
                   style={styles.td}

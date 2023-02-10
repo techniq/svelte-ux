@@ -18,7 +18,6 @@ docUrl: $docUrl
   import tableOrderStore from '$lib/stores/tableOrderStore';
 
   import { createPropertySortFunc } from '$lib/utils/sort';
-  import { getCellValue } from '$lib/utils/table';
 
   const pagination = paginationStore();
   const order = tableOrderStore({ initialBy: 'name' });
@@ -171,45 +170,37 @@ docUrl: $docUrl
         name: 'calories',
         align: 'right',
         format: 'integer',
-        dataBackground: ({ column, value }) => ({
-          domain: [0, max(data, (d) => getCellValue(column, d)) ?? 0],
-          bar: true,
-          inset: [1, 2],
+        dataBackground: {
           color: 'var(--color-blue-100)',
-        })
+          inset: [1, 2],
+        }
       },
       {
         name: 'fat',
         align: 'right',
         format: 'integer',
-        dataBackground: ({ column, value }) => ({
-          domain: [0, max(data, (d) => getCellValue(column, d)) ?? 0],
-          bar: true,
-          inset: [1, 2],
+        dataBackground: {
           color: 'var(--color-purple-100)',
-        })
+          inset: [1, 2],
+        }
       },
       {
         name: 'carbs',
         align: 'right',
         format: 'integer',
-        dataBackground: ({ column, value }) => ({
-          domain: [0, max(data, (d) => getCellValue(column, d)) ?? 0],
-          bar: true,
-          inset: [1, 2],
+        dataBackground: {
           color: 'var(--color-orange-100)',
-        })
+          inset: [1, 2],
+        }
       },
       {
         name: 'protein',
         align: 'right',
         format: 'integer',
-        dataBackground: ({ column, value }) => ({
-          domain: [0, max(data, (d) => getCellValue(column, d)) ?? 0],
-          bar: true,
-          inset: [1, 2],
+        dataBackground: {
           color: 'var(--color-red-100)',
-        })
+          inset: [1, 2],
+        }
       },
     ]}
   />

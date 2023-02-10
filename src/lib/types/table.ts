@@ -38,7 +38,9 @@ export type ColumnDef<TData = any> = {
     data?: ResolvePropType<TData, string | string[]>;
   };
 
-  dataBackground?: (context: ResolveContext<TData>) => Partial<DataBackgroundOptions>;
+  dataBackground?:
+    | Partial<DataBackgroundOptions>
+    | ((context: ResolveContext<TData>) => Partial<DataBackgroundOptions>);
 
   /** Set by getHeaders() util */
   colSpan?: number;
