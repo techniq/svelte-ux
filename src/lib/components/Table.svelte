@@ -105,7 +105,6 @@
                   use:tableCell={{ column, rowData, rowIndex }}
                   use:dataBackground={{
                     value: cellValue,
-                    domain: [0, 100],
                     enabled: column.dataBackground != null,
                     ...column.dataBackground?.({ column, cellValue, rowData }),
                   }}

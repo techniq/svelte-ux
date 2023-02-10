@@ -3,7 +3,7 @@ import { tweened } from 'svelte/motion';
 
 export type DataBackgroundOptions = {
   value: number;
-  domain: [number, number];
+  domain?: [number, number];
 
   /**
    * Set color explicitly.  Can also use the following:
