@@ -2,7 +2,7 @@ import { scaleLinear } from 'd3-scale';
 import { tweened } from 'svelte/motion';
 
 export type DataBackgroundOptions = {
-  value: number;
+  value: number | null | undefined;
   domain?: [number, number];
 
   /**
