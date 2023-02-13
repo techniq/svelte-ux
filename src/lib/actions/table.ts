@@ -112,7 +112,7 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
     if (column.sticky) {
       if (node.nodeName === 'TH') {
         // Ignore sticky bottom for header cell
-        tracker.addAction(sticky(node, { ...column.sticky, bottom: false }));
+        tracker.addAction(sticky, { ...column.sticky, bottom: false });
 
         // Increase z-index for other sticky headers (scrolled left) as well as sticky cells below (scrolled up)
         // Only need to increase z-index for first and last headers (and higher than sticky data cells below them)
@@ -126,13 +126,11 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
         // TODO: Once sticky/stickyContext actions supported offsetting bottom, this should be removed
         const isLastRow = node.closest('table tr:last-child') === node.closest('tr');
 
-        tracker.addAction(
-          sticky(node, {
-            ...column.sticky,
-            top: false,
-            bottom: column.sticky.bottom && isLastRow,
-          })
-        );
+        tracker.addAction(sticky, {
+          ...column.sticky,
+          top: false,
+          bottom: column.sticky.bottom && isLastRow,
+        });
 
         // Increase column z-index for sticky columns
         if (column.sticky.left) {
@@ -147,21 +145,18 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
     if (column.dataBackground) {
       const extents = extent(tableData ?? [], (d) => getCellValue(column, d));
 
-      tracker.addAction(
-        dataBackground(node, {
-          value: context.cellValue,
-          domain: tableData ? [min([0, extents[0]]), max([0, extents[1]])] : undefined,
-          ...(typeof column.dataBackground === 'function'
-            ? column.dataBackground?.({ column, cellValue: context.cellValue, rowData })
-            : column.dataBackground),
-        })
-      );
+      tracker.addAction(dataBackground, {
+        value: context.cellValue,
+        domain: tableData ? [min([0, extents[0]]), max([0, extents[1]])] : undefined,
+        ...(typeof column.dataBackground === 'function'
+          ? column.dataBackground?.({ column, cellValue: context.cellValue, rowData })
+          : column.dataBackground),
+      });
     }
   }
 
   function destroy() {
-    // Do we always need to reset if being unmounted?
-    tracker.reset();
+    tracker.destroy();
   }
 
   update(options);

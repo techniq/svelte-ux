@@ -1,3 +1,5 @@
+import type { SvelteAction } from '$lib/types';
+
 /**
  * Apply changes to an HTMLElement with the ability to reverse.
  * Useful with Svelte actions when being destroyed
@@ -10,7 +12,7 @@ export default class DomTracker {
     styles: { property: string; value: string }[];
     attributes: { qualifiedName: string; value: string }[];
     eventListeners: { type: string; listener: () => any }[];
-    actions: SvelteActionReturnType[];
+    actions: Map<string, SvelteActionReturnType>;
   };
 
   constructor(node: HTMLElement) {
@@ -21,7 +23,7 @@ export default class DomTracker {
       styles: [],
       attributes: [],
       eventListeners: [],
-      actions: [],
+      actions: new Map<string, SvelteActionReturnType>(),
     };
   }
 
@@ -45,9 +47,15 @@ export default class DomTracker {
     this.changes.eventListeners.push({ type, listener });
   }
 
-  addAction(action: SvelteActionReturnType) {
-    // Action added in creation
-    this.changes.actions.push(action);
+  addAction<TOptions>(action: SvelteAction, options: TOptions) {
+    const existingAction = this.changes.actions.get(action.name);
+    if (existingAction) {
+      // Action already created, call action's update() (if available)
+      existingAction.update?.(options);
+    } else {
+      // Add new action
+      this.changes.actions.set(action.name, action(this.node, options));
+    }
   }
 
   reset() {
@@ -67,16 +75,25 @@ export default class DomTracker {
       this.node.removeEventListener(type, listener);
     });
 
-    this.changes.actions.forEach((action) => {
-      action.destroy?.();
-    });
+    // Do not destroy actions so internal state is kept
 
     this.changes = {
+      ...this.changes,
       classes: [],
       styles: [],
       attributes: [],
       eventListeners: [],
-      actions: [],
     };
+  }
+
+  destroy() {
+    this.reset();
+
+    // Destroy actions (cleanup any global state like actions on `window`, etc)
+    for (var action of this.changes.actions.values()) {
+      if (action) {
+        action.destroy?.();
+      }
+    }
   }
 }

@@ -92,3 +92,8 @@ export type StoresValues<T> = T extends Readable<infer U>
     };
 
 export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;
+
+export type SvelteAction<TOptions = any> = (
+  node: HTMLElement,
+  options?: TOptions
+) => SvelteActionReturnType;

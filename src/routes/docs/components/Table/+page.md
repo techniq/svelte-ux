@@ -9,6 +9,7 @@ docUrl: $docUrl
   import api from '$lib/components/Table.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
+  import Button from '$lib/components/Button.svelte';
   import Paginate from '$lib/components/Paginate.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Table from '$lib/components/Table.svelte';
@@ -17,6 +18,7 @@ docUrl: $docUrl
   import paginationStore from '$lib/stores/paginationStore';
   import tableOrderStore from '$lib/stores/tableOrderStore';
 
+  import { randomInteger } from '$lib/utils/number';
   import { createPropertySortFunc } from '$lib/utils/sort';
 
   const pagination = paginationStore();
@@ -37,6 +39,19 @@ docUrl: $docUrl
     { id: 12, name: 'Nougat', calories: 360, fat: 19.0, carbs: 9, protein: 37.0 },
     { id: 13, name: 'Oreo', calories: 437, fat: 18.0, carbs: 63, protein: 4.0 }
   ];
+
+  function randomDataGen() {
+    return data.map(d => {
+      return {
+        ...d,
+        calories: randomInteger(300, 900),
+        fat: randomInteger(2, 30),
+        carbs: randomInteger(5, 100),
+        protein: randomInteger(0, 50),
+      }
+    });
+  }
+  let randomData = randomDataGen();
 
   $: sortFunc = createPropertySortFunc($order.by, $order.direction);
   $: sortedData = [...data].sort(sortFunc);
@@ -159,8 +174,9 @@ docUrl: $docUrl
 ## Data background
 
 <Preview>
+  <Button on:click={() => randomData = randomDataGen()} class="text-blue-500 border border-blue-500 bg-white mb-1">Randomize</Button>
   <Table
-    {data}
+    data={randomData}
     columns={[
       {
         name: 'name',
@@ -173,6 +189,7 @@ docUrl: $docUrl
         dataBackground: {
           color: 'var(--color-blue-100)',
           inset: [1, 2],
+          tweened: { duration: 300 }
         }
       },
       {
@@ -182,6 +199,7 @@ docUrl: $docUrl
         dataBackground: {
           color: 'var(--color-purple-100)',
           inset: [1, 2],
+          tweened: { duration: 300 }
         }
       },
       {
@@ -191,6 +209,7 @@ docUrl: $docUrl
         dataBackground: {
           color: 'var(--color-orange-100)',
           inset: [1, 2],
+          tweened: { duration: 300 }
         }
       },
       {
@@ -200,6 +219,7 @@ docUrl: $docUrl
         dataBackground: {
           color: 'var(--color-red-100)',
           inset: [1, 2],
+          tweened: { duration: 300 }
         }
       },
     ]}
