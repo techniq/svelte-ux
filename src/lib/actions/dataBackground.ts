@@ -40,7 +40,9 @@ export function dataBackground(
   const barEnd = tweened(0, { duration: 0, ...options.tweened });
 
   function update(options: DataBackgroundOptions) {
-    const { value, domain, color, mode = 'bar', inset, enabled } = options;
+    const { domain, color, mode = 'bar', inset, enabled } = options;
+
+    const value = options.value ?? 0;
 
     if (enabled === false) {
       // remove styles
