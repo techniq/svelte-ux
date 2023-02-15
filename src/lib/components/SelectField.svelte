@@ -285,7 +285,10 @@
     value = itemValue(item);
     selected = item;
     searchText = itemText(item);
-    dispatch('change', { item, value: itemValue(item) });
+
+    if (value != previousValue) {
+      dispatch('change', { item, value });
+    }
 
     // Only hide if value changed (do not hide if opening initially and loading list)
     // if (value != previousValue) {
