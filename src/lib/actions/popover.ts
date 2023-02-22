@@ -66,13 +66,19 @@ export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActi
     });
   });
 
-  function onClickOutside(e) {
-    if (!anchorEl.contains(e.target) && !popoverEl.contains(e.target)) {
+  // Used to track if the mouse changed targets between `mousedown` and `mouseup` (ex. drag from within input to body).  Better control than `click`
+  let clickTarget = null;
+  function onMouseDown(e) {
+    clickTarget = e.target;
+  }
+  document.addEventListener('mousedown', onMouseDown);
+
+  function onMouseUp(e) {
+    if (clickTarget === e.target && !anchorEl.contains(e.target) && !popoverEl.contains(e.target)) {
       node.dispatchEvent(new CustomEvent('clickOutside', node));
     }
   }
-
-  document.addEventListener('click', onClickOutside);
+  document.addEventListener('mouseup', onMouseUp);
 
   const portalResult = portal(node);
 
@@ -81,7 +87,8 @@ export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActi
     destroy() {
       cleanup();
       portalResult?.destroy?.();
-      document.removeEventListener('click', onClickOutside);
+      document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener('mouseup', onMouseUp);
     },
   };
 }
