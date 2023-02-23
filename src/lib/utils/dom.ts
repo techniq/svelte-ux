@@ -27,10 +27,11 @@ export function getScrollParent(node): HTMLElement | null {
 export function scrollIntoView(node) {
   // TODO: Consider only scrolling if needed
   const scrollParent = getScrollParent(node);
+  const removeScrollParentOffset = scrollParent != node.offsetParent; // ignore `position: absolute` parent, for example
 
   const nodeOffset = {
-    top: node.offsetTop,
-    left: node.offsetLeft,
+    top: node.offsetTop - (removeScrollParentOffset ? scrollParent.offsetTop : 0),
+    left: node.offsetLeft - (removeScrollParentOffset ? scrollParent.offsetLeft : 0),
   };
 
   const optionCenter = {
