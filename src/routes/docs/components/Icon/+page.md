@@ -13,6 +13,8 @@ docUrl: $docUrl
 
 	import Icon from '$lib/components/Icon.svelte';
 	import Preview from '$lib/components/Preview.svelte';
+
+	const mdiAccountUrl = 'https://api.iconify.design/mdi:account.svg'
 </script>
 
 # Examples
@@ -22,6 +24,13 @@ docUrl: $docUrl
 <Preview>
 	<Icon path={mdiAccount} />
 	<Icon data={mdiAccount} />
+	<Icon svg={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'} />
+	<Icon svgUrl="https://api.iconify.design/mdi:account.svg" />
+	<Icon>
+		<svg width="32" height="32" viewBox="0 0 24 24">
+			<path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z" />
+		</svg>
+	</Icon>
 </Preview>
 
 ## Font Awesome icons
@@ -40,6 +49,7 @@ docUrl: $docUrl
 	<Icon path={mdiAccount} size="2.5em" />
 	<Icon path={mdiAccount} size="3em" />
 	<Icon path={mdiAccount} size="64px" />
+	<Icon svgUrl="https://api.iconify.design/mdi:account.svg" size="64px" />
 </Preview>
 
 ## Color
@@ -49,6 +59,7 @@ docUrl: $docUrl
 	<Icon path={mdiAccount} class="text-blue-500" />
 	<Icon path={mdiAccount} class="text-green-500" />
 	<Icon path={mdiAccount} class="text-black/50" />
+	<Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="text-red-500" />
 </Preview>
 
 ## Multiple paths
@@ -64,6 +75,7 @@ docUrl: $docUrl
 	<Icon path={mdiArrowRight} class="scale-75" />
 	<Icon path={mdiArrowRight} class="-scale-x-100" />
 	<Icon path={mdiAccount} class="-scale-y-100" />
+	<Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="-scale-y-100" />
 </Preview>
 
 ## Animation

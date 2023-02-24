@@ -1,3 +1,7 @@
+<script context="module" lang="ts">
+  let cache = new Map<string, Promise<string>>();
+</script>
+
 <script lang="ts">
   import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
@@ -10,6 +14,8 @@
   export let viewBox = '0 0 24 24';
   export let path: string | string[] = '';
   export let data: IconDefinition | string = undefined;
+  export let svg: string = undefined;
+  export let svgUrl: string = undefined;
 
   // Accessibility
   export let title: string | undefined = undefined;
@@ -34,30 +40,72 @@
     // Also conveniently accept path as data
     path = data;
   }
+
+  $: if (svgUrl) {
+    let promise;
+    if (cache.has(svgUrl)) {
+      cache.get(svgUrl).then((text) => (svg = text));
+    } else {
+      promise = fetch(svgUrl).then((resp) => resp.text());
+      promise.then((text) => {
+        svg = text;
+        cache.set(svgUrl, promise);
+      });
+    }
+  }
 </script>
 
-<svg
-  {width}
-  {height}
-  {viewBox}
-  class={cls('inline-block flex-shrink-0', classes.root, $$props.class)}
-  style={$$props.style}
-  role={isLabelled ? 'img' : 'presentation'}
-  aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
-  on:click
->
-  {#if title}
-    <title id={titleId}>{title}</title>
-  {/if}
-  {#if desc}
-    <desc id={descId}>{desc}</desc>
-  {/if}
+{#if svg || $$slots.default}
+  <span
+    class={cls(
+      'icon-container inline-block flex-shrink-0 align-middle',
+      classes.root,
+      $$props.class
+    )}
+    style={$$props.style}
+    style:width
+    style:height
+    style:--width={width}
+    style:--height={height}
+    role={isLabelled ? 'img' : 'presentation'}
+    aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
+    on:click
+  >
+    <slot>
+      {@html svg}
+    </slot>
+  </span>
+{:else}
+  <svg
+    {width}
+    {height}
+    {viewBox}
+    class={cls('inline-block flex-shrink-0', classes.root, $$props.class)}
+    style={$$props.style}
+    role={isLabelled ? 'img' : 'presentation'}
+    aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
+    on:click
+  >
+    {#if title}
+      <title id={titleId}>{title}</title>
+    {/if}
+    {#if desc}
+      <desc id={descId}>{desc}</desc>
+    {/if}
 
-  {#each Array.isArray(path) ? path : [path] as d, i}
-    <path
-      {d}
-      fill="currentColor"
-      class={Array.isArray(classes.path) ? classes.path[i] : classes.path}
-    />
-  {/each}
-</svg>
+    {#each Array.isArray(path) ? path : [path] as d, i}
+      <path
+        {d}
+        fill="currentColor"
+        class={Array.isArray(classes.path) ? classes.path[i] : classes.path}
+      />
+    {/each}
+  </svg>
+{/if}
+
+<style>
+  .icon-container :global(> svg) {
+    width: var(--width);
+    height: var(--height);
+  }
+</style>
