@@ -46,7 +46,14 @@
     if (cache.has(svgUrl)) {
       cache.get(svgUrl).then((text) => (svg = text));
     } else {
-      promise = fetch(svgUrl).then((resp) => resp.text());
+      promise = fetch(svgUrl)
+        .then((resp) => resp.text())
+        .catch((e) => {
+          // Failed request, remove promise so fetched again
+          cache.delete(svgUrl);
+          // TODO: Consider showing error icon
+          // throw e;
+        });
       cache.set(svgUrl, promise);
       promise.then((text) => {
         svg = text;
