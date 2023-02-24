@@ -47,9 +47,9 @@
       cache.get(svgUrl).then((text) => (svg = text));
     } else {
       promise = fetch(svgUrl).then((resp) => resp.text());
+      cache.set(svgUrl, promise);
       promise.then((text) => {
         svg = text;
-        cache.set(svgUrl, promise);
       });
     }
   }
