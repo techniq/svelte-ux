@@ -64,7 +64,7 @@
     {#if loading}
       <CircularProgress size={16} class={cls(classes.loading)} />
     {:else if icon}
-      <Icon path={icon} class={cls(!iconOnly && 'mr-1', classes.icon)} />
+      <Icon data={icon} class={cls(!iconOnly && 'mr-1', classes.icon)} />
     {/if}
     <slot />
   </a>
@@ -82,7 +82,7 @@
     {#if loading}
       <CircularProgress size={16} width={2} class={cls('mr-2', classes.loading)} />
     {:else if icon}
-      <Icon path={icon} class={cls(!iconOnly && 'mr-1', classes.icon)} />
+      <Icon data={icon} class={cls(!iconOnly && 'mr-1', classes.icon)} />
     {/if}
     <slot />
   </button>
