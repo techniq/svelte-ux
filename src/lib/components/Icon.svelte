@@ -37,8 +37,14 @@
     width = '1.0rem';
     height = '1.0rem';
   } else if (typeof data === 'string') {
-    // Also conveniently accept path as data
-    path = data;
+    // Also conveniently accept `path`, `svg`, or `svgUrl` as `data`
+    if (data.toLowerCase().startsWith('http')) {
+      svgUrl = data;
+    } else if (data.toLowerCase().startsWith('<svg')) {
+      svg = data;
+    } else {
+      path = data;
+    }
   }
 
   $: if (svgUrl) {
