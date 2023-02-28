@@ -12,26 +12,28 @@ export function getHeaders(columns: ColumnDef[]) {
   }).map(() => []);
 
   function addItems(columns: ColumnDef[], depth: number) {
-    columns.forEach((column) => {
-      const columnDef: ColumnDef = {
-        ...column,
-      };
-      delete columnDef.columns;
+    columns
+      .filter((c) => c.hidden !== true)
+      .forEach((column) => {
+        const columnDef: ColumnDef = {
+          ...column,
+        };
+        delete columnDef.columns;
 
-      if (column.columns) {
-        const colSpan = getWidth(column);
-        if (colSpan > 1) {
-          columnDef.colSpan = colSpan;
+        if (column.columns) {
+          const colSpan = getWidth(column);
+          if (colSpan > 1) {
+            columnDef.colSpan = colSpan;
+          }
+          addItems(column.columns, depth + 1);
+        } else {
+          const rowSpan = maxDepth - depth;
+          if (rowSpan > 1) {
+            columnDef.rowSpan = maxDepth - depth;
+          }
         }
-        addItems(column.columns, depth + 1);
-      } else {
-        const rowSpan = maxDepth - depth;
-        if (rowSpan > 1) {
-          columnDef.rowSpan = maxDepth - depth;
-        }
-      }
-      result[depth].push(columnDef);
-    });
+        result[depth].push(columnDef);
+      });
   }
   addItems(columns, 0);
 
@@ -47,9 +49,9 @@ export function getRowColumns(columns: ColumnDef[]) {
       return;
     }
 
-    column.columns.forEach((child) => setColumns(child));
+    column.columns.filter((c) => c.hidden !== true).forEach((child) => setColumns(child));
   }
-  columns.forEach((column) => setColumns(column));
+  columns.filter((c) => c.hidden !== true).forEach((column) => setColumns(column));
 
   return result;
 }
@@ -60,9 +62,11 @@ export function getDepth(columns: ColumnDef[] | undefined) {
   }
 
   let depth = 0;
-  columns.forEach((item) => {
-    depth = Math.max(depth, getDepth(item.columns));
-  });
+  columns
+    .filter((c) => c.hidden !== true)
+    .forEach((item) => {
+      depth = Math.max(depth, getDepth(item.columns));
+    });
 
   return depth + 1;
 }
@@ -73,9 +77,11 @@ export function getWidth(column: ColumnDef) {
   }
 
   let width = 0;
-  column.columns.forEach((child) => {
-    width += getWidth(child);
-  });
+  column.columns
+    .filter((c) => c.hidden !== true)
+    .forEach((child) => {
+      width += getWidth(child);
+    });
 
   return width;
 }

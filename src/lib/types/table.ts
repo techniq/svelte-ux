@@ -46,4 +46,6 @@ export type ColumnDef<TData = any> = {
   colSpan?: number;
   /** Set by getHeaders() util */
   rowSpan?: number;
+
+  hidden?: boolean;
 };
