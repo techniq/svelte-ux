@@ -33,6 +33,7 @@ docUrl: $docUrl
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
         <MenuItem>Sign In</MenuItem>
+        <MenuItem disabled>Disabled</MenuItem>
       </Menu>
     </span>
   </Toggle>

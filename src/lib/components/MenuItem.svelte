@@ -11,6 +11,7 @@
     icon: 'text-black/50 mr-2',
   };
   export let scrollIntoView = false;
+  export let disabled = false;
 </script>
 
 <Button
@@ -18,8 +19,10 @@
   {icon}
   {classes}
   fullWidth
-  class={cls('text-left p-2', $$props.class)}
   actions={(node) => [scrollIntoViewAction(node, { condition: scrollIntoView })]}
+  {disabled}
+  class={cls('text-left p-2', $$props.class)}
+  {...$$restProps}
   on:click
 >
   <slot />
