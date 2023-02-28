@@ -31,9 +31,6 @@
   let actionsEl: HTMLDivElement;
 
   function onClick(e: MouseEvent) {
-    // Do not allow event to reach popover's clickOutside
-    e.stopPropagation();
-
     try {
       // https://stackoverflow.com/questions/28900077/why-is-event-target-not-element-in-typescript
       if (!(e.target instanceof Element)) {
@@ -63,8 +60,8 @@
 
 {#if open}
   <Backdrop
-    on:click={(e) => {
-      // Do not allow event to reach Popover's clickOutside
+    on:mouseup={(e) => {
+      // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
       if (!persistent) {
         open = false;
@@ -81,8 +78,12 @@
       classes.root
     )}
     on:click={onClick}
+    on:mouseup={(e) => {
+      // Do not allow event to reach Popover's on:mouseup (clickOutside)
+      e.stopPropagation();
+    }}
     on:keydown={(e) => {
-      // Do not allow event to reach Popover's onKeydown
+      // Do not allow event to reach Popover's on:keydown
       e.stopPropagation();
       if (e.key === 'Escape' && !persistent) {
         open = false;

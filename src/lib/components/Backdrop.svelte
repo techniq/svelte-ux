@@ -12,7 +12,12 @@
 <div
   class="backdrop fixed top-0 bottom-0 left-0 right-0 flex items-center
     justify-center bg-black/50 {$$restProps.class || ''}"
+  on:keydown
+  on:keyup
+  on:keypress
   on:click
+  on:mousedown
+  on:mouseup
   transition:fade={fadeParams}
   class:blur
   use:portalAction={{ enabled: portal }}

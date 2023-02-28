@@ -30,9 +30,6 @@
   let menuItemsEl: HTMLMenuElement;
 
   function onClick(e) {
-    // Do not allow event to reach Popover's clickOutside
-    e.stopPropagation();
-
     try {
       if (e.target === menuItemsEl) {
         // Clicked within menu but outside of any items
@@ -66,6 +63,10 @@
     class="menu-items outline-none max-h-screen"
     bind:this={menuItemsEl}
     on:click={onClick}
+    on:mouseup={(e) => {
+      // Do not allow event to reach Popover's on:mouseup (clickOutside)
+      e.stopPropagation();
+    }}
     transition:transition={transitionParams}
     use:focusMove={{ disabled: !moveFocus }}
   >
