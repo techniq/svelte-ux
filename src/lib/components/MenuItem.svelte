@@ -21,8 +21,8 @@
   fullWidth
   actions={(node) => [scrollIntoViewAction(node, { condition: scrollIntoView })]}
   {disabled}
-  class={cls('text-left p-2', $$props.class)}
   {...$$restProps}
+  class={cls('text-left p-2', $$props.class)}
   on:click
 >
   <slot />
