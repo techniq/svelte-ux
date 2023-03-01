@@ -15,7 +15,7 @@
 
 <form
   on:submit={(e) => {
-    // e.preventDefault();
+    e.preventDefault();
     draft.commit();
   }}
   on:reset={(e) => {
