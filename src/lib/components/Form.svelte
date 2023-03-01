@@ -5,7 +5,7 @@
 
   const dispatch = createEventDispatcher();
 
-  export let initial: any = null;
+  export let initial: any = {};
 
   const [state, draft, error] = formStore(initial);
   $: current = draft.current;
@@ -15,13 +15,14 @@
 
 <form
   on:submit={(e) => {
-    e.preventDefault();
+    // e.preventDefault();
     draft.commit();
   }}
   on:reset={(e) => {
     e.preventDefault();
     draft.revert();
   }}
+  {...$$restProps}
 >
   <slot
     state={$state}
