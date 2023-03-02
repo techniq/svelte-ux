@@ -6,6 +6,7 @@ interface SveldProp {
   type: string;
   isFunction: boolean;
   isFunctionDeclaration: boolean;
+  isRequired: boolean;
   constant: boolean;
   reactive: boolean;
 }
@@ -39,5 +40,6 @@ interface SveldJson {
   slots: SveldSlot[];
   events: SveldEvent[];
   typedefs: SveldTypedefs[];
+  moduleExports: SveldProp[];
   rest_props: SveldRestProps[];
 }

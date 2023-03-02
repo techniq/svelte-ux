@@ -10,6 +10,7 @@
   import EmptyMessage from './EmptyMessage.svelte';
   import Icon from './Icon.svelte';
   import ListItem from './ListItem.svelte';
+  import Tooltip from './Tooltip.svelte';
 
   export let api: SveldJson;
 
@@ -49,18 +50,29 @@
         </div>
 
         <div slot="actions">
-          {#if prop.value != null && prop.value !== 'null'}
+          {#if prop.isRequired}
             <div
-              class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+              class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
+            >
+              Required
+            </div>
+          {/if}
+
+          <Tooltip title="value" offset={2}>
+            <div
+              class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
             >
               {prop.value}
             </div>
-          {/if}
-          <div
-            class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
-          >
-            {prop.type ?? '-'}
-          </div>
+          </Tooltip>
+
+          <Tooltip title="type" offset={2}>
+            <div
+              class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+            >
+              {prop.type ?? 'unknown'}
+            </div>
+          </Tooltip>
         </div>
       </ListItem>
     {:else}
@@ -127,11 +139,13 @@
         <div slot="actions" class="flex gap-1">
           {#if slot.slot_props != '{}'}
             {#each parseSlotProps(slot.slot_props) as { key, value }}
-              <div
-                class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
-              >
-                {key}: {value}
-              </div>
+              <Tooltip title="slot prop" offset={2}>
+                <div
+                  class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+                >
+                  {key}: {value}
+                </div>
+              </Tooltip>
             {/each}
           {/if}
         </div>
@@ -176,14 +190,57 @@
     {/each}
   </div>
 
-  <!-- <Card title="Types" id="types">
-  <Table
-    columns={[
-      { name: 'TODO', align: 'left' },
-    ]}
-    data={api.props}
-    slot="contents"
-  />
-</Card>
- -->
+  <div>
+    <div
+      id="module_exports"
+      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
+    >
+      Module Exports
+    </div>
+    {#each api.moduleExports as prop}
+      <ListItem
+        list="type"
+        icon={mdiCodeBraces}
+        avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
+      >
+        <div slot="title">{prop.name}</div>
+
+        <div slot="subheading" class="text-black/50 text-xs">
+          {#if prop.description}
+            <span class="whitespace-pre">
+              {prop.description}
+            </span>
+          {/if}
+        </div>
+
+        <div slot="actions">
+          {#if prop.isRequired}
+            <div
+              class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
+            >
+              Required
+            </div>
+          {/if}
+
+          <Tooltip title="value" offset={2}>
+            <div
+              class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
+            >
+              {prop.value}
+            </div>
+          </Tooltip>
+
+          <Tooltip title="type" offset={2}>
+            <div
+              class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+            >
+              {prop.type ?? 'unknown'}
+            </div>
+          </Tooltip>
+        </div>
+      </ListItem>
+    {:else}
+      <EmptyMessage>No exports</EmptyMessage>
+    {/each}
+  </div>
 </div>
