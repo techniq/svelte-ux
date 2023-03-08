@@ -66,7 +66,7 @@
   {/if}
 
   <div class={cls('option', $classesContext.option, classes.option)}>
-    <slot selected />
+    <slot {selected} />
   </div>
 </button>
 
