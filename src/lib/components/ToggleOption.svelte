@@ -25,6 +25,7 @@
   const [send, receive] = crossfade;
 
   let optionElement: HTMLElement = null;
+  $: selected = $selectedOption === optionElement;
 
   onMount(() => {
     registerOption(optionElement, value);
@@ -34,7 +35,7 @@
     unregisterOption(optionElement, value);
   });
 
-  $: if (autoscroll && $selectedOption === optionElement) {
+  $: if (autoscroll && selected) {
     // TODO: Only scroll if needed / out of view
     scrollIntoView(optionElement);
   }
@@ -42,7 +43,7 @@
 
 <button
   type="button"
-  class:selected={$selectedOption === optionElement}
+  class:selected
   on:click={() => selectOption(optionElement, value)}
   on:click
   bind:this={optionElement}
@@ -56,7 +57,7 @@
   )}
 >
   <!-- Stack indicator under option -->
-  {#if $selectedOption === optionElement}
+  {#if selected}
     <div
       class={cls('indicator', $classesContext.indicator, classes.indicator)}
       in:receive={{ key: 'indicator' }}
@@ -65,7 +66,7 @@
   {/if}
 
   <div class={cls('option', $classesContext.option, classes.option)}>
-    <slot />
+    <slot selected />
   </div>
 </button>
 
