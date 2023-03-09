@@ -38,13 +38,20 @@
     height = '1.0rem';
   } else if (typeof data === 'string') {
     // Also conveniently accept `path`, `svg`, or `svgUrl` as `data`
-    if (data.toLowerCase().startsWith('http')) {
+    const dataStr = data.toLowerCase();
+    if (dataStr.startsWith('http')) {
       svgUrl = data;
-    } else if (data.toLowerCase().startsWith('<svg')) {
+    } else if (dataStr.startsWith('<svg')) {
       svg = data;
     } else {
       path = data;
     }
+  }
+
+  // If the SVG includes the font awesome license comment, use `1.0em
+  $: if (svg?.includes('fontawesome.com')) {
+    width = '1.0rem';
+    height = '1.0rem';
   }
 
   $: if (svgUrl) {
