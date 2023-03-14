@@ -22,8 +22,8 @@ docUrl: $docUrl
 ## Default
 
 <Preview>
-	<Button class="border" on:click={() => overflowItems += 1}>+ item</Button>
-	<Button class="border" on:click={() => overflowItems -= overflowItems > 1 ? 1 : 0}>- item</Button>
+	<Button variant="outlined" on:click={() => overflowItems += 1}>+ item</Button>
+	<Button variant="outlined" on:click={() => overflowItems -= overflowItems > 1 ? 1 : 0}>- item</Button>
 	<Overflow class="w-1/2 h-[200px] overflow-hidden" let:overflowX let:overflowY>
 		<div>overflowX: {overflowX}</div>
 		<div>overflowY: {overflowY}</div>

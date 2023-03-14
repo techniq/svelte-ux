@@ -88,7 +88,7 @@
             <Button
               href="/docs/components/{api.rest_props.name}#props"
               target="_blank"
-              base
+              variant="none"
               class="text-xs font-semibold bg-white border border-black/30 px-2 rounded-full"
             >
               &lt;{api.rest_props.name}&gt;
@@ -99,7 +99,7 @@
               href="https://developer.mozilla.org/docs/Web/HTML/Element/{api.rest_props
                 .name}#attributes"
               target="_blank"
-              base
+              variant="none"
               class="text-xs font-semibold bg-white border border-black/30 px-2 rounded-full"
             >
               &lt;{api.rest_props.name}&gt;

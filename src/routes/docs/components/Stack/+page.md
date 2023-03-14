@@ -168,7 +168,7 @@ docUrl: $docUrl
 
 <Preview>
   <Stack stack inline>
-    <Button class="border">Example</Button>
+    <Button variant="outlined">Example</Button>
     <div
       class="bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center "
     >
@@ -181,7 +181,7 @@ docUrl: $docUrl
 
 <Preview>
   <Stack stack inline>
-    <Button class="border">Example</Button>
+    <Button variant="outlined">Example</Button>
     <div
       class="bg-red-500 rounded-full h-4 w-4 -mr-1 -mt-1 text-xs text-white flex items-center justify-center self-start justify-self-end"
     >
@@ -194,7 +194,7 @@ docUrl: $docUrl
 
 <Preview>
   <Stack stack inline>
-    <Button icon={mdiFilterVariant} class="border p-3" />
+    <Button variant="outlined" icon={mdiFilterVariant} class="p-3" />
     <div
       class="bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center self-start justify-self-end"
     >
@@ -207,7 +207,7 @@ docUrl: $docUrl
 
 <Preview>
   <Stack stack inline>
-    <Button icon={mdiFilterVariant} class="border p-3" />
+    <Button variant="outlined" icon={mdiFilterVariant} class="p-3" />
     <div class="bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center self-start justify-self-end border border-white" />
     <div class="bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center self-end justify-self-end border border-white" />
   </Stack>

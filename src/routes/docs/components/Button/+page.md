@@ -30,36 +30,10 @@ import { Button } from 'svelte-ux';
   <Button>Click me</Button>
 </Preview>
 
-## Color
-
-<Preview>
-  <Button class="text-blue-500 hover:bg-blue-50">Click me</Button>
-</Preview>
-
-## Color (red)
-
-<Preview>
-  <Button class="text-red-500 hover:bg-red-50">Click me</Button>
-</Preview>
-
 ## Disabled
 
 <Preview>
   <Button disabled>Click me</Button>
-</Preview>
-
-## Outlined
-
-<Preview>
-  <Button class="border">Click me</Button>
-</Preview>
-
-## Outlined w/ color
-
-<Preview>
-  <Button class="border border-current text-blue-500 hover:bg-blue-50">
-    Click me
-  </Button>
 </Preview>
 
 ## Link
@@ -68,10 +42,35 @@ import { Button } from 'svelte-ux';
   <Button href="https://www.google.com" target="_blank">Open Google</Button>
 </Preview>
 
-## Base
+## Variants
 
 <Preview>
-  <Button base>Click me</Button>
+  <div class="grid gap-2">
+    <div>
+      <Button>Text</Button>
+      <Button color="blue">Text</Button>
+      <Button color="red">Text</Button>
+      <Button color="green">Text</Button>
+    </div>
+    <div>
+      <Button variant="outlined">Outlined</Button>
+      <Button variant="outlined" color="blue">Outlined</Button>
+      <Button variant="outlined" color="red">Outlined</Button>
+      <Button variant="outlined" color="green">Outlined</Button>
+    </div>
+    <div>
+      <Button variant="filled">Filled</Button>
+      <Button variant="filled" color="blue">Filled</Button>
+      <Button variant="filled" color="red">Filled</Button>
+      <Button variant="filled" color="green">Filled</Button>
+    </div>
+  </div>
+</Preview>
+
+## `none` variant
+
+<Preview>
+  <Button variant="none">Click me</Button>
 </Preview>
 
 <SectionDivider class="mt-12">Icon</SectionDivider>
@@ -91,7 +90,7 @@ import { Button } from 'svelte-ux';
 ## Icon with text
 
 <Preview>
-  <Button icon={mdiTrashCan} class="text-red-500">Delete</Button>
+  <Button icon={mdiTrashCan} color="red">Delete</Button>
 </Preview>
 
 ## Icon via url
@@ -109,10 +108,13 @@ import { Button } from 'svelte-ux';
 ## Loading
 
 <Preview>
-  <Button class="border border-current text-blue-500 hover:bg-blue-50" loading>
+  <Button loading >
     Click me
   </Button>
-  <Button loading >
+  <Button variant="outlined" color="blue" loading>
+    Click me
+  </Button>
+  <Button variant="filled" color="blue" loading>
     Click me
   </Button>
 </Preview>

@@ -36,7 +36,7 @@ docUrl: $docUrl
 
 <Preview>
   <Badge {value}>
-    <Button class="border">Example</Button>
+    <Button variant="outlined">Example</Button>
   </Badge>
 </Preview>
 
@@ -44,7 +44,7 @@ docUrl: $docUrl
 
 <Preview>
   <Badge {value} small>
-    <Button class="border">Example</Button>
+    <Button variant="outlined">Example</Button>
   </Badge>
 </Preview>
 
@@ -52,7 +52,7 @@ docUrl: $docUrl
 
 <Preview>
   <Badge {value} circle>
-    <Button icon={mdiFilterVariant} class="border p-3" />
+    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
   </Badge>
 </Preview>
 
@@ -60,7 +60,7 @@ docUrl: $docUrl
 
 <Preview>
   <Badge {value} circle small>
-    <Button icon={mdiFilterVariant} class="border p-3" />
+    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
   </Badge>
 </Preview>
 
@@ -68,7 +68,7 @@ docUrl: $docUrl
 
 <Preview>
   <Badge {value} dot>
-    <Button icon={mdiFilterVariant} class="border p-3" />
+    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
   </Badge>
 </Preview>
 
@@ -76,7 +76,7 @@ docUrl: $docUrl
 
 <Preview>
   <Badge {value} dot small>
-    <Button icon={mdiFilterVariant} class="border p-3" />
+    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
   </Badge>
 </Preview>
 
@@ -84,8 +84,8 @@ docUrl: $docUrl
 
 <Preview>
   <Badge {value} circle>
-    <Button icon={mdiFilterVariant} class="border p-3" />
-    <div slot="value" class="border bg-green-500 text-white rounded-full">
+    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+    <div slot="value" class="bg-green-500 text-white rounded-full">
       <Icon path={mdiPlus} />
     </div>
   </Badge>
@@ -94,7 +94,7 @@ docUrl: $docUrl
 <!-- ## Corner (multi) w/ Icon Button
 <Preview>
 <Stack stack inline>
-  <Button icon={mdiFilterVariant} class="border p-3" />
+  <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
   <div
     class="bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center self-start justify-self-end border border-white"
   />
@@ -111,7 +111,7 @@ docUrl: $docUrl
     <div class="text-sm text-black/50">Button w/ default</div>
     <Preview>
       <Badge {value}>
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -120,7 +120,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ top-left</span>
     <Preview>
       <Badge {value} placement="top-left">
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -129,7 +129,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ top-right</span>
     <Preview>
       <Badge {value} placement="top-right">
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -138,7 +138,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ bottom-left</span>
     <Preview>
       <Badge {value} placement="bottom-left">
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -147,7 +147,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ bottom-right</span>
     <Preview>
       <Badge {value} placement="bottom-right">
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -156,7 +156,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ default</span>
     <Preview>
       <Badge {value} small>
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -165,7 +165,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ top-left</span>
     <Preview>
       <Badge {value} small placement="top-left">
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -174,7 +174,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ top-right</span>
     <Preview>
       <Badge {value} small placement="top-right">
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -183,7 +183,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ bottom-left</span>
     <Preview>
       <Badge {value} small placement="bottom-left">
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -192,7 +192,7 @@ docUrl: $docUrl
     <span class="text-sm text-black/50">Button w/ bottom-right</span>
     <Preview>
       <Badge {value} small placement="bottom-right">
-        <Button class="border">Example</Button>
+        <Button variant="outlined">Example</Button>
       </Badge>
     </Preview>
   </div>

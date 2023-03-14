@@ -133,7 +133,7 @@ docUrl: $docUrl
           <Dialog {open} on:close={toggle}>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button class="bg-blue-500 text-white hover:bg-blue-600">
+              <Button variant="filled" color="blue">
                 Close
               </Button>
             </div>

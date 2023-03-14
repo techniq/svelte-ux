@@ -15,14 +15,14 @@
 </script>
 
 <Button
-  base
+  variant="none"
   {icon}
   {classes}
   fullWidth
   actions={(node) => [scrollIntoViewAction(node, { condition: scrollIntoView })]}
   {disabled}
   {...$$restProps}
-  class={cls('text-left p-2', $$props.class)}
+  class={cls('text-left p-2 hover:bg-black/5', $$props.class)}
   on:click
 >
   <slot />

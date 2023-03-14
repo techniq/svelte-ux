@@ -41,7 +41,7 @@ docUrl: $docUrl
     <Notification open actions="right" closeIcon>
       <div slot="title">Discussion archived</div>
       <div slot="actions">
-        <Button class="text-blue-500 hover:bg-blue-50 ">Undo</Button>
+        <Button color="blue">Undo</Button>
       </div>
     </Notification>
   </Stack>
@@ -61,7 +61,7 @@ docUrl: $docUrl
         tenetur.
       </div>
       <div slot="actions">
-        <Button class="text-blue-500 hover:bg-blue-50">Undo</Button>
+        <Button color="blue">Undo</Button>
         <Button>Dismiss</Button>
       </div>
     </Notification>
@@ -79,7 +79,7 @@ docUrl: $docUrl
       </div>
       <div slot="actions" class="h-full">
         <Stack vertical class="border-l divide-y h-full">
-          <Button class="text-blue-500 hover:bg-blue-50">Reply</Button>
+          <Button color="blue">Reply</Button>
           <Button>Don't Allow</Button>
         </Stack>
       </div>

@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { format as dateFormat, isWithinInterval } from 'date-fns';
 
+  import Button from './Button.svelte';
   import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
   import { cls } from '../utils/styles';
@@ -84,18 +85,15 @@
     hidden && 'opacity-0 pointer-events-none'
   )}
 >
-  <!-- TODO: Use <Button base>, although doesn't support `class:...` -->
-  <button
-    type="button"
+  <Button
     class={cls(
-      'w-8 h-8 rounded-full flex items-center justify-center text-xs cursor-pointer hover:bg-black/5 hover:text-black focus:outline-none',
+      'w-8 h-8 rounded-full text-xs',
       periodType != PeriodType.Day && 'flex-1',
-      isSelected ? 'bg-accent-500 text-white' : 'text-black',
-      fade && 'text-opacity-25',
-      isCurrent && 'font-bold',
-      !isSelected && isCurrent && !disabled && 'text-accent-500',
-      disabled && 'opacity-25 pointer-events-none cursor-default'
+      (disabled || fade) && 'opacity-25',
+      isCurrent ? 'font-bold' : 'font-normal'
     )}
+    variant={isSelected ? 'filled' : 'text'}
+    color={isSelected || isCurrent ? 'accent' : 'default'}
     {disabled}
     on:click={() => {
       // Do not set selected date as this is causing issues with controlled selected (ex. date ranges, arrays, etc) / changing from date to { from: ..., to: ... }
@@ -104,5 +102,5 @@
     }}
   >
     {dateFormat(date, format)}
-  </button>
+  </Button>
 </div>

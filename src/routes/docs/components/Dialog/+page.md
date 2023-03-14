@@ -30,7 +30,7 @@ docUrl: $docUrl
   <Dialog bind:open>
     <div slot="title">Are you sure you want to do that?</div>
     <div slot="actions">
-      <Button class="bg-blue-500 text-white hover:bg-blue-600">
+      <Button variant="filled" color="blue">
         Close
       </Button>
     </div>
@@ -45,7 +45,7 @@ docUrl: $docUrl
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button class="bg-blue-500 text-white hover:bg-blue-600">
+        <Button variant="filled" color="blue">
           Close
         </Button>
       </div>
@@ -70,7 +70,7 @@ docUrl: $docUrl
             openAsync = false
           }, 1000)
         }}
-        class="bg-blue-500 text-white hover:bg-blue-600"
+        variant="filled" color="blue"
       >
         Save
       </Button>
@@ -97,7 +97,7 @@ docUrl: $docUrl
               toggleOff();
             }, 1000)
           }}
-          class="bg-blue-500 text-white hover:bg-blue-600"
+          variant="filled" color="blue"
         >
           Save
         </Button>
@@ -140,7 +140,7 @@ docUrl: $docUrl
     <Dialog {open} on:close={toggle} loading>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button class="bg-blue-500 text-white hover:bg-blue-600">
+        <Button variant="filled" color="blue">
           Close
         </Button>
       </div>
@@ -156,7 +156,7 @@ docUrl: $docUrl
     <Dialog {open} on:close={toggle} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button class="bg-blue-500 text-white hover:bg-blue-600">Yes</Button>
+        <Button variant="filled" color="blue">Yes</Button>
         <Button>No</Button>
       </div>
     </Dialog>
@@ -174,7 +174,7 @@ docUrl: $docUrl
         <TextField label="Age" autofocus />
       </div>
       <div slot="actions">
-        <Button class="bg-blue-500 text-white hover:bg-blue-600">OK</Button>
+        <Button variant="filled" color="blue">OK</Button>
         <Button>Cancel</Button>
       </div>
     </Dialog>
@@ -189,7 +189,7 @@ docUrl: $docUrl
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button class="bg-blue-500 text-white hover:bg-blue-600" disabled>
+        <Button variant="filled" color="blue" disabled>
           Don't touch
         </Button>
         <Button>

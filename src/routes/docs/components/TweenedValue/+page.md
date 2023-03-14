@@ -24,7 +24,7 @@ docUrl: $docUrl
 
 # Examples
 
-<Button class="bg-blue-500 hover:bg-blue-600 text-white" on:click={update}>Update value</Button>
+<Button variant="filled" color="blue" on:click={update}>Update value</Button>
 <Button on:click={() => value = null}>Set null</Button>
 
 ## Basic
