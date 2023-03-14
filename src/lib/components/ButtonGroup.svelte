@@ -10,7 +10,7 @@
 
   $: _class = cls(
     // 'button-group', // TODO: Re-add once no longer conflict in another project
-    'flex',
+    'inline-flex',
     variant, // used for per-variant group overrides in `style`
     disabled && 'opacity-50 pointer-events-none',
     $$props.class
