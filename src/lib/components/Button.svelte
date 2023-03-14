@@ -94,7 +94,7 @@
         rose: 'text-rose-500 hover:bg-rose-500/10',
       },
       outlined: {
-        default: 'hover:bg-black/5',
+        default: 'bg-white hover:bg-black/5',
         accent: 'text-accent-500 border-accent-500 hover:bg-accent-500/10',
         red: 'text-red-500 border-red-500 hover:bg-red-500/10',
         orange: 'text-orange-500 border-orange-500 hover:bg-orange-500/10',
