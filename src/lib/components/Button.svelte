@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { getContext } from 'svelte';
   import Icon from './Icon.svelte';
 
-  import cssVars from '../actions/cssVars';
   import CircularProgress from './CircularProgress.svelte';
   import { cls } from '../utils/styles';
   import multi from '../actions/multi';
@@ -47,6 +47,11 @@
     loading?: string;
   } = {};
 
+  // Override from `ButtonGroup` if set
+  const groupContext = getContext('ButtonGroup');
+  $: variant = groupContext?.variant ?? variant;
+  $: color = groupContext?.color ?? color;
+
   $: _class = cls(
     'button',
     'transition duration-300 ring-black/20',
@@ -58,6 +63,13 @@
     variant !== 'none' && 'px-4 uppercase font-medium tracking-wider whitespace-nowrap',
     variant !== 'none' && !small && 'py-2',
     disabled && 'opacity-50 pointer-events-none',
+    // Variant specific styles
+    {
+      text: '',
+      outlined: 'border',
+      filled: '',
+    }[variant],
+    // Variant specific colors
     {
       text: {
         default: 'hover:bg-black/5',
@@ -81,25 +93,25 @@
         rose: 'text-rose-500 hover:bg-rose-500/10',
       },
       outlined: {
-        default: 'border hover:bg-black/5',
-        accent: 'text-accent-500 border border-accent-500 hover:bg-accent-500/10',
-        red: 'text-red-500 border border-red-500 hover:bg-red-500/10',
-        orange: 'text-orange-500 border border-orange-500 hover:bg-orange-500/10',
-        amber: 'text-amber-500 border border-amber-500 hover:bg-amber-500/10',
-        yellow: 'text-yellow-500 border border-yellow-500 hover:bg-yellow-500/10',
-        lime: 'text-lime-500 border border-lime-500 hover:bg-lime-500/10',
-        green: 'text-green-500 border border-green-500 hover:bg-green-500/10',
-        emerald: 'text-emerald-500 border border-emerald-500 hover:bg-emerald-500/10',
-        teal: 'text-teal-500 border border-teal-500 hover:bg-teal-500/10',
-        cyan: 'text-cyan-500 border border-cyan-500 hover:bg-cyan-500/10',
-        sky: 'text-sky-500 border border-sky-500 hover:bg-sky-500/10',
-        blue: 'text-blue-500 border border-blue-500 hover:bg-blue-500/10',
-        indigo: 'text-indigo-500 border border-indigo-500 hover:bg-indigo-500/10',
-        violet: 'text-violet-500 border border-violet-500 hover:bg-violet-500/10',
-        purple: 'text-purple-500 border border-purple-500 hover:bg-purple-500/10',
-        fuchsia: 'text-fuchsia-500 border border-fuchsia-500 hover:bg-fuchsia-500/10',
-        pink: 'text-pink-500 border border-pink-500 hover:bg-pink-500/10',
-        rose: 'text-rose-500 border border-rose-500 hover:bg-rose-500/10',
+        default: 'hover:bg-black/5',
+        accent: 'text-accent-500 border-accent-500 hover:bg-accent-500/10',
+        red: 'text-red-500 border-red-500 hover:bg-red-500/10',
+        orange: 'text-orange-500 border-orange-500 hover:bg-orange-500/10',
+        amber: 'text-amber-500 border-amber-500 hover:bg-amber-500/10',
+        yellow: 'text-yellow-500 border-yellow-500 hover:bg-yellow-500/10',
+        lime: 'text-lime-500 border-lime-500 hover:bg-lime-500/10',
+        green: 'text-green-500 border-green-500 hover:bg-green-500/10',
+        emerald: 'text-emerald-500 border-emerald-500 hover:bg-emerald-500/10',
+        teal: 'text-teal-500 border-teal-500 hover:bg-teal-500/10',
+        cyan: 'text-cyan-500 border-cyan-500 hover:bg-cyan-500/10',
+        sky: 'text-sky-500 border-sky-500 hover:bg-sky-500/10',
+        blue: 'text-blue-500 border-blue-500 hover:bg-blue-500/10',
+        indigo: 'text-indigo-500 border-indigo-500 hover:bg-indigo-500/10',
+        violet: 'text-violet-500 border-violet-500 hover:bg-violet-500/10',
+        purple: 'text-purple-500 border-purple-500 hover:bg-purple-500/10',
+        fuchsia: 'text-fuchsia-500 border-fuchsia-500 hover:bg-fuchsia-500/10',
+        pink: 'text-pink-500 border-pink-500 hover:bg-pink-500/10',
+        rose: 'text-rose-500 border-rose-500 hover:bg-rose-500/10',
       },
       filled: {
         default: 'bg-black/5 hover:bg-black/10',
@@ -122,7 +134,6 @@
         pink: 'text-white bg-pink-500 hover:bg-pink-600',
         rose: 'text-white bg-rose-500 hover:bg-rose-600',
       },
-      // none: {},
     }[variant]?.[color],
     classes.root,
     $$props.class

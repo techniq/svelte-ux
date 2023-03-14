@@ -8,6 +8,7 @@
       'Avatar',
       'Badge',
       'Button',
+      'ButtonGroup',
       'Card',
       'Collapse',
       'ExpansionPanel',
