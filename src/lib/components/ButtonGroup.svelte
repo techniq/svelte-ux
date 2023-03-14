@@ -3,7 +3,7 @@
   import { cls } from '../utils/styles';
   import type Button from './Button.svelte';
 
-  export let variant: ComponentProps<Button>['variant'] = 'text';
+  export let variant: ComponentProps<Button>['variant'];
   export let color: ComponentProps<Button>['color'] | undefined = undefined;
   export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
   export let disabled: boolean = false;

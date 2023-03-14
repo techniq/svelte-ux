@@ -17,9 +17,9 @@
 
   export let small: boolean = false;
   export let loading: boolean = false;
-  export let rounded: boolean | 'full' = iconOnly ? 'full' : true;
   export let disabled: boolean = false;
-  export let variant: 'text' | 'outlined' | 'filled' | 'none' = 'text';
+  export let rounded: boolean | 'full' = undefined; // default in reactive groupContext below
+  export let variant: 'text' | 'outlined' | 'filled' | 'none' | undefined; // default in reactive groupContext below
   export let color:
     | 'default'
     | 'accent'
@@ -39,7 +39,7 @@
     | 'purple'
     | 'fuchsia'
     | 'pink'
-    | 'rose' = 'default';
+    | 'rose' = undefined; // default in reactive groupContext below
 
   export let classes: {
     root?: string;
@@ -49,9 +49,9 @@
 
   // Override from `ButtonGroup` if set
   const groupContext = getContext('ButtonGroup');
-  $: variant = groupContext?.variant ?? variant;
-  $: color = groupContext?.color ?? color;
-  $: rounded = groupContext?.rounded ?? rounded;
+  $: variant = variant ?? groupContext?.variant ?? 'text';
+  $: color = color ?? groupContext?.color ?? 'default';
+  $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);
 
   $: _class = cls(
     'button',

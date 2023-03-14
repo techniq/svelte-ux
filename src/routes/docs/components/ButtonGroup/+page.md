@@ -229,7 +229,7 @@ import { ButtonGroup } from 'svelte-ux';
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup>
+    <ButtonGroup variant="text">
       <Button>Click me</Button>
       <Toggle let:on={open} let:toggle>
         <span>
