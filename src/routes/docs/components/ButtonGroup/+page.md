@@ -33,6 +33,50 @@ import { ButtonGroup } from 'svelte-ux';
 <Preview>
   <div class="grid gap-2">
     <ButtonGroup variant="text" color="blue">
+      <Button>Left</Button>
+      <Button>Center</Button>
+      <Button>Right</Button>
+    </ButtonGroup>
+    <ButtonGroup variant="outlined">
+      <Button>Left</Button>
+      <Button>Center</Button>
+      <Button>Right</Button>
+    </ButtonGroup>
+    <ButtonGroup variant="filled" color="blue">
+      <Button>Left</Button>
+      <Button>Center</Button>
+      <Button>Right</Button>
+    </ButtonGroup>
+  </div>
+</Preview>
+
+## Icons
+
+<Preview>
+  <div class="grid gap-2">
+    <ButtonGroup variant="text" color="blue">
+      <Button icon={mdiFormatAlignLeft} />
+      <Button icon={mdiFormatAlignCenter} />
+      <Button icon={mdiFormatAlignRight} />
+    </ButtonGroup>
+    <ButtonGroup variant="outlined">
+      <Button icon={mdiFormatAlignLeft} />
+      <Button icon={mdiFormatAlignCenter} />
+      <Button icon={mdiFormatAlignRight} />
+    </ButtonGroup>
+    <ButtonGroup variant="filled" color="blue">
+      <Button icon={mdiFormatAlignLeft} />
+      <Button icon={mdiFormatAlignCenter} />
+      <Button icon={mdiFormatAlignRight} />
+    </ButtonGroup>
+  </div>
+</Preview>
+
+## Icons (partially rounded)
+
+<Preview>
+  <div class="grid gap-2">
+    <ButtonGroup variant="text" color="blue">
       <Button
         icon={mdiFormatAlignLeft}
         iconOnly={false}
@@ -142,8 +186,9 @@ import { ButtonGroup } from 'svelte-ux';
         <span>
           <Button
             icon={mdiChevronDown}
-            iconOnly={false}
             on:click={toggle}
+            rounded
+            class="px-1"
           />
           <Menu {open} on:close={toggle} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
@@ -160,8 +205,9 @@ import { ButtonGroup } from 'svelte-ux';
         <span>
           <Button
             icon={mdiChevronDown}
-            iconOnly={false}
             on:click={toggle}
+            rounded
+            class="px-1"
           />
           <Menu {open} on:close={toggle} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
@@ -178,8 +224,9 @@ import { ButtonGroup } from 'svelte-ux';
         <span>
           <Button
             icon={mdiChevronDown}
-            iconOnly={false}
             on:click={toggle}
+            rounded
+            class="px-1"
           />
           <Menu {open} on:close={toggle} placement="bottom-start">
             <MenuItem>Hello</MenuItem>

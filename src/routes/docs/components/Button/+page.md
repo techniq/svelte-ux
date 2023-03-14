@@ -87,6 +87,39 @@ import { Button } from 'svelte-ux';
   <Button variant="none">Click me</Button>
 </Preview>
 
+## Rounded
+
+<Preview>
+  <div class="grid gap-2">
+    <div>
+      <Button>Default</Button>
+      <Button rounded>Rounded</Button>
+      <Button rounded="full">Full</Button>
+      <Button rounded={false}>False</Button>
+    </div>
+    <div>
+      <Button variant="outlined" color="blue">Default</Button>
+      <Button variant="outlined" color="blue" rounded>Rounded</Button>
+      <Button variant="outlined" color="blue" rounded="full">Full</Button>
+      <Button variant="outlined" color="blue" rounded={false}>False</Button>
+    </div>
+    <div>
+      <Button variant="filled" color="blue">Default</Button>
+      <Button variant="filled" color="blue" rounded>Rounded</Button>
+      <Button variant="filled" color="blue" rounded="full">Full</Button>
+      <Button variant="filled" color="blue" rounded={false}>False</Button>
+    </div>
+  </div>
+</Preview>
+
+## Normal case
+
+<Preview>
+  <Button class="normal-case">Text</Button>
+  <Button class="normal-case" variant="outlined" color="blue">Outlined</Button>
+  <Button class="normal-case" variant="filled" color="blue">Filled</Button>
+</Preview>
+
 ## Tooltip
 
 <Preview>

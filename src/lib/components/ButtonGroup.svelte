@@ -5,6 +5,7 @@
 
   export let variant: ComponentProps<Button>['variant'] = 'text';
   export let color: ComponentProps<Button>['color'] | undefined = undefined;
+  export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
   export let disabled: boolean = false;
 
   $: _class = cls(
@@ -18,6 +19,7 @@
   setContext('ButtonGroup', {
     variant,
     color,
+    rounded,
   });
 </script>
 

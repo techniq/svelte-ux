@@ -17,7 +17,7 @@
 
   export let small: boolean = false;
   export let loading: boolean = false;
-  export let circle: boolean = iconOnly;
+  export let rounded: boolean | 'full' = iconOnly ? 'full' : true;
   export let disabled: boolean = false;
   export let variant: 'text' | 'outlined' | 'filled' | 'none' = 'text';
   export let color:
@@ -51,12 +51,13 @@
   const groupContext = getContext('ButtonGroup');
   $: variant = groupContext?.variant ?? variant;
   $: color = groupContext?.color ?? color;
+  $: rounded = groupContext?.rounded ?? rounded;
 
   $: _class = cls(
     'button',
     'transition duration-300 ring-black/20',
     'focus:outline-none focus-visible:ring-1',
-    circle ? 'rounded-full' : variant !== 'none' ? 'rounded' : '',
+    variant === 'none' || !rounded ? '' : rounded === 'full' ? 'rounded-full' : 'rounded',
     small ? 'text-xs' : 'text-sm',
     fullWidth ? 'flex w-full' : 'inline-flex',
     (variant !== 'none' || iconOnly) && 'items-center justify-center',
