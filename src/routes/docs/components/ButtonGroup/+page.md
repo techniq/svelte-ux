@@ -173,6 +173,46 @@ import { ButtonGroup } from 'svelte-ux';
   </div>
 </Preview>
 
+## with Tooltip
+
+<Preview>
+  <div class="grid gap-2">
+    <ButtonGroup variant="text" color="blue">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+    <ButtonGroup variant="outlined">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+    <ButtonGroup variant="filled" color="blue">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+  </div>
+</Preview>
+
 ## Disabled
 
 <Preview>
