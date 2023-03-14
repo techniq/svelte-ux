@@ -102,16 +102,19 @@
 
 <div class="grid grid-cols-[2fr,3fr] gap-2 bg-gray-100">
   <div class="col-start-2">
-    <ToggleGroup contained bind:value={activeDate}>
-      <div class="options w-full border">
-        <ToggleOption value="from" class="flex-1">
-          <div class="text-xs text-black/50">Start</div>
-          {#if selected.from}
-            <div class="font-medium">{format(selected.from, 'M/d/yyyy')}</div>
-          {:else}
-            <div class="italic">Empty</div>
-          {/if}
-          <!-- <div class="p-1">
+    <ToggleGroup
+      contained
+      bind:value={activeDate}
+      classes={{ root: 'w-full', options: 'w-full border' }}
+    >
+      <ToggleOption value="from" class="flex-1">
+        <div class="text-xs text-black/50">Start</div>
+        {#if selected.from}
+          <div class="font-medium">{format(selected.from, 'M/d/yyyy')}</div>
+        {:else}
+          <div class="italic">Empty</div>
+        {/if}
+        <!-- <div class="p-1">
             <DateField
               label="Start"
               value={selected.from}
@@ -124,16 +127,16 @@
               dense
             />
           </div> -->
-        </ToggleOption>
+      </ToggleOption>
 
-        <ToggleOption value="to" class="flex-1">
-          <div class="text-xs text-black/50">End</div>
-          {#if selected.to}
-            <div class="font-medium">{format(selected.to, 'M/d/yyyy')}</div>
-          {:else}
-            <div class="italic">Empty</div>
-          {/if}
-          <!-- <div class="p-1">
+      <ToggleOption value="to" class="flex-1">
+        <div class="text-xs text-black/50">End</div>
+        {#if selected.to}
+          <div class="font-medium">{format(selected.to, 'M/d/yyyy')}</div>
+        {:else}
+          <div class="italic">Empty</div>
+        {/if}
+        <!-- <div class="p-1">
             <DateField
               label="End"
               value={selected.to}
@@ -146,8 +149,7 @@
               dense
             />
           </div> -->
-        </ToggleOption>
-      </div>
+      </ToggleOption>
     </ToggleGroup>
   </div>
 
@@ -168,39 +170,43 @@
           }
         }}
         vertical
+        classes={{ options: 'w-full border' }}
       >
-        <div class="options flex flex-col w-full border">
-          {#each periodTypeOptions ?? [] as pt}
-            <ToggleOption value={adjustPeriodType(pt)} class="flex-1">
-              {getPeriodTypeName(adjustPeriodType(pt))}
-            </ToggleOption>
-          {/each}
-        </div>
+        {#each periodTypeOptions ?? [] as pt}
+          <ToggleOption value={adjustPeriodType(pt)}>
+            {getPeriodTypeName(adjustPeriodType(pt))}
+          </ToggleOption>
+        {/each}
       </ToggleGroup>
 
       {#if selected.periodType}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
-        <ToggleGroup contained bind:value={selected} vertical>
-          <div class="options flex flex-col w-full border">
-            {#each getDateRangePresets(selected.periodType) ?? [] as preset}
-              <ToggleOption value={preset.value} class="flex-1">{preset.label}</ToggleOption>
-            {/each}
-          </div>
+        <ToggleGroup
+          contained
+          bind:value={selected}
+          vertical
+          classes={{ options: 'w-full border' }}
+        >
+          {#each getDateRangePresets(selected.periodType) ?? [] as preset}
+            <ToggleOption value={preset.value}>{preset.label}</ToggleOption>
+          {/each}
         </ToggleGroup>
       {/if}
 
       {#if selected.periodType && hasDayOfWeek(selected.periodType)}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Start day of week</div>
-        <ToggleGroup contained bind:value={selectedDayOfWeek}>
-          <div class="options flex w-full border">
-            <ToggleOption value={DayOfWeek.SUN} class="flex-1">Sun</ToggleOption>
-            <ToggleOption value={DayOfWeek.MON} class="flex-1">Mon</ToggleOption>
-            <ToggleOption value={DayOfWeek.TUE} class="flex-1">Tue</ToggleOption>
-            <ToggleOption value={DayOfWeek.WED} class="flex-1">Wed</ToggleOption>
-            <ToggleOption value={DayOfWeek.THU} class="flex-1">Thu</ToggleOption>
-            <ToggleOption value={DayOfWeek.FRI} class="flex-1">Fri</ToggleOption>
-            <ToggleOption value={DayOfWeek.SAT} class="flex-1">Sat</ToggleOption>
-          </div>
+        <ToggleGroup
+          contained
+          bind:value={selectedDayOfWeek}
+          classes={{ options: 'w-full border' }}
+        >
+          <ToggleOption value={DayOfWeek.SUN}>Sun</ToggleOption>
+          <ToggleOption value={DayOfWeek.MON}>Mon</ToggleOption>
+          <ToggleOption value={DayOfWeek.TUE}>Tue</ToggleOption>
+          <ToggleOption value={DayOfWeek.WED}>Wed</ToggleOption>
+          <ToggleOption value={DayOfWeek.THU}>Thu</ToggleOption>
+          <ToggleOption value={DayOfWeek.FRI}>Fri</ToggleOption>
+          <ToggleOption value={DayOfWeek.SAT}>Sat</ToggleOption>
         </ToggleGroup>
       {/if}
     </div>
