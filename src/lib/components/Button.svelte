@@ -19,7 +19,7 @@
   export let loading: boolean = false;
   export let disabled: boolean = false;
   export let rounded: boolean | 'full' = undefined; // default in reactive groupContext below
-  export let variant: 'text' | 'outlined' | 'filled' | 'none' | undefined; // default in reactive groupContext below
+  export let variant: 'text' | 'outlined' | 'filled' | 'none' | undefined = undefined; // default in reactive groupContext below
   export let color:
     | 'default'
     | 'accent'
