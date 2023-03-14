@@ -30,16 +30,30 @@ import { Button } from 'svelte-ux';
   <Button>Click me</Button>
 </Preview>
 
+## Link
+
+<Preview>
+  <Button href="https://www.google.com" target="_blank">Open Google</Button>
+</Preview>
+
 ## Disabled
 
 <Preview>
   <Button disabled>Click me</Button>
 </Preview>
 
-## Link
+## Loading
 
 <Preview>
-  <Button href="https://www.google.com" target="_blank">Open Google</Button>
+  <Button loading >
+    Click me
+  </Button>
+  <Button variant="outlined" color="blue" loading>
+    Click me
+  </Button>
+  <Button variant="filled" color="blue" loading>
+    Click me
+  </Button>
 </Preview>
 
 ## Variants
@@ -73,15 +87,31 @@ import { Button } from 'svelte-ux';
   <Button variant="none">Click me</Button>
 </Preview>
 
+## Tooltip
+
+<Preview>
+  <Tooltip title="Really, do it!" placement="right" offset={2}>
+    <Button>Click me</Button>
+  </Tooltip>
+</Preview>
+
+## Tooltip (disabled)
+
+<Preview>
+  <Tooltip title="Really, do it!" placement="right" offset={2}>
+    <Button disabled>Click me</Button>
+  </Tooltip>
+</Preview>
+
 <SectionDivider class="mt-12">Icon</SectionDivider>
 
-## Menu
+## Icon-only button
 
 <Preview>
   <Button icon={mdiMenu} />
 </Preview>
 
-## Menu with padding
+## Icon-only button with padding
 
 <Preview>
   <Button icon={mdiMenu} class="p-2" />
@@ -103,36 +133,6 @@ import { Button } from 'svelte-ux';
 
 <Preview>
   <Button icon={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'} class="p-2" />
-</Preview>
-
-## Loading
-
-<Preview>
-  <Button loading >
-    Click me
-  </Button>
-  <Button variant="outlined" color="blue" loading>
-    Click me
-  </Button>
-  <Button variant="filled" color="blue" loading>
-    Click me
-  </Button>
-</Preview>
-
-## Tooltip
-
-<Preview>
-  <Tooltip title="Really, do it!" placement="right" offset={2}>
-    <Button>Click me</Button>
-  </Tooltip>
-</Preview>
-
-## Tooltip (disabled)
-
-<Preview>
-  <Tooltip title="Really, do it!" placement="right" offset={2}>
-    <Button disabled>Click me</Button>
-  </Tooltip>
 </Preview>
 
 # API
