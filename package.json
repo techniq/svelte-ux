@@ -3,7 +3,7 @@
   "author": "Sean Lynch <techniq35@gmail.com>",
   "license": "MIT",
   "repository": "techniq/svelte-ux",
-  "version": "0.26.26",
+  "version": "0.27.0",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
