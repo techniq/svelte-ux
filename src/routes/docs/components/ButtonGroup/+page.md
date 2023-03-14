@@ -104,21 +104,70 @@ import { ButtonGroup } from 'svelte-ux';
         iconOnly={false}
       />
     </ButtonGroup>
-    <ButtonGroup variant="filled">
+    <ButtonGroup variant="filled" color="blue">
       <Button
-        color="blue"
         icon={mdiFormatAlignLeft}
         iconOnly={false}
       />
       <Button
-        color="blue"
         icon={mdiFormatAlignCenter}
         iconOnly={false}
       />
       <Button
-        color="blue"
         icon={mdiFormatAlignRight}
         iconOnly={false}
+      />
+    </ButtonGroup>
+  </div>
+</Preview>
+
+## Selected
+
+<Preview>
+  <div class="grid gap-2">
+    <ButtonGroup variant="text" color="blue">
+      <Button
+        icon={mdiFormatAlignLeft}
+        iconOnly={false}
+        class="bg-blue-50 hover:bg-blue-100 z-10"
+      />
+      <Button
+        icon={mdiFormatAlignCenter}
+        iconOnly={false}
+      />
+      <Button
+        icon={mdiFormatAlignRight}
+        iconOnly={false}
+      />
+    </ButtonGroup>
+    <ButtonGroup variant="outlined">
+      <Button
+        icon={mdiFormatAlignLeft}
+        iconOnly={false}
+      />
+      <Button
+        icon={mdiFormatAlignCenter}
+        iconOnly={false}
+        class="text-blue-500 border-blue-500 bg-blue-50 hover:bg-blue-100 z-10"
+      />
+      <Button
+        icon={mdiFormatAlignRight}
+        iconOnly={false}
+      />
+    </ButtonGroup>
+    <ButtonGroup variant="filled" color="blue">
+      <Button
+        icon={mdiFormatAlignLeft}
+        iconOnly={false}
+      />
+      <Button
+        icon={mdiFormatAlignCenter}
+        iconOnly={false}
+      />
+      <Button
+        icon={mdiFormatAlignRight}
+        iconOnly={false}
+          class="bg-blue-600 hover:bg-blue-700"
       />
     </ButtonGroup>
   </div>

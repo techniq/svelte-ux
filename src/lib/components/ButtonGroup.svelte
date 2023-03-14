@@ -29,24 +29,27 @@
 
 <style lang="postcss">
   /* Sets if button is first/last, or if child of element that is first/last (ex. wrapped in span for menu/tooltip/etc)
-
   /* `variant="outlined" */
+  [role='group'] :global(button:not(:first-child)),
+  [role='group'] :global(:not(:first-child) button) {
+    @apply rounded-l-none;
+  }
+  [role='group'] :global(button:not(:last-child)),
+  [role='group'] :global(:not(:last-child) button) {
+    @apply rounded-r-none;
+  }
+
+  /* Overlap borders to allow selection styling per button.  Should be used with z-index */
   .outlined :global(button:not(:first-child)),
   .outlined :global(:not(:first-child) button) {
-    @apply rounded-l-none border-l-0;
-  }
-  .outlined :global(button:not(:last-child)),
-  .outlined :global(:not(:last-child) button) {
-    @apply rounded-r-none;
+    @apply ml-[-1px];
   }
 
-  /* `variant="filled" */
+  /* Add gap between buttons (text, filled) */
+  .text :global(button:not(:first-child)),
+  .text :global(:not(:first-child) button),
   .filled :global(button:not(:first-child)),
   .filled :global(:not(:first-child) button) {
-    @apply rounded-l-none ml-px;
-  }
-  .filled :global(button:not(:last-child)),
-  .filled :global(:not(:last-child) button) {
-    @apply rounded-r-none;
+    @apply ml-px;
   }
 </style>
