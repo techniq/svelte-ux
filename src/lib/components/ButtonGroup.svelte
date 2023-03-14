@@ -23,7 +23,7 @@
   });
 </script>
 
-<div role="group" class={_class}>
+<div role="group" class={_class} on:keydown on:keyup on:keypress on:click>
   <slot />
 </div>
 
