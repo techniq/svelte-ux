@@ -112,12 +112,12 @@ import { Button } from 'svelte-ux';
   </div>
 </Preview>
 
-## Normal case
+## Uppercase
 
 <Preview>
-  <Button class="normal-case">Text</Button>
-  <Button class="normal-case" variant="outlined" color="blue">Outlined</Button>
-  <Button class="normal-case" variant="filled" color="blue">Filled</Button>
+  <Button class="uppercase">Text</Button>
+  <Button class="uppercase" variant="outlined" color="blue">Outlined</Button>
+  <Button class="uppercase" variant="filled" color="blue">Filled</Button>
 </Preview>
 
 ## Tooltip

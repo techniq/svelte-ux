@@ -61,7 +61,7 @@
     small ? 'text-xs' : 'text-sm',
     fullWidth ? 'flex w-full' : 'inline-flex',
     (variant !== 'none' || iconOnly) && 'items-center justify-center',
-    variant !== 'none' && 'px-4 uppercase font-medium tracking-wider whitespace-nowrap',
+    variant !== 'none' && 'px-4 font-medium tracking-wider whitespace-nowrap',
     variant !== 'none' && !small && 'py-2',
     disabled && 'opacity-50 pointer-events-none',
     // Variant specific styles
