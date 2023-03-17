@@ -47,7 +47,7 @@
     loading?: string;
   } = {};
 
-  // Override from `ButtonGroup` if set
+  // Override default from `ButtonGroup` if set
   const groupContext = getContext('ButtonGroup');
   $: variant = variant ?? groupContext?.variant ?? 'text';
   $: color = color ?? groupContext?.color ?? 'default';
