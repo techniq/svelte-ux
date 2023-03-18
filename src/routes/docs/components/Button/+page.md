@@ -87,6 +87,34 @@ import { Button } from 'svelte-ux';
   <Button variant="none">Click me</Button>
 </Preview>
 
+## Size
+
+<Preview>
+  {#each ['sm', 'md', 'lg'] as size}
+    <div class="[&:not(:first-child)]:mt-4">{size}</div>
+    <div class="grid gap-2 ml-3">
+      <div>
+        <Button {size}>Text</Button>
+        <Button color="blue" {size}>Text</Button>
+        <Button color="red" {size}>Text</Button>
+        <Button color="green" {size}>Text</Button>
+      </div>
+      <div>
+        <Button variant="outlined" {size}>Outlined</Button>
+        <Button variant="outlined" {size} color="blue">Outlined</Button>
+        <Button variant="outlined" {size} color="red">Outlined</Button>
+        <Button variant="outlined" {size} color="green">Outlined</Button>
+      </div>
+      <div>
+        <Button variant="filled" {size}>Filled</Button>
+        <Button variant="filled" {size} color="blue">Filled</Button>
+        <Button variant="filled" {size} color="red">Filled</Button>
+        <Button variant="filled" {size} color="green">Filled</Button>
+      </div>
+    </div>
+  {/each}
+</Preview>
+
 ## Rounded
 
 <Preview>
@@ -144,7 +172,15 @@ import { Button } from 'svelte-ux';
   <Button icon={mdiMenu} />
 </Preview>
 
-## Icon-only button with padding
+## Icon-only size
+
+<Preview>
+  <Button icon={mdiMenu} size="sm" />
+  <Button icon={mdiMenu} size="md" />
+  <Button icon={mdiMenu} size="lg" />
+</Preview>
+
+## Icon-only button with custom padding
 
 <Preview>
   <Button icon={mdiMenu} class="p-2" />
@@ -166,6 +202,17 @@ import { Button } from 'svelte-ux';
 
 <Preview>
   <Button icon={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'} class="p-2" />
+</Preview>
+
+## Icon-only button variants and color
+
+<Preview>
+  <Button icon={mdiMenu} />
+  <Button icon={mdiMenu} color="blue" />
+  <Button icon={mdiMenu} variant="filled" />
+  <Button icon={mdiMenu} variant="filled" color="blue" />
+  <Button icon={mdiMenu} variant="outlined" />
+  <Button icon={mdiMenu} variant="outlined" color="blue" />
 </Preview>
 
 # API

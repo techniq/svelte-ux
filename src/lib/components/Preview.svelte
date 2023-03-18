@@ -30,8 +30,7 @@
       <div class="absolute top-0 right-0 p-2">
         <Button
           icon={mdiContentCopy}
-          small
-          class=" text-white/70 hover:bg-white/20 py-1"
+          class="text-white/70 hover:bg-white/20 py-1"
           on:click={() => navigator.clipboard.writeText(code)}
         >
           Copy
@@ -42,12 +41,7 @@
 </div>
 
 {#if code}
-  <Button
-    icon={mdiCodeTags}
-    small
-    class=" text-black/70 py-1"
-    on:click={() => (showCode = !showCode)}
-  >
+  <Button icon={mdiCodeTags} class=" text-black/70 py-1" on:click={() => (showCode = !showCode)}>
     {showCode ? 'Hide' : 'Show'} Code
   </Button>
 {/if}

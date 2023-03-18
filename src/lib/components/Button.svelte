@@ -15,11 +15,11 @@
   export let iconOnly = icon !== undefined && $$slots.default !== true;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> = undefined;
 
-  export let small: boolean = false;
   export let loading: boolean = false;
   export let disabled: boolean = false;
   export let rounded: boolean | 'full' = undefined; // default in reactive groupContext below
   export let variant: 'text' | 'outlined' | 'filled' | 'none' | undefined = undefined; // default in reactive groupContext below
+  export let size: 'sm' | 'md' | 'lg' = 'md';
   export let color:
     | 'default'
     | 'accent'
@@ -57,12 +57,23 @@
     'button',
     'transition duration-300 ring-black/20',
     'focus:outline-none focus-visible:ring-1',
-    variant === 'none' || !rounded ? '' : rounded === 'full' ? 'rounded-full' : 'rounded',
-    small ? 'text-xs' : 'text-sm',
     fullWidth ? 'flex w-full' : 'inline-flex',
-    (variant !== 'none' || iconOnly) && 'items-center justify-center',
-    variant !== 'none' && 'px-4 font-medium tracking-wider whitespace-nowrap',
-    variant !== 'none' && !small && 'py-2',
+    variant === 'none' || !rounded ? '' : rounded === 'full' ? 'rounded-full' : 'rounded',
+    variant !== 'none' && [
+      'items-center justify-center',
+      'font-medium tracking-wider whitespace-nowrap',
+      iconOnly
+        ? {
+            sm: 'text-xs p-1',
+            md: 'text-sm p-1',
+            lg: 'text-base p-2',
+          }[size]
+        : {
+            sm: 'text-xs px-2 py-1',
+            md: 'text-sm px-4 py-2',
+            lg: 'text-base px-6 py-3',
+          }[size],
+    ],
     disabled && 'opacity-50 pointer-events-none',
     // Variant specific styles
     {
