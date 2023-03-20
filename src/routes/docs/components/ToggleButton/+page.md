@@ -6,14 +6,17 @@ docUrl: $docUrl
 
 <script lang="ts">
   import { slide } from 'svelte/transition';
-  import { mdiMenu, mdiTrashCan } from '@mdi/js';
+  import { mdiMenu, mdiTrashCan, mdiChevronDown } from '@mdi/js';
 
   import api from '$lib/components/Button.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Button from '$lib/components/Button.svelte';
+  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
+  import Menu from '$lib/components/Menu.svelte';
+  import MenuItem from '$lib/components/MenuItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
@@ -62,10 +65,10 @@ import { ToggleButton } from 'svelte-ux';
   </ToggleButton>
 </Preview>
 
-## Slide
+## slide transition
 
 <Preview>
-<ToggleButton size="sm" transition={slide} let:on={showDetails}>
+  <ToggleButton size="sm" transition={slide} let:on={showDetails}>
     {showDetails ? 'show less' : 'show more'}...
     <div slot="toggle" class="mt-2 border-t border-b border-gray-100">
       {#each { length: 10 } as _, i}
@@ -73,6 +76,21 @@ import { ToggleButton } from 'svelte-ux';
       {/each}
     </div>
   </ToggleButton>
+</Preview>
+
+## ButtonGroup
+
+<Preview>
+  <ButtonGroup variant="outlined">
+    <Button>Click me</Button>
+    <ToggleButton let:on={open} let:toggleOff icon={mdiChevronDown} iconOnly rounded class="px-1" transition={false}>
+      <Menu {open} on:close={toggleOff} placement="bottom-start">
+        <MenuItem>One</MenuItem>
+        <MenuItem>Two</MenuItem>
+        <MenuItem>Three</MenuItem>
+      </Menu>
+    </ToggleButton>
+  </ButtonGroup>
 </Preview>
 
 # API

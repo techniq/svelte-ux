@@ -28,8 +28,7 @@
 </div>
 
 <style lang="postcss">
-  /* Sets if button is first/last, or if child of element that is first/last (ex. wrapped in span for menu/tooltip/etc)
-  /* `variant="outlined" */
+  /* Sets if button is first/last, or if child of element that is first/last (ex. wrapped in span for menu/tooltip/etc) */
   [role='group'] :global(.button:not(:first-child)),
   [role='group'] :global(:not(:first-child) .button) {
     @apply rounded-l-none;
