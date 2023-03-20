@@ -22,6 +22,7 @@
       'Progress',
       'ScrollContainer',
       'SpringValue',
+      'ToggleButton',
       'ToggleGroup',
       'TweenedValue',
     ],
