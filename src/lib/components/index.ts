@@ -63,6 +63,7 @@ export { default as TableOrderIcon } from './TableOrderIcon.svelte';
 export { default as TablePagination } from './TablePagination.svelte';
 export { default as TextField } from './TextField.svelte';
 export { default as Toggle } from './Toggle.svelte';
+export { default as ToggleButton } from './ToggleButton.svelte';
 export { default as ToggleGroup } from './ToggleGroup.svelte';
 export { default as ToggleOption } from './ToggleOption.svelte';
 export { default as TogglePanel } from './TogglePanel.svelte';
