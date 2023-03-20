@@ -9,6 +9,7 @@
 
   export let icon: ButtonProps['icon'] = undefined;
   export let classes: ButtonProps['classes'] = {
+    root: 'text-sm',
     icon: 'text-black/50 mr-2',
   };
   export let scrollIntoView = false;
