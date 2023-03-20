@@ -10,7 +10,7 @@
 </script>
 
 <Toggle let:on let:toggle let:toggleOn let:toggleOff>
-  <Button {...$$restProps} on:click={toggle}>
+  <Button {...$$restProps} on:click={toggle} on:click>
     <slot {on} {toggle} {toggleOn} {toggleOff} />
   </Button>
   {#if on}
