@@ -5,6 +5,7 @@ docUrl: $docUrl
 ---
 
 <script lang="ts">
+  import { slide } from 'svelte/transition';
   import { mdiMenu, mdiTrashCan } from '@mdi/js';
 
   import api from '$lib/components/Button.svelte?raw&sveld';
@@ -58,6 +59,19 @@ import { ToggleButton } from 'svelte-ux';
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>
+  </ToggleButton>
+</Preview>
+
+## Slide
+
+<Preview>
+<ToggleButton size="sm" transition={slide} let:on={showDetails}>
+    {showDetails ? 'show less' : 'show more'}...
+    <div slot="toggle" class="mt-2 border-t border-b border-gray-100">
+      {#each { length: 10 } as _, i}
+        <div>{i}</div>
+      {/each}
+    </div>
   </ToggleButton>
 </Preview>
 

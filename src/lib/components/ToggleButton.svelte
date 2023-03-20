@@ -16,7 +16,7 @@
   {#if on}
     <!-- Transition delays unmount to allow children to transition (ex. Drawer/Dialog) -->
     {#if transition}
-      <div class="contents" transition:transition={transitionParams}>
+      <div transition:transition={transitionParams}>
         <slot name="toggle" {on} {toggle} {toggleOn} {toggleOff} />
       </div>
     {:else}
