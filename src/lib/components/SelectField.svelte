@@ -395,7 +395,10 @@
                   .indexOf(slotEl)
               : -1;
             logger.debug({ slotEl, itemIndex });
-            selectIndex(itemIndex);
+            // ignore clicks on group items
+            if (itemIndex !== -1) {
+              selectIndex(itemIndex);
+            }
           }
         }}
       >
