@@ -69,6 +69,12 @@ docUrl: $docUrl
   <SelectField {items} bind:value clearSearchOnFocus />
 </Preview>
 
+## clearable=false
+
+<Preview>
+  <SelectField {items} bind:value clearSearchOnFocus clearable={false} />
+</Preview>
+
 ## Grouped options
 
 <Preview>
@@ -257,6 +263,12 @@ docUrl: $docUrl
     on:change={(e) => console.log('on:change', e.detail)}
     placement="top-start"
   />
+</Preview>
+
+## Custom selected class
+
+<Preview>
+  <SelectField {items} bind:value clearSearchOnFocus classes={{ selected: 'bg-accent-500 text-white' }} />
 </Preview>
 
 <!-- ## Menu actions

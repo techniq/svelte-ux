@@ -31,6 +31,7 @@
   export let disabled: boolean = false;
   export let readonly: boolean = false;
   export let icon: string | null = null;
+  export let clearable = true;
   export let base = false;
   export let rounded = false;
   export let filled = false;
@@ -42,6 +43,7 @@
     field?: string;
     items?: string;
     item?: string;
+    selected?: string;
     group?: string;
     empty?: string;
   } = {};
@@ -342,7 +344,7 @@
         </span>
       {:else if readonly}
         <!-- Do not show chevron or clear buttons -->
-      {:else if value}
+      {:else if value && clearable}
         <Button
           icon={mdiClose}
           class="text-black/50 p-1"
@@ -402,7 +404,7 @@
           {#if item.group && item.group !== previousItem?.group}
             <div
               class={cls(
-                'group-header text-xs uppercase leading-8 tracking-widest text-black/50 px-2',
+                'group-header text-xs leading-8 tracking-widest text-black/50 px-2',
                 classes.group
               )}
             >
@@ -414,6 +416,7 @@
             <MenuItem
               class={cls(
                 index === highlightIndex && 'bg-black/5',
+                item === selected && (classes.selected || 'font-semibold'),
                 item.group ? 'px-4' : 'px-2',
                 classes.item
               )}
