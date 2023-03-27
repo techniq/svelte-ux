@@ -42,6 +42,12 @@ docUrl: $docUrl
 
   const manyOptions = Array.from({ length: 100 }).map((_, i) => ({ name: `${i + 1}`, value: i + 1 }))
 
+  const newOptions = [
+    { name: 'Foo', value: 1 },
+    { name: 'Bar', value: 2 },
+    { name: 'Baz', value: 3 },
+  ];
+
   let value = 3;
 </script>
 
@@ -85,6 +91,15 @@ docUrl: $docUrl
 
 <Preview>
   <SelectField options={manyOptions} />
+</Preview>
+
+## Update options
+
+<Preview>
+  <Toggle let:on let:toggle>
+    <SelectField options={on ? newOptions : options} bind:value clearSearchOnFocus />
+    <Button on:click={toggle}>Toggle Options</Button>
+  </Toggle>
 </Preview>
 
 ## Loading

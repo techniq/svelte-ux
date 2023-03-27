@@ -105,6 +105,8 @@
         prevSelected = selectValue(value);
       } else {
         logger.info('neither selected or value changed (options only)');
+        // Reselect value (in case option value changes searchText, for example)
+        selectValue(value);
       }
     }
   }
