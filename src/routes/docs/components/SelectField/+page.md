@@ -109,8 +109,15 @@ docUrl: $docUrl
 
 <Preview>
   <SelectField {items} on:change={(e) => console.log('on:change', e.detail)}>
-    <div slot="item" let:item let:index let:highlightIndex>
-      <MenuItem class={cls(index === highlightIndex && 'bg-black/5')} scrollIntoView={index === highlightIndex}>
+    <div slot="item" let:item let:index let:selected let:highlightIndex>
+      <MenuItem
+        class={cls(
+          index === highlightIndex && 'bg-black/5',
+          item === selected && 'font-semibold',
+          item.group ? 'px-4' : 'px-2',
+        )}
+        scrollIntoView={index === highlightIndex}
+      >
         <div>
           <div>{item.name}</div>
           <div class="text-sm text-black/50">{item.value}</div>
@@ -124,8 +131,15 @@ docUrl: $docUrl
 
 <Preview>
   <SelectField {items} on:change={(e) => console.log('on:change', e.detail)}>
-    <div slot="item" let:item let:index let:highlightIndex>
-      <MenuItem class={cls(index === highlightIndex && 'bg-black/5')} scrollIntoView={index === highlightIndex}>
+    <div slot="item" let:item let:index let:selected let:highlightIndex>
+      <MenuItem
+        class={cls(
+          index === highlightIndex && 'bg-black/5',
+          item === selected && 'font-semibold',
+          item.group ? 'px-4' : 'px-2',
+        )}
+        scrollIntoView={index === highlightIndex}
+      >
         <div class="grid grid-cols-[1fr,auto] items-center w-full">
           <div>
             <div>{item.name}</div>

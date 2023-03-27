@@ -415,7 +415,7 @@
             </div>
           {/if}
 
-          <slot name="item" {item} {index} {highlightIndex}>
+          <slot name="item" {item} {index} {selected} {value} {highlightIndex}>
             <MenuItem
               class={cls(
                 index === highlightIndex && 'bg-black/5',
