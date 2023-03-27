@@ -15,15 +15,15 @@
   import TextField from './TextField.svelte';
 
   const dispatch = createEventDispatcher<{
-    change: { value: any; item: any };
+    change: { value: any; option: any };
     inputChange: string;
   }>();
 
   const logger = new Logger('SelectField');
 
-  export let items: any[] = [];
-  export let itemText = (item: any) => (item?.name as string) ?? '';
-  export let itemValue = (item: any) => item?.value ?? null;
+  export let options: any[] = [];
+  export let optionText = (option: any) => (option?.name as string) ?? '';
+  export let optionValue = (option: any) => option?.value ?? null;
 
   export let label = '';
   export let placeholder = '';
@@ -41,8 +41,8 @@
   export let classes: {
     root?: string;
     field?: string;
-    items?: string;
-    item?: string;
+    options?: string;
+    option?: string;
     selected?: string;
     group?: string;
     empty?: string;
@@ -56,7 +56,7 @@
   export let disableTransition = false;
   export let menuProps: ComponentProps<Menu> = undefined;
 
-  $: filteredItems = items ?? [];
+  $: filteredOptions = options ?? [];
   let searchText = '';
   $: logger.debug({ searchText });
 
@@ -65,31 +65,31 @@
   export let selected = undefined;
   let prevSelected = undefined;
 
-  function updateSelected(selected, value, items) {
+  function updateSelected(selected, value, options) {
     logger.debug('updateSelected', {
       value,
       prevValue,
       selected,
       prevSelected,
-      items,
+      options,
       loading,
     });
 
     if (loading === true) {
       // wait to apply any changes (initially could be loading selected option)
     } else {
-      if (selected !== undefined && itemValue(selected) !== itemValue(prevSelected)) {
+      if (selected !== undefined && optionValue(selected) !== optionValue(prevSelected)) {
         logger.info('selected changed', {
           value,
           prevValue,
           selected,
           prevSelected,
-          items,
+          options,
         });
 
         // Capture for next change
-        prevValue = itemValue(selected);
-        prevSelected = selectItem(selected);
+        prevValue = optionValue(selected);
+        prevSelected = selectOption(selected);
       } else if (/*value !== undefined &&*/ value !== prevValue) {
         // Removed `value !== undefined` to clear searchText when value is set to undefined.  Might be a breaking change
         logger.info('value changed', {
@@ -97,31 +97,31 @@
           prevValue,
           selected,
           prevSelected,
-          items,
+          options,
         });
 
         // Capture for next change
         prevValue = value;
         prevSelected = selectValue(value);
       } else {
-        logger.info('neither selected or value changed (items only)');
+        logger.info('neither selected or value changed (options only)');
       }
     }
   }
-  // Reactively call anytime `selected`, `value`, or `items` change
-  $: updateSelected(selected, value, items);
+  // Reactively call anytime `selected`, `value`, or `options` change
+  $: updateSelected(selected, value, options);
 
   export let search = async (text: string) => {
     logger.debug('search', text);
 
     if (text === '') {
-      // Reset items
-      filteredItems = items;
+      // Reset options
+      filteredOptions = options;
     } else {
       const words = text?.toLowerCase().split(' ') ?? [];
-      filteredItems = items.filter((item) => {
-        const _itemText = itemText(item).toLowerCase();
-        return words.every((word) => _itemText.includes(word));
+      filteredOptions = options.filter((option) => {
+        const _optionText = optionText(option).toLowerCase();
+        return words.every((word) => _optionText.includes(word));
       });
     }
   };
@@ -133,13 +133,13 @@
   $: if (open === false) {
     // Restore text if cleared but selection remains
     if (selected) {
-      searchText = itemText(selected);
+      searchText = optionText(selected);
     }
   }
 
   // Elements
   let inputEl: HTMLInputElement | null = null;
-  let menuItemsEl: HTMLDivElement;
+  let menuOptionsEl: HTMLDivElement;
 
   $: {
     search(searchText);
@@ -157,19 +157,19 @@
   function onFocus() {
     logger.debug('onFocus');
     if (clearSearchOnFocus) {
-      searchText = ''; // Show all items on focus
+      searchText = ''; // Show all options on focus
     }
     show();
   }
 
   function onBlur(e: FocusEvent) {
-    logger.debug('onBlur', { target: e.target, relatedTarget: e.relatedTarget, menuItemsEl });
+    logger.debug('onBlur', { target: e.target, relatedTarget: e.relatedTarget, menuOptionsEl });
 
-    // Hide if focus not moved to menu (item clicked)
+    // Hide if focus not moved to menu (option clicked)
     if (
       e.relatedTarget instanceof Node &&
-      !menuItemsEl?.contains(e.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu item (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.items` after setting `tabindex="-1"
-      e.relatedTarget !== menuItemsEl?.offsetParent // click on scroll bar
+      !menuOptionsEl?.contains(e.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
+      e.relatedTarget !== menuOptionsEl?.offsetParent // click on scroll bar
     ) {
       hide();
     } else {
@@ -191,7 +191,7 @@
 
       case 'ArrowDown':
         show();
-        if (highlightIndex < filteredItems.length - 1) {
+        if (highlightIndex < filteredOptions.length - 1) {
           highlightIndex++;
         } else {
           // wrap to top
@@ -205,7 +205,7 @@
           highlightIndex--;
         } else {
           // wrap to bottom
-          highlightIndex = filteredItems.length - 1;
+          highlightIndex = filteredOptions.length - 1;
         }
         break;
 
@@ -230,7 +230,7 @@
   function onClick() {
     logger.debug('onClick');
     if (clearSearchOnFocus) {
-      searchText = ''; // Show all items on focus
+      searchText = ''; // Show all options on focus
     }
     show();
   }
@@ -257,39 +257,39 @@
   }
 
   /**
-   * Select item by index
+   * Select option by index
    */
   function selectIndex(index: number) {
     logger.debug('selectIndex', { index });
 
-    const item = filteredItems[index];
-    return selectItem(item);
+    const option = filteredOptions[index];
+    return selectOption(option);
   }
 
   /**
-   * Select item by value
+   * Select option by value
    */
   function selectValue(value: any) {
-    logger.debug('selectValue', { value, items, filteredItems });
+    logger.debug('selectValue', { value, options, filteredOptions });
 
-    const item = items?.find((item) => itemValue(item) === value);
-    return selectItem(item);
+    const option = options?.find((option) => optionValue(option) === value);
+    return selectOption(option);
   }
 
   /**
-   * Select item by object
+   * Select option by object
    */
-  function selectItem(item: any) {
-    logger.info('selectItem', { item });
+  function selectOption(option: any) {
+    logger.info('selectOption', { option });
 
     const previousValue = value;
 
-    value = itemValue(item);
-    selected = item;
-    searchText = itemText(item);
+    value = optionValue(option);
+    selected = option;
+    searchText = optionText(option);
 
     if (value != previousValue) {
-      dispatch('change', { item, value });
+      dispatch('change', { option, value });
     }
 
     // Only hide if value changed (do not hide if opening initially and loading list)
@@ -300,13 +300,13 @@
     // }
     hide();
 
-    return item;
+    return option;
   }
 
   function clear() {
     logger.info('clear');
-    selectItem(null);
-    filteredItems = items;
+    selectOption(null);
+    filteredOptions = options;
     //inputEl?.focus();
   }
 </script>
@@ -363,8 +363,8 @@
     </span>
   </TextField>
 
-  <!-- Improve initial open display, still needs work when switching from No items found (items.length === 0) -->
-  {#if items?.length > 0 || loading !== true}
+  <!-- Improve initial open display, still needs work when switching from No options found (options.length === 0) -->
+  {#if options?.length > 0 || loading !== true}
     <Menu
       {placement}
       {autoPlacement}
@@ -378,60 +378,60 @@
     >
       <div
         tabindex="-1"
-        class={cls('items focus:outline-none', classes.items)}
+        class={cls('options focus:outline-none', classes.options)}
         class:opacity-50={loading}
-        bind:this={menuItemsEl}
+        bind:this={menuOptionsEl}
         on:click|stopPropagation={(e) => {
-          logger.debug('Items container clicked');
+          logger.debug('options container clicked');
 
           if (e.target instanceof HTMLElement) {
-            // Find slot parent of click target item, fallback to `e.target` if slot is not overridden
-            // Use `.items > ` in case slot is nested (ex. GraphQLSelect with slot)
-            const slotEl = e.target.closest('.items > [slot=item]') ?? e.target;
+            // Find slot parent of click target option, fallback to `e.target` if slot is not overridden
+            // Use `.options > ` in case slot is nested (ex. GraphQLSelect with slot)
+            const slotEl = e.target.closest('.options > [slot=option]') ?? e.target;
             // Find the index of the clicked on element (ignoring group headers)
-            const itemIndex = slotEl
-              ? [...menuItemsEl.children]
+            const optionIndex = slotEl
+              ? [...menuOptionsEl.children]
                   .filter((el) => !el.classList.contains('group-header'))
                   .indexOf(slotEl)
               : -1;
-            logger.debug({ slotEl, itemIndex });
-            // ignore clicks on group items
-            if (itemIndex !== -1) {
-              selectIndex(itemIndex);
+            logger.debug({ slotEl, optionIndex });
+            // ignore clicks on group options
+            if (optionIndex !== -1) {
+              selectIndex(optionIndex);
             }
           }
         }}
       >
-        {#each filteredItems ?? [] as item, index (itemValue(item))}
-          {@const previousItem = filteredItems[index - 1]}
-          {#if item.group && item.group !== previousItem?.group}
+        {#each filteredOptions ?? [] as option, index (optionValue(option))}
+          {@const previousOption = filteredOptions[index - 1]}
+          {#if option.group && option.group !== previousOption?.group}
             <div
               class={cls(
                 'group-header text-xs leading-8 tracking-widest text-black/50 px-2',
                 classes.group
               )}
             >
-              {item.group}
+              {option.group}
             </div>
           {/if}
 
-          <slot name="item" {item} {index} {selected} {value} {highlightIndex}>
+          <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
             <MenuItem
               class={cls(
                 index === highlightIndex && 'bg-black/5',
-                item === selected && (classes.selected || 'font-semibold'),
-                item.group ? 'px-4' : 'px-2',
-                classes.item
+                option === selected && (classes.selected || 'font-semibold'),
+                option.group ? 'px-4' : 'px-2',
+                classes.option
               )}
               scrollIntoView={index === highlightIndex}
             >
-              {itemText(item)}
+              {optionText(option)}
             </MenuItem>
           </slot>
         {:else}
           <slot name="empty" {loading} {searchText}>
             <div class={cls('p-3 text-black/50 italic text-sm', classes.empty)}>
-              {loading ? 'Loading...' : 'No items found'}
+              {loading ? 'Loading...' : 'No options found'}
             </div>
           </slot>
         {/each}

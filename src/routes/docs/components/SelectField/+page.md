@@ -24,13 +24,13 @@ docUrl: $docUrl
   import { delay } from '$lib/utils/promise';
   import { cls } from '$lib/utils/styles';
 
-  const items = [
+  const options = [
     { name: 'One', value: 1 },
     { name: 'Two', value: 2 },
     { name: 'Three', value: 3 },
     { name: 'Four', value: 4 },
   ];
-  const itemsWithGroup = [
+  const optionsWithGroup = [
     { name: 'One', value: 1, group: "First" },
     { name: 'Two', value: 2, group: "First" },
     { name: 'Three', value: 3, group: "Second" },
@@ -40,7 +40,7 @@ docUrl: $docUrl
     { name: 'Seven', value: 7, group: "Third" },
   ];
 
-  const manyItems = Array.from({ length: 100 }).map((_, i) => ({ name: i + 1, value: i + 1 }))
+  const manyOptions = Array.from({ length: 100 }).map((_, i) => ({ name: i + 1, value: i + 1 }))
 
   let value = 3;
 </script>
@@ -50,13 +50,13 @@ docUrl: $docUrl
 ## Basic
 
 <Preview>
-  <SelectField {items} on:change={(e) => console.log('on:change', e.detail)} />
+  <SelectField {options} on:change={(e) => console.log('on:change', e.detail)} />
 </Preview>
 
 ## bind:value
 
 <Preview>
-  <SelectField {items} bind:value />
+  <SelectField {options} bind:value />
   <Button on:click={() => (value = 1)}>Pick 1</Button>
   <Button on:click={() => (value = 2)}>Pick 2</Button>
   <Button on:click={() => (value = 3)}>Pick 3</Button>
@@ -66,84 +66,84 @@ docUrl: $docUrl
 ## clearSearchOnFocus
 
 <Preview>
-  <SelectField {items} bind:value clearSearchOnFocus />
+  <SelectField {options} bind:value clearSearchOnFocus />
 </Preview>
 
 ## clearable=false
 
 <Preview>
-  <SelectField {items} bind:value clearSearchOnFocus clearable={false} />
+  <SelectField {options} bind:value clearSearchOnFocus clearable={false} />
 </Preview>
 
 ## Grouped options
 
 <Preview>
-  <SelectField items={itemsWithGroup} on:change={(e) => console.log('on:change', e.detail)} />
+  <SelectField options={optionsWithGroup} on:change={(e) => console.log('on:change', e.detail)} />
 </Preview>
 
 ## Many options
 
 <Preview>
-  <SelectField items={manyItems} />
+  <SelectField options={manyOptions} />
 </Preview>
 
 ## Loading
 
 <Preview>
-  <SelectField {items} loading />
+  <SelectField {options} loading />
 </Preview>
 
 ## Disabled
 
 <Preview>
-  <SelectField {items} disabled />
+  <SelectField {options} disabled />
 </Preview>
 
 ## Readonly
 
 <Preview>
-  <SelectField {items} value={1} readonly />
+  <SelectField {options} value={1} readonly />
 </Preview>
 
-## Item Slot
+## option Slot
 
 <Preview>
-  <SelectField {items} on:change={(e) => console.log('on:change', e.detail)}>
-    <div slot="item" let:item let:index let:selected let:highlightIndex>
+  <SelectField {options} on:change={(e) => console.log('on:change', e.detail)}>
+    <div slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
           index === highlightIndex && 'bg-black/5',
-          item === selected && 'font-semibold',
-          item.group ? 'px-4' : 'px-2',
+          option === selected && 'font-semibold',
+          option.group ? 'px-4' : 'px-2',
         )}
         scrollIntoView={index === highlightIndex}
       >
         <div>
-          <div>{item.name}</div>
-          <div class="text-sm text-black/50">{item.value}</div>
+          <div>{option.name}</div>
+          <div class="text-sm text-black/50">{option.value}</div>
         </div>
       </MenuItem>
     </div>
   </SelectField>
 </Preview>
 
-## Item with action
+## option with action
 
 <Preview>
-  <SelectField {items} on:change={(e) => console.log('on:change', e.detail)}>
-    <div slot="item" let:item let:index let:selected let:highlightIndex>
+  <SelectField {options} on:change={(e) => console.log('on:change', e.detail)}>
+    <div slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
           index === highlightIndex && 'bg-black/5',
-          item === selected && 'font-semibold',
-          item.group ? 'px-4' : 'px-2',
+          option === selected && 'font-semibold',
+          option.group ? 'px-4' : 'px-2',
         )}
         scrollIntoView={index === highlightIndex}
       >
-        <div class="grid grid-cols-[1fr,auto] items-center w-full">
+        <div class="grid grid-cols-[1fr,auto] options-center w-full">
           <div>
-            <div>{item.name}</div>
-            <div class="text-sm text-black/50">{item.value}</div>
+            <div>{option.name}</div>
+            <div class="text-sm text-black/50">{option.value}</div>
           </div>
           <Toggle let:on={open} let:toggle let:toggleOff>
             <Button
@@ -153,7 +153,7 @@ docUrl: $docUrl
             />
             <Drawer {open} on:close={toggleOff} right class="w-[400px]">
               <div class="p-4">
-                Editing item: {item.name}
+                Editing option: {option.name}
               </div>
               <div class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400">
                 <Button on:click={toggleOff}>Close</Button>
@@ -170,8 +170,8 @@ docUrl: $docUrl
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <SelectField {items}>
-      <div slot="prepend" on:click|stopPropagation class="flex items-center">
+    <SelectField {options}>
+      <div slot="prepend" on:click|stopPropagation class="flex options-center">
         <select
           class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
           style="text-align-last: center;"
@@ -193,22 +193,22 @@ docUrl: $docUrl
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <SelectField {items}>
+    <SelectField {options}>
       <span slot="append" on:click|stopPropagation>
         <Button icon={mdiPlus} class="text-black/50 p-2" on:click={toggle} />
       </span>
     </SelectField>
     <Dialog {open} on:close={toggle}>
-      <div slot="title">Create new item</div>
+      <div slot="title">Create new option</div>
       <div class="px-6 py-3 w-96">
         <TextField label="Name" autofocus />
       </div>
       <div slot="actions">
         <Button
-          on:click={() => console.log('Adding item...')}
+          on:click={() => console.log('Adding option...')}
           class="text-blue-500"
         >
-          Add item
+          Add option
         </Button>
         <Button>Cancel</Button>
       </div>
@@ -219,25 +219,25 @@ docUrl: $docUrl
 ## Icon
 
 <Preview>
-  <SelectField {items} icon={mdiMagnify} />
+  <SelectField {options} icon={mdiMagnify} />
 </Preview>
 
 ## Rounded
 
 <Preview>
-  <SelectField {items} rounded />
+  <SelectField {options} rounded />
 </Preview>
 
 ## Rounded with icon
 
 <Preview>
-  <SelectField {items} icon={mdiMagnify} rounded />
+  <SelectField {options} icon={mdiMagnify} rounded />
 </Preview>
 
 ## Rounded with append slot and icon
 
 <Preview>
-  <SelectField {items} icon={mdiMagnify} rounded>
+  <SelectField {options} icon={mdiMagnify} rounded>
     <span slot="prepend" on:click|stopPropagation>
       <select
         class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
@@ -259,7 +259,7 @@ docUrl: $docUrl
 
 <Preview>
   <SelectField
-    {items}
+    {options}
     on:change={(e) => console.log('on:change', e.detail)}
     search={async () => {
       console.log('search override...');
@@ -273,7 +273,7 @@ docUrl: $docUrl
 
 <Preview>
   <SelectField
-    {items}
+    {options}
     on:change={(e) => console.log('on:change', e.detail)}
     placement="top-start"
   />
@@ -282,13 +282,13 @@ docUrl: $docUrl
 ## Custom selected class
 
 <Preview>
-  <SelectField {items} bind:value clearSearchOnFocus classes={{ selected: 'bg-accent-500 text-white' }} />
+  <SelectField {options} bind:value clearSearchOnFocus classes={{ selected: 'bg-accent-500 text-white' }} />
 </Preview>
 
 <!-- ## Menu actions
 <Preview>
 <SelectField
-  {items}
+  {options}
   on:change={(e) => {
     console.log('on:change', e.detail);
   }}
