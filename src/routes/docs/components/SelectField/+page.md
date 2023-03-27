@@ -40,7 +40,7 @@ docUrl: $docUrl
     { name: 'Seven', value: 7, group: "Third" },
   ];
 
-  const manyOptions = Array.from({ length: 100 }).map((_, i) => ({ name: i + 1, value: i + 1 }))
+  const manyOptions = Array.from({ length: 100 }).map((_, i) => ({ name: `${i + 1}`, value: i + 1 }))
 
   let value = 3;
 </script>
