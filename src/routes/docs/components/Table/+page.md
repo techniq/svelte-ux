@@ -11,9 +11,9 @@ docUrl: $docUrl
 
   import Button from '$lib/components/Button.svelte';
   import Paginate from '$lib/components/Paginate.svelte';
+  import Pagination from '$lib/components/Pagination.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Table from '$lib/components/Table.svelte';
-  import TablePagination from '$lib/components/TablePagination.svelte';
 
   import paginationStore from '$lib/stores/paginationStore';
   import tableOrderStore from '$lib/stores/tableOrderStore';
@@ -126,7 +126,7 @@ docUrl: $docUrl
         },
       ]}
     />
-    <TablePagination {pagination} />
+    <Pagination {pagination} perPageOptions={[5,10,25,100]} show={['perPage', 'pagination', 'prevPage', 'nextPage']} classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }} />
   </Paginate>
 </Preview>
 

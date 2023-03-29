@@ -22,6 +22,7 @@
       'Progress',
       'ScrollContainer',
       'SpringValue',
+      'Table',
       'ToggleButton',
       'ToggleGroup',
       'TweenedValue',
@@ -54,7 +55,6 @@
       'Tooltip',
     ],
     State: ['Form', 'Selection', 'State', 'Toggle'],
-    Table: ['Table', 'TablePagination'],
     Date: [
       'dateDisplay',
       'DateField',
