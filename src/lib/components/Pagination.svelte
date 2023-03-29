@@ -10,6 +10,7 @@
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Toggle from './Toggle.svelte';
+  import Tooltip from './Tooltip.svelte';
 
   export let pagination: ReturnType<typeof paginationStore>;
   export let perPageOptions = [10, 25, 50, 100, 1000];
@@ -34,50 +35,58 @@
 </script>
 
 {#if $pagination.totalPages > 1 || !hideSinglePage}
-  <div class={cls('flex items-center', classes.root, $$props.class)}>
+  <div class={cls('flex items-center gap-1', classes.root, $$props.class)}>
     {#each show as component}
       {#if component === 'actions'}
         <slot name="actions" />
       {/if}
 
       {#if component === 'firstPage'}
-        <Button
-          icon={mdiPageFirst}
-          on:click={pagination.firstPage}
-          disabled={$pagination.isFirst}
-          aria-label="First Page"
-          class={cls('p-2', classes.buttons)}
-        />
+        <Tooltip title="First page" offset={2}>
+          <Button
+            icon={mdiPageFirst}
+            on:click={pagination.firstPage}
+            disabled={$pagination.isFirst}
+            aria-label="First Page"
+            class={cls('p-2', classes.buttons)}
+          />
+        </Tooltip>
       {/if}
 
       {#if component === 'prevPage'}
-        <Button
-          icon={mdiChevronLeft}
-          on:click={pagination.prevPage}
-          disabled={$pagination.isFirst}
-          aria-label="Previous Page"
-          class={cls('p-2', classes.buttons)}
-        />
+        <Tooltip title="Previous page" offset={2}>
+          <Button
+            icon={mdiChevronLeft}
+            on:click={pagination.prevPage}
+            disabled={$pagination.isFirst}
+            aria-label="Previous Page"
+            class={cls('p-2', classes.buttons)}
+          />
+        </Tooltip>
       {/if}
 
       {#if component === 'nextPage'}
-        <Button
-          icon={mdiChevronRight}
-          on:click={pagination.nextPage}
-          disabled={$pagination.isLast}
-          aria-label="Next Page"
-          class={cls('p-2', classes.buttons)}
-        />
+        <Tooltip title="Next page" offset={2}>
+          <Button
+            icon={mdiChevronRight}
+            on:click={pagination.nextPage}
+            disabled={$pagination.isLast}
+            aria-label="Next Page"
+            class={cls('p-2', classes.buttons)}
+          />
+        </Tooltip>
       {/if}
 
       {#if component === 'lastPage'}
-        <Button
-          icon={mdiPageLast}
-          on:click={pagination.lastPage}
-          disabled={$pagination.isLast}
-          aria-label="Last Page"
-          class={cls('p-2', classes.buttons)}
-        />
+        <Tooltip title="Last page" offset={2}>
+          <Button
+            icon={mdiPageLast}
+            on:click={pagination.lastPage}
+            disabled={$pagination.isLast}
+            aria-label="Last Page"
+            class={cls('p-2', classes.buttons)}
+          />
+        </Tooltip>
       {/if}
 
       {#if component === 'perPage'}
