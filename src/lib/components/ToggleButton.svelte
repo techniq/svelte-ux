@@ -14,14 +14,14 @@
   <Button {...$$restProps} on:click={toggle} on:click>
     <slot {on} {toggle} {toggleOn} {toggleOff} />
   </Button>
-  {#if on}
-    <!-- Transition delays unmount to allow children to transition (ex. Drawer/Dialog) -->
-    {#if transition}
+  <!-- Transition delays unmount to allow children to transition (ex. Drawer/Dialog) -->
+  {#if transition}
+    {#if on}
       <div transition:transition|local={transitionParams}>
         <slot name="toggle" {on} {toggle} {toggleOn} {toggleOff} />
       </div>
-    {:else}
-      <slot name="toggle" {on} {toggle} {toggleOn} {toggleOff} />
     {/if}
+  {:else if on}
+    <slot name="toggle" {on} {toggle} {toggleOn} {toggleOff} />
   {/if}
 </Toggle>
