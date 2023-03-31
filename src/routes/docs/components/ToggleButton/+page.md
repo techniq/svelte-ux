@@ -78,6 +78,19 @@ import { ToggleButton } from 'svelte-ux';
   </ToggleButton>
 </Preview>
 
+## on by default
+
+<Preview>
+  <ToggleButton on size="sm" transition={slide} let:on={showDetails}>
+    {showDetails ? 'show less' : 'show more'}...
+    <div slot="toggle" class="mt-2 border-t border-b border-gray-100">
+      {#each { length: 10 } as _, i}
+        <div>{i}</div>
+      {/each}
+    </div>
+  </ToggleButton>
+</Preview>
+
 ## ButtonGroup
 
 <Preview>

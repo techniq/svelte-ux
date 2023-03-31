@@ -5,11 +5,12 @@
   import { fade } from 'svelte/transition';
   import type { TransitionParams } from '$lib/types';
 
+  export let on = false;
   export let transition: typeof fade | false = fade;
   export let transitionParams: TransitionParams = {};
 </script>
 
-<Toggle let:on let:toggle let:toggleOn let:toggleOff>
+<Toggle bind:on let:toggle let:toggleOn let:toggleOff>
   <Button {...$$restProps} on:click={toggle} on:click>
     <slot {on} {toggle} {toggleOn} {toggleOff} />
   </Button>

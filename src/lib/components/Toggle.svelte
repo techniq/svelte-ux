@@ -3,7 +3,7 @@
 
   const dispatch = createEventDispatcher();
 
-  let on = false;
+  export let on = false;
 
   function toggle() {
     on = !on;
