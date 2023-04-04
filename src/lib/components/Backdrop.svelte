@@ -9,6 +9,7 @@
   export let fadeParams: FadeParams = { duration: 300 };
 </script>
 
+<!-- TODO: Add `|local` to transition without breaking `ToggleButton` usage: https://github.com/techniq/svelte-ux/issues/51 -->
 <div
   class="backdrop fixed top-0 bottom-0 left-0 right-0 flex items-center
     justify-center bg-black/50 {$$restProps.class || ''}"
@@ -18,7 +19,7 @@
   on:click
   on:mousedown
   on:mouseup
-  transition:fade|local={fadeParams}
+  transition:fade={fadeParams}
   class:blur
   use:portalAction={{ enabled: portal }}
 >
