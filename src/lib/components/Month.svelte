@@ -128,8 +128,8 @@
   {#key startOfMonth.valueOf()}
     <div
       class="col-span-full row-span-full grid grid-cols-7 grid-rows-6 gap-y-4"
-      in:fly={{ x: '-100%' }}
-      out:fly={{ x: '100%' }}
+      in:fly|local={{ x: '-100%' }}
+      out:fly|local={{ x: '100%' }}
     >
       {#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
         {#each week ?? [] as day (day.valueOf())}

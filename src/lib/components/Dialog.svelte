@@ -98,7 +98,7 @@
         $$props.class
       )}
       style={$$props.style}
-      transition:scale={{ duration: 150, easing: quadIn }}
+      transition:scale|local={{ duration: 150, easing: quadIn }}
       on:introstart
       on:outrostart
       on:introend

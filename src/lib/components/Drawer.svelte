@@ -56,7 +56,7 @@
       $$props.class
     )}
     style={$$props.style}
-    transition:fly={{
+    transition:fly|local={{
       x: left ? '-100%' : right ? '100%' : 0,
       y: top ? '-100%' : bottom ? '100%' : 0,
     }}

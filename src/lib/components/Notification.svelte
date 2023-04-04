@@ -43,7 +43,7 @@
 {#if open}
   <div
     class="notification rounded-lg border bg-white shadow-lg z-10"
-    transition:fly={{ duration: 200, easing: quadIn, x: 100 }}
+    transition:fly|local={{ duration: 200, easing: quadIn, x: 100 }}
     on:outroend={() => dispatch('close')}
     on:click={onClick}
     bind:this={notificationEl}

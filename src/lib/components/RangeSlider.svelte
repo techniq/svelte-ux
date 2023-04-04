@@ -304,7 +304,7 @@
     <output
       style="left: calc(var(--start) * 100%);"
       class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
-      transition:fly={{ y: 4, duration: 300 }}
+      transition:fly|local={{ y: 4, duration: 300 }}
     >
       {value[0]}
     </output>
@@ -314,7 +314,7 @@
     <output
       style="left: calc(var(--end) * 100%);"
       class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
-      transition:fly={{ y: 4, duration: 300 }}
+      transition:fly|local={{ y: 4, duration: 300 }}
     >
       {value[1]}
     </output>

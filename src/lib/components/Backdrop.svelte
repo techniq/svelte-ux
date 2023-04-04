@@ -18,7 +18,7 @@
   on:click
   on:mousedown
   on:mouseup
-  transition:fade={fadeParams}
+  transition:fade|local={fadeParams}
   class:blur
   use:portalAction={{ enabled: portal }}
 >
