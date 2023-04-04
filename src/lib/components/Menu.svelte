@@ -58,6 +58,7 @@
   on:close
   let:close
 >
+  <!-- TODO: Add `|local` to transition without breaking `ToggleButton` usage: https://github.com/techniq/svelte-ux/issues/51 -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <menu
     class="menu-items outline-none max-h-screen"
@@ -67,7 +68,7 @@
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
     }}
-    transition:transition|local={transitionParams}
+    transition:transition={transitionParams}
     use:focusMove={{ disabled: !moveFocus }}
   >
     <slot {close} />
