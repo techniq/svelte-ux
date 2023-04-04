@@ -13,6 +13,7 @@ docUrl: $docUrl
 
 	import Icon from '$lib/components/Icon.svelte';
 	import Preview from '$lib/components/Preview.svelte';
+	import Tooltip from '$lib/components/Tooltip.svelte';
 
 	const mdiAccountUrl = 'https://api.iconify.design/mdi:account.svg'
 </script>
@@ -87,6 +88,27 @@ docUrl: $docUrl
 	<Icon path={mdiHeart} class="animate-pulse" />
 	<Icon path={mdiCircleMedium} class="animate-ping" />
 	<Icon path={mdiDownload} class="animate-bounce" />
+</Preview>
+
+## with Tooltip
+
+<Preview>
+	<Tooltip title="User">
+		<Icon path={mdiAccount} />
+	</Tooltip>
+	<Tooltip title="User">
+		<Icon svgUrl="https://api.iconify.design/mdi:account.svg" />
+	</Tooltip>
+	<Tooltip title="User">
+		<Icon svg={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'} />
+	</Tooltip>
+	<Tooltip title="User">
+		<Icon>
+			<svg width="32" height="32" viewBox="0 0 24 24">
+				<path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z" />
+			</svg>
+		</Icon>
+	</Tooltip>
 </Preview>
 
 # API

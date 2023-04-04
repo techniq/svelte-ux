@@ -75,7 +75,7 @@
   }
 </script>
 
-{#if svg || $$slots.default}
+{#if svg || svgUrl || $$slots.default}
   <span
     class={cls(
       'icon-container inline-block flex-shrink-0 align-middle',
@@ -92,7 +92,7 @@
     on:click
   >
     <slot>
-      {@html svg}
+      {@html svg ?? ''}
     </slot>
   </span>
 {:else}
