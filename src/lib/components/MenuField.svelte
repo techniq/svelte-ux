@@ -13,7 +13,6 @@
   export let value = null;
   export let menuProps: ComponentProps<Menu> = undefined;
   export let menuIcon = mdiMenuDown;
-  export let explicitClose = null;
   $: selected = options?.find((x) => x.value === value);
 
   let open = false;
@@ -44,9 +43,7 @@
     slot="fieldset"
     {open}
     on:close={() => {
-      if (!explicitClose) {
-        open = false;
-      }
+      open = false;
     }}
     matchWidth
     {...menuProps}
