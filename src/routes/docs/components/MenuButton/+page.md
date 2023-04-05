@@ -7,11 +7,11 @@ docUrl: $docUrl
 <script>
   import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify, mdiRefresh } from '@mdi/js';
 
-  import api from '$lib/components/MenuField.svelte?raw&sveld';
+  import api from '$lib/components/MenuButton.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Button from '$lib/components/Button.svelte';
-  import MenuField from '$lib/components/MenuField.svelte';
+  import MenuButton from '$lib/components/MenuButton.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import TextField from '$lib/components/TextField.svelte';
@@ -31,52 +31,58 @@ docUrl: $docUrl
 
 # Examples
 
-## Style
-
-<Preview>
-  <MenuField {options} classes={{ container: 'bg-blue-50 rounded-full border-0 text-blue-500' }} />
-</Preview>
-
 ## Basic
 
 <Preview>
-  <MenuField {options} />
+  <MenuButton {options} />
 </Preview>
 
 ## Label
 
 <Preview>
-  <MenuField label="View" {options} />
+  <MenuButton label="View" {options} />
 </Preview>
 
 ## Value
 
 <Preview>
-  <MenuField {options} value="copy" />
+  <MenuButton {options} value="copy" />
 </Preview>
 
 ## Icon
 
 <Preview>
-  <MenuField {options} icon={mdiMagnify} />
+  <MenuButton {options} icon={mdiMagnify} />
+</Preview>
+
+## Variant
+
+<Preview>
+  <MenuButton {options} variant="filled" color="blue" />
 </Preview>
 
 ## Option icons
 
 <Preview>
-  <MenuField options={optionsWithIcons} />
+  <MenuButton options={optionsWithIcons} />
 </Preview>
 
-## menuProps
+## menuProps (placement)
 
 <Preview>
-  <MenuField {options} menuProps={{ placement: 'top-start' }} />
+  <MenuButton {options} menuProps={{ placement: 'top-start' }} />
 </Preview>
 
-## explicitClose
+## menuProps (matchWidth)
 
 <Preview>
-  <MenuField {options} menuProps={{ explicitClose: true }} let:options let:setValue let:close>
+  <MenuButton {options} menuProps={{ matchWidth: true }} />
+</Preview>
+
+## menuProps (explicitClose)
+
+<Preview>
+  <MenuButton {options} menuProps={{ placement: 'bottom-start', explicitClose: true }} let:options let:setValue let:close>
     <div class="p-2">
       <TextField icon={mdiMagnify} placeholder="Search" />
     </div>
@@ -92,31 +98,21 @@ docUrl: $docUrl
         </MenuItem>
       {/each}
     </menu>
-  </MenuField>
+  </MenuButton>
 </Preview>
 
 ## options slot
 
 <Preview>
-  <MenuField {options} let:options let:setValue>
-    <menu>
+  <MenuButton {options} let:options let:setValue>
+    <menu class="w-24">
       {#each options as option}
         <MenuItem on:click={() => setValue(option.value)}>
           {option.label}
         </MenuItem>
       {/each}
     </menu>
-  </MenuField>
-</Preview>
-
-## append slot
-
-<Preview>
-  <MenuField {options}>
-    <div slot="append">
-      <Button icon={mdiRefresh} class="p-2 text-black/50" />
-    </div>
-  </MenuField>
+  </MenuButton>
 </Preview>
 
 # API

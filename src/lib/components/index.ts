@@ -34,6 +34,7 @@ export { default as Input } from './Input.svelte';
 export { default as Form } from './Form.svelte';
 export { default as ListItem } from './ListItem.svelte';
 export { default as Menu } from './Menu.svelte';
+export { default as MenuButton } from './MenuButton.svelte';
 export { default as MenuField } from './MenuField.svelte';
 export { default as MenuItem } from './MenuItem.svelte';
 export { default as Month } from './Month.svelte';
