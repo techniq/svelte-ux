@@ -46,7 +46,7 @@ docUrl: $docUrl
 ## Value
 
 <Preview>
-  <MenuField {options} value="settings" />
+  <MenuField {options} value="copy" />
 </Preview>
 
 ## Icon
