@@ -61,6 +61,12 @@ docUrl: $docUrl
   <MenuButton {options} variant="filled" color="blue" />
 </Preview>
 
+## Size
+
+<Preview>
+  <MenuButton {options} size="sm" />
+</Preview>
+
 ## Option icons
 
 <Preview>

@@ -20,7 +20,7 @@
 
 <Button on:click={() => (open = !open)} {...$$restProps}>
   <slot name="selection">
-    <span class="truncate text-sm">
+    <span class="truncate">
       {selected?.label ?? 'No selection'}
     </span>
   </slot>
