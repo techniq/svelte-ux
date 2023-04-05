@@ -70,7 +70,20 @@ import { ToggleButton } from 'svelte-ux';
 <Preview>
   <ToggleButton size="sm" transition={slide} let:on={showDetails}>
     {showDetails ? 'show less' : 'show more'}...
-    <div slot="toggle" class="mt-2 border-t border-b border-gray-100">
+    <div slot="toggle" class="mt-2 border-t border-gray-100">
+      {#each { length: 10 } as _, i}
+        <div>{i}</div>
+      {/each}
+    </div>
+  </ToggleButton>
+</Preview>
+
+## slide transition (button after)
+
+<Preview>
+  <ToggleButton size="sm" transition={slide} let:on={showDetails} buttonPlacement="after">
+    {showDetails ? 'show less' : 'show more'}...
+    <div slot="toggle" class="mt-2 border-b border-gray-100">
       {#each { length: 10 } as _, i}
         <div>{i}</div>
       {/each}
