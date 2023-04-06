@@ -48,10 +48,13 @@ import { Button } from 'svelte-ux';
   <Button loading >
     Click me
   </Button>
-  <Button variant="outlined" color="blue" loading>
+  <Button variant="outlined" color="accent" loading>
     Click me
   </Button>
-  <Button variant="filled" color="blue" loading>
+  <Button variant="filled" color="accent" loading>
+    Click me
+  </Button>
+  <Button variant="filledOutlined" color="accent" loading>
     Click me
   </Button>
 </Preview>
@@ -61,22 +64,28 @@ import { Button } from 'svelte-ux';
 <Preview>
   <div class="grid gap-2">
     <div>
-      <Button>Text</Button>
-      <Button color="blue">Text</Button>
-      <Button color="red">Text</Button>
-      <Button color="green">Text</Button>
+      <Button>default</Button>
+      <Button color="blue">default</Button>
+      <Button color="red">default</Button>
+      <Button color="green">default</Button>
     </div>
     <div>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="outlined" color="blue">Outlined</Button>
-      <Button variant="outlined" color="red">Outlined</Button>
-      <Button variant="outlined" color="green">Outlined</Button>
+      <Button variant="outlined">outlined</Button>
+      <Button variant="outlined" color="blue">outlined</Button>
+      <Button variant="outlined" color="red">outlined</Button>
+      <Button variant="outlined" color="green">outlined</Button>
     </div>
     <div>
-      <Button variant="filled">Filled</Button>
-      <Button variant="filled" color="blue">Filled</Button>
-      <Button variant="filled" color="red">Filled</Button>
-      <Button variant="filled" color="green">Filled</Button>
+      <Button variant="filled">filled</Button>
+      <Button variant="filled" color="blue">filled</Button>
+      <Button variant="filled" color="red">filled</Button>
+      <Button variant="filled" color="green">filled</Button>
+    </div>
+    <div>
+      <Button variant="filledOutlined">filledOutlined</Button>
+      <Button variant="filledOutlined" color="blue">filledOutlined</Button>
+      <Button variant="filledOutlined" color="red">filledOutlined</Button>
+      <Button variant="filledOutlined" color="green">filledOutlined</Button>
     </div>
   </div>
 </Preview>
@@ -94,22 +103,28 @@ import { Button } from 'svelte-ux';
     <div class="[&:not(:first-child)]:mt-4">{size}</div>
     <div class="grid gap-2 ml-3">
       <div>
-        <Button {size}>Text</Button>
-        <Button color="blue" {size}>Text</Button>
-        <Button color="red" {size}>Text</Button>
-        <Button color="green" {size}>Text</Button>
+        <Button {size}>default</Button>
+        <Button color="blue" {size}>default</Button>
+        <Button color="red" {size}>default</Button>
+        <Button color="green" {size}>default</Button>
       </div>
       <div>
-        <Button variant="outlined" {size}>Outlined</Button>
-        <Button variant="outlined" {size} color="blue">Outlined</Button>
-        <Button variant="outlined" {size} color="red">Outlined</Button>
-        <Button variant="outlined" {size} color="green">Outlined</Button>
+        <Button variant="outlined" {size}>outlined</Button>
+        <Button variant="outlined" {size} color="blue">outlined</Button>
+        <Button variant="outlined" {size} color="red">outlined</Button>
+        <Button variant="outlined" {size} color="green">outlined</Button>
       </div>
       <div>
-        <Button variant="filled" {size}>Filled</Button>
-        <Button variant="filled" {size} color="blue">Filled</Button>
-        <Button variant="filled" {size} color="red">Filled</Button>
-        <Button variant="filled" {size} color="green">Filled</Button>
+        <Button variant="filled" {size}>filled</Button>
+        <Button variant="filled" {size} color="blue">filled</Button>
+        <Button variant="filled" {size} color="red">filled</Button>
+        <Button variant="filled" {size} color="green">filled</Button>
+      </div>
+      <div>
+        <Button variant="filledOutlined" {size}>filledOutlined</Button>
+        <Button variant="filledOutlined" {size} color="blue">filledOutlined</Button>
+        <Button variant="filledOutlined" {size} color="red">filledOutlined</Button>
+        <Button variant="filledOutlined" {size} color="green">filledOutlined</Button>
       </div>
     </div>
   {/each}
@@ -120,22 +135,28 @@ import { Button } from 'svelte-ux';
 <Preview>
   <div class="grid gap-2">
     <div>
-      <Button>Default</Button>
-      <Button rounded>Rounded</Button>
-      <Button rounded="full">Full</Button>
-      <Button rounded={false}>False</Button>
+      <Button>default</Button>
+      <Button rounded>rounded</Button>
+      <Button rounded="full">full</Button>
+      <Button rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="outlined" color="blue">Default</Button>
-      <Button variant="outlined" color="blue" rounded>Rounded</Button>
-      <Button variant="outlined" color="blue" rounded="full">Full</Button>
-      <Button variant="outlined" color="blue" rounded={false}>False</Button>
+      <Button variant="outlined" color="accent">default</Button>
+      <Button variant="outlined" color="accent" rounded>rounded</Button>
+      <Button variant="outlined" color="accent" rounded="full">full</Button>
+      <Button variant="outlined" color="accent" rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="filled" color="blue">Default</Button>
-      <Button variant="filled" color="blue" rounded>Rounded</Button>
-      <Button variant="filled" color="blue" rounded="full">Full</Button>
-      <Button variant="filled" color="blue" rounded={false}>False</Button>
+      <Button variant="filled" color="accent">default</Button>
+      <Button variant="filled" color="accent" rounded>rounded</Button>
+      <Button variant="filled" color="accent" rounded="full">full</Button>
+      <Button variant="filled" color="accent" rounded={false}>false</Button>
+    </div>
+    <div>
+      <Button variant="filledOutlined" color="accent">default</Button>
+      <Button variant="filledOutlined" color="accent" rounded>rounded</Button>
+      <Button variant="filledOutlined" color="accent" rounded="full">full</Button>
+      <Button variant="filledOutlined" color="accent" rounded={false}>false</Button>
     </div>
   </div>
 </Preview>
@@ -143,9 +164,10 @@ import { Button } from 'svelte-ux';
 ## Uppercase
 
 <Preview>
-  <Button class="uppercase">Text</Button>
-  <Button class="uppercase" variant="outlined" color="blue">Outlined</Button>
-  <Button class="uppercase" variant="filled" color="blue">Filled</Button>
+  <Button class="uppercase">text</Button>
+  <Button class="uppercase" variant="outlined" color="accent">outlined</Button>
+  <Button class="uppercase" variant="filled" color="accent">filled</Button>
+  <Button class="uppercase" variant="filledOutlined" color="accent">filledOutlined</Button>
 </Preview>
 
 ## Tooltip
@@ -207,12 +229,22 @@ import { Button } from 'svelte-ux';
 ## Icon-only button variants and color
 
 <Preview>
-  <Button icon={mdiMenu} />
-  <Button icon={mdiMenu} color="blue" />
-  <Button icon={mdiMenu} variant="filled" />
-  <Button icon={mdiMenu} variant="filled" color="blue" />
-  <Button icon={mdiMenu} variant="outlined" />
-  <Button icon={mdiMenu} variant="outlined" color="blue" />
+  <div>
+    <Button icon={mdiMenu} />
+    <Button icon={mdiMenu} color="accent" />
+  </div>
+  <div>
+    <Button icon={mdiMenu} variant="outlined" />
+    <Button icon={mdiMenu} variant="outlined" color="accent" />
+  </div>
+  <div>
+    <Button icon={mdiMenu} variant="filled" />
+    <Button icon={mdiMenu} variant="filled" color="accent" />
+  </div>
+  <div>
+    <Button icon={mdiMenu} variant="filledOutlined" />
+    <Button icon={mdiMenu} variant="filledOutlined" color="accent" />
+  </div>
 </Preview>
 
 # API

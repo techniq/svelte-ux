@@ -18,7 +18,8 @@
   export let loading: boolean = false;
   export let disabled: boolean = false;
   export let rounded: boolean | 'full' = undefined; // default in reactive groupContext below
-  export let variant: 'text' | 'outlined' | 'filled' | 'none' | undefined = undefined; // default in reactive groupContext below
+  export let variant: 'text' | 'outlined' | 'filled' | 'filledOutlined' | 'none' | undefined =
+    undefined; // default in reactive groupContext below
   export let size: 'sm' | 'md' | 'lg' = 'md';
   export let color:
     | 'default'
@@ -80,6 +81,7 @@
       text: '',
       outlined: 'border',
       filled: '',
+      filledOutlined: 'border',
     }[variant],
     // Variant specific colors
     {
@@ -145,6 +147,27 @@
         fuchsia: 'text-white bg-fuchsia-500 hover:bg-fuchsia-600',
         pink: 'text-white bg-pink-500 hover:bg-pink-600',
         rose: 'text-white bg-rose-500 hover:bg-rose-600',
+      },
+      filledOutlined: {
+        default: 'bg-white bg-black/5 hover:bg-black/10 border-black/20',
+        accent: 'text-accent-500 border-accent-500 bg-accent-500/10 hover:bg-accent-500/20',
+        red: 'text-red-500 border-red-500 bg-red-500/10 hover:bg-red-500/20',
+        orange: 'text-orange-500 border-orange-500 bg-orange-500/10 hover:bg-orange-500/20',
+        amber: 'text-amber-500 border-amber-500 bg-amber-500/10 hover:bg-amber-500/20',
+        yellow: 'text-yellow-500 border-yellow-500 bg-yellow-500/10 hover:bg-yellow-500/20',
+        lime: 'text-lime-500 border-lime-500 bg-lime-500/10 hover:bg-lime-500/20',
+        green: 'text-green-500 border-green-500 bg-green-500/10 hover:bg-green-500/20',
+        emerald: 'text-emerald-500 border-emerald-500 bg-emerald-500/10 hover:bg-emerald-500/20',
+        teal: 'text-teal-500 border-teal-500 bg-teal-500/10 hover:bg-teal-500/20',
+        cyan: 'text-cyan-500 border-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/20',
+        sky: 'text-sky-500 border-sky-500 bg-sky-500/10 hover:bg-sky-500/20',
+        blue: 'text-blue-500 border-blue-500 bg-blue-500/10 hover:bg-blue-500/20',
+        indigo: 'text-indigo-500 border-indigo-500 bg-indigo-500/10 hover:bg-indigo-500/20',
+        violet: 'text-violet-500 border-violet-500 bg-violet-500/10 hover:bg-violet-500/20',
+        purple: 'text-purple-500 border-purple-500 bg-purple-500/10 hover:bg-purple-500/20',
+        fuchsia: 'text-fuchsia-500 border-fuchsia-500 bg-fuchsia-500/10 hover:bg-fuchsia-500/20',
+        pink: 'text-pink-500 border-pink-500 bg-pink-500/10 hover:bg-pink-500/20',
+        rose: 'text-rose-500 border-rose-500 bg-rose-500/10 hover:bg-rose-500/20',
       },
     }[variant]?.[color],
     classes.root,
