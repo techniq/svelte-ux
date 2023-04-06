@@ -3,18 +3,21 @@
 
   export let items: any[];
   export let perPage = 10;
+  export let disabled = false;
 
   let page = 1;
-  $: visibleItems = items.slice(0, page * perPage);
+  $: visibleItems = disabled ? items : items.slice(0, page * perPage);
 </script>
 
 <slot {visibleItems} />
 
-<div
-  use:intersection
-  on:intersecting={(e) => {
-    if (e.detail.isIntersecting) {
-      page += 1;
-    }
-  }}
-/>
+{#if !disabled}
+  <div
+    use:intersection
+    on:intersecting={(e) => {
+      if (e.detail.isIntersecting) {
+        page += 1;
+      }
+    }}
+  />
+{/if}
