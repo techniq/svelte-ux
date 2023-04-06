@@ -2,6 +2,7 @@
   import { fade, FadeParams } from 'svelte/transition';
 
   import portalAction from '../actions/portal';
+  import { cls } from '../utils/styles';
 
   export let blur: boolean = false;
   export let portal = false;
@@ -9,25 +10,21 @@
   export let fadeParams: FadeParams = { duration: 300 };
 </script>
 
-<!-- TODO: Add `|local` to transition without breaking `ToggleButton` usage: https://github.com/techniq/svelte-ux/issues/51 -->
 <div
-  class="backdrop fixed top-0 bottom-0 left-0 right-0 flex items-center
-    justify-center bg-black/50 {$$restProps.class || ''}"
+  class={cls(
+    'backdrop fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-black/50',
+    blur && 'backdrop-blur-sm',
+    $$restProps.class
+  )}
   on:keydown
   on:keyup
   on:keypress
   on:click
   on:mousedown
   on:mouseup
-  transition:fade={fadeParams}
-  class:blur
+  in:fade={fadeParams}
+  out:fade|local={fadeParams}
   use:portalAction={{ enabled: portal }}
 >
   <slot />
 </div>
-
-<style lang="postcss">
-  .blur {
-    backdrop-filter: blur(2px);
-  }
-</style>

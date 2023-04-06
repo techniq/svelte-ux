@@ -91,7 +91,6 @@
     }}
     use:portalAction={{ enabled: portal }}
   >
-    <!-- TODO: Add `|local` to transition without breaking `ToggleButton` usage: https://github.com/techniq/svelte-ux/issues/51 -->
     <div
       class={cls(
         'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
@@ -99,7 +98,8 @@
         $$props.class
       )}
       style={$$props.style}
-      transition:scale={{ duration: 150, easing: quadIn }}
+      in:scale={{ duration: 150, easing: quadIn }}
+      out:scale|local={{ duration: 150, easing: quadIn }}
       on:introstart
       on:outrostart
       on:introend

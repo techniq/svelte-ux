@@ -42,7 +42,6 @@
     {portal}
   />
 
-  <!-- TODO: Add `|local` to transition without breaking `ToggleButton` usage: https://github.com/techniq/svelte-ux/issues/51 -->
   <div
     class={cls(
       'bg-white fixed overflow-auto transform z-50 outline-none',
@@ -57,7 +56,11 @@
       $$props.class
     )}
     style={$$props.style}
-    transition:fly={{
+    in:fly={{
+      x: left ? '-100%' : right ? '100%' : 0,
+      y: top ? '-100%' : bottom ? '100%' : 0,
+    }}
+    out:fly|local={{
       x: left ? '-100%' : right ? '100%' : 0,
       y: top ? '-100%' : bottom ? '100%' : 0,
     }}
