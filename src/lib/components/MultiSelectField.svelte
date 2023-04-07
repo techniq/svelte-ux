@@ -3,7 +3,7 @@
   import { get } from 'lodash-es';
   import type { Placement } from '@floating-ui/dom';
 
-  import { mdiChevronDown, mdiClose, mdiMagnify } from '@mdi/js';
+  import { mdiChevronDown, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
   import MultiSelectMenu from './MultiSelectMenu.svelte';
@@ -11,7 +11,6 @@
 
   import { cls } from '../utils/styles';
   import Logger from '../utils/logger';
-  import { selectOnFocus } from '../actions/input';
   import CircularProgress from './CircularProgress.svelte';
 
   type Option = $$Generic;
@@ -69,7 +68,7 @@
   function show() {
     logger.debug('show');
 
-    if (!disabled) {
+    if (!open) {
       searchText = '';
       open = true;
     }
@@ -121,7 +120,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={cls(classes.root, $$props.class)} on:click={onClick}>
+<div class={cls(disabled && 'pointer-events-none', classes.root, $$props.class)} on:click={onClick}>
   <!-- TODO: Setup blur without jank on open or issues when clicking within menu -->
   <!-- on:blur={onBlur} -->
   <TextField
@@ -137,7 +136,6 @@
     bind:inputEl
     on:focus={onFocus}
     on:change={onChange}
-    actions={(node) => [selectOnFocus(node)]}
     class={cls(classes.field, 'h-full')}
     {...$$restProps}
   >
