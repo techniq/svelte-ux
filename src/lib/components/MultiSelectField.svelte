@@ -159,6 +159,7 @@
           on:click={(e) => {
             e.stopPropagation();
             clear();
+            hide();
           }}
         />
       {:else}
