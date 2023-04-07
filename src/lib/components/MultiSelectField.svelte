@@ -166,6 +166,14 @@
           icon={mdiChevronDown}
           class="text-black/50 p-1 transform {open ? 'rotate-180' : ''}"
           tabindex="-1"
+          on:click={(e) => {
+            e.stopPropagation();
+            if (open) {
+              hide();
+            } else {
+              show();
+            }
+          }}
         />
       {/if}
     </span>
