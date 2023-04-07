@@ -68,6 +68,8 @@
   function show() {
     logger.debug('show');
 
+    inputEl.focus();
+
     if (!open) {
       searchText = '';
       open = true;

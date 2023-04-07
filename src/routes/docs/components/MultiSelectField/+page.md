@@ -61,6 +61,7 @@ docUrl: $docUrl
     {value}
     on:change={(e) => value = e.detail.selection.selected}
     classes={{ menu: 'max-h-[360px]' }}
+    menuProps={{ autoPlacement: true }}
   />
 </Preview>
 
