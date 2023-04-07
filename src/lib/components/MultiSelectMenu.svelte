@@ -1,0 +1,229 @@
+<script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+  import { flip } from 'svelte/animate';
+  import { get, partition } from 'lodash-es';
+  import type { Placement } from '@floating-ui/dom';
+
+  import { mdiMagnify } from '@mdi/js';
+
+  import Button from './Button.svelte';
+  import InfiniteScroll from './InfiniteScroll.svelte';
+  import Menu from './Menu.svelte';
+  import MultiSelectOption from './MultiSelectOption.svelte';
+  import TextField from './TextField.svelte';
+
+  import dirtyStore from '../stores/dirtyStore';
+  import selectionStore from '../stores/selectionStore';
+  import uniqueStore from '../stores/uniqueStore';
+  import { cls } from '$lib/utils/styles';
+
+  type Option = $$Generic;
+
+  export let options: Option[];
+  export let value: string[] = [];
+  export let indeterminateSelected: string[] = [];
+  export let open = false;
+  export let duration = 200;
+  export let placement: Placement = 'bottom-start';
+  export let inlineSearch = false;
+  export let infiniteScroll = false;
+
+  export let labelProp = 'name';
+  export let valueProp = 'value';
+
+  export let classes: {
+    root?: string;
+    menu?: string;
+    actions?: string;
+  } = {};
+
+  export let onApply = async (ctx: {
+    selection: typeof $selection;
+    indeterminate: typeof $indeterminateStore;
+    original: { selected: Option[]; unselected: Option[] };
+  }) => {
+    // no-op by default
+  };
+
+  export let menuItemsEl: HTMLMenuElement;
+
+  const dispatch = createEventDispatcher<{
+    change: {
+      selection: typeof $selection;
+      indeterminate: typeof $indeterminateStore;
+      original: { selected: Option[]; unselected: Option[] };
+    };
+  }>();
+
+  export let searchText = '';
+  let applying = false;
+
+  // Partition options based on if they initially selected, which will be displayed at the top
+  $: [selectedOptions, unselectedOptions] = partition(options, (x) =>
+    value.includes(get(x, valueProp))
+  );
+
+  // Filter by search text
+  function applyFilter(option: Option, searchText: string) {
+    if (searchText) {
+      return get(option, labelProp).toLowerCase().includes(searchText.toLowerCase());
+    } else {
+      // show all if no search set
+      return true;
+    }
+  }
+  $: filteredSelectedOptions = selectedOptions.filter((x) => applyFilter(x, searchText));
+  $: filteredUnselectedOptions = unselectedOptions.filter((x) => applyFilter(x, searchText));
+
+  $: selection = selectionStore({
+    initial: selectedOptions.map((x) => get(x, valueProp)),
+  });
+
+  $: isSelectionDirty = dirtyStore(selection);
+  $: indeterminateStore = uniqueStore(indeterminateSelected);
+
+  function onChange() {
+    const changeContext = {
+      value: $selection.selected,
+      selection: $selection,
+      indeterminate: $indeterminateStore,
+      original: { selected: selectedOptions, unselected: unselectedOptions },
+    };
+    dispatch('change', changeContext);
+
+    searchText = '';
+
+    // Store will be recreated when `selectedOptions` is updated, but just in case
+    isSelectionDirty.reset();
+  }
+
+  export function clear() {
+    $selection.clear();
+    onChange();
+  }
+</script>
+
+<Menu
+  bind:open
+  on:close
+  explicitClose
+  {placement}
+  let:close
+  {...$$restProps}
+  classes={{
+    root: cls(classes.root, $$restProps.class),
+    menu: cls('flex flex-col', classes.menu),
+  }}
+  bind:menuItemsEl
+>
+  {#if inlineSearch}
+    <div class="border-b border-gray-100 p-4 pb-2">
+      <TextField
+        placeholder="Search items"
+        iconRight={mdiMagnify}
+        bind:value={searchText}
+        autofocus={{ delay: 100 }}
+      />
+    </div>
+  {/if}
+
+  <div class="overflow-auto py-1 px-4">
+    <!-- initially selected options -->
+    <InfiniteScroll items={filteredSelectedOptions} disabled={!infiniteScroll} let:visibleItems>
+      {#each visibleItems as option (get(option, valueProp))}
+        {@const label = get(option, labelProp)}
+        {@const value = get(option, valueProp)}
+        {@const checked = $selection.isSelected(value)}
+        {@const indeterminate = $indeterminateStore.has(value)}
+        {@const onChange = () => {
+          // TODO: Try to figure out how to keep underling Checkbox controlled so state goes `indeterminate` => `checked` => `unchecked`
+          // If partial/indeterminate, transition to fully selected, then deselect/select as usual
+          // if ($indeterminateStore.has(value)) {
+          //   indeterminateStore.delete(value);
+          // } else {
+          //   $selection.toggleSelected(value);
+          // }
+
+          // Clear indeterminate status and toggle `unchecked` (and will proceed to toggle `checked` => `unchecked` => etc)
+          indeterminateStore.delete(value);
+          $selection.toggleSelected(value);
+        }}
+        <div animate:flip={{ duration }}>
+          <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
+            <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+              {label}
+            </MultiSelectOption>
+          </slot>
+        </div>
+      {/each}
+    </InfiniteScroll>
+
+    {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
+      <!-- separator between selected and deselected -->
+      <div class="border-b border-gray-100" />
+    {/if}
+
+    <!-- initially unselected options -->
+    <InfiniteScroll items={filteredUnselectedOptions} disabled={!infiniteScroll} let:visibleItems>
+      {#each visibleItems as option (get(option, valueProp))}
+        {@const label = get(option, labelProp)}
+        {@const value = get(option, valueProp)}
+        {@const checked = $selection.isSelected(value)}
+        {@const indeterminate = $indeterminateStore.has(value)}
+        {@const onChange = () => {
+          // TODO: Try to figure out how to keep underling Checkbox controlled so state goes `indeterminate` => `checked` => `unchecked`
+          // If partial/indeterminate, transition to fully selected, then deselect/select as usual
+          // if ($indeterminateStore.has(value)) {
+          //   indeterminateStore.delete(value);
+          // } else {
+          //   $selection.toggleSelected(value);
+          // }
+
+          // Clear indeterminate status and toggle `unchecked` (and will proceed to toggle `checked` => `unchecked` => etc)
+          indeterminateStore.delete(value);
+          $selection.toggleSelected(value);
+        }}
+        <div animate:flip={{ duration }}>
+          <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
+            <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+              {label}
+            </MultiSelectOption>
+          </slot>
+        </div>
+      {:else}
+        {#if !filteredSelectedOptions.length}
+          <div class="text-gray-400 text-xs py-2">There are no matching items.</div>
+        {/if}
+      {/each}
+    </InfiniteScroll>
+  </div>
+
+  <div class="grid grid-cols-[auto,1fr,auto] border-t border-gray-100 px-4 py-2">
+    <slot name="actions" {searchText}>
+      <div />
+    </slot>
+
+    <div />
+
+    <Button
+      class="bg-accent-500 px-6 normal-case text-white hover:bg-accent-600"
+      loading={applying}
+      disabled={!$isSelectionDirty || applying}
+      on:click={async () => {
+        applying = true;
+        const changeContext = {
+          value: $selection.selected,
+          selection: $selection,
+          indeterminate: $indeterminateStore,
+          original: { selected: selectedOptions, unselected: unselectedOptions },
+        };
+        await onApply(changeContext);
+        applying = false;
+        onChange();
+        close();
+      }}
+    >
+      Apply
+    </Button>
+  </div>
+</Menu>

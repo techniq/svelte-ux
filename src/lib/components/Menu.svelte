@@ -27,7 +27,12 @@
   export let explicitClose = false;
   export let moveFocus = true;
 
-  let menuItemsEl: HTMLMenuElement;
+  export let classes: {
+    root?: string;
+    menu?: string;
+  } = {};
+
+  export let menuItemsEl: HTMLMenuElement = undefined;
 
   function onClick(e) {
     try {
@@ -53,14 +58,14 @@
   {matchWidth}
   {resize}
   {open}
-  class={cls('bg-white rounded shadow border overflow-auto', $$props.class)}
+  class={cls('bg-white rounded shadow border overflow-auto', classes.root, $$props.class)}
   style={$$props.style}
   on:close
   let:close
 >
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <menu
-    class="menu-items outline-none max-h-screen"
+    class={cls('menu-items outline-none max-h-screen', classes.menu)}
     bind:this={menuItemsEl}
     on:click={onClick}
     on:mouseup={(e) => {

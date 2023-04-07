@@ -31,6 +31,8 @@
       'Checkbox',
       'Field',
       'Input',
+      'MultiSelectField',
+      'MultiSelectMenu',
       'Radio',
       'RangeSlider',
       'SelectField',
