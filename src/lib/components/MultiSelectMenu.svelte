@@ -205,25 +205,40 @@
 
     <div />
 
-    <Button
-      class="bg-accent-500 px-6 normal-case text-white hover:bg-accent-600"
-      loading={applying}
-      disabled={!$isSelectionDirty || applying}
-      on:click={async () => {
-        applying = true;
-        const changeContext = {
-          value: $selection.selected,
-          selection: $selection,
-          indeterminate: $indeterminateStore,
-          original: { selected: selectedOptions, unselected: unselectedOptions },
-        };
-        await onApply(changeContext);
-        applying = false;
-        onChange();
-        close();
-      }}
-    >
-      Apply
-    </Button>
+    <div>
+      <Button
+        class="px-6"
+        disabled={applying}
+        on:click={() => {
+          $selection.reset();
+          close();
+        }}
+      >
+        Cancel
+      </Button>
+
+      <Button
+        variant="filled"
+        color="accent"
+        class="px-6"
+        loading={applying}
+        disabled={!$isSelectionDirty || applying}
+        on:click={async () => {
+          applying = true;
+          const changeContext = {
+            value: $selection.selected,
+            selection: $selection,
+            indeterminate: $indeterminateStore,
+            original: { selected: selectedOptions, unselected: unselectedOptions },
+          };
+          await onApply(changeContext);
+          applying = false;
+          onChange();
+          close();
+        }}
+      >
+        Apply
+      </Button>
+    </div>
   </div>
 </Menu>

@@ -11,9 +11,11 @@ docUrl: $docUrl
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Button from '$lib/components/Button.svelte';
+  import Drawer from '$lib/components/Drawer.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import MultiSelectField from '$lib/components/MultiSelectField.svelte';
+  import ToggleButton from '$lib/components/ToggleButton.svelte';
 
   import { delay } from '$lib/utils/promise';
   import { cls } from '$lib/utils/styles';
@@ -88,6 +90,29 @@ docUrl: $docUrl
       <Button color="accent" icon={mdiPlus}>Add item</Button>
     </div>
   </MultiSelectField>
+</Preview>
+
+## within Drawer
+
+<Preview>
+  <ToggleButton let:on={open} let:toggle let:toggleOff>
+    Open Drawer
+    <Drawer slot="toggle" {open} on:close={toggleOff} right class="w-[400px]">
+      <div class="p-4">
+        <MultiSelectField
+          {options}
+          {value}
+          on:change={(e) => value = e.detail.selection.selected}
+        /> 
+      </div>
+      <div
+        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
+      p-1 border-t border-gray-400"
+      >
+        <Button on:click={toggleOff}>Close</Button>
+      </div>
+    </Drawer>
+  </ToggleButton>
 </Preview>
 
 # API

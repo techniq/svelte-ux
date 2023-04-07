@@ -56,6 +56,10 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
       selected.set(new Set());
     }
 
+    function reset() {
+      selected.set(new Set(props.initial ?? []));
+    }
+
     const selectedArr = [...$selected.values()];
 
     return {
@@ -66,6 +70,7 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
       isAllSelected,
       isAnySelected,
       clear,
+      reset,
       all,
     };
   });
