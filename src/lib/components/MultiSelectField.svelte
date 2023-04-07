@@ -85,7 +85,6 @@
 
     searchText = e.detail.inputValue as string;
     // dispatch('inputChange', searchText);
-    show();
   }
 
   function onClick() {
