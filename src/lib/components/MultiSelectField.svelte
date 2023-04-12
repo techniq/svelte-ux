@@ -51,7 +51,6 @@
   // Elements
   let inputEl: HTMLInputElement | null = null;
   let menuOptionsEl: HTMLDivElement;
-  let multiSelectMenu: MultiSelectMenu<Option>;
 
   export let menuProps: ComponentProps<MultiSelectMenu<Option>> = undefined;
 
@@ -101,8 +100,6 @@
   function onBlur(e: FocusEvent) {
     logger.debug('onBlur', { target: e.target, relatedTarget: e.relatedTarget, menuOptionsEl });
 
-    console.log({ menuOptionsEl });
-
     // Hide if focus not moved to menu (option clicked)
     if (
       e.relatedTarget instanceof Node &&
@@ -117,7 +114,7 @@
 
   function clear() {
     logger.info('clear');
-    multiSelectMenu.clear();
+    value = [];
   }
 </script>
 
@@ -195,7 +192,6 @@
     on:close={hide}
     on:change
     bind:menuOptionsEl
-    bind:this={multiSelectMenu}
     {...menuProps}
   >
     <slot name="actions" slot="actions">

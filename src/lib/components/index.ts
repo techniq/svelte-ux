@@ -40,6 +40,7 @@ export { default as MenuItem } from './MenuItem.svelte';
 export { default as Month } from './Month.svelte';
 export { default as MonthList } from './MonthList.svelte';
 export { default as MonthListByYear } from './MonthListByYear.svelte';
+export { default as MultiSelect } from './MultiSelect.svelte';
 export { default as MultiSelectField } from './MultiSelectField.svelte';
 export { default as MultiSelectMenu } from './MultiSelectMenu.svelte';
 export { default as MultiSelectOption } from './MultiSelectOption.svelte';

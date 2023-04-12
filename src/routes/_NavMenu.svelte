@@ -31,6 +31,7 @@
       'Checkbox',
       'Field',
       'Input',
+      'MultiSelect',
       'MultiSelectField',
       'MultiSelectMenu',
       'Radio',
