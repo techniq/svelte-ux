@@ -13,6 +13,7 @@ docUrl: $docUrl
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
+  import Form from '$lib/components/Form.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import Stack from '$lib/components/Stack.svelte';
@@ -123,6 +124,27 @@ docUrl: $docUrl
       </div>
     </MultiSelect>
   </div>
+</Preview>
+
+## Form integration
+
+<Preview>
+  <Form
+    initial={{ value }}
+    on:change={(e) => (value = e.detail.value)}
+    let:draft
+    let:state
+  >
+    {state.value.length} selected
+    <MultiSelect
+      {options}
+      value={draft.value}
+      {draft}
+      on:change={(e) => draft.value = e.detail.value}
+      cancelButtonProps={{ type: 'reset' }}
+      applyButtonProps={{ type: 'submit' }}
+    />
+  </Form>
 </Preview>
 
 # API

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { ComponentProps, createEventDispatcher } from 'svelte';
   import { flip } from 'svelte/animate';
   import { get, partition } from 'lodash-es';
 
@@ -26,6 +26,9 @@
 
   export let labelProp = 'name';
   export let valueProp = 'value';
+
+  export let cancelButtonProps: ComponentProps<Button> = undefined;
+  export let applyButtonProps: ComponentProps<Button> = undefined;
 
   export let classes: {
     root?: string;
@@ -83,11 +86,12 @@
       original: { selected: selectedOptions, unselected: unselectedOptions },
     };
     dispatch('change', changeContext);
-
     searchText = '';
-
     // Store will be recreated when `selectedOptions` is updated, but just in case
-    isSelectionDirty.reset();
+    // `setTimeout` is used to delay the disabling the Apply button 1 event loop, otherwise if `type="submit" will not react the `<form on:submit>` - https://svelte.dev/repl/0875574693e14fa9a4348075b1788d0a?version=3.58.0
+    setTimeout(() => {
+      isSelectionDirty.reset();
+    });
   }
 
   export function clear() {
@@ -193,6 +197,7 @@
         $selection.reset();
         dispatch('cancel');
       }}
+      {...cancelButtonProps}
     >
       Cancel
     </Button>
@@ -215,6 +220,7 @@
         applying = false;
         onChange();
       }}
+      {...applyButtonProps}
     >
       Apply
     </Button>
