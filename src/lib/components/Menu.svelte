@@ -72,8 +72,7 @@
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
     }}
-    in:transition={transitionParams}
-    out:transition|local={transitionParams}
+    transition:transition={transitionParams}
     use:focusMove={{ disabled: !moveFocus }}
   >
     <slot {close} />
