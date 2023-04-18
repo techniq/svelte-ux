@@ -1,4 +1,4 @@
-import { derived } from 'svelte/store';
+import { derived, get } from 'svelte/store';
 import type { Readable } from 'svelte/store';
 import type { Page } from '@sveltejs/kit';
 import { isEqual } from 'lodash-es';
@@ -60,7 +60,8 @@ export function queryParamStore<Value>(
 export function queryParamsStore<Values extends { [key: string]: any }>(
   page: Readable<Page>,
   defaultValues?: Values,
-  paramTypes?: { [key: string]: ParamType } | ((key: keyof Values) => ParamType)
+  paramTypes?: { [key: string]: ParamType } | ((key: keyof Values) => ParamType),
+  goto?: (url: string | URL, opts?: any) => any // Matches $app/navigation's goto without dependency - https://kit.svelte.dev/docs/modules#$app-navigation-goto
 ) {
   const store = derived(page, ($page) => {
     const state = { ...defaultValues };
@@ -85,7 +86,7 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
   /**
    * Create new `URLSearchParams` from values and paramTypes mapping
    */
-  function create(newValues: Values) {
+  function createParams(newValues: Values) {
     //  Do not update querystring with initialValue..
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(); // queryParamsStore controls full params so start fresh
@@ -105,9 +106,27 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
     }
   }
 
+  function createUrl(newValues: Values) {
+    if (typeof window !== 'undefined') {
+      const params = createParams(newValues);
+      const url = new URL(window.location.href);
+      url.search = params.toString();
+      return url;
+    }
+  }
+
   return {
     subscribe: store.subscribe,
-    create,
+    set: (values: Values) => {
+      if (goto === undefined) {
+        console.error('`goto` must be passed to allow setting URL via store');
+      } else {
+        const url = createUrl(values);
+        goto(url, get(page));
+      }
+    },
+    createParams,
+    createUrl,
   };
 }
 
