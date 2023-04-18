@@ -8,6 +8,9 @@ import * as Serialize from '../utils/serialize';
 import rollup from '../utils/rollup';
 import type { ValueOf } from '../types/typeHelpers';
 
+// Matches $app/navigation's goto without dependency - https://kit.svelte.dev/docs/modules#$app-navigation-goto
+type Goto = (url: string | URL, opts?: any) => any;
+
 export type ParamType =
   | 'string'
   | 'string[]'
@@ -29,7 +32,8 @@ export function queryParamStore<Value>(
   name: string,
   page: Readable<Page>,
   defaultValue?: Value,
-  paramType?: ParamType
+  paramType?: ParamType,
+  goto?: Goto
 ) {
   const store = derived(page, ($page) => {
     const values = $page.url.searchParams.getAll(name);
@@ -48,6 +52,15 @@ export function queryParamStore<Value>(
 
   return {
     subscribe: store.subscribe,
+    set: (value: Value) => {
+      if (goto === undefined) {
+        console.error('`goto` must be passed to allow setting URL via store');
+      } else {
+        const url = new URL(window.location.href);
+        apply(url.searchParams, value);
+        goto(url, get(page));
+      }
+    },
     apply,
   };
 }
@@ -61,7 +74,7 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
   page: Readable<Page>,
   defaultValues?: Values,
   paramTypes?: { [key: string]: ParamType } | ((key: keyof Values) => ParamType),
-  goto?: (url: string | URL, opts?: any) => any // Matches $app/navigation's goto without dependency - https://kit.svelte.dev/docs/modules#$app-navigation-goto
+  goto?: Goto
 ) {
   const store = derived(page, ($page) => {
     const state = { ...defaultValues };
