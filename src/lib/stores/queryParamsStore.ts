@@ -152,9 +152,11 @@ function applyParam(
 ) {
   const config = getParamConfig(paramType);
 
-  if (isEqual(defaultValue, value)) {
-    // Skip - only update param if different from default
-  } else if (value == null || (Array.isArray(value) && value.length === 0)) {
+  if (
+    isEqual(defaultValue, value) ||
+    value == null ||
+    (Array.isArray(value) && value.length === 0)
+  ) {
     params.delete(key);
   } else {
     params.set(key, config.encode(value));
@@ -163,7 +165,6 @@ function applyParam(
 
 function decodeParam(values: string[], paramType?: ParamType) {
   const config = getParamConfig(paramType);
-
   return config.decode(values);
 }
 
