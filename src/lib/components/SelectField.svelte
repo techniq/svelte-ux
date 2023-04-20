@@ -105,8 +105,8 @@
         prevSelected = selectValue(value);
       } else {
         logger.info('neither selected or value changed (options only)');
-        // Reselect value (in case option value changes `searchText` with new options, for example)
-        if (prevValue !== undefined) {
+        // Reselect value if menu is not open and options possibly changed (which could result in new display text for the select value)
+        if (!open && prevValue !== undefined) {
           selectValue(prevValue);
         }
       }
