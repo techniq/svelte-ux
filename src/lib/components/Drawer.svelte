@@ -64,6 +64,10 @@
       x: left ? '-100%' : right ? '100%' : 0,
       y: top ? '-100%' : bottom ? '100%' : 0,
     }}
+    on:introstart
+    on:outrostart
+    on:introend
+    on:outroend
     on:keydown={(e) => {
       // Do not allow event to reach Popover's on:keydown
       e.stopPropagation();
