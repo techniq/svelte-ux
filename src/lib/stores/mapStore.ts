@@ -18,6 +18,14 @@ export default function mapStore<TKey, TValue>(
       });
     },
 
+    update(key: TKey, updater: (current: TValue) => TValue) {
+      store.update((map) => {
+        const current = map.get(key);
+        map.set(key, updater(current));
+        return map;
+      });
+    },
+
     delete(key: TKey) {
       store.update((map) => {
         map.delete(key);
