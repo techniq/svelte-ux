@@ -9,9 +9,13 @@ docUrl: $docUrl
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import AppBar from '$lib/components/AppBar.svelte';
+  import Button from '$lib/components/Button.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
+
+  let checked = true;
+  let group = [2];
 </script>
 
 # Examples
@@ -21,6 +25,30 @@ docUrl: $docUrl
 <Preview>
   <Checkbox />
   <Checkbox checked />
+</Preview>
+
+## bind:checked
+
+<Preview>
+  <Checkbox bind:checked />
+  <div class="text-sm">
+    set: <Button size="sm" on:click={() => checked = true}>true</Button>
+    <Button size="sm" on:click={() => checked = false}>false</Button>
+  </div>
+</Preview>
+
+## bind:group
+
+<Preview>
+  <Checkbox bind:group value={1}>One</Checkbox>
+  <Checkbox bind:group value={2}>Two</Checkbox>
+  <Checkbox bind:group value={3}>Three</Checkbox>
+  <Checkbox bind:group value={4} disabled>Four (disabled)</Checkbox>
+  <div>{JSON.stringify(group)}</div>
+  <div class="text-sm">
+    <Button size="sm" on:click={() => group = []}>clear</Button>
+    <Button size="sm" on:click={() => group = [1,2,3,4]}>select all</Button>
+  </div>
 </Preview>
 
 ## Label
