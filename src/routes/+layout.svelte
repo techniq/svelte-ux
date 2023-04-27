@@ -1,8 +1,12 @@
 <script lang="ts">
+  import { inject } from '@vercel/analytics';
   import 'prism-themes/themes/prism-vsc-dark-plus.css';
+  import { dev } from '$app/environment';
 
   import AppLayout from '$lib/components/AppLayout.svelte';
   import NavMenu from './_NavMenu.svelte';
+
+  inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <AppLayout>

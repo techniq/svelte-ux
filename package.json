@@ -41,6 +41,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.2.5",
     "@fortawesome/fontawesome-common-types": "^6.3.0",
+    "@vercel/analytics": "^1.0.0",
     "clsx": "^1.2.1",
     "d3-array": "^3.2.2",
     "d3-format": "^3.1.0",
