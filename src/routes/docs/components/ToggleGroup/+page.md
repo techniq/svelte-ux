@@ -11,6 +11,7 @@ docUrl: $docUrl
 
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import Radio from '$lib/components/Radio.svelte';
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
   import TogglePanel from '$lib/components/TogglePanel.svelte';
@@ -30,14 +31,10 @@ docUrl: $docUrl
 
 ## Style
 
-<label>
-  <input type="radio" value="contained" bind:group={optionStyle} />
-  Contained (Apple)
-</label>
-<label>
-  <input type="radio" value="underlined" bind:group={optionStyle} />
-  Underlined (Twitter)
-</label>
+<div class="bg-white p-2 rounded border border-gray-300 flex gap-4">
+  <Radio value="contained" bind:group={optionStyle}>Contained</Radio>
+  <Radio value="underlined" bind:group={optionStyle}>Underlined</Radio>
+</div>
 
 ## Panels
 
@@ -140,7 +137,7 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
-    value={selectedStr}
+    bind:value={selectedStr}
   >
     <ToggleOption value="all" class="w-32">All</ToggleOption>
     <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
@@ -153,6 +150,7 @@ docUrl: $docUrl
   <Button on:click={() => (selectedStr = 'all')}>All</Button>
   <Button on:click={() => (selectedStr = 'missed')}>Missed</Button>
   <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
+  <Button on:click={() => (selectedStr = null)}>Clear</Button>
 </div>
 
 ## Controlled (object value)
@@ -161,7 +159,7 @@ docUrl: $docUrl
   <ToggleGroup
     contained={optionStyle === 'contained'}
     underlined={optionStyle === 'underlined'}
-    value={selectedObj}
+    bind:value={selectedObj}
   >
     <ToggleOption value={allValue} class="w-32">All</ToggleOption>
     <ToggleOption value={missedValue} class="w-32">Missed</ToggleOption>
@@ -174,6 +172,7 @@ docUrl: $docUrl
   <Button on:click={() => (selectedObj = allValue)}>All</Button>
   <Button on:click={() => (selectedObj = missedValue)}>Missed</Button>
   <Button on:click={() => (selectedObj = callsValue)}>Calls</Button>
+  <Button on:click={() => (selectedObj = null)}>Clear</Button>
 </div>
 
 ## Overflow scrollIntoView

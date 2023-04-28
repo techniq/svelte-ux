@@ -8,6 +8,7 @@
   import { crossfade, fade } from 'svelte/transition';
 
   import { cls } from '../utils/styles';
+  import Logger from '../utils/logger';
 
   export let value: any = undefined; // index or value
   export let autoscroll: boolean = false;
@@ -26,6 +27,8 @@
     indicator?: string;
   } = {};
 
+  const logger = new Logger('ToggleGroup');
+
   const options: HTMLElement[] = [];
   const optionsByValue: Map<any, HTMLElement> = new Map();
   const panels: HTMLElement[] = [];
@@ -38,18 +41,16 @@
   $: {
     // Find selected option element based on selected value/index
     const newSelectedOption = optionsByValue.get(value) || options[value];
-    // console.log({ selected, newSelectedOption });
+    logger.debug('value changed', { value, newSelectedOption });
     selectOption(newSelectedOption, value);
   }
 
   function registerOption(option: HTMLElement, optionValue: any) {
     options.push(option);
-    // if (value != null) {
     optionsByValue.set(optionValue, option);
-    // }
 
     // Select option if selected after being registered
-    if (/*selected != null &&*/ optionValue === value) {
+    if (optionValue === value) {
       selectOption(option, optionValue);
     }
   }
@@ -77,19 +78,17 @@
   }
 
   function selectOption(option: HTMLElement, optionValue: any) {
-    // console.log('selectOption', option, optionValue);
+    logger.debug('selectOption', { option, optionValue });
 
-    if (option) {
-      if (value !== optionValue) {
-        dispatch('change', { value: optionValue });
-      }
-
-      $selectedOption = option;
-      value = optionValue;
-
-      const i = options.indexOf(option);
-      $selectedPanel = panels[i];
+    if (value !== optionValue) {
+      dispatch('change', { value: optionValue });
     }
+
+    $selectedOption = option;
+    value = optionValue;
+
+    const i = options.indexOf(option);
+    $selectedPanel = panels[i];
   }
 
   // Toss classes into a store so it can be reactively read from context
