@@ -153,6 +153,52 @@ docUrl: $docUrl
   <Button on:click={() => (selectedStr = null)}>Clear</Button>
 </div>
 
+## Controlled with null option
+
+<Preview>
+  <ToggleGroup
+    contained={optionStyle === 'contained'}
+    underlined={optionStyle === 'underlined'}
+    bind:value={selectedStr}
+  >
+    <ToggleOption value={null} class="w-32">None</ToggleOption>
+    <ToggleOption value="all" class="w-32">All</ToggleOption>
+    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
+    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
+  </ToggleGroup>
+</Preview>
+
+<div class="mt-4">
+  Select:
+  <Button on:click={() => (selectedStr = null)}>None</Button>
+  <Button on:click={() => (selectedStr = 'all')}>All</Button>
+  <Button on:click={() => (selectedStr = 'missed')}>Missed</Button>
+  <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
+</div>
+
+## Controlled with undefined option
+
+<Preview>
+  <ToggleGroup
+    contained={optionStyle === 'contained'}
+    underlined={optionStyle === 'underlined'}
+    bind:value={selectedStr}
+  >
+    <ToggleOption value={undefined} class="w-32">None</ToggleOption>
+    <ToggleOption value="all" class="w-32">All</ToggleOption>
+    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
+    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
+  </ToggleGroup>
+</Preview>
+
+<div class="mt-4">
+  Select:
+  <Button on:click={() => (selectedStr = undefined)}>None</Button>
+  <Button on:click={() => (selectedStr = 'all')}>All</Button>
+  <Button on:click={() => (selectedStr = 'missed')}>Missed</Button>
+  <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
+</div>
+
 ## Controlled (object value)
 
 <Preview>
