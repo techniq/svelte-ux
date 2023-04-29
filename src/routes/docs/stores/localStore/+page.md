@@ -10,7 +10,7 @@ docUrl: $docUrl
 	import localStore from '$lib/stores/localStore';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { localStore } from 'svelte-ux';

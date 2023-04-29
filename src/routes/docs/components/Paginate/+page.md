@@ -18,7 +18,7 @@ docUrl: $docUrl
 
 # Examples
 
-## Usage
+# Usage
 
 ```svelte
 <script lang="ts">

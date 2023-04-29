@@ -10,7 +10,7 @@ docUrl: $docUrl
 	import matchMedia from '$lib/stores/matchMedia';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { matchMedia } from 'svelte-ux';

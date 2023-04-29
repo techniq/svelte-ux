@@ -169,6 +169,20 @@ export function nestedFindByPredicate(
 }
 
 /**
+ * Given a flat array of objects with a `level` property, build a nested object with `children`
+ */
+export function buildTree(arr: any[]) {
+  var levels = [{}];
+  arr.forEach((o) => {
+    levels.length = o.level;
+    levels[o.level - 1].children = levels[o.level - 1].children || [];
+    levels[o.level - 1].children.push(o);
+    levels[o.level] = o;
+  });
+  return levels[0].children;
+}
+
+/**
  * Transverse array tree in depth-first order and execute callback for each item
  */
 export function walk(arr: any[], children: Function, callback: Function) {

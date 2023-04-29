@@ -10,7 +10,7 @@ docUrl: $docUrl
 	import tableOrderStore from '$lib/stores/tableOrderStore';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { tableOrderStore } from 'svelte-ux';

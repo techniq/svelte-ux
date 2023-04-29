@@ -12,7 +12,7 @@ docUrl: $docUrl
   // const { loading, data, error } = graphStore(/*...*/)
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { graphStore } from 'svelte-ux';

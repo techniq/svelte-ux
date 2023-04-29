@@ -18,7 +18,7 @@ docUrl: $docUrl
   const tickTimer = timerStore({ onTick: () => ticks += 1 })
 </script>
 
-## Usage
+# Usage
 
 ```js
 const timer = timerStore();

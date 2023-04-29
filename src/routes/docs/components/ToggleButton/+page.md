@@ -24,7 +24,7 @@ docUrl: $docUrl
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { ToggleButton } from 'svelte-ux';

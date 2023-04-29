@@ -10,7 +10,7 @@ docUrl: $docUrl
 	import paginationStore from '$lib/stores/paginationStore';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { paginationStore } from 'svelte-ux';

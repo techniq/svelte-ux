@@ -11,7 +11,7 @@ docUrl: $docUrl
 	import formStore from '$lib/stores/formStore';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { formStore } from 'svelte-ux';

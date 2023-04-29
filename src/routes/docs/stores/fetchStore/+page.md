@@ -12,7 +12,7 @@ docUrl: $docUrl
   // const { loading, data, error } = fetchStore(/*...*/)
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { fetchStore } from 'svelte-ux';

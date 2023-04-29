@@ -18,9 +18,7 @@ docUrl: $docUrl
 	pagination.setTotal(100);
 </script>
 
-# Examples
-
-## Usage
+# Usage
 
 ```svelte
 <script lang="ts">
@@ -32,6 +30,8 @@ docUrl: $docUrl
 
 <Pagination {pagination} />
 ```
+
+# Examples
 
 ## Default
 

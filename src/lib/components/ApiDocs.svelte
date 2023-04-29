@@ -27,12 +27,9 @@
 
 <div class="grid gap-8">
   <div>
-    <div
-      id="props"
-      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
-    >
+    <h2 id="props" class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50">
       Props
-    </div>
+    </h2>
     {#each api.props as prop}
       <ListItem
         list="type"
@@ -112,12 +109,9 @@
   </div>
 
   <div>
-    <div
-      id="slots"
-      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
-    >
+    <h2 id="slots" class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50">
       Slots
-    </div>
+    </h2>
     {#each api.slots as slot}
       <ListItem
         list="type"
@@ -156,12 +150,12 @@
   </div>
 
   <div>
-    <div
+    <h2
       id="events"
       class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/40"
     >
       Events
-    </div>
+    </h2>
     {#each api.events as event}
       <ListItem
         list="type"
@@ -191,12 +185,12 @@
   </div>
 
   <div>
-    <div
+    <h2
       id="module_exports"
       class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
     >
       Module Exports
-    </div>
+    </h2>
     {#each api.moduleExports as prop}
       <ListItem
         list="type"

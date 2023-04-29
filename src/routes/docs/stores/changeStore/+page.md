@@ -17,7 +17,7 @@ docUrl: $docUrl
   const changed = changeStore(value, (value) => console.log('changed', value));
 </script>
 
-## Usage
+# Usage
 
 ```svelte
 <script>

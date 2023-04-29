@@ -17,7 +17,7 @@ docUrl: $docUrl
   const isDirty = dirtyStore(value)
 </script>
 
-## Usage
+# Usage
 
 ```svelte
 <script>

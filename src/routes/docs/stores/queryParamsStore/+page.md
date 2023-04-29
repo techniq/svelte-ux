@@ -10,7 +10,7 @@ docUrl: $docUrl
 	import queryParamsStore from '$lib/stores/queryParamsStore';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { queryParamsStore } from 'svelte-ux';

@@ -22,7 +22,7 @@
 <main class="p-2">
 <div class="prose max-w-none bg-white rounded border p-4">
 
-## Installation
+# Installation
 
 Install `svelte-ux` package
 
@@ -42,7 +42,7 @@ Lastly, add `tailwindcss` and dependencies. Requires the latest (v3.0+) with bui
 npm install tailwindcss autoprefixer
 ```
 
-## Setup svelte-preprocess
+# Setup svelte-preprocess
 
 Update `svelte.config.js` and add `svelte-preprocess` if not already added.
 
@@ -58,7 +58,7 @@ const config = {
 };
 ```
 
-## Setup Tailwind
+# Setup Tailwind
 
 Create `postcss.config.cjs`
 

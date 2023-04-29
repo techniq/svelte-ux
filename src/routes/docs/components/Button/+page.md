@@ -16,7 +16,7 @@ docUrl: $docUrl
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-## Usage
+# Usage
 
 ```js
 import { Button } from 'svelte-ux';
@@ -35,6 +35,8 @@ import { Button } from 'svelte-ux';
 <Preview>
   <Button href="https://www.google.com" target="_blank">Open Google</Button>
 </Preview>
+
+### Foo
 
 ## Disabled
 

@@ -16,7 +16,7 @@ docUrl: $docUrl
   const debouncedValue = debounceStore(value)
 </script>
 
-## Usage
+# Usage
 
 ```svelte
 <script>
