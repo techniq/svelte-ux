@@ -16,6 +16,7 @@
       'InfiniteScroll',
       'Lazy',
       'ListItem',
+      'ListTree',
       'Overflow',
       'Paginate',
       'Pagination',
