@@ -6,10 +6,10 @@ description: 'Recursively render <ul> and <li> children at each level'
 ---
 
 <script lang="ts">
-	import api from '$lib/components/ListTree.svelte?raw&sveld';
+	import api from '$lib/components/TreeList.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
-	import ListTree from '$lib/components/ListTree.svelte';
+	import TreeList from '$lib/components/TreeList.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 </script>
 

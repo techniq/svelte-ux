@@ -3,7 +3,7 @@
 
   import { buildTree } from '../lib/utils/array';
   import { cls } from '../lib/utils/styles';
-  import ListTree from '../lib/components/ListTree.svelte';
+  import TreeList from '../lib/components/TreeList.svelte';
 
   let headings = [];
 
@@ -16,8 +16,8 @@
   });
 </script>
 
-<ListTree items={headings} classes={{ li: 'ml-4', levels: [{ li: 'mb-2' }] }} let:item>
+<TreeList items={headings} classes={{ li: 'ml-4', levels: [{ li: 'mb-2' }] }} let:item>
   <a href="#{item.id}" class={cls(item.level === 1 ? 'font-semibold' : 'text-sm')}>
     {item.name}
   </a>
-</ListTree>
+</TreeList>
