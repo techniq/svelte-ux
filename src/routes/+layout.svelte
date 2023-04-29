@@ -2,8 +2,12 @@
   import { inject } from '@vercel/analytics';
   import 'prism-themes/themes/prism-vsc-dark-plus.css';
   import { dev } from '$app/environment';
+  import { mdiGithub } from '@mdi/js';
 
+  import AppBar from '$lib/components/AppBar.svelte';
   import AppLayout from '$lib/components/AppLayout.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Tooltip from '$lib/components/Tooltip.svelte';
   import NavMenu from './_NavMenu.svelte';
 
   inject({ mode: dev ? 'development' : 'production' });
@@ -16,7 +20,22 @@
     <div class="h-4" />
   </nav>
 
-  <slot />
+  <AppBar title="svelte-ux">
+    <div slot="actions">
+      <Tooltip title="View repository" placement="left" offset={2}>
+        <Button
+          icon={mdiGithub}
+          href="https://github.com/techniq/svelte-ux"
+          class="p-2"
+          target="_blank"
+        />
+      </Tooltip>
+    </div>
+  </AppBar>
+
+  <main class="scroll-smooth">
+    <slot />
+  </main>
 </AppLayout>
 
 <style lang="postcss">

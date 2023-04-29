@@ -1,25 +1,7 @@
 <script lang="ts">
-  import { mdiGithub } from '@mdi/js';
-
-  import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-<AppBar title="svelte-ux">
-  <div slot="actions">
-    <Tooltip title="View repository" placement="left" offset={2}>
-      <Button
-        icon={mdiGithub}
-        href="https://github.com/techniq/svelte-ux"
-        class="p-2"
-        target="_blank"
-      />
-    </Tooltip>
-  </div>
-</AppBar>
-
-<main class="p-2">
 <div class="prose max-w-none bg-white rounded border p-4">
 
 # Installation
@@ -131,4 +113,3 @@ import { dateDisplay } from 'svelte-ux/utils/dateDisplay';
 ```
 
  </div>
-</main>
