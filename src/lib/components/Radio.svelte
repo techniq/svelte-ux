@@ -1,21 +1,4 @@
 <script lang="ts">
-  /*
-    TODO:
-			- [ ] change color
-      - [ ] bind:group (array of values)
-        - Smelte
-          - https://github.com/matyunya/smelte/blob/2bdabb642fbba956757a7bec5a5896fc356ed51e/src/components/Checkbox/Checkbox.svelte#L24
-          - https://github.com/matyunya/smelte/pull/184
-          - https://svelte.dev/repl/1565708677134e418e256234984d90ef?version=3.29.0
-        - svelte-mui
-          - https://github.com/vikignt/svelte-mui/blob/master/src/Checkbox.svelte
-          - https://svelte-mui.now.sh/checkbox/checkbox-group
-        - Svelte Material UI
-          - https://sveltematerialui.com/demo/checkbox
-          - https://github.com/hperrin/svelte-material-ui/blob/master/packages/checkbox/Checkbox.svelte
-      - [ ] use:draw
-  */
-
   import { mdiCheckboxBlankCircle } from '@mdi/js';
 
   import Icon from './Icon.svelte';
