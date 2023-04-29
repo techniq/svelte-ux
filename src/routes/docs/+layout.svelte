@@ -19,6 +19,6 @@
   </div>
 </AppBar>
 
-<main class="p-4 scroll-smooth">
+<main class="scroll-smooth">
   <slot />
 </main>

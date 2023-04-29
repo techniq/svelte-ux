@@ -42,32 +42,27 @@ export function markdownToc() {
             .replace(
               '</Layout_MDSVEX_DEFAULT>',
               `
-                <div slot="toc" class="prose">
+                <div slot="toc" class="text-gray-600">
                   <ul>
-                    <!--
-                    <li>
-                      <a href="#usage">Usage</a>
-                    </li>
-                    -->
-                    <li>
-                      <a href="#examples">Examples</a>
-                      <ul>
-                      ${toc
-                        .map((item) => {
-                          return `
-                            <li>
-                              <a href="\#${item.id}">${item.text}</a>
-                            </li>`;
-                        })
-                        .join('')}
+                    <li class="mb-4">
+                      <a href="#examples" class="font-semibold">Examples</a>
+                      <ul class="text-sm ml-4">
+                        ${toc
+                          .map((item) => {
+                            return `
+                              <li>
+                                <a href="\#${item.id}">${item.text}</a>
+                              </li>`;
+                          })
+                          .join('')}
                       </ul>
                     </li>
-                    <li>
-                      <a href="#api">API</a>
-                      <ul>
-                        <li><a href="#props">Props</a></li>
-                        <li><a href="#slots">Slots</a></li>
-                        <li><a href="#events">Events</a></li>
+                    <li class="">
+                      <a href="#api" class="font-semibold">API</a>
+                      <ul class="text-sm ml-4">
+                        <li><a href="#props">props</a></li>
+                        <li><a href="#slots">slots</a></li>
+                        <li><a href="#events">events</a></li>
                       </ul>
                     </li>
                   </ul>
