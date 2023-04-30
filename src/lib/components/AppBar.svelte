@@ -14,7 +14,7 @@
    */
   export let head = true;
 
-  $: titleString = Array.isArray(title) ? title.join(' › ') : title.toString();
+  $: titleString = Array.isArray(title) ? title.filter((x) => x).join(' › ') : title.toString();
 
   $: if (browser && head) {
     // Appears to be needed for some reactive updates
