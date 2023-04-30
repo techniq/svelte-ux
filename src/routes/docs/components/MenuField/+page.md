@@ -25,12 +25,6 @@
 
 # Examples
 
-## Style
-
-<Preview>
-  <MenuField {options} classes={{ container: 'bg-blue-50 rounded-full border-0 text-blue-500' }} />
-</Preview>
-
 ## Basic
 
 <Preview>
@@ -111,6 +105,12 @@
       <Button icon={mdiRefresh} class="p-2 text-black/50" />
     </div>
   </MenuField>
+</Preview>
+
+## Style
+
+<Preview>
+  <MenuField {options} classes={{ container: 'bg-blue-50 rounded-full border-0 text-blue-500' }} />
 </Preview>
 
 # API
