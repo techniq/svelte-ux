@@ -1,7 +1,3 @@
----
-description: A list item that provides a standard layout and works best with multiple instances in the same parent element.
----
-
 <script lang="ts">
 	import { mdiAccount, mdiChevronRight } from '@mdi/js';
 

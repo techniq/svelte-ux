@@ -1,7 +1,3 @@
----
-filename: $filename
----
-
 <script lang="ts">
   import { mdiFilterVariant } from '@mdi/js';
 

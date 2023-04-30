@@ -1,7 +1,3 @@
----
-filename: $filename
----
-
 <script lang="ts">
 	import Preview from '$lib/components/Preview.svelte';
 </script>

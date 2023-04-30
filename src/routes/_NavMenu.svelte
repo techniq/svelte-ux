@@ -16,7 +16,6 @@
       'InfiniteScroll',
       'Lazy',
       'ListItem',
-      'ListTree',
       'Overflow',
       'Paginate',
       'Pagination',
@@ -26,6 +25,7 @@
       'Table',
       'ToggleButton',
       'ToggleGroup',
+      'TreeList',
       'TweenedValue',
     ],
     Inputs: [

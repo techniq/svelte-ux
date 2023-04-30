@@ -1,7 +1,3 @@
----
-description: 'Waits to render a component until visible. Requires placeholder size (min-height)'
----
-
 <script lang="ts">
 	import api from '$lib/components/Lazy.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';

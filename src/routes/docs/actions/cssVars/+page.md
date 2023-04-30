@@ -1,7 +1,3 @@
----
-description: Reactively set CSS variables using a single object
----
-
 <script lang="ts">
 	import { subDays, subMonths } from 'date-fns';
 
