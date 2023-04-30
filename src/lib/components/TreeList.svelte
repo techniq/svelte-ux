@@ -1,28 +1,23 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
 
-  type Items = { name: string; level: number; id: number; children: Items }[];
+  type Node = { name: string; level: number; id: number; children: Node[] };
 
-  export let items: Items;
+  export let nodes: Node[];
 
   export let classes: {
-    ul?: string;
-    li?: string;
-    /** Per-level styles (by array position) */
-    levels?: {
-      ul?: string;
-      li?: string;
-    }[];
+    ul?: string | ((nodes: Node[]) => string);
+    li?: string | ((node: Node) => string);
   } = {};
 </script>
 
-<ul class={cls(classes.ul)}>
-  {#each items as item}
-    <li class={cls(classes.li, classes.levels?.[item.level - 1]?.li)}>
-      <slot {item} />
-      {#if item.children}
-        <svelte:self items={item.children} {classes} let:item>
-          <slot {item} />
+<ul class={cls(typeof classes.ul === 'string' ? classes.ul : classes.ul?.(node))}>
+  {#each nodes as node}
+    <li class={cls(typeof classes.li === 'string' ? classes.li : classes.li?.(node))}>
+      <slot {node} />
+      {#if node.children}
+        <svelte:self nodes={node.children} {classes} let:node>
+          <slot {node} />
         </svelte:self>
       {/if}
     </li>

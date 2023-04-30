@@ -8,7 +8,7 @@
   import { mdiCodeTags, mdiFileDocumentEditOutline } from '@mdi/js';
   import Button from '$lib/components/Button.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
-  import TableOfContents from './TableOfContents.svelte';
+  import TableOfContents from '$lib/components/TableOfContents.svelte';
 
   export { a, blockquote };
 </script>
@@ -62,7 +62,7 @@
       <slot />
     </div>
 
-    <div class="hidden lg:block w-[200px]">
+    <div class="hidden lg:block w-[224px]">
       <div class="sticky top-0 pr-2">
         <div class="text-xs uppercase leading-8 tracking-widest text-black/50">On this page</div>
         <TableOfContents />
