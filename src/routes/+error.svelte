@@ -1,16 +1,13 @@
 <script lang="ts">
   import { page } from '$app/stores';
 
-  import AppBar from '$lib/components/AppBar.svelte';
-  import Stack from '$lib/components/Stack.svelte';
-
   $: console.log($page.error);
 </script>
 
-<AppBar title={['Error', $page.status]} />
+<div class="p-4">
+  <div class="grid gap-4">
+    <span class="text-2xl font-bold">Error: {$page.status}</span>
 
-<main class="p-4">
-  <Stack vertical gap={16}>
     <div>
       <h2 class="text-lg font-bold mb-1">Message:</h2>
       <pre class="ml-2 p-4 border rounded-md text-xs bg-black/80 text-white">{$page.error
@@ -32,5 +29,5 @@
             .stack}</pre>
       </div>
     {/if}
-  </Stack>
-</main>
+  </div>
+</div>
