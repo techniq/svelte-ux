@@ -1,8 +1,5 @@
 ---
-name: $name
 description: Reactively set CSS variables using a single object
-sourceUrl: $sourceUrl
-docUrl: $docUrl
 ---
 
 <script lang="ts">

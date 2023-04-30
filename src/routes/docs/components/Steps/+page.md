@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script lang="ts">
 	import { format } from 'date-fns';
 	import { mdiCheck, mdiCircle, mdiClockOutline, mdiClose, mdiMapMarker } from '@mdi/js';

@@ -14,10 +14,13 @@
 </script>
 
 <script>
+  import { page } from '$app/stores';
+
+  $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)');
+  $: docUrl = `src/routes/docs/${type}/${name}/+page.md?plain=1`;
+  $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
+
   // frontmatter: https://mdsvex.com/docs#frontmatter-1
-  export let name = undefined;
-  export let sourceUrl = undefined;
-  export let docUrl = undefined;
   export let description = undefined;
 </script>
 

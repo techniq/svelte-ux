@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script lang="ts">
   import api from '$lib/components/DateRange.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';

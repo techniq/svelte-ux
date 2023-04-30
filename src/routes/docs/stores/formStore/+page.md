@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script lang="ts">
 	import Preview from '$lib/components/Preview.svelte';
 	import TextField from '$lib/components/TextField.svelte';

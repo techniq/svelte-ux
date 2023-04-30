@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script>
   import { max } from 'd3-array';
   import api from '$lib/components/Table.svelte?raw&sveld';

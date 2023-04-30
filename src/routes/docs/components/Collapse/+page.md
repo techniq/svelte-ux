@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script>
   import { fade } from 'svelte/transition';
   import { mdiArrowRight } from '@mdi/js';

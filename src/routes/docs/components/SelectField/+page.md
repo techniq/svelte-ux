@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script>
   import { mdiMagnify, mdiPlus, mdiPencil } from '@mdi/js';
 

@@ -1,7 +1,4 @@
 ---
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
 description: 'Recursively render <ul> and <li> children at each level'
 ---
 

@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script lang="ts">
   import { slide } from 'svelte/transition';
   import { mdiMenu, mdiTrashCan, mdiChevronDown } from '@mdi/js';

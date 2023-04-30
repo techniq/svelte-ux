@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script>
   import { mdiFilterVariant, mdiPlus, mdiMinus } from '@mdi/js';
 

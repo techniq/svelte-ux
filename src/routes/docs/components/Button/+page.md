@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script lang="ts">
   import { mdiMenu, mdiTrashCan } from '@mdi/js';
 

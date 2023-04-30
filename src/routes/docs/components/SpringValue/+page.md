@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script>
   import api from '$lib/components/SpringValue.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';

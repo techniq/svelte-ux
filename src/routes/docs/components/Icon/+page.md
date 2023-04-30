@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script lang="ts">
 	import { mdiAccount, mdiCheck, mdiDecagramOutline, mdiLoading, mdiDownload, mdiHeart, mdiCircleMedium, mdiArrowRight } from '@mdi/js';
 	import { faUser } from '@fortawesome/free-solid-svg-icons'

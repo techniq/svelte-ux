@@ -1,7 +1,4 @@
 ---
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
 description: 'Waits to render a component until visible. Requires placeholder size (min-height)'
 ---
 

@@ -1,9 +1,3 @@
----
-name: $name
-sourceUrl: $sourceUrl
-docUrl: $docUrl
----
-
 <script>
   import toggleGroupApi from '$lib/components/ToggleGroup.svelte?raw&sveld';
   import toggleOptionApi from '$lib/components/ToggleOption.svelte?raw&sveld';
