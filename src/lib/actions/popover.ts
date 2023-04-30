@@ -1,14 +1,14 @@
 import {
   computePosition,
-  Placement,
   autoUpdate,
-  ComputePositionConfig,
   flip,
   offset,
   shift,
   autoPlacement,
   size,
-  Alignment,
+  type Placement,
+  type ComputePositionConfig,
+  type Alignment,
 } from '@floating-ui/dom';
 import portal from './portal';
 

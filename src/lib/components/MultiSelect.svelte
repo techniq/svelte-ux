@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ComponentProps, createEventDispatcher } from 'svelte';
+  import { type ComponentProps, createEventDispatcher } from 'svelte';
   import { flip } from 'svelte/animate';
   import { get, partition } from 'lodash-es';
 

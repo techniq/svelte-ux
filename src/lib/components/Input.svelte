@@ -12,8 +12,8 @@
   import { cls } from '../utils/styles';
 
   export let value = '';
-  export let id = undefined;
-  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> = undefined;
+  export let id: string | undefined = undefined;
+  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = undefined;
   export let inputEl: HTMLInputElement | null = null;
 
   export let mask = '';

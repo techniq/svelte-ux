@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fade, FadeParams } from 'svelte/transition';
+  import { fade, type FadeParams } from 'svelte/transition';
 
   import portalAction from '../actions/portal';
   import { cls } from '../utils/styles';

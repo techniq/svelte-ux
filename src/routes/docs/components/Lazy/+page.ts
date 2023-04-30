@@ -1,6 +1,10 @@
-export async function load() {
+import type { PageLoad } from './$types';
+
+export const load = (async () => {
   return {
-    description:
-      'Waits to render a component until visible. Requires placeholder size (min-height)',
+    meta: {
+      description:
+        'Waits to render a component until visible. Requires placeholder size (min-height)',
+    },
   };
-}
+}) satisfies PageLoad;

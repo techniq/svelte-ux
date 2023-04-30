@@ -10,7 +10,7 @@
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)');
   $: docUrl = `src/routes/docs/${type}/${name}/+page.md?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
-  $: description = $page.data.description;
+  $: description = $page.data.meta?.description;
 </script>
 
 <div class="grid grid-rows-[auto,1fr] h-full p-4">

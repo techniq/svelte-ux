@@ -1,5 +1,9 @@
-export async function load() {
+import type { PageLoad } from './$types';
+
+export const load = (async () => {
   return {
-    description: 'Reactively set CSS variables using a single object',
+    meta: {
+      description: 'Reactively set CSS variables using a single object',
+    },
   };
-}
+}) satisfies PageLoad;

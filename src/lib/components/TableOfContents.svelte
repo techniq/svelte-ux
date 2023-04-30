@@ -43,7 +43,7 @@
   {...$$restProps}
   let:node
 >
-  <slot {node}>
+  <slot {node} {activeHeadingId}>
     <a
       href="#{node.id}"
       class={cls(

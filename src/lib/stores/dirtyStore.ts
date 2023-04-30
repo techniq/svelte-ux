@@ -1,4 +1,4 @@
-import { Readable, Subscriber, writable } from 'svelte/store';
+import { type Readable, type Subscriber, writable } from 'svelte/store';
 
 function dirtyStore<T extends Readable<any>>(store: T) {
   const count = writable(-1);

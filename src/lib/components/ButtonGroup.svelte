@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ComponentProps, setContext } from 'svelte';
+  import { type ComponentProps, setContext } from 'svelte';
   import { cls } from '../utils/styles';
   import type Button from './Button.svelte';
 

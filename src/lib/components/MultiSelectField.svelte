@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ComponentProps } from 'svelte';
+  import type { ComponentProps } from 'svelte';
   import { get } from 'lodash-es';
   import type { Placement } from '@floating-ui/dom';
 

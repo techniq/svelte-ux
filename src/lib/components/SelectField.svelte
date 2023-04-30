@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ComponentProps, createEventDispatcher } from 'svelte';
+  import { type ComponentProps, createEventDispatcher } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
