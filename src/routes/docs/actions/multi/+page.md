@@ -12,4 +12,10 @@ docUrl: $docUrl
 	import multi from '$lib/actions/multi';
 </script>
 
+# Usage
+
+```js
+import { multi } from 'svelte-ux';
+```
+
 > TODO

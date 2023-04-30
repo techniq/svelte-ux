@@ -23,6 +23,8 @@ docUrl: $docUrl
   const selection4 = selectionStore({ single: true });
 </script>
 
+# Usage
+
 ## Basic
 
 ```js

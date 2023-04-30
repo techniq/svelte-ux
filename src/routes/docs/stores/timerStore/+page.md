@@ -37,7 +37,7 @@ const timer = timerStore({ delay: number, onTick: () => {...}, disabled: boolean
 ```
 
 <Preview>
-  {$dateTimer}
+  <div>{$dateTimer}</div>
   <Switch checked={dateTimer.isRunning()} on:change={e => e.detail ? dateTimer.start() : dateTimer.stop() } />
 </Preview>
 
@@ -50,6 +50,6 @@ const timer = timerStore({ delay: number, onTick: () => {...}, disabled: boolean
 ```
 
 <Preview>
-  {$tickTimer}
+  <div>{$tickTimer}</div>
   <Switch checked={tickTimer.isRunning()} on:change={e => e.detail ? tickTimer.start() : tickTimer.stop() } />
 </Preview>

@@ -17,6 +17,12 @@ docUrl: $docUrl
 	let overflowItems = 1;
 </script>
 
+# Usage
+
+```js
+import { remainingViewportHeight, remainingViewportWidth, overflow } from 'svelte-ux';
+```
+
 ## remainingViewportHeight
 
 > TODO

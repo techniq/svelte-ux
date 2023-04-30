@@ -8,7 +8,7 @@ docUrl: $docUrl
   import { spring } from 'svelte/motion';
 
 	import Preview from '$lib/components/Preview.svelte';
-	import { pannable, longpress } from '$lib/actions/mouse';
+	import { longpress, pannable } from '$lib/actions/mouse';
 
   let longpressed = false;
 
@@ -24,6 +24,12 @@ docUrl: $docUrl
 	}
 
 </script>
+
+# Usage
+
+```js
+import { longpress, pannable } from 'svelte-ux';
+```
 
 ## longpress
 

@@ -12,6 +12,12 @@ docUrl: $docUrl
 	import { autoFocus, autoHeight, blurOnEscape, selectOnFocus, debounceEvent } from '$lib/actions/input';
 </script>
 
+# Usage
+
+```js
+import { autoFocus, autoHeight, blurOnEscape, selectOnFocus, debounceEvent } from 'svelte-ux';
+```
+
 ## autoFocus
 
 ### Auto focus node when rendered

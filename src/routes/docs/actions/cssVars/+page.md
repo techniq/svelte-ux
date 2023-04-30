@@ -16,6 +16,12 @@ docUrl: $docUrl
 	let styleVars = { background: '#ddd', border: '1px solid #aaa' };
 </script>
 
+# Usage
+
+```js
+import { cssVars } from 'svelte-ux';
+```
+
 <Preview>
 	<div class="grid gap-4" use:cssVars={styleVars}>
 		<div class="w-10 h-10 rounded" style="background-color: var(--background); border: var(--border)" />

@@ -12,4 +12,10 @@ docUrl: $docUrl
 	import portal from '$lib/actions/portal';
 </script>
 
+# Usage
+
+```js
+import { portal } from 'svelte-ux';
+```
+
 > TODO

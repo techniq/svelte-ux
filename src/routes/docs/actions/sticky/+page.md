@@ -12,6 +12,12 @@ docUrl: $docUrl
 	import { sticky, stickyContext } from '$lib/actions/sticky';
 </script>
 
+# Usage
+
+```js
+import { sticky, stickyContext } from 'svelte-ux';
+```
+
 ## sticky
 
 > TODO

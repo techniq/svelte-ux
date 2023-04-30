@@ -9,6 +9,7 @@ docUrl: $docUrl
 
 	import Button from '$lib/components/Button.svelte';
 	import Preview from '$lib/components/Preview.svelte';
+	import TweenedValue from '$lib/components/TweenedValue.svelte';
 
 	import { dataBackground } from '$lib/actions/dataBackground';
 	import { randomInteger } from '$lib/utils/number';
@@ -32,7 +33,13 @@ docUrl: $docUrl
 		: [Math.min(...values), Math.max(...values)]
 </script>
 
-<Button on:click={() => values = getValues()}>Update data</Button>
+# Usage
+
+```js
+import { dataBackground } from 'svelte-ux';
+```
+
+<Button on:click={() => values = getValues()} variant="filledOutlined" color="blue" class="bg-white">Update data</Button>
 
 <h2>Domain</h2>
 <label>
@@ -78,14 +85,19 @@ docUrl: $docUrl
 ## dataBackground
 
 <Preview>
-  <table class="w-40 border">
-    {#each (sorted ? sort(values) : values) as value}
-			 <!-- re-mount if duration changes so action is updated -->
+	<table class="w-40 border">
+		{#each sorted ? sort(values) : values as value}
+			<!-- re-mount if duration changes so action is updated -->
 			{#key duration}
 				<tr>
-					<td class="text-right" use:dataBackground={{ value, color: value > 0 ? 'hsl(140 100% 80%)' : 'hsl(0 100% 80%)', domain, bar: true, inset, baseline, tweened: { duration } }}>{value}%</td>
+					<td
+						class="text-right"
+						use:dataBackground={{ value, color: value > 0 ? 'hsl(140 100% 80%)' : 'hsl(0 100% 80%)', domain, bar: true, inset, baseline, tweened: { duration } }}
+					>
+						<TweenedValue {value} format="integer" />
+					</td>
 				</tr>
 			{/key}
-    {/each}
-  </table>
+		{/each}
+	</table>
 </Preview>

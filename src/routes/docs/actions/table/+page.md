@@ -12,6 +12,10 @@ docUrl: $docUrl
 	import { tableCell } from '$lib/actions/table';
 </script>
 
-## tableCell
+# Usage
+
+```js
+import { tableCell } from 'svelte-ux';
+```
 
 > TODO

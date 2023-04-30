@@ -19,6 +19,12 @@ docUrl: $docUrl
   let scrolledIndex = 0;
 </script>
 
+# Usage
+
+```js
+import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
+```
+
 ## scrollIntoView
 
 ### Smootly scroll element into center of view

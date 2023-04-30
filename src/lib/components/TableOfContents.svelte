@@ -18,8 +18,8 @@
 <TreeList
   nodes={headings}
   classes={{ li: (node) => cls('ml-4', node.level === 1 && 'mb-2') }}
-  let:node
   {...$$restProps}
+  let:node
 >
   <slot {node}>
     <a href="#{node.id}" class={cls(node.level === 1 ? 'font-semibold' : 'text-sm')}>
