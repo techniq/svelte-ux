@@ -57,7 +57,10 @@
     <div class="hidden lg:block w-[224px]">
       <div class="sticky top-0 pr-2">
         <div class="text-xs uppercase leading-8 tracking-widest text-black/50">On this page</div>
-        <TableOfContents />
+        <!-- Rebuild toc when page changes -->
+        {#key $page.route.id}
+          <TableOfContents />
+        {/key}
       </div>
     </div>
   </div>
