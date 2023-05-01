@@ -10,6 +10,7 @@ export { default as ButtonGroup } from './ButtonGroup.svelte';
 export { default as Card } from './Card.svelte';
 export { default as Checkbox } from './Checkbox.svelte';
 export { default as CircularProgress } from './CircularProgress.svelte';
+export { default as Code } from './Code.svelte';
 export { default as Collapse } from './Collapse.svelte';
 export { default as DateButton } from './DateButton.svelte';
 export { default as DateField } from './DateField.svelte';
