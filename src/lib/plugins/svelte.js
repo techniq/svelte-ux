@@ -17,7 +17,7 @@ export function codePreview() {
       const previews = content.match(/<Preview[\s\S]*?<\/Preview>/g) ?? [];
 
       previews.forEach((preview) => {
-        const previewCode = preview.match(/<Preview>([^]*)<\/Preview>/)[1];
+        const previewCode = preview.match(/<Preview.*>([^]*)<\/Preview>/)[1];
 
         const formattedCode = format(previewCode, {
           parser: 'svelte',

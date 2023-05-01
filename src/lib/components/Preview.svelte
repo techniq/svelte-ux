@@ -6,14 +6,15 @@
   import { slide } from 'svelte/transition';
 
   import Button from './Button.svelte';
+  import { cls } from '$lib/utils/styles';
 
-  export let code = null;
+  export let code: string | null = null;
   export let language = 'svelte';
   export let highlightedCode = code ? Prism.highlight(code, Prism.languages.svelte, language) : '';
   export let showCode = false;
 </script>
 
-<div class="border border-black/20 rounded bg-white">
+<div class={cls('border border-black/20 rounded bg-white', $$restProps.class)}>
   <div class="p-4">
     <slot />
   </div>
