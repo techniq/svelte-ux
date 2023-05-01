@@ -49,7 +49,7 @@
       class={cls(
         'block px-2',
         node.level === 1 ? 'font-semibold' : 'text-sm',
-        node.id === activeHeadingId && 'bg-black/[0.08] rounded-lg'
+        node.id && node.id === activeHeadingId && 'bg-black/[0.08] rounded-lg'
       )}
     >
       {@html node.name}
