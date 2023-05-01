@@ -47,9 +47,9 @@
     <a
       href="#{node.id}"
       class={cls(
-        'block px-2',
+        'block px-2 rounded-lg hover:bg-black/5',
         node.level === 1 ? 'font-semibold' : 'text-sm',
-        node.id && node.id === activeHeadingId && 'bg-black/[0.08] rounded-lg'
+        node.id && node.id === activeHeadingId && 'bg-black/5'
       )}
     >
       {@html node.name}
