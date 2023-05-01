@@ -2,6 +2,7 @@
   import { mdiCodeTags, mdiFileDocumentEditOutline } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
+  import Code from '$lib/components/Code.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import TableOfContents from '$lib/components/TableOfContents.svelte';
 
@@ -11,6 +12,7 @@
   $: docUrl = `src/routes/docs/${type}/${name}/+page.md?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
   $: description = $page.data.meta?.description;
+  $: hideUsage = $page.data.meta?.hideUsage;
 </script>
 
 <div class="grid grid-rows-[auto,1fr] h-full p-4">
@@ -51,6 +53,13 @@
 
   <div class="grid grid-cols-[1fr,auto] gap-6 pt-2 pb-4">
     <div>
+      {#if type === 'components' && !hideUsage}
+        {#key $page.route.id}
+          <h1>Usage</h1>
+          <Code code={`import { ${name} } from 'svelte-ux';`} language="javascript" />
+        {/key}
+      {/if}
+
       <slot />
     </div>
 

@@ -12,12 +12,6 @@
   import Preview from '$lib/components/Preview.svelte';
 </script>
 
-# Usage
-
-```js
-import { Card } from 'svelte-ux';
-```
-
 # Examples
 
 ## Default

@@ -14,12 +14,6 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-# Usage
-
-```js
-import { ButtonGroup } from 'svelte-ux';
-```
-
 # Examples
 
 ## Basic

@@ -10,12 +10,6 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-# Usage
-
-```js
-import { Button } from 'svelte-ux';
-```
-
 # Examples
 
 ## Default

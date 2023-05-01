@@ -9,12 +9,6 @@
 	import Preview from '$lib/components/Preview.svelte';
 </script>
 
-# Usage
-
-```js
-import { AppBar } from 'svelte-ux';
-```
-
 # Examples
 
 ## Default

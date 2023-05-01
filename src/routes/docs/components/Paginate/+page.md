@@ -10,8 +10,6 @@
 	const items = Array(100).fill().map((x, i) => ({ name: `Item: ${i + 1}`}))
 </script>
 
-# Examples
-
 # Usage
 
 ```svelte
@@ -25,6 +23,8 @@
   {/each}
 </Paginate>
 ```
+
+# Examples
 
 ## Default
 

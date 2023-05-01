@@ -18,12 +18,6 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-# Usage
-
-```js
-import { ToggleButton } from 'svelte-ux';
-```
-
 # Examples
 
 ## Dialog
