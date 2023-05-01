@@ -23,6 +23,7 @@
       'ScrollContainer',
       'SpringValue',
       'Table',
+      'TableOfContents',
       'ToggleButton',
       'ToggleGroup',
       'TreeList',
