@@ -52,7 +52,7 @@
         node.id === activeHeadingId && 'bg-black/[0.08] rounded-lg'
       )}
     >
-      {node.name}
+      {@html node.name}
     </a>
   </slot>
 </TreeList>

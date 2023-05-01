@@ -30,8 +30,6 @@ import { Button } from 'svelte-ux';
   <Button href="https://www.google.com" target="_blank">Open Google</Button>
 </Preview>
 
-### Foo
-
 ## Disabled
 
 <Preview>
