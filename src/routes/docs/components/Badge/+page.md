@@ -74,7 +74,7 @@
   </Badge>
 </Preview>
 
-<SectionDivider>Value slot</SectionDivider>
+## Value slot
 
 <Preview>
   <Badge {value} circle>
@@ -98,11 +98,11 @@
 </Stack>
 </Preview> -->
 
-<SectionDivider>Placement</SectionDivider>
+## Placement
 
 <div class="grid grid-cols-5 gap-4">
   <div>
-    <div class="text-sm text-black/50">Button w/ default</div>
+    <h3 class="text-sm text-black/50">Button w/ default</h3>
     <Preview>
       <Badge {value}>
         <Button variant="outlined">Example</Button>
@@ -111,7 +111,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ top-left</span>
+    <h3 class="text-sm text-black/50">Button w/ top-left</h3>
     <Preview>
       <Badge {value} placement="top-left">
         <Button variant="outlined">Example</Button>
@@ -120,7 +120,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ top-right</span>
+    <h3 class="text-sm text-black/50">Button w/ top-right</h3>
     <Preview>
       <Badge {value} placement="top-right">
         <Button variant="outlined">Example</Button>
@@ -129,7 +129,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ bottom-left</span>
+    <h3 class="text-sm text-black/50">Button w/ bottom-left</h3>
     <Preview>
       <Badge {value} placement="bottom-left">
         <Button variant="outlined">Example</Button>
@@ -138,7 +138,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ bottom-right</span>
+    <h3 class="text-sm text-black/50">Button w/ bottom-right</h3>
     <Preview>
       <Badge {value} placement="bottom-right">
         <Button variant="outlined">Example</Button>
@@ -147,7 +147,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ default</span>
+    <h3 class="text-sm text-black/50">Button w/ default</h3>
     <Preview>
       <Badge {value} small>
         <Button variant="outlined">Example</Button>
@@ -156,7 +156,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ top-left</span>
+    <h3 class="text-sm text-black/50">Button w/ top-left</h3>
     <Preview>
       <Badge {value} small placement="top-left">
         <Button variant="outlined">Example</Button>
@@ -165,7 +165,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ top-right</span>
+    <h3 class="text-sm text-black/50">Button w/ top-right</h3>
     <Preview>
       <Badge {value} small placement="top-right">
         <Button variant="outlined">Example</Button>
@@ -174,7 +174,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ bottom-left</span>
+    <h3 class="text-sm text-black/50">Button w/ bottom-left</h3>
     <Preview>
       <Badge {value} small placement="bottom-left">
         <Button variant="outlined">Example</Button>
@@ -183,7 +183,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Button w/ bottom-right</span>
+    <h3 class="text-sm text-black/50">Button w/ bottom-right</h3>
     <Preview>
       <Badge {value} small placement="bottom-right">
         <Button variant="outlined">Example</Button>
@@ -192,7 +192,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ default</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ default</h3>
     <Preview>
       <Badge {value} circle>
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -201,7 +201,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ top-left</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ top-left</h3>
     <Preview>
       <Badge {value} circle placement="top-left">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -210,7 +210,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ top-right</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ top-right</h3>
     <Preview>
       <Badge {value} circle placement="top-right">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -219,7 +219,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ bottom-left</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ bottom-left</h3>
     <Preview>
       <Badge {value} circle placement="bottom-left">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -228,7 +228,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ bottom-right</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ bottom-right</h3>
     <Preview>
       <Badge {value} circle placement="bottom-right">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -237,7 +237,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ default</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ default</h3>
     <Preview>
       <Badge {value} circle small>
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -246,7 +246,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ top-left</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ top-left</h3>
     <Preview>
       <Badge {value} circle small placement="top-left">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -255,7 +255,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ top-right</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ top-right</h3>
     <Preview>
       <Badge {value} circle small placement="top-right">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -264,7 +264,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ bottom-left</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ bottom-left</h3>
     <Preview>
       <Badge {value} circle small placement="bottom-left">
         <Button icon={mdiFilterVariant} class="border p-3" />
@@ -273,7 +273,7 @@
   </div>
 
   <div>
-    <span class="text-sm text-black/50">Icon Button w/ bottom-right</span>
+    <h3 class="text-sm text-black/50">Icon Button w/ bottom-right</h3>
     <Preview>
       <Badge {value} circle small placement="bottom-right">
         <Button icon={mdiFilterVariant} class="border p-3" />
