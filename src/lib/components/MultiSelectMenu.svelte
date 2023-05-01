@@ -16,6 +16,7 @@
   export let placement: Placement = 'bottom-start';
   export let inlineSearch = false;
   export let infiniteScroll = false;
+  export let searchText = '';
 
   export let labelProp = 'name';
   export let valueProp = 'value';
@@ -51,6 +52,7 @@
     {infiniteScroll}
     {labelProp}
     {valueProp}
+    {searchText}
     on:cancel={() => close()}
     on:cancel
     on:change={() => close()}
