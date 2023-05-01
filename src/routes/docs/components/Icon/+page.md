@@ -18,6 +18,7 @@
 
 - Supports loading icons from path, svg as string, svg from URL, or as svg element via slot
 - Convenient `data` prop to support most of the above use cases via a single prop through introspection
+- Supports most icon collections includes Material Design Icons and Font Awesome.
 - Simple in-memory cache when loaded via URL (and only loaded once)
 
 </div>
