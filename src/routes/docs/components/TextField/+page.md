@@ -186,9 +186,8 @@
 ### Sets input type and add prefix/suffix when appropriate
 
 <Preview>
-  <div class="grid grid-flow-col gap-2">
+  <div class="grid grid-cols-3 gap-2">
     <TextField label="default" on:change={e => console.log(e.detail)}  />
-    <div />
     <TextField label="text" type="text" on:change={e => console.log(e.detail)} />
     <TextField label="password" type="password" on:change={e => console.log(e.detail)}  />
     <TextField label="integer" type="integer" on:change={e => console.log(e.detail)}  />
