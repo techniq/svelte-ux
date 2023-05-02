@@ -72,15 +72,17 @@ export function movable(node: HTMLElement, options: MovableOptions = {}): Svelte
 
     if (options.step) {
       if (Math.abs(dx) >= options.step) {
-        dx = dx - (dx % options.step);
-        lastX = event.clientX;
+        const overStep = dx % options.step;
+        dx = dx - overStep;
+        lastX = event.clientX - overStep;
       } else {
         dx = 0;
       }
 
       if (Math.abs(dy) >= options.step) {
-        dy = dy - (dy % options.step);
-        lastY = event.clientY;
+        const overStep = dy % options.step;
+        dy = dy - overStep;
+        lastY = event.clientY - overStep;
       } else {
         dy = 0;
       }
@@ -89,15 +91,17 @@ export function movable(node: HTMLElement, options: MovableOptions = {}): Svelte
       const parentHeight = node.parentElement.offsetHeight;
 
       if (Math.abs(dx / parentWidth) >= options.stepPercent) {
-        dx = dx - (dx % (parentWidth * options.stepPercent));
-        lastX = event.clientX;
+        const overStep = dx % (parentWidth * options.stepPercent);
+        dx = dx - overStep;
+        lastX = event.clientX - overStep;
       } else {
         dx = 0;
       }
 
       if (Math.abs(dy / parentHeight) >= options.stepPercent) {
-        dy = dy - (dy % (parentHeight * options.stepPercent));
-        lastY = event.clientY;
+        const overStep = dy % (parentHeight * options.stepPercent);
+        dy = dy - overStep;
+        lastY = event.clientY - overStep;
       } else {
         dy = 0;
       }
