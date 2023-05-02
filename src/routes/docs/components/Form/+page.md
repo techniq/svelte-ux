@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { z } from 'zod';
   import api from '$lib/components/Form.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -9,6 +10,16 @@
 
   let data = {
     name: 'Sean Lynch'
+  }
+
+  const schema = z.object({
+    firstName: z.string().nonempty('First name is required').max(10),
+    lastName: z.string().nonempty('Last name is required').max(10),
+  });
+
+  let schemaData = {
+    firstName: '',
+    lastName: '',
   }
 </script>
 
@@ -63,6 +74,44 @@
     <Button type="reset">Cancel</Button>
     <div class="mt-2">
       <div>state: {JSON.stringify(state)}</div>
+    </div>
+  </Form>
+</Preview>
+
+## zod schema
+
+<Preview>
+  <Form
+    initial={schemaData}
+    {schema}
+    on:change={(e) => (schemaData = e.detail)}
+    let:draft
+    let:state
+    let:errors
+  >
+    <div class="grid gap-2">
+      <TextField
+        label="First Name"
+        value={draft.firstName}
+        on:change={(e) => {
+            draft.firstName = e.detail.value;
+          }}
+        error={errors.firstName}
+      />
+      <TextField
+        label="Last Name"
+        value={draft.lastName}
+        on:change={(e) => {
+            draft.lastName = e.detail.value;
+          }}
+        error={errors.lastName}
+      />
+    </div>
+    <Button type="submit">Apply</Button>
+    <Button type="reset">Cancel</Button>
+    <div class="mt-2">
+      <div>state: {JSON.stringify(state)}</div>
+      <div>errors: {JSON.stringify(errors)}</div>
     </div>
   </Form>
 </Preview>
