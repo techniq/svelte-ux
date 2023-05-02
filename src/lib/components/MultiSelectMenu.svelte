@@ -14,6 +14,7 @@
   export let open = false;
   export let duration = 200;
   export let placement: Placement = 'bottom-start';
+  export let autoPlacement = true;
   export let inlineSearch = false;
   export let infiniteScroll = false;
   export let searchText = '';
@@ -34,6 +35,7 @@
   on:close
   explicitClose
   {placement}
+  {autoPlacement}
   let:close
   {...$$restProps}
   classes={{
