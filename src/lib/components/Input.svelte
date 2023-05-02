@@ -6,12 +6,15 @@
         - Replace completed slots as spaces (for spacing)
   */
   import { createEventDispatcher, onMount } from 'svelte';
+  import type { HTMLInputAttributes, HTMLInputTypeAttribute } from 'svelte/elements';
 
   import multi from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
 
   export let value = '';
+  export let type: HTMLInputTypeAttribute = 'text';
+  export let inputmode: HTMLInputAttributes['inputmode'] | undefined = undefined;
   export let id: string | undefined = undefined;
   export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = undefined;
   export let inputEl: HTMLInputElement | null = null;
@@ -85,6 +88,8 @@
 <input
   {id}
   {value}
+  {type}
+  {inputmode}
   placeholder={isFocused && mask ? mask : placeholder}
   bind:this={inputEl}
   on:keydown={(e) => (backspace = e.key === 'Backspace')}

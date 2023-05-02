@@ -12,6 +12,7 @@
   import Input from './Input.svelte';
   import { isLiteralObject } from '../utils/object';
   import { autoFocus } from '$lib/actions';
+  import type { HTMLInputAttributes } from 'svelte/elements';
 
   type InputValue = string | number;
 
@@ -70,6 +71,7 @@
     case 'decimal':
     case 'currency':
     case 'percent':
+      // TODO: typing '.'  on iOS appears to clear input when using type="number"
       inputType = 'number';
       break;
     case 'password':
@@ -84,6 +86,27 @@
     case 'text':
     default:
       inputType = 'text';
+  }
+  let inputMode: HTMLInputAttributes['inputmode'] = undefined;
+  $: switch (type) {
+    case 'integer':
+      inputMode = 'numeric';
+      break;
+    case 'decimal':
+    case 'currency':
+    case 'percent':
+      inputMode = 'decimal';
+      break;
+    case 'email':
+      inputMode = 'email';
+      break;
+    case 'search':
+      inputMode = 'search';
+      break;
+    case 'text':
+    case 'password':
+    default:
+      inputMode = 'text';
   }
 
   $: inputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
@@ -181,6 +204,7 @@
         </div>
       {/if}
 
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="flex-grow inline-grid" on:click>
         {#if label}
           <label
@@ -244,6 +268,7 @@
               {placeholder}
               {autocomplete}
               type={inputType}
+              inputmode={inputMode}
               value={inputValue}
               {mask}
               {replace}
