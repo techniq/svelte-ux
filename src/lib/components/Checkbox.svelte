@@ -44,7 +44,7 @@
   }
 </script>
 
-<div class={cls('inline-flex gap-x-1 items-center', classes.root, $$props.class)}>
+<div class={cls('inline-flex items-center', classes.root, $$props.class)}>
   <input
     {id}
     type="checkbox"
@@ -92,7 +92,7 @@
     <label
       for={id}
       class={cls(
-        'peer-disabled:opacity-50',
+        'peer-disabled:opacity-50 pl-1',
         {
           xs: 'text-xs', // 12px
           sm: 'text-sm', // 14px
