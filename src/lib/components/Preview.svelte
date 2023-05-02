@@ -15,7 +15,7 @@
 </script>
 
 <div class={cls('border border-black/20 rounded bg-white', $$restProps.class)}>
-  <div class="p-4">
+  <div class="p-4 overflow-auto">
     <slot />
   </div>
 
