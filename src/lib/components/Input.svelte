@@ -94,6 +94,7 @@
   bind:this={inputEl}
   on:keydown={(e) => (backspace = e.key === 'Backspace')}
   on:keydown
+  on:keyup
   on:keypress
   on:input={onInput}
   on:input
