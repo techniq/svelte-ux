@@ -12,6 +12,7 @@
   import Button from '$lib/components/Button.svelte';
   import Field from '$lib/components/Field.svelte';
   import Icon from '$lib/components/Icon.svelte';
+  import Input from '$lib/components/Input.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Switch from '$lib/components/Switch.svelte';
@@ -100,6 +101,22 @@
 <Preview>
   <Field label="Date of Birth" let:id>
     <input {id} type="date" class="text-sm w-full outline-none" />
+  </Field>
+</Preview>
+
+## input type="number"
+
+<Preview>
+  <Field label="Number" let:id>
+    <input {id} type="number" min={0} max={10} step={1} class="w-full outline-none" />
+  </Field>
+</Preview>
+
+## Input
+
+<Preview>
+  <Field label="Phone number" let:id>
+    <Input {id} mask="+1 (___) ___-____" replace="_" />
   </Field>
 </Preview>
 
