@@ -36,6 +36,7 @@
       'MultiSelect',
       'MultiSelectField',
       'MultiSelectMenu',
+      'NumberStepper',
       'Radio',
       'RangeSlider',
       'SelectField',

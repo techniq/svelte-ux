@@ -45,6 +45,7 @@ export { default as MultiSelect } from './MultiSelect.svelte';
 export { default as MultiSelectField } from './MultiSelectField.svelte';
 export { default as MultiSelectMenu } from './MultiSelectMenu.svelte';
 export { default as MultiSelectOption } from './MultiSelectOption.svelte';
+export { default as NumberStepper } from './NumberStepper.svelte';
 export { default as NavItem } from './NavItem.svelte';
 export { default as Notification } from './Notification.svelte';
 export { default as Overflow } from './Overflow.svelte';

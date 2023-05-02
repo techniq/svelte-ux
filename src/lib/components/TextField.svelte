@@ -31,7 +31,7 @@
     | 'percent'
     | 'search'
     | 'email' = 'text';
-  export let placeholder = undefined;
+  export let placeholder: string | undefined = undefined;
   export let error = '';
   export let hint = '';
   export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
@@ -60,9 +60,9 @@
   } = {};
 
   // Input props
-  export let mask = undefined;
-  export let replace = undefined;
-  export let accept = undefined;
+  export let mask: string | undefined = undefined;
+  export let replace: string | undefined = undefined;
+  export let accept: string | undefined = undefined;
 
   let inputType = 'text';
   $: switch (type) {

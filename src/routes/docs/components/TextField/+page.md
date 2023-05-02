@@ -450,10 +450,10 @@
     class="w-24"
   >
     <div slot="prepend" class="flex">
-      <Button icon={mdiMinus} on:click={() => (numberValue -= 1)} />
+      <Button icon={mdiMinus} on:click={() => (numberValue -= 1)} size="sm" />
     </div>
     <div slot="append" class="flex">
-      <Button icon={mdiPlus} on:click={() => (numberValue += 1)} />
+      <Button icon={mdiPlus} on:click={() => (numberValue += 1)} size="sm" />
     </div>
   </TextField>
 </Preview>

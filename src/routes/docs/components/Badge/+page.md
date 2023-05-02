@@ -7,24 +7,16 @@
   import Badge from '$lib/components/Badge.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
+  import NumberStepper from '$lib/components/NumberStepper.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
-  import Stack from '$lib/components/Stack.svelte';
-  import TextField from '$lib/components/TextField.svelte';
 
   let value = 1;
 </script>
 
 # Examples
 
-<TextField type="integer" bind:value align="center" class="w-24">
-  <div slot="prepend" class="flex">
-    <Button icon={mdiMinus} on:click={() => (value -= 1)} />
-  </div>
-  <div slot="append" class="flex">
-    <Button icon={mdiPlus} on:click={() => (value += 1)} />
-  </div>
-</TextField>
+<NumberStepper bind:value />
 
 ## Button
 
