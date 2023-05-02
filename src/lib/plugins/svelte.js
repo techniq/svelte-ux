@@ -25,13 +25,15 @@ export function codePreview() {
         });
         const highlightedCode = Prism.highlight(formattedCode, Prism.languages.svelte, 'svelte');
 
-        code = code.replace(
-          preview,
-          preview.replace(
-            '<Preview',
-            `<Preview code={\`${formattedCode}\`} highlightedCode={\`${highlightedCode}\`}`
-          )
-        );
+        if (!preview.includes('code=')) {
+          code = code.replace(
+            preview,
+            preview.replace(
+              '<Preview',
+              `<Preview code={\`${formattedCode}\`} highlightedCode={\`${highlightedCode}\`}`
+            )
+          );
+        }
       });
 
       return { code };
