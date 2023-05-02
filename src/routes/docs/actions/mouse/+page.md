@@ -2,7 +2,7 @@
   import { spring } from 'svelte/motion';
 
 	import Preview from '$lib/components/Preview.svelte';
-	import { longpress, pannable } from '$lib/actions/mouse';
+	import { longpress, movable } from '$lib/actions/mouse';
 
   let longpressed = false;
 
@@ -22,7 +22,7 @@
 # Usage
 
 ```js
-import { longpress, pannable } from 'svelte-ux';
+import { longpress, movable } from 'svelte-ux';
 ```
 
 ## longpress
@@ -38,23 +38,23 @@ import { longpress, pannable } from 'svelte-ux';
   {/if}
 </Preview>
 
-## pannable
+## movable
 
 ### Track mouse position changes from mouse down on node to mouse up
 
 <Preview>
   <div class="h-40">
     <div class="w-10 h-10 bg-red-500 rounded cursor-move"
-      use:pannable
-      on:panstart={() => {
+      use:movable
+      on:movestart={() => {
         coords.stiffness = 1;
         coords.damping = 1;
       }}
-      on:panmove={(e) => {
+      on:move={(e) => {
         $coords.x += e.detail.dx;
         $coords.y += e.detail.dy;
       }}
-      on:panend={() => {
+      on:moveend={() => {
         coords.stiffness = 0.2;
         coords.damping = 0.4;
         coords.set({ x: 0, y: 0 });
@@ -71,16 +71,16 @@ import { longpress, pannable } from 'svelte-ux';
 <Preview>
   <div class="h-40">
     <div class="w-10 h-10 bg-red-500 rounded cursor-move"
-      use:pannable={{ step: 25 }}
-      on:panstart={() => {
+      use:movable={{ step: 25 }}
+      on:movestart={() => {
         coords.stiffness = 1;
         coords.damping = 1;
       }}
-      on:panmove={(e) => {
+      on:move={(e) => {
         $coords.x += e.detail.dx;
         $coords.y += e.detail.dy;
       }}
-      on:panend={() => {
+      on:moveend={() => {
         coords.stiffness = 0.2;
         coords.damping = 0.4;
         coords.set({ x: 0, y: 0 });
@@ -97,16 +97,16 @@ import { longpress, pannable } from 'svelte-ux';
 <Preview>
   <div class="h-40">
     <div class="w-10 h-10 bg-red-500 rounded cursor-move"
-      use:pannable={{ stepPercent: .10 }}
-      on:panstart={() => {
+      use:movable={{ stepPercent: .10 }}
+      on:movestart={() => {
         coords.stiffness = 1;
         coords.damping = 1;
       }}
-      on:panmove={(e) => {
+      on:move={(e) => {
         $coords.x += e.detail.dx;
         $coords.y += e.detail.dy;
       }}
-      on:panend={() => {
+      on:moveend={() => {
         coords.stiffness = 0.2;
         coords.damping = 0.4;
         coords.set({ x: 0, y: 0 });
@@ -123,16 +123,16 @@ import { longpress, pannable } from 'svelte-ux';
 <Preview>
   <div class="h-40">
     <div class="w-10 h-10 bg-red-500 rounded cursor-move"
-      use:pannable={{ axis: 'x' }}
-      on:panstart={() => {
+      use:movable={{ axis: 'x' }}
+      on:movestart={() => {
         coords.stiffness = 1;
         coords.damping = 1;
       }}
-      on:panmove={(e) => {
+      on:move={(e) => {
         $coords.x += e.detail.dx;
         $coords.y += e.detail.dy;
       }}
-      on:panend={() => {
+      on:moveend={() => {
         coords.stiffness = 0.2;
         coords.damping = 0.4;
         coords.set({ x: 0, y: 0 });

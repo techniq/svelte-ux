@@ -13,7 +13,7 @@
         - left/right arrows move range
         - shift + left moves start, shift + right moves end
         - consider last item clicked gets events (both, start, end)...
-      - [x] Ignore dy changes from pannable
+      - [x] Ignore dy changes from movable
       - [ ] Support single and double thumb (array)
         - single: clicking range/track jumps to value
         - double: clicking range/track jumps range
@@ -30,7 +30,7 @@
   import { scaleLinear } from 'd3-scale';
   import { mdiDragHorizontal } from '@mdi/js';
 
-  import { pannable } from '$lib/actions/mouse';
+  import { movable } from '$lib/actions/mouse';
   import { decimalCount, round } from '$lib/utils/number';
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
@@ -241,10 +241,10 @@
   />
 
   <div
-    use:pannable={{ axis: 'x', stepPercent }}
-    on:panstart={onMoveStart('range')}
-    on:panmove={onMove('range')}
-    on:panend={onMoveEnd('range')}
+    use:movable={{ axis: 'x', stepPercent }}
+    on:movestart={onMoveStart('range')}
+    on:move={onMove('range')}
+    on:moveend={onMoveEnd('range')}
     on:mouseenter={onMouseEnter('range')}
     on:mouseleave={onMouseLeave('range')}
     on:dblclick={() => (value = [min, max])}
@@ -262,10 +262,10 @@
   </div>
 
   <div
-    use:pannable={{ axis: 'x', stepPercent }}
-    on:panstart={onMoveStart('start')}
-    on:panmove={onMove('start')}
-    on:panend={onMoveEnd('start')}
+    use:movable={{ axis: 'x', stepPercent }}
+    on:movestart={onMoveStart('start')}
+    on:move={onMove('start')}
+    on:moveend={onMoveEnd('start')}
     on:mouseenter={onMouseEnter('start')}
     on:mouseleave={onMouseLeave('start')}
     on:dblclick={() => (value = [min, value[1]])}
@@ -281,10 +281,10 @@
   />
 
   <div
-    use:pannable={{ axis: 'x', stepPercent }}
-    on:panstart={onMoveStart('end')}
-    on:panmove={onMove('end')}
-    on:panend={onMoveEnd('end')}
+    use:movable={{ axis: 'x', stepPercent }}
+    on:movestart={onMoveStart('end')}
+    on:move={onMove('end')}
+    on:moveend={onMoveEnd('end')}
     on:mouseenter={onMouseEnter('end')}
     on:mouseleave={onMouseLeave('end')}
     on:dblclick={() => (value = [value[0], max])}

@@ -31,7 +31,7 @@ export function longpress(node: HTMLElement, duration: number) {
 /**
  * Track mouse position changes from mouse down on node to mouse up
  */
-type PannableOptions = {
+type MovableOptions = {
   /**
    * Number of pixels to step
    */
@@ -44,7 +44,7 @@ type PannableOptions = {
 
   axis?: 'x' | 'y' | 'xy';
 };
-export function pannable(node: HTMLElement, options: PannableOptions = {}): SvelteActionReturnType {
+export function movable(node: HTMLElement, options: MovableOptions = {}): SvelteActionReturnType {
   let lastX = 0;
   let lastY = 0;
 
@@ -53,7 +53,7 @@ export function pannable(node: HTMLElement, options: PannableOptions = {}): Svel
     lastY = event.clientY;
 
     node.dispatchEvent(
-      new CustomEvent('panstart', {
+      new CustomEvent('movestart', {
         detail: { x: lastX, y: lastY },
       })
     );
@@ -108,7 +108,7 @@ export function pannable(node: HTMLElement, options: PannableOptions = {}): Svel
 
     if ((xEnabled && dx) || (yEnabled && dy)) {
       node.dispatchEvent(
-        new CustomEvent('panmove', {
+        new CustomEvent('move', {
           detail: { x: lastX, y: lastX, dx: xEnabled ? dx : 0, dy: yEnabled ? dy : 0 },
         })
       );
@@ -122,7 +122,7 @@ export function pannable(node: HTMLElement, options: PannableOptions = {}): Svel
     lastY = event.clientY;
 
     node.dispatchEvent(
-      new CustomEvent('panend', {
+      new CustomEvent('moveend', {
         detail: { x: lastX, y: lastY },
       })
     );
