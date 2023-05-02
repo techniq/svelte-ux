@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
+  import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import { get } from 'lodash-es';
   import type { Placement } from '@floating-ui/dom';
 
@@ -48,6 +48,8 @@
     actions?: string;
   } = {};
 
+  const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
+
   // Elements
   let inputEl: HTMLInputElement | null = null;
   let menuOptionsEl: HTMLDivElement;
@@ -80,7 +82,7 @@
     open = false;
   }
 
-  function onChange(e: TextField['$$events_def']['change']) {
+  function onSearchChange(e: ComponentEvents<TextField>['change']) {
     logger.debug('onChange');
 
     searchText = e.detail.inputValue as string;
@@ -112,9 +114,17 @@
     }
   }
 
+  function onSelectChange(e: ComponentEvents<MultiSelectMenu<Option>>['change']) {
+    logger.info('onSelectChange', e);
+    value = e.detail.selection.selected;
+    // TODO: Also dispatch `indeterminate: e.detail.indeterminate`?
+    dispatch('change', { value });
+  }
+
   function clear() {
     logger.info('clear');
     value = [];
+    dispatch('change', { value });
   }
 </script>
 
@@ -134,7 +144,7 @@
     value={searchText}
     bind:inputEl
     on:focus={onFocus}
-    on:change={onChange}
+    on:change={onSearchChange}
     class={cls(classes.field, 'h-full')}
     {...$$restProps}
   >
@@ -189,8 +199,8 @@
     {classes}
     matchWidth
     bind:open
+    on:change={onSelectChange}
     on:close={hide}
-    on:change
     bind:menuOptionsEl
     {...menuProps}
   >

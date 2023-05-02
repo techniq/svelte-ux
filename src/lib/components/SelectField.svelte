@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type ComponentProps, createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
@@ -150,7 +150,7 @@
     highlightIndex = 0;
   }
 
-  function onChange(e: TextField['$$events_def']['change']) {
+  function onChange(e: ComponentEvents<TextField>['change']) {
     logger.debug('onChange');
 
     searchText = e.detail.inputValue as string;

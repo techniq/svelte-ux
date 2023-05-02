@@ -34,7 +34,7 @@
   <MultiSelectField
     {options}
     {value}
-    on:change={(e) => value = e.detail.selection.selected}
+    on:change={(e) => value = e.detail.value}
   />
 </Preview>
 
@@ -44,7 +44,7 @@
   <MultiSelectField
     {options}
     {value}
-    on:change={(e) => value = e.detail.selection.selected}
+    on:change={(e) => value = e.detail.value}
     disabled
   />
 </Preview>
@@ -55,7 +55,7 @@
   <MultiSelectField
     options={manyOptions}
     {value}
-    on:change={(e) => value = e.detail.selection.selected}
+    on:change={(e) => value = e.detail.value}
     classes={{ menu: 'max-h-[360px]' }}
     menuProps={{ autoPlacement: true }}
   />
@@ -68,7 +68,7 @@
     {options}
     {value}
     formatSelected={({ options }) => options.map(o => o.name).join(', ') || 'None'}
-    on:change={(e) => value = e.detail.selection.selected}
+    on:change={(e) => value = e.detail.value}
   />
 </Preview>
 
@@ -78,7 +78,7 @@
   <MultiSelectField
     {options}
     {value}
-    on:change={(e) => value = e.detail.selection.selected}
+    on:change={(e) => value = e.detail.value}
   >
     <div slot="actions">
       <Button color="accent" icon={mdiPlus}>Add item</Button>
@@ -96,7 +96,7 @@
         <MultiSelectField
           {options}
           {value}
-          on:change={(e) => value = e.detail.selection.selected}
+          on:change={(e) => value = e.detail.value}
         /> 
       </div>
       <div

@@ -97,7 +97,7 @@
 
   function applyMove(which: 'start' | 'range' | 'end', deltaValue: number) {
     const [currentStartValue, currentEndValue] = value;
-    // Round to fix float math (ex. 0.1 + 0.2 or 0.3 - 0.1)
+    // Round to fix float math (ex. `0.1 + 0.2` or `0.3 - 0.1`)
     const newStartValue = round(currentStartValue + deltaValue, stepDecimals);
     const newEndValue = round(currentEndValue + deltaValue, stepDecimals);
 
