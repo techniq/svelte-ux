@@ -1,8 +1,8 @@
 import { cubicOut } from 'svelte/easing';
 
-/*
+/**
  * Drop in replacement for built-in fly with support for declaring units for `x` and `y` (ex. `100%` or `2em`)
- * derived from: https://github.com/sveltejs/svelte/pull/6050
+ * @deprecated: built-in fly now supports units (x: '100vw" or `y: '50%')
  */
 export function fly(
   node,
@@ -49,6 +49,7 @@ export function fly(
 
 /**
  * Slide for horizontal (left/right) instead of vertical (top/bottom)
+ * @deprecated: built-in `slide` now axis ('x' or `y`)
  */
 export function horizontalSlide(node, { delay = 0, duration = 400, easing = cubicOut } = {}) {
   // https://github.com/sveltejs/svelte/blob/master/src/runtime/transition/index.ts#L103
