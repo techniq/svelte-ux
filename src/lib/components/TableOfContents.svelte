@@ -5,6 +5,8 @@
   import { cls } from '../utils/styles';
   import TreeList from './TreeList.svelte';
 
+  export let element = 'main';
+
   let activeHeadingId = '';
   let headings = [];
   let nodes = [];
@@ -16,9 +18,9 @@
   }
 
   onMount(() => {
-    const mainEl = document.querySelector('main');
+    const el = document.querySelector(element);
 
-    headings = Array.from(mainEl.querySelectorAll('h1,h2,h3,h4,h5,h6'), (el) => ({
+    headings = Array.from(el?.querySelectorAll('h1,h2,h3,h4,h5,h6') ?? [], (el) => ({
       id: el.id,
       name: el.innerHTML,
       level: Number(el.tagName[1]),
@@ -26,14 +28,14 @@
     }));
     nodes = buildTree(headings);
 
-    mainEl.addEventListener('scroll', onScroll, { passive: true });
+    el?.addEventListener('scroll', onScroll, { passive: true });
     // set first heading until scrolled
     activeHeadingId = headings[0]?.id;
   });
 
   onDestroy(() => {
-    const mainEl = document.querySelector('main');
-    mainEl.removeEventListener('scroll', onScroll);
+    const el = document.querySelector(element);
+    el?.removeEventListener('scroll', onScroll);
   });
 </script>
 
