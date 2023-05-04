@@ -123,12 +123,14 @@
 
       <slot />
 
-      <div
-        class={cls('actions flex w-full justify-end p-2 bg-black/5 border-t', classes.actions)}
-        bind:this={actionsEl}
-      >
-        <slot name="actions" />
-      </div>
+      {#if $$slots.actions}
+        <div
+          class={cls('actions flex w-full justify-end p-2 bg-black/5 border-t', classes.actions)}
+          bind:this={actionsEl}
+        >
+          <slot name="actions" />
+        </div>
+      {/if}
     </div>
   </div>
 {/if}
