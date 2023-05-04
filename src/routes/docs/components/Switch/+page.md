@@ -62,6 +62,28 @@
   </div>
 </Preview>
 
+## Color
+
+<Preview>
+  <div class="inline-grid grid-cols-[auto,auto] gap-2">
+    <Switch color="red" />
+    <Switch checked color="red" />
+    <Switch color="green" />
+    <Switch checked color="green" />
+    <Switch color="purple" />
+    <Switch checked color="purple" />
+  </div>
+</Preview>
+
+## Custom classes
+
+<Preview>
+  <div class="grid gap-2">
+    <Switch color="green" classes={{ switch: 'data-[checked=false]:bg-red-500 data-[checked=false]:border-red-500' }} />
+    <Switch classes={{ switch: 'bg-white border-gray-400', toggle: 'data-[checked=false]:bg-red-500 data-[checked=true]:bg-green-500' }} />
+  </div>
+</Preview>
+
 # API
 
 <ApiDocs {api} />
