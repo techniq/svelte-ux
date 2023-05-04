@@ -18,7 +18,7 @@ export function longpress(node: HTMLElement, duration: number) {
   node.addEventListener('mouseup', handleMouseup);
 
   return {
-    update(newDuration) {
+    update(newDuration: number) {
       duration = newDuration;
     },
     destroy() {
@@ -87,8 +87,8 @@ export function movable(node: HTMLElement, options: MovableOptions = {}): Svelte
         dy = 0;
       }
     } else if (options.stepPercent) {
-      const parentWidth = node.parentElement.offsetWidth;
-      const parentHeight = node.parentElement.offsetHeight;
+      const parentWidth = node.parentElement?.offsetWidth ?? 0;
+      const parentHeight = node.parentElement?.offsetHeight ?? 0;
 
       if (Math.abs(dx / parentWidth) >= options.stepPercent) {
         const overStep = dx % (parentWidth * options.stepPercent);

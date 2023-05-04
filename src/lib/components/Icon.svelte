@@ -13,9 +13,9 @@
   export let height = size;
   export let viewBox = '0 0 24 24';
   export let path: string | string[] = '';
-  export let data: IconDefinition | string = undefined;
-  export let svg: string = undefined;
-  export let svgUrl: string = undefined;
+  export let data: IconDefinition | string | undefined = undefined;
+  export let svg: string | undefined = undefined;
+  export let svgUrl: string | undefined = undefined;
 
   // Accessibility
   export let title: string | undefined = undefined;

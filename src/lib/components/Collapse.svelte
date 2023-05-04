@@ -14,8 +14,8 @@
   const dispatch = createEventDispatcher();
 
   export let name = '';
-  export let value = undefined;
-  export let group = undefined;
+  export let value: any = undefined;
+  export let group: any = undefined;
   export let open = false;
   export let popout = false;
   export let disabled = false;

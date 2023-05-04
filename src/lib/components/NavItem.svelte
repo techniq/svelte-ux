@@ -7,7 +7,7 @@
   import { cls } from '../utils/styles';
 
   export let currentUrl: URL;
-  export let path: string = null;
+  export let path: string;
   export let text: string = '';
   export let icon: string | null = null;
 
@@ -26,7 +26,7 @@
       if (isPathActive) {
         const nodeTop = node.getBoundingClientRect().top;
         const scrollParent = getScrollParent(node);
-        const scrollParentHeight = scrollParent.offsetHeight;
+        const scrollParentHeight = scrollParent?.offsetHeight ?? 0;
         const threshold = 0;
         const isVisible = scrollParentHeight - nodeTop < threshold;
         return isVisible;

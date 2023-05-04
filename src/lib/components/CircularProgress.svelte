@@ -10,7 +10,7 @@
   $: indeterminate = value == null;
   $: circumference = 2 * Math.PI * radius;
   $: strokeDashArray = Math.round(circumference * 1000) / 1000;
-  $: strokeDashOffset = ((100 - value) / 100) * circumference + 'px';
+  $: strokeDashOffset = ((100 - (value ?? 0)) / 100) * circumference + 'px';
   $: viewBoxSize = radius / (1 - width / size);
   $: strokeWidth = (width / size) * viewBoxSize * 2;
 </script>
