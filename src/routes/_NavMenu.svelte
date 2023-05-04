@@ -105,6 +105,8 @@
     'tableOrderStore',
     'timerStore',
   ];
+
+  const utils = ['Logger'];
 </script>
 
 <NavItem text="Getting Started" currentUrl={$page.url} path="/" class="pl-6 py-2 mt-4" />
@@ -151,4 +153,13 @@
 </div>
 {#each stores as item}
   <NavItem text={item} currentUrl={$page.url} path="/docs/stores/{item}" class="pl-6 py-2" />
+{/each}
+
+<div
+  class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
+>
+  Utils
+</div>
+{#each utils as item}
+  <NavItem text={item} currentUrl={$page.url} path="/docs/utils/{item}" class="pl-6 py-2" />
 {/each}

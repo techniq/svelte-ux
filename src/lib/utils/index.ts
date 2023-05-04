@@ -1,4 +1,7 @@
-// alias exports to remove conflicts (and make imports less noisy from top-level)
+// top-level exports
+export * from './logger';
+
+// aliased exports to remove conflicts (and make imports less noisy from top-level)
 export * as array from './array';
 export * as date from './date';
 export * as dateDisplay from './dateDisplay';
@@ -10,7 +13,6 @@ export * as env from './env';
 export * as file from './file';
 export * as format from './format';
 export * as json from './json';
-export * as logger from './logger';
 export * as map from './map';
 export * as number from './number';
 export * as object from './object';
