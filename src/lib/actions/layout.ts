@@ -61,7 +61,6 @@ export function overflow(node: HTMLElement) {
     const prevOverflowedX = overflowedX;
     overflowedX = node.scrollWidth - node.clientWidth;
     if (overflowedX !== prevOverflowedX) {
-      console.log('change');
       node.dispatchEvent(
         new CustomEvent('overflowX', { detail: node.scrollWidth - node.clientWidth })
       );
