@@ -67,7 +67,8 @@
       {
         'scale-0': (value ?? 0) === 0,
         'scale-100': (value ?? 0) !== 0,
-      }
+      },
+      $$props.class
     )}
   >
     <slot name="value">

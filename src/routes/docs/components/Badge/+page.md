@@ -66,6 +66,14 @@
   </Badge>
 </Preview>
 
+## Style
+
+<Preview>
+  <Badge {value} circle class="bg-green-500">
+    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+  </Badge>
+</Preview>
+
 ## Value slot
 
 <Preview>
