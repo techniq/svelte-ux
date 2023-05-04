@@ -22,7 +22,6 @@
     import.meta.glob('./docs/**/+page.md', { as: 'raw', eager: true })
   ).flatMap(([file, source]) => {
     const url = file.replace('.', '').replace('/+page.md', '');
-    console.log({ url });
     const [_, docs, group, name] = url.split('/');
     return {
       name,
@@ -32,7 +31,6 @@
   });
 
   function onKeyDown(e: KeyboardEvent) {
-    console.log(e);
     if (e.key === 'k' && e.metaKey) {
       open = true;
     }
