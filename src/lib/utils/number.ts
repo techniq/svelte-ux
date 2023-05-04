@@ -75,8 +75,6 @@ export function formatNumberAsStyle(
     formula += `.${precision}f`;
   }
 
-  // console.log({ value, formula, result: d3Format(formula)(value) });
-
   return d3Format(formula)(value);
 }
 

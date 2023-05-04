@@ -104,11 +104,8 @@ export function stickyContext(
         break;
 
       default:
-        console.log(`Unexpected type: ${type}`);
+        console.error(`Unexpected type: ${type}`);
     }
-
-    // console.log({ stickyTop });
-    // debugger;
 
     node.style.setProperty('--sticky-top', `${stickyTop}px`);
 

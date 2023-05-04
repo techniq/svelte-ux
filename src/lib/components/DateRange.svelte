@@ -36,8 +36,6 @@
     // Apply date-fns function based on type and from/to.
     let newSelected = { ...selected };
 
-    // console.log('onDateChange', date);
-
     const { start, end } = getDateFuncsByPeriodType(selected.periodType);
 
     let newActiveDate: typeof activeDate = activeDate === 'from' ? 'to' : 'from';

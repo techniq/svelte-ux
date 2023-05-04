@@ -1,7 +1,5 @@
 <script>
   import SectionDivider from '$lib/components/SectionDivider.svelte';
-
-  // console.log($$props);
 </script>
 
 <!--

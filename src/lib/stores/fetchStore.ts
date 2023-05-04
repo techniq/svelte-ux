@@ -181,7 +181,6 @@ export default function fetchStore() {
       const index = promises.indexOf(currentPromise);
       if (index === -1) {
         // Ignore update as a later request/promise has already been processed
-        // console.log('skipping update');
         return currentState;
       }
 
@@ -239,7 +238,6 @@ export default function fetchStore() {
       addError(localErrors, newState.error);
     }
 
-    // console.log({ newState });
     return newState;
   }
 

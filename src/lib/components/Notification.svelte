@@ -21,7 +21,7 @@
     try {
       // https://stackoverflow.com/questions/28900077/why-is-event-target-not-element-in-typescript
       if (!(e.target instanceof Element)) {
-        console.log('unexpected');
+        console.error('Unexpected target');
         return;
       }
 

@@ -21,8 +21,6 @@
       .map((x) => x.split(':').map((x) => x.trim()))
       .map((x) => ({ key: x[0], value: x[1] }));
   }
-
-  // $: console.log({ api });
 </script>
 
 <div class="grid gap-8">
