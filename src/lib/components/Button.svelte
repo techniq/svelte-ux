@@ -18,7 +18,7 @@
 
   export let loading: boolean = false;
   export let disabled: boolean = false;
-  export let rounded: boolean | 'full' = undefined; // default in reactive groupContext below
+  export let rounded: boolean | 'full' | undefined = undefined; // default in reactive groupContext below
   export let variant: 'text' | 'outlined' | 'filled' | 'filledOutlined' | 'none' | undefined =
     undefined; // default in reactive groupContext below
   export let size: 'sm' | 'md' | 'lg' = 'md';
@@ -41,6 +41,7 @@
     'transition duration-300 ring-black/20',
     'focus:outline-none focus-visible:ring-1',
     fullWidth ? 'flex w-full' : 'inline-flex',
+    loading ? 'gap-2' : 'gap-1',
     variant === 'none' || !rounded ? '' : rounded === 'full' ? 'rounded-full' : 'rounded',
     variant !== 'none' && [
       'items-center justify-center',
@@ -170,9 +171,9 @@
   on:click
 >
   {#if loading}
-    <CircularProgress size={16} width={2} class={cls('mr-2', classes.loading)} />
+    <CircularProgress size={16} width={2} class={cls(classes.loading)} />
   {:else if icon}
-    <Icon data={icon} class={cls(!iconOnly && 'mr-1', classes.icon)} />
+    <Icon data={icon} class={cls(classes.icon)} />
   {/if}
   <slot />
 </svelte:element>
