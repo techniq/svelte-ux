@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { slide } from 'svelte/transition';
   import { mdiCalendar, mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
@@ -124,14 +125,19 @@
 {/if}
 
 <Dialog bind:open>
-  <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24">
-    <div class="text-sm text-white/50">
-      {dateDisplay(currentValue, { format: secondaryFormat })}
+  {#if currentValue}
+    <div
+      class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24"
+      transition:slide|local
+    >
+      <div class="text-sm text-white/50">
+        {dateDisplay(currentValue, { format: secondaryFormat })}
+      </div>
+      <div class="text-3xl text-white">
+        {dateDisplay(currentValue, { format: primaryFormat })}
+      </div>
     </div>
-    <div class="text-3xl text-white">
-      {dateDisplay(currentValue, { format: primaryFormat })}
-    </div>
-  </div>
+  {/if}
 
   <div class="p-2 w-96">
     <DateSelect
