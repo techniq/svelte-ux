@@ -15,6 +15,7 @@
      - [ ] Refine SelectList / reuse with SelectField (and maybe MultiSelect)
      - [ ] Improve size of Dialog (move class to Dialog without breaking overflow)
      - [ ] Load descriptions/meta from +page.ts
+     - [ ] Improve dialog positioning on small viewports (consistent top/bottom with max height)
   */
 
   const options = Object.entries(
@@ -51,7 +52,7 @@
     K
   </kbd>
 </Button>
-<Dialog bind:open>
+<Dialog bind:open classes={{ root: 'items-start mt-20' }}>
   <div class="overflow-auto max-h-[min(90vh,600px)] min-w-[400px] p-4">
     <SelectList
       icon={mdiMagnify}
