@@ -7,6 +7,7 @@
   import Dialog from '$lib/components/Dialog.svelte';
   import SelectList from '$lib/components/SelectList.svelte';
 
+  export let options: { name: string; value: string; group?: string }[] = [];
   let open = false;
 
   /*
@@ -17,18 +18,6 @@
      - [ ] Load descriptions/meta from +page.ts
      - [ ] Improve dialog positioning on small viewports (consistent top/bottom with max height)
   */
-
-  const options = Object.entries(
-    import.meta.glob('./docs/**/+page.md', { as: 'raw', eager: true })
-  ).flatMap(([file, source]) => {
-    const url = file.replace('.', '').replace('/+page.md', '');
-    const [_, docs, group, name] = url.split('/');
-    return {
-      name,
-      group: group,
-      value: url,
-    };
-  });
 
   function onKeyDown(e: KeyboardEvent) {
     if (e.key === 'k' && e.metaKey) {

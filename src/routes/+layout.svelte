@@ -12,6 +12,18 @@
   import QuickSearch from './QuickSearch.svelte';
 
   inject({ mode: dev ? 'development' : 'production' });
+
+  const quickSearchOptions = Object.entries(
+    import.meta.glob('./docs/**/+page.md', { as: 'raw', eager: true })
+  ).flatMap(([file, source]) => {
+    const url = file.replace('.', '').replace('/+page.md', '');
+    const [_, docs, group, name] = url.split('/');
+    return {
+      name,
+      value: url,
+      group: group,
+    };
+  });
 </script>
 
 <AppLayout>
@@ -23,7 +35,7 @@
 
   <AppBar title="svelte-ux">
     <div slot="actions">
-      <QuickSearch />
+      <QuickSearch options={quickSearchOptions} />
 
       <Tooltip title="View repository" placement="left" offset={2}>
         <Button

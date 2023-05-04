@@ -324,7 +324,7 @@
     on:keydown={onKeyDown}
     on:keypress={onKeyPress}
     actions={(node) => [autoFocus(node), selectOnFocus(node)]}
-    class={cls(classes.field, 'h-full')}
+    class={cls('h-full', classes.field)}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
