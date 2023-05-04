@@ -38,13 +38,13 @@
 
         <div slot="subheading" class="text-black/50 text-xs">
           {#if prop.description}
-            <span class="whitespace-pre">
+            <span class="whitespace-pre-line">
               {prop.description}
             </span>
           {/if}
         </div>
 
-        <div slot="actions">
+        <div slot="actions" class="flex flex-wrap justify-end gap-1">
           {#if prop.isRequired}
             <div
               class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
@@ -128,7 +128,7 @@
           {slot.description ?? ''}
         </div>
 
-        <div slot="actions" class="flex gap-1">
+        <div slot="actions" class="flex flex-wrap justify-end gap-1">
           {#if slot.slot_props != '{}'}
             {#each parseSlotProps(slot.slot_props) as { key, value }}
               <Tooltip title="slot prop" offset={2}>
@@ -162,7 +162,7 @@
       >
         <div slot="title">{event.name}</div>
 
-        <div slot="actions">
+        <div slot="actions" class="flex flex-wrap justify-end gap-1">
           {#if event.element != null}
             <div
               class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
@@ -199,13 +199,13 @@
 
         <div slot="subheading" class="text-black/50 text-xs">
           {#if prop.description}
-            <span class="whitespace-pre">
+            <span class="whitespace-pre-line">
               {prop.description}
             </span>
           {/if}
         </div>
 
-        <div slot="actions">
+        <div slot="actions" class="flex flex-wrap justify-end gap-1">
           {#if prop.isRequired}
             <div
               class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
