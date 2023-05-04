@@ -9,6 +9,7 @@
   import Button from '$lib/components/Button.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import NavMenu from './_NavMenu.svelte';
+  import QuickSearch from './QuickSearch.svelte';
 
   inject({ mode: dev ? 'development' : 'production' });
 </script>
@@ -22,6 +23,8 @@
 
   <AppBar title="svelte-ux">
     <div slot="actions">
+      <QuickSearch />
+
       <Tooltip title="View repository" placement="left" offset={2}>
         <Button
           icon={mdiGithub}
