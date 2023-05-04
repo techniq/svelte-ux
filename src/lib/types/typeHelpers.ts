@@ -97,3 +97,23 @@ export type SvelteAction<TOptions = any> = (
   node: HTMLElement,
   options?: TOptions
 ) => SvelteActionReturnType;
+
+export type TailwindColors =
+  | 'accent'
+  | 'red'
+  | 'orange'
+  | 'amber'
+  | 'yellow'
+  | 'lime'
+  | 'green'
+  | 'emerald'
+  | 'teal'
+  | 'cyan'
+  | 'sky'
+  | 'blue'
+  | 'indigo'
+  | 'violet'
+  | 'purple'
+  | 'fuchsia'
+  | 'pink'
+  | 'rose';

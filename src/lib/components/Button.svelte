@@ -6,6 +6,7 @@
   import { cls } from '../utils/styles';
   import multi from '../actions/multi';
   import type { Actions } from '../actions/multi';
+  import type { TailwindColors } from '$lib/types';
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
@@ -21,26 +22,7 @@
   export let variant: 'text' | 'outlined' | 'filled' | 'filledOutlined' | 'none' | undefined =
     undefined; // default in reactive groupContext below
   export let size: 'sm' | 'md' | 'lg' = 'md';
-  export let color:
-    | 'default'
-    | 'accent'
-    | 'red'
-    | 'orange'
-    | 'amber'
-    | 'yellow'
-    | 'lime'
-    | 'green'
-    | 'emerald'
-    | 'teal'
-    | 'cyan'
-    | 'sky'
-    | 'blue'
-    | 'indigo'
-    | 'violet'
-    | 'purple'
-    | 'fuchsia'
-    | 'pink'
-    | 'rose' = undefined; // default in reactive groupContext below
+  export let color: TailwindColors | 'default' | undefined = undefined; // default in reactive groupContext below
 
   export let classes: {
     root?: string;
