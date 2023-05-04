@@ -54,6 +54,7 @@ export { default as Paginate } from './Paginate.svelte';
 export { default as Pagination } from './Pagination.svelte';
 export { default as Popover } from './Popover.svelte';
 // export { default as Preview } from './Preview.svelte'; // TODO: Export after `SyntaxError: The requested module '/node_modules/prismjs/prism.js?v=fe9edf62' does not provide an export named 'default'` is fixed
+export { default as QuickSearch } from './QuickSearch.svelte';
 export { default as Radio } from './Radio.svelte';
 export { default as RangeSlider } from './RangeSlider.svelte';
 export { default as ScrollContainer } from './ScrollContainer.svelte';

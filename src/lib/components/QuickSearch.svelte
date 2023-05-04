@@ -1,8 +1,6 @@
 <script lang="ts">
   import { mdiMagnify } from '@mdi/js';
 
-  import { goto } from '$app/navigation';
-
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import SelectList from '$lib/components/SelectList.svelte';
@@ -45,10 +43,8 @@
       icon={mdiMagnify}
       placeholder="Search..."
       {options}
-      on:change={(e) => {
-        goto(e.detail.value);
-        open = false;
-      }}
+      on:change
+      on:change={(e) => (open = false)}
       classes={{ group: 'capitalize' }}
     />
   </div>

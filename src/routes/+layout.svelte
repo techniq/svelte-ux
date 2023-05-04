@@ -9,7 +9,8 @@
   import Button from '$lib/components/Button.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import NavMenu from './_NavMenu.svelte';
-  import QuickSearch from './QuickSearch.svelte';
+  import QuickSearch from '$lib/components/QuickSearch.svelte';
+  import { goto } from '$app/navigation';
 
   inject({ mode: dev ? 'development' : 'production' });
 
@@ -35,7 +36,7 @@
 
   <AppBar title="svelte-ux">
     <div slot="actions">
-      <QuickSearch options={quickSearchOptions} />
+      <QuickSearch options={quickSearchOptions} on:change={(e) => goto(e.detail.value)} />
 
       <Tooltip title="View repository" placement="left" offset={2}>
         <Button
