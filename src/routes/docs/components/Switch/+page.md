@@ -5,9 +5,12 @@
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import AppBar from '$lib/components/AppBar.svelte';
+  import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Switch from '$lib/components/Switch.svelte';
   import Preview from '$lib/components/Preview.svelte';
+
+  let checked = null;
 </script>
 
 # Examples
@@ -50,6 +53,13 @@
       <Icon path={mdiCheck} class="text-black/50" size=".8em" />
     </Switch>
   </div>
+</Preview>
+
+## checked={null}
+
+<Preview>
+  <Switch bind:checked />
+  <Button on:click={() => checked = null} size="sm">reset</Button>
 </Preview>
 
 ## Size

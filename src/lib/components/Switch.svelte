@@ -5,7 +5,7 @@
 
   export let id: string = uniqueId('switch_');
   export let value: any = undefined;
-  export let checked: boolean = false;
+  export let checked: boolean | null = false;
   export let disabled: boolean = false;
   export let size: 'sm' | 'md' | 'lg' = 'lg';
 
@@ -62,7 +62,8 @@
           pink: 'bg-pink-500 border-pink-500',
           rose: 'bg-rose-500 border-rose-500',
         }[color],
-      !checked && 'bg-gray-300 border-gray-300',
+      checked === false && 'bg-gray-300 border-gray-300',
+      checked === null && 'border-gray-300',
       disabled
         ? 'opacity-50'
         : 'cursor-pointer peer-focus-visible:ring-2 ring-accent-400 ring-offset-1',
@@ -75,6 +76,7 @@
       class={cls(
         'toggle w-1/2 aspect-square h-full rounded-full transition-all duration-200 bg-white grid items-center justify-center transform',
         checked && 'translate-x-full',
+        checked === null && 'border border-gray-300',
         classes.toggle
       )}
     >
