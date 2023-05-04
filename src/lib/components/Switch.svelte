@@ -35,7 +35,7 @@
     data-checked={checked}
     class={cls(
       'switch',
-      'border rounded-full grid align-items p-[3px] transition-shadow',
+      'border rounded-full grid align-items p-[2px] transition-shadow',
       {
         'w-6 h-4': size === 'sm',
         'w-8 h-5': size === 'md',
@@ -73,7 +73,7 @@
     <div
       data-checked={checked}
       class={cls(
-        'toggle w-1/2 h-full rounded-full transition-all duration-200 bg-white grid items-center justify-center transform',
+        'toggle w-1/2 aspect-square h-full rounded-full transition-all duration-200 bg-white grid items-center justify-center transform',
         checked && 'translate-x-full',
         classes.toggle
       )}
