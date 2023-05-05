@@ -39,9 +39,9 @@
   } else if (typeof data === 'string') {
     // Also conveniently accept `path`, `svg`, or `svgUrl` as `data`
     const dataStr = data.toLowerCase();
-    if (dataStr.startsWith('http')) {
+    if (dataStr.includes('http')) {
       svgUrl = data;
-    } else if (dataStr.startsWith('<svg')) {
+    } else if (dataStr.includes('<svg')) {
       svg = data;
     } else {
       path = data;
