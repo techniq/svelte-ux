@@ -50,7 +50,7 @@
 <Preview>
 	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']}>
 		<div slot="pagination" class="text-sm flex-1 text-center" let:pagination>
-			{pagination.from.toLocaleString()} - {pagination.to.toLocaleString()}
+			Page {pagination.page} of {pagination.totalPages}
 		</div>
 	</Pagination>
 </Preview>
