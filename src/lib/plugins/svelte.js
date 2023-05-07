@@ -14,21 +14,22 @@ export function codePreview() {
     markup({ content, filename }) {
       let code = content;
 
-      const previews = content.match(/<Preview[\s\S]*?<\/Preview>/g) ?? [];
+      // Process <Preview>...</Preview> to `<Preview code={...}>...</Preview>
+      const previewMatches = content.match(/<Preview[\s\S]*?<\/Preview>/g) ?? [];
 
-      previews.forEach((preview) => {
-        const previewCode = preview.match(/<Preview.*>([^]*)<\/Preview>/)[1];
+      previewMatches.forEach((previewMatch) => {
+        const previewContent = previewMatch.match(/<Preview.*>([^]*)<\/Preview>/)[1];
 
-        const formattedCode = format(previewCode, {
+        const formattedCode = format(previewContent, {
           parser: 'svelte',
           plugins: [typescriptPlugin, sveltePlugin],
         });
         const highlightedCode = Prism.highlight(formattedCode, Prism.languages.svelte, 'svelte');
 
-        if (!preview.includes('code=')) {
+        if (!previewMatch.includes('code=')) {
           code = code.replace(
-            preview,
-            preview.replace(
+            previewMatch,
+            previewMatch.replace(
               '<Preview',
               `<Preview code={\`${formattedCode}\`} highlightedCode={\`${highlightedCode}\`}`
             )
