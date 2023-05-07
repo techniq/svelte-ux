@@ -20,12 +20,18 @@
   onMount(() => {
     const el = document.querySelector(element);
 
-    headings = Array.from(el?.querySelectorAll('h1,h2,h3,h4,h5,h6') ?? [], (el) => ({
-      id: el.id,
-      name: el.innerHTML,
-      level: Number(el.tagName[1]),
-      element: el,
-    }));
+    headings = Array.from(el?.querySelectorAll('h1,h2,h3,h4,h5,h6') ?? [], (el) => {
+      if (!el.hasAttribute('id')) {
+        el.setAttribute('id', el.innerHTML.toLowerCase().replaceAll(' ', '-'));
+      }
+
+      return {
+        id: el.id,
+        name: el.innerHTML,
+        level: Number(el.tagName[1]),
+        element: el,
+      };
+    });
     nodes = buildTree(headings);
 
     el?.addEventListener('scroll', onScroll, { passive: true });
