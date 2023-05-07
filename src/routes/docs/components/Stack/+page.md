@@ -10,9 +10,9 @@
 	import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Stack horizontal>
@@ -25,7 +25,7 @@
   </Stack>
 </Preview>
 
-## Gap
+<h2>Gap</h2>
 
 <Preview>
   <Stack horizontal gap={8}>
@@ -38,7 +38,7 @@
   </Stack>
 </Preview>
 
-## Justify
+<h2>Justify</h2>
 
 <Preview>
   <Stack horizontal justify="start" gap={8}>
@@ -73,7 +73,7 @@
   </Stack>
 </Preview>
 
-## Template
+<h2>Template</h2>
 
 <Preview>
   <Stack horizontal template="auto 1fr auto" gap={8}>
@@ -85,7 +85,7 @@
 
 <SectionDivider>Vertical</SectionDivider>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Stack vertical>
@@ -98,7 +98,7 @@
   </Stack>
 </Preview>
 
-## Gap
+<h2>Gap</h2>
 
 <Preview>
   <Stack vertical gap={8}>
@@ -111,7 +111,7 @@
   </Stack>
 </Preview>
 
-## Justify
+<h2>Justify</h2>
 
 <Preview>
   <Stack vertical justify="start" gap={8}>
@@ -146,7 +146,7 @@
   </Stack>
 </Preview>
 
-## Template
+<h2>Template</h2>
 
 <Preview>
   <Stack vertical template="auto 1fr auto" gap={8} class="h-64">
@@ -158,7 +158,7 @@
 
 <SectionDivider>Stack</SectionDivider>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Stack stack inline>
@@ -171,7 +171,7 @@
   </Stack>
 </Preview>
 
-## Corner w/ Button
+<h2>Corner w/ Button</h2>
 
 <Preview>
   <Stack stack inline>
@@ -184,7 +184,7 @@
   </Stack>
 </Preview>
 
-## Corner /w Icon Button
+<h2>Corner /w Icon Button</h2>
 
 <Preview>
   <Stack stack inline>
@@ -197,7 +197,7 @@
   </Stack>
 </Preview>
 
-## Corner (multi) /w Icon Button
+<h2>Corner (multi) /w Icon Button</h2>
 
 <Preview>
   <Stack stack inline>
@@ -207,6 +207,6 @@
   </Stack>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

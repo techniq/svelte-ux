@@ -12,7 +12,7 @@
 	const mdiAccountUrl = 'https://api.iconify.design/mdi:account.svg'
 </script>
 
-# Features
+<h1>Features</h1>
 
 <div class="prose max-w-none">
 
@@ -23,9 +23,9 @@
 
 </div>
 
-# Examples
+<h1>Examples</h1>
 
-## Material Design icons
+<h2>Material Design icons</h2>
 
 <Preview>
 	<Icon path={mdiAccount} />
@@ -39,13 +39,13 @@
 	</Icon>
 </Preview>
 
-## Font Awesome icons
+<h2>Font Awesome icons</h2>
 
 <Preview>
 	<Icon data={faUser} />
 </Preview>
 
-## Sizes
+<h2>Sizes</h2>
 
 <Preview>
 	<Icon path={mdiAccount} size="8px" />
@@ -58,7 +58,7 @@
 	<Icon svgUrl="https://api.iconify.design/mdi:account.svg" size="64px" />
 </Preview>
 
-## Color
+<h2>Color</h2>
 
 <Preview>
 	<Icon path={mdiAccount} class="text-red-500" />
@@ -71,13 +71,13 @@
 	
 </Preview>
 
-## Multiple paths
+<h2>Multiple paths</h2>
 
 <Preview>
 	<Icon path={[mdiDecagramOutline, mdiCheck]} classes={{ path: ['', 'text-blue-500 scale-50 origin-center'] }} />
 </Preview>
 
-## Rotate / Scale / Flip
+<h2>Rotate / Scale / Flip</h2>
 
 <Preview>
 	<Icon path={mdiArrowRight} class="-rotate-45" />
@@ -87,7 +87,7 @@
 	<Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="-scale-y-100" />
 </Preview>
 
-## Animation
+<h2>Animation</h2>
 
 <Preview>
 	<Icon path={mdiLoading} class="animate-spin" />
@@ -96,7 +96,7 @@
 	<Icon path={mdiDownload} class="animate-bounce" />
 </Preview>
 
-## with Tooltip
+<h2>with Tooltip</h2>
 
 <Preview>
 	<Tooltip title="User">
@@ -117,6 +117,6 @@
 	</Tooltip>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

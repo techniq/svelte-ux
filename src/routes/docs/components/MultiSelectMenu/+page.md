@@ -31,9 +31,9 @@
   let value = [3];
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## basic
+<h2>basic</h2>
 
 <Preview>
   <span>
@@ -50,7 +50,7 @@
   </span>
 </Preview>
 
-## inlineSearch
+<h2>inlineSearch</h2>
 
 <Preview>
   <span>
@@ -68,7 +68,7 @@
   </span>
 </Preview>
 
-## many options
+<h2>many options</h2>
 
 <Preview>
   <span>
@@ -86,7 +86,7 @@
   </span>
 </Preview>
 
-## many options w/ inlineSearch
+<h2>many options w/ inlineSearch</h2>
 
 <Preview>
   <span>
@@ -105,7 +105,7 @@
   </span>
 </Preview>
 
-## many options w/ infiniteScroll
+<h2>many options w/ infiniteScroll</h2>
 
 <Preview>
   <span>
@@ -125,7 +125,7 @@
   </span>
 </Preview>
 
-## actions slot
+<h2>actions slot</h2>
 
 <Preview>
   <span>
@@ -148,6 +148,6 @@
   </span>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

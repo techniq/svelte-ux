@@ -15,9 +15,9 @@
   let controlledOpen = [false,true,false,false,false];
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Separate (no bind:group)
+<h2>Separate (no bind:group)</h2>
 
 <Preview>
   <Card>
@@ -31,7 +31,7 @@
   </Card>
 </Preview>
 
-## Accordian (with bind:group)
+<h2>Accordian (with bind:group)</h2>
 
 <Preview>
   <Card>
@@ -45,7 +45,7 @@
   </Card>
 </Preview>
 
-## Controlled
+<h2>Controlled</h2>
 
 <Preview>
   <Card>
@@ -64,7 +64,7 @@
   </div>
 </Preview>
 
-## Expansion Panel
+<h2>Expansion Panel</h2>
 
 <Preview>
   <Card class="divide-y">
@@ -79,9 +79,9 @@
   </Card>
 </Preview>
 
-## Expansion Panel
+<h2>Expansion Panel</h2>
 
-### with popout
+<h3>with popout</h3>
 
 <Preview>
   {#each Array(5) as _, i}
@@ -94,7 +94,7 @@
   {/each}
 </Preview>
 
-## Custom transition
+<h2>Custom transition</h2>
 
 <Preview>
   <Card>
@@ -108,7 +108,7 @@
   </Card>
 </Preview>
 
-## Transition params
+<h2>Transition params</h2>
 
 <Preview>
   <Card>
@@ -122,7 +122,7 @@
   </Card>
 </Preview>
 
-## Custom icon and transition
+<h2>Custom icon and transition</h2>
 
 <Preview>
   <Card>
@@ -136,7 +136,7 @@
   </Card>
 </Preview>
 
-## Flip icon transition
+<h2>Flip icon transition</h2>
 
 <Preview>
   <Card>
@@ -150,6 +150,6 @@
   </Card>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

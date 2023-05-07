@@ -22,15 +22,15 @@
   let selectedQuarter = { from: null, to: null };
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <MonthList />
 </Preview>
 
-## Horizontal Stack wrapper
+<h2>Horizontal Stack wrapper</h2>
 
 <Preview>
   <Stack horizontal>
@@ -38,7 +38,7 @@
   </Stack>
 </Preview>
 
-## Vertical Stack wrapper
+<h2>Vertical Stack wrapper</h2>
 
 <Preview>
   <Stack vertical>
@@ -46,7 +46,7 @@
   </Stack>
 </Preview>
 
-## Grid wrapper w/ auto columns (100px)
+<h2>Grid wrapper w/ auto columns (100px)</h2>
 
 <Preview>
   <Grid autoColumns="100px">
@@ -54,7 +54,7 @@
   </Grid>
 </Preview>
 
-## Grid wrapper w/ 3 columns
+<h2>Grid wrapper w/ 3 columns</h2>
 
 <Preview>
   <Grid columns={3}>
@@ -62,7 +62,7 @@
   </Grid>
 </Preview>
 
-## Format w/ as name
+<h2>Format w/ as name</h2>
 
 <Preview>
   <Grid autoColumns="100px">
@@ -70,19 +70,19 @@
   </Grid>
 </Preview>
 
-## Format w/ as number
+<h2>Format w/ as number</h2>
 
 <Preview>
   <MonthList format="M" />
 </Preview>
 
-## Disabled months w/ single
+<h2>Disabled months w/ single</h2>
 
 <Preview>
   <MonthList disabledMonths={new Date()} />
 </Preview>
 
-## Disabled months w/ array
+<h2>Disabled months w/ array</h2>
 
 <Preview>
   <MonthList
@@ -94,7 +94,7 @@
   />
 </Preview>
 
-## Disabled months w/ range
+<h2>Disabled months w/ range</h2>
 
 <Preview>
   <MonthList
@@ -105,19 +105,19 @@
   />
 </Preview>
 
-## Disabled months w/ function
+<h2>Disabled months w/ function</h2>
 
 <Preview>
   <MonthList disabledMonths={(date) => isAfter(date, new Date())} />
 </Preview>
 
-## Selected w/ single
+<h2>Selected w/ single</h2>
 
 <Preview>
   <MonthList selected={new Date()} />
 </Preview>
 
-## Selected w/ array
+<h2>Selected w/ array</h2>
 
 <Preview>
   <MonthList
@@ -129,7 +129,7 @@
   />
 </Preview>
 
-## Selected w/ range
+<h2>Selected w/ range</h2>
 
 <Preview>
   <MonthList
@@ -140,7 +140,7 @@
   />
 </Preview>
 
-## Selected state w/ single
+<h2>Selected state w/ single</h2>
 
 <Preview>
   <MonthList
@@ -151,7 +151,7 @@
   />
 </Preview>
 
-## Selected state w/ array
+<h2>Selected state w/ array</h2>
 
 <Preview>
   <MonthList
@@ -167,7 +167,7 @@
   />
 </Preview>
 
-## Selected state w/ range
+<h2>Selected state w/ range</h2>
 
 <Preview>
   <MonthList
@@ -197,7 +197,7 @@
   />
 </Preview>
 
-## Selected state w/ quarter
+<h2>Selected state w/ quarter</h2>
 
 <Preview>
   <Grid columns={6}>
@@ -214,6 +214,6 @@
   </Grid>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

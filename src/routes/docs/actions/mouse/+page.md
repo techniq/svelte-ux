@@ -19,15 +19,15 @@
 
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { longpress, movable } from 'svelte-ux';
 ```
 
-## longpress
+<h2>longpress</h2>
 
-### Dispatch event after element has been pressed for a duration of time
+<h3>Dispatch event after element has been pressed for a duration of time</h3>
 
 <Preview>
   <button class="border rounded p-2 text-sm hover:bg-black/5" use:longpress={1000} on:longpress={() => longpressed = !longpressed}>
@@ -38,9 +38,9 @@ import { longpress, movable } from 'svelte-ux';
   {/if}
 </Preview>
 
-## movable
+<h2>movable</h2>
 
-### Track mouse position changes from mouse down on node to mouse up
+<h3>Track mouse position changes from mouse down on node to mouse up</h3>
 
 <Preview>
   <div class="h-40">
@@ -66,7 +66,7 @@ import { longpress, movable } from 'svelte-ux';
   </div>
 </Preview>
 
-### With pixel steps / snapping
+<h3>With pixel steps / snapping</h3>
 
 <Preview>
   <div class="h-40">
@@ -92,7 +92,7 @@ import { longpress, movable } from 'svelte-ux';
   </div>
 </Preview>
 
-### With percentage of parent steps / snapping
+<h3>With percentage of parent steps / snapping</h3>
 
 <Preview>
   <div class="h-40">
@@ -118,7 +118,7 @@ import { longpress, movable } from 'svelte-ux';
   </div>
 </Preview>
 
-### x-axis only
+<h3>x-axis only</h3>
 
 <Preview>
   <div class="h-40">

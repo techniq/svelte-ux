@@ -8,32 +8,32 @@
   let value = 10;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## basic
+<h2>basic</h2>
 
 <Preview>
   <NumberStepper />
 </Preview>
 
-## bind:value
+<h2>bind:value</h2>
 
 <Preview>
   <NumberStepper bind:value /> {value}
 </Preview>
 
-## on:change
+<h2>on:change</h2>
 
 <Preview>
   <NumberStepper on:change={e => console.log(e.detail.value)} />
 </Preview>
 
-## dense
+<h2>dense</h2>
 
 <Preview>
   <NumberStepper dense />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

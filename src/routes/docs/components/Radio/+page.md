@@ -9,9 +9,9 @@
   let group = undefined;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Controlled via checked prop
+<h2>Controlled via checked prop</h2>
 
 <Preview>
   <Radio />
@@ -19,7 +19,7 @@
   <Radio checked={false} />
 </Preview>
 
-## Controlled via bind:group and value
+<h2>Controlled via bind:group and value</h2>
 
 <Preview>
   <Radio bind:group value={1} />
@@ -27,7 +27,7 @@
   <Radio bind:group value={3} />
 </Preview>
 
-## Label
+<h2>Label</h2>
 
 <Preview>
   <Radio bind:group value={1}>First</Radio>
@@ -35,7 +35,7 @@
   <Radio bind:group value={3}>Third</Radio>
 </Preview>
 
-## Long labels
+<h2>Long labels</h2>
 
 <Preview>
   <div class="border w-[150px] overflow-auto p-1">
@@ -45,7 +45,7 @@
   </div>
 </Preview>
 
-## Long labels (truncate)
+<h2>Long labels (truncate)</h2>
 
 <Preview>
   <div class="border w-[150px] overflow-auto p-1">
@@ -55,7 +55,7 @@
   </div>
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <Radio disabled />
@@ -63,7 +63,7 @@
   <Radio disabled>Label</Radio>
 </Preview>
 
-## Size
+<h2>Size</h2>
 
 <Preview>
   <div>
@@ -92,6 +92,6 @@
   </div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

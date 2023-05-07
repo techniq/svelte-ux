@@ -51,9 +51,9 @@
   $: sortedData = [...data].sort(sortFunc);
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <Table
@@ -87,7 +87,7 @@
   />
 </Preview>
 
-## Pagination
+<h2>Pagination</h2>
 
 <Preview>
   <Paginate items={data} perPage={5} let:pageItems let:pagination>
@@ -124,7 +124,7 @@
   </Paginate>
 </Preview>
 
-## Order
+<h2>Order</h2>
 
 <Preview>
   <Table
@@ -165,7 +165,7 @@
   />
 </Preview>
 
-## Data background
+<h2>Data background</h2>
 
 <Preview>
   <Button on:click={() => randomData = randomDataGen()} class="text-blue-500 border border-blue-500 bg-white mb-1">Randomize</Button>
@@ -220,6 +220,6 @@
   />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

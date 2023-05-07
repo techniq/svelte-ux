@@ -12,9 +12,9 @@
   import Stack from '$lib/components/Stack.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <Stack vertical class="w-[400px]">
@@ -28,7 +28,7 @@
   </Stack>
 </Preview>
 
-## Condensed
+<h2>Condensed</h2>
 
 <Preview>
   <Stack vertical class="w-[400px]">
@@ -41,7 +41,7 @@
   </Stack>
 </Preview>
 
-## Actions below
+<h2>Actions below</h2>
 
 <Preview>
   <Stack vertical class="w-[400px]">
@@ -62,7 +62,7 @@
   </Stack>
 </Preview>
 
-## Actions split
+<h2>Actions split</h2>
 
 <Preview>
   <Stack vertical class="w-[640px]">
@@ -81,6 +81,6 @@
   </Stack>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

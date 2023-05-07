@@ -22,9 +22,9 @@
   });
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
 	<Selection let:selected let:isSelected let:toggleSelected>
@@ -39,7 +39,7 @@
 	</Selection>
 </Preview>
 
-## Initial selection
+<h2>Initial selection</h2>
 
 <Preview>
 	<Selection initial={[1,2,3]} let:selected let:isSelected let:toggleSelected>
@@ -54,7 +54,7 @@
 	</Selection>
 </Preview>
 
-## Select all
+<h2>Select all</h2>
 
 <Preview>
 	<Selection all={items.map((item) => item.id)} let:isAnySelected let:isAllSelected let:toggleAll let:selected let:isSelected let:toggleSelected>
@@ -72,7 +72,7 @@
 	</Selection>
 </Preview>
 
-## Select all (paginated)
+<h2>Select all (paginated)</h2>
 
 <Preview>
 	<Paginate items={manyItems} perPage={5} let:pagination let:pageItems>
@@ -96,7 +96,7 @@
 	</Paginate>
 </Preview>
 
-## Single
+<h2>Single</h2>
 
 <Preview>
 	<Selection single let:selected let:toggleSelected>
@@ -111,6 +111,6 @@
 	</Selection>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -7,9 +7,9 @@
 	import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <div class="grid grid-flow-col">
@@ -22,7 +22,7 @@
   </div>
 </Preview>
 
-## Gap
+<h2>Gap</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -35,7 +35,7 @@
   </div>
 </Preview>
 
-## Justify
+<h2>Justify</h2>
 
 <Preview>
   <div class="grid grid-flow-col justify-start gap-2">
@@ -70,7 +70,7 @@
   </div>
 </Preview>
 
-## Template
+<h2>Template</h2>
 
 <Preview>
   <div class="grid grid-flow-col grid-cols-[auto,1fr,auto] gap-2">
@@ -82,7 +82,7 @@
 
 <SectionDivider>Vertical</SectionDivider>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <div class="grid">
@@ -95,7 +95,7 @@
   </div>
 </Preview>
 
-## Gap
+<h2>Gap</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -108,7 +108,7 @@
   </div>
 </Preview>
 
-## Justify
+<h2>Justify</h2>
 
 <Preview>
   <div class="grid justify-start gap-2">
@@ -143,7 +143,7 @@
   </div>
 </Preview>
 
-## Template
+<h2>Template</h2>
 
 <Preview>
   <div class="grid grid-rows-[auto,1fr,auto] gap-2 h-64">
@@ -155,7 +155,7 @@
 
 <SectionDivider>Stack</SectionDivider>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <div class="inline-grid place-items-center">
@@ -168,7 +168,7 @@
   </div>
 </Preview>
 
-## Corner w/ Button
+<h2>Corner w/ Button</h2>
 
 <Preview>
   <div class="inline-grid">
@@ -181,7 +181,7 @@
   </div>
 </Preview>
 
-## Corner /w Icon Button
+<h2>Corner /w Icon Button</h2>
 
 <Preview>
   <div class="inline-grid">
@@ -194,7 +194,7 @@
   </div>
 </Preview>
 
-## Corner (multi) /w Icon Button
+<h2>Corner (multi) /w Icon Button</h2>
 
 <Preview>
   <div class="inline-grid">

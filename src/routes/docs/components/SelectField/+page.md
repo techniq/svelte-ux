@@ -45,15 +45,15 @@
   let value = 3;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <SelectField {options} on:change={(e) => console.log('on:change', e.detail)} />
 </Preview>
 
-## bind:value
+<h2>bind:value</h2>
 
 <Preview>
   <SelectField {options} bind:value />
@@ -63,31 +63,31 @@
   <Button on:click={() => (value = 4)}>Pick 4</Button>
 </Preview>
 
-## clearSearchOnFocus
+<h2>clearSearchOnFocus</h2>
 
 <Preview>
   <SelectField {options} bind:value clearSearchOnFocus />
 </Preview>
 
-## clearable=false
+<h2>clearable=false</h2>
 
 <Preview>
   <SelectField {options} bind:value clearSearchOnFocus clearable={false} />
 </Preview>
 
-## Grouped options
+<h2>Grouped options</h2>
 
 <Preview>
   <SelectField options={optionsWithGroup} on:change={(e) => console.log('on:change', e.detail)} />
 </Preview>
 
-## Many options
+<h2>Many options</h2>
 
 <Preview>
   <SelectField options={manyOptions} />
 </Preview>
 
-## Update options
+<h2>Update options</h2>
 
 <Preview>
   <Toggle let:on let:toggle>
@@ -96,25 +96,25 @@
   </Toggle>
 </Preview>
 
-## Loading
+<h2>Loading</h2>
 
 <Preview>
   <SelectField {options} loading />
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <SelectField {options} disabled />
 </Preview>
 
-## Readonly
+<h2>Readonly</h2>
 
 <Preview>
   <SelectField {options} value={1} readonly />
 </Preview>
 
-## option Slot
+<h2>option Slot</h2>
 
 <Preview>
   <SelectField {options} on:change={(e) => console.log('on:change', e.detail)}>
@@ -136,7 +136,7 @@
   </SelectField>
 </Preview>
 
-## option with action
+<h2>option with action</h2>
 
 <Preview>
   <SelectField {options} on:change={(e) => console.log('on:change', e.detail)}>
@@ -175,7 +175,7 @@
   </SelectField>
 </Preview>
 
-## Prepend slot
+<h2>Prepend slot</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -198,7 +198,7 @@
   </Toggle>
 </Preview>
 
-## Append slot (actions)
+<h2>Append slot (actions)</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -225,25 +225,25 @@
   </Toggle>
 </Preview>
 
-## Icon
+<h2>Icon</h2>
 
 <Preview>
   <SelectField {options} icon={mdiMagnify} />
 </Preview>
 
-## Rounded
+<h2>Rounded</h2>
 
 <Preview>
   <SelectField {options} rounded />
 </Preview>
 
-## Rounded with icon
+<h2>Rounded with icon</h2>
 
 <Preview>
   <SelectField {options} icon={mdiMagnify} rounded />
 </Preview>
 
-## Rounded with append slot and icon
+<h2>Rounded with append slot and icon</h2>
 
 <Preview>
   <SelectField {options} icon={mdiMagnify} rounded>
@@ -264,7 +264,7 @@
   </SelectField>
 </Preview>
 
-## Search
+<h2>Search</h2>
 
 <Preview>
   <SelectField
@@ -278,7 +278,7 @@
   />
 </Preview>
 
-## Placement
+<h2>Placement</h2>
 
 <Preview>
   <SelectField
@@ -288,7 +288,7 @@
   />
 </Preview>
 
-## Custom selected class
+<h2>Custom selected class</h2>
 
 <Preview>
   <SelectField {options} bind:value clearSearchOnFocus classes={{ selected: 'bg-accent-500 text-white' }} />
@@ -316,6 +316,6 @@
 
 <div class="h-96" /> -->
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

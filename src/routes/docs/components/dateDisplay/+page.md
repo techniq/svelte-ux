@@ -5,21 +5,21 @@
   import { PeriodType } from '$lib/utils/date';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## No format
+<h2>No format</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'))}
 </Preview>
 
-## Custom format
+<h2>Custom format</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), { format: 'EEE, MMMM do' })}
 </Preview>
 
-## PeriodType Day w/ long (default)
+<h2>PeriodType Day w/ long (default)</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -27,7 +27,7 @@
   })}
 </Preview>
 
-### short
+<h3>short</h3>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -36,7 +36,7 @@
   })}
 </Preview>
 
-## PeriodType WeekSun w/ long (default)
+<h2>PeriodType WeekSun w/ long (default)</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -44,7 +44,7 @@
   })}
 </Preview>
 
-### short
+<h3>short</h3>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -53,7 +53,7 @@
   })}
 </Preview>
 
-## PeriodType BiWeek1Sun w/ long (default)
+<h2>PeriodType BiWeek1Sun w/ long (default)</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -61,7 +61,7 @@
   })}
 </Preview>
 
-### short
+<h3>short</h3>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -70,7 +70,7 @@
   })}
 </Preview>
 
-## PeriodType Month w/ long (default)
+<h2>PeriodType Month w/ long (default)</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -78,7 +78,7 @@
   })}
 </Preview>
 
-### short
+<h3>short</h3>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -87,7 +87,7 @@
   })}
 </Preview>
 
-## PeriodType Quarter w/ long (default)
+<h2>PeriodType Quarter w/ long (default)</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -95,7 +95,7 @@
   })}
 </Preview>
 
-### short
+<h3>short</h3>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -104,7 +104,7 @@
   })}
 </Preview>
 
-## PeriodType CalendarYear w/ long (default)
+<h2>PeriodType CalendarYear w/ long (default)</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -112,7 +112,7 @@
   })}
 </Preview>
 
-### short
+<h3>short</h3>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -121,7 +121,7 @@
   })}
 </Preview>
 
-## PeriodType FiscalYearOctober w/ long (default)
+<h2>PeriodType FiscalYearOctober w/ long (default)</h2>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {
@@ -129,7 +129,7 @@
   })}
 </Preview>
 
-### short
+<h3>short</h3>
 
 <Preview>
   {dateDisplay(new Date('1982-03-30T00:00:00'), {

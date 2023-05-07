@@ -7,9 +7,9 @@
 	import Toggle from '$lib/components/Toggle.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Loading overlay
+<h2>Loading overlay</h2>
 
 <Preview>
   <div class="relative">
@@ -23,7 +23,7 @@
   </div>
 </Preview>
 
-## Change color
+<h2>Change color</h2>
 
 <Preview>
   <div class="relative">
@@ -37,7 +37,7 @@
   </div>
 </Preview>
 
-## Prompt
+<h2>Prompt</h2>
 
 <Preview>
   <Toggle let:on={show} let:toggle>

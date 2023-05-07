@@ -6,16 +6,16 @@
 	import { sticky, stickyContext } from '$lib/actions/sticky';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { sticky, stickyContext } from 'svelte-ux';
 ```
 
-## sticky
+<h2>sticky</h2>
 
 > TODO
 
-## stickyContext
+<h2>stickyContext</h2>
 
 > TODO

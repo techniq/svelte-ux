@@ -10,11 +10,11 @@
   let open = false;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Inferred anchor
+<h2>Inferred anchor</h2>
 
-### Uses the parent element of `Popover` if `anchorEl` not provided
+<h3>Uses the parent element of `Popover` if `anchorEl` not provided</h3>
 
 <Preview>
   <div class="inline-block">
@@ -25,7 +25,7 @@
   </div>
 </Preview>
 
-## Placement
+<h2>Placement</h2>
 
 <Preview>
   <div class="mx-20">
@@ -154,6 +154,6 @@
   </div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

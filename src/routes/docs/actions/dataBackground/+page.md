@@ -27,7 +27,7 @@
 		: [Math.min(...values), Math.max(...values)]
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { dataBackground } from 'svelte-ux';
@@ -76,7 +76,7 @@ import { dataBackground } from 'svelte-ux';
 	Tweened duration: <input type="number" bind:value={duration} style="width: 100px" />
 </div>
 
-## dataBackground
+<h2>dataBackground</h2>
 
 <Preview>
 	<table class="w-40 border">

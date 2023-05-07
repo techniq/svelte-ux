@@ -12,16 +12,16 @@
   let group = [2];
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Checkbox />
   <Checkbox checked />
 </Preview>
 
-## bind:checked
+<h2>bind:checked</h2>
 
 <Preview>
   <Checkbox bind:checked />
@@ -31,7 +31,7 @@
   </div>
 </Preview>
 
-## bind:group
+<h2>bind:group</h2>
 
 <Preview>
   <Checkbox bind:group value={1}>One</Checkbox>
@@ -45,14 +45,14 @@
   </div>
 </Preview>
 
-## Label
+<h2>Label</h2>
 
 <Preview>
   <Checkbox>Label</Checkbox>
   <Checkbox checked>Label</Checkbox>
 </Preview>
 
-## Long labels
+<h2>Long labels</h2>
 
 <Preview>
   <div class="border w-[150px] overflow-auto p-1">
@@ -62,7 +62,7 @@
   </div>
 </Preview>
 
-## Long labels (truncate)
+<h2>Long labels (truncate)</h2>
 
 <Preview>
   <div class="border w-[150px] overflow-auto p-1">
@@ -72,7 +72,7 @@
   </div>
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <Checkbox disabled />
@@ -81,14 +81,14 @@
   <Checkbox disabled checked>Label</Checkbox>
 </Preview>
 
-## Indeterminate
+<h2>Indeterminate</h2>
 
 <Preview>
   <Checkbox indeterminate />
   <Checkbox indeterminate checked />
 </Preview>
 
-## Size
+<h2>Size</h2>
 
 <Preview>
   <div>
@@ -119,7 +119,7 @@
 
 <SectionDivider>Circle</SectionDivider>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Checkbox circle />
@@ -127,7 +127,7 @@
   <Checkbox circle />
 </Preview>
 
-## Label
+<h2>Label</h2>
 
 <Preview>
   <Checkbox circle>First</Checkbox>
@@ -135,21 +135,21 @@
   <Checkbox circle>Third</Checkbox>
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <Checkbox circle disabled />
   <Checkbox circle disabled checked />
 </Preview>
 
-## Indeterminate
+<h2>Indeterminate</h2>
 
 <Preview>
   <Checkbox circle indeterminate />
   <Checkbox circle indeterminate checked />
 </Preview>
 
-## Size
+<h2>Size</h2>
 
 <Preview>
   <div>
@@ -178,6 +178,6 @@
   </div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

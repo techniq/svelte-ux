@@ -20,9 +20,9 @@
   import ToggleOption from '$lib/components/ToggleOption.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Text (display only)
+<h2>Text (display only)</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -31,7 +31,7 @@
   </div>
 </Preview>
 
-## Switch
+<h2>Switch</h2>
 
 <Preview>
   <Field label="Is Active" let:id>
@@ -88,7 +88,7 @@
   </div>
 </div>
 
-## Button
+<h2>Button</h2>
 
 <Preview>
   <Field label="Action" let:id>
@@ -96,7 +96,7 @@
   </Field>
 </Preview>
 
-## Date input
+<h2>Date input</h2>
 
 <Preview>
   <Field label="Date of Birth" let:id>
@@ -104,7 +104,7 @@
   </Field>
 </Preview>
 
-## input type="number"
+<h2>input type="number"</h2>
 
 <Preview>
   <Field label="Number" let:id>
@@ -112,7 +112,7 @@
   </Field>
 </Preview>
 
-## Input
+<h2>Input</h2>
 
 <Preview>
   <Field label="Phone number" let:id>
@@ -120,7 +120,7 @@
   </Field>
 </Preview>
 
-## Select
+<h2>Select</h2>
 
 <Preview>
   <Field label="Position" let:id>
@@ -136,6 +136,6 @@
   </Field>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

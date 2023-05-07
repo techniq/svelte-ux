@@ -6,7 +6,7 @@
   // const { loading, data, error } = graphStore(/*...*/)
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { graphStore } from 'svelte-ux';

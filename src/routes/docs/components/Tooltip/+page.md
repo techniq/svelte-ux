@@ -9,9 +9,9 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Button
+<h2>Button</h2>
 
 <Preview>
   <Tooltip title="Hello">
@@ -19,7 +19,7 @@
   </Tooltip>
 </Preview>
 
-## Icon button
+<h2>Icon button</h2>
 
 <Preview>
   <Tooltip title="Click to remove">
@@ -27,7 +27,7 @@
   </Tooltip>
 </Preview>
 
-## Slot w/ custom markup
+<h2>Slot w/ custom markup</h2>
 
 <Preview>
   <Tooltip>
@@ -47,7 +47,7 @@
   </Tooltip>
 </Preview>
 
-## Placement
+<h2>Placement</h2>
 
 <Preview>
   <Tooltip title="Hello" placement="left">
@@ -64,7 +64,7 @@
   </Tooltip>
 </Preview>
 
-## Offset
+<h2>Offset</h2>
 
 <Preview>
   <Tooltip title="Hello">
@@ -81,7 +81,7 @@
   </Tooltip>
 </Preview>
 
-## Overlap
+<h2>Overlap</h2>
 
 <Preview>
   <Tooltip title="Hello" offset={-8}>
@@ -89,7 +89,7 @@
   </Tooltip>
 </Preview>
 
-## Underline & cursor
+<h2>Underline & cursor</h2>
 
 <Preview>
   <Tooltip title="Hello" underline cursor>
@@ -99,6 +99,6 @@
 
 <!-- TODO: Slot with custom transition -->
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -4,7 +4,7 @@
 	import localStore from '$lib/stores/localStore';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { localStore } from 'svelte-ux';

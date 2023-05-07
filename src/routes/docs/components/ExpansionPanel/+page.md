@@ -10,9 +10,9 @@
   import Preview from '$lib/components/Preview.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Simple
+<h2>Simple</h2>
 
 <Preview>
   {#each Array(5) as _, i}
@@ -27,7 +27,7 @@
   {/each}
 </Preview>
 
-## Actions
+<h2>Actions</h2>
 
 <Preview>
   {#each Array(5) as _, i}
@@ -46,7 +46,7 @@
   {/each}
 </Preview>
 
-## Disabled items
+<h2>Disabled items</h2>
 
 <Preview>
   {#each Array(5) as _, i}
@@ -61,7 +61,7 @@
   {/each}
 </Preview>
 
-## ListItem trigger
+<h2>ListItem trigger</h2>
 
 <Preview>
   {#each Array(5) as _, i}
@@ -84,9 +84,9 @@
   {/each}
 </Preview>
 
-## Mix ExpansionPanel with ListItem
+<h2>Mix ExpansionPanel with ListItem</h2>
 
-### first and last items
+<h3>first and last items</h3>
 
 <Preview>
   <ExpansionPanel>
@@ -129,9 +129,9 @@
   </ExpansionPanel>
 </Preview>
 
-## Mix ExpansionPanel with ListItem
+<h2>Mix ExpansionPanel with ListItem</h2>
 
-### middle item
+<h3>middle item</h3>
 
 <Preview>
   <ListItem
@@ -164,6 +164,6 @@
   />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

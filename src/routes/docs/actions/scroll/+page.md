@@ -13,15 +13,15 @@
   let scrolledIndex = 0;
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
 ```
 
-## scrollIntoView
+<h2>scrollIntoView</h2>
 
-### Smootly scroll element into center of view
+<h3>Smootly scroll element into center of view</h3>
 
 <Preview>
   <input type="range" bind:value={scrolledIndex} min={0} max={itemCount - 1} /> {scrolledIndex}
@@ -37,9 +37,9 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
   </div>
 </Preview>
 
-## scrollShadow
+<h2>scrollShadow</h2>
 
-### Add shadows to indicate scrolling available
+<h3>Add shadows to indicate scrolling available</h3>
 
 <Preview>
   <div class="h-40 border rounded" use:scrollShadow>
@@ -49,7 +49,7 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
   </div>
 </Preview>
 
-### with flip'd children
+<h3>with flip'd children</h3>
 
 <Preview>
   <div class="h-40 border rounded" use:scrollShadow>
@@ -59,7 +59,7 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
   </div>
 </Preview>
 
-### Horizontal scroll
+<h3>Horizontal scroll</h3>
 
 <Preview>
   <div class="h-20 border rounded" use:scrollShadow>
@@ -71,7 +71,7 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
   </div>
 </Preview>
 
-### White shadow on bottom (fade content)
+<h3>White shadow on bottom (fade content)</h3>
 
 <Preview>
   <div class="h-40 border rounded" use:scrollShadow={{ bottom: { color: 'rgb(255 255 255 / 1)', offset: 30, blur: 30, scrollRatio: 0 }}}>
@@ -81,7 +81,7 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
   </div>
 </Preview>
 
-### with truncation
+<h3>with truncation</h3>
 
 <Preview>
   <div class="w-[200px] h-40 border rounded" use:scrollShadow>
@@ -91,9 +91,9 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
   </div>
 </Preview>
 
-## scrollFade
+<h2>scrollFade</h2>
 
-### Add shadows to indicate scrolling available
+<h3>Add shadows to indicate scrolling available</h3>
 
 <Preview>
   <div class="max-h-40 border rounded" use:scrollFade>
@@ -103,7 +103,7 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
   </div>
 </Preview>
 
-### with flip'd children
+<h3>with flip'd children</h3>
 
 <Preview>
   <div class="max-h-40 border rounded" use:scrollFade>
@@ -113,7 +113,7 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
   </div>
 </Preview>
 
-### Horizontal scroll
+<h3>Horizontal scroll</h3>
 
 <Preview>
   <div class="h-20 border rounded" use:scrollFade>

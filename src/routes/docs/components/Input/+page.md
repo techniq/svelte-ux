@@ -8,39 +8,39 @@
   import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Date
+<h2>Date</h2>
 
 <Preview>
 	<Input mask="mm/dd/yyyy" replace="dmyh" />
 </Preview>
 
-## Date time
+<h2>Date time</h2>
 
 <Preview>
 	<Input mask="mm/dd/yyyy hh:mm" replace="dmyh" />
 </Preview>
 
-## Telephone
+<h2>Telephone</h2>
 
 <Preview>
 	<Input mask="+1 (___) ___-____" replace="_" />
 </Preview>
 
-## Credit Card
+<h2>Credit Card</h2>
 
 <Preview>
 	<Input mask=".... .... .... ...." replace="." accept="\d" />
 </Preview>
 
-## MAC Address
+<h2>MAC Address</h2>
 
 <Preview>
 	<Input mask="XX:XX:XX:XX:XX:XX" replace="X" accept="[\dA-H]" />
 </Preview>
 
-## Alphanumeric
+<h2>Alphanumeric</h2>
 
 <Preview>
 	<Input mask="__-__-__-____" replace="_" accept="\w" />
@@ -48,9 +48,9 @@
 
 <SectionDivider>Props</SectionDivider>
 
-## Value
+<h2>Value</h2>
 
-### Formatted
+<h3>Formatted</h3>
 
 <Preview>
 	<Input mask="mm/dd/yyyy" replace="dmyh" value="03/30/1982" />
@@ -58,33 +58,33 @@
 	<Input mask="+1 (___) ___-____" replace="_" value="(234) 567-8901" />
 </Preview>
 
-## Value
+<h2>Value</h2>
 
-### Unformatted
+<h3>Unformatted</h3>
 
 <Preview>
 	<Input mask="mm/dd/yyyy" replace="dmyh" value="03301982" />
 	<Input mask="+1 (___) ___-____" replace="_" value="2345678901" />
 </Preview>
 
-## Value
+<h2>Value</h2>
 
-### Different (but compatible) format
+<h3>Different (but compatible) format</h3>
 
 <Preview>
 	<Input mask="+1 (___) ___-____" replace="_" value="234-567-8901" />
 </Preview>
 
-## Value
+<h2>Value</h2>
 
-### Partial
+<h3>Partial</h3>
 
 <Preview>
 	<Input mask="mm/dd/yyyy" replace="dmyh" value="03/30" />
 	<Input mask="+1 (___) ___-____" replace="_" value="234" />
 </Preview>
 
-## Change event
+<h2>Change event</h2>
 
 <Preview>
   <Input
@@ -94,7 +94,7 @@
   />
 </Preview>
 
-## With Field
+<h2>With Field</h2>
 
 <Preview>
   <Field label="Birth Date" let:id>
@@ -102,12 +102,12 @@
   </Field>
 </Preview>
 
-## Placeholder
+<h2>Placeholder</h2>
 
 <Preview>
 	<Input placeholder="Please enter your birthday" mask="mm/dd/yyyy" replace="dmyh" />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

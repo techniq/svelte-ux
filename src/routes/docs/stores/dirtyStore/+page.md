@@ -11,7 +11,7 @@
   const isDirty = dirtyStore(value)
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```svelte
 <script>
@@ -23,7 +23,7 @@
 </script>
 ```
 
-## Example
+<h2>Example</h2>
 
 <Preview>
   <TextField bind:value={$value} />

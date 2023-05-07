@@ -24,29 +24,29 @@
   let selectedMultiMonth = { from: null, to: null };
 </script>
 
-# Examples
+<h1>Examples</h1>
 
 <!-- TODO: Add playground -->
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Month />
 </Preview>
 
-## Show Outside Days
+<h2>Show Outside Days</h2>
 
 <Preview>
 <Month showOutsideDays />
 </Preview>
 
-## Disabled days w/ single
+<h2>Disabled days w/ single</h2>
 
 <Preview>
 <Month disabledDays={new Date()} />
 </Preview>
 
-## Disabled days w/ array
+<h2>Disabled days w/ array</h2>
 
 <Preview>
   <Month
@@ -58,7 +58,7 @@
   />
 </Preview>
 
-## Disabled days w/ range
+<h2>Disabled days w/ range</h2>
 
 <Preview>
   <Month
@@ -69,19 +69,19 @@
   />
 </Preview>
 
-## Disabled days w/ function
+<h2>Disabled days w/ function</h2>
 
 <Preview>
   <Month disabledDays={(date) => isAfter(date, new Date())} />
 </Preview>
 
-## Selected w/ single
+<h2>Selected w/ single</h2>
 
 <Preview>
   <Month selected={new Date()} />
 </Preview>
 
-## Selected w/ array
+<h2>Selected w/ array</h2>
 
 <Preview>
   <Month
@@ -89,7 +89,7 @@
   />
 </Preview>
 
-## Selected w/ range
+<h2>Selected w/ range</h2>
 
 <Preview>
   <Month
@@ -97,7 +97,7 @@
   />
 </Preview>
 
-## Selected state w/ single
+<h2>Selected state w/ single</h2>
 
 <Preview>
   <Month
@@ -108,7 +108,7 @@
   />
 </Preview>
 
-## Selected state w/ array
+<h2>Selected state w/ array</h2>
 
 <Preview>
   <Month
@@ -124,7 +124,7 @@
   />
 </Preview>
 
-## Selected state w/ range
+<h2>Selected state w/ range</h2>
 
 <Preview>
   <Month
@@ -154,7 +154,7 @@
   />
 </Preview>
 
-## Selected state w/ week
+<h2>Selected state w/ week</h2>
 
 <Preview>
   <Month
@@ -166,7 +166,7 @@
   />
 </Preview>
 
-## Selected state w/ multi-month
+<h2>Selected state w/ multi-month</h2>
 
 <Preview>
   <Stack horizontal gap={40}>
@@ -224,6 +224,6 @@
   </Stack>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

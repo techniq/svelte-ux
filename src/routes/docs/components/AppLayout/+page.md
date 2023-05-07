@@ -6,10 +6,10 @@
 	import Preview from '$lib/components/Preview.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
 > TODO
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

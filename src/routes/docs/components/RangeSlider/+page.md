@@ -10,9 +10,9 @@
   let value = [25, 75];
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Description
+<h2>Description</h2>
 
 <div class="prose">
 
@@ -22,46 +22,46 @@
 
 </div>
 
-## basic
+<h2>basic</h2>
 
 <Preview>
   <RangeSlider />
 </Preview>
 
-## disabled
+<h2>disabled</h2>
 
 <Preview>
   <RangeSlider disabled />
 </Preview>
 
-## bind:value
+<h2>bind:value</h2>
 
 <Preview>
   <RangeSlider bind:value />
 </Preview>
 
-## min/max
+<h2>min/max</h2>
 
 <Preview>
   <RangeSlider min={50} max={100} />
 </Preview>
 
-## step
+<h2>step</h2>
 
-### small
+<h3>small</h3>
 
 <Preview>
   <RangeSlider max={1} step={0.01} />
 </Preview>
 
-## step
+<h2>step</h2>
 
-### large
+<h3>large</h3>
 
 <Preview>
   <RangeSlider max={100} step={10} />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

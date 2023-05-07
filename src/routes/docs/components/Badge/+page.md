@@ -14,11 +14,11 @@
   let value = 1;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
 <NumberStepper bind:value />
 
-## Button
+<h2>Button</h2>
 
 <Preview>
   <Badge {value}>
@@ -26,7 +26,7 @@
   </Badge>
 </Preview>
 
-## Button w/ small
+<h2>Button w/ small</h2>
 
 <Preview>
   <Badge {value} small>
@@ -34,7 +34,7 @@
   </Badge>
 </Preview>
 
-## Icon Button
+<h2>Icon Button</h2>
 
 <Preview>
   <Badge {value} circle>
@@ -42,7 +42,7 @@
   </Badge>
 </Preview>
 
-## Icon Button w/ small
+<h2>Icon Button w/ small</h2>
 
 <Preview>
   <Badge {value} circle small>
@@ -50,7 +50,7 @@
   </Badge>
 </Preview>
 
-## Dot
+<h2>Dot</h2>
 
 <Preview>
   <Badge {value} dot>
@@ -58,7 +58,7 @@
   </Badge>
 </Preview>
 
-## Dot w/ small
+<h2>Dot w/ small</h2>
 
 <Preview>
   <Badge {value} dot small>
@@ -66,7 +66,7 @@
   </Badge>
 </Preview>
 
-## Style
+<h2>Style</h2>
 
 <Preview>
   <Badge {value} circle class="bg-green-500">
@@ -74,7 +74,7 @@
   </Badge>
 </Preview>
 
-## Value slot
+<h2>Value slot</h2>
 
 <Preview>
   <Badge {value} circle>
@@ -98,7 +98,7 @@
 </Stack>
 </Preview> -->
 
-## Placement
+<h2>Placement</h2>
 
 <div class="grid grid-cols-5 gap-4">
   <div>
@@ -282,6 +282,6 @@
   </div>
 </div>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

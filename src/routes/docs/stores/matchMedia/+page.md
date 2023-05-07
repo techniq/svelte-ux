@@ -4,7 +4,7 @@
 	import matchMedia from '$lib/stores/matchMedia';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { matchMedia } from 'svelte-ux';

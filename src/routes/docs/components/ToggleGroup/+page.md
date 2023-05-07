@@ -21,16 +21,16 @@
   let optionStyle = 'contained';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Style
+<h2>Style</h2>
 
 <div class="bg-white p-2 rounded border border-gray-300 flex gap-4">
   <Radio value="contained" bind:group={optionStyle}>Contained</Radio>
   <Radio value="underlined" bind:group={optionStyle}>Underlined</Radio>
 </div>
 
-## Panels
+<h2>Panels</h2>
 
 <Preview>
   <ToggleGroup
@@ -48,7 +48,7 @@
   </ToggleGroup>
 </Preview>
 
-## Vertical layout
+<h2>Vertical layout</h2>
 
 <Preview>
   <ToggleGroup
@@ -62,7 +62,7 @@
   </ToggleGroup>
 </Preview>
 
-## Full width
+<h2>Full width</h2>
 
 <Preview>
   <ToggleGroup
@@ -76,7 +76,7 @@
   </ToggleGroup>
 </Preview>
 
-## Full width w/ vertical
+<h2>Full width w/ vertical</h2>
 
 <Preview>
   <ToggleGroup
@@ -91,7 +91,7 @@
   </ToggleGroup>
 </Preview>
 
-## Grid layout
+<h2>Grid layout</h2>
 
 <Preview>
   <ToggleGroup
@@ -111,7 +111,7 @@
   </ToggleGroup>
 </Preview>
 
-## Circle
+<h2>Circle</h2>
 
 <Preview>
   <ToggleGroup
@@ -125,7 +125,7 @@
   </ToggleGroup>
 </Preview>
 
-## Controlled
+<h2>Controlled</h2>
 
 <Preview>
   <ToggleGroup
@@ -147,7 +147,7 @@
   <Button on:click={() => (selectedStr = null)}>Clear</Button>
 </div>
 
-## Controlled with null option
+<h2>Controlled with null option</h2>
 
 <Preview>
   <ToggleGroup
@@ -170,7 +170,7 @@
   <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
 </div>
 
-## Controlled with undefined option
+<h2>Controlled with undefined option</h2>
 
 <Preview>
   <ToggleGroup
@@ -193,7 +193,7 @@
   <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
 </div>
 
-## Controlled (object value)
+<h2>Controlled (object value)</h2>
 
 <Preview>
   <ToggleGroup
@@ -215,7 +215,7 @@
   <Button on:click={() => (selectedObj = null)}>Clear</Button>
 </div>
 
-## Overflow scrollIntoView
+<h2>Overflow scrollIntoView</h2>
 
 <Preview>
   <ToggleGroup
@@ -252,10 +252,10 @@
   <Button on:click={() => (selected = 10)}>10</Button>
 </div>
 
-# ToggleGroup API
+<h1>ToggleGroup API</h1>
 
 <ApiDocs api={toggleGroupApi} />
 
-# ToggleOption API
+<h1>ToggleOption API</h1>
 
 <ApiDocs api={toggleOptionApi} />

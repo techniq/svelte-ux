@@ -10,7 +10,7 @@
 	let border = '1px solid #aaa';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { cssVars } from 'svelte-ux';

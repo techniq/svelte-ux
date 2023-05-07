@@ -23,9 +23,9 @@
   }
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <Form
@@ -57,7 +57,7 @@
   </Form>
 </Preview>
 
-## Form submit button
+<h2>Form submit button</h2>
 
 <Preview>
   <Form
@@ -78,7 +78,7 @@
   </Form>
 </Preview>
 
-## zod schema
+<h2>zod schema</h2>
 
 <Preview>
   <Form
@@ -116,6 +116,6 @@
   </Form>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

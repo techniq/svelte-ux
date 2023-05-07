@@ -14,9 +14,9 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -38,7 +38,7 @@
   </div>
 </Preview>
 
-## Icons
+<h2>Icons</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -60,7 +60,7 @@
   </div>
 </Preview>
 
-## Icons (partially rounded)
+<h2>Icons (partially rounded)</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -109,7 +109,7 @@
   </div>
 </Preview>
 
-## Selected
+<h2>Selected</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -161,7 +161,7 @@
   </div>
 </Preview>
 
-## with Tooltip
+<h2>with Tooltip</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -201,7 +201,7 @@
   </div>
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -253,7 +253,7 @@
   </div>
 </Preview>
 
-## with Menu
+<h2>with Menu</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -317,6 +317,6 @@
   </div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

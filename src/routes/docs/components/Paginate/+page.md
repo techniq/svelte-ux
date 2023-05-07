@@ -10,7 +10,7 @@
 	const items = Array(100).fill().map((x, i) => ({ name: `Item: ${i + 1}`}))
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```svelte
 <script lang="ts">
@@ -24,9 +24,9 @@
 </Paginate>
 ```
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
 	<Paginate {items} let:pagination let:pageItems >
@@ -39,7 +39,7 @@
 	</Paginate>
 </Preview>
 
-## Per page
+<h2>Per page</h2>
 
 <Preview>
 	<Paginate {items} perPage={5} let:pagination let:pageItems >
@@ -52,6 +52,6 @@
 	</Paginate>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

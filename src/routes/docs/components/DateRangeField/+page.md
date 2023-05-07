@@ -19,50 +19,50 @@
   };
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <DateRangeField />
 </Preview>
 
-## Controlled
+<h2>Controlled</h2>
 
 <Preview>
   <DateRangeField bind:value />
 </Preview>
 
-## Clearable
+<h2>Clearable</h2>
 
 <Preview>
   <DateRangeField bind:value clearable />
 </Preview>
 
-## Icon
+<h2>Icon</h2>
 
 <Preview>
   <DateRangeField bind:value  icon={mdiCalendarRange} />
 </Preview>
 
-## Stepper
+<h2>Stepper</h2>
 
 <Preview>
   <DateRangeField bind:value stepper />
 </Preview>
 
-## Stepper w/ icon
+<h2>Stepper w/ icon</h2>
 
 <Preview>
   <DateRangeField bind:value stepper icon={mdiCalendarRange} />
 </Preview>
 
-## Stepper w/ rounded & filled & centered
+<h2>Stepper w/ rounded & filled & centered</h2>
 
 <Preview>
   <DateRangeField  bind:value stepper rounded filled center />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

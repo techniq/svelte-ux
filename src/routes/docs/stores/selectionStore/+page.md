@@ -17,9 +17,9 @@
   const selection4 = selectionStore({ single: true });
 </script>
 
-# Usage
+<h1>Usage</h1>
 
-## Basic
+<h2>Basic</h2>
 
 ```js
 const selection = selectionStore();
@@ -36,7 +36,7 @@ const selection = selectionStore();
   selected: {JSON.stringify($selection.selected)}
 </Preview>
 
-## Initial selection
+<h2>Initial selection</h2>
 
 ```js
 const selection2 = selectionStore({ initial: [1, 2, 3] });
@@ -53,7 +53,7 @@ const selection2 = selectionStore({ initial: [1, 2, 3] });
   selected: {JSON.stringify($selection2.selected)}
 </Preview>
 
-## Select all
+<h2>Select all</h2>
 
 ```js
 const selection3 = selectionStore({ all: items.map((item) => item.id) });
@@ -73,7 +73,7 @@ const selection3 = selectionStore({ all: items.map((item) => item.id) });
   selected: {JSON.stringify($selection3.selected)}
 </Preview>
 
-## Single
+<h2>Single</h2>
 
 ```js
 const selection4 = selectionStore({ single: true });

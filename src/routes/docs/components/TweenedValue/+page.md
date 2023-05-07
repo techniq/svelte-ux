@@ -16,30 +16,30 @@
   }
 </script>
 
-# Examples
+<h1>Examples</h1>
 
 <Button variant="filled" color="blue" on:click={update}>Update value</Button>
 <Button on:click={() => value = null}>Set null</Button>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <TweenedValue {value} />
 </Preview>
 
-## Formatted
+<h2>Formatted</h2>
 
 <Preview>
   <TweenedValue {value} format="currency" />
 </Preview>
 
-## Options
+<h2>Options</h2>
 
 <Preview>
   <TweenedValue {value} format="decimal" options={{ duration: 1000, easing: easings.expoOut }} />
 </Preview>
 
-## Style
+<h2>Style</h2>
 
 <Preview>
   <TweenedValue {value} let:value>
@@ -47,12 +47,12 @@
   </TweenedValue>
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <TweenedValue {value} disabled />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -6,47 +6,47 @@
 	import { autoFocus, autoHeight, blurOnEscape, selectOnFocus, debounceEvent } from '$lib/actions/input';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { autoFocus, autoHeight, blurOnEscape, selectOnFocus, debounceEvent } from 'svelte-ux';
 ```
 
-## autoFocus
+<h2>autoFocus</h2>
 
-### Auto focus node when rendered
+<h3>Auto focus node when rendered</h3>
 
 <Preview>
   <input value="Example text" use:autoFocus class="border">
 </Preview>
 
-## selectOnFocus
+<h2>selectOnFocus</h2>
 
-### Selects the text inside a text node when the node is focused
+<h3>Selects the text inside a text node when the node is focused</h3>
 
 <Preview>
   <input value="Example text" use:selectOnFocus class="border">
 </Preview>
 
-## blurOnEscape
+<h2>blurOnEscape</h2>
 
-### Blurs the node when Escape is pressed
+<h3>Blurs the node when Escape is pressed</h3>
 
 <Preview>
   <input value="Example text" use:blurOnEscape class="border">
 </Preview>
 
-## autoHeight
+<h2>autoHeight</h2>
 
-### Automatically resize textarea based on content
+<h3>Automatically resize textarea based on content</h3>
 
 <Preview>
   <textarea value="Example text" use:autoHeight class="border" />
 </Preview>
 
-## debounceEvent
+<h2>debounceEvent</h2>
 
-### Debounce any event (input, change, etc)
+<h3>Debounce any event (input, change, etc)</h3>
 
 <Preview>
   <input value="Example text" use:debounceEvent={{ type: 'input', listener: (e) => { console.log(e.target.value) }, timeout: 1000 }} class="border">

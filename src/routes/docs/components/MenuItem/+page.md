@@ -8,6 +8,6 @@
   import MenuItem from '$lib/components/MenuItem.svelte';
 </script>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

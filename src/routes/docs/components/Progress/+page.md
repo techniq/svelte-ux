@@ -16,9 +16,9 @@
   let label = false;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Demo
+<h2>Demo</h2>
 
 <div class="border border-black/20 rounded bg-white ">
   <Stack horizontal template="1fr auto" items="center" justifyItems="center">
@@ -68,13 +68,13 @@
   </Stack>
 </div>
 
-## Default
+<h2>Default</h2>
 
   <Preview>
     <CircularProgress />
   </Preview>
 
-## Value
+<h2>Value</h2>
 
   <Preview>
     <Stack horizontal justify="start" gap={32}>
@@ -87,7 +87,7 @@
     </Stack>
   </Preview>
 
-## Value w/ with track
+<h2>Value w/ with track</h2>
 
 <Preview>
 <Stack horizontal justify="start" gap={32}>
@@ -100,7 +100,7 @@
 </Stack>
 </Preview>
 
-## Value w/ with label
+<h2>Value w/ with label</h2>
 
 <Preview>
 <Stack horizontal justify="start" gap={32}>
@@ -125,7 +125,7 @@
 </Stack>
 </Preview>
 
-## Value w/ with label and track
+<h2>Value w/ with label and track</h2>
 
 <Preview>
   <Stack horizontal justify="start" gap={32}>
@@ -150,7 +150,7 @@
   </Stack>
 </Preview>
 
-## Size
+<h2>Size</h2>
 
 <Preview>
   <Stack horizontal justify="start" gap={32}>
@@ -160,7 +160,7 @@
   </Stack>
 </Preview>
 
-## Width
+<h2>Width</h2>
 
 <Preview>
   <Stack horizontal justify="start" gap={32}>
@@ -171,7 +171,7 @@
   </Stack>
 </Preview>
 
-## Color
+<h2>Color</h2>
 
 <Preview>
   <Stack horizontal justify="start" gap={32}>
@@ -183,7 +183,7 @@
   </Stack>
 </Preview>
 
-## Track Color
+<h2>Track Color</h2>
 
 <Preview>
   <Stack horizontal justify="start" gap={32}>
@@ -210,6 +210,6 @@
   </Stack>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

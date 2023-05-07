@@ -11,21 +11,21 @@
 	let overflowItems = 1;
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { remainingViewportHeight, remainingViewportWidth, overflow } from 'svelte-ux';
 ```
 
-## remainingViewportHeight
+<h2>remainingViewportHeight</h2>
 
 > TODO
 
-## remainingViewportWidth
+<h2>remainingViewportWidth</h2>
 
 > TODO
 
-## overflow
+<h2>overflow</h2>
 
 <Button on:click={() => overflowItems += 1}>+ item</Button>
 <Button on:click={() => overflowItems -= overflowItems > 1 ? 1 : 0}>- item</Button>

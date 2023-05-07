@@ -14,9 +14,9 @@
   import Toggle from '$lib/components/Toggle.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -33,7 +33,7 @@
   </Toggle>
 </Preview>
 
-## Explicit close
+<h2>Explicit close</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -52,7 +52,7 @@
   </Toggle>
 </Preview>
 
-## with Dialog and Drawer
+<h2>with Dialog and Drawer</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle={toggleMenu} let:toggleOff={closeMenu}>
@@ -118,7 +118,7 @@
   </Toggle>
 </Preview>
 
-## matchWidth
+<h2>matchWidth</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -134,7 +134,7 @@
   </Toggle>
 </Preview>
 
-## autoPlacement
+<h2>autoPlacement</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -150,9 +150,9 @@
   </Toggle>
 </Preview>
 
-## disableTransition
+<h2>disableTransition</h2>
 
-### Useful when menu will exceed window and need repositioned.
+<h3>Useful when menu will exceed window and need repositioned.</h3>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -168,7 +168,7 @@
   </Toggle>
 </Preview>
 
-## transition params
+<h2>transition params</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -184,6 +184,6 @@
   </Toggle>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

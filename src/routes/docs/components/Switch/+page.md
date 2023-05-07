@@ -13,9 +13,9 @@
   let checked = null;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -24,7 +24,7 @@
   </div>
 </Preview>
 
-## Icons
+<h2>Icons</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -43,7 +43,7 @@
   </div>
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -55,14 +55,14 @@
   </div>
 </Preview>
 
-## checked={null}
+<h2>checked={null}</h2>
 
 <Preview>
   <Switch bind:checked />
   <Button on:click={() => checked = null} size="sm">reset</Button>
 </Preview>
 
-## Size
+<h2>Size</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -72,7 +72,7 @@
   </div>
 </Preview>
 
-## Color
+<h2>Color</h2>
 
 <Preview>
   <div class="inline-grid grid-cols-[auto,auto] gap-2">
@@ -85,7 +85,7 @@
   </div>
 </Preview>
 
-## Custom classes
+<h2>Custom classes</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -94,6 +94,6 @@
   </div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -4,7 +4,7 @@
 	import paginationStore from '$lib/stores/paginationStore';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { paginationStore } from 'svelte-ux';

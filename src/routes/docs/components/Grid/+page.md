@@ -6,9 +6,9 @@
 	import Preview from '$lib/components/Preview.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Grid>
@@ -21,7 +21,7 @@
   </Grid>
 </Preview>
 
-## Gap
+<h2>Gap</h2>
 
 <Preview>
   <Grid gap={8}>
@@ -34,7 +34,7 @@
   </Grid>
 </Preview>
 
-## Columns
+<h2>Columns</h2>
 
 <Preview>
   <Grid columns={4}>
@@ -47,7 +47,7 @@
   </Grid>
 </Preview>
 
-## Columns with gap
+<h2>Columns with gap</h2>
 
 <Preview>
   <Grid columns={4} gap={8}>
@@ -60,7 +60,7 @@
   </Grid>
 </Preview>
 
-## Auto Columns
+<h2>Auto Columns</h2>
 
 <Preview>
   <Grid autoColumns="160px" gap={8}>
@@ -73,7 +73,7 @@
   </Grid>
 </Preview>
 
-## Template
+<h2>Template</h2>
 
 <Preview>
   <Grid template="auto 1fr auto" gap={8}>
@@ -83,6 +83,6 @@
   </Grid>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

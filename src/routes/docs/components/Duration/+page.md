@@ -7,9 +7,9 @@
 	import { getDuration, humanizeDuration, DurationUnits } from '$lib/utils/duration';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Duration
+<h2>Duration</h2>
 
 <Preview>
 	<div class="grid">
@@ -22,23 +22,23 @@
 	</div>
 </Preview>
 
-## Fixed range
+<h2>Fixed range</h2>
 
 <Preview>
 	<Duration start={subDays(new Date(), 3)} end={subDays(new Date(), 1)} />
 </Preview>
 
-## Explicit duration
+<h2>Explicit duration</h2>
 
 <Preview>
 	<Duration duration={{ milliseconds: 54321 }} />
 </Preview>
 
-# Utils
+<h1>Utils</h1>
 
-## humanizeDuration
+<h2>humanizeDuration</h2>
 
-### date
+<h3>date</h3>
 
 <Preview>
 	<div>{humanizeDuration({ start: subDays(new Date(), 3) })}</div>
@@ -46,7 +46,7 @@
 	<div>{humanizeDuration({ start: subMonths(new Date(), 3), variant: 'long' })}</div>
 </Preview>
 
-### string
+<h3>string</h3>
 
 <Preview>
 	<div>{humanizeDuration({ start: '1982-03-30' })}</div>
@@ -55,7 +55,7 @@
 	<div>{humanizeDuration({ start: '1982-03-30', minUnits: DurationUnits.Hour })}</div>
 </Preview>
 
-### duration
+<h3>duration</h3>
 
 <Preview>
 	<div>{humanizeDuration({ duration: { milliseconds: 300 } })}</div>
@@ -63,6 +63,6 @@
 	<div>{humanizeDuration({ duration: { days: 5, hours: 26 } })}</div>
 </Preview>
 
-## getDuration
+<h2>getDuration</h2>
 
 <Preview>{JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}</Preview>

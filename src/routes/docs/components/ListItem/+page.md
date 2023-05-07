@@ -21,33 +21,33 @@
 	]
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Title only
+<h2>Title only</h2>
 
 <Preview>
 	<ListItem title="Title" />
 </Preview>
 
-## Title with subheading
+<h2>Title with subheading</h2>
 
 <Preview>
 	<ListItem title="Title" subheading="Subheading" />
 </Preview>
 
-## Icon
+<h2>Icon</h2>
 
 <Preview>
 	<ListItem title="Title" icon={mdiAccount} />
 </Preview>
 
-## Icon with subheading
+<h2>Icon with subheading</h2>
 
 <Preview>
 	<ListItem title="Title" subheading="Subheading" icon={mdiAccount} />
 </Preview>
 
-## Icon with classes
+<h2>Icon with classes</h2>
 
 <Preview>
   <ListItem
@@ -58,7 +58,7 @@
   />
 </Preview>
 
-## Actions
+<h2>Actions</h2>
 
 <Preview>
   <ListItem title="Title">
@@ -68,7 +68,7 @@
   </ListItem>
 </Preview>
 
-## Multiple
+<h2>Multiple</h2>
 
 <Preview>
 	<ListItem title="Title" />
@@ -77,7 +77,7 @@
 	<ListItem title="Title" />
 </Preview>
 
-## Loading
+<h2>Loading</h2>
 
 <Preview>
 	<ListItem title="Title" subheading="Subheading" />
@@ -86,9 +86,9 @@
 	<ListItem title="Title" subheading="Subheading" />
 </Preview>
 
-## Radio Group
+<h2>Radio Group</h2>
 
-### example 1
+<h3>example 1</h3>
 
 <Preview>
 	<div class="rounded border">
@@ -111,9 +111,9 @@
 	</div>
 </Preview>
 
-## Radio Group
+<h2>Radio Group</h2>
 
-### example 2
+<h3>example 2</h3>
 
 <Preview>
 	<div class="grid gap-4">
@@ -136,7 +136,7 @@
 	</div>
 </Preview>
 
-### example 3
+<h3>example 3</h3>
 
 <Preview>
 	<div class="grid gap-4 bg-gray-100 p-4">
@@ -164,6 +164,6 @@
 	</div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

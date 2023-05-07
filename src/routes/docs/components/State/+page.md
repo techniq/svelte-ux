@@ -3,7 +3,7 @@
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
 ```svelte
 <State initial={selected} let:value let:set>
@@ -15,6 +15,6 @@
 </Toggle>
 ```
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

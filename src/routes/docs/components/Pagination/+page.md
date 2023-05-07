@@ -12,7 +12,7 @@
 	pagination.setTotal(100);
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```svelte
 <script lang="ts">
@@ -25,27 +25,27 @@
 <Pagination {pagination} />
 ```
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
 	<Pagination {pagination} />
 </Preview>
 
-## First/Last page
+<h2>First/Last page</h2>
 
 <Preview>
 	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']} />
 </Preview>
 
-## Center pagination
+<h2>Center pagination</h2>
 
 <Preview>
 	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']} classes={{ pagination: 'flex-1 text-center' }} />
 </Preview>
 
-## Pagination slot
+<h2>Pagination slot</h2>
 
 <Preview>
 	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']}>
@@ -55,13 +55,13 @@
 	</Pagination>
 </Preview>
 
-## Table pagination
+<h2>Table pagination</h2>
 
 <Preview>
 	<Pagination {pagination} show={['perPage', 'pagination', 'prevPage', 'nextPage']} classes={{ perPage: 'flex-1 text-right', pagination: 'px-8' }} />
 </Preview>
 
-## Table pagination with actions slot
+<h2>Table pagination with actions slot</h2>
 
 <Preview>
 	<Pagination {pagination} show={['actions', 'perPage', 'pagination', 'prevPage', 'nextPage']} classes={{ perPage: 'flex-1 text-right', pagination: 'px-8' }}>
@@ -71,6 +71,6 @@
 	</Pagination>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

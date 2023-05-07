@@ -6,7 +6,7 @@
 	import portal from '$lib/actions/portal';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { portal } from 'svelte-ux';

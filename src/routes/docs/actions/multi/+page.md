@@ -6,7 +6,7 @@
 	import multi from '$lib/actions/multi';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { multi } from 'svelte-ux';

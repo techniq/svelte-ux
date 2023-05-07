@@ -52,9 +52,9 @@
     - [ ] Add Playground
  -->
 
-# Examples
+<h1>Examples</h1>
 
-## Label
+<h2>Label</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -63,7 +63,7 @@
   </div>
 </Preview>
 
-## Placeholder only
+<h2>Placeholder only</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -72,7 +72,7 @@
   </div>
 </Preview>
 
-## Label with placeholder
+<h2>Label with placeholder</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -84,7 +84,7 @@
   </div>
 </Preview>
 
-## Always shrink label
+<h2>Always shrink label</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -93,7 +93,7 @@
   </div>
 </Preview>
 
-## Always shrink label with placeholder
+<h2>Always shrink label with placeholder</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -110,7 +110,7 @@
   </div>
 </Preview>
 
-## Dense
+<h2>Dense</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -127,7 +127,7 @@
   </div>
 </Preview>
 
-## Error
+<h2>Error</h2>
 
 <Preview>
   <TextField
@@ -137,25 +137,25 @@
   />
 </Preview>
 
-## Hint
+<h2>Hint</h2>
 
 <Preview>
   <TextField label="Password" hint="At least 8 characters" />
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <TextField label="Name" disabled />
 </Preview>
 
-## on:change event
+<h2>on:change event</h2>
 
 <Preview>
   <TextField label="Name" on:change={e => console.log(e.detail)} />
 </Preview>
 
-## debounceChange
+<h2>debounceChange</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -164,7 +164,7 @@
   </div>
 </Preview>
 
-## Actions
+<h2>Actions</h2>
 
 <Preview>
   <TextField
@@ -181,9 +181,9 @@
 
 <SectionDivider>Type</SectionDivider>
 
-## Examples
+<h2>Examples</h2>
 
-### Sets input type and add prefix/suffix when appropriate
+<h3>Sets input type and add prefix/suffix when appropriate</h3>
 
 <Preview>
   <div class="grid grid-cols-3 gap-2">
@@ -236,7 +236,7 @@
   </div>
 </div>
 
-## Append
+<h2>Append</h2>
 
 <Preview>
   <TextField label="Name">
@@ -246,7 +246,7 @@
   </TextField>
 </Preview>
 
-## Prefix
+<h2>Prefix</h2>
 
 <Preview>
   <TextField label="Amount">
@@ -282,25 +282,25 @@
   </div>
 </div>
 
-## Icon with convienent prepend
+<h2>Icon with convienent prepend</h2>
 
 <Preview>
   <TextField label="Search" icon={mdiMagnify} />
 </Preview>
 
-## Icon with convienent append
+<h2>Icon with convienent append</h2>
 
 <Preview>
   <TextField label="Search" iconRight={mdiMagnify} />
 </Preview>
 
-## Clearable with convienent append
+<h2>Clearable with convienent append</h2>
 
 <Preview>
   <TextField label="Search" clearable />
 </Preview>
 
-## Clearable with additional append
+<h2>Clearable with additional append</h2>
 
 <Preview>
   <TextField label="Search" clearable>
@@ -310,19 +310,19 @@
   </TextField>
 </Preview>
 
-## Operators with number
+<h2>Operators with number</h2>
 
 <Preview>
   <TextField label="Search" operators={numberOperators} bind:value />
 </Preview>
 
-## Operators with string
+<h2>Operators with string</h2>
 
 <Preview>
   <TextField label="Search" operators={stringOperators} />
 </Preview>
 
-## All adornments
+<h2>All adornments</h2>
 
 <Preview>
   <TextField label="Transfer amount">
@@ -339,7 +339,7 @@
   </TextField>
 </Preview>
 
-## Multi Prepend/Append
+<h2>Multi Prepend/Append</h2>
 
 <Preview>
   <TextField label="Date Range">
@@ -356,19 +356,19 @@
 
 <SectionDivider>Multiline</SectionDivider>
 
-## Multiline
+<h2>Multiline</h2>
 
 <Preview>
   <TextField label="Comment" multiline />
 </Preview>
 
-## Multiline with placeholder
+<h2>Multiline with placeholder</h2>
 
 <Preview>
   <TextField label="Comment" multiline placeholder="Please leave a comment" />
 </Preview>
 
-## Multiline with autoHeight
+<h2>Multiline with autoHeight</h2>
 
 <Preview>
   <TextField
@@ -380,19 +380,19 @@
 
 <SectionDivider>Mask & Accept</SectionDivider>
 
-## Date
+<h2>Date</h2>
 
 <Preview>
   <TextField mask="mm/dd/yyyy" replace="dmyh" />
 </Preview>
 
-## Telephone
+<h2>Telephone</h2>
 
 <Preview>
 	<TextField mask="+1 (___) ___-____" replace="_" />
 </Preview>
 
-## `accept` without `mask`
+<h2>`accept` without `mask`</h2>
 
 <Preview>
   <TextField label="Zip code" accept={/[0-9]{0,5}/} />
@@ -402,25 +402,25 @@
 
 <SectionDivider>Style</SectionDivider>
 
-## Rounded
+<h2>Rounded</h2>
 
 <Preview>
   <TextField label="Search" rounded />
 </Preview>
 
-## Rounded with icon
+<h2>Rounded with icon</h2>
 
 <Preview>
   <TextField label="Search" rounded icon={mdiMagnify} />
 </Preview>
 
-## Filled
+<h2>Filled</h2>
 
 <Preview>
   <TextField label="Search" filled />
 </Preview>
 
-## Rounded and Filled
+<h2>Rounded and Filled</h2>
 
 <Preview>
   <TextField label="Search" rounded filled />
@@ -428,7 +428,7 @@
 
 <SectionDivider>Examples</SectionDivider>
 
-## Address bar
+<h2>Address bar</h2>
 
 <Preview>
   <TextField icon={mdiInformationOutline}>
@@ -439,7 +439,7 @@
   </TextField>
 </Preview>
 
-## Number stepper
+<h2>Number stepper</h2>
 
 <Preview>
   <TextField
@@ -459,7 +459,7 @@
 
 <!-- TODO: Determine why some classes are being overridden (Svelte class:rounded-full interfering?) -->
 <!--
-## Base with Custom classes
+<h2>Base with Custom classes</h2>
 <Preview>
   <TextField
     label="Search"
@@ -469,6 +469,6 @@
 </Preview>
 -->
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -14,15 +14,15 @@
   // $: console.log({ selected });
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <DateRange />
 </Preview>
 
-## PeriodType options
+<h2>PeriodType options</h2>
 
 <Preview>
   <DateRange
@@ -35,12 +35,12 @@
   />
 </Preview>
 
-## Controlled
+<h2>Controlled</h2>
 
 <Preview>
   <DateRange bind:selected />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

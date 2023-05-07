@@ -6,17 +6,17 @@
 	import { resize, intersection, mutate } from '$lib/actions/observer';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { resize, intersection, mutate } from 'svelte-ux';
 ```
 
-## resize
+<h2>resize</h2>
 
 > TODO
 
-## intersection
+<h2>intersection</h2>
 
 ```svelte
 <div
@@ -34,6 +34,6 @@ See also:
 - InfiniteScroll
 - Lazy
 
-## mutate
+<h2>mutate</h2>
 
 > TODO

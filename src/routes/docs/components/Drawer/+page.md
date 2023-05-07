@@ -16,9 +16,9 @@
   let bottomOpen = false;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Location
+<h2>Location</h2>
 
 <Preview>
   <Drawer bind:open={leftOpen} class="w-[400px]">
@@ -63,7 +63,7 @@
   <Button on:click={() => (bottomOpen = true)}>Bottom</Button>
 </Preview>
 
-## Persistent
+<h2>Persistent</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
@@ -80,7 +80,7 @@
   </Toggle>
 </Preview>
 
-## Loading
+<h2>Loading</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
@@ -97,7 +97,7 @@
   </Toggle>
 </Preview>
 
-## With autofocus TextField
+<h2>With autofocus TextField</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
@@ -116,7 +116,7 @@
   </Toggle>
 </Preview>
 
-## Dialog within Drawer
+<h2>Dialog within Drawer</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
@@ -145,7 +145,7 @@
   </Toggle>
 </Preview>
 
-## MenuField within Drawer
+<h2>MenuField within Drawer</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
@@ -168,6 +168,6 @@
   </Toggle>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

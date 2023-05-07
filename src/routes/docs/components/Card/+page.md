@@ -12,39 +12,39 @@
   import Preview from '$lib/components/Preview.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Card>Contents</Card>
 </Preview>
 
-## Title
+<h2>Title</h2>
 
 <Preview>
   <Card title="Title" />
 </Preview>
 
-## Title with subheading
+<h2>Title with subheading</h2>
 
 <Preview>
   <Card title="Title" subheading="Subheading" />
 </Preview>
 
-## Title as array
+<h2>Title as array</h2>
 
 <Preview>
   <Card title={['One', 'Two', 'Three']} />
 </Preview>
 
-## Title with subheading as array
+<h2>Title with subheading as array</h2>
 
 <Preview>
   <Card title="Title" subheading={['One', 'Two', 'Three']} />
 </Preview>
 
-## Header with Avatar
+<h2>Header with Avatar</h2>
 
 <Preview>
   <Card>
@@ -56,7 +56,7 @@
   </Card>
 </Preview>
 
-## Header with Actions
+<h2>Header with Actions</h2>
 
 <Preview>
   <Card>
@@ -68,7 +68,7 @@
   </Card>
 </Preview>
 
-## Header with Avatar & Actions
+<h2>Header with Avatar & Actions</h2>
 
 <Preview>
   <Card>
@@ -83,7 +83,7 @@
   </Card>
 </Preview>
 
-## Contents slot
+<h2>Contents slot</h2>
 
 <Preview>
   <Card title="Title" subheading="Subheading">
@@ -91,7 +91,7 @@
   </Card>
 </Preview>
 
-## Actions slot
+<h2>Actions slot</h2>
 
 <Preview>
   <Card title="Title" subheading="Subheading">
@@ -102,7 +102,7 @@
   </Card>
 </Preview>
 
-## Actions slot alignment (always bottom)
+<h2>Actions slot alignment (always bottom)</h2>
 
 <Preview>
   <div class="grid grid-cols-3 gap-3">
@@ -125,12 +125,12 @@
   </div>
 </Preview>
 
-## Loading
+<h2>Loading</h2>
 
 <Preview>
   <Card title="Title" loading />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

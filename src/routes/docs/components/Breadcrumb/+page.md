@@ -19,31 +19,31 @@
   ];
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <Breadcrumb {items} />
 </Preview>
 
-## With gap
+<h2>With gap</h2>
 
 <Preview>
   <Breadcrumb {items} class="gap-1" />
 </Preview>
 
-## Custom divider
+<h2>Custom divider</h2>
 
-### with prop
+<h3>with prop</h3>
 
 <Preview>
   <Breadcrumb {items} divider="\" class="gap-2" />
 </Preview>
 
-## Custom divider
+<h2>Custom divider</h2>
 
-### with slot Icon
+<h3>with slot Icon</h3>
 
 <Preview>
   <Breadcrumb {items} class="gap-2">
@@ -51,9 +51,9 @@
   </Breadcrumb>
 </Preview>
 
-## Custom item
+<h2>Custom item</h2>
 
-### with markup
+<h3>with markup</h3>
 
 <Preview>
   <Breadcrumb items={labeledItems} class="gap-2">
@@ -64,9 +64,9 @@
   </Breadcrumb>
 </Preview>
 
-## Custom item
+<h2>Custom item</h2>
 
-### with Button
+<h3>with Button</h3>
 
 <Preview>
   <Breadcrumb items={labeledItems}>
@@ -79,7 +79,7 @@
   </Breadcrumb>
 </Preview>
 
-## Custom item and divider
+<h2>Custom item and divider</h2>
 
 <Preview>
   <Breadcrumb items={labeledItems} class="gap-2">
@@ -91,21 +91,21 @@
   </Breadcrumb>
 </Preview>
 
-## Many items
+<h2>Many items</h2>
 
 <Preview>
   <Breadcrumb items={Array.from({ length: 20 }).map((_, i) => 'Item ' + (++i))} />
 </Preview>
 
-## Null items (not displayed)
+<h2>Null items (not displayed)</h2>
 
 <Preview>
   <Breadcrumb items={Array.from({ length: 10 }).map((_, i) => i % 2 ? null : 'Item ' + (++i))} />
 </Preview>
 
-## Color
+<h2>Color</h2>
 
-### inherit
+<h3>inherit</h3>
 
 <Preview>
   <div class="bg-black text-white p-2 rounded">
@@ -113,15 +113,15 @@
   </div>
 </Preview>
 
-## Color
+<h2>Color</h2>
 
-### text class
+<h3>text class</h3>
 
 <Preview>
   <Breadcrumb {items} class="text-blue-500" />
 </Preview>
 
-## Truncate long text
+<h2>Truncate long text</h2>
 
 <Preview>
   <div class="w-[300px] border">
@@ -131,6 +131,6 @@
   </div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

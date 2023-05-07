@@ -11,9 +11,9 @@
 	const text = 'This is really long text used to demonstrate overflow.'
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
 	<Button variant="outlined" on:click={() => overflowItems += 1}>+ item</Button>
@@ -29,7 +29,7 @@
 	</Overflow>
 </Preview>
 
-## Conditional tooltip
+<h2>Conditional tooltip</h2>
 
 <Preview>
 	<Overflow class="w-1/2 truncate border" let:overflowX>
@@ -37,6 +37,6 @@
 	</Overflow>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

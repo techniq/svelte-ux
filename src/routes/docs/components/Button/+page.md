@@ -10,27 +10,27 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <Button>Click me</Button>
 </Preview>
 
-## Link
+<h2>Link</h2>
 
 <Preview>
   <Button href="https://www.google.com" target="_blank">Open Google</Button>
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <Button disabled>Click me</Button>
 </Preview>
 
-## Loading
+<h2>Loading</h2>
 
 <Preview>
   <Button loading >
@@ -47,7 +47,7 @@
   </Button>
 </Preview>
 
-## Variants
+<h2>Variants</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -78,13 +78,13 @@
   </div>
 </Preview>
 
-## `none` variant
+<h2>`none` variant</h2>
 
 <Preview>
   <Button variant="none">Click me</Button>
 </Preview>
 
-## Size
+<h2>Size</h2>
 
 <Preview>
   {#each ['sm', 'md', 'lg'] as size}
@@ -118,7 +118,7 @@
   {/each}
 </Preview>
 
-## Rounded
+<h2>Rounded</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -149,7 +149,7 @@
   </div>
 </Preview>
 
-## Uppercase
+<h2>Uppercase</h2>
 
 <Preview>
   <Button class="uppercase">text</Button>
@@ -158,7 +158,7 @@
   <Button class="uppercase" variant="filledOutlined" color="accent">filledOutlined</Button>
 </Preview>
 
-## Tooltip
+<h2>Tooltip</h2>
 
 <Preview>
   <Tooltip title="Really, do it!" placement="right" offset={2}>
@@ -166,7 +166,7 @@
   </Tooltip>
 </Preview>
 
-## Tooltip (disabled)
+<h2>Tooltip (disabled)</h2>
 
 <Preview>
   <Tooltip title="Really, do it!" placement="right" offset={2}>
@@ -176,13 +176,13 @@
 
 <SectionDivider class="mt-12">Icon</SectionDivider>
 
-## Icon-only button
+<h2>Icon-only button</h2>
 
 <Preview>
   <Button icon={mdiMenu} />
 </Preview>
 
-## Icon-only size
+<h2>Icon-only size</h2>
 
 <Preview>
   <Button icon={mdiMenu} size="sm" />
@@ -190,31 +190,31 @@
   <Button icon={mdiMenu} size="lg" />
 </Preview>
 
-## Icon-only button with custom padding
+<h2>Icon-only button with custom padding</h2>
 
 <Preview>
   <Button icon={mdiMenu} class="p-2" />
 </Preview>
 
-## Icon with text
+<h2>Icon with text</h2>
 
 <Preview>
   <Button icon={mdiTrashCan} color="red">Delete</Button>
 </Preview>
 
-## Icon via url
+<h2>Icon via url</h2>
 
 <Preview>
   <Button icon="https://api.iconify.design/mdi:account.svg" class="p-2" />
 </Preview>
 
-## Icon via SVG string
+<h2>Icon via SVG string</h2>
 
 <Preview>
   <Button icon={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'} class="p-2" />
 </Preview>
 
-## Icon-only button variants and color
+<h2>Icon-only button variants and color</h2>
 
 <Preview>
   <div>
@@ -235,6 +235,6 @@
   </div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

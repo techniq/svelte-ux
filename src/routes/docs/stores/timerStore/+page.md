@@ -12,7 +12,7 @@
   const tickTimer = timerStore({ onTick: () => ticks += 1 })
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 const timer = timerStore();
@@ -22,7 +22,7 @@ const timer = timerStore();
 const timer = timerStore({ delay: number, onTick: () => {...}, disabled: boolean })
 ```
 
-## Example
+<h2>Example</h2>
 
 ```svelte
 <script>
@@ -35,7 +35,7 @@ const timer = timerStore({ delay: number, onTick: () => {...}, disabled: boolean
   <Switch checked={dateTimer.isRunning()} on:change={e => e.detail ? dateTimer.start() : dateTimer.stop() } />
 </Preview>
 
-## Tick count
+<h2>Tick count</h2>
 
 ```svelte
 <script>

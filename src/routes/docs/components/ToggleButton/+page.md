@@ -18,9 +18,9 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Dialog
+<h2>Dialog</h2>
 
 <Preview>
   <ToggleButton let:on={open} let:toggle>
@@ -36,7 +36,7 @@
   </ToggleButton>
 </Preview>
 
-## Drawer
+<h2>Drawer</h2>
 
 <Preview>
   <ToggleButton let:on={open} let:toggle let:toggleOff>
@@ -53,7 +53,7 @@
   </ToggleButton>
 </Preview>
 
-## slide transition
+<h2>slide transition</h2>
 
 <Preview>
   <ToggleButton size="sm" transition={slide} let:on={showDetails}>
@@ -66,7 +66,7 @@
   </ToggleButton>
 </Preview>
 
-## slide transition (button after)
+<h2>slide transition (button after)</h2>
 
 <Preview>
   <ToggleButton size="sm" transition={slide} let:on={showDetails} buttonPlacement="after">
@@ -79,7 +79,7 @@
   </ToggleButton>
 </Preview>
 
-## on by default
+<h2>on by default</h2>
 
 <Preview>
   <ToggleButton on size="sm" transition={slide} let:on={showDetails}>
@@ -92,7 +92,7 @@
   </ToggleButton>
 </Preview>
 
-## ButtonGroup
+<h2>ButtonGroup</h2>
 
 <Preview>
   <ButtonGroup variant="outlined">
@@ -107,6 +107,6 @@
   </ButtonGroup>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

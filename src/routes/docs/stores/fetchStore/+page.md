@@ -6,7 +6,7 @@
   // const { loading, data, error } = fetchStore(/*...*/)
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { fetchStore } from 'svelte-ux';

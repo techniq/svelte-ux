@@ -9,9 +9,9 @@
 	const items = Array(100).fill().map((x, i) => ({ name: `Item: ${i + 1}`}))
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
 	<div class="h-[400px] p-1 overflow-auto">
@@ -23,7 +23,7 @@
 	</div>
 </Preview>
 
-## Per page
+<h2>Per page</h2>
 
 <Preview>
 	<div class="h-[400px] p-1 overflow-auto">
@@ -35,6 +35,6 @@
 	</div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -51,9 +51,9 @@
 	];
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
 	<Steps {items}>
@@ -88,6 +88,6 @@
 	</Steps>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

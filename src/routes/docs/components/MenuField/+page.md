@@ -23,45 +23,45 @@
   ]
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <MenuField {options} />
 </Preview>
 
-## Label
+<h2>Label</h2>
 
 <Preview>
   <MenuField label="View" {options} />
 </Preview>
 
-## Value
+<h2>Value</h2>
 
 <Preview>
   <MenuField {options} value="copy" />
 </Preview>
 
-## Icon
+<h2>Icon</h2>
 
 <Preview>
   <MenuField {options} icon={mdiMagnify} />
 </Preview>
 
-## Option icons
+<h2>Option icons</h2>
 
 <Preview>
   <MenuField options={optionsWithIcons} />
 </Preview>
 
-## menuProps
+<h2>menuProps</h2>
 
 <Preview>
   <MenuField {options} menuProps={{ placement: 'top-start' }} />
 </Preview>
 
-## explicitClose
+<h2>explicitClose</h2>
 
 <Preview>
   <MenuField {options} menuProps={{ explicitClose: true }} let:options let:setValue let:close>
@@ -83,7 +83,7 @@
   </MenuField>
 </Preview>
 
-## options slot
+<h2>options slot</h2>
 
 <Preview>
   <MenuField {options} let:options let:setValue>
@@ -97,7 +97,7 @@
   </MenuField>
 </Preview>
 
-## append slot
+<h2>append slot</h2>
 
 <Preview>
   <MenuField {options}>
@@ -107,12 +107,12 @@
   </MenuField>
 </Preview>
 
-## Style
+<h2>Style</h2>
 
 <Preview>
   <MenuField {options} classes={{ container: 'bg-blue-50 rounded-full border-0 text-blue-500' }} />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

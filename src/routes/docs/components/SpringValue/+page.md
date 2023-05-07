@@ -15,30 +15,30 @@
   }
 </script>
 
-# Examples
+<h1>Examples</h1>
 
 <Button variant="filled" color="blue" on:click={update}>Update value</Button>
 <Button on:click={() => value = null}>Set null</Button>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <SpringValue {value} />
 </Preview>
 
-## Formatted
+<h2>Formatted</h2>
 
 <Preview>
   <SpringValue {value} format="currency" />
 </Preview>
 
-## Options
+<h2>Options</h2>
 
 <Preview>
   <SpringValue {value} format="decimal" options={{ stiffness: 0.01, damping: 0.25 }} />
 </Preview>
 
-## Style
+<h2>Style</h2>
 
 <Preview>
   <SpringValue {value} let:value>
@@ -46,12 +46,12 @@
   </SpringValue>
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <SpringValue {value} disabled />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

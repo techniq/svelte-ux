@@ -15,9 +15,9 @@
   let loading = false;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <Button on:click={() => open = true}>Show Dialog</Button>
@@ -31,7 +31,7 @@
   </Dialog>
 </Preview>
 
-## Basic (with Toggle)
+<h2>Basic (with Toggle)</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -47,7 +47,7 @@
   </Toggle>
 </Preview>
 
-## Async
+<h2>Async</h2>
 
 <Preview>
   <Button on:click={() => openAsync = true}>Show Dialog</Button>
@@ -73,7 +73,7 @@
   </Dialog>
 </Preview>
 
-## Async (with Toggle)
+<h2>Async (with Toggle)</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggleOn let:toggleOff>
@@ -101,7 +101,7 @@
   </Toggle>
 </Preview>
 
-## Confirmation dialog
+<h2>Confirmation dialog</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -126,7 +126,7 @@
   </Toggle>
 </Preview>
 
-## Loading
+<h2>Loading</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -142,7 +142,7 @@
   </Toggle>
 </Preview>
 
-## Persistent
+<h2>Persistent</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -157,7 +157,7 @@
   </Toggle>
 </Preview>
 
-## With autofocus TextField
+<h2>With autofocus TextField</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -175,7 +175,7 @@
   </Toggle>
 </Preview>
 
-## Disabled action
+<h2>Disabled action</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -194,6 +194,6 @@
   </Toggle>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -10,15 +10,15 @@
   let selected = new Date('1982-03-30');
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
   <YearList />
 </Preview>
 
-## Selected
+<h2>Selected</h2>
 
 <Preview>
   <YearList
@@ -29,7 +29,7 @@
   />
 </Preview>
 
-## Selected w/ Scroll into view
+<h2>Selected w/ Scroll into view</h2>
 
 <Preview>
   <div class="overflow-auto h-64">
@@ -44,7 +44,7 @@
   </div>
 </Preview>
 
-## Min / Max date
+<h2>Min / Max date</h2>
 
 <Preview>
   <YearList
@@ -53,6 +53,6 @@
   />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -5,7 +5,7 @@
 	import formStore from '$lib/stores/formStore';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { formStore } from 'svelte-ux';

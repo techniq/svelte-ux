@@ -4,7 +4,7 @@
 	import queryParamsStore from '$lib/stores/queryParamsStore';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { queryParamsStore } from 'svelte-ux';

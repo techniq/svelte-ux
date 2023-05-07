@@ -2,7 +2,7 @@
 	import Preview from '$lib/components/Preview.svelte';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```svelte
 <script>

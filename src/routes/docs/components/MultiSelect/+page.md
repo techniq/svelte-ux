@@ -32,9 +32,9 @@
   let value = [3];
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## basic
+<h2>basic</h2>
 
 <Preview>
   {value.length} selected
@@ -45,7 +45,7 @@
   />
 </Preview>
 
-## inlineSearch
+<h2>inlineSearch</h2>
 
 <Preview>
   {value.length} selected
@@ -57,7 +57,7 @@
   />
 </Preview>
 
-## many options
+<h2>many options</h2>
 
 <Preview>
   {value.length} selected
@@ -70,7 +70,7 @@
   </div>
 </Preview>
 
-## many options w/ inlineSearch
+<h2>many options w/ inlineSearch</h2>
 
 <Preview>
   {value.length} selected
@@ -85,7 +85,7 @@
   </div>
 </Preview>
 
-## many options w/ infiniteScroll
+<h2>many options w/ infiniteScroll</h2>
 
 <Preview>
   {value.length} selected
@@ -101,7 +101,7 @@
   </div>
 </Preview>
 
-## actions slot
+<h2>actions slot</h2>
 
 <Preview>
   {value.length} selected
@@ -120,7 +120,7 @@
   </div>
 </Preview>
 
-## Form integration
+<h2>Form integration</h2>
 
 <Preview>
   <Form
@@ -141,6 +141,6 @@
   </Form>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -9,27 +9,27 @@
 	import Preview from '$lib/components/Preview.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Default
+<h2>Default</h2>
 
 <Preview>
 	<AppBar />
 </Preview>
 
-## Title as string
+<h2>Title as string</h2>
 
 <Preview>
 	<AppBar title="Example" />
 </Preview>
 
-## Title as array
+<h2>Title as array</h2>
 
 <Preview>
 	<AppBar title={['One', 'Two', 'Three']} />
 </Preview>
 
-## Actions
+<h2>Actions</h2>
 
 <Preview>
 	<AppBar title="Example">
@@ -39,7 +39,7 @@
 	</AppBar>
 </Preview>
 
-## Color
+<h2>Color</h2>
 
 <Preview>
 	<div class="grid gap-2">
@@ -48,6 +48,6 @@
 	</div>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

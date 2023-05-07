@@ -26,9 +26,9 @@
   let value = [3];
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## basic
+<h2>basic</h2>
 
 <Preview>
   <MultiSelectField
@@ -38,7 +38,7 @@
   />
 </Preview>
 
-## disabled
+<h2>disabled</h2>
 
 <Preview>
   <MultiSelectField
@@ -49,7 +49,7 @@
   />
 </Preview>
 
-## many options
+<h2>many options</h2>
 
 <Preview>
   <MultiSelectField
@@ -61,7 +61,7 @@
   />
 </Preview>
 
-## formatSelected
+<h2>formatSelected</h2>
 
 <Preview>
   <MultiSelectField
@@ -72,7 +72,7 @@
   />
 </Preview>
 
-## actions slot
+<h2>actions slot</h2>
 
 <Preview>
   <MultiSelectField
@@ -86,7 +86,7 @@
   </MultiSelectField>
 </Preview>
 
-## within Drawer
+<h2>within Drawer</h2>
 
 <Preview>
   <ToggleButton let:on={open} let:toggle let:toggleOff>
@@ -109,6 +109,6 @@
   </ToggleButton>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -23,63 +23,63 @@
   ]
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <MenuButton {options} />
 </Preview>
 
-## Label
+<h2>Label</h2>
 
 <Preview>
   <MenuButton label="View" {options} />
 </Preview>
 
-## Value
+<h2>Value</h2>
 
 <Preview>
   <MenuButton {options} value="copy" />
 </Preview>
 
-## Icon
+<h2>Icon</h2>
 
 <Preview>
   <MenuButton {options} icon={mdiMagnify} />
 </Preview>
 
-## Variant
+<h2>Variant</h2>
 
 <Preview>
   <MenuButton {options} variant="filled" color="blue" />
 </Preview>
 
-## Size
+<h2>Size</h2>
 
 <Preview>
   <MenuButton {options} size="sm" />
 </Preview>
 
-## Option icons
+<h2>Option icons</h2>
 
 <Preview>
   <MenuButton options={optionsWithIcons} />
 </Preview>
 
-## menuProps (placement)
+<h2>menuProps (placement)</h2>
 
 <Preview>
   <MenuButton {options} menuProps={{ placement: 'top-start' }} />
 </Preview>
 
-## menuProps (matchWidth)
+<h2>menuProps (matchWidth)</h2>
 
 <Preview>
   <MenuButton {options} menuProps={{ matchWidth: true }} />
 </Preview>
 
-## menuProps (explicitClose)
+<h2>menuProps (explicitClose)</h2>
 
 <Preview>
   <MenuButton {options} menuProps={{ placement: 'bottom-start', explicitClose: true }} let:options let:setValue let:close>
@@ -101,7 +101,7 @@
   </MenuButton>
 </Preview>
 
-## options slot
+<h2>options slot</h2>
 
 <Preview>
   <MenuButton {options} let:options let:setValue>
@@ -115,6 +115,6 @@
   </MenuButton>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -6,7 +6,7 @@
 	import { tableCell } from '$lib/actions/table';
 </script>
 
-# Usage
+<h1>Usage</h1>
 
 ```js
 import { tableCell } from 'svelte-ux';

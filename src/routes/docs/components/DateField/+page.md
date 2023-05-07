@@ -14,9 +14,9 @@
   let value;
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Playground
+<h2>Playground</h2>
 
 <Preview>
   <DateField
@@ -29,7 +29,7 @@
   value: {value}
 </Preview>
 
-## Controlled
+<h2>Controlled</h2>
 
 <Preview>
   <DateField {value} />
@@ -39,25 +39,25 @@
   <Button on:click={() => (value = addDays(new Date(), 7))}>Next Week</Button>
 </Preview>
 
-## Picker
+<h2>Picker</h2>
 
 <Preview>
   <DateField {value} on:change={(e) => (value = e.detail.value)} picker />
 </Preview>
 
-## Clearable
+<h2>Clearable</h2>
 
 <Preview>
   <DateField {value} on:change={(e) => (value = e.detail.value)} clearable />
 </Preview>
 
-## Label
+<h2>Label</h2>
 
 <Preview>
   <DateField label="Birth date" />
 </Preview>
 
-## Icon
+<h2>Icon</h2>
 
 <Preview>
   <div class="grid gap-2">
@@ -66,24 +66,24 @@
   </div>
 </Preview>
 
-## Error
+<h2>Error</h2>
 
 <Preview>
   <DateField label="Birth date" error="This is a required field" />
 </Preview>
 
-## Disabled
+<h2>Disabled</h2>
 
 <Preview>
   <DateField label="Birth date" disabled />
 </Preview>
 
-## on:change event
+<h2>on:change event</h2>
 
 <Preview>
   <DateField label="Birth date" on:change={(e) => console.log(e.detail)} />
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />

@@ -7,9 +7,9 @@
   import ScrollContainer from '$lib/components/ScrollContainer.svelte';
 </script>
 
-# Examples
+<h1>Examples</h1>
 
-## Basic
+<h2>Basic</h2>
 
 <Preview>
   <ScrollContainer class="scroll-mt-6 scroll-mb-6" let:scrollIntoView>
@@ -21,6 +21,6 @@
   </ScrollContainer>
 </Preview>
 
-# API
+<h1>API</h1>
 
 <ApiDocs {api} />
