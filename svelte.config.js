@@ -21,6 +21,9 @@ const config = {
 
   kit: {
     adapter: vercelAdapter(),
+    alias: {
+      $docs: 'src/docs',
+    },
   },
 };
 

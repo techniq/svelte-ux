@@ -4,11 +4,12 @@
 
 	import TableOfContents from '$lib/components/TableOfContents.svelte';
 	import Preview from '$lib/components/Preview.svelte';
+	import Blockquote from '$docs/Blockquote.svelte';
 </script>
 
 <h1>Examples</h1>
 
-> TODO
+<Blockquote>TODO</Blockquote>
 
 <h1>API</h1>
 

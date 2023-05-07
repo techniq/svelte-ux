@@ -2,6 +2,7 @@
 	import { subDays, subMonths } from 'date-fns';
 
 	import Preview from '$lib/components/Preview.svelte';
+	import Blockquote from '$docs/Blockquote.svelte';
 
 	import { tableCell } from '$lib/actions/table';
 </script>
@@ -12,4 +13,4 @@
 import { tableCell } from 'svelte-ux';
 ```
 
-> TODO
+<Blockquote>TODO</Blockquote>

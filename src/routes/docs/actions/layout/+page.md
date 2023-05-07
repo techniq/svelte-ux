@@ -3,6 +3,8 @@
 
 	import Button from '$lib/components/Button.svelte';
 	import Preview from '$lib/components/Preview.svelte';
+	import Blockquote from '$docs/Blockquote.svelte';
+	
 
 	import { remainingViewportHeight, remainingViewportWidth, overflow } from '$lib/actions/layout';
 
@@ -19,11 +21,11 @@ import { remainingViewportHeight, remainingViewportWidth, overflow } from 'svelt
 
 <h2>remainingViewportHeight</h2>
 
-> TODO
+<Blockquote>TODO</Blockquote>
 
 <h2>remainingViewportWidth</h2>
 
-> TODO
+<Blockquote>TODO</Blockquote>
 
 <h2>overflow</h2>
 

@@ -2,6 +2,7 @@
 	import { subDays, subMonths } from 'date-fns';
 
 	import Preview from '$lib/components/Preview.svelte';
+	import Blockquote from '$docs/Blockquote.svelte';
 
 	import { sticky, stickyContext } from '$lib/actions/sticky';
 </script>
@@ -14,8 +15,8 @@ import { sticky, stickyContext } from 'svelte-ux';
 
 <h2>sticky</h2>
 
-> TODO
+<Blockquote>TODO</Blockquote>
 
 <h2>stickyContext</h2>
 
-> TODO
+<Blockquote>TODO</Blockquote>

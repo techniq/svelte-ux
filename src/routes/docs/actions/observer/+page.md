@@ -2,6 +2,7 @@
 	import { subDays, subMonths } from 'date-fns';
 
 	import Preview from '$lib/components/Preview.svelte';
+  import Blockquote from '$docs/Blockquote.svelte';
 
 	import { resize, intersection, mutate } from '$lib/actions/observer';
 </script>
@@ -14,7 +15,7 @@ import { resize, intersection, mutate } from 'svelte-ux';
 
 <h2>resize</h2>
 
-> TODO
+<Blockquote>TODO</Blockquote>
 
 <h2>intersection</h2>
 
@@ -36,4 +37,4 @@ See also:
 
 <h2>mutate</h2>
 
-> TODO
+<Blockquote>TODO</Blockquote>
