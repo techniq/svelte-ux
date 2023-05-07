@@ -85,7 +85,7 @@
   </Badge>
 </Preview>
 
-<!-- ## Corner (multi) w/ Icon Button
+<!-- <h2>Corner (multi) w/ Icon Button</h2>
 <Preview>
 <Stack stack inline>
   <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />

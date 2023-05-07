@@ -4,7 +4,6 @@
   import api from '$lib/components/Avatar.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
-  import AppBar from '$lib/components/AppBar.svelte';
   import Avatar from '$lib/components/Avatar.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
