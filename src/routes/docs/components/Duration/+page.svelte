@@ -71,6 +71,13 @@
   <div>{humanizeDuration({ duration: { days: 5, hours: 26 } })}</div>
 </Preview>
 
+<h3>Leap year comparison</h3>
+
+<Preview>
+  <div>{humanizeDuration({ start: new Date('2023-02-28'), end: new Date('2023-03-01') })}</div>
+  <div>{humanizeDuration({ start: new Date('2024-02-28'), end: new Date('2024-03-01') })}</div>
+</Preview>
+
 <h2>getDuration()</h2>
 
 <Preview class="whitespace-pre">
