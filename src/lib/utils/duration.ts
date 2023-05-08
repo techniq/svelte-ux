@@ -111,6 +111,7 @@ export function humanizeDuration(config: {
     variant === 'short'
       ? ['y', 'd', 'h', 'm', 's', 'ms']
       : ['years', 'days', 'hours', 'minutes', 'seconds', 'milliseconds'];
+
   var unitNums = [
     duration.years,
     duration.days,
@@ -118,7 +119,7 @@ export function humanizeDuration(config: {
     duration.minutes,
     duration.seconds,
     duration.milliseconds,
-  ].filter((x, i) => i <= (minUnits || 99));
+  ].filter((x, i) => i <= (minUnits ?? 99));
 
   // Combine unit numbers and names
   for (var i in unitNums) {

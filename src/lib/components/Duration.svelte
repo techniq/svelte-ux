@@ -2,12 +2,12 @@
   import { DurationUnits, getDuration, humanizeDuration } from '../utils/duration';
   import timerStore from '../stores/timerStore';
 
-  export let start: Date = undefined;
-  export let end: Date = undefined;
-  export let duration: Partial<Duration> = undefined;
-  export let minUnits: DurationUnits = DurationUnits.Millisecond;
-  export let totalUnits: number = undefined;
-  export let variant: 'short' | 'long' = undefined;
+  export let start: Date | undefined = undefined;
+  export let end: Date | undefined = undefined;
+  export let duration: Partial<Duration> | undefined = undefined;
+  export let minUnits: DurationUnits | undefined = DurationUnits.Millisecond;
+  export let totalUnits: number = 99;
+  export let variant: 'short' | 'long' = 'short';
 
   function getDelay() {
     const newDuration = getDuration(start, end ?? $timer, duration);
