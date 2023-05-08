@@ -28,51 +28,53 @@
     <h2 id="props" class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50">
       Props
     </h2>
-    {#each api.props as prop}
-      <ListItem
-        list="type"
-        icon={mdiCodeBraces}
-        avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
-      >
-        <div slot="title">{prop.name}</div>
+    <div class="border">
+      {#each api.props as prop}
+        <ListItem
+          list="type"
+          icon={mdiCodeBraces}
+          avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
+        >
+          <div slot="title">{prop.name}</div>
 
-        <div slot="subheading" class="text-black/50 text-xs">
-          {#if prop.description}
-            <span class="whitespace-pre-line">
-              {prop.description}
-            </span>
-          {/if}
-        </div>
+          <div slot="subheading" class="text-black/50 text-xs">
+            {#if prop.description}
+              <span class="whitespace-pre-line">
+                {prop.description}
+              </span>
+            {/if}
+          </div>
 
-        <div slot="actions" class="flex flex-wrap justify-end gap-1">
-          {#if prop.isRequired}
-            <div
-              class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
-            >
-              Required
-            </div>
-          {/if}
+          <div slot="actions" class="flex flex-wrap justify-end gap-1">
+            {#if prop.isRequired}
+              <div
+                class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
+              >
+                Required
+              </div>
+            {/if}
 
-          <Tooltip title="value" offset={2}>
-            <div
-              class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
-            >
-              {prop.value}
-            </div>
-          </Tooltip>
+            <Tooltip title="value" offset={2}>
+              <div
+                class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
+              >
+                {prop.value}
+              </div>
+            </Tooltip>
 
-          <Tooltip title="type" offset={2}>
-            <div
-              class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
-            >
-              {prop.type ?? 'unknown'}
-            </div>
-          </Tooltip>
-        </div>
-      </ListItem>
-    {:else}
-      <EmptyMessage>No props</EmptyMessage>
-    {/each}
+            <Tooltip title="type" offset={2}>
+              <div
+                class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+              >
+                {prop.type ?? 'unknown'}
+              </div>
+            </Tooltip>
+          </div>
+        </ListItem>
+      {:else}
+        <EmptyMessage>No props</EmptyMessage>
+      {/each}
+    </div>
 
     {#if api.rest_props}
       <div class="text-black/50 text-xs flex gap-2 mt-2 ml-4 items-center">
@@ -110,41 +112,43 @@
     <h2 id="slots" class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50">
       Slots
     </h2>
-    {#each api.slots as slot}
-      <ListItem
-        list="type"
-        icon={mdiGoogleCirclesGroup}
-        avatar={{ size: 'sm', class: 'text-xs text-white bg-purple-500' }}
-      >
-        <div slot="title">
-          {#if slot.default}
-            <i>default</i>
-          {:else}
-            {slot.name}
-          {/if}
-        </div>
+    <div class="border">
+      {#each api.slots as slot}
+        <ListItem
+          list="type"
+          icon={mdiGoogleCirclesGroup}
+          avatar={{ size: 'sm', class: 'text-xs text-white bg-purple-500' }}
+        >
+          <div slot="title">
+            {#if slot.default}
+              <i>default</i>
+            {:else}
+              {slot.name}
+            {/if}
+          </div>
 
-        <div slot="subheading" class="text-black/50 text-xs">
-          {slot.description ?? ''}
-        </div>
+          <div slot="subheading" class="text-black/50 text-xs">
+            {slot.description ?? ''}
+          </div>
 
-        <div slot="actions" class="flex flex-wrap justify-end gap-1">
-          {#if slot.slot_props != '{}'}
-            {#each parseSlotProps(slot.slot_props) as { key, value }}
-              <Tooltip title="slot prop" offset={2}>
-                <div
-                  class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
-                >
-                  {key}: {value}
-                </div>
-              </Tooltip>
-            {/each}
-          {/if}
-        </div>
-      </ListItem>
-    {:else}
-      <EmptyMessage>No slots</EmptyMessage>
-    {/each}
+          <div slot="actions" class="flex flex-wrap justify-end gap-1">
+            {#if slot.slot_props != '{}'}
+              {#each parseSlotProps(slot.slot_props) as { key, value }}
+                <Tooltip title="slot prop" offset={2}>
+                  <div
+                    class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+                  >
+                    {key}: {value}
+                  </div>
+                </Tooltip>
+              {/each}
+            {/if}
+          </div>
+        </ListItem>
+      {:else}
+        <EmptyMessage>No slots</EmptyMessage>
+      {/each}
+    </div>
   </div>
 
   <div>
@@ -154,32 +158,34 @@
     >
       Events
     </h2>
-    {#each api.events as event}
-      <ListItem
-        list="type"
-        icon={mdiBullhorn}
-        avatar={{ size: 'sm', class: 'text-xs text-white bg-green-500' }}
-      >
-        <div slot="title">{event.name}</div>
+    <div class="border">
+      {#each api.events as event}
+        <ListItem
+          list="type"
+          icon={mdiBullhorn}
+          avatar={{ size: 'sm', class: 'text-xs text-white bg-green-500' }}
+        >
+          <div slot="title">{event.name}</div>
 
-        <div slot="actions" class="flex flex-wrap justify-end gap-1">
-          {#if event.element != null}
+          <div slot="actions" class="flex flex-wrap justify-end gap-1">
+            {#if event.element != null}
+              <div
+                class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+              >
+                {event.element}
+              </div>
+            {/if}
             <div
-              class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+              class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
             >
-              {event.element}
+              {event.type}
             </div>
-          {/if}
-          <div
-            class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
-          >
-            {event.type}
           </div>
-        </div>
-      </ListItem>
-    {:else}
-      <EmptyMessage>No events</EmptyMessage>
-    {/each}
+        </ListItem>
+      {:else}
+        <EmptyMessage>No events</EmptyMessage>
+      {/each}
+    </div>
   </div>
 
   <div>
@@ -189,50 +195,52 @@
     >
       Module Exports
     </h2>
-    {#each api.moduleExports as prop}
-      <ListItem
-        list="type"
-        icon={mdiCodeBraces}
-        avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
-      >
-        <div slot="title">{prop.name}</div>
+    <div class="border">
+      {#each api.moduleExports as prop}
+        <ListItem
+          list="type"
+          icon={mdiCodeBraces}
+          avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
+        >
+          <div slot="title">{prop.name}</div>
 
-        <div slot="subheading" class="text-black/50 text-xs">
-          {#if prop.description}
-            <span class="whitespace-pre-line">
-              {prop.description}
-            </span>
-          {/if}
-        </div>
+          <div slot="subheading" class="text-black/50 text-xs">
+            {#if prop.description}
+              <span class="whitespace-pre-line">
+                {prop.description}
+              </span>
+            {/if}
+          </div>
 
-        <div slot="actions" class="flex flex-wrap justify-end gap-1">
-          {#if prop.isRequired}
-            <div
-              class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
-            >
-              Required
-            </div>
-          {/if}
+          <div slot="actions" class="flex flex-wrap justify-end gap-1">
+            {#if prop.isRequired}
+              <div
+                class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
+              >
+                Required
+              </div>
+            {/if}
 
-          <Tooltip title="value" offset={2}>
-            <div
-              class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
-            >
-              {prop.value}
-            </div>
-          </Tooltip>
+            <Tooltip title="value" offset={2}>
+              <div
+                class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
+              >
+                {prop.value}
+              </div>
+            </Tooltip>
 
-          <Tooltip title="type" offset={2}>
-            <div
-              class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
-            >
-              {prop.type ?? 'unknown'}
-            </div>
-          </Tooltip>
-        </div>
-      </ListItem>
-    {:else}
-      <EmptyMessage>No exports</EmptyMessage>
-    {/each}
+            <Tooltip title="type" offset={2}>
+              <div
+                class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+              >
+                {prop.type ?? 'unknown'}
+              </div>
+            </Tooltip>
+          </div>
+        </ListItem>
+      {:else}
+        <EmptyMessage>No exports</EmptyMessage>
+      {/each}
+    </div>
   </div>
 </div>
