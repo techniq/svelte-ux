@@ -44,9 +44,9 @@
 
 <h1>Utils</h1>
 
-<h2>humanizeDuration</h2>
+<h2>humanizeDuration()</h2>
 
-<h3>date</h3>
+<h3>Date</h3>
 
 <Preview>
   <div>{humanizeDuration({ start: subDays(new Date(), 3) })}</div>
@@ -63,7 +63,7 @@
   <div>{humanizeDuration({ start: '1982-03-30', minUnits: DurationUnits.Hour })}</div>
 </Preview>
 
-<h3>duration</h3>
+<h3>duration object</h3>
 
 <Preview>
   <div>{humanizeDuration({ duration: { milliseconds: 300 } })}</div>
@@ -71,9 +71,11 @@
   <div>{humanizeDuration({ duration: { days: 5, hours: 26 } })}</div>
 </Preview>
 
-<h2>getDuration</h2>
+<h2>getDuration()</h2>
 
-<Preview>{JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}</Preview>
+<Preview class="whitespace-pre">
+  {JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}
+</Preview>
 
 <h1>API</h1>
 
