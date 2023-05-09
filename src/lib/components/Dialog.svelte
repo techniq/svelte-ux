@@ -89,10 +89,13 @@
     on:keydown={(e) => {
       // Do not allow event to reach Popover's on:keydown
       e.stopPropagation();
-      if (e.key === 'Escape' && !persistent) {
-        open = false;
+      if (e.key === 'Escape') {
+        if (!persistent) {
+          open = false;
+        }
+
+        dispatch('close-attempt');
       }
-      dispatch('close-attempt');
     }}
     use:portalAction={{ enabled: portal }}
   >
