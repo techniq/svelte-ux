@@ -39,7 +39,7 @@
 <Preview>
   <ToggleButton let:on={open} let:toggle let:toggleOff>
     Open Drawer
-    <Drawer slot="toggle" {open} on:close={toggleOff} right class="w-[400px]">
+    <Drawer slot="toggle" {open} on:close={toggleOff} class="w-[400px]">
       <h1>Contents</h1>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25

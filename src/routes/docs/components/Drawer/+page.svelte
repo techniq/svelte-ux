@@ -21,27 +21,7 @@
 <h2>Location</h2>
 
 <Preview>
-  <Drawer bind:open={leftOpen} class="w-[400px]">
-    <h1>Contents</h1>
-    <div
-      class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-    >
-      <Button on:click={() => (leftOpen = false)}>Close</Button>
-    </div>
-  </Drawer>
-  <Button on:click={() => (leftOpen = true)}>Left</Button>
-  <Drawer bind:open={rightOpen} right class="w-[400px]">
-    <h1>Contents</h1>
-    <div
-      class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-    >
-      <Button on:click={() => (rightOpen = false)}>Close</Button>
-    </div>
-  </Drawer>
-  <Button on:click={() => (rightOpen = true)}>Right</Button>
-  <Drawer bind:open={topOpen} top class="h-64">
+  <Drawer bind:open={topOpen} placement="top" class="h-64">
     <h1>Contents</h1>
     <div
       class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
@@ -51,7 +31,8 @@
     </div>
   </Drawer>
   <Button on:click={() => (topOpen = true)}>Top</Button>
-  <Drawer bind:open={bottomOpen} bottom class="h-64">
+
+  <Drawer bind:open={bottomOpen} placement="bottom" class="h-64">
     <h1>Contents</h1>
     <div
       class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
@@ -61,13 +42,35 @@
     </div>
   </Drawer>
   <Button on:click={() => (bottomOpen = true)}>Bottom</Button>
+
+  <Drawer bind:open={leftOpen} placement="left" class="w-[400px]">
+    <h1>Contents</h1>
+    <div
+      class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
+    p-1 border-t border-gray-400"
+    >
+      <Button on:click={() => (leftOpen = false)}>Close</Button>
+    </div>
+  </Drawer>
+  <Button on:click={() => (leftOpen = true)}>Left</Button>
+
+  <Drawer bind:open={rightOpen} placement="right" class="w-[400px]">
+    <h1>Contents</h1>
+    <div
+      class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
+    p-1 border-t border-gray-400"
+    >
+      <Button on:click={() => (rightOpen = false)}>Close</Button>
+    </div>
+  </Drawer>
+  <Button on:click={() => (rightOpen = true)}>Right</Button>
 </Preview>
 
 <h2>Persistent</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} right persistent class="w-[400px]">
+    <Drawer {open} on:close={toggleOff} persistent class="w-[400px]">
       <h1>Contents</h1>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
@@ -84,7 +87,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} right class="w-[400px]" loading>
+    <Drawer {open} on:close={toggleOff} class="w-[400px]" loading>
       <h1>Contents</h1>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
@@ -101,7 +104,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+    <Drawer {open} on:close={toggleOff} class="w-[400px]">
       <div class="p-2">
         <TextField autofocus />
       </div>
@@ -120,7 +123,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+    <Drawer {open} on:close={toggleOff} class="w-[400px]">
       <div class="p-2">
         <Toggle let:on={open} let:toggle>
           <Button on:click={toggle}>Show Dialog</Button>
@@ -147,7 +150,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+    <Drawer {open} on:close={toggleOff} class="w-[400px]">
       <div class="p-2">
         <MenuField
           options={[

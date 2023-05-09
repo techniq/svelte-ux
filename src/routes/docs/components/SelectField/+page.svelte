@@ -14,7 +14,6 @@
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 
-
   import { delay } from '$lib/utils/promise';
   import { cls } from '$lib/utils/styles';
 
@@ -25,16 +24,19 @@
     { name: 'Four', value: 4 },
   ];
   const optionsWithGroup = [
-    { name: 'One', value: 1, group: "First" },
-    { name: 'Two', value: 2, group: "First" },
-    { name: 'Three', value: 3, group: "Second" },
-    { name: 'Four', value: 4, group: "Second" },
-    { name: 'Five', value: 5, group: "Second" },
-    { name: 'Six', value: 6, group: "Third" },
-    { name: 'Seven', value: 7, group: "Third" },
+    { name: 'One', value: 1, group: 'First' },
+    { name: 'Two', value: 2, group: 'First' },
+    { name: 'Three', value: 3, group: 'Second' },
+    { name: 'Four', value: 4, group: 'Second' },
+    { name: 'Five', value: 5, group: 'Second' },
+    { name: 'Six', value: 6, group: 'Third' },
+    { name: 'Seven', value: 7, group: 'Third' },
   ];
 
-  const manyOptions = Array.from({ length: 100 }).map((_, i) => ({ name: `${i + 1}`, value: i + 1 }))
+  const manyOptions = Array.from({ length: 100 }).map((_, i) => ({
+    name: `${i + 1}`,
+    value: i + 1,
+  }));
 
   const newOptions = [
     { name: 'Foo', value: 1 },
@@ -123,7 +125,7 @@
         class={cls(
           index === highlightIndex && 'bg-black/5',
           option === selected && 'font-semibold',
-          option.group ? 'px-4' : 'px-2',
+          option.group ? 'px-4' : 'px-2'
         )}
         scrollIntoView={index === highlightIndex}
       >
@@ -145,7 +147,7 @@
         class={cls(
           index === highlightIndex && 'bg-black/5',
           option === selected && 'font-semibold',
-          option.group ? 'px-4' : 'px-2',
+          option.group ? 'px-4' : 'px-2'
         )}
         scrollIntoView={index === highlightIndex}
       >
@@ -160,11 +162,13 @@
               class="-m-1 p-1 text-xs text-gray-400 z-[9999]"
               on:click={toggle}
             />
-            <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+            <Drawer {open} on:close={toggleOff} class="w-[400px]">
               <div class="p-4">
                 Editing option: {option.name}
               </div>
-              <div class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400">
+              <div
+                class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
+              >
                 <Button on:click={toggleOff}>Close</Button>
               </div>
             </Drawer>
@@ -213,10 +217,7 @@
         <TextField label="Name" autofocus />
       </div>
       <div slot="actions">
-        <Button
-          on:click={() => console.log('Adding option...')}
-          class="text-blue-500"
-        >
+        <Button on:click={() => console.log('Adding option...')} class="text-blue-500">
           Add option
         </Button>
         <Button>Cancel</Button>
@@ -291,7 +292,12 @@
 <h2>Custom selected class</h2>
 
 <Preview>
-  <SelectField {options} bind:value clearSearchOnFocus classes={{ selected: 'bg-accent-500 text-white' }} />
+  <SelectField
+    {options}
+    bind:value
+    clearSearchOnFocus
+    classes={{ selected: 'bg-accent-500 text-white' }}
+  />
 </Preview>
 
 <!-- ## Menu actions

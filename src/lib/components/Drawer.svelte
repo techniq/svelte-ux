@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { fly } from 'svelte/transition';
 
   import Backdrop from './Backdrop.svelte';
   import CircularProgress from './CircularProgress.svelte';
@@ -7,7 +8,6 @@
 
   import { focusMove } from '../actions/focus';
   import portalAction from '../actions/portal';
-  import { fly } from '../utils/transition';
   import { cls } from '../utils/styles';
 
   const dispatch = createEventDispatcher();
@@ -16,11 +16,7 @@
   export let portal = true;
   export let persistent = false;
   export let loading: boolean | null = null;
-
-  export let right = false;
-  export let top = false;
-  export let bottom = false;
-  $: left = !right && !top && !bottom;
+  export let placement: 'top' | 'bottom' | 'left' | 'right' = 'right';
 
   $: dispatch('change', { open });
 
@@ -46,23 +42,23 @@
     class={cls(
       'bg-white fixed overflow-auto transform z-50 outline-none',
       {
-        'h-full': left || right,
-        'w-full': top || bottom,
-        'top-0': left || right || top,
-        'bottom-0': bottom,
-        'left-0': left || top || bottom,
-        'right-0': right,
+        'h-full': ['left', 'right'].includes(placement),
+        'w-full': ['top', 'bottom'].includes(placement),
+        'top-0': ['top', 'left', 'right'].includes(placement),
+        'bottom-0': placement === 'bottom',
+        'left-0': ['top', 'top', 'bottom'].includes(placement),
+        'right-0': placement === 'right',
       },
       $$props.class
     )}
     style={$$props.style}
     in:fly={{
-      x: left ? '-100%' : right ? '100%' : 0,
-      y: top ? '-100%' : bottom ? '100%' : 0,
+      x: placement === 'left' ? '-100%' : placement === 'right' ? '100%' : 0,
+      y: placement === 'top' ? '-100%' : placement === 'bottom' ? '100%' : 0,
     }}
     out:fly|local={{
-      x: left ? '-100%' : right ? '100%' : 0,
-      y: top ? '-100%' : bottom ? '100%' : 0,
+      x: placement === 'left' ? '-100%' : placement === 'right' ? '100%' : 0,
+      y: placement === 'top' ? '-100%' : placement === 'bottom' ? '100%' : 0,
     }}
     on:introstart
     on:outrostart

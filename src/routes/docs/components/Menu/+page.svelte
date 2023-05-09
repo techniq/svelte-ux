@@ -85,7 +85,7 @@
         </Toggle>
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Drawer...</MenuItem>
-          <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+          <Drawer {open} on:close={toggleOff} class="w-[400px]">
             <div
               class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
             >
@@ -95,7 +95,7 @@
         </Toggle>
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Persistent Drawer...</MenuItem>
-          <Drawer {open} on:close={toggleOff} right class="w-[400px]" persistent>
+          <Drawer {open} on:close={toggleOff} class="w-[400px]" persistent>
             <div
               class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
             >
@@ -105,7 +105,7 @@
         </Toggle>
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Drawer with another Menu...</MenuItem>
-          <Drawer {open} on:close={toggleOff} right class="w-[400px]">
+          <Drawer {open} on:close={toggleOff} class="w-[400px]">
             <Toggle let:on={open} let:toggle>
               <span>
                 <Button on:click={toggle}>Click me</Button>
