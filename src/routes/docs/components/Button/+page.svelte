@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiMenu, mdiTrashCan } from '@mdi/js';
+  import { mdiHome, mdiMagnify, mdiMenu, mdiTrashCan } from '@mdi/js';
 
   import api from '$lib/components/Button.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -208,10 +208,28 @@
   <Button icon={mdiMenu} class="p-2" />
 </Preview>
 
-<h2>Icon with text</h2>
+<h2>Text with icon</h2>
 
 <Preview>
   <Button icon={mdiTrashCan} color="red">Delete</Button>
+</Preview>
+
+<h2>Text with right icon</h2>
+
+<Preview>
+  <Button icon={mdiMagnify} class="flex-row-reverse">Search</Button>
+</Preview>
+
+<h2>Text with top icon</h2>
+
+<Preview>
+  <Button icon={mdiHome} class="flex-col">Home</Button>
+</Preview>
+
+<h2>Text with bottom icon</h2>
+
+<Preview>
+  <Button icon={mdiHome} class="flex-col-reverse">Home</Button>
 </Preview>
 
 <h2>Icon via url</h2>
