@@ -1,7 +1,7 @@
 <script>
   import api from '$lib/components/TweenedValue.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
-  import * as easings from 'svelte/easing'
+  import * as easings from 'svelte/easing';
 
   import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
@@ -18,8 +18,8 @@
 
 <h1>Examples</h1>
 
-<Button variant="filled" color="blue" on:click={update}>Update value</Button>
-<Button on:click={() => value = null}>Set null</Button>
+<Button variant="fill" color="blue" on:click={update}>Update value</Button>
+<Button on:click={() => (value = null)}>Set null</Button>
 
 <h2>Basic</h2>
 

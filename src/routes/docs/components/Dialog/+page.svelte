@@ -20,13 +20,11 @@
 <h2>Basic</h2>
 
 <Preview>
-  <Button on:click={() => open = true}>Show Dialog</Button>
+  <Button on:click={() => (open = true)}>Show Dialog</Button>
   <Dialog bind:open>
     <div slot="title">Are you sure you want to do that?</div>
     <div slot="actions">
-      <Button variant="filled" color="blue">
-        Close
-      </Button>
+      <Button variant="fill" color="blue">Close</Button>
     </div>
   </Dialog>
 </Preview>
@@ -39,9 +37,7 @@
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="filled" color="blue">
-          Close
-        </Button>
+        <Button variant="fill" color="blue">Close</Button>
       </div>
     </Dialog>
   </Toggle>
@@ -50,21 +46,22 @@
 <h2>Async</h2>
 
 <Preview>
-  <Button on:click={() => openAsync = true}>Show Dialog</Button>
+  <Button on:click={() => (openAsync = true)}>Show Dialog</Button>
   <Dialog bind:open={openAsync} {loading} persistent={loading}>
     <div slot="title">Are you sure you want to do that?</div>
     <div slot="actions">
       <Button
         on:click={(e) => {
-            // Wait for response before closing (done explicitly)
+          // Wait for response before closing (done explicitly)
           e.stopPropagation();
           loading = true;
           setTimeout(() => {
             loading = false;
-            openAsync = false
-          }, 1000)
+            openAsync = false;
+          }, 1000);
         }}
-        variant="filled" color="blue"
+        variant="fill"
+        color="blue"
       >
         Save
       </Button>
@@ -89,9 +86,10 @@
             setTimeout(() => {
               loading = false;
               toggleOff();
-            }, 1000)
+            }, 1000);
           }}
-          variant="filled" color="blue"
+          variant="fill"
+          color="blue"
         >
           Save
         </Button>
@@ -105,17 +103,15 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <Button icon={mdiTrashCan} on:click={toggle} class="text-red-500">
-      Delete
-    </Button>
+    <Button icon={mdiTrashCan} on:click={toggle} class="text-red-500">Delete</Button>
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure?</div>
-      <div class="px-6 py-3">
-        This will permanently delete the item and can not be undone.
-      </div>
+      <div class="px-6 py-3">This will permanently delete the item and can not be undone.</div>
       <div slot="actions">
         <Button
-          on:click={() => { console.log('Deleting item...') }}
+          on:click={() => {
+            console.log('Deleting item...');
+          }}
           class="bg-red-500 text-white hover:bg-red-600"
         >
           Yes, delete item
@@ -134,9 +130,7 @@
     <Dialog {open} on:close={toggle} loading>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="filled" color="blue">
-          Close
-        </Button>
+        <Button variant="fill" color="blue">Close</Button>
       </div>
     </Dialog>
   </Toggle>
@@ -150,7 +144,7 @@
     <Dialog {open} on:close={toggle} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="filled" color="blue">Yes</Button>
+        <Button variant="fill" color="blue">Yes</Button>
         <Button>No</Button>
       </div>
     </Dialog>
@@ -168,7 +162,7 @@
         <TextField label="Age" autofocus />
       </div>
       <div slot="actions">
-        <Button variant="filled" color="blue">OK</Button>
+        <Button variant="fill" color="blue">OK</Button>
         <Button>Cancel</Button>
       </div>
     </Dialog>
@@ -183,12 +177,8 @@
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="filled" color="blue" disabled>
-          Don't touch
-        </Button>
-        <Button>
-          Close
-        </Button>
+        <Button variant="fill" color="blue" disabled>Don't touch</Button>
+        <Button>Close</Button>
       </div>
     </Dialog>
   </Toggle>

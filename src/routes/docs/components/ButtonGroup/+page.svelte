@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { mdiChevronDown, mdiFormatAlignLeft, mdiFormatAlignCenter, mdiFormatAlignRight } from '@mdi/js';
+  import {
+    mdiChevronDown,
+    mdiFormatAlignLeft,
+    mdiFormatAlignCenter,
+    mdiFormatAlignRight,
+  } from '@mdi/js';
 
   import api from '$lib/components/Button.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -9,7 +14,6 @@
   import Menu from '$lib/components/Menu.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
@@ -20,17 +24,31 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="blue">
+    <ButtonGroup variant="text" color="accent">
       <Button>Left</Button>
       <Button>Center</Button>
       <Button>Right</Button>
     </ButtonGroup>
-    <ButtonGroup variant="outlined">
+
+    <ButtonGroup variant="outline">
       <Button>Left</Button>
       <Button>Center</Button>
       <Button>Right</Button>
     </ButtonGroup>
-    <ButtonGroup variant="filled" color="blue">
+
+    <ButtonGroup variant="fill" color="accent">
+      <Button>Left</Button>
+      <Button>Center</Button>
+      <Button>Right</Button>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-light" color="accent">
+      <Button>Left</Button>
+      <Button>Center</Button>
+      <Button>Right</Button>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-outline" color="accent">
       <Button>Left</Button>
       <Button>Center</Button>
       <Button>Right</Button>
@@ -42,17 +60,31 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="blue">
+    <ButtonGroup variant="text" color="accent">
       <Button icon={mdiFormatAlignLeft} />
       <Button icon={mdiFormatAlignCenter} />
       <Button icon={mdiFormatAlignRight} />
     </ButtonGroup>
-    <ButtonGroup variant="outlined">
+
+    <ButtonGroup variant="outline">
       <Button icon={mdiFormatAlignLeft} />
       <Button icon={mdiFormatAlignCenter} />
       <Button icon={mdiFormatAlignRight} />
     </ButtonGroup>
-    <ButtonGroup variant="filled" color="blue">
+
+    <ButtonGroup variant="fill" color="accent">
+      <Button icon={mdiFormatAlignLeft} />
+      <Button icon={mdiFormatAlignCenter} />
+      <Button icon={mdiFormatAlignRight} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-light" color="accent">
+      <Button icon={mdiFormatAlignLeft} />
+      <Button icon={mdiFormatAlignCenter} />
+      <Button icon={mdiFormatAlignRight} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-outline" color="accent">
       <Button icon={mdiFormatAlignLeft} />
       <Button icon={mdiFormatAlignCenter} />
       <Button icon={mdiFormatAlignRight} />
@@ -64,47 +96,34 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="blue">
-      <Button
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignCenter}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignRight}
-        iconOnly={false}
-      />
+    <ButtonGroup variant="text" color="accent">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
-    <ButtonGroup variant="outlined">
-      <Button
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignCenter}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignRight}
-        iconOnly={false}
-      />
+
+    <ButtonGroup variant="outline">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
-    <ButtonGroup variant="filled" color="blue">
-      <Button
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignCenter}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignRight}
-        iconOnly={false}
-      />
+
+    <ButtonGroup variant="fill" color="accent">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-light" color="accent">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-outline" color="accent">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
   </div>
 </Preview>
@@ -113,50 +132,44 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="blue">
-      <Button
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-        class="bg-blue-50 hover:bg-blue-100 z-10"
-      />
+    <ButtonGroup variant="text" color="accent">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} variant="fill-light" />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="outline">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button
         icon={mdiFormatAlignCenter}
         iconOnly={false}
+        variant="fill-outline"
+        color="accent"
+        class="z-10"
       />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill" color="accent">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button
         icon={mdiFormatAlignRight}
         iconOnly={false}
+        class="bg-accent-600 hover:bg-accent-700"
       />
     </ButtonGroup>
-    <ButtonGroup variant="outlined">
-      <Button
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignCenter}
-        iconOnly={false}
-        class="text-blue-500 border-blue-500 bg-blue-50 hover:bg-blue-100 z-10"
-      />
-      <Button
-        icon={mdiFormatAlignRight}
-        iconOnly={false}
-      />
+
+    <ButtonGroup variant="fill-light" color="accent">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} variant="fill-outline" />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
-    <ButtonGroup variant="filled" color="blue">
-      <Button
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignCenter}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignRight}
-        iconOnly={false}
-          class="bg-blue-600 hover:bg-blue-700"
-      />
+
+    <ButtonGroup variant="fill-outline" color="accent">
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} variant="fill" />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
   </div>
 </Preview>
@@ -165,7 +178,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="blue">
+    <ButtonGroup variant="text" color="accent">
       <Tooltip title="left" offset={2}>
         <Button icon={mdiFormatAlignLeft} />
       </Tooltip>
@@ -176,7 +189,8 @@
         <Button icon={mdiFormatAlignRight} />
       </Tooltip>
     </ButtonGroup>
-    <ButtonGroup variant="outlined">
+
+    <ButtonGroup variant="outline">
       <Tooltip title="left" offset={2}>
         <Button icon={mdiFormatAlignLeft} />
       </Tooltip>
@@ -187,7 +201,32 @@
         <Button icon={mdiFormatAlignRight} />
       </Tooltip>
     </ButtonGroup>
-    <ButtonGroup variant="filled" color="blue">
+
+    <ButtonGroup variant="fill" color="accent">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-light" color="accent">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-outline" color="accent">
       <Tooltip title="left" offset={2}>
         <Button icon={mdiFormatAlignLeft} />
       </Tooltip>
@@ -205,50 +244,34 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="blue" disabled>
-      <Button
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignCenter}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignRight}
-        iconOnly={false}
-      />
+    <ButtonGroup variant="text" color="accent" disabled>
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
-    <ButtonGroup variant="outlined" disabled>
-      <Button
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignCenter}
-        iconOnly={false}
-      />
-      <Button
-        icon={mdiFormatAlignRight}
-        iconOnly={false}
-      />
+
+    <ButtonGroup variant="outline" disabled>
+      <Button icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
-    <ButtonGroup variant="filled" disabled>
-      <Button
-        color="blue"
-        icon={mdiFormatAlignLeft}
-        iconOnly={false}
-      />
-      <Button
-        color="blue"
-        icon={mdiFormatAlignCenter}
-        iconOnly={false}
-      />
-      <Button
-        color="blue"
-        icon={mdiFormatAlignRight}
-        iconOnly={false}
-      />
+
+    <ButtonGroup variant="fill" disabled>
+      <Button color="accent" icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button color="accent" icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button color="accent" icon={mdiFormatAlignRight} iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-light" disabled>
+      <Button color="accent" icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button color="accent" icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button color="accent" icon={mdiFormatAlignRight} iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-outline" disabled>
+      <Button color="accent" icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button color="accent" icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button color="accent" icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
   </div>
 </Preview>
@@ -261,12 +284,7 @@
       <Button>Click me</Button>
       <Toggle let:on={open} let:toggle>
         <span>
-          <Button
-            icon={mdiChevronDown}
-            on:click={toggle}
-            rounded
-            class="px-1"
-          />
+          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
           <Menu {open} on:close={toggle} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
@@ -276,16 +294,12 @@
         </span>
       </Toggle>
     </ButtonGroup>
-    <ButtonGroup variant="outlined">
+
+    <ButtonGroup variant="outline">
       <Button>Click me</Button>
       <Toggle let:on={open} let:toggle>
         <span>
-          <Button
-            icon={mdiChevronDown}
-            on:click={toggle}
-            rounded
-            class="px-1"
-          />
+          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
           <Menu {open} on:close={toggle} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
@@ -295,16 +309,42 @@
         </span>
       </Toggle>
     </ButtonGroup>
-    <ButtonGroup variant="filled" color="blue">
+
+    <ButtonGroup variant="fill" color="accent">
       <Button>Click me</Button>
       <Toggle let:on={open} let:toggle>
         <span>
-          <Button
-            icon={mdiChevronDown}
-            on:click={toggle}
-            rounded
-            class="px-1"
-          />
+          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
+          <Menu {open} on:close={toggle} placement="bottom-start">
+            <MenuItem>Hello</MenuItem>
+            <MenuItem>Hello</MenuItem>
+            <MenuItem>Hello</MenuItem>
+            <MenuItem>Hello</MenuItem>
+          </Menu>
+        </span>
+      </Toggle>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-light" color="accent">
+      <Button>Click me</Button>
+      <Toggle let:on={open} let:toggle>
+        <span>
+          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
+          <Menu {open} on:close={toggle} placement="bottom-start">
+            <MenuItem>Hello</MenuItem>
+            <MenuItem>Hello</MenuItem>
+            <MenuItem>Hello</MenuItem>
+            <MenuItem>Hello</MenuItem>
+          </Menu>
+        </span>
+      </Toggle>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-outline" color="accent">
+      <Button>Click me</Button>
+      <Toggle let:on={open} let:toggle>
+        <span>
+          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
           <Menu {open} on:close={toggle} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>

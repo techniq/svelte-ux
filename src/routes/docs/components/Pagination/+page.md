@@ -66,7 +66,7 @@
 <Preview>
 	<Pagination {pagination} show={['actions', 'perPage', 'pagination', 'prevPage', 'nextPage']} classes={{ perPage: 'flex-1 text-right', pagination: 'px-8' }}>
 		<div slot="actions">
-			<Button variant="filled" color="blue">Click me</Button>
+			<Button variant="fill" color="blue">Click me</Button>
 		</div>
 	</Pagination>
 </Preview>

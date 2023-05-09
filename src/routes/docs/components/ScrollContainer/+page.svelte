@@ -13,11 +13,13 @@
 
 <Preview>
   <ScrollContainer class="scroll-mt-6 scroll-mb-6" let:scrollIntoView>
-    <Button variant="filled" color="blue" on:click={() => scrollIntoView({ block: 'end' })}>Scroll to bottom</Button>
-    {#each { length: 100 } as _,i}
+    <Button variant="fill" color="blue" on:click={() => scrollIntoView({ block: 'end' })}
+      >Scroll to bottom</Button
+    >
+    {#each { length: 100 } as _, i}
       <div>Item: {i + 1}</div>
     {/each}
-    <Button variant="filled" color="blue" on:click={() => scrollIntoView()}>Scroll to top</Button>
+    <Button variant="fill" color="blue" on:click={() => scrollIntoView()}>Scroll to top</Button>
   </ScrollContainer>
 </Preview>
 

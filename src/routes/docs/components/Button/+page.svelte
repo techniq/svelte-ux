@@ -33,18 +33,11 @@
 <h2>Loading</h2>
 
 <Preview>
-  <Button loading >
-    Click me
-  </Button>
-  <Button variant="outlined" color="accent" loading>
-    Click me
-  </Button>
-  <Button variant="filled" color="accent" loading>
-    Click me
-  </Button>
-  <Button variant="filledOutlined" color="accent" loading>
-    Click me
-  </Button>
+  <Button loading>Click me</Button>
+  <Button variant="outline" color="accent" loading>Click me</Button>
+  <Button variant="fill" color="accent" loading>Click me</Button>
+  <Button variant="fill-light" color="accent" loading>Click me</Button>
+  <Button variant="fill-outline" color="accent" loading>Click me</Button>
 </Preview>
 
 <h2>Variants</h2>
@@ -58,22 +51,28 @@
       <Button color="green">default</Button>
     </div>
     <div>
-      <Button variant="outlined">outlined</Button>
-      <Button variant="outlined" color="blue">outlined</Button>
-      <Button variant="outlined" color="red">outlined</Button>
-      <Button variant="outlined" color="green">outlined</Button>
+      <Button variant="outline">outline</Button>
+      <Button variant="outline" color="blue">outline</Button>
+      <Button variant="outline" color="red">outline</Button>
+      <Button variant="outline" color="green">outline</Button>
     </div>
     <div>
-      <Button variant="filled">filled</Button>
-      <Button variant="filled" color="blue">filled</Button>
-      <Button variant="filled" color="red">filled</Button>
-      <Button variant="filled" color="green">filled</Button>
+      <Button variant="fill">fill</Button>
+      <Button variant="fill" color="blue">fill</Button>
+      <Button variant="fill" color="red">fill</Button>
+      <Button variant="fill" color="green">fill</Button>
     </div>
     <div>
-      <Button variant="filledOutlined">filledOutlined</Button>
-      <Button variant="filledOutlined" color="blue">filledOutlined</Button>
-      <Button variant="filledOutlined" color="red">filledOutlined</Button>
-      <Button variant="filledOutlined" color="green">filledOutlined</Button>
+      <Button variant="fill-light">fill-light</Button>
+      <Button variant="fill-light" color="blue">fill-light</Button>
+      <Button variant="fill-light" color="red">fill-light</Button>
+      <Button variant="fill-light" color="green">fill-light</Button>
+    </div>
+    <div>
+      <Button variant="fill-outline">fill-outline</Button>
+      <Button variant="fill-outline" color="blue">fill-outline</Button>
+      <Button variant="fill-outline" color="red">fill-outline</Button>
+      <Button variant="fill-outline" color="green">fill-outline</Button>
     </div>
   </div>
 </Preview>
@@ -97,22 +96,28 @@
         <Button color="green" {size}>default</Button>
       </div>
       <div>
-        <Button variant="outlined" {size}>outlined</Button>
-        <Button variant="outlined" {size} color="blue">outlined</Button>
-        <Button variant="outlined" {size} color="red">outlined</Button>
-        <Button variant="outlined" {size} color="green">outlined</Button>
+        <Button variant="outline" {size}>outline</Button>
+        <Button variant="outline" {size} color="blue">outline</Button>
+        <Button variant="outline" {size} color="red">outline</Button>
+        <Button variant="outline" {size} color="green">outline</Button>
       </div>
       <div>
-        <Button variant="filled" {size}>filled</Button>
-        <Button variant="filled" {size} color="blue">filled</Button>
-        <Button variant="filled" {size} color="red">filled</Button>
-        <Button variant="filled" {size} color="green">filled</Button>
+        <Button variant="fill" {size}>fill</Button>
+        <Button variant="fill" {size} color="blue">fill</Button>
+        <Button variant="fill" {size} color="red">fill</Button>
+        <Button variant="fill" {size} color="green">fill</Button>
       </div>
       <div>
-        <Button variant="filledOutlined" {size}>filledOutlined</Button>
-        <Button variant="filledOutlined" {size} color="blue">filledOutlined</Button>
-        <Button variant="filledOutlined" {size} color="red">filledOutlined</Button>
-        <Button variant="filledOutlined" {size} color="green">filledOutlined</Button>
+        <Button variant="fill-light" {size}>fill-light</Button>
+        <Button variant="fill-light" {size} color="blue">fill-light</Button>
+        <Button variant="fill-light" {size} color="red">fill-light</Button>
+        <Button variant="fill-light" {size} color="green">fill-light</Button>
+      </div>
+      <div>
+        <Button variant="fill-outline" {size}>fill-outline</Button>
+        <Button variant="fill-outline" {size} color="blue">fill-outline</Button>
+        <Button variant="fill-outline" {size} color="red">fill-outline</Button>
+        <Button variant="fill-outline" {size} color="green">fill-outline</Button>
       </div>
     </div>
   {/each}
@@ -129,22 +134,28 @@
       <Button rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="outlined" color="accent">default</Button>
-      <Button variant="outlined" color="accent" rounded>rounded</Button>
-      <Button variant="outlined" color="accent" rounded="full">full</Button>
-      <Button variant="outlined" color="accent" rounded={false}>false</Button>
+      <Button variant="outline" color="accent">default</Button>
+      <Button variant="outline" color="accent" rounded>rounded</Button>
+      <Button variant="outline" color="accent" rounded="full">full</Button>
+      <Button variant="outline" color="accent" rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="filled" color="accent">default</Button>
-      <Button variant="filled" color="accent" rounded>rounded</Button>
-      <Button variant="filled" color="accent" rounded="full">full</Button>
-      <Button variant="filled" color="accent" rounded={false}>false</Button>
+      <Button variant="fill" color="accent">default</Button>
+      <Button variant="fill" color="accent" rounded>rounded</Button>
+      <Button variant="fill" color="accent" rounded="full">full</Button>
+      <Button variant="fill" color="accent" rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="filledOutlined" color="accent">default</Button>
-      <Button variant="filledOutlined" color="accent" rounded>rounded</Button>
-      <Button variant="filledOutlined" color="accent" rounded="full">full</Button>
-      <Button variant="filledOutlined" color="accent" rounded={false}>false</Button>
+      <Button variant="fill-light" color="accent">default</Button>
+      <Button variant="fill-light" color="accent" rounded>rounded</Button>
+      <Button variant="fill-light" color="accent" rounded="full">full</Button>
+      <Button variant="fill-light" color="accent" rounded={false}>false</Button>
+    </div>
+    <div>
+      <Button variant="fill-outline" color="accent">default</Button>
+      <Button variant="fill-outline" color="accent" rounded>rounded</Button>
+      <Button variant="fill-outline" color="accent" rounded="full">full</Button>
+      <Button variant="fill-outline" color="accent" rounded={false}>false</Button>
     </div>
   </div>
 </Preview>
@@ -153,9 +164,10 @@
 
 <Preview>
   <Button class="uppercase">text</Button>
-  <Button class="uppercase" variant="outlined" color="accent">outlined</Button>
-  <Button class="uppercase" variant="filled" color="accent">filled</Button>
-  <Button class="uppercase" variant="filledOutlined" color="accent">filledOutlined</Button>
+  <Button class="uppercase" variant="outline" color="accent">outline</Button>
+  <Button class="uppercase" variant="fill" color="accent">fill</Button>
+  <Button class="uppercase" variant="fill-light" color="accent">fill-light</Button>
+  <Button class="uppercase" variant="fill-outline" color="accent">fill-outline</Button>
 </Preview>
 
 <h2>Tooltip</h2>
@@ -211,7 +223,10 @@
 <h2>Icon via SVG string</h2>
 
 <Preview>
-  <Button icon={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'} class="p-2" />
+  <Button
+    icon={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'}
+    class="p-2"
+  />
 </Preview>
 
 <h2>Icon-only button variants and color</h2>
@@ -222,16 +237,20 @@
     <Button icon={mdiMenu} color="accent" />
   </div>
   <div>
-    <Button icon={mdiMenu} variant="outlined" />
-    <Button icon={mdiMenu} variant="outlined" color="accent" />
+    <Button icon={mdiMenu} variant="outline" />
+    <Button icon={mdiMenu} variant="outline" color="accent" />
   </div>
   <div>
-    <Button icon={mdiMenu} variant="filled" />
-    <Button icon={mdiMenu} variant="filled" color="accent" />
+    <Button icon={mdiMenu} variant="fill" />
+    <Button icon={mdiMenu} variant="fill" color="accent" />
   </div>
   <div>
-    <Button icon={mdiMenu} variant="filledOutlined" />
-    <Button icon={mdiMenu} variant="filledOutlined" color="accent" />
+    <Button icon={mdiMenu} variant="fill-light" />
+    <Button icon={mdiMenu} variant="fill-light" color="accent" />
+  </div>
+  <div>
+    <Button icon={mdiMenu} variant="fill-outline" />
+    <Button icon={mdiMenu} variant="fill-outline" color="accent" />
   </div>
 </Preview>
 

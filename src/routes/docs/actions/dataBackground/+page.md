@@ -33,7 +33,7 @@
 import { dataBackground } from 'svelte-ux';
 ```
 
-<Button on:click={() => values = getValues()} variant="filledOutlined" color="blue" class="bg-white">Update data</Button>
+<Button on:click={() => values = getValues()} variant="fill-outline" color="blue" class="bg-white">Update data</Button>
 
 <h2>Domain</h2>
 <label>

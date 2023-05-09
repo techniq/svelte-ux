@@ -203,7 +203,7 @@
     </Button>
 
     <Button
-      variant="filled"
+      variant="fill"
       color="accent"
       class="px-6"
       loading={applying}

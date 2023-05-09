@@ -28,9 +28,7 @@
     <Dialog slot="toggle" {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="filled" color="blue">
-          Close
-        </Button>
+        <Button variant="fill" color="blue">Close</Button>
       </div>
     </Dialog>
   </ToggleButton>
@@ -95,9 +93,17 @@
 <h2>ButtonGroup</h2>
 
 <Preview>
-  <ButtonGroup variant="outlined">
+  <ButtonGroup variant="outline">
     <Button>Click me</Button>
-    <ToggleButton let:on={open} let:toggleOff icon={mdiChevronDown} iconOnly rounded class="px-1" transition={false}>
+    <ToggleButton
+      let:on={open}
+      let:toggleOff
+      icon={mdiChevronDown}
+      iconOnly
+      rounded
+      class="px-1"
+      transition={false}
+    >
       <Menu {open} on:close={toggleOff} placement="bottom-start">
         <MenuItem>One</MenuItem>
         <MenuItem>Two</MenuItem>

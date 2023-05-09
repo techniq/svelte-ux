@@ -17,10 +17,10 @@
   ];
 
   const optionsWithIcons = [
-    { label: 'Cut', value: 'cut', icon: mdiContentCut},
+    { label: 'Cut', value: 'cut', icon: mdiContentCut },
     { label: 'Copy', value: 'copy', icon: mdiContentCopy },
     { label: 'Paste', value: 'paste', icon: mdiContentPaste },
-  ]
+  ];
 </script>
 
 <h1>Examples</h1>
@@ -52,7 +52,7 @@
 <h2>Variant</h2>
 
 <Preview>
-  <MenuButton {options} variant="filled" color="blue" />
+  <MenuButton {options} variant="fill" color="blue" />
 </Preview>
 
 <h2>Size</h2>
@@ -82,7 +82,13 @@
 <h2>menuProps (explicitClose)</h2>
 
 <Preview>
-  <MenuButton {options} menuProps={{ placement: 'bottom-start', explicitClose: true }} let:options let:setValue let:close>
+  <MenuButton
+    {options}
+    menuProps={{ placement: 'bottom-start', explicitClose: true }}
+    let:options
+    let:setValue
+    let:close
+  >
     <div class="p-2">
       <TextField icon={mdiMagnify} placeholder="Search" />
     </div>

@@ -11,7 +11,7 @@
   $: _class = cls(
     // 'button-group', // TODO: Re-add once no longer conflict in another project
     'inline-flex',
-    variant, // used for per-variant group overrides in `style`
+    `variant-${variant}`, // used for per-variant group overrides in `style`
     disabled && 'opacity-50 pointer-events-none',
     $$props.class
   );
@@ -39,16 +39,20 @@
   }
 
   /* Overlap borders to allow selection styling per button.  Should be used with z-index */
-  .outlined :global(.button:not(:first-child)),
-  .outlined :global(:not(:first-child) .button) {
+  .variant-outline :global(.button:not(:first-child)),
+  .variant-outline :global(:not(:first-child) .button),
+  .variant-fill-outline :global(.button:not(:first-child)),
+  .variant-fill-outline :global(:not(:first-child) .button) {
     @apply ml-[-1px];
   }
 
   /* Add gap between buttons (text, filled) */
-  .text :global(.button:not(:first-child)),
-  .text :global(:not(:first-child) .button),
-  .filled :global(.button:not(:first-child)),
-  .filled :global(:not(:first-child) .button) {
+  .variant-text :global(.button:not(:first-child)),
+  .variant-text :global(:not(:first-child) .button),
+  .variant-fill :global(.button:not(:first-child)),
+  .variant-fill :global(:not(:first-child) .button),
+  .variant-fill-light :global(.button:not(:first-child)),
+  .variant-fill-light :global(:not(:first-child) .button) {
     @apply ml-px;
   }
 </style>

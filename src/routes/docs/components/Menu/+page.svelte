@@ -41,7 +41,12 @@
       <Button on:click={toggle}>Click me</Button>
       <Menu {open} on:close={toggle} explicitClose let:close>
         <div class="p-2">
-          <TextField icon={mdiMagnify} placeholder="Search" class="mb-2" autofocus={{ delay: 50 }} />
+          <TextField
+            icon={mdiMagnify}
+            placeholder="Search"
+            class="mb-2"
+            autofocus={{ delay: 50 }}
+          />
           <MenuItem on:click={close}>Refresh</MenuItem>
           <MenuItem on:click={close}>Settings</MenuItem>
           <MenuItem on:click={close}>Help</MenuItem>
@@ -65,7 +70,7 @@
           <Dialog {open} on:close={toggleDialog}>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button variant="filled" color="blue">Close</Button>
+              <Button variant="fill" color="blue">Close</Button>
             </div>
           </Dialog>
         </Toggle>
@@ -74,14 +79,16 @@
           <Dialog {open} on:close={toggleDialog} persistent>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button variant="filled" color="blue">Close</Button>
+              <Button variant="fill" color="blue">Close</Button>
             </div>
           </Dialog>
         </Toggle>
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Drawer...</MenuItem>
           <Drawer {open} on:close={toggleOff} right class="w-[400px]">
-            <div class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400">
+            <div
+              class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
+            >
               <Button on:click={toggleOff}>Close</Button>
             </div>
           </Drawer>
@@ -89,7 +96,9 @@
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Persistent Drawer...</MenuItem>
           <Drawer {open} on:close={toggleOff} right class="w-[400px]" persistent>
-            <div class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400">
+            <div
+              class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
+            >
               <Button on:click={toggleOff}>Close</Button>
             </div>
           </Drawer>
@@ -108,7 +117,9 @@
                 </Menu>
               </span>
             </Toggle>
-            <div class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400">
+            <div
+              class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
+            >
               <Button on:click={toggleOff}>Close</Button>
             </div>
           </Drawer>

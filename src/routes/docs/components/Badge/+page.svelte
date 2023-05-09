@@ -22,7 +22,7 @@
 
 <Preview>
   <Badge {value}>
-    <Button variant="outlined">Example</Button>
+    <Button variant="outline">Example</Button>
   </Badge>
 </Preview>
 
@@ -30,7 +30,7 @@
 
 <Preview>
   <Badge {value} small>
-    <Button variant="outlined">Example</Button>
+    <Button variant="outline">Example</Button>
   </Badge>
 </Preview>
 
@@ -38,7 +38,7 @@
 
 <Preview>
   <Badge {value} circle>
-    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+    <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
   </Badge>
 </Preview>
 
@@ -46,7 +46,7 @@
 
 <Preview>
   <Badge {value} circle small>
-    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+    <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
   </Badge>
 </Preview>
 
@@ -54,7 +54,7 @@
 
 <Preview>
   <Badge {value} dot>
-    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+    <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
   </Badge>
 </Preview>
 
@@ -62,7 +62,7 @@
 
 <Preview>
   <Badge {value} dot small>
-    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+    <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
   </Badge>
 </Preview>
 
@@ -70,7 +70,7 @@
 
 <Preview>
   <Badge {value} circle class="bg-green-500">
-    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+    <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
   </Badge>
 </Preview>
 
@@ -78,7 +78,7 @@
 
 <Preview>
   <Badge {value} circle>
-    <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+    <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
     <div slot="value" class="bg-green-500 text-white rounded-full">
       <Icon path={mdiPlus} />
     </div>
@@ -88,7 +88,7 @@
 <!-- <h2>Corner (multi) w/ Icon Button</h2>
 <Preview>
 <Stack stack inline>
-  <Button icon={mdiFilterVariant} variant="outlined" class="p-3" />
+  <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
   <div
     class="bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center self-start justify-self-end border border-white"
   />
@@ -105,7 +105,7 @@
     <h3 class="text-sm text-black/50">Button w/ default</h3>
     <Preview>
       <Badge {value}>
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -114,7 +114,7 @@
     <h3 class="text-sm text-black/50">Button w/ top-left</h3>
     <Preview>
       <Badge {value} placement="top-left">
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -123,7 +123,7 @@
     <h3 class="text-sm text-black/50">Button w/ top-right</h3>
     <Preview>
       <Badge {value} placement="top-right">
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -132,7 +132,7 @@
     <h3 class="text-sm text-black/50">Button w/ bottom-left</h3>
     <Preview>
       <Badge {value} placement="bottom-left">
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -141,7 +141,7 @@
     <h3 class="text-sm text-black/50">Button w/ bottom-right</h3>
     <Preview>
       <Badge {value} placement="bottom-right">
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -150,7 +150,7 @@
     <h3 class="text-sm text-black/50">Button w/ default</h3>
     <Preview>
       <Badge {value} small>
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -159,7 +159,7 @@
     <h3 class="text-sm text-black/50">Button w/ top-left</h3>
     <Preview>
       <Badge {value} small placement="top-left">
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -168,7 +168,7 @@
     <h3 class="text-sm text-black/50">Button w/ top-right</h3>
     <Preview>
       <Badge {value} small placement="top-right">
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -177,7 +177,7 @@
     <h3 class="text-sm text-black/50">Button w/ bottom-left</h3>
     <Preview>
       <Badge {value} small placement="bottom-left">
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
@@ -186,7 +186,7 @@
     <h3 class="text-sm text-black/50">Button w/ bottom-right</h3>
     <Preview>
       <Badge {value} small placement="bottom-right">
-        <Button variant="outlined">Example</Button>
+        <Button variant="outline">Example</Button>
       </Badge>
     </Preview>
   </div>
