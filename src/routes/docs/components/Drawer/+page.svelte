@@ -16,7 +16,7 @@
   let topOpen = false;
   let bottomOpen = false;
 
-  let isDirty = false;
+  let isChanged = false;
 </script>
 
 <h1>Examples</h1>
@@ -185,21 +185,21 @@
     <Toggle let:on={showDrawer} let:toggleOn={openDrawer} let:toggleOff={closeDrawer}>
       <Drawer
         open={showDrawer}
-        on:close-attempt={isDirty ? openConfirmation : closeDrawer}
-        persistent={isDirty}
+        on:close-attempt={isChanged ? openConfirmation : closeDrawer}
+        persistent={isChanged}
         class="w-[400px]"
       >
         <div class="p-4">
           <div class="grid grid-cols-[1fr,auto] items-center">
             Changed
-            <Switch bind:checked={isDirty} />
+            <Switch bind:checked={isChanged} />
           </div>
         </div>
         <div
           class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
     p-1 border-t border-gray-400"
         >
-          <Button on:click={isDirty ? openConfirmation : closeDrawer}>Close</Button>
+          <Button on:click={isChanged ? openConfirmation : closeDrawer}>Close</Button>
         </div>
       </Drawer>
       <Button on:click={openDrawer}>Click me</Button>
@@ -212,7 +212,7 @@
             on:click={() => {
               closeConfirmation();
               closeDrawer();
-              isDirty = false;
+              isChanged = false;
             }}
             variant="fill"
             color="red"
