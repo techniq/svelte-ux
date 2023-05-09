@@ -45,10 +45,10 @@
     ],
     Layout: [
       'Grid',
-      { label: 'Grid (class)', value: 'GridTailwind' },
+      { label: 'Grid (classes)', value: 'GridTailwind' },
       'Overlay',
       'Stack',
-      { label: 'Stack (class)', value: 'StackTailwind' },
+      { label: 'Stack (classes)', value: 'StackTailwind' },
     ],
     Model: [
       'Dialog',

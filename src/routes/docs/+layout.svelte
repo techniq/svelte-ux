@@ -9,6 +9,7 @@
   import { page } from '$app/stores';
 
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
+  $: title = $page.data.meta?.title ?? name;
   $: docUrl = `src/routes/docs/${type}/${name}/+page.md?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
   $: description = $page.data.meta?.description;
@@ -17,9 +18,9 @@
 
 <div class="grid grid-rows-[auto,1fr] h-full p-4">
   <div>
-    {#if name}
+    {#if title}
       <div class="flex items-center gap-2 _border-b border-black/10">
-        <span class="text-2xl font-bold">{name}</span>
+        <span class="text-2xl font-bold">{title}</span>
         {#if sourceUrl}
           <Tooltip title="View source">
             <Button
