@@ -103,7 +103,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <Button icon={mdiTrashCan} on:click={toggle} class="text-red-500">Delete</Button>
+    <Button icon={mdiTrashCan} on:click={toggle} color="red">Delete</Button>
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure?</div>
       <div class="px-6 py-3">This will permanently delete the item and can not be undone.</div>
@@ -112,7 +112,8 @@
           on:click={() => {
             console.log('Deleting item...');
           }}
-          class="bg-red-500 text-white hover:bg-red-600"
+          variant="fill"
+          color="red"
         >
           Yes, delete item
         </Button>

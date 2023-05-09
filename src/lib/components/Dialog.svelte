@@ -42,7 +42,10 @@
       } else if (actionsEl.contains(e.target)) {
         // Close if action button clicked on (but not container).  Can be disabled with `e.stopPropagation()`
         // console.log('clicked:actions', e.target, actionsEl);
-        if (e.target != actionsEl && !e.target.hasAttribute('slot')) open = false;
+        if (e.target != actionsEl && !e.target.hasAttribute('slot')) {
+          open = false;
+          dispatch('close-attempt');
+        }
       } else if (dialogEl.contains(e.target)) {
         // console.log('clicked:within', e.target);
       } else {
@@ -66,6 +69,7 @@
       if (!persistent) {
         open = false;
       }
+      dispatch('close-attempt');
     }}
     class="z-50"
     fadeParams={{ duration: 150 }}
@@ -88,6 +92,7 @@
       if (e.key === 'Escape' && !persistent) {
         open = false;
       }
+      dispatch('close-attempt');
     }}
     use:portalAction={{ enabled: portal }}
   >

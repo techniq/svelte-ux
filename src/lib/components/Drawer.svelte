@@ -33,6 +33,7 @@
       if (!persistent) {
         open = false;
       }
+      dispatch('close-attempt');
     }}
     class="z-50"
     {portal}
@@ -70,6 +71,7 @@
       if (e.key === 'Escape' && !persistent) {
         open = false;
       }
+      dispatch('close-attempt');
     }}
     on:mouseup={(e) => {
       // Do not allow event to reach Popover's on:mouseup (clickOutside)

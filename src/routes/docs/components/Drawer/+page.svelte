@@ -7,6 +7,7 @@
   import Drawer from '$lib/components/Drawer.svelte';
   import MenuField from '$lib/components/MenuField.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import Switch from '$lib/components/Switch.svelte';
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 
@@ -14,6 +15,8 @@
   let rightOpen = false;
   let topOpen = false;
   let bottomOpen = false;
+
+  let isDirty = false;
 </script>
 
 <h1>Examples</h1>
@@ -168,6 +171,58 @@
       </div>
     </Drawer>
     <Button on:click={toggle}>Click me</Button>
+  </Toggle>
+</Preview>
+
+<h2>Prompt if changed</h2>
+
+<Preview>
+  <Toggle
+    let:on={showConfirmation}
+    let:toggleOn={openConfirmation}
+    let:toggleOff={closeConfirmation}
+  >
+    <Toggle let:on={showDrawer} let:toggleOn={openDrawer} let:toggleOff={closeDrawer}>
+      <Drawer
+        open={showDrawer}
+        on:close-attempt={isDirty ? openConfirmation : closeDrawer}
+        persistent={isDirty}
+        class="w-[400px]"
+      >
+        <div class="p-4">
+          <div class="grid grid-cols-[1fr,auto] items-center">
+            Changed
+            <Switch bind:checked={isDirty} />
+          </div>
+        </div>
+        <div
+          class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
+    p-1 border-t border-gray-400"
+        >
+          <Button on:click={isDirty ? openConfirmation : closeDrawer}>Close</Button>
+        </div>
+      </Drawer>
+      <Button on:click={openDrawer}>Click me</Button>
+
+      <Dialog open={showConfirmation} on:close={closeConfirmation}>
+        <div slot="title">Are you sure?</div>
+        <div class="px-6 py-3">You will lose any unsaved changes</div>
+        <div slot="actions">
+          <Button
+            on:click={() => {
+              closeConfirmation();
+              closeDrawer();
+              isDirty = false;
+            }}
+            variant="fill"
+            color="red"
+          >
+            Yes, lose changes
+          </Button>
+          <Button>Cancel</Button>
+        </div>
+      </Dialog>
+    </Toggle>
   </Toggle>
 </Preview>
 
