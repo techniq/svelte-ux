@@ -49,30 +49,35 @@
       <Button color="blue">default</Button>
       <Button color="red">default</Button>
       <Button color="green">default</Button>
+      <Button color="gray">default</Button>
     </div>
     <div>
       <Button variant="outline">outline</Button>
       <Button variant="outline" color="blue">outline</Button>
       <Button variant="outline" color="red">outline</Button>
       <Button variant="outline" color="green">outline</Button>
+      <Button variant="outline" color="gray">outline</Button>
     </div>
     <div>
       <Button variant="fill">fill</Button>
       <Button variant="fill" color="blue">fill</Button>
       <Button variant="fill" color="red">fill</Button>
       <Button variant="fill" color="green">fill</Button>
+      <Button variant="fill" color="gray">fill</Button>
     </div>
     <div>
       <Button variant="fill-light">fill-light</Button>
       <Button variant="fill-light" color="blue">fill-light</Button>
       <Button variant="fill-light" color="red">fill-light</Button>
       <Button variant="fill-light" color="green">fill-light</Button>
+      <Button variant="fill-light" color="gray">fill-light</Button>
     </div>
     <div>
       <Button variant="fill-outline">fill-outline</Button>
       <Button variant="fill-outline" color="blue">fill-outline</Button>
       <Button variant="fill-outline" color="red">fill-outline</Button>
       <Button variant="fill-outline" color="green">fill-outline</Button>
+      <Button variant="fill-outline" color="gray">fill-outline</Button>
     </div>
   </div>
 </Preview>
@@ -94,30 +99,35 @@
         <Button color="blue" {size}>default</Button>
         <Button color="red" {size}>default</Button>
         <Button color="green" {size}>default</Button>
+        <Button color="gray" {size}>default</Button>
       </div>
       <div>
         <Button variant="outline" {size}>outline</Button>
         <Button variant="outline" {size} color="blue">outline</Button>
         <Button variant="outline" {size} color="red">outline</Button>
         <Button variant="outline" {size} color="green">outline</Button>
+        <Button variant="outline" {size} color="gray">outline</Button>
       </div>
       <div>
         <Button variant="fill" {size}>fill</Button>
         <Button variant="fill" {size} color="blue">fill</Button>
         <Button variant="fill" {size} color="red">fill</Button>
         <Button variant="fill" {size} color="green">fill</Button>
+        <Button variant="fill" {size} color="gray">fill</Button>
       </div>
       <div>
         <Button variant="fill-light" {size}>fill-light</Button>
         <Button variant="fill-light" {size} color="blue">fill-light</Button>
         <Button variant="fill-light" {size} color="red">fill-light</Button>
         <Button variant="fill-light" {size} color="green">fill-light</Button>
+        <Button variant="fill-light" {size} color="gray">fill-light</Button>
       </div>
       <div>
         <Button variant="fill-outline" {size}>fill-outline</Button>
         <Button variant="fill-outline" {size} color="blue">fill-outline</Button>
         <Button variant="fill-outline" {size} color="red">fill-outline</Button>
         <Button variant="fill-outline" {size} color="green">fill-outline</Button>
+        <Button variant="fill-outline" {size} color="gray">fill-outline</Button>
       </div>
     </div>
   {/each}

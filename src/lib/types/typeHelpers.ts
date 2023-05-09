@@ -116,4 +116,5 @@ export type TailwindColors =
   | 'purple'
   | 'fuchsia'
   | 'pink'
-  | 'rose';
+  | 'rose'
+  | 'gray';
