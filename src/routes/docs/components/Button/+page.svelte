@@ -12,10 +12,10 @@
 
 <h1>Examples</h1>
 
-<h2>Default</h2>
+<h2>Basic</h2>
 
 <Preview>
-  <Button>Click me</Button>
+  <Button on:click={() => alert('Why did you do that?')}>Click me</Button>
 </Preview>
 
 <h2>Link</h2>
