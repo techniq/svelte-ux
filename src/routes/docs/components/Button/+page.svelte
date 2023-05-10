@@ -1,5 +1,6 @@
 <script lang="ts">
   import { mdiHome, mdiMagnify, mdiMenu, mdiTrashCan } from '@mdi/js';
+  import { faUser } from '@fortawesome/free-solid-svg-icons';
 
   import api from '$lib/components/Button.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -196,7 +197,25 @@
   </Tooltip>
 </Preview>
 
-<SectionDivider class="mt-12">Icon</SectionDivider>
+<h2>Text with icon</h2>
+
+<Preview>
+  <div class="flex items-center">
+    <Button icon={mdiTrashCan} color="red">Delete</Button>
+    <Button icon={mdiMagnify} class="flex-row-reverse">Search</Button>
+    <Button icon={mdiHome} class="flex-col">Home</Button>
+    <Button icon={mdiHome} class="flex-col-reverse">Home</Button>
+    <Button icon={faUser}>Profile</Button>
+  </div>
+</Preview>
+
+<h2>Pass props to Icon</h2>
+
+<Preview>
+  <Button icon={{ data: mdiTrashCan, size: '2rem', class: '-my-2' }} color="red">Delete</Button>
+</Preview>
+
+<SectionDivider class="mt-12">Icon only</SectionDivider>
 
 <h2>Icon-only button</h2>
 
@@ -216,30 +235,6 @@
 
 <Preview>
   <Button icon={mdiMenu} class="p-2" />
-</Preview>
-
-<h2>Text with icon</h2>
-
-<Preview>
-  <Button icon={mdiTrashCan} color="red">Delete</Button>
-</Preview>
-
-<h2>Text with right icon</h2>
-
-<Preview>
-  <Button icon={mdiMagnify} class="flex-row-reverse">Search</Button>
-</Preview>
-
-<h2>Text with top icon</h2>
-
-<Preview>
-  <Button icon={mdiHome} class="flex-col">Home</Button>
-</Preview>
-
-<h2>Text with bottom icon</h2>
-
-<Preview>
-  <Button icon={mdiHome} class="flex-col-reverse">Home</Button>
 </Preview>
 
 <h2>Icon via url</h2>

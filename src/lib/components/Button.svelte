@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext } from 'svelte';
+  import { getContext, type ComponentProps } from 'svelte';
   import Icon from './Icon.svelte';
 
   import CircularProgress from './CircularProgress.svelte';
@@ -12,7 +12,7 @@
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
-  export let icon: string | undefined = undefined;
+  export let icon: ComponentProps<Icon>['data'] | ComponentProps<Icon> | undefined = undefined;
   export let iconOnly = icon !== undefined && $$slots.default !== true;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> = undefined;
 
@@ -208,7 +208,12 @@
   {#if loading}
     <CircularProgress size={16} width={2} class={cls(classes.loading)} />
   {:else if icon}
-    <Icon data={icon} class={cls(classes.icon)} />
+    {#if typeof icon === 'string' || 'icon' in icon}
+      <!-- font path/url/etc or font-awesome IconDefinition -->
+      <Icon data={icon} class={cls(classes.icon)} />
+    {:else}
+      <Icon class={cls(classes.icon)} {...icon} />
+    {/if}
   {/if}
   <slot />
 </svelte:element>
