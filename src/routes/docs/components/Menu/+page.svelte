@@ -20,8 +20,8 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <span>
-      <Button on:click={toggle}>Click me</Button>
+    <Button on:click={toggle}>
+      Click me
       <Menu {open} on:close={toggle}>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
@@ -29,7 +29,7 @@
         <MenuItem>Sign In</MenuItem>
         <MenuItem disabled>Disabled</MenuItem>
       </Menu>
-    </span>
+    </Button>
   </Toggle>
 </Preview>
 
@@ -37,8 +37,8 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <span>
-      <Button on:click={toggle}>Click me</Button>
+    <Button on:click={toggle}>
+      Click me
       <Menu {open} on:close={toggle} explicitClose let:close>
         <div class="p-2">
           <TextField
@@ -53,7 +53,7 @@
           <MenuItem on:click={close}>Sign In</MenuItem>
         </div>
       </Menu>
-    </span>
+    </Button>
   </Toggle>
 </Preview>
 
@@ -61,8 +61,8 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle={toggleMenu} let:toggleOff={closeMenu}>
-    <span>
-      <Button on:click={toggleMenu}>Click me</Button>
+    <Button on:click={toggleMenu}>
+      Click me
       <Menu {open} on:close={closeMenu} explicitClose let:close>
         <MenuItem on:click={close}>Normal item</MenuItem>
         <Toggle let:on={open} let:toggle={toggleDialog} on:toggleOff={closeMenu}>
@@ -74,6 +74,7 @@
             </div>
           </Dialog>
         </Toggle>
+
         <Toggle let:on={open} let:toggle={toggleDialog} on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDialog}>Open Persistent Dialog...</MenuItem>
           <Dialog {open} on:close={toggleDialog} persistent>
@@ -83,6 +84,7 @@
             </div>
           </Dialog>
         </Toggle>
+
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Drawer...</MenuItem>
           <Drawer {open} on:close={toggleOff} class="w-[400px]">
@@ -93,6 +95,7 @@
             </div>
           </Drawer>
         </Toggle>
+
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Persistent Drawer...</MenuItem>
           <Drawer {open} on:close={toggleOff} class="w-[400px]" persistent>
@@ -103,6 +106,7 @@
             </div>
           </Drawer>
         </Toggle>
+
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Drawer with another Menu...</MenuItem>
           <Drawer {open} on:close={toggleOff} class="w-[400px]">
@@ -125,7 +129,7 @@
           </Drawer>
         </Toggle>
       </Menu>
-    </span>
+    </Button>
   </Toggle>
 </Preview>
 
@@ -133,15 +137,15 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <span>
-      <Button on:click={toggle}>Click me</Button>
+    <Button on:click={toggle}>
+      Click me
       <Menu {open} on:close={toggle} matchWidth>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
         <MenuItem>Sign In</MenuItem>
       </Menu>
-    </span>
+    </Button>
   </Toggle>
 </Preview>
 
@@ -149,15 +153,15 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <span>
-      <Button on:click={toggle}>Click me</Button>
+    <Button on:click={toggle}>
+      Click me
       <Menu {open} on:close={toggle} autoPlacement>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
         <MenuItem>Sign In</MenuItem>
       </Menu>
-    </span>
+    </Button>
   </Toggle>
 </Preview>
 
@@ -167,15 +171,15 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <span>
-      <Button on:click={toggle}>Click me</Button>
+    <Button on:click={toggle}>
+      Click me
       <Menu {open} on:close={toggle} disableTransition>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
         <MenuItem>Sign In</MenuItem>
       </Menu>
-    </span>
+    </Button>
   </Toggle>
 </Preview>
 
@@ -183,15 +187,15 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <span>
-      <Button on:click={toggle}>Click me</Button>
+    <Button on:click={toggle}>
+      Click me
       <Menu {open} on:close={toggle} transitionParams={{ duration: 2000 }}>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
         <MenuItem>Sign In</MenuItem>
       </Menu>
-    </span>
+    </Button>
   </Toggle>
 </Preview>
 
