@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-  import { fly, fade, scale, slide, blur } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   import type { Placement } from '@floating-ui/dom';
 
   import Popover from './Popover.svelte';
@@ -26,9 +26,9 @@
 
   let containerEl: HTMLDivElement;
 
-  let timeoutId;
+  let timeoutId: ReturnType<typeof setTimeout>;
 
-  function showTooltip(e) {
+  function showTooltip(e: MouseEvent | FocusEvent) {
     if (
       delay === 0 ||
       e instanceof FocusEvent ||
