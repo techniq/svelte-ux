@@ -21,7 +21,7 @@
   export let resize = false;
   export let disableTransition = false;
   export let transition = disableTransition
-    ? (node: HTMLElement, params: TransitionParams) => null as TransitionConfig
+    ? (node: HTMLElement, params: TransitionParams) => ({} as TransitionConfig)
     : slide;
   export let transitionParams: TransitionParams = {};
   export let explicitClose = false;
@@ -32,7 +32,7 @@
     menu?: string;
   } = {};
 
-  export let menuItemsEl: HTMLMenuElement = undefined;
+  export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 
   function onClick(e) {
     try {

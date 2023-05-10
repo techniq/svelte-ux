@@ -6,7 +6,7 @@
   import { cls } from '../utils/styles';
 
   export let open = false;
-  export let placement: Placement = undefined;
+  export let placement: Placement | undefined = undefined;
 
   /**
    * Place popover based on which side of the viewport has more space
@@ -16,7 +16,7 @@
   /**
    * Provide element to anchor.  If not provided, uses direct parent of Popover
    */
-  export let anchorEl: HTMLElement = undefined;
+  export let anchorEl: HTMLElement | undefined = undefined;
 
   /**
    * Offset between anchor and popover
