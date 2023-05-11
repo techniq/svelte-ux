@@ -1,9 +1,11 @@
 <script>
   import { onDestroy, onMount } from 'svelte';
+  import { mdiCircleSmall } from '@mdi/js';
 
   import { buildTree } from '../utils/array';
   import { cls } from '../utils/styles';
   import TreeList from './TreeList.svelte';
+  import Icon from './Icon.svelte';
 
   export let element = 'main';
 
@@ -47,7 +49,7 @@
 
 <TreeList
   {nodes}
-  classes={{ li: (node) => cls(node.level === 1 ? 'mb-2' : 'ml-2') }}
+  classes={{ li: (node) => cls(node.level === 1 ? 'mb-2' : node.level > 2 ? 'ml-3' : '') }}
   {...$$restProps}
   let:node
 >
@@ -55,11 +57,14 @@
     <a
       href="#{node.id}"
       class={cls(
-        'block px-2 rounded-lg hover:bg-black/5',
+        'flex gap-1 px-2 rounded-lg hover:bg-black/5 ',
         node.level === 1 ? 'font-semibold' : 'text-sm',
         node.id && node.id === activeHeadingId && 'bg-black/5'
       )}
     >
+      {#if node.level > 1}
+        <Icon path={mdiCircleSmall} class="-mx-1 text-black/30" />
+      {/if}
       {@html node.name}
     </a>
   </slot>
