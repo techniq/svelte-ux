@@ -17,6 +17,7 @@
   export let placement: Placement = 'bottom-start';
   export let autoPlacement = true;
   export let inlineSearch = false;
+  export let placeholder: string | undefined = undefined;
   export let infiniteScroll = false;
   export let searchText = '';
 
@@ -52,6 +53,7 @@
     {open}
     {duration}
     {inlineSearch}
+    {placeholder}
     {infiniteScroll}
     {labelProp}
     {valueProp}

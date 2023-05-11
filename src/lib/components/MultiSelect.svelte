@@ -22,6 +22,7 @@
   export let indeterminateSelected: string[] = [];
   export let duration = 200;
   export let inlineSearch = false;
+  export let placeholder = 'Search items';
   export let infiniteScroll = false;
 
   export let labelProp = 'name';
@@ -103,7 +104,7 @@
 {#if inlineSearch}
   <div class="border-b border-gray-100 p-4 pb-2">
     <TextField
-      placeholder="Search items"
+      {placeholder}
       iconRight={mdiMagnify}
       bind:value={searchText}
       autofocus={{ delay: 100 }}

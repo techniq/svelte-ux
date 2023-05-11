@@ -57,6 +57,7 @@
         {open}
         on:close={toggleOff}
         inlineSearch
+        placeholder="Pick a number"
       />
     </ToggleButton>
   </span>
