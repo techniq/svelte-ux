@@ -5,6 +5,7 @@
 
   import { cls } from '$lib/utils/styles';
   import MultiSelect from './MultiSelect.svelte';
+  import { MultiSelectOption } from './MultiSelectOption.svelte';
 
   type Option = $$Generic;
 
@@ -60,6 +61,23 @@
     on:change={() => close()}
     on:change
   >
+    <!-- TODO: If only `<slot name="option" slot="option" />` just worked  -->
+    <svelte:fragment
+      slot="option"
+      let:option
+      let:label
+      let:value
+      let:checked
+      let:indeterminate
+      let:onChange
+    >
+      <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
+        <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+          {label}
+        </MultiSelectOption>
+      </slot>
+    </svelte:fragment>
+
     <slot name="actions" slot="actions" />
   </MultiSelect>
 </Menu>

@@ -1,5 +1,5 @@
 <script>
-  import { mdiMagnify, mdiPlus, mdiPencil } from '@mdi/js';
+  import { mdiPlus } from '@mdi/js';
 
   import api from '$lib/components/MultiSelectField.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -7,12 +7,9 @@
   import Button from '$lib/components/Button.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
   import MultiSelectField from '$lib/components/MultiSelectField.svelte';
+  import MultiSelectOption from '$lib/components/MultiSelectOption.svelte';
   import ToggleButton from '$lib/components/ToggleButton.svelte';
-
-  import { delay } from '$lib/utils/promise';
-  import { cls } from '$lib/utils/styles';
 
   const options = [
     { name: 'One', value: 1 },
@@ -93,6 +90,27 @@
       </div>
     </Drawer>
   </ToggleButton>
+</Preview>
+
+<h2>option slot</h2>
+
+<Preview>
+  <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)}>
+    <MultiSelectOption
+      slot="option"
+      let:option
+      let:label
+      let:value
+      let:checked
+      let:indeterminate
+      let:onChange
+      {checked}
+      {indeterminate}
+      on:change={onChange}
+    >
+      <span class="uppercase text-red-500">{label}</span>
+    </MultiSelectOption>
+  </MultiSelectField>
 </Preview>
 
 <h1>API</h1>

@@ -7,6 +7,7 @@
 
   import Button from './Button.svelte';
   import MultiSelectMenu from './MultiSelectMenu.svelte';
+  import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
 
   import { cls } from '../utils/styles';
@@ -204,6 +205,23 @@
     bind:menuOptionsEl
     {...menuProps}
   >
+    <!-- TODO: If only `<slot name="option" slot="option" />` just worked  -->
+    <svelte:fragment
+      slot="option"
+      let:option
+      let:label
+      let:value
+      let:checked
+      let:indeterminate
+      let:onChange
+    >
+      <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
+        <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+          {label}
+        </MultiSelectOption>
+      </slot>
+    </svelte:fragment>
+
     <slot name="actions" slot="actions">
       <div />
     </slot>
