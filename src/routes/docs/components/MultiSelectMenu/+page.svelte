@@ -168,6 +168,9 @@
           {checked}
           {indeterminate}
           on:change={onChange}
+          classes={{
+            root: 'py-1',
+          }}
         >
           <span class="uppercase text-red-500">{label}</span>
         </MultiSelectOption>
