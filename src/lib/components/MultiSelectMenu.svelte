@@ -29,7 +29,7 @@
     menu?: string;
   } = {};
 
-  export let menuItemsEl: HTMLMenuElement;
+  export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 </script>
 
 <Menu

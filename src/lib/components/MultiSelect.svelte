@@ -28,8 +28,8 @@
   export let labelProp = 'name';
   export let valueProp = 'value';
 
-  export let cancelButtonProps: ComponentProps<Button> = undefined;
-  export let applyButtonProps: ComponentProps<Button> = undefined;
+  export let cancelButtonProps: ComponentProps<Button> | undefined = undefined;
+  export let applyButtonProps: ComponentProps<Button> | undefined = undefined;
 
   export let classes: {
     root?: string;

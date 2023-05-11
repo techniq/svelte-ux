@@ -52,10 +52,10 @@
   const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
 
   // Elements
-  let inputEl: HTMLInputElement | null = null;
-  let menuOptionsEl: HTMLDivElement;
+  let inputEl: HTMLInputElement | undefined;
+  let menuOptionsEl: HTMLDivElement | undefined;
 
-  export let menuProps: ComponentProps<MultiSelectMenu<Option>> = undefined;
+  export let menuProps: ComponentProps<MultiSelectMenu<Option>> | undefined = undefined;
 
   const logger = new Logger('MultiSelectField');
 
@@ -70,7 +70,7 @@
   function show() {
     logger.debug('show');
 
-    inputEl.focus();
+    inputEl?.focus();
 
     if (!open) {
       searchText = '';
