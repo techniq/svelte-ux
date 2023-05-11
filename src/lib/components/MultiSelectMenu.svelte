@@ -5,7 +5,7 @@
 
   import { cls } from '$lib/utils/styles';
   import MultiSelect from './MultiSelect.svelte';
-  import { MultiSelectOption } from './MultiSelectOption.svelte';
+  import MultiSelectOption from './MultiSelectOption.svelte';
 
   type Option = $$Generic;
 
