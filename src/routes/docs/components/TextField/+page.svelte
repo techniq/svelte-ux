@@ -76,10 +76,7 @@
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
-    <TextField
-      label="First Name"
-      placeholder="Please enter your first name"
-    />
+    <TextField label="First Name" placeholder="Please enter your first name" />
     <TextField label="Last Name" placeholder="Please enter your last name" />
   </div>
 </Preview>
@@ -97,16 +94,8 @@
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
-    <TextField
-      label="First Name"
-      shrinkLabel
-      placeholder="Please enter your first name"
-    />
-    <TextField
-      label="Last Name"
-      shrinkLabel
-      placeholder="Please enter your last name"
-    />
+    <TextField label="First Name" shrinkLabel placeholder="Please enter your first name" />
+    <TextField label="Last Name" shrinkLabel placeholder="Please enter your last name" />
   </div>
 </Preview>
 
@@ -114,16 +103,8 @@
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
-    <TextField
-      label="First Name"
-      placeholder="Please enter your first name"
-      dense
-    />
-    <TextField
-      label="Last Name"
-      placeholder="Please enter your last name"
-      dense
-    />
+    <TextField label="First Name" placeholder="Please enter your first name" dense />
+    <TextField label="Last Name" placeholder="Please enter your last name" dense />
   </div>
 </Preview>
 
@@ -152,15 +133,15 @@
 <h2>on:change event</h2>
 
 <Preview>
-  <TextField label="Name" on:change={e => console.log(e.detail)} />
+  <TextField label="Name" on:change={(e) => console.log(e.detail)} />
 </Preview>
 
 <h2>debounceChange</h2>
 
 <Preview>
   <div class="grid gap-2">
-    <TextField label="Name" on:change={e => console.log(e.detail)} debounceChange />
-    <TextField label="Name" on:change={e => console.log(e.detail)} debounceChange={1000} />
+    <TextField label="Name" on:change={(e) => console.log(e.detail)} debounceChange />
+    <TextField label="Name" on:change={(e) => console.log(e.detail)} debounceChange={1000} />
   </div>
 </Preview>
 
@@ -172,30 +153,32 @@
     actions={(node) => [
       debounceEvent(node, {
         type: 'input',
-        listener: e => { console.log(e.target.value) },
-        timeout: 500
-      })
+        listener: (e) => {
+          console.log(e.target.value);
+        },
+        timeout: 500,
+      }),
     ]}
   />
 </Preview>
 
 <SectionDivider>Type</SectionDivider>
 
-<h2>Examples</h2>
+<h2>Input types</h2>
 
 <h3>Sets input type and add prefix/suffix when appropriate</h3>
 
 <Preview>
   <div class="grid grid-cols-3 gap-2">
-    <TextField label="default" on:change={e => console.log(e.detail)}  />
-    <TextField label="text" type="text" on:change={e => console.log(e.detail)} />
-    <TextField label="password" type="password" on:change={e => console.log(e.detail)}  />
-    <TextField label="integer" type="integer" on:change={e => console.log(e.detail)}  />
-    <TextField label="decimal" type="decimal" on:change={e => console.log(e.detail)}  />
-    <TextField label="currency" type="currency" on:change={e => console.log(e.detail)}  />
-    <TextField label="percent" type="percent" on:change={e => console.log(e.detail)}  />
-    <TextField label="email" type="email" on:change={e => console.log(e.detail)}  />
-    <TextField label="search" type="search" on:change={e => console.log(e.detail)}  />
+    <TextField label="default" on:change={(e) => console.log(e.detail)} />
+    <TextField label="text" type="text" on:change={(e) => console.log(e.detail)} />
+    <TextField label="password" type="password" on:change={(e) => console.log(e.detail)} />
+    <TextField label="integer" type="integer" on:change={(e) => console.log(e.detail)} />
+    <TextField label="decimal" type="decimal" on:change={(e) => console.log(e.detail)} />
+    <TextField label="currency" type="currency" on:change={(e) => console.log(e.detail)} />
+    <TextField label="percent" type="percent" on:change={(e) => console.log(e.detail)} />
+    <TextField label="email" type="email" on:change={(e) => console.log(e.detail)} />
+    <TextField label="search" type="search" on:change={(e) => console.log(e.detail)} />
   </div>
 </Preview>
 
@@ -203,7 +186,7 @@
 
 <div class="grid grid-flow-col gap-2">
   <div>
-        <div class="text-lg font-semibold mt-8 ml-2">Prepend</div>
+    <div class="text-lg font-semibold mt-8 ml-2">Prepend</div>
     <Preview>
       <TextField label="User Search">
         <div slot="prepend">
@@ -271,11 +254,7 @@
     <Preview>
       <TextField label="Ratio" align="right">
         <div slot="suffix">
-          <Icon
-            path={mdiPercent}
-            size="1.1em"
-            class="text-black/50 -mt-1 ml-1"
-          />
+          <Icon path={mdiPercent} size="1.1em" class="text-black/50 -mt-1 ml-1" />
         </div>
       </TextField>
     </Preview>
@@ -371,11 +350,7 @@
 <h2>Multiline with autoHeight</h2>
 
 <Preview>
-  <TextField
-    label="Comment"
-    multiline
-    actions={(node) => [autoHeight(node)]}
-  />
+  <TextField label="Comment" multiline actions={(node) => [autoHeight(node)]} />
 </Preview>
 
 <SectionDivider>Mask & Accept</SectionDivider>
@@ -389,7 +364,7 @@
 <h2>Telephone</h2>
 
 <Preview>
-	<TextField mask="+1 (___) ___-____" replace="_" />
+  <TextField mask="+1 (___) ___-____" replace="_" />
 </Preview>
 
 <h2>`accept` without `mask`</h2>
@@ -442,12 +417,7 @@
 <h2>Number stepper</h2>
 
 <Preview>
-  <TextField
-    type="integer"
-    bind:value={numberValue}
-    align="center"
-    class="w-24"
-  >
+  <TextField type="integer" bind:value={numberValue} align="center" class="w-24">
     <div slot="prepend" class="flex">
       <Button icon={mdiMinus} on:click={() => (numberValue -= 1)} size="sm" />
     </div>
