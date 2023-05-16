@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import toggleGroupApi from '$lib/components/ToggleGroup.svelte?raw&sveld';
   import toggleOptionApi from '$lib/components/ToggleOption.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -33,10 +33,7 @@
 <h2>Panels</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-  >
+  <ToggleGroup contained={optionStyle === 'contained'} underlined={optionStyle === 'underlined'}>
     <ToggleOption value="all" class="w-32">All</ToggleOption>
     <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
     <ToggleOption value="calls" class="w-32">Calls</ToggleOption>

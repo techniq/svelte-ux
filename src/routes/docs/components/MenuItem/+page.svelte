@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiMagnify } from '@mdi/js';
 
   import api from '$lib/components/MenuItem.svelte?raw&sveld';

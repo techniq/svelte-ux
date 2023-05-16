@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import api from '$lib/components/Checkbox.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -26,8 +26,8 @@
 <Preview>
   <Checkbox bind:checked />
   <div class="text-sm">
-    set: <Button size="sm" on:click={() => checked = true}>true</Button>
-    <Button size="sm" on:click={() => checked = false}>false</Button>
+    set: <Button size="sm" on:click={() => (checked = true)}>true</Button>
+    <Button size="sm" on:click={() => (checked = false)}>false</Button>
   </div>
 </Preview>
 
@@ -40,8 +40,8 @@
   <Checkbox bind:group value={4} disabled>Four (disabled)</Checkbox>
   <div>{JSON.stringify(group)}</div>
   <div class="text-sm">
-    <Button size="sm" on:click={() => group = []}>clear</Button>
-    <Button size="sm" on:click={() => group = [1,2,3,4]}>select all</Button>
+    <Button size="sm" on:click={() => (group = [])}>clear</Button>
+    <Button size="sm" on:click={() => (group = [1, 2, 3, 4])}>select all</Button>
   </div>
 </Preview>
 
@@ -67,7 +67,9 @@
 <Preview>
   <div class="border w-[150px] overflow-auto p-1">
     {#each { length: 5 } as _}
-      <Checkbox classes={{ root: 'truncate max-w-full', label: 'truncate' }}>This is a really long label</Checkbox>
+      <Checkbox classes={{ root: 'truncate max-w-full', label: 'truncate' }}
+        >This is a really long label</Checkbox
+      >
     {/each}
   </div>
 </Preview>
@@ -103,13 +105,13 @@
     <Checkbox size="sm">Label</Checkbox>
     <Checkbox size="sm" checked>Label</Checkbox>
   </div>
-    <div>
+  <div>
     <Checkbox size="md" />
     <Checkbox size="md" checked />
     <Checkbox size="md">Label</Checkbox>
     <Checkbox size="md" checked>Label</Checkbox>
   </div>
-    <div>
+  <div>
     <Checkbox size="lg" />
     <Checkbox size="lg" checked />
     <Checkbox size="lg">Label</Checkbox>
@@ -164,13 +166,13 @@
     <Checkbox size="sm" circle>Label</Checkbox>
     <Checkbox size="sm" circle checked>Label</Checkbox>
   </div>
-    <div>
+  <div>
     <Checkbox size="md" circle />
     <Checkbox size="md" circle checked />
     <Checkbox size="md" circle>Label</Checkbox>
     <Checkbox size="md" circle checked>Label</Checkbox>
   </div>
-    <div>
+  <div>
     <Checkbox size="lg" circle />
     <Checkbox size="lg" circle checked />
     <Checkbox size="lg" circle>Label</Checkbox>

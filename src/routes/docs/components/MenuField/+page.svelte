@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify, mdiRefresh } from '@mdi/js';
 
   import api from '$lib/components/MenuField.svelte?raw&sveld';
@@ -17,10 +17,10 @@
   ];
 
   const optionsWithIcons = [
-    { label: 'Cut', value: 'cut', icon: mdiContentCut},
+    { label: 'Cut', value: 'cut', icon: mdiContentCut },
     { label: 'Copy', value: 'copy', icon: mdiContentCopy },
     { label: 'Paste', value: 'paste', icon: mdiContentPaste },
-  ]
+  ];
 </script>
 
 <h1>Examples</h1>

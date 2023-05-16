@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { max } from 'd3-array';
   import api from '$lib/components/Table.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -31,18 +31,18 @@
     { id: 10, name: 'Lollipop', calories: 392, fat: 0.2, carbs: 98, protein: 0.0 },
     { id: 11, name: 'Marshmallow', calories: 318, fat: 0.0, carbs: 81, protein: 2.0 },
     { id: 12, name: 'Nougat', calories: 360, fat: 19.0, carbs: 9, protein: 37.0 },
-    { id: 13, name: 'Oreo', calories: 437, fat: 18.0, carbs: 63, protein: 4.0 }
+    { id: 13, name: 'Oreo', calories: 437, fat: 18.0, carbs: 63, protein: 4.0 },
   ];
 
   function randomDataGen() {
-    return data.map(d => {
+    return data.map((d) => {
       return {
         ...d,
         calories: randomInteger(300, 900),
         fat: randomInteger(2, 30),
         carbs: randomInteger(5, 100),
         protein: randomInteger(0, 50),
-      }
+      };
     });
   }
   let randomData = randomDataGen();
@@ -120,7 +120,12 @@
         },
       ]}
     />
-    <Pagination {pagination} perPageOptions={[5,10,25,100]} show={['perPage', 'pagination', 'prevPage', 'nextPage']} classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }} />
+    <Pagination
+      {pagination}
+      perPageOptions={[5, 10, 25, 100]}
+      show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+      classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+    />
   </Paginate>
 </Preview>
 
@@ -168,7 +173,10 @@
 <h2>Data background</h2>
 
 <Preview>
-  <Button on:click={() => randomData = randomDataGen()} class="text-blue-500 border border-blue-500 bg-white mb-1">Randomize</Button>
+  <Button
+    on:click={() => (randomData = randomDataGen())}
+    class="text-blue-500 border border-blue-500 bg-white mb-1">Randomize</Button
+  >
   <Table
     data={randomData}
     columns={[
@@ -183,8 +191,8 @@
         dataBackground: {
           color: 'var(--color-blue-100)',
           inset: [1, 2],
-          tweened: { duration: 300 }
-        }
+          tweened: { duration: 300 },
+        },
       },
       {
         name: 'fat',
@@ -193,8 +201,8 @@
         dataBackground: {
           color: 'var(--color-purple-100)',
           inset: [1, 2],
-          tweened: { duration: 300 }
-        }
+          tweened: { duration: 300 },
+        },
       },
       {
         name: 'carbs',
@@ -203,8 +211,8 @@
         dataBackground: {
           color: 'var(--color-orange-100)',
           inset: [1, 2],
-          tweened: { duration: 300 }
-        }
+          tweened: { duration: 300 },
+        },
       },
       {
         name: 'protein',
@@ -213,8 +221,8 @@
         dataBackground: {
           color: 'var(--color-red-100)',
           inset: [1, 2],
-          tweened: { duration: 300 }
-        }
+          tweened: { duration: 300 },
+        },
       },
     ]}
   />

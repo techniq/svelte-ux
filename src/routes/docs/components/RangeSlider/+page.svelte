@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiMagnify, mdiPlus } from '@mdi/js';
 
   import api from '$lib/components/RangeSlider.svelte?raw&sveld';
@@ -15,11 +15,8 @@
 <h2>Description</h2>
 
 <div class="prose">
-
-- Drag start and end points individually, or drag the middle together
-- Double click start, end or range to set min/max
-- Use keyboard arrow keys to adjust last changed
-
+  - Drag start and end points individually, or drag the middle together - Double click start, end or
+  range to set min/max - Use keyboard arrow keys to adjust last changed
 </div>
 
 <h2>basic</h2>

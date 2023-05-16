@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiCodeTags, mdiFileDocumentEditOutline } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import api from '$lib/components/Drawer.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 

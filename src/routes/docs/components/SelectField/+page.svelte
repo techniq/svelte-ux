@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiMagnify, mdiPlus, mdiPencil } from '@mdi/js';
 
   import api from '$lib/components/SelectField.svelte?raw&sveld';

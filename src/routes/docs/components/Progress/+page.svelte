@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import api from '$lib/components/CircularProgress.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -20,21 +20,15 @@
 
 <h2>Demo</h2>
 
-<div class="border border-black/20 rounded bg-white ">
+<div class="border border-black/20 rounded bg-white">
   <Stack horizontal template="1fr auto" items="center" justifyItems="center">
-      <CircularProgress
-        value={indeterminate ? null : value}
-        {size}
-        {width}
-        {rotate}
-        {track}
-      >
-        {#if label}
-          <span class="text-black/50 text-xs">
-            {#if indeterminate}Loading...{:else}{value}%{/if}
-          </span>
-        {/if}
-      </CircularProgress>
+    <CircularProgress value={indeterminate ? null : value} {size} {width} {rotate} {track}>
+      {#if label}
+        <span class="text-black/50 text-xs">
+          {#if indeterminate}Loading...{:else}{value}%{/if}
+        </span>
+      {/if}
+    </CircularProgress>
     <div class="bg-black/5 border-l border-black/20 p-4">
       <label class="block">
         size:
@@ -70,59 +64,59 @@
 
 <h2>Default</h2>
 
-  <Preview>
-    <CircularProgress />
-  </Preview>
+<Preview>
+  <CircularProgress />
+</Preview>
 
 <h2>Value</h2>
 
-  <Preview>
-    <Stack horizontal justify="start" gap={32}>
-      <CircularProgress value={0} />
-      <CircularProgress value={20} />
-      <CircularProgress value={40} />
-      <CircularProgress value={60} />
-      <CircularProgress value={80} />
-      <CircularProgress value={100} />
-    </Stack>
-  </Preview>
+<Preview>
+  <Stack horizontal justify="start" gap={32}>
+    <CircularProgress value={0} />
+    <CircularProgress value={20} />
+    <CircularProgress value={40} />
+    <CircularProgress value={60} />
+    <CircularProgress value={80} />
+    <CircularProgress value={100} />
+  </Stack>
+</Preview>
 
 <h2>Value w/ with track</h2>
 
 <Preview>
-<Stack horizontal justify="start" gap={32}>
-<CircularProgress value={0} track />
-<CircularProgress value={20} track />
-<CircularProgress value={40} track />
-<CircularProgress value={60} track />
-<CircularProgress value={80} track />
-<CircularProgress value={100} track />
-</Stack>
+  <Stack horizontal justify="start" gap={32}>
+    <CircularProgress value={0} track />
+    <CircularProgress value={20} track />
+    <CircularProgress value={40} track />
+    <CircularProgress value={60} track />
+    <CircularProgress value={80} track />
+    <CircularProgress value={100} track />
+  </Stack>
 </Preview>
 
 <h2>Value w/ with label</h2>
 
 <Preview>
-<Stack horizontal justify="start" gap={32}>
-<CircularProgress value={0}>
-<span class="text-black/50 text-xs">0%</span>
-</CircularProgress>
-<CircularProgress value={20}>
-<span class="text-black/50 text-xs">20%</span>
-</CircularProgress>
-<CircularProgress value={40}>
-<span class="text-black/50 text-xs">40%</span>
-</CircularProgress>
-<CircularProgress value={60}>
-<span class="text-black/50 text-xs">60%</span>
-</CircularProgress>
-<CircularProgress value={80}>
-<span class="text-black/50 text-xs">80%</span>
-</CircularProgress>
-<CircularProgress value={100}>
-<span class="text-black/50 text-xs">100%</span>
-</CircularProgress>
-</Stack>
+  <Stack horizontal justify="start" gap={32}>
+    <CircularProgress value={0}>
+      <span class="text-black/50 text-xs">0%</span>
+    </CircularProgress>
+    <CircularProgress value={20}>
+      <span class="text-black/50 text-xs">20%</span>
+    </CircularProgress>
+    <CircularProgress value={40}>
+      <span class="text-black/50 text-xs">40%</span>
+    </CircularProgress>
+    <CircularProgress value={60}>
+      <span class="text-black/50 text-xs">60%</span>
+    </CircularProgress>
+    <CircularProgress value={80}>
+      <span class="text-black/50 text-xs">80%</span>
+    </CircularProgress>
+    <CircularProgress value={100}>
+      <span class="text-black/50 text-xs">100%</span>
+    </CircularProgress>
+  </Stack>
 </Preview>
 
 <h2>Value w/ with label and track</h2>
@@ -187,26 +181,11 @@
 
 <Preview>
   <Stack horizontal justify="start" gap={32}>
-    <CircularProgress
-      class="text-blue-500 [--track-color:theme(colors.blue.100)]"
-      track
-    />
-    <CircularProgress
-      class="text-red-500 [--track-color:theme(colors.red.100)]"
-      track
-    />
-    <CircularProgress
-      class="text-purple-500 [--track-color:theme(colors.purple.100)]"
-      track
-    />
-    <CircularProgress
-      class="text-green-500 [--track-color:theme(colors.green.100)]"
-      track
-    />
-    <CircularProgress
-      class="text-orange-500 [--track-color:theme(colors.orange.100)]"
-      track
-    />
+    <CircularProgress class="text-blue-500 [--track-color:theme(colors.blue.100)]" track />
+    <CircularProgress class="text-red-500 [--track-color:theme(colors.red.100)]" track />
+    <CircularProgress class="text-purple-500 [--track-color:theme(colors.purple.100)]" track />
+    <CircularProgress class="text-green-500 [--track-color:theme(colors.green.100)]" track />
+    <CircularProgress class="text-orange-500 [--track-color:theme(colors.orange.100)]" track />
   </Stack>
 </Preview>
 

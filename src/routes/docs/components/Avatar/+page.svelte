@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiAccount } from '@mdi/js';
 
   import api from '$lib/components/Avatar.svelte?raw&sveld';

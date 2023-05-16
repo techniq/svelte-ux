@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiTrashCan } from '@mdi/js';
 
   import api from '$lib/components/Tooltip.svelte?raw&sveld';
@@ -92,9 +92,7 @@
 <h2>Underline & cursor</h2>
 
 <Preview>
-  <Tooltip title="Hello" underline cursor>
-    Hover me
-  </Tooltip>
+  <Tooltip title="Hello" underline cursor>Hover me</Tooltip>
 </Preview>
 
 <!-- TODO: Slot with custom transition -->

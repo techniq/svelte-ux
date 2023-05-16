@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { addDays } from 'date-fns';
 
   import { mdiCalendarStart, mdiCalendarEnd } from '@mdi/js';

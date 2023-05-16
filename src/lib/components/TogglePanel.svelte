@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { getContext, onDestroy } from 'svelte';
 
   import { groupKey } from './ToggleGroup.svelte';

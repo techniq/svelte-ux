@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiPlus } from '@mdi/js';
 
   import api from '$lib/components/MultiSelectField.svelte?raw&sveld';

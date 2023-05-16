@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiTrashCan } from '@mdi/js';
 
   import api from '$lib/components/Dialog.svelte?raw&sveld';

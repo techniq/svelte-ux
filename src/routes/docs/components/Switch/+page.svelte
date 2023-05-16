@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiCheck, mdiClose } from '@mdi/js';
 
   import api from '$lib/components/Switch.svelte?raw&sveld';
@@ -59,7 +59,7 @@
 
 <Preview>
   <Switch bind:checked />
-  <Button on:click={() => checked = null} size="sm">reset</Button>
+  <Button on:click={() => (checked = null)} size="sm">reset</Button>
 </Preview>
 
 <h2>Size</h2>
@@ -89,8 +89,16 @@
 
 <Preview>
   <div class="grid gap-2">
-    <Switch color="green" classes={{ switch: 'data-[checked=false]:bg-red-500 data-[checked=false]:border-red-500' }} />
-    <Switch classes={{ switch: 'bg-white border-gray-400', toggle: 'data-[checked=false]:bg-red-500 data-[checked=true]:bg-green-500' }} />
+    <Switch
+      color="green"
+      classes={{ switch: 'data-[checked=false]:bg-red-500 data-[checked=false]:border-red-500' }}
+    />
+    <Switch
+      classes={{
+        switch: 'bg-white border-gray-400',
+        toggle: 'data-[checked=false]:bg-red-500 data-[checked=true]:bg-green-500',
+      }}
+    />
   </div>
 </Preview>
 

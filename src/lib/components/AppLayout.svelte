@@ -3,7 +3,7 @@
   export const showDrawer = writable(true);
 </script>
 
-<script>
+<script lang="ts">
   import Backdrop from './Backdrop.svelte';
 
   import matchMedia from '../stores/matchMedia';

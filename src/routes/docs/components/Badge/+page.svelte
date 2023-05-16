@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { mdiFilterVariant, mdiPlus, mdiMinus } from '@mdi/js';
 
   import api from '$lib/components/Badge.svelte?raw&sveld';

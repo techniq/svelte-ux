@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import api from '$lib/components/TweenedValue.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
   import * as easings from 'svelte/easing';
