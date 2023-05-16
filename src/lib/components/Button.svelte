@@ -44,7 +44,7 @@
 
   $: _class = cls(
     'button',
-    'transition duration-300 ring-black/20',
+    'transition duration-200 ring-black/20',
     'focus:outline-none focus-visible:ring-1',
     fullWidth ? 'flex w-full' : 'inline-flex',
     loading ? 'gap-2' : 'gap-1',
