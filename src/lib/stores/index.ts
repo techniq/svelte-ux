@@ -6,7 +6,7 @@ export { default as graphStore, initGraphClient } from './graphStore';
 export { default as formStore } from './formStore';
 export { default as localStore } from './localStore';
 export { default as mapStore } from './mapStore';
-export { default as matchMedia } from './matchMedia';
+export * from './matchMedia';
 export { default as paginationStore } from './paginationStore';
 export { default as selectionStore } from './selectionStore';
 export { default as tableOrderStore } from './tableOrderStore';

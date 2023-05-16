@@ -57,6 +57,7 @@ export { default as Popover } from './Popover.svelte';
 export { default as QuickSearch } from './QuickSearch.svelte';
 export { default as Radio } from './Radio.svelte';
 export { default as RangeSlider } from './RangeSlider.svelte';
+export { default as ResponsiveMenu } from './ResponsiveMenu.svelte';
 export { default as ScrollContainer } from './ScrollContainer.svelte';
 export { default as SectionDivider } from './SectionDivider.svelte';
 export { default as Selection } from './Selection.svelte';

@@ -6,14 +6,14 @@
 <script lang="ts">
   import Backdrop from './Backdrop.svelte';
 
-  import matchMedia from '../stores/matchMedia';
+  import { mdScreen } from '../stores/matchMedia';
   import cssVars from '../actions/cssVars';
   import { cls } from '../utils/styles';
 
   export let navWidth = 240;
 
-  let isMobile = matchMedia('screen and (max-width: 768px)');
-  $: temporaryDrawer = $isMobile;
+  let isDesktop = mdScreen;
+  $: temporaryDrawer = !$isDesktop;
 
   $: styleVars = {
     drawerWidth: $showDrawer ? `${navWidth}px` : '0',
