@@ -57,6 +57,7 @@
       'MenuButton',
       'MenuField',
       'MenuItem',
+      'ResponsiveMenu',
       'Notification',
       'Popover',
       'Tooltip',
