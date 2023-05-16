@@ -21,7 +21,7 @@ export default function portal(node: HTMLElement, options?: PortalOptions): Svel
     destroy() {
       const target = getTarget(options);
       // If target still contains node that was moved, remove it.  Not sure if required
-      if (target.contains(node)) {
+      if (target?.contains(node)) {
         target.removeChild(node);
       }
     },
@@ -32,7 +32,7 @@ function moveNode(node: HTMLElement, options: PortalOptions = {}): SvelteActionR
   if (options.enabled === false) return;
 
   const target = getTarget(options);
-  target.appendChild(node);
+  target?.appendChild(node);
 }
 
 function getTarget(options: PortalOptions = {}) {
