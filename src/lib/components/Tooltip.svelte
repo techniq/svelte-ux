@@ -51,6 +51,18 @@
     }
     open = false;
   }
+
+  function onFocusIn(e: FocusEvent) {
+    // TODO: Is there a better way to differentiate between focus from click vs tab?
+    if (e.target?.parentElement?.querySelector(':focus-visible')) {
+      // tab focused
+      showTooltip(e);
+    } else {
+      // click focused
+      hideTooltip();
+      lastShown = null;
+    }
+  }
 </script>
 
 {#if enabled && (title || $$slots.title)}
@@ -79,12 +91,14 @@
   </Popover>
 {/if}
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   class="contents"
   on:mouseenter={showTooltip}
   on:mouseleave={hideTooltip}
-  on:focusin={showTooltip}
+  on:focusin={onFocusIn}
   on:focusout={hideTooltip}
+  on:click={hideTooltip}
   bind:this={containerEl}
 >
   {#if $$props.class || underline || cursor}
