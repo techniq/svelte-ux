@@ -2,6 +2,7 @@
 	import { subDays, subMonths } from 'date-fns';
 
 	import Preview from '$lib/components/Preview.svelte';
+	import Code from '$lib/components/Code.svelte';
 	import TextField from '$lib/components/TextField.svelte';
 
 	import cssVars from '$lib/actions/cssVars';
@@ -12,9 +13,7 @@
 
 <h1>Usage</h1>
 
-```js
-import { cssVars } from 'svelte-ux';
-```
+<Code code={`import { cssVars } from 'svelte-ux';`} language="javascript" class="mb-4" />
 
 <Preview>
 	<div class="grid gap-4" use:cssVars={{ background, border }}>

@@ -1,30 +1,35 @@
 <script lang="ts">
   import { flip } from 'svelte/animate';
 
-	import Button from '$lib/components/Button.svelte';
-	import Preview from '$lib/components/Preview.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Code from '$lib/components/Code.svelte';
+  import Preview from '$lib/components/Preview.svelte';
 
-	import { scrollIntoView, scrollFade, scrollShadow } from '$lib/actions/scroll';
+  import { scrollIntoView, scrollFade, scrollShadow } from '$lib/actions/scroll';
 
   let filterItems = false;
 
   const itemCount = 30;
-  $: items = Array.from({ length: itemCount }).map((_, i) => `Item: ${i}`).filter((_, i) => filterItems ? i > 25 : true)
+  $: items = Array.from({ length: itemCount })
+    .map((_, i) => `Item: ${i}`)
+    .filter((_, i) => (filterItems ? i > 25 : true));
   let scrolledIndex = 0;
 </script>
 
 <h1>Usage</h1>
 
-```js
-import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
-```
+<Code
+  code={`import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';`}
+  language="javascript"
+/>
 
 <h2>scrollIntoView</h2>
 
 <h3>Smootly scroll element into center of view</h3>
 
 <Preview>
-  <input type="range" bind:value={scrolledIndex} min={0} max={itemCount - 1} /> {scrolledIndex}
+  <input type="range" bind:value={scrolledIndex} min={0} max={itemCount - 1} />
+  {scrolledIndex}
   <div class="h-40 overflow-auto border rounded">
     {#each items as item, i}
       <div
@@ -74,7 +79,12 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
 <h3>White shadow on bottom (fade content)</h3>
 
 <Preview>
-  <div class="h-40 border rounded" use:scrollShadow={{ bottom: { color: 'rgb(255 255 255 / 1)', offset: 30, blur: 30, scrollRatio: 0 }}}>
+  <div
+    class="h-40 border rounded"
+    use:scrollShadow={{
+      bottom: { color: 'rgb(255 255 255 / 1)', offset: 30, blur: 30, scrollRatio: 0 },
+    }}
+  >
     {#each items as item, i}
       <div>{item}</div>
     {/each}
@@ -126,5 +136,7 @@ import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';
 </Preview>
 
 <div>
-  <Button on:click={() => filterItems = !filterItems}>Toggle filter</Button>
+  <Button variant="fill" color="accent" on:click={() => (filterItems = !filterItems)}
+    >Toggle filter</Button
+  >
 </div>

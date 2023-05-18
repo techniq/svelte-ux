@@ -7,7 +7,7 @@
 
   export let value: T | 0;
   export let format: FormatType = undefined;
-  export let options: TweenedOptions;
+  export let options: TweenedOptions = undefined;
   export let disabled = false;
 
   const tweenedValue = tweened(value, options);
