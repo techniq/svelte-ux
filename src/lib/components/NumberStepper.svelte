@@ -6,6 +6,8 @@
   import { selectOnFocus } from '$lib/actions/input';
 
   export let value: number = 0;
+  export let min: number | undefined = undefined;
+  export let max: number | undefined = undefined;
 
   const dispatch = createEventDispatcher();
 
@@ -21,9 +23,19 @@
   {...$$restProps}
 >
   <div slot="prepend" class="flex">
-    <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
+    <Button
+      icon={mdiMinus}
+      on:click={() => (value -= 1)}
+      size="sm"
+      disabled={min != null && value <= min}
+    />
   </div>
   <div slot="append" class="flex">
-    <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
+    <Button
+      icon={mdiPlus}
+      on:click={() => (value += 1)}
+      size="sm"
+      disabled={max != null && value >= max}
+    />
   </div>
 </TextField>
