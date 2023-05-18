@@ -41,8 +41,10 @@
   const dispatch = createEventDispatcher();
 
   function close(reason: string = 'unknown') {
-    dispatch('close', reason);
-    open = false;
+    if (open) {
+      dispatch('close', reason);
+      open = false;
+    }
   }
 
   function onKeydown(e: KeyboardEvent) {
