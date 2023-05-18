@@ -15,9 +15,9 @@ export function resize(node: HTMLElement): SvelteActionReturnType {
 
 export function intersection(
   node: HTMLElement,
-  options: IntersectionObserverInit = undefined
+  options?: IntersectionObserverInit
 ): SvelteActionReturnType {
-  // TODO: Support definiinting `options.root = node.parentNode` easily
+  // TODO: Support defininting `options.root = node.parentNode` easily (maybe querySelector() string?)
 
   let observer = new IntersectionObserver(
     (entries, observer) => {
