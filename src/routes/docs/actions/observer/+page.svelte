@@ -1,7 +1,10 @@
 <script lang="ts">
+  import { fly } from 'svelte/transition';
+
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
   import Code from '$lib/components/Code.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
 
   import { resize, intersection, mutate } from '$lib/actions/observer';
 </script>
@@ -12,7 +15,7 @@
 
 <h2>use:resize</h2>
 
-<h3>Example</h3>
+<h3>Basic</h3>
 
 <Preview showCode>
   <div
@@ -58,16 +61,82 @@
 
 <h2>use:intersection</h2>
 
-```svelte
-<div
-  use:intersection
-  on:intersecting={(e) => {
-    if (e.detail.isIntersecting) {
-      //
-    }
-  }}
-/>
-``` See also: - InfiniteScroll - Lazy
+<h3>Adding class when fully visible</h3>
+
+<Preview showCode>
+  <div class="h-[200px] overflow-auto">
+    {#each { length: 10 } as _}
+      <div>Scroll down</div>
+    {/each}
+    <div
+      use:intersection={{ threshold: 1 }}
+      on:intersecting={(e) => {
+        if (e.detail.isIntersecting) {
+          e.target.classList.add('bg-red-500');
+        } else {
+          e.target.classList.remove('bg-red-500');
+        }
+      }}
+      class="transition-colors duration-500"
+    >
+      Watch me scroll away
+    </div>
+    {#each { length: 10 } as _}
+      <div>Scroll up</div>
+    {/each}
+  </div>
+</Preview>
+
+<h3>Show header on scroll away</h3>
+
+<Preview showCode>
+  <Toggle let:on={showHeader} let:toggleOn let:toggleOff>
+    <div class="relative overflow-hidden">
+      {#if showHeader}
+        <div
+          class="absolute top-0 left-0 bg-blue-500 text-white p-4 w-full"
+          transition:fly={{ y: '-100%', opacity: 1 }}
+        >
+          Header
+        </div>
+      {/if}
+      <div class="h-[200px] overflow-auto">
+        {#each { length: 10 } as _}
+          <div>Scroll down</div>
+        {/each}
+        <div
+          use:intersection={{ threshold: 1 }}
+          on:intersecting={(e) => {
+            if (e.detail.isIntersecting) {
+              // Visible
+              toggleOff();
+            } else {
+              if (e.detail.boundingClientRect.top < (e.detail.rootBounds?.top ?? 0)) {
+                // Scrolled off top
+                toggleOn();
+              } else {
+                // Scrolled off bottom
+              }
+            }
+          }}
+        >
+          Watch me scroll away
+        </div>
+        {#each { length: 10 } as _}
+          <div>Scroll up</div>
+        {/each}
+      </div>
+    </div>
+  </Toggle>
+</Preview>
+
+<div>
+  See also:
+  <ul class="list-inside list-disc">
+    <li>InfiniteScroll</li>
+    <li>Lazy</li>
+  </ul>
+</div>
 
 <h2>use:mutate</h2>
 
