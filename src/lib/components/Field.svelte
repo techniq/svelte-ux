@@ -35,6 +35,9 @@
   export let classes: {
     root?: string;
     container?: string;
+    label?: string;
+    input?: string;
+    error?: string;
   } = {};
 
   $: hasValue = Array.isArray(value)
@@ -100,7 +103,8 @@
             'z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var cursor-pointer group-hover:group-focus-within:text-color-var',
             center && 'justify-center',
             error ? 'text-red-500/80' : 'text-black/50',
-            (shrinkLabel || hasValue) && 'shrink'
+            (shrinkLabel || hasValue) && 'shrink',
+            classes.label
           )}
           for={id}
           bind:this={labelEl}
@@ -113,7 +117,8 @@
             'input flex items-center overflow-hidden',
             hasLabel && 'pt-4',
             dense ? 'my-1' : 'my-2',
-            center && 'text-center'
+            center && 'text-center',
+            classes.input
           )}
         >
           <slot name="prefix" />
@@ -153,7 +158,8 @@
     class={cls(
       'hint',
       'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
-      error ? 'text-red-500' : 'text-black/50 scale-y-0'
+      error ? 'text-red-500' : 'text-black/50 scale-y-0',
+      classes.error
     )}
   >
     {error || hint}

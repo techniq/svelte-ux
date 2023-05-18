@@ -58,6 +58,9 @@
   export let classes: {
     root?: string;
     container?: string;
+    label?: string;
+    input?: string;
+    error?: string;
   } = {};
 
   // Input props
@@ -211,7 +214,8 @@
             class={cls(
               'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
               error ? 'text-red-500/80' : 'text-black/50',
-              (shrinkLabel || hasInputValue) && 'shrink'
+              (shrinkLabel || hasInputValue) && 'shrink',
+              classes.label
             )}
             for={id}
             bind:this={labelEl}
@@ -258,7 +262,8 @@
                   'text-left': align === 'left',
                   'text-center': align === 'center',
                   'text-right': align === 'right',
-                }
+                },
+                classes.input
               )}
               use:multi={actions}
             />
@@ -289,7 +294,8 @@
                   'text-left': align === 'left',
                   'text-center': align === 'center',
                   'text-right': align === 'right',
-                }
+                },
+                classes.input
               )}
             />
           {/if}
@@ -349,7 +355,8 @@
     class={cls(
       'hint',
       'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
-      error ? 'text-red-500' : 'text-black/50 scale-y-0'
+      error ? 'text-red-500' : 'text-black/50 scale-y-0',
+      classes.error
     )}
   >
     {error || hint}
