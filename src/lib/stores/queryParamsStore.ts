@@ -22,22 +22,21 @@ export type ParamType =
   | 'json'
   | 'object';
 
+export type QueryParamProps<Value> = {
+  name: string;
+  page: Readable<Page>;
+  default?: Value;
+  paramType?: ParamType;
+  goto?: Goto;
+};
+
 /**
  * Set a single querystring param
- * @param name
- * @param defaultValue
- * @returns
  */
-export function queryParamStore<Value>(
-  name: string,
-  page: Readable<Page>,
-  defaultValue?: Value,
-  paramType?: ParamType,
-  goto?: Goto
-) {
-  const store = derived(page, ($page) => {
-    const values = $page.url.searchParams.getAll(name);
-    return decodeParam(values, paramType) ?? defaultValue;
+export function queryParamStore<Value>(props: QueryParamProps<Value>) {
+  const store = derived(props.page, ($page) => {
+    const values = $page.url.searchParams.getAll(props.name);
+    return decodeParam(values, props.paramType) ?? props.default;
   });
 
   /**
@@ -46,38 +45,40 @@ export function queryParamStore<Value>(
   function apply(params: URLSearchParams, newValue: Value) {
     //  Do not update querystring with initialValue..
     if (typeof window !== 'undefined') {
-      applyParam(params, name, newValue, defaultValue, paramType);
+      applyParam(params, props.name, newValue, props.default, props.paramType);
     }
   }
 
   return {
     subscribe: store.subscribe,
     set: (value: Value) => {
-      if (goto === undefined) {
+      if (props.goto === undefined) {
         console.error('`goto` must be passed to allow setting URL via store');
       } else {
         const url = new URL(window.location.href);
         apply(url.searchParams, value);
-        goto(url, get(page));
+        props.goto(url, get(props.page));
       }
     },
     apply,
   };
 }
 
+export type QueryParamsProps<Values> = {
+  page: Readable<Page>;
+  defaults?: Values;
+  paramTypes?: { [key: string]: ParamType } | ((key: keyof Values) => ParamType);
+  goto?: Goto;
+};
+
 /**
  * Set all query string params based on object.  Each object property represents a single query param
- * @param defaultValues
- * @returns
  */
 export function queryParamsStore<Values extends { [key: string]: any }>(
-  page: Readable<Page>,
-  defaultValues?: Values,
-  paramTypes?: { [key: string]: ParamType } | ((key: keyof Values) => ParamType),
-  goto?: Goto
+  props: QueryParamsProps<Values>
 ) {
-  const store = derived(page, ($page) => {
-    const state = { ...defaultValues };
+  const store = derived(props.page, ($page) => {
+    const state = { ...props.defaults };
 
     // Group by key
     const groupedParams: Map<keyof Values, ValueOf<Values>> = rollup(
@@ -88,9 +89,11 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
 
     for (const [key, values] of groupedParams) {
       const paramType =
-        typeof paramTypes === 'function' ? paramTypes(key as string) : paramTypes?.[key as string];
+        typeof props.paramTypes === 'function'
+          ? props.paramTypes(key as string)
+          : props.paramTypes?.[key as string];
 
-      state[key] = decodeParam(values, paramType);
+      state[key.toString()] = decodeParam(values, paramType);
     }
 
     return state;
@@ -107,11 +110,11 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
       if (newValues != null) {
         Object.entries(newValues).forEach(([key, value]) => {
           const paramType =
-            typeof paramTypes === 'function'
-              ? paramTypes(key as string)
-              : paramTypes?.[key as string];
+            typeof props.paramTypes === 'function'
+              ? props.paramTypes(key as string)
+              : props.paramTypes?.[key as string];
 
-          applyParam(params, key, value, defaultValues?.[key], paramType);
+          applyParam(params, key, value, props.defaults?.[key], paramType);
         });
       }
 
@@ -123,7 +126,7 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
     if (typeof window !== 'undefined') {
       const params = createParams(newValues);
       const url = new URL(window.location.href);
-      url.search = params.toString();
+      url.search = params?.toString() ?? '';
       return url;
     }
   }
@@ -131,11 +134,13 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
   return {
     subscribe: store.subscribe,
     set: (values: Values) => {
-      if (goto === undefined) {
+      if (props.goto === undefined) {
         console.error('`goto` must be passed to allow setting URL via store');
       } else {
         const url = createUrl(values);
-        goto(url, get(page));
+        if (url) {
+          props.goto(url, get(props.page));
+        }
       }
     },
     createParams,
@@ -150,22 +155,27 @@ function applyParam(
   defaultValue: any,
   paramType?: ParamType
 ) {
-  const config = getParamConfig(paramType);
-
   if (
     isEqual(defaultValue, value) ||
     value == null ||
     (Array.isArray(value) && value.length === 0)
   ) {
     params.delete(key);
-  } else {
-    params.set(key, config.encode(value));
+  } else if (paramType) {
+    const config = getParamConfig(paramType);
+    if (config) {
+      params.set(key, config.encode(value) ?? '');
+    }
   }
 }
 
 function decodeParam(values: string[], paramType?: ParamType) {
-  const config = getParamConfig(paramType);
-  return config.decode(values);
+  if (paramType) {
+    const config = getParamConfig(paramType);
+    return config.decode(values);
+  } else {
+    return null;
+  }
 }
 
 function getParamConfig(paramType: ParamType) {

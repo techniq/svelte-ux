@@ -1,20 +1,68 @@
 <script lang="ts">
 	import Preview from '$lib/components/Preview.svelte';
 
-	import queryParamsStore from '$lib/stores/queryParamsStore';
+	import { queryParamsStore } from '$lib/stores/queryParamsStore';
 </script>
 
-<h1>Usage</h1>
+<h1>queryParamStore()</h1>
+
+Manage a single query param
+
+```js
+import { queryParamStore } from 'svelte-ux';
+import { page } from '$app/stores';
+import { goto } from '$app/navigation';
+
+const dateRange = queryParamStore({
+  name: 'range',
+  default: {
+    from: startOfToday(),
+    to: endOfToday(),
+  },
+  paramType: 'object',
+  page,
+});
+
+$: setDataRange = (value) => {
+  const params = new URLSearchParams(location.search);
+  dateRange.apply(params, value);
+  const url = `${location.pathname}?${params.toString()}`;
+  goto(url, $page);
+};
+```
+
+If `goto` is passed, store can be set directly
 
 ```js
 import { queryParamsStore } from 'svelte-ux';
 import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 
-const filters = queryParamsStore(
+const filters = queryParamStore({
+  name: 'range',
+  default: {
+    from: startOfToday(),
+    to: endOfToday(),
+  },
+  paramType: 'object',
   page,
-  // default values
-  {
+  goto, // <--- IMPORTANT
+});
+
+$dataRange = newValue;
+```
+
+<h1>queryParamsStore()</h1>
+
+Manage all query params as a single store
+
+```js
+import { queryParamsStore } from 'svelte-ux';
+import { page } from '$app/stores';
+import { goto } from '$app/navigation';
+
+const filters = queryParamsStore({
+  defaults: {
     name: null,
     value: null,
     range: {
@@ -22,8 +70,7 @@ const filters = queryParamsStore(
       to: endOfToday(),
     },
   },
-  // param types
-  (key) => {
+  paramTypes: (key) => {
     switch (key) {
       case 'name':
         return 'string';
@@ -32,8 +79,9 @@ const filters = queryParamsStore(
       case 'range':
         return 'object';
     }
-  }
-);
+  },
+  page,
+});
 
 $: setFilters = (newFilters) => {
   const url = filters.createUrl(newFilters);
@@ -41,17 +89,15 @@ $: setFilters = (newFilters) => {
 };
 ```
 
-If goto is passed as last argument, store can be set directly
+If `goto` is passed, store can be set directly
 
 ```js
 import { queryParamsStore } from 'svelte-ux';
 import { page } from '$app/stores';
 import { goto } from '$app/navigation';
 
-const filters = queryParamsStore(
-  page,
-  // default values
-  {
+const filters = queryParamsStore({
+  defaults: {
     name: null,
     value: null,
     range: {
@@ -59,8 +105,7 @@ const filters = queryParamsStore(
       to: endOfToday(),
     },
   },
-  // param types
-  (key) => {
+  paramTypes: (key) => {
     switch (key) {
       case 'name':
         return 'string';
@@ -70,8 +115,9 @@ const filters = queryParamsStore(
         return 'object';
     }
   },
-  goto // <--- IMPORTANT
-);
+  page,
+  goto, // <--- IMPORTANT
+});
 
 $filters = newFilters;
 ```
