@@ -47,7 +47,7 @@ function createState(page: number, perPage: number, total: number) {
     page,
     perPage,
     total,
-    from: (page - 1) * perPage + 1,
+    from: Math.min(total, (page - 1) * perPage + 1),
     to: Math.min(total, page * perPage),
 
     totalPages,
