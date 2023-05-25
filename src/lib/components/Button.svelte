@@ -14,7 +14,7 @@
   export let fullWidth: boolean = false;
   export let icon: ComponentProps<Icon>['data'] | ComponentProps<Icon> | undefined = undefined;
   export let iconOnly = icon !== undefined && $$slots.default !== true;
-  export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> = undefined;
+  export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
 
   export let loading: boolean = false;
   export let disabled: boolean = false;
@@ -210,9 +210,9 @@
   {:else if icon}
     {#if typeof icon === 'string' || 'icon' in icon}
       <!-- font path/url/etc or font-awesome IconDefinition -->
-      <Icon data={icon} class={cls(classes.icon)} />
+      <Icon data={icon} class={cls('pointer-events-none', classes.icon)} />
     {:else}
-      <Icon class={cls(classes.icon)} {...icon} />
+      <Icon class={cls('pointer-events-none', classes.icon)} {...icon} />
     {/if}
   {/if}
   <slot />
