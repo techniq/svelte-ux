@@ -29,10 +29,10 @@
 <Button
   icon={mdiMagnify}
   on:click={() => (open = true)}
-  class="bg-black/10 hover:bg-black/20 rounded-full w-56 justify-start"
+  class="bg-black/10 hover:bg-black/20 rounded-full sm:w-56 justify-start"
 >
   <span class="flex-1 text-left">Search</span>
-  <kbd class="ml-2 font-sans text-white/50">
+  <kbd class="ml-2 font-sans text-white/50 max-sm:hidden">
     <abbr title="Command" class="no-underline">⌘</abbr>
     K
   </kbd>
