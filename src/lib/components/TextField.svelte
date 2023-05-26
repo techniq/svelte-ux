@@ -21,6 +21,7 @@
     change: { value: typeof value; inputValue: InputValue; operator: string };
   }>();
 
+  export let name: string | undefined = undefined;
   export let label = '';
   export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
   export let type:
@@ -33,7 +34,7 @@
     | 'search'
     | 'email' = 'text';
   export let placeholder: string | undefined = undefined;
-  export let error = '';
+  export let error: string | string[] | undefined = '';
   export let hint = '';
   export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
   export let multiline = false;
@@ -115,7 +116,7 @@
   $: inputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
   $: operator = isLiteralObject(value) ? Object.keys(value)[0] : operators?.[0].value;
 
-  let lastTimeoutId;
+  let lastTimeoutId: ReturnType<typeof setTimeout>;
   function updateValue() {
     let newValue;
     // TODO: Improve handling of `1234.05` and backspacing the `5`, which results in `1234` (`.0` removed)
@@ -246,6 +247,7 @@
           {#if multiline}
             <textarea
               {id}
+              {name}
               {placeholder}
               {autocomplete}
               value={inputValue}
@@ -270,6 +272,7 @@
           {:else}
             <Input
               {id}
+              {name}
               {placeholder}
               {autocomplete}
               type={inputType}
