@@ -4,9 +4,7 @@
   import Blockquote from '$docs/Blockquote.svelte';
 </script>
 
-<h1>Examples</h1>
-
-<Blockquote>TODO</Blockquote>
+<h1>Example</h1>
 
 ```svelte
 <AppLayout>
