@@ -82,17 +82,13 @@ A few notes regarding the config
 - Currently `svelte-ux` provides a tailwind plugin to use more [realistic shadows](https://www.joshwcomeau.com/css/designing-shadows/) by having multiple shadow layers, unlike the current Tailwind [shadows](https://tailwindcss.com/docs/box-shadow) which have at most 2 layers, exposed as `elevation-#` classes. This may change in the future.
 - The `tailwindcss-forms` plugin should not be used. The styles that it sets up for inputs conflict with the styles used by `svelte-ux`.
 
-Next, import Tailwind layers in `src/routes/__layout.svelte` style block
+Next, import Tailwind layers in `src/routes/+layout.svelte` style block
 
 ```svelte
 <style lang="postcss">
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
-
-  :global(body) {
-    @apply bg-black/10;
-  }
 </style>
 ```
 
