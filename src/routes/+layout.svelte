@@ -28,7 +28,7 @@
 </script>
 
 <AppLayout>
-  <nav slot="nav" class="nav h-full">
+  <nav slot="nav" class="h-full">
     <NavMenu />
     <!-- Spacer -->
     <div class="h-4" />
