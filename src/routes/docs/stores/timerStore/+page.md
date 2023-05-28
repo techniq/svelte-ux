@@ -6,10 +6,11 @@
 
 	import timerStore from '$lib/stores/timerStore';
 
-  let ticks = 0;
+  const dateTimer = timerStore({ initial: new Date(), onTick: () => new Date() })
+  $: ({ isRunning: isDateRunning } = dateTimer);
 
-  const dateTimer = timerStore()
-  const tickTimer = timerStore({ onTick: () => ticks += 1 })
+  const tickTimer = timerStore({ initial: 0, onTick: (value) => value + 1 })
+  $: ({ isRunning: isTickRunning } = tickTimer);
 </script>
 
 <h1>Usage</h1>
@@ -32,18 +33,18 @@ const timer = timerStore({ delay: number, onTick: () => {...}, disabled: boolean
 
 <Preview>
   <div>{$dateTimer}</div>
-  <Switch checked={dateTimer.isRunning()} on:change={e => e.detail ? dateTimer.start() : dateTimer.stop() } />
+  <Switch checked={$isDateRunning} on:change={e => e.target.checked ? dateTimer.start() : dateTimer.stop()} />
 </Preview>
 
 <h2>Tick count</h2>
 
 ```svelte
 <script>
-  const tickTimer = timerStore({ onTick: () => (ticks += 1) });
+  const tickTimer = timerStore({ initial: 0, onTick: (value) => value + 1 });
 </script>
 ```
 
 <Preview>
   <div>{$tickTimer}</div>
-  <Switch checked={tickTimer.isRunning()} on:change={e => e.detail ? tickTimer.start() : tickTimer.stop() } />
+  <Switch checked={$isTickRunning} on:change={e => e.target.checked ? tickTimer.start() : tickTimer.stop()} />
 </Preview>

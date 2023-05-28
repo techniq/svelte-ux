@@ -1,21 +1,24 @@
 import { writable } from 'svelte/store';
 
-export type TimerOptions = {
+export type TimerOptions<T> = {
+  initial?: T;
   delay?: number;
   disabled?: boolean;
 
   /** Called on each interval tick.  Returned value is used to update store value, defaulting to current Date */
-  onTick?: () => any;
+  onTick?: (current: T) => any;
 };
 
 /**
  * Subscribable timer store
  */
-export default function timerStore<T = any>(options: TimerOptions = {}) {
-  let intervalId = null;
+export default function timerStore<T = any>(options: TimerOptions<T> = {}) {
+  let initial = options.initial ?? null;
+  let intervalId: ReturnType<typeof setInterval> | null = null;
   let delay = options.delay ?? 1000;
+  const isRunning = writable(false);
 
-  const state = writable<T>(null, () => {
+  const state = writable<T>(initial, () => {
     if (!options.disabled) {
       start();
     }
@@ -26,18 +29,21 @@ export default function timerStore<T = any>(options: TimerOptions = {}) {
   function start() {
     stop();
     intervalId = setInterval(() => {
-      // console.log('tick');
-      state.set(options.onTick?.() ?? new Date());
+      state.update((current) => options.onTick?.(current) ?? new Date());
     }, delay);
+    isRunning.set(true);
   }
 
   function stop() {
-    clearInterval(intervalId);
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
     intervalId = null;
+    isRunning.set(false);
   }
 
-  function isRunning() {
-    return intervalId != null;
+  function reset() {
+    return state.set(initial);
   }
 
   function getDelay() {
@@ -51,9 +57,10 @@ export default function timerStore<T = any>(options: TimerOptions = {}) {
   }
 
   return {
-    subscribe: state.subscribe,
+    ...state,
     start,
     stop,
+    reset,
     isRunning,
     getDelay,
     setDelay,
