@@ -7,8 +7,10 @@
 
 <div
   use:overflow
-  on:overflowX={(e) => (overflowX = e.detail)}
-  on:overflowY={(e) => (overflowY = e.detail)}
+  on:overflow={(e) => {
+    overflowX = e.detail.overflowX;
+    overflowY = e.detail.overflowY;
+  }}
   {...$$restProps}
 >
   <slot {overflowX} {overflowY} />

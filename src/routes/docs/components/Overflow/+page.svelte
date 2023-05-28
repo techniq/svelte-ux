@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+
   import api from '$lib/components/Overflow.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -35,9 +37,24 @@
 
 <Preview>
   <Overflow class="w-1/2 truncate border" let:overflowX>
-    <Tooltip title={text} enabled={overflowX}>{text}</Tooltip>
+    <Tooltip title={text} enabled={overflowX > 0}>{text}</Tooltip>
   </Overflow>
 </Preview>
+
+<!-- TODO: white up scroll buttons -->
+<!-- <h2>Paginate controls</h2>
+
+<Preview>
+  <Overflow class="bg-gray-50 border p-2 relative" let:overflowX>
+    <Button icon={mdiChevronLeft} class="absolute top-1/2 left-0 -translate-y-1/2" size="sm" />
+    <div class="flex gap-3 overflow-auto scrollbar-none">
+      {#each { length: 20 } as _}
+        <div class="border rounded-lg px-4 bg-white">Item</div>
+      {/each}
+    </div>
+    <Button icon={mdiChevronRight} class="absolute top-1/2 right-0 -translate-y-1/2" size="sm" />
+  </Overflow>
+</Preview> -->
 
 <h1>API</h1>
 

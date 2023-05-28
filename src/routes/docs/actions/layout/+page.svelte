@@ -34,8 +34,10 @@
 <div
   class="w-1/2 h-[100px] border border-black/20 rounded-lg bg-white whitespace-nowrap truncate p-4 resize overflow-auto"
   use:overflow
-  on:overflowX={(e) => (overflowX = e.detail)}
-  on:overflowY={(e) => (overflowY = e.detail)}
+  on:overflow={(e) => {
+    overflowX = e.detail.overflowX;
+    overflowY = e.detail.overflowY;
+  }}
 >
   {#each { length: overflowItems } as _}
     <div>Resize the window to see text truncate and watch values</div>

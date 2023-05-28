@@ -54,23 +54,24 @@ export function remainingViewportWidth(
  * Watch for overflow changes (x or y) and dispatch `overflowX` / `overflowY` events with amount
  */
 export function overflow(node: HTMLElement) {
-  let overflowedX = 0;
-  let overflowedY = 0;
+  let overflowX = 0;
+  let overflowY = 0;
 
   function update() {
-    const prevOverflowedX = overflowedX;
-    overflowedX = node.scrollWidth - node.clientWidth;
-    if (overflowedX !== prevOverflowedX) {
-      node.dispatchEvent(
-        new CustomEvent('overflowX', { detail: node.scrollWidth - node.clientWidth })
-      );
-    }
+    const prevOverflowX = overflowX;
+    overflowX = node.scrollWidth - node.clientWidth;
 
-    const prevOverflowedY = overflowedY;
-    overflowedY = node.scrollHeight - node.clientHeight;
-    if (overflowedY !== prevOverflowedY) {
+    const prevOverflowY = overflowY;
+    overflowY = node.scrollHeight - node.clientHeight;
+
+    if (overflowX !== prevOverflowX || overflowY !== prevOverflowY) {
       node.dispatchEvent(
-        new CustomEvent('overflowY', { detail: node.scrollHeight - node.clientHeight })
+        new CustomEvent('overflow', {
+          detail: {
+            overflowX,
+            overflowY,
+          },
+        })
       );
     }
   }
