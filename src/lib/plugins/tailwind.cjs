@@ -1,6 +1,17 @@
 const plugin = require('tailwindcss/plugin');
 
 module.exports = plugin(function ({ addUtilities }) {
+  // Hide scrollbar
+  addUtilities({
+    '.scrollbar-none': {
+      '-ms-overflow-style': 'none',
+      'scrollbar-width': 'none',
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
+    },
+  });
+
   // Add `elevation-#` classes
   addUtilities({
     '.elevation-0': {
