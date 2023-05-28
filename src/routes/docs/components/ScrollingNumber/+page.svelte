@@ -8,10 +8,14 @@
   import Field from '$lib/components/Field.svelte';
   import { mdiMinus, mdiPlus } from '@mdi/js';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
+  import { timerStore } from '$lib';
 
   let value = 0;
   let min = -10;
   let max = 10;
+
+  const timer = timerStore({ initial: 60, onTick: (value) => value - 1 });
+  $: ({ isRunning } = timer);
 </script>
 
 <h1>Examples</h1>
@@ -87,6 +91,17 @@
       />
     </div>
   </Field>
+</Preview>
+
+<h2>Countdown</h2>
+
+<Preview>
+  <ScrollingNumber value={$timer} classes={{ root: 'h-16', value: 'text-6xl' }} />
+  <ButtonGroup variant="fill" _class="grid grid-flow-col gap-1 ml-2">
+    <Button on:click={timer.start} disabled={$isRunning}>Start</Button>
+    <Button on:click={timer.stop} disabled={!$isRunning}>Stop</Button>
+  </ButtonGroup>
+  <Button on:click={timer.reset}>Reset</Button>
 </Preview>
 
 <h2>Debug</h2>
