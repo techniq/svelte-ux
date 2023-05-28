@@ -105,3 +105,11 @@ export function round(value: number, decimals: number) {
 export function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+/**
+ * Remainder (n % m) with support for negative numbers
+ * See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder#description
+ */
+export function modulo(n: number, m: number) {
+  return ((n % m) + m) % m;
+}
