@@ -27,7 +27,7 @@ export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActi
   const anchorEl = options?.anchorEl ?? node.parentElement;
 
   const cleanup = autoUpdate(anchorEl, popoverEl, () => {
-    // Only allow autoPlacement to swap sides (ex. top/bottom) and not also axises (ex. left/right).  Mathces flip behavor
+    // Only allow autoPlacement to swap sides (ex. top/bottom) and not also axises (ex. left/right).  Matches flip behavor
     const alignment =
       options?.autoPlacement && options?.placement
         ? (options?.placement.split('-')[1] as Alignment)

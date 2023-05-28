@@ -12,8 +12,7 @@
   $: title = $page.data.meta?.title ?? name;
   $: docUrl = `src/routes/docs/${type}/${name}/+page.md?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
-  $: description = $page.data.meta?.description;
-  $: hideUsage = $page.data.meta?.hideUsage;
+  $: ({ description, related, hideUsage } = $page.data.meta ?? {});
 </script>
 
 <div class="grid grid-rows-[auto,1fr] h-full p-4">
@@ -62,6 +61,17 @@
       {/if}
 
       <slot />
+
+      {#if related}
+        <h1 id="related">Related</h1>
+        <ul class="list-inside list-disc ml-2">
+          {#each related as r}
+            <li>
+              <a href="/docs/{r}">{r}</a>
+            </li>
+          {/each}
+        </ul>
+      {/if}
     </div>
 
     <div class="hidden lg:block w-[224px]">

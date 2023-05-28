@@ -85,6 +85,7 @@
     'mouse',
     'multi',
     'observer',
+    'popover',
     'portal',
     'scroll',
     'sticky',
