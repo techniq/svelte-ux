@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { mdiCodeTags, mdiFileDocumentEditOutline } from '@mdi/js';
+  import { mdiChevronRight, mdiCodeTags, mdiFileDocumentEditOutline } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
   import Code from '$lib/components/Code.svelte';
+  import Icon from '$lib/components/Icon.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import TableOfContents from '$lib/components/TableOfContents.svelte';
 
@@ -13,6 +14,11 @@
   $: docUrl = `src/routes/docs/${type}/${name}/+page.md?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
   $: ({ description, related, hideUsage } = $page.data.meta ?? {});
+
+  function getRelated(r: string) {
+    const [type, name] = r.split('/');
+    return { type, name, url: `/docs/${type}/${name}` };
+  }
 </script>
 
 <div class="grid grid-rows-[auto,1fr] h-full p-4">
@@ -64,13 +70,14 @@
 
       {#if related}
         <h1 id="related">Related</h1>
-        <ul class="list-inside list-disc ml-2">
-          {#each related as r}
-            <li>
-              <a href="/docs/{r}">{r}</a>
-            </li>
-          {/each}
-        </ul>
+        {#each related.map(getRelated) as r}
+          <div class="flex mb-1">
+            <Icon data={mdiChevronRight} class="text-black/30" />
+            <h2 class="text-base m-0">
+              <a href={r.url}>{r.name}</a>
+            </h2>
+          </div>
+        {/each}
       {/if}
     </div>
 
