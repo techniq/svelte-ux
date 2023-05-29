@@ -18,6 +18,7 @@
   $: ({ isRunning } = timer);
 
   function onKeyDown(e: KeyboardEvent) {
+    e.preventDefault();
     const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
     switch (e.code) {
       case 'ArrowUp':
