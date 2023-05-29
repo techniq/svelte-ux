@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { mdiClose, mdiCurrencyUsd, mdiInformationOutline, mdiPercent } from '@mdi/js';
+  import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
   import multi from '../actions/multi';
@@ -158,7 +158,8 @@
   $: hasLabel = label !== '';
 
   $: hasPrepend = $$slots.prepend || icon != null;
-  $: hasAppend = $$slots.append || iconRight != null || clearable || error || operators;
+  $: hasAppend =
+    $$slots.append || iconRight != null || clearable || error || operators || type === 'password';
   $: hasPrefix = $$slots.prefix || type === 'currency';
   $: hasSuffix = $$slots.suffix || type === 'percent';
 
@@ -341,6 +342,20 @@
                 <option {value}>{label}</option>
               {/each}
             </select>
+          {/if}
+
+          {#if type === 'password'}
+            <Button
+              icon={mdiEye}
+              class="text-black/50 p-2"
+              on:click={() => {
+                if (inputType === 'password') {
+                  inputType = 'text';
+                } else {
+                  inputType = 'password';
+                }
+              }}
+            />
           {/if}
 
           <slot name="append" />

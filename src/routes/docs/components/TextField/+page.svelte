@@ -223,9 +223,9 @@
 
 <Preview>
   <TextField label="Name">
-    <div slot="append">
+    <span slot="append">
       <Button icon={mdiRefresh} class="text-black/50 p-2" />
-    </div>
+    </span>
   </TextField>
 </Preview>
 
