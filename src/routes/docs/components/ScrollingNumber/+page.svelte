@@ -16,7 +16,21 @@
 
   const timer = timerStore({ initial: 60, onTick: (value) => value - 1 });
   $: ({ isRunning } = timer);
+
+  function onKeyDown(e) {
+    const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
+    switch (e.code) {
+      case 'ArrowUp':
+        value += step;
+        break;
+      case 'ArrowDown':
+        value -= step;
+        break;
+    }
+  }
 </script>
+
+<svelte:window on:keydown={onKeyDown} />
 
 <h1>Examples</h1>
 
