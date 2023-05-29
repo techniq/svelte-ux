@@ -17,7 +17,7 @@
   const timer = timerStore({ initial: 60, onTick: (value) => value - 1 });
   $: ({ isRunning } = timer);
 
-  function onKeyDown(e) {
+  function onKeyDown(e: KeyboardEvent) {
     const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
     switch (e.code) {
       case 'ArrowUp':
