@@ -44,6 +44,9 @@
   <Button on:click={() => (value += 10)}>+10</Button>
   <Button on:click={() => (value += 100)}>+100</Button>
 </ButtonGroup>
+<span class="text-xs ml-2 text-black/50"
+  >also keyboard up/down with shift: +/- 10 option: +/- 100
+</span>
 
 <h2>Basic</h2>
 
