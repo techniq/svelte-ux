@@ -14,7 +14,7 @@
   let min = -10;
   let max = 10;
 
-  const timer = timerStore({ initial: 60, onTick: (value) => value - 1 });
+  const timer = timerStore({ initial: 60, onTick: (value) => value - 1, disabled: true });
   $: ({ isRunning } = timer);
 
   function onKeyDown(e: KeyboardEvent) {
