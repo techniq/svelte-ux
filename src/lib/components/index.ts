@@ -59,6 +59,7 @@ export { default as Radio } from './Radio.svelte';
 export { default as RangeSlider } from './RangeSlider.svelte';
 export { default as ResponsiveMenu } from './ResponsiveMenu.svelte';
 export { default as ScrollContainer } from './ScrollContainer.svelte';
+export { default as ScrollingNumber } from './ScrollingNumber.svelte';
 export { default as SectionDivider } from './SectionDivider.svelte';
 export { default as Selection } from './Selection.svelte';
 export { default as SelectField } from './SelectField.svelte';
