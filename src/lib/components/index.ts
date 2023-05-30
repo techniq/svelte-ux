@@ -72,6 +72,7 @@ export { default as Table } from './Table.svelte';
 export { default as TableOfContents } from './TableOfContents.svelte';
 export { default as TableOrderIcon } from './TableOrderIcon.svelte';
 export { default as TextField } from './TextField.svelte';
+export { default as Tilt } from './Tilt.svelte';
 export { default as Toggle } from './Toggle.svelte';
 export { default as ToggleButton } from './ToggleButton.svelte';
 export { default as ToggleGroup } from './ToggleGroup.svelte';
