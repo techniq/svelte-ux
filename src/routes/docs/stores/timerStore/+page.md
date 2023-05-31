@@ -19,8 +19,8 @@
 const timer = timerStore();
 ```
 
-```js
-const timer = timerStore({ delay: number, onTick: () => {...}, disabled: boolean })
+```ts
+const timer = timerStore<T>({ initial?: T, onTick?: (value: T) => {...}, delay?: number, disabled?: boolean })
 ```
 
 <h2>Example</h2>
