@@ -27,7 +27,7 @@
       'ToggleGroup',
       'TreeList',
     ],
-    Motion: ['ScrollingNumber', 'SpringValue', 'TweenedValue'],
+    Motion: ['ScrollingNumber', 'SpringValue', 'Tilt', 'TweenedValue'],
     Inputs: [
       'Checkbox',
       'Field',
