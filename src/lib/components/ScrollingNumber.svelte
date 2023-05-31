@@ -17,13 +17,17 @@
   $: offset = modulo($displayValue, 1);
 </script>
 
-<div class={cls('relative overflow-hidden h-6', classes.root, $$props.class)}>
-  <div class="h-full" style:transform="translateY({100 * offset}%)">
-    <div class={cls('absolute -top-full h-full', classes.value)}>
-      {Math.floor($displayValue + 1)}
-    </div>
-    <div class={cls('absolute h-full', classes.value)}>
-      {Math.floor($displayValue)}
-    </div>
+<div class={cls('inline-grid overflow-hidden', classes.root, $$props.class)}>
+  <div
+    class={cls('col-span-full row-span-full', classes.value)}
+    style:transform="translateY({-100 + 100 * offset}%)"
+  >
+    {Math.floor($displayValue + 1)}
+  </div>
+  <div
+    class={cls('col-span-full row-span-full', classes.value)}
+    style:transform="translateY({100 * offset}%)"
+  >
+    {Math.floor($displayValue)}
   </div>
 </div>

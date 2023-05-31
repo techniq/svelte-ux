@@ -56,12 +56,9 @@
 </Preview>
 
 <h2>Font-size</h2>
-<span class="text-xs ml-2 text-black/50">
-  Root container height must match value font-size / line-height
-</span>
 
 <Preview>
-  <ScrollingNumber bind:value classes={{ root: 'h-16', value: 'text-6xl' }} />
+  <ScrollingNumber bind:value class="text-6xl" />
 </Preview>
 
 <h2>Field</h2>
@@ -115,7 +112,7 @@
 <h2>Countdown</h2>
 
 <Preview>
-  <ScrollingNumber value={$timer} classes={{ root: 'h-16', value: 'text-6xl' }} />
+  <ScrollingNumber value={$timer} class="text-6xl" />
   <ButtonGroup variant="fill" _class="grid grid-flow-col gap-1 ml-2">
     <Button on:click={timer.start} disabled={$isRunning}>Start</Button>
     <Button on:click={timer.stop} disabled={!$isRunning}>Stop</Button>
@@ -128,7 +125,7 @@
 <Preview>
   <ScrollingNumber
     bind:value
-    classes={{ root: 'h-16', value: 'text-6xl first:bg-red-100 last:bg-green-100' }}
+    classes={{ value: 'text-6xl first:bg-red-500/50 last:bg-green-500/50' }}
   />
   <div class="grid grid-flow-col">
     <Button on:click={() => (value -= 100)}>-100</Button>
