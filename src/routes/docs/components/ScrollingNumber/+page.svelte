@@ -1,5 +1,5 @@
 <script lang="ts">
-  import api from '$lib/components/InfiniteScroll.svelte?raw&sveld';
+  import api from '$lib/components/ScrollingNumber.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Preview from '$lib/components/Preview.svelte';
@@ -18,14 +18,15 @@
   $: ({ isRunning } = timer);
 
   function onKeyDown(e: KeyboardEvent) {
-    e.preventDefault();
     const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
     switch (e.code) {
       case 'ArrowUp':
         value += step;
+        e.preventDefault();
         break;
       case 'ArrowDown':
         value -= step;
+        e.preventDefault();
         break;
     }
   }
