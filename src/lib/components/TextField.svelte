@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
@@ -68,6 +68,8 @@
   export let mask: string | undefined = undefined;
   export let replace: string | undefined = undefined;
   export let accept: string | undefined = undefined;
+  // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
+  export let autocapitalize: ComponentProps<Input>['autocapitalize'] = undefined;
 
   let inputType = 'text';
   $: switch (type) {
@@ -252,6 +254,7 @@
               {placeholder}
               {autocomplete}
               value={inputValue}
+              {autocapitalize}
               on:input={handleInput}
               on:focus
               on:blur
@@ -282,6 +285,7 @@
               {mask}
               {replace}
               {accept}
+              {autocapitalize}
               {actions}
               bind:inputEl
               on:input={handleInput}

@@ -18,6 +18,7 @@
   export let id: string | undefined = undefined;
   export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = undefined;
   export let inputEl: HTMLInputElement | null = null;
+  export let autocapitalize: HTMLInputAttributes['autocapitalize'] = undefined;
 
   export let mask = '';
   export let replace = '_';
@@ -91,6 +92,7 @@
   {type}
   {inputmode}
   placeholder={isFocused && mask ? mask : placeholder}
+  {autocapitalize}
   bind:this={inputEl}
   on:keydown={(e) => (backspace = e.key === 'Backspace')}
   on:keydown
