@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import type { ComponentProps } from '$lib/types';
   import { mdiMenuDown } from '@mdi/js';
 
@@ -9,13 +10,16 @@
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
 
-  export let options: Array<{ label: string; value: any; icon?: string }> = undefined;
-  export let value = null;
-  export let menuProps: ComponentProps<Menu> = undefined;
+  export let options: Array<{ label: string; value: any; icon?: string }>;
+  export let value: any = null;
+  export let menuProps: ComponentProps<Menu> | undefined = undefined;
   export let menuIcon = mdiMenuDown;
   $: selected = options?.find((x) => x.value === value);
 
   let open = false;
+
+  const dispatch = createEventDispatcher();
+  $: dispatch('change', { value });
 </script>
 
 <Field on:click={() => (open = !open)} class="cursor-pointer" {...$$restProps}>

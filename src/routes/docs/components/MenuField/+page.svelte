@@ -43,6 +43,12 @@
   <MenuField {options} value="copy" />
 </Preview>
 
+<h2>Empty selection</h2>
+
+<Preview>
+  <MenuField options={[{ label: 'Please make a selection', value: null }, ...options]} />
+</Preview>
+
 <h2>Icon</h2>
 
 <Preview>
