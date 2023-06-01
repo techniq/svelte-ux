@@ -11,8 +11,6 @@
   import { timerStore } from '$lib';
 
   let value = 0;
-  let min = -10;
-  let max = 10;
 
   const timer = timerStore({ initial: 60, onTick: (value) => value - 1, disabled: true });
   $: ({ isRunning } = timer);
@@ -68,18 +66,8 @@
   <Field label="Value">
     <ScrollingNumber bind:value class="w-full" />
     <div slot="append" class="flex">
-      <Button
-        icon={mdiMinus}
-        on:click={() => (value -= 1)}
-        size="sm"
-        disabled={min != null && value <= min}
-      />
-      <Button
-        icon={mdiPlus}
-        on:click={() => (value += 1)}
-        size="sm"
-        disabled={max != null && value >= max}
-      />
+      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
+      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
     </div>
   </Field>
 </Preview>
@@ -90,23 +78,51 @@
 <Preview>
   <Field class="w-36">
     <div slot="prepend" class="flex">
-      <Button
-        icon={mdiMinus}
-        on:click={() => (value -= 1)}
-        size="sm"
-        disabled={min != null && value <= min}
-      />
+      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
     </div>
     <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
     <div slot="append" class="flex">
-      <Button
-        icon={mdiPlus}
-        on:click={() => (value += 1)}
-        size="sm"
-        disabled={max != null && value >= max}
-      />
+      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
     </div>
   </Field>
+</Preview>
+
+<h2>ButtonGroup</h2>
+
+<Preview>
+  <div class="flex gap-4">
+    <ButtonGroup variant="outline">
+      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button class="w-20 pointer-events-none">
+        <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+      </Button>
+      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill">
+      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button class="w-20 pointer-events-none">
+        <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+      </Button>
+      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup color="accent" variant="fill-light">
+      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button class="w-20 pointer-events-none">
+        <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+      </Button>
+      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+    </ButtonGroup>
+
+    <ButtonGroup color="accent" variant="fill-outline">
+      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button class="w-20 pointer-events-none">
+        <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+      </Button>
+      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+    </ButtonGroup>
+  </div>
 </Preview>
 
 <h2>Countdown</h2>
