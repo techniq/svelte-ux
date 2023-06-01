@@ -13,6 +13,27 @@
     'inline-flex',
     `variant-${variant}`, // used for per-variant group overrides in `style`
     disabled && 'opacity-50 pointer-events-none',
+
+    /* Remove left/right rounding if button is not first/last, or if is a child of an element that is first/last (ex. wrapped in span for menu/tooltip/etc) */
+    '[&_.button:not(:first-child)]:rounded-l-none',
+    '[&_.button:not(:last-child)]:rounded-r-none',
+    '[&_:not(:first-child)_.button]:rounded-l-none',
+    '[&_:not(:last-child)_.button]:rounded-r-none',
+
+    /* Overlap borders to allow selection styling per button.  Should be used with z-index */
+    '[&.variant-outline_.button:not(:first-child)]:-ml-px',
+    '[&.variant-outline_:not(:first-child)_.button]:-ml-px',
+    '[&.variant-fill-outline_.button:not(:first-child)]:-ml-px',
+    '[&.variant-fill-outline_:not(:first-child)_.button]:-ml-px',
+
+    /* Add gap between buttons (text, filled) */
+    '[&.variant-text_.button:not(:first-child)]:ml-px',
+    '[&.variant-text_:not(:first-child)_.button]:ml-px',
+    '[&.variant-fill_.button:not(:first-child)]:ml-px',
+    '[&.variant-fill_:not(:first-child)_.button]:ml-px',
+    '[&.variant-fill-light_.button:not(:first-child)]:ml-px',
+    '[&.variant-fill-light_:not(:first-child)_.button]:ml-px',
+
     $$props.class
   );
 
@@ -26,33 +47,3 @@
 <div role="group" class={_class} on:keydown on:keyup on:keypress on:click>
   <slot />
 </div>
-
-<style lang="postcss">
-  /* Sets if button is first/last, or if child of element that is first/last (ex. wrapped in span for menu/tooltip/etc) */
-  [role='group'] :global(.button:not(:first-child)),
-  [role='group'] :global(:not(:first-child) .button) {
-    @apply rounded-l-none;
-  }
-  [role='group'] :global(.button:not(:last-child)),
-  [role='group'] :global(:not(:last-child) .button) {
-    @apply rounded-r-none;
-  }
-
-  /* Overlap borders to allow selection styling per button.  Should be used with z-index */
-  .variant-outline :global(.button:not(:first-child)),
-  .variant-outline :global(:not(:first-child) .button),
-  .variant-fill-outline :global(.button:not(:first-child)),
-  .variant-fill-outline :global(:not(:first-child) .button) {
-    @apply ml-[-1px];
-  }
-
-  /* Add gap between buttons (text, filled) */
-  .variant-text :global(.button:not(:first-child)),
-  .variant-text :global(:not(:first-child) .button),
-  .variant-fill :global(.button:not(:first-child)),
-  .variant-fill :global(:not(:first-child) .button),
-  .variant-fill-light :global(.button:not(:first-child)),
-  .variant-fill-light :global(:not(:first-child) .button) {
-    @apply ml-px;
-  }
-</style>
