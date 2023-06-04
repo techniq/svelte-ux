@@ -99,7 +99,7 @@
                   style={styles.td}
                   on:click={(e) => dispatch('cellClick', { column, rowData })}
                 >
-                  {getCellContent(column, rowData, rowIndex)}
+                  {@html getCellContent(column, rowData, rowIndex)}
                 </td>
               {/each}
             </tr>

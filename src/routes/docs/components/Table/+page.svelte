@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { max } from 'd3-array';
   import api from '$lib/components/Table.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
@@ -12,8 +11,12 @@
   import paginationStore from '$lib/stores/paginationStore';
   import tableOrderStore from '$lib/stores/tableOrderStore';
 
+  import { tableCell } from '$lib/actions/table';
+  import { getCellValue, getCellContent } from '$lib/utils/table';
+
   import { randomInteger } from '$lib/utils/number';
   import { createPropertySortFunc } from '$lib/utils/sort';
+  import TweenedValue from '$lib/components/TweenedValue.svelte';
 
   const pagination = paginationStore();
   const order = tableOrderStore({ initialBy: 'name' });
@@ -62,6 +65,46 @@
       {
         name: 'name',
         align: 'left',
+      },
+      {
+        name: 'calories',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'fat',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'carbs',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'protein',
+        align: 'right',
+        format: 'integer',
+      },
+    ]}
+  />
+</Preview>
+
+<h2>Basic</h2>
+
+<Preview>
+  <Table
+    {data}
+    columns={[
+      {
+        name: 'name',
+        align: 'left',
+        format: (value) =>
+          '<a href="https://www.google.com/search?q=' +
+          value +
+          '" class="underline" target="_blank">' +
+          value +
+          '</a>',
       },
       {
         name: 'calories',
@@ -226,6 +269,88 @@
       },
     ]}
   />
+</Preview>
+
+<h2>Customize markup</h2>
+
+<Preview>
+  <Button
+    on:click={() => (randomData = randomDataGen())}
+    class="text-blue-500 border border-blue-500 bg-white mb-1">Randomize</Button
+  >
+  <Table
+    data={randomData}
+    columns={[
+      {
+        name: 'name',
+        align: 'left',
+      },
+      {
+        name: 'calories',
+        align: 'right',
+        format: 'integer',
+        dataBackground: {
+          color: 'var(--color-blue-100)',
+          inset: [1, 2],
+          tweened: { duration: 300 },
+        },
+      },
+      {
+        name: 'fat',
+        align: 'right',
+        format: 'integer',
+        dataBackground: {
+          color: 'var(--color-purple-100)',
+          inset: [1, 2],
+          tweened: { duration: 300 },
+        },
+      },
+      {
+        name: 'carbs',
+        align: 'right',
+        format: 'integer',
+        dataBackground: {
+          color: 'var(--color-orange-100)',
+          inset: [1, 2],
+          tweened: { duration: 300 },
+        },
+      },
+      {
+        name: 'protein',
+        align: 'right',
+        format: 'integer',
+        dataBackground: {
+          color: 'var(--color-red-100)',
+          inset: [1, 2],
+          tweened: { duration: 300 },
+        },
+      },
+    ]}
+  >
+    <tbody slot="data" let:columns let:data>
+      {#each data ?? [] as rowData, rowIndex}
+        <tr>
+          {#each columns as column (column.name)}
+            {@const value = getCellValue(column, rowData, rowIndex)}
+
+            {#if column.name === 'name'}
+              <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+                {value}
+              </td>
+            {:else}
+              <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+                <TweenedValue
+                  {value}
+                  format={column.format}
+                  options={column.dataBackground?.tweened}
+                />
+              </td>
+            {/if}
+          {/each}
+        </tr>
+      {/each}
+    </tbody>
+  </Table>
 </Preview>
 
 <h1>API</h1>

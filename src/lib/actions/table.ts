@@ -13,7 +13,7 @@ type TableCellOptions = {
   column?: ColumnDef;
   rowData?: any;
   rowIndex?: number;
-  tableData?: any[];
+  tableData?: any[] | null;
   order?: ReturnType<typeof tableOrderStore>;
   overrides?: Partial<ColumnDef>;
 };
