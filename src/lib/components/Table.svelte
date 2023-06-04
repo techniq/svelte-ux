@@ -99,7 +99,11 @@
                   style={styles.td}
                   on:click={(e) => dispatch('cellClick', { column, rowData })}
                 >
-                  {@html getCellContent(column, rowData, rowIndex)}
+                  {#if column.html}
+                    {@html getCellContent(column, rowData, rowIndex)}
+                  {:else}
+                    {getCellContent(column, rowData, rowIndex)}
+                  {/if}
                 </td>
               {/each}
             </tr>

@@ -19,6 +19,8 @@ export type ColumnDef<TData = any> = {
   header?: string;
   value?: string | ((rowData: TData, rowIndex?: number) => any);
   format?: FormatType;
+  /** Render as HTML.  Only enable if value from trusted source (else exposing to XSS vulnerability) */
+  html?: boolean;
   orderBy?: string | boolean | ((a: any, b: any) => number);
   columns?: ColumnDef<TData>[];
   align?: 'left' | 'right' | 'center' | 'justify';

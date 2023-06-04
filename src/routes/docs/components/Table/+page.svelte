@@ -105,6 +105,7 @@
           '" class="underline" target="_blank">' +
           value +
           '</a>',
+        html: true,
       },
       {
         name: 'calories',
