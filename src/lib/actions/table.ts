@@ -1,4 +1,6 @@
+import type { Action } from 'svelte/action';
 import { merge } from 'lodash-es';
+import { extent, max, min } from 'd3-array';
 
 import type { ColumnDef, ResolveContext } from '../types/table';
 import type tableOrderStore from '../stores/tableOrderStore';
@@ -7,7 +9,6 @@ import { dataBackground } from './dataBackground';
 import { sticky } from './sticky';
 import { getCellValue } from '../utils/table';
 import DomTracker from './_domTracker';
-import { extent, max, min } from 'd3-array';
 
 type TableCellOptions = {
   column?: ColumnDef;
@@ -18,7 +19,7 @@ type TableCellOptions = {
   overrides?: Partial<ColumnDef>;
 };
 
-export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteActionReturnType {
+export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) => {
   // Track changes so they can be reversed on an update
   const tracker = new DomTracker(node);
 
@@ -165,7 +166,7 @@ export function tableCell(node: HTMLElement, options: TableCellOptions): SvelteA
     update,
     destroy,
   };
-}
+};
 
 function getClasses(classProp: ColumnDef['class']['data'], context: ResolveContext) {
   const resolvedClassProp = typeof classProp === 'function' ? classProp(context) : classProp;

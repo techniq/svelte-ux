@@ -1,5 +1,6 @@
-import { scaleLinear } from 'd3-scale';
+import type { Action } from 'svelte/action';
 import { tweened } from 'svelte/motion';
+import { scaleLinear } from 'd3-scale';
 
 export type DataBackgroundOptions = {
   value: number | null | undefined;
@@ -30,14 +31,11 @@ export type DataBackgroundOptions = {
   tweened?: Parameters<typeof tweened>[1];
 };
 
-export function dataBackground(
-  node: HTMLElement,
-  options: DataBackgroundOptions
-): SvelteActionReturnType {
+export const dataBackground: Action<HTMLElement, DataBackgroundOptions> = (node, options) => {
   // Set duration to 0 by default to be instantaneous
-  const baseline = tweened(0, { duration: 0, ...options.tweened });
-  const barStart = tweened(0, { duration: 0, ...options.tweened });
-  const barEnd = tweened(0, { duration: 0, ...options.tweened });
+  const baseline = tweened(0, { duration: 0, ...options?.tweened });
+  const barStart = tweened(0, { duration: 0, ...options?.tweened });
+  const barEnd = tweened(0, { duration: 0, ...options?.tweened });
 
   function update(options: DataBackgroundOptions) {
     const { domain, color, mode = 'bar', inset, enabled } = options;
@@ -125,7 +123,9 @@ export function dataBackground(
     }
   }
 
-  update(options);
+  if (options) {
+    update(options);
+  }
 
   return { update };
-}
+};

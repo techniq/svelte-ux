@@ -1,14 +1,14 @@
+import type { Action } from 'svelte/action';
 import { scrollIntoView as scrollIntoViewUtil } from '$lib/utils/dom';
 
-export function scrollIntoView(
-  node: HTMLElement,
-  options: {
-    condition: boolean | ((node: HTMLElement) => boolean);
-    initial?: boolean;
-    delay?: number;
-  }
-): SvelteActionReturnType {
-  function update(options: Parameters<typeof scrollIntoView>[1]) {
+type ScrollIntoViewOptions = {
+  condition: boolean | ((node: HTMLElement) => boolean);
+  initial?: boolean;
+  delay?: number;
+};
+
+export const scrollIntoView: Action<HTMLElement, ScrollIntoViewOptions> = (node, options) => {
+  function update(options: ScrollIntoViewOptions) {
     if (typeof options.condition === 'boolean' ? options.condition : options.condition(node)) {
       setTimeout(() => {
         scrollIntoViewUtil(node);
@@ -16,29 +16,28 @@ export function scrollIntoView(
     }
   }
 
-  if (options.initial !== false) {
+  if (options && options.initial !== false) {
     update(options);
   }
   return { update };
-}
+};
 
-export function scrollShadow(
-  node: HTMLElement,
-  options?: {
-    top?: {
-      color?: string;
-    };
-    bottom?: {
-      color?: string;
-    };
-    left?: {
-      color?: string;
-    };
-    right?: {
-      color?: string;
-    };
-  }
-): SvelteActionReturnType {
+type ScrollShadowOptions = {
+  top?: {
+    color?: string;
+  };
+  bottom?: {
+    color?: string;
+  };
+  left?: {
+    color?: string;
+  };
+  right?: {
+    color?: string;
+  };
+};
+
+export const scrollShadow: Action<HTMLElement, ScrollShadowOptions> = (node, options) => {
   const defaultOptions = {
     offset: 10,
     blur: 6,
@@ -147,15 +146,14 @@ export function scrollShadow(
       mutationObserver.disconnect();
     },
   };
-}
+};
 
-export function scrollFade(
-  node: HTMLElement,
-  options?: {
-    length?: number;
-    scrollRatio?: number;
-  }
-): SvelteActionReturnType {
+type ScrollFadeOptions = {
+  length?: number;
+  scrollRatio?: number;
+};
+
+export const scrollFade: Action<HTMLElement, ScrollFadeOptions> = (node, options) => {
   const length = options?.length ?? 50;
   const scrollRatio = options?.scrollRatio ?? 5;
 
@@ -209,8 +207,8 @@ export function scrollFade(
 
       gradient = `linear-gradient(to right, ${gradients.join(',')})`;
     }
-    node.style.webkitMaskImage = gradient;
-    node.style.maskImage = gradient;
+    node.style.webkitMaskImage = gradient ?? '';
+    node.style.maskImage = gradient ?? '';
   }
   node.classList.add('overflow-auto');
   node.addEventListener('scroll', onScroll, { passive: true });
@@ -239,4 +237,4 @@ export function scrollFade(
       mutationObserver.disconnect();
     },
   };
-}
+};

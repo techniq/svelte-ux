@@ -1,13 +1,12 @@
-export type Actions<TNode = HTMLElement | SVGElement> = (node: TNode) => SvelteActionReturnType[];
+import type { Action, ActionReturn } from 'svelte/action';
+
+export type Actions<TNode = HTMLElement | SVGElement> = (node: TNode) => ActionReturn[];
 
 /**
  * Helper action to handle multiple actions as a single action.  Useful for adding actions for custom components
  */
-export default function multi<TNode = HTMLElement | SVGElement>(
-  node: TNode,
-  actions?: Actions<TNode>
-): SvelteActionReturnType {
-  let destroyFuncs: (() => void)[] | undefined = undefined;
+export const multi: Action<HTMLElement | SVGElement> = (node, actions?: Actions) => {
+  let destroyFuncs: ActionReturn['destroy'][] = [];
 
   function update() {
     destroy();
@@ -19,11 +18,11 @@ export default function multi<TNode = HTMLElement | SVGElement>(
   }
 
   function destroy() {
-    destroyFuncs?.forEach((fn) => fn?.());
+    destroyFuncs.forEach((fn) => fn?.());
   }
 
   if (actions?.length) {
     update();
     return { update, destroy };
   }
-}
+};

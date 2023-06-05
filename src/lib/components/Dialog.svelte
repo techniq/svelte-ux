@@ -6,7 +6,7 @@
   import { quadIn } from 'svelte/easing';
 
   import { focusMove } from '../actions/focus';
-  import portalAction from '../actions/portal';
+  import { portal as portalAction } from '../actions/portal';
   import { cls } from '../utils/styles';
 
   import Backdrop from './Backdrop.svelte';

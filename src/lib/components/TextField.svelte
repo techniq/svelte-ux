@@ -3,7 +3,7 @@
   import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
-  import multi from '../actions/multi';
+  import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
 

@@ -1,11 +1,11 @@
-export { default as cssVars } from './cssVars';
+export * from './cssVars';
 export * from './dataBackground';
 export * from './input';
 export * from './layout';
 export * from './mouse';
-export { default as multi } from './multi';
+export * from './multi';
 export * from './observer';
-export { default as portal } from './portal';
+export * from './portal';
 export * from './scroll';
 export * from './sticky';
 export * from './table';

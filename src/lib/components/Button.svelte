@@ -4,7 +4,7 @@
 
   import CircularProgress from './CircularProgress.svelte';
   import { cls } from '../utils/styles';
-  import multi from '../actions/multi';
+  import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import type { TailwindColors } from '$lib/types';
 

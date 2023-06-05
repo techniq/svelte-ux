@@ -8,7 +8,7 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import type { HTMLInputAttributes, HTMLInputTypeAttribute } from 'svelte/elements';
 
-  import multi from '../actions/multi';
+  import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
 

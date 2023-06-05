@@ -1,4 +1,4 @@
-import type { SvelteAction } from '$lib/types';
+import type { Action, ActionReturn } from 'svelte/action';
 
 /**
  * Apply changes to an HTMLElement with the ability to reverse.
@@ -12,7 +12,7 @@ export default class DomTracker {
     styles: { property: string; value: string }[];
     attributes: { qualifiedName: string; value: string }[];
     eventListeners: { type: string; listener: () => any }[];
-    actions: Map<string, SvelteActionReturnType>;
+    actions: Map<string, ActionReturn | void>;
   };
 
   constructor(node: HTMLElement) {
@@ -23,7 +23,7 @@ export default class DomTracker {
       styles: [],
       attributes: [],
       eventListeners: [],
-      actions: new Map<string, SvelteActionReturnType>(),
+      actions: new Map<string, ActionReturn>(),
     };
   }
 
@@ -47,7 +47,7 @@ export default class DomTracker {
     this.changes.eventListeners.push({ type, listener });
   }
 
-  addAction<TOptions>(action: SvelteAction, options: TOptions) {
+  addAction<TOptions>(action: Action, options: TOptions) {
     const existingAction = this.changes.actions.get(action.name);
     if (existingAction) {
       // Action already created, call action's update() (if available)

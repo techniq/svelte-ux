@@ -7,7 +7,7 @@
   import Overlay from './Overlay.svelte';
 
   import { focusMove } from '../actions/focus';
-  import portalAction from '../actions/portal';
+  import { portal as portalAction } from '../actions/portal';
   import { cls } from '../utils/styles';
 
   const dispatch = createEventDispatcher();

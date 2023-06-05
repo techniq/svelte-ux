@@ -1,7 +1,9 @@
+import type { Action } from 'svelte/action';
+
 /**
  * Dispatch event after element has been pressed for a duration of time
  */
-export function longpress(node: HTMLElement, duration: number) {
+export const longpress: Action<HTMLElement, number> = (node, duration) => {
   let timeoutID: number;
 
   const handleMousedown = () => {
@@ -26,7 +28,7 @@ export function longpress(node: HTMLElement, duration: number) {
       node.removeEventListener('mouseup', handleMouseup);
     },
   };
-}
+};
 
 /**
  * Track mouse position changes from mouse down on node to mouse up
@@ -44,7 +46,7 @@ type MovableOptions = {
 
   axis?: 'x' | 'y' | 'xy';
 };
-export function movable(node: HTMLElement, options: MovableOptions = {}): SvelteActionReturnType {
+export const movable: Action<HTMLElement, MovableOptions> = (node, options = {}) => {
   let lastX = 0;
   let lastY = 0;
 
@@ -142,4 +144,4 @@ export function movable(node: HTMLElement, options: MovableOptions = {}): Svelte
       node.removeEventListener('mousedown', handleMouseDown);
     },
   };
-}
+};

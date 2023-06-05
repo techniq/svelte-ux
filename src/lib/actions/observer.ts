@@ -1,4 +1,6 @@
-export function resize(node: HTMLElement): SvelteActionReturnType {
+import type { Action } from 'svelte/action';
+
+export const resize: Action<HTMLElement> = (node) => {
   let observer = new ResizeObserver((entries, observer) => {
     entries.forEach((entry) => {
       node.dispatchEvent(new CustomEvent('resize', { detail: entry }));
@@ -11,12 +13,9 @@ export function resize(node: HTMLElement): SvelteActionReturnType {
       observer.disconnect();
     },
   };
-}
+};
 
-export function intersection(
-  node: HTMLElement,
-  options?: IntersectionObserverInit
-): SvelteActionReturnType {
+export const intersection: Action<HTMLElement, IntersectionObserverInit> = (node, options) => {
   // TODO: Support defininting `options.root = node.parentNode` easily (maybe querySelector() string?)
 
   let observer = new IntersectionObserver(
@@ -38,15 +37,12 @@ export function intersection(
       observer.disconnect();
     },
   };
-}
+};
 
-export function mutate(
-  node: HTMLElement | SVGElement,
-  options: MutationObserverInit
-): SvelteActionReturnType {
+export const mutate: Action<HTMLElement | SVGElement, MutationObserverInit> = (node, options) => {
   let observer: MutationObserver | null = null;
 
-  function update(options: MutationObserverInit) {
+  function update(options: MutationObserverInit | undefined) {
     destroy();
     observer = new MutationObserver((mutations) => {
       node.dispatchEvent(new CustomEvent('mutate', { detail: mutations }));
@@ -62,4 +58,4 @@ export function mutate(
   update(options);
 
   return { update, destroy };
-}
+};

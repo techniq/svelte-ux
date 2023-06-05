@@ -1,5 +1,5 @@
 <script lang="ts">
-  import cssVars from '../actions/cssVars';
+  import { cssVars } from '../actions/cssVars';
 
   export let items: any[];
 

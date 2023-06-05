@@ -1,3 +1,5 @@
+import type { Action } from 'svelte/action';
+
 import { keys } from '../types/typeHelpers';
 import DomTracker from './_domTracker';
 
@@ -11,11 +13,11 @@ type StickyOptions = {
   TODO
     - [ ] Consider raising a `stuck` event for styling (example: https://svelte.dev/repl/4ad71e00c86c47d29806e17f09ff0869?version=3.35.0)
 */
-export function sticky(node: HTMLElement, options?: StickyOptions): SvelteActionReturnType {
+export const sticky: Action<HTMLElement, StickyOptions> = (node, options) => {
   // Track changes so they can be reversed on an update
   const tracker = new DomTracker(node);
 
-  function update(options: StickyOptions) {
+  function update(options?: StickyOptions) {
     if (options === undefined) {
       // Default to top sticky if no options passed
       options = { top: true };
@@ -69,12 +71,11 @@ export function sticky(node: HTMLElement, options?: StickyOptions): SvelteAction
     update,
     destroy,
   };
-}
+};
 
-export function stickyContext(
-  node: HTMLElement,
-  options?: { type: 'page' | 'container' }
-): SvelteActionReturnType {
+type StickyContextOptions = { type: 'page' | 'container' };
+
+export const stickyContext: Action<HTMLElement, StickyContextOptions> = (node, options) => {
   const type = options?.type ?? 'page';
 
   function setSticky() {
@@ -114,4 +115,4 @@ export function stickyContext(
   }
 
   setSticky();
-}
+};

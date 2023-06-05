@@ -3,7 +3,7 @@
   import Blockquote from '$docs/Blockquote.svelte';
   import Code from '$lib/components/Code.svelte';
 
-  import multi from '$lib/actions/multi';
+  import { multi } from '$lib/actions/multi';
 </script>
 
 <h1>Usage</h1>

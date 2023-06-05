@@ -1,11 +1,14 @@
+import type { Action } from 'svelte/action';
+
 /**
  * Set `height` or `max-height` to viewport height excluding node's current viewport top
  */
-export function remainingViewportHeight(
-  node: HTMLElement,
-  options?: { max?: boolean; offset?: number; enabled?: boolean }
-): SvelteActionReturnType {
-  function update(options) {
+export const remainingViewportHeight: Action<
+  HTMLElement,
+  { max?: boolean; offset?: number; enabled?: boolean }
+> = (node, options) => {
+  type Options = typeof options;
+  function update(options: Options) {
     const viewportClientTop = node.getBoundingClientRect().top;
     const property = options?.max ? 'max-height' : 'height';
 
@@ -21,16 +24,17 @@ export function remainingViewportHeight(
 
   update(options);
   return { update };
-}
+};
 
 /**
  * Set `width` or `max-width` to viewport width excluding node's current viewport left
  */
-export function remainingViewportWidth(
-  node: HTMLElement,
-  options?: { max?: boolean; offset?: number; enabled?: boolean }
-): SvelteActionReturnType {
-  function update(options) {
+export const remainingViewportWidth: Action<
+  HTMLElement,
+  { max?: boolean; offset?: number; enabled?: boolean }
+> = (node, options) => {
+  type Options = typeof options;
+  function update(options: Options) {
     // TODO: Find way to watch/update when viewport location changes (ex. closing side drawer).  Resizer observer does not work for these cases.  Using the absolute positioned sentinel element sounds promising: https://stackoverflow.com/questions/40251082/an-event-or-observer-for-changes-to-getboundingclientrect
     const viewportClientLeft = node.getBoundingClientRect().left;
 
@@ -48,12 +52,12 @@ export function remainingViewportWidth(
 
   update(options);
   return { update };
-}
+};
 
 /**
  * Watch for overflow changes (x or y) and dispatch `overflowX` / `overflowY` events with amount
  */
-export function overflow(node: HTMLElement) {
+export const overflow: Action<HTMLElement> = (node) => {
   let overflowX = 0;
   let overflowY = 0;
 
@@ -95,4 +99,4 @@ export function overflow(node: HTMLElement) {
       mutationObserver.disconnect();
     },
   };
-}
+};

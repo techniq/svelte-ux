@@ -1,9 +1,10 @@
 import { tick } from 'svelte';
+import type { ActionReturn } from 'svelte/action';
 
 export function focusMove(
   node: HTMLElement,
   options: { restoreFocus?: boolean; disabled?: boolean } = { restoreFocus: false, disabled: false }
-): SvelteActionReturnType {
+): ActionReturn {
   if (!options.disabled) {
     let previousActiveElement = document.activeElement;
 
@@ -27,10 +28,12 @@ export function focusMove(
       },
     };
   }
+
+  return {};
 }
 
 // TODO: Add `focusTrap`
 // https://css-tricks.com/a-css-approach-to-trap-focus-inside-of-an-element/
-// export function focusTrap(node: HTMLElement): SvelteActionReturnType {
+// export function focusTrap(node: HTMLElement): ActionReturn {
 //   //
 // }

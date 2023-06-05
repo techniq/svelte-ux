@@ -1,3 +1,4 @@
+import type { Action } from 'svelte/action';
 import {
   computePosition,
   autoUpdate,
@@ -10,7 +11,8 @@ import {
   type ComputePositionConfig,
   type Alignment,
 } from '@floating-ui/dom';
-import portal from './portal';
+
+import { portal } from './portal';
 
 type PopoverOptions = {
   anchorEl?: HTMLElement;
@@ -22,7 +24,7 @@ type PopoverOptions = {
   resize?: boolean;
 };
 
-export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActionReturnType {
+export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
   const popoverEl = node;
   const anchorEl = options?.anchorEl ?? node.parentElement;
 
@@ -91,7 +93,7 @@ export function popover(node: HTMLElement, options?: PopoverOptions): SvelteActi
       document.removeEventListener('mouseup', onMouseUp);
     },
   };
-}
+};
 
 // See: https://github.com/floating-ui/floating-ui/blob/master/packages/core/src/utils/getOppositePlacement.ts (not exported)
 const hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
