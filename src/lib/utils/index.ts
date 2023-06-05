@@ -24,4 +24,3 @@ export * as sort from './sort';
 export * as string from './string';
 export * as styles from './styles';
 export * as table from './table';
-export * as transition from './transition';
