@@ -106,7 +106,11 @@ export function getCellValue(column: ColumnDef, rowData: any, rowIndex?: number)
     value = get(rowData, typeof column.value === 'string' ? column.value : column.name);
   }
 
-  if (typeof value === 'string' && !isFunction(column.format) && column.format in PeriodType) {
+  if (
+    typeof value === 'string' &&
+    !isFunction(column.format) &&
+    (column.format ?? 'none') in PeriodType
+  ) {
     // Convert date string to Date instance
     // TODO: Shoud dateFns.parseISO() be used?
     // TODO: Should we handle date-only strings different?

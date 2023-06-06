@@ -102,7 +102,7 @@ export function round(value: number, decimals: number) {
 /**
  * Get random number between min and max (inclusive)
  */
-export function randomInteger(min, max) {
+export function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 

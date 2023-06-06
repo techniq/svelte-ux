@@ -7,7 +7,7 @@ export function url(currentUrl: URL, path: string) {
   } else if (path.match(/^\.\.?\//)) {
     // Relative path (starts wtih `./` or `../`)
     // console.log('relative path');
-    let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/);
+    let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/) as string[];
     let dir = currentUrl.pathname.replace(/\/$/, '');
     // console.log({ dir, breadcrumbs, relativePath });
     const traverse = breadcrumbs.match(/\.\.\//g) || [];

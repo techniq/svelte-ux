@@ -13,7 +13,8 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
-    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "typedoc": "typedoc"
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^2.4.3",
@@ -21,6 +22,7 @@
     "@sveltejs/package": "^2.0.2",
     "@tailwindcss/typography": "^0.5.9",
     "@types/d3-array": "^3.0.4",
+    "@types/d3-format": "^3.0.1",
     "@types/d3-scale": "^4.0.3",
     "@types/lodash-es": "^4.17.7",
     "@types/prismjs": "^1.26.0",
@@ -33,6 +35,7 @@
     "svelte2tsx": "^0.6.12",
     "tailwindcss": "^3.3.2",
     "tslib": "^2.5.0",
+    "typedoc-json-parser": "^8.1.2",
     "typescript": "^5.0.4",
     "unist-util-visit": "^4.1.2",
     "vite": "^4.3.4",

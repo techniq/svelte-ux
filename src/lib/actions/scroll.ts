@@ -1,5 +1,6 @@
 import type { Action } from 'svelte/action';
 import { scrollIntoView as scrollIntoViewUtil } from '$lib/utils/dom';
+import type { EventWithTarget } from '$lib/types';
 
 type ScrollIntoViewOptions = {
   condition: boolean | ((node: HTMLElement) => boolean);
@@ -65,9 +66,14 @@ export const scrollShadow: Action<HTMLElement, ScrollShadowOptions> = (node, opt
     },
   };
 
-  function onScroll(e) {
-    const { clientWidth, clientHeight, scrollWidth, scrollHeight, scrollTop, scrollLeft } =
-      e.currentTarget ?? e.target;
+  function onScroll(e: EventWithTarget) {
+    const target = (e.currentTarget ?? e.target) as HTMLElement | null;
+
+    if (!target) {
+      return;
+    }
+
+    const { clientWidth, clientHeight, scrollWidth, scrollHeight, scrollTop, scrollLeft } = target;
 
     const verticalScrollPercent = scrollTop / (scrollHeight - clientHeight);
     const horizontalScrollPercent = scrollLeft / (scrollWidth - clientWidth);
@@ -157,9 +163,14 @@ export const scrollFade: Action<HTMLElement, ScrollFadeOptions> = (node, options
   const length = options?.length ?? 50;
   const scrollRatio = options?.scrollRatio ?? 5;
 
-  function onScroll(e) {
-    const { clientWidth, clientHeight, scrollWidth, scrollHeight, scrollTop, scrollLeft } =
-      e.currentTarget ?? e.target;
+  function onScroll(e: EventWithTarget) {
+    const target = (e.currentTarget ?? e.target) as HTMLElement | null;
+
+    if (!target) {
+      return;
+    }
+
+    const { clientWidth, clientHeight, scrollWidth, scrollHeight, scrollTop, scrollLeft } = target;
 
     const verticalScrollPercent = scrollTop / (scrollHeight - clientHeight);
     const horizontalScrollPercent = scrollLeft / (scrollWidth - clientWidth);

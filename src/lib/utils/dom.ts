@@ -3,10 +3,10 @@
  * - see: https://stackoverflow.com/questions/35939886/find-first-scrollable-parent
  * - see: https://gist.github.com/twxia/bb20843c495a49644be6ea3804c0d775
  */
-export function getScrollParent(node): HTMLElement | null {
+export function getScrollParent(node: HTMLElement): HTMLElement {
   const isElement = node instanceof HTMLElement;
-  const overflowX = isElement && (window?.getComputedStyle(node).overflowX ?? 'visible');
-  const overflowY = isElement && (window?.getComputedStyle(node).overflowY ?? 'visible');
+  const overflowX = isElement ? window?.getComputedStyle(node).overflowX ?? 'visible' : 'unknown';
+  const overflowY = isElement ? window?.getComputedStyle(node).overflowY ?? 'visible' : 'unknown';
   const isHorozontalScrollable =
     !['visible', 'hidden'].includes(overflowX) && node.scrollWidth > node.clientWidth;
   const isVerticalScrollable =
@@ -14,8 +14,8 @@ export function getScrollParent(node): HTMLElement | null {
 
   if (isHorozontalScrollable || isVerticalScrollable) {
     return node;
-  } else if (node.parentNode) {
-    return getScrollParent(node.parentNode);
+  } else if (node.parentElement) {
+    return getScrollParent(node.parentElement);
   } else {
     return document.body;
   }
@@ -24,14 +24,14 @@ export function getScrollParent(node): HTMLElement | null {
 /**
  * Scroll node into view of closely scrollable (overflown) parent.  Like `node.scrollIntoView()` but will only scroll immediate container (not viewport)
  */
-export function scrollIntoView(node) {
+export function scrollIntoView(node: HTMLElement) {
   // TODO: Consider only scrolling if needed
   const scrollParent = getScrollParent(node);
   const removeScrollParentOffset = scrollParent != node.offsetParent; // ignore `position: absolute` parent, for example
 
   const nodeOffset = {
-    top: node.offsetTop - (removeScrollParentOffset ? scrollParent.offsetTop : 0),
-    left: node.offsetLeft - (removeScrollParentOffset ? scrollParent.offsetLeft : 0),
+    top: node.offsetTop - (removeScrollParentOffset ? scrollParent?.offsetTop ?? 0 : 0),
+    left: node.offsetLeft - (removeScrollParentOffset ? scrollParent?.offsetLeft ?? 0 : 0),
   };
 
   const optionCenter = {

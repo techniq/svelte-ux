@@ -160,7 +160,9 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
     tracker.destroy();
   }
 
-  update(options);
+  if (options) {
+    update(options);
+  }
 
   return {
     update,
@@ -168,7 +170,7 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
   };
 };
 
-function getClasses(classProp: ColumnDef['class']['data'], context: ResolveContext) {
+function getClasses(classProp: ColumnDef['class']['data'], context: ResolveContext): string[] {
   const resolvedClassProp = typeof classProp === 'function' ? classProp(context) : classProp;
 
   if (typeof resolvedClassProp === 'string') {
@@ -181,7 +183,10 @@ function getClasses(classProp: ColumnDef['class']['data'], context: ResolveConte
   }
 }
 
-function getStyleProperties(styleProp: ColumnDef['style']['data'], context: ResolveContext) {
+function getStyleProperties(
+  styleProp: ColumnDef['style']['data'],
+  context: ResolveContext
+): string[][] {
   const resolvedStyleProp = typeof styleProp === 'function' ? styleProp(context) : styleProp;
 
   if (typeof resolvedStyleProp === 'string') {

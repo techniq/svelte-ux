@@ -171,12 +171,12 @@ export function nestedFindByPredicate(
 /**
  * Given a flat array of objects with a `level` property, build a nested object with `children`
  */
-export function buildTree(arr: any[]) {
-  var levels = [{}];
+export function buildTree<T extends { level: number }>(arr: T[]) {
+  var levels = [{}] as Array<T & { children?: any[] }>;
   arr.forEach((o) => {
     levels.length = o.level;
     levels[o.level - 1].children = levels[o.level - 1].children || [];
-    levels[o.level - 1].children.push(o);
+    levels[o.level - 1].children?.push(o);
     levels[o.level] = o;
   });
   return levels[0].children;
@@ -185,7 +185,7 @@ export function buildTree(arr: any[]) {
 /**
  * Transverse array tree in depth-first order and execute callback for each item
  */
-export function walk(arr: any[], children: Function, callback: Function) {
+export function walk<T>(arr: T[], children: Function, callback: Function) {
   arr.forEach((item) => {
     callback(item);
 
@@ -198,9 +198,9 @@ export function walk(arr: any[], children: Function, callback: Function) {
 /**
  * Build flatten array in depth-first order (using `walk`)
  */
-export function flattenTree(arr: any[], children: Function) {
-  const flatArray = [];
-  walk(arr, children, (item) => flatArray.push(item));
+export function flattenTree<T>(arr: T[], children: Function) {
+  const flatArray: T[] = [];
+  walk(arr, children, (item: any) => flatArray.push(item));
 
   return flatArray;
 }

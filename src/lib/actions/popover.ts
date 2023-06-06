@@ -28,6 +28,10 @@ export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
   const popoverEl = node;
   const anchorEl = options?.anchorEl ?? node.parentElement;
 
+  if (!anchorEl) {
+    return;
+  }
+
   const cleanup = autoUpdate(anchorEl, popoverEl, () => {
     // Only allow autoPlacement to swap sides (ex. top/bottom) and not also axises (ex. left/right).  Matches flip behavor
     const alignment =
@@ -69,15 +73,20 @@ export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
   });
 
   // Used to track if the mouse changed targets between `mousedown` and `mouseup` (ex. drag from within input to body).  Better control than `click`
-  let clickTarget = null;
-  function onMouseDown(e) {
+  let clickTarget: EventTarget | null = null;
+  function onMouseDown(e: MouseEvent) {
     clickTarget = e.target;
   }
   document.addEventListener('mousedown', onMouseDown);
 
-  function onMouseUp(e) {
-    if (clickTarget === e.target && !anchorEl.contains(e.target) && !popoverEl.contains(e.target)) {
-      node.dispatchEvent(new CustomEvent('clickOutside', node));
+  function onMouseUp(e: MouseEvent) {
+    if (
+      e.target instanceof HTMLElement &&
+      clickTarget === e.target &&
+      !anchorEl?.contains(e.target) &&
+      !popoverEl.contains(e.target)
+    ) {
+      node.dispatchEvent(new CustomEvent('clickOutside'));
     }
   }
   document.addEventListener('mouseup', onMouseUp);
@@ -85,7 +94,6 @@ export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
   const portalResult = portal(node);
 
   return {
-    ...portalResult,
     destroy() {
       cleanup();
       portalResult?.destroy?.();

@@ -6,7 +6,7 @@ export type TimerOptions<T> = {
   disabled?: boolean;
 
   /** Called on each interval tick.  Returned value is used to update store value, defaulting to current Date */
-  onTick?: (current: T) => any;
+  onTick?: (current: T | null) => any;
 };
 
 /**
@@ -18,7 +18,7 @@ export default function timerStore<T = any>(options: TimerOptions<T> = {}) {
   let delay = options.delay ?? 1000;
   const isRunning = writable(false);
 
-  const state = writable<T>(initial, () => {
+  const state = writable<T | null>(initial, () => {
     if (!options.disabled) {
       start();
     }

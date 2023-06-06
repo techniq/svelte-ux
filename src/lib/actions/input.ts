@@ -3,10 +3,7 @@ import type { Action } from 'svelte/action';
 /**
  * Auto focus node when rendered.  Useful for inputs
  */
-export const autoFocus: Action<HTMLInputElement | HTMLTextAreaElement, { delay?: number }> = (
-  node,
-  options?
-) => {
+export const autoFocus: Action<HTMLElement, { delay?: number }> = (node, options?) => {
   // TODO: Add options to "restoreFocus" on destroy()
   // const elementFocused = document.activeElement as HTMLElement;
   setTimeout(() => {
@@ -18,7 +15,7 @@ export const autoFocus: Action<HTMLInputElement | HTMLTextAreaElement, { delay?:
  * Selects the text inside a text node when the node is focused
  */
 export const selectOnFocus: Action<HTMLInputElement | HTMLTextAreaElement> = (node) => {
-  const handleFocus = (event: FocusEvent) => {
+  const handleFocus = (event: Event) => {
     node.select();
   };
 
@@ -35,17 +32,17 @@ export const selectOnFocus: Action<HTMLInputElement | HTMLTextAreaElement> = (no
  * Blurs the node when Escape is pressed
  */
 export const blurOnEscape: Action<HTMLInputElement | HTMLTextAreaElement> = (node) => {
-  const handleKey = (event: Event) => {
+  const handleKey = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       node.blur();
     }
   };
 
-  node.addEventListener('keydown', handleKey);
+  (node as HTMLInputElement).addEventListener('keydown', handleKey);
 
   return {
     destroy() {
-      node.removeEventListener('keydown', handleKey);
+      (node as HTMLInputElement).removeEventListener('keydown', handleKey);
     },
   };
 };
@@ -57,9 +54,11 @@ export const blurOnEscape: Action<HTMLInputElement | HTMLTextAreaElement> = (nod
  *  - https://svelte.dev/repl/f1a7e24a08a54947bb4447f295c741fb?version=3.14.1
  */
 export const autoHeight: Action<HTMLTextAreaElement> = (node) => {
-  function resize({ target }) {
-    target.style.height = '1px';
-    target.style.height = +target.scrollHeight + 'px';
+  function resize({ target }: { target: EventTarget | null }) {
+    if (target instanceof HTMLElement) {
+      target.style.height = '1px';
+      target.style.height = +target.scrollHeight + 'px';
+    }
   }
 
   node.style.overflow = 'hidden';

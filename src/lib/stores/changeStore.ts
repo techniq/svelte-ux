@@ -11,7 +11,7 @@ function changeStore<T extends Stores>(
     current: StoresValues<T>;
   }) => any
 ) {
-  let previous = undefined;
+  let previous: StoresValues<T> | undefined = undefined;
   return derived(store, ($store) => {
     const value = { previous, current: $store };
     if (previous === undefined) {
