@@ -2,7 +2,7 @@
   import { getContext, type ComponentProps } from 'svelte';
   import Icon from './Icon.svelte';
 
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
   import { cls } from '../utils/styles';
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
@@ -206,7 +206,7 @@
   on:click
 >
   {#if loading}
-    <CircularProgress size={16} width={2} class={cls(classes.loading)} />
+    <ProgressCircle size={16} width={2} class={cls(classes.loading)} />
   {:else if icon}
     {#if typeof icon === 'string' || 'icon' in icon}
       <!-- font path/url/etc or font-awesome IconDefinition -->

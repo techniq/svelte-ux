@@ -3,7 +3,7 @@
   import { fly } from 'svelte/transition';
 
   import Backdrop from './Backdrop.svelte';
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
 
   import { focusMove } from '../actions/focus';
@@ -85,7 +85,7 @@
   >
     {#if loading}
       <Overlay center class="rounded">
-        <CircularProgress />
+        <ProgressCircle />
       </Overlay>
     {/if}
 

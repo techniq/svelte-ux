@@ -1,6 +1,6 @@
 <script lang="ts">
   import Avatar from './Avatar.svelte';
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
   import Icon from './Icon.svelte';
   import Overlay from './Overlay.svelte';
   import type { ComponentProps } from '../types';
@@ -62,7 +62,7 @@
 >
   {#if loading}
     <Overlay center class="rounded">
-      <CircularProgress />
+      <ProgressCircle />
     </Overlay>
   {/if}
 

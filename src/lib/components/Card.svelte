@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
   import Header from './Header.svelte';
   import Overlay from './Overlay.svelte';
   import { cls } from '../utils/styles';
@@ -25,7 +25,7 @@
 >
   {#if loading}
     <Overlay center class="rounded">
-      <CircularProgress />
+      <ProgressCircle />
     </Overlay>
   {/if}
 

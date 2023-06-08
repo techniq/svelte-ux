@@ -12,7 +12,7 @@
 
   import { cls } from '../utils/styles';
   import Logger from '../utils/logger';
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
 
   type Option = $$Generic;
 
@@ -156,7 +156,7 @@
 
       {#if loading}
         <span class="inline-block w-[29px] h-[28px] text-center">
-          <CircularProgress size={16} width={2} class="text-black/50" />
+          <ProgressCircle size={16} width={2} class="text-black/50" />
         </span>
         <!-- {:else if readonly} -->
         <!-- Do not show chevron or clear buttons -->

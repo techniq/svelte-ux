@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Preview from '$lib/components/Preview.svelte';
+  import Preview from '$lib/components/Preview.svelte';
 
-	import Button from '$lib/components/Button.svelte';
-	import CircularProgress from '$lib/components/CircularProgress.svelte';
-	import Overlay from '$lib/components/Overlay.svelte';
-	import Toggle from '$lib/components/Toggle.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import ProgressCircle from '$lib/components/ProgressCircle.svelte';
+  import Overlay from '$lib/components/Overlay.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -14,7 +14,7 @@
 <Preview>
   <div class="relative">
     <Overlay center>
-      <CircularProgress />
+      <ProgressCircle />
     </Overlay>
     <div>Some content</div>
     <div>Some content</div>
@@ -28,7 +28,7 @@
 <Preview>
   <div class="relative">
     <Overlay center class="bg-black/10">
-      <CircularProgress />
+      <ProgressCircle />
     </Overlay>
     <div>Some content</div>
     <div>Some content</div>

@@ -10,7 +10,7 @@
   import { cls } from '../utils/styles';
 
   import Backdrop from './Backdrop.svelte';
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
 
   const dispatch = createEventDispatcher();
@@ -117,7 +117,7 @@
     >
       {#if loading}
         <Overlay center class="rounded">
-          <CircularProgress />
+          <ProgressCircle />
         </Overlay>
       {/if}
 
