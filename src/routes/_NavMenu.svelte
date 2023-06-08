@@ -112,6 +112,7 @@
 </script>
 
 <NavItem text="Getting Started" currentUrl={$page.url} path="/" class="pl-6 py-2 mt-4" />
+<NavItem text="Customization" currentUrl={$page.url} path="/customization" class="pl-6 py-2" />
 
 <div
   class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
