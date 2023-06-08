@@ -10,6 +10,7 @@
       'Button',
       'ButtonGroup',
       'Card',
+      'CircleProgress',
       'Collapse',
       'ExpansionPanel',
       'Icon',

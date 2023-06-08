@@ -1,192 +1,75 @@
 <script lang="ts">
-  import api from '$lib/components/CircularProgress.svelte?raw&sveld';
+  import api from '$lib/components/Progress.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
-  import CircularProgress from '$lib/components/CircularProgress.svelte';
-  // import LinearProgress from '$lib/components/LinearProgress.svelte';
+  import Progress from '$lib/components/Progress.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import Stack from '$lib/components/Stack.svelte';
+  import { cls } from '$lib/utils/styles';
 
   let value = 50;
-  let size = 40;
-  let width = 4;
-  let rotate = 0;
-  let track = false;
-  let indeterminate = true;
-  let label = false;
 </script>
 
 <h1>Examples</h1>
 
-<h2>Demo</h2>
-
-<div class="border border-black/20 rounded bg-white">
-  <Stack horizontal template="1fr auto" items="center" justifyItems="center">
-    <CircularProgress value={indeterminate ? null : value} {size} {width} {rotate} {track}>
-      {#if label}
-        <span class="text-black/50 text-xs">
-          {#if indeterminate}Loading...{:else}{value}%{/if}
-        </span>
-      {/if}
-    </CircularProgress>
-    <div class="bg-black/5 border-l border-black/20 p-4">
-      <label class="block">
-        size:
-        <input type="range" min={0} max={120} bind:value={size} />
-      </label>
-      <label class="block">
-        width:
-        <input type="range" min={0} max={20} bind:value={width} />
-      </label>
-      <label class="block">
-        rotate:
-        <input type="range" min={0} max={360} bind:value={rotate} />
-      </label>
-      <label class="block">
-        value:
-        <input type="range" min={0} max={100} bind:value disabled={indeterminate} />
-      </label>
-      <label class="block">
-        indeterminate:
-        <input type="checkbox" bind:checked={indeterminate} />
-      </label>
-      <label class="block">
-        track:
-        <input type="checkbox" bind:checked={track} />
-      </label>
-      <label class="block">
-        label:
-        <input type="checkbox" bind:checked={label} />
-      </label>
-    </div>
-  </Stack>
-</div>
-
-<h2>Default</h2>
-
-<Preview>
-  <CircularProgress />
-</Preview>
-
 <h2>Value</h2>
 
 <Preview>
-  <Stack horizontal justify="start" gap={32}>
-    <CircularProgress value={0} />
-    <CircularProgress value={20} />
-    <CircularProgress value={40} />
-    <CircularProgress value={60} />
-    <CircularProgress value={80} />
-    <CircularProgress value={100} />
-  </Stack>
+  <Progress value={0} />
+  <Progress value={0.2} />
+  <Progress value={0.4} />
+  <Progress value={0.6} />
+  <Progress value={0.8} />
+  <Progress value={1} />
+  <Progress value={null} />
 </Preview>
 
-<h2>Value w/ with track</h2>
+<h2>Max</h2>
 
 <Preview>
-  <Stack horizontal justify="start" gap={32}>
-    <CircularProgress value={0} track />
-    <CircularProgress value={20} track />
-    <CircularProgress value={40} track />
-    <CircularProgress value={60} track />
-    <CircularProgress value={80} track />
-    <CircularProgress value={100} track />
-  </Stack>
-</Preview>
-
-<h2>Value w/ with label</h2>
-
-<Preview>
-  <Stack horizontal justify="start" gap={32}>
-    <CircularProgress value={0}>
-      <span class="text-black/50 text-xs">0%</span>
-    </CircularProgress>
-    <CircularProgress value={20}>
-      <span class="text-black/50 text-xs">20%</span>
-    </CircularProgress>
-    <CircularProgress value={40}>
-      <span class="text-black/50 text-xs">40%</span>
-    </CircularProgress>
-    <CircularProgress value={60}>
-      <span class="text-black/50 text-xs">60%</span>
-    </CircularProgress>
-    <CircularProgress value={80}>
-      <span class="text-black/50 text-xs">80%</span>
-    </CircularProgress>
-    <CircularProgress value={100}>
-      <span class="text-black/50 text-xs">100%</span>
-    </CircularProgress>
-  </Stack>
-</Preview>
-
-<h2>Value w/ with label and track</h2>
-
-<Preview>
-  <Stack horizontal justify="start" gap={32}>
-    <CircularProgress value={0} track>
-      <span class="text-black/50 text-xs">0%</span>
-    </CircularProgress>
-    <CircularProgress value={20} track>
-      <span class="text-black/50 text-xs">20%</span>
-    </CircularProgress>
-    <CircularProgress value={40} track>
-      <span class="text-black/50 text-xs">40%</span>
-    </CircularProgress>
-    <CircularProgress value={60} track>
-      <span class="text-black/50 text-xs">60%</span>
-    </CircularProgress>
-    <CircularProgress value={80} track>
-      <span class="text-black/50 text-xs">80%</span>
-    </CircularProgress>
-    <CircularProgress value={100} track>
-      <span class="text-black/50 text-xs">100%</span>
-    </CircularProgress>
-  </Stack>
-</Preview>
-
-<h2>Size</h2>
-
-<Preview>
-  <Stack horizontal justify="start" gap={32}>
-    <CircularProgress size={20} />
-    <CircularProgress />
-    <CircularProgress size={100} />
-  </Stack>
-</Preview>
-
-<h2>Width</h2>
-
-<Preview>
-  <Stack horizontal justify="start" gap={32}>
-    <CircularProgress width={1} />
-    <CircularProgress width={2} />
-    <CircularProgress />
-    <CircularProgress width={10} />
-  </Stack>
+  <Progress value={50} max={100} />
 </Preview>
 
 <h2>Color</h2>
 
 <Preview>
-  <Stack horizontal justify="start" gap={32}>
-    <CircularProgress class="text-blue-500" />
-    <CircularProgress class="text-red-500" />
-    <CircularProgress class="text-purple-500" />
-    <CircularProgress class="text-green-500" />
-    <CircularProgress class="text-orange-500" />
-  </Stack>
+  <Progress value={0.5} class="[--color:theme(colors.green.500)]" />
+  <Progress value={0.7} class="[--color:theme(colors.yellow.500)]" />
+  <Progress value={0.9} class="[--color:theme(colors.red.500)]" />
 </Preview>
 
-<h2>Track Color</h2>
+<h2>Track color</h2>
 
 <Preview>
-  <Stack horizontal justify="start" gap={32}>
-    <CircularProgress class="text-blue-500 [--track-color:theme(colors.blue.100)]" track />
-    <CircularProgress class="text-red-500 [--track-color:theme(colors.red.100)]" track />
-    <CircularProgress class="text-purple-500 [--track-color:theme(colors.purple.100)]" track />
-    <CircularProgress class="text-green-500 [--track-color:theme(colors.green.100)]" track />
-    <CircularProgress class="text-orange-500 [--track-color:theme(colors.orange.100)]" track />
-  </Stack>
+  <Progress value={0.5} class="[--track-color:theme(colors.accent.50)]" />
+  <Progress
+    value={0.5}
+    class="[--color:theme(colors.green.500)] [--track-color:theme(colors.green.50)]"
+  />
+  <Progress
+    value={0.7}
+    class="[--color:theme(colors.yellow.500)] [--track-color:theme(colors.yellow.50)]"
+  />
+  <Progress
+    value={0.9}
+    class="[--color:theme(colors.red.500)] [--track-color:theme(colors.red.50)]"
+  />
+</Preview>
+
+<h2>Color based on value</h2>
+
+<Preview>
+  <Progress
+    bind:value
+    class={cls(
+      value > 90
+        ? '[--color:theme(colors.red.500)]'
+        : value > 70
+        ? '[--color:theme(colors.yellow.500)]'
+        : '[--color:theme(colors.green.500)]'
+    )}
+    max={100}
+  />
+  <input type="range" bind:value class="w-full" />
 </Preview>
 
 <h1>API</h1>
