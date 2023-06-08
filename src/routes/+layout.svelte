@@ -11,6 +11,7 @@
   import NavMenu from './_NavMenu.svelte';
   import QuickSearch from '$lib/components/QuickSearch.svelte';
   import { goto } from '$app/navigation';
+  import { createTheme } from '$lib/components/theme';
 
   inject({ mode: dev ? 'development' : 'production' });
 
@@ -24,6 +25,14 @@
       value: url,
       group: group,
     };
+  });
+
+  createTheme({
+    // AppBar: 'bg-red-500',
+    // Button: 'bg-red-500',
+    // Button: {
+    //   icon: 'text-xl',
+    // },
   });
 </script>
 

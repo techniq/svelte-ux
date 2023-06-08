@@ -6,6 +6,7 @@
   import Button from './Button.svelte';
   import { browser } from '../utils/env';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let title: string | number | Array<string | number> = '';
 
@@ -13,6 +14,8 @@
    * Update head / document.title.  Set to false to disable
    */
   export let head = true;
+
+  const theme = getComponentTheme('AppBar');
 
   $: titleString = Array.isArray(title) ? title.filter((x) => x).join(' › ') : title.toString();
 
@@ -26,6 +29,7 @@
   class={cls(
     'AppBar',
     'h-16 px-4 bg-accent-500 text-white flex items-center shadow-md relative',
+    theme.class,
     $$restProps.class
   )}
 >

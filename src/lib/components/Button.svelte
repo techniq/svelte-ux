@@ -7,6 +7,7 @@
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import type { TailwindColors } from '$lib/types';
+  import { getComponentTheme } from './theme';
   import { getButtonGroup } from './ButtonGroup.svelte';
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
@@ -36,6 +37,8 @@
     icon?: string;
     loading?: string;
   } = {};
+
+  const theme = getComponentTheme('Button');
 
   // Override default from `ButtonGroup` if set
   const groupContext = getButtonGroup();
@@ -189,6 +192,7 @@
       },
       none: {},
     }[variant ?? 'none']?.[color ?? 'default'],
+    theme.class,
     classes.root,
     $$props.class
   );
@@ -207,13 +211,13 @@
   on:click
 >
   {#if loading}
-    <ProgressCircle size={16} width={2} class={cls(classes.loading)} />
+    <ProgressCircle size={16} width={2} class={cls(theme.classes?.loading, classes.loading)} />
   {:else if icon}
     {#if typeof icon === 'string' || 'icon' in icon}
       <!-- font path/url/etc or font-awesome IconDefinition -->
-      <Icon data={icon} class={cls('pointer-events-none', classes.icon)} />
+      <Icon data={icon} class={cls('pointer-events-none', theme.classes?.icon, classes.icon)} />
     {:else}
-      <Icon class={cls('pointer-events-none', classes.icon)} {...icon} />
+      <Icon class={cls('pointer-events-none', theme.classes?.icon, classes.icon)} {...icon} />
     {/if}
   {/if}
   <slot />
