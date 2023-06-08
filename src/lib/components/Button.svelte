@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext, type ComponentProps } from 'svelte';
+  import type { ComponentProps } from 'svelte';
   import Icon from './Icon.svelte';
 
   import ProgressCircle from './ProgressCircle.svelte';
@@ -7,6 +7,7 @@
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import type { TailwindColors } from '$lib/types';
+  import { getButtonGroup } from './ButtonGroup.svelte';
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
@@ -37,7 +38,7 @@
   } = {};
 
   // Override default from `ButtonGroup` if set
-  const groupContext = getContext('ButtonGroup');
+  const groupContext = getButtonGroup();
   $: variant = variant ?? groupContext?.variant ?? 'text';
   $: color = color ?? groupContext?.color ?? 'default';
   $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);

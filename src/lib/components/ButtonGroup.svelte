@@ -1,7 +1,30 @@
-<script lang="ts">
-  import { type ComponentProps, setContext } from 'svelte';
-  import { cls } from '../utils/styles';
+<script lang="ts" context="module">
+  import { type ComponentProps, setContext, getContext } from 'svelte';
   import type Button from './Button.svelte';
+  import type { TailwindColors } from '$lib/types';
+
+  type ButtonProps = ComponentProps<Button>;
+
+  // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
+  type ButtonGroupContext = {
+    variant: 'text' | 'outline' | 'fill' | 'fill-outline' | 'fill-light' | 'none' | undefined; // ButtonProps['variant'];
+    color: TailwindColors | 'default' | undefined; //ButtonProps['color'];
+    rounded: boolean | 'full' | undefined; // ButtonProps['rounded']
+  };
+
+  const buttonGroupKey = Symbol();
+
+  export function setButtonGroup(value: ButtonGroupContext | undefined) {
+    setContext(buttonGroupKey, value);
+  }
+
+  export function getButtonGroup() {
+    return getContext<ButtonGroupContext | undefined>(buttonGroupKey);
+  }
+</script>
+
+<script lang="ts">
+  import { cls } from '../utils/styles';
 
   export let variant: ComponentProps<Button>['variant'];
   export let color: ComponentProps<Button>['color'] | undefined = undefined;
@@ -37,7 +60,7 @@
     $$props.class
   );
 
-  setContext('ButtonGroup', {
+  setButtonGroup({
     variant,
     color,
     rounded,

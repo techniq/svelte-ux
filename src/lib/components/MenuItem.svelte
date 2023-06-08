@@ -3,7 +3,7 @@
   import type { ComponentProps } from '../types';
   import { cls } from '../utils/styles';
   import { scrollIntoView as scrollIntoViewAction } from '../actions/scroll';
-  import { setContext } from 'svelte';
+  import { setButtonGroup } from './ButtonGroup.svelte';
 
   type ButtonProps = ComponentProps<Button>;
 
@@ -16,7 +16,7 @@
   export let disabled = false;
 
   // Clear ButtonGroup if set
-  setContext('ButtonGroup', null);
+  setButtonGroup(undefined);
 </script>
 
 <Button
