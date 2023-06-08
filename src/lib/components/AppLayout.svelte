@@ -25,7 +25,8 @@
 
 <div
   class={cls(
-    'layout grid grid-cols-[auto,1fr] grid-rows-[64px,1fr] h-screen',
+    'AppLayout',
+    'grid grid-cols-[auto,1fr] grid-rows-[64px,1fr] h-screen',
     classes.root,
     $$props.class
   )}
@@ -54,8 +55,7 @@
 </div>
 
 <style>
-  /* .container is used by tailwind */
-  .layout {
+  .AppLayout {
     grid-template-areas: var(--areas);
   }
 
@@ -63,11 +63,11 @@
     grid-area: aside;
   }
 
-  .layout :global(> header) {
+  .AppLayout :global(> header) {
     grid-area: header;
   }
 
-  .layout :global(> main) {
+  .AppLayout :global(> main) {
     grid-area: main;
     overflow: auto;
   }

@@ -18,7 +18,7 @@
   let open = false;
 </script>
 
-<Button on:click={() => (open = !open)} {...$$restProps}>
+<Button on:click={() => (open = !open)} {...$$restProps} class={cls('MenuButton', $$props.class)}>
   <slot name="selection">
     <span class="truncate">
       {selected?.label ?? 'No selection'}

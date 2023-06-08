@@ -13,7 +13,7 @@
     : '';
 </script>
 
-<div class={cls('rounded', $$restProps.class)}>
+<div class={cls('Code', 'rounded', $$restProps.class)}>
   {#if code}
     <div class="relative">
       <pre class="language-{language} rounded" style="margin: 0; white-space: normal;">

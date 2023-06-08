@@ -41,6 +41,7 @@
 
   <div
     class={cls(
+      'Drawer',
       'bg-white fixed overflow-auto transform z-50 outline-none',
       {
         'h-full': ['left', 'right'].includes(placement),

@@ -74,6 +74,7 @@
 <div
   style="--tw-gradient-stops: var(--tw-gradient-from) 50%, var(--tw-gradient-to) 50%"
   class={cls(
+    'DateButton',
     'inline-flex items-center justify-center',
     isSelectedStart
       ? '[--tw-gradient-from:transparent]'

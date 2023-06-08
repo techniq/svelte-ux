@@ -62,8 +62,11 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={cls('table-container"', classes.container, $$props.class)} style={styles.container}>
-  <div class={cls('table-wrapper"', classes.wrapper)} style={styles.wrapper}>
+<div
+  class={cls('Table', 'table-container', classes.container, $$props.class)}
+  style={styles.container}
+>
+  <div class={cls('table-wrapper', classes.wrapper)} style={styles.wrapper}>
     <table class={cls('w-full', classes.table)} style={styles.table}>
       <slot name="headers" {headers}>
         <thead class={cls(classes.thead)} style={styles.thead}>

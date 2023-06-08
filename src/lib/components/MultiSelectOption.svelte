@@ -13,7 +13,9 @@
   } = {};
 </script>
 
-<div class={cls('grid grid-cols-[1fr,auto] py-2', classes.root, $$props.class)}>
+<div
+  class={cls('MultiSelectOption', 'grid grid-cols-[1fr,auto] py-2', classes.root, $$props.class)}
+>
   <Checkbox bind:checked bind:indeterminate on:change {disabled} class={classes.checkbox}>
     <div class={cls('ml-1 inline-block cursor-pointer text-sm text-gray-900', classes.container)}>
       <slot />

@@ -78,6 +78,7 @@
 {#if svg || svgUrl || $$slots.default}
   <span
     class={cls(
+      'Icon',
       'icon-container inline-block flex-shrink-0 align-middle fill-current',
       classes.root,
       $$props.class
@@ -100,7 +101,7 @@
     {width}
     {height}
     {viewBox}
-    class={cls('inline-block flex-shrink-0 fill-current', classes.root, $$props.class)}
+    class={cls('Icon', 'inline-block flex-shrink-0 fill-current', classes.root, $$props.class)}
     style={$$props.style}
     role={isLabelled ? 'img' : 'presentation'}
     aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}

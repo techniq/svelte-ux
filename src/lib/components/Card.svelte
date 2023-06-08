@@ -19,7 +19,8 @@
 <div
   {...$$restProps}
   class={cls(
-    'card relative z-0 bg-white border rounded elevation-1 flex flex-col justify-between',
+    'Card',
+    'relative z-0 bg-white border rounded elevation-1 flex flex-col justify-between',
     $$props.class
   )}
 >

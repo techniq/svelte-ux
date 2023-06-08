@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { cls } from '$lib/utils/styles';
   import Breadcrumb from './Breadcrumb.svelte';
   import Stack from './Stack.svelte';
 
@@ -11,7 +12,7 @@
   template="{$$slots.avatar ? 'auto' : ''} 1fr {$$slots.actions ? 'auto' : ''}"
   gap={16}
   items="center"
-  class={$$props.class}
+  class={cls('Header', $$props.class)}
 >
   <slot name="avatar" />
 

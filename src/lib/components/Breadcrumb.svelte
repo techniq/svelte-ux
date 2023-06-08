@@ -14,6 +14,7 @@
 <div
   {...$$restProps}
   class={cls(
+    'Breadcrumb',
     inline ? 'inline-flex' : 'flex',
     'items-center justify-start flex-wrap',
     $$restProps.class

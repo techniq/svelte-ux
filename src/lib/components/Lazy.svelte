@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { cls } from '$lib/utils/styles';
   import { intersection } from '../actions/observer';
 
   /**
@@ -35,6 +36,7 @@
   }}
   style:min-height={typeof height === 'number' ? `${height}px` : height}
   {...$$restProps}
+  class={cls('Lazy', $$props.class)}
 >
   {#if show}
     <slot />

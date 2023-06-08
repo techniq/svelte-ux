@@ -53,4 +53,4 @@
   });
 </script>
 
-<span>{displayDuration}</span>
+<span class="Duration">{displayDuration}</span>

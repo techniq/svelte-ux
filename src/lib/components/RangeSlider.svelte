@@ -191,7 +191,7 @@
     }
 
     let sliderRect: DOMRect;
-    if (e.target.classList.contains('range-slider')) {
+    if (e.target.classList.contains('RangeSlider')) {
       // Root / track
       sliderRect = e.target.getBoundingClientRect();
     } else if (e.target.classList.contains('range')) {
@@ -220,7 +220,7 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
   class={cls(
-    'range-slider group relative h-2 bg-black/10 rounded-full select-none outline-none',
+    'RangeSlider group relative h-2 bg-black/10 rounded-full select-none outline-none',
     disabled && ' pointer-events-none opacity-50'
   )}
   style="--start: {$start}; --end: {$end};"

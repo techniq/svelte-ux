@@ -31,7 +31,7 @@
 </script>
 
 <div
-  class={cls('tilt [perspective:600px]', $$props.class)}
+  class={cls('Tilt [perspective:600px]', $$props.class)}
   style:--rotateX="{rotateX}deg"
   style:--rotateY="{rotateY}deg"
   style:--brightness={brightness}
@@ -44,7 +44,7 @@
 </div>
 
 <style>
-  .tilt > :global(*) {
+  .Tilt > :global(*) {
     transform: rotateX(var(--rotateX)) rotateY(var(--rotateY));
     filter: brightness(var(--brightness));
   }

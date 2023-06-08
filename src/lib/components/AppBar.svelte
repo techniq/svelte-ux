@@ -24,6 +24,7 @@
 
 <header
   class={cls(
+    'AppBar',
     'h-16 px-4 bg-accent-500 text-white flex items-center shadow-md relative',
     $$restProps.class
   )}

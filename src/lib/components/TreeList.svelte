@@ -11,7 +11,7 @@
   } = {};
 </script>
 
-<ul class={cls(typeof classes.ul === 'string' ? classes.ul : classes.ul?.(node))}>
+<ul class={cls('TreeList', typeof classes.ul === 'string' ? classes.ul : classes.ul?.(node))}>
   {#each nodes ?? [] as node}
     <li class={cls(typeof classes.li === 'string' ? classes.li : classes.li?.(node))}>
       <slot {node} />

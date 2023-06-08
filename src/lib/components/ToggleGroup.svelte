@@ -146,7 +146,7 @@
 </script>
 
 <div
-  class={cls('toggle-group', $classesStore.root, $$props.class)}
+  class={cls('ToggleGroup', $classesStore.root, $$props.class)}
   class:contained
   class:underlined
   {...$$restProps}

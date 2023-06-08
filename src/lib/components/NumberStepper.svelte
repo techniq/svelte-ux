@@ -18,7 +18,7 @@
   type="integer"
   bind:value
   align="center"
-  class="w-24"
+  class="NumberStepper w-24"
   actions={(node) => [selectOnFocus(node)]}
   {...$$restProps}
 >

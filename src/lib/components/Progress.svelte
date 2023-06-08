@@ -10,6 +10,7 @@
   {max}
   {...$$restProps}
   class={cls(
+    'Progress',
     'h-2 w-full',
 
     // bar color

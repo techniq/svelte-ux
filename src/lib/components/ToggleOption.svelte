@@ -49,6 +49,7 @@
   bind:this={optionElement}
   {...$$restProps}
   class={cls(
+    'ToggleOption',
     'optionContainer',
     'grid items-center',
     $classesContext.optionContainer,

@@ -11,7 +11,7 @@
 
 {#if order.by && (order.by === column.name || order.by === column.orderBy)}
   <div
-    class="inline-block transition duration-100 transform"
+    class="TableOrderIcon inline-block transition duration-100 transform"
     class:rotate-180={order.direction === 'desc'}
   >
     <Icon path={mdiArrowUp} />

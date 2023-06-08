@@ -117,6 +117,7 @@
   on:blur
   use:multi={actions}
   class={cls(
+    'Input',
     'text-sm w-full outline-none bg-transparent selection:bg-gray-500/30',
     mask && (mask == placeholder || isFocused || value) && 'font-mono'
   )}

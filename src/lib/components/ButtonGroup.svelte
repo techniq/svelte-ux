@@ -9,7 +9,7 @@
   export let disabled: boolean = false;
 
   $: _class = cls(
-    // 'button-group', // TODO: Re-add once no longer conflict in another project
+    'ButtonGroup',
     'inline-flex',
     `variant-${variant}`, // used for per-variant group overrides in `style`
     disabled && 'opacity-50 pointer-events-none',

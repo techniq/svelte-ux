@@ -41,7 +41,7 @@
   let:close
   {...$$restProps}
   classes={{
-    root: cls(classes.root, $$restProps.class),
+    root: cls('MultiSelectMenu', classes.root, $$restProps.class),
     menu: cls('flex flex-col', classes.menu),
   }}
   bind:menuItemsEl

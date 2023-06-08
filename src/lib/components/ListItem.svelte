@@ -49,6 +49,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <li
   class={cls(
+    'ListItem',
     'flex gap-4 items-center border-t py-2 px-4',
     'relative', // Needed for loading overlay
     list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',

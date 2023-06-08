@@ -46,6 +46,7 @@
 <div
   {...$$restProps}
   class={cls(
+    'Collapse',
     popout && 'transition-all duration-all',
     popout && open && 'my-3',
     popout && list === 'type' && 'first-of-type:mt-0 last-of-type:mb-0',

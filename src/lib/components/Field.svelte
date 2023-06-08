@@ -57,6 +57,7 @@
 <fieldset
   {disabled}
   class={cls(
+    'Field',
     'group',
     error
       ? '[--color:theme(colors.red.500)]'

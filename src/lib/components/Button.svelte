@@ -43,7 +43,7 @@
   $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);
 
   $: _class = cls(
-    'button',
+    'Button',
     'transition duration-200 ring-black/20',
     'focus:outline-none focus-visible:ring-1',
     fullWidth ? 'flex w-full' : 'inline-flex',

@@ -316,7 +316,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={cls(classes.root, $$props.class)} on:click={onClick}>
+<div class={cls('SelectField', classes.root, $$props.class)} on:click={onClick}>
   <TextField
     {label}
     {placeholder}

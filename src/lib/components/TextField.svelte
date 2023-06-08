@@ -172,6 +172,7 @@
 <fieldset
   {disabled}
   class={cls(
+    'TextField',
     'group',
     error
       ? '[--color:theme(colors.red.500)]'

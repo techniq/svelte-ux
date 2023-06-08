@@ -35,7 +35,7 @@
 </script>
 
 {#if $pagination.totalPages > 1 || !hideSinglePage}
-  <div class={cls('flex items-center gap-1', classes.root, $$props.class)}>
+  <div class={cls('Pagination', 'flex items-center gap-1', classes.root, $$props.class)}>
     {#each show as component}
       {#if component === 'actions'}
         <slot name="actions" />

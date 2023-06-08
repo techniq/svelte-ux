@@ -98,7 +98,7 @@
   }
 </script>
 
-<div class="grid grid-cols-[2fr,3fr] gap-2 bg-gray-100">
+<div class="DateRange grid grid-cols-[2fr,3fr] gap-2 bg-gray-100">
   <div class="col-start-2">
     <ToggleGroup
       contained

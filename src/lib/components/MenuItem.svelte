@@ -28,6 +28,7 @@
   {disabled}
   {...$$restProps}
   class={cls(
+    'MenuItem',
     'text-left items-center p-2 hover:bg-black/5 duration-75',
     classes?.root,
     $$props.class

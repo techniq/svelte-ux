@@ -58,7 +58,7 @@
   {matchWidth}
   {resize}
   {open}
-  class={cls('bg-white rounded shadow border overflow-auto', classes.root, $$props.class)}
+  class={cls('Menu', 'bg-white rounded shadow border overflow-auto', classes.root, $$props.class)}
   style={$$props.style}
   on:close
   let:close

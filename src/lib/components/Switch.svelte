@@ -19,7 +19,7 @@
   } = {};
 </script>
 
-<div class={cls('inline-block', classes.root)}>
+<div class={cls('Switch', 'inline-block', classes.root)}>
   <input
     {id}
     type="checkbox"

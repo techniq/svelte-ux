@@ -73,7 +73,7 @@
     {offset}
     {matchWidth}
     {open}
-    class="pointer-events-none"
+    class="Tooltip pointer-events-none"
     {...$$restProps}
   >
     <slot name="title">

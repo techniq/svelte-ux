@@ -14,6 +14,7 @@
   <slot />
   <div
     class={cls(
+      'Badge',
       'rounded-full flex items-center justify-center transform transition-transform',
 
       !$$slots.value && 'bg-accent-500 text-white',

@@ -17,7 +17,7 @@
   $: offset = modulo($displayValue, 1);
 </script>
 
-<div class={cls('inline-grid overflow-hidden', classes.root, $$props.class)}>
+<div class={cls('ScrollingNumber', 'inline-grid overflow-hidden', classes.root, $$props.class)}>
   <div
     class={cls('col-span-full row-span-full', classes.value)}
     style:transform="translateY({-100 + 100 * offset}%)"

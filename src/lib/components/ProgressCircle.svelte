@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { cls } from '$lib/utils/styles';
+
   export let value: number | null = null;
   export let rotate = 0;
   export let size = 40;
@@ -17,7 +19,11 @@
 
 <div
   {...$$props}
-  class="progress-circular {$$props.class}"
+  class={cls(
+    'ProgressCircular',
+    'relative inline-flex justify-center items-center align-middle',
+    $$props.class
+  )}
   class:indeterminate
   style="height: {size}px; width: {size}px; {$$props.style}"
 >
@@ -59,14 +65,6 @@
 </div>
 
 <style lang="postcss">
-  .progress-circular {
-    position: relative;
-    display: inline-flex;
-    vertical-align: middle;
-    justify-content: center;
-    align-items: center;
-  }
-
   svg {
     width: 100%;
     height: 100%;

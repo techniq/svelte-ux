@@ -44,7 +44,7 @@
   }
 </script>
 
-<div class={cls('inline-flex items-center', classes.root, $$props.class)}>
+<div class={cls('Checkbox', 'inline-flex items-center', classes.root, $$props.class)}>
   <input
     {id}
     type="checkbox"

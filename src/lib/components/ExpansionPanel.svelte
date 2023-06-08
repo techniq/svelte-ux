@@ -21,6 +21,7 @@
   {...$$restProps}
   classes={{
     root: cls(
+      'ExpansionPanel',
       'bg-white elevation-1 border-t',
       'relative', // Match ListItem (used for loading) so Stacking Context is consistent (else causes a solid line between ExpansionPanel and ListItem)
       list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
