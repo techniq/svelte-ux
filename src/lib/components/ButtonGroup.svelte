@@ -14,25 +14,25 @@
     `variant-${variant}`, // used for per-variant group overrides in `style`
     disabled && 'opacity-50 pointer-events-none',
 
-    /* Remove left/right rounding if button is not first/last, or if is a child of an element that is first/last (ex. wrapped in span for menu/tooltip/etc) */
-    '[&_.button:not(:first-child)]:rounded-l-none',
-    '[&_.button:not(:last-child)]:rounded-r-none',
-    '[&_:not(:first-child)_.button]:rounded-l-none',
-    '[&_:not(:last-child)_.button]:rounded-r-none',
+    /* Remove left/right rounding if Button is not first/last, or if is a child of an element that is first/last (ex. wrapped in span for menu/tooltip/etc) */
+    '[&_.Button:not(:first-child)]:rounded-l-none',
+    '[&_.Button:not(:last-child)]:rounded-r-none',
+    '[&_:not(:first-child)_.Button]:rounded-l-none',
+    '[&_:not(:last-child)_.Button]:rounded-r-none',
 
-    /* Overlap borders to allow selection styling per button.  Should be used with z-index */
-    '[&.variant-outline_.button:not(:first-child)]:-ml-px',
-    '[&.variant-outline_:not(:first-child)_.button]:-ml-px',
-    '[&.variant-fill-outline_.button:not(:first-child)]:-ml-px',
-    '[&.variant-fill-outline_:not(:first-child)_.button]:-ml-px',
+    /* Overlap borders to allow selection styling per Button.  Should be used with z-index */
+    '[&.variant-outline_.Button:not(:first-child)]:-ml-px',
+    '[&.variant-outline_:not(:first-child)_.Button]:-ml-px',
+    '[&.variant-fill-outline_.Button:not(:first-child)]:-ml-px',
+    '[&.variant-fill-outline_:not(:first-child)_.Button]:-ml-px',
 
     /* Add gap between buttons (text, filled) */
-    '[&.variant-text_.button:not(:first-child)]:ml-px',
-    '[&.variant-text_:not(:first-child)_.button]:ml-px',
-    '[&.variant-fill_.button:not(:first-child)]:ml-px',
-    '[&.variant-fill_:not(:first-child)_.button]:ml-px',
-    '[&.variant-fill-light_.button:not(:first-child)]:ml-px',
-    '[&.variant-fill-light_:not(:first-child)_.button]:ml-px',
+    '[&.variant-text_.Button:not(:first-child)]:ml-px',
+    '[&.variant-text_:not(:first-child)_.Button]:ml-px',
+    '[&.variant-fill_.Button:not(:first-child)]:ml-px',
+    '[&.variant-fill_:not(:first-child)_.Button]:ml-px',
+    '[&.variant-fill-light_.Button:not(:first-child)]:ml-px',
+    '[&.variant-fill-light_:not(:first-child)_.Button]:ml-px',
 
     $$props.class
   );
