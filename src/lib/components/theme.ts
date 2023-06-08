@@ -30,11 +30,7 @@ export function getTheme() {
 }
 
 export function getComponentTheme(name: string) {
-  const theme = getTheme()[name];
+  const theme = getTheme()[name] ?? {};
 
-  if (typeof theme === 'string') {
-    return { class: theme, classes: undefined };
-  } else {
-    return { class: undefined, classes: theme };
-  }
+  return typeof theme === 'string' ? { root: theme } : theme;
 }

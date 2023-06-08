@@ -192,7 +192,7 @@
       },
       none: {},
     }[variant ?? 'none']?.[color ?? 'default'],
-    theme.class,
+    theme.root,
     classes.root,
     $$props.class
   );
@@ -211,13 +211,13 @@
   on:click
 >
   {#if loading}
-    <ProgressCircle size={16} width={2} class={cls(theme.classes?.loading, classes.loading)} />
+    <ProgressCircle size={16} width={2} class={cls(theme.loading, classes.loading)} />
   {:else if icon}
     {#if typeof icon === 'string' || 'icon' in icon}
       <!-- font path/url/etc or font-awesome IconDefinition -->
-      <Icon data={icon} class={cls('pointer-events-none', theme.classes?.icon, classes.icon)} />
+      <Icon data={icon} class={cls('pointer-events-none', theme.icon, classes.icon)} />
     {:else}
-      <Icon class={cls('pointer-events-none', theme.classes?.icon, classes.icon)} {...icon} />
+      <Icon class={cls('pointer-events-none', theme.icon, classes.icon)} {...icon} />
     {/if}
   {/if}
   <slot />
