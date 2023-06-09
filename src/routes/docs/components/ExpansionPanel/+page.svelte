@@ -31,7 +31,7 @@
 
 <Preview>
   {#each Array(5) as _, i}
-    <ExpansionPanel>
+    <ExpansionPanel classes={{ toggle: 'bg-gray-100 border-t border-gray-300' }}>
       <div slot="trigger" class="flex-1 p-3">Item {i + 1}</div>
       <div slot="actions" class="p-2">
         <Button>Action 1</Button>
