@@ -5,11 +5,19 @@
   import { scrollIntoView } from '../actions/scroll';
   import { getScrollParent } from '../utils/dom';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let currentUrl: URL;
   export let path: string;
   export let text: string = '';
   export let icon: string | null = null;
+
+  export let classes: {
+    root?: string;
+    active?: string;
+    icon?: string;
+  } = {};
+  const theme = getComponentTheme('NavItem');
 
   $: isPathActive = path ? isActive(currentUrl, path) : false;
 </script>
@@ -18,8 +26,10 @@
   href={url(currentUrl, path)}
   class={cls(
     'NavItem',
-    'flex items-center text-sm p-1 hover:text-white hover:bg-gray-300/10 relative',
-    isPathActive ? ['text-sky-400', 'bg-gray-500/10'] : 'text-gray-400',
+    'flex items-center text-sm p-1 relative',
+    isPathActive && 'is-active',
+    theme.root,
+    classes.root,
     $$props.class
   )}
   use:scrollIntoView={{
@@ -40,7 +50,7 @@
   on:click
 >
   {#if isPathActive}
-    <div class="absolute left-0 top-0 w-1 h-full bg-sky-500" />
+    <div class={cls('absolute left-0 top-0 w-1 h-full', theme.active, classes.active)} />
   {/if}
 
   {#if $$slots.avatar}
@@ -48,7 +58,7 @@
   {/if}
 
   {#if icon}
-    <Icon path={icon} class="mr-3 flex-shrink-0" />
+    <Icon path={icon} class={cls('mr-3 flex-shrink-0', theme.icon, classes.icon)} />
   {/if}
 
   {text}

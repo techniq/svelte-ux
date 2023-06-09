@@ -26,12 +26,7 @@
 </script>
 
 <header
-  class={cls(
-    'AppBar',
-    'h-16 px-4 bg-accent-500 text-white flex items-center shadow-md relative',
-    theme.root,
-    $$restProps.class
-  )}
+  class={cls('AppBar', 'h-16 px-4 flex items-center relative', theme.root, $$restProps.class)}
 >
   <Button icon={mdiMenu} on:click={() => ($showDrawer = !$showDrawer)} class="p-3" />
   <div class="ml-2 text-lg">

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { mdiRefresh } from '@mdi/js';
+  import { mdiRefresh } from '@mdi/js';
 
-	import api from '$lib/components/AppBar.svelte?raw&sveld';
+  import api from '$lib/components/AppBar.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
-	import AppBar from '$lib/components/AppBar.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import Preview from '$lib/components/Preview.svelte';
+  import AppBar from '$lib/components/AppBar.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Preview from '$lib/components/Preview.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -14,38 +14,38 @@
 <h2>Default</h2>
 
 <Preview>
-	<AppBar />
+  <AppBar />
 </Preview>
 
 <h2>Title as string</h2>
 
 <Preview>
-	<AppBar title="Example" />
+  <AppBar title="Example" />
 </Preview>
 
 <h2>Title as array</h2>
 
 <Preview>
-	<AppBar title={['One', 'Two', 'Three']} />
+  <AppBar title={['One', 'Two', 'Three']} />
 </Preview>
 
 <h2>Actions</h2>
 
 <Preview>
-	<AppBar title="Example">
-		<div slot="actions">
-			<Button icon={mdiRefresh} class="p-2 hover:bg-white/10" />
-		</div>
-	</AppBar>
+  <AppBar title="Example">
+    <div slot="actions">
+      <Button icon={mdiRefresh} class="p-2 hover:bg-white/10" />
+    </div>
+  </AppBar>
 </Preview>
 
 <h2>Color</h2>
 
 <Preview>
-	<div class="grid gap-2">
-		<AppBar title="Example" class="bg-purple-500" />
-		<AppBar title="Example" class="bg-white text-black" />
-	</div>
+  <div class="grid gap-2">
+    <AppBar title="Example" class="bg-accent-500 text-white" />
+    <AppBar title="Example" class="bg-purple-500 text-white" />
+  </div>
 </Preview>
 
 <h1>API</h1>

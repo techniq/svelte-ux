@@ -19,7 +19,6 @@
     aside?: string;
     nav?: string;
   } = {};
-
   const theme = getComponentTheme('AppLayout');
 
   let isDesktop = mdScreen;
@@ -51,13 +50,7 @@
       classes.aside
     )}
   >
-    <nav
-      class={cls(
-        'nav h-full overflow-scroll bg-[#282b31] w-[var(--navWidth)]',
-        theme.nav,
-        classes.nav
-      )}
-    >
+    <nav class={cls('nav h-full overflow-scroll w-[var(--navWidth)]', theme.nav, classes.nav)}>
       <slot name="nav" />
     </nav>
   </aside>

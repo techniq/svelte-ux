@@ -28,14 +28,14 @@
   });
 
   createTheme({
-    // AppBar: 'bg-red-500',
-    // AppLayout: {
-    //   nav: 'bg-red-500',
-    // },
-    // Button: 'bg-red-500',
-    // Button: {
-    //   icon: 'text-xl',
-    // },
+    AppBar: 'bg-accent-500 text-white shadow-md',
+    AppLayout: {
+      nav: 'bg-[#282b31]',
+    },
+    NavItem: {
+      root: 'text-gray-400 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10',
+      active: 'bg-sky-500',
+    },
   });
 </script>
 
