@@ -7,6 +7,7 @@
   import Icon from './Icon.svelte';
   import Stack from './Stack.svelte';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher<{
     clear: null;
@@ -39,6 +40,7 @@
     input?: string;
     error?: string;
   } = {};
+  const theme = getComponentTheme('Field');
 
   $: hasValue = Array.isArray(value)
     ? value.length > 0
@@ -66,6 +68,7 @@
       : '[--color:theme(colors.accent.500)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
+    theme.root,
     classes.root,
     $$props.class
   )}
@@ -82,6 +85,7 @@
       !base && [rounded ? 'rounded-full' : 'rounded', filled ? 'bg-black/10' : 'bg-white'],
       error ? 'border-red-500' : 'border-black/20',
       'group-focus-within:shadow-md group-focus-within:border-color-var',
+      theme.container,
       classes.container
     )}
   >
@@ -106,6 +110,7 @@
               center && 'justify-center',
               error ? 'text-red-500/80' : 'text-black/50',
               (shrinkLabel || hasValue) && 'shrink',
+              theme.label,
               classes.label
             )}
             for={id}
@@ -121,6 +126,7 @@
             hasLabel && 'pt-4',
             dense ? 'my-1' : 'my-2',
             center && 'text-center',
+            theme.input,
             classes.input
           )}
         >
@@ -162,6 +168,7 @@
       'hint',
       'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
       error ? 'text-red-500' : 'text-black/50 scale-y-0',
+      theme.error,
       classes.error
     )}
   >

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import api from '$lib/components/NumberStepper.svelte?raw&sveld';
+  import api from '$lib/components/NumberStepper.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
-	import NumberStepper from '$lib/components/NumberStepper.svelte';
-	import Preview from '$lib/components/Preview.svelte';
+  import NumberStepper from '$lib/components/NumberStepper.svelte';
+  import Preview from '$lib/components/Preview.svelte';
 
   let value = 10;
 </script>
@@ -19,19 +19,26 @@
 <h2>bind:value</h2>
 
 <Preview>
-  <NumberStepper bind:value /> {value}
+  <NumberStepper bind:value />
+  {value}
 </Preview>
 
 <h2>on:change</h2>
 
 <Preview>
-  <NumberStepper on:change={e => console.log(e.detail.value)} />
+  <NumberStepper on:change={(e) => console.log(e.detail.value)} />
 </Preview>
 
 <h2>dense</h2>
 
 <Preview>
   <NumberStepper dense />
+</Preview>
+
+<h2>min / max</h2>
+
+<Preview>
+  <NumberStepper min={0} max={10} />
 </Preview>
 
 <h1>API</h1>

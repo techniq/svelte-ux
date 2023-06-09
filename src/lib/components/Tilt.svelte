@@ -1,8 +1,12 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
   import { scaleLinear } from 'd3-scale';
+  import { getComponentTheme } from './theme';
 
   export let maxRotation = 20;
+
+  const theme = getComponentTheme('Tilt');
+
   let width = 0;
   let height = 0;
 
@@ -31,7 +35,7 @@
 </script>
 
 <div
-  class={cls('Tilt [perspective:600px]', $$props.class)}
+  class={cls('Tilt [perspective:600px]', theme.root, $$props.class)}
   style:--rotateX="{rotateX}deg"
   style:--rotateY="{rotateY}deg"
   style:--brightness={brightness}

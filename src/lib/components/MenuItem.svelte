@@ -4,16 +4,19 @@
   import { cls } from '../utils/styles';
   import { scrollIntoView as scrollIntoViewAction } from '../actions/scroll';
   import { setButtonGroup } from './ButtonGroup.svelte';
+  import { getComponentTheme } from './theme';
 
   type ButtonProps = ComponentProps<Button>;
 
   export let icon: ButtonProps['icon'] = undefined;
+  export let scrollIntoView = false;
+  export let disabled = false;
+
   export let classes: ButtonProps['classes'] = {
     root: 'text-sm gap-3',
     icon: 'text-black/50',
   };
-  export let scrollIntoView = false;
-  export let disabled = false;
+  const theme = getComponentTheme('MenuItem');
 
   // Clear ButtonGroup if set
   setButtonGroup(undefined);
@@ -30,6 +33,7 @@
   class={cls(
     'MenuItem',
     'text-left items-center p-2 hover:bg-black/5 duration-75',
+    theme.root,
     classes?.root,
     $$props.class
   )}

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { getComponentTheme } from './theme';
+
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import { get } from 'lodash-es';
   import type { Placement } from '@floating-ui/dom';
@@ -48,6 +50,7 @@
     field?: string;
     actions?: string;
   } = {};
+  const theme = getComponentTheme('MultiSelectField');
 
   const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
 
@@ -130,7 +133,10 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={cls(disabled && 'pointer-events-none', classes.root, $$props.class)} on:click={onClick}>
+<div
+  class={cls(disabled && 'pointer-events-none', theme.root, classes.root, $$props.class)}
+  on:click={onClick}
+>
   <!-- TODO: Setup blur without jank on open or issues when clicking within menu -->
   <!-- on:blur={onBlur} -->
   <TextField
@@ -146,7 +152,7 @@
     bind:inputEl
     on:focus={onFocus}
     on:change={onSearchChange}
-    class={cls(classes.field, 'h-full')}
+    class={cls('h-full', theme.field, classes.field)}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />

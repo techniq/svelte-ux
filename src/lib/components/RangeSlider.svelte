@@ -34,12 +34,15 @@
   import { decimalCount, round } from '$lib/utils/number';
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let min = 0;
   export let max = 100;
   export let step = 1;
   export let value = [min, max];
   export let disabled = false;
+
+  const theme = getComponentTheme('RangeSlider');
 
   $: stepPercent = step / (max - min);
   $: stepDecimals = decimalCount(step);
@@ -220,8 +223,11 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
   class={cls(
-    'RangeSlider group relative h-2 bg-black/10 rounded-full select-none outline-none',
-    disabled && ' pointer-events-none opacity-50'
+    'RangeSlider',
+    'group relative h-2 bg-black/10 rounded-full select-none outline-none',
+    disabled && ' pointer-events-none opacity-50',
+    theme.root,
+    $$props.class
   )}
   style="--start: {$start}; --end: {$end};"
   {disabled}

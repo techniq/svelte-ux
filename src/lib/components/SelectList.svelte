@@ -11,6 +11,7 @@
   import ProgressCircle from './ProgressCircle.svelte';
   import MenuItem from './MenuItem.svelte';
   import TextField from './TextField.svelte';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher<{
     change: { value: any; option: any };
@@ -45,6 +46,7 @@
     group?: string;
     empty?: string;
   } = {};
+  const theme = getComponentTheme('SelectList');
 
   $: filteredOptions = options ?? [];
   let searchText = '';
@@ -306,7 +308,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={cls('SelectList', classes.root, $$props.class)} on:click={onClick}>
+<div class={cls('SelectList', theme.root, classes.root, $$props.class)} on:click={onClick}>
   <TextField
     {label}
     {placeholder}
@@ -324,7 +326,7 @@
     on:keydown={onKeyDown}
     on:keypress={onKeyPress}
     actions={(node) => [autoFocus(node), selectOnFocus(node)]}
-    class={cls('h-full', classes.field)}
+    class={cls('h-full', theme.field, classes.field)}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
@@ -355,7 +357,7 @@
   {#if options?.length > 0 || loading !== true}
     <div
       tabindex="-1"
-      class={cls('options focus:outline-none', classes.options)}
+      class={cls('options focus:outline-none', theme.options, classes.options)}
       class:opacity-50={loading}
       bind:this={menuOptionsEl}
       on:click|stopPropagation={(e) => {
@@ -385,6 +387,7 @@
           <div
             class={cls(
               'group-header text-xs leading-8 tracking-widest text-black/50 px-2',
+              theme.group,
               classes.group
             )}
           >
@@ -398,6 +401,7 @@
               index === highlightIndex && 'bg-black/5',
               option === selected && (classes.selected || 'font-semibold'),
               option.group ? 'px-4' : 'px-2',
+              theme.option,
               classes.option
             )}
             scrollIntoView={index === highlightIndex}
@@ -407,7 +411,7 @@
         </slot>
       {:else}
         <slot name="empty" {loading} {searchText}>
-          <div class={cls('p-3 text-black/50 italic text-sm', classes.empty)}>
+          <div class={cls('p-3 text-black/50 italic text-sm', theme.empty, classes.empty)}>
             {loading ? 'Loading...' : 'No options found'}
           </div>
         </slot>

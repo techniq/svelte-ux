@@ -9,6 +9,7 @@
   import { focusMove } from '../actions/focus';
   import { portal as portalAction } from '../actions/portal';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -17,6 +18,8 @@
   export let persistent = false;
   export let loading: boolean | null = null;
   export let placement: 'top' | 'bottom' | 'left' | 'right' = 'right';
+
+  const theme = getComponentTheme('Drawer');
 
   $: dispatch('change', { open });
 
@@ -51,6 +54,7 @@
         'left-0': ['top', 'top', 'bottom'].includes(placement),
         'right-0': placement === 'right',
       },
+      theme.root,
       $$props.class
     )}
     style={$$props.style}

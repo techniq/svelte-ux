@@ -9,6 +9,7 @@
 
   import { cls } from '../utils/styles';
   import Logger from '../utils/logger';
+  import { getComponentTheme } from './theme';
 
   export let value: any = undefined; // index or value
   export let autoscroll: boolean = false;
@@ -26,6 +27,7 @@
     option?: string;
     indicator?: string;
   } = {};
+  const theme = getComponentTheme('ToggleGroup');
 
   const logger = new Logger('ToggleGroup');
 
@@ -101,6 +103,7 @@
           'hover:shadow hover:border-gray-700',
           circle ? 'rounded-full' : 'rounded-[10px]',
           vertical ? 'grid-flow-row' : 'grid-flow-col',
+          theme.options,
           classes.options
         ),
         optionContainer: cls(
@@ -109,25 +112,28 @@
           'hover:text-opacity-100 hover:bg-black/5',
           'focus-visible:ring-1',
           '[&.selected]:text-black',
+          theme.optionContainer,
           classes.optionContainer
         ),
         indicator: cls(
           'bg-white w-full h-full shadow-md ring-black/20 ring-1',
           circle ? 'rounded-full' : 'rounded-[8px]',
+          theme.indicator,
           classes.indicator
         ),
       }
     : underlined
     ? {
         ...classes,
-        options: cls('flex border-b text-sm h-10', classes.options),
+        options: cls('flex border-b text-sm h-10', theme.options, classes.options),
         optionContainer: cls(
           'text-black/50 font-bold',
           'hover:text-accent-500 hover:bg-accent-500/10',
           '[&.selected]:text-accent-500',
+          theme.optionContainer,
           classes.optionContainer
         ),
-        indicator: cls('h-full border-b-2 border-accent-500', classes.indicator),
+        indicator: cls('h-full border-b-2 border-accent-500', theme.indicator, classes.indicator),
       }
     : classes;
 

@@ -4,6 +4,7 @@
   import Icon from './Icon.svelte';
   import { uniqueId } from '../utils/string';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let id = uniqueId('checkbox_');
   export let value: any = undefined;
@@ -18,11 +19,12 @@
     label?: string;
     icon?: string;
   } = {};
+  const theme = getComponentTheme('Radio');
 
   $: checked = group !== undefined ? group === value : checked;
 </script>
 
-<div class={cls('Radio', 'inline-flex items-center', classes.root, $$props.class)}>
+<div class={cls('Radio', 'inline-flex items-center', theme.root, classes.root, $$props.class)}>
   <input
     {id}
     type="radio"
@@ -41,6 +43,7 @@
         'peer-focus-visible:ring-2 peer-hover:border-accent-500 peer-focus-visible:border-accent-500 ring-accent-300 ring-offset-0',
       !checked && !disabled && 'peer-hover:bg-accent-100',
       checked ? (disabled ? ' border-gray-500' : 'border-accent-500') : 'border-gray-500',
+      theme.checkbox,
       classes.checkbox
     )}
   >
@@ -50,6 +53,7 @@
         'pointer-events-none transition-transform',
         disabled ? 'text-gray-500' : 'text-accent-500',
         checked ? 'scale-100' : 'scale-0',
+        theme.icon,
         classes.icon
       )}
       size={{
@@ -72,6 +76,7 @@
           md: 'text-md', // 16px
           lg: 'text-lg', // 18px
         }[size],
+        theme.label,
         classes.label
       )}
     >

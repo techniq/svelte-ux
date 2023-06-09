@@ -1,5 +1,7 @@
 export async function load() {
   return {
-    meta: {},
+    meta: {
+      related: ['components/TreeList'],
+    },
   };
 }

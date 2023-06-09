@@ -9,6 +9,7 @@
 
   import Popover from './Popover.svelte';
   import type { TransitionParams } from '$lib/types';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -31,6 +32,7 @@
     root?: string;
     menu?: string;
   } = {};
+  const theme = getComponentTheme('Menu');
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 
@@ -58,14 +60,20 @@
   {matchWidth}
   {resize}
   {open}
-  class={cls('Menu', 'bg-white rounded shadow border overflow-auto', classes.root, $$props.class)}
+  class={cls(
+    'Menu',
+    'bg-white rounded shadow border overflow-auto',
+    theme.root,
+    classes.root,
+    $$props.class
+  )}
   style={$$props.style}
   on:close
   let:close
 >
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <menu
-    class={cls('menu-items outline-none max-h-screen', classes.menu)}
+    class={cls('menu-items outline-none max-h-screen', theme.menu, classes.menu)}
     bind:this={menuItemsEl}
     on:click={onClick}
     on:mouseup={(e) => {

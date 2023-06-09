@@ -64,7 +64,7 @@
       'Popover',
       'Tooltip',
     ],
-    State: ['Form', 'Selection', 'State', 'Toggle'],
+    State: ['Form', 'Selection', 'State', 'StoreSubscribe', 'Toggle'],
     Date: [
       'dateDisplay',
       'DateField',

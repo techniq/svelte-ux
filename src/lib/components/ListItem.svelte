@@ -5,6 +5,7 @@
   import Overlay from './Overlay.svelte';
   import type { ComponentProps } from '../types';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let title: string | number | null = null;
   export let subheading: string | number | null = null;
@@ -34,11 +35,13 @@
   export let noBackground = false;
 
   export let classes: {
+    root?: string;
     avatar?: string;
     icon?: string;
     title?: string;
     subheading?: string;
   } = {};
+  const theme = getComponentTheme('ListItem');
 
   /**
    * Show loading overlay
@@ -57,6 +60,8 @@
     list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
     noShadow !== true && 'elevation-1',
     noBackground !== true && 'bg-white',
+    theme.root,
+    classes.root,
     $$props.class
   )}
   on:click
@@ -70,11 +75,11 @@
   <slot name="avatar">
     {#if icon != null}
       {#if avatar}
-        <Avatar class={classes.avatar} {...avatar}>
-          <Icon path={icon} class={classes.icon} />
+        <Avatar class={cls(theme.avatar, classes.avatar)} {...avatar}>
+          <Icon path={icon} class={cls(theme.icon, classes.icon)} />
         </Avatar>
       {:else}
-        <Icon path={icon} class={classes.icon} />
+        <Icon path={icon} class={cls(theme.icon, classes.icon)} />
       {/if}
     {/if}
   </slot>
@@ -82,13 +87,13 @@
   <div class="flex-grow">
     <slot name="title">
       {#if title != null}
-        <div class={classes.title}>{title}</div>
+        <div class={cls(theme.title, classes.title)}>{title}</div>
       {/if}
     </slot>
 
     <slot name="subheading">
       {#if subheading != null}
-        <div class={cls('text-sm text-black/50', classes.subheading)}>
+        <div class={cls('text-sm text-black/50', theme.subheading, classes.subheading)}>
           {subheading}
         </div>
       {/if}

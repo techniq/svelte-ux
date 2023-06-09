@@ -4,6 +4,7 @@
 
   import { popover } from '../actions/popover';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let open = false;
   export let placement: Placement | undefined = undefined;
@@ -39,6 +40,7 @@
   export let resize = false;
 
   const dispatch = createEventDispatcher();
+  const theme = getComponentTheme('Popover');
 
   function close(reason: string = 'unknown') {
     if (open) {
@@ -59,7 +61,7 @@
 
 {#if open}
   <div
-    class={cls('Popover absolute z-50 outline-none', $$props.class)}
+    class={cls('Popover absolute z-50 outline-none', theme.root, $$props.class)}
     tabindex="-1"
     use:popover={{ anchorEl, placement, autoPlacement, offset, padding, matchWidth, resize }}
     on:clickOutside={(e) => {

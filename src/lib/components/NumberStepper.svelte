@@ -4,10 +4,14 @@
 
   import { Button, TextField } from '.';
   import { selectOnFocus } from '$lib/actions/input';
+  import { getComponentTheme } from './theme';
+  import { cls } from '$lib/utils/styles';
 
   export let value: number = 0;
   export let min: number | undefined = undefined;
   export let max: number | undefined = undefined;
+
+  const theme = getComponentTheme('NumberStepper');
 
   const dispatch = createEventDispatcher();
 
@@ -18,7 +22,7 @@
   type="integer"
   bind:value
   align="center"
-  class="NumberStepper w-24"
+  class={cls('NumberStepper w-24', theme.root, $$props.class)}
   actions={(node) => [selectOnFocus(node)]}
   {...$$restProps}
 >
