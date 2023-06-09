@@ -3,10 +3,11 @@
   import NavItem from '$lib/components/NavItem.svelte';
 
   const components = {
-    App: ['AppBar', 'AppLayout', 'Breadcrumb', 'Steps'],
+    App: ['AppBar', 'AppLayout', 'NavItem'],
     General: [
       'Avatar',
       'Badge',
+      'Breadcrumb',
       'Button',
       'ButtonGroup',
       'Card',
@@ -22,6 +23,7 @@
       'Progress',
       'ProgressCircle',
       'ScrollContainer',
+      'Steps',
       'Table',
       'TableOfContents',
       'ToggleButton',

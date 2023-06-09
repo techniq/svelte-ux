@@ -8,6 +8,7 @@
   import TableOfContents from '$lib/components/TableOfContents.svelte';
 
   import { page } from '$app/stores';
+  import { createTheme } from '$lib/components/theme';
 
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
   $: title = $page.data.meta?.title ?? name;
@@ -19,6 +20,9 @@
     const [type, name] = r.split('/');
     return { type, name, url: `/docs/${type}/${name}` };
   }
+
+  // Clear root layout theme so doesn't show on doc examples
+  createTheme({});
 </script>
 
 <div class="grid grid-rows-[auto,1fr] h-full p-4">
