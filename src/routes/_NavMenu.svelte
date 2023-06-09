@@ -113,58 +113,32 @@
   const utils = ['Logger'];
 </script>
 
-<NavItem text="Getting Started" currentUrl={$page.url} path="/" class="pl-6 py-2 mt-4" />
-<NavItem text="Customization" currentUrl={$page.url} path="/customization" class="pl-6 py-2" />
+<NavItem text="Getting Started" currentUrl={$page.url} path="/" />
+<NavItem text="Customization" currentUrl={$page.url} path="/customization" />
 
-<div
-  class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
->
-  Components
-</div>
+<h1>Components</h1>
 {#each Object.entries(components) as [header, items]}
-  <div class="pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold">{header}</div>
+  <h2>{header}</h2>
   {#each items as item}
     {#if typeof item === 'object'}
-      <NavItem
-        text={item.label}
-        currentUrl={$page.url}
-        path="/docs/components/{item.value}"
-        class="pl-6 py-2"
-      />
+      <NavItem text={item.label} currentUrl={$page.url} path="/docs/components/{item.value}" />
     {:else}
-      <NavItem
-        text={item}
-        currentUrl={$page.url}
-        path="/docs/components/{item}"
-        class="pl-6 py-2"
-      />
+      <NavItem text={item} currentUrl={$page.url} path="/docs/components/{item}" />
     {/if}
   {/each}
 {/each}
 
-<div
-  class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
->
-  Actions
-</div>
+<h1>Actions</h1>
 {#each actions as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/actions/{item}" class="pl-6 py-2" />
+  <NavItem text={item} currentUrl={$page.url} path="/docs/actions/{item}" />
 {/each}
 
-<div
-  class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
->
-  Stores
-</div>
+<h1>Stores</h1>
 {#each stores as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/stores/{item}" class="pl-6 py-2" />
+  <NavItem text={item} currentUrl={$page.url} path="/docs/stores/{item}" />
 {/each}
 
-<div
-  class="py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10"
->
-  Utils
-</div>
+<h1>Utils</h1>
 {#each utils as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/utils/{item}" class="pl-6 py-2" />
+  <NavItem text={item} currentUrl={$page.url} path="/docs/utils/{item}" />
 {/each}

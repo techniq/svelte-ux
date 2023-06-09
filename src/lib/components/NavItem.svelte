@@ -14,7 +14,7 @@
 
   export let classes: {
     root?: string;
-    active?: string;
+    indicator?: string;
     icon?: string;
   } = {};
   const theme = getComponentTheme('NavItem');
@@ -50,7 +50,7 @@
   on:click
 >
   {#if isPathActive}
-    <div class={cls('absolute left-0 top-0 w-1 h-full', theme.active, classes.active)} />
+    <div class={cls('absolute left-0 top-0 w-1 h-full', theme.indicator, classes.indicator)} />
   {/if}
 
   {#if $$slots.avatar}

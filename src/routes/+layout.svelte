@@ -30,12 +30,16 @@
   createTheme({
     AppBar: 'bg-accent-500 text-white shadow-md',
     AppLayout: {
-      nav: 'bg-[#282b31]',
+      nav: 'bg-[#282b31] py-4',
     },
     NavItem: {
-      root: 'text-gray-400 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10',
-      active: 'bg-sky-500',
+      root: 'text-gray-400 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10 pl-6 py-2',
+      indicator: 'bg-sky-500',
     },
+
+    // AppLayout: {
+    //   aside: 'border-r border-gray-400',
+    // },
   });
 </script>
 
@@ -75,21 +79,29 @@
     @apply bg-black/10;
   }
 
-  :global(h1) {
+  :global(main h1) {
     @apply text-xl font-semibold mt-8 mb-2 ml-2 border-b border-gray-400 pb-1;
   }
 
-  :global(h2) {
+  :global(main h2) {
     @apply text-lg font-semibold mt-4 mb-1 ml-2;
   }
-  :global(h2:first-child) {
+  :global(main h2:first-child) {
     @apply mt-0;
   }
 
-  :global(h3) {
+  :global(main h3) {
     @apply text-xs text-black/50 ml-2 mb-1;
   }
-  :global(h2 + h3) {
+  :global(main h2 + h3) {
     @apply -mt-1;
+  }
+
+  :global(nav h1) {
+    @apply py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10;
+  }
+
+  :global(nav h2) {
+    @apply pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold;
   }
 </style>
