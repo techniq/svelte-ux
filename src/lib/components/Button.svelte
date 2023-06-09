@@ -32,6 +32,7 @@
   export let size: 'sm' | 'md' | 'lg' = 'md';
   export let color: TailwindColors | 'default' | undefined = undefined; // default in reactive groupContext below
 
+  /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
     root?: string;
     icon?: string;
