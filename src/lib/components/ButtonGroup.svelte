@@ -36,8 +36,8 @@
   $: _class = cls(
     'ButtonGroup',
     'inline-flex',
-    `variant-${variant}`, // used for per-variant group overrides in `style`
     disabled && 'opacity-50 pointer-events-none',
+    `variant-${variant}`, // used for per-variant group overrides in `style`
 
     /* Remove left/right rounding if Button is not first/last, or if is a child of an element that is first/last (ex. wrapped in span for menu/tooltip/etc) */
     '[&_.Button:not(:first-child)]:rounded-l-none',

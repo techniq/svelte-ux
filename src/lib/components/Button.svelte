@@ -70,6 +70,7 @@
     ],
     disabled && 'opacity-50 pointer-events-none',
     // Variant specific styles
+    `variant-${variant}`,
     {
       text: '',
       outline: 'border',
