@@ -16,6 +16,8 @@
   import ToggleGroup from './ToggleGroup.svelte';
   import ToggleOption from './ToggleOption.svelte';
   import DateField from './DateField.svelte';
+  import { cls } from '$lib/utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let selected: DateRange = { from: null, to: null, periodType: null };
   export let periodTypeOptions: PeriodType[] = [
@@ -28,6 +30,8 @@
     PeriodType.CalendarYear,
     PeriodType.FiscalYearOctober,
   ];
+
+  const theme = getComponentTheme('DateRange');
 
   let selectedDayOfWeek: DayOfWeek = DayOfWeek.SUN;
   let activeDate: 'from' | 'to' = 'from';
@@ -98,7 +102,7 @@
   }
 </script>
 
-<div class="DateRange grid grid-cols-[2fr,3fr] gap-2 bg-gray-100">
+<div class={cls('DateRange grid grid-cols-[2fr,3fr] gap-2 bg-gray-100', theme.root, $$props.class)}>
   <div class="col-start-2">
     <ToggleGroup
       contained

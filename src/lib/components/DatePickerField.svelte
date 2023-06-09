@@ -9,6 +9,7 @@
   import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
   import { dateDisplay } from '../utils/dateDisplay';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -30,6 +31,8 @@
   export let dense = false;
   export let icon: string | null = null;
   export let center = false;
+
+  const theme = getComponentTheme('DatePickerField');
 
   let open: boolean = false;
 

@@ -38,7 +38,6 @@
     icon?: string;
     loading?: string;
   } = {};
-
   const theme = getComponentTheme('Button');
 
   // Override default from `ButtonGroup` if set

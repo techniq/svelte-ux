@@ -1,9 +1,12 @@
 <script lang="ts">
   import { cls } from '../utils/styles';
   import Icon from './Icon.svelte';
+  import { getComponentTheme } from './theme';
 
   export let size: 'sm' | 'md' | 'lg' | 'unset' = 'md';
   export let icon: string | undefined = undefined;
+
+  const theme = getComponentTheme('Avatar');
 </script>
 
 <div
@@ -15,6 +18,7 @@
       md: 'w-10 h-10',
       lg: 'w-14 h-14',
     }[size],
+    theme.root,
     $$props.class
   )}
 >

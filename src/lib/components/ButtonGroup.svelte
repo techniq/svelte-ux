@@ -3,9 +3,8 @@
   import type Button from './Button.svelte';
   import type { TailwindColors } from '$lib/types';
 
-  type ButtonProps = ComponentProps<Button>;
-
   // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
+  type ButtonProps = ComponentProps<Button>;
   type ButtonGroupContext = {
     variant: 'text' | 'outline' | 'fill' | 'fill-outline' | 'fill-light' | 'none' | undefined; // ButtonProps['variant'];
     color: TailwindColors | 'default' | undefined; //ButtonProps['color'];
@@ -25,11 +24,14 @@
 
 <script lang="ts">
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let variant: ComponentProps<Button>['variant'];
   export let color: ComponentProps<Button>['color'] | undefined = undefined;
   export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
   export let disabled: boolean = false;
+
+  const theme = getComponentTheme('ButtonGroup');
 
   $: _class = cls(
     'ButtonGroup',
@@ -57,6 +59,7 @@
     '[&.variant-fill-light_.Button:not(:first-child)]:ml-px',
     '[&.variant-fill-light_:not(:first-child)_.Button]:ml-px',
 
+    theme.root,
     $$props.class
   );
 

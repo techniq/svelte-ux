@@ -3,10 +3,13 @@
   import Header from './Header.svelte';
   import Overlay from './Overlay.svelte';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let title: string | string[] | null = null;
   export let subheading: string | string[] | null = null;
   export let loading: boolean | null = null;
+
+  const theme = getComponentTheme('Card');
 </script>
 
 <!-- 
@@ -21,6 +24,7 @@
   class={cls(
     'Card',
     'relative z-0 bg-white border rounded elevation-1 flex flex-col justify-between',
+    theme.root,
     $$props.class
   )}
 >

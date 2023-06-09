@@ -3,11 +3,14 @@
 
   import { portal as portalAction } from '../actions/portal';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let blur: boolean = false;
   export let portal = false;
 
   export let fadeParams: FadeParams = { duration: 300 };
+
+  const theme = getComponentTheme('Backdrop');
 </script>
 
 <div
@@ -15,7 +18,8 @@
     'Backdrop',
     'fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-black/50',
     blur && 'backdrop-blur-sm',
-    $$restProps.class
+    theme.root,
+    $$props.class
   )}
   on:keydown
   on:keyup

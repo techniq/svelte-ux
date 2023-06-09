@@ -6,6 +6,7 @@
 
   import Icon from './Icon.svelte';
   import type { TransitionParams } from '$lib/types';
+  import { getComponentTheme } from './theme';
 
   /**
    * @slot {{ active: number }} trigger - Primary content to trigger the show/hide
@@ -30,6 +31,7 @@
     icon?: string;
     content?: string;
   } = {};
+  const theme = getComponentTheme('Collapse');
 
   /**
    * Controls how first, last, and gap between are calculated
@@ -52,6 +54,7 @@
     popout && list === 'type' && 'first-of-type:mt-0 last-of-type:mb-0',
     popout && list === 'parent' && 'first:mt-0 last:mb-0',
     popout && list === 'group' && 'group-first:mt-0 group-last:mb-0',
+    theme.root,
     classes.root,
     $$props.class
   )}
@@ -66,7 +69,9 @@
       group = group === value ? undefined : value;
     }}
   >
-    <slot name="trigger" {open}><span class={cls('flex-1', classes.trigger)}>{name}</span></slot>
+    <slot name="trigger" {open}
+      ><span class={cls('flex-1', theme.trigger, classes.trigger)}>{name}</span></slot
+    >
 
     <slot name="icon" {open}>
       <div
@@ -75,6 +80,7 @@
         class={cls(
           'transition-all duration-[var(--duration)] transform',
           'data-[open=true]:-rotate-180',
+          theme.icon,
           classes.icon
         )}
       >
@@ -84,7 +90,7 @@
   </button>
 
   {#if open}
-    <div transition:transition|local={transitionParams} class={classes.content}>
+    <div transition:transition|local={transitionParams} class={cls(theme.content, classes.content)}>
       <slot {open} />
     </div>
   {/if}
