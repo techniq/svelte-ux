@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ComponentProps } from 'svelte';
   import toggleGroupApi from '$lib/components/ToggleGroup.svelte?raw&sveld';
   import toggleOptionApi from '$lib/components/ToggleOption.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
@@ -18,22 +19,22 @@
   let selectedStr = 'missed';
   let selectedObj = missedValue;
 
-  let optionStyle = 'contained';
+  let variant: ComponentProps<ToggleGroup>['variant'] = 'contained';
 </script>
 
 <h1>Examples</h1>
 
-<h2>Style</h2>
+<h2>Variant</h2>
 
 <div class="bg-white p-2 rounded border border-gray-300 flex gap-4">
-  <Radio value="contained" bind:group={optionStyle}>Contained</Radio>
-  <Radio value="underlined" bind:group={optionStyle}>Underlined</Radio>
+  <Radio value="contained" bind:group={variant}>Contained</Radio>
+  <Radio value="underlined" bind:group={variant}>Underlined</Radio>
 </div>
 
 <h2>Panels</h2>
 
 <Preview>
-  <ToggleGroup contained={optionStyle === 'contained'} underlined={optionStyle === 'underlined'}>
+  <ToggleGroup {variant}>
     <ToggleOption value="all" class="w-32">All</ToggleOption>
     <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
     <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
@@ -48,11 +49,7 @@
 <h2>Vertical layout</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    vertical
-  >
+  <ToggleGroup {variant} vertical>
     <ToggleOption value="all">All</ToggleOption>
     <ToggleOption value="missed">Missed</ToggleOption>
     <ToggleOption value="calls">Calls</ToggleOption>
@@ -62,11 +59,7 @@
 <h2>Full width</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    classes={{ options: 'w-full' }}
-  >
+  <ToggleGroup {variant} classes={{ options: 'w-full' }}>
     <ToggleOption value="all">All</ToggleOption>
     <ToggleOption value="missed">Missed</ToggleOption>
     <ToggleOption value="calls">Calls</ToggleOption>
@@ -76,12 +69,7 @@
 <h2>Full width w/ vertical</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    classes={{ options: 'w-full' }}
-    vertical
-  >
+  <ToggleGroup {variant} classes={{ options: 'w-full' }} vertical>
     <ToggleOption value="all">All</ToggleOption>
     <ToggleOption value="missed">Missed</ToggleOption>
     <ToggleOption value="calls">Calls</ToggleOption>
@@ -91,11 +79,7 @@
 <h2>Grid layout</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    classes={{ options: '!grid grid-rows-3 grid-cols-3' }}
-  >
+  <ToggleGroup {variant} classes={{ options: '!grid grid-rows-3 grid-cols-3' }}>
     <ToggleOption value={1}>1</ToggleOption>
     <ToggleOption value={2}>2</ToggleOption>
     <ToggleOption value={3}>3</ToggleOption>
@@ -111,11 +95,7 @@
 <h2>Circle</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    circle
-  >
+  <ToggleGroup {variant} circle>
     <ToggleOption value={1} class="h-10 aspect-square">1</ToggleOption>
     <ToggleOption value={2} class="h-10 aspect-square">2</ToggleOption>
     <ToggleOption value={3} class="h-10 aspect-square">3</ToggleOption>
@@ -125,11 +105,7 @@
 <h2>Controlled</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    bind:value={selectedStr}
-  >
+  <ToggleGroup {variant} bind:value={selectedStr}>
     <ToggleOption value="all" class="w-32">All</ToggleOption>
     <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
     <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
@@ -147,11 +123,7 @@
 <h2>Controlled with null option</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    bind:value={selectedStr}
-  >
+  <ToggleGroup {variant} bind:value={selectedStr}>
     <ToggleOption value={null} class="w-32">None</ToggleOption>
     <ToggleOption value="all" class="w-32">All</ToggleOption>
     <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
@@ -170,11 +142,7 @@
 <h2>Controlled with undefined option</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    bind:value={selectedStr}
-  >
+  <ToggleGroup {variant} bind:value={selectedStr}>
     <ToggleOption value={undefined} class="w-32">None</ToggleOption>
     <ToggleOption value="all" class="w-32">All</ToggleOption>
     <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
@@ -193,11 +161,7 @@
 <h2>Controlled (object value)</h2>
 
 <Preview>
-  <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
-    bind:value={selectedObj}
-  >
+  <ToggleGroup {variant} bind:value={selectedObj}>
     <ToggleOption value={allValue} class="w-32">All</ToggleOption>
     <ToggleOption value={missedValue} class="w-32">Missed</ToggleOption>
     <ToggleOption value={callsValue} class="w-32">Calls</ToggleOption>
@@ -216,10 +180,9 @@
 
 <Preview>
   <ToggleGroup
-    contained={optionStyle === 'contained'}
-    underlined={optionStyle === 'underlined'}
+    {variant}
     value={selected}
-    classes={{ options: 'overflow-auto w-full' }}
+    classes={{ options: 'w-full overflow-auto scrollbar-none' }}
     autoscroll
   >
     <ToggleOption value={1} class="w-32">One</ToggleOption>
