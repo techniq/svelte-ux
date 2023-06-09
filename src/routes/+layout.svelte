@@ -29,6 +29,9 @@
 
   createTheme({
     // AppBar: 'bg-red-500',
+    // AppLayout: {
+    //   nav: 'bg-red-500',
+    // },
     // Button: 'bg-red-500',
     // Button: {
     //   icon: 'text-xl',

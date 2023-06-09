@@ -1,25 +1,19 @@
-import { getContext, setContext } from 'svelte';
+import { getContext, setContext, type ComponentProps, SvelteComponent } from 'svelte';
+import type * as Components from './';
+
+type ComponentName = keyof typeof Components;
+
+type ClassesProp<T> = T extends { prototype: infer PR extends SvelteComponent }
+  ? ComponentProps<PR> extends { classes?: any }
+    ? ComponentProps<PR>['classes']
+    : never
+  : never;
+
+type Theme = {
+  [key in ComponentName]?: ClassesProp<(typeof Components)[key]> | string;
+};
 
 const themeKey = Symbol();
-
-// TODO: Find convenient way to type keys as component names (AppBar, Button, etc), and lookup `classes` prop on referenced component name
-
-/**
- * passed as `class`
- * {
- *   ComponentName: 'class'
- * }
- *
- * or passed as `classes`
- * {
- *   ComponentName:
- *   {
- *     element1: 'class',
- *     element2: 'class'
- *   }
- * }
- */
-type Theme = Record<string, string | Record<string, string>>;
 
 export function createTheme(theme: Theme) {
   setContext(themeKey, theme);
@@ -29,7 +23,7 @@ export function getTheme() {
   return getContext<Theme>(themeKey) ?? {};
 }
 
-export function getComponentTheme(name: string) {
+export function getComponentTheme(name: ComponentName) {
   const theme = getTheme()[name] ?? {};
 
   return typeof theme === 'string' ? { root: theme } : theme;
