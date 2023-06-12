@@ -29,7 +29,7 @@
     | 'fill-light'
     | 'none'
     | undefined = undefined; // default in reactive groupContext below
-  export let size: 'sm' | 'md' | 'lg' = 'md';
+  export let size: 'sm' | 'md' | 'lg' = undefined; // default in reactive groupContext below
   export let color: TailwindColors | 'default' | undefined = undefined; // default in reactive groupContext below
 
   /** @type {{root?: string, icon?: string, loading?: string}} */
@@ -43,6 +43,7 @@
   // Override default from `ButtonGroup` if set
   const groupContext = getButtonGroup();
   $: variant = variant ?? groupContext?.variant ?? 'text';
+  $: size = size ?? groupContext?.size ?? 'md';
   $: color = color ?? groupContext?.color ?? 'default';
   $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);
 

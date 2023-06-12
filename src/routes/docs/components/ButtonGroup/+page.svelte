@@ -4,6 +4,7 @@
     mdiFormatAlignLeft,
     mdiFormatAlignCenter,
     mdiFormatAlignRight,
+    mdiBookmark,
   } from '@mdi/js';
 
   import api from '$lib/components/Button.svelte?raw&sveld';
@@ -174,68 +175,33 @@
   </div>
 </Preview>
 
-<h2>with Tooltip</h2>
+<h2>Size</h2>
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="accent">
-      <Tooltip title="left" offset={2}>
-        <Button icon={mdiFormatAlignLeft} />
-      </Tooltip>
-      <Tooltip title="center" offset={2}>
-        <Button icon={mdiFormatAlignCenter} />
-      </Tooltip>
-      <Tooltip title="right" offset={2}>
-        <Button icon={mdiFormatAlignRight} />
-      </Tooltip>
+    <ButtonGroup variant="text" size="sm" color="accent">
+      <Button icon={mdiBookmark}>Bookmark</Button>
+      <Button>12k</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="outline">
-      <Tooltip title="left" offset={2}>
-        <Button icon={mdiFormatAlignLeft} />
-      </Tooltip>
-      <Tooltip title="center" offset={2}>
-        <Button icon={mdiFormatAlignCenter} />
-      </Tooltip>
-      <Tooltip title="right" offset={2}>
-        <Button icon={mdiFormatAlignRight} />
-      </Tooltip>
+    <ButtonGroup variant="outline" size="sm">
+      <Button icon={mdiBookmark}>Bookmark</Button>
+      <Button>12k</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill" color="accent">
-      <Tooltip title="left" offset={2}>
-        <Button icon={mdiFormatAlignLeft} />
-      </Tooltip>
-      <Tooltip title="center" offset={2}>
-        <Button icon={mdiFormatAlignCenter} />
-      </Tooltip>
-      <Tooltip title="right" offset={2}>
-        <Button icon={mdiFormatAlignRight} />
-      </Tooltip>
+    <ButtonGroup variant="fill" size="sm" color="accent">
+      <Button icon={mdiBookmark}>Bookmark</Button>
+      <Button>12k</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-light" color="accent">
-      <Tooltip title="left" offset={2}>
-        <Button icon={mdiFormatAlignLeft} />
-      </Tooltip>
-      <Tooltip title="center" offset={2}>
-        <Button icon={mdiFormatAlignCenter} />
-      </Tooltip>
-      <Tooltip title="right" offset={2}>
-        <Button icon={mdiFormatAlignRight} />
-      </Tooltip>
+    <ButtonGroup variant="fill-light" size="sm" color="accent">
+      <Button icon={mdiBookmark}>Bookmark</Button>
+      <Button>12k</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-outline" color="accent">
-      <Tooltip title="left" offset={2}>
-        <Button icon={mdiFormatAlignLeft} />
-      </Tooltip>
-      <Tooltip title="center" offset={2}>
-        <Button icon={mdiFormatAlignCenter} />
-      </Tooltip>
-      <Tooltip title="right" offset={2}>
-        <Button icon={mdiFormatAlignRight} />
-      </Tooltip>
+    <ButtonGroup variant="fill-outline" size="sm" color="accent">
+      <Button icon={mdiBookmark}>Bookmark</Button>
+      <Button>12k</Button>
     </ButtonGroup>
   </div>
 </Preview>
@@ -353,6 +319,72 @@
           </Menu>
         </span>
       </Toggle>
+    </ButtonGroup>
+  </div>
+</Preview>
+
+<h2>with Tooltip</h2>
+
+<Preview>
+  <div class="grid gap-2">
+    <ButtonGroup variant="text" color="accent">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+
+    <ButtonGroup variant="outline">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill" color="accent">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-light" color="accent">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
+    </ButtonGroup>
+
+    <ButtonGroup variant="fill-outline" color="accent">
+      <Tooltip title="left" offset={2}>
+        <Button icon={mdiFormatAlignLeft} />
+      </Tooltip>
+      <Tooltip title="center" offset={2}>
+        <Button icon={mdiFormatAlignCenter} />
+      </Tooltip>
+      <Tooltip title="right" offset={2}>
+        <Button icon={mdiFormatAlignRight} />
+      </Tooltip>
     </ButtonGroup>
   </div>
 </Preview>

@@ -7,6 +7,7 @@
   type ButtonProps = ComponentProps<Button>;
   type ButtonGroupContext = {
     variant: 'text' | 'outline' | 'fill' | 'fill-outline' | 'fill-light' | 'none' | undefined; // ButtonProps['variant'];
+    size: 'sm' | 'md' | 'lg' | undefined; //ButtonProps['size'];
     color: TailwindColors | 'default' | undefined; //ButtonProps['color'];
     rounded: boolean | 'full' | undefined; // ButtonProps['rounded']
   };
@@ -27,6 +28,7 @@
   import { getComponentTheme } from './theme';
 
   export let variant: ComponentProps<Button>['variant'];
+  export let size: ComponentProps<Button>['size'] | undefined = undefined;
   export let color: ComponentProps<Button>['color'] | undefined = undefined;
   export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
   export let disabled: boolean = false;
@@ -65,6 +67,7 @@
 
   setButtonGroup({
     variant,
+    size,
     color,
     rounded,
   });
