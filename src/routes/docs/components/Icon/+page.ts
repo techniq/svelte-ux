@@ -7,6 +7,7 @@ export async function load() {
         'Supports most icon collections.  Verified with Material Design Icons and Font Awesome',
         'Simple in-memory cache when loaded via URL and only fetches once',
       ],
+      related: ['components/Button'],
     },
   };
 }
