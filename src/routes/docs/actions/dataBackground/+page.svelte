@@ -44,7 +44,7 @@
     <Field label="Domain">
       <ToggleGroup
         bind:value={domainSelected}
-        contained
+        variant="contained"
         classes={{ root: 'w-full', options: 'w-full' }}
       >
         <ToggleOption value="original">Original</ToggleOption>
