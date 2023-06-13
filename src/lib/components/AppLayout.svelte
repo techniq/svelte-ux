@@ -11,8 +11,9 @@
   import { getComponentTheme } from './theme';
 
   export let navWidth = 240;
-  /** Use areas="'header header' 'aside main'" for full-width header */
-  export let areas = "'aside header' 'aside main'";
+  /** Control whether nav should be full height (default) or header should be full width */
+  export let fullHeaderWidth = false;
+  $: areas = fullHeaderWidth ? "'header header' 'aside main'" : "'aside header' 'aside main'";
 
   export let classes: {
     root?: string;
@@ -63,7 +64,7 @@
     grid-template-areas: var(--areas);
   }
 
-  aside {
+  .AppLayout aside {
     grid-area: aside;
   }
 
