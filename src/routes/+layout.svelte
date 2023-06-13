@@ -79,18 +79,15 @@
     @apply bg-black/10;
   }
 
-  :global(main :not(.prose) h1) {
+  :global(main h1:not(.prose *, .ApiDocs *)) {
     @apply text-xl font-semibold mt-8 mb-2 ml-2 border-b border-gray-400 pb-1;
   }
 
-  :global(main :not(.prose) h2) {
+  :global(main h2:not(.prose *, .ApiDocs *)) {
     @apply text-lg font-semibold mt-4 mb-1 ml-2;
   }
-  :global(main :not(.prose) h2:first-child) {
-    @apply mt-0;
-  }
 
-  :global(main :not(.prose) h3) {
+  :global(main h3:not(.prose *)) {
     @apply text-xs text-black/50 ml-2 mb-1;
   }
   :global(main :not(.prose) h2 + h3) {
