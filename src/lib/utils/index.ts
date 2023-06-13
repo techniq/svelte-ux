@@ -1,5 +1,6 @@
 // top-level exports
 export * from './logger';
+export { cls } from './styles';
 
 // aliased exports to remove conflicts (and make imports less noisy from top-level)
 export * as array from './array';
