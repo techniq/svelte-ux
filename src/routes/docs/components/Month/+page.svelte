@@ -15,7 +15,6 @@
 
   import Month from '$lib/components/Month.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import Stack from '$lib/components/Stack.svelte';
 
   let selected = null;
   let selectedArr = [];
@@ -37,25 +36,19 @@
 <h2>Show Outside Days</h2>
 
 <Preview>
-<Month showOutsideDays />
+  <Month showOutsideDays />
 </Preview>
 
 <h2>Disabled days w/ single</h2>
 
 <Preview>
-<Month disabledDays={new Date()} />
+  <Month disabledDays={new Date()} />
 </Preview>
 
 <h2>Disabled days w/ array</h2>
 
 <Preview>
-  <Month
-    disabledDays={[
-    subDays(new Date(), 2),
-    new Date(),
-    addDays(new Date(), 2),
-    ]}
-  />
+  <Month disabledDays={[subDays(new Date(), 2), new Date(), addDays(new Date(), 2)]} />
 </Preview>
 
 <h2>Disabled days w/ range</h2>
@@ -84,17 +77,13 @@
 <h2>Selected w/ array</h2>
 
 <Preview>
-  <Month
-    selected={[subDays(new Date(), 2), new Date(), addDays(new Date(), 2)]}
-  />
+  <Month selected={[subDays(new Date(), 2), new Date(), addDays(new Date(), 2)]} />
 </Preview>
 
 <h2>Selected w/ range</h2>
 
 <Preview>
-  <Month
-    selected={{ from: subDays(new Date(), 2), to: addDays(new Date(), 2) }}
-  />
+  <Month selected={{ from: subDays(new Date(), 2), to: addDays(new Date(), 2) }} />
 </Preview>
 
 <h2>Selected state w/ single</h2>
@@ -169,59 +158,63 @@
 <h2>Selected state w/ multi-month</h2>
 
 <Preview>
-  <Stack horizontal gap={40}>
-    <Month
-      selected={selectedMultiMonth}
-      on:dateChange={(e) => {
-        const date = e.detail;
-        const newSelectedRange = { ...selectedMultiMonth };
-        if (selectedMultiMonth.from === undefined) {
-          newSelectedRange.from = date;
-        } else if (isSameDay(date, selectedMultiMonth.from)) {
-          newSelectedRange.from = undefined;
-        } else if (selectedMultiMonth.to === undefined) {
-        if (isAfter(date, selectedMultiMonth.from)) {
-          newSelectedRange.to = date;
-        } else {
-          newSelectedRange.to = selectedMultiMonth.from;
-          newSelectedRange.from = date;
-        }
-        } else if (isSameDay(date, selectedMultiMonth.to)) {
-          newSelectedRange.to = undefined;
-        } else {
-          newSelectedRange.from = date;
-          newSelectedRange.to = undefined;
-        }
-        selectedMultiMonth = newSelectedRange;
-      }}
-    />
-    <Month
-      selected={selectedMultiMonth}
-      startOfMonth={startOfMonth(addMonths(new Date(), 1))}
-      on:dateChange={(e) => {
-        const date = e.detail;
-        const newSelectedRange = { ...selectedMultiMonth };
-        if (selectedMultiMonth.from === undefined) {
-          newSelectedRange.from = date;
-        } else if (isSameDay(date, selectedMultiMonth.from)) {
-          newSelectedRange.from = undefined;
-        } else if (selectedMultiMonth.to === undefined) {
-        if (isAfter(date, selectedMultiMonth.from)) {
-          newSelectedRange.to = date;
-        } else {
-          newSelectedRange.to = selectedMultiMonth.from;
-          newSelectedRange.from = date;
-        }
-        } else if (isSameDay(date, selectedMultiMonth.to)) {
-          newSelectedRange.to = undefined;
-        } else {
-          newSelectedRange.from = date;
-          newSelectedRange.to = undefined;
-        }
-        selectedMultiMonth = newSelectedRange;
-      }}
-    />
-  </Stack>
+  <div class="grid grid-cols-[1fr,1fr] gap-10">
+    <div>
+      <Month
+        selected={selectedMultiMonth}
+        on:dateChange={(e) => {
+          const date = e.detail;
+          const newSelectedRange = { ...selectedMultiMonth };
+          if (selectedMultiMonth.from === undefined) {
+            newSelectedRange.from = date;
+          } else if (isSameDay(date, selectedMultiMonth.from)) {
+            newSelectedRange.from = undefined;
+          } else if (selectedMultiMonth.to === undefined) {
+            if (isAfter(date, selectedMultiMonth.from)) {
+              newSelectedRange.to = date;
+            } else {
+              newSelectedRange.to = selectedMultiMonth.from;
+              newSelectedRange.from = date;
+            }
+          } else if (isSameDay(date, selectedMultiMonth.to)) {
+            newSelectedRange.to = undefined;
+          } else {
+            newSelectedRange.from = date;
+            newSelectedRange.to = undefined;
+          }
+          selectedMultiMonth = newSelectedRange;
+        }}
+      />
+    </div>
+    <div>
+      <Month
+        selected={selectedMultiMonth}
+        startOfMonth={startOfMonth(addMonths(new Date(), 1))}
+        on:dateChange={(e) => {
+          const date = e.detail;
+          const newSelectedRange = { ...selectedMultiMonth };
+          if (selectedMultiMonth.from === undefined) {
+            newSelectedRange.from = date;
+          } else if (isSameDay(date, selectedMultiMonth.from)) {
+            newSelectedRange.from = undefined;
+          } else if (selectedMultiMonth.to === undefined) {
+            if (isAfter(date, selectedMultiMonth.from)) {
+              newSelectedRange.to = date;
+            } else {
+              newSelectedRange.to = selectedMultiMonth.from;
+              newSelectedRange.from = date;
+            }
+          } else if (isSameDay(date, selectedMultiMonth.to)) {
+            newSelectedRange.to = undefined;
+          } else {
+            newSelectedRange.from = date;
+            newSelectedRange.to = undefined;
+          }
+          selectedMultiMonth = newSelectedRange;
+        }}
+      />
+    </div>
+  </div>
 </Preview>
 
 <h1>API</h1>
