@@ -10,10 +10,16 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
   import NavMenu from './_NavMenu.svelte';
   import QuickSearch from '$lib/components/QuickSearch.svelte';
-  import { goto } from '$app/navigation';
+  import { afterNavigate, goto } from '$app/navigation';
   import { createTheme } from '$lib/components/theme';
 
   inject({ mode: dev ? 'development' : 'production' });
+
+  let mainEl: HTMLElement;
+  afterNavigate(() => {
+    // @ts-ignore: `instant` not in spec, but supported by Chrome/Firefox - https://kilianvalkhof.com/2022/css-html/preventing-smooth-scrolling-with-javascript/
+    mainEl.scrollTo({ top: 0, behavior: 'instant' });
+  });
 
   const quickSearchOptions = Object.entries(
     import.meta.glob('./docs/**/+page.(md|svelte)', { as: 'raw', eager: true })
@@ -65,7 +71,7 @@
     </div>
   </AppBar>
 
-  <main class="scroll-smooth">
+  <main class="scroll-smooth" bind:this={mainEl}>
     <slot />
   </main>
 </AppLayout>
