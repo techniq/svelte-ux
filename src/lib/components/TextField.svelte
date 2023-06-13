@@ -69,7 +69,7 @@
   // Input props
   export let mask: string | undefined = undefined;
   export let replace: string | undefined = undefined;
-  export let accept: string | undefined = undefined;
+  export let accept: string | RegExp | undefined = undefined;
   // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
   export let autocapitalize: ComponentProps<Input>['autocapitalize'] = undefined;
 
