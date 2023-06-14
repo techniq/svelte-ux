@@ -12,6 +12,7 @@
     "prepublishOnly": "svelte-package",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "test:unit": "vitest",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "typedoc": "typedoc"
@@ -39,7 +40,8 @@
     "typescript": "^5.0.4",
     "unist-util-visit": "^4.1.2",
     "vite": "^4.3.4",
-    "vite-plugin-sveld": "^1.1.0"
+    "vite-plugin-sveld": "^1.1.0",
+    "vitest": "^0.32.0"
   },
   "type": "module",
   "dependencies": {

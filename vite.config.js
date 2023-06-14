@@ -1,9 +1,10 @@
+import { defineConfig } from 'vitest/config';
 import { sveltekit } from '@sveltejs/kit/vite';
 import sveld from 'vite-plugin-sveld';
 
-/** @type {import('vite').UserConfig} */
-const config = {
+export default defineConfig({
   plugins: [sveltekit(), sveld()],
-};
-
-export default config;
+  test: {
+    include: ['src/**/*.{test,spec}.{js,ts}'],
+  },
+});
