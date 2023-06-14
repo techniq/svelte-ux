@@ -9,7 +9,7 @@ type ClassesProp<T> = T extends { prototype: infer PR extends SvelteComponent }
     : never
   : never;
 
-type Theme = {
+export type Theme = {
   [key in ComponentName]?: ClassesProp<(typeof Components)[key]> | string;
 };
 

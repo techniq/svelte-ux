@@ -1,0 +1,42 @@
+<script lang="ts">
+  import api from '$lib/components/Theme.svelte?raw&sveld';
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
+  import Preview from '$lib/components/Preview.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Menu from '$lib/components/Menu.svelte';
+  import MenuItem from '$lib/components/MenuItem.svelte';
+  import Theme from '$lib/components/Theme.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
+</script>
+
+<h1>Examples</h1>
+
+<h2>Basic</h2>
+
+<Preview>
+  <Theme
+    theme={{
+      Button: 'border-2 font-bold',
+      Menu: 'shadow-xl border-gray-500',
+      MenuItem: 'font-bold',
+    }}
+  >
+    <Toggle let:on={open} let:toggle>
+      <Button on:click={toggle} variant="outline" color="blue">
+        Click me
+        <Menu {open} on:close={toggle}>
+          <MenuItem>Refresh</MenuItem>
+          <MenuItem>Settings</MenuItem>
+          <MenuItem>Help</MenuItem>
+          <MenuItem>Sign In</MenuItem>
+          <MenuItem disabled>Disabled</MenuItem>
+        </Menu>
+      </Button>
+    </Toggle>
+  </Theme>
+</Preview>
+
+<h1>API</h1>
+
+<ApiDocs {api} />
