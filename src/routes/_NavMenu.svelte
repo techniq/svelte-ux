@@ -111,7 +111,7 @@
     'timerStore',
   ];
 
-  const utils = ['cls', 'Logger'];
+  const utils = ['cls', 'format', 'Logger'];
 </script>
 
 <NavItem text="Getting Started" currentUrl={$page.url} path="/" />

@@ -1,4 +1,5 @@
 // top-level exports
+export * from './format';
 export * from './logger';
 export { cls } from './styles';
 
@@ -12,7 +13,6 @@ export * as duration from './duration';
 export * as env from './env';
 // export * as excel from './excel'; // Remove until `await import('exceljs')` works externally
 export * as file from './file';
-export * as format from './format';
 export * as json from './json';
 export * as map from './map';
 export * as number from './number';
