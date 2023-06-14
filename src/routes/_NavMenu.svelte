@@ -26,6 +26,7 @@
       'Steps',
       'Table',
       'TableOfContents',
+      'Theme',
       'ToggleButton',
       'ToggleGroup',
       'TreeList',
