@@ -178,7 +178,7 @@ function decodeParam(values: string[], paramType?: ParamType) {
   }
 }
 
-function getParamConfig(paramType: ParamType) {
+export function getParamConfig(paramType: ParamType) {
   switch (paramType) {
     case 'string':
       return {
