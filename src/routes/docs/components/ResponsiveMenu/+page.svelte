@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mdiMagnify } from '@mdi/js';
 
-  import api from '$lib/components/Menu.svelte?raw&sveld';
+  import api from '$lib/components/ResponsiveMenu.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Button from '$lib/components/Button.svelte';
