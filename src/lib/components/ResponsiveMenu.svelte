@@ -15,11 +15,11 @@
 
 {#if $isLargeScreen}
   <!-- Default explicitClose={true} to match Drawer behavior -->
-  <Menu bind:open on:close explicitClose {...menuProps}>
+  <Menu bind:open on:close explicitClose class="ResponsiveMenu" {...menuProps}>
     <slot {open} />
   </Menu>
 {:else}
-  <Drawer bind:open placement="bottom" on:close {...drawerProps}>
+  <Drawer bind:open placement="bottom" on:close class="ResponsiveMenu" {...drawerProps}>
     <slot {open} />
   </Drawer>
 {/if}

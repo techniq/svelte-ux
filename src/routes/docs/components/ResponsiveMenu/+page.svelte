@@ -12,6 +12,7 @@
   import ResponsiveMenu from '$lib/components/ResponsiveMenu.svelte';
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
+  import Theme from '$lib/components/Theme.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -167,6 +168,25 @@
       </ResponsiveMenu>
     </Button>
   </Toggle>
+</Preview>
+
+<h2>Theme example</h2>
+
+<Preview>
+  <Theme theme={{ Drawer: '[&.ResponsiveMenu]:rounded-t-xl [&.ResponsiveMenu]:py-2' }}>
+    <Toggle let:on={open} let:toggle let:toggleOff>
+      <Button on:click={toggle}>
+        Click me
+        <ResponsiveMenu {open} on:close={toggleOff}>
+          <MenuItem on:click={toggleOff}>Refresh</MenuItem>
+          <MenuItem on:click={toggleOff}>Settings</MenuItem>
+          <MenuItem on:click={toggleOff}>Help</MenuItem>
+          <MenuItem on:click={toggleOff}>Sign In</MenuItem>
+          <MenuItem on:click={toggleOff} disabled>Disabled</MenuItem>
+        </ResponsiveMenu>
+      </Button>
+    </Toggle>
+  </Theme>
 </Preview>
 
 <h1>API</h1>
