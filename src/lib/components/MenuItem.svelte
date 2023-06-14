@@ -4,7 +4,7 @@
   import { cls } from '../utils/styles';
   import { scrollIntoView as scrollIntoViewAction } from '../actions/scroll';
   import { setButtonGroup } from './ButtonGroup.svelte';
-  import { getComponentTheme } from './theme';
+  import { createTheme, getComponentTheme } from './theme';
 
   type ButtonProps = ComponentProps<Button>;
 
@@ -20,6 +20,9 @@
 
   // Clear ButtonGroup if set
   setButtonGroup(undefined);
+
+  // Clear theme to not expose to Button
+  createTheme({});
 </script>
 
 <Button
