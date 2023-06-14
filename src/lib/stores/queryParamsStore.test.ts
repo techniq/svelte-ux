@@ -74,28 +74,28 @@ describe('getParamConfig', () => {
   });
 
   it('date encode', () => {
-    const original = new Date('1982-03-30T00:00:00');
+    const original = new Date('1982-03-30T00:00:00-05:00');
     const { encode, decode } = getParamConfig('date');
     const actual = encode(original);
     expect(actual).toEqual('1982-03-30');
   });
 
   it('date encode/decode should return same value', () => {
-    const original = new Date('1982-03-30T00:00:00');
+    const original = new Date('1982-03-30T00:00:00-05:00');
     const { encode, decode } = getParamConfig('date');
     const actual = decode(encode(original));
     expect(actual).toEqual(original);
   });
 
   it('datetime encode', () => {
-    const original = new Date('1982-03-30T00:00:00');
+    const original = new Date('1982-03-30T00:00:00-05:00');
     const { encode, decode } = getParamConfig('datetime');
     const actual = encode(original);
     expect(actual).toEqual('1982-03-30T05:00:00.000Z');
   });
 
   it('datetime encode/decode should return same value', () => {
-    const original = new Date('1982-03-30T00:00:00');
+    const original = new Date('1982-03-30T00:00:00-05:00');
     const { encode, decode } = getParamConfig('datetime');
     const actual = decode(encode(original));
     expect(actual).toEqual(original);
@@ -106,7 +106,7 @@ describe('getParamConfig', () => {
       number: 1234,
       string: 'example',
       bool: true,
-      date: new Date('1982-03-30T00:00:00'),
+      date: new Date('1982-03-30T00:00:00-05:00'),
     };
     const { encode, decode } = getParamConfig('json');
     const actual = encode(original);
@@ -120,7 +120,7 @@ describe('getParamConfig', () => {
       number: 1234,
       string: 'example',
       bool: true,
-      date: new Date('1982-03-30T00:00:00'),
+      date: new Date('1982-03-30T00:00:00-05:00'),
     };
     const { encode, decode } = getParamConfig('json');
     const actual = decode(encode(original));
@@ -132,7 +132,7 @@ describe('getParamConfig', () => {
       number: 1234,
       string: 'example',
       bool: true,
-      date: new Date('1982-03-30T00:00:00'),
+      date: new Date('1982-03-30T00:00:00-05:00'),
     };
     const { encode, decode } = getParamConfig('object');
     const actual = encode(original);
@@ -146,7 +146,7 @@ describe('getParamConfig', () => {
       number: 1234,
       string: 'example',
       bool: true,
-      date: new Date('1982-03-30T00:00:00'),
+      date: new Date('1982-03-30T00:00:00-05:00'),
     };
     const { encode, decode } = getParamConfig('object');
     const actual = decode(encode(original));
