@@ -16,6 +16,8 @@
   import ToggleGroup from './ToggleGroup.svelte';
   import ToggleOption from './ToggleOption.svelte';
   import DateField from './DateField.svelte';
+  import { cls } from '$lib/utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let selected: DateRange = { from: null, to: null, periodType: null };
   export let periodTypeOptions: PeriodType[] = [
@@ -28,6 +30,8 @@
     PeriodType.CalendarYear,
     PeriodType.FiscalYearOctober,
   ];
+
+  const theme = getComponentTheme('DateRange');
 
   let selectedDayOfWeek: DayOfWeek = DayOfWeek.SUN;
   let activeDate: 'from' | 'to' = 'from';
@@ -98,10 +102,10 @@
   }
 </script>
 
-<div class="grid grid-cols-[2fr,3fr] gap-2 bg-gray-100">
+<div class={cls('DateRange grid grid-cols-[2fr,3fr] gap-2 bg-gray-100', theme.root, $$props.class)}>
   <div class="col-start-2">
     <ToggleGroup
-      contained
+      variant="contained"
       bind:value={activeDate}
       classes={{ root: 'w-full', options: 'w-full border' }}
     >
@@ -155,7 +159,7 @@
     <div>
       <div class="text-xs text-black/50 uppercase mb-1 -mt-5">Type</div>
       <ToggleGroup
-        contained
+        variant="contained"
         bind:value={selected.periodType}
         on:change={(e) => {
           // Expand selection range to match period type (day => month, etc)
@@ -180,7 +184,7 @@
       {#if selected.periodType}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
         <ToggleGroup
-          contained
+          variant="contained"
           bind:value={selected}
           vertical
           classes={{ options: 'w-full border' }}
@@ -194,7 +198,7 @@
       {#if selected.periodType && hasDayOfWeek(selected.periodType)}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Start day of week</div>
         <ToggleGroup
-          contained
+          variant="contained"
           bind:value={selectedDayOfWeek}
           classes={{ options: 'w-full border' }}
         >

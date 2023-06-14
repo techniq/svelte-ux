@@ -1,9 +1,13 @@
 <script lang="ts">
+  import { cls } from '$lib/utils/styles';
   import Breadcrumb from './Breadcrumb.svelte';
   import Stack from './Stack.svelte';
+  import { getComponentTheme } from './theme';
 
   export let title: string | string[] | null = null;
   export let subheading: string | string[] | null = null;
+
+  const theme = getComponentTheme('Header');
 </script>
 
 <Stack
@@ -11,7 +15,7 @@
   template="{$$slots.avatar ? 'auto' : ''} 1fr {$$slots.actions ? 'auto' : ''}"
   gap={16}
   items="center"
-  class={$$props.class}
+  class={cls('Header', theme.root, $$props.class)}
 >
   <slot name="avatar" />
 

@@ -19,6 +19,7 @@
   import api from '$lib/components/TextField.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
+  import Blockquote from '$docs/Blockquote.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -46,11 +47,6 @@
   let value = '';
   let numberValue = 1;
 </script>
-
-<!--
-  TODO:
-    - [ ] Add Playground
- -->
 
 <h1>Examples</h1>
 
@@ -373,7 +369,8 @@
   <TextField label="Zip code" accept={/[0-9]{0,5}/} />
 </Preview>
 
-> See [Input](./Input) for more mask examples
+<Blockquote>See <a href="./Input" class="font-semibold">Input</a> for more mask examples</Blockquote
+>
 
 <SectionDivider>Style</SectionDivider>
 

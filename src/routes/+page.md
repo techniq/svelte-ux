@@ -24,6 +24,8 @@ Lastly, add `tailwindcss` and dependencies. Requires the latest (v3.0+) with bui
 npm install tailwindcss autoprefixer
 ```
 
+---
+
 <h1>Setup svelte-preprocess</h1>
 
 Update `svelte.config.js` and add `svelte-preprocess` if not already added.
@@ -39,6 +41,8 @@ const config = {
   },
 };
 ```
+
+---
 
 <h1>Setup Tailwind</h1>
 
@@ -92,7 +96,11 @@ Next, import Tailwind layers in `src/routes/+layout.svelte` style block
 </style>
 ```
 
-Lastly, use `components` (or `actions`, `stores`, or `utils`) by importing from `svelte-ux`
+---
+
+<h1>Usage</h1>
+
+Using `components`, `actions`, or `stores` as as simple as importing from `svelte-ux`
 
 ```svelte
 <script>
@@ -102,10 +110,12 @@ Lastly, use `components` (or `actions`, `stores`, or `utils`) by importing from 
 <Button>Click here</Button>
 ```
 
-All `components` `actions` and `stores` are available as top-level imports as shown above, although `utils` must be imported with a deeper path as to not polute the top-level imports. This may change in the future.
+Currently, `utils` are not exposed as top-level exports to not polute the namespace, although this may change in the future. For now, you can import them using the full path.
 
 ```js
 import { dateDisplay } from 'svelte-ux/utils/dateDisplay';
 ```
+
+See each component page for detailed usage examples.
 
  </div>

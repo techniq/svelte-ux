@@ -6,6 +6,7 @@
   import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -16,6 +17,8 @@
   export let hidden: boolean = false;
   export let fade: boolean = false;
   export let format = getDefaultFormat(periodType);
+
+  const theme = getComponentTheme('DateButton');
 
   function getDefaultFormat(periodType: PeriodType) {
     switch (periodType) {
@@ -74,6 +77,7 @@
 <div
   style="--tw-gradient-stops: var(--tw-gradient-from) 50%, var(--tw-gradient-to) 50%"
   class={cls(
+    'DateButton',
     'inline-flex items-center justify-center',
     isSelectedStart
       ? '[--tw-gradient-from:transparent]'
@@ -82,7 +86,9 @@
       ? '[--tw-gradient-to:transparent]'
       : '[--tw-gradient-to:theme(colors.accent.500)]',
     isSelected && (isVerticalSelection ? 'bg-gradient-to-b' : 'bg-gradient-to-r'),
-    hidden && 'opacity-0 pointer-events-none'
+    hidden && 'opacity-0 pointer-events-none',
+    theme.root,
+    $$props.class
   )}
 >
   <Button
@@ -92,7 +98,7 @@
       (disabled || fade) && 'opacity-25',
       isCurrent ? 'font-bold' : 'font-normal'
     )}
-    variant={isSelected ? 'filled' : 'text'}
+    variant={isSelected ? 'fill' : 'text'}
     color={isSelected || isCurrent ? 'accent' : 'default'}
     {disabled}
     on:click={() => {

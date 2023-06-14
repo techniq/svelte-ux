@@ -1,6 +1,7 @@
 <script lang="ts">
   import Collapse from './Collapse.svelte';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   /**
    * Controls how first, last, and gap between are calculated
@@ -15,17 +16,26 @@
   // related issue: https://github.com/sveltejs/svelte/issues/5312
   export let disabled = false;
   $: enabled = $$slots.default && !disabled;
+
+  export let classes: {
+    root?: string;
+    toggle?: string;
+  } = {};
+  const theme = getComponentTheme('ExpansionPanel');
 </script>
 
 <Collapse
   {...$$restProps}
   classes={{
     root: cls(
+      'ExpansionPanel',
       'bg-white elevation-1 border-t',
       'relative', // Match ListItem (used for loading) so Stacking Context is consistent (else causes a solid line between ExpansionPanel and ListItem)
       list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
       list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
       list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
+      theme.root,
+      classes.root,
       $$props.class
     ),
     icon: cls('text-gray-500 px-2', !enabled && 'hidden'),
@@ -39,7 +49,7 @@
   <slot name="actions" />
 
   {#if enabled}
-    <div class="px-3 pt-2 pb-3 bg-gray-200 border-t border-gray-300">
+    <div class={cls('px-3 pt-2 pb-3', theme.toggle, classes.toggle)}>
       <slot />
     </div>
   {/if}

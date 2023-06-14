@@ -8,16 +8,19 @@
 
   import { mdScreen } from '../stores/matchMedia';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let navWidth = 240;
-  /** Use areas="'header header' 'aside main'" for full-width header */
-  export let areas = "'aside header' 'aside main'";
+  /** Control whether nav should be full height (default) or header should be full width */
+  export let fullHeaderWidth = false;
+  $: areas = fullHeaderWidth ? "'header header' 'aside main'" : "'aside header' 'aside main'";
 
   export let classes: {
     root?: string;
     aside?: string;
     nav?: string;
   } = {};
+  const theme = getComponentTheme('AppLayout');
 
   let isDesktop = mdScreen;
   $: temporaryDrawer = !$isDesktop;
@@ -25,7 +28,9 @@
 
 <div
   class={cls(
-    'layout grid grid-cols-[auto,1fr] grid-rows-[64px,1fr] h-screen',
+    'AppLayout',
+    'grid grid-cols-[auto,1fr] grid-rows-[64px,1fr] h-screen',
+    theme.root,
     classes.root,
     $$props.class
   )}
@@ -42,10 +47,11 @@
     class={cls(
       'w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
       temporaryDrawer && 'fixed h-full z-30 elevation-10',
+      theme.aside,
       classes.aside
     )}
   >
-    <nav class={cls('nav h-full overflow-scroll bg-[#282b31] w-[var(--navWidth)]', classes.nav)}>
+    <nav class={cls('nav h-full overflow-scroll w-[var(--navWidth)]', theme.nav, classes.nav)}>
       <slot name="nav" />
     </nav>
   </aside>
@@ -54,20 +60,19 @@
 </div>
 
 <style>
-  /* .container is used by tailwind */
-  .layout {
+  .AppLayout {
     grid-template-areas: var(--areas);
   }
 
-  aside {
+  .AppLayout aside {
     grid-area: aside;
   }
 
-  .layout :global(> header) {
+  .AppLayout :global(> header) {
     grid-area: header;
   }
 
-  .layout :global(> main) {
+  .AppLayout :global(> main) {
     grid-area: main;
     overflow: auto;
   }

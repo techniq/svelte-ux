@@ -56,6 +56,7 @@
 
 <div
   use:cssVars={styleVars}
+  class="Grid"
   class:grid={!inline}
   class:inline-grid={inline}
   class:stack

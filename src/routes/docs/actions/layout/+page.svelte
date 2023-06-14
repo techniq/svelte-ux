@@ -28,20 +28,27 @@
 
 <h2>overflow</h2>
 
-<Button on:click={() => (overflowItems += 1)}>+ item</Button>
-<Button on:click={() => (overflowItems -= overflowItems > 1 ? 1 : 0)}>- item</Button>
-
-<div
-  class="w-1/2 h-[100px] border border-black/20 rounded-lg bg-white whitespace-nowrap truncate p-4 resize overflow-auto"
-  use:overflow
-  on:overflow={(e) => {
-    overflowX = e.detail.overflowX;
-    overflowY = e.detail.overflowY;
-  }}
->
-  {#each { length: overflowItems } as _}
-    <div>Resize the window to see text truncate and watch values</div>
-  {/each}
-</div>
-<div>overflowX: {overflowX}</div>
-<div>overflowY: {overflowY}</div>
+<Preview>
+  <div class="mb-2">
+    <Button on:click={() => (overflowItems += 1)} variant="fill" color="blue">+ item</Button>
+    <Button
+      on:click={() => (overflowItems -= overflowItems > 1 ? 1 : 0)}
+      variant="fill"
+      color="blue">- item</Button
+    >
+  </div>
+  <div
+    class="w-1/2 h-[100px] border border-black/20 rounded-lg bg-white whitespace-nowrap truncate p-4 resize overflow-auto"
+    use:overflow
+    on:overflow={(e) => {
+      overflowX = e.detail.overflowX;
+      overflowY = e.detail.overflowY;
+    }}
+  >
+    {#each { length: overflowItems } as _}
+      <div>Resize the window to see text truncate and watch values</div>
+    {/each}
+  </div>
+  <div>overflowX: {overflowX}</div>
+  <div>overflowY: {overflowY}</div>
+</Preview>

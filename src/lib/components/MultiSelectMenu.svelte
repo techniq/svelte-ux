@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { getComponentTheme } from './theme';
+
   import type { Placement } from '@floating-ui/dom';
 
   import Menu from './Menu.svelte';
@@ -28,6 +30,7 @@
     root?: string;
     menu?: string;
   } = {};
+  const theme = getComponentTheme('MultiSelectMenu');
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 </script>
@@ -41,8 +44,8 @@
   let:close
   {...$$restProps}
   classes={{
-    root: cls(classes.root, $$restProps.class),
-    menu: cls('flex flex-col', classes.menu),
+    root: cls('MultiSelectMenu', theme.root, classes.root, $$restProps.class),
+    menu: cls('flex flex-col', theme.menu, classes.menu),
   }}
   bind:menuItemsEl
 >

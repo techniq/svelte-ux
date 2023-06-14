@@ -48,9 +48,7 @@
 
 <SectionDivider>Props</SectionDivider>
 
-<h2>Value</h2>
-
-<h3>Formatted</h3>
+<h2>Formatted `value`</h2>
 
 <Preview>
   <Input mask="mm/dd/yyyy" replace="dmyh" value="03/30/1982" />
@@ -58,26 +56,20 @@
   <Input mask="+1 (___) ___-____" replace="_" value="(234) 567-8901" />
 </Preview>
 
-<h2>Value</h2>
-
-<h3>Unformatted</h3>
+<h2>Unformatted `value`</h2>
 
 <Preview>
   <Input mask="mm/dd/yyyy" replace="dmyh" value="03301982" />
   <Input mask="+1 (___) ___-____" replace="_" value="2345678901" />
 </Preview>
 
-<h2>Value</h2>
-
-<h3>Different (but compatible) format</h3>
+<h2>Different (but compatible) `value` format</h2>
 
 <Preview>
   <Input mask="+1 (___) ___-____" replace="_" value="234-567-8901" />
 </Preview>
 
-<h2>Value</h2>
-
-<h3>Partial</h3>
+<h2>Partial `value`</h2>
 
 <Preview>
   <Input mask="mm/dd/yyyy" replace="dmyh" value="03/30" />

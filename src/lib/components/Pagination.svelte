@@ -11,6 +11,7 @@
   import MenuItem from './MenuItem.svelte';
   import Toggle from './Toggle.svelte';
   import Tooltip from './Tooltip.svelte';
+  import { getComponentTheme } from './theme';
 
   export let pagination: ReturnType<typeof paginationStore>;
   export let perPageOptions = [10, 25, 50, 100, 1000];
@@ -32,10 +33,13 @@
     pagination?: string;
     perPage?: string;
   } = {};
+  const theme = getComponentTheme('Pagination');
 </script>
 
 {#if $pagination.totalPages > 1 || !hideSinglePage}
-  <div class={cls('flex items-center gap-1', classes.root, $$props.class)}>
+  <div
+    class={cls('Pagination', 'flex items-center gap-1', theme.root, classes.root, $$props.class)}
+  >
     {#each show as component}
       {#if component === 'actions'}
         <slot name="actions" />
@@ -48,7 +52,7 @@
             on:click={pagination.firstPage}
             disabled={$pagination.isFirst}
             aria-label="First Page"
-            class={cls('p-2', classes.buttons)}
+            class={cls('p-2', theme.buttons, classes.buttons)}
           />
         </Tooltip>
       {/if}
@@ -60,7 +64,7 @@
             on:click={pagination.prevPage}
             disabled={$pagination.isFirst}
             aria-label="Previous Page"
-            class={cls('p-2', classes.buttons)}
+            class={cls('p-2', theme.buttons, classes.buttons)}
           />
         </Tooltip>
       {/if}
@@ -72,7 +76,7 @@
             on:click={pagination.nextPage}
             disabled={$pagination.isLast}
             aria-label="Next Page"
-            class={cls('p-2', classes.buttons)}
+            class={cls('p-2', theme.buttons, classes.buttons)}
           />
         </Tooltip>
       {/if}
@@ -84,13 +88,13 @@
             on:click={pagination.lastPage}
             disabled={$pagination.isLast}
             aria-label="Last Page"
-            class={cls('p-2', classes.buttons)}
+            class={cls('p-2', theme.buttons, classes.buttons)}
           />
         </Tooltip>
       {/if}
 
       {#if component === 'perPage'}
-        <div class={cls('text-sm text-center', classes.perPage)}>
+        <div class={cls('text-sm text-center', theme.perPage, classes.perPage)}>
           Per page:
           <Toggle let:on={open} let:toggle>
             <span>
@@ -113,7 +117,7 @@
 
       {#if component === 'pagination'}
         <slot name="pagination" pagination={$pagination}>
-          <div class={cls('text-sm tabular-nums', classes.pagination)}>
+          <div class={cls('text-sm tabular-nums', theme.pagination, classes.pagination)}>
             {$pagination.from.toLocaleString()}-{$pagination.to.toLocaleString()}
             of
             {$pagination.total.toLocaleString()}

@@ -11,6 +11,7 @@
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let value = '';
   export let type: HTMLInputTypeAttribute = 'text';
@@ -24,6 +25,8 @@
   export let replace = '_';
   export let accept = '\\d';
   export let placeholder = mask;
+
+  const theme = getComponentTheme('Input');
 
   let isFocused = false;
 
@@ -116,11 +119,14 @@
   }}
   on:blur
   use:multi={actions}
-  class={cls(
-    'text-sm w-full outline-none bg-transparent selection:bg-gray-500/30',
-    mask && (mask == placeholder || isFocused || value) && 'font-mono'
-  )}
   {...$$restProps}
+  class={cls(
+    'Input',
+    'text-sm w-full outline-none bg-transparent selection:bg-gray-500/30',
+    mask && (mask == placeholder || isFocused || value) && 'font-mono',
+    theme.root,
+    $$props.class
+  )}
 />
 
 <style>

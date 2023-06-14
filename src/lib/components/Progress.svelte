@@ -1,8 +1,11 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let value: number | null;
   export let max: number | undefined = undefined;
+
+  const theme = getComponentTheme('Progress');
 </script>
 
 <progress
@@ -10,6 +13,7 @@
   {max}
   {...$$restProps}
   class={cls(
+    'Progress',
     'h-2 w-full',
 
     // bar color
@@ -28,6 +32,7 @@
     '[&::-webkit-progress-bar]:rounded-full',
     'rounded-full',
 
+    theme.root,
     $$props.class
   )}
 />

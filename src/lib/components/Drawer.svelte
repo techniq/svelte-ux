@@ -3,12 +3,13 @@
   import { fly } from 'svelte/transition';
 
   import Backdrop from './Backdrop.svelte';
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
 
   import { focusMove } from '../actions/focus';
   import { portal as portalAction } from '../actions/portal';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -17,6 +18,8 @@
   export let persistent = false;
   export let loading: boolean | null = null;
   export let placement: 'top' | 'bottom' | 'left' | 'right' = 'right';
+
+  const theme = getComponentTheme('Drawer');
 
   $: dispatch('change', { open });
 
@@ -41,6 +44,7 @@
 
   <div
     class={cls(
+      'Drawer',
       'bg-white fixed overflow-auto transform z-50 outline-none',
       {
         'h-full': ['left', 'right'].includes(placement),
@@ -50,6 +54,7 @@
         'left-0': ['top', 'top', 'bottom'].includes(placement),
         'right-0': placement === 'right',
       },
+      theme.root,
       $$props.class
     )}
     style={$$props.style}
@@ -85,7 +90,7 @@
   >
     {#if loading}
       <Overlay center class="rounded">
-        <CircularProgress />
+        <ProgressCircle />
       </Overlay>
     {/if}
 

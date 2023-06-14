@@ -21,22 +21,6 @@
   const mdiAccountUrl = 'https://api.iconify.design/mdi:account.svg';
 </script>
 
-<h1>Features</h1>
-
-<div class="prose max-w-none">
-  <ul>
-    <li>
-      Supports loading icons from path, svg as string, svg from URL, or as svg element via slot
-    </li>
-    <li>
-      Convenient `data` prop to support most of the above use cases via a single prop through
-      introspection
-    </li>
-    <li>Supports most icon collections includes Material Design Icons and Font Awesome.</li>
-    <li>Simple in-memory cache when loaded via URL (and only loaded once)</li>
-  </ul>
-</div>
-
 <h1>Examples</h1>
 
 <h2>Material Design icons</h2>

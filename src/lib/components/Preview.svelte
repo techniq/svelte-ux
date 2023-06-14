@@ -7,6 +7,7 @@
 
   import Button from './Button.svelte';
   import { cls } from '$lib/utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let code: string | null = null;
   export let language = 'svelte';
@@ -14,7 +15,7 @@
   export let showCode = false;
 </script>
 
-<div class={cls('border border-black/20 rounded bg-white', $$restProps.class)}>
+<div class={cls('Preview border border-black/20 rounded bg-white', $$props.class)}>
   <div class="p-4">
     <slot />
   </div>

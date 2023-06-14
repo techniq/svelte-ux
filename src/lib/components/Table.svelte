@@ -8,6 +8,7 @@
   import { getCellContent, getCellHeader, getHeaders, getRowColumns } from '../utils/table';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -26,6 +27,10 @@
     th?: string;
     td?: string;
   } = {};
+  // TODO: Figure out circular reference error
+  // const theme = getComponentTheme('Table');
+  const theme = {};
+
   export let styles: {
     container?: string;
     wrapper?: string;
@@ -44,8 +49,8 @@
       return {
         ...column,
         class: {
-          header: cls(classes.th, column.class?.header),
-          data: cls(classes.td, column.class?.data),
+          header: cls(theme.th, classes.th, column.class?.header),
+          data: cls(theme.td, classes.td, column.class?.data),
         },
       };
     });
@@ -54,21 +59,24 @@
     return {
       ...column,
       class: {
-        header: cls(classes.th, column.class?.header),
-        data: cls(classes.td, column.class?.data),
+        header: cls(theme.th, classes.th, column.class?.header),
+        data: cls(theme.td, classes.td, column.class?.data),
       },
     };
   });
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={cls('table-container"', classes.container, $$props.class)} style={styles.container}>
-  <div class={cls('table-wrapper"', classes.wrapper)} style={styles.wrapper}>
-    <table class={cls('w-full', classes.table)} style={styles.table}>
+<div
+  class={cls('Table', 'table-container', theme.container, classes.container, $$props.class)}
+  style={styles.container}
+>
+  <div class={cls('table-wrapper', theme.wrapper, classes.wrapper)} style={styles.wrapper}>
+    <table class={cls('w-full', theme.table, classes.table)} style={styles.table}>
       <slot name="headers" {headers}>
-        <thead class={cls(classes.thead)} style={styles.thead}>
+        <thead class={cls(theme.thead, classes.thead)} style={styles.thead}>
           {#each headers ?? [] as headerRow}
-            <tr class={cls(classes.tr)} style={styles.tr}>
+            <tr class={cls(theme.tr, classes.tr)} style={styles.tr}>
               {#each headerRow ?? [] as column}
                 <th
                   use:tableCell={{ column }}
@@ -89,9 +97,9 @@
       <slot />
 
       <slot name="data" {data} columns={rowColumns}>
-        <tbody class={cls(classes.tbody)} style={styles.tbody}>
+        <tbody class={cls(theme.tbody, classes.tbody)} style={styles.tbody}>
           {#each data ?? [] as rowData, rowIndex}
-            <tr class={cls(classes.tr)} style={styles.tr}>
+            <tr class={cls(theme.tr, classes.tr)} style={styles.tr}>
               {#each rowColumns ?? [] as column}
                 <td
                   use:tableCell={{ column, rowData, rowIndex, tableData: data }}

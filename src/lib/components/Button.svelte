@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { getContext, type ComponentProps } from 'svelte';
+  import type { ComponentProps } from 'svelte';
   import Icon from './Icon.svelte';
 
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
   import { cls } from '../utils/styles';
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import type { TailwindColors } from '$lib/types';
+  import { getComponentTheme } from './theme';
+  import { getButtonGroup } from './ButtonGroup.svelte';
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
@@ -27,23 +29,26 @@
     | 'fill-light'
     | 'none'
     | undefined = undefined; // default in reactive groupContext below
-  export let size: 'sm' | 'md' | 'lg' = 'md';
+  export let size: 'sm' | 'md' | 'lg' = undefined; // default in reactive groupContext below
   export let color: TailwindColors | 'default' | undefined = undefined; // default in reactive groupContext below
 
+  /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
     root?: string;
     icon?: string;
     loading?: string;
   } = {};
+  const theme = getComponentTheme('Button');
 
   // Override default from `ButtonGroup` if set
-  const groupContext = getContext('ButtonGroup');
+  const groupContext = getButtonGroup();
   $: variant = variant ?? groupContext?.variant ?? 'text';
+  $: size = size ?? groupContext?.size ?? 'md';
   $: color = color ?? groupContext?.color ?? 'default';
   $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);
 
   $: _class = cls(
-    'button',
+    'Button',
     'transition duration-200 ring-black/20',
     'focus:outline-none focus-visible:ring-1',
     fullWidth ? 'flex w-full' : 'inline-flex',
@@ -66,6 +71,7 @@
     ],
     disabled && 'opacity-50 pointer-events-none',
     // Variant specific styles
+    `variant-${variant}`,
     {
       text: '',
       outline: 'border',
@@ -188,6 +194,7 @@
       },
       none: {},
     }[variant ?? 'none']?.[color ?? 'default'],
+    theme.root,
     classes.root,
     $$props.class
   );
@@ -206,13 +213,13 @@
   on:click
 >
   {#if loading}
-    <CircularProgress size={16} width={2} class={cls(classes.loading)} />
+    <ProgressCircle size={16} width={2} class={cls(theme.loading, classes.loading)} />
   {:else if icon}
     {#if typeof icon === 'string' || 'icon' in icon}
       <!-- font path/url/etc or font-awesome IconDefinition -->
-      <Icon data={icon} class={cls('pointer-events-none', classes.icon)} />
+      <Icon data={icon} class={cls('pointer-events-none', theme.icon, classes.icon)} />
     {:else}
-      <Icon class={cls('pointer-events-none', classes.icon)} {...icon} />
+      <Icon class={cls('pointer-events-none', theme.icon, classes.icon)} {...icon} />
     {/if}
   {/if}
   <slot />

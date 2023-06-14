@@ -13,6 +13,7 @@
   import { isLiteralObject } from '../utils/object';
   import { autoFocus } from '$lib/actions';
   import type { HTMLInputAttributes } from 'svelte/elements';
+  import { getComponentTheme } from './theme';
 
   type InputValue = string | number;
 
@@ -63,11 +64,12 @@
     input?: string;
     error?: string;
   } = {};
+  const theme = getComponentTheme('TextField');
 
   // Input props
   export let mask: string | undefined = undefined;
   export let replace: string | undefined = undefined;
-  export let accept: string | undefined = undefined;
+  export let accept: string | RegExp | undefined = undefined;
   // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
   export let autocapitalize: ComponentProps<Input>['autocapitalize'] = undefined;
 
@@ -172,6 +174,7 @@
 <fieldset
   {disabled}
   class={cls(
+    'TextField',
     'group',
     error
       ? '[--color:theme(colors.red.500)]'
@@ -180,6 +183,7 @@
       : '[--color:theme(colors.accent.500)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
+    theme.root,
     classes.root,
     $$props.class
   )}
@@ -196,6 +200,7 @@
       !base && [rounded ? 'rounded-full' : 'rounded', filled ? 'bg-black/10' : 'bg-white'],
       error ? 'border-red-500' : 'border-black/20',
       'group-focus-within:shadow-md group-focus-within:border-color-var',
+      theme.container,
       classes.container
     )}
   >
@@ -219,6 +224,7 @@
               'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
               error ? 'text-red-500/80' : 'text-black/50',
               (shrinkLabel || hasInputValue) && 'shrink',
+              theme.label,
               classes.label
             )}
             for={id}
@@ -269,6 +275,7 @@
                   'text-center': align === 'center',
                   'text-right': align === 'right',
                 },
+                theme.input,
                 classes.input
               )}
               use:multi={actions}
@@ -303,6 +310,7 @@
                   'text-center': align === 'center',
                   'text-right': align === 'right',
                 },
+                theme.input,
                 classes.input
               )}
             />
@@ -378,6 +386,7 @@
       'hint',
       'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
       error ? 'text-red-500' : 'text-black/50 scale-y-0',
+      theme.error,
       classes.error
     )}
   >

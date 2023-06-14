@@ -130,14 +130,6 @@
   </Toggle>
 </Preview>
 
-<div>
-  See also:
-  <ul class="list-inside list-disc">
-    <li>InfiniteScroll</li>
-    <li>Lazy</li>
-  </ul>
-</div>
-
 <h2>use:mutate</h2>
 
 <Blockquote>TODO</Blockquote>

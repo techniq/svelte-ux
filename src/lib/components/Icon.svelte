@@ -7,6 +7,7 @@
 
   import { uniqueId } from '../utils/string';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let size: string | number = '1.5em';
   export let width = size;
@@ -28,6 +29,7 @@
     root?: string;
     path?: string | string[];
   } = {};
+  const theme = getComponentTheme('Icon');
 
   $: if (typeof data === 'object' && 'icon' in data) {
     // Font Awesome
@@ -78,7 +80,9 @@
 {#if svg || svgUrl || $$slots.default}
   <span
     class={cls(
+      'Icon',
       'icon-container inline-block flex-shrink-0 align-middle fill-current',
+      theme.root,
       classes.root,
       $$props.class
     )}
@@ -100,7 +104,13 @@
     {width}
     {height}
     {viewBox}
-    class={cls('inline-block flex-shrink-0 fill-current', classes.root, $$props.class)}
+    class={cls(
+      'Icon',
+      'inline-block flex-shrink-0 fill-current',
+      theme.root,
+      classes.root,
+      $$props.class
+    )}
     style={$$props.style}
     role={isLabelled ? 'img' : 'presentation'}
     aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
@@ -117,7 +127,10 @@
       <path
         {d}
         fill="currentColor"
-        class={Array.isArray(classes.path) ? classes.path[i] : classes.path}
+        class={cls(
+          Array.isArray(theme.path) ? theme.path[i] : theme.path,
+          Array.isArray(classes.path) ? classes.path[i] : classes.path
+        )}
       />
     {/each}
   </svg>

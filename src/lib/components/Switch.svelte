@@ -2,6 +2,7 @@
   import type { TailwindColors } from '$lib/types';
   import { uniqueId } from '$lib/utils/string';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let id: string = uniqueId('switch_');
   export let value: any = undefined;
@@ -17,16 +18,17 @@
     switch?: string;
     toggle?: string;
   } = {};
+  const theme = getComponentTheme('Switch');
 </script>
 
-<div class={cls('inline-block', classes.root)}>
+<div class={cls('Switch', 'inline-block', theme.root, classes.root)}>
   <input
     {id}
     type="checkbox"
     bind:checked
     on:change
     {value}
-    class={cls('peer appearance-none inline', classes.input)}
+    class={cls('peer appearance-none inline', theme.input, classes.input)}
     {disabled}
   />
 
@@ -67,6 +69,7 @@
       disabled
         ? 'opacity-50'
         : 'cursor-pointer peer-focus-visible:ring-2 ring-accent-400 ring-offset-1',
+      theme.switch,
       classes.switch,
       $$props.class
     )}
@@ -77,6 +80,7 @@
         'toggle w-1/2 aspect-square h-full rounded-full transition-all duration-200 bg-white grid items-center justify-center transform',
         checked && 'translate-x-full',
         checked === null && 'border border-gray-300',
+        theme.toggle,
         classes.toggle
       )}
     >

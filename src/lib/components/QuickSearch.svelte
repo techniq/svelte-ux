@@ -4,8 +4,17 @@
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import SelectList from '$lib/components/SelectList.svelte';
+  import { getComponentTheme } from './theme';
+  import { cls } from '$lib/utils/styles';
 
   export let options: { name: string; value: string; group?: string }[] = [];
+
+  export let classes: {
+    root?: string;
+    button?: string;
+  } = {};
+  const theme = getComponentTheme('QuickSearch');
+
   let open = false;
 
   /*
@@ -30,7 +39,11 @@
 <Button
   icon={mdiMagnify}
   on:click={() => (open = true)}
-  class="bg-black/10 hover:bg-black/20 rounded-full sm:w-56 justify-start"
+  class={cls(
+    'bg-black/10 hover:bg-black/20 rounded-full sm:w-56 justify-start',
+    theme.button,
+    classes.button
+  )}
 >
   <span class="flex-1 text-left">Search</span>
   <kbd class="ml-2 font-sans text-white/50 max-sm:hidden">
@@ -38,7 +51,10 @@
     K
   </kbd>
 </Button>
-<Dialog bind:open classes={{ root: 'items-start mt-20' }}>
+<Dialog
+  bind:open
+  classes={{ root: cls('items-start mt-20', theme.root, classes.root, $$props.class) }}
+>
   <div class="overflow-auto max-h-[min(90vh,600px)] min-w-[400px] p-4">
     <SelectList
       icon={mdiMagnify}

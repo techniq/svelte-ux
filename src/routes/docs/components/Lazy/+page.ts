@@ -3,6 +3,7 @@ export async function load() {
     meta: {
       description:
         'Waits to render a component until visible. Requires placeholder size (min-height)',
+      related: ['actions/observer'],
     },
   };
 }

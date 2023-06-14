@@ -10,8 +10,9 @@
   import { cls } from '../utils/styles';
 
   import Backdrop from './Backdrop.svelte';
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
+  import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -26,6 +27,7 @@
     title?: string;
     actions?: string;
   } = {};
+  const theme = getComponentTheme('Dialog');
 
   let dialogEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
@@ -78,7 +80,9 @@
 
   <div
     class={cls(
+      'Dialog',
       'fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center pointer-events-none',
+      theme.root,
       classes.root
     )}
     on:click={onClick}
@@ -102,6 +106,7 @@
     <div
       class={cls(
         'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
+        theme.dialog,
         classes.dialog,
         $$props.class
       )}
@@ -117,13 +122,13 @@
     >
       {#if loading}
         <Overlay center class="rounded">
-          <CircularProgress />
+          <ProgressCircle />
         </Overlay>
       {/if}
 
       <slot name="header">
         {#if $$slots.title}
-          <div class={cls('text-xl font-bold pt-4 pb-2 px-6', classes.title)}>
+          <div class={cls('text-xl font-bold pt-4 pb-2 px-6', theme.title, classes.title)}>
             <slot name="title" />
           </div>
         {/if}
@@ -133,7 +138,11 @@
 
       {#if $$slots.actions}
         <div
-          class={cls('actions flex w-full justify-end p-2 bg-black/5 border-t', classes.actions)}
+          class={cls(
+            'actions flex w-full justify-end p-2 bg-black/5 border-t',
+            theme.actions,
+            classes.actions
+          )}
           bind:this={actionsEl}
         >
           <slot name="actions" />

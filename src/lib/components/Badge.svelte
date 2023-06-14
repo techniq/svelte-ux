@@ -1,6 +1,7 @@
 <script lang="ts">
   import Stack from './Stack.svelte';
   import { cls } from '../utils/styles';
+  import { getComponentTheme } from './theme';
 
   export let value: number = $$slots.value ? 1 : 0;
   export let small = false;
@@ -8,12 +9,15 @@
   export let dot = false;
 
   export let placement: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' = 'top-right';
+
+  const theme = getComponentTheme('Badge');
 </script>
 
 <Stack stack inline>
   <slot />
   <div
     class={cls(
+      'Badge',
       'rounded-full flex items-center justify-center transform transition-transform',
 
       !$$slots.value && 'bg-accent-500 text-white',
@@ -68,6 +72,7 @@
         'scale-0': (value ?? 0) === 0,
         'scale-100': (value ?? 0) !== 0,
       },
+      theme.root,
       $$props.class
     )}
   >

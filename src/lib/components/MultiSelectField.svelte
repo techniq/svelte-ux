@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { getComponentTheme } from './theme';
+
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import { get } from 'lodash-es';
   import type { Placement } from '@floating-ui/dom';
@@ -12,7 +14,7 @@
 
   import { cls } from '../utils/styles';
   import Logger from '../utils/logger';
-  import CircularProgress from './CircularProgress.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
 
   type Option = $$Generic;
 
@@ -48,6 +50,7 @@
     field?: string;
     actions?: string;
   } = {};
+  const theme = getComponentTheme('MultiSelectField');
 
   const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
 
@@ -130,7 +133,10 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={cls(disabled && 'pointer-events-none', classes.root, $$props.class)} on:click={onClick}>
+<div
+  class={cls(disabled && 'pointer-events-none', theme.root, classes.root, $$props.class)}
+  on:click={onClick}
+>
   <!-- TODO: Setup blur without jank on open or issues when clicking within menu -->
   <!-- on:blur={onBlur} -->
   <TextField
@@ -146,7 +152,7 @@
     bind:inputEl
     on:focus={onFocus}
     on:change={onSearchChange}
-    class={cls(classes.field, 'h-full')}
+    class={cls('h-full', theme.field, classes.field)}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
@@ -156,7 +162,7 @@
 
       {#if loading}
         <span class="inline-block w-[29px] h-[28px] text-center">
-          <CircularProgress size={16} width={2} class="text-black/50" />
+          <ProgressCircle size={16} width={2} class="text-black/50" />
         </span>
         <!-- {:else if readonly} -->
         <!-- Do not show chevron or clear buttons -->

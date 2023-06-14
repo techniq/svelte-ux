@@ -45,10 +45,10 @@
     <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full width</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup contained classes={{ root: 'w-full', options: 'w-full' }}>
-          <ToggleOption>Yes</ToggleOption>
-          <ToggleOption>No</ToggleOption>
-          <ToggleOption>All</ToggleOption>
+        <ToggleGroup variant="contained" classes={{ root: 'w-full', options: 'w-full' }}>
+          <ToggleOption value="yes">Yes</ToggleOption>
+          <ToggleOption value="no">No</ToggleOption>
+          <ToggleOption value="all">All</ToggleOption>
         </ToggleGroup>
       </Field>
     </Preview>
@@ -59,10 +59,10 @@
     <div class="text-xs font-semibold text-black/50 mb-1 ml-2">fixed width</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup contained classes={{ root: 'w-96', options: 'w-full' }}>
-          <ToggleOption>Yes</ToggleOption>
-          <ToggleOption>No</ToggleOption>
-          <ToggleOption>All</ToggleOption>
+        <ToggleGroup variant="contained" classes={{ root: 'w-96', options: 'w-full' }}>
+          <ToggleOption value="yes">Yes</ToggleOption>
+          <ToggleOption value="no">No</ToggleOption>
+          <ToggleOption value="all">All</ToggleOption>
         </ToggleGroup>
       </Field>
     </Preview>
@@ -72,14 +72,14 @@
     <div class="text-lg font-semibold mt-8 mb-1 ml-2">ToggleGroup with icons</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup contained circle classes={{ options: 'h-12 w-32' }}>
-          <ToggleOption>
+        <ToggleGroup variant="contained" circle classes={{ options: 'h-12 w-32' }}>
+          <ToggleOption value="yes">
             <Icon path={mdiAccount} />
           </ToggleOption>
-          <ToggleOption>
+          <ToggleOption value="no">
             <Icon path={mdiAccountOutline} />
           </ToggleOption>
-          <ToggleOption>
+          <ToggleOption value="all">
             <Icon path={mdiAccountMultipleOutline} />
           </ToggleOption>
         </ToggleGroup>

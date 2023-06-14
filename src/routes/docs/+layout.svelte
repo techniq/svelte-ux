@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { mdiChevronRight, mdiCodeTags, mdiFileDocumentEditOutline } from '@mdi/js';
+  import {
+    mdiCheckCircle,
+    mdiChevronRight,
+    mdiCodeTags,
+    mdiFileDocumentEditOutline,
+  } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
   import Code from '$lib/components/Code.svelte';
@@ -8,17 +13,21 @@
   import TableOfContents from '$lib/components/TableOfContents.svelte';
 
   import { page } from '$app/stores';
+  import { createTheme } from '$lib/components/theme';
 
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
   $: title = $page.data.meta?.title ?? name;
   $: docUrl = `src/routes/docs/${type}/${name}/+page.md?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
-  $: ({ description, related, hideUsage } = $page.data.meta ?? {});
+  $: ({ description, features, related, hideUsage } = $page.data.meta ?? {});
 
   function getRelated(r: string) {
     const [type, name] = r.split('/');
     return { type, name, url: `/docs/${type}/${name}` };
   }
+
+  // Clear root layout theme so doesn't show on doc examples
+  createTheme({});
 </script>
 
 <div class="grid grid-rows-[auto,1fr] h-full p-4">
@@ -63,6 +72,20 @@
         {#key $page.route.id}
           <h1 id="usage">Usage</h1>
           <Code code={`import { ${name} } from 'svelte-ux';`} language="javascript" />
+        {/key}
+      {/if}
+
+      {#if features}
+        {#key $page.route.id}
+          <h1 id="features">Features</h1>
+          <ul class="pl-4 text-gray-700 divide-y-4">
+            {#each features as feature}
+              <li class="grid grid-cols-[auto,1fr] gap-2">
+                <Icon data={mdiCheckCircle} class="text-emerald-600 pt-1" />
+                <span>{feature}</span>
+              </li>
+            {/each}
+          </ul>
         {/key}
       {/if}
 

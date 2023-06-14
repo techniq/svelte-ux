@@ -23,7 +23,7 @@
   }
 </script>
 
-<div class="grid gap-8">
+<div class="ApiDocs grid gap-8">
   <div>
     <h2 id="props" class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50">
       Props

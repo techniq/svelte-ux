@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { cls } from '$lib/utils/styles';
   import { intersection } from '../actions/observer';
+  import { getComponentTheme } from './theme';
 
   /**
    * Placeholder height.  Should match closely to resulting height to reducing scroll bouncing
@@ -16,6 +18,8 @@
   };
 
   export let offset: Offset = {};
+
+  const theme = getComponentTheme('Lazy');
 
   // $: if (show) {
   //   console.count('mounting');
@@ -35,6 +39,7 @@
   }}
   style:min-height={typeof height === 'number' ? `${height}px` : height}
   {...$$restProps}
+  class={cls('Lazy', theme.root, $$props.class)}
 >
   {#if show}
     <slot />

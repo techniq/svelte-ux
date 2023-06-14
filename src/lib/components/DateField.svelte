@@ -6,6 +6,7 @@
 
   import Input from './Input.svelte';
   import DatePickerField from './DatePickerField.svelte';
+  import { getComponentTheme } from './theme';
 
   export let value: Date = null;
   export let format = 'MM/dd/yyyy';
@@ -24,6 +25,8 @@
   export let filled = false;
   export let dense = false;
   export let icon: string | null = null;
+
+  const theme = getComponentTheme('DateField');
 
   let inputValue = '';
 
