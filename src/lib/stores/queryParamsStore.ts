@@ -164,6 +164,7 @@ function applyParam(
   } else if (paramType) {
     const config = getParamConfig(paramType);
     if (config) {
+      // TODO: Add `ParamType` which calls `params.append()` for each value instead of encoding together
       params.set(key, config.encode(value) ?? '');
     }
   }
