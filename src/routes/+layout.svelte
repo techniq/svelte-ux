@@ -43,8 +43,11 @@
       indicator: 'bg-sky-500',
     },
 
+    // AppBar: 'bg-white/50 text-black shadow-md backdrop-blur-md z-20',
     // AppLayout: {
+    //   root: '[&_main]:-mt-16 [&_main]:pt-16',
     //   aside: 'border-r border-gray-400',
+    //   nav: 'bg-neutral-800 py-4',
     // },
   });
 </script>
