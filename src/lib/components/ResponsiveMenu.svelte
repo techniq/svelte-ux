@@ -21,7 +21,7 @@
     on:close
     explicitClose
     {...menuProps}
-    class={cls('ResponsiveMenu', $$props.class)}
+    class={cls('ResponsiveMenu', $$props.class, menuProps?.class)}
   >
     <slot {open} />
   </Menu>
@@ -31,7 +31,7 @@
     placement="bottom"
     on:close
     {...drawerProps}
-    class={cls('ResponsiveMenu', $$props.class)}
+    class={cls('ResponsiveMenu', $$props.class, drawerProps?.class)}
   >
     <slot {open} />
   </Drawer>
