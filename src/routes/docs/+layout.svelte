@@ -17,7 +17,7 @@
 
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
   $: title = $page.data.meta?.title ?? name;
-  $: docUrl = `src/routes/docs/${type}/${name}/+page.md?plain=1`;
+  $: docUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
   $: ({ description, features, related, hideUsage } = $page.data.meta ?? {});
 
