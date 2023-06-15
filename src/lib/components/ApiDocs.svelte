@@ -54,7 +54,7 @@
               </div>
             {/if}
 
-            <Tooltip title="value" offset={2}>
+            <Tooltip title="default" offset={2}>
               <div
                 class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
               >
