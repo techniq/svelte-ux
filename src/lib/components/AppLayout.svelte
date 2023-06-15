@@ -12,8 +12,8 @@
 
   export let navWidth = 240;
   /** Control whether nav should be full height (default) or header should be full width */
-  export let fullHeaderWidth = false;
-  $: areas = fullHeaderWidth ? "'header header' 'aside main'" : "'aside header' 'aside main'";
+  export let headerFullWidth = false;
+  $: areas = headerFullWidth ? "'header header' 'aside main'" : "'aside header' 'aside main'";
 
   export let classes: {
     root?: string;
