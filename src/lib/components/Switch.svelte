@@ -4,7 +4,7 @@
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
 
-  export let id: string = uniqueId('switch_');
+  export let id: string = uniqueId('switch-');
   export let value: any = undefined;
   export let checked: boolean | null = false;
   export let disabled: boolean = false;

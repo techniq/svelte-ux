@@ -2,6 +2,7 @@
 export * from './format';
 export * from './logger';
 export { cls } from './styles';
+export { uniqueId } from './string';
 
 // aliased exports to remove conflicts (and make imports less noisy from top-level)
 export * as array from './array';

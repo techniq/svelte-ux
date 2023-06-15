@@ -21,8 +21,8 @@
   // Accessibility
   export let title: string | undefined = undefined;
   export let desc: string | undefined = undefined;
-  export let titleId: string | undefined = title ? uniqueId('svg') : '';
-  export let descId: string | undefined = desc ? uniqueId('svg') : '';
+  export let titleId: string | undefined = title ? uniqueId('title-') : '';
+  export let descId: string | undefined = desc ? uniqueId('desc-') : '';
   $: isLabelled = title || desc;
 
   export let classes: {

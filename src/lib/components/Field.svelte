@@ -52,7 +52,7 @@
 
   $: hStackTemplate = `${hasPrepend ? 'auto' : ''} 1fr ${hasAppend ? ' auto' : ''}`;
 
-  const id = uniqueId('field_');
+  const id = uniqueId('field-');
   let labelEl: HTMLLabelElement | null = null;
 </script>
 

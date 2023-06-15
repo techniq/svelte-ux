@@ -15,24 +15,6 @@
 
   inject({ mode: dev ? 'development' : 'production' });
 
-  let mainEl: HTMLElement;
-  afterNavigate(() => {
-    // @ts-ignore: `instant` not in spec, but supported by Chrome/Firefox - https://kilianvalkhof.com/2022/css-html/preventing-smooth-scrolling-with-javascript/
-    mainEl.scrollTo({ top: 0, behavior: 'instant' });
-  });
-
-  const quickSearchOptions = Object.entries(
-    import.meta.glob('./docs/**/+page.(md|svelte)', { as: 'raw', eager: true })
-  ).flatMap(([file, source]) => {
-    const url = file.replace('.', '').replace(/\/\+page.(md|svelte)/, '');
-    const [_, docs, group, name] = url.split('/');
-    return {
-      name,
-      value: url,
-      group: group,
-    };
-  });
-
   createTheme({
     AppBar: 'bg-accent-500 text-white shadow-md',
     AppLayout: {
@@ -49,6 +31,24 @@
     //   aside: 'border-r border-gray-400',
     //   nav: 'bg-neutral-800 py-4',
     // },
+  });
+
+  let mainEl: HTMLElement;
+  afterNavigate(() => {
+    // @ts-ignore: `instant` not in spec, but supported by Chrome/Firefox - https://kilianvalkhof.com/2022/css-html/preventing-smooth-scrolling-with-javascript/
+    mainEl.scrollTo({ top: 0, behavior: 'instant' });
+  });
+
+  const quickSearchOptions = Object.entries(
+    import.meta.glob('./docs/**/+page.(md|svelte)', { as: 'raw', eager: true })
+  ).flatMap(([file, source]) => {
+    const url = file.replace('.', '').replace(/\/\+page.(md|svelte)/, '');
+    const [_, docs, group, name] = url.split('/');
+    return {
+      name,
+      value: url,
+      group: group,
+    };
   });
 </script>
 

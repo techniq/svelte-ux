@@ -6,7 +6,7 @@
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
 
-  export let id = uniqueId('checkbox_');
+  export let id = uniqueId('radio-');
   export let value: any = undefined;
   export let group: any = undefined;
   export let checked: boolean = false;
