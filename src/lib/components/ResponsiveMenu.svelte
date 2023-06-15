@@ -3,6 +3,7 @@
   import { matchMediaWidth } from '../stores/matchMedia';
   import Drawer from './Drawer.svelte';
   import Menu from './Menu.svelte';
+  import { cls } from '../utils/styles';
 
   export let open = true;
   export let screenWidth = 768; // md+
@@ -15,11 +16,23 @@
 
 {#if $isLargeScreen}
   <!-- Default explicitClose={true} to match Drawer behavior -->
-  <Menu bind:open on:close explicitClose class="ResponsiveMenu" {...menuProps}>
+  <Menu
+    bind:open
+    on:close
+    explicitClose
+    {...menuProps}
+    class={cls('ResponsiveMenu', $$props.class)}
+  >
     <slot {open} />
   </Menu>
 {:else}
-  <Drawer bind:open placement="bottom" on:close class="ResponsiveMenu" {...drawerProps}>
+  <Drawer
+    bind:open
+    placement="bottom"
+    on:close
+    {...drawerProps}
+    class={cls('ResponsiveMenu', $$props.class)}
+  >
     <slot {open} />
   </Drawer>
 {/if}
