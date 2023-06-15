@@ -6,7 +6,7 @@
   import { quadIn } from 'svelte/easing';
 
   import { focusMove } from '../actions/focus';
-  import { portal as portalAction } from '../actions/portal';
+  import { portal as portalAction, type PortalOptions } from '../actions/portal';
   import { cls } from '../utils/styles';
 
   import Backdrop from './Backdrop.svelte';
@@ -17,7 +17,7 @@
   const dispatch = createEventDispatcher();
 
   export let open = false;
-  export let portal = true;
+  export let portal: PortalOptions = true;
   export let persistent = false;
   export let loading: boolean | null = null;
 
@@ -101,7 +101,7 @@
         dispatch('close-attempt');
       }
     }}
-    use:portalAction={{ enabled: portal }}
+    use:portalAction={portal}
   >
     <div
       class={cls(

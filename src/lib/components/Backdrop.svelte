@@ -1,12 +1,12 @@
 <script lang="ts">
   import { fade, type FadeParams } from 'svelte/transition';
 
-  import { portal as portalAction } from '../actions/portal';
+  import { portal as portalAction, type PortalOptions } from '../actions/portal';
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
 
   export let blur: boolean = false;
-  export let portal = false;
+  export let portal: PortalOptions = false;
 
   export let fadeParams: FadeParams = { duration: 300 };
 
@@ -29,7 +29,7 @@
   on:mouseup
   in:fade={fadeParams}
   out:fade|local={fadeParams}
-  use:portalAction={{ enabled: portal }}
+  use:portalAction={portal}
 >
   <slot />
 </div>

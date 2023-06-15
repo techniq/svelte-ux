@@ -226,6 +226,31 @@
   </Toggle>
 </Preview>
 
+<h2>Custom portal target</h2>
+
+<Preview>
+  <div id="portal" />
+
+  <Toggle let:on={open} let:toggle let:toggleOff>
+    <Drawer
+      {open}
+      on:close={toggleOff}
+      placement="bottom"
+      class="h-64"
+      portal={{ target: '#portal' }}
+    >
+      <h1>Contents</h1>
+      <div
+        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
+    p-1 border-t border-gray-400"
+      >
+        <Button on:click={toggleOff}>Close</Button>
+      </div>
+    </Drawer>
+    <Button on:click={toggle}>Click me</Button>
+  </Toggle>
+</Preview>
+
 <h1>API</h1>
 
 <ApiDocs {api} />

@@ -7,14 +7,14 @@
   import Overlay from './Overlay.svelte';
 
   import { focusMove } from '../actions/focus';
-  import { portal as portalAction } from '../actions/portal';
+  import { portal as portalAction, type PortalOptions } from '../actions/portal';
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
 
   const dispatch = createEventDispatcher();
 
   export let open = true;
-  export let portal = true;
+  export let portal: PortalOptions = true;
   export let persistent = false;
   export let loading: boolean | null = null;
   export let placement: 'top' | 'bottom' | 'left' | 'right' = 'right';
@@ -85,7 +85,7 @@
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
     }}
-    use:portalAction={{ enabled: portal }}
+    use:portalAction={portal}
     use:focusMove={{ restoreFocus: true }}
   >
     {#if loading}

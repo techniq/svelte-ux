@@ -1,9 +1,11 @@
 import type { Action } from 'svelte/action';
 
-type PortalOptions = {
-  enabled?: boolean;
-  target?: HTMLElement | string;
-};
+export type PortalOptions =
+  | {
+      enabled?: boolean;
+      target?: HTMLElement | string;
+    }
+  | boolean;
 
 /**
  * Render component outside current DOM hierarchy
@@ -31,17 +33,19 @@ export const portal: Action<HTMLElement, PortalOptions> = (node, options) => {
 };
 
 function moveNode(node: HTMLElement, options: PortalOptions = {}) {
-  if (options.enabled === false) return;
+  const enabled = typeof options === 'boolean' ? options : options.enabled;
+  if (enabled === false) return;
 
   const target = getTarget(options);
   target?.appendChild(node);
 }
 
 function getTarget(options: PortalOptions = {}) {
-  if (options.target instanceof HTMLElement) {
-    return options.target;
-  } else if (typeof options.target === 'string') {
-    return document.getElementById(options.target);
+  const target = typeof options === 'object' ? options.target : undefined;
+  if (target instanceof HTMLElement) {
+    return target;
+  } else if (typeof target === 'string') {
+    return document.querySelector(target);
   } else {
     return document.body;
   }
