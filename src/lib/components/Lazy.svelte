@@ -20,10 +20,6 @@
   export let offset: Offset = {};
 
   const theme = getComponentTheme('Lazy');
-
-  // $: if (show) {
-  //   console.count('mounting');
-  // }
 </script>
 
 <div
@@ -37,6 +33,7 @@
       show = true;
     }
   }}
+  on:intersecting
   style:min-height={typeof height === 'number' ? `${height}px` : height}
   {...$$restProps}
   class={cls('Lazy', theme.root, $$props.class)}

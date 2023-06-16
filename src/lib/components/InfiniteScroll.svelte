@@ -19,5 +19,6 @@
         page += 1;
       }
     }}
+    on:intersecting
   />
 {/if}
