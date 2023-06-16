@@ -19,7 +19,7 @@
   $: title = $page.data.meta?.title ?? name;
   $: docUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
-  $: ({ description, features, related, hideUsage } = $page.data.meta ?? {});
+  $: ({ description, features, related, hideUsage, hideTableOfContents } = $page.data.meta ?? {});
 
   function getRelated(r: string) {
     const [type, name] = r.split('/');
@@ -104,14 +104,16 @@
       {/if}
     </div>
 
-    <div class="hidden lg:block w-[224px]">
-      <div class="sticky top-0 pr-2">
-        <div class="text-xs uppercase leading-8 tracking-widest text-black/50">On this page</div>
-        <!-- Rebuild toc when page changes -->
-        {#key $page.route.id}
-          <TableOfContents />
-        {/key}
+    {#if !hideTableOfContents}
+      <div class="hidden lg:block w-[224px]">
+        <div class="sticky top-0 pr-2">
+          <div class="text-xs uppercase leading-8 tracking-widest text-black/50">On this page</div>
+          <!-- Rebuild toc when page changes -->
+          {#key $page.route.id}
+            <TableOfContents />
+          {/key}
+        </div>
       </div>
-    </div>
+    {/if}
   </div>
 </div>
