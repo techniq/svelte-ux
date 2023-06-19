@@ -8,6 +8,11 @@
    */
   export let height: string | number;
 
+  /**
+   * Unmount item once no longer visible.  Captures rendered height before unmounting
+   */
+  export let unmount = false;
+
   let show = false;
 
   type Offset = {
@@ -31,6 +36,9 @@
   on:intersecting={(e) => {
     if (e.detail.isIntersecting) {
       show = true;
+    } else if (unmount) {
+      height = e.detail.boundingClientRect.height;
+      show = false;
     }
   }}
   on:intersecting
