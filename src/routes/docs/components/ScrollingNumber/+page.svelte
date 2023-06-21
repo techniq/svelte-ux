@@ -12,7 +12,18 @@
 
   let value = 0;
 
-  const timer = timerStore({ initial: 60, onTick: (value) => value - 1, disabled: true });
+  const timer = timerStore({
+    initial: 60,
+    onTick: (value) => {
+      if (value <= 0) {
+        timer.stop();
+        return value;
+      } else {
+        return value - 1;
+      }
+    },
+    disabled: true,
+  });
   $: ({ isRunning } = timer);
 
   function onKeyDown(e: KeyboardEvent) {
@@ -128,8 +139,8 @@
 <h2>Countdown</h2>
 
 <Preview>
-  <ScrollingNumber value={$timer} class="text-6xl" />
-  <ButtonGroup variant="fill" _class="grid grid-flow-col gap-1 ml-2">
+  <ScrollingNumber value={$timer} class="text-6xl tabular-nums" />
+  <ButtonGroup variant="fill" class="ml-3">
     <Button on:click={timer.start} disabled={$isRunning}>Start</Button>
     <Button on:click={timer.stop} disabled={!$isRunning}>Stop</Button>
   </ButtonGroup>
