@@ -13,6 +13,7 @@
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
   import Theme from '$lib/components/Theme.svelte';
+  import Blockquote from '$docs/Blockquote.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -160,7 +161,11 @@
   <Toggle let:on={open} let:toggle>
     <Button on:click={toggle}>
       Click me
-      <ResponsiveMenu {open} on:close={toggle} drawerProps={{ class: 'rounded-t-lg' }}>
+      <ResponsiveMenu
+        {open}
+        on:close={toggle}
+        drawerProps={{ class: 'rounded-t-lg pb-[env(safe-area-inset-bottom)]' }}
+      >
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
@@ -170,10 +175,33 @@
   </Toggle>
 </Preview>
 
+<Blockquote>
+  `env()`
+  <a
+    href="https://developer.mozilla.org/en-US/docs/Web/CSS/env#usage"
+    target="_blank"
+    class="font-semibold text-blue-500">requires</a
+  >
+  setting `viewport-fit=cover` within `viewport` meta tag
+</Blockquote>
+
+See also
+<a
+  href="https://github.com/mvllow/tailwindcss-safe-area"
+  target="_blank"
+  class="font-semibold text-blue-500">tailwind-css-safe-area</a
+>
+to add `pb-safe` util class
+
 <h2>Theme example</h2>
 
 <Preview>
-  <Theme theme={{ Drawer: '[&.ResponsiveMenu]:rounded-t-xl [&.ResponsiveMenu]:py-2' }}>
+  <Theme
+    theme={{
+      Drawer:
+        '[&.ResponsiveMenu]:rounded-t-xl [&.ResponsiveMenu]:py-2 [&.ResponsiveMenu]:pb-[env(safe-area-inset-bottom)]',
+    }}
+  >
     <Toggle let:on={open} let:toggle let:toggleOff>
       <Button on:click={toggle}>
         Click me
