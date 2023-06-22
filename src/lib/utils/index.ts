@@ -1,4 +1,5 @@
 // top-level exports
+export { formatDate, PeriodType } from './date';
 export * from './dateDisplay';
 export * from './duration';
 export * from './file';
