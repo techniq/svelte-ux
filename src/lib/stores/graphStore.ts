@@ -1,7 +1,5 @@
 import { setContext, getContext } from 'svelte';
 import { writable } from 'svelte/store';
-import { print } from 'graphql';
-import type { DocumentNode } from 'graphql';
 import { merge } from 'lodash-es';
 
 import fetchStore, { initFetchClient } from './fetchStore';
@@ -26,7 +24,7 @@ export function initGraphClient(config: ClientConfig) {
 }
 
 export type QueryConfig = {
-  query?: string | DocumentNode;
+  query: string;
   variables?: any;
   config?: FetchConfig;
 };
@@ -45,9 +43,8 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
     const { query, variables, config } = mergedQueryConfig;
 
     // https://github.com/apollographql/graphql-tag/issues/144
-    const queryAsString: string = typeof query === 'object' ? print(query) : query;
 
-    const isMutation = queryAsString.toLowerCase().includes('mutation');
+    const isMutation = query.toLowerCase().includes('mutation');
 
     const options: RequestInit = merge(
       {
@@ -55,7 +52,7 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query: queryAsString, variables }),
+        body: JSON.stringify({ query, variables }),
       },
       globalConfig.config?.options?.(),
       config?.options?.()
@@ -92,4 +89,8 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
     queryConfig: queryConfigStore,
     fetchConfig,
   };
+}
+
+export function gql(strings: TemplateStringsArray, ...args: any[]) {
+  return strings.map((s, i) => (i === strings.length - 1 ? `${s}` : `${s}${args[i]}`)).join('');
 }

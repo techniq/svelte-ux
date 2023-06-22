@@ -2,7 +2,7 @@ export { default as changeStore } from './changeStore';
 export { default as debounceStore } from './debounceStore';
 export { default as dirtyStore } from './dirtyStore';
 export { default as fetchStore } from './fetchStore';
-export { default as graphStore, initGraphClient } from './graphStore';
+export { default as graphStore, initGraphClient, gql } from './graphStore';
 export { default as formStore } from './formStore';
 export { default as localStore } from './localStore';
 export { default as mapStore } from './mapStore';
