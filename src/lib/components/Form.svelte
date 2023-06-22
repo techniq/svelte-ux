@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import type { Schema } from 'zod';
 
   import formStore from '../stores/formStore';
-  import type { Schema } from 'zod';
   import { getComponentTheme } from './theme';
   import { cls } from '$lib/utils/styles';
 
@@ -20,12 +20,10 @@
 </script>
 
 <form
-  on:submit={(e) => {
-    e.preventDefault();
+  on:submit|preventDefault={(e) => {
     draft.commit();
   }}
-  on:reset={(e) => {
-    e.preventDefault();
+  on:reset|preventDefault={(e) => {
     draft.revert();
   }}
   class={cls(theme.root, $$props.class)}
