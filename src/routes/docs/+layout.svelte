@@ -82,7 +82,7 @@
             {#each features as feature}
               <li class="grid grid-cols-[auto,1fr] gap-2">
                 <Icon data={mdiCheckCircle} class="text-emerald-600 pt-1" />
-                <span>{feature}</span>
+                <span>{@html feature}</span>
               </li>
             {/each}
           </ul>
