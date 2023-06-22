@@ -1,4 +1,7 @@
 // top-level exports
+export * from './dateDisplay';
+export * from './duration';
+export * from './file';
 export * from './format';
 export * from './logger';
 export { cls } from './styles';
@@ -7,13 +10,10 @@ export { uniqueId } from './string';
 // aliased exports to remove conflicts (and make imports less noisy from top-level)
 export * as array from './array';
 export * as date from './date';
-export * as dateDisplay from './dateDisplay';
 export * as dateRange from './dateRange';
 export * as dom from './dom';
-export * as duration from './duration';
 export * as env from './env';
 // export * as excel from './excel'; // Remove until `await import('exceljs')` works externally
-export * as file from './file';
 export * as json from './json';
 export * as map from './map';
 export * as number from './number';

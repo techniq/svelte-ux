@@ -1,7 +1,7 @@
 import { format as dateFormat } from 'date-fns';
 import { formatDate, utcToLocalDate, PeriodType } from './date';
 
-type DateDisplayOptions = {
+export type DateDisplayOptions = {
   periodType?: PeriodType | null;
   variant?: Parameters<typeof formatDate>[2];
   format?: string;
