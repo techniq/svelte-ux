@@ -14,7 +14,7 @@
 <h1>Usage</h1>
 
 <Code
-  code={`import { autoFocus, autoHeight, blurOnEscape, selectOnFocus, debounceEvent } from 'svelte-ux';`}
+  source={`import { autoFocus, autoHeight, blurOnEscape, selectOnFocus, debounceEvent } from 'svelte-ux';`}
   language="javascript"
 />
 

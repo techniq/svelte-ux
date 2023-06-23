@@ -7,20 +7,20 @@
   import { cls } from '$lib/utils/styles';
   import { getComponentTheme } from './theme';
 
-  export let code: string | null = null;
+  export let source: string | null = null;
   export let language = 'svelte';
-  export let highlightedCode = code
-    ? Prism.highlight(code, Prism.languages[language] ?? Prism.languages.text, language)
+  export let highlightedSource = source
+    ? Prism.highlight(source, Prism.languages[language] ?? Prism.languages.text, language)
     : '';
 
   const theme = getComponentTheme('Code');
 </script>
 
 <div class={cls('Code', 'rounded', theme.root, $$props.class)}>
-  {#if code}
+  {#if source}
     <div class="relative">
       <pre class="language-{language} rounded" style="margin: 0; white-space: normal;">
-          <code class="language-{language}">{@html highlightedCode}</code>
+          <code class="language-{language}">{@html highlightedSource}</code>
       </pre>
 
       <div class="absolute top-0 right-0 p-2 z-10">
@@ -28,7 +28,7 @@
           icon={mdiContentCopy}
           class="text-white/70 hover:bg-white/20 py-1 backdrop-blur-md"
           size="sm"
-          on:click={() => navigator.clipboard.writeText(code ?? '')}
+          on:click={() => navigator.clipboard.writeText(source ?? '')}
         >
           Copy
         </Button>

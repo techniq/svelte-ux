@@ -37,7 +37,7 @@
 
 <h1>Usage</h1>
 
-<Code code={`import { dataBackground } from 'svelte-ux';`} language="javascript" class="mb-4" />
+<Code source={`import { dataBackground } from 'svelte-ux';`} language="javascript" class="mb-4" />
 
 <div class="grid gap-2">
   <div class="grid grid-cols-[2fr,1fr,1fr] gap-2">

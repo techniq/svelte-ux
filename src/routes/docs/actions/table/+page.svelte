@@ -8,6 +8,6 @@
 
 <h1>Usage</h1>
 
-<Code code={`import { tableCell } from 'svelte-ux';`} language="javascript" />
+<Code source={`import { tableCell } from 'svelte-ux';`} language="javascript" />
 
 <Blockquote>TODO</Blockquote>

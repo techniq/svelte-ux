@@ -8,6 +8,6 @@
 
 <h1>Usage</h1>
 
-<Code code={`import { multi } from 'svelte-ux';`} language="javascript" />
+<Code source={`import { multi } from 'svelte-ux';`} language="javascript" />
 
 <Blockquote>TODO</Blockquote>

@@ -14,7 +14,7 @@
 <h1>Usage</h1>
 
 <Code
-  code={`import { remainingViewportHeight, remainingViewportWidth, overflow } from 'svelte-ux';`}
+  source={`import { remainingViewportHeight, remainingViewportWidth, overflow } from 'svelte-ux';`}
   language="javascript"
 />
 

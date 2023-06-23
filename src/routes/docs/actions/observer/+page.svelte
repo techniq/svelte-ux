@@ -11,7 +11,7 @@
 
 <h1>Usage</h1>
 
-<Code code={`import { resize, intersection, mutate } from 'svelte-ux';`} language="javascript" />
+<Code source={`import { resize, intersection, mutate } from 'svelte-ux';`} language="javascript" />
 
 <h2>use:resize</h2>
 

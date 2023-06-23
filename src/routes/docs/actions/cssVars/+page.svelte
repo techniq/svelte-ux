@@ -11,7 +11,7 @@
 
 <h1>Usage</h1>
 
-<Code code={`import { cssVars } from 'svelte-ux';`} language="javascript" class="mb-4" />
+<Code source={`import { cssVars } from 'svelte-ux';`} language="javascript" class="mb-4" />
 
 <Preview>
   <div class="grid gap-4" use:cssVars={{ background, border }}>

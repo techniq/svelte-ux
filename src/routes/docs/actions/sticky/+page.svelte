@@ -8,7 +8,7 @@
 
 <h1>Usage</h1>
 
-<Code code={`import { sticky, stickyContext } from 'svelte-ux';`} language="javascript" />
+<Code source={`import { sticky, stickyContext } from 'svelte-ux';`} language="javascript" />
 
 <h2>sticky</h2>
 

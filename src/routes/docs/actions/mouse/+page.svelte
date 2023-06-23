@@ -18,7 +18,7 @@
 
 <h1>Usage</h1>
 
-<Code code={`import { longpress, movable } from 'svelte-ux';`} language="javascript" />
+<Code source={`import { longpress, movable } from 'svelte-ux';`} language="javascript" />
 
 <h2>longpress</h2>
 

@@ -19,7 +19,7 @@
 <h1>Usage</h1>
 
 <Code
-  code={`import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';`}
+  source={`import { scrollIntoView, scrollFade, scrollShadow } from 'svelte-ux';`}
   language="javascript"
 />
 

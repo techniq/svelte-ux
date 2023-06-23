@@ -71,7 +71,7 @@
       {#if type === 'components' && !hideUsage}
         {#key $page.route.id}
           <h1 id="usage">Usage</h1>
-          <Code code={`import { ${name} } from 'svelte-ux';`} language="javascript" />
+          <Code source={`import { ${name} } from 'svelte-ux';`} language="javascript" />
         {/key}
       {/if}
 
