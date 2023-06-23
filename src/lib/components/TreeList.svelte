@@ -2,7 +2,7 @@
   import { cls } from '$lib/utils/styles';
   import { getComponentTheme } from './theme';
 
-  type Node = { name: string; level: number; id: number; children: Node[] };
+  type Node = { id: number; name: string; level: number; children: Node[] };
 
   export let nodes: Node[];
 
@@ -17,7 +17,8 @@
   class={cls(
     'TreeList',
     typeof theme.ul === 'string' ? theme.ul : theme.ul?.(node),
-    typeof classes.ul === 'string' ? classes.ul : classes.ul?.(node)
+    typeof classes.ul === 'string' ? classes.ul : classes.ul?.(node),
+    $$props.class
   )}
 >
   {#each nodes ?? [] as node}

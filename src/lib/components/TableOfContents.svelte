@@ -6,12 +6,15 @@
   import { cls } from '../utils/styles';
   import TreeList from './TreeList.svelte';
   import Icon from './Icon.svelte';
+  import { getComponentTheme } from './theme';
 
   export let element = 'main';
 
   let activeHeadingId = '';
   let headings = [];
   let nodes = [];
+
+  const theme = getComponentTheme('TableOfContents');
 
   function onScroll(e) {
     activeHeadingId = headings?.find(
@@ -51,6 +54,7 @@
   {nodes}
   classes={{ li: (node) => cls(node.level === 1 ? 'mb-2' : node.level > 2 ? 'ml-3' : '') }}
   {...$$restProps}
+  class={cls('TableOfContents', theme.root, $$props.class)}
   let:node
 >
   <slot {node} {activeHeadingId}>
