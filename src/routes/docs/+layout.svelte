@@ -6,20 +6,20 @@
     mdiFileDocumentEditOutline,
   } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
   import Code from '$lib/components/Code.svelte';
   import Icon from '$lib/components/Icon.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
   import TableOfContents from '$lib/components/TableOfContents.svelte';
 
   import { page } from '$app/stores';
   import { createTheme } from '$lib/components/theme';
+  import ViewSourceButton from '$docs/ViewSourceButton.svelte';
 
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
   $: title = $page.data.meta?.title ?? name;
-  $: docUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
+  $: pageUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
-  $: ({ description, features, related, hideUsage, hideTableOfContents } = $page.data.meta ?? {});
+  $: ({ description, features, related, hideUsage, hideTableOfContents, source, pageSource } =
+    $page.data.meta ?? {});
 
   function getRelated(r: string) {
     const [type, name] = r.split('/');
@@ -33,36 +33,29 @@
 <div class="grid grid-rows-[auto,1fr] h-full p-4">
   <div>
     {#if title}
-      <div class="flex items-center gap-2 _border-b border-black/10">
-        <span class="text-2xl font-bold">{title}</span>
-        {#if sourceUrl}
-          <Tooltip title="View source">
-            <Button
-              class="text-black/50 p-1"
-              icon={mdiCodeTags}
-              href="https://github.com/techniq/svelte-ux/blob/master/{sourceUrl}"
-              target="_blank"
-            />
-          </Tooltip>
-        {/if}
-
-        {#if docUrl}
-          <Tooltip title="Edit this page">
-            <Button
-              class="text-black/50 p-1"
-              icon={mdiFileDocumentEditOutline}
-              href="https://github.com/techniq/svelte-ux/blob/master/{docUrl}"
-              target="_blank"
-            />
-          </Tooltip>
-        {/if}
-      </div>
+      <div class="text-2xl font-bold">{title}</div>
 
       {#if description}
         <div class="text-sm text-black/60">
           {description}
         </div>
       {/if}
+
+      <div class="flex gap-2 mt-2">
+        <ViewSourceButton
+          label="Source"
+          {source}
+          href={sourceUrl ? `https://github.com/techniq/svelte-ux/blob/master/${sourceUrl}` : ''}
+          icon={mdiCodeTags}
+        />
+
+        <ViewSourceButton
+          label="Page source"
+          source={pageSource}
+          href={pageUrl ? `https://github.com/techniq/svelte-ux/blob/master/${pageUrl}` : ''}
+          icon={mdiFileDocumentEditOutline}
+        />
+      </div>
     {/if}
   </div>
 

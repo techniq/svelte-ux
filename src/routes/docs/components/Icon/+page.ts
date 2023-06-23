@@ -1,6 +1,11 @@
+import source from '$lib/components/Icon.svelte?raw';
+import pageSource from './+page.svelte?raw';
+
 export async function load() {
   return {
     meta: {
+      source,
+      pageSource,
       features: [
         'Supports loading icons as path data, SVG as string, SVG from URL, or as an SVG element via slot',
         'Convenient `data` prop to support most of the above use cases via a single prop through introspection',
