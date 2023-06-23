@@ -17,7 +17,10 @@
     <Button {icon} on:click={toggle} variant="fill-light" color="blue" size="sm">{label}</Button>
     <Dialog {open} on:close={toggle}>
       <div class="grid grid-cols-[1fr,auto] gap-1 items-center p-4">
-        <span class="text-lg font-semibold">{label}</span>
+        <div>
+          <div class="text-lg font-semibold">{label}</div>
+          <div class="text-xs text-black/50">{href}</div>
+        </div>
 
         {#if href}
           <Button icon={mdiGithub} variant="fill-light" color="accent" {href} target="_blank">

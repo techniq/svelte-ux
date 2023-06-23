@@ -33,7 +33,15 @@
 <div class="grid grid-rows-[auto,1fr] h-full p-4">
   <div>
     {#if title}
-      <div class="text-2xl font-bold">{title}</div>
+      <div>
+        <div class="inline-block text-xs font-bold text-gray-500 capitalize">Docs</div>
+        <Icon path={mdiChevronRight} class="divider opacity-25" />
+        <div class="inline-block text-xs font-bold text-blue-500 capitalize">
+          {type}
+        </div>
+      </div>
+
+      <div class="text-2xl font-bold mb-3">{title}</div>
 
       {#if description}
         <div class="text-sm text-black/60">
@@ -87,9 +95,9 @@
       {#if related}
         <h1 id="related">Related</h1>
         {#each related.map(getRelated) as r}
-          <div class="flex mb-1">
+          <div class="flex items-center gap-1 ml-2">
             <Icon data={mdiChevronRight} class="text-black/30" />
-            <h2 class="text-base m-0">
+            <h2 class="text-base !m-0">
               <a href={r.url}>{r.name}</a>
             </h2>
           </div>
