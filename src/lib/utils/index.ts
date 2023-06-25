@@ -4,6 +4,7 @@ export * from './dateDisplay';
 export * from './duration';
 export * from './file';
 export * from './format';
+export * from './json';
 export * from './logger';
 export { cls } from './styles';
 export { uniqueId } from './string';
@@ -15,7 +16,6 @@ export * as dateRange from './dateRange';
 export * as dom from './dom';
 export * as env from './env';
 // export * as excel from './excel'; // Remove until `await import('exceljs')` works externally
-export * as json from './json';
 export * as map from './map';
 export * as number from './number';
 export * as object from './object';

@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { isFunction } from 'lodash-es';
 
-import { decode, encode } from '../utils/json';
+import { parse, stringify } from '../utils/json';
 import { expireObject } from '../utils/object';
 import type { Expiry } from '../utils/object';
 import { browser } from '../utils/env';
@@ -26,7 +26,7 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
   } else {
     const storedValue = browser ? localStorage.getItem(key) : null;
     if (storedValue !== null) {
-      const decodedValue = decode(storedValue);
+      const decodedValue = parse(storedValue);
       if (options?.expiry) {
         // TODO: if object returned, merge with initialValue (sub-properties)?
         value = expireObject<Value>(decodedValue.value, decodedValue.expiry) ?? initialValue;
@@ -53,9 +53,9 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
           : options?.expiry;
         previousExpiry = expiry;
 
-        localStorage.setItem(key, encode({ value: val, expiry }));
+        localStorage.setItem(key, stringify({ value: val, expiry }));
       } else {
-        localStorage.setItem(key, encode(val));
+        localStorage.setItem(key, stringify(val));
       }
     });
   }

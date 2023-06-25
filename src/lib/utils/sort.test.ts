@@ -89,7 +89,7 @@ describe('nestedSort', () => {
     ];
 
     const actual = nestedSort(data, createPropertySortFunc('key'));
-    expect(actual).toEqual(expected);
+    expect(actual).eql(expected);
   });
 
   it('basic 2', () => {
@@ -178,6 +178,6 @@ describe('nestedSort', () => {
     ];
 
     const actual = nestedSort(data, createPropertySortFunc('Actual'));
-    expect(actual).toEqual(expected);
+    expect(actual).eql(expected);
   });
 });

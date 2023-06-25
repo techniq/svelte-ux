@@ -98,11 +98,11 @@ describe('expireObject', () => {
     const expected = {
       two: 2,
     };
-    expect(actual).toEqual(expected);
+    expect(actual).eql(expected);
 
     // Test cleaning up expiry
     const expiryActual = expireObject(expiry, expiry);
-    expect(expiryActual).toEqual({ two: expiry.two });
+    expect(expiryActual).eql({ two: expiry.two });
   });
 
   it('extra property expiry not in object', () => {
@@ -122,11 +122,11 @@ describe('expireObject', () => {
       two: 2,
       three: 3,
     };
-    expect(actual).toEqual(expected);
+    expect(actual).eql(expected);
 
     // Test cleaning up expiry
     const expiryActual = expireObject(expiry, expiry);
-    expect(expiryActual).toEqual({ two: expiry.two });
+    expect(expiryActual).eql({ two: expiry.two });
   });
 
   it('expired object property', () => {
@@ -148,11 +148,11 @@ describe('expireObject', () => {
       two: 2,
       three: 3,
     };
-    expect(actual).toEqual(expected);
+    expect(actual).eql(expected);
 
     // Test cleaning up expiry
     const expiryActual = expireObject(expiry, expiry);
-    expect(expiryActual).toEqual({ two: expiry.two });
+    expect(expiryActual).eql({ two: expiry.two });
   });
 
   it('expired nested object property', () => {
@@ -179,11 +179,11 @@ describe('expireObject', () => {
       two: 2,
       three: 3,
     };
-    expect(actual).toEqual(expected);
+    expect(actual).eql(expected);
 
     // Test cleaning up expiry
     const expiryActual = expireObject(expiry, expiry);
-    expect(expiryActual).toEqual({ two: expiry.two });
+    expect(expiryActual).eql({ two: expiry.two });
   });
 
   it('removes $default expiry if expired', () => {
@@ -194,6 +194,6 @@ describe('expireObject', () => {
 
     // Test cleaning up expiry
     const expiryActual = expireObject(expiry, expiry);
-    expect(expiryActual).toEqual({ one: expiry.one });
+    expect(expiryActual).eql({ one: expiry.one });
   });
 });

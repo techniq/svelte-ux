@@ -4,7 +4,7 @@ import { merge } from 'lodash-es';
 
 import fetchStore, { initFetchClient } from './fetchStore';
 import type { FetchConfig } from './fetchStore';
-import { decode } from '$lib/utils/json';
+import { parse, stringify } from '$lib/utils/json';
 
 type ClientConfig = {
   url: string;
@@ -52,7 +52,7 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query, variables }),
+        body: stringify({ query, variables }),
       },
       globalConfig.config?.options?.(),
       config?.options?.()
@@ -66,7 +66,7 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
           // Use custom JSON reviver to convert Date strings to Date objects
           // const body = await res.json();
           const text = await res.text();
-          const body = decode(text);
+          const body = parse(text);
           if (body.errors) {
             throw body.errors;
           } else {

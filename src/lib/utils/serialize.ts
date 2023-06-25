@@ -1,4 +1,4 @@
-import { reviver } from './json';
+import { parse, reviver, stringify } from './json';
 
 // See: https://github.com/pbeshai/serialize-query-params/blob/master/src/serialize.ts
 
@@ -273,7 +273,7 @@ export function encodeJson(any: any | null | undefined): string | null | undefin
     return any;
   }
 
-  return JSON.stringify(any);
+  return stringify(any);
 }
 
 /**
@@ -294,7 +294,7 @@ export function decodeJson(
 
   let result = null;
   try {
-    result = JSON.parse(jsonStr, reviver);
+    result = parse(jsonStr);
   } catch (e) {
     /* ignore errors, returning undefined */
   }
