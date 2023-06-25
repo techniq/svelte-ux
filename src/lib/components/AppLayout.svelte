@@ -11,6 +11,7 @@
   import { getComponentTheme } from './theme';
 
   export let navWidth = 240;
+  export let headerHeight = 64;
   /** Control whether nav should be full height (default) or header should be full width */
   export let headerFullWidth = false;
   $: areas = headerFullWidth ? "'header header' 'aside main'" : "'aside header' 'aside main'";
@@ -27,16 +28,17 @@
 </script>
 
 <div
+  style:--headerHeight="{headerHeight}px"
+  style:--drawerWidth="{$showDrawer ? navWidth : 0}px"
+  style:--navWidth="{navWidth}px"
+  style:--areas={areas}
   class={cls(
     'AppLayout',
-    'grid grid-cols-[auto,1fr] grid-rows-[64px,1fr] h-screen',
+    'grid grid-cols-[auto,1fr] grid-rows-[var(--headerHeight),1fr] h-screen',
     theme.root,
     classes.root,
     $$props.class
   )}
-  style:--drawerWidth="{$showDrawer ? navWidth : 0}px"
-  style:--navWidth="{navWidth}px"
-  style:--areas={areas}
 >
   <!-- Render backdrop first to fix stacking order with <aside> nav -->
   {#if $showDrawer && temporaryDrawer}
@@ -75,5 +77,7 @@
   .AppLayout :global(> main) {
     grid-area: main;
     overflow: auto;
+    margin-top: calc(var(--headerHeight) * -1);
+    padding-top: var(--headerHeight);
   }
 </style>
