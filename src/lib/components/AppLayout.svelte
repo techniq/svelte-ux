@@ -12,6 +12,7 @@
 
   export let navWidth = 240;
   export let headerHeight = 64;
+  export let overlapHeader = false;
   /** Control whether nav should be full height (default) or header should be full width */
   export let headerFullWidth = false;
   $: areas = headerFullWidth ? "'header header' 'aside main'" : "'aside header' 'aside main'";
@@ -39,6 +40,7 @@
     classes.root,
     $$props.class
   )}
+  class:overlapHeader
 >
   <!-- Render backdrop first to fix stacking order with <aside> nav -->
   {#if $showDrawer && temporaryDrawer}
@@ -77,7 +79,10 @@
   .AppLayout :global(> main) {
     grid-area: main;
     overflow: auto;
-    /* Overlap under header to support background blur */
+  }
+
+  /* Overlap under header to support background blur */
+  .AppLayout.overlapHeader :global(> main) {
     margin-top: calc(var(--headerHeight) * -1);
     padding-top: var(--headerHeight);
   }
