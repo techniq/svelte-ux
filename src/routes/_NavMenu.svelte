@@ -12,6 +12,7 @@
       'ButtonGroup',
       'Card',
       'Collapse',
+      'CopyButton',
       'ExpansionPanel',
       'Icon',
       'InfiniteScroll',

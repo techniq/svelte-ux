@@ -9,6 +9,7 @@ export { default as Button } from './Button.svelte';
 export { default as ButtonGroup } from './ButtonGroup.svelte';
 export { default as Card } from './Card.svelte';
 export { default as Checkbox } from './Checkbox.svelte';
+export { default as CopyButton } from './CopyButton.svelte';
 export { default as Progress } from './Progress.svelte';
 export { default as ProgressCircle } from './ProgressCircle.svelte';
 // export { default as Code } from './Code.svelte';
