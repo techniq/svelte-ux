@@ -77,6 +77,7 @@
   .AppLayout :global(> main) {
     grid-area: main;
     overflow: auto;
+    /* Overlap under header to support background blur */
     margin-top: calc(var(--headerHeight) * -1);
     padding-top: var(--headerHeight);
   }

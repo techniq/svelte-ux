@@ -16,11 +16,7 @@
   inject({ mode: dev ? 'development' : 'production' });
 
   createTheme({
-    AppBar: 'bg-accent-500 text-white shadow-md',
-    // AppBar: 'bg-white/50 text-black shadow-md backdrop-blur-md z-20',
-    // AppLayout: {
-    //   root: '[&_main]:-mt-16 [&_main]:pt-16',
-    // },
+    // AppBar: 'bg-accent-500 text-white shadow-md',
   });
 
   let mainEl: HTMLElement;
@@ -74,10 +70,6 @@
   @tailwind components;
   @tailwind utilities;
 
-  :global(body) {
-    @apply bg-neutral-200;
-  }
-
   :global(main h1:not(.prose *, .ApiDocs *)) {
     @apply text-xl font-semibold mt-8 mb-2 ml-2 border-b border-gray-400 pb-1;
   }
@@ -94,6 +86,11 @@
   }
 
   /* Material */
+
+  :global(body) {
+    @apply bg-neutral-200;
+  }
+
   :global(nav) {
     @apply bg-neutral-800 py-2;
   }
@@ -118,8 +115,20 @@
     }
   }
 
+  :global(.AppBar) {
+    @apply bg-accent-500 text-white shadow-md;
+  }
+
   /* New theme */
-  /* :global(nav) {
+  /* :global(body) {
+    @apply bg-neutral-900;
+  }
+
+  :global(aside) {
+    @apply border-r border-neutral-700;
+  }
+
+  :global(nav) {
     @apply bg-neutral-900 py-2;
   }
 
@@ -132,7 +141,7 @@
   }
 
   :global(nav .NavItem) {
-    @apply text-sm text-gray-400 py-1 border-l border-gray-500 pl-4 ml-4;
+    @apply text-sm text-gray-400 py-1 border-l border-neutral-700 pl-4 ml-4;
   }
 
   :global(nav .NavItem:hover) {
@@ -140,6 +149,14 @@
   }
 
   :global(nav .NavItem.is-active) {
-    @apply text-sky-400 bg-gray-500/10 border-sky-400;
+    @apply text-accent-200 bg-accent-500/20 border-accent-300;
+  }
+
+  :global(.AppBar) {
+    @apply bg-neutral-800/70 text-white shadow-md backdrop-blur-lg;
+  }
+
+  :global(main) {
+    @apply text-neutral-200;
   } */
 </style>
