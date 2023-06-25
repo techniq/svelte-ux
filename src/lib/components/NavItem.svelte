@@ -26,7 +26,7 @@
   href={url(currentUrl, path)}
   class={cls(
     'NavItem',
-    'flex items-center text-sm p-1 relative',
+    'flex items-center relative',
     isPathActive && 'is-active',
     theme.root,
     classes.root,
@@ -50,7 +50,7 @@
   on:click
 >
   {#if isPathActive}
-    <div class={cls('absolute left-0 top-0 w-1 h-full', theme.indicator, classes.indicator)} />
+    <div class={cls('absolute top-0 left-0 w-1 h-full', theme.indicator, classes.indicator)} />
   {/if}
 
   {#if $$slots.avatar}

@@ -21,7 +21,7 @@
       nav: 'bg-neutral-800 py-4',
     },
     NavItem: {
-      root: 'text-gray-400 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10 pl-6 py-2',
+      root: 'text-sm text-gray-400 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10 pl-6 py-2',
       indicator: 'bg-sky-500',
     },
 
