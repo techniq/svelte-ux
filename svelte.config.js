@@ -11,11 +11,9 @@ const config = {
   preprocess: [mdsvex(mdsvexConfig), sveltePreprocess(), codePreview()],
 
   vitePlugin: {
-    experimental: {
-      inspector: {
-        toggleKeyCombo: 'alt-shift',
-        toggleButtonPos: 'bottom-right',
-      },
+    inspector: {
+      toggleKeyCombo: 'alt-shift',
+      toggleButtonPos: 'bottom-right',
     },
   },
 
