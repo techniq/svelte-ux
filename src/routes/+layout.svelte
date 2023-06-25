@@ -17,19 +17,9 @@
 
   createTheme({
     AppBar: 'bg-accent-500 text-white shadow-md',
-    AppLayout: {
-      nav: 'bg-neutral-800 py-4',
-    },
-    NavItem: {
-      root: 'text-sm text-gray-400 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10 pl-6 py-2',
-      indicator: 'bg-sky-500',
-    },
-
     // AppBar: 'bg-white/50 text-black shadow-md backdrop-blur-md z-20',
     // AppLayout: {
     //   root: '[&_main]:-mt-16 [&_main]:pt-16',
-    //   aside: 'border-r border-gray-400',
-    //   nav: 'bg-neutral-800 py-4',
     // },
   });
 
@@ -85,7 +75,7 @@
   @tailwind utilities;
 
   :global(body) {
-    @apply bg-black/10;
+    @apply bg-neutral-200;
   }
 
   :global(main h1:not(.prose *, .ApiDocs *)) {
@@ -103,6 +93,11 @@
     @apply -mt-1;
   }
 
+  /* Material */
+  :global(nav) {
+    @apply bg-neutral-800 py-2;
+  }
+
   :global(nav h1) {
     @apply py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10;
   }
@@ -110,4 +105,41 @@
   :global(nav h2) {
     @apply pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold;
   }
+
+  :global(nav .NavItem) {
+    @apply text-sm text-gray-400 pl-5 py-2 border-l-4 border-transparent;
+
+    &:hover {
+      @apply text-white bg-gray-300/10;
+    }
+
+    &.is-active {
+      @apply text-sky-400 bg-gray-500/10 border-sky-500;
+    }
+  }
+
+  /* New theme */
+  /* :global(nav) {
+    @apply bg-neutral-900 py-2;
+  }
+
+  :global(nav h1) {
+    @apply py-2 pl-4 mt-4 text-sm text-gray-200 font-bold bg-black/20 border-t border-b border-white/10;
+  }
+
+  :global(nav h2) {
+    @apply pt-4 pb-2 pl-4 text-xs text-gray-200 font-bold;
+  }
+
+  :global(nav .NavItem) {
+    @apply text-sm text-gray-400 py-1 border-l border-gray-500 pl-4 ml-4;
+  }
+
+  :global(nav .NavItem:hover) {
+    @apply text-white bg-gray-300/10;
+  }
+
+  :global(nav .NavItem.is-active) {
+    @apply text-sky-400 bg-gray-500/10 border-sky-400;
+  } */
 </style>
