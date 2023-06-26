@@ -4,9 +4,11 @@ import pageSource from './+page.md?raw';
 export async function load() {
   return {
     meta: {
+      description: 'Client-side paginate through',
       source,
       pageSource,
       hideUsage: true,
+      related: ['components/Pagination'],
     },
   };
 }

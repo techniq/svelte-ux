@@ -14,13 +14,14 @@
 
 ```svelte
 <script lang="ts">
-  import { Paginate } from 'svelte-ux';
+  import { Paginate, Pagination } from 'svelte-ux';
 </script>
 
-<Paginate {items} let:pagination let pageItems>
+<Paginate {items} let:pageItems let:pagination>
   {#each pageItems as child}
     <!-- render item -->
   {/each}
+  <Pagination {pagination} />
 </Paginate>
 ```
 
@@ -29,7 +30,7 @@
 <h2>Default</h2>
 
 <Preview>
-	<Paginate {items} let:pagination let:pageItems >
+	<Paginate {items} let:pageItems let:pagination>
 		{#each pageItems as child}
 			<ListItem title={child.name} />
 		{/each}
@@ -42,7 +43,7 @@
 <h2>Per page</h2>
 
 <Preview>
-	<Paginate {items} perPage={5} let:pagination let:pageItems >
+	<Paginate {items} perPage={5} let:pageItems let:pagination>
 		{#each pageItems as child}
 			<ListItem title={child.name} />
 		{/each}
