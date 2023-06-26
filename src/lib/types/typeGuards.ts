@@ -11,7 +11,10 @@ export function hasKeyOf<T>(object: any, key: string): object is T {
 
 // Similar to Object.hasOwnProperty
 // http://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards
-export function hasProperty<T>(o: T, name: string | number | symbol): name is keyof T {
+export function hasProperty<T extends Object>(
+  o: T,
+  name: string | number | symbol
+): name is keyof T {
   return name in o;
 }
 
@@ -24,6 +27,13 @@ export function nameof<T>(key: keyof T, instance?: T): keyof T {
 
 export function isNumber(val: unknown): val is number {
   return typeof val === 'number';
+}
+
+/**
+ * Check if value is present (not `null`/`undefined`).  Useful with `arr.filter(notNull)`
+ */
+export function notNull<T>(value: T | null | undefined): value is T {
+  return value != null;
 }
 
 export function isElement(elem?: Element | EventType): elem is Element {
