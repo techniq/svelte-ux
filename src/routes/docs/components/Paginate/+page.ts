@@ -8,7 +8,7 @@ export async function load() {
       source,
       pageSource,
       hideUsage: true,
-      related: ['components/Pagination'],
+      related: ['components/Paginate', 'stores/paginationStore'],
     },
   };
 }

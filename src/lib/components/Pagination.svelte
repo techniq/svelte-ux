@@ -3,7 +3,8 @@
 
   import type paginationStore from '../stores/paginationStore';
   import { cls } from '../utils/styles';
-  import { format } from '../utils/format';
+  import { format as formatValue } from '../utils/format';
+  import type { StoresValues } from '../types/typeHelpers';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -13,9 +14,14 @@
   import Tooltip from './Tooltip.svelte';
   import { getComponentTheme } from './theme';
 
-  export let pagination: ReturnType<typeof paginationStore>;
+  type Pagination = ReturnType<typeof paginationStore>;
+
+  export let pagination: Pagination;
   export let perPageOptions = [10, 25, 50, 100, 1000];
   export let hideSinglePage = false;
+  export let format: (pagination: StoresValues<Pagination>) => string = (pagination) => {
+    return `${$pagination.from.toLocaleString()}-${$pagination.to.toLocaleString()} of ${$pagination.total.toLocaleString()}`;
+  };
 
   type ShowComponent =
     | 'prevPage'
@@ -106,7 +112,7 @@
               <Menu {open} on:close={toggle} autoPlacement offset={12}>
                 {#each perPageOptions ?? [] as option}
                   <MenuItem class="justify-end" on:click={() => pagination.setPerPage(option)}>
-                    {format(option, 'integer')}
+                    {formatValue(option, 'integer')}
                   </MenuItem>
                 {/each}
               </Menu>
@@ -118,9 +124,7 @@
       {#if component === 'pagination'}
         <slot name="pagination" pagination={$pagination}>
           <div class={cls('text-sm tabular-nums', theme.pagination, classes.pagination)}>
-            {$pagination.from.toLocaleString()}-{$pagination.to.toLocaleString()}
-            of
-            {$pagination.total.toLocaleString()}
+            {format($pagination)}
           </div>
         </slot>
       {/if}

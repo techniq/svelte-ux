@@ -45,6 +45,12 @@
 	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']} classes={{ pagination: 'flex-1 text-center' }} />
 </Preview>
 
+<h2>format</h2>
+
+<Preview>
+	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']} classes={{ pagination: 'flex-1 text-center' }} format={pagination => 'Page ' + pagination.page + ' of ' + pagination.totalPages} />
+</Preview>
+
 <h2>Pagination slot</h2>
 
 <Preview>

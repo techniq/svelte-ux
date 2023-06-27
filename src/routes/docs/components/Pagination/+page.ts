@@ -10,7 +10,7 @@ export async function load() {
       pageSource,
       hideUsage: true,
       features: ['Easily customize display of results and controls'],
-      related: ['stores/paginationStore', 'components/Paginate'],
+      related: ['components/Paginate', 'stores/paginationStore'],
     },
   };
 }
