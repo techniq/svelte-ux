@@ -25,17 +25,20 @@
     mainEl.scrollTo({ top: 0, behavior: 'instant' });
   });
 
+  const groups = ['components', 'actions', 'stores', 'utils'];
   const quickSearchOptions = Object.entries(
     import.meta.glob('./docs/**/+page.(md|svelte)', { as: 'raw', eager: true })
-  ).flatMap(([file, source]) => {
-    const url = file.replace('.', '').replace(/\/\+page.(md|svelte)/, '');
-    const [_, docs, group, name] = url.split('/');
-    return {
-      name,
-      value: url,
-      group: group,
-    };
-  });
+  )
+    .flatMap(([file, source]) => {
+      const url = file.replace('.', '').replace(/\/\+page.(md|svelte)/, '');
+      const [_, docs, group, name] = url.split('/');
+      return {
+        name,
+        value: url,
+        group: group,
+      };
+    })
+    .sort((a, b) => groups.indexOf(a.group) - groups.indexOf(b.group));
 </script>
 
 <AppLayout>
