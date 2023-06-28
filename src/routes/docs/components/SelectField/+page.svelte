@@ -98,25 +98,25 @@
   </Toggle>
 </Preview>
 
-<h2>Loading</h2>
+<h2>loading</h2>
 
 <Preview>
   <SelectField {options} loading />
 </Preview>
 
-<h2>Disabled</h2>
+<h2>disabled</h2>
 
 <Preview>
   <SelectField {options} disabled />
 </Preview>
 
-<h2>Readonly</h2>
+<h2>readonly</h2>
 
 <Preview>
   <SelectField {options} value={1} readonly />
 </Preview>
 
-<h2>option Slot</h2>
+<h2>option slot</h2>
 
 <Preview>
   <SelectField {options} on:change={(e) => console.log('on:change', e.detail)}>
@@ -151,28 +151,30 @@
         )}
         scrollIntoView={index === highlightIndex}
       >
-        <div class="grid grid-cols-[1fr,auto] options-center w-full">
+        <div class="grid grid-cols-[1fr,auto] items-center w-full">
           <div>
             <div>{option.name}</div>
             <div class="text-sm text-black/50">{option.value}</div>
           </div>
-          <Toggle let:on={open} let:toggle let:toggleOff>
-            <Button
-              icon={mdiPencil}
-              class="-m-1 p-1 text-xs text-gray-400 z-[9999]"
-              on:click={toggle}
-            />
-            <Drawer {open} on:close={toggleOff} class="w-[400px]">
-              <div class="p-4">
-                Editing option: {option.name}
-              </div>
-              <div
-                class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
-              >
-                <Button on:click={toggleOff}>Close</Button>
-              </div>
-            </Drawer>
-          </Toggle>
+          <div on:click|stopPropagation>
+            <Toggle let:on={open} let:toggle let:toggleOff>
+              <Button
+                icon={mdiPencil}
+                class="p-1 text-xs text-gray-400 z-[9999]"
+                on:click={toggle}
+              />
+              <Drawer {open} on:close={toggleOff} class="w-[400px]">
+                <div class="p-4">
+                  Editing option: {option.name}
+                </div>
+                <div
+                  class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
+                >
+                  <Button on:click={toggleOff}>Close</Button>
+                </div>
+              </Drawer>
+            </Toggle>
+          </div>
         </div>
       </MenuItem>
     </div>
@@ -184,7 +186,7 @@
 <Preview>
   <Toggle let:on={open} let:toggle>
     <SelectField {options}>
-      <div slot="prepend" on:click|stopPropagation class="flex options-center">
+      <div slot="prepend" on:click|stopPropagation class="flex items-center">
         <select
           class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
           style="text-align-last: center;"
