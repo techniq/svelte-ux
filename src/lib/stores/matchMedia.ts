@@ -36,3 +36,5 @@ export const print = matchMedia(`print`);
 export const darkColorScheme = matchMedia(`(prefers-color-scheme: dark)`);
 export const lightColorScheme = matchMedia(`(prefers-color-scheme: light)`);
 export const motionReduce = matchMedia(`(prefers-reduced-motion: reduce)`);
+export const landscape = matchMedia(`(orientation: landscape)`);
+export const portrait = matchMedia(`(orientation: portrait)`);
