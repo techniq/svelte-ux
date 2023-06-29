@@ -5,7 +5,6 @@
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
-  import Stack from './Stack.svelte';
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
 
@@ -39,6 +38,8 @@
     label?: string;
     input?: string;
     error?: string;
+    prepend?: string;
+    append?: string;
   } = {};
   const theme = getComponentTheme('Field');
 
@@ -49,8 +50,6 @@
 
   $: hasPrepend = $$slots.prepend || icon != null;
   $: hasAppend = $$slots.append || iconRight != null || clearable || error;
-
-  $: hStackTemplate = `${hasPrepend ? 'auto' : ''} 1fr ${hasAppend ? ' auto' : ''}`;
 
   const id = uniqueId('field-');
   let labelEl: HTMLLabelElement | null = null;
@@ -89,9 +88,11 @@
       classes.container
     )}
   >
-    <Stack horizontal template={hStackTemplate} items="center">
+    <div class="flex items-center">
       {#if hasPrepend}
-        <div class="prepend whitespace-nowrap flex items-center">
+        <div
+          class={cls('prepend whitespace-nowrap flex items-center', theme.prepend, classes.prepend)}
+        >
           <slot name="prepend" />
 
           {#if icon}
@@ -102,11 +103,12 @@
         </div>
       {/if}
 
-      <Stack stack items="initial" justifyItems="initial" on:click>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div class="flex-grow inline-grid" on:click>
         {#if label}
           <label
             class={cls(
-              'z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var cursor-pointer group-hover:group-focus-within:text-color-var',
+              'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var cursor-pointer group-hover:group-focus-within:text-color-var',
               center && 'justify-center',
               error ? 'text-red-500/80' : 'text-black/50',
               (shrinkLabel || hasValue) && 'shrink',
@@ -122,7 +124,7 @@
 
         <div
           class={cls(
-            'input flex items-center overflow-hidden',
+            'input col-span-full row-span-full flex items-center',
             hasLabel && 'pt-4',
             dense ? 'my-1' : 'my-2',
             center && 'text-center',
@@ -136,10 +138,10 @@
 
           <slot name="suffix" />
         </div>
-      </Stack>
+      </div>
 
       {#if hasAppend}
-        <div class="append whitespace-nowrap">
+        <div class={cls('append whitespace-nowrap', theme.append, classes.append)}>
           {#if clearable && hasValue}
             <Button
               icon={mdiClose}
@@ -161,11 +163,11 @@
           {/if}
         </div>
       {/if}
-    </Stack>
+    </div>
   </div>
   <div
     class={cls(
-      'hint',
+      error ? 'error' : 'hint',
       'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
       error ? 'text-red-500' : 'text-black/50 scale-y-0',
       theme.error,
@@ -180,7 +182,6 @@
 
 <style lang="postcss">
   label {
-    /* border: 1px solid rgba(255, 0, 0, 0.5); */
     width: 100%;
   }
   fieldset:focus-within label,
@@ -188,21 +189,5 @@
     transform: scale(0.75);
     width: 133%; /* offset 75% scale */
     height: 32px;
-  }
-
-  .prepend {
-    /* background: rgba(0, 255, 0, 0.1); */
-  }
-
-  .append {
-    /* background: rgba(0, 255, 0, 0.1); */
-  }
-
-  :global([slot='prefix']) {
-    /* background: rgba(0, 255, 0, 0.1); */
-  }
-
-  :global([slot='suffix']) {
-    /* background: rgba(0, 255, 0, 0.1); */
   }
 </style>

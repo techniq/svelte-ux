@@ -22,7 +22,12 @@
   $: dispatch('change', { value });
 </script>
 
-<Field on:click={() => (open = !open)} class="cursor-pointer" {...$$restProps}>
+<Field
+  on:click={() => (open = !open)}
+  class="cursor-pointer"
+  {...$$restProps}
+  classes={{ input: 'overflow-hidden', ...$$restProps.classes }}
+>
   <slot name="selection">
     <div class="truncate text-sm">
       {selected?.label ?? 'No selection'}

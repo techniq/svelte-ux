@@ -63,6 +63,8 @@
     label?: string;
     input?: string;
     error?: string;
+    prepend?: string;
+    append?: string;
   } = {};
   const theme = getComponentTheme('TextField');
 
@@ -206,7 +208,14 @@
   >
     <div class="flex items-center">
       {#if hasPrepend}
-        <div class={cls('prepend whitespace-nowrap', rounded && 'pl-3')}>
+        <div
+          class={cls(
+            'prepend whitespace-nowrap',
+            rounded && 'pl-3',
+            theme.prepend,
+            classes.prepend
+          )}
+        >
           <slot name="prepend" />
           {#if icon}
             <span class="mr-3">
@@ -236,7 +245,7 @@
 
         <div
           class={cls(
-            'col-span-full row-span-full input flex items-center',
+            'input col-span-full row-span-full flex items-center',
             hasLabel && 'pt-4',
             dense ? 'my-1' : 'my-2',
             (hasPrefix || hasSuffix) &&
@@ -325,7 +334,7 @@
       </div>
 
       {#if hasAppend}
-        <div class="append whitespace-nowrap">
+        <div class={cls('append whitespace-nowrap', theme.append, classes.append)}>
           {#if clearable && hasInputValue}
             <Button
               icon={mdiClose}
@@ -383,7 +392,7 @@
   </div>
   <div
     class={cls(
-      'hint',
+      error ? 'error' : 'hint',
       'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
       error ? 'text-red-500' : 'text-black/50 scale-y-0',
       theme.error,
@@ -396,7 +405,6 @@
 
 <style lang="postcss">
   label {
-    /* border: 1px solid rgba(255, 0, 0, 0.5); */
     width: 100%;
   }
   fieldset:focus-within label,
@@ -404,22 +412,6 @@
     transform: scale(0.75);
     width: 133%; /* offset 75% scale */
     height: 32px;
-  }
-
-  .prepend {
-    /* background: rgba(0, 255, 0, 0.1); */
-  }
-
-  .append {
-    /* background: rgba(0, 255, 0, 0.1); */
-  }
-
-  :global([slot='prefix']) {
-    /* background: rgba(0, 255, 0, 0.1); */
-  }
-
-  :global([slot='suffix']) {
-    /* background: rgba(0, 255, 0, 0.1); */
   }
 
   :global(input::placeholder),

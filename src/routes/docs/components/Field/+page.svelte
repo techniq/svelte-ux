@@ -10,14 +10,16 @@
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Button from '$lib/components/Button.svelte';
+  import Checkbox from '$lib/components/Checkbox.svelte';
   import Field from '$lib/components/Field.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Input from '$lib/components/Input.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Switch from '$lib/components/Switch.svelte';
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
+
+  let group: string[] = [];
 </script>
 
 <h1>Examples</h1>
@@ -36,6 +38,16 @@
 <Preview>
   <Field label="Is Active" let:id>
     <Switch {id} />
+  </Field>
+</Preview>
+
+<h2>Checkbox</h2>
+
+<Preview>
+  <Field label="Fruits" classes={{ input: 'flex flex-col gap-3' }} bind:value={group} clearable>
+    <Checkbox bind:group value="apple" class="w-full">Apple</Checkbox>
+    <Checkbox bind:group value="banana" class="w-full">Banana</Checkbox>
+    <Checkbox bind:group value="strawberry" class="w-full">Strawberry</Checkbox>
   </Field>
 </Preview>
 
