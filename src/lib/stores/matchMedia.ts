@@ -27,3 +27,12 @@ export const mdScreen = matchMediaWidth(768);
 export const lgScreen = matchMediaWidth(1024);
 export const xlScreen = matchMediaWidth(1280);
 export const xxlScreen = matchMediaWidth(1536);
+
+// Media types
+export const screen = matchMedia(`screen`);
+export const print = matchMedia(`print`);
+
+// Media features
+export const darkColorScheme = matchMedia(`(prefers-color-scheme: dark)`);
+export const lightColorScheme = matchMedia(`(prefers-color-scheme: light)`);
+export const motionReduce = matchMedia(`(prefers-reduced-motion: reduce)`);
