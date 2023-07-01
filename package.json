@@ -15,12 +15,14 @@
     "test:unit": "vitest",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "typedoc": "typedoc"
+    "typedoc": "typedoc",
+    "changeset": "changeset"
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^3.0.1",
     "@sveltejs/kit": "^1.20.5",
     "@sveltejs/package": "^2.1.0",
+    "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@tailwindcss/typography": "^0.5.9",
     "@types/d3-array": "^3.0.5",
     "@types/d3-format": "^3.0.1",
@@ -45,6 +47,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@changesets/cli": "^2.26.2",
     "@floating-ui/dom": "^1.4.2",
     "@fortawesome/fontawesome-common-types": "^6.4.0",
     "@vercel/analytics": "^1.0.1",
