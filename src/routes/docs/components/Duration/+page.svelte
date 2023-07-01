@@ -1,8 +1,6 @@
 <script lang="ts">
   import { subDays, subMonths, subSeconds } from 'date-fns';
 
-  import api from '$lib/components/Duration.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
   import Duration from '$lib/components/Duration.svelte';
@@ -83,7 +81,3 @@
 <Preview class="whitespace-pre">
   {JSON.stringify(getDuration(subDays(new Date(), 3)), null, 2)}
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

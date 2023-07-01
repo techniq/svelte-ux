@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/CopyButton.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import CopyButton from '$lib/components/CopyButton.svelte';
   import Preview from '$lib/components/Preview.svelte';
 </script>
@@ -57,7 +54,3 @@
     </div>
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

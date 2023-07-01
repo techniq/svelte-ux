@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiAccount } from '@mdi/js';
 
-  import api from '$lib/components/Avatar.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Avatar from '$lib/components/Avatar.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -50,7 +47,3 @@
     <Icon path={mdiAccount} class="text-white" />
   </Avatar>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

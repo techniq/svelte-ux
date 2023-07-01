@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiArrowRight } from '@mdi/js';
 
-  import api from '$lib/components/Breadcrumb.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
   import Button from '$lib/components/Button.svelte';
   import DividerDot from '$lib/components/DividerDot.svelte';
@@ -94,13 +91,13 @@
 <h2>Many items</h2>
 
 <Preview>
-  <Breadcrumb items={Array.from({ length: 20 }).map((_, i) => 'Item ' + (++i))} />
+  <Breadcrumb items={Array.from({ length: 20 }).map((_, i) => 'Item ' + ++i)} />
 </Preview>
 
 <h2>Null items (not displayed)</h2>
 
 <Preview>
-  <Breadcrumb items={Array.from({ length: 10 }).map((_, i) => i % 2 ? null : 'Item ' + (++i))} />
+  <Breadcrumb items={Array.from({ length: 10 }).map((_, i) => (i % 2 ? null : 'Item ' + ++i))} />
 </Preview>
 
 <h2>Color</h2>
@@ -130,7 +127,3 @@
     </Breadcrumb>
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

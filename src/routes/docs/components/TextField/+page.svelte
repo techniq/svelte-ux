@@ -16,9 +16,6 @@
     mdiPlus,
   } from '@mdi/js';
 
-  import api from '$lib/components/TextField.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Blockquote from '$docs/Blockquote.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
@@ -435,7 +432,3 @@
   />
 </Preview>
 -->
-
-<h1>API</h1>
-
-<ApiDocs {api} />

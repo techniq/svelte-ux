@@ -1,6 +1,5 @@
 <script lang="ts">
-	import api from '$lib/components/State.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 </script>
 
 <h1>Examples</h1>
@@ -14,7 +13,3 @@
 	{/each}
 </Toggle>
 ```
-
-<h1>API</h1>
-
-<ApiDocs {api} />

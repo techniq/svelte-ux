@@ -10,9 +10,6 @@
     startOfMonth,
   } from 'date-fns';
 
-  import api from '$lib/components/Month.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Month from '$lib/components/Month.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
@@ -216,7 +213,3 @@
     </div>
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

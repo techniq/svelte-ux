@@ -1,8 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Checkbox.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
-  import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -179,7 +175,3 @@
     <Checkbox size="lg" circle checked>Label</Checkbox>
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

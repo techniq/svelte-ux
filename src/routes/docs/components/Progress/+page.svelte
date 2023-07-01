@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Progress.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Progress from '$lib/components/Progress.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import { cls } from '$lib/utils/styles';
@@ -71,7 +68,3 @@
   />
   <input type="range" bind:value class="w-full" />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

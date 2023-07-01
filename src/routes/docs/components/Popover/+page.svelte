@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Popover.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Popover from '$lib/components/Popover.svelte';
@@ -93,7 +90,7 @@
       <Toggle let:on={open} let:toggle let:toggleOff>
         <div class="col-start-5 text-left">
           <div class="inline-block">
-            <Popover {open} on:close={toggleOff}  placement="right">
+            <Popover {open} on:close={toggleOff} placement="right">
               <div class="px-4 py-8 bg-white border shadow">Contents</div>
             </Popover>
             <Button on:click={toggle}>Right</Button>
@@ -153,7 +150,3 @@
     </div>
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

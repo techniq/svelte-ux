@@ -1,6 +1,5 @@
 <script lang="ts">
-	import api from '$lib/components/Paginate.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 
 	import ListItem from '$lib/components/ListItem.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
@@ -52,7 +51,3 @@
 		{/if}
 	</Paginate>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

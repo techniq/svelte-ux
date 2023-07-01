@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiMagnify } from '@mdi/js';
 
-  import api from '$lib/components/Menu.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
@@ -198,7 +195,3 @@
     </Button>
   </Toggle>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

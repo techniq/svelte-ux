@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Tilt.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Preview from '$lib/components/Preview.svelte';
   import Tilt from '$lib/components/Tilt.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
@@ -66,7 +63,3 @@
 </Preview>
 
 <Blockquote>Magic: The Gathering card images are copyright Wizards of the Coast, LLC.</Blockquote>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

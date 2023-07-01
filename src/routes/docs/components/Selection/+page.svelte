@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Selection.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
   import Paginate from '$lib/components/Paginate.svelte';
@@ -135,7 +132,3 @@
     selected: {JSON.stringify(selected)}
   </Selection>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

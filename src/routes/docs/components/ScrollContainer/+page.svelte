@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/ScrollContainer.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import ScrollContainer from '$lib/components/ScrollContainer.svelte';
@@ -22,7 +19,3 @@
     <Button variant="fill" color="blue" on:click={() => scrollIntoView()}>Scroll to top</Button>
   </ScrollContainer>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

@@ -1,12 +1,8 @@
 <script lang="ts">
-  import api from '$lib/components/Radio.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
-  import AppBar from '$lib/components/AppBar.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Radio from '$lib/components/Radio.svelte';
 
-  let group = undefined;
+  let group: number | undefined = undefined;
 </script>
 
 <h1>Examples</h1>
@@ -93,7 +89,3 @@
     <Radio size="lg" checked>Label</Radio>
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

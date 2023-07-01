@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiMagnify } from '@mdi/js';
 
-  import api from '$lib/components/ResponsiveMenu.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
@@ -216,7 +213,3 @@ to add `pb-safe` util class
     </Toggle>
   </Theme>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

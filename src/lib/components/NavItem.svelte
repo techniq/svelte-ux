@@ -14,6 +14,7 @@
 
   export let classes: {
     root?: string;
+    active?: string;
     icon?: string;
   } = {};
   const theme = getComponentTheme('NavItem');
@@ -26,7 +27,7 @@
   class={cls(
     'NavItem',
     'flex items-center',
-    isPathActive && 'is-active',
+    isPathActive && ['is-active', theme.active, classes.active],
     theme.root,
     classes.root,
     $$props.class

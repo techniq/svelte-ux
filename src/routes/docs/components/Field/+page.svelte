@@ -6,9 +6,6 @@
     mdiChevronDown,
   } from '@mdi/js';
 
-  import api from '$lib/components/Field.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
   import Field from '$lib/components/Field.svelte';
@@ -147,7 +144,3 @@
     </span>
   </Field>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

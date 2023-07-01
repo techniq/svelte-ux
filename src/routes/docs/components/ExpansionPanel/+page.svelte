@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiAccount } from '@mdi/js';
 
-  import api from '$lib/components/ExpansionPanel.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import ExpansionPanel from '$lib/components/ExpansionPanel.svelte';
   import ListItem from '$lib/components/ListItem.svelte';
@@ -163,7 +160,3 @@
     avatar={{ class: 'bg-gray-400 text-white/90' }}
   />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

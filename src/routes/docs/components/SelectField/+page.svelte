@@ -1,15 +1,11 @@
 <script lang="ts">
   import { mdiMagnify, mdiPlus, mdiPencil } from '@mdi/js';
 
-  import api from '$lib/components/SelectField.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
-  import Stack from '$lib/components/Stack.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
@@ -323,7 +319,3 @@
 </Preview>
 
 <div class="h-96" /> -->
-
-<h1>API</h1>
-
-<ApiDocs {api} />

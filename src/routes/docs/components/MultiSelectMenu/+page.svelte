@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiPlus } from '@mdi/js';
 
-  import api from '$lib/components/MultiSelectMenu.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import MultiSelectMenu from '$lib/components/MultiSelectMenu.svelte';
@@ -179,7 +176,3 @@
     </ToggleButton>
   </span>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

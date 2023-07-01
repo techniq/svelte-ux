@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiPlus } from '@mdi/js';
 
-  import api from '$lib/components/MultiSelect.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Form from '$lib/components/Form.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -131,7 +128,3 @@
     />
   </Form>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

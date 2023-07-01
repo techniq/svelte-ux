@@ -2,9 +2,6 @@
   import { mdiHome, mdiMagnify, mdiMenu, mdiTrashCan } from '@mdi/js';
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-  import api from '$lib/components/Button.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
@@ -276,7 +273,3 @@
     <Button icon={mdiMenu} variant="fill-outline" color="accent" />
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

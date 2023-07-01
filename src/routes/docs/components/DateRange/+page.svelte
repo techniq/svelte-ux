@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/DateRange.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Preview from '$lib/components/Preview.svelte';
   import DateRange from '$lib/components/DateRange.svelte';
   import { PeriodType } from '$lib/utils/date';
@@ -40,7 +37,3 @@
 <Preview>
   <DateRange bind:selected />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

@@ -1,9 +1,6 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
-  import { mdiMenu, mdiTrashCan, mdiChevronDown } from '@mdi/js';
-
-  import api from '$lib/components/Button.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
+  import { mdiChevronDown } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
@@ -12,10 +9,7 @@
   import Menu from '$lib/components/Menu.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
   import ToggleButton from '$lib/components/ToggleButton.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -112,7 +106,3 @@
     </ToggleButton>
   </ButtonGroup>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

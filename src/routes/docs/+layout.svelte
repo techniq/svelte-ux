@@ -6,6 +6,7 @@
     mdiFileDocumentEditOutline,
   } from '@mdi/js';
 
+  import ApiDocs from '$lib/components/ApiDocs.svelte';
   import Code from '$lib/components/Code.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import TableOfContents from '$lib/components/TableOfContents.svelte';
@@ -18,7 +19,7 @@
   $: title = $page.data.meta?.title ?? name;
   $: pageUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
-  $: ({ description, features, related, hideUsage, hideTableOfContents, source, pageSource } =
+  $: ({ description, features, related, hideUsage, hideTableOfContents, source, pageSource, api } =
     $page.data.meta ?? {});
 
   function getRelated(r: string) {
@@ -102,6 +103,11 @@
             </h2>
           </div>
         {/each}
+      {/if}
+
+      {#if api}
+        <h1>API</h1>
+        <ApiDocs {api} />
       {/if}
     </div>
 

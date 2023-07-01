@@ -1,9 +1,6 @@
 <script lang="ts">
-  import api from '$lib/components/Grid.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
-	import Grid from '$lib/components/Grid.svelte';
-	import Preview from '$lib/components/Preview.svelte';
+  import Grid from '$lib/components/Grid.svelte';
+  import Preview from '$lib/components/Preview.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -82,7 +79,3 @@
     <div class="border">item</div>
   </Grid>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

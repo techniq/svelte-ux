@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/ScrollingNumber.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Preview from '$lib/components/Preview.svelte';
   import ScrollingNumber from '$lib/components/ScrollingNumber.svelte';
   import Button from '$lib/components/Button.svelte';
@@ -15,7 +12,7 @@
   const timer = timerStore({
     initial: 60,
     onTick: (value) => {
-      if (value <= 0) {
+      if (value == null || value <= 0) {
         timer.stop();
         return value;
       } else {
@@ -139,7 +136,7 @@
 <h2>Countdown</h2>
 
 <Preview>
-  <ScrollingNumber value={$timer} class="text-6xl tabular-nums" />
+  <ScrollingNumber value={$timer ?? 0} class="text-6xl tabular-nums" />
   <ButtonGroup variant="fill" class="ml-3">
     <Button on:click={timer.start} disabled={$isRunning}>Start</Button>
     <Button on:click={timer.stop} disabled={!$isRunning}>Stop</Button>
@@ -164,7 +161,3 @@
     <Button on:click={() => (value += 100)}>+100</Button>
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

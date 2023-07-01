@@ -1,14 +1,9 @@
 <script lang="ts">
-  import api from '$lib/components/SpringValue.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
-  import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SpringValue from '$lib/components/SpringValue.svelte';
-  import { formatNumberAsStyle } from '$lib/utils/number';
 
-  let value = 0;
+  let value: number | null = 0;
 
   function update() {
     value = Math.random() * 10;
@@ -42,7 +37,7 @@
 
 <Preview>
   <SpringValue {value} let:value>
-    <span style:color={value < 5 ? 'red' : 'green'}>{value}</span>
+    <span style:color={value == null || value < 5 ? 'red' : 'green'}>{value}</span>
   </SpringValue>
 </Preview>
 
@@ -51,7 +46,3 @@
 <Preview>
   <SpringValue {value} disabled />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

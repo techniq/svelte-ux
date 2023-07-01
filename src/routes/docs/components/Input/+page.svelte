@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Input.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Field from '$lib/components/Field.svelte';
   import Input from '$lib/components/Input.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -95,7 +92,3 @@
 <Preview>
   <Input placeholder="Please enter your birthday" mask="mm/dd/yyyy" replace="dmyh" />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

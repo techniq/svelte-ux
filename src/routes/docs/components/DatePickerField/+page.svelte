@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiCalendar } from '@mdi/js';
 
-  import api from '$lib/components/DatePickerField.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Preview from '$lib/components/Preview.svelte';
   import DatePickerField from '$lib/components/DatePickerField.svelte';
 
@@ -79,7 +76,3 @@
 <Preview>
   <DatePickerField label="Start Date" clearable />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

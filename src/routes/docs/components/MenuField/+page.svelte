@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify, mdiRefresh } from '@mdi/js';
 
-  import api from '$lib/components/MenuField.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import MenuField from '$lib/components/MenuField.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
@@ -118,7 +115,3 @@
 <Preview>
   <MenuField {options} classes={{ container: 'bg-blue-50 rounded-full border-0 text-blue-500' }} />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

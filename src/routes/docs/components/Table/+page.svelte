@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Table.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Paginate from '$lib/components/Paginate.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
@@ -353,7 +350,3 @@
     </tbody>
   </Table>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

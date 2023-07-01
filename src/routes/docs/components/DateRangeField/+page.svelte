@@ -3,9 +3,6 @@
 
   import { mdiCalendarRange } from '@mdi/js';
 
-  import api from '$lib/components/DateRangeField.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Preview from '$lib/components/Preview.svelte';
   import DateRangeField from '$lib/components/DateRangeField.svelte';
 
@@ -42,7 +39,7 @@
 <h2>Icon</h2>
 
 <Preview>
-  <DateRangeField bind:value  icon={mdiCalendarRange} />
+  <DateRangeField bind:value icon={mdiCalendarRange} />
 </Preview>
 
 <h2>Stepper</h2>
@@ -60,9 +57,5 @@
 <h2>Stepper w/ rounded & filled & centered</h2>
 
 <Preview>
-  <DateRangeField  bind:value stepper rounded filled center />
+  <DateRangeField bind:value stepper rounded filled center />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

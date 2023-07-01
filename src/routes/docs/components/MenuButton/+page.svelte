@@ -1,10 +1,6 @@
 <script lang="ts">
-  import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify, mdiRefresh } from '@mdi/js';
+  import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify } from '@mdi/js';
 
-  import api from '$lib/components/MenuButton.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
-  import Button from '$lib/components/Button.svelte';
   import MenuButton from '$lib/components/MenuButton.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -120,7 +116,3 @@
     </menu>
   </MenuButton>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

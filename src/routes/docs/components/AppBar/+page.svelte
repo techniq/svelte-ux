@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiRefresh } from '@mdi/js';
 
-  import api from '$lib/components/AppBar.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -47,7 +44,3 @@
     <AppBar title="Example" class="bg-purple-500 text-white" />
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

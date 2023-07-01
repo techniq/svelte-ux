@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Theme.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Preview from '$lib/components/Preview.svelte';
   import Button from '$lib/components/Button.svelte';
   import Menu from '$lib/components/Menu.svelte';
@@ -36,7 +33,3 @@
     </Toggle>
   </Theme>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

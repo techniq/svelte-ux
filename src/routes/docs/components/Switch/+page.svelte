@@ -1,16 +1,12 @@
 <script lang="ts">
   import { mdiCheck, mdiClose } from '@mdi/js';
 
-  import api from '$lib/components/Switch.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
-  import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Switch from '$lib/components/Switch.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
-  let checked = null;
+  let checked: boolean | null = null;
 </script>
 
 <h1>Examples</h1>
@@ -101,7 +97,3 @@
     />
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

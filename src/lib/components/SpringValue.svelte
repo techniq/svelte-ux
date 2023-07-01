@@ -7,7 +7,7 @@
 
   export let value: T | 0;
   export let format: FormatType = undefined;
-  export let options: SpringOptions;
+  export let options: SpringOptions = undefined;
   export let disabled = false;
 
   const springValue = spring(value, options);

@@ -3,13 +3,9 @@
 
   import { mdiCalendarStart, mdiCalendarEnd } from '@mdi/js';
 
-  import api from '$lib/components/DateField.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import DateField from '$lib/components/DateField.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
 
   let value;
 </script>
@@ -83,7 +79,3 @@
 <Preview>
   <DateField label="Birth date" on:change={(e) => console.log(e.detail)} />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

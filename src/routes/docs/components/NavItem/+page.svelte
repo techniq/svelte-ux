@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/NavItem.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import NavItem from '$lib/components/NavItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
@@ -23,10 +20,6 @@
     text="NavItem"
     currentUrl={$page.url}
     path="/docs/components/NavItem"
-    classes={{ root: 'pl-3', active: 'bg-accent-500 rounded' }}
+    classes={{ root: 'pl-3', active: 'bg-accent-50 text-accent-500' }}
   />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

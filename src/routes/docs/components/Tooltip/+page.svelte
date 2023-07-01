@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiTrashCan } from '@mdi/js';
 
-  import api from '$lib/components/Tooltip.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
@@ -96,7 +93,3 @@
 </Preview>
 
 <!-- TODO: Slot with custom transition -->
-
-<h1>API</h1>
-
-<ApiDocs {api} />

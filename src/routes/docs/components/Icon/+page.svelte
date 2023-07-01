@@ -11,9 +11,6 @@
   } from '@mdi/js';
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-  import api from '$lib/components/Icon.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
@@ -132,7 +129,3 @@
     </Icon>
   </Tooltip>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

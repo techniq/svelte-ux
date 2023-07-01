@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiFilterVariant } from '@mdi/js';
 
-  import api from '$lib/components/Stack.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Stack from '$lib/components/Stack.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -210,7 +207,3 @@
     />
   </Stack>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

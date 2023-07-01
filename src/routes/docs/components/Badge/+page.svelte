@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiFilterVariant, mdiPlus, mdiMinus } from '@mdi/js';
 
-  import api from '$lib/components/Badge.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Badge from '$lib/components/Badge.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
@@ -281,7 +278,3 @@
     </Preview>
   </div>
 </div>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

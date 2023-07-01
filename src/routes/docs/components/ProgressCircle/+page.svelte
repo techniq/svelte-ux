@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/ProgressCircle.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import ProgressCircle from '$lib/components/ProgressCircle.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
@@ -186,7 +183,3 @@
     <ProgressCircle class="text-orange-500 [--track-color:theme(colors.orange.100)]" track />
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

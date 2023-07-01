@@ -1,7 +1,5 @@
 <script lang="ts">
   import { z } from 'zod';
-  import api from '$lib/components/Form.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
 
   import Button from '$lib/components/Button.svelte';
   import Form from '$lib/components/Form.svelte';
@@ -9,8 +7,8 @@
   import TextField from '$lib/components/TextField.svelte';
 
   let data = {
-    name: 'Sean Lynch'
-  }
+    name: 'Sean Lynch',
+  };
 
   const schema = z.object({
     firstName: z.string().nonempty('First name is required').max(10),
@@ -20,7 +18,7 @@
   let schemaData = {
     firstName: '',
     lastName: '',
-  }
+  };
 </script>
 
 <h1>Examples</h1>
@@ -40,7 +38,10 @@
     let:current
     let:refresh
   >
-    <TextField label="Name" value={draft.name} on:change={(e) => {
+    <TextField
+      label="Name"
+      value={draft.name}
+      on:change={(e) => {
         draft.name = e.detail.value;
         // Call "refresh" as often as you want "current" updated (on:blur, etc)
         refresh();
@@ -60,13 +61,11 @@
 <h2>Form submit button</h2>
 
 <Preview>
-  <Form
-    initial={data}
-    on:change={(e) => (data = e.detail)}
-    let:draft
-    let:state
-  >
-    <TextField label="Name" value={draft.name} on:change={(e) => {
+  <Form initial={data} on:change={(e) => (data = e.detail)} let:draft let:state>
+    <TextField
+      label="Name"
+      value={draft.name}
+      on:change={(e) => {
         draft.name = e.detail.value;
       }}
     />
@@ -94,16 +93,16 @@
         label="First Name"
         value={draft.firstName}
         on:change={(e) => {
-            draft.firstName = e.detail.value;
-          }}
+          draft.firstName = e.detail.value;
+        }}
         error={errors.firstName}
       />
       <TextField
         label="Last Name"
         value={draft.lastName}
         on:change={(e) => {
-            draft.lastName = e.detail.value;
-          }}
+          draft.lastName = e.detail.value;
+        }}
         error={errors.lastName}
       />
     </div>
@@ -115,7 +114,3 @@
     </div>
   </Form>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

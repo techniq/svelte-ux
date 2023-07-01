@@ -1,6 +1,5 @@
 <script lang="ts">
-	import api from '$lib/components/Pagination.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
 
 	import Button from '$lib/components/Button.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
@@ -76,7 +75,3 @@
 		</div>
 	</Pagination>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

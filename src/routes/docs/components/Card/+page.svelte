@@ -1,9 +1,6 @@
 <script lang="ts">
   import { mdiDotsVertical } from '@mdi/js';
 
-  import api from '$lib/components/Card.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import AppBar from '$lib/components/AppBar.svelte';
   import Avatar from '$lib/components/Avatar.svelte';
   import Button from '$lib/components/Button.svelte';
@@ -113,14 +110,10 @@
       </div>
     </Card>
     <Card title="Title" subheading="with content">
-      <div slot="contents" class="bg-red-500">
-        Contents
-      </div>
+      <div slot="contents" class="bg-red-500">Contents</div>
     </Card>
     <Card title="Title" subheading="with tall content">
-      <div slot="contents" class="bg-red-500 h-40">
-        Contents
-      </div>
+      <div slot="contents" class="bg-red-500 h-40">Contents</div>
     </Card>
   </div>
 </Preview>
@@ -130,7 +123,3 @@
 <Preview>
   <Card title="Title" loading />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Drawer.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
@@ -250,7 +247,3 @@
     <Button on:click={toggle}>Click me</Button>
   </Toggle>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

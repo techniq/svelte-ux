@@ -1,15 +1,11 @@
 <script lang="ts">
-  import api from '$lib/components/TweenedValue.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
   import * as easings from 'svelte/easing';
 
-  import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
-  import { format } from '$lib/utils/format';
 
-  let value = 0;
+  let value: number | null = 0;
 
   function update() {
     value = Math.random() * 10;
@@ -43,7 +39,7 @@
 
 <Preview>
   <TweenedValue {value} let:value>
-    <span style:color={value < 5 ? 'red' : 'green'}>{value}</span>
+    <span style:color={value == null || value < 5 ? 'red' : 'green'}>{value}</span>
   </TweenedValue>
 </Preview>
 
@@ -52,7 +48,3 @@
 <Preview>
   <TweenedValue {value} disabled />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

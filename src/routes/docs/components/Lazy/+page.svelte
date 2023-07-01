@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/Lazy.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Lazy from '$lib/components/Lazy.svelte';
   import ListItem from '$lib/components/ListItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -36,7 +33,3 @@
     {/each}
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

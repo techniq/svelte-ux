@@ -2,9 +2,6 @@
   import { fade } from 'svelte/transition';
   import { mdiArrowRight } from '@mdi/js';
 
-  import api from '$lib/components/Collapse.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Card from '$lib/components/Card.svelte';
   import Collapse from '$lib/components/Collapse.svelte';
@@ -176,7 +173,3 @@
     {/each}
   </Card>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

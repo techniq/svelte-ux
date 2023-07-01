@@ -1,7 +1,4 @@
 <script lang="ts">
-  import api from '$lib/components/NumberStepper.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import NumberStepper from '$lib/components/NumberStepper.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
@@ -40,7 +37,3 @@
 <Preview>
   <NumberStepper min={0} max={10} />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

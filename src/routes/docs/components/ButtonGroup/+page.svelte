@@ -7,9 +7,6 @@
     mdiBookmark,
   } from '@mdi/js';
 
-  import api from '$lib/components/Button.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Menu from '$lib/components/Menu.svelte';
@@ -388,7 +385,3 @@
     </ButtonGroup>
   </div>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

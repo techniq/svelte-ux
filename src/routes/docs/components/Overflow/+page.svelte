@@ -1,9 +1,4 @@
 <script lang="ts">
-  import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
-
-  import api from '$lib/components/Overflow.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Button from '$lib/components/Button.svelte';
   import Overflow from '$lib/components/Overflow.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -55,7 +50,3 @@
     <Button icon={mdiChevronRight} class="absolute top-1/2 right-0 -translate-y-1/2" size="sm" />
   </Overflow>
 </Preview> -->
-
-<h1>API</h1>
-
-<ApiDocs {api} />

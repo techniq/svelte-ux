@@ -1,9 +1,4 @@
 <script lang="ts">
-  import { mdiMagnify, mdiPlus } from '@mdi/js';
-
-  import api from '$lib/components/RangeSlider.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Preview from '$lib/components/Preview.svelte';
   import RangeSlider from '$lib/components/RangeSlider.svelte';
 
@@ -58,7 +53,3 @@
 <Preview>
   <RangeSlider max={100} step={10} />
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

@@ -8,9 +8,6 @@
     endOfQuarter,
   } from 'date-fns';
 
-  import api from '$lib/components/MonthList.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
   import Grid from '$lib/components/Grid.svelte';
   import MonthList from '$lib/components/MonthList.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -85,13 +82,7 @@
 <h2>Disabled months w/ array</h2>
 
 <Preview>
-  <MonthList
-    disabledMonths={[
-      subMonths(new Date(), 2),
-      new Date(),
-      addMonths(new Date(), 2),
-    ]}
-  />
+  <MonthList disabledMonths={[subMonths(new Date(), 2), new Date(), addMonths(new Date(), 2)]} />
 </Preview>
 
 <h2>Disabled months w/ range</h2>
@@ -120,13 +111,7 @@
 <h2>Selected w/ array</h2>
 
 <Preview>
-  <MonthList
-    selected={[
-      subMonths(new Date(), 2),
-      new Date(),
-      addMonths(new Date(), 2),
-    ]}
-  />
+  <MonthList selected={[subMonths(new Date(), 2), new Date(), addMonths(new Date(), 2)]} />
 </Preview>
 
 <h2>Selected w/ range</h2>
@@ -213,7 +198,3 @@
     />
   </Grid>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />

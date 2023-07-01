@@ -1,10 +1,9 @@
 <script lang="ts">
   import { mdiFilterVariant } from '@mdi/js';
 
-	import Button from '$lib/components/Button.svelte';
-	import Stack from '$lib/components/Stack.svelte';
-	import Preview from '$lib/components/Preview.svelte';
-	import SectionDivider from '$lib/components/SectionDivider.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -199,7 +198,11 @@
 <Preview>
   <div class="inline-grid">
     <Button icon={mdiFilterVariant} class="col-span-full row-span-full border p-3" />
-    <div class="col-span-full row-span-full self-start justify-self-end bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center border border-white" />
-    <div class="col-span-full row-span-full self-end justify-self-end bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center border border-white" />
+    <div
+      class="col-span-full row-span-full self-start justify-self-end bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center border border-white"
+    />
+    <div
+      class="col-span-full row-span-full self-end justify-self-end bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center border border-white"
+    />
   </div>
 </Preview>

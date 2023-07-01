@@ -1,10 +1,6 @@
 <script lang="ts">
   import { mdiInbox, mdiCheckCircleOutline } from '@mdi/js';
 
-  import api from '$lib/components/Notification.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-
-  import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -51,8 +47,7 @@
       </div>
       <div slot="title">Discussion moved</div>
       <div slot="description" class="w-80">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit oluptatum
-        tenetur.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit oluptatum tenetur.
       </div>
       <div slot="actions">
         <Button color="blue">Undo</Button>
@@ -68,9 +63,7 @@
   <Stack vertical class="w-[640px]">
     <Notification actions="split">
       <div slot="title">Receive notifications</div>
-      <div slot="description">
-        Notifications may include alerts, sounds, and badges
-      </div>
+      <div slot="description">Notifications may include alerts, sounds, and badges</div>
       <div slot="actions" class="h-full">
         <Stack vertical class="border-l divide-y h-full">
           <Button color="blue">Reply</Button>
@@ -80,7 +73,3 @@
     </Notification>
   </Stack>
 </Preview>
-
-<h1>API</h1>
-
-<ApiDocs {api} />
