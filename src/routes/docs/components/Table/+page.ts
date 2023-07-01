@@ -8,7 +8,7 @@ export async function load() {
       api,
       source,
       pageSource,
-      related: ['actions/table'],
+      related: ['actions/table', 'actions/dataBackground'],
     },
   };
 }
