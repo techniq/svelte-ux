@@ -25,9 +25,7 @@
 
 <div class="ApiDocs grid gap-8">
   <div>
-    <h2 id="props" class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50">
-      Props
-    </h2>
+    <h2 id="props" class="text-xs uppercase leading-8 tracking-widest text-black/50">Props</h2>
     <div class="border">
       {#each api.props as prop}
         <ListItem
@@ -109,9 +107,7 @@
   </div>
 
   <div>
-    <h2 id="slots" class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50">
-      Slots
-    </h2>
+    <h2 id="slots" class="text-xs uppercase leading-8 tracking-widest text-black/50">Slots</h2>
     <div class="border">
       {#each api.slots as slot}
         <ListItem
@@ -152,12 +148,7 @@
   </div>
 
   <div>
-    <h2
-      id="events"
-      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/40"
-    >
-      Events
-    </h2>
+    <h2 id="events" class="text-xs uppercase leading-8 tracking-widest text-black/40">Events</h2>
     <div class="border">
       {#each api.events as event}
         <ListItem
@@ -189,10 +180,7 @@
   </div>
 
   <div>
-    <h2
-      id="module_exports"
-      class="text-xs uppercase text-secondary leading-8 tracking-widest text-black/50"
-    >
+    <h2 id="module_exports" class="text-xs uppercase leading-8 tracking-widest text-black/50">
       Module Exports
     </h2>
     <div class="border">
