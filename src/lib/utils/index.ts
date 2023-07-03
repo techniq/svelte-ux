@@ -6,6 +6,7 @@ export * from './file';
 export * from './format';
 export * from './json';
 export * from './logger';
+export { round, clamp, randomInteger } from './number';
 export { cls } from './styles';
 export { uniqueId } from './string';
 
