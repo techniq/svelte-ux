@@ -36,6 +36,6 @@ export function isActive(currentUrl: URL, path: string) {
     return currentUrl.pathname === path;
   } else {
     // Matches full path next character is `/`
-    return path.match(currentUrl.pathname + '($|\\/)') != null;
+    return currentUrl.pathname.match(path + '($|\\/)') != null;
   }
 }
