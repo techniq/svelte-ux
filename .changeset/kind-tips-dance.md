@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Add round(), clamp(), and randomInteger() number utils to top-level export
+Add round() and clamp() number utils to top-level export

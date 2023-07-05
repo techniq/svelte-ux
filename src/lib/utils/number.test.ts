@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { clamp, randomInteger, round } from './number';
+import { clamp, round } from './number';
 
 describe('clamp()', () => {
   it('no change', () => {
@@ -45,12 +45,5 @@ describe('round()', () => {
     const original = 123.456;
     const actual = round(original, 2);
     expect(actual).equal(123.46);
-  });
-});
-
-describe('randomInteger()', () => {
-  it('basic', () => {
-    const actual = randomInteger(10, 50);
-    expect(actual).greaterThanOrEqual(10).lessThanOrEqual(50);
   });
 });
