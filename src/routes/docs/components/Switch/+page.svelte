@@ -20,6 +20,21 @@
   </div>
 </Preview>
 
+<h2>Label</h2>
+
+<Preview>
+  <div class="grid gap-2">
+    <label class="flex gap-2 items-center text-sm">
+      Click me
+      <Switch />
+    </label>
+    <label class="flex gap-2 items-center text-sm">
+      <Switch />
+      Click me
+    </label>
+  </div>
+</Preview>
+
 <h2>Icons</h2>
 
 <Preview>
