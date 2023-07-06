@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import NavItem from '$lib/components/NavItem.svelte';
+  import { mdiFormatListBulleted, mdiHome, mdiPalette } from '@mdi/js';
 
   const components = {
     App: ['AppBar', 'AppLayout', 'NavItem'],
@@ -115,8 +116,9 @@
   const utils = ['cls', 'format', 'json', 'Logger'];
 </script>
 
-<NavItem text="Getting Started" currentUrl={$page.url} path="/" />
-<NavItem text="Customization" currentUrl={$page.url} path="/customization" />
+<NavItem text="Getting Started" icon={mdiHome} currentUrl={$page.url} path="/" />
+<NavItem text="Customization" icon={mdiPalette} currentUrl={$page.url} path="/customization" />
+<NavItem text="Changelog" icon={mdiFormatListBulleted} currentUrl={$page.url} path="/changelog" />
 
 <h1>Components</h1>
 {#each Object.entries(components) as [header, items]}
