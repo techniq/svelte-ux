@@ -655,3 +655,12 @@ export function localToUtcDate(date: Date | string | null | undefined) {
   );
   return d;
 }
+
+/**
+ * Generate a random Date between `from` and `to` (exclusive)
+ */
+export function randomDate(from: Date, to: Date) {
+  const fromTime = from.getTime();
+  const toTime = to.getTime();
+  return new Date(fromTime + Math.random() * (toTime - fromTime));
+}
