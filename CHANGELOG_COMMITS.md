@@ -1,12 +1,32 @@
-# svelte-ux
+# Hello
+
+## next
+
+### Commits
+
+- [ViewSourceButton] Improve code example dialogs on mobile ([d74c23](https://github.com/techniq/svelte-ux/commit/d74c2357e81b92715c7aeb87d2aad6ecdf928805))
+- Add "npm run publish" to run "changeset publish" ([af51ac](https://github.com/techniq/svelte-ux/commit/af51ac1507453aa84e00b618c81f87c41485c6e3))
+- [Switch] Add label example ([1d4ea8](https://github.com/techniq/svelte-ux/commit/1d4ea8129204f313c4e557f473f64a8e5194380b))
+- Add changelog route to show CHANGELOG.md contents ([b028cb](https://github.com/techniq/svelte-ux/commit/b028cb7619ad4c7ef166cbdaadccda4cfa40f3ec))
 
 ## 0.43.5
 
-### Patch Changes
+### Commits
 
-- Add round() and clamp() number utils to top-level export ([`2eb5dd6`](https://github.com/techniq/svelte-ux/commit/2eb5dd6f4c46181656b550d484269a96aea04d61))
-
-- Fix routing isActive() with nested paths ([`3971b79`](https://github.com/techniq/svelte-ux/commit/3971b794a4871f718316982875f7a90578935923))
+- Add randomDate() util ([f0fefa](https://github.com/techniq/svelte-ux/commit/f0fefa2e59bd7b97e93e9e1f93090ce71c313b9a))
+- Remove randomInteger() from top-level exports. Recommend d3-random's randomInt() ([69c520](https://github.com/techniq/svelte-ux/commit/69c520a926fcc49869fbc21d9f417c732b7eeb5e))
+- Fix routing isActive() with nested paths. Add tests ([3971b7](https://github.com/techniq/svelte-ux/commit/3971b794a4871f718316982875f7a90578935923))
+- Add "npm run version" to generate changelog from changesets ([381e28](https://github.com/techniq/svelte-ux/commit/381e282ef8455474447b9490fdad8b4ea0bb9601))
+- Add pagination example ([0d15fb](https://github.com/techniq/svelte-ux/commit/0d15fbf058b58f3ebb4ea3a0fbc0fe203f1d5faf))
+- Add round(), clamp(), and randomInteger() number utils to top-level export ([2eb5dd](https://github.com/techniq/svelte-ux/commit/2eb5dd6f4c46181656b550d484269a96aea04d61))
+- Update docs ([c1ee10](https://github.com/techniq/svelte-ux/commit/c1ee10d0bdf40b2d01687c57f9abdf2a56466d4a))
+- Improve display of related components/etc ([6ea40f](https://github.com/techniq/svelte-ux/commit/6ea40fd45f983b0fa0d15db9888972cc28564435))
+- Remove vite-plugin-sveld reference from `global.d.ts` to `app.d.ts` ([1e6dae](https://github.com/techniq/svelte-ux/commit/1e6dae8f22f4deaa495987481205887f9594b503))
+- Import api (sveld) docs from each load() and handle via docs +layout.svelte to simplify all examples ([27851b](https://github.com/techniq/svelte-ux/commit/27851b17b5c00f1d79ead8c4b8dda7123d1362de))
+- Fix changeset changelog repo ([8cde69](https://github.com/techniq/svelte-ux/commit/8cde69ba25c9d955cce7b2288a302ee203db86dd))
+- Setup changesets. Issue #1 ([ca0b89](https://github.com/techniq/svelte-ux/commit/ca0b89563c80ba4bbe9cedc8888e3ad1641ba54a))
+- Also add landscape and portrait media queries ([9a321d](https://github.com/techniq/svelte-ux/commit/9a321dbc074f10700915cce75733d840cef00062))
+- Add convenient print, screen, dark/light color scheme, and reduce motion media queries ([b560fe](https://github.com/techniq/svelte-ux/commit/b560feff29a0e2ac107d851e2fa56cb6bfd2989b))
 
 ## 0.43.4
 
