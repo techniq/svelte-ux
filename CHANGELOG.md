@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.43.6
+
+### Patch Changes
+
+- Add `maxDepth` prop to TableOfContents to set maximum header depth traversed (h1, h2, ...) ([`6143fae`](https://github.com/techniq/svelte-ux/commit/6143fae06700a266f12f43178e9a7a0062ba2e1b))
+
+- [Docs] Improve code example dialogs on mobile ([`d74c235`](https://github.com/techniq/svelte-ux/commit/d74c2357e81b92715c7aeb87d2aad6ecdf928805))
+
 ## 0.43.5
 
 ### Patch Changes
