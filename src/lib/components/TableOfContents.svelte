@@ -9,6 +9,7 @@
   import { getComponentTheme } from './theme';
 
   export let element = 'main';
+  export let maxDepth = 6;
 
   let activeHeadingId = '';
   let headings = [];
@@ -25,7 +26,8 @@
   onMount(() => {
     const el = document.querySelector(element);
 
-    headings = Array.from(el?.querySelectorAll('h1,h2,h3,h4,h5,h6') ?? [], (el) => {
+    const selector = Array.from({ length: maxDepth }, (_, i) => 'h' + ++i).join(','); // h1,h2,...
+    headings = Array.from(el?.querySelectorAll(selector) ?? [], (el) => {
       if (!el.hasAttribute('id')) {
         el.setAttribute('id', el.innerHTML.toLowerCase().replaceAll(' ', '-'));
       }
