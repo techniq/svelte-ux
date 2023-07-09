@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.43.10
+
+### Patch Changes
+
+- [MenuField] Enable autoPlacement and resize menuProps by default ([`13b7220`](https://github.com/techniq/svelte-ux/commit/13b72209765d041ca80aeadbd3e599c3d264dd95))
+
 ## 0.43.9
 
 ### Patch Changes
