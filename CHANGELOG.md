@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.43.8
+
+### Patch Changes
+
+- [MenuField] Add group options and theme support. Support hidding menu icon ([`508d656`](https://github.com/techniq/svelte-ux/commit/508d656c91cad1ed341ae5e15c9c56996688af1c))
+
 ## 0.43.7
 
 ### Patch Changes
