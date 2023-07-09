@@ -16,7 +16,10 @@
 
   export let options: Options;
   export let value: any = null;
-  export let menuProps: ComponentProps<Menu> | undefined = undefined;
+  export let menuProps: ComponentProps<Menu> | undefined = {
+    autoPlacement: true,
+    resize: true,
+  };
   export let menuIcon = mdiMenuDown;
   /** If true, show left/right buttons to step through options */
   export let stepper = false;
