@@ -18,6 +18,16 @@
     { label: 'Copy', value: 'copy', icon: mdiContentCopy },
     { label: 'Paste', value: 'paste', icon: mdiContentPaste },
   ];
+
+  const optionsWithGroup = [
+    { label: 'One', value: 1, group: 'First' },
+    { label: 'Two', value: 2, group: 'First' },
+    { label: 'Three', value: 3, group: 'Second' },
+    { label: 'Four', value: 4, group: 'Second' },
+    { label: 'Five', value: 5, group: 'Second' },
+    { label: 'Six', value: 6, group: 'Third' },
+    { label: 'Seven', value: 7, group: 'Third' },
+  ];
 </script>
 
 <h1>Examples</h1>
@@ -56,6 +66,12 @@
 
 <Preview>
   <MenuField options={optionsWithIcons} />
+</Preview>
+
+<h2>grouped options</h2>
+
+<Preview>
+  <MenuField options={optionsWithGroup} />
 </Preview>
 
 <h2>menuProps</h2>
@@ -113,7 +129,7 @@
 <h2>stepper</h2>
 
 <Preview>
-  <MenuField {options} stepper />
+  <MenuField {options} stepper classes={{ menuIcon: 'hidden' }} />
 </Preview>
 
 <h2>style</h2>

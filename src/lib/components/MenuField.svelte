@@ -10,8 +10,9 @@
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Button from './Button.svelte';
+  import { getComponentTheme } from './theme';
 
-  type Options = Array<{ label: string; value: any; icon?: string }>;
+  type Options = Array<{ label: string; value: any; icon?: string; group?: string }>;
 
   export let options: Options;
   export let value: any = null;
@@ -19,6 +20,12 @@
   export let menuIcon = mdiMenuDown;
   /** If true, show left/right buttons to step through options */
   export let stepper = false;
+
+  export let classes: ComponentProps<Field>['classes'] & {
+    menuIcon?: string;
+    group?: string;
+  } = {};
+  const theme = getComponentTheme('MenuField');
 
   let open = false;
   $: selected = options?.find((x) => x.value === value);
@@ -52,7 +59,7 @@
 <Field
   class="cursor-pointer"
   {...$$restProps}
-  classes={{ input: 'overflow-hidden', ...$$restProps.classes }}
+  classes={{ input: 'overflow-hidden', ...$$props.classes }}
   on:click={() => (open = !open)}
 >
   <slot name="selection">
@@ -73,9 +80,14 @@
 
     <Icon
       path={menuIcon}
-      class={cls('text-black/50 mr-1 transform transition-all duration-300', {
-        '-rotate-180': open,
-      })}
+      class={cls(
+        'text-black/50 mr-1 transform transition-all duration-300',
+        {
+          '-rotate-180': open,
+        },
+        theme.menuIcon,
+        classes.menuIcon
+      )}
       on:click={() => (open = !open)}
     />
 
@@ -95,7 +107,20 @@
   >
     <slot {options} {selected} close={() => (open = false)} setValue={(val) => (value = val)}>
       <menu>
-        {#each options as option}
+        {#each options as option, index}
+          {@const previousOption = options[index - 1]}
+          {#if option.group && option.group !== previousOption?.group}
+            <div
+              class={cls(
+                'group-header text-xs leading-8 tracking-widest text-black/50 px-2',
+                theme.group,
+                classes.group
+              )}
+            >
+              {option.group}
+            </div>
+          {/if}
+
           <MenuItem icon={option.icon} on:click={() => (value = option.value)}>
             {option.label}
           </MenuItem>
