@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.43.9
+
+### Patch Changes
+
+- [MenuField] Support passing `option` and `selected` classes. Adjust px when using groups ([`baac1c4`](https://github.com/techniq/svelte-ux/commit/baac1c4bbb51ecdd2ab2bfe1b34b40ce2955b443))
+
 ## 0.43.8
 
 ### Patch Changes
