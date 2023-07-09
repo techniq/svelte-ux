@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type { ComponentProps } from '$lib/types';
-  import { mdiMenuDown } from '@mdi/js';
+  import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js';
 
   import { cls } from '../utils/styles';
 
@@ -9,24 +9,51 @@
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
+  import Button from './Button.svelte';
 
-  export let options: Array<{ label: string; value: any; icon?: string }>;
+  type Options = Array<{ label: string; value: any; icon?: string }>;
+
+  export let options: Options;
   export let value: any = null;
   export let menuProps: ComponentProps<Menu> | undefined = undefined;
   export let menuIcon = mdiMenuDown;
-  $: selected = options?.find((x) => x.value === value);
+  /** If true, show left/right buttons to step through options */
+  export let stepper = false;
 
   let open = false;
+  $: selected = options?.find((x) => x.value === value);
+
+  $: previous = () => {
+    const index = options.findIndex((o) => o.value === value);
+    if (index === 0 || index === -1) {
+      // If first item, or no selected value yet, return last item
+      return options[options.length - 1].value;
+    } else {
+      // Previous item
+      return options[index - 1].value;
+    }
+  };
+
+  $: next = () => {
+    const index = options.findIndex((x) => x.value === value);
+    if (index === options.length - 1) {
+      // First value
+      return options[0].value;
+    } else {
+      // Next value
+      return options[index + 1].value;
+    }
+  };
 
   const dispatch = createEventDispatcher();
   $: dispatch('change', { value });
 </script>
 
 <Field
-  on:click={() => (open = !open)}
   class="cursor-pointer"
   {...$$restProps}
   classes={{ input: 'overflow-hidden', ...$$restProps.classes }}
+  on:click={() => (open = !open)}
 >
   <slot name="selection">
     <div class="truncate text-sm">
@@ -34,7 +61,12 @@
     </div>
   </slot>
 
-  <slot slot="prepend" name="prepend" />
+  <span slot="prepend">
+    {#if stepper}
+      <Button icon={mdiChevronLeft} on:click={() => (value = previous())} class="mr-2" size="sm" />
+    {/if}
+    <slot name="prepend" />
+  </span>
 
   <span slot="append" class="flex items-center">
     <slot name="append" />
@@ -46,6 +78,10 @@
       })}
       on:click={() => (open = !open)}
     />
+
+    {#if stepper}
+      <Button icon={mdiChevronRight} on:click={() => (value = next())} class="mr-2" size="sm" />
+    {/if}
   </span>
 
   <Menu

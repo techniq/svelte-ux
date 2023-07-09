@@ -22,37 +22,37 @@
 
 <h1>Examples</h1>
 
-<h2>Basic</h2>
+<h2>basic</h2>
 
 <Preview>
   <MenuField {options} />
 </Preview>
 
-<h2>Label</h2>
+<h2>label</h2>
 
 <Preview>
   <MenuField label="View" {options} />
 </Preview>
 
-<h2>Value</h2>
+<h2>value</h2>
 
 <Preview>
   <MenuField {options} value="copy" />
 </Preview>
 
-<h2>Empty selection</h2>
+<h2>empty selection</h2>
 
 <Preview>
   <MenuField options={[{ label: 'Please make a selection', value: null }, ...options]} />
 </Preview>
 
-<h2>Icon</h2>
+<h2>icon</h2>
 
 <Preview>
   <MenuField {options} icon={mdiMagnify} />
 </Preview>
 
-<h2>Option icons</h2>
+<h2>option icons</h2>
 
 <Preview>
   <MenuField options={optionsWithIcons} />
@@ -110,7 +110,13 @@
   </MenuField>
 </Preview>
 
-<h2>Style</h2>
+<h2>stepper</h2>
+
+<Preview>
+  <MenuField {options} stepper />
+</Preview>
+
+<h2>style</h2>
 
 <Preview>
   <MenuField {options} classes={{ container: 'bg-blue-50 rounded-full border-0 text-blue-500' }} />
