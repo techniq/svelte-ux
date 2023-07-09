@@ -22,6 +22,8 @@
   export let stepper = false;
 
   export let classes: ComponentProps<Field>['classes'] & {
+    option?: string;
+    selected?: string;
     menuIcon?: string;
     group?: string;
   } = {};
@@ -121,7 +123,16 @@
             </div>
           {/if}
 
-          <MenuItem icon={option.icon} on:click={() => (value = option.value)}>
+          <MenuItem
+            icon={option.icon}
+            class={cls(
+              option.value === value && (classes.selected || 'font-semibold'),
+              option.group ? 'px-4' : 'px-2',
+              theme.option,
+              classes.option
+            )}
+            on:click={() => (value = option.value)}
+          >
             {option.label}
           </MenuItem>
         {/each}
