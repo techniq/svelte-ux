@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.43.7
+
+### Patch Changes
+
+- Add stepper prop to MenuField to easily transverse options ([`59d3925`](https://github.com/techniq/svelte-ux/commit/59d39259d963bffb9d95576096f473c975adf8cc))
+
 ## 0.43.6
 
 ### Patch Changes
