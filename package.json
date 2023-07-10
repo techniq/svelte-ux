@@ -18,6 +18,7 @@
     "typedoc": "typedoc",
     "changeset": "changeset",
     "version": "changeset version",
+    "version-status": "changeset status -v",
     "publish": "changeset publish"
   },
   "devDependencies": {
