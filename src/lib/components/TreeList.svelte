@@ -16,8 +16,8 @@
 <ul
   class={cls(
     'TreeList',
-    typeof theme.ul === 'string' ? theme.ul : theme.ul?.(node),
-    typeof classes.ul === 'string' ? classes.ul : classes.ul?.(node),
+    typeof theme.ul === 'string' ? theme.ul : theme.ul?.(nodes),
+    typeof classes.ul === 'string' ? classes.ul : classes.ul?.(nodes),
     $$props.class
   )}
 >
