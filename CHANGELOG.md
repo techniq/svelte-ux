@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.43.11
+
+### Patch Changes
+
+- Bump all non-major dependencies ([`b0bec45`](https://github.com/techniq/svelte-ux/commit/b0bec45311e5321f551718e9b3eef1de435a5e6b))
+
 ## 0.43.10
 
 ### Patch Changes
