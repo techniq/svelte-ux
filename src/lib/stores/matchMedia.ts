@@ -22,11 +22,19 @@ export function matchMedia(queryString: string) {
 export const matchMediaWidth = (width: number) => matchMedia(`(min-width: ${width}px)`);
 
 // Matches tailwind defaults (https://tailwindcss.com/docs/screens)
-export const smScreen = matchMediaWidth(640);
-export const mdScreen = matchMediaWidth(768);
-export const lgScreen = matchMediaWidth(1024);
-export const xlScreen = matchMediaWidth(1280);
-export const xxlScreen = matchMediaWidth(1536);
+export const breakpoints = {
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  xxl: 1536,
+};
+
+export const smScreen = matchMediaWidth(breakpoints.sm);
+export const mdScreen = matchMediaWidth(breakpoints.md);
+export const lgScreen = matchMediaWidth(breakpoints.lg);
+export const xlScreen = matchMediaWidth(breakpoints.xl);
+export const xxlScreen = matchMediaWidth(breakpoints.xxl);
 
 // Media types
 export const screen = matchMedia(`screen`);

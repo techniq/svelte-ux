@@ -1,12 +1,12 @@
 <script context="module">
   import { writable } from 'svelte/store';
-  export const showDrawer = writable(true);
+  export const showDrawer = writable(window.innerWidth >= breakpoints.md);
 </script>
 
 <script lang="ts">
   import Backdrop from './Backdrop.svelte';
 
-  import { mdScreen } from '../stores/matchMedia';
+  import { breakpoints, mdScreen } from '../stores/matchMedia';
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
 
