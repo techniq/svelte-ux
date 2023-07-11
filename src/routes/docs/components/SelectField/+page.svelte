@@ -215,7 +215,7 @@
         <TextField label="Name" autofocus />
       </div>
       <div slot="actions">
-        <Button on:click={() => console.log('Adding option...')} class="text-blue-500">
+        <Button on:click={() => console.log('Adding option...')} class="text-accent-500">
           Add option
         </Button>
         <Button>Cancel</Button>

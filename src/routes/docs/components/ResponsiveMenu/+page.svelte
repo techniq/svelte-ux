@@ -69,7 +69,7 @@
           <Dialog {open} on:close={toggleDialog}>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button variant="fill" color="blue">Close</Button>
+              <Button variant="fill" color="accent">Close</Button>
             </div>
           </Dialog>
         </Toggle>
@@ -79,7 +79,7 @@
           <Dialog {open} on:close={toggleDialog} persistent>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button variant="fill" color="blue">Close</Button>
+              <Button variant="fill" color="accent">Close</Button>
             </div>
           </Dialog>
         </Toggle>
@@ -177,7 +177,7 @@
   <a
     href="https://developer.mozilla.org/en-US/docs/Web/CSS/env#usage"
     target="_blank"
-    class="font-semibold text-blue-500">requires</a
+    class="font-semibold text-accent-500">requires</a
   >
   setting `viewport-fit=cover` within `viewport` meta tag
 </Blockquote>
@@ -186,7 +186,7 @@ See also
 <a
   href="https://github.com/mvllow/tailwindcss-safe-area"
   target="_blank"
-  class="font-semibold text-blue-500">tailwind-css-safe-area</a
+  class="font-semibold text-accent-500">tailwind-css-safe-area</a
 >
 to add `pb-safe` util class
 

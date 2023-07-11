@@ -30,11 +30,11 @@
 
 <Preview>
   <div class="mb-2">
-    <Button on:click={() => (overflowItems += 1)} variant="fill" color="blue">+ item</Button>
+    <Button on:click={() => (overflowItems += 1)} variant="fill" color="accent">+ item</Button>
     <Button
       on:click={() => (overflowItems -= overflowItems > 1 ? 1 : 0)}
       variant="fill"
-      color="blue">- item</Button
+      color="accent">- item</Button
     >
   </div>
   <div

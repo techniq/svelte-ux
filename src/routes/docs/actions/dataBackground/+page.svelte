@@ -91,7 +91,7 @@
     </div>
   </Field>
 
-  <Button on:click={() => (values = getValues())} variant="fill" color="blue">Update data</Button>
+  <Button on:click={() => (values = getValues())} variant="fill" color="accent">Update data</Button>
 </div>
 
 <h2>dataBackground</h2>

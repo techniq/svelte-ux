@@ -115,7 +115,7 @@
 <h3>text class</h3>
 
 <Preview>
-  <Breadcrumb {items} class="text-blue-500" />
+  <Breadcrumb {items} class="text-accent-500" />
 </Preview>
 
 <h2>Truncate long text</h2>

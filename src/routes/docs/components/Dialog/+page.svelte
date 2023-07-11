@@ -21,7 +21,7 @@
   <Dialog bind:open>
     <div slot="title">Are you sure you want to do that?</div>
     <div slot="actions">
-      <Button variant="fill" color="blue">Close</Button>
+      <Button variant="fill" color="accent">Close</Button>
     </div>
   </Dialog>
 </Preview>
@@ -34,7 +34,7 @@
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="blue">Close</Button>
+        <Button variant="fill" color="accent">Close</Button>
       </div>
     </Dialog>
   </Toggle>
@@ -58,7 +58,7 @@
           }, 1000);
         }}
         variant="fill"
-        color="blue"
+        color="accent"
       >
         Save
       </Button>
@@ -86,7 +86,7 @@
             }, 1000);
           }}
           variant="fill"
-          color="blue"
+          color="accent"
         >
           Save
         </Button>
@@ -128,7 +128,7 @@
     <Dialog {open} on:close={toggle} loading>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="blue">Close</Button>
+        <Button variant="fill" color="accent">Close</Button>
       </div>
     </Dialog>
   </Toggle>
@@ -142,7 +142,7 @@
     <Dialog {open} on:close={toggle} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="blue">Yes</Button>
+        <Button variant="fill" color="accent">Yes</Button>
         <Button>No</Button>
       </div>
     </Dialog>
@@ -160,7 +160,7 @@
         <TextField label="Age" autofocus />
       </div>
       <div slot="actions">
-        <Button variant="fill" color="blue">OK</Button>
+        <Button variant="fill" color="accent">OK</Button>
         <Button>Cancel</Button>
       </div>
     </Dialog>
@@ -175,7 +175,7 @@
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="blue" disabled>Don't touch</Button>
+        <Button variant="fill" color="accent" disabled>Don't touch</Button>
         <Button>Close</Button>
       </div>
     </Dialog>

@@ -112,8 +112,8 @@
         on:click={() => (selectedId = choice.id)}
         class={cls(
           'cursor-pointer',
-          'hover:bg-blue-50',
-          selectedId == choice.id ? 'bg-blue-50' : ''
+          'hover:bg-accent-50',
+          selectedId == choice.id ? 'bg-accent-50' : ''
         )}
       >
         <div slot="avatar" class="contents">
@@ -138,9 +138,9 @@
           on:click={() => (selectedId = choice.id)}
           class={cls(
             'px-8 py-4',
-            'cursor-pointer ring ring-inset ring-blue-500 transition-shadow duration-100',
-            'hover:bg-blue-50',
-            selectedId == choice.id ? 'ring-1 bg-blue-50' : 'ring-0'
+            'cursor-pointer ring ring-inset ring-accent-500 transition-shadow duration-100',
+            'hover:bg-accent-50',
+            selectedId == choice.id ? 'ring-1 bg-accent-50' : 'ring-0'
           )}
           noShadow
         />

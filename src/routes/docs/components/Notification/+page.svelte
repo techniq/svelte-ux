@@ -31,7 +31,7 @@
     <Notification open actions="right" closeIcon>
       <div slot="title">Discussion archived</div>
       <div slot="actions">
-        <Button color="blue">Undo</Button>
+        <Button color="accent">Undo</Button>
       </div>
     </Notification>
   </Stack>
@@ -50,7 +50,7 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit oluptatum tenetur.
       </div>
       <div slot="actions">
-        <Button color="blue">Undo</Button>
+        <Button color="accent">Undo</Button>
         <Button>Dismiss</Button>
       </div>
     </Notification>
@@ -66,7 +66,7 @@
       <div slot="description">Notifications may include alerts, sounds, and badges</div>
       <div slot="actions" class="h-full">
         <Stack vertical class="border-l divide-y h-full">
-          <Button color="blue">Reply</Button>
+          <Button color="accent">Reply</Button>
           <Button>Don't Allow</Button>
         </Stack>
       </div>

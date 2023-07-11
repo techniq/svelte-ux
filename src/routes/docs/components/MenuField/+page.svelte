@@ -135,5 +135,8 @@
 <h2>style</h2>
 
 <Preview>
-  <MenuField {options} classes={{ container: 'bg-blue-50 rounded-full border-0 text-blue-500' }} />
+  <MenuField
+    {options}
+    classes={{ container: 'bg-accent-50 rounded-full border-0 text-accent-500' }}
+  />
 </Preview>

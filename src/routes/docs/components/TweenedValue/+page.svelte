@@ -14,7 +14,7 @@
 
 <h1>Examples</h1>
 
-<Button variant="fill" color="blue" on:click={update}>Update value</Button>
+<Button variant="fill" color="accent" on:click={update}>Update value</Button>
 <Button on:click={() => (value = null)}>Set null</Button>
 
 <h2>Basic</h2>

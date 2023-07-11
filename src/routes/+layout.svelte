@@ -91,7 +91,7 @@
   /* Material */
 
   :global(body) {
-    @apply bg-neutral-200;
+    @apply bg-neutral-200 accent-accent-500;
   }
 
   :global(nav) {
@@ -114,7 +114,7 @@
     }
 
     &.is-active {
-      @apply text-sky-400 bg-gray-500/10 border-sky-500;
+      @apply text-accent-100 bg-gray-500/10 border-accent-500;
     }
   }
 

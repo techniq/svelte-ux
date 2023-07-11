@@ -216,7 +216,7 @@
 <Preview>
   <Button
     on:click={() => (randomData = randomDataGen())}
-    class="text-blue-500 border border-blue-500 bg-white mb-1">Randomize</Button
+    class="text-accent-500 border border-accent-500 bg-white mb-1">Randomize</Button
   >
   <Table
     data={randomData}
@@ -274,7 +274,7 @@
 <Preview>
   <Button
     on:click={() => (randomData = randomDataGen())}
-    class="text-blue-500 border border-blue-500 bg-white mb-1">Randomize</Button
+    class="text-accent-500 border border-accent-500 bg-white mb-1">Randomize</Button
   >
   <Table
     data={randomData}

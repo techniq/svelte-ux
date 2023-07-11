@@ -67,7 +67,7 @@
           <Dialog {open} on:close={toggleDialog}>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button variant="fill" color="blue">Close</Button>
+              <Button variant="fill" color="accent">Close</Button>
             </div>
           </Dialog>
         </Toggle>
@@ -77,7 +77,7 @@
           <Dialog {open} on:close={toggleDialog} persistent>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button variant="fill" color="blue">Close</Button>
+              <Button variant="fill" color="accent">Close</Button>
             </div>
           </Dialog>
         </Toggle>

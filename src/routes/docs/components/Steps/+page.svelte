@@ -69,14 +69,14 @@
       <div
         class={cls('w-4 h-4 flex-shrink-0 rounded-full flex items-center', {
           'bg-green-500': item.status === 'completed',
-          'border-2 border-blue-500 bg-blue-100': item.status === 'in-progress',
+          'border-2 border-accent-500 bg-accent-100': item.status === 'in-progress',
           'bg-red-500': item.status === 'failed',
         })}
       >
         {#if item.status === 'completed'}
           <Icon path={mdiCheck} size="1rem" class="text-white" />
         {:else if item.status === 'in-progress'}
-          <Icon path={mdiCircle} size="1rem" class="text-blue-500" />
+          <Icon path={mdiCircle} size="1rem" class="text-accent-500" />
         {:else if item.status === 'failed'}
           <Icon path={mdiClose} size="1rem" class="text-white" />
         {/if}

@@ -94,7 +94,7 @@
     <div class="relative overflow-hidden">
       {#if showHeader}
         <div
-          class="absolute top-0 left-0 bg-blue-500 text-white p-4 w-full"
+          class="absolute top-0 left-0 bg-accent-500 text-white p-4 w-full"
           transition:fly={{ y: '-100%', opacity: 1 }}
         >
           Header

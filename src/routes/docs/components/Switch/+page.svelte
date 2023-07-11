@@ -41,12 +41,12 @@
   <div class="grid gap-2">
     <Switch let:checked>
       {#if checked}
-        <Icon path={mdiCheck} class="text-blue-500" size=".8em" />
+        <Icon path={mdiCheck} class="text-accent-500" size=".8em" />
       {/if}
     </Switch>
     <Switch let:checked>
       {#if checked}
-        <Icon path={mdiCheck} class="text-blue-500" size=".8em" />
+        <Icon path={mdiCheck} class="text-accent-500" size=".8em" />
       {:else}
         <Icon path={mdiClose} class="text-gray-400" size=".8em" />
       {/if}
