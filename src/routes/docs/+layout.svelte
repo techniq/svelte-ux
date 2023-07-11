@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { fade, slide } from 'svelte/transition';
   import { flatGroup } from 'd3-array';
 
   import {
     mdiCheckCircle,
+    mdiChevronDown,
     mdiChevronRight,
     mdiCodeBraces,
     mdiCodeTags,
@@ -12,6 +15,7 @@
   } from '@mdi/js';
 
   import ApiDocs from '$lib/components/ApiDocs.svelte';
+  import Button from '$lib/components/Button.svelte';
   import Code from '$lib/components/Code.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import ListItem from '$lib/components/ListItem.svelte';
@@ -21,6 +25,7 @@
   import { page } from '$app/stores';
   import { createTheme } from '$lib/components/theme';
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';
+  import { xlScreen } from '$lib/stores/matchMedia';
 
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
   $: title = $page.data.meta?.title ?? name;
@@ -28,6 +33,12 @@
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
   $: ({ description, features, related, hideUsage, hideTableOfContents, source, pageSource, api } =
     $page.data.meta ?? {});
+
+  $: showTableOfContents = false;
+
+  onMount(() => {
+    showTableOfContents = !hideTableOfContents && $xlScreen;
+  });
 
   function getRelated(r: string) {
     const [type, name] = r.split('/');
@@ -71,9 +82,32 @@
           href={pageUrl ? `https://github.com/techniq/svelte-ux/blob/master/${pageUrl}` : ''}
           icon={mdiFileDocumentEditOutline}
         />
+
+        {#if !hideTableOfContents}
+          <Button
+            icon={mdiChevronDown}
+            on:click={() => {
+              console.log('click');
+              showTableOfContents = !showTableOfContents;
+            }}
+            variant="fill-light"
+            color="blue"
+            size="sm"
+          >
+            On this page
+          </Button>
+        {/if}
       </div>
     {/if}
   </div>
+
+  {#if showTableOfContents && !$xlScreen}
+    <div transition:fade class="mt-3">
+      {#key $page.route.id}
+        <TableOfContents />
+      {/key}
+    </div>
+  {/if}
 
   <div class="grid grid-cols-[1fr,auto] gap-6 pt-2 pb-4">
     <div class="overflow-auto">
@@ -143,9 +177,9 @@
       {/if}
     </div>
 
-    {#if !hideTableOfContents}
-      <div class="hidden lg:block w-[224px]">
-        <div class="sticky top-0 pr-2 max-h-[calc(100vh-64px)] overflow-auto">
+    {#if showTableOfContents && $xlScreen}
+      <div transition:slide={{ axis: 'x' }}>
+        <div class="w-[224px] sticky top-0 pr-2 max-h-[calc(100vh-64px)] overflow-auto">
           <div class="text-xs uppercase leading-8 tracking-widest text-black/50">On this page</div>
           <!-- Rebuild toc when page changes -->
           {#key $page.route.id}
