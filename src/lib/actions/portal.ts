@@ -9,11 +9,6 @@ export type PortalOptions =
 
 /**
  * Render component outside current DOM hierarchy
- * @see:
- *  - https://dev.to/jsmitar/svelte-creating-dialog-component-with-use-portal-3hp4
- *  - https://svelte.dev/repl/79e33c2d7695444b994ba74255bb1387?version=3.24.0
- *  - https://svelte.dev/repl/86ec36c27be2471f86590e0c18c7198c?version=3.23.2
- *  - https://github.com/sveltejs/svelte/issues/3088#issuecomment-505785516
  */
 export const portal: Action<HTMLElement, PortalOptions> = (node, options) => {
   moveNode(node, options);

@@ -18,15 +18,27 @@
   language="javascript"
 />
 
-<h2>remainingViewportHeight</h2>
+<h2>
+  remainingViewportHeight <small
+    >Set `height` or `max-height` to viewport height excluding node's current viewport top</small
+  >
+</h2>
 
 <Blockquote>TODO</Blockquote>
 
-<h2>remainingViewportWidth</h2>
+<h2>
+  remainingViewportWidth <small
+    >Set `width` or `max-width` to viewport width excluding node's current viewport left</small
+  >
+</h2>
 
 <Blockquote>TODO</Blockquote>
 
-<h2>overflow</h2>
+<h2>
+  overflow <small
+    >Watch for overflow changes (x or y) and dispatch `overflow` event with amount</small
+  >
+</h2>
 
 <Preview>
   <div class="mb-2">

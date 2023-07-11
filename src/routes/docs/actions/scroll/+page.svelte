@@ -23,9 +23,7 @@
   language="javascript"
 />
 
-<h2>scrollIntoView</h2>
-
-<h3>Smootly scroll element into center of view</h3>
+<h2>scrollIntoView <small>Smootly scroll element into center of view</small></h2>
 
 <Preview>
   <input type="range" bind:value={scrolledIndex} min={0} max={itemCount - 1} />
@@ -42,9 +40,7 @@
   </div>
 </Preview>
 
-<h2>scrollShadow</h2>
-
-<h3>Add shadows to indicate scrolling available</h3>
+<h2>scrollShadow <small>Add shadows to indicate scrolling available</small></h2>
 
 <Preview>
   <div class="h-40 border rounded" use:scrollShadow>
@@ -101,9 +97,7 @@
   </div>
 </Preview>
 
-<h2>scrollFade</h2>
-
-<h3>Add shadows to indicate scrolling available</h3>
+<h2>scrollFade <small>Add shadows to indicate scrolling available</small></h2>
 
 <Preview>
   <div class="max-h-40 border rounded" use:scrollFade>

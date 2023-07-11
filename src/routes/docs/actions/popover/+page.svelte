@@ -9,5 +9,3 @@
 <h1>Usage</h1>
 
 <Code source={`import { popover } from 'svelte-ux';`} language="javascript" />
-
-<Blockquote>TODO</Blockquote>

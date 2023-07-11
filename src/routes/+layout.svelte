@@ -88,6 +88,14 @@
     @apply -mt-1;
   }
 
+  :global(main small) {
+    @apply text-xs text-black/50 inline-block;
+  }
+
+  :global(.TableOfContents small) {
+    @apply hidden;
+  }
+
   /* Material */
 
   :global(body) {

@@ -20,9 +20,9 @@
 
 <Code source={`import { longpress, movable } from 'svelte-ux';`} language="javascript" />
 
-<h2>longpress</h2>
-
-<h3>Dispatch event after element has been pressed for a duration of time</h3>
+<h2>
+  longpress <small>Dispatch event after element has been pressed for a duration of time</small>
+</h2>
 
 <Preview>
   <button
@@ -37,9 +37,7 @@
   {/if}
 </Preview>
 
-<h2>movable</h2>
-
-<h3>Track mouse position changes from mouse down on node to mouse up</h3>
+<h2>movable <small>Track mouse position changes from mouse down on node to mouse up</small></h2>
 
 <Preview>
   <div class="h-40">

@@ -4,6 +4,7 @@
   import TextField from '$lib/components/TextField.svelte';
 
   import { cssVars } from '$lib/actions/cssVars';
+  import Blockquote from '$docs/Blockquote.svelte';
 
   let background = '#ddd';
   let border = '1px solid #aaa';
@@ -17,7 +18,26 @@
   <div class="grid gap-4" use:cssVars={{ background, border }}>
     <div
       class="w-10 h-10 rounded"
-      style="background-color: var(--background); border: var(--border)"
+      style:background-color="var(--background)"
+      style:border="var(--border)"
+    />
+    <div class="grid grid-flow-col gap-2">
+      <TextField label="Background" bind:value={background} />
+      <TextField label="Border" bind:value={border} />
+    </div>
+  </div>
+</Preview>
+
+<Blockquote
+  >With the Svelte addition of `style:`, this actions is less useful (but a little more concise)</Blockquote
+>
+
+<Preview>
+  <div class="grid gap-4" style:--background={background} style:--border={border}>
+    <div
+      class="w-10 h-10 rounded"
+      style:background-color="var(--background)"
+      style:border="var(--border)"
     />
     <div class="grid grid-flow-col gap-2">
       <TextField label="Background" bind:value={background} />
