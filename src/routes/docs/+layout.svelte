@@ -109,7 +109,7 @@
     </div>
   {/if}
 
-  <div class="grid grid-cols-[1fr,auto] gap-6 pt-2 pb-4">
+  <div class="grid xl:grid-cols-[1fr,auto] gap-6 pt-2 pb-4">
     <div class="overflow-auto">
       {#if type === 'components' && !hideUsage}
         {#key $page.route.id}
