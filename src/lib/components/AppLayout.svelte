@@ -12,10 +12,15 @@
 
   export let navWidth = 240;
   export let headerHeight = 64;
-  export let overlapHeader = false;
+
   /** Control whether nav should be full height (default) or header should be full width */
-  export let headerFullWidth = false;
-  $: areas = headerFullWidth ? "'header header' 'aside main'" : "'aside header' 'aside main'";
+  export let headerPosition: 'full' | 'inset' = 'full';
+
+  /** Overlap `main` under header using negative top margin with positive top padding to support background blur */
+  export let overlapHeader = false;
+
+  $: areas =
+    headerPosition === 'full' ? "'header header' 'aside main'" : "'aside header' 'aside main'";
 
   export let classes: {
     root?: string;
@@ -24,8 +29,7 @@
   } = {};
   const theme = getComponentTheme('AppLayout');
 
-  let isDesktop = mdScreen;
-  $: temporaryDrawer = !$isDesktop;
+  $: temporaryDrawer = !$mdScreen;
 </script>
 
 <div
@@ -42,15 +46,17 @@
   )}
   class:overlapHeader
 >
+  <slot />
+
   <!-- Render backdrop first to fix stacking order with <aside> nav -->
   {#if $showDrawer && temporaryDrawer}
-    <Backdrop on:click={() => ($showDrawer = false)} class="z-20" />
+    <Backdrop on:click={() => ($showDrawer = false)} class="z-50" />
   {/if}
 
   <aside
     class={cls(
       'w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
-      temporaryDrawer && 'fixed h-full z-30 elevation-10',
+      temporaryDrawer && 'fixed h-full z-50 elevation-10',
       theme.aside,
       classes.aside
     )}
@@ -59,8 +65,6 @@
       <slot name="nav" />
     </nav>
   </aside>
-
-  <slot />
 </div>
 
 <style>
