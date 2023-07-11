@@ -1,6 +1,7 @@
 <script context="module">
   import { writable } from 'svelte/store';
-  export const showDrawer = writable(window.innerWidth >= breakpoints.md);
+  import { browser } from '../utils/env';
+  export const showDrawer = writable(browser ? window.innerWidth >= breakpoints.md : true);
 </script>
 
 <script lang="ts">
@@ -29,7 +30,7 @@
   } = {};
   const theme = getComponentTheme('AppLayout');
 
-  $: temporaryDrawer = !$mdScreen;
+  $: temporaryDrawer = browser ? !$mdScreen : false;
 </script>
 
 <div
