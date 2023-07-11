@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.44.1
+
+### Patch Changes
+
+- [AppLayout] Fix SSR rendering (window undefined) ([`e0b29f1`](https://github.com/techniq/svelte-ux/commit/e0b29f19640ff3c38b3aec6bbd31aa410a230db4))
+
 ## 0.44.0
 
 ### Minor Changes
