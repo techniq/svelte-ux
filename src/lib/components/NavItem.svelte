@@ -6,6 +6,8 @@
   import { getScrollParent } from '../utils/dom';
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
+  import { showDrawer } from './AppLayout.svelte';
+  import { mdScreen } from '../stores/matchMedia';
 
   export let currentUrl: URL;
   export let path: string;
@@ -48,6 +50,12 @@
     delay: 500,
   }}
   on:click
+  on:click={() => {
+    // Close if use temporary drawer
+    if (!$mdScreen) {
+      $showDrawer = false;
+    }
+  }}
 >
   {#if $$slots.avatar}
     <slot name="avatar" />
