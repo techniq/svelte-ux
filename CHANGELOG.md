@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.44.0
+
+### Minor Changes
+
+- [AppLayout] Rename `headerFullWidth` to `headerPosition` with full/inset values, and now default to full width. Fix AppBar / temporary drawer z-index ([`76a0ca1`](https://github.com/techniq/svelte-ux/commit/76a0ca18331300f231f07b12ee24a0c1e2e68b92))
+
+### Patch Changes
+
+- [AppLayout] Only show nav drawer initially on viewports >= 768 (md) ([`e19b3b8`](https://github.com/techniq/svelte-ux/commit/e19b3b888efc4339b8e02f0d4d397487fde61913))
+
+- NavItem now closes drawer when clicked on mobile ([`1f59d76`](https://github.com/techniq/svelte-ux/commit/1f59d76c661d6e5aa015ccc7efe0fb5d37b8817c))
+
 ## 0.43.11
 
 ### Patch Changes
