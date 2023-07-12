@@ -11,6 +11,7 @@
     mdiCodeTags,
     mdiDatabaseOutline,
     mdiFileDocumentEditOutline,
+    mdiGithub,
     mdiLink,
   } from '@mdi/js';
 
@@ -41,8 +42,17 @@
   });
 
   function getRelated(r: string) {
-    const [type, name] = r.split('/');
-    return { type, name, url: `/docs/${type}/${name}` };
+    if (r.startsWith('http')) {
+      var url = new URL(r);
+      if (url.hostname.includes('github.com')) {
+        return { type: 'github', name: url.pathname.slice(1), url };
+      } else {
+        return { type: 'website', name: url, url };
+      }
+    } else {
+      const [type, name] = r.split('/');
+      return { type, name, url: `/docs/${type}/${name}` };
+    }
   }
 
   // Clear root layout theme so doesn't show on doc examples
@@ -153,12 +163,22 @@
                     ? mdiDatabaseOutline
                     : item.type === 'actions'
                     ? mdiCodeBraces
+                    : item.type === 'github'
+                    ? mdiGithub
                     : mdiLink}
                 <ListItem
                   title={item.name}
                   {icon}
                   avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
-                  on:click={() => goto(item.url)}
+                  on:click={() => {
+                    if (item.url instanceof URL) {
+                      // open in new window
+                      window.open(item.url);
+                    } else {
+                      // go to route
+                      goto(item.url);
+                    }
+                  }}
                   class="hover:bg-accent-50 cursor-pointer"
                 >
                   <div slot="actions">
