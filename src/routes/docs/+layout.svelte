@@ -59,7 +59,7 @@
   createTheme({});
 </script>
 
-<div class="grid grid-rows-[auto,1fr] h-full p-4">
+<div class="p-4">
   <div>
     {#if title}
       <div>
@@ -112,7 +112,7 @@
   </div>
 
   {#if showTableOfContents && !$xlScreen}
-    <div transition:fade class="mt-3">
+    <div transition:fade|local class="mt-3">
       {#key $page.route.id}
         <TableOfContents />
       {/key}
@@ -198,7 +198,7 @@
     </div>
 
     {#if showTableOfContents && $xlScreen}
-      <div transition:slide={{ axis: 'x' }}>
+      <div transition:slide|local={{ axis: 'x' }}>
         <div class="w-[224px] sticky top-0 pr-2 max-h-[calc(100vh-64px)] overflow-auto">
           <div class="text-xs uppercase leading-8 tracking-widest text-black/50">On this page</div>
           <!-- Rebuild toc when page changes -->
