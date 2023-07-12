@@ -6,6 +6,8 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description:
+        'Logging which can be granularly enabled/disabled via local storage and provides styled output',
     },
   };
 }

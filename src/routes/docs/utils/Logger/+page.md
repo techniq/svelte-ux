@@ -20,8 +20,8 @@
 to enable
 
 ```js
-localStorage.logger = 'MyComponent';
-localStorage.logger = 'MyComponent:INFO';
-localStorage.logger = 'MyComponent,OtherComponent';
-localStorage.logger = 'MyComponent:INFO,OtherComponent';
+window.localStorage.logger = 'MyComponent';
+window.localStorage.logger = 'MyComponent:INFO';
+window.localStorage.logger = 'MyComponent,OtherComponent';
+window.localStorage.logger = 'MyComponent:INFO,OtherComponent';
 ```
