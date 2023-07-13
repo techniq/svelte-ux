@@ -51,10 +51,10 @@
 <div class="grid grid-cols-2 gap-2">
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
-    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full width</div>
+    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">default width</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup variant="contained" classes={{ root: 'w-full', options: 'w-full' }}>
+        <ToggleGroup variant="outline" inset>
           <ToggleOption value="yes">Yes</ToggleOption>
           <ToggleOption value="no">No</ToggleOption>
           <ToggleOption value="all">All</ToggleOption>
@@ -65,10 +65,10 @@
 
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
-    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">fixed width</div>
+    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full width</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup variant="contained" classes={{ root: 'w-96', options: 'w-full' }}>
+        <ToggleGroup variant="outline" inset class="w-full">
           <ToggleOption value="yes">Yes</ToggleOption>
           <ToggleOption value="no">No</ToggleOption>
           <ToggleOption value="all">All</ToggleOption>
@@ -78,10 +78,25 @@
   </div>
 
   <div>
-    <div class="text-lg font-semibold mt-8 mb-1 ml-2">ToggleGroup with icons</div>
+    <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
+    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full rounded and small</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup variant="contained" circle classes={{ options: 'h-12 w-32' }}>
+        <ToggleGroup variant="outline" inset rounded="full" size="sm" class="w-full">
+          <ToggleOption value="yes">Yes</ToggleOption>
+          <ToggleOption value="no">No</ToggleOption>
+          <ToggleOption value="all">All</ToggleOption>
+        </ToggleGroup>
+      </Field>
+    </Preview>
+  </div>
+
+  <div>
+    <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
+    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">with icons</div>
+    <Preview>
+      <Field label="Is Active">
+        <ToggleGroup variant="outline" inset rounded="full">
           <ToggleOption value="yes">
             <Icon path={mdiAccount} />
           </ToggleOption>

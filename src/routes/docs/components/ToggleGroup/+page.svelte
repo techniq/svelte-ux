@@ -4,8 +4,9 @@
   import toggleOptionApi from '$lib/components/ToggleOption.svelte?raw&sveld';
   import ApiDocs from '$lib/components/ApiDocs.svelte';
 
-  import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Field from '$lib/components/Field.svelte';
   import Radio from '$lib/components/Radio.svelte';
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
@@ -16,60 +17,144 @@
   const callsValue = {};
 
   let selected = 1;
-  let selectedStr = 'missed';
+  let selectedStr = 'all';
   let selectedObj = missedValue;
 
-  let variant: ComponentProps<ToggleGroup>['variant'] = 'contained';
+  let variant: ComponentProps<ToggleGroup>['variant'] = 'default';
+  let size: ComponentProps<ToggleGroup>['size'] = 'md';
+  let rounded: ComponentProps<ToggleGroup>['rounded'] = true;
+  let inset: ComponentProps<ToggleGroup>['inset'] = false;
+  let gap: ComponentProps<ToggleGroup>['gap'] = false;
+  let vertical: ComponentProps<ToggleGroup>['vertical'] = false;
+  let showPanes = false;
 </script>
+
+<h1>Playground</h1>
+
+<div class="grid grid-cols-[1fr,200px] gap-3">
+  <div>
+    <Preview>
+      <ToggleGroup {variant} {size} {rounded} {gap} {inset} {vertical}>
+        <ToggleOption value="all">All</ToggleOption>
+        <ToggleOption value="missed">Missed</ToggleOption>
+        <ToggleOption value="calls">Calls</ToggleOption>
+        <svelte:fragment slot="panes">
+          {#if showPanes}
+            <div class="mt-2 p-4 bg-black/5 rounded border">
+              <TogglePanel>All panel</TogglePanel>
+              <TogglePanel>Missed panel</TogglePanel>
+              <TogglePanel>Calls panel</TogglePanel>
+            </div>
+          {/if}
+        </svelte:fragment>
+      </ToggleGroup>
+    </Preview>
+  </div>
+
+  <div class="grid gap-2">
+    <Field label="Variant" classes={{ input: 'grid gap-1' }}>
+      <Radio name="variant" value="default" bind:group={variant}>default</Radio>
+      <Radio name="variant" value="outline" bind:group={variant}>outline</Radio>
+      <Radio name="variant" value="fill" bind:group={variant}>fill</Radio>
+      <Radio name="variant" value="fill-light" bind:group={variant}>fill-light</Radio>
+      <Radio name="variant" value="underline" bind:group={variant}>underline</Radio>
+    </Field>
+
+    <Field label="Size" classes={{ input: 'grid gap-1' }}>
+      <Radio name="size" value="xs" bind:group={size}>xs</Radio>
+      <Radio name="size" value="sm" bind:group={size}>sm</Radio>
+      <Radio name="size" value="md" bind:group={size}>md</Radio>
+      <Radio name="size" value="lg" bind:group={size}>lg</Radio>
+    </Field>
+
+    <Field label="Rounded" classes={{ input: 'grid gap-1' }}>
+      <Radio name="rounded" value={false} bind:group={rounded}>false</Radio>
+      <Radio name="rounded" value={true} bind:group={rounded}>true</Radio>
+      <Radio name="rounded" value="full" bind:group={rounded}>full</Radio>
+    </Field>
+
+    <Field label="Gap" classes={{ input: 'grid gap-1' }}>
+      <Radio name="gap" value={false} bind:group={gap}>false</Radio>
+      <Radio name="gap" value={true} bind:group={gap}>true</Radio>
+      <Radio name="gap" value="px" bind:group={gap}>px</Radio>
+    </Field>
+
+    <Field label="Inset" classes={{ input: 'grid gap-1' }}>
+      <Radio name="inset" value={false} bind:group={inset}>false</Radio>
+      <Radio name="inset" value={true} bind:group={inset}>true</Radio>
+    </Field>
+
+    <Field label="Vertical" classes={{ input: 'grid gap-1' }}>
+      <Radio name="vertical" value={false} bind:group={vertical}>false</Radio>
+      <Radio name="vertical" value={true} bind:group={vertical}>true</Radio>
+    </Field>
+
+    <Field label="Show panes" classes={{ input: 'grid gap-1' }}>
+      <Radio value={false} bind:group={showPanes}>false</Radio>
+      <Radio value={true} bind:group={showPanes}>true</Radio>
+    </Field>
+  </div>
+</div>
 
 <h1>Examples</h1>
 
-<h2>Variant</h2>
+<h2>Variants</h2>
 
-<div class="bg-white p-2 rounded border border-gray-300 flex gap-4">
-  <Radio value="contained" bind:group={variant}>Contained</Radio>
-  <Radio value="underlined" bind:group={variant}>Underlined</Radio>
-</div>
+{#each ['default', 'outline', 'fill', 'fill-light', 'underline'] as variant}
+  <h3>{variant}</h3>
+  <Preview>
+    <div class="inline-grid gap-2">
+      <ToggleGroup {variant} bind:value={selectedStr}>
+        <ToggleOption value="all">All</ToggleOption>
+        <ToggleOption value="missed">Missed</ToggleOption>
+        <ToggleOption value="calls">Calls</ToggleOption>
+      </ToggleGroup>
 
-<h2>Panels</h2>
+      <ToggleGroup {variant} bind:value={selectedStr} rounded={false}>
+        <ToggleOption value="all">All</ToggleOption>
+        <ToggleOption value="missed">Missed</ToggleOption>
+        <ToggleOption value="calls">Calls</ToggleOption>
+      </ToggleGroup>
 
-<Preview>
-  <ToggleGroup {variant}>
-    <ToggleOption value="all" class="w-32">All</ToggleOption>
-    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
-    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
-    <div slot="panes" class="mt-2 p-4 bg-black/5 rounded border">
-      <TogglePanel>All panel</TogglePanel>
-      <TogglePanel>Missed panel</TogglePanel>
-      <TogglePanel>Calls panel</TogglePanel>
+      <ToggleGroup {variant} bind:value={selectedStr} rounded="full">
+        <ToggleOption value="all">All</ToggleOption>
+        <ToggleOption value="missed">Missed</ToggleOption>
+        <ToggleOption value="calls">Calls</ToggleOption>
+      </ToggleGroup>
+
+      <ToggleGroup {variant} bind:value={selectedStr} rounded="full" inset>
+        <ToggleOption value="all">All</ToggleOption>
+        <ToggleOption value="missed">Missed</ToggleOption>
+        <ToggleOption value="calls">Calls</ToggleOption>
+      </ToggleGroup>
     </div>
-  </ToggleGroup>
-</Preview>
+  </Preview>
+{/each}
 
 <h2>Vertical layout</h2>
 
 <Preview>
-  <ToggleGroup {variant} vertical>
+  <ToggleGroup vertical>
     <ToggleOption value="all">All</ToggleOption>
     <ToggleOption value="missed">Missed</ToggleOption>
     <ToggleOption value="calls">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
-<h2>Full width</h2>
+<h2>Vertical with fixed width</h2>
 
 <Preview>
-  <ToggleGroup {variant} classes={{ options: 'w-full' }}>
+  <ToggleGroup class="w-[300px]" vertical>
     <ToggleOption value="all">All</ToggleOption>
     <ToggleOption value="missed">Missed</ToggleOption>
     <ToggleOption value="calls">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
-<h2>Full width w/ vertical</h2>
+<h2>Left aligned tabs with fixed height</h2>
 
 <Preview>
-  <ToggleGroup {variant} classes={{ options: 'w-full' }} vertical>
+  <ToggleGroup variant="underline" classes={{ options: 'justify-start h-10' }}>
     <ToggleOption value="all">All</ToggleOption>
     <ToggleOption value="missed">Missed</ToggleOption>
     <ToggleOption value="calls">Calls</ToggleOption>
@@ -79,7 +164,7 @@
 <h2>Grid layout</h2>
 
 <Preview>
-  <ToggleGroup {variant} classes={{ options: '!grid grid-rows-3 grid-cols-3' }}>
+  <ToggleGroup classes={{ options: 'grid-rows-3 grid-cols-3' }}>
     <ToggleOption value={1}>1</ToggleOption>
     <ToggleOption value={2}>2</ToggleOption>
     <ToggleOption value={3}>3</ToggleOption>
@@ -95,7 +180,7 @@
 <h2>Circle</h2>
 
 <Preview>
-  <ToggleGroup {variant} circle>
+  <ToggleGroup rounded="full" classes={{ options: 'inline-grid' }}>
     <ToggleOption value={1} class="h-10 aspect-square">1</ToggleOption>
     <ToggleOption value={2} class="h-10 aspect-square">2</ToggleOption>
     <ToggleOption value={3} class="h-10 aspect-square">3</ToggleOption>
@@ -105,10 +190,10 @@
 <h2>Controlled</h2>
 
 <Preview>
-  <ToggleGroup {variant} bind:value={selectedStr}>
-    <ToggleOption value="all" class="w-32">All</ToggleOption>
-    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
-    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
+  <ToggleGroup bind:value={selectedStr}>
+    <ToggleOption value="all">All</ToggleOption>
+    <ToggleOption value="missed">Missed</ToggleOption>
+    <ToggleOption value="calls">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -123,11 +208,11 @@
 <h2>Controlled with null option</h2>
 
 <Preview>
-  <ToggleGroup {variant} bind:value={selectedStr}>
-    <ToggleOption value={null} class="w-32">None</ToggleOption>
-    <ToggleOption value="all" class="w-32">All</ToggleOption>
-    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
-    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
+  <ToggleGroup bind:value={selectedStr}>
+    <ToggleOption value={null}>None</ToggleOption>
+    <ToggleOption value="all">All</ToggleOption>
+    <ToggleOption value="missed">Missed</ToggleOption>
+    <ToggleOption value="calls">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -142,11 +227,11 @@
 <h2>Controlled with undefined option</h2>
 
 <Preview>
-  <ToggleGroup {variant} bind:value={selectedStr}>
-    <ToggleOption value={undefined} class="w-32">None</ToggleOption>
-    <ToggleOption value="all" class="w-32">All</ToggleOption>
-    <ToggleOption value="missed" class="w-32">Missed</ToggleOption>
-    <ToggleOption value="calls" class="w-32">Calls</ToggleOption>
+  <ToggleGroup bind:value={selectedStr}>
+    <ToggleOption value={undefined}>None</ToggleOption>
+    <ToggleOption value="all">All</ToggleOption>
+    <ToggleOption value="missed">Missed</ToggleOption>
+    <ToggleOption value="calls">Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -161,10 +246,10 @@
 <h2>Controlled (object value)</h2>
 
 <Preview>
-  <ToggleGroup {variant} bind:value={selectedObj}>
-    <ToggleOption value={allValue} class="w-32">All</ToggleOption>
-    <ToggleOption value={missedValue} class="w-32">Missed</ToggleOption>
-    <ToggleOption value={callsValue} class="w-32">Calls</ToggleOption>
+  <ToggleGroup bind:value={selectedObj}>
+    <ToggleOption value={allValue}>All</ToggleOption>
+    <ToggleOption value={missedValue}>Missed</ToggleOption>
+    <ToggleOption value={callsValue}>Calls</ToggleOption>
   </ToggleGroup>
 </Preview>
 
@@ -180,7 +265,6 @@
 
 <Preview>
   <ToggleGroup
-    {variant}
     value={selected}
     classes={{ options: 'w-full overflow-auto scrollbar-none' }}
     autoscroll

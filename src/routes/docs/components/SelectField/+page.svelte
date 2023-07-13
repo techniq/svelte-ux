@@ -307,7 +307,7 @@
   }}
 >
   <div slot="actions" class="p-2">
-    <ToggleGroup variant="contained" class="w-full" selected="active">
+    <ToggleGroup variant="outline" inset class="w-full" selected="active">
       <div class="options w-full border">
         <ToggleOption value="active">Active</ToggleOption>
         <ToggleOption value="inaction">Inactive</ToggleOption>

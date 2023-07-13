@@ -43,8 +43,7 @@
   }
 </script>
 
-<button
-  type="button"
+<label
   class:selected
   on:click={() => selectOption(optionElement, value)}
   on:click
@@ -52,9 +51,9 @@
   {...$$restProps}
   class={cls(
     'ToggleOption',
-    'optionContainer',
+    'label',
     'grid items-center',
-    $classesContext.optionContainer,
+    $classesContext.label,
     theme.root,
     classes.root,
     $$props.class
@@ -72,11 +71,13 @@
   <div class={cls('option', $classesContext.option, theme.option, classes.option)}>
     <slot {selected} />
   </div>
-</button>
+
+  <input type="radio" bind:value class="appearance-none absolute" checked={selected} />
+</label>
 
 <style lang="postcss">
   /* Stack contents */
-  button > * {
+  label > * {
     grid-column: 1;
     grid-row: 1;
     z-index: 1;

@@ -14,19 +14,125 @@
   export let value: any = undefined; // index or value
   export let autoscroll: boolean = false;
 
-  // styles
-  export let variant: 'contained' | 'underlined' | 'none' = 'none';
+  export let variant: 'default' | 'outline' | 'fill' | 'fill-light' | 'underline' | 'none' =
+    'default';
+  export let size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
+  export let rounded: boolean | 'full' = variant !== 'underline';
+  export let gap: boolean | 'px' = false;
+  export let inset: boolean = false;
   export let vertical: boolean = false;
-  export let circle: boolean = false;
 
   export let classes: {
     root?: string;
     options?: string;
-    optionContainer?: string;
+    label?: string;
     option?: string;
     indicator?: string;
   } = {};
   const theme = getComponentTheme('ToggleGroup');
+
+  $: variantClasses = {
+    default: {
+      options: '',
+      label: 'text-gray-500 hover:text-accent-500 [&.selected]:text-accent-500',
+      indicator: 'h-full bg-accent-50',
+    },
+    outline: {
+      options: 'border hover:border-gray-300',
+      label: 'text-gray-500 hover:text-accent-500 [&.selected]:text-accent-500',
+      indicator: 'h-full w-full bg-accent-50',
+    },
+    fill: {
+      options: cls(!gap && 'bg-accent-500/10'),
+      label: cls(
+        gap && 'bg-accent-500/10',
+        'text-accent-500 hover:text-accent-600 hover:bg-accent-500/10 [&.selected]:text-accent-50'
+      ),
+      indicator: 'h-full bg-accent-500',
+    },
+    'fill-light': {
+      options: cls(!gap && 'bg-gray-500/10'),
+      label: cls(
+        gap && 'bg-gray-500/10',
+        'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500'
+      ),
+      indicator: 'h-full bg-accent-100',
+    },
+    underline: {
+      options: 'border-b',
+      label:
+        'relative text-black/50 font-bold hover:text-accent-500 hover:bg-accent-500/10 [&.selected]:text-accent-500',
+      indicator: 'absolute bottom-0 left-0 w-full border-t-2 rounded-t border-accent-500',
+    },
+    none: {},
+  } satisfies Record<typeof variant, typeof classes>;
+
+  // Toss classes into a store so it can be reactively read from context
+  const classesStore = writable(classes);
+  $: $classesStore = {
+    root: cls('', variantClasses[variant].root, classes.root),
+
+    options: cls(
+      'grid overflow-auto',
+      vertical ? 'grid-flow-row' : 'grid-flow-col',
+      rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
+      gap === true ? 'gap-1' : gap === 'px' ? 'gap-px' : '',
+      inset ? 'p-[2px]' : '',
+      variantClasses[variant].options,
+      theme.options,
+      classes.options
+    ),
+
+    label: cls(
+      'text-center cursor-pointer',
+      {
+        xs: 'text-xs',
+        sm: 'text-xs',
+        md: 'text-sm',
+        lg: 'text-base',
+      }[size],
+      rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
+      // If adding gap between options, round round firt and last outside edges for options and the indicator
+      gap &&
+        (vertical
+          ? [
+              '[&:not(:first-child)]:rounded-t-none',
+              '[&:not(:last-child)]:rounded-b-none',
+              '[&:not(:first-child)_.indicator]:rounded-t-none',
+              '[&:not(:last-child)_.indicator]:rounded-b-none',
+            ]
+          : [
+              '[&:not(:first-child)]:rounded-l-none',
+              '[&:not(:last-child)]:rounded-r-none',
+              '[&:not(:first-child)_.indicator]:rounded-l-none',
+              '[&:not(:last-child)_.indicator]:rounded-r-none',
+            ]),
+      variantClasses[variant].label,
+      theme.label,
+      classes.label
+    ),
+
+    option: cls(
+      variant !== 'none' && 'px-4 font-medium',
+      {
+        xs: '',
+        sm: 'py-1',
+        md: 'py-1',
+        lg: 'py-1',
+      }[size],
+      variantClasses[variant].option,
+      theme.option,
+      classes.option
+    ),
+
+    indicator: cls(
+      'z-0',
+      rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
+      variantClasses[variant].indicator,
+      theme.indicator,
+      classes.indicator
+    ),
+  };
 
   const logger = new Logger('ToggleGroup');
 
@@ -92,51 +198,6 @@
     $selectedPanel = panels[i];
   }
 
-  // Toss classes into a store so it can be reactively read from context
-  const classesStore = writable(classes);
-  $: $classesStore =
-    variant === 'contained'
-      ? {
-          ...classes,
-          options: cls(
-            'inline-grid overflow-auto p-1 text-sm bg-black/10 border-black/20 transition-shadow border',
-            'hover:shadow hover:border-gray-700',
-            circle ? 'rounded-full' : 'rounded-[10px]',
-            vertical ? 'grid-flow-row' : 'grid-flow-col',
-            theme.options,
-            classes.options
-          ),
-          optionContainer: cls(
-            'text-black/50 ring-black/40',
-            circle ? 'rounded-full' : 'rounded-[8px]',
-            'hover:text-opacity-100 hover:bg-black/5',
-            'focus-visible:ring-1',
-            '[&.selected]:text-black',
-            theme.optionContainer,
-            classes.optionContainer
-          ),
-          indicator: cls(
-            'bg-white w-full h-full shadow-md ring-black/20 ring-1',
-            circle ? 'rounded-full' : 'rounded-[8px]',
-            theme.indicator,
-            classes.indicator
-          ),
-        }
-      : variant === 'underlined'
-      ? {
-          ...classes,
-          options: cls('flex border-b text-sm h-10', theme.options, classes.options),
-          optionContainer: cls(
-            'text-black/50 font-bold',
-            'hover:text-accent-500 hover:bg-accent-500/10',
-            '[&.selected]:text-accent-500',
-            theme.optionContainer,
-            classes.optionContainer
-          ),
-          indicator: cls('h-full border-b-2 border-accent-500', theme.indicator, classes.indicator),
-        }
-      : classes;
-
   setContext(groupKey, {
     registerOption,
     unregisterOption,
@@ -155,6 +216,7 @@
   class={cls('ToggleGroup', `variant-${variant}`, $classesStore.root, $$props.class)}
   {...$$restProps}
 >
+  <!-- TODO: Figure out why fieldset and class="overflow-auto" doesn't work  -->
   <div class={cls('options', $classesStore.options)}>
     <slot />
   </div>

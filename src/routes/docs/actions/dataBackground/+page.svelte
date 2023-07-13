@@ -42,11 +42,7 @@
 <div class="grid gap-2">
   <div class="grid grid-cols-[2fr,1fr,1fr] gap-2">
     <Field label="Domain">
-      <ToggleGroup
-        bind:value={domainSelected}
-        variant="contained"
-        classes={{ root: 'w-full', options: 'w-full' }}
-      >
+      <ToggleGroup bind:value={domainSelected} variant="outline" inset size="sm" class="w-full">
         <ToggleOption value="original">Original</ToggleOption>
         <ToggleOption value="derived">Derived</ToggleOption>
       </ToggleGroup>

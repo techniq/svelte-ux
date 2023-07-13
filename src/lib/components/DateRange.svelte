@@ -102,13 +102,9 @@
   }
 </script>
 
-<div class={cls('DateRange grid grid-cols-[2fr,3fr] gap-2 bg-gray-100', theme.root, $$props.class)}>
+<div class={cls('DateRange grid grid-cols-[2fr,3fr] gap-2', theme.root, $$props.class)}>
   <div class="col-start-2">
-    <ToggleGroup
-      variant="contained"
-      bind:value={activeDate}
-      classes={{ root: 'w-full', options: 'w-full border' }}
-    >
+    <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-white">
       <ToggleOption value="from" class="flex-1">
         <div class="text-xs text-black/50">Start</div>
         {#if selected.from}
@@ -159,7 +155,6 @@
     <div>
       <div class="text-xs text-black/50 uppercase mb-1 -mt-5">Type</div>
       <ToggleGroup
-        variant="contained"
         bind:value={selected.periodType}
         on:change={(e) => {
           // Expand selection range to match period type (day => month, etc)
@@ -171,8 +166,10 @@
             selected.to = end(selected.to);
           }
         }}
+        variant="outline"
+        inset
         vertical
-        classes={{ options: 'w-full border' }}
+        class="bg-white"
       >
         {#each periodTypeOptions ?? [] as pt}
           <ToggleOption value={adjustPeriodType(pt)}>
@@ -183,12 +180,7 @@
 
       {#if selected.periodType}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
-        <ToggleGroup
-          variant="contained"
-          bind:value={selected}
-          vertical
-          classes={{ options: 'w-full border' }}
-        >
+        <ToggleGroup bind:value={selected} variant="outline" inset vertical class="bg-white">
           {#each getDateRangePresets(selected.periodType) ?? [] as preset}
             <ToggleOption value={preset.value}>{preset.label}</ToggleOption>
           {/each}
@@ -198,9 +190,10 @@
       {#if selected.periodType && hasDayOfWeek(selected.periodType)}
         <div class="text-xs text-black/50 uppercase mb-1 mt-4">Start day of week</div>
         <ToggleGroup
-          variant="contained"
           bind:value={selectedDayOfWeek}
-          classes={{ options: 'w-full border' }}
+          variant="outline"
+          inset
+          classes={{ root: 'bg-white', option: 'px-0' }}
         >
           <ToggleOption value={DayOfWeek.SUN}>Sun</ToggleOption>
           <ToggleOption value={DayOfWeek.MON}>Mon</ToggleOption>
