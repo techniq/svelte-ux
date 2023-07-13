@@ -18,17 +18,17 @@
 <h2>Controlled via bind:group and value</h2>
 
 <Preview>
-  <Radio bind:group value={1} />
-  <Radio bind:group value={2} />
-  <Radio bind:group value={3} />
+  <Radio name="group-value" bind:group value={1} />
+  <Radio name="group-value" bind:group value={2} />
+  <Radio name="group-value" bind:group value={3} />
 </Preview>
 
 <h2>Label</h2>
 
 <Preview>
-  <Radio bind:group value={1}>First</Radio>
-  <Radio bind:group value={2}>Second</Radio>
-  <Radio bind:group value={3}>Third</Radio>
+  <Radio name="label" bind:group value={1}>First</Radio>
+  <Radio name="label" bind:group value={2}>Second</Radio>
+  <Radio name="label" bind:group value={3}>Third</Radio>
 </Preview>
 
 <h2>Long labels</h2>
@@ -36,7 +36,7 @@
 <Preview>
   <div class="border w-[150px] overflow-auto p-1">
     {#each { length: 5 } as _, i}
-      <Radio bind:group value={i}>This is a really long label {i}</Radio>
+      <Radio name="long-label" bind:group value={i}>This is a really long label {i}</Radio>
     {/each}
   </div>
 </Preview>
@@ -46,7 +46,11 @@
 <Preview>
   <div class="border w-[150px] overflow-auto p-1">
     {#each { length: 5 } as _, i}
-      <Radio bind:group value={i} classes={{ root: 'truncate max-w-full', label: 'truncate' }}
+      <Radio
+        name="long-label-truncate"
+        bind:group
+        value={i}
+        classes={{ root: 'truncate max-w-full', label: 'truncate' }}
         >This is a really long label {i}</Radio
       >
     {/each}
@@ -65,27 +69,27 @@
 
 <Preview>
   <div>
-    <Radio size="xs" />
-    <Radio size="xs" checked />
-    <Radio size="xs">Label</Radio>
-    <Radio size="xs" checked>Label</Radio>
+    <Radio name="xs" size="xs" />
+    <Radio name="xs" size="xs" checked />
+    <Radio name="xs" size="xs">Label</Radio>
+    <Radio name="xs" size="xs" checked>Label</Radio>
   </div>
   <div>
-    <Radio size="sm" />
-    <Radio size="sm" checked />
-    <Radio size="sm">Label</Radio>
-    <Radio size="sm" checked>Label</Radio>
+    <Radio name="sm" size="sm" />
+    <Radio name="sm" size="sm" checked />
+    <Radio name="sm" size="sm">Label</Radio>
+    <Radio name="sm" size="sm" checked>Label</Radio>
   </div>
   <div>
-    <Radio size="md" />
-    <Radio size="md" checked />
-    <Radio size="md">Label</Radio>
-    <Radio size="md" checked>Label</Radio>
+    <Radio name="md" size="md" />
+    <Radio name="md" size="md" checked />
+    <Radio name="md" size="md">Label</Radio>
+    <Radio name="md" size="md" checked>Label</Radio>
   </div>
   <div>
-    <Radio size="lg" />
-    <Radio size="lg" checked />
-    <Radio size="lg">Label</Radio>
-    <Radio size="lg" checked>Label</Radio>
+    <Radio name="lg" size="lg" />
+    <Radio name="lg" size="lg" checked />
+    <Radio name="lg" size="lg">Label</Radio>
+    <Radio name="lg" size="lg" checked>Label</Radio>
   </div>
 </Preview>

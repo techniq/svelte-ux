@@ -7,6 +7,7 @@
   import { getComponentTheme } from './theme';
 
   export let id = uniqueId('radio-');
+  export let name: string = '';
   export let value: any = undefined;
   export let group: any = undefined;
   export let checked: boolean = false;
@@ -27,6 +28,7 @@
 <div class={cls('Radio', 'inline-flex items-center', theme.root, classes.root, $$props.class)}>
   <input
     {id}
+    {name}
     type="radio"
     bind:group
     on:change

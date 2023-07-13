@@ -7,6 +7,7 @@
   import { getComponentTheme } from './theme';
 
   export let id = uniqueId('checkbox-');
+  export let name = '';
   export let value: any = undefined;
   export let checked: boolean = false;
   export let group: any[] | null = null;
@@ -49,6 +50,7 @@
 <div class={cls('Checkbox', 'inline-flex items-center', theme.root, classes.root, $$props.class)}>
   <input
     {id}
+    {name}
     type="checkbox"
     bind:checked
     on:change={onChange}
