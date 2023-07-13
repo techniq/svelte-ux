@@ -1,5 +1,24 @@
 # svelte-ux
 
+## 0.45.0
+
+### Minor Changes
+
+- [Button] Rename "text" variant to "default" ([`4d61047`](https://github.com/techniq/svelte-ux/commit/4d6104746922808b84ff1d81b525205e53f7a930))
+
+- [ToggleGroup] Major overhaul of styling ([`ef5c2ee`](https://github.com/techniq/svelte-ux/commit/ef5c2ee9cf50a3025fcb335ff091fdf5c63f2241))
+
+  - Support many variants based on accent color
+  - Support style modifications including size, rounded (small/full), gap (small/px), and inset.
+  - Rename `optionsContainer` to `label` and use label component.
+  - Support keyboard up/down/left/right via underlying radio input.
+
+### Patch Changes
+
+- Add `name` prop to Checkbox and Radio components ([`56021eb`](https://github.com/techniq/svelte-ux/commit/56021eb971e9369f5eca7263dee2fa12d73f06ae))
+
+- [DateRange] Align design with new ToggleGroup variant ([`ef5c2ee`](https://github.com/techniq/svelte-ux/commit/ef5c2ee9cf50a3025fcb335ff091fdf5c63f2241))
+
 ## 0.44.1
 
 ### Patch Changes
