@@ -22,7 +22,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="accent">
+    <ButtonGroup color="accent">
       <Button>Left</Button>
       <Button>Center</Button>
       <Button>Right</Button>
@@ -58,7 +58,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="accent">
+    <ButtonGroup color="accent">
       <Button icon={mdiFormatAlignLeft} />
       <Button icon={mdiFormatAlignCenter} />
       <Button icon={mdiFormatAlignRight} />
@@ -94,7 +94,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="accent">
+    <ButtonGroup color="accent">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
@@ -130,7 +130,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="accent">
+    <ButtonGroup color="accent">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} variant="fill-light" />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
@@ -160,7 +160,7 @@
 
     <ButtonGroup variant="fill-light" color="accent">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
-      <Button icon={mdiFormatAlignCenter} iconOnly={false} variant="fill-outline" />
+      <Button icon={mdiFormatAlignCenter} iconOnly={false} variant="fill" />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
 
@@ -176,7 +176,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" size="sm" color="accent">
+    <ButtonGroup size="sm" color="accent">
       <Button icon={mdiBookmark}>Bookmark</Button>
       <Button>12k</Button>
     </ButtonGroup>
@@ -207,7 +207,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="accent" disabled>
+    <ButtonGroup color="accent" disabled>
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
@@ -243,7 +243,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text">
+    <ButtonGroup>
       <Button>Click me</Button>
       <Toggle let:on={open} let:toggle>
         <span>
@@ -324,7 +324,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup variant="text" color="accent">
+    <ButtonGroup color="accent">
       <Tooltip title="left" offset={2}>
         <Button icon={mdiFormatAlignLeft} />
       </Tooltip>

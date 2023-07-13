@@ -6,7 +6,7 @@
   // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
   type ButtonProps = ComponentProps<Button>;
   type ButtonGroupContext = {
-    variant: 'text' | 'outline' | 'fill' | 'fill-outline' | 'fill-light' | 'none' | undefined; // ButtonProps['variant'];
+    variant: 'default' | 'outline' | 'fill' | 'fill-outline' | 'fill-light' | 'none' | undefined; // ButtonProps['variant'];
     size: 'sm' | 'md' | 'lg' | undefined; //ButtonProps['size'];
     color: TailwindColors | 'default' | undefined; //ButtonProps['color'];
     rounded: boolean | 'full' | undefined; // ButtonProps['rounded']
@@ -27,7 +27,7 @@
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
 
-  export let variant: ComponentProps<Button>['variant'];
+  export let variant: ComponentProps<Button>['variant'] = undefined;
   export let size: ComponentProps<Button>['size'] | undefined = undefined;
   export let color: ComponentProps<Button>['color'] | undefined = undefined;
   export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
@@ -53,9 +53,9 @@
     '[&.variant-fill-outline_.Button:not(:first-child)]:-ml-px',
     '[&.variant-fill-outline_:not(:first-child)_.Button]:-ml-px',
 
-    /* Add gap between buttons (text, filled) */
-    '[&.variant-text_.Button:not(:first-child)]:ml-px',
-    '[&.variant-text_:not(:first-child)_.Button]:ml-px',
+    /* Add gap between buttons (default, filled) */
+    '[&.variant-default_.Button:not(:first-child)]:ml-px',
+    '[&.variant-default_:not(:first-child)_.Button]:ml-px',
     '[&.variant-fill_.Button:not(:first-child)]:ml-px',
     '[&.variant-fill_:not(:first-child)_.Button]:ml-px',
     '[&.variant-fill-light_.Button:not(:first-child)]:ml-px',

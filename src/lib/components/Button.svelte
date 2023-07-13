@@ -22,7 +22,7 @@
   export let disabled: boolean = false;
   export let rounded: boolean | 'full' | undefined = undefined; // default in reactive groupContext below
   export let variant:
-    | 'text'
+    | 'default'
     | 'outline'
     | 'fill'
     | 'fill-outline'
@@ -42,7 +42,7 @@
 
   // Override default from `ButtonGroup` if set
   const groupContext = getButtonGroup();
-  $: variant = variant ?? groupContext?.variant ?? 'text';
+  $: variant = variant ?? groupContext?.variant ?? 'default';
   $: size = size ?? groupContext?.size ?? 'md';
   $: color = color ?? groupContext?.color ?? 'default';
   $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);
@@ -73,7 +73,7 @@
     // Variant specific styles
     `variant-${variant}`,
     {
-      text: '',
+      default: '',
       outline: 'border',
       fill: '',
       'fill-outline': 'border',
@@ -82,7 +82,7 @@
     }[variant ?? 'none'],
     // Variant specific colors
     {
-      text: {
+      default: {
         default: 'hover:bg-black/5',
         accent: 'text-accent-500 hover:bg-accent-500/10',
         red: 'text-red-500 hover:bg-red-500/10',
