@@ -75,6 +75,8 @@ export { default as Switch } from './Switch.svelte';
 export { default as Table } from './Table.svelte';
 export { default as TableOfContents } from './TableOfContents.svelte';
 export { default as TableOrderIcon } from './TableOrderIcon.svelte';
+export { default as Tab } from './Tab.svelte';
+export { default as Tabs } from './Tabs.svelte';
 export { default as TextField } from './TextField.svelte';
 export { createTheme } from './theme';
 export { default as Theme } from './Theme.svelte';
