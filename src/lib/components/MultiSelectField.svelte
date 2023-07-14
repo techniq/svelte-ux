@@ -24,7 +24,7 @@
   export let indeterminateSelected: string[] = [];
   export let placement: Placement = 'bottom-start';
   export let infiniteScroll = false;
-  export let labelProp = 'name';
+  export let labelProp = 'name'; // TODO: Default to 'label'
   export let valueProp = 'value';
 
   // TextField props
@@ -148,6 +148,7 @@
     {icon}
     {dense}
     {disabled}
+    shrinkLabel
     value={searchText}
     bind:inputEl
     on:focus={onFocus}
