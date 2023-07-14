@@ -90,8 +90,8 @@
     </Field>
 
     <Field label="Show panes" classes={{ input: 'grid gap-1' }}>
-      <Radio value={false} bind:group={showPanes}>false</Radio>
-      <Radio value={true} bind:group={showPanes}>true</Radio>
+      <Radio name="panes" value={false} bind:group={showPanes}>false</Radio>
+      <Radio name="panes" value={true} bind:group={showPanes}>true</Radio>
     </Field>
   </div>
 </div>
@@ -123,6 +123,18 @@
       </ToggleGroup>
 
       <ToggleGroup {variant} bind:value={selectedStr} rounded="full" inset>
+        <ToggleOption value="all">All</ToggleOption>
+        <ToggleOption value="missed">Missed</ToggleOption>
+        <ToggleOption value="calls">Calls</ToggleOption>
+      </ToggleGroup>
+
+      <ToggleGroup {variant} bind:value={selectedStr} gap>
+        <ToggleOption value="all">All</ToggleOption>
+        <ToggleOption value="missed">Missed</ToggleOption>
+        <ToggleOption value="calls">Calls</ToggleOption>
+      </ToggleGroup>
+
+      <ToggleGroup {variant} bind:value={selectedStr} gap="px">
         <ToggleOption value="all">All</ToggleOption>
         <ToggleOption value="missed">Missed</ToggleOption>
         <ToggleOption value="calls">Calls</ToggleOption>

@@ -59,10 +59,15 @@
       indicator: 'h-full bg-accent-100',
     },
     underline: {
-      options: 'border-b',
+      options: vertical ? 'border-r' : 'border-b',
       label:
         'relative text-black/50 font-bold hover:text-accent-500 hover:bg-accent-500/10 [&.selected]:text-accent-500',
-      indicator: 'absolute bottom-0 left-0 w-full border-t-2 rounded-t border-accent-500',
+      indicator: cls(
+        'absolute  border-accent-500',
+        vertical
+          ? 'top-0 right-0 h-full border-l-4 rounded-l'
+          : 'bottom-0 left-0 w-full border-t-2 rounded-t'
+      ),
     },
     none: {},
   } satisfies Record<typeof variant, typeof classes>;
