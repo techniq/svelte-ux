@@ -13,7 +13,7 @@ export type Theme = {
   [key in ComponentName]?: ClassesProp<(typeof Components)[key]> | string;
 };
 
-const themeKey = 'SVELTE_UX_THEME';
+const themeKey = Symbol();
 
 export function createTheme(theme: Theme) {
   setContext(themeKey, theme);

@@ -78,7 +78,7 @@ export { default as TableOrderIcon } from './TableOrderIcon.svelte';
 export { default as Tab } from './Tab.svelte';
 export { default as Tabs } from './Tabs.svelte';
 export { default as TextField } from './TextField.svelte';
-export { createTheme } from './theme';
+export { createTheme, getTheme, getComponentTheme } from './theme';
 export { default as Theme } from './Theme.svelte';
 export { default as Tilt } from './Tilt.svelte';
 export { default as Toggle } from './Toggle.svelte';
