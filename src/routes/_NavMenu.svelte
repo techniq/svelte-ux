@@ -28,6 +28,7 @@
       'Steps',
       'Table',
       'TableOfContents',
+      'Tabs',
       'Theme',
       'ToggleButton',
       'ToggleGroup',

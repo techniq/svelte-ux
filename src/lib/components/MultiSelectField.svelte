@@ -20,11 +20,11 @@
 
   // MultiSelectMenu props
   export let options: Option[];
-  export let value: string[] = [];
-  export let indeterminateSelected: string[] = [];
+  export let value: any[] = [];
+  export let indeterminateSelected: any[] = [];
   export let placement: Placement = 'bottom-start';
   export let infiniteScroll = false;
-  export let labelProp = 'name';
+  export let labelProp = 'name'; // TODO: Default to 'label'
   export let valueProp = 'value';
 
   // TextField props
@@ -40,9 +40,8 @@
   export let filled = false;
   export let dense = false;
 
-  export let formatSelected: (ctx: { value: string[]; options: Option[] }) => string = ({
-    value,
-  }) => `${value.length} selected`;
+  export let formatSelected: (ctx: { value: any[]; options: Option[] }) => string = ({ value }) =>
+    `${value.length} selected`;
 
   export let classes: {
     root?: string;
@@ -58,7 +57,8 @@
   let inputEl: HTMLInputElement | undefined;
   let menuOptionsEl: HTMLDivElement | undefined;
 
-  export let menuProps: ComponentProps<MultiSelectMenu<Option>> | undefined = undefined;
+  export let menuProps: Omit<ComponentProps<MultiSelectMenu<Option>>, 'options'> | undefined =
+    undefined;
 
   const logger = new Logger('MultiSelectField');
 
@@ -148,6 +148,7 @@
     {icon}
     {dense}
     {disabled}
+    shrinkLabel
     value={searchText}
     bind:inputEl
     on:focus={onFocus}

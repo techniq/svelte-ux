@@ -31,6 +31,12 @@
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} />
 </Preview>
 
+<h2>label</h2>
+
+<Preview>
+  <MultiSelectField label="Numbers" {options} {value} on:change={(e) => (value = e.detail.value)} />
+</Preview>
+
 <h2>disabled</h2>
 
 <Preview>
