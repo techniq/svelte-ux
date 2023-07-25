@@ -93,29 +93,25 @@
   </div>
 </Preview>
 
-<h2>Shrink label</h2>
+<h2>Float label</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
-    <TextField label="First Name" labelPlacement="shrink" />
-    <TextField label="Last Name" labelPlacement="shrink" />
+    <TextField label="First Name" labelPlacement="float" />
+    <TextField label="Last Name" labelPlacement="float" />
   </div>
 </Preview>
 
-<h2>Shrink label with placeholder</h2>
+<h2>Float label with placeholder</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
     <TextField
       label="First Name"
-      labelPlacement="shrink"
+      labelPlacement="float"
       placeholder="Please enter your first name"
     />
-    <TextField
-      label="Last Name"
-      labelPlacement="shrink"
-      placeholder="Please enter your last name"
-    />
+    <TextField label="Last Name" labelPlacement="float" placeholder="Please enter your last name" />
   </div>
 </Preview>
 

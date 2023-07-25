@@ -24,7 +24,7 @@
 
   export let name: string | undefined = undefined;
   export let label = '';
-  export let labelPlacement: 'inset' | 'shrink' | 'top' | 'left' = 'inset';
+  export let labelPlacement: 'inset' | 'float' | 'top' | 'left' = 'inset';
   export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
   export let type:
     | 'text'
@@ -160,7 +160,7 @@
   }
 
   $: hasInputValue = inputValue != null && inputValue !== '';
-  $: hasInsetLabel = ['inset', 'shrink'].includes(labelPlacement) && label !== '';
+  $: hasInsetLabel = ['inset', 'float'].includes(labelPlacement) && label !== '';
 
   $: hasPrepend = $$slots.prepend || icon != null;
   $: hasAppend =
@@ -241,7 +241,7 @@
 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="flex-grow inline-grid" on:click>
-          {#if label && ['inset', 'shrink'].includes(labelPlacement)}
+          {#if label && ['inset', 'float'].includes(labelPlacement)}
             <label
               class={cls(
                 'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
@@ -265,7 +265,7 @@
               dense ? 'my-1' : 'my-2',
               (hasPrefix || hasSuffix) &&
                 label &&
-                labelPlacement === 'shrink' &&
+                labelPlacement === 'float' &&
                 !hasInputValue &&
                 'opacity-0 transition-opacity',
               'group-focus-within:opacity-100'
@@ -293,7 +293,7 @@
                 class={cls(
                   'text-sm border-none w-full bg-transparent outline-none resize-none',
                   'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
-                  (labelPlacement !== 'shrink' || !hasInsetLabel) && 'placeholder-opacity-30',
+                  (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-30',
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
@@ -328,7 +328,7 @@
                   'text-sm border-none w-full bg-transparent outline-none truncate',
                   'selection:bg-gray-500/30',
                   'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
-                  (labelPlacement !== 'shrink' || !hasInsetLabel) && 'placeholder-opacity-30',
+                  (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-30',
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
@@ -421,7 +421,7 @@
 </fieldset>
 
 <style lang="postcss">
-  fieldset:focus-within label.placement-shrink,
+  fieldset:focus-within label.placement-float,
   label.shrink {
     transform: scale(0.75);
     width: 133%; /* offset 75% scale */

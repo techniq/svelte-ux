@@ -14,7 +14,7 @@
   }>();
 
   export let label = '';
-  export let labelPlacement: 'inset' | 'shrink' | 'top' | 'left' = 'inset';
+  export let labelPlacement: 'inset' | 'float' | 'top' | 'left' = 'inset';
   export let value: any = null;
   // export let placeholder = '';
   export let error = '';
@@ -46,7 +46,7 @@
   $: hasValue = Array.isArray(value)
     ? value.length > 0
     : !!value /* anything truthy such as object, non-empty string, etc */;
-  $: hasInsetLabel = ['inset', 'shrink'].includes(labelPlacement) && label !== '';
+  $: hasInsetLabel = ['inset', 'float'].includes(labelPlacement) && label !== '';
 
   $: hasPrepend = $$slots.prepend || icon != null;
   $: hasAppend = $$slots.append || iconRight != null || clearable || error;
@@ -124,7 +124,7 @@
 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="flex-grow inline-grid" on:click>
-          {#if label && ['inset', 'shrink'].includes(labelPlacement)}
+          {#if label && ['inset', 'float'].includes(labelPlacement)}
             <label
               class={cls(
                 'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
@@ -202,7 +202,7 @@
 </fieldset>
 
 <style lang="postcss">
-  fieldset:focus-within label.placement-shrink,
+  fieldset:focus-within label.placement-float,
   label.shrink {
     transform: scale(0.75);
     width: 133%; /* offset 75% scale */
