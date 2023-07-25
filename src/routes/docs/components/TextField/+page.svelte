@@ -47,7 +47,7 @@
 
 <h1>Examples</h1>
 
-<h2>Label</h2>
+<h2>Label only</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -74,25 +74,17 @@
   </div>
 </Preview>
 
-<h2>Always shrink label</h2>
+<h2>Error</h2>
 
 <Preview>
-  <div class="grid grid-flow-col gap-2">
-    <TextField label="First Name" shrinkLabel />
-    <TextField label="Last Name" shrinkLabel />
-  </div>
+  <TextField
+    label="Password"
+    placeholder="Please enter your password"
+    error="This is a required field"
+  />
 </Preview>
 
-<h2>Always shrink label with placeholder</h2>
-
-<Preview>
-  <div class="grid grid-flow-col gap-2">
-    <TextField label="First Name" shrinkLabel placeholder="Please enter your first name" />
-    <TextField label="Last Name" shrinkLabel placeholder="Please enter your last name" />
-  </div>
-</Preview>
-
-<h2>Dense</h2>
+<h2>Dense inline label</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
@@ -101,11 +93,89 @@
   </div>
 </Preview>
 
-<h2>Error</h2>
+<h2>Shrink label</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <TextField label="First Name" labelPlacement="shrink" />
+    <TextField label="Last Name" labelPlacement="shrink" />
+  </div>
+</Preview>
+
+<h2>Shrink label with placeholder</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <TextField
+      label="First Name"
+      labelPlacement="shrink"
+      placeholder="Please enter your first name"
+    />
+    <TextField
+      label="Last Name"
+      labelPlacement="shrink"
+      placeholder="Please enter your last name"
+    />
+  </div>
+</Preview>
+
+<h2>Top label</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <TextField label="First Name" labelPlacement="top" />
+    <TextField label="Last Name" labelPlacement="top" />
+  </div>
+</Preview>
+
+<h2>Top label with placeholder</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <TextField label="First Name" labelPlacement="top" placeholder="Please enter your first name" />
+    <TextField label="Last Name" labelPlacement="top" placeholder="Please enter your last name" />
+  </div>
+</Preview>
+
+<h2>Top label with error</h2>
 
 <Preview>
   <TextField
     label="Password"
+    labelPlacement="top"
+    placeholder="Please enter your password"
+    error="This is a required field"
+  />
+</Preview>
+
+<h2>Left label</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <TextField label="First Name" labelPlacement="left" />
+    <TextField label="Last Name" labelPlacement="left" />
+  </div>
+</Preview>
+
+<h2>Left label with placeholder</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <TextField
+      label="First Name"
+      labelPlacement="left"
+      placeholder="Please enter your first name"
+    />
+    <TextField label="Last Name" labelPlacement="left" placeholder="Please enter your last name" />
+  </div>
+</Preview>
+
+<h2>Left label with error</h2>
+
+<Preview>
+  <TextField
+    label="Password"
+    labelPlacement="left"
     placeholder="Please enter your password"
     error="This is a required field"
   />
@@ -381,18 +451,6 @@
 
 <Preview>
   <TextField label="Search" rounded icon={mdiMagnify} />
-</Preview>
-
-<h2>Filled</h2>
-
-<Preview>
-  <TextField label="Search" filled />
-</Preview>
-
-<h2>Rounded and Filled</h2>
-
-<Preview>
-  <TextField label="Search" rounded filled />
 </Preview>
 
 <SectionDivider>Examples</SectionDivider>

@@ -47,16 +47,16 @@
   <DatePickerField periodType={PeriodType.Month} bind:value stepper />
 </Preview>
 
-<h2>Stepper w/ rounded & filled</h2>
+<h2>Stepper w/ rounded</h2>
 
 <Preview>
-  <DatePickerField bind:value stepper rounded filled />
+  <DatePickerField bind:value stepper rounded />
 </Preview>
 
-<h2>Stepper w/ rounded & filled & center</h2>
+<h2>Stepper w/ rounded & center</h2>
 
 <Preview>
-  <DatePickerField bind:value stepper rounded filled center />
+  <DatePickerField bind:value stepper rounded center />
 </Preview>
 
 <h2>Icon only</h2>

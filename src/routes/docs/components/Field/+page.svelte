@@ -159,3 +159,13 @@
     </span>
   </Field>
 </Preview>
+
+<h2>Label placement</h2>
+
+<Preview>
+  <div class="grid gap-4">
+    <Field label="Name" labelPlacement="inset">Sean Lynch</Field>
+    <Field label="Name" labelPlacement="top">Sean Lynch</Field>
+    <Field label="Name" labelPlacement="left">Sean Lynch</Field>
+  </div>
+</Preview>

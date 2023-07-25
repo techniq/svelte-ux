@@ -27,7 +27,6 @@
   export let clearable = false;
   export let base = false;
   export let rounded = false;
-  export let filled = false;
   export let dense = false;
   export let icon: string | null = null;
   export let center = false;
@@ -66,7 +65,6 @@
     {disabled}
     {base}
     {rounded}
-    {filled}
     {dense}
     {center}
     let:id

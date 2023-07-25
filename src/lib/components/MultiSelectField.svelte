@@ -37,7 +37,6 @@
   export let clearable = true;
   export let base = false;
   export let rounded = false;
-  export let filled = false;
   export let dense = false;
 
   export let formatSelected: (ctx: { value: any[]; options: Option[] }) => string = ({ value }) =>
@@ -144,11 +143,9 @@
     {placeholder}
     {base}
     {rounded}
-    {filled}
     {icon}
     {dense}
     {disabled}
-    shrinkLabel
     value={searchText}
     bind:inputEl
     on:focus={onFocus}

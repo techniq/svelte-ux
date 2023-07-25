@@ -54,8 +54,8 @@
   <DateRangeField bind:value stepper icon={mdiCalendarRange} />
 </Preview>
 
-<h2>Stepper w/ rounded & filled & centered</h2>
+<h2>Stepper w/ rounded & centered</h2>
 
 <Preview>
-  <DateRangeField bind:value stepper rounded filled center />
+  <DateRangeField bind:value stepper rounded center />
 </Preview>

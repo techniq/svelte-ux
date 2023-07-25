@@ -1,19 +1,19 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import type { HTMLInputAttributes } from 'svelte/elements';
   import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
+  import { autoFocus } from '../actions/input';
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
+  import { isLiteralObject } from '../utils/object';
+  import { getComponentTheme } from './theme';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import Input from './Input.svelte';
-  import { isLiteralObject } from '../utils/object';
-  import { autoFocus } from '$lib/actions';
-  import type { HTMLInputAttributes } from 'svelte/elements';
-  import { getComponentTheme } from './theme';
 
   type InputValue = string | number;
 
@@ -24,6 +24,7 @@
 
   export let name: string | undefined = undefined;
   export let label = '';
+  export let labelPlacement: 'inset' | 'shrink' | 'top' | 'left' = 'inset';
   export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
   export let type:
     | 'text'
@@ -43,12 +44,10 @@
   export let clearable = false;
   export let base = false;
   export let rounded = false;
-  export let filled = false;
   export let dense = false;
   export let icon: string | null = null;
   export let iconRight: string | null = null;
   export let align: 'left' | 'center' | 'right' = 'left';
-  export let shrinkLabel = false;
   export let autofocus: boolean | Parameters<typeof autoFocus>[1] = false;
   // TODO: Find way to conditionally set type based on `multiline` value
   export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> = autofocus
@@ -81,7 +80,7 @@
     case 'decimal':
     case 'currency':
     case 'percent':
-      // TODO: typing '.'  on iOS appears to clear input when using type="number"
+      // TODO: typing '.' on iOS appears to clear input when using type="number"
       inputType = 'number';
       break;
     case 'password':
@@ -161,7 +160,7 @@
   }
 
   $: hasInputValue = inputValue != null && inputValue !== '';
-  $: hasLabel = label !== '';
+  $: hasInsetLabel = ['inset', 'shrink'].includes(labelPlacement) && label !== '';
 
   $: hasPrepend = $$slots.prepend || icon != null;
   $: hasAppend =
@@ -177,12 +176,9 @@
   {disabled}
   class={cls(
     'TextField',
-    'group',
-    error
-      ? '[--color:theme(colors.red.500)]'
-      : filled
-      ? '[--color:theme(colors.gray.600)]'
-      : '[--color:theme(colors.accent.500)]',
+    'group flex gap-1',
+    labelPlacement !== 'left' ? 'flex-col' : 'items-center',
+    error ? '[--color:theme(colors.red.500)]' : '[--color:theme(colors.accent.500)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
     theme.root,
@@ -190,224 +186,242 @@
     $$props.class
   )}
 >
-  <div
-    class={cls(
-      'border py-0 transition-shadow',
-      disabled ? '' : 'hover:shadow',
-      disabled ? '' : error ? 'hover:border-red-700' : 'hover:border-gray-700',
-      {
-        'px-2': !rounded,
-        'px-6': rounded && !hasPrepend, // TODO: `hasPrepend` always true for SelectField, etc.  See: https://github.com/sveltejs/svelte/issues/6059
-      },
-      !base && [rounded ? 'rounded-full' : 'rounded', filled ? 'bg-black/10' : 'bg-white'],
-      error ? 'border-red-500' : 'border-black/20',
-      'group-focus-within:shadow-md group-focus-within:border-color-var',
-      theme.container,
-      classes.container
-    )}
-  >
-    <div class="flex items-center">
-      {#if hasPrepend}
-        <div
-          class={cls(
-            'prepend whitespace-nowrap',
-            rounded && 'pl-3',
-            theme.prepend,
-            classes.prepend
-          )}
-        >
-          <slot name="prepend" />
-          {#if icon}
-            <span class="mr-3">
-              <Icon path={icon} class="text-black/50" />
-            </span>
-          {/if}
-        </div>
-      {/if}
+  {#if label && ['top', 'left'].includes(labelPlacement)}
+    <label
+      class={cls(
+        'block text-sm font-medium',
+        'truncate group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
+        error ? 'text-red-500/80' : 'text-black/50',
+        `placement-${labelPlacement}`,
+        theme.label,
+        classes.label
+      )}
+      for={id}
+      bind:this={labelEl}
+    >
+      {label}
+    </label>
+  {/if}
 
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <div class="flex-grow inline-grid" on:click>
-        {#if label}
-          <label
+  <div class="flex-1">
+    <div
+      class={cls(
+        'border py-0 transition-shadow',
+        disabled ? '' : 'hover:shadow',
+        disabled ? '' : error ? 'hover:border-red-700' : 'hover:border-gray-700',
+        {
+          'px-2': !rounded,
+          'px-6': rounded && !hasPrepend, // TODO: `hasPrepend` always true for SelectField, etc.  See: https://github.com/sveltejs/svelte/issues/6059
+        },
+        !base && ['bg-white', rounded ? 'rounded-full' : 'rounded'],
+        error ? 'border-red-500' : 'border-black/20',
+        'group-focus-within:shadow-md group-focus-within:border-color-var',
+        theme.container,
+        classes.container
+      )}
+    >
+      <div class="flex items-center">
+        {#if hasPrepend}
+          <div
             class={cls(
-              'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
-              error ? 'text-red-500/80' : 'text-black/50',
-              (shrinkLabel || hasInputValue) && 'shrink',
-              theme.label,
-              classes.label
+              'prepend whitespace-nowrap',
+              rounded && 'pl-3',
+              theme.prepend,
+              classes.prepend
             )}
-            for={id}
-            bind:this={labelEl}
           >
-            {label}
-          </label>
+            <slot name="prepend" />
+            {#if icon}
+              <span class="mr-3">
+                <Icon path={icon} class="text-black/50" />
+              </span>
+            {/if}
+          </div>
         {/if}
 
-        <div
-          class={cls(
-            'input col-span-full row-span-full flex items-center',
-            hasLabel && 'pt-4',
-            dense ? 'my-1' : 'my-2',
-            (hasPrefix || hasSuffix) &&
-              label &&
-              !shrinkLabel &&
-              !hasInputValue &&
-              'opacity-0 transition-opacity',
-            'group-focus-within:opacity-100'
-          )}
-        >
-          <slot name="prefix" />
-
-          {#if type === 'currency'}
-            <Icon path={mdiCurrencyUsd} size="1.1em" class="text-black/50 -mt-1" />
-          {/if}
-
-          {#if multiline}
-            <textarea
-              {id}
-              {name}
-              {placeholder}
-              {autocomplete}
-              value={inputValue}
-              {autocapitalize}
-              on:input={handleInput}
-              on:focus
-              on:blur
-              on:keydown
-              on:keypress
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div class="flex-grow inline-grid" on:click>
+          {#if label && ['inset', 'shrink'].includes(labelPlacement)}
+            <label
               class={cls(
-                'text-sm border-none w-full bg-transparent outline-none resize-none',
-                'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
-                (shrinkLabel || !hasLabel) && 'placeholder-opacity-30',
-                {
-                  'text-left': align === 'left',
-                  'text-center': align === 'center',
-                  'text-right': align === 'right',
-                },
-                theme.input,
-                classes.input
+                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
+                error ? 'text-red-500/80' : 'text-black/50',
+                `placement-${labelPlacement}`,
+                (labelPlacement === 'inset' || hasInputValue) && 'shrink',
+                theme.label,
+                classes.label
               )}
-              use:multi={actions}
-            />
-          {:else}
-            <Input
-              {id}
-              {name}
-              {placeholder}
-              {autocomplete}
-              type={inputType}
-              inputmode={inputMode}
-              value={inputValue}
-              {mask}
-              {replace}
-              {accept}
-              {autocapitalize}
-              {actions}
-              bind:inputEl
-              on:input={handleInput}
-              on:focus
-              on:blur
-              on:keydown
-              on:keypress
-              class={cls(
-                'text-sm border-none w-full bg-transparent outline-none truncate',
-                'selection:bg-gray-500/30',
-                'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
-                (shrinkLabel || !hasLabel) && 'placeholder-opacity-30',
-                {
-                  'text-left': align === 'left',
-                  'text-center': align === 'center',
-                  'text-right': align === 'right',
-                },
-                theme.input,
-                classes.input
-              )}
-            />
-          {/if}
-
-          {#if type === 'percent'}
-            <Icon path={mdiPercent} size="1.1em" class="text-black/50 -mt-1 ml-1" />
-          {/if}
-
-          <slot name="suffix" />
-        </div>
-      </div>
-
-      {#if hasAppend}
-        <div class={cls('append whitespace-nowrap', theme.append, classes.append)}>
-          {#if clearable && hasInputValue}
-            <Button
-              icon={mdiClose}
-              class="text-black/50 p-1"
-              on:click={() => {
-                inputValue = '';
-                operator = operators ? operators[0].value : null;
-                updateValue();
-                dispatch('clear');
-                labelEl?.focus();
-              }}
-            />
-          {/if}
-
-          {#if operators}
-            <select
-              value={operator}
-              on:change={(e) => {
-                operator = e.target.value;
-                updateValue();
-              }}
-              class="appearance-none bg-black/5 border border-black/20 rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
-              style="text-align-last: center;"
+              for={id}
+              bind:this={labelEl}
             >
-              {#each operators ?? [] as { label, value }}
-                <option {value}>{label}</option>
-              {/each}
-            </select>
+              {label}
+            </label>
           {/if}
 
-          {#if type === 'password'}
-            <Button
-              icon={mdiEye}
-              class="text-black/50 p-2"
-              on:click={() => {
-                if (inputType === 'password') {
-                  inputType = 'text';
-                } else {
-                  inputType = 'password';
-                }
-              }}
-            />
-          {/if}
+          <div
+            class={cls(
+              'input col-span-full row-span-full flex items-center',
+              hasInsetLabel && 'pt-4',
+              dense ? 'my-1' : 'my-2',
+              (hasPrefix || hasSuffix) &&
+                label &&
+                labelPlacement === 'shrink' &&
+                !hasInputValue &&
+                'opacity-0 transition-opacity',
+              'group-focus-within:opacity-100'
+            )}
+          >
+            <slot name="prefix" />
 
-          <slot name="append" />
+            {#if type === 'currency'}
+              <Icon path={mdiCurrencyUsd} size="1.1em" class="text-black/50 -mt-1" />
+            {/if}
 
-          {#if error}
-            <Icon path={mdiInformationOutline} class="text-red-500" />
-          {:else if iconRight}
-            <Icon path={iconRight} class="text-black/50" />
-          {/if}
+            {#if multiline}
+              <textarea
+                {id}
+                {name}
+                {placeholder}
+                {autocomplete}
+                value={inputValue}
+                {autocapitalize}
+                on:input={handleInput}
+                on:focus
+                on:blur
+                on:keydown
+                on:keypress
+                class={cls(
+                  'text-sm border-none w-full bg-transparent outline-none resize-none',
+                  'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
+                  (labelPlacement !== 'shrink' || !hasInsetLabel) && 'placeholder-opacity-30',
+                  {
+                    'text-left': align === 'left',
+                    'text-center': align === 'center',
+                    'text-right': align === 'right',
+                  },
+                  theme.input,
+                  classes.input
+                )}
+                use:multi={actions}
+              />
+            {:else}
+              <Input
+                {id}
+                {name}
+                {placeholder}
+                {autocomplete}
+                type={inputType}
+                inputmode={inputMode}
+                value={inputValue}
+                {mask}
+                {replace}
+                {accept}
+                {autocapitalize}
+                {actions}
+                bind:inputEl
+                on:input={handleInput}
+                on:focus
+                on:blur
+                on:keydown
+                on:keypress
+                class={cls(
+                  'text-sm border-none w-full bg-transparent outline-none truncate',
+                  'selection:bg-gray-500/30',
+                  'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
+                  (labelPlacement !== 'shrink' || !hasInsetLabel) && 'placeholder-opacity-30',
+                  {
+                    'text-left': align === 'left',
+                    'text-center': align === 'center',
+                    'text-right': align === 'right',
+                  },
+                  theme.input,
+                  classes.input
+                )}
+              />
+            {/if}
+
+            {#if type === 'percent'}
+              <Icon path={mdiPercent} size="1.1em" class="text-black/50 -mt-1 ml-1" />
+            {/if}
+
+            <slot name="suffix" />
+          </div>
         </div>
-      {/if}
+
+        {#if hasAppend}
+          <div class={cls('append whitespace-nowrap', theme.append, classes.append)}>
+            {#if clearable && hasInputValue}
+              <Button
+                icon={mdiClose}
+                class="text-black/50 p-1"
+                on:click={() => {
+                  inputValue = '';
+                  operator = operators ? operators[0].value : null;
+                  updateValue();
+                  dispatch('clear');
+                  labelEl?.focus();
+                }}
+              />
+            {/if}
+
+            {#if operators}
+              <select
+                value={operator}
+                on:change={(e) => {
+                  operator = e.target.value;
+                  updateValue();
+                }}
+                class="appearance-none bg-black/5 border border-black/20 rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
+                style="text-align-last: center;"
+              >
+                {#each operators ?? [] as { label, value }}
+                  <option {value}>{label}</option>
+                {/each}
+              </select>
+            {/if}
+
+            {#if type === 'password'}
+              <Button
+                icon={mdiEye}
+                class="text-black/50 p-2"
+                on:click={() => {
+                  if (inputType === 'password') {
+                    inputType = 'text';
+                  } else {
+                    inputType = 'password';
+                  }
+                }}
+              />
+            {/if}
+
+            <slot name="append" />
+
+            {#if error}
+              <Icon path={mdiInformationOutline} class="text-red-500" />
+            {:else if iconRight}
+              <Icon path={iconRight} class="text-black/50" />
+            {/if}
+          </div>
+        {/if}
+      </div>
     </div>
-  </div>
-  <div
-    class={cls(
-      error ? 'error' : 'hint',
-      'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
-      error ? 'text-red-500' : 'text-black/50 scale-y-0',
-      theme.error,
-      classes.error
-    )}
-  >
-    {error || hint}
+
+    <div
+      class={cls(
+        error ? 'error' : 'hint',
+        'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
+        error ? 'text-red-500' : 'text-black/50 scale-y-0',
+        theme.error,
+        classes.error
+      )}
+    >
+      {error || hint}
+    </div>
   </div>
 </fieldset>
 
 <style lang="postcss">
-  label {
-    width: 100%;
-  }
-  fieldset:focus-within label,
+  fieldset:focus-within label.placement-shrink,
   label.shrink {
     transform: scale(0.75);
     width: 133%; /* offset 75% scale */

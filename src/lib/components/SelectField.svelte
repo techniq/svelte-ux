@@ -35,7 +35,6 @@
   export let clearable = true;
   export let base = false;
   export let rounded = false;
-  export let filled = false;
   export let dense = false;
   export let clearSearchOnFocus = false;
 
@@ -56,7 +55,7 @@
   export let matchWidth = true;
   export let resize = true;
   export let disableTransition = false;
-  export let menuProps: ComponentProps<Menu> = undefined;
+  export let menuProps: ComponentProps<Menu> | undefined = undefined;
 
   $: filteredOptions = options ?? [];
   let searchText = '';
@@ -324,7 +323,6 @@
     {placeholder}
     {base}
     {rounded}
-    {filled}
     {icon}
     {dense}
     {disabled}
