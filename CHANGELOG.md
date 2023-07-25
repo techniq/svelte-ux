@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.46.2
+
+### Patch Changes
+
+- Change theme key from Symbol to simple string ([`9bc956c`](https://github.com/techniq/svelte-ux/commit/9bc956cbd72055135b75ca9f2bafd0431c1d1644))
+
 ## 0.46.1
 
 ### Patch Changes
