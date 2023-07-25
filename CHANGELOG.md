@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.46.3
+
+### Patch Changes
+
+- Change back to using Symbol for theme key. Export `getTheme()` and `getComponentTheme()` as top-level exports ([`ccd5308`](https://github.com/techniq/svelte-ux/commit/ccd530847713258cd9834f92fca030642a430fc8))
+
 ## 0.46.2
 
 ### Patch Changes
