@@ -5,7 +5,9 @@
   import Tab from './Tab.svelte';
 
   export let value: any = undefined;
-  export let vertical = false;
+  export let placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
+
+  $: vertical = placement === 'left' || placement === 'right';
 
   export let options: { label: string; value: any }[] = [];
 
@@ -21,8 +23,14 @@
 <div
   class={cls(
     'Tabs',
-    'overflow-auto',
-    vertical ? 'flex' : '',
+    'overflow-auto flex',
+    `placement-${placement}`,
+    {
+      top: 'flex-col',
+      bottom: 'flex-col-reverse',
+      left: 'flex-row',
+      right: 'flex-row-reverse',
+    }[placement],
     theme.root,
     classes.root,
     $$props.class
@@ -30,8 +38,14 @@
 >
   <div
     class={cls(
-      'flex gap-2 overflow-auto',
-      vertical ? 'flex-col -mr-px z-[1]' : '-mb-px',
+      'flex gap-1 overflow-auto z-[1]',
+      vertical && 'flex-col',
+      {
+        top: '-mb-px',
+        bottom: '-mt-px',
+        left: '-mr-px',
+        right: '-ml-px',
+      }[placement],
       theme.tabs,
       classes.tabs
     )}
@@ -39,7 +53,7 @@
     <slot>
       {#each options as tab (tab.value)}
         <Tab
-          {vertical}
+          {placement}
           selected={value === tab.value}
           on:click={() => (value = tab.value)}
           classes={{ ...theme.tab, ...classes.tab }}
@@ -52,8 +66,15 @@
 
   <div
     class={cls(
-      vertical ? 'flex-1' : 'rounded-b-lg rounded-tr-lg',
-      'border border-gray-100 px-4 py-2'
+      vertical && 'flex-1',
+      {
+        top: 'border-t',
+        bottom: 'border-b',
+        left: 'border-l',
+        right: 'border-r',
+      }[placement],
+      theme.content,
+      classes.content
     )}
   >
     <slot name="content" {value} />

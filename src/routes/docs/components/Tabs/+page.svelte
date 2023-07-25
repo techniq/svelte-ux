@@ -44,6 +44,86 @@
   </Tabs>
 </Preview>
 
+<h2>placement</h2>
+
+<Preview>
+  <div class="grid grid-cols-2 gap-4">
+    <Tabs {options} placement="top" bind:value>
+      <svelte:fragment slot="content" let:value>
+        Page {value}
+      </svelte:fragment>
+    </Tabs>
+
+    <Tabs {options} placement="bottom" bind:value>
+      <svelte:fragment slot="content" let:value>
+        Page {value}
+      </svelte:fragment>
+    </Tabs>
+
+    <Tabs {options} placement="left" bind:value>
+      <svelte:fragment slot="content" let:value>
+        Page {value}
+      </svelte:fragment>
+    </Tabs>
+
+    <Tabs {options} placement="right" bind:value>
+      <svelte:fragment slot="content" let:value>
+        Page {value}
+      </svelte:fragment>
+    </Tabs>
+  </div>
+</Preview>
+
+<h2>rounded and contained</h2>
+
+<Preview>
+  <div class="grid grid-cols-2 gap-4">
+    <Tabs
+      {options}
+      placement="top"
+      bind:value
+      classes={{ content: 'border px-4 py-2 rounded-b rounded-tr', tab: { root: 'rounded-t' } }}
+    >
+      <svelte:fragment slot="content" let:value>
+        Page {value}
+      </svelte:fragment>
+    </Tabs>
+
+    <Tabs
+      {options}
+      placement="bottom"
+      bind:value
+      classes={{ content: 'border px-4 py-2  rounded-t rounded-br', tab: { root: 'rounded-b' } }}
+    >
+      <svelte:fragment slot="content" let:value>
+        Page {value}
+      </svelte:fragment>
+    </Tabs>
+
+    <Tabs
+      {options}
+      placement="left"
+      bind:value
+      classes={{ content: 'border px-4 py-2  rounded-r', tab: { root: 'rounded-l' } }}
+    >
+      <svelte:fragment slot="content" let:value>
+        Page {value}
+      </svelte:fragment>
+    </Tabs>
+
+    <Tabs
+      {options}
+      placement="right"
+      bind:value
+      classes={{ content: 'border px-4 py-2 rounded-l', tab: { root: 'rounded-r' } }}
+    >
+      <svelte:fragment slot="content" let:value>
+        Page {value}
+      </svelte:fragment>
+    </Tabs>
+  </div>
+</Preview>
+
 <h2>add / remove</h2>
 
 <Preview>
@@ -73,16 +153,6 @@
     </Tab>
 
     <svelte:fragment slot="content">
-      Page {value}
-    </svelte:fragment>
-  </Tabs>
-</Preview>
-
-<h2>vertical</h2>
-
-<Preview>
-  <Tabs {options} vertical bind:value>
-    <svelte:fragment slot="content" let:value>
       Page {value}
     </svelte:fragment>
   </Tabs>
