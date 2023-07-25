@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.46.0
+
+### Minor Changes
+
+- [Field / Textfield] Add top/left label placement, along with existing inset/shrink (replace shrinkLabel prop). Default to inset instead of shrink. Remove filled prop ([`de49c98`](https://github.com/techniq/svelte-ux/commit/de49c98d19335a7d9e94ad7fe4d659ebd640be14))
+
+### Patch Changes
+
+- Add Tabs / Tab components ([#64](https://github.com/techniq/svelte-ux/pull/64))
+
+- [MultiSelectField] Always shrink TextField label ([#64](https://github.com/techniq/svelte-ux/pull/64))
+
 ## 0.45.0
 
 ### Minor Changes
