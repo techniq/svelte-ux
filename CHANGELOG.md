@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.46.1
+
+### Patch Changes
+
+- [Field / TextField] Rename `labelPlacement="shrink"` to `labelPlacement="float"` to better describe usage ([`ebf9efd`](https://github.com/techniq/svelte-ux/commit/ebf9efd181e8049c92b28e183adebff0b8840525))
+
+- Bump all non-major dependencies ([`ebf9efd`](https://github.com/techniq/svelte-ux/commit/ebf9efd181e8049c92b28e183adebff0b8840525))
+
 ## 0.46.0
 
 ### Minor Changes
