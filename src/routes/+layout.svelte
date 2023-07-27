@@ -126,7 +126,7 @@
     }
   }
 
-  :global(.AppBar) {
+  :global(.AppLayout > .AppBar) {
     @apply bg-accent-500 text-white shadow-md;
   }
 
