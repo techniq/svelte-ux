@@ -9,13 +9,13 @@ import 'prism-svelte';
  */
 export function codePreview() {
   return {
-    markup({ content, filename }) {
+    async markup({ content, filename }) {
       let code = content;
 
       // Process <Preview>...</Preview> to `<Preview code={...}>...</Preview>
       const previewMatches = content.match(/<Preview[\s\S]*?<\/Preview>/g) ?? [];
 
-      previewMatches.forEach(async (previewMatch) => {
+      for await (const previewMatch of previewMatches) {
         const previewContent = previewMatch.match(/<Preview.*>([^]*)<\/Preview>/)[1];
 
         const formattedCode = await format(previewContent, {
@@ -33,7 +33,7 @@ export function codePreview() {
             )
           );
         }
-      });
+      }
 
       return { code };
     },
