@@ -14,8 +14,14 @@
   export let value: any = undefined; // index or value
   export let autoscroll: boolean = false;
 
-  export let variant: 'default' | 'outline' | 'fill' | 'fill-light' | 'underline' | 'none' =
-    'default';
+  export let variant:
+    | 'default'
+    | 'outline'
+    | 'fill'
+    | 'fill-light'
+    | 'fill-white'
+    | 'underline'
+    | 'none' = 'default';
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
   export let rounded: boolean | 'full' = variant !== 'underline';
   export let gap: boolean | 'px' = false;
@@ -57,6 +63,14 @@
         'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500'
       ),
       indicator: 'h-full bg-accent-100',
+    },
+    'fill-white': {
+      options: cls(!gap && 'bg-gray-500/10'),
+      label: cls(
+        gap && 'bg-gray-500/10',
+        'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500'
+      ),
+      indicator: 'h-full bg-white',
     },
     underline: {
       options: vertical ? 'border-r' : 'border-b',
