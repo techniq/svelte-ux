@@ -6,7 +6,7 @@ export async function load() {
     meta: {
       source,
       pageSource,
-      related: ['components/Tabs'],
+      related: ['components/Switch', 'components/Tabs'],
     },
   };
 }
