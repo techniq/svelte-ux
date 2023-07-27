@@ -1,10 +1,8 @@
-import prettier from 'prettier/esm/standalone.mjs';
-import typescriptPlugin from 'prettier/esm/parser-typescript.mjs';
+import { format } from 'prettier';
+import typescriptPlugin from 'prettier/plugins/typescript';
 import sveltePlugin from 'prettier-plugin-svelte';
 import Prism from 'prismjs';
 import 'prism-svelte';
-
-const { format } = prettier;
 
 /**
  *  Add `code` and `highlightedCode` props to <Preview> from slot contents
@@ -17,10 +15,10 @@ export function codePreview() {
       // Process <Preview>...</Preview> to `<Preview code={...}>...</Preview>
       const previewMatches = content.match(/<Preview[\s\S]*?<\/Preview>/g) ?? [];
 
-      previewMatches.forEach((previewMatch) => {
+      previewMatches.forEach(async (previewMatch) => {
         const previewContent = previewMatch.match(/<Preview.*>([^]*)<\/Preview>/)[1];
 
-        const formattedCode = format(previewContent, {
+        const formattedCode = await format(previewContent, {
           parser: 'svelte',
           plugins: [typescriptPlugin, sveltePlugin],
         });
