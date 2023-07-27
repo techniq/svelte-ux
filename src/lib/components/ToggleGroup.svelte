@@ -70,7 +70,7 @@
         gap && 'bg-gray-500/10',
         'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500'
       ),
-      indicator: 'h-full bg-white',
+      indicator: 'h-full bg-white border',
     },
     underline: {
       options: vertical ? 'border-r' : 'border-b',
