@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.47.0
+
+### Minor Changes
+
+- Update prettier to v3 including Preview preprocess ([`bbfbb56`](https://github.com/techniq/svelte-ux/commit/bbfbb56364a0e51d9f324342735451893196283a))
+
 ## 0.46.3
 
 ### Patch Changes
