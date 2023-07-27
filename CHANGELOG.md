@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.47.1
+
+### Patch Changes
+
+- Fix Preview preprocess after prettier async formatting ([`a27ddcd`](https://github.com/techniq/svelte-ux/commit/a27ddcdd10e0058d5edd2dd4bc7bb6565a84b30e))
+
 ## 0.47.0
 
 ### Minor Changes
