@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.47.2
+
+### Patch Changes
+
+- [SelectField] Only run search() when open (not when closing from selection) ([`566cd74`](https://github.com/techniq/svelte-ux/commit/566cd74d33f93cb6018fe02f4d629a719aa2190d))
+
+- [ToggleGroup] Add "fill-white" variant ([`1572737`](https://github.com/techniq/svelte-ux/commit/15727371ea612f59886c61f882253dfed5c1e05c))
+
 ## 0.47.1
 
 ### Patch Changes
