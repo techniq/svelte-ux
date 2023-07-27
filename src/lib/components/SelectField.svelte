@@ -117,7 +117,7 @@
   $: updateSelected(selected, value, options);
 
   export let search = async (text: string) => {
-    logger.debug('search', text);
+    logger.debug('search', { text, open });
 
     if (text === '') {
       // Reset options
@@ -146,7 +146,8 @@
   let inputEl: HTMLInputElement | null = null;
   let menuOptionsEl: HTMLDivElement;
 
-  $: {
+  $: if (open) {
+    // Do not search if menu is not open / closing on selection
     search(searchText);
     highlightIndex = 0;
   }
