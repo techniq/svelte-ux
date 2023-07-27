@@ -1,5 +1,5 @@
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'] as const;
-type LogLevel = typeof logLevels[number];
+type LogLevel = (typeof logLevels)[number];
 
 /**
  * Enable:

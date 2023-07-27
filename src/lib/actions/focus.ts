@@ -3,7 +3,10 @@ import type { ActionReturn } from 'svelte/action';
 
 export function focusMove(
   node: HTMLElement,
-  options: { restoreFocus?: boolean; disabled?: boolean } = { restoreFocus: false, disabled: false }
+  options: { restoreFocus?: boolean; disabled?: boolean } = {
+    restoreFocus: false,
+    disabled: false,
+  }
 ): ActionReturn {
   if (!options.disabled) {
     let previousActiveElement = document.activeElement;
