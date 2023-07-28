@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
-  import Icon from './Icon.svelte';
+  import { slide } from 'svelte/transition';
 
+  import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
   import { cls } from '../utils/styles';
   import { multi } from '../actions/multi';
@@ -213,14 +214,19 @@
   on:click
 >
   {#if loading}
-    <ProgressCircle size={16} width={2} class={cls(theme.loading, classes.loading)} />
+    <span transition:slide={{ axis: 'x', duration: 200 }}>
+      <ProgressCircle size={16} width={2} class={cls(theme.loading, classes.loading)} />
+    </span>
   {:else if icon}
-    {#if typeof icon === 'string' || 'icon' in icon}
-      <!-- font path/url/etc or font-awesome IconDefinition -->
-      <Icon data={icon} class={cls('pointer-events-none', theme.icon, classes.icon)} />
-    {:else}
-      <Icon class={cls('pointer-events-none', theme.icon, classes.icon)} {...icon} />
-    {/if}
+    <span in:slide={{ axis: 'x', duration: 200 }}>
+      {#if typeof icon === 'string' || 'icon' in icon}
+        <!-- font path/url/etc or font-awesome IconDefinition -->
+        <Icon data={icon} class={cls('pointer-events-none', theme.icon, classes.icon)} />
+      {:else}
+        <Icon class={cls('pointer-events-none', theme.icon, classes.icon)} {...icon} />
+      {/if}
+    </span>
   {/if}
+
   <slot />
 </svelte:element>

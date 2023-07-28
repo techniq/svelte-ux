@@ -6,6 +6,7 @@
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -31,11 +32,55 @@
 <h2>Loading</h2>
 
 <Preview>
-  <Button loading>Click me</Button>
-  <Button variant="outline" color="accent" loading>Click me</Button>
-  <Button variant="fill" color="accent" loading>Click me</Button>
-  <Button variant="fill-light" color="accent" loading>Click me</Button>
-  <Button variant="fill-outline" color="accent" loading>Click me</Button>
+  <Button loading>Loading...</Button>
+  <Button variant="outline" color="accent" loading>Loading...</Button>
+  <Button variant="fill" color="accent" loading>Loading...</Button>
+  <Button variant="fill-light" color="accent" loading>Loading...</Button>
+  <Button variant="fill-outline" color="accent" loading>Loading...</Button>
+
+  <div class="mt-2">
+    <Toggle let:on={loading} let:toggle>
+      <Button {loading} on:click={toggle}>Click me</Button>
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button variant="outline" color="accent" {loading} on:click={toggle}>Click me</Button>
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button variant="fill" color="accent" {loading} on:click={toggle}>Click me</Button>
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button variant="fill-light" color="accent" {loading} on:click={toggle}>Click me</Button>
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button variant="fill-outline" color="accent" {loading} on:click={toggle}>Click me</Button>
+    </Toggle>
+  </div>
+
+  <div class="mt-2">
+    <Toggle let:on={loading} let:toggle>
+      <Button icon={faUser} {loading} on:click={toggle}>Click me</Button>
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button icon={faUser} variant="outline" color="accent" {loading} on:click={toggle}
+        >Click me</Button
+      >
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button icon={faUser} variant="fill" color="accent" {loading} on:click={toggle}
+        >Click me</Button
+      >
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button icon={faUser} variant="fill-light" color="accent" {loading} on:click={toggle}
+        >Click me</Button
+      >
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button icon={faUser} variant="fill-outline" color="accent" {loading} on:click={toggle}
+        >Click me</Button
+      >
+    </Toggle>
+  </div>
 </Preview>
 
 <h2>Variants</h2>
