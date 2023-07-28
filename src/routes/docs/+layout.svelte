@@ -60,7 +60,7 @@
 </script>
 
 <div class="p-4">
-  <div>
+  <div class="p-1">
     {#if title}
       <div>
         <div class="inline-block text-xs font-bold text-gray-500 capitalize">Docs</div>
@@ -120,7 +120,7 @@
   {/if}
 
   <div class="grid xl:grid-cols-[1fr,auto] gap-6 pt-2 pb-4">
-    <div class="overflow-auto">
+    <div class="overflow-auto p-1">
       {#if type === 'components' && !hideUsage}
         {#key $page.route.id}
           <h1 id="usage">Usage</h1>
