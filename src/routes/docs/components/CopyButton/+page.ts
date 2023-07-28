@@ -8,6 +8,7 @@ export async function load() {
       api,
       source,
       pageSource,
+      description: 'Button to copy value to clipboard',
       related: ['components/Button'],
     },
   };

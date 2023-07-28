@@ -4,6 +4,7 @@
   import { cls } from '../utils/styles';
   import Button from './Button.svelte';
   import { getComponentTheme } from './theme';
+  import { slide } from 'svelte/transition';
 
   export let value: string;
 
@@ -25,6 +26,6 @@
   }}
 >
   {#if showMessage}
-    Copied!
+    <span transition:slide={{ axis: 'x', duration: 200 }}>Copied!</span>
   {/if}
 </Button>
