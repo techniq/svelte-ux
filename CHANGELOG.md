@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.47.3
+
+### Patch Changes
+
+- [Button] Add transition to loading state ([`cb8914e`](https://github.com/techniq/svelte-ux/commit/cb8914e4c572a9221fb82077d19cb27466b7dda6))
+
+- [CopyButton] Transition message ([`6d863ac`](https://github.com/techniq/svelte-ux/commit/6d863ac2ffabffb606f79b65c4e50d46dbed49e4))
+
 ## 0.47.2
 
 ### Patch Changes
