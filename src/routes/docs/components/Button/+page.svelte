@@ -254,7 +254,9 @@
 <h2>Pass props to Icon</h2>
 
 <Preview>
-  <Button icon={{ data: mdiTrashCan, size: '2rem', class: '-my-2' }} color="red">Delete</Button>
+  <Button icon={{ data: mdiTrashCan, size: '2rem', style: 'color:#b91c1c' }} color="red"
+    >Delete</Button
+  >
 </Preview>
 
 <SectionDivider class="mt-12">Icon only</SectionDivider>
