@@ -74,6 +74,7 @@
     svgUrl="https://ka-p.fontawesome.com/releases/v5.15.2/svgs/solid/user.svg"
     class="text-green-500"
   />
+  <Icon path={mdiAccount} style="color:red" />
 </Preview>
 
 <h2>Multiple paths</h2>
