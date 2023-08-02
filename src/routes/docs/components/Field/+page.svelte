@@ -48,6 +48,22 @@
   </Field>
 </Preview>
 
+<h2>Checkbox w/ error</h2>
+
+<Preview>
+  <Field
+    label="Fruits"
+    classes={{ input: 'flex flex-col gap-3' }}
+    bind:value={group}
+    clearable
+    error
+  >
+    <Checkbox bind:group value="apple" class="w-full">Apple</Checkbox>
+    <Checkbox bind:group value="banana" class="w-full">Banana</Checkbox>
+    <Checkbox bind:group value="strawberry" class="w-full">Strawberry</Checkbox>
+  </Field>
+</Preview>
+
 <div class="grid grid-cols-2 gap-2">
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>

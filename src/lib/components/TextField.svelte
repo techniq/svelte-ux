@@ -36,7 +36,7 @@
     | 'search'
     | 'email' = 'text';
   export let placeholder: string | undefined = undefined;
-  export let error: string | string[] | undefined = '';
+  export let error: string | string[] | boolean | undefined = '';
   export let hint = '';
   export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
   export let multiline = false;
@@ -293,6 +293,7 @@
                 class={cls(
                   'text-sm border-none w-full bg-transparent outline-none resize-none',
                   'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
+                  error && 'placeholder-red-800',
                   (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-30',
                   {
                     'text-left': align === 'left',
@@ -328,6 +329,7 @@
                   'text-sm border-none w-full bg-transparent outline-none truncate',
                   'selection:bg-gray-500/30',
                   'placeholder-black placeholder-opacity-0 group-focus-within:placeholder-opacity-30',
+                  error && 'placeholder-red-800',
                   (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-30',
                   {
                     'text-left': align === 'left',
@@ -415,7 +417,7 @@
         classes.error
       )}
     >
-      {error || hint}
+      {error && error != true ? error : hint}
     </div>
   </div>
 </fieldset>

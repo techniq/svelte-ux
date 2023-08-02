@@ -77,6 +77,12 @@
 <h2>Error</h2>
 
 <Preview>
+  <TextField label="Password" placeholder="Please enter your password" error />
+</Preview>
+
+<h2>Error message</h2>
+
+<Preview>
   <TextField
     label="Password"
     placeholder="Please enter your password"

@@ -17,7 +17,7 @@
   export let labelPlacement: 'inset' | 'float' | 'top' | 'left' = 'inset';
   export let value: any = null;
   // export let placeholder = '';
-  export let error = '';
+  export let error: string | string[] | boolean | undefined = '';
   export let hint = '';
   // export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
   // export let multiline = false;
@@ -194,7 +194,7 @@
         classes.error
       )}
     >
-      {error || hint}
+      {error && error != true ? error : hint}
     </div>
   </div>
 
