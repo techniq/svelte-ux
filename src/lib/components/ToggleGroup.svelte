@@ -111,7 +111,7 @@
         lg: 'text-base',
       }[size],
       rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
-      // If adding gap between options, round round firt and last outside edges for options and the indicator
+      // If adding gap between options, round first and last outside edges for options and the indicator
       gap &&
         (vertical
           ? [
