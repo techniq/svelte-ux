@@ -30,7 +30,7 @@ This is fairly synonymous with the CSS [accent-color](https://developer.mozilla.
 
 ## `class` and `classes` props
 
-Any tailwind classes such as colors (`text-*`, `bg-*`), padding/margins (`p-*`, `mx-*`), etc can be passed to `class` or `classes` props of a component.
+Any tailwind class such as colors (`text-*`, `bg-*`), padding/margins (`p-*`, `mx-*`), etc can be passed to `class` or `classes` props of a component.
 
 ```svelte
 <Button class="px-4">Click me</Button>
@@ -39,10 +39,10 @@ Any tailwind classes such as colors (`text-*`, `bg-*`), padding/margins (`p-*`, 
 Using `classes` enables easy access to internal elements
 
 ```svelte
-<Button classes={{ icon: '' }}>Click me</Button>
+<Button icon={mdiMagnify} classes={{ icon: 'opacity-50' }}>Click me</Button>
 ```
 
-Internally, each component uses the `cls()` util which leverages [tailwind-merge](https://github.com/dcastil/tailwind-merge) for easy style overriding.
+Internally, each component uses the `cls()` util which leverages [tailwind-merge](https://github.com/dcastil/tailwind-merge) for easy style overriding (see `class precedence` below).
 
 ---
 
