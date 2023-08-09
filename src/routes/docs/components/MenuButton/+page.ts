@@ -8,6 +8,12 @@ export async function load() {
       api,
       source,
       pageSource,
+      related: [
+        'components/Menu',
+        'components/MenuItem',
+        'components/MenuField',
+        'components/SelectField',
+      ],
     },
   };
 }

@@ -8,7 +8,8 @@ export async function load() {
       api,
       source,
       pageSource,
-      description: 'Dynamically switch between menu and bottom drawer based on viewport width',
+      description: 'Dynamically switch between Menu and bottom Drawer based on viewport width',
+      related: ['components/Menu', 'components/Drawer'],
     },
   };
 }
