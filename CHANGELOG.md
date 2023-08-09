@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.47.6
+
+### Patch Changes
+
+- [SelectField] Highlight selected option on open and fix highlight styling competing with item hover styling ([`9a027dd`](https://github.com/techniq/svelte-ux/commit/9a027dd25aaa822d549f6ecf81cac7b2a4071bf8))
+
 ## 0.47.5
 
 ### Patch Changes
