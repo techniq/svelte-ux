@@ -10,8 +10,8 @@
   import MenuItem from './MenuItem.svelte';
   import { getComponentTheme } from './theme';
 
-  export let options: Array<{ label: string; value: any; icon?: string }> = undefined;
-  export let value = null;
+  export let options: Array<{ label: string; value: any; icon?: string }>;
+  export let value: any = null;
   export let menuProps: ComponentProps<Menu> = { placement: 'bottom-start' };
   export let menuIcon = mdiMenuDown;
   $: selected = options?.find((x) => x.value === value);
@@ -55,9 +55,13 @@
     {...menuProps}
   >
     <slot {options} {selected} close={() => (open = false)} setValue={(val) => (value = val)}>
-      <menu>
+      <menu class="group p-1">
         {#each options as option}
-          <MenuItem icon={option.icon} on:click={() => (value = option.value)}>
+          <MenuItem
+            icon={option.icon}
+            selected={option.value === value}
+            on:click={() => (value = option.value)}
+          >
             {option.label}
           </MenuItem>
         {/each}

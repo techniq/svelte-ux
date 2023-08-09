@@ -109,9 +109,19 @@
                 <Icon path={mdiMenuDown} />
               </Button>
 
-              <Menu {open} on:close={toggle} autoPlacement offset={12}>
+              <Menu
+                {open}
+                on:close={toggle}
+                autoPlacement
+                offset={12}
+                classes={{ menu: 'group p-1' }}
+              >
                 {#each perPageOptions ?? [] as option}
-                  <MenuItem class="justify-end" on:click={() => pagination.setPerPage(option)}>
+                  <MenuItem
+                    class="justify-end"
+                    selected={$pagination.perPage === option}
+                    on:click={() => pagination.setPerPage(option)}
+                  >
                     {formatValue(option, 'integer')}
                   </MenuItem>
                 {/each}

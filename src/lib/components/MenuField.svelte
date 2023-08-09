@@ -26,7 +26,7 @@
 
   export let classes: ComponentProps<Field>['classes'] & {
     option?: string;
-    selected?: string;
+    menuItem?: ComponentProps<MenuItem>['classes'];
     menuIcon?: string;
     group?: string;
   } = {};
@@ -111,7 +111,7 @@
     {...menuProps}
   >
     <slot {options} {selected} close={() => (open = false)} setValue={(val) => (value = val)}>
-      <menu>
+      <menu class="group p-1">
         {#each options as option, index}
           {@const previousOption = options[index - 1]}
           {#if option.group && option.group !== previousOption?.group}
@@ -128,12 +128,9 @@
 
           <MenuItem
             icon={option.icon}
-            class={cls(
-              option.value === value && (classes.selected || 'font-semibold'),
-              option.group ? 'px-4' : 'px-2',
-              theme.option,
-              classes.option
-            )}
+            selected={option.value === value}
+            class={cls(option.group ? 'px-4' : 'px-2', theme.option, classes.option)}
+            classes={classes.menuItem}
             on:click={() => (value = option.value)}
           >
             {option.label}

@@ -11,10 +11,12 @@
   export let icon: ButtonProps['icon'] = undefined;
   export let scrollIntoView = false;
   export let disabled = false;
+  export let selected = false;
 
-  export let classes: ButtonProps['classes'] = {
+  export let classes: ButtonProps['classes'] & { selected?: string } = {
     root: 'text-sm gap-3',
     icon: 'text-black/50',
+    selected: 'font-semibold [:not(.group:hover)>&]:bg-black/5',
   };
   const theme = getComponentTheme('MenuItem');
 
@@ -35,7 +37,8 @@
   {...$$restProps}
   class={cls(
     'MenuItem',
-    'text-left items-center p-2 hover:bg-black/5 duration-75',
+    'text-left items-center p-2 hover:bg-black/5 rounded duration-75',
+    selected && classes.selected,
     theme.root,
     classes?.root,
     $$props.class
