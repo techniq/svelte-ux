@@ -383,7 +383,7 @@
     >
       <div
         tabindex="-1"
-        class={cls('options focus:outline-none', theme.options, classes.options)}
+        class={cls('options group p-1 focus:outline-none', theme.options, classes.options)}
         class:opacity-50={loading}
         bind:this={menuOptionsEl}
         on:click|stopPropagation={(e) => {
