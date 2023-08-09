@@ -131,6 +131,10 @@
     }
   };
 
+  // Elements
+  let inputEl: HTMLInputElement | null = null;
+  let menuOptionsEl: HTMLDivElement;
+
   // UI state
   export let open = false;
   let highlightIndex = 0;
@@ -142,14 +146,15 @@
     }
   }
 
-  // Elements
-  let inputEl: HTMLInputElement | null = null;
-  let menuOptionsEl: HTMLDivElement;
-
   $: if (open) {
     // Do not search if menu is not open / closing on selection
     search(searchText);
-    highlightIndex = 0;
+
+    // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
+    if (highlightIndex === -1) {
+      const selectedIndex = filteredOptions.findIndex((o) => optionValue(o) === value);
+      highlightIndex = selectedIndex === -1 ? 0 : selectedIndex;
+    }
   }
 
   function onChange(e: ComponentEvents<TextField>['change']) {
@@ -253,7 +258,7 @@
   function hide() {
     logger.debug('hide');
     open = false;
-    highlightIndex = 0;
+    highlightIndex = -1;
   }
 
   function selectHighlighted() {
@@ -298,12 +303,6 @@
       dispatch('change', { option, value });
     }
 
-    // Only hide if value changed (do not hide if opening initially and loading list)
-    // if (value != previousValue) {
-    //   hide();
-    // } else {
-    //   logger.debug('same value selected', { previousValue, value });
-    // }
     hide();
 
     return option;
@@ -378,7 +377,7 @@
       {disableTransition}
       moveFocus={false}
       bind:open
-      on:close={() => (open = false)}
+      on:close={() => hide()}
       {...menuProps}
     >
       <div
@@ -424,7 +423,7 @@
           <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
             <MenuItem
               class={cls(
-                index === highlightIndex && 'bg-black/5',
+                index === highlightIndex && '[:not(.group:hover)>&]:bg-black/5',
                 option === selected && (classes.selected || 'font-semibold'),
                 option.group ? 'px-4' : 'px-2',
                 theme.option,

@@ -82,7 +82,7 @@
 <h2>Many options</h2>
 
 <Preview>
-  <SelectField options={manyOptions} />
+  <SelectField options={manyOptions} clearSearchOnFocus />
 </Preview>
 
 <h2>Update options</h2>
