@@ -27,13 +27,23 @@
   import { createTheme } from '$lib/components/theme';
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';
   import { xlScreen } from '$lib/stores/matchMedia';
+  import { cls } from '$lib/utils/styles';
 
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
   $: title = $page.data.meta?.title ?? name;
   $: pageUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
-  $: ({ description, features, related, hideUsage, hideTableOfContents, source, pageSource, api } =
-    $page.data.meta ?? {});
+  $: ({
+    description,
+    features,
+    related,
+    hideUsage,
+    hideTableOfContents,
+    source,
+    pageSource,
+    api,
+    status,
+  } = $page.data.meta ?? {});
 
   $: showTableOfContents = false;
 
@@ -70,7 +80,20 @@
         </div>
       </div>
 
-      <div class="text-2xl font-bold mb-3">{title}</div>
+      <div class="text-2xl font-bold mb-3">
+        {title}
+        {#if status}
+          <span
+            class={cls(
+              'text-sm  px-2 rounded',
+              status === 'beta' && 'bg-yellow-500/20 text-yellow-800',
+              status === 'deprecated' && 'bg-red-500/20 text-red-900'
+            )}
+          >
+            {status}
+          </span>
+        {/if}
+      </div>
 
       {#if description}
         <div class="text-sm text-black/60">
