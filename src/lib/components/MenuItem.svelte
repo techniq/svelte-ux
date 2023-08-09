@@ -44,6 +44,8 @@
     $$props.class
   )}
   on:click
+  on:mouseover
+  on:mouseout
 >
   <slot />
 </Button>

@@ -212,6 +212,10 @@
   {disabled}
   use:multi={actions}
   on:click
+  on:mouseover
+  on:mouseout
+  on:focus
+  on:blur
 >
   {#if loading}
     <span transition:slide|local={{ axis: 'x', duration: 200 }}>
