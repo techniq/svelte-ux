@@ -55,14 +55,20 @@
   bind:open
   classes={{ root: cls('items-start mt-20', theme.root, classes.root, $$props.class) }}
 >
-  <div class="overflow-auto max-h-[min(90vh,600px)] min-w-[400px] p-4">
+  <div class="overflow-auto max-h-[min(90vh,600px)] min-w-[400px] py-1">
     <SelectList
       icon={mdiMagnify}
       placeholder="Search..."
       {options}
       on:change
       on:change={(e) => (open = false)}
-      classes={{ group: 'capitalize' }}
+      classes={{
+        field: {
+          container: 'border-none hover:shadow-none group-focus-within:shadow-none',
+        },
+        group: 'capitalize',
+        options: 'border-t mt-1 px-1',
+      }}
     />
   </div>
 </Dialog>

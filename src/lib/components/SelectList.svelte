@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentEvents } from 'svelte';
+  import { createEventDispatcher, type ComponentEvents, type ComponentProps } from 'svelte';
 
   import { mdiClose } from '@mdi/js';
 
@@ -38,7 +38,7 @@
 
   export let classes: {
     root?: string;
-    field?: string;
+    field?: ComponentProps<TextField>['classes'];
     options?: string;
     option?: string;
     selected?: string;
@@ -324,7 +324,8 @@
     on:keydown={onKeyDown}
     on:keypress={onKeyPress}
     actions={(node) => [autoFocus(node), selectOnFocus(node)]}
-    class={cls('h-full', theme.field, classes.field)}
+    class={cls('h-full')}
+    classes={{ ...theme.field, ...classes.field }}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
