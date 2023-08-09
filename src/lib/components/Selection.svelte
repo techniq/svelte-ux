@@ -11,7 +11,7 @@
   $: $selection.all.set(all);
 </script>
 
-<!-- TOOD: `<slot {...$selection} />` does not play well with sveld -->
+<!-- TODO: `<slot {...$selection} />` does not play well with sveld -->
 <slot
   selected={$selection.selected}
   isSelected={$selection.isSelected}
