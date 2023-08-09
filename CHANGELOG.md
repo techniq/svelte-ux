@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.47.5
+
+### Patch Changes
+
+- [SelectField] Update styling to match MenuField/MenuButton ([`99c905c`](https://github.com/techniq/svelte-ux/commit/99c905c06791d01755a683cd9e6cc6e69f128819))
+
 ## 0.47.4
 
 ### Patch Changes
