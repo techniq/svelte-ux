@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.47.4
+
+### Patch Changes
+
+- [MenuItem] Add `selected` prop to apply styling, including handling sibling hover. Refine default styling for MenuButton/MenuField ([`0672ec6`](https://github.com/techniq/svelte-ux/commit/0672ec671082d96c1270152e8ecc25f7907f901c))
+
+- [QuickSearch] Refine styling ([`93fa30c`](https://github.com/techniq/svelte-ux/commit/93fa30ce53e1c377e3a1f04a94574b1496383186))
+
+- [Field/TextField] Support setting `error` to true to enable styling without message. Improve TextField error placeholder when in error state ([`3652357`](https://github.com/techniq/svelte-ux/commit/3652357541ea75983d86ed68a7a10966aeb7b252))
+
+- Update non-major dependencies ([`fb89b0c`](https://github.com/techniq/svelte-ux/commit/fb89b0cbf5a6e638da1c27301d6879d068fd55fb))
+
 ## 0.47.3
 
 ### Patch Changes
