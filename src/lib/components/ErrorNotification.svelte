@@ -5,7 +5,6 @@
   import Dialog from './Dialog.svelte';
   import Icon from './Icon.svelte';
   import Notification from './Notification.svelte';
-  import Stack from './Stack.svelte';
   import Toggle from './Toggle.svelte';
 
   export let title: string;
@@ -26,11 +25,11 @@
 
     <div slot="description" class="max-w-3xl max-h-64 overflow-auto whitespace-pre">
       {#if description}
-        <Stack vertical gap={8}>
+        <div class="grid gap-2">
           {#each description.split('\n') as line}
             <div>{line}</div>
           {/each}
-        </Stack>
+        </div>
       {/if}
     </div>
 
@@ -59,7 +58,7 @@
       {/if}
     </div>
 
-    <Stack vertical gap={16} class="p-6">
+    <div class="grid gap-4 p-6">
       {#if stackTrace}
         <div>
           <div class="text-xs text-black/50 mb-1">Stacktrace:</div>
@@ -68,7 +67,7 @@
           </pre>
         </div>
       {/if}
-    </Stack>
+    </div>
 
     <div slot="actions">
       <Button on:click={toggle} class="text-accent-500 hover:bg-accent-50">Close</Button>

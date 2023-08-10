@@ -3,8 +3,6 @@
 
   import Button from './Button.svelte';
   import MonthList from './MonthList.svelte';
-  import Grid from './Grid.svelte';
-  import Stack from './Stack.svelte';
 
   import { getMinSelectedDate, getMaxSelectedDate } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
@@ -32,19 +30,19 @@
   $: selectedYear = (getMinSelectedDate(selected) || new Date()).getFullYear();
 </script>
 
-<Stack vertical class="divide-y">
+<div class="grid divide-y">
   <Button on:click={() => (minYear -= 1)}>More</Button>
 
   {#each years ?? [] as year (year)}
-    <Grid template="auto 1fr" columnGap={8} items="center" class="p-2">
+    <div class="grid grid-cols-[auto,1fr] items-center gap-2 p-2">
       <div class="text-xl font-bold" use:scrollIntoView={{ condition: year === selectedYear }}>
         {year}
       </div>
-      <Grid autoColumns="48px" rowGap={4}>
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-y-4">
         <MonthList {year} {selected} on:dateChange />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   {/each}
 
   <Button on:click={() => (maxYear += 1)}>More</Button>
-</Stack>
+</div>

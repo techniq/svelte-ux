@@ -6,7 +6,6 @@
   import { mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
-  import Stack from './Stack.svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -49,13 +48,13 @@
     on:keypress
     bind:this={notificationEl}
   >
-    <Stack horizontal>
-      <Stack horizontal gap={16} class="p-4" items="center">
+    <div class="grid grid-flow-col">
+      <div class="grid grid-flow-col items-center gap-4 p-4">
         {#if $$slots.icon}
           <slot name="icon" />
         {/if}
 
-        <Stack vertical gap={2}>
+        <div class="grid gap-1">
           {#if $$slots.title}
             <div class="font-medium">
               <slot name="title" />
@@ -73,7 +72,7 @@
               <slot name="actions" />
             </div>
           {/if}
-        </Stack>
+        </div>
 
         {#if $$slots.actions && actions === 'right'}
           <div bind:this={actionsEl} class="-my-2 ml-8 -mr-2">
@@ -88,13 +87,13 @@
             class="text-black/25 self-start"
           />
         {/if}
-      </Stack>
+      </div>
 
       {#if $$slots.actions && actions === 'split'}
         <div bind:this={actionsEl}>
           <slot name="actions" />
         </div>
       {/if}
-    </Stack>
+    </div>
   </div>
 {/if}

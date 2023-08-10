@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Stack from './Stack.svelte';
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
 
@@ -13,7 +12,7 @@
   const theme = getComponentTheme('Badge');
 </script>
 
-<Stack stack inline>
+<div class="inline-grid [&>*]:[grid-area:1/1]">
   <slot />
   <div
     class={cls(
@@ -82,4 +81,4 @@
       {/if}
     </slot>
   </div>
-</Stack>
+</div>

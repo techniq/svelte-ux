@@ -1,7 +1,6 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
   import Breadcrumb from './Breadcrumb.svelte';
-  import Stack from './Stack.svelte';
   import { getComponentTheme } from './theme';
 
   export let title: string | string[] | null = null;
@@ -10,16 +9,10 @@
   const theme = getComponentTheme('Header');
 </script>
 
-<Stack
-  horizontal
-  template="{$$slots.avatar ? 'auto' : ''} 1fr {$$slots.actions ? 'auto' : ''}"
-  gap={16}
-  items="center"
-  class={cls('Header', theme.root, $$props.class)}
->
+<div class={cls('Header', 'flex items-center gap-4', theme.root, $$props.class)}>
   <slot name="avatar" />
 
-  <div>
+  <div class="flex-1">
     <slot name="title">
       {#if title}
         {#if Array.isArray(title)}
@@ -42,4 +35,4 @@
   </div>
 
   <slot name="actions" />
-</Stack>
+</div>

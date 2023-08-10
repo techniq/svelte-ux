@@ -82,18 +82,15 @@
   </Badge>
 </Preview>
 
-<!-- <h2>Corner (multi) w/ Icon Button</h2>
+<h2>Multiple</h2>
+
 <Preview>
-<Stack stack inline>
-  <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
-  <div
-    class="bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center self-start justify-self-end border border-white"
-  />
-  <div
-    class="bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center self-end justify-self-end border border-white"
-  />
-</Stack>
-</Preview> -->
+  <Badge placement="bottom-right" {value} dot circle class="bg-red-500">
+    <Badge placement="top-right" {value} dot circle class="bg-green-500">
+      <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
+    </Badge>
+  </Badge>
+</Preview>
 
 <h2>Placement</h2>
 

@@ -10,7 +10,6 @@
 
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
-  import Stack from './Stack.svelte';
 
   import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
@@ -55,10 +54,10 @@
   };
 </script>
 
-<Stack vertical>
+<div class="grid">
   <Button on:click={() => (minYear -= 1)} class="border-b">More</Button>
 
-  <Stack vertical class="p-2">
+  <div class="grid p-2">
     {#each years.map((year) => new Date(year, 0, 1)) as year (year.valueOf())}
       <DateButton
         date={year}
@@ -69,7 +68,7 @@
         on:dateChange
       />
     {/each}
-  </Stack>
+  </div>
 
   <Button on:click={() => (maxYear += 1)} class="border-t">More</Button>
-</Stack>
+</div>

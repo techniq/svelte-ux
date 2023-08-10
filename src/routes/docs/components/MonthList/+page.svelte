@@ -8,10 +8,8 @@
     endOfQuarter,
   } from 'date-fns';
 
-  import Grid from '$lib/components/Grid.svelte';
   import MonthList from '$lib/components/MonthList.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import Stack from '$lib/components/Stack.svelte';
 
   let selected = null;
   let selectedArr = [];
@@ -27,44 +25,44 @@
   <MonthList />
 </Preview>
 
-<h2>Horizontal Stack wrapper</h2>
+<h2>Horizontal layout</h2>
 
 <Preview>
-  <Stack horizontal>
+  <div class="grid grid-flow-col">
     <MonthList />
-  </Stack>
+  </div>
 </Preview>
 
-<h2>Vertical Stack wrapper</h2>
+<h2>Vertical layout</h2>
 
 <Preview>
-  <Stack vertical>
+  <div class="grid">
     <MonthList />
-  </Stack>
+  </div>
 </Preview>
 
-<h2>Grid wrapper w/ auto columns (100px)</h2>
+<h2>Auto columns (100px)</h2>
 
 <Preview>
-  <Grid autoColumns="100px">
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))]">
     <MonthList />
-  </Grid>
+  </div>
 </Preview>
 
-<h2>Grid wrapper w/ 3 columns</h2>
+<h2>3 columns</h2>
 
 <Preview>
-  <Grid columns={3}>
+  <div class="grid grid-cols-3">
     <MonthList />
-  </Grid>
+  </div>
 </Preview>
 
 <h2>Format w/ as name</h2>
 
 <Preview>
-  <Grid autoColumns="100px">
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))]">
     <MonthList format="MMMM" />
-  </Grid>
+  </div>
 </Preview>
 
 <h2>Format w/ as number</h2>
@@ -185,7 +183,7 @@
 <h2>Selected state w/ quarter</h2>
 
 <Preview>
-  <Grid columns={6}>
+  <div class="grid grid-cols-6">
     <MonthList
       selected={selectedQuarter}
       on:dateChange={(e) => {
@@ -196,5 +194,5 @@
         };
       }}
     />
-  </Grid>
+  </div>
 </Preview>
