@@ -93,7 +93,7 @@
 >
   <Button
     class={cls(
-      'w-8 h-8 rounded-full text-xs',
+      'w-8 h-8 rounded-full text-xs transition-none',
       periodType != PeriodType.Day && 'flex-1',
       (disabled || fade) && 'opacity-25',
       isCurrent ? 'font-bold' : 'font-normal'
