@@ -9,6 +9,11 @@ export async function load() {
       source,
       pageSource,
       status: 'beta',
+      features: [
+        'Drag start and end points individually, or drag the middle together',
+        'Double click start, end or range to set min/max',
+        'Use keyboard arrow keys to adjust last changed',
+      ],
     },
   };
 }
