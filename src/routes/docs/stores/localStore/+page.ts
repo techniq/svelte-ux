@@ -6,6 +6,7 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description: 'Read and write to localStorage with expiration support',
     },
   };
 }

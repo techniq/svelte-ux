@@ -327,7 +327,7 @@
   >
     <tbody slot="data" let:columns let:data>
       {#each data ?? [] as rowData, rowIndex}
-        <tr>
+        <tr class="tabular-nums">
           {#each columns as column (column.name)}
             {@const value = getCellValue(column, rowData, rowIndex)}
 

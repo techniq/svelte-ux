@@ -6,6 +6,7 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      related: ['actions/table', 'components/Table'],
     },
   };
 }
