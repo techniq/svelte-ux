@@ -61,16 +61,16 @@
   <Button on:click={() => (value = 4)}>Pick 4</Button>
 </Preview>
 
-<h2>clearSearchOnFocus</h2>
-
-<Preview>
-  <SelectField {options} bind:value clearSearchOnFocus />
-</Preview>
-
 <h2>clearable=false</h2>
 
 <Preview>
-  <SelectField {options} bind:value clearSearchOnFocus clearable={false} />
+  <SelectField {options} bind:value clearable={false} />
+</Preview>
+
+<h2>clearSearchOnFocus=false</h2>
+
+<Preview>
+  <SelectField {options} bind:value clearSearchOnOpen={false} />
 </Preview>
 
 <h2>Grouped options</h2>
@@ -82,14 +82,14 @@
 <h2>Many options</h2>
 
 <Preview>
-  <SelectField options={manyOptions} clearSearchOnFocus />
+  <SelectField options={manyOptions} clearSearchOnOpen />
 </Preview>
 
 <h2>Update options</h2>
 
 <Preview>
   <Toggle let:on let:toggle>
-    <SelectField options={on ? newOptions : options} bind:value clearSearchOnFocus />
+    <SelectField options={on ? newOptions : options} bind:value clearSearchOnOpen />
     <Button on:click={toggle}>Toggle Options</Button>
   </Toggle>
 </Preview>
@@ -293,7 +293,7 @@
   <SelectField
     {options}
     bind:value
-    clearSearchOnFocus
+    clearSearchOnOpen
     classes={{ selected: 'bg-accent-500 text-white' }}
   />
 </Preview>

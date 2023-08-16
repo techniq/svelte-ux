@@ -36,7 +36,7 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let clearSearchOnFocus = false;
+  export let clearSearchOnOpen = true;
 
   export let classes: {
     root?: string;
@@ -184,9 +184,6 @@
 
   function onFocus() {
     logger.debug('onFocus');
-    if (clearSearchOnFocus) {
-      searchText = ''; // Show all options on focus
-    }
     show();
   }
 
@@ -257,9 +254,6 @@
 
   function onClick() {
     logger.debug('onClick');
-    if (clearSearchOnFocus) {
-      searchText = ''; // Show all options on focus
-    }
     show();
   }
 
@@ -267,6 +261,9 @@
     logger.debug('show');
 
     if (!disabled && !readonly) {
+      if (open === false && clearSearchOnOpen) {
+        searchText = ''; // Show all options on open
+      }
       open = true;
       inputEl?.focus();
     }
