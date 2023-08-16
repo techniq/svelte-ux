@@ -37,6 +37,7 @@
   <Button variant="fill" color="accent" loading>Loading...</Button>
   <Button variant="fill-light" color="accent" loading>Loading...</Button>
   <Button variant="fill-outline" color="accent" loading>Loading...</Button>
+  <Button variant="text" color="accent" loading>Loading...</Button>
 
   <div class="mt-2">
     <Toggle let:on={loading} let:toggle>
@@ -53,6 +54,9 @@
     </Toggle>
     <Toggle let:on={loading} let:toggle>
       <Button variant="fill-outline" color="accent" {loading} on:click={toggle}>Click me</Button>
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button variant="text" color="accent" {loading} on:click={toggle}>Click me</Button>
     </Toggle>
   </div>
 
@@ -77,6 +81,11 @@
     </Toggle>
     <Toggle let:on={loading} let:toggle>
       <Button icon={faUser} variant="fill-outline" color="accent" {loading} on:click={toggle}
+        >Click me</Button
+      >
+    </Toggle>
+    <Toggle let:on={loading} let:toggle>
+      <Button icon={faUser} variant="text" color="accent" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
@@ -121,6 +130,13 @@
       <Button variant="fill-outline" color="red">fill-outline</Button>
       <Button variant="fill-outline" color="green">fill-outline</Button>
       <Button variant="fill-outline" color="gray">fill-outline</Button>
+    </div>
+    <div>
+      <Button variant="text">text</Button>
+      <Button variant="text" color="blue">text</Button>
+      <Button variant="text" color="red">text</Button>
+      <Button variant="text" color="green">text</Button>
+      <Button variant="text" color="gray">text</Button>
     </div>
   </div>
 </Preview>
@@ -172,6 +188,13 @@
         <Button variant="fill-outline" {size} color="green">fill-outline</Button>
         <Button variant="fill-outline" {size} color="gray">fill-outline</Button>
       </div>
+      <div>
+        <Button variant="text" {size}>text</Button>
+        <Button variant="text" {size} color="blue">text</Button>
+        <Button variant="text" {size} color="red">text</Button>
+        <Button variant="text" {size} color="green">text</Button>
+        <Button variant="text" {size} color="gray">text</Button>
+      </div>
     </div>
   {/each}
 </Preview>
@@ -216,11 +239,12 @@
 <h2>Uppercase</h2>
 
 <Preview>
-  <Button class="uppercase">text</Button>
+  <Button class="uppercase">default</Button>
   <Button class="uppercase" variant="outline" color="accent">outline</Button>
   <Button class="uppercase" variant="fill" color="accent">fill</Button>
   <Button class="uppercase" variant="fill-light" color="accent">fill-light</Button>
   <Button class="uppercase" variant="fill-outline" color="accent">fill-outline</Button>
+  <Button class="uppercase" variant="text" color="accent">text</Button>
 </Preview>
 
 <h2>Tooltip</h2>
@@ -318,5 +342,9 @@
   <div>
     <Button icon={mdiMenu} variant="fill-outline" />
     <Button icon={mdiMenu} variant="fill-outline" color="accent" />
+  </div>
+  <div>
+    <Button icon={mdiMenu} variant="text" />
+    <Button icon={mdiMenu} variant="text" color="accent" />
   </div>
 </Preview>

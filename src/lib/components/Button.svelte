@@ -28,6 +28,7 @@
     | 'fill'
     | 'fill-outline'
     | 'fill-light'
+    | 'text'
     | 'none'
     | undefined = undefined; // default in reactive groupContext below
   export let size: 'sm' | 'md' | 'lg' = undefined; // default in reactive groupContext below
@@ -79,6 +80,7 @@
       fill: 'focus-visible:ring-offset-1',
       'fill-outline': 'border focus-visible:ring-offset-1',
       'fill-light': '',
+      text: 'p-0',
       none: '',
     }[variant ?? 'none'],
     // Variant specific colors
@@ -203,6 +205,28 @@
         pink: 'text-pink-500 border-pink-500 bg-pink-500/10 hover:bg-pink-500/20 ring-pink-500/60',
         rose: 'text-rose-500 border-rose-500 bg-rose-500/10 hover:bg-rose-500/20 ring-rose-500/60',
         gray: 'text-gray-500 border-gray-500 bg-gray-500/10 hover:bg-gray-500/20 ring-gray-500/60',
+      },
+      text: {
+        default: 'hover:text-black/70 ring-black/10',
+        accent: 'text-accent-500 hover:text-accent-700 ring-accent-500/60',
+        red: 'text-red-500 hover:text-red-700 ring-red-500/60',
+        orange: 'text-orange-500 hover:text-orange-700 ring-orange-500/60',
+        amber: 'text-amber-500 hover:text-amber-700 ring-amber-500/60',
+        yellow: 'text-yellow-500 hover:text-yellow-700 ring-yellow-500/60',
+        lime: 'text-lime-500 hover:text-lime-700 ring-lime-500/60',
+        green: 'text-green-500 hover:text-green-700 ring-green-500/60',
+        emerald: 'text-emerald-500 hover:text-emerald-700 ring-emerald-500/60',
+        teal: 'text-teal-500 hover:text-teal-700 ring-teal-500/60',
+        cyan: 'text-cyan-500 hover:text-cyan-700 ring-cyan-500/60',
+        sky: 'text-sky-500 hover:text-sky-700 ring-sky-500/60',
+        blue: 'text-blue-500 hover:text-blue-700 ring-blue-500/60',
+        indigo: 'text-indigo-500 hover:text-indigo-700 ring-indigo-500/60',
+        violet: 'text-violet-500 hover:text-violet-700 ring-violet-500/60',
+        purple: 'text-purple-500 hover:text-purple-700 ring-purple-500/60',
+        fuchsia: 'text-fuchsia-500 hover:text-fuchsia-700 ring-fuchsia-500/60',
+        pink: 'text-pink-500 hover:text-pink-700 ring-pink-500/60',
+        rose: 'text-rose-500 hover:text-rose-700 ring-rose-500/60',
+        gray: 'text-gray-500 hover:text-gray-700 ring-gray-500/60',
       },
       none: {},
     }[variant ?? 'none']?.[color ?? 'default'],

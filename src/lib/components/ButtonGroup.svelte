@@ -6,7 +6,15 @@
   // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
   type ButtonProps = ComponentProps<Button>;
   type ButtonGroupContext = {
-    variant: 'default' | 'outline' | 'fill' | 'fill-outline' | 'fill-light' | 'none' | undefined; // ButtonProps['variant'];
+    variant:
+      | 'default'
+      | 'outline'
+      | 'fill'
+      | 'fill-outline'
+      | 'fill-light'
+      | 'text'
+      | 'none'
+      | undefined; // ButtonProps['variant'];
     size: 'sm' | 'md' | 'lg' | undefined; //ButtonProps['size'];
     color: TailwindColors | 'default' | undefined; //ButtonProps['color'];
     rounded: boolean | 'full' | undefined; // ButtonProps['rounded']
