@@ -1,5 +1,23 @@
 # svelte-ux
 
+## 0.48.0
+
+### Minor Changes
+
+- [SelectField] Rename `clearSearchOnFocus` to `clearSearchOnOpen` to open on up/down key input, and default to `true` ([`7b364ea`](https://github.com/techniq/svelte-ux/commit/7b364eaf67299d0bbeed010afa71bb02ad74e7cf))
+
+### Patch Changes
+
+- [SelectField] Improve handling of highlightIndex after searching ([`cd53e86`](https://github.com/techniq/svelte-ux/commit/cd53e8693a15575604227cd3b1117bc08542af53))
+
+- [Button] Color match focus rings with offset based on variant ([`519ff82`](https://github.com/techniq/svelte-ux/commit/519ff829b17185928571574173ebdb79364b6a7c))
+
+- Remove remaining internal Grid/Stack usage ([`c21ed48`](https://github.com/techniq/svelte-ux/commit/c21ed480a34a11514cb41f9242178f3b333379e6))
+
+- [SelectField] Only select by index (i.e. press "enter") if a valid option is found (not all filtered) ([`6e94fb0`](https://github.com/techniq/svelte-ux/commit/6e94fb05459c745a5fd248481eae5269b8cf5aee))
+
+- [SelectField] Add menu `actions` slot ([`a21355b`](https://github.com/techniq/svelte-ux/commit/a21355b8798ea9c80bf2e5343ba366e970bab52a))
+
 ## 0.47.6
 
 ### Patch Changes
