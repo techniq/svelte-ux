@@ -192,11 +192,12 @@
 
     // Hide if focus not moved to menu (option clicked)
     if (
-      e.relatedTarget instanceof Node &&
+      e.relatedTarget instanceof HTMLElement &&
       !menuOptionsEl?.contains(e.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
-      e.relatedTarget !== menuOptionsEl?.offsetParent // click on scroll bar
+      e.relatedTarget !== menuOptionsEl?.offsetParent && // click on scroll bar
+      !e.relatedTarget.closest('menu > [slot=actions]') // click on action item
     ) {
-      hide();
+      hide('blur');
     } else {
       logger.debug('ignoring blur');
     }
@@ -237,7 +238,7 @@
       case 'Escape':
         if (open) {
           inputEl?.focus();
-          hide();
+          hide('escape');
         }
         break;
     }
@@ -269,8 +270,8 @@
     }
   }
 
-  function hide() {
-    logger.debug('hide');
+  function hide(reason = '') {
+    logger.debug('hide', { reason });
     open = false;
     highlightIndex = -1;
   }
@@ -317,7 +318,7 @@
       dispatch('change', { option, value });
     }
 
-    hide();
+    hide('selectOption');
 
     return option;
   }
@@ -391,7 +392,7 @@
       {disableTransition}
       moveFocus={false}
       bind:open
-      on:close={() => hide()}
+      on:close={() => hide('menu on:close')}
       {...menuProps}
     >
       <div
@@ -456,6 +457,7 @@
           </slot>
         {/each}
       </div>
+      <slot name="actions" {hide} />
     </Menu>
   {/if}
 </div>

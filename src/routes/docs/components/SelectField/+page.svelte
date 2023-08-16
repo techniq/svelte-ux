@@ -200,7 +200,7 @@
   </Toggle>
 </Preview>
 
-<h2>Append slot (actions)</h2>
+<h2>`append` slot (field actions)</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle>
@@ -222,6 +222,36 @@
       </div>
     </Dialog>
   </Toggle>
+</Preview>
+
+<h2>`actions` slot (menu)</h2>
+
+<Preview>
+  <SelectField {options} bind:value>
+    <div slot="actions" class="p-2 border-t" on:click|stopPropagation let:hide>
+      <Toggle let:on={open} let:toggle>
+        <Button icon={mdiPlus} color="blue" on:click={toggle}>New item</Button>
+        <Dialog
+          {open}
+          on:close={() => {
+            toggle();
+            hide();
+          }}
+        >
+          <div slot="title">Create new option</div>
+          <div class="px-6 py-3 w-96">
+            <TextField label="Name" autofocus />
+          </div>
+          <div slot="actions">
+            <Button on:click={() => console.log('Adding option...')} class="text-accent-500">
+              Add option
+            </Button>
+            <Button>Cancel</Button>
+          </div>
+        </Dialog>
+      </Toggle>
+    </div>
+  </SelectField>
 </Preview>
 
 <h2>Icon</h2>
@@ -297,25 +327,3 @@
     classes={{ selected: 'bg-accent-500 text-white' }}
   />
 </Preview>
-
-<!-- ## Menu actions
-<Preview>
-<SelectField
-  {options}
-  on:change={(e) => {
-    console.log('on:change', e.detail);
-  }}
->
-  <div slot="actions" class="p-2">
-    <ToggleGroup variant="outline" inset class="w-full" selected="active">
-      <div class="options w-full border">
-        <ToggleOption value="active">Active</ToggleOption>
-        <ToggleOption value="inaction">Inactive</ToggleOption>
-        <ToggleOption value="all">All</ToggleOption>
-      </div>
-    </ToggleGroup>
-  </div>
-</SelectField>
-</Preview>
-
-<div class="h-96" /> -->
