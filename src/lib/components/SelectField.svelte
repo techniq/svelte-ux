@@ -279,7 +279,7 @@
   function selectHighlighted() {
     logger.debug('selectHighlighted');
 
-    selectIndex(highlightIndex);
+    return selectIndex(highlightIndex);
   }
 
   /**
@@ -289,7 +289,10 @@
     logger.debug('selectIndex', { index });
 
     const option = filteredOptions[index];
-    return selectOption(option);
+    // Only select by index if valid option found (ex. ignore pressing enter if all filtered)
+    if (option) {
+      return selectOption(option);
+    }
   }
 
   /**
