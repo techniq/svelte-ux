@@ -8,7 +8,7 @@ export async function load() {
       api,
       source,
       pageSource,
-      related: ['components/NumberStepper'],
+      related: ['components/NumberStepper', 'components/SpringValue', 'components/TweenedValue'],
     },
   };
 }
