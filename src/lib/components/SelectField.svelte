@@ -147,13 +147,30 @@
   }
 
   $: if (open) {
+    // Capture current highlighted item (attempt to restore after searching)
+    const prevHighlightedOption = filteredOptions[highlightIndex];
+
     // Do not search if menu is not open / closing on selection
     search(searchText);
 
     // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
+    const selectedIndex = filteredOptions.findIndex((o) => optionValue(o) === value);
     if (highlightIndex === -1) {
-      const selectedIndex = filteredOptions.findIndex((o) => optionValue(o) === value);
+      // Highlight selected if none currently
       highlightIndex = selectedIndex === -1 ? 0 : selectedIndex;
+    } else {
+      // Attempt to re-highlight previously highlighted item after search
+      const prevHighlightedOptionIndex = filteredOptions.findIndex(
+        (o) => o === prevHighlightedOption
+      );
+
+      if (prevHighlightedOptionIndex !== -1) {
+        // Maintain previously highlight index after filter update (option still available)
+        highlightIndex = prevHighlightedOptionIndex;
+      } else {
+        // Highlight first item
+        highlightIndex = 0;
+      }
     }
   }
 
