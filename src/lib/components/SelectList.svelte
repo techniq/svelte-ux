@@ -356,7 +356,7 @@
   {#if options?.length > 0 || loading !== true}
     <div
       tabindex="-1"
-      class={cls('options focus:outline-none', theme.options, classes.options)}
+      class={cls('options group focus:outline-none', theme.options, classes.options)}
       class:opacity-50={loading}
       bind:this={menuOptionsEl}
       on:click|stopPropagation={(e) => {
@@ -397,12 +397,12 @@
         <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
           <MenuItem
             class={cls(
-              index === highlightIndex && 'bg-black/5',
-              option === selected && (classes.selected || 'font-semibold'),
+              index === highlightIndex && '[:not(.group:hover)>&]:bg-black/5',
               option.group ? 'px-4' : 'px-2',
               theme.option,
               classes.option
             )}
+            selected={option === selected}
             scrollIntoView={index === highlightIndex}
           >
             {optionText(option)}
