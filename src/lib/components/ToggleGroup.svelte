@@ -51,24 +51,24 @@
     fill: {
       options: cls(!gap && 'bg-accent-500/10'),
       label: cls(
-        gap && 'bg-accent-500/10',
-        'text-accent-500 hover:text-accent-600 hover:bg-accent-500/10 [&.selected]:text-accent-50'
+        'text-accent-500 hover:text-accent-600 hover:bg-accent-500/10 [&.selected]:text-accent-50',
+        gap && 'bg-accent-500/10'
       ),
       indicator: 'h-full bg-accent-500',
     },
     'fill-light': {
       options: cls(!gap && 'bg-gray-500/10'),
       label: cls(
-        gap && 'bg-gray-500/10',
-        'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500'
+        'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500',
+        gap && 'bg-gray-500/10'
       ),
       indicator: 'h-full bg-accent-100',
     },
     'fill-white': {
       options: cls(!gap && 'bg-gray-500/10'),
       label: cls(
-        gap && 'bg-gray-500/10',
-        'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500'
+        'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500',
+        gap && 'bg-gray-500/10'
       ),
       indicator: 'h-full bg-white border',
     },
@@ -77,7 +77,7 @@
       label:
         'relative text-black/50 font-bold hover:text-accent-500 hover:bg-accent-500/10 [&.selected]:text-accent-500',
       indicator: cls(
-        'absolute  border-accent-500',
+        'absolute border-accent-500',
         vertical
           ? 'top-0 right-0 h-full border-l-4 rounded-l'
           : 'bottom-0 left-0 w-full border-t-2 rounded-t'
