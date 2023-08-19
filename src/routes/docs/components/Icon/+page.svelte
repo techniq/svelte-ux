@@ -14,8 +14,6 @@
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
-
-  const mdiAccountUrl = 'https://api.iconify.design/mdi:account.svg';
 </script>
 
 <h1>Examples</h1>
@@ -71,7 +69,7 @@
     class="fill-blue-500"
   />
   <Icon
-    svgUrl="https://ka-p.fontawesome.com/releases/v5.15.2/svgs/solid/user.svg"
+    svgUrl="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/user.svg"
     class="text-green-500"
   />
   <Icon path={mdiAccount} style="color:red" />
