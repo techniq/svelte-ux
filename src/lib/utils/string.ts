@@ -6,6 +6,23 @@ export function isUpperCase(str: string) {
 }
 
 /**
+ * Returns string with the first letter of each word converted to uppercase (and remainder as lowercase)
+ */
+export function toTitleCase(str: string, ignore = ['a', 'an', 'is', 'the']) {
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map((word, index) => {
+      if (index > 0 && ignore.includes(word)) {
+        return word;
+      } else {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+    })
+    .join(' ');
+}
+
+/**
  * Generates a unique Id, with prefix if provided
  */
 let idCounter = 0;
