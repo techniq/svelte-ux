@@ -82,6 +82,7 @@ module.exports = {
 
 A few notes regarding the config
 
+- `./node_modules/svelte-ux/**/*.{svelte,js}` makes sure all the library classes are JIT added
 - Define `accent` color of your choice. Many components utilize this color and more are being updated to do so.
 - Currently `svelte-ux` provides a tailwind plugin to use more [realistic shadows](https://www.joshwcomeau.com/css/designing-shadows/) by having multiple shadow layers, unlike the current Tailwind [shadows](https://tailwindcss.com/docs/box-shadow) which have at most 2 layers, exposed as `elevation-#` classes. This may change in the future.
 - The `tailwindcss-forms` plugin should not be used. The styles that it sets up for inputs conflict with the styles used by `svelte-ux`.
