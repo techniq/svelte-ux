@@ -28,6 +28,7 @@
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';
   import { xlScreen } from '$lib/stores/matchMedia';
   import { cls } from '$lib/utils/styles';
+  import { toTitleCase } from '$lib/utils/string';
 
   $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
   $: title = $page.data.meta?.title ?? name;
@@ -59,6 +60,8 @@
       } else {
         return { type: 'website', name: url, url };
       }
+    } else if (r.startsWith('/')) {
+      return { type: 'docs', name: toTitleCase(r.slice(1)), url: r };
     } else {
       const [type, name] = r.split('/');
       return { type, name, url: `/docs/${type}/${name}` };

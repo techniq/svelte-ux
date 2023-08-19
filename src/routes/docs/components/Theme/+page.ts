@@ -8,7 +8,9 @@ export async function load() {
       api,
       source,
       pageSource,
-      description: 'Create theme context as component.  Typically `createTheme()` is used directly',
+      description:
+        'Create theme context as a component.  Useful to scope theme within a component tree, although typically `createTheme()` is used directly',
+      related: ['/customization'],
     },
   };
 }
