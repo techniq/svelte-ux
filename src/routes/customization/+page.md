@@ -15,7 +15,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'color-var': 'var(--color)',
         accent: colors.blue,
       },
     },

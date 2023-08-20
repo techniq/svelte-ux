@@ -73,7 +73,7 @@
     <label
       class={cls(
         'block text-sm font-medium',
-        'truncate group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
+        'truncate group-hover:text-gray-700 group-focus-within:text-accent-500 group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
         error ? 'text-red-500/80' : 'text-black/50',
         `placement-${labelPlacement}`,
         theme.label,
@@ -98,7 +98,7 @@
         },
         !base && ['bg-white', rounded ? 'rounded-full' : 'rounded'],
         error ? 'border-red-500' : 'border-black/20',
-        'group-focus-within:shadow-md group-focus-within:border-color-var',
+        'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
         theme.container,
         classes.container
       )}
@@ -127,7 +127,7 @@
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <label
               class={cls(
-                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-color-var group-hover:group-focus-within:text-color-var cursor-pointer',
+                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
                 center && 'justify-center',
                 error ? 'text-red-500/80' : 'text-black/50',
                 `placement-${labelPlacement}`,
