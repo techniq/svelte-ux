@@ -93,6 +93,7 @@
     'localStore',
     'matchMedia',
     'paginationStore',
+    'promiseStore',
     'queryParamsStore',
     'selectionStore',
     'tableOrderStore',

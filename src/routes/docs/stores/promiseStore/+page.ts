@@ -1,4 +1,4 @@
-import source from '$lib/stores/promiseStore.ts?raw';
+import source from '$lib/stores/fetchStore.ts?raw';
 import pageSource from './+page.md?raw';
 
 export async function load() {
