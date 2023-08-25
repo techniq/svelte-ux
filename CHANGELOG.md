@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.48.1
+
+### Patch Changes
+
+- Add `toTitleCase()` strring util ([`70caaab`](https://github.com/techniq/svelte-ux/commit/70caaab9ad69a8fa3f8dfe340f6f8f6d1c2957b2))
+
+- Remove need to register `color-var` tailwind color ([`03968f7`](https://github.com/techniq/svelte-ux/commit/03968f731723f1b856acdc71e1f93113e64efed8))
+
+- [Button] Add `text` variant ([`d3b0009`](https://github.com/techniq/svelte-ux/commit/d3b00095d9f0706ee7619e024e24abf844715d2d))
+
+- Add `promiseStore` to easily wrap a Promise as a store. Useful for SvelteKit streamed data handling ([`7b2f662`](https://github.com/techniq/svelte-ux/commit/7b2f6626be230baa857191c89fa4ff4bed8029f5))
+
 ## 0.48.0
 
 ### Minor Changes
