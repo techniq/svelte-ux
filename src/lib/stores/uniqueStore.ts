@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 /**
- * Store to manage unique values using `Set` (with improves ergonomics and better control of updates)
+ * Store to manage unique values using `Set` with improves ergonomics and better control of updates
  */
 export default function uniqueStore<T = string>(initialValues?: T[]) {
   const store = writable<Set<T>>(new Set(initialValues ?? []));
@@ -25,6 +25,17 @@ export default function uniqueStore<T = string>(initialValues?: T[]) {
     delete(value: T) {
       store.update((set) => {
         set.delete(value);
+        return set;
+      });
+    },
+
+    toggle(value: T) {
+      store.update((set) => {
+        if (set.has(value)) {
+          set.delete(value);
+        } else {
+          set.add(value);
+        }
         return set;
       });
     },

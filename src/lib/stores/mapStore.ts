@@ -18,7 +18,7 @@ export default function mapStore<TKey, TValue>(
       });
     },
 
-    update(key: TKey, updater: (current: TValue) => TValue) {
+    update(key: TKey, updater: (current: TValue | undefined) => TValue) {
       store.update((map) => {
         const current = map.get(key);
         map.set(key, updater(current));

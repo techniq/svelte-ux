@@ -91,6 +91,7 @@
     'formStore',
     'graphStore',
     'localStore',
+    'mapStore',
     'matchMedia',
     'paginationStore',
     'promiseStore',
@@ -98,6 +99,7 @@
     'selectionStore',
     'tableOrderStore',
     'timerStore',
+    'uniqueStore',
   ];
 
   const utils = ['cls', 'format', 'json', 'Logger'];
