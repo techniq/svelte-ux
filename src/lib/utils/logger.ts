@@ -1,3 +1,5 @@
+import { browser } from './env';
+
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'] as const;
 type LogLevel = (typeof logLevels)[number];
 
@@ -37,11 +39,13 @@ export default class Logger {
   }
 
   log(level: LogLevel, ...message: any) {
-    const enabledLoggers =
-      localStorage
-        .getItem('logger')
-        ?.split(',')
-        .map((x) => x.split(':') as [string, LogLevel?]) ?? [];
+    // TODO: Consider checking `env` for SSR support?
+    const enabledLoggers = browser
+      ? localStorage
+          .getItem('logger')
+          ?.split(',')
+          .map((x) => x.split(':') as [string, LogLevel?]) ?? []
+      : [];
 
     const enabledLogger = enabledLoggers.find((x) => x[0] === this.name);
 
