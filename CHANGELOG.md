@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.48.2
+
+### Patch Changes
+
+- Add basic docs for `uniqueStore` and `mapStore` ([`37b96a5`](https://github.com/techniq/svelte-ux/commit/37b96a5f3e1767e4650442e4028cb103bc8eea3f))
+
+- [Logger] Fix SSR (due to localStorage) ([`935291a`](https://github.com/techniq/svelte-ux/commit/935291a3f09f511c25a052b65db70b26f2bb44fe))
+
 ## 0.48.1
 
 ### Patch Changes
