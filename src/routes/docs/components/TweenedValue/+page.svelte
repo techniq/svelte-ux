@@ -2,20 +2,47 @@
   import * as easings from 'svelte/easing';
 
   import Button from '$lib/components/Button.svelte';
+  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
 
   let value: number | null = 0;
 
-  function update() {
-    value = Math.random() * 10;
+  function onKeyDown(e: KeyboardEvent) {
+    const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
+    switch (e.code) {
+      case 'ArrowUp':
+        value += step;
+        e.preventDefault();
+        break;
+      case 'ArrowDown':
+        value -= step;
+        e.preventDefault();
+        break;
+    }
   }
 </script>
 
+<svelte:window on:keydown={onKeyDown} />
+
 <h1>Examples</h1>
 
-<Button variant="fill" color="accent" on:click={update}>Update value</Button>
-<Button on:click={() => (value = null)}>Set null</Button>
+<div class="grid grid-cols-[1fr,auto,auto] gap-2">
+  <ButtonGroup variant="fill" class="grid grid-flow-col ml-2">
+    <Button on:click={() => (value -= 100)}>-100</Button>
+    <Button on:click={() => (value -= 10)}>-10</Button>
+    <Button on:click={() => (value -= 1)}>-1</Button>
+    <Button on:click={() => (value = 0)}>0</Button>
+    <Button on:click={() => (value += 1)}>+1</Button>
+    <Button on:click={() => (value += 10)}>+10</Button>
+    <Button on:click={() => (value += 100)}>+100</Button>
+  </ButtonGroup>
+  <Button variant="fill" on:click={() => (value = Math.random() * 10)}>Random</Button>
+  <Button variant="fill" on:click={() => (value = null)}>Null</Button>
+</div>
+<span class="text-xs ml-2 text-black/50">
+  also keyboard up/down with shift: +/- 10 option: +/- 100
+</span>
 
 <h2>Basic</h2>
 
@@ -26,7 +53,7 @@
 <h2>Formatted</h2>
 
 <Preview>
-  <TweenedValue {value} format="currency" />
+  <TweenedValue {value} format="decimal" />
 </Preview>
 
 <h2>Options</h2>
