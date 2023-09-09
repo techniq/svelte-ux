@@ -5,6 +5,8 @@
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
+  import { format } from '$lib/utils/format';
+  import { cls } from '$lib/utils/styles';
 
   let value: number | null = 0;
 
@@ -66,7 +68,9 @@
 
 <Preview>
   <TweenedValue {value} let:value>
-    <span style:color={value == null || value < 5 ? 'red' : 'green'}>{value}</span>
+    <span class={cls('tabular-nums', value ?? 0 < 0 ? 'text-red-500' : 'text-green-500')}>
+      {format(value, 'decimal')}
+    </span>
   </TweenedValue>
 </Preview>
 
