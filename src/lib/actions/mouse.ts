@@ -6,29 +6,58 @@ import type { Action } from 'svelte/action';
 export const longpress: Action<HTMLElement, number> = (node, duration) => {
   let timeoutID: number;
 
-  const handleMousedown = () => {
+  function onMouseDown() {
     timeoutID = window.setTimeout(() => {
       node.dispatchEvent(new CustomEvent('longpress'));
     }, duration);
-  };
+  }
 
-  const handleMouseup = () => {
+  function onMouseUp() {
     clearTimeout(timeoutID);
-  };
+  }
 
-  node.addEventListener('mousedown', handleMousedown);
-  node.addEventListener('mouseup', handleMouseup);
+  node.addEventListener('mousedown', onMouseDown);
+  node.addEventListener('mouseup', onMouseUp);
 
   return {
     update(newDuration: number) {
       duration = newDuration;
     },
     destroy() {
-      node.removeEventListener('mousedown', handleMousedown);
-      node.removeEventListener('mouseup', handleMouseup);
+      node.removeEventListener('mousedown', onMouseDown);
+      node.removeEventListener('mouseup', onMouseUp);
     },
   };
 };
+
+// /**
+//  * Dispatch event similar to `click` but only if target is same between `mousedown` and `mouseup` (ie. ignore if drag from within input to body)
+//  */
+// export const clickWithin: Action<HTMLElement, Function> = (node, handle) => {
+//   let clickTarget: EventTarget | null = null;
+
+//   function onMouseDown(e: MouseEvent) {
+//     clickTarget = e.target;
+//   }
+
+//   function onMouseUp(e: MouseEvent) {
+//     if (e.target instanceof HTMLElement && clickTarget === e.target) {
+//       handle?.(e);
+//       node.dispatchEvent(new CustomEvent('clickWithin'));
+//     }
+//     clickTarget = null;
+//   }
+
+//   node.addEventListener('mousedown', onMouseDown);
+//   node.addEventListener('mouseup', onMouseUp);
+
+//   return {
+//     destroy() {
+//       node.removeEventListener('mousedown', onMouseDown);
+//       node.removeEventListener('mouseup', onMouseUp);
+//     },
+//   };
+// };
 
 /**
  * Track mouse position changes from mouse down on node to mouse up
@@ -50,7 +79,7 @@ export const movable: Action<HTMLElement, MovableOptions> = (node, options = {})
   let lastX = 0;
   let lastY = 0;
 
-  function handleMouseDown(event: MouseEvent) {
+  function onMouseDown(event: MouseEvent) {
     lastX = event.clientX;
     lastY = event.clientY;
 
@@ -60,11 +89,11 @@ export const movable: Action<HTMLElement, MovableOptions> = (node, options = {})
       })
     );
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
   }
 
-  function handleMouseMove(event: MouseEvent) {
+  function onMouseMove(event: MouseEvent) {
     // TODO: Handle page scroll?  clientX/Y is based on viewport (apply to parent?)
     let dx = event.clientX - lastX;
     let dy = event.clientY - lastY;
@@ -123,7 +152,7 @@ export const movable: Action<HTMLElement, MovableOptions> = (node, options = {})
     }
   }
 
-  function handleMouseUp(event: MouseEvent) {
+  function onMouseUp(event: MouseEvent) {
     lastX = event.clientX;
     lastY = event.clientY;
 
@@ -133,15 +162,15 @@ export const movable: Action<HTMLElement, MovableOptions> = (node, options = {})
       })
     );
 
-    window.removeEventListener('mousemove', handleMouseMove);
-    window.removeEventListener('mouseup', handleMouseUp);
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('mouseup', onMouseUp);
   }
 
-  node.addEventListener('mousedown', handleMouseDown);
+  node.addEventListener('mousedown', onMouseDown);
 
   return {
     destroy() {
-      node.removeEventListener('mousedown', handleMouseDown);
+      node.removeEventListener('mousedown', onMouseDown);
     },
   };
 };
