@@ -26,6 +26,7 @@
     dialog?: string;
     title?: string;
     actions?: string;
+    backdrop?: string;
   } = {};
   const theme = getComponentTheme('Dialog');
 
@@ -73,7 +74,7 @@
       }
       dispatch('close-attempt');
     }}
-    class="z-50"
+    class={cls('z-50', theme.backdrop, classes.backdrop)}
     fadeParams={{ duration: 150 }}
     {portal}
   />

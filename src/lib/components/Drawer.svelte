@@ -19,6 +19,10 @@
   export let loading: boolean | null = null;
   export let placement: 'top' | 'bottom' | 'left' | 'right' = 'right';
 
+  export let classes: {
+    root?: string;
+    backdrop?: string;
+  } = {};
   const theme = getComponentTheme('Drawer');
 
   $: dispatch('change', { open });
@@ -38,7 +42,7 @@
       }
       dispatch('close-attempt');
     }}
-    class="z-50"
+    class={cls('z-50', theme.backdrop, classes.backdrop)}
     {portal}
   />
 
@@ -55,6 +59,7 @@
         'right-0': placement === 'right',
       },
       theme.root,
+      classes.root,
       $$props.class
     )}
     style={$$props.style}
