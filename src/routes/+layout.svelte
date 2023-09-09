@@ -2,7 +2,7 @@
   import { inject } from '@vercel/analytics';
   import 'prism-themes/themes/prism-vsc-dark-plus.css';
   import { dev } from '$app/environment';
-  import { mdiGithub } from '@mdi/js';
+  import { mdiGithub, mdiOpenInNew } from '@mdi/js';
 
   import AppBar from '$lib/components/AppBar.svelte';
   import AppLayout from '$lib/components/AppLayout.svelte';
@@ -49,7 +49,11 @@
   </nav>
 
   <AppBar title="svelte-ux">
-    <div slot="actions">
+    <div slot="actions" class="flex gap-3">
+      <Button href="https://www.layerchart.com" icon={mdiOpenInNew} target="_blank" class="p-2">
+        LayerChart
+      </Button>
+
       <QuickSearch options={quickSearchOptions} on:change={(e) => goto(e.detail.value)} />
 
       <Tooltip title="View repository" placement="left" offset={2}>
