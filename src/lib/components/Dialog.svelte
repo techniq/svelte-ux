@@ -66,13 +66,15 @@
 
 {#if open}
   <Backdrop
-    on:mouseup={(e) => {
-      // Do not allow event to reach Popover's on:mouseup (clickOutside)
-      e.stopPropagation();
+    on:click={() => {
       if (!persistent) {
         open = false;
       }
       dispatch('close-attempt');
+    }}
+    on:mouseup={(e) => {
+      // Do not allow event to reach Popover's on:mouseup (clickOutside)
+      e.stopPropagation();
     }}
     class={cls('z-50', theme.backdrop, classes.backdrop)}
     fadeParams={{ duration: 150 }}
