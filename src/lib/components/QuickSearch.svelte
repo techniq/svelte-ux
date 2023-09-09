@@ -53,7 +53,10 @@
 </Button>
 <Dialog
   bind:open
-  classes={{ root: cls('items-start mt-20', theme.root, classes.root, $$props.class) }}
+  classes={{
+    root: cls('items-start mt-20', theme.root, classes.root, $$props.class),
+    backdrop: 'backdrop-blur-sm bg-black/70',
+  }}
 >
   <div class="overflow-auto max-h-[min(90vh,600px)] min-w-[400px] py-1">
     <SelectList
