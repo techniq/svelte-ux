@@ -12,7 +12,9 @@
 <slot {visibleItems} />
 
 {#if !disabled}
+  <!-- Make 1px tall as sometimes it is now detected  -->
   <div
+    class="sentinel h-px"
     use:intersection
     on:intersecting={(e) => {
       if (e.detail.isIntersecting) {
