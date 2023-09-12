@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.48.3
+
+### Patch Changes
+
+- Support passing `backdrop` classes (including theme) to Dialog and Drawer ([`84adc7f`](https://github.com/techniq/svelte-ux/commit/84adc7f6a6c4189464150245853a1ef867e2f4e1))
+
+- Only close Dialog/Drawer on direct Backdrop click (not drag from Dialog/Drawer to Backdrop) ([`acc3255`](https://github.com/techniq/svelte-ux/commit/acc32559d1e408cfa400320e6999787aec979919))
+
+- [QuickSearch] Add backdrop blur and increase opacity ([`1b82911`](https://github.com/techniq/svelte-ux/commit/1b829116576c15cfb6f342d393bdc6975f11b257))
+
+- [InfiniteScroll] Add 1px height to sentinel to fix intersection detection in some cases ([`3a82242`](https://github.com/techniq/svelte-ux/commit/3a822425f08390b968d2c1b53cc12e987faf7d87))
+
 ## 0.48.2
 
 ### Patch Changes
