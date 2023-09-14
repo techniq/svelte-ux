@@ -1,5 +1,12 @@
 # svelte-ux
 
+## 0.49.0
+
+### Minor Changes
+
+- Upgrade all dependencies including svelte from 3.59.1 to 4.2.0 ([`301861c`](https://github.com/techniq/svelte-ux/commit/301861cfb63d500e795971a38eddf9b1653b6b32))
+- Change svelte to `peerDependency`
+
 ## 0.48.3
 
 ### Patch Changes
