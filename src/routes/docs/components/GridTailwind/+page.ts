@@ -4,7 +4,8 @@ export async function load() {
   return {
     meta: {
       pageSource,
-      title: 'Grid (via tailwind classes)',
+      title: 'Grid',
+      description: 'Uses tailwind classes',
       hideUsage: true,
     },
   };

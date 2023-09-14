@@ -4,7 +4,8 @@ export async function load() {
   return {
     meta: {
       pageSource,
-      title: 'Stack (via tailwind classes)',
+      title: 'Stack',
+      description: 'Uses tailwind classes',
       hideUsage: true,
     },
   };

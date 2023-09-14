@@ -8,6 +8,7 @@ export async function load() {
       api,
       source,
       pageSource,
+      description: 'Use tailwind classes instead',
       status: 'deprecated',
     },
   };
