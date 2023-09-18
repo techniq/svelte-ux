@@ -17,16 +17,18 @@
       <slot {on} {toggle} {toggleOn} {toggleOff} />
     </Button>
   {/if}
+
   <!-- Transition delays unmount to allow children to transition (ex. Drawer/Dialog) -->
   {#if transition}
     {#if on}
-      <div transition:transition|local={transitionParams}>
+      <div transition:transition={transitionParams}>
         <slot name="toggle" {on} {toggle} {toggleOn} {toggleOff} />
       </div>
     {/if}
   {:else if on}
     <slot name="toggle" {on} {toggle} {toggleOn} {toggleOff} />
   {/if}
+
   {#if buttonPlacement === 'after'}
     <Button {...$$restProps} on:click={toggle} on:click>
       <slot {on} {toggle} {toggleOn} {toggleOff} />

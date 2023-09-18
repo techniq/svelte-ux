@@ -17,9 +17,9 @@
 <h2>Dialog</h2>
 
 <Preview>
-  <ToggleButton let:on={open} let:toggle>
+  <ToggleButton let:on={open}>
     Open Dialog
-    <Dialog slot="toggle" {open} on:close={toggle}>
+    <Dialog slot="toggle" {open} on:close={toggle} let:toggle>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
         <Button variant="fill" color="accent">Close</Button>
@@ -31,9 +31,9 @@
 <h2>Drawer</h2>
 
 <Preview>
-  <ToggleButton let:on={open} let:toggle let:toggleOff>
+  <ToggleButton>
     Open Drawer
-    <Drawer slot="toggle" {open} on:close={toggleOff} class="w-[400px]">
+    <Drawer slot="toggle" let:on={open} {open} on:close={toggleOff} class="w-[400px]" let:toggleOff>
       <h1>Contents</h1>
       <div
         class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
