@@ -112,7 +112,7 @@
   >
     <slot {options} {selected} close={() => (open = false)} setValue={(val) => (value = val)}>
       <menu class="group p-1">
-        {#each options as option, index}
+        {#each options as option, index (option.value)}
           {@const previousOption = options[index - 1]}
           {#if option.group && option.group !== previousOption?.group}
             <div
