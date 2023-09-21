@@ -3,7 +3,7 @@
 
   type T = $$Generic;
 
-  export let value: Readable<T>;
+  export let store: Readable<T>;
 </script>
 
-<slot value={$value} />
+<slot value={$store} />
