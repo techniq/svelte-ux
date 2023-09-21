@@ -231,7 +231,7 @@
       none: {},
     }[variant ?? 'none']?.[color ?? 'default'],
     theme.root,
-    classes.root,
+    classes?.root,
     $$props.class
   );
 </script>
