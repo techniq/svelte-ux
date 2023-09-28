@@ -26,6 +26,7 @@
   <div>{format(.5678, 'percentRound')}</div>
   <div>{format(1_234_567, 'metric')}</div>
   <div>{format(1_200_000, 'metric')}</div>
+  <div>{format(.5678, 'percent', 1)}</div>
 </Preview>
 
 <h2>Period formats</h2>
@@ -34,4 +35,5 @@
   <div>{format(date, PeriodType.Day)}</div>
   <div>{format(date, PeriodType.Month)}</div>
   <div>{format(date, PeriodType.CalendarYear)}</div>
+  <div>{format(date, PeriodType.Day, 'short')}</div>
 </Preview>
