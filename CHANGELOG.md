@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.49.1
+
+### Patch Changes
+
+- [StoreSubscribe] Rename `value` prop to `store` ([`4438954`](https://github.com/techniq/svelte-ux/commit/4438954a0fe2cdaa4e1979b189a41ee5807db538))
+
+- [Button] Defend against `classes` sometimes being set to `undefined`. Issue #91 ([`49a525b`](https://github.com/techniq/svelte-ux/commit/49a525ba71bae0ebdc58c92ef4b155a5f36bbf8a))
+
+- [format] Pass additional arguments to underlying `formatDate()` and `formatNumberAsStyle()` functions ([`ebdb2c8`](https://github.com/techniq/svelte-ux/commit/ebdb2c856a1fe4a200036f076896fca430550ad3))
+
 ## 0.49.0
 
 ### Minor Changes
