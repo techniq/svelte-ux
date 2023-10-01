@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.50.0
+
+### Minor Changes
+
+- Update transitions to Svelte 4 compatible (default local, explicit `|global` instead of default global, explicit `|local`). Fix ToggleButton Dialog/Drawer transition in ([`7406467`](https://github.com/techniq/svelte-ux/commit/7406467e42c2900a6371915d8faaedd42dadfcb3))
+
 ## 0.49.1
 
 ### Patch Changes
