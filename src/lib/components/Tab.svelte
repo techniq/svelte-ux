@@ -34,7 +34,7 @@
     $$props.class
   )}
   on:click
-  transition:slide|local={{ axis: vertical ? 'y' : 'x' }}
+  transition:slide={{ axis: vertical ? 'y' : 'x' }}
 >
   <slot />
 </button>

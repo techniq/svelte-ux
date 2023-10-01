@@ -127,10 +127,7 @@
 
 <Dialog bind:open>
   {#if currentValue}
-    <div
-      class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24"
-      transition:slide|local
-    >
+    <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24" transition:slide>
       <div class="text-sm text-white/50">
         {dateDisplay(currentValue, { format: secondaryFormat })}
       </div>

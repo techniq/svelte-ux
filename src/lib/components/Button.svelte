@@ -253,11 +253,11 @@
   on:blur
 >
   {#if loading}
-    <span transition:slide|local={{ axis: 'x', duration: 200 }}>
+    <span transition:slide={{ axis: 'x', duration: 200 }}>
       <ProgressCircle size={16} width={2} class={cls(theme.loading, classes.loading)} />
     </span>
   {:else if icon}
-    <span in:slide|local={{ axis: 'x', duration: 200 }}>
+    <span in:slide={{ axis: 'x', duration: 200 }}>
       {#if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
         <Icon data={icon} class={cls('pointer-events-none', theme.icon, classes.icon)} />

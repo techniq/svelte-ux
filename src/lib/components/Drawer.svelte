@@ -65,11 +65,11 @@
       $$props.class
     )}
     style={$$props.style}
-    in:fly={{
+    in:fly|global={{
       x: placement === 'left' ? '-100%' : placement === 'right' ? '100%' : 0,
       y: placement === 'top' ? '-100%' : placement === 'bottom' ? '100%' : 0,
     }}
-    out:fly|local={{
+    out:fly={{
       x: placement === 'left' ? '-100%' : placement === 'right' ? '100%' : 0,
       y: placement === 'top' ? '-100%' : placement === 'bottom' ? '100%' : 0,
     }}

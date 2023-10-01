@@ -25,7 +25,7 @@
       <pre
         class="language-{language} rounded"
         style="margin: 0; white-space: normal;"
-        transition:slide|local>
+        transition:slide>
           <code class="language-{language}">{@html highlightedCode}</code>
       </pre>
 

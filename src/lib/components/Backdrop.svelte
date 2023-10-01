@@ -27,8 +27,8 @@
   on:click
   on:mousedown
   on:mouseup
-  in:fade={fadeParams}
-  out:fade|local={fadeParams}
+  in:fade|global={fadeParams}
+  out:fade={fadeParams}
   use:portalAction={portal}
 >
   <slot />

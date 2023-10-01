@@ -114,8 +114,8 @@
         $$props.class
       )}
       style={$$props.style}
-      in:scale={{ duration: 150, easing: quadIn }}
-      out:scale|local={{ duration: 150, easing: quadIn }}
+      in:scale|global={{ duration: 150, easing: quadIn }}
+      out:scale={{ duration: 150, easing: quadIn }}
       on:introstart
       on:outrostart
       on:introend

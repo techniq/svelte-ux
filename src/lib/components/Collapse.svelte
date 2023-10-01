@@ -90,7 +90,7 @@
   </button>
 
   {#if open}
-    <div transition:transition|local={transitionParams} class={cls(theme.content, classes.content)}>
+    <div transition:transition={transitionParams} class={cls(theme.content, classes.content)}>
       <slot {open} />
     </div>
   {/if}

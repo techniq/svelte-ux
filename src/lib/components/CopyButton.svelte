@@ -26,6 +26,6 @@
   }}
 >
   {#if showMessage}
-    <span transition:slide|local={{ axis: 'x', duration: 200 }}>Copied!</span>
+    <span transition:slide={{ axis: 'x', duration: 200 }}>Copied!</span>
   {/if}
 </Button>

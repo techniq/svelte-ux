@@ -64,7 +64,7 @@
     <div
       class={cls('indicator', $classesContext.indicator, theme.indicator, classes.indicator)}
       in:receive={{ key: 'indicator' }}
-      out:send|local={{ key: 'indicator' }}
+      out:send={{ key: 'indicator' }}
     />
   {/if}
 

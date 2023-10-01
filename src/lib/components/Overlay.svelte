@@ -24,7 +24,7 @@
     theme.root,
     $$props.class
   )}
-  transition:transitionFn|local={transitionConfig}
+  transition:transitionFn={transitionConfig}
 >
   <slot />
 </div>

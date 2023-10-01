@@ -92,7 +92,7 @@
           theme.title,
           classes.title
         )}
-        transition:fly|local={{
+        transition:fly={{
           x: placement === 'left' ? 6 : placement === 'right' ? -6 : 0,
           y: placement === 'top' ? 6 : placement === 'bottom' ? -6 : 0,
           duration: 300,
