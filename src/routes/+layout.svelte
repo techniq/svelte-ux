@@ -2,7 +2,7 @@
   import { inject } from '@vercel/analytics';
   import 'prism-themes/themes/prism-vsc-dark-plus.css';
   import { dev } from '$app/environment';
-  import { mdiGithub, mdiOpenInNew } from '@mdi/js';
+  import { mdiGithub, mdiOpenInNew, mdiTwitter } from '@mdi/js';
 
   import AppBar from '$lib/components/AppBar.svelte';
   import AppLayout from '$lib/components/AppLayout.svelte';
@@ -55,6 +55,15 @@
       </Button>
 
       <QuickSearch options={quickSearchOptions} on:change={(e) => goto(e.detail.value)} />
+
+      <Tooltip title="Open Twitter / X" placement="left" offset={2}>
+        <Button
+          icon={mdiTwitter}
+          href="https://twitter.com/techniq35"
+          class="p-2"
+          target="_blank"
+        />
+      </Tooltip>
 
       <Tooltip title="View repository" placement="left" offset={2}>
         <Button
