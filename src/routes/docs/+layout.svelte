@@ -124,7 +124,6 @@
         <Button
           icon={mdiChevronDown}
           on:click={() => {
-            console.log('click');
             showTableOfContents = !showTableOfContents;
           }}
           variant="fill-light"
