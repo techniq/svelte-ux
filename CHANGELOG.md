@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.50.1
+
+### Patch Changes
+
+- [scrollIntoView] Add `onlyIfNeeded` option to mimic non-standard `scrollIntoViewIfNeeded()` ([`38c448f`](https://github.com/techniq/svelte-ux/commit/38c448fd7e9e41e72adcb915d3283e2ebe84c175))
+
+- Add `isVisibleInScrollParent(node)` DOM util ([`2eea4b5`](https://github.com/techniq/svelte-ux/commit/2eea4b5fe8b0910d3bc3ca29290dc3a4aba7474c))
+
 ## 0.50.0
 
 ### Minor Changes
