@@ -10,7 +10,7 @@ export async function load() {
       source,
       pageSource,
       hideUsage: true,
-      related: ['components/Paginate', 'stores/paginationStore'],
+      related: ['components/Pagination', 'stores/paginationStore'],
     },
   };
 }
