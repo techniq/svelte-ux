@@ -1,5 +1,6 @@
 {
   "name": "svelte-ux",
+  "description": "A large collection of Svelte components, actions, stores and utils to simplify creating highly interactive and visual applications.  Built using Tailwind with extensibility and customization in mind.",
   "author": "Sean Lynch <techniq35@gmail.com>",
   "license": "MIT",
   "repository": "techniq/svelte-ux",
