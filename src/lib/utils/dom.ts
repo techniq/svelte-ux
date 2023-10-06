@@ -22,7 +22,7 @@ export function getScrollParent(node: HTMLElement): HTMLElement {
 }
 
 /**
- * Scroll node into view of closely scrollable (overflown) parent.  Like `node.scrollIntoView()` but will only scroll immediate container (not viewport)
+ * Scroll node into view of closest scrollable (i.e. overflown) parent.  Like `node.scrollIntoView()` but will only scroll immediate container (not viewport)
  */
 export function scrollIntoView(node: HTMLElement) {
   // TODO: Consider only scrolling if needed
@@ -49,4 +49,17 @@ export function scrollIntoView(node: HTMLElement) {
     left: nodeOffset.left + optionCenter.left - containerCenter.left,
     behavior: 'smooth',
   });
+}
+
+/**
+ * Determine if node is currently visible in scroll container
+ */
+export function isVisibleInScrollParent(node: HTMLElement) {
+  const nodeTop = node.getBoundingClientRect().top;
+  const scrollParent = getScrollParent(node);
+  const parentHeight = scrollParent?.offsetHeight ?? 0;
+  const parentTop = scrollParent?.offsetTop ?? 0;
+  // Make sure node is within
+  const isVisible = nodeTop > parentTop && nodeTop < parentTop + parentHeight;
+  return isVisible;
 }
