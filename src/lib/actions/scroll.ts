@@ -1,16 +1,26 @@
 import type { Action } from 'svelte/action';
-import { scrollIntoView as scrollIntoViewUtil } from '$lib/utils/dom';
+import { isVisibleInScrollParent, scrollIntoView as scrollIntoViewUtil } from '$lib/utils/dom';
 import type { EventWithTarget } from '$lib/types';
 
 type ScrollIntoViewOptions = {
   condition: boolean | ((node: HTMLElement) => boolean);
+  /** Only scroll if needed (not visible in scroll parent).  Similar to non-standard `scrollIntoViewIfNeeded()` */
+  onlyIfNeeded?: boolean;
   initial?: boolean;
   delay?: number;
 };
 
 export const scrollIntoView: Action<HTMLElement, ScrollIntoViewOptions> = (node, options) => {
   function update(options: ScrollIntoViewOptions) {
-    if (typeof options.condition === 'boolean' ? options.condition : options.condition(node)) {
+    const condition =
+      typeof options.condition === 'boolean' ? options.condition : options.condition(node);
+
+    const needed =
+      typeof options.onlyIfNeeded === 'boolean'
+        ? options.onlyIfNeeded && !isVisibleInScrollParent(node)
+        : true;
+
+    if (condition && needed) {
       setTimeout(() => {
         scrollIntoViewUtil(node);
       }, options.delay ?? 0);

@@ -35,18 +35,8 @@
     $$props.class
   )}
   use:scrollIntoView={{
-    condition: (node) => {
-      if (isPathActive) {
-        const nodeTop = node.getBoundingClientRect().top;
-        const scrollParent = getScrollParent(node);
-        const scrollParentHeight = scrollParent?.offsetHeight ?? 0;
-        const threshold = 0;
-        const isVisible = scrollParentHeight - nodeTop < threshold;
-        return isVisible;
-      } else {
-        return false;
-      }
-    },
+    condition: isPathActive,
+    onlyIfNeeded: true,
     delay: 500,
   }}
   on:click
