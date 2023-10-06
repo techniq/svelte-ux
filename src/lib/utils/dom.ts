@@ -55,11 +55,9 @@ export function scrollIntoView(node: HTMLElement) {
  * Determine if node is currently visible in scroll container
  */
 export function isVisibleInScrollParent(node: HTMLElement) {
-  const nodeTop = node.getBoundingClientRect().top;
+  const nodeRect = node.getBoundingClientRect();
   const scrollParent = getScrollParent(node);
-  const parentHeight = scrollParent?.offsetHeight ?? 0;
-  const parentTop = scrollParent?.offsetTop ?? 0;
-  // Make sure node is within
-  const isVisible = nodeTop > parentTop && nodeTop < parentTop + parentHeight;
+  const parentRect = scrollParent.getBoundingClientRect();
+  const isVisible = nodeRect.top > parentRect.top && nodeRect.bottom < parentRect.bottom;
   return isVisible;
 }
