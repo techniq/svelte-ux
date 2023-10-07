@@ -11,9 +11,9 @@
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
   import Field from '$lib/components/Field.svelte';
-  import Checkbox from '$lib/components/Checkbox.svelte';
   import Switch from '$lib/components/Switch.svelte';
   import NumberStepper from '$lib/components/NumberStepper.svelte';
+  import { cls } from '$lib/utils/styles';
 
   let originalDomain = [-100, 100];
 
@@ -90,7 +90,7 @@
   <Button on:click={() => (values = getValues())} variant="fill" color="accent">Update data</Button>
 </div>
 
-<h2>dataBackground</h2>
+<h2>Basic</h2>
 
 <Preview>
   <table class="w-full _w-40 border">
@@ -102,7 +102,37 @@
             class="text-right border border-gray-100 tabular-nums"
             use:dataBackground={{
               value,
-              color: value > 0 ? 'hsl(140 100% 80%)' : 'hsl(0 100% 80%)',
+              color: value > 0 ? 'hsl(140 80% 80%)' : 'hsl(0 80% 80%)',
+              domain,
+              bar: true,
+              inset,
+              baseline,
+              tweened: { duration },
+            }}
+          >
+            <TweenedValue {value} format="integer" options={{ duration }} />
+          </td>
+        </tr>
+      {/key}
+    {/each}
+  </table>
+</Preview>
+
+<h2>Tailwind gradient</h2>
+
+<Preview>
+  <table class="w-full _w-40 border">
+    {#each sorted ? sort(values) : values as value}
+      <!-- re-mount if duration changes so action is updated -->
+      {#key duration}
+        <tr>
+          <td
+            class={cls(
+              'text-right border border-gray-100 tabular-nums',
+              value > 0 ? 'from-green-300 to-green-500' : 'from-red-500 to-red-300'
+            )}
+            use:dataBackground={{
+              value,
               domain,
               bar: true,
               inset,
