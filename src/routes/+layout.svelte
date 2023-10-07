@@ -50,7 +50,12 @@
 
   <AppBar title="svelte-ux">
     <div slot="actions" class="flex gap-3">
-      <Button href="https://www.layerchart.com" icon={mdiOpenInNew} target="_blank" class="p-2">
+      <Button
+        href="https://www.layerchart.com"
+        icon={mdiOpenInNew}
+        target="_blank"
+        class="p-2 max-sm:hidden"
+      >
         LayerChart
       </Button>
 
