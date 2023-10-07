@@ -40,6 +40,25 @@
   </div>
 </Preview>
 
+<div>
+  <small>Only if needed</small>
+</div>
+
+<Preview>
+  <input type="range" bind:value={scrolledIndex} min={0} max={itemCount - 1} />
+  {scrolledIndex}
+  <div class="h-40 overflow-auto border rounded">
+    {#each items as item, i}
+      <div
+        use:scrollIntoView={{ condition: scrolledIndex === i, onlyIfNeeded: true }}
+        class:bg-gray-200={scrolledIndex === i}
+      >
+        {item}
+      </div>
+    {/each}
+  </div>
+</Preview>
+
 <h2>scrollShadow <small>Add shadows to indicate scrolling available</small></h2>
 
 <Preview>
