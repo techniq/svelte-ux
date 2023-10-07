@@ -58,7 +58,7 @@
     backdrop: 'backdrop-blur-sm bg-black/70',
   }}
 >
-  <div class="overflow-auto max-h-[min(90vh,600px)] min-w-[400px] py-1">
+  <div class="overflow-auto max-h-[min(90dvh,600px)] min-w-[400px] py-1">
     <SelectList
       icon={mdiMagnify}
       placeholder="Search..."

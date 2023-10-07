@@ -226,7 +226,7 @@
 
     {#if showTableOfContents && $xlScreen}
       <div transition:slide={{ axis: 'x' }}>
-        <div class="w-[224px] sticky top-0 pr-2 max-h-[calc(100vh-64px)] overflow-auto z-20">
+        <div class="w-[224px] sticky top-0 pr-2 max-h-[calc(100dvh-64px)] overflow-auto z-20">
           <div class="text-xs uppercase leading-8 tracking-widest text-black/50">On this page</div>
           <!-- Rebuild toc when page changes -->
           {#key $page.route.id}
