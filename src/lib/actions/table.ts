@@ -86,24 +86,24 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
       cellValue: rowData && getCellValue(column, rowData, rowIndex ?? -1),
     };
 
-    if (column.class) {
-      if (node.nodeName === 'TH' && column.class.header) {
-        const classes = getClasses(column.class.header, context);
+    if (column.classes) {
+      if (node.nodeName === 'TH' && column.classes.th) {
+        const classes = getClasses(column.classes.th, context);
         classes?.forEach((className) => tracker.addClass(className));
-      } else if (node.nodeName === 'TD' && column.class.data) {
-        const classes = getClasses(column.class.data, context);
+      } else if (node.nodeName === 'TD' && column.classes.td) {
+        const classes = getClasses(column.classes.td, context);
         classes?.forEach((className) => tracker.addClass(className));
       }
     }
 
     if (column.style) {
-      if (node.nodeName === 'TH' && column.style.header) {
-        const styleProperties = getStyleProperties(column.style.header, context);
+      if (node.nodeName === 'TH' && column.style.th) {
+        const styleProperties = getStyleProperties(column.style.th, context);
         styleProperties?.forEach(([property, value]) => {
           tracker.addStyle(property, value);
         });
-      } else if (node.nodeName === 'TD' && column.style.data) {
-        const styleProperties = getStyleProperties(column.style.data, context);
+      } else if (node.nodeName === 'TD' && column.style.td) {
+        const styleProperties = getStyleProperties(column.style.td, context);
         styleProperties?.forEach(([property, value]) => {
           tracker.addStyle(property, value);
         });
@@ -170,7 +170,7 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
   };
 };
 
-function getClasses(classProp: ColumnDef['class']['data'], context: ResolveContext): string[] {
+function getClasses(classProp: ColumnDef['classes']['td'], context: ResolveContext): string[] {
   const resolvedClassProp = typeof classProp === 'function' ? classProp(context) : classProp;
 
   if (typeof resolvedClassProp === 'string') {
@@ -184,7 +184,7 @@ function getClasses(classProp: ColumnDef['class']['data'], context: ResolveConte
 }
 
 function getStyleProperties(
-  styleProp: ColumnDef['style']['data'],
+  styleProp: ColumnDef['style']['td'],
   context: ResolveContext
 ): string[][] {
   const resolvedStyleProp = typeof styleProp === 'function' ? styleProp(context) : styleProp;

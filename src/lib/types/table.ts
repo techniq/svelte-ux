@@ -32,12 +32,12 @@ export type ColumnDef<TData = any> = {
   sticky?: { [edge in Edge]?: boolean };
 
   style?: {
-    header?: ResolvePropType<TData, string | { [property: string]: string }>;
-    data?: ResolvePropType<TData, string | { [property: string]: string }>;
+    th?: ResolvePropType<TData, string | { [property: string]: string }>;
+    td?: ResolvePropType<TData, string | { [property: string]: string }>;
   };
-  class?: {
-    header?: ResolvePropType<TData, string | string[]>;
-    data?: ResolvePropType<TData, string | string[]>;
+  classes?: {
+    th?: ResolvePropType<TData, string | string[]>;
+    td?: ResolvePropType<TData, string | string[]>;
   };
 
   dataBackground?:

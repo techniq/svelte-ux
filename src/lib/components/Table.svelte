@@ -35,7 +35,7 @@
   } = {};
   // TODO: Figure out circular reference error
   // const theme = getComponentTheme('Table');
-  const theme = {};
+  const theme: typeof classes = {};
 
   export let styles: {
     container?: string;
@@ -54,9 +54,9 @@
     return headerRow.map((column) => {
       return {
         ...column,
-        class: {
-          header: cls(theme.th, classes.th, column.class?.header),
-          data: cls(theme.td, classes.td, column.class?.data),
+        classes: {
+          th: cls(theme.th, classes.th, column.classes?.th),
+          td: cls(theme.td, classes.td, column.classes?.td),
         },
       };
     });
@@ -64,9 +64,9 @@
   $: rowColumns = getRowColumns(columns).map((column) => {
     return {
       ...column,
-      class: {
-        header: cls(theme.th, classes.th, column.class?.header),
-        data: cls(theme.td, classes.td, column.class?.data),
+      classes: {
+        th: cls(theme.th, classes.th, column.classes?.th),
+        td: cls(theme.td, classes.td, column.classes?.td),
       },
     };
   });
