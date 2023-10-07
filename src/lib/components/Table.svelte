@@ -5,7 +5,13 @@
   import type { ColumnDef } from '../types/table';
   import { cls } from '../utils/styles';
 
-  import { getCellContent, getCellHeader, getHeaders, getRowColumns } from '../utils/table';
+  import {
+    getCellValue,
+    getCellContent,
+    getCellHeader,
+    getHeaders,
+    getRowColumns,
+  } from '../utils/table';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
   import { getComponentTheme } from './theme';
@@ -73,7 +79,7 @@
 >
   <div class={cls('table-wrapper', theme.wrapper, classes.wrapper)} style={styles.wrapper}>
     <table class={cls('w-full', theme.table, classes.table)} style={styles.table}>
-      <slot name="headers" {headers}>
+      <slot name="headers" {headers} {getCellHeader}>
         <thead class={cls(theme.thead, classes.thead)} style={styles.thead}>
           {#each headers ?? [] as headerRow}
             <tr class={cls(theme.tr, classes.tr)} style={styles.tr}>
@@ -96,7 +102,7 @@
 
       <slot />
 
-      <slot name="data" {data} columns={rowColumns}>
+      <slot name="data" {data} columns={rowColumns} {getCellValue} {getCellContent}>
         <tbody class={cls(theme.tbody, classes.tbody)} style={styles.tbody}>
           {#each data ?? [] as rowData, rowIndex}
             <tr class={cls(theme.tr, classes.tr)} style={styles.tr}>

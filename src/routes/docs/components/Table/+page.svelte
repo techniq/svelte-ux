@@ -9,7 +9,6 @@
   import tableOrderStore from '$lib/stores/tableOrderStore';
 
   import { tableCell } from '$lib/actions/table';
-  import { getCellValue, getCellContent } from '$lib/utils/table';
 
   import { randomInteger } from '$lib/utils/number';
   import { createPropertySortFunc } from '$lib/utils/sort';
@@ -325,7 +324,7 @@
       },
     ]}
   >
-    <tbody slot="data" let:columns let:data>
+    <tbody slot="data" let:columns let:data let:getCellValue>
       {#each data ?? [] as rowData, rowIndex}
         <tr class="tabular-nums">
           {#each columns as column (column.name)}
