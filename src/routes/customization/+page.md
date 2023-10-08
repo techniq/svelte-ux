@@ -128,4 +128,4 @@ Many components expose slots, including `default` and named, to allow customizat
 
 ## Composition
 
-If you find yourself passing the same props repeatily, you may find it useful to use composition to build your own custom components and leverage svelte-ux's components internally
+If you find yourself passing the same props repeatily, you may find it useful to use composition to build your own custom components and leverage Svelte UX's components internally

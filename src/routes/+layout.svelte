@@ -48,7 +48,7 @@
     <div class="h-4" />
   </nav>
 
-  <AppBar title="svelte-ux">
+  <AppBar title="Svelte UX">
     <div slot="actions" class="flex gap-3">
       <Button
         href="https://www.layerchart.com"
