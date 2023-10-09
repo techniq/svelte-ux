@@ -6,7 +6,7 @@ export async function load() {
     meta: {
       source,
       pageSource,
-      description: 'Debounce store updates',
+      description: 'Delay store update until some time has passed since the last update',
     },
   };
 }
