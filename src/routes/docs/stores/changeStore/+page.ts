@@ -6,6 +6,8 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description:
+        'Track previous value.  Calls onChange callback only after first change (not initial value)',
     },
   };
 }

@@ -20,11 +20,25 @@
 import { uniqueStore } from 'svelte-ux';
 
 const store = mapStore();
-// $store.get(key)
-// $store.has(key)
-// store.set(key, value);
-// store.update(key, value => value + 1);
-// store.delete(key);
-// store.clear();
-// store.refresh();
+
+// Get a value
+$store.get(key);
+
+// Set a value
+store.set(key, value);
+
+// Update a value
+store.update(key, (value) => value + 1);
+
+// Check if value exists
+$store.has(key);
+
+// Delete a value
+store.delete(key);
+
+// Delete all values
+store.clear();
+
+// Force a reactive update in case of internal changes to entries
+store.refresh();
 ```

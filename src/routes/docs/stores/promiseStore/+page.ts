@@ -1,4 +1,4 @@
-import source from '$lib/stores/fetchStore.ts?raw';
+import source from '$lib/stores/promiseStore.ts?raw';
 import pageSource from './+page.md?raw';
 
 export async function load() {
@@ -6,6 +6,7 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description: 'Wraps a Promise as a store.  Useful for SvelteKit streamed data handling',
     },
   };
 }

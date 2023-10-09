@@ -6,6 +6,7 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description: 'Manage form state via immer draft and zod scehma, with undo history',
       related: ['components/Form'],
     },
   };

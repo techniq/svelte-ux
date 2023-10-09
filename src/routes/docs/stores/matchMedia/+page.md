@@ -37,7 +37,7 @@
 {/if}
 ```
 
-<h2>Convenient presets</h2>
+<h2>Convenient presets (tailwind defaults)</h2>
 
 ```svelte
 <script>

@@ -7,6 +7,7 @@ export async function load() {
       source,
       pageSource,
       title: 'Query params',
+      description: 'Manage query params as a store, with multiple serialization strategies',
       hideUsage: true,
     },
   };

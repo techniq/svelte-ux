@@ -6,7 +6,8 @@ export async function load() {
     meta: {
       source,
       pageSource,
-      related: ['components/Duration'],
+      description: 'Manage interval ticks, useful for timely updates and countdowns',
+      related: ['components/Duration', 'components/ScrollingNumber'],
     },
   };
 }

@@ -6,6 +6,8 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description:
+        'Store to monitor media query matching, including screen width/height, orientation, print media, prefers dark/light scheme, and prefers reduced motion',
     },
   };
 }

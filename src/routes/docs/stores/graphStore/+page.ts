@@ -6,6 +6,8 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description: ['GraphQL requests powered by fetchStore'],
+      related: ['stores/fetchStore'],
     },
   };
 }

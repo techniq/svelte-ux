@@ -10,7 +10,7 @@ export type PromiseStoreData<T> = {
 const WAITING = Symbol();
 
 /**
- * Add promiseStore to easily wrap a Promise as a store.  Useful for SvelteKit streamed data handling
+ * Wraps a Promise as a store.  Useful for SvelteKit streamed data handling
  */
 export function promiseStore<T>(initialValue?: Promise<T> | null) {
   let currentPromise: Promise<T> | null = null;

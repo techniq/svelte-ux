@@ -6,6 +6,8 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description:
+        'Manage table column sorting selection and direction.  Compliments Table component',
       related: ['actions/table', 'components/Table'],
     },
   };
