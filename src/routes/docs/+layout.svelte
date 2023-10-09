@@ -84,7 +84,7 @@
       </div>
     </div>
 
-    <div class="text-2xl font-bold mb-3">
+    <div class="text-2xl font-bold">
       {title}
       {#if status}
         <span
@@ -105,7 +105,7 @@
       </div>
     {/if}
 
-    <div class="flex gap-2 mt-2">
+    <div class="flex gap-2 mt-3">
       <ViewSourceButton
         label="Source"
         {source}
