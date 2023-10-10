@@ -24,7 +24,7 @@
       console.log(e.detail);
       e.target.innerText = JSON.stringify(e.detail.contentRect, null, 2);
     }}
-    class="resize overflow-auto bg-red-50"
+    class="resize overflow-auto whitespace-pre outline outline-gray-200 rounded"
   />
 </Preview>
 
@@ -36,7 +36,7 @@
     on:resize={(e) => {
       e.target.innerText = JSON.stringify(e.target.getBoundingClientRect(), null, 2);
     }}
-    class="resize overflow-auto bg-red-50"
+    class="resize overflow-auto whitespace-pre outline outline-gray-200 rounded"
   />
 </Preview>
 
@@ -49,13 +49,11 @@
       e.target.style.setProperty('--nodeWidth', e.detail.contentRect.width);
       e.target.style.setProperty('--nodeHeight', e.detail.contentRect.height);
       e.target.style.setProperty('--color', e.detail.contentRect.width % 255);
-      //e.target.style.setProperty('--rotate', e.detail.contentRect.width % 5 + 'deg');
     }}
-    class="text-white"
-    style:background-color="rgb(var(--color), 0, 0)"
-    style:transform="rotate(var(--rotate))"
+    style:background-color="hsl(var(--color), 100%, 70%)"
+    class="resize overflow-auto p-2 rounded"
   >
-    Inspect element as well
+    Resize and watch me change colors
   </div>
 </Preview>
 
