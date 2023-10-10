@@ -120,7 +120,7 @@ export const scrollShadow: Action<HTMLElement, ScrollShadowOptions> = (node, opt
 
     node.style.setProperty('--shadow', shadows.join(', '));
 
-    // Apply box-shadow to after pseudo element so it's rendered on top of content
+    // Apply box-shadow to :after pseudo element so it's rendered on top of content
     node.classList.add(
       'relative',
       'overflow-auto',

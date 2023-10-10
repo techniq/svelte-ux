@@ -28,7 +28,7 @@
   />
 </Preview>
 
-<h3>Full coordinates</h3>
+<h3>Full coordinates (using `getBoundingClientRect()`)</h3>
 
 <Preview showCode>
   <div
@@ -46,8 +46,6 @@
   <div
     use:resize
     on:resize={(e) => {
-      e.target.style.setProperty('--nodeWidth', e.detail.contentRect.width);
-      e.target.style.setProperty('--nodeHeight', e.detail.contentRect.height);
       e.target.style.setProperty('--color', e.detail.contentRect.width % 255);
     }}
     style:background-color="hsl(var(--color), 100%, 70%)"
