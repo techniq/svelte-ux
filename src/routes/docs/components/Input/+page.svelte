@@ -34,7 +34,7 @@
 <h2>MAC Address</h2>
 
 <Preview>
-  <Input mask="XX:XX:XX:XX:XX:XX" replace="X" accept="[\dA-H]" />
+  <Input mask="XX:XX:XX:XX:XX:XX" replace="X" accept="[\dA-F]" />
 </Preview>
 
 <h2>Alphanumeric</h2>

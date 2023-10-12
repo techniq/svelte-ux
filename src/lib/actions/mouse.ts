@@ -59,9 +59,6 @@ export const longpress: Action<HTMLElement, number> = (node, duration) => {
 //   };
 // };
 
-/**
- * Track mouse position changes from mouse down on node to mouse up
- */
 type MovableOptions = {
   /**
    * Number of pixels to step
@@ -75,6 +72,10 @@ type MovableOptions = {
 
   axis?: 'x' | 'y' | 'xy';
 };
+
+/**
+ * Track mouse position changes from mouse down on node to mouse up
+ */
 export const movable: Action<HTMLElement, MovableOptions> = (node, options = {}) => {
   let lastX = 0;
   let lastY = 0;
@@ -171,6 +172,49 @@ export const movable: Action<HTMLElement, MovableOptions> = (node, options = {})
   return {
     destroy() {
       node.removeEventListener('mousedown', onMouseDown);
+    },
+  };
+};
+
+// TODO: Use options
+type MouseCoordsOptions = {
+  target: HTMLElement;
+  cssVars: boolean;
+  context: 'viewport' | 'relative';
+};
+
+/** Set relative mouse coordinates as --x/--y CSS variables */
+export const mouseCoords: Action<HTMLElement, HTMLElement> = (node, target = node) => {
+  function onMouseMove(e: MouseEvent) {
+    // Mouse coordinates relative to node instead of viewport (`e.offsetX/Y` changes based on target/children)
+    const rect = node.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    node.style.setProperty('--x', `${x}px`);
+    node.style.setProperty('--y', `${y}px`);
+  }
+
+  function onMouseLeave() {
+    // node.style.removeProperty('--x');
+    // node.style.removeProperty('--y');
+    node.style.setProperty('--x', `-9999px`);
+    node.style.setProperty('--y', `-9999px`);
+  }
+
+  // Init x/y values, clear on exit
+  onMouseLeave();
+
+  target.addEventListener('mousemove', onMouseMove);
+  node.addEventListener('mouseleave', onMouseLeave);
+
+  return {
+    update(target: HTMLElement) {
+      target = target;
+    },
+    destroy() {
+      target.removeEventListener('mousedown', onMouseMove);
+      node.removeEventListener('mouseleave', onMouseLeave);
     },
   };
 };

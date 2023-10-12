@@ -6,6 +6,9 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description:
+        'Helper action to handle multiple actions as a single action.  Useful for adding actions for custom components',
+      related: ['components/Button', 'components/Input', 'components/TextField'],
     },
   };
 }

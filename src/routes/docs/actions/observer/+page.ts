@@ -6,6 +6,7 @@ export async function load() {
     meta: {
       source,
       pageSource,
+      description: 'Actions for ResizeObserver, IntersectionObserver, and MutationObserver',
       related: ['components/InfiniteScroll', 'components/Lazy'],
     },
   };
