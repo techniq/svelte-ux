@@ -93,7 +93,7 @@
 <h2>Basic</h2>
 
 <Preview>
-  <table class="w-full _w-40 border">
+  <table class="w-full border">
     {#each sorted ? sort(values) : values as value}
       <!-- re-mount if duration changes so action is updated -->
       {#key duration}
@@ -121,7 +121,7 @@
 <h2>Tailwind gradient</h2>
 
 <Preview>
-  <table class="w-full _w-40 border">
+  <table class="w-full border">
     {#each sorted ? sort(values) : values as value}
       <!-- re-mount if duration changes so action is updated -->
       {#key duration}
