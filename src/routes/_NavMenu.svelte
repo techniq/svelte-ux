@@ -79,6 +79,7 @@
     'popover',
     'portal',
     'scroll',
+    'spotlight',
     'sticky',
     'table',
   ];
