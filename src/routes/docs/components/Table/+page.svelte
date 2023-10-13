@@ -11,7 +11,6 @@
   import { tableCell } from '$lib/actions/table';
 
   import { randomInteger } from '$lib/utils/number';
-  import { createPropertySortFunc } from '$lib/utils/sort';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
 
   const pagination = paginationStore();
@@ -46,8 +45,7 @@
   }
   let randomData = randomDataGen();
 
-  $: sortFunc = createPropertySortFunc($order.by, $order.direction);
-  $: sortedData = [...data].sort(sortFunc);
+  $: sortedData = [...data].sort($order.handler);
 </script>
 
 <h1>Examples</h1>
