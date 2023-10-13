@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.52.0
+
+### Minor Changes
+
+- Consolidate `createPropertySortFunc()` use case into `createSortFunc` to simplify ([`3cedc7f`](https://github.com/techniq/svelte-ux/commit/3cedc7fa2056777a5b6b6dd7c43a026f004f4d29))
+
+- [tableOrderStore] Always set `handler` state to sort function for convenience ([`6e36df8`](https://github.com/techniq/svelte-ux/commit/6e36df8632cfeac178af73460fc633979153bec6))
+
 ## 0.51.0
 
 ### Minor Changes
