@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.51.0
+
+### Minor Changes
+
+- [Table] Rename `column.class` to `column.classes` and `header`/`data` classes to `th`/`td` for consistency with other APIs ([`ff93894`](https://github.com/techniq/svelte-ux/commit/ff93894104be28227fe221b961e0c312746eeb46))
+
+- Add spotlight action ([`fc8cc8c`](https://github.com/techniq/svelte-ux/commit/fc8cc8c204a88c164faefe2945018edf1ddea302))
+
+### Patch Changes
+
+- [Table] Pass `getCellValue`, `getCellContent`, and `getCellHeader` as slot props to applicable `headers` / `data` slots to simplify use case ([`4a95509`](https://github.com/techniq/svelte-ux/commit/4a95509934bed1607693d946ce8f3cbb7f7d6080))
+
 ## 0.50.1
 
 ### Patch Changes
