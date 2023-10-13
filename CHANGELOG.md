@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.53.0
+
+### Minor Changes
+
+- Rename `createSortFunc` => `sortFunc` and `createCompoundSort` to `compundSortFunc`, and `sort()` now shallow copies. Export all sort utils as top level ([`baec848`](https://github.com/techniq/svelte-ux/commit/baec848931e1eb8b3dd3d92c75cd423aed6065a7))
+
 ## 0.52.1
 
 ### Patch Changes
