@@ -5,7 +5,6 @@
   import Preview from '$lib/components/Preview.svelte';
   import Table from '$lib/components/Table.svelte';
 
-  import paginationStore from '$lib/stores/paginationStore';
   import tableOrderStore from '$lib/stores/tableOrderStore';
 
   import { tableCell } from '$lib/actions/table';
@@ -13,7 +12,6 @@
   import { randomInteger } from '$lib/utils/number';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
 
-  const pagination = paginationStore();
   const order = tableOrderStore({ initialBy: 'name' });
 
   const data = [

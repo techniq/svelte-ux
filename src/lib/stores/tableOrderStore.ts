@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { isFunction } from 'lodash-es';
 import type { ColumnDef } from '../types/table';
-import { createSortFunc } from '$lib/utils/sort';
+import { sortFunc } from '$lib/utils/sort';
 
 type SortFunc = (a: any, b: any) => number;
 type OrderDirection = 'asc' | 'desc';
@@ -39,9 +39,9 @@ export default function tableOrderStore(props?: TableOrderProps) {
       if (isFunction(column.orderBy)) {
         handler = column.orderBy;
       } else if (typeof column.orderBy === 'string') {
-        handler = createSortFunc(column.orderBy, direction);
+        handler = sortFunc(column.orderBy, direction);
       } else {
-        handler = createSortFunc(column.value ?? column.name, direction);
+        handler = sortFunc(column.value ?? column.name, direction);
       }
 
       return {

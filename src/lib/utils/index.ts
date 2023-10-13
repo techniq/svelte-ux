@@ -7,6 +7,7 @@ export * from './format';
 export * from './json';
 export * from './logger';
 export { round, clamp } from './number';
+export * from './sort';
 export { cls } from './styles';
 export { uniqueId } from './string';
 
@@ -24,7 +25,6 @@ export * as promise from './promise';
 export * as rollup from './rollup';
 export * as routing from './routing';
 export * as serialize from './serialize';
-export * as sort from './sort';
 export * as string from './string';
 export * as styles from './styles';
 export * as table from './table';
