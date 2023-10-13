@@ -1,23 +1,10 @@
-import { propAccessor } from './object';
-import type { PropAccessorArg } from './object';
+import { propAccessor, type PropAccessorArg } from './object';
 
-export function createCompoundSort(...sortFns: { (a: any, b: any): any }[]) {
-  return (a: any, b: any) => {
-    let result = 0;
-    for (let i = 0; i < sortFns.length; i++) {
-      let result = sortFns[i](a, b);
-      if (result != 0) {
-        return result;
-      }
-    }
-    return 0;
-  };
-}
-
-export function createSortFunc(valueFn: (a: any) => any, direction: 'asc' | 'desc' = 'asc') {
+export function createSortFunc(value?: PropAccessorArg, direction: 'asc' | 'desc' = 'asc') {
   const sortDirection = direction === 'asc' ? 1 : -1;
 
   return (a: any, b: any) => {
+    const valueFn = propAccessor(value);
     const aValue = valueFn(a);
     const bValue = valueFn(b);
 
@@ -36,8 +23,17 @@ export function createSortFunc(valueFn: (a: any) => any, direction: 'asc' | 'des
   };
 }
 
-export function createPropertySortFunc(prop?: PropAccessorArg, direction: 'asc' | 'desc' = 'asc') {
-  return createSortFunc(propAccessor(prop), direction);
+export function createCompoundSort(...sortFns: { (a: any, b: any): any }[]) {
+  return (a: any, b: any) => {
+    let result = 0;
+    for (let i = 0; i < sortFns.length; i++) {
+      let result = sortFns[i](a, b);
+      if (result != 0) {
+        return result;
+      }
+    }
+    return 0;
+  };
 }
 
 export function nestedSort(
@@ -60,5 +56,5 @@ export function sort<T = any>(
   prop?: PropAccessorArg,
   direction: 'asc' | 'desc' = 'asc'
 ) {
-  return arr.sort(createPropertySortFunc(prop, direction));
+  return arr.sort(createSortFunc(prop, direction));
 }

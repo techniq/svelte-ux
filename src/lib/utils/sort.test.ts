@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { nestedSort, createPropertySortFunc } from './sort';
+import { nestedSort, createSortFunc } from './sort';
 
 describe('nestedSort', () => {
   it('basic', () => {
@@ -88,7 +88,7 @@ describe('nestedSort', () => {
       },
     ];
 
-    const actual = nestedSort(data, createPropertySortFunc('key'));
+    const actual = nestedSort(data, createSortFunc('key'));
     expect(actual).eql(expected);
   });
 
@@ -177,7 +177,7 @@ describe('nestedSort', () => {
       },
     ];
 
-    const actual = nestedSort(data, createPropertySortFunc('Actual'));
+    const actual = nestedSort(data, createSortFunc('Actual'));
     expect(actual).eql(expected);
   });
 });
