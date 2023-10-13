@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.52.1
+
+### Patch Changes
+
+- Update dependencies
+
 ## 0.52.0
 
 ### Minor Changes
