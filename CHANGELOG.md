@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.53.1
+
+### Patch Changes
+
+- [tableOrderStore] Support passing the initial handler (like by/direction) before a column header has been clicked ([`375a3cc`](https://github.com/techniq/svelte-ux/commit/375a3cc944356b6017fe51ff0f4bd087a86d899d))
+
 ## 0.53.0
 
 ### Minor Changes
