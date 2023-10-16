@@ -17,7 +17,7 @@
 <h1>Usage</h1>
 
 ```js
-import { uniqueStore } from 'svelte-ux';
+import { mapStore } from 'svelte-ux';
 
 const store = mapStore();
 
