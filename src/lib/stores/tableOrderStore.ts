@@ -13,15 +13,16 @@ export type TableOrderState = {
 };
 
 export type TableOrderProps = {
-  initialBy: string;
+  initialBy?: string;
   initialDirection?: OrderDirection;
+  initialHandler?: SortFunc;
 };
 
 export default function tableOrderStore(props?: TableOrderProps) {
   const state = writable({
     by: props?.initialBy ?? '',
     direction: props?.initialDirection ?? 'asc',
-    handler: undefined as SortFunc | undefined,
+    handler: props?.initialHandler ?? (undefined as SortFunc | undefined),
   });
 
   function onHeaderClick(column: ColumnDef) {
