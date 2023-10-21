@@ -1,6 +1,7 @@
 <script lang="ts">
   import { uniqueId } from '$lib/utils/string';
   import { cls } from '$lib/utils/styles';
+  import { getComponentTheme } from './theme';
 
   /** Color of light */
   export let lightColor = '#666666';
@@ -20,6 +21,13 @@
   /** controls the focus for the light source. The bigger the value the brighter the light */
   export let specularExponent = 120;
 
+  /** @type {{root?: string, icon?: string, loading?: string}} */
+  export let classes: {
+    root?: string;
+    svg?: string;
+  } = {};
+  const theme = getComponentTheme('Shine');
+
   const filterId = uniqueId('filter-');
 
   let mouse = { x: 0, y: 0 };
@@ -38,7 +46,7 @@
 
 <svelte:window on:pointermove={onPointerMove} on:scroll={onScroll} />
 
-<svg {...$$restProps} class={cls('fixed inset-0', $$props.class)}>
+<svg class={cls('fixed inset-0', theme.svg, classes?.svg)}>
   <filter id={filterId} color-interpolation-filters="sRGB">
     <feGaussianBlur in="SourceAlpha" stdDeviation={depth} />
 
@@ -66,6 +74,11 @@
   </filter>
 </svg>
 
-<div style:filter="url(#{filterId})" bind:this={wrapperEl}>
+<div
+  style:filter="url(#{filterId})"
+  {...$$restProps}
+  class={cls('inline-block', theme.root, classes?.root, $$props.class)}
+  bind:this={wrapperEl}
+>
   <slot />
 </div>

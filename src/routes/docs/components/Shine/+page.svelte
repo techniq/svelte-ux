@@ -19,21 +19,23 @@
 
 <h2>Basic</h2>
 
-<Preview class="bg-neutral-700">
-  <Shine>
-    <div
-      class="text-8xl border-[12px] border-black mb-4 py-2 font-semibold rounded-lg text-center w-[500px]"
-    >
-      Shine
-    </div>
-  </Shine>
+<Preview class="_bg-neutral-700">
+  <div class="inline-block bg-accent-100">
+    <Shine>
+      <div
+        class="text-8xl text-accent-500 border-[12px] border-accent-500 py-2 font-semibold rounded-lg text-center w-[500px]"
+      >
+        Shine
+      </div>
+    </Shine>
+  </div>
 </Preview>
 
 <h2>Emoji</h2>
 
 <Preview>
   <Shine depth={3}>
-    <div class="text-[9rem] leading-[9rem]">👻 💀 🧪</div>
+    <div class="text-[9rem] leading-[9rem]">🚀 🧸 🍔 🥨 🍩 🍓 🍒 🪼 🧠 🌎</div>
   </Shine>
 </Preview>
 
