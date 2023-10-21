@@ -26,6 +26,18 @@
   </div>
 </Preview>
 
+<h2>Set brightness</h2>
+
+<Preview>
+  <div class="flex items-center justify-center content-center gap-6">
+    {#each images as image}
+      <Tilt class="hover:scale-110 transition duration-500" setBrightness>
+        <img src={image} width="180px" class="transition ease-out" />
+      </Tilt>
+    {/each}
+  </div>
+</Preview>
+
 <h2>Change perspective amount</h2>
 
 <Preview>

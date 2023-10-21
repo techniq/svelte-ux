@@ -4,6 +4,7 @@
   import { getComponentTheme } from './theme';
 
   export let maxRotation = 20;
+  export let setBrightness = false;
 
   const theme = getComponentTheme('Tilt');
 
@@ -24,7 +25,9 @@
 
     rotateY = scaleY(mouseX);
     rotateX = scaleX(mouseY);
-    brightness = scaleBrightness(mouseY);
+    if (setBrightness) {
+      brightness = scaleBrightness(mouseY);
+    }
   }
 
   function onMouseLeave(e: MouseEvent) {
@@ -35,10 +38,16 @@
 </script>
 
 <div
-  class={cls('Tilt [perspective:600px]', theme.root, $$props.class)}
   style:--rotateX="{rotateX}deg"
   style:--rotateY="{rotateY}deg"
   style:--brightness={brightness}
+  class={cls(
+    'Tilt [perspective:600px]',
+    '[&>*]:[transform:rotateX(var(--rotateX))_rotateY(var(--rotateY))]',
+    '[&>*]:brightness-[var(--brightness)]',
+    theme.root,
+    $$props.class
+  )}
   bind:clientWidth={width}
   bind:clientHeight={height}
   on:mousemove={onMouseMove}
@@ -46,10 +55,3 @@
 >
   <slot />
 </div>
-
-<style>
-  .Tilt > :global(*) {
-    transform: rotateX(var(--rotateX)) rotateY(var(--rotateY));
-    filter: brightness(var(--brightness));
-  }
-</style>
