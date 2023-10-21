@@ -13,8 +13,10 @@
 
   /** Represents the height of the surface for a light filter primitive */
   export let surfaceScale = 2;
+
   /** The bigger the value the bigger the reflection */
   export let specularConstant = 0.75;
+
   /** controls the focus for the light source. The bigger the value the brighter the light */
   export let specularExponent = 120;
 
