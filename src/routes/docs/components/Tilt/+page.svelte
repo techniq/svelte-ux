@@ -2,6 +2,7 @@
   import Preview from '$lib/components/Preview.svelte';
   import Tilt from '$lib/components/Tilt.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
+  import Shine from '$lib/components/Shine.svelte';
 
   const images = [
     'https://nelsoncodepen.s3.eu-west-2.amazonaws.com/thb-250-plains.png',
@@ -36,6 +37,20 @@
       </Tilt>
     {/each}
   </div>
+</Preview>
+
+<h2>with Shine</h2>
+
+<Preview>
+  <Shine>
+    <div class="flex items-center justify-center content-center gap-6">
+      {#each images as image}
+        <Tilt class="hover:scale-110 transition duration-500">
+          <img src={image} width="180px" class="transition ease-out" />
+        </Tilt>
+      {/each}
+    </div>
+  </Shine>
 </Preview>
 
 <h2>Change perspective amount</h2>
