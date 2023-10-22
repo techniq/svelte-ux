@@ -19,8 +19,8 @@
 
 <h2>Basic</h2>
 
-<Preview class="_bg-neutral-700">
-  <div class="inline-block bg-accent-100">
+<Preview>
+  <div class="inline-block bg-accent-100 rounded-lg">
     <Shine>
       <div
         class="text-8xl text-accent-500 border-[12px] border-accent-500 py-2 font-semibold rounded-lg text-center w-[500px]"
