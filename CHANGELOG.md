@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.53.2
+
+### Patch Changes
+
+- [Tilt] Support enabling/disabling brightness filter (default: false) ([`c8abcb3`](https://github.com/techniq/svelte-ux/commit/c8abcb37ae139d0835302afcd4e9b0cc3be9b5a9))
+
+- Add Shine component ([`9577113`](https://github.com/techniq/svelte-ux/commit/95771137233108c0658ef60d4b44d7a34c88a797))
+
 ## 0.53.1
 
 ### Patch Changes
