@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.53.4
+
+### Patch Changes
+
+- Add Shine component and spotlight action to top-level exports ([`e0c6985`](https://github.com/techniq/svelte-ux/commit/e0c6985a36b6a70a820cd991e413875a54654348))
+
 ## 0.53.3
 
 ### Patch Changes
