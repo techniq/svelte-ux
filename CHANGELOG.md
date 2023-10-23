@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.53.3
+
+### Patch Changes
+
+- [DateRangeField] Improve dialog size and overflow with large month selection ([`861477f`](https://github.com/techniq/svelte-ux/commit/861477f43360d41acac2dafae38f70dbf3400328))
+
+- [DateRangeField] Support passing `periodTypeOptions` to underlying `DateRange` ([`e099253`](https://github.com/techniq/svelte-ux/commit/e0992538b22e9cfd10b22e82bce44ec8fa8481bb))
+
 ## 0.53.2
 
 ### Patch Changes
