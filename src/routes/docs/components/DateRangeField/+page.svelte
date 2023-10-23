@@ -36,6 +36,15 @@
   <DateRangeField bind:value clearable />
 </Preview>
 
+<h2>PeriodType options</h2>
+
+<Preview>
+  <DateRangeField
+    bind:value
+    periodTypeOptions={[PeriodType.Day, PeriodType.Month, PeriodType.CalendarYear]}
+  />
+</Preview>
+
 <h2>Icon</h2>
 
 <Preview>

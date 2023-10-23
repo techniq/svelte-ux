@@ -8,7 +8,7 @@
   import Dialog from './Dialog.svelte';
   import Field from './Field.svelte';
 
-  import { getDateFuncsByPeriodType, getPeriodTypeName } from '../utils/date';
+  import { PeriodType, getDateFuncsByPeriodType, getPeriodTypeName } from '../utils/date';
   import type { DateRange as DateRangeType } from '../utils/dateRange';
   import { cls } from '../utils/styles';
 
@@ -23,6 +23,16 @@
   export let value: DateRangeType = _defaultValue;
   export let stepper: boolean = false;
   export let center: boolean = false;
+  export let periodTypeOptions: PeriodType[] = [
+    PeriodType.Day,
+    PeriodType.WeekSun,
+    PeriodType.BiWeek1Sun,
+    // PeriodType.BiWeek2Sun,
+    PeriodType.Month,
+    PeriodType.Quarter,
+    PeriodType.CalendarYear,
+    PeriodType.FiscalYearOctober,
+  ];
 
   // Field props
   export let label: string | null = null;
@@ -137,7 +147,7 @@
   </div>
 
   <div class="p-2 w-[640px] border-b">
-    <DateRange bind:selected={currentValue} />
+    <DateRange bind:selected={currentValue} {periodTypeOptions} />
   </div>
 
   <div slot="actions" class="flex items-center gap-2">
