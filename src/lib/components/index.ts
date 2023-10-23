@@ -67,6 +67,7 @@ export { default as SectionDivider } from './SectionDivider.svelte';
 export { default as Selection } from './Selection.svelte';
 export { default as SelectField } from './SelectField.svelte';
 export { default as SelectList } from './SelectList.svelte';
+export { default as Shine } from './Shine.svelte';
 export { default as SpringValue } from './SpringValue.svelte';
 export { default as Stack } from './Stack.svelte';
 export { default as State } from './State.svelte';

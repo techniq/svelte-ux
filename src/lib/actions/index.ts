@@ -7,5 +7,6 @@ export * from './multi';
 export * from './observer';
 export * from './portal';
 export * from './scroll';
+export * from './spotlight';
 export * from './sticky';
 export * from './table';
