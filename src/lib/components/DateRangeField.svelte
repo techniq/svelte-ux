@@ -136,7 +136,7 @@
   </div>
 </Field>
 
-<Dialog bind:open>
+<Dialog classes={{ dialog: 'max-h-[90vh] grid grid-rows-[auto,1fr,auto]' }} bind:open>
   <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24">
     <div class="text-sm text-white/50">
       {currentValue.periodType ? getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
@@ -146,8 +146,8 @@
     </div>
   </div>
 
-  <div class="p-2 w-[640px] border-b">
-    <DateRange bind:selected={currentValue} {periodTypeOptions} />
+  <div class="p-2 w-[640px] border-b overflow-auto">
+    <DateRange bind:selected={currentValue} {periodTypeOptions} class="h-full" />
   </div>
 
   <div slot="actions" class="flex items-center gap-2">

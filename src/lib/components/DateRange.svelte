@@ -207,7 +207,7 @@
     </div>
   </div>
 
-  <div class="bg-white border rounded">
+  <div class="bg-white border rounded overflow-auto">
     <DateSelect
       {selected}
       periodType={selected?.periodType}
