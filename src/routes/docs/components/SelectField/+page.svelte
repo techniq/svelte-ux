@@ -36,6 +36,7 @@
   }));
 
   const newOptions = [
+    { name: 'Empty', value: null },
     { name: 'Foo', value: 1 },
     { name: 'Bar', value: 2 },
     { name: 'Baz', value: 3 },
