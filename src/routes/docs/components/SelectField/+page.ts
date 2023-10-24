@@ -8,6 +8,12 @@ export async function load() {
       api,
       source,
       pageSource,
+      features: [
+        'Asynchronous loading of options',
+        'Grouped options',
+        'Field actions, Menu actions, and per-option actions',
+        'Smart placement of menu (with granular control and overflow handling)',
+      ],
       related: [
         'components/TextField',
         'components/Menu',

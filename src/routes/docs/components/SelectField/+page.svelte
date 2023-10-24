@@ -4,6 +4,7 @@
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Drawer from '$lib/components/Drawer.svelte';
+  import Form from '$lib/components/Form.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
@@ -13,7 +14,7 @@
   import { delay } from '$lib/utils/promise';
   import { cls } from '$lib/utils/styles';
 
-  const options = [
+  let options = [
     { name: 'One', value: 1 },
     { name: 'Two', value: 2 },
     { name: 'Three', value: 3 },
@@ -209,18 +210,40 @@
         <Button icon={mdiPlus} class="text-black/50 p-2" on:click={toggle} />
       </span>
     </SelectField>
-    <Dialog {open} on:close={toggle}>
-      <div slot="title">Create new option</div>
-      <div class="px-6 py-3 w-96">
-        <TextField label="Name" autofocus />
-      </div>
-      <div slot="actions">
-        <Button on:click={() => console.log('Adding option...')} class="text-accent-500">
-          Add option
-        </Button>
-        <Button>Cancel</Button>
-      </div>
-    </Dialog>
+    <Form
+      initial={{ name: null, value: null }}
+      on:change={(e) => {
+        options = [e.detail, ...options];
+      }}
+      let:draft
+      let:commit
+      let:revert
+    >
+      <Dialog {open} on:close={toggle}>
+        <div slot="title">Create new option</div>
+        <div class="px-6 py-3 w-96 grid gap-2">
+          <TextField
+            label="Name"
+            value={draft.name}
+            on:change={(e) => {
+              draft.name = e.detail.value;
+            }}
+            autofocus
+          />
+          <TextField
+            label="Value"
+            value={draft.value}
+            on:change={(e) => {
+              draft.value = e.detail.value;
+            }}
+          />
+        </div>
+        <div slot="actions">
+          <Button on:click={() => commit()} color="accent">Add option</Button>
+          <Button on:click={() => revert()}>Cancel</Button>
+        </div>
+      </Dialog>
+    </Form>
   </Toggle>
 </Preview>
 
@@ -231,24 +254,46 @@
     <div slot="actions" class="p-2 border-t" on:click|stopPropagation let:hide>
       <Toggle let:on={open} let:toggle>
         <Button icon={mdiPlus} color="blue" on:click={toggle}>New item</Button>
-        <Dialog
-          {open}
-          on:close={() => {
-            toggle();
-            hide();
+        <Form
+          initial={{ name: null, value: null }}
+          on:change={(e) => {
+            options = [e.detail, ...options];
           }}
+          let:draft
+          let:commit
+          let:revert
         >
-          <div slot="title">Create new option</div>
-          <div class="px-6 py-3 w-96">
-            <TextField label="Name" autofocus />
-          </div>
-          <div slot="actions">
-            <Button on:click={() => console.log('Adding option...')} class="text-accent-500">
-              Add option
-            </Button>
-            <Button>Cancel</Button>
-          </div>
-        </Dialog>
+          <Dialog
+            {open}
+            on:close={() => {
+              toggle();
+              hide();
+            }}
+          >
+            <div slot="title">Create new option</div>
+            <div class="px-6 py-3 w-96 grid gap-2">
+              <TextField
+                label="Name"
+                value={draft.name}
+                on:change={(e) => {
+                  draft.name = e.detail.value;
+                }}
+                autofocus
+              />
+              <TextField
+                label="Value"
+                value={draft.value}
+                on:change={(e) => {
+                  draft.value = e.detail.value;
+                }}
+              />
+            </div>
+            <div slot="actions">
+              <Button on:click={() => commit()} color="accent">Add option</Button>
+              <Button on:click={() => revert()}>Cancel</Button>
+            </div>
+          </Dialog>
+        </Form>
       </Toggle>
     </div>
   </SelectField>
