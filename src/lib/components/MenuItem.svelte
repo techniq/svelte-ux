@@ -38,7 +38,7 @@
   class={cls(
     'MenuItem',
     'text-left items-center p-2 hover:bg-black/5 rounded duration-75',
-    selected && classes.selected,
+    selected && classes?.selected,
     theme.root,
     classes?.root,
     $$props.class
