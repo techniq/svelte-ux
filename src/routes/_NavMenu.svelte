@@ -64,7 +64,8 @@
       'YearList',
     ],
     State: ['Form', 'Selection', 'State', 'StoreSubscribe', 'Toggle', 'ToggleButton'],
-    Motion: ['ScrollingNumber', 'Shine', 'SpringValue', 'Tilt', 'TweenedValue'],
+    Motion: ['ScrollingNumber', 'SpringValue', 'Tilt', 'TweenedValue'],
+    Effects: ['Gooey', 'Shine'],
     Other: ['CopyButton'],
   };
 

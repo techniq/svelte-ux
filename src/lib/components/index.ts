@@ -29,6 +29,7 @@ export { default as EmptyMessage } from './EmptyMessage.svelte';
 export { default as ErrorNotification } from './ErrorNotification.svelte';
 export { default as ExpansionPanel } from './ExpansionPanel.svelte';
 export { default as Field } from './Field.svelte';
+export { default as Gooey } from './Gooey.svelte';
 export { default as Grid } from './Grid.svelte';
 export { default as Header } from './Header.svelte';
 export { default as Icon } from './Icon.svelte';

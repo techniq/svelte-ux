@@ -1,0 +1,219 @@
+<script lang="ts">
+  import { blur } from 'svelte/transition';
+  import { circIn, circOut } from 'svelte/easing';
+
+  import Blockquote from '$docs/Blockquote.svelte';
+  import Gooey from '$lib/components/Gooey.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+
+  import timerStore from '$lib/stores/timerStore';
+  import { cls } from '$lib/utils/styles';
+  import RangeField from '$lib/components/RangeField.svelte';
+
+  export let gooeyBlur = 5;
+
+  const words = ['Why', 'is', 'this', 'so', 'satisfying', 'to', 'watch?'];
+  const indexTimer = timerStore({
+    initial: 0,
+    delay: 1400,
+    onTick: (value) => ++value % words.length,
+  });
+  $: word = words[$indexTimer ?? 0];
+</script>
+
+<h1>Examples</h1>
+
+<h2>Morphing text</h2>
+
+<Preview class="text-center">
+  <Gooey blur={4} alphaPixel={255} alphaShift={-144}>
+    <div
+      class={cls('grid grid-stack place-items-center', 'w-[500px] text-8xl text-center font-bold')}
+    >
+      {#key $indexTimer}
+        <span
+          in:blur={{ amount: '10px', duration: 1000, easing: circOut }}
+          out:blur={{ amount: '100px', duration: 1000, easing: circIn }}
+        >
+          {word}
+        </span>
+      {/key}
+    </div>
+  </Gooey>
+</Preview>
+
+<Blockquote>
+  Inspiration: <a
+    href="https://codepen.io/Valgo/pen/PowZaNY"
+    target="_blank"
+    class="text-accent-500"
+  >
+    Text Morph
+  </a>
+  by
+  <a href="https://codepen.io/Valgo" target="_blank" class="text-accent-500">Valgo</a>
+</Blockquote>
+
+<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+  <h2>Rounded text background</h2>
+  <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
+</div>
+
+<Preview class="bg-indigo-900">
+  <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9} composite="atop">
+    <div
+      contenteditable="true"
+      class="inline bg-white box-decoration-clone text-xl leading-7 px-2 py-1 outline-none"
+    >
+      This is an example of a simple headline<br />or text with rounded corners<br />using a gooey
+      SVG filter.<br />You can edit me!
+    </div>
+  </Gooey>
+</Preview>
+
+<Blockquote>
+  Inspiration: <a href="https://codepen.io/ines/pen/NXbmRO" target="_blank" class="text-accent-500">
+    Gooey text background with SVG filters
+  </a>
+  by
+  <a href="https://codepen.io/ines" target="_blank" class="text-accent-500">Ines Montani</a>
+</Blockquote>
+
+<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+  <h2>Orbiting glowing dot</h2>
+  <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
+</div>
+
+<Preview class="bg-gradient-radial from-slate-800 to-slate-900">
+  <div class="grid grid-stack place-items-center" style:--orbit-radius="75px">
+    <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9}>
+      <div class="w-[300px] h-[300px] grid grid-stack place-items-center">
+        <!-- Fixed dots -->
+        {#each { length: 8 } as _, i}
+          <div
+            class="w-[30px] h-[30px] bg-sky-500 rounded-full"
+            style:transform="rotate({(360 / 8) * i}deg) translateX(var(--orbit-radius))"
+          />
+        {/each}
+
+        <!-- Moving dot -->
+        <div class="orbit w-[26px] h-[26px] bg-cyan-300 rounded-full" />
+      </div>
+    </Gooey>
+    <!-- glow -->
+    <div class="orbit w-[26px] h-[26px] bg-cyan-300 rounded-full blur-lg" />
+  </div>
+</Preview>
+
+<Blockquote>
+  Inspiration: <a
+    href="https://codepen.io/hostsamurai/pen/bodZvR"
+    target="_blank"
+    class="text-accent-500"
+  >
+    Spinner with Glowing, Gooey Effect
+  </a>
+  by
+  <a href="https://codepen.io/hostsamurai" target="_blank" class="text-accent-500">Lou</a>
+</Blockquote>
+
+<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+  <h2>Scanning glowing dot</h2>
+  <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
+</div>
+
+<Preview class="bg-gradient-radial from-slate-800 to-slate-900 text-center">
+  <div class="relative inline-block">
+    <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9}>
+      <div class="flex gap-8">
+        <!-- Fixed dots -->
+        {#each { length: 4 } as _, i}
+          <div class="w-[30px] h-[30px] bg-sky-500 rounded-full" />
+        {/each}
+
+        <!-- Moving dot -->
+        <div class="scanning absolute top-[2px] left-0 w-full">
+          <div class=" w-[26px] h-[26px] bg-cyan-300 rounded-full" />
+        </div>
+      </div>
+    </Gooey>
+    <!-- glow -->
+    <div class="scanning absolute top-[2px] left-0 w-full">
+      <div class="w-[26px] h-[26px] bg-cyan-300 rounded-full blur-lg" />
+    </div>
+  </div>
+</Preview>
+
+<Blockquote>
+  Inspiration: <a
+    href="https://codepen.io/hostsamurai/pen/qPENyb"
+    target="_blank"
+    class="text-accent-500"
+  >
+    Loader/Scanner with Gooey Effect
+  </a>
+  by
+  <a href="https://codepen.io/hostsamurai" target="_blank" class="text-accent-500">Lou</a>
+</Blockquote>
+
+<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+  <h2>Converging dots</h2>
+  <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={10} class="mb-1" />
+</div>
+
+<Preview class="text-center">
+  <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9}>
+    <div class="w-40 h-40 grid grid-stack place-items-center animate-spin [animation-duration:3s]">
+      {#each { length: 6 } as _, i}
+        <div
+          class="orbit-converge w-6 h-6 rounded-full"
+          style:--orbit-radius="60px"
+          style:--orbit-start="{35 * i}deg"
+          style:background-color="hsl({180 + i * 5}, 80%, 50%)"
+        />
+      {/each}
+    </div>
+  </Gooey>
+</Preview>
+
+<style>
+  .orbit {
+    animation: orbit 3s linear infinite;
+  }
+  @keyframes orbit {
+    from {
+      transform: rotate(var(--orbit-start, 0deg)) translateX(var(--orbit-radius));
+    }
+    to {
+      transform: rotate(calc(var(--orbit-start, 0deg) + 360deg)) translateX(var(--orbit-radius));
+    }
+  }
+
+  .orbit-converge {
+    animation: orbit-converge 2.5s ease-in-out infinite;
+  }
+  @keyframes orbit-converge {
+    0% {
+      transform: rotate(var(--orbit-start, 0deg)) translateX(var(--orbit-radius));
+    }
+    50% {
+      transform: rotate(360deg) translateX(var(--orbit-radius));
+    }
+    100% {
+      transform: rotate(calc(var(--orbit-start, 0deg) + 360deg)) translateX(var(--orbit-radius));
+    }
+  }
+
+  .scanning {
+    animation: scanning 2.5s ease-in-out infinite;
+  }
+  @keyframes scanning {
+    0%,
+    100% {
+      transform: translateX(-12%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+  }
+</style>
