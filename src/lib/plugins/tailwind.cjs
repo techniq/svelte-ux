@@ -1,6 +1,15 @@
 const plugin = require('tailwindcss/plugin');
 
 module.exports = plugin(function ({ addUtilities }) {
+  // Stack grid children
+  addUtilities({
+    '.grid-stack': {
+      '& > *': {
+        'grid-area': '1 / 1',
+      },
+    },
+  });
+
   // Hide scrollbar
   addUtilities({
     '.scrollbar-none': {

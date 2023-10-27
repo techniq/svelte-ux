@@ -12,7 +12,7 @@
   const theme = getComponentTheme('Badge');
 </script>
 
-<div class="inline-grid [&>*]:[grid-area:1/1]">
+<div class="inline-grid grid-stack">
   <slot />
   <div
     class={cls(
