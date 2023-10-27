@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.53.5
+
+### Patch Changes
+
+- Add Gooey component ([`daccd7e`](https://github.com/techniq/svelte-ux/commit/daccd7e1122ccee9850f9b83d5bf4147fee3b23a))
+
+- Add `.grid-stack` utility to Svelte UX tailwind plugin to easily stack grid children ([`3edff44`](https://github.com/techniq/svelte-ux/commit/3edff44863492384602ca25f6af9edf39c2fda9c))
+
+- Add basic RangeField component ([`1dd7f4f`](https://github.com/techniq/svelte-ux/commit/1dd7f4f04b1db981afd5eaa715313f8c29703781))
+
 ## 0.53.4
 
 ### Patch Changes
