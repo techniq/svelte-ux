@@ -9,6 +9,7 @@
   import timerStore from '$lib/stores/timerStore';
   import { cls } from '$lib/utils/styles';
   import RangeField from '$lib/components/RangeField.svelte';
+  import { mouseCoords } from '$lib/actions/mouse';
 
   export let gooeyBlur = 5;
 
@@ -174,6 +175,24 @@
       {/each}
     </div>
   </Gooey>
+</Preview>
+
+<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+  <h2>Gooey mouse</h2>
+  <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={10} class="mb-1" />
+</div>
+
+<Preview class="relative overflow-hidden">
+  <div class="h-[200px]" use:mouseCoords>
+    <Gooey blur={gooeyBlur} alphaPixel={18} alphaShift={-7} class="h-full w-full">
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-blue-500 blur-md"
+      />
+      <div
+        class="absolute left-[--x] top-[--y] -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-cyan-300 blur-md"
+      />
+    </Gooey>
+  </div>
 </Preview>
 
 <style>
