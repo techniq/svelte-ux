@@ -74,7 +74,7 @@ Classes are applied in the following order, and [tailwind-merge](https://github.
 
 ## Global classes
 
-All components with top-level elements add a `{ComponentName}` class, to allow easy overriding using global CSS rules, if desired
+All components with top-level elements add a `{ComponentName}` class, to allow easy overriding using global CSS rules, if desired.
 
 ```css
 :global(.Button) {
@@ -128,4 +128,4 @@ Many components expose slots, including `default` and named, to allow customizat
 
 ## Composition
 
-If you find yourself passing the same props repeatily, you may find it useful to use composition to build your own custom components and leverage Svelte UX's components internally
+If you find yourself passing the same props repeatedly, you may find it useful to use composition to build your own custom components and leverage Svelte UX's components internally.

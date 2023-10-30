@@ -38,7 +38,7 @@
       'Steps',
       'Table',
     ],
-    Model: [
+    Modal: [
       'Dialog',
       'Drawer',
       'Menu',
