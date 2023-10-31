@@ -1,6 +1,7 @@
 # Svelte UX
 
 ![](https://img.shields.io/github/license/techniq/svelte-ux?style=flat)
+[![](https://img.shields.io/github/actions/workflow/status/techniq/svelte-ux/ci.yml?style=flat)](https://github.com/techniq/svelte-ux/actions/workflows/ci.yml)
 [![](https://img.shields.io/npm/v/svelte-ux?style=flat)](https://www.npmjs.com/package/svelte-ux)
 ![npm](https://img.shields.io/npm/dw/svelte-ux?style=flat&color=orange)
 
