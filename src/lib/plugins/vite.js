@@ -1,4 +1,4 @@
-import { ComponentParser } from 'sveld';
+import ComponentParser from 'sveld/lib/ComponentParser';
 import sveltePreprocess from 'svelte-preprocess';
 import { preprocess } from 'svelte/compiler';
 import qs from 'node:querystring';
