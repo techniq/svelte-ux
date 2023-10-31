@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.53.6
+
+### Patch Changes
+
+- Update dependencies ([`f51cdf3`](https://github.com/techniq/svelte-ux/commit/f51cdf3df2142e649f03e083e41994c25854a984))
+
 ## 0.53.5
 
 ### Patch Changes
