@@ -3,7 +3,7 @@
     TODO:
       - [x] min/max range (not just 0 - 1)
       - [x] step
-      - [ ] on:change event
+      - [x] on:change event
       - [x] Show value while hovered/dragging
         - https://svelte.dev/repl/8af0c98cc61d4f7fbca233282b885eaa?version=3.44.3
       - [x] Tween changes
@@ -23,7 +23,7 @@
       - [x] Maintain step precision / fix float math
       - [x] Disabled state
       - [ ] Change range color / gradient
-      - [ ] Show min/max scale (opt in as prop).  Show above, below, option?
+      - [X] Show min/max scale (opt in as prop).  Show above, below, option?
   */
   import { spring } from 'svelte/motion';
   import { fly } from 'svelte/transition';
@@ -35,14 +35,18 @@
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
+	import { createEventDispatcher } from 'svelte';
 
   export let min = 0;
   export let max = 100;
   export let step = 1;
   export let value = [min, max];
   export let disabled = false;
+  export let display_values = false;
+  export let display_limits = false;
 
   const theme = getComponentTheme('RangeSlider');
+  const dispatch = createEventDispatcher();
 
   $: stepPercent = step / (max - min);
   $: stepDecimals = decimalCount(step);
@@ -51,8 +55,12 @@
 
   let isMoving = false;
   let lastMoved: 'start' | 'range' | 'end' = 'range';
-  let showStartValue = false;
-  let showEndValue = false;
+  /**
+   * showStartValue is used to control if we should display the value of value[0]
+   * defaults to display_values, so if the prop is true we always display it, otherwise we only display it on hover
+   */
+  let showStartValue = display_values;
+  let showEndValue = display_values;
   let ignoreClickEvents = false;
 
   const start = spring(0);
@@ -69,18 +77,18 @@
       switch (which) {
         case 'start':
           lastMoved = 'start';
-          showStartValue = true;
+          showStartValue = display_values ? true: true;
           break;
 
         case 'range':
           lastMoved = 'range';
-          showStartValue = true;
-          showEndValue = true;
+          showStartValue = display_values ? true: true;
+          showEndValue = display_values ? true: true;
           break;
 
         case 'end':
           lastMoved = 'end';
-          showEndValue = true;
+          showEndValue = display_values ? true: true;
           break;
       }
     };
@@ -139,8 +147,10 @@
       }, 100);
 
       isMoving = false;
-      showStartValue = false;
-      showEndValue = false;
+      showStartValue = display_values ? true: false;
+      showEndValue = display_values ? true: false;
+      // Dispatch change event
+      dispatch('change', [value]);
     };
   }
 
@@ -149,16 +159,16 @@
       if (isMoving === false) {
         switch (which) {
           case 'start':
-            showStartValue = true;
+            showStartValue = display_values ? true: true;
             break;
 
           case 'range':
-            showStartValue = true;
-            showEndValue = true;
+            showStartValue = display_values ? true: true;
+            showEndValue = display_values ? true: true;
             break;
 
           case 'end':
-            showEndValue = true;
+            showEndValue = display_values ? true: true;
             break;
         }
       }
@@ -168,8 +178,8 @@
   function onMouseLeave(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
       if (isMoving === false) {
-        showStartValue = false;
-        showEndValue = false;
+        showStartValue = display_values ? true: false;
+        showEndValue = display_values ? true: false;
       }
     };
   }
@@ -217,6 +227,8 @@
       value = [value[0], round(newValue, stepDecimals)];
       lastMoved = 'end';
     }
+    // Dispatch change event
+    dispatch('change', [value]);
   }
 </script>
 
@@ -236,6 +248,24 @@
   on:keydown={onKeyDown}
   {...$$restProps}
 >
+  {#if display_limits}
+    <output
+      style="left: 0; top: 2.7rem;"
+      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
+      transition:fly={{ y: 4, duration: 300 }}
+    >
+      {min}
+    </output>
+    <output
+    style="right: -35px; top: 2.7rem;"
+    class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
+    transition:fly={{ y: 4, duration: 300 }}
+  >
+    {max}
+  </output>
+  {/if}
+
+
   <div
     on:mouseenter={onMouseEnter('range')}
     on:mouseleave={onMouseLeave('range')}
