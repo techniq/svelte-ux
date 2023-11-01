@@ -49,15 +49,15 @@
   <RangeSlider max={100} step={10} />
 </Preview>
 
-<h2>Display values</h2>
+<h2>Always show</h2>
 
 <Preview>
-  <RangeSlider display_values={true} display_limits={false}/>
+  <RangeSlider alwaysShow={true}/>
 </Preview>
 
 
-<h2>Display Limits</h2>
+<h2>Show limits</h2>
 
 <Preview>
-  <RangeSlider display_values={false} display_limits={true}/>
+  <RangeSlider showLimits={true}/>
 </Preview>

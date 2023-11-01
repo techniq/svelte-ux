@@ -42,8 +42,8 @@
   export let step = 1;
   export let value = [min, max];
   export let disabled = false;
-  export let display_values = false;
-  export let display_limits = false;
+  export let alwaysShow = false;
+  export let showLimits = false;
 
   const theme = getComponentTheme('RangeSlider');
   const dispatch = createEventDispatcher();
@@ -57,10 +57,10 @@
   let lastMoved: 'start' | 'range' | 'end' = 'range';
   /**
    * showStartValue is used to control if we should display the value of value[0]
-   * defaults to display_values, so if the prop is true we always display it, otherwise we only display it on hover
+   * defaults to alwaysShow, so if the prop is true we always display it, otherwise we only display it on hover
    */
-  let showStartValue = display_values;
-  let showEndValue = display_values;
+  let showStartValue = alwaysShow;
+  let showEndValue = alwaysShow;
   let ignoreClickEvents = false;
 
   const start = spring(0);
@@ -68,6 +68,8 @@
 
   const end = spring(0);
   $: end.set(scale(value[1]));
+
+  $: dispatch('change', value)
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
@@ -77,18 +79,18 @@
       switch (which) {
         case 'start':
           lastMoved = 'start';
-          showStartValue = display_values ? true: true;
+          showStartValue = alwaysShow ? true: true;
           break;
 
         case 'range':
           lastMoved = 'range';
-          showStartValue = display_values ? true: true;
-          showEndValue = display_values ? true: true;
+          showStartValue = alwaysShow ? true: true;
+          showEndValue = alwaysShow ? true: true;
           break;
 
         case 'end':
           lastMoved = 'end';
-          showEndValue = display_values ? true: true;
+          showEndValue = alwaysShow ? true: true;
           break;
       }
     };
@@ -147,10 +149,8 @@
       }, 100);
 
       isMoving = false;
-      showStartValue = display_values ? true: false;
-      showEndValue = display_values ? true: false;
-      // Dispatch change event
-      dispatch('change', [value]);
+      showStartValue = alwaysShow ? true: false;
+      showEndValue = alwaysShow ? true: false;
     };
   }
 
@@ -159,16 +159,16 @@
       if (isMoving === false) {
         switch (which) {
           case 'start':
-            showStartValue = display_values ? true: true;
+            showStartValue = true;
             break;
 
           case 'range':
-            showStartValue = display_values ? true: true;
-            showEndValue = display_values ? true: true;
+            showStartValue = true;
+            showEndValue = true;
             break;
 
           case 'end':
-            showEndValue = display_values ? true: true;
+            showEndValue = true;
             break;
         }
       }
@@ -178,8 +178,8 @@
   function onMouseLeave(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
       if (isMoving === false) {
-        showStartValue = display_values ? true: false;
-        showEndValue = display_values ? true: false;
+        showStartValue = alwaysShow ? true: false;
+        showEndValue = alwaysShow ? true: false;
       }
     };
   }
@@ -227,8 +227,7 @@
       value = [value[0], round(newValue, stepDecimals)];
       lastMoved = 'end';
     }
-    // Dispatch change event
-    dispatch('change', [value]);
+
   }
 </script>
 
@@ -248,7 +247,7 @@
   on:keydown={onKeyDown}
   {...$$restProps}
 >
-  {#if display_limits}
+  {#if showLimits}
     <output
       style="left: 0; top: 2.7rem;"
       class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
