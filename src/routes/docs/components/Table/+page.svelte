@@ -12,7 +12,7 @@
   import { randomInteger } from '$lib/utils/number';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
 
-  const order = tableOrderStore({ initialBy: 'name' });
+  const order = tableOrderStore({ initialBy: 'calories', initialDirection: 'desc' });
 
   const data = [
     { id: 1, name: 'Cupcake', calories: 305, fat: 3.7, carbs: 67, protein: 4.3 },

@@ -22,7 +22,7 @@ export default function tableOrderStore(props?: TableOrderProps) {
   const state = writable({
     by: props?.initialBy ?? '',
     direction: props?.initialDirection ?? 'asc',
-    handler: props?.initialHandler ?? (undefined as SortFunc | undefined),
+    handler: props?.initialHandler ?? sortFunc(props?.initialBy, props?.initialDirection ?? 'asc'),
   });
 
   function onHeaderClick(column: ColumnDef) {
