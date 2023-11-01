@@ -6,6 +6,7 @@
   import SelectList from '$lib/components/SelectList.svelte';
   import { getComponentTheme } from './theme';
   import { cls } from '$lib/utils/styles';
+  import { smScreen } from '$lib/stores';
 
   export let options: { name: string; value: string; group?: string }[] = [];
 
@@ -38,19 +39,21 @@
 
 <Button
   icon={mdiMagnify}
+  iconOnly={!$smScreen}
   on:click={() => (open = true)}
   class={cls(
-    'bg-black/10 hover:bg-black/20 rounded-full sm:w-56 justify-start',
+    'sm:bg-black/10 sm:hover:bg-black/20 rounded-full sm:w-56 justify-start',
     theme.button,
     classes.button
   )}
 >
-  <span class="flex-1 text-left">Search</span>
+  <span class="flex-1 text-left max-sm:hidden">Search</span>
   <kbd class="ml-2 font-sans text-white/50 max-sm:hidden">
     <abbr title="Command" class="no-underline">⌘</abbr>
     K
   </kbd>
 </Button>
+
 <Dialog
   bind:open
   classes={{

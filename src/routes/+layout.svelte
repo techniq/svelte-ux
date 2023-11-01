@@ -54,7 +54,7 @@
         href="https://www.layerchart.com"
         icon={mdiOpenInNew}
         target="_blank"
-        class="p-2 max-sm:hidden"
+        class="p-2 max-md:hidden"
       >
         LayerChart
       </Button>
