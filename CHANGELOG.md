@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.53.8
+
+### Patch Changes
+
+- [QuickSearch] Drop to iconOnly button on small viewports ([`3008269`](https://github.com/techniq/svelte-ux/commit/30082691a9e307fb542f397b7a193fb3c55785b8))
+
 ## 0.53.7
 
 ### Patch Changes
