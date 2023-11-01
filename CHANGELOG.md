@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.53.7
+
+### Patch Changes
+
+- [tableOrderStore] Initialize handler using `initialBy` / `initialDiretion` ([`9b0f92f`](https://github.com/techniq/svelte-ux/commit/9b0f92f103c4b98d9e29c189683639250d5fb812))
+
 ## 0.53.6
 
 ### Patch Changes
