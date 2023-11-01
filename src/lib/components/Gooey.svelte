@@ -26,7 +26,7 @@
   const filterId = uniqueId('filter-');
 </script>
 
-<svg class={cls('fixed inset-0', theme.svg, classes?.svg)}>
+<svg class={cls('fixed inset-0 pointer-events-none', theme.svg, classes?.svg)}>
   <filter id={filterId}>
     {#if blur}
       <feGaussianBlur in="SourceGraphic" stdDeviation={blur} result="blur" />

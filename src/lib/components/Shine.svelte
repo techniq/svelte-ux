@@ -46,7 +46,7 @@
 
 <svelte:window on:pointermove={onPointerMove} on:scroll={onScroll} />
 
-<svg class={cls('fixed inset-0', theme.svg, classes?.svg)}>
+<svg class={cls('fixed inset-0 pointer-events-none', theme.svg, classes?.svg)}>
   <filter id={filterId} color-interpolation-filters="sRGB">
     <feGaussianBlur in="SourceAlpha" stdDeviation={depth} />
 
