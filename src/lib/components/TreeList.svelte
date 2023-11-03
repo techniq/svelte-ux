@@ -2,14 +2,18 @@
   import { cls } from '$lib/utils/styles';
   import { getComponentTheme } from './theme';
 
+
   type Node = { id: number; name: string; level: number; children: Node[] };
 
+  /**
+   * An array of nodes containing custom metadata and an array of child nodes
+   * @param {Array} nodes - An array of Node Objects each containing a children: Node[] attribute.
+   * Example: type Node = { name: string; children: Node[] }
+   */
   export let nodes: Node[];
 
   /**
    * Allows for conditional classes to be applied to each tag <ul> and <li>
-   * 
-   * @export
    * @param {Object} classes - An object containing optional classes for <ul> and <li> tags.
    * @param {string|Function} classes.ul - A string or function that returns a string of classes to be applied to each <ul> tag.
    * @param {string|Function} classes.li - A string or function that returns a string of classes to be applied to each <li> tag.

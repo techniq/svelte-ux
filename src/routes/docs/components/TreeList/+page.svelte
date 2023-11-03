@@ -6,28 +6,24 @@
     import { mdiCircleSmall } from '@mdi/js';
     import { cls } from '$lib';
 
-  type Node = { id: number; name: string; level: number; children: Node[] };
+  type Node = { name: string; level: number; children: Node[] };
 
 
   let nodes: Node[] = [
     {
-      id: 1,
       name: 'Node 1',
       level: 1,
       children: [
         {
-          id: 2,
           name: 'Node 1.1',
           level: 2,
           children: [
             {
-              id: 3,
               name: 'Node 1.1.1',
               level: 3,
               children: []
             },
             {
-              id: 4,
               name: 'Node 1.1.2',
               level: 3,
               children: []
@@ -35,7 +31,6 @@
           ]
         },
         {
-          id: 5,
           name: 'Node 1.2',
           level: 2,
           children: []
@@ -43,12 +38,10 @@
       ]
     },
     {
-      id: 6,
       name: 'Node 2',
       level: 1,
       children: [
         {
-          id: 7,
           name: 'Node 2.1',
           level: 2,
           children: []
@@ -62,9 +55,10 @@
 Wer're going to use a TreeList to render the following tree using &lt;ul&gt; and &lt;li&gt;:
 <br><br>
 
-<Preview code="{JSON.stringify(nodes, null, 2)}">
+<Preview language="typescript" code="{"type Node = { name: string; level: number; children: Node[] };\n\nconst nodes =" + JSON.stringify(nodes, null, 2)}">
 <pre>
-  {JSON.stringify(nodes, null, 2).slice(0, 300)}...
+  type Node = &lbrace; name: string; level: number; children: Node[] &rbrace;;
+  const nodes = {JSON.stringify(nodes, null, 2).slice(0, 300)}...
 </pre>
 </Preview>
 
