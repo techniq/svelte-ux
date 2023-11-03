@@ -1,5 +1,23 @@
 # svelte-ux
 
+## 0.53.8
+
+### Patch Changes
+
+- [QuickSearch] Drop to iconOnly button on small viewports ([`3008269`](https://github.com/techniq/svelte-ux/commit/30082691a9e307fb542f397b7a193fb3c55785b8))
+
+## 0.53.7
+
+### Patch Changes
+
+- [tableOrderStore] Initialize handler using `initialBy` / `initialDiretion` ([`9b0f92f`](https://github.com/techniq/svelte-ux/commit/9b0f92f103c4b98d9e29c189683639250d5fb812))
+
+## 0.53.6
+
+### Patch Changes
+
+- Update dependencies ([`f51cdf3`](https://github.com/techniq/svelte-ux/commit/f51cdf3df2142e649f03e083e41994c25854a984))
+
 ## 0.53.5
 
 ### Patch Changes

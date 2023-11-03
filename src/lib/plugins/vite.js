@@ -1,4 +1,4 @@
-import { ComponentParser } from 'sveld';
+import s from 'sveld';
 import sveltePreprocess from 'svelte-preprocess';
 import { preprocess } from 'svelte/compiler';
 import qs from 'node:querystring';
@@ -15,7 +15,7 @@ export function sveld() {
         let { code } = await preprocess(raw, sveltePreprocess(), {
           filename: id,
         });
-        const data = new ComponentParser({
+        const data = new s.ComponentParser({
           verbose: false,
         }).parseSvelteComponent(code, {
           filePath: id,

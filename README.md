@@ -1,5 +1,13 @@
 # Svelte UX
 
+![](https://img.shields.io/github/license/techniq/svelte-ux?style=flat)
+[![](https://img.shields.io/github/actions/workflow/status/techniq/svelte-ux/ci.yml?style=flat)](https://github.com/techniq/svelte-ux/actions/workflows/ci.yml)
+[![](https://img.shields.io/npm/v/svelte-ux?style=flat)](https://www.npmjs.com/package/svelte-ux)
+![npm](https://img.shields.io/npm/dw/svelte-ux?style=flat&color=orange)
+
+![](https://img.shields.io/github/license/svelte-ux?style=flat)
+[![](https://dcbadge.vercel.app/api/server/b94Kmm88?style=flat)](https://discord.gg/b94Kmm88)
+
 The projects aims to simplify building highly interactive and visual applications. It provides over 200 components, actions, stores, and utils, with many more planned.
 
 The components are built using Tailwind with extensibility and customization in mind through the use of theming, variants, granule class overrides, and slots. A rich design token system is also currently in the works.

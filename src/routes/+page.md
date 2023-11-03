@@ -100,7 +100,7 @@ Next, import Tailwind layers in `src/routes/+layout.svelte` style block
 
 <h1>Usage</h1>
 
-Using `components`, `actions`, or `stores` as as simple as importing from `svelte-ux`
+Using `components`, `actions`, or `stores` is as simple as importing from `svelte-ux`.
 
 ```svelte
 <script>
