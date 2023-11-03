@@ -6,6 +6,14 @@
 
   export let nodes: Node[];
 
+  /**
+   * Allows for conditional classes to be applied to each tag <ul> and <li>
+   * 
+   * @export
+   * @param {Object} classes - An object containing optional classes for <ul> and <li> tags.
+   * @param {string|Function} classes.ul - A string or function that returns a string of classes to be applied to each <ul> tag.
+   * @param {string|Function} classes.li - A string or function that returns a string of classes to be applied to each <li> tag.
+   */
   export let classes: {
     ul?: string | ((nodes: Node[]) => string);
     li?: string | ((node: Node) => string);
