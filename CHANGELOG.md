@@ -1,5 +1,21 @@
 # svelte-ux
 
+## 0.54.0
+
+### Minor Changes
+
+- Replace <fieldset> elements with <div> elements to delegate control over the tag hierarchy to package users and allow for many-to-one relationships between fieldsets and TextField/SelectField elements. ([#114](https://github.com/techniq/svelte-ux/pull/114))
+
+  BREAKING CHANGE: The Field component's `fieldset` slot was renamed to `root` since it no longer has a <fieldset> element.
+
+### Patch Changes
+
+- [Gooey / Shine] Ignore pointer events on `<svg>` element (fix top left page deadzone) ([`0cd35e8`](https://github.com/techniq/svelte-ux/commit/0cd35e8ea5f66706ca50a7154718758287e4debd))
+
+- Button: Spurious error/warning removal with TS type hints & a Svelte ignore comment. ([#114](https://github.com/techniq/svelte-ux/pull/114))
+
+- SelectField: Added several A11y enhancements to reduce warnings. ([#114](https://github.com/techniq/svelte-ux/pull/114))
+
 ## 0.53.8
 
 ### Patch Changes
