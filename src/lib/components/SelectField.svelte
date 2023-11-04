@@ -62,11 +62,11 @@
   $: logger.debug({ searchText });
 
   export let value: any = undefined;
-  let prevValue = undefined;
-  export let selected = undefined;
-  let prevSelected = undefined;
+  let prevValue: any = undefined;
+  export let selected: any = undefined;
+  let prevSelected: any = undefined;
 
-  function updateSelected(selected, value, options) {
+  function updateSelected(selected: any, value: any, options: any) {
     logger.debug('updateSelected', {
       value,
       prevValue,
@@ -187,15 +187,16 @@
     show();
   }
 
-  function onBlur(e: FocusEvent) {
-    logger.debug('onBlur', { target: e.target, relatedTarget: e.relatedTarget, menuOptionsEl });
+  function onBlur(e: FocusEvent|CustomEvent<any>) {
+    const fe = e as FocusEvent;
+    logger.debug('onBlur', { target: e.target, relatedTarget: fe?.relatedTarget, menuOptionsEl });
 
     // Hide if focus not moved to menu (option clicked)
     if (
-      e.relatedTarget instanceof HTMLElement &&
-      !menuOptionsEl?.contains(e.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
-      e.relatedTarget !== menuOptionsEl?.offsetParent && // click on scroll bar
-      !e.relatedTarget.closest('menu > [slot=actions]') // click on action item
+      fe.relatedTarget instanceof HTMLElement &&
+      !menuOptionsEl?.contains(fe.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
+      fe.relatedTarget !== menuOptionsEl?.offsetParent && // click on scroll bar
+      !fe.relatedTarget.closest('menu > [slot=actions]') // click on action item
     ) {
       hide('blur');
     } else {
@@ -335,7 +336,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class={cls('SelectField', theme.root, classes.root, $$props.class)} on:click={onClick}>
+<div role="button" tabindex="-1" aria-pressed={open ? "true" : "false"} class={cls('SelectField', theme.root, classes.root, $$props.class)} on:click={onClick}>
   <TextField
     {label}
     {placeholder}
@@ -353,6 +354,8 @@
     on:keypress={onKeyPress}
     actions={(node) => [selectOnFocus(node)]}
     class={cls('h-full', theme.field, classes.field)}
+    role="combobox"
+    aria-expanded={open ? "true" : "false"}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
@@ -399,7 +402,9 @@
       {...menuProps}
     >
       <div
+        role="listbox"
         tabindex="-1"
+        aria-expanded={open ? "true" : "false"}
         class={cls('options group p-1 focus:outline-none', theme.options, classes.options)}
         class:opacity-50={loading}
         bind:this={menuOptionsEl}
@@ -448,6 +453,9 @@
                 classes.option
               )}
               scrollIntoView={index === highlightIndex}
+              role="option"
+              aria-selected={option === selected ? "true" : "false"}
+              aria-disabled={option?.disabled ? "true" : "false"}
             >
               {optionText(option)}
             </MenuItem>

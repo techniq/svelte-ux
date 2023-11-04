@@ -73,6 +73,7 @@
   export let accept: string | RegExp | undefined = undefined;
   // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
   export let autocapitalize: ComponentProps<Input>['autocapitalize'] = undefined;
+  export let role: AriaRole | undefined = undefined;
 
   let inputType = 'text';
   $: switch (type) {
@@ -240,7 +241,7 @@
         {/if}
 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div class="flex-grow inline-grid" on:click>
+        <div role={role === "combobox" ? role : undefined} class="flex-grow inline-grid" on:click>
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <label
               class={cls(
