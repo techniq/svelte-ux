@@ -102,7 +102,7 @@
   </span>
 
   <Menu
-    slot="fieldset"
+    slot="root"
     {open}
     on:close={() => {
       open = false;

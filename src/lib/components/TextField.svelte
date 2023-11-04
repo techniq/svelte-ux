@@ -172,8 +172,8 @@
   let labelEl: HTMLLabelElement | null = null;
 </script>
 
-<fieldset
-  {disabled}
+<div
+  role="group"
   class={cls(
     'TextField',
     'group flex gap-1',
@@ -283,6 +283,7 @@
                 {name}
                 {placeholder}
                 {autocomplete}
+                {disabled}
                 value={inputValue}
                 {autocapitalize}
                 on:input={handleInput}
@@ -310,6 +311,7 @@
                 {id}
                 {name}
                 {placeholder}
+                {disabled}
                 {autocomplete}
                 type={inputType}
                 inputmode={inputMode}
@@ -355,6 +357,7 @@
             {#if clearable && hasInputValue}
               <Button
                 icon={mdiClose}
+                {disabled}
                 class="text-black/50 p-1"
                 on:click={() => {
                   inputValue = '';
@@ -368,6 +371,7 @@
 
             {#if operators}
               <select
+                {disabled}
                 value={operator}
                 on:change={(e) => {
                   operator = e.target.value;
@@ -385,6 +389,7 @@
             {#if type === 'password'}
               <Button
                 icon={mdiEye}
+                {disabled}
                 class="text-black/50 p-2"
                 on:click={() => {
                   if (inputType === 'password') {
@@ -420,10 +425,10 @@
       {error && error != true ? error : hint}
     </div>
   </div>
-</fieldset>
+</div>
 
 <style lang="postcss">
-  fieldset:focus-within label.placement-float,
+  div.TextField:focus-within label.placement-float,
   label.shrink {
     transform: scale(0.75);
     width: 133%; /* offset 75% scale */

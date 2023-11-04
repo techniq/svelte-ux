@@ -55,8 +55,8 @@
   let labelEl: HTMLLabelElement | null = null;
 </script>
 
-<fieldset
-  {disabled}
+<div
+  role="group"
   class={cls(
     'Field',
     'group flex gap-1',
@@ -165,6 +165,7 @@
             {#if clearable && hasValue}
               <Button
                 icon={mdiClose}
+                {disabled}
                 class="text-black/50 p-1"
                 on:click={() => {
                   value = Array.isArray(value) ? [] : typeof value === 'string' ? '' : null;
@@ -198,11 +199,11 @@
     </div>
   </div>
 
-  <slot name="fieldset" />
-</fieldset>
+  <slot name="root" />
+</div>
 
 <style lang="postcss">
-  fieldset:focus-within label.placement-float,
+  div.Field:focus-within label.placement-float,
   label.shrink {
     transform: scale(0.75);
     width: 133%; /* offset 75% scale */

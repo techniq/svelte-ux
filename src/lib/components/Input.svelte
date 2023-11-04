@@ -25,6 +25,7 @@
   export let replace = '_';
   export let accept = '\\d';
   export let placeholder = mask;
+  export let disabled = false;
 
   const theme = getComponentTheme('Input');
 
@@ -95,6 +96,7 @@
   {type}
   {inputmode}
   placeholder={isFocused && mask ? mask : placeholder}
+  {disabled}
   {autocapitalize}
   bind:this={inputEl}
   on:keydown={(e) => (backspace = e.key === 'Backspace')}
