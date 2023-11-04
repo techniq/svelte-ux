@@ -31,7 +31,7 @@
     | 'text'
     | 'none'
     | undefined = undefined; // default in reactive groupContext below
-  export let size: 'sm' | 'md' | 'lg' = undefined; // default in reactive groupContext below
+  export let size: 'sm' | 'md' | 'lg' | undefined = undefined; // default in reactive groupContext below
   export let color: TailwindColors | 'default' | undefined = undefined; // default in reactive groupContext below
 
   /** @type {{root?: string, icon?: string, loading?: string}} */
@@ -64,12 +64,12 @@
             sm: 'text-xs p-1',
             md: 'text-sm p-2',
             lg: 'text-base p-3',
-          }[size]
+          }[size!]
         : {
             sm: 'text-xs px-2 py-1',
             md: 'text-sm px-4 py-2',
             lg: 'text-base px-6 py-3',
-          }[size],
+          }[size!],
     ],
     disabled && 'opacity-50 pointer-events-none',
     // Variant specific styles
@@ -236,6 +236,7 @@
   );
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <svelte:element
   this={href ? 'a' : 'button'}
   {href}
