@@ -6,6 +6,8 @@ import {
   enablePatches,
   setAutoFreeze,
   current,
+  type Objectish,
+  type Patch,
 } from 'immer';
 import type { Schema } from 'zod';
 import { set } from 'lodash-es';
@@ -20,20 +22,20 @@ type FormStoreOptions<T> = {
   schema?: Schema<T>;
 };
 
-export default function formStore<T = any>(initialState: T, options?: FormStoreOptions<T>) {
+export default function formStore<T extends Objectish = any>(initialState: T, options?: FormStoreOptions<T>) {
   const stateStore = writable(initialState);
   const draftStore = writable(createDraft(initialState));
   const errorsStore = writable({} as { [key: string]: string }); // TODO: Improve type (`{ [key in keyof T]: string }`?)
 
-  const undoList = [];
+  const undoList: Patch[][] = [];
 
   const storeApi = { subscribe: stateStore.subscribe };
 
-  let currentDraftValue = writable<T>(current(get(draftStore)));
+  let currentDraftValue = writable<T>(current(get(draftStore)) as T);
 
   const draftApi = {
     ...draftStore,
-    set(newState) {
+    set(newState: T) {
       draftStore.set(createDraft(newState));
     },
     /** Apply draft to state after verifying with schema (if available).  Append change to undo stack */
@@ -79,20 +81,19 @@ export default function formStore<T = any>(initialState: T, options?: FormStoreO
     },
     /** Undo last committed change */
     undo() {
-      if (undoList.length) {
-        const undo = undoList.pop();
+      const undo = undoList.pop();
+      if (undo == null) return;
 
-        const currentState = get(stateStore);
-        const newState = applyPatches(currentState, undo);
+      const currentState = get(stateStore);
+      const newState = applyPatches(currentState, undo);
 
-        stateStore.set(newState);
-        draftStore.set(createDraft(newState));
-        currentDraftValue.set(newState);
-      }
+      stateStore.set(newState);
+      draftStore.set(createDraft(newState));
+      currentDraftValue.set(newState);
     },
     /** Refresh `current` draft value (un-proxied) */
     refresh() {
-      currentDraftValue.set(current(get(draftStore)));
+      currentDraftValue.set(current(get(draftStore)) as T);
     },
     current: currentDraftValue,
   };

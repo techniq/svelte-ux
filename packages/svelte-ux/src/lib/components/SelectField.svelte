@@ -5,15 +5,19 @@
   import { mdiChevronDown, mdiClose } from '@mdi/js';
 
   import Logger from '../utils/logger';
-  import { selectOnFocus } from '../actions/input';
+  import { autoFocus, selectOnFocus } from '$lib/actions';
   import { cls } from '../utils/styles';
 
   import Button from './Button.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
+  import SelectListOptions from './_SelectListOptions.svelte';
   import TextField from './TextField.svelte';
   import { getComponentTheme } from './theme';
+  import type { IconInput } from '$lib/utils/icons';
+  import type { MenuOption } from '$lib/types/options';
+  import type { ScrollIntoViewOptions } from '$lib/actions';
 
   const dispatch = createEventDispatcher<{
     change: { value: any; option: any };
@@ -22,8 +26,8 @@
 
   const logger = new Logger('SelectField');
 
-  export let options: any[] = [];
-  export let optionText = (option: any) => (option?.name as string) ?? '';
+  export let options: MenuOption[] = [];
+  export let optionText = (option: any) => (option?.label as string) ?? '';
   export let optionValue = (option: any) => option?.value ?? null;
 
   export let label = '';
@@ -31,16 +35,28 @@
   export let loading: boolean = false;
   export let disabled: boolean = false;
   export let readonly: boolean = false;
-  export let icon: string | null = null;
+  export let icon: IconInput = undefined;
+  export let toggleIcon: IconInput = mdiChevronDown;
+  export let closeIcon: IconInput = mdiClose;
+  export let activeOptionIcon: boolean = false;
   export let clearable = true;
   export let base = false;
   export let rounded = false;
   export let dense = false;
   export let clearSearchOnOpen = true;
+  export let tabindex = 0;
+  export let autofocus: ComponentProps<TextField>['autofocus'] = undefined;
+  export let fieldActions: ComponentProps<TextField>['actions'] = autofocus
+    ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined), selectOnFocus(node)]
+    : undefined;
+
+  let originalIcon = icon;
+
+  export let scrollIntoView: Partial<ScrollIntoViewOptions> = {};
 
   export let classes: {
     root?: string;
-    field?: string;
+    field?: string | ComponentProps<TextField>['classes'];
     options?: string;
     option?: string;
     selected?: string;
@@ -49,6 +65,9 @@
   } = {};
   const theme = getComponentTheme('SelectField');
 
+  let fieldClasses: ComponentProps<TextField>['classes'];
+  $: fieldClasses = typeof(classes.field) === "string" ? { root: classes.field } : classes.field;
+
   // Menu props
   export let placement: Placement = 'bottom-start';
   export let autoPlacement = true;
@@ -56,6 +75,7 @@
   export let resize = true;
   export let disableTransition = false;
   export let menuProps: ComponentProps<Menu> | undefined = undefined;
+  export let inlineOptions = false;
 
   $: filteredOptions = options ?? [];
   let searchText = '';
@@ -151,27 +171,27 @@
     const prevHighlightedOption = filteredOptions[highlightIndex];
 
     // Do not search if menu is not open / closing on selection
-    search(searchText);
-
-    // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
-    const selectedIndex = filteredOptions.findIndex((o) => optionValue(o) === value);
-    if (highlightIndex === -1) {
-      // Highlight selected if none currently
-      highlightIndex = selectedIndex === -1 ? 0 : selectedIndex;
-    } else {
-      // Attempt to re-highlight previously highlighted item after search
-      const prevHighlightedOptionIndex = filteredOptions.findIndex(
-        (o) => o === prevHighlightedOption
-      );
-
-      if (prevHighlightedOptionIndex !== -1) {
-        // Maintain previously highlight index after filter update (option still available)
-        highlightIndex = prevHighlightedOptionIndex;
+    search(searchText).then(() => {
+      // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
+      const selectedIndex = filteredOptions.findIndex((o) => optionValue(o) === value);
+      if (highlightIndex === -1) {
+        // Highlight selected if none currently
+        highlightIndex = selectedIndex === -1 ? 0 : selectedIndex;
       } else {
-        // Highlight first item
-        highlightIndex = 0;
+        // Attempt to re-highlight previously highlighted item after search
+        const prevHighlightedOptionIndex = filteredOptions.findIndex(
+          (o) => o === prevHighlightedOption
+        );
+
+        if (prevHighlightedOptionIndex !== -1) {
+          // Maintain previously highlight index after filter update (option still available)
+          highlightIndex = prevHighlightedOptionIndex;
+        } else {
+          // Highlight first item
+          highlightIndex = 0;
+        }
       }
-    }
+    });
   }
 
   function onChange(e: ComponentEvents<TextField>['change']) {
@@ -318,6 +338,14 @@
     selected = option;
     searchText = optionText(option);
 
+    if (activeOptionIcon) {
+      if (!selected?.icon) {
+        icon = originalIcon;
+      } else {
+        icon = selected.icon;
+      }
+    }
+
     if (value != previousValue) {
       dispatch('change', { option, value });
     }
@@ -331,12 +359,15 @@
     logger.info('clear');
     selectOption(null);
     filteredOptions = options;
-    //inputEl?.focus();
   }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div role="button" tabindex="-1" aria-pressed={open ? "true" : "false"} class={cls('SelectField', theme.root, classes.root, $$props.class)} on:click={onClick}>
+<button
+  aria-haspopup={!inlineOptions ? "listbox" : undefined}
+  class={cls("SelectField block w-full cursor-default text-left", theme.root, classes.root, $$props.class)}
+  on:click={onClick}>
+
   <TextField
     {label}
     {placeholder}
@@ -352,10 +383,12 @@
     on:blur={onBlur}
     on:keydown={onKeyDown}
     on:keypress={onKeyPress}
-    actions={(node) => [selectOnFocus(node)]}
-    class={cls('h-full', theme.field, classes.field)}
+    actions={fieldActions}
+    classes={{ container: inlineOptions ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none' : undefined }}
+    class={cls('h-full', theme.field, fieldClasses)}
     role="combobox"
     aria-expanded={open ? "true" : "false"}
+    aria-autocomplete={!inlineOptions ? "list" : undefined}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
@@ -371,18 +404,20 @@
         <!-- Do not show chevron or clear buttons -->
       {:else if value && clearable}
         <Button
-          icon={mdiClose}
+          icon={closeIcon}
           class="text-black/50 p-1"
           on:click={(e) => {
             e.stopPropagation();
+            logger.debug("closeIcon clicked");
             clear();
           }}
         />
-      {:else}
+      {:else if !inlineOptions}
         <Button
-          icon={mdiChevronDown}
+          icon={toggleIcon}
           class="text-black/50 p-1 transform {open ? 'rotate-180' : ''}"
           tabindex="-1"
+          on:click={() => {logger.debug("toggleIcon clicked")}}
         />
       {/if}
     </span>
@@ -390,85 +425,89 @@
 
   <!-- Improve initial open display, still needs work when switching from No options found (options.length === 0) -->
   {#if options?.length > 0 || loading !== true}
-    <Menu
-      {placement}
-      {autoPlacement}
-      {matchWidth}
-      {resize}
-      {disableTransition}
-      moveFocus={false}
-      bind:open
-      on:close={() => hide('menu on:close')}
-      {...menuProps}
-    >
-      <div
-        role="listbox"
-        tabindex="-1"
-        aria-expanded={open ? "true" : "false"}
-        class={cls('options group p-1 focus:outline-none', theme.options, classes.options)}
-        class:opacity-50={loading}
-        bind:this={menuOptionsEl}
-        on:click|stopPropagation={(e) => {
-          logger.debug('options container clicked');
+    {#if !inlineOptions}
+      <Menu
+        {placement}
+        {autoPlacement}
+        {matchWidth}
+        {resize}
+        {disableTransition}
+        moveFocus={false}
+        bind:open
+        on:close={() => hide('menu on:close')}
+        {...menuProps}
+        >
+        <!-- TODO: Rework into hierarchy of snippets in v2.0 -->
+        <SelectListOptions
+          bind:menuOptionsEl
+          {open} {loading} {highlightIndex} {searchText} {filteredOptions}
+          classes={{...classes, root: cls(classes.options, inlineOptions ? "border-t mt-1 px-1" : "")}}
+          {optionText} {optionValue} {selectIndex} {selectOption} {onKeyPress} {onKeyDown}>
 
-          if (e.target instanceof HTMLElement) {
-            // Find slot parent of click target option, fallback to `e.target` if slot is not overridden
-            // Use `.options > ` in case slot is nested (ex. GraphQLSelect with slot)
-            const slotEl = e.target.closest('.options > [slot=option]') ?? e.target;
-            // Find the index of the clicked on element (ignoring group headers)
-            const optionIndex = slotEl
-              ? [...menuOptionsEl.children]
-                  .filter((el) => !el.classList.contains('group-header'))
-                  .indexOf(slotEl)
-              : -1;
-            logger.debug({ slotEl, optionIndex });
-            // ignore clicks on group options
-            if (optionIndex !== -1) {
-              selectIndex(optionIndex);
-            }
-          }
-        }}
-      >
-        {#each filteredOptions ?? [] as option, index (optionValue(option))}
-          {@const previousOption = filteredOptions[index - 1]}
-          {#if option.group && option.group !== previousOption?.group}
-            <div
-              class={cls(
-                'group-header text-xs leading-8 tracking-widest text-black/50 px-2',
-                theme.group,
-                classes.group
-              )}
-            >
-              {option.group}
-            </div>
-          {/if}
+          <svelte:fragment slot="option" let:option let:index>
+            <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
+              <MenuItem
+                class={cls(
+                  index === highlightIndex && '[:not(.group:hover)>&]:bg-black/5',
+                  option === selected && (classes.selected || 'font-semibold'),
+                  option.group ? 'px-4' : 'px-2',
+                  theme.option,
+                  classes.option
+                )}
+                scrollIntoView={{ condition: index === highlightIndex, onlyIfNeeded: inlineOptions, ...scrollIntoView }}
+                role="option"
+                aria-selected={option === selected ? "true" : "false"}
+                aria-disabled={option?.disabled ? "true" : "false"}
+              >
+                {optionText(option)}
+              </MenuItem>
+            </slot>
+          </svelte:fragment>
 
-          <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
-            <MenuItem
-              class={cls(
-                index === highlightIndex && '[:not(.group:hover)>&]:bg-black/5',
-                option === selected && (classes.selected || 'font-semibold'),
-                option.group ? 'px-4' : 'px-2',
-                theme.option,
-                classes.option
-              )}
-              scrollIntoView={index === highlightIndex}
-              role="option"
-              aria-selected={option === selected ? "true" : "false"}
-              aria-disabled={option?.disabled ? "true" : "false"}
-            >
-              {optionText(option)}
-            </MenuItem>
-          </slot>
-        {:else}
-          <slot name="empty" {loading} {searchText}>
+          <slot name="empty" slot="empty" let:loading>
             <div class={cls('p-3 text-black/50 italic text-sm', theme.empty, classes.empty)}>
               {loading ? 'Loading...' : 'No options found'}
             </div>
           </slot>
-        {/each}
-      </div>
-      <slot name="actions" {hide} />
-    </Menu>
+        </SelectListOptions>
+
+        <slot name="actions" {hide} />
+      </Menu>
+    {:else}
+        <!-- TODO: Rework into hierarchy of snippets in v2.0. -->
+        <!-- This code must be identical to the above block -->
+        <SelectListOptions
+          bind:menuOptionsEl
+          {open} {loading} {highlightIndex} {searchText} {filteredOptions}
+          classes={{...classes, root: cls(classes.options, inlineOptions ? "border-t mt-1 px-1" : "")}}
+          {optionText} {optionValue} {selectIndex} {selectOption} {onKeyPress} {onKeyDown}>
+
+          <svelte:fragment slot="option" let:option let:index>
+            <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
+              <MenuItem
+                class={cls(
+                  index === highlightIndex && '[:not(.group:hover)>&]:bg-black/5',
+                  option === selected && (classes.selected || 'font-semibold'),
+                  option.group ? 'px-4' : 'px-2',
+                  theme.option,
+                  classes.option
+                )}
+                scrollIntoView={{ condition: index === highlightIndex, onlyIfNeeded: inlineOptions, ...scrollIntoView }}
+                role="option"
+                aria-selected={option === selected ? "true" : "false"}
+                aria-disabled={option?.disabled ? "true" : "false"}
+              >
+                {optionText(option)}
+              </MenuItem>
+            </slot>
+          </svelte:fragment>
+
+          <slot name="empty" slot="empty" let:loading>
+            <div class={cls('p-3 text-black/50 italic text-sm', theme.empty, classes.empty)}>
+              {loading ? 'Loading...' : 'No options found'}
+            </div>
+          </slot>
+        </SelectListOptions>
+    {/if}
   {/if}
-</div>
+</button>
