@@ -1,6 +1,6 @@
 import type { Action, ActionReturn } from 'svelte/action';
 
-export type Actions<TNode = HTMLElement | SVGElement> = (node: TNode) => ActionReturn[];
+export type Actions<TNode = HTMLElement | SVGElement> = (node: TNode) => (ActionReturn|undefined|null|void)[];
 
 /**
  * Helper action to handle multiple actions as a single action.  Useful for adding actions for custom components

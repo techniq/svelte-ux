@@ -50,7 +50,7 @@
   export let align: 'left' | 'center' | 'right' = 'left';
   export let autofocus: boolean | Parameters<typeof autoFocus>[1] = false;
   // TODO: Find way to conditionally set type based on `multiline` value
-  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> = autofocus
+  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = autofocus
     ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined)]
     : undefined;
   export let operators: { label: string; value: string }[] = undefined;
