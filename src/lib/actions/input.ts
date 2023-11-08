@@ -3,7 +3,7 @@ import type { Action } from 'svelte/action';
 /**
  * Auto focus node when rendered.  Useful for inputs
  */
-export const autoFocus: Action<HTMLElement, { delay?: number }> = (node, options?) => {
+export function autoFocus(node: HTMLElement, options?: { delay?: number }) {
   // TODO: Add options to "restoreFocus" on destroy()
   // const elementFocused = document.activeElement as HTMLElement;
   setTimeout(
@@ -82,7 +82,7 @@ export const autoHeight: Action<HTMLTextAreaElement> = (node) => {
  */
 export const debounceEvent: Action<
   HTMLInputElement | HTMLTextAreaElement,
-  { type: string; listener: (e: Event) => any; timeout?: number }
+  { type: string; listener: (e: Event) => any; timeout?: number } | undefined | null
 > = (node, options) => {
   if (options) {
     const { type, listener, timeout } = options;
