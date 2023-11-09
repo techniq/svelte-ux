@@ -21,3 +21,19 @@ See also [LayerChart](https://layerchart.com) for a large collection of composab
 - Commit as `Version bump to x.y.z` (TODO: automate)
 - `npm run publish` to publish version to npm
 - `git push --tags` to publish tags to Github
+
+## Contributing
+
+```bash
+# install things
+pnpm i
+
+# run to all packages that has this test:unit script
+pnpm -r test:unit
+
+# run a script from the root
+pnpm -F svelet-ux dev
+
+# run a script from a package
+cd packages/svelte-ux && pnpm dev
+```
