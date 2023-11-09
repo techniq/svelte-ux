@@ -13,13 +13,11 @@
 
   export let gooeyBlur = 5;
 
-  const words = ['Why', 'is', 'this', 'so', 'satisfying', 'to', 'watch?'];
   const indexTimer = timerStore({
     initial: 0,
     delay: 1400,
-    onTick: (value) => ++value % words.length,
+    onTick: (value) => (value ?? 0) + 1,
   });
-  $: word = words[$indexTimer ?? 0];
 </script>
 
 <h1>Examples</h1>
@@ -28,6 +26,7 @@
 
 <Preview class="text-center">
   <Gooey blur={4} alphaPixel={255} alphaShift={-144}>
+    {@const words = ['Why', 'is', 'this', 'so', 'satisfying', 'to', 'watch?']}
     <div
       class={cls('grid grid-stack place-items-center', 'w-[500px] text-8xl text-center font-bold')}
     >
@@ -36,7 +35,7 @@
           in:blur={{ amount: '10px', duration: 1000, easing: circOut }}
           out:blur={{ amount: '100px', duration: 1000, easing: circIn }}
         >
-          {word}
+          {words[($indexTimer ?? 0) % words.length]}
         </span>
       {/key}
     </div>
@@ -54,6 +53,26 @@
   by
   <a href="https://codepen.io/Valgo" target="_blank" class="text-accent-500">Valgo</a>
 </Blockquote>
+
+<h2>Morphing emoji</h2>
+
+<Preview class="text-center">
+  <Gooey blur={4} alphaPixel={255} alphaShift={-144} composite="atop">
+    {@const words = ['🚀', '🍩', '🍔', '🥨', '🥓']}
+    <div
+      class={cls('grid grid-stack place-items-center', 'w-[500px] text-8xl text-center font-bold')}
+    >
+      {#key $indexTimer}
+        <span
+          in:blur={{ amount: '10px', duration: 1000, easing: circOut }}
+          out:blur={{ amount: '100px', duration: 1000, easing: circIn }}
+        >
+          {words[($indexTimer ?? 0) % words.length]}
+        </span>
+      {/key}
+    </div>
+  </Gooey>
+</Preview>
 
 <div class="grid grid-cols-[1fr,auto] gap-2 items-end">
   <h2>Rounded text background</h2>
