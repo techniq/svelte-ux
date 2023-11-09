@@ -6,12 +6,13 @@
   import { getComponentTheme } from './theme';
 
   export let value = 0;
+  export let format: (value: number) => string | number = (value) => value;
 
   export let classes: {
     root?: string;
     value?: string;
   } = {};
-  const theme = getComponentTheme('ScrollingNumber');
+  const theme = getComponentTheme('ScrollingValue');
 
   const displayValue = spring();
   // 	const displayValue = tweened(value, { duration: 1000, easing: bounceOut });
@@ -21,7 +22,7 @@
 
 <div
   class={cls(
-    'ScrollingNumber',
+    'ScrollingValue',
     'inline-grid overflow-hidden',
     theme.root,
     classes.root,
@@ -32,12 +33,12 @@
     class={cls('col-span-full row-span-full', theme.value, classes.value)}
     style:transform="translateY({-100 + 100 * offset}%)"
   >
-    {Math.floor($displayValue + 1)}
+    {format(Math.floor($displayValue + 1))}
   </div>
   <div
     class={cls('col-span-full row-span-full', theme.value, classes.value)}
     style:transform="translateY({100 * offset}%)"
   >
-    {Math.floor($displayValue)}
+    {format(Math.floor($displayValue))}
   </div>
 </div>

@@ -8,7 +8,7 @@ export async function load() {
       api,
       source,
       pageSource,
-      related: ['components/ScrollingNumber'],
+      related: ['components/ScrollingValue'],
     },
   };
 }

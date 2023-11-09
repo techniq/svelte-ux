@@ -1,5 +1,5 @@
-import api from '$lib/components/ScrollingNumber.svelte?raw&sveld';
-import source from '$lib/components/ScrollingNumber.svelte?raw';
+import api from '$lib/components/ScrollingValue.svelte?raw&sveld';
+import source from '$lib/components/ScrollingValue.svelte?raw';
 import pageSource from './+page.svelte?raw';
 
 export async function load() {

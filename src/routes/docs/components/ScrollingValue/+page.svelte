@@ -1,6 +1,6 @@
 <script lang="ts">
   import Preview from '$lib/components/Preview.svelte';
-  import ScrollingNumber from '$lib/components/ScrollingNumber.svelte';
+  import ScrollingValue from '$lib/components/ScrollingValue.svelte';
   import Button from '$lib/components/Button.svelte';
   import Field from '$lib/components/Field.svelte';
   import { mdiMinus, mdiPlus } from '@mdi/js';
@@ -58,13 +58,25 @@
 <h2>Basic</h2>
 
 <Preview>
-  <ScrollingNumber bind:value />
+  <ScrollingValue bind:value />
+</Preview>
+
+<h2>Formatted</h2>
+
+<Preview>
+  <ScrollingValue
+    bind:value
+    format={(value) => {
+      const options = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'];
+      return options[Math.abs(value) % options.length];
+    }}
+  />
 </Preview>
 
 <h2>Font-size</h2>
 
 <Preview>
-  <ScrollingNumber bind:value class="text-6xl" />
+  <ScrollingValue bind:value class="text-6xl" />
 </Preview>
 
 <h2>Field</h2>
@@ -72,7 +84,7 @@
 
 <Preview>
   <Field label="Value">
-    <ScrollingNumber bind:value class="w-full" />
+    <ScrollingValue bind:value class="w-full" />
     <div slot="append" class="flex">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
@@ -88,7 +100,7 @@
     <div slot="prepend" class="flex">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
     </div>
-    <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+    <ScrollingValue bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
     <div slot="append" class="flex">
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
     </div>
@@ -102,7 +114,7 @@
     <ButtonGroup variant="outline">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
-        <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+        <ScrollingValue bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
       </Button>
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
@@ -110,7 +122,7 @@
     <ButtonGroup variant="fill">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
-        <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+        <ScrollingValue bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
       </Button>
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
@@ -118,7 +130,7 @@
     <ButtonGroup color="accent" variant="fill-light">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
-        <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+        <ScrollingValue bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
       </Button>
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
@@ -126,7 +138,7 @@
     <ButtonGroup color="accent" variant="fill-outline">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
-        <ScrollingNumber bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
+        <ScrollingValue bind:value classes={{ root: 'w-full', value: 'w-full text-center' }} />
       </Button>
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
@@ -136,7 +148,7 @@
 <h2>Countdown</h2>
 
 <Preview>
-  <ScrollingNumber value={$timer ?? 0} class="text-6xl tabular-nums" />
+  <ScrollingValue value={$timer ?? 0} class="text-6xl tabular-nums" />
   <ButtonGroup variant="fill" class="ml-3">
     <Button on:click={timer.start} disabled={$isRunning}>Start</Button>
     <Button on:click={timer.stop} disabled={!$isRunning}>Stop</Button>
@@ -147,7 +159,7 @@
 <h2>Debug</h2>
 
 <Preview>
-  <ScrollingNumber
+  <ScrollingValue
     bind:value
     classes={{ value: 'text-6xl first:bg-red-500/50 last:bg-green-500/50' }}
   />

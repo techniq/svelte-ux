@@ -7,7 +7,7 @@ export async function load() {
       source,
       pageSource,
       description: 'Manage interval ticks, useful for timely updates and countdowns',
-      related: ['components/Duration', 'components/ScrollingNumber'],
+      related: ['components/Duration', 'components/ScrollingValue'],
     },
   };
 }
