@@ -6,7 +6,7 @@
 ![npm](https://img.shields.io/npm/dw/svelte-ux?style=flat&color=orange)
 
 ![](https://img.shields.io/github/license/svelte-ux?style=flat)
-[![](https://dcbadge.vercel.app/api/server/CuEcjdJb?style=flat)](https://discord.gg/CuEcjdJb)
+[![](https://dcbadge.vercel.app/api/server/697JhMPD3t?style=flat)](https://discord.gg/697JhMPD3t)
 
 The projects aims to simplify building highly interactive and visual applications. It provides over 200 components, actions, stores, and utils, with many more planned.
 
