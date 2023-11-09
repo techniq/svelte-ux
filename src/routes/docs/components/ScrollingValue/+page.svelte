@@ -36,6 +36,12 @@
         break;
     }
   }
+
+  const indexTimer = timerStore({
+    initial: 0,
+    delay: 2000,
+    onTick: (value) => (value ?? 0) + 1,
+  });
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
@@ -64,13 +70,20 @@
 <h2>Formatted</h2>
 
 <Preview>
-  <ScrollingValue
-    bind:value
-    format={(value) => {
-      const options = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five'];
-      return options[Math.abs(value) % options.length];
-    }}
-  />
+  <span class="text-3xl">
+    <span class="font-semibold">Svelte</span> is
+    <ScrollingValue
+      value={$indexTimer}
+      format={(value) => {
+        const options = ['compiled', 'compact', 'complete'];
+        return options[Math.abs(value) % options.length];
+      }}
+      classes={{
+        value:
+          'font-bold text-transparent bg-clip-text bg-gradient-to-b from-green-200 via-cyan-400 to-blue-500',
+      }}
+    />
+  </span>
 </Preview>
 
 <h2>Font-size</h2>
