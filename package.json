@@ -1,0 +1,22 @@
+{
+  "name": "svelte-ux-monorepo",
+  "version": "0.0.1",
+  "author": "Sean Lynch <techniq35@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "pnpm -r test",
+    "build": "rimraf packages/*/dist && pnpm -r build",
+    "lint": "pnpm -r lint",
+    "format": "pnpm -r format",
+    "release:version": "npm run changeset version",
+    "release": "npm run build && changeset publish",
+    "reset": "git clean -xdf",
+    "up-dep": "pnpm -r up --latest"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "0.4.8",
+    "@changesets/cli": "2.26.1",
+    "rimraf": "5.0.0"
+  }
+}
