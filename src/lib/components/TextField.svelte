@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import type { HTMLInputAttributes } from 'svelte/elements';
+  import type { AriaRole, HTMLInputAttributes } from 'svelte/elements';
   import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
@@ -53,7 +53,7 @@
   export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = autofocus
     ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined)]
     : undefined;
-  export let operators: { label: string; value: string }[] = undefined;
+  export let operators: { label: string; value: string }[] = [];
   export let inputEl: HTMLInputElement | null = null;
   export let debounceChange: boolean | number = false;
   export let classes: {
@@ -148,15 +148,28 @@
     }
   }
 
-  function handleInput(e) {
+  function handleInput(e: Event) {
+    const elm = (e.target as (HTMLTextAreaElement|HTMLInputElement));
     if (accept) {
       // filter input based on accepted characters
       const regex = new RegExp(accept, 'g');
-      inputValue = e.target.value.match(regex)?.[0] ?? '';
-      e.target.value = inputValue;
+      inputValue = elm.value.match(regex)?.[0] ?? '';
+      elm.value = inputValue;
     } else {
-      inputValue = e.target.value;
+      inputValue = elm.value;
     }
+    updateValue();
+  }
+
+  function textAreaMultiAction(n: HTMLTextAreaElement) {
+    if (actions) {
+      return actions(n);
+    }
+    return [];
+  }
+
+  function onSelectChange(e: Event) {
+    operator = (e.target as HTMLSelectElement).value;
     updateValue();
   }
 
@@ -305,7 +318,7 @@
                   theme.input,
                   classes.input
                 )}
-                use:multi={actions}
+                use:multi={textAreaMultiAction}
               />
             {:else}
               <Input
@@ -362,7 +375,7 @@
                 class="text-black/50 p-1"
                 on:click={() => {
                   inputValue = '';
-                  operator = operators ? operators[0].value : null;
+                  operator = operators?.[0].value;
                   updateValue();
                   dispatch('clear');
                   labelEl?.focus();
@@ -374,10 +387,7 @@
               <select
                 {disabled}
                 value={operator}
-                on:change={(e) => {
-                  operator = e.target.value;
-                  updateValue();
-                }}
+                on:change={onSelectChange}
                 class="appearance-none bg-black/5 border border-black/20 rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
                 style="text-align-last: center;"
               >
