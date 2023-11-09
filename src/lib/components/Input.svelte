@@ -23,7 +23,7 @@
 
   export let mask = '';
   export let replace = '_';
-  export let accept = '\\d';
+  export let accept: string | RegExp = '\\d';
   export let placeholder = mask;
   export let disabled = false;
 
@@ -38,9 +38,9 @@
   $: replaceSet = new Set(replace); // Set of characters to replace
   $: prev = ((j) => Array.from(mask ?? '', (c, i) => (replaceSet.has(c) ? (j = i + 1) : j)))(0);
   $: firstPlaceholderPos = [...(mask ?? '')].findIndex((c) => replaceSet.has(c));
-  $: acceptRegEx = new RegExp(accept, 'g');
+  $: acceptRegEx = accept instanceof RegExp ? accept : new RegExp(accept, 'g');
 
-  function clean(inputValue) {
+  function clean(inputValue: string) {
     // Get only accepted characters (no mask)
     const inputMatch = inputValue?.match(acceptRegEx) || [];
 
@@ -65,7 +65,7 @@
     if (mask) {
       // For selection (including just cursor position), ...
       const [i, j] = [el.selectionStart, el.selectionEnd].map((i) => {
-        i = clean(el.value.slice(0, i)).findIndex((c) => replaceSet.has(c));
+        i = clean(el.value.slice(0, i ?? undefined)).findIndex((c) => replaceSet.has(c));
         return i < 0 ? prev[prev.length - 1] : backspace ? prev[i - 1] || firstPlaceholderPos : i;
       });
       value = clean(el.value).join('');
@@ -134,6 +134,7 @@
 <style>
   /* Hide +/- buttons */
   input[type='number'] {
+    appearance: textfield;
     -moz-appearance: textfield;
   }
   input[type='number']::-webkit-inner-spin-button,

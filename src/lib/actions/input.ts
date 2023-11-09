@@ -3,7 +3,7 @@ import type { Action } from 'svelte/action';
 /**
  * Auto focus node when rendered.  Useful for inputs
  */
-export function autoFocus(node: HTMLElement, options?: { delay?: number }) {
+export function autoFocus(node: HTMLElement | SVGElement, options?: { delay?: number }) {
   // TODO: Add options to "restoreFocus" on destroy()
   // const elementFocused = document.activeElement as HTMLElement;
   setTimeout(
