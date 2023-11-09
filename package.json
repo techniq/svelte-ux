@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "pnpm -r test",
+    "test:unit": "pnpm -r test:unit",
     "build": "rimraf packages/*/dist && pnpm -r build",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",

@@ -19,11 +19,19 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: 🌐 Checkout Repository
+        uses: actions/checkout@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run test:unit
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: 🧑‍💻 Setup env
+        uses: jycouet/jycouet/shared-config/setup@main
+        with:
+          nodeVersion: ${{ matrix.node-version }}
+
+      - name: 🧹 Prettier Check
+        run: pnpm lint
+
+      - name: 👌 Run Tests
+        run: pnpm test:unit
