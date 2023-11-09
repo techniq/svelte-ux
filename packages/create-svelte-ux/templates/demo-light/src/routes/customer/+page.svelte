@@ -1,6 +1,6 @@
 <script>
-	import { PAGES } from '$lib/ROUTES';
-	import { Button } from 'svelte-ux';
+  import { PAGES } from '$lib/ROUTES';
+  import { Button } from 'svelte-ux';
 </script>
 
 <h2>Customers...</h2>

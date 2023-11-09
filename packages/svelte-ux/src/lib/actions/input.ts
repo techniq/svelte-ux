@@ -12,7 +12,7 @@ export function autoFocus(node: HTMLElement | SVGElement, options?: { delay?: nu
     },
     options?.delay ?? 0
   );
-};
+}
 
 /**
  * Selects the text inside a text node when the node is focused
