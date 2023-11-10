@@ -4,7 +4,7 @@
   "description": "A CLI for creating new Svelte UX projects",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jycouet/svelte-ux-monorepo",
+    "url": "https://github.com/techniq/svelte-ux",
     "directory": "packages/create-svelte-ux"
   },
   "license": "MIT",
@@ -12,8 +12,8 @@
   "bin": "./bin.js",
   "scripts": {
     "dev": "node bin.js",
-    "build:": "cd ../../ && ((pnpm run build && cd -) || (cd - && exit 1))",
-    "build:dev": "pnpm build: && pnpm dev",
+    "build": "cd ../../ && ((pnpm run build && cd -) || (cd - && exit 1))",
+    "build:dev": "pnpm build && pnpm dev",
     "check": "tsc",
     "lint": "prettier --check . --config ../../.prettierrc --ignore-path ../../.gitignore --ignore-path .gitignore --plugin prettier-plugin-svelte --plugin-search-dir=.",
     "format": "pnpm lint --write"
