@@ -5,8 +5,11 @@
 [![](https://img.shields.io/npm/v/svelte-ux?style=flat)](https://www.npmjs.com/package/svelte-ux)
 ![npm](https://img.shields.io/npm/dw/svelte-ux?style=flat&color=orange)
 
+[![](https://img.shields.io/badge/Open_in-SvelteLab-black?logo=svelte&color=%23FF3E00)](https://www.sveltelab.dev/?provider=github&owner=techniq&repo=svelte-ux&branch=main&path=%2Fpackages%2Fcreate-svelte-ux%2Ftemplates%2Fstarter) [![](https://img.shields.io/badge/Open_in-StackBlitz-black?logo=stackblitz&color=%231269D3)](https://stackblitz.com/github/techniq/svelte-ux/tree/main/packages/create-svelte-ux/templates/starter) [![](https://img.shields.io/badge/Open_in-CodeSandbox-black?logo=codesandbox&color=%23151515)](https://codesandbox.io/p/sandbox/github/techniq/svelte-ux/tree/main/packages/create-svelte-ux/templates/starter)
+
 ![](https://img.shields.io/github/license/svelte-ux?style=flat)
 [![](https://dcbadge.vercel.app/api/server/697JhMPD3t?style=flat)](https://discord.gg/697JhMPD3t)
+
 
 The projects aims to simplify building highly interactive and visual applications. It provides over 200 components, actions, stores, and utils, with many more planned.
 
