@@ -53,7 +53,7 @@
   export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = autofocus
     ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined)]
     : undefined;
-  export let operators: { label: string; value: string }[] = [];
+  export let operators: { label: string; value: string }[] | undefined = undefined;
   export let inputEl: HTMLInputElement | null = null;
   export let debounceChange: boolean | number = false;
   export let classes: {
@@ -149,7 +149,7 @@
   }
 
   function handleInput(e: Event) {
-    const elm = (e.target as (HTMLTextAreaElement|HTMLInputElement));
+    const elm = e.target as HTMLTextAreaElement | HTMLInputElement;
     if (accept) {
       // filter input based on accepted characters
       const regex = new RegExp(accept, 'g');
@@ -254,7 +254,7 @@
         {/if}
 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div role={role === "combobox" ? role : undefined} class="flex-grow inline-grid" on:click>
+        <div role={role === 'combobox' ? role : undefined} class="flex-grow inline-grid" on:click>
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <label
               class={cls(
