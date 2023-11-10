@@ -47,7 +47,7 @@ program.addOption(
 program.parse(process.argv);
 const options_cli = program.opts();
 
-p.intro('🎨 Welcome to Svelte-UX!');
+p.intro('🎨 Welcome to Svelte UX!');
 
 // if we weren't given a directory, then we should ask
 if (!projectDir) {
