@@ -101,7 +101,7 @@ const template = options_cli.template
   ? options_cli.template
   : await p.select({
       message: 'Which template do you want to use?',
-      initialValue: 'react-typescript',
+      initialValue: 'basic',
       options,
     });
 if (p.isCancel(template)) {
