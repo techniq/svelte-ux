@@ -13,7 +13,6 @@ let projectName = projectDir;
 
 // When it will be in the same mono repo we will be able to get the version
 const { version } = JSON.parse(fs.readFileSync(new URL('package.json', import.meta.url), 'utf-8'));
-// const version = '0.54.0';
 console.log(`${gray(`create-svelte-ux version ${version}`)}\n`);
 
 // prepare options
