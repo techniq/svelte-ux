@@ -1,7 +1,10 @@
-.DS_Store
-node_modules
-/build
-/.svelte-kit
-/package
-/dist
-/.vercel
+node_modules/
+dist/
+tsconfig.tsbuildinfo
+coverage/
+.next/
+.idea/
+.svelte-kit/
+.env
+
+test-*

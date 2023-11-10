@@ -10,7 +10,10 @@ type ScrollIntoViewOptions = {
   delay?: number;
 };
 
-export const scrollIntoView: Action<HTMLElement, ScrollIntoViewOptions|undefined> = (node, options) => {
+export const scrollIntoView: Action<HTMLElement, ScrollIntoViewOptions | undefined> = (
+  node,
+  options
+) => {
   function update(options?: ScrollIntoViewOptions): void {
     const condition =
       typeof options?.condition === 'boolean' ? options.condition : options?.condition(node);
@@ -21,9 +24,12 @@ export const scrollIntoView: Action<HTMLElement, ScrollIntoViewOptions|undefined
         : true;
 
     if (condition && needed) {
-      setTimeout(() => {
-        scrollIntoViewUtil(node);
-      }, options?.delay ?? 0);
+      setTimeout(
+        () => {
+          scrollIntoViewUtil(node);
+        },
+        options?.delay ?? 0
+      );
     }
   }
 

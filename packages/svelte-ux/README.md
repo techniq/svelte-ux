@@ -14,40 +14,6 @@ The components are built using Tailwind with extensibility and customization in 
 
 See also [LayerChart](https://layerchart.com) for a large collection of composable chart components to build a wide range of visualizations.
 
-## Contributing
-
-### Install dependencies
-
-```
-pnpm i
-```
-
-### Run dev server for `svelte-ux` package
-
-```
-cd packages/svelte-ux
-pnpm dev
-```
-
-### Run test for `svelte-ux` package
-
-```
-cd packages/svelte-ux
-pnpm test:unit
-```
-
-### Run tests for all packages
-
-```
-pnpm -r test:unit
-```
-
-### Run a script from the root
-
-```
-pnpm -F svelte-ux dev
-```
-
 ## Publishing
 
 - `npm run changeset` for each changelog worthy change
@@ -55,7 +21,3 @@ pnpm -F svelte-ux dev
 - Commit as `Version bump to x.y.z` (TODO: automate)
 - `npm run publish` to publish version to npm
 - `git push --tags` to publish tags to Github
-
-```
-
-```
