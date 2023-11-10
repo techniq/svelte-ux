@@ -1,4 +1,4 @@
 {
-  "label": "Svelte UX - Demo",
-  "hint": "Light demo of Svelte UX components"
+	"label": "Svelte UX - Basic",
+	"hint": "Basic setup of a Svelte UX project"
 }

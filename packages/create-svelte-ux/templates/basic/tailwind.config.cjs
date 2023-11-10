@@ -3,18 +3,18 @@ const svelte_ux = require('svelte-ux/plugins/tailwind.cjs');
 
 /** @type {import('tailwindcss').Config}*/
 const config = {
-  content: ['./src/**/*.{html,svelte}', './node_modules/svelte-ux/**/*.{svelte,js}'],
-  theme: {
-    extend: {
-      colors: {
-        accent: colors.purple,
-      },
-    },
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [svelte_ux],
+	content: ['./src/**/*.{html,svelte}', './node_modules/svelte-ux/**/*.{svelte,js}'],
+	theme: {
+		extend: {
+			colors: {
+				accent: colors.blue
+			}
+		}
+	},
+	variants: {
+		extend: {}
+	},
+	plugins: [svelte_ux]
 };
 
 module.exports = config;

@@ -12,8 +12,8 @@ let projectDir = process.argv[2];
 let projectName = projectDir;
 
 // When it will be in the same mono repo we will be able to get the version
-// const { version } = JSON.parse(fs.readFileSync(new URL('package.json', import.meta.url), 'utf-8'));
-const version = '0.54.0';
+const { version } = JSON.parse(fs.readFileSync(new URL('package.json', import.meta.url), 'utf-8'));
+// const version = '0.54.0';
 console.log(`${gray(`create-svelte-ux version ${version}`)}\n`);
 
 // prepare options
@@ -71,7 +71,7 @@ if (!projectDir) {
 // if we were told to use the current directory then we need
 // a more appropriate name for the project
 if (projectDir === '.') {
-  projectName = 'svelte-ux-demo';
+  projectName = 'svelte-ux-app';
 }
 let dirToCreate = true;
 
