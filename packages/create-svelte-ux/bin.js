@@ -100,7 +100,7 @@ const template = options_cli.template
   ? options_cli.template
   : await p.select({
       message: 'Which template do you want to use?',
-      initialValue: 'basic',
+      initialValue: 'starter',
       options,
     });
 if (p.isCancel(template)) {
