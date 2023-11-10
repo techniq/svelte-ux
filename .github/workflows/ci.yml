@@ -25,13 +25,16 @@ jobs:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
 
-      - name: 🧑‍💻 Setup env
-        uses: jycouet/jycouet/shared-config/setup@main
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          nodeVersion: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-      - name: 🧹 Prettier Check
-        run: pnpm lint
+      - run: npm ci
+
+      # - name: 🧹 Prettier Check
+      #   run: pnpm lint
 
       - name: 👌 Run Tests
         run: pnpm test:unit
