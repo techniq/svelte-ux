@@ -14,12 +14,13 @@
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import Input from './Input.svelte';
+  import { type IconInput, asIconData } from '$lib/utils/icons';
 
   type InputValue = string | number;
 
   const dispatch = createEventDispatcher<{
     clear: null;
-    change: { value: typeof value; inputValue: InputValue; operator: string };
+    change: { value: typeof value; inputValue: InputValue; operator?: string };
   }>();
 
   export let name: string | undefined = undefined;
@@ -45,8 +46,8 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: string | null = null;
-  export let iconRight: string | null = null;
+  export let icon: IconInput = null;
+  export let iconRight: IconInput = null;
   export let align: 'left' | 'center' | 'right' = 'left';
   export let autofocus: boolean | Parameters<typeof autoFocus>[1] = false;
   // TODO: Find way to conditionally set type based on `multiline` value
@@ -176,7 +177,7 @@
   $: hasInputValue = inputValue != null && inputValue !== '';
   $: hasInsetLabel = ['inset', 'float'].includes(labelPlacement) && label !== '';
 
-  $: hasPrepend = $$slots.prepend || icon != null;
+  $: hasPrepend = $$slots.prepend || !!icon;
   $: hasAppend =
     $$slots.append || iconRight != null || clearable || error || operators || type === 'password';
   $: hasPrefix = $$slots.prefix || type === 'currency';
@@ -247,7 +248,7 @@
             <slot name="prepend" />
             {#if icon}
               <span class="mr-3">
-                <Icon path={icon} class="text-black/50" />
+                <Icon data={asIconData(icon)} class="text-black/50" />
               </span>
             {/if}
           </div>
@@ -417,7 +418,7 @@
             {#if error}
               <Icon path={mdiInformationOutline} class="text-red-500" />
             {:else if iconRight}
-              <Icon path={iconRight} class="text-black/50" />
+              <Icon data={asIconData(iconRight)} class="text-black/50" />
             {/if}
           </div>
         {/if}
