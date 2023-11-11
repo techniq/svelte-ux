@@ -1,5 +1,23 @@
 # svelte-ux
 
+## 0.55.0
+
+### Minor Changes
+
+- Rename `ScrollingNumber` to `ScrollingValue` and support formatting, thus supporting alpha (non-numeric) display ([`8c2719c`](https://github.com/techniq/svelte-ux/commit/8c2719ce4e56bba08ab1e202b3da3aa8f524d14f))
+
+- Setup as monorepo using pnpm workspace and add `create-svelte-ux` package (`npm create svelte-ux`) ([#119](https://github.com/techniq/svelte-ux/pull/119))
+
+### Patch Changes
+
+- Fix type errors related to Actions, the multi Action, and the Input/TextField components. ([#118](https://github.com/techniq/svelte-ux/pull/118))
+
+- Add a Maybe component for conditionally wrapping slotted content. ([#117](https://github.com/techniq/svelte-ux/pull/117))
+
+- Modify action declarations to Actions<T> with mixed null/undefined values. ([#115](https://github.com/techniq/svelte-ux/pull/115))
+
+- Add delay() promise util as top-level export ([`61b805f`](https://github.com/techniq/svelte-ux/commit/61b805fa730991964d25c7bff462072f62a07603))
+
 ## 0.54.0
 
 ### Minor Changes
