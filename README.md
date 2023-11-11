@@ -1,4 +1,8 @@
-# Svelte UX
+
+<p align="center">
+  <img alt="svelte-ux logo" height="100px" src="./static/logos/logo.jpg" />  
+</p>
+<h1 align="center">Svelte UX</h1>
 
 ![](https://img.shields.io/github/license/techniq/svelte-ux?style=flat)
 [![](https://img.shields.io/github/actions/workflow/status/techniq/svelte-ux/ci.yml?style=flat)](https://github.com/techniq/svelte-ux/actions/workflows/ci.yml)
