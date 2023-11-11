@@ -9,6 +9,6 @@ npm run dev
 npm run dev -- --open
 ```
 
-You will lean the rest on the Home page of the demo app.
+You will learn the rest on the Home page of the demo app.
 
 More info on: https://svelte-ux.techniq.dev/
