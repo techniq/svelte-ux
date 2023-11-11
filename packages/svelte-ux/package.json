@@ -17,17 +17,12 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "typedoc": "typedoc",
-    "changeset": "changeset",
-    "version": "changeset version",
-    "version-status": "changeset status -v",
-    "prepare": "svelte-kit sync",
-    "publish": "changeset publish"
+    "prepare": "svelte-kit sync"
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^3.0.3",
     "@sveltejs/kit": "^1.27.2",
     "@sveltejs/package": "^2.2.2",
-    "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/d3-array": "^3.0.9",
     "@types/d3-format": "^3.0.3",

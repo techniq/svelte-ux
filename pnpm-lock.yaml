@@ -8,12 +8,12 @@ importers:
 
   .:
     devDependencies:
-      '@changesets/changelog-github':
-        specifier: 0.4.8
-        version: 0.4.8
       '@changesets/cli':
         specifier: 2.26.1
         version: 2.26.1
+      '@svitejs/changesets-changelog-github-compact':
+        specifier: ^1.1.0
+        version: 1.1.0
       rimraf:
         specifier: 5.0.0
         version: 5.0.0
@@ -112,9 +112,6 @@ importers:
       '@sveltejs/package':
         specifier: ^2.2.2
         version: 2.2.2(svelte@4.2.1)(typescript@5.2.2)
-      '@svitejs/changesets-changelog-github-compact':
-        specifier: ^1.1.0
-        version: 1.1.0
       '@tailwindcss/typography':
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@3.3.5)
@@ -262,16 +259,6 @@ packages:
     resolution: {integrity: sha512-+vRfnKtXVWsDDxGctOfzJsPhaCdXRYoe+KyWYoq5X/GqoISREiat0l3L8B0a453B2B4dfHGcZaGyowHbp9BSaA==}
     dependencies:
       '@changesets/types': 5.2.1
-
-  /@changesets/changelog-github@0.4.8:
-    resolution: {integrity: sha512-jR1DHibkMAb5v/8ym77E4AMNWZKB5NPzw5a5Wtqm1JepAuIF+hrKp2u04NKM14oBZhHglkCfrla9uq8ORnK/dw==}
-    dependencies:
-      '@changesets/get-github-info': 0.5.2
-      '@changesets/types': 5.2.1
-      dotenv: 8.6.0
-    transitivePeerDependencies:
-      - encoding
-    dev: true
 
   /@changesets/cli@2.26.1:
     resolution: {integrity: sha512-XnTa+b51vt057fyAudvDKGB0Sh72xutQZNAdXkCqPBKO2zvs2yYZx5hFZj1u9cbtpwM6Sxtcr02/FQJfZOzemQ==}
@@ -1832,11 +1819,6 @@ packages:
   /dotenv@16.3.1:
     resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
-    dev: true
-
-  /dotenv@8.6.0:
-    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
-    engines: {node: '>=10'}
     dev: true
 
   /eastasianwidth@0.2.0:
