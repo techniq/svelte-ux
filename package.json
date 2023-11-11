@@ -9,9 +9,8 @@
     "build": "rimraf packages/*/dist && pnpm -r build",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
-    "release:version": "changeset version",
-    "release": "npm run build && changeset publish",
-    "reset": "git clean -xdf",
+    "changeset:version": "changeset version",
+    "changeset:release": "changeset publish",
     "up-dep": "pnpm -r up --latest"
   },
   "devDependencies": {
