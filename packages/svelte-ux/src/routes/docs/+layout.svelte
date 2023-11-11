@@ -109,14 +109,18 @@
       <ViewSourceButton
         label="Source"
         {source}
-        href={sourceUrl ? `https://github.com/techniq/svelte-ux/blob/master/${sourceUrl}` : ''}
+        href={sourceUrl
+          ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${sourceUrl}`
+          : ''}
         icon={mdiCodeTags}
       />
 
       <ViewSourceButton
         label="Page source"
         source={pageSource}
-        href={pageUrl ? `https://github.com/techniq/svelte-ux/blob/master/${pageUrl}` : ''}
+        href={pageUrl
+          ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${pageUrl}`
+          : ''}
         icon={mdiFileDocumentEditOutline}
       />
 
