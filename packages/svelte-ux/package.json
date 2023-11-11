@@ -20,6 +20,7 @@
     "changeset": "changeset",
     "version": "changeset version",
     "version-status": "changeset status -v",
+    "prepare": "svelte-kit sync",
     "publish": "changeset publish"
   },
   "devDependencies": {
