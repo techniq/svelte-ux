@@ -9,6 +9,7 @@
     "build": "rimraf packages/*/dist && pnpm -r build",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
+    "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:release": "changeset publish",
     "up-dep": "pnpm -r up --latest"
