@@ -10,12 +10,13 @@
   import type { TailwindColors } from '$lib/types';
   import { getComponentTheme } from './theme';
   import { getButtonGroup } from './ButtonGroup.svelte';
+  import { asIconData, type IconInput } from '$lib/utils/icons';
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
-  export let icon: ComponentProps<Icon>['data'] | ComponentProps<Icon> | undefined = undefined;
+  export let icon: IconInput = undefined;
   export let iconOnly = icon !== undefined && $$slots.default !== true;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
 
@@ -261,7 +262,7 @@
     <span in:slide={{ axis: 'x', duration: 200 }}>
       {#if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
-        <Icon data={icon} class={cls('pointer-events-none', theme.icon, classes.icon)} />
+        <Icon data={asIconData(icon)} class={cls('pointer-events-none', theme.icon, classes.icon)} />
       {:else}
         <Icon class={cls('pointer-events-none', theme.icon, classes.icon)} {...icon} />
       {/if}
