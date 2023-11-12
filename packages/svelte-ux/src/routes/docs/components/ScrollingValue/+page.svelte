@@ -67,6 +67,14 @@
   <ScrollingValue bind:value />
 </Preview>
 
+<h2>Individual numbers</h2>
+
+<Preview>
+  {#each Math.abs(value).toString().split('') as num}
+    <ScrollingValue value={Number(num)} single class="text-3xl tabular-nums" />
+  {/each}
+</Preview>
+
 <h2>Formatted</h2>
 
 <Preview>
@@ -84,12 +92,6 @@
       }}
     />
   </span>
-</Preview>
-
-<h2>Font-size</h2>
-
-<Preview>
-  <ScrollingValue bind:value class="text-6xl" />
 </Preview>
 
 <h2>Field</h2>

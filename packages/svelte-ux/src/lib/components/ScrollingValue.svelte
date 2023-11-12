@@ -6,6 +6,7 @@
   import { getComponentTheme } from './theme';
 
   export let value = 0;
+  export let single = false;
   export let format: (value: number) => string | number = (value) => value;
 
   export let classes: {
@@ -33,7 +34,7 @@
     class={cls('col-span-full row-span-full', theme.value, classes.value)}
     style:transform="translateY({-100 + 100 * offset}%)"
   >
-    {format(Math.floor($displayValue + 1))}
+    {format(Math.floor(single && $displayValue >= 9 ? 0 : $displayValue + 1))}
   </div>
   <div
     class={cls('col-span-full row-span-full', theme.value, classes.value)}
