@@ -2,7 +2,7 @@
   import { inject } from '@vercel/analytics';
   import 'prism-themes/themes/prism-vsc-dark-plus.css';
   import { dev } from '$app/environment';
-  import { mdiGithub, mdiOpenInNew, mdiTwitter } from '@mdi/js';
+  import { mdiArrowTopRight, mdiGithub, mdiTwitter } from '@mdi/js';
 
   import AppBar from '$lib/components/AppBar.svelte';
   import AppLayout from '$lib/components/AppLayout.svelte';
@@ -52,9 +52,9 @@
     <div slot="actions" class="flex gap-3">
       <Button
         href="https://www.layerchart.com"
-        icon={mdiOpenInNew}
+        icon={{ data: mdiArrowTopRight, class: 'opacity-50' }}
         target="_blank"
-        class="p-2 max-md:hidden"
+        class="p-2 max-md:hidden flex-row-reverse"
       >
         LayerChart
       </Button>
