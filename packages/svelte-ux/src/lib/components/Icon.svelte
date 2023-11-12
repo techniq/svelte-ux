@@ -14,7 +14,7 @@
   export let height = size;
   export let viewBox = '0 0 24 24';
   export let path: string | string[] = '';
-  export let data: IconDefinition | string | undefined = undefined;
+  export let data: IconDefinition | string | null | undefined = undefined;
   export let svg: string | undefined = undefined;
   export let svgUrl: string | undefined = undefined;
 
@@ -31,7 +31,7 @@
   } = {};
   const theme = getComponentTheme('Icon');
 
-  $: if (typeof data === 'object' && 'icon' in data) {
+  $: if (typeof data === 'object' && data && 'icon' in data) {
     // Font Awesome
     const [_width, _height, _ligatures, _unicode, _path] = data.icon;
     viewBox = `0 0 ${_width} ${_height}`;
@@ -59,15 +59,18 @@
   $: if (svgUrl) {
     let promise;
     if (cache.has(svgUrl)) {
-      cache.get(svgUrl).then((text) => (svg = text));
+      cache.get(svgUrl)?.then((text) => (svg = text));
     } else {
       promise = fetch(svgUrl)
         .then((resp) => resp.text())
-        .catch((e) => {
+        .catch(() => {
           // Failed request, remove promise so fetched again
-          cache.delete(svgUrl);
+          if (svgUrl && typeof(svgUrl) === "string") {
+            cache.delete(svgUrl);
+          }
           // TODO: Consider showing error icon
           // throw e;
+          return "";
         });
       cache.set(svgUrl, promise);
       promise.then((text) => {
