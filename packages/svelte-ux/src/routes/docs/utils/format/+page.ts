@@ -1,5 +1,5 @@
 import source from '$lib/utils/format.ts?raw';
-import pageSource from './+page.md?raw';
+import pageSource from './+page.svelte?raw';
 
 export async function load() {
   return {
