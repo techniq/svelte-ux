@@ -25,9 +25,10 @@ export function toTitleCase(str: string, ignore = ['a', 'an', 'is', 'the']) {
 /**
  * Generates a unique Id, with prefix if provided
  */
-let idCounter = 0;
+const idMap = new Map<string, number>();
 export function uniqueId(prefix = '') {
-  var id = ++idCounter;
+  let id = (idMap.get(prefix) ?? 0) + 1;
+  idMap.set(prefix, id);
   return prefix + id;
 }
 
