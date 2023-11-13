@@ -1,5 +1,11 @@
 # create-svelte-ux
 
+## 0.2.0
+
+### Minor Changes
+
+- Add simple LayerChart integration template ([#128](https://github.com/techniq/svelte-ux/pull/128))
+
 ## 0.1.0
 
 ### Minor Changes

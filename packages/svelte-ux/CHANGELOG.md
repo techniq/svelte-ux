@@ -1,5 +1,20 @@
 # svelte-ux
 
+## 0.55.1
+
+### Patch Changes
+
+- [ToggleButton] Remove `|global` modifier from transition (doesn't appear required anymore and should fix SvelteKit routing ([`14041fd`](https://github.com/techniq/svelte-ux/commit/14041fde15945f2d7e7f2599009fd66d4002b135))
+
+- [uniqueId] Track ids per prefix ([`523c609`](https://github.com/techniq/svelte-ux/commit/523c609662e463e807be65a7b4ce063ce0a6b3a8))
+
+- Add string utils to top-level exports and add docs ([`c046b08`](https://github.com/techniq/svelte-ux/commit/c046b082fd720fa116a4e9e28b9b53fa451a970a))
+
+- [ScrollingValue] Add `single` prop to enable individual number display (proper handling of 9) ([`a730969`](https://github.com/techniq/svelte-ux/commit/a730969f0a30271b9c6aec84df83a5c9b35e5eaa))
+
+- Added new `IconInput` and `IconData` types to enable inclusive & seamless passing of icon arguments between components. Also provides a `asIconData` utility function for type-safe conversion. ([#125](https://github.com/techniq/svelte-ux/pull/125))
+  Fixed type errors for Button & TextField's use of Icon data.
+
 ## 0.55.0
 
 ### Minor Changes
