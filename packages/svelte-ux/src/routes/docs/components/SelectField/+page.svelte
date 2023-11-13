@@ -21,6 +21,7 @@
     { name: 'Three', value: 3, icon: mdiPencil },
     { name: 'Four', value: 4, icon: mdiAccount },
   ];
+
   const optionsWithGroup = [
     { name: 'One', value: 1, group: 'First' },
     { name: 'Two', value: 2, group: 'First' },
@@ -42,6 +43,9 @@
     { name: 'Bar', value: 2 },
     { name: 'Baz', value: 3 },
   ];
+
+  let optionsAsync: { name: string; value: number }[] = [];
+  let loading = false;
 
   let value = 3;
 </script>
@@ -101,6 +105,25 @@
 
 <Preview>
   <SelectField {options} loading />
+</Preview>
+
+<h2>Async options</h2>
+
+<Preview>
+  <SelectField options={optionsAsync} {loading} />
+  <Button
+    on:click={() => {
+      loading = true;
+      // simulate async loading with a loading of 2 seconds!
+      setTimeout(() => {
+        optionsAsync = optionsAsync.length === 0 ? options : [];
+        loading = false;
+      }, 2000);
+    }}
+    {loading}
+  >
+    {optionsAsync.length === 0 ? 'Load options' : 'unload options'}
+  </Button>
 </Preview>
 
 <h2>disabled</h2>
