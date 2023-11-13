@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiMagnify, mdiPlus, mdiPencil } from '@mdi/js';
+  import { mdiMagnify, mdiPlus, mdiPencil, mdiAccount } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
@@ -13,12 +13,13 @@
 
   import { delay } from '$lib/utils/promise';
   import { cls } from '$lib/utils/styles';
+  import Icon from '$lib/components/Icon.svelte';
 
   let options = [
-    { name: 'One', value: 1 },
-    { name: 'Two', value: 2 },
-    { name: 'Three', value: 3 },
-    { name: 'Four', value: 4 },
+    { name: 'One', value: 1, icon: mdiMagnify },
+    { name: 'Two', value: 2, icon: mdiPlus },
+    { name: 'Three', value: 3, icon: mdiPencil },
+    { name: 'Four', value: 4, icon: mdiAccount },
   ];
   const optionsWithGroup = [
     { name: 'One', value: 1, group: 'First' },
@@ -130,6 +131,33 @@
         <div>
           <div>{option.name}</div>
           <div class="text-sm text-black/50">{option.value}</div>
+        </div>
+      </MenuItem>
+    </div>
+  </SelectField>
+</Preview>
+
+<h2>option slot with icon</h2>
+
+<Preview>
+  <SelectField
+    {options}
+    bind:value
+    icon={options.find((c) => c.value === value)?.icon}
+    on:change={(e) => console.log('on:change', e.detail)}
+  >
+    <div slot="option" let:option let:index let:selected let:highlightIndex>
+      <MenuItem
+        class={cls(
+          index === highlightIndex && 'bg-black/5',
+          option === selected && 'font-semibold',
+          option.group ? 'px-4' : 'px-2'
+        )}
+        scrollIntoView={index === highlightIndex}
+      >
+        <div class="flex gap-2">
+          <Icon path={option.icon} />
+          <div>{option.name}</div>
         </div>
       </MenuItem>
     </div>
