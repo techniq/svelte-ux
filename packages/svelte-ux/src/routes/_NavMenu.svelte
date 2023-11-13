@@ -104,7 +104,7 @@
     'uniqueStore',
   ];
 
-  const utils = ['cls', 'format', 'json', 'Logger'];
+  const utils = ['cls', 'format', 'json', 'Logger', 'string'];
 </script>
 
 <NavItem text="Getting Started" icon={mdiHome} currentUrl={$page.url} path="/" />

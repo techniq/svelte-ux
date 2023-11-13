@@ -10,7 +10,7 @@ export { round, clamp } from './number';
 export * from './promise';
 export * from './sort';
 export { cls } from './styles';
-export { uniqueId } from './string';
+export * from './string';
 
 // aliased exports to remove conflicts (and make imports less noisy from top-level)
 export * as array from './array';
@@ -25,6 +25,5 @@ export * as object from './object';
 export * as rollup from './rollup';
 export * as routing from './routing';
 export * as serialize from './serialize';
-export * as string from './string';
 export * as styles from './styles';
 export * as table from './table';
