@@ -177,11 +177,9 @@
           option.group ? 'px-4' : 'px-2'
         )}
         scrollIntoView={index === highlightIndex}
+        icon={{ data: option.icon, style: 'color: #0000FF;' }}
       >
-        <div class="flex gap-2">
-          <Icon path={option.icon} />
-          <div>{option.name}</div>
-        </div>
+        {option.name}
       </MenuItem>
     </div>
   </SelectField>
