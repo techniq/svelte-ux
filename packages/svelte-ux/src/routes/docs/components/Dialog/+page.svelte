@@ -8,6 +8,7 @@
   import Toggle from '$lib/components/Toggle.svelte';
 
   let open = false;
+  let openSecond = false;
   let openAsync = false;
   let loading = false;
 </script>
@@ -114,6 +115,55 @@
         >
           Yes, delete item
         </Button>
+        <Button>Cancel</Button>
+      </div>
+    </Dialog>
+  </Toggle>
+</Preview>
+
+<h2>dialog in dialog</h2>
+
+<Preview>
+  <Toggle let:on={open} let:toggle={toggleDelete}>
+    <Button icon={mdiTrashCan} on:click={toggleDelete} color="red">Delete</Button>
+    <Dialog {open}>
+      <div slot="title">Delete this item ?</div>
+      <div class="px-6 py-3">This will permanently delete the item</div>
+      <div slot="actions">
+        <Toggle let:on={openSecond} let:toggle={toggleConfirm}>
+          <Button
+            icon={mdiTrashCan}
+            on:click={(e) => {
+              e.stopPropagation();
+              toggleConfirm();
+            }}
+            color="red"
+            variant="fill"
+          >
+            Yes
+          </Button>
+          <Dialog open={openSecond} on:close={toggleConfirm}>
+            <div slot="title">Are you <b>REALLY</b> sure?</div>
+            <div class="px-6 py-3">
+              This will permanently delete the item and can not be undone.
+            </div>
+            <div slot="actions">
+              <Button
+                on:click={(e) => {
+                  console.log('Deleting item...');
+                  toggleConfirm();
+                  toggleDelete();
+                }}
+                variant="fill"
+                color="red"
+              >
+                Yes, delete item
+              </Button>
+              <Button>Cancel</Button>
+            </div>
+          </Dialog>
+        </Toggle>
+
         <Button>Cancel</Button>
       </div>
     </Dialog>
