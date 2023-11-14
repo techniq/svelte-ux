@@ -113,16 +113,20 @@
   <SelectField options={optionsAsync} {loading} />
   <Button
     on:click={() => {
-      loading = true;
-      // simulate async loading with a loading of 2 seconds!
-      setTimeout(() => {
-        optionsAsync = optionsAsync.length === 0 ? options : [];
-        loading = false;
-      }, 2000);
+      // simulate async loading of 2 seconds
+      if (optionsAsync.length === 0) {
+        loading = true;
+        setTimeout(() => {
+          optionsAsync = options;
+          loading = false;
+        }, 2000);
+      } else {
+        optionsAsync = [];
+      }
     }}
     {loading}
   >
-    {optionsAsync.length === 0 ? 'Load options' : 'unload options'}
+    {optionsAsync.length === 0 ? 'Load options' : 'Unload options'}
   </Button>
 </Preview>
 
