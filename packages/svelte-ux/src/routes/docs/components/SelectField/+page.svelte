@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiMagnify, mdiPlus, mdiPencil } from '@mdi/js';
+  import { mdiMagnify, mdiPlus, mdiPencil, mdiAccount } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
@@ -13,13 +13,15 @@
 
   import { delay } from '$lib/utils/promise';
   import { cls } from '$lib/utils/styles';
+  import Icon from '$lib/components/Icon.svelte';
 
   let options = [
-    { name: 'One', value: 1 },
-    { name: 'Two', value: 2 },
-    { name: 'Three', value: 3 },
-    { name: 'Four', value: 4 },
+    { name: 'One', value: 1, icon: mdiMagnify },
+    { name: 'Two', value: 2, icon: mdiPlus },
+    { name: 'Three', value: 3, icon: mdiPencil },
+    { name: 'Four', value: 4, icon: mdiAccount },
   ];
+
   const optionsWithGroup = [
     { name: 'One', value: 1, group: 'First' },
     { name: 'Two', value: 2, group: 'First' },
@@ -41,6 +43,9 @@
     { name: 'Bar', value: 2 },
     { name: 'Baz', value: 3 },
   ];
+
+  let optionsAsync: { name: string; value: number }[] = [];
+  let loading = false;
 
   let value = 3;
 </script>
@@ -102,6 +107,31 @@
   <SelectField {options} loading />
 </Preview>
 
+<h2>Async options</h2>
+
+<Preview>
+  <SelectField bind:value options={optionsAsync} {loading} />
+  <Button
+    on:click={() => {
+      // simulate async loading of 2 seconds
+      if (optionsAsync.length === 0) {
+        loading = true;
+        setTimeout(() => {
+          optionsAsync = options;
+          // set a default value after loading
+          value = 2;
+          loading = false;
+        }, 2000);
+      } else {
+        optionsAsync = [];
+      }
+    }}
+    {loading}
+  >
+    {optionsAsync.length === 0 ? 'Load options' : 'Unload options'}
+  </Button>
+</Preview>
+
 <h2>disabled</h2>
 
 <Preview>
@@ -131,6 +161,31 @@
           <div>{option.name}</div>
           <div class="text-sm text-black/50">{option.value}</div>
         </div>
+      </MenuItem>
+    </div>
+  </SelectField>
+</Preview>
+
+<h2>option slot with icon</h2>
+
+<Preview>
+  <SelectField
+    {options}
+    bind:value
+    icon={options.find((c) => c.value === value)?.icon}
+    on:change={(e) => console.log('on:change', e.detail)}
+  >
+    <div slot="option" let:option let:index let:selected let:highlightIndex>
+      <MenuItem
+        class={cls(
+          index === highlightIndex && 'bg-black/5',
+          option === selected && 'font-semibold',
+          option.group ? 'px-4' : 'px-2'
+        )}
+        scrollIntoView={index === highlightIndex}
+        icon={{ data: option.icon, style: 'color: #0000FF;' }}
+      >
+        {option.name}
       </MenuItem>
     </div>
   </SelectField>
