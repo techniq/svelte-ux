@@ -110,7 +110,7 @@
 <h2>Async options</h2>
 
 <Preview>
-  <SelectField options={optionsAsync} {loading} />
+  <SelectField bind:value options={optionsAsync} {loading} />
   <Button
     on:click={() => {
       // simulate async loading of 2 seconds
@@ -118,6 +118,8 @@
         loading = true;
         setTimeout(() => {
           optionsAsync = options;
+          // set a default value after loading
+          value = 2;
           loading = false;
         }, 2000);
       } else {
