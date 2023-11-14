@@ -124,25 +124,35 @@
 <h2>dialog in dialog</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
-    <Button icon={mdiTrashCan} on:click={toggle} color="red">Delete</Button>
-    <Dialog {open} on:close={toggle}>
-      <div slot="title">Are you sure?</div>
+  <Toggle let:on={open} let:toggle={toggleDelete}>
+    <Button icon={mdiTrashCan} on:click={toggleDelete} color="red">Delete</Button>
+    <Dialog {open}>
+      <div slot="title">Delete this item ?</div>
       <div class="px-6 py-3">This will permanently delete the item</div>
       <div slot="actions">
-        <Toggle let:on={openSecond} let:toggle>
-          <Button icon={mdiTrashCan} on:click={toggle} color="red" variant="fill">
-            Yes, delete item
+        <Toggle let:on={openSecond} let:toggle={toggleConfirm}>
+          <Button
+            icon={mdiTrashCan}
+            on:click={(e) => {
+              e.stopPropagation();
+              toggleConfirm();
+            }}
+            color="red"
+            variant="fill"
+          >
+            Yes
           </Button>
-          <Dialog open={openSecond} on:close={toggle}>
+          <Dialog open={openSecond} on:close={toggleConfirm}>
             <div slot="title">Are you <b>REALLY</b> sure?</div>
             <div class="px-6 py-3">
               This will permanently delete the item and can not be undone.
             </div>
             <div slot="actions">
               <Button
-                on:click={() => {
+                on:click={(e) => {
                   console.log('Deleting item...');
+                  toggleConfirm();
+                  toggleDelete();
                 }}
                 variant="fill"
                 color="red"
@@ -159,6 +169,7 @@
     </Dialog>
   </Toggle>
 </Preview>
+
 <h2>Loading</h2>
 
 <Preview>
