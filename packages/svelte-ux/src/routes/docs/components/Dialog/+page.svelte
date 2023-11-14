@@ -8,7 +8,6 @@
   import Toggle from '$lib/components/Toggle.svelte';
 
   let open = false;
-  let openSecond = false;
   let openAsync = false;
   let loading = false;
 </script>
@@ -121,7 +120,7 @@
   </Toggle>
 </Preview>
 
-<h2>dialog in dialog</h2>
+<h2>Dialog in Dialog</h2>
 
 <Preview>
   <Toggle let:on={open} let:toggle={toggleDelete}>
