@@ -1,15 +1,18 @@
-import { format as d3Format } from 'd3-format';
+import { format as d3Format, formatDefaultLocale, type FormatLocaleDefinition } from 'd3-format';
 
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
 export function formatNumber(
   number: number | null | undefined,
-  options: Intl.NumberFormatOptions & { fractionDigits?: number } = {}
+  options: Intl.NumberFormatOptions & {
+    fractionDigits?: number;
+    locales?: string | string[] | undefined;
+  } = {}
 ) {
   if (number == null) {
     return '';
   }
 
-  const formatter = Intl.NumberFormat(undefined, {
+  const formatter = Intl.NumberFormat(options.locales ?? undefined, {
     ...(options.currency != null && {
       style: 'currency',
     }),
@@ -37,9 +40,14 @@ export type FormatNumberStyle =
 export function formatNumberAsStyle(
   value: number | null | undefined,
   style: FormatNumberStyle = 'decimal',
-  precision = 2, // Used for decimals, defaults to 2
-  significantDigits?: number // Used for summary, ie, 1,001.34 with significantDigits=1 will be 1K
+  options: {
+    precision?: number;
+    significantDigits?: number; // Used for summary, ie, 1,001.34 with significantDigits=1 will be 1K
+    format?: FormatLocaleDefinition;
+  } = {}
 ) {
+  const { precision = 2, significantDigits } = options;
+
   if (value == null) {
     return '';
   }
@@ -51,11 +59,8 @@ export function formatNumberAsStyle(
   var formula = '';
 
   if (style === 'currency') {
-    formula += '$';
+    formula += '$'; // needed even if it will be euro later. It's just to say "Its currency"
   }
-
-  // All numbers are formatted with commas
-  formula += ',';
 
   // TODO: Format `G` as `B`, etc.  See: https://github.com/d3/d3/issues/2241 and https://github.com/d3/d3-format/pull/96
 
@@ -70,12 +75,20 @@ export function formatNumberAsStyle(
   } else if (significantDigits === 0) {
     formula += '~s';
   } else if (significantDigits) {
-    formula += `.${significantDigits}s`;
+    formula += `,.${significantDigits}s`;
   } else {
-    formula += `.${precision}f`;
+    formula += `,.${precision}f`;
   }
 
-  return d3Format(formula)(value);
+  const defaultFormat = formatDefaultLocale({
+    decimal: '.',
+    thousands: ',',
+    grouping: [3],
+    currency: ['$', ''],
+    ...options?.format,
+  });
+
+  return defaultFormat.format(formula)(value);
 }
 
 /**

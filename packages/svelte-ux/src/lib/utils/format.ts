@@ -4,7 +4,10 @@ import { formatDate, PeriodType } from './date';
 import { formatNumberAsStyle } from './number';
 import type { FormatNumberStyle } from './number';
 
-export type FormatType = FormatNumberStyle | PeriodType | ((value: any, ...extraArgs) => any);
+export type FormatType =
+  | FormatNumberStyle
+  | PeriodType
+  | ((value: any, ...extraArgs: any[]) => any);
 
 /**
  * Generic format which can handle Dates, Numbers, or custom format function
