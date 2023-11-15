@@ -5,7 +5,7 @@
   import Field from '$lib/components/Field.svelte';
   import { mdiMinus, mdiPlus } from '@mdi/js';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
-  import { timerStore } from '$lib';
+  import { romanize, timerStore } from '$lib';
 
   let value = 0;
 
@@ -75,7 +75,17 @@
   {/each}
 </Preview>
 
-<h2>Formatted</h2>
+<h2>Formatted (roman numerals)</h2>
+
+<Preview>
+  <ScrollingValue
+    bind:value
+    format={(value) => romanize(Math.abs(value)) || 0}
+    class="text-3xl tabular-nums"
+  />
+</Preview>
+
+<h2>Formatted (list)</h2>
 
 <Preview>
   <span class="text-3xl">
