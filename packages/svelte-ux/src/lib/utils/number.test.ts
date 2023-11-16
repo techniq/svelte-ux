@@ -209,10 +209,19 @@ describe('formatNumber()', () => {
     expect(actual).equal('50M dollars');
   });
 
-  it('dollars 50M wo suffix', () => {
+  it('50M wo suffix', () => {
     const actual = formatNumber(50000000, {
       style: 'metric',
     });
     expect(actual).equal('50M');
+  });
+
+  it('200 m²', () => {
+    const actual = formatNumber(200, {
+      style: 'metric',
+      suffix: ' m²',
+      suffixExtraIfMany: '',
+    });
+    expect(actual).equal('200 m²');
   });
 });
