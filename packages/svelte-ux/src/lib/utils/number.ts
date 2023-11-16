@@ -10,7 +10,7 @@ export type FormatNumberStyle =
   | 'percentRound'
   | 'metric';
 
-type FormatNumberOptions = Intl.NumberFormatOptions & {
+export type FormatNumberOptions = Intl.NumberFormatOptions & {
   style?: FormatNumberStyle;
   locales?: string | undefined;
   fractionDigits?: number;
@@ -41,7 +41,12 @@ export function formatNumber(
   }
 
   // todo set defaults in a context or something
-  const defaults: FormatNumberOptions = { currency: 'USD', fractionDigits: 2 };
+  const defaults: FormatNumberOptions = {
+    locales: 'en',
+    currency: 'USD',
+    fractionDigits: 2,
+    currencyDisplay: 'symbol',
+  };
 
   const formatter = Intl.NumberFormat(options.locales ?? defaults.locales ?? undefined, {
     // Let's always starts with all defaults

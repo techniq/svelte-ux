@@ -1,8 +1,8 @@
 import { isFunction } from 'lodash-es';
 
 import { formatDate, PeriodType } from './date';
-import { formatNumberAsStyle } from './number';
-import type { FormatNumberStyle } from './number';
+import { formatNumber } from './number';
+import type { FormatNumberOptions, FormatNumberStyle } from './number';
 
 export type FormatType =
   | FormatNumberStyle
@@ -12,16 +12,30 @@ export type FormatType =
 /**
  * Generic format which can handle Dates, Numbers, or custom format function
  */
-export function format(value: any, format?: FormatType, ...extraFuncArgs: any[]) {
+export function format(
+  value: number | null,
+  format?: FormatNumberStyle,
+  extraFuncArgs?: FormatNumberOptions
+): string;
+export function format(
+  value: string | Date | null | undefined,
+  format?: PeriodType,
+  ...extraFuncArgs: any[]
+): string;
+export function format(value: any, format?: FormatType, ...extraFuncArgs: any[]): any {
   let formattedValue = value ?? ''; // Do not render `null`
 
   if (format) {
+    // TODO QUESTION: is this used?
     if (isFunction(format)) {
       formattedValue = format(value, ...extraFuncArgs);
     } else if (format in PeriodType) {
       formattedValue = formatDate(value, format as PeriodType, ...extraFuncArgs);
     } else if (typeof value === 'number') {
-      formattedValue = formatNumberAsStyle(value, format as FormatNumberStyle, ...extraFuncArgs);
+      formattedValue = formatNumber(value, {
+        style: format,
+        ...extraFuncArgs[0],
+      });
     }
   }
 

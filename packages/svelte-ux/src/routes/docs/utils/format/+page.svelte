@@ -21,9 +21,9 @@
   <div>{format(1234.56, 'currency')}</div>
   <div>{format(0.5678, 'percent')}</div>
   <div>{format(0.5678, 'percentRound')}</div>
-  <div>{format(1_234_567, 'metric')}</div>
+  <div>{format(1_234_567, 'metric', { minimumSignificantDigits: 5 })}</div>
   <div>{format(1_200_000, 'metric')}</div>
-  <div>{format(0.5678, 'percent', 1)}</div>
+  <div>{format(0.5678, 'percent', { fractionDigits: 1 })}</div>
 </Preview>
 
 <h2>Period formats</h2>

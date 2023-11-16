@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { clamp, formatNumber, formatNumberAsStyle, round } from './number';
+import { clamp, formatNumber, round } from './number';
 
 describe('clamp()', () => {
   it('no change', () => {
@@ -67,6 +67,7 @@ describe('formatNumber()', () => {
   it('formats number with integer', () => {
     const actual = formatNumber(1234.5678, { style: 'integer' });
     expect(actual).equal('1234');
+    expect(actual).equal('1,234'); // TODO: Today its like this... It's intended? (I leave the test breaking for now)
   });
 
   it('formats number with default fraction digits', () => {
@@ -81,7 +82,6 @@ describe('formatNumber()', () => {
 
   it('returns value with significant digits', () => {
     const actual = formatNumber(1234.5678, {
-      // style: 'decimal', // Optional, default is decimal
       notation: 'compact',
       maximumSignificantDigits: 2,
     });
@@ -90,7 +90,6 @@ describe('formatNumber()', () => {
 
   it('returns value with significant digits', () => {
     const actual = formatNumber(1000, {
-      // style: 'decimal', // Optional, default is decimal
       notation: 'compact',
       minimumSignificantDigits: 2,
     });
