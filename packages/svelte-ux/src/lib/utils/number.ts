@@ -1,5 +1,3 @@
-import { format as d3Format, formatDefaultLocale, type FormatLocaleDefinition } from 'd3-format';
-
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
   | 'currency' // from Intl.NumberFormat options.style NumberFormatOptions
@@ -94,60 +92,6 @@ export function formatNumber(
   }
 
   return `${value}${suffix}`;
-}
-
-export function formatNumberAsStyle(
-  value: number | null | undefined,
-  style: FormatNumberStyle = 'decimal',
-  options: {
-    precision?: number;
-    significantDigits?: number; // Used for summary, ie, 1,001.34 with significantDigits=1 will be 1K
-    format?: FormatLocaleDefinition;
-  } = {}
-) {
-  const { precision = 2, significantDigits } = options;
-
-  if (value == null) {
-    return '';
-  }
-
-  if (style === 'none') {
-    return `${value}`;
-  }
-
-  var formula = '';
-
-  if (style === 'currency') {
-    formula += '$'; // needed even if it will be euro later. It's just to say "Its currency"
-  }
-
-  // TODO: Format `G` as `B`, etc.  See: https://github.com/d3/d3/issues/2241 and https://github.com/d3/d3-format/pull/96
-
-  if (style === 'percent') {
-    formula += `.${precision}%`;
-  } else if (style === 'percentRound') {
-    formula += `.0%`;
-  } else if (style === 'integer') {
-    formula += `d`;
-  } else if (style === 'metric') {
-    formula += '~s';
-  } else if (significantDigits === 0) {
-    formula += '~s';
-  } else if (significantDigits) {
-    formula += `,.${significantDigits}s`;
-  } else {
-    formula += `,.${precision}f`;
-  }
-
-  const defaultFormat = formatDefaultLocale({
-    decimal: '.',
-    thousands: ',',
-    grouping: [3],
-    currency: ['$', ''],
-    ...options?.format,
-  });
-
-  return defaultFormat.format(formula)(value);
 }
 
 /**
