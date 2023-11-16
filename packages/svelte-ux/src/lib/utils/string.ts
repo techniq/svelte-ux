@@ -48,6 +48,7 @@ export function truncate(text: string, totalChars: number, endChars: number = 0)
   }
 }
 
+/** Get the roman numeral for the given value */
 export function romanize(value: number) {
   const lookup = {
     M: 1000,
@@ -66,11 +67,11 @@ export function romanize(value: number) {
   };
 
   let result = '';
-  let i;
-  for (i in lookup) {
-    while (value >= lookup[i]) {
-      result += i;
-      value -= lookup[i];
+
+  for (let [numeral, numeralValue] of Object.entries(lookup)) {
+    while (value >= numeralValue) {
+      result += numeral;
+      value -= numeralValue;
     }
   }
 
