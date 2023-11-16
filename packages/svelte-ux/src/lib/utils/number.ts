@@ -36,10 +36,6 @@ export function formatNumber(
     return `${number}`;
   }
 
-  if (options.style === 'integer') {
-    return `${parseInt(number.toString())}`;
-  }
-
   // todo set defaults in a context or something
   const defaults: FormatNumberOptions = {
     locales: 'en',
@@ -79,6 +75,13 @@ export function formatNumber(
     ...(options.style === 'metric' && {
       style: 'decimal',
       notation: 'compact',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }),
+
+    // Let's overwrite for style=metric
+    ...(options.style === 'integer' && {
+      style: 'decimal',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }),

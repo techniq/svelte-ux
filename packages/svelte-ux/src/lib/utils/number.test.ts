@@ -66,8 +66,7 @@ describe('formatNumber()', () => {
 
   it('formats number with integer', () => {
     const actual = formatNumber(1234.5678, { style: 'integer' });
-    expect(actual).equal('1234');
-    // expect(actual).equal('1,234'); // TODO: Today its like this... It's intended? (I leave the test breaking for now)
+    expect(actual).equal('1,235');
   });
 
   it('formats number with default fraction digits', () => {
