@@ -1,12 +1,31 @@
 import { format as d3Format, formatDefaultLocale, type FormatLocaleDefinition } from 'd3-format';
 
+export type FormatNumberStyle =
+  | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'currency' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'percent' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'unit' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'none'
+  | 'integer'
+  | 'percentRound'
+  | 'metric';
+
+type FormatNumberOptions = Intl.NumberFormatOptions & {
+  style?: FormatNumberStyle;
+  locales?: string | undefined;
+  fractionDigits?: number;
+};
+
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
 export function formatNumber(
   number: number | null | undefined,
-  options: Intl.NumberFormatOptions & {
-    style?: FormatNumberStyle;
-    locales?: string | undefined;
-    fractionDigits?: number;
+  options: FormatNumberOptions & {
+    suffix?: string;
+    /**
+     * If number is >= 2, then this extraSuffix will be appended
+     * @default 's'
+     */
+    suffixExtraIfMany?: string;
   } = {}
 ) {
   if (number == null) {
@@ -21,41 +40,53 @@ export function formatNumber(
     return `${parseInt(number.toString())}`;
   }
 
-  const defaultCurrency = 'USD';
+  // todo set defaults in a context or something
+  const defaults: FormatNumberOptions = { currency: 'USD', fractionDigits: 2 };
 
-  const formatter = Intl.NumberFormat(options.locales ?? undefined, {
-    // Let's always set a default currency, even if it's not used
-    currency: defaultCurrency,
+  const formatter = Intl.NumberFormat(options.locales ?? defaults.locales ?? undefined, {
+    // Let's always starts with all defaults
+    ...defaults,
 
     // If currency is specified, then style must be currency
     ...(options.currency != null && {
       style: 'currency',
     }),
 
-    // Let's always default to 2 fraction digits by default
+    // Let's shorten min / max with fractionDigits
     ...{
-      minimumFractionDigits: options.fractionDigits != null ? options.fractionDigits : 2,
-      maximumFractionDigits: options.fractionDigits != null ? options.fractionDigits : 2,
+      minimumFractionDigits:
+        options.fractionDigits != null ? options.fractionDigits : defaults.fractionDigits,
+      maximumFractionDigits:
+        options.fractionDigits != null ? options.fractionDigits : defaults.fractionDigits,
     },
 
     // now we bring in user specified options
     ...options,
+
+    // Let's overwrite for style=percentRound
+    ...(options.style === 'percentRound' && {
+      style: 'percent',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }),
+
+    // Let's overwrite for style=metric
+    ...(options.style === 'metric' && {
+      style: 'decimal',
+      notation: 'compact',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }),
   });
   const value = formatter.format(number);
 
-  return value;
-}
+  let suffix = options.suffix ?? '';
+  if (suffix && Math.abs(number) >= 2 && options.suffixExtraIfMany !== '') {
+    suffix += options.suffixExtraIfMany ?? 's';
+  }
 
-export type FormatNumberStyle =
-  | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
-  | 'currency' // from Intl.NumberFormat options.style NumberFormatOptions
-  | 'percent' // from Intl.NumberFormat options.style NumberFormatOptions
-  | 'unit' // from Intl.NumberFormat options.style NumberFormatOptions
-  | 'integer'
-  | 'percentRound'
-  | 'metric' // todo remove? Use unit instead?
-  | 'none'
-  | undefined;
+  return `${value}${suffix}`;
+}
 
 export function formatNumberAsStyle(
   value: number | null | undefined,

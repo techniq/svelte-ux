@@ -79,12 +79,30 @@ describe('formatNumber()', () => {
     expect(actual).equal('1,234.568');
   });
 
-  it('formats number with currency USD', () => {
+  it('returns value with significant digits', () => {
+    const actual = formatNumber(1234.5678, {
+      // style: 'decimal', // Optional, default is decimal
+      notation: 'compact',
+      maximumSignificantDigits: 2,
+    });
+    expect(actual).equal('1.2K');
+  });
+
+  it('returns value with significant digits', () => {
+    const actual = formatNumber(1000, {
+      // style: 'decimal', // Optional, default is decimal
+      notation: 'compact',
+      minimumSignificantDigits: 2,
+    });
+    expect(actual).equal('1.0K');
+  });
+
+  it('formats number with currency USD by style', () => {
     const actual = formatNumber(1234.5678, { style: 'currency' });
     expect(actual).equal('$1,234.57');
   });
 
-  it('formats number with currency USD', () => {
+  it('formats number with currency USD by currency', () => {
     const actual = formatNumber(1234.5678, { currency: 'USD' });
     expect(actual).equal('$1,234.57');
   });
@@ -94,78 +112,101 @@ describe('formatNumber()', () => {
     expect(actual).equal('£1,234.57');
   });
 
-  it('formats number with currency EUR', () => {
+  it('formats number with currency EUR only currency', () => {
     const actual = formatNumber(1234.5678, { currency: 'EUR' });
     expect(actual).equal('€1,234.57');
   });
 
-  it('formats number with currency EUR', () => {
+  it('formats number with currency EUR with right local', () => {
     const actual = formatNumber(1234.5678, { locales: 'fr', currency: 'EUR' });
     expect(actual).equal('1 234,57 €');
   });
-});
-
-describe('formatNumberAsStyle()', () => {
-  // it('returns empty string for null', () => {
-  //   const actual = formatNumberAsStyle(null);
-  //   expect(actual).equal('');
-  // });
-
-  // it('returns empty string for undefined', () => {
-  //   const actual = formatNumberAsStyle(undefined);
-  //   expect(actual).equal('');
-  // });
-
-  // it('returns value as string for style "none"', () => {
-  //   const actual = formatNumberAsStyle(1234.5678, 'none');
-  //   expect(actual).equal('1234.5678');
-  // });
-
-  // it('returns value with currency symbol for style "currency"', () => {
-  //   const actual = formatNumberAsStyle(1234.5678, 'currency');
-  //   expect(actual).toString().startsWith('$');
-  // });
 
   it('returns value with percent symbol for style "percent"', () => {
-    const actual = formatNumberAsStyle(0.1234, 'percent');
-    expect(actual).toString().endsWith('%');
+    const actual = formatNumber(0.1234, { style: 'percent' });
+    expect(actual).equal('12.34%');
   });
 
   it('returns value with percent symbol and no decimal for style "percentRound"', () => {
-    const actual = formatNumberAsStyle(0.1234, 'percentRound');
-    expect(actual).toString().endsWith('%');
-    expect(actual).not.toContain('.');
+    const actual2 = formatNumber(0.1234, { style: 'percentRound' });
+    expect(actual2).equal('12%');
   });
 
-  // it('returns value with no decimal for style "integer"', () => {
-  //   const actual = formatNumberAsStyle(1234.5678, 'integer');
-  //   expect(actual).equal('1235');
-  // });
+  it('returns value with metric suffix for style "unit" & meters', () => {
+    const actual = formatNumber(1000, {
+      style: 'unit',
 
-  it('returns value with metric suffix for style "metric"', () => {
-    const actual = formatNumberAsStyle(1000, 'metric');
-    expect(actual).equal('1k');
+      unit: 'meter',
+      unitDisplay: 'narrow',
+
+      notation: 'compact',
+      fractionDigits: 0,
+    });
+    expect(actual).equal('1Km');
   });
 
-  it('returns value with significant digits', () => {
-    const actual = formatNumberAsStyle(1234.5678, 'decimal', { significantDigits: 2 });
-    expect(actual).equal('1.2k');
+  it('byte 10B', () => {
+    const actual = formatNumber(10, {
+      style: 'unit',
+      unit: 'byte',
+      unitDisplay: 'narrow',
+      notation: 'compact',
+      fractionDigits: 0,
+    });
+    expect(actual).equal('10B');
   });
 
-  it('returns value with precision for style "decimal"', () => {
-    const actual = formatNumberAsStyle(1234.5678);
-    expect(actual).equal('1,234.57');
+  it('byte 200KB', () => {
+    const actual = formatNumber(200000, {
+      style: 'unit',
+      unit: 'byte',
+      unitDisplay: 'narrow',
+      notation: 'compact',
+      fractionDigits: 0,
+    });
+    expect(actual).equal('200KB');
   });
 
-  // it('returns value with currency symbol for style "currency" EUR fr', () => {
-  //   const actual = formatNumberAsStyle(1234.5678, 'currency', {
-  //     format: {
-  //       decimal: ',',
-  //       thousands: ' ',
-  //       grouping: [3],
-  //       currency: ['', ' €'],
-  //     },
-  //   });
-  //   expect(actual).toBe('1 234,57 €');
-  // });
+  it('byte 50MB', () => {
+    const actual = formatNumber(50000000, {
+      style: 'unit',
+      unit: 'byte',
+      unitDisplay: 'narrow',
+      notation: 'compact',
+      fractionDigits: 0,
+    });
+    expect(actual).equal('50MB');
+  });
+
+  it('dollar 0', () => {
+    const actual = formatNumber(0, {
+      style: 'metric',
+      suffix: ' dollar',
+    });
+    expect(actual).equal('0 dollar');
+  });
+
+  it('dollars 10', () => {
+    const actual = formatNumber(10, {
+      style: 'metric',
+      suffix: ' dollar',
+    });
+    expect(actual).equal('10 dollars');
+  });
+
+  it('dollars 200K', () => {
+    const actual = formatNumber(200000, {
+      style: 'metric',
+      suffix: ' dollar',
+    });
+    expect(actual).equal('200K dollars');
+  });
+
+  it('dollars 50M', () => {
+    const actual = formatNumber(50000000, {
+      style: 'metric',
+      suffix: ' dollar',
+    });
+    expect(actual).equal('50M dollars');
+  });
 });
