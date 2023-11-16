@@ -4,22 +4,41 @@ import { format as d3Format, formatDefaultLocale, type FormatLocaleDefinition } 
 export function formatNumber(
   number: number | null | undefined,
   options: Intl.NumberFormatOptions & {
+    style?: FormatNumberStyle;
+    locales?: string | undefined;
     fractionDigits?: number;
-    locales?: string | string[] | undefined;
   } = {}
 ) {
   if (number == null) {
     return '';
   }
 
+  if (options.style === 'none') {
+    return `${number}`;
+  }
+
+  if (options.style === 'integer') {
+    return `${parseInt(number.toString())}`;
+  }
+
+  const defaultCurrency = 'USD';
+
   const formatter = Intl.NumberFormat(options.locales ?? undefined, {
+    // Let's always set a default currency, even if it's not used
+    currency: defaultCurrency,
+
+    // If currency is specified, then style must be currency
     ...(options.currency != null && {
       style: 'currency',
     }),
+
+    // Let's always default to 2 fraction digits by default
     ...{
       minimumFractionDigits: options.fractionDigits != null ? options.fractionDigits : 2,
       maximumFractionDigits: options.fractionDigits != null ? options.fractionDigits : 2,
     },
+
+    // now we bring in user specified options
     ...options,
   });
   const value = formatter.format(number);
@@ -28,12 +47,13 @@ export function formatNumber(
 }
 
 export type FormatNumberStyle =
+  | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'currency' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'percent' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'unit' // from Intl.NumberFormat options.style NumberFormatOptions
   | 'integer'
-  | 'decimal'
-  | 'currency'
-  | 'percent'
   | 'percentRound'
-  | 'metric'
+  | 'metric' // todo remove? Use unit instead?
   | 'none'
   | undefined;
 
