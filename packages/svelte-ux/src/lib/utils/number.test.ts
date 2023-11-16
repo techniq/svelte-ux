@@ -64,9 +64,14 @@ describe('formatNumber()', () => {
     expect(actual).equal('1234.5678');
   });
 
-  it('formats number with integer', () => {
+  it('formats number with integer default', () => {
     const actual = formatNumber(1234.5678, { style: 'integer' });
     expect(actual).equal('1,235');
+  });
+
+  it('formats number with integer fr', () => {
+    const actual = formatNumber(1234.5678, { style: 'integer', locales: 'fr' });
+    expect(actual).equal('1 235');
   });
 
   it('formats number with default fraction digits', () => {
