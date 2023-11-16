@@ -26,7 +26,6 @@ export function format(value: any, format?: FormatType, ...extraFuncArgs: any[])
   let formattedValue = value ?? ''; // Do not render `null`
 
   if (format) {
-    // TODO QUESTION: is this used?
     if (isFunction(format)) {
       formattedValue = format(value, ...extraFuncArgs);
     } else if (format in PeriodType) {
