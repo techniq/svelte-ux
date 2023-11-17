@@ -14,20 +14,16 @@ export type FormatNumberOptions = Intl.NumberFormatOptions & {
   style?: FormatNumberStyle;
   locales?: string | undefined;
   fractionDigits?: number;
+  suffix?: string;
+  /**
+   * If number is >= 2, then this extraSuffix will be appended
+   * @default 's'
+   */
+  suffixExtraIfMany?: string;
 };
 
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
-export function formatNumber(
-  number: number | null | undefined,
-  options: FormatNumberOptions & {
-    suffix?: string;
-    /**
-     * If number is >= 2, then this extraSuffix will be appended
-     * @default 's'
-     */
-    suffixExtraIfMany?: string;
-  } = {}
-) {
+export function formatNumber(number: number | null | undefined, options: FormatNumberOptions = {}) {
   if (number == null) {
     return '';
   }

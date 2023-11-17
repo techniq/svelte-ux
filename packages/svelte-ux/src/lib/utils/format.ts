@@ -13,15 +13,16 @@ export type FormatType =
  * Generic format which can handle Dates, Numbers, or custom format function
  */
 export function format(
-  value: number | null,
+  value: null | undefined,
   format?: FormatNumberStyle,
   extraFuncArgs?: FormatNumberOptions
 ): string;
 export function format(
-  value: string | Date | null | undefined,
-  format?: PeriodType,
-  ...extraFuncArgs: any[]
+  value: number,
+  format?: FormatNumberStyle,
+  extraFuncArgs?: FormatNumberOptions
 ): string;
+export function format(value: string | Date, format?: PeriodType, ...extraFuncArgs: any[]): string;
 export function format(value: any, format?: FormatType, ...extraFuncArgs: any[]): any {
   let formattedValue = value ?? ''; // Do not render `null`
 
