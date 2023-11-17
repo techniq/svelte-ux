@@ -17,7 +17,12 @@
 
   settings({
     // formats: {
-    //   numbers: { locales: 'fr', currency: 'EUR' },
+    //   numbers: {
+    //     defaults: {
+    //       locales: 'fr',
+    //       currency: 'EUR',
+    //     },
+    //   },
     // },
     // theme: {
     //   AppBar: 'bg-red-500 text-white shadow-md',
