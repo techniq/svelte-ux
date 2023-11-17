@@ -32,7 +32,7 @@ export function formatNumber(number: number | null | undefined, options: FormatN
     return `${number}`;
   }
 
-  const defaults = getFormatNumberOptions();
+  const defaults = getFormatNumberOptions(options.style);
 
   const formatter = Intl.NumberFormat(options.locales ?? defaults.locales ?? undefined, {
     // Let's always starts with all defaults
