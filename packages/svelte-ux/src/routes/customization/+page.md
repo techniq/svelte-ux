@@ -63,12 +63,22 @@ settings({
   },
 
   formats: {
-    // This is the default, but you can override it here for your app globally
     numbers: {
-      locales: 'en',
-      currency: 'USD',
-      fractionDigits: 2,
-      currencyDisplay: 'symbol',
+      // This is the default, but you can override it here for your app globally
+      default: {
+        locales: 'en',
+        currency: 'USD',
+        fractionDigits: 2,
+        currencyDisplay: 'symbol',
+      },
+      // and/or per preset
+      currency: {
+        locales: 'fr',
+        currency: 'EUR',
+      },
+      decimal: {
+        fractionDigits: 4,
+      },
     },
   },
 });

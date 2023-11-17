@@ -24,7 +24,7 @@
 
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { createTheme } from '$lib/components/theme';
+  import { settings, getSettings } from '$lib/components/settings';
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';
   import { xlScreen } from '$lib/stores/matchMedia';
   import { cls } from '$lib/utils/styles';
@@ -69,7 +69,7 @@
   }
 
   // Clear root layout theme so doesn't show on doc examples
-  createTheme({});
+  settings({ ...getSettings(), theme: {} });
 </script>
 
 <div
