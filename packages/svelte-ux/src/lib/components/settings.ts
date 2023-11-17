@@ -1,11 +1,8 @@
 import type { FormatNumberOptions, FormatNumberStyle } from '$lib/utils/number';
 import { getContext, setContext } from 'svelte';
 import type { Theme } from './theme';
+import type { Prettify } from '$lib/types/typeHelpers';
 
-// Matt Pocock tips //https://www.youtube.com/watch?v=2lCCKiWGlC0
-export type Prettify<T> = {
-  [K in keyof T]: T[K];
-} & {};
 type ExcludeNone<T> = T extends 'none' ? never : T;
 export type Settings = {
   formats?: {
