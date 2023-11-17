@@ -13,7 +13,7 @@
 
 <h1>Examples</h1>
 
-<h2>number formats (defaut setup)</h2>
+<h2>number formats (defaut settings)</h2>
 
 <Preview showCode>
   <div>{format(1234.56, 'integer')}</div>
@@ -26,12 +26,12 @@
   <div>{format(0.5678, 'percent', { fractionDigits: 1 })}</div>
 </Preview>
 
-<h2>number formats (local setup)</h2>
+<h2>number formats (local settings)</h2>
 
 <span>
   You can customize numbers with the 3rd arg that is an enhanced <b>`Intl.NumberFormatOptions`</b>
   type. You can pass for example locales like <b>fr</b>, <b>de</b>, ... You can also to that
-  globally in the <a class="text-accent-500" href="/customization#setup">Setup</a>.
+  globally in the <a class="text-accent-500" href="/customization#settings">Settings</a>.
 </span>
 
 <Preview showCode>

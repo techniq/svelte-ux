@@ -11,11 +11,11 @@
   import NavMenu from './_NavMenu.svelte';
   import QuickSearch from '$lib/components/QuickSearch.svelte';
   import { afterNavigate, goto } from '$app/navigation';
-  import { setup } from '$lib';
+  import { settings } from '$lib';
 
   inject({ mode: dev ? 'development' : 'production' });
 
-  setup({
+  settings({
     // formats: {
     //   numbers: { locales: 'fr', currency: 'EUR' },
     // },

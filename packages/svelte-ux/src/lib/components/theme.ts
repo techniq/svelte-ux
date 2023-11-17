@@ -1,6 +1,6 @@
 import type { ComponentProps, SvelteComponent } from 'svelte';
 import type * as Components from './';
-import { getSetup } from './setup';
+import { getSettings } from './settings';
 
 type ComponentName = keyof typeof Components;
 
@@ -15,7 +15,7 @@ export type Theme = {
 };
 
 export function getTheme() {
-  return getSetup().theme ?? {};
+  return getSettings().theme ?? {};
 }
 
 export function getComponentTheme(name: ComponentName) {

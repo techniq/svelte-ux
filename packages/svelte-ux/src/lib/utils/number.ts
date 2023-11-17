@@ -1,4 +1,4 @@
-import { getFormatNumberOptions } from '$lib/components/setup';
+import { getFormatNumberOptions } from '$lib/components/settings';
 
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions

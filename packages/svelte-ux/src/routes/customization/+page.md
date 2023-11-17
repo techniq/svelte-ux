@@ -45,16 +45,16 @@ Internally, each component uses the `cls()` util which leverages [tailwind-merge
 
 ---
 
-## Setup with YOUR preferences
+## Settings with YOUR preferences
 
-At the root of your app, you can call `setup({ ... })` to set up your own defaults for your theme, components, formats, ... Usually this is done in `+layout.svelte`.
+At the root of your app, you can call `settings({ ... })` to set up your own defaults for your theme, components, formats, ... Usually this is done in `+layout.svelte`.
 
 On each `ComponentName: ...` you can pass `class` (when value is a `string`) or `classes` (when value is an `object`) props to each component via context to allow convenient global styling, including access to internal element (when using `classes`)
 
 ```js
-import { setup } from 'svelte-ux';
+import { settings } from 'svelte-ux';
 
-setup({
+settings({
   theme: {
     Button: 'flex-2', // same as <Button class="flex-2">
     TextField: {
