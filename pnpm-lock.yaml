@@ -66,9 +66,6 @@ importers:
       d3-array:
         specifier: ^3.2.4
         version: 3.2.4
-      d3-format:
-        specifier: ^3.1.0
-        version: 3.1.0
       d3-scale:
         specifier: ^4.0.2
         version: 4.0.2
@@ -118,9 +115,6 @@ importers:
       '@types/d3-array':
         specifier: ^3.0.9
         version: 3.0.9
-      '@types/d3-format':
-        specifier: ^3.0.3
-        version: 3.0.3
       '@types/d3-scale':
         specifier: ^4.0.6
         version: 4.0.6
@@ -1016,10 +1010,6 @@ packages:
 
   /@types/d3-array@3.0.9:
     resolution: {integrity: sha512-mZowFN3p64ajCJJ4riVYlOjNlBJv3hctgAY01pjw3qTnJePD8s9DZmYDzhHKvzfCYvdjwylkU38+Vdt7Cu2FDA==}
-    dev: true
-
-  /@types/d3-format@3.0.3:
-    resolution: {integrity: sha512-kxuLXSAEJykTeL/EI3tUiEfGqru7PRdqEy099YBnqFl+fF167UVSB4+wntlZv86ZdoYf0DHjsRHnTIm8kcH7qw==}
     dev: true
 
   /@types/d3-scale@4.0.6:

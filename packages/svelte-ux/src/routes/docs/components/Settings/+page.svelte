@@ -3,7 +3,7 @@
   import Button from '$lib/components/Button.svelte';
   import Menu from '$lib/components/Menu.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
-  import Theme from '$lib/components/Theme.svelte';
+  import Settings from '$lib/components/Settings.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 </script>
 
@@ -12,11 +12,13 @@
 <h2>Basic</h2>
 
 <Preview>
-  <Theme
-    theme={{
-      Button: 'border-2 font-bold',
-      Menu: 'shadow-xl border-gray-500',
-      MenuItem: 'font-bold',
+  <Settings
+    settings={{
+      theme: {
+        Button: 'border-2 font-bold',
+        Menu: 'shadow-xl border-gray-500',
+        MenuItem: 'font-bold',
+      },
     }}
   >
     <Toggle let:on={open} let:toggle>
@@ -31,5 +33,5 @@
         </Menu>
       </Button>
     </Toggle>
-  </Theme>
+  </Settings>
 </Preview>

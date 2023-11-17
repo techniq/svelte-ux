@@ -9,7 +9,7 @@
   import ResponsiveMenu from '$lib/components/ResponsiveMenu.svelte';
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
-  import Theme from '$lib/components/Theme.svelte';
+  import Settings from '$lib/components/Settings.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
 </script>
 
@@ -193,10 +193,12 @@ to add `pb-safe` util class
 <h2>Theme example</h2>
 
 <Preview>
-  <Theme
-    theme={{
-      Drawer:
-        '[&.ResponsiveMenu]:rounded-t-xl [&.ResponsiveMenu]:py-2 [&.ResponsiveMenu]:pb-[env(safe-area-inset-bottom)]',
+  <Settings
+    settings={{
+      theme: {
+        Drawer:
+          '[&.ResponsiveMenu]:rounded-t-xl [&.ResponsiveMenu]:py-2 [&.ResponsiveMenu]:pb-[env(safe-area-inset-bottom)]',
+      },
     }}
   >
     <Toggle let:on={open} let:toggle let:toggleOff>
@@ -211,5 +213,5 @@ to add `pb-safe` util class
         </ResponsiveMenu>
       </Button>
     </Toggle>
-  </Theme>
+  </Settings>
 </Preview>

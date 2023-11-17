@@ -11,12 +11,22 @@
   import NavMenu from './_NavMenu.svelte';
   import QuickSearch from '$lib/components/QuickSearch.svelte';
   import { afterNavigate, goto } from '$app/navigation';
-  import { createTheme } from '$lib/components/theme';
+  import { settings } from '$lib';
 
   inject({ mode: dev ? 'development' : 'production' });
 
-  createTheme({
-    // AppBar: 'bg-accent-500 text-white shadow-md',
+  settings({
+    // formats: {
+    //   numbers: {
+    //     defaults: {
+    //       locales: 'fr',
+    //       currency: 'EUR',
+    //     },
+    //   },
+    // },
+    // theme: {
+    //   AppBar: 'bg-red-500 text-white shadow-md',
+    // },
   });
 
   let mainEl: HTMLElement;

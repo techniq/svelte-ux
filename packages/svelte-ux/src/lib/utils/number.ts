@@ -1,81 +1,89 @@
-import { format as d3Format } from 'd3-format';
+import { getFormatNumberOptions } from '$lib/components/settings';
+
+export type FormatNumberStyle =
+  | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'currency' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'percent' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'unit' // from Intl.NumberFormat options.style NumberFormatOptions
+  | 'none'
+  | 'integer'
+  | 'percentRound'
+  | 'metric';
+
+export type FormatNumberOptions = Intl.NumberFormatOptions & {
+  style?: FormatNumberStyle;
+  locales?: string | undefined;
+  fractionDigits?: number;
+  suffix?: string;
+  /**
+   * If number is >= 2, then this extraSuffix will be appended
+   * @default 's'
+   */
+  suffixExtraIfMany?: string;
+};
 
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
-export function formatNumber(
-  number: number | null | undefined,
-  options: Intl.NumberFormatOptions & { fractionDigits?: number } = {}
-) {
+export function formatNumber(number: number | null | undefined, options: FormatNumberOptions = {}) {
   if (number == null) {
     return '';
   }
 
-  const formatter = Intl.NumberFormat(undefined, {
+  if (options.style === 'none') {
+    return `${number}`;
+  }
+
+  const defaults = getFormatNumberOptions(options.style);
+
+  const formatter = Intl.NumberFormat(options.locales ?? defaults.locales ?? undefined, {
+    // Let's always starts with all defaults
+    ...defaults,
+
+    // If currency is specified, then style must be currency
     ...(options.currency != null && {
       style: 'currency',
     }),
+
+    // Let's shorten min / max with fractionDigits
     ...{
-      minimumFractionDigits: options.fractionDigits != null ? options.fractionDigits : 2,
-      maximumFractionDigits: options.fractionDigits != null ? options.fractionDigits : 2,
+      minimumFractionDigits:
+        options.fractionDigits != null ? options.fractionDigits : defaults.fractionDigits,
+      maximumFractionDigits:
+        options.fractionDigits != null ? options.fractionDigits : defaults.fractionDigits,
     },
+
+    // now we bring in user specified options
     ...options,
+
+    // Let's overwrite for style=percentRound
+    ...(options.style === 'percentRound' && {
+      style: 'percent',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }),
+
+    // Let's overwrite for style=metric
+    ...(options.style === 'metric' && {
+      style: 'decimal',
+      notation: 'compact',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }),
+
+    // Let's overwrite for style=metric
+    ...(options.style === 'integer' && {
+      style: 'decimal',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }),
   });
   const value = formatter.format(number);
 
-  return value;
-}
-
-export type FormatNumberStyle =
-  | 'integer'
-  | 'decimal'
-  | 'currency'
-  | 'percent'
-  | 'percentRound'
-  | 'metric'
-  | 'none'
-  | undefined;
-
-export function formatNumberAsStyle(
-  value: number | null | undefined,
-  style: FormatNumberStyle = 'decimal',
-  precision = 2, // Used for decimals, defaults to 2
-  significantDigits?: number // Used for summary, ie, 1,001.34 with significantDigits=1 will be 1K
-) {
-  if (value == null) {
-    return '';
+  let suffix = options.suffix ?? '';
+  if (suffix && Math.abs(number) >= 2 && options.suffixExtraIfMany !== '') {
+    suffix += options.suffixExtraIfMany ?? 's';
   }
 
-  if (style === 'none') {
-    return `${value}`;
-  }
-
-  var formula = '';
-
-  if (style === 'currency') {
-    formula += '$';
-  }
-
-  // All numbers are formatted with commas
-  formula += ',';
-
-  // TODO: Format `G` as `B`, etc.  See: https://github.com/d3/d3/issues/2241 and https://github.com/d3/d3-format/pull/96
-
-  if (style === 'percent') {
-    formula += `.${precision}%`;
-  } else if (style === 'percentRound') {
-    formula += `.0%`;
-  } else if (style === 'integer') {
-    formula += `d`;
-  } else if (style === 'metric') {
-    formula += '~s';
-  } else if (significantDigits === 0) {
-    formula += '~s';
-  } else if (significantDigits) {
-    formula += `.${significantDigits}s`;
-  } else {
-    formula += `.${precision}f`;
-  }
-
-  return d3Format(formula)(value);
+  return `${value}${suffix}`;
 }
 
 /**
