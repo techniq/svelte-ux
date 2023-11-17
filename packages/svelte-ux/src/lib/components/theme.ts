@@ -1,5 +1,6 @@
-import { getContext, setContext, type ComponentProps, SvelteComponent } from 'svelte';
+import type { ComponentProps, SvelteComponent } from 'svelte';
 import type * as Components from './';
+import { getSetup } from './setup';
 
 type ComponentName = keyof typeof Components;
 
@@ -13,14 +14,8 @@ export type Theme = {
   [key in ComponentName]?: ClassesProp<(typeof Components)[key]> | string;
 };
 
-const themeKey = Symbol();
-
-export function createTheme(theme: Theme) {
-  setContext(themeKey, theme);
-}
-
 export function getTheme() {
-  return getContext<Theme>(themeKey) ?? {};
+  return getSetup().theme ?? {};
 }
 
 export function getComponentTheme(name: ComponentName) {

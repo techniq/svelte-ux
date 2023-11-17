@@ -1,3 +1,5 @@
+import { getFormatNumberOptions } from '$lib/components/setup';
+
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
   | 'currency' // from Intl.NumberFormat options.style NumberFormatOptions
@@ -34,13 +36,7 @@ export function formatNumber(
     return `${number}`;
   }
 
-  // todo set defaults in a context or something
-  const defaults: FormatNumberOptions = {
-    locales: 'en',
-    currency: 'USD',
-    fractionDigits: 2,
-    currencyDisplay: 'symbol',
-  };
+  const defaults = getFormatNumberOptions();
 
   const formatter = Intl.NumberFormat(options.locales ?? defaults.locales ?? undefined, {
     // Let's always starts with all defaults

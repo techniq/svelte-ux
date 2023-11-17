@@ -45,15 +45,31 @@ Internally, each component uses the `cls()` util which leverages [tailwind-merge
 
 ---
 
-## Theme via context (`createTheme()`)
+## Setup with YOUR preferences
 
-Using `createTheme({ ComponentName: ... })` you can pass `class` (when value is a `string`) or `classes` (when value is an `object`) props to each component via context to allow convenient global styling, including access to internal element (when using `classes`)
+At the root of your app, you can call `setup({ ... })` to set up your own defaults for your theme, components, formats, ... Usually this is done in `+layout.svelte`.
+
+On each `ComponentName: ...` you can pass `class` (when value is a `string`) or `classes` (when value is an `object`) props to each component via context to allow convenient global styling, including access to internal element (when using `classes`)
 
 ```js
-createTheme({
-  Button: 'flex-2', // same as <Button class="flex-2">
-  TextField: {
-    container: 'hover:shadow-none group-focus-within:shadow-none', // same as <TextField classes={{ container: '...' }}>
+import { setup } from 'svelte-ux';
+
+setup({
+  theme: {
+    Button: 'flex-2', // same as <Button class="flex-2">
+    TextField: {
+      container: 'hover:shadow-none group-focus-within:shadow-none', // same as <TextField classes={{ container: '...' }}>
+    },
+  },
+
+  formats: {
+    // This is the default, but you can override it here for your app globally
+    numbers: {
+      locales: 'en',
+      currency: 'USD',
+      fractionDigits: 2,
+      currencyDisplay: 'symbol',
+    },
   },
 });
 ```
