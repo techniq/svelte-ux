@@ -3,6 +3,14 @@
   import { format } from '$lib/utils/format';
   import { PeriodType } from '$lib/utils/date';
   import Code from '$lib/components/Code.svelte';
+  import TextField from '$lib/components/TextField.svelte';
+  import MenuField from '$lib/components/MenuField.svelte';
+  import type { FormatNumberStyle } from '$lib/utils/number';
+
+  let value = 1234.56;
+  let style: FormatNumberStyle = 'decimal';
+  let locales: string = 'en'; //
+  let currency: string = 'USD';
 
   const date = new Date('1982-03-30T00:00:00');
 </script>
@@ -12,6 +20,36 @@
 <Code source={`import { format } from 'svelte-ux';`} language="javascript" class="mb-4" />
 
 <h1>Examples</h1>
+
+<h2>Playground</h2>
+
+<div class="grid grid-cols-xs gap-2 mb-2">
+  <TextField label="value" bind:value type="decimal" />
+
+  <MenuField
+    label="style"
+    bind:value={style}
+    options={['integer', 'decimal', 'currency', 'percent', 'percentRound', 'metric'].map(
+      (value) => ({ label: value, value })
+    )}
+  />
+
+  <MenuField
+    label="locale"
+    bind:value={locales}
+    options={['en', 'de', 'fr', 'jp'].map((value) => ({ label: value, value }))}
+  />
+
+  <MenuField
+    label="currency"
+    bind:value={currency}
+    options={['USD', 'EUR', 'GBP', 'JPY'].map((value) => ({ label: value, value }))}
+  />
+</div>
+
+<Preview>
+  <div>{format(value, style, { locales, currency })}</div>
+</Preview>
 
 <h2>number formats (defaut settings)</h2>
 
@@ -52,4 +90,6 @@
   <div>{format(date, PeriodType.Month)}</div>
   <div>{format(date, PeriodType.CalendarYear)}</div>
   <div>{format(date, PeriodType.Day, 'short')}</div>
+  <div>{format(date, PeriodType.Month, 'short')}</div>
+  <div>{format(date, PeriodType.CalendarYear, 'short')}</div>
 </Preview>
