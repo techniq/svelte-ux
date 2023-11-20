@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
@@ -34,6 +34,11 @@
     PeriodType.FiscalYearOctober,
   ];
 
+  export let classes: {
+    field?: ComponentProps<Field>['classes'];
+    dialog?: ComponentProps<Dialog>['classes'];
+  } = {};
+
   // Field props
   export let label: string | null = null;
   // export let value = '';
@@ -62,6 +67,7 @@
   {rounded}
   {dense}
   {center}
+  classes={classes.field}
   let:id
   {...$$restProps}
 >
@@ -136,7 +142,13 @@
   </div>
 </Field>
 
-<Dialog classes={{ dialog: 'max-h-[90vh] grid grid-rows-[auto,1fr,auto]' }} bind:open>
+<Dialog
+  classes={{
+    ...classes.dialog,
+    dialog: cls('max-h-[90vh] grid grid-rows-[auto,1fr,auto]', classes.dialog?.dialog),
+  }}
+  bind:open
+>
   <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24">
     <div class="text-sm text-white/50">
       {currentValue.periodType ? getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
@@ -163,11 +175,14 @@
     >
       OK
     </Button>
+
     <Button
       on:click={() => {
         open = false;
         currentValue = value;
-      }}>Cancel</Button
+      }}
     >
+      Cancel
+    </Button>
   </div>
 </Dialog>
