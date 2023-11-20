@@ -1,5 +1,19 @@
 # svelte-ux
 
+## 0.56.0
+
+### Minor Changes
+
+- Add Intl support in `formatNumber()` by leveraging Intl.NumberFormat() (and remove d3-format dependency) ([#134](https://github.com/techniq/svelte-ux/pull/134))
+
+- `createTheme( ... )` was removed in favor of `settings({ theme: ... })` (Same for component `<Theme ... />`, is now `<Settings ... />`). Enables configuring `formatNumber()` style and future settings. ([#134](https://github.com/techniq/svelte-ux/pull/134))
+
+### Patch Changes
+
+- Add `romanize()` string util and ScrollingValue example ([`ebd429e`](https://github.com/techniq/svelte-ux/commit/ebd429e4965ce7f681eb5f0d6933c7258ff333fb))
+
+- Update dependencies ([`380a7dd`](https://github.com/techniq/svelte-ux/commit/380a7ddc680949cf6df0416aae3888bbda7b4883))
+
 ## 0.55.1
 
 ### Patch Changes
