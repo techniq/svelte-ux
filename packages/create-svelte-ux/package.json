@@ -19,13 +19,13 @@
     "format": "pnpm lint --write"
   },
   "dependencies": {
-    "@clack/prompts": "^0.6.3",
-    "@kitql/helpers": "^0.8.2",
-    "commander": "^9.4.0"
+    "@clack/prompts": "^0.7.0",
+    "@kitql/helpers": "^0.8.3",
+    "commander": "^11.1.0"
   },
   "devDependencies": {
-    "@types/node": "^18.7.23",
-    "prettier": "^2.8.3"
+    "@types/node": "^20.9.2",
+    "prettier": "^3.1.0"
   },
   "files": [
     "fragments",
