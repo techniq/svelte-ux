@@ -12,7 +12,7 @@
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:release": "changeset publish",
-    "up-dep": "pnpm update -r -i --latest"
+    "up-deps": "pnpm update -r -i --latest"
   },
   "devDependencies": {
     "@changesets/cli": "2.26.2",
