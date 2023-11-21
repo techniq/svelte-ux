@@ -7,8 +7,8 @@
 
   let selected = {
     from: new Date('1982-03-01T00:00:00'),
-    to: new Date('1982-03-30T23:59:59'),
-    periodType: 10,
+    to: new Date('1982-03-31T23:59:59'),
+    periodType: 30,
   };
   // $: console.log({ selected });
 </script>
@@ -38,6 +38,18 @@
       PeriodType.FiscalYearOctober,
     ]}
   />
+</Preview>
+
+<h2>Single PeriodType options with presets</h2>
+
+<Preview>
+  <DateRange periodTypes={[PeriodType.Day]} />
+</Preview>
+
+<h2>Single PeriodType options without presets</h2>
+
+<Preview>
+  <DateRange periodTypes={[PeriodType.Day]} getPeriodTypePresets={() => []} />
 </Preview>
 
 <h2>PeriodType presets</h2>

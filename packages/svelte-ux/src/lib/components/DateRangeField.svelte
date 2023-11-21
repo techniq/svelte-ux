@@ -9,7 +9,7 @@
   import Field from './Field.svelte';
 
   import { PeriodType, getDateFuncsByPeriodType, getPeriodTypeName } from '../utils/date';
-  import type { DateRange as DateRangeType } from '../utils/dateRange';
+  import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange';
   import { cls } from '../utils/styles';
 
   const dispatch = createEventDispatcher();
@@ -33,6 +33,7 @@
     PeriodType.CalendarYear,
     PeriodType.FiscalYearOctober,
   ];
+  export let getPeriodTypePresets = getDateRangePresets;
 
   export let classes: {
     field?: ComponentProps<Field>['classes'];
@@ -153,13 +154,13 @@
     <div class="text-sm text-white/50">
       {currentValue.periodType ? getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
     </div>
-    <div class="text-2xl md:text-3xl text-white">
+    <div class="text-xl sm:text-2xl text-white">
       <DateRangeDisplay value={currentValue} />
     </div>
   </div>
 
-  <div class="p-2 w-[640px] max-w-[90vw] border-b overflow-auto">
-    <DateRange bind:selected={currentValue} {periodTypes} class="h-full" />
+  <div class="p-2 border-b overflow-auto">
+    <DateRange bind:selected={currentValue} {periodTypes} {getPeriodTypePresets} class="h-full" />
   </div>
 
   <div slot="actions" class="flex items-center gap-2">

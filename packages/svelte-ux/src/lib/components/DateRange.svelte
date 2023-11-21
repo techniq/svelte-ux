@@ -22,7 +22,8 @@
   import { getComponentTheme } from './theme';
   import { mdScreen } from '$lib/stores/matchMedia';
 
-  export let selected: DateRange = { from: null, to: null, periodType: null };
+  export let selected: DateRange | null = { from: null, to: null, periodType: null };
+
   /** Period types to show */
   export let periodTypes: PeriodType[] = [
     PeriodType.Day,
@@ -38,11 +39,10 @@
 
   const theme = getComponentTheme('DateRange');
 
+  let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
   let selectedDayOfWeek: DayOfWeek = DayOfWeek.SUN;
   let activeDate: 'from' | 'to' = 'from';
-
-  $: presets = selected.periodType ? getPeriodTypePresets(selected.periodType) : [];
 
   $: periodTypeOptions = periodTypes.map((pt) => {
     const value = adjustPeriodType(pt);
@@ -52,7 +52,7 @@
     };
   });
 
-  $: presetOptions = presets.map((preset) => {
+  $: presetOptions = getPeriodTypePresets(selectedPeriodType).map((preset) => {
     return {
       label: preset.label,
       value: getDateRangeStr(preset.value),
@@ -67,9 +67,9 @@
 
   function onDateChange(date: Date) {
     // Apply date-fns function based on type and from/to.
-    let newSelected = { ...selected };
+    let newSelected = { ...selected, periodType: selectedPeriodType };
 
-    const { start, end } = getDateFuncsByPeriodType(selected.periodType);
+    const { start, end } = getDateFuncsByPeriodType(selectedPeriodType);
 
     let newActiveDate: typeof activeDate = activeDate === 'from' ? 'to' : 'from';
 
@@ -111,8 +111,8 @@
 
   // Update selection after changing `selectedDayOfWeek`
   $: {
-    if (selected.periodType && hasDayOfWeek(selected.periodType)) {
-      const newPeriodType = replaceDayOfWeek(selected.periodType, selectedDayOfWeek);
+    if (hasDayOfWeek(selectedPeriodType)) {
+      const newPeriodType = replaceDayOfWeek(selectedPeriodType, selectedDayOfWeek);
 
       const newSelected = { ...selected, periodType: newPeriodType };
 
@@ -148,10 +148,22 @@
       ? replaceDayOfWeek(periodType, selectedDayOfWeek) || periodType
       : periodType;
   }
+
+  $: showPeriodTypes = periodTypeOptions.length > 1;
+  $: showPresets = presetOptions.length > 0;
+  $: showSidebar = showPeriodTypes || showPresets;
 </script>
 
-<div class={cls('DateRange grid md:grid-cols-[2fr,3fr] gap-2', theme.root, $$props.class)}>
-  <div class="md:col-start-2">
+<div
+  class={cls(
+    'DateRange grid gap-2',
+    'w-[min(90vw,384px)]',
+    showSidebar && 'md:w-[640px] md:grid-cols-[2fr,3fr]',
+    theme.root,
+    $$props.class
+  )}
+>
+  <div class={cls(showSidebar && 'md:col-start-2')}>
     <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-white">
       <ToggleOption value="from" class="flex-1">
         <div class="text-xs text-black/50">Start</div>
@@ -199,53 +211,22 @@
     </ToggleGroup>
   </div>
 
-  <div class="flex flex-col gap-1">
-    {#if $mdScreen}
-      <div>
-        <div class="text-xs text-black/50 uppercase mb-1 -mt-5">Type</div>
-        <ToggleGroup
-          bind:value={selected.periodType}
-          on:change={(e) => onPeriodTypeChange(e.detail.value)}
-          variant="outline"
-          inset
-          vertical
-          class="bg-white"
-        >
-          {#each periodTypeOptions as option}
-            <ToggleOption value={option.value}>
-              {option.label}
-            </ToggleOption>
-          {/each}
-        </ToggleGroup>
-      </div>
-    {:else}
-      <MenuField
-        label="Type"
-        bind:value={selected.periodType}
-        options={periodTypeOptions}
-        on:change={(e) => onPeriodTypeChange(e.detail.value)}
-      />
-    {/if}
-
-    {#if selected.periodType}
-      {#key selected.periodType}
+  {#if showSidebar}
+    <div class="flex flex-col gap-2 md:gap-4 md:-mt-5">
+      {#if showPeriodTypes}
         {#if $mdScreen}
           <div>
-            <div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
+            <div class="text-xs text-black/50 uppercase mb-1">Type</div>
             <ToggleGroup
-              bind:value={selectedPreset}
+              bind:value={selectedPeriodType}
+              on:change={(e) => onPeriodTypeChange(e.detail.value)}
               variant="outline"
               inset
               vertical
               class="bg-white"
             >
-              {#each presetOptions as option}
-                <ToggleOption
-                  value={option.value}
-                  on:click={() => {
-                    onPresetChange(option.value);
-                  }}
-                >
+              {#each periodTypeOptions as option}
+                <ToggleOption value={option.value}>
                   {option.label}
                 </ToggleOption>
               {/each}
@@ -253,42 +234,77 @@
           </div>
         {:else}
           <MenuField
-            label="Presets"
-            bind:value={selectedPreset}
-            options={presetOptions}
-            on:change={(e) => {
-              onPresetChange(e.detail.value);
-            }}
+            label="Type"
+            bind:value={selectedPeriodType}
+            options={periodTypeOptions}
+            on:change={(e) => onPeriodTypeChange(e.detail.value)}
           />
         {/if}
-      {/key}
-    {/if}
+      {/if}
 
-    {#if selected.periodType && hasDayOfWeek(selected.periodType)}
-      <div>
-        <div class="text-xs text-black/50 uppercase mb-1 mt-4">Start day of week</div>
-        <ToggleGroup
-          bind:value={selectedDayOfWeek}
-          variant="outline"
-          inset
-          classes={{ root: 'bg-white', option: 'px-0' }}
-        >
-          <ToggleOption value={DayOfWeek.SUN}>Sun</ToggleOption>
-          <ToggleOption value={DayOfWeek.MON}>Mon</ToggleOption>
-          <ToggleOption value={DayOfWeek.TUE}>Tue</ToggleOption>
-          <ToggleOption value={DayOfWeek.WED}>Wed</ToggleOption>
-          <ToggleOption value={DayOfWeek.THU}>Thu</ToggleOption>
-          <ToggleOption value={DayOfWeek.FRI}>Fri</ToggleOption>
-          <ToggleOption value={DayOfWeek.SAT}>Sat</ToggleOption>
-        </ToggleGroup>
-      </div>
-    {/if}
-  </div>
+      {#if showPresets}
+        {#key selectedPeriodType}
+          {#if $mdScreen}
+            <div>
+              <div class="text-xs text-black/50 uppercase mb-1">Presets</div>
+              <ToggleGroup
+                bind:value={selectedPreset}
+                variant="outline"
+                inset
+                vertical
+                class="bg-white"
+              >
+                {#each presetOptions as option}
+                  <ToggleOption
+                    value={option.value}
+                    on:click={() => {
+                      onPresetChange(option.value);
+                    }}
+                  >
+                    {option.label}
+                  </ToggleOption>
+                {/each}
+              </ToggleGroup>
+            </div>
+          {:else}
+            <MenuField
+              label="Presets"
+              bind:value={selectedPreset}
+              options={presetOptions}
+              on:change={(e) => {
+                onPresetChange(e.detail.value);
+              }}
+            />
+          {/if}
+        {/key}
+      {/if}
+
+      {#if hasDayOfWeek(selectedPeriodType)}
+        <div>
+          <div class="text-xs text-black/50 uppercase mb-1">Start day of week</div>
+          <ToggleGroup
+            bind:value={selectedDayOfWeek}
+            variant="outline"
+            inset
+            classes={{ root: 'bg-white', option: 'px-0' }}
+          >
+            <ToggleOption value={DayOfWeek.SUN}>Sun</ToggleOption>
+            <ToggleOption value={DayOfWeek.MON}>Mon</ToggleOption>
+            <ToggleOption value={DayOfWeek.TUE}>Tue</ToggleOption>
+            <ToggleOption value={DayOfWeek.WED}>Wed</ToggleOption>
+            <ToggleOption value={DayOfWeek.THU}>Thu</ToggleOption>
+            <ToggleOption value={DayOfWeek.FRI}>Fri</ToggleOption>
+            <ToggleOption value={DayOfWeek.SAT}>Sat</ToggleOption>
+          </ToggleGroup>
+        </div>
+      {/if}
+    </div>
+  {/if}
 
   <div class="bg-white border rounded overflow-auto">
     <DateSelect
       {selected}
-      periodType={selected?.periodType}
+      periodType={selectedPeriodType}
       on:dateChange={(e) => onDateChange(e.detail)}
       {activeDate}
     />
