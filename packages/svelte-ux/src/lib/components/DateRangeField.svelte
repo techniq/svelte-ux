@@ -23,7 +23,7 @@
   export let value: DateRangeType = _defaultValue;
   export let stepper: boolean = false;
   export let center: boolean = false;
-  export let periodTypeOptions: PeriodType[] = [
+  export let periodTypes: PeriodType[] = [
     PeriodType.Day,
     PeriodType.WeekSun,
     PeriodType.BiWeek1Sun,
@@ -159,7 +159,7 @@
   </div>
 
   <div class="p-2 w-[640px] max-w-[90vw] border-b overflow-auto">
-    <DateRange bind:selected={currentValue} {periodTypeOptions} class="h-full" />
+    <DateRange bind:selected={currentValue} {periodTypes} class="h-full" />
   </div>
 
   <div slot="actions" class="flex items-center gap-2">

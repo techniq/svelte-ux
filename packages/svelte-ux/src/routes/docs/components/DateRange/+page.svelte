@@ -31,7 +31,7 @@
 
 <Preview>
   <DateRange
-    periodTypeOptions={[
+    periodTypes={[
       PeriodType.Month,
       PeriodType.Quarter,
       PeriodType.CalendarYear,
@@ -44,7 +44,7 @@
 
 <Preview>
   <DateRange
-    periodTypeOptions={[PeriodType.Day, PeriodType.Month]}
+    periodTypes={[PeriodType.Day, PeriodType.Month]}
     getPeriodTypePresets={(periodType) => {
       const { start, end, add } = getDateFuncsByPeriodType(periodType);
 

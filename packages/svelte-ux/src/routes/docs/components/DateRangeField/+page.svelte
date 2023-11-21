@@ -41,7 +41,7 @@
 <Preview>
   <DateRangeField
     bind:value
-    periodTypeOptions={[PeriodType.Day, PeriodType.Month, PeriodType.CalendarYear]}
+    periodTypes={[PeriodType.Day, PeriodType.Month, PeriodType.CalendarYear]}
   />
 </Preview>
 
