@@ -153,12 +153,12 @@
     <div class="text-sm text-white/50">
       {currentValue.periodType ? getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
     </div>
-    <div class="text-3xl text-white">
+    <div class="text-2xl md:text-3xl text-white">
       <DateRangeDisplay value={currentValue} />
     </div>
   </div>
 
-  <div class="p-2 w-[640px] border-b overflow-auto">
+  <div class="p-2 w-[640px] max-w-[90vw] border-b overflow-auto">
     <DateRange bind:selected={currentValue} {periodTypeOptions} class="h-full" />
   </div>
 
