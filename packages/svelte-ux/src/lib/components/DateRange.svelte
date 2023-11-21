@@ -11,12 +11,13 @@
   } from '../utils/date';
   import { getDateRangePresets } from '../utils/dateRange';
   import type { DateRange } from '../utils/dateRange';
+  import { cls } from '../utils/styles';
+  import { omit } from '../utils/object';
 
   import DateSelect from './DateSelect.svelte';
   import ToggleGroup from './ToggleGroup.svelte';
   import ToggleOption from './ToggleOption.svelte';
   import DateField from './DateField.svelte';
-  import { cls } from '$lib/utils/styles';
   import { getComponentTheme } from './theme';
 
   export let selected: DateRange = { from: null, to: null, periodType: null };
@@ -33,8 +34,19 @@
 
   const theme = getComponentTheme('DateRange');
 
+  let selectedPreset: string | null = null;
   let selectedDayOfWeek: DayOfWeek = DayOfWeek.SUN;
   let activeDate: 'from' | 'to' = 'from';
+
+  $: presets = selected.periodType ? getDateRangePresets(selected.periodType) : [];
+
+  /** Get date range (without period type) as string */
+  function getDateRangeStr(range: DateRange) {
+    return JSON.stringify(omit(range, ['periodType']));
+  }
+  $: {
+    selectedPreset = getDateRangeStr(selected);
+  }
 
   function onDateChange(date: Date) {
     // Apply date-fns function based on type and from/to.
@@ -179,12 +191,29 @@
       </ToggleGroup>
 
       {#if selected.periodType}
-        <div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
-        <ToggleGroup bind:value={selected} variant="outline" inset vertical class="bg-white">
-          {#each getDateRangePresets(selected.periodType) ?? [] as preset}
-            <ToggleOption value={preset.value}>{preset.label}</ToggleOption>
-          {/each}
-        </ToggleGroup>
+        {#key selected.periodType}
+          <div class="text-xs text-black/50 uppercase mb-1 mt-4">Presets</div>
+          <ToggleGroup
+            bind:value={selectedPreset}
+            variant="outline"
+            inset
+            vertical
+            class="bg-white"
+          >
+            {#each presets as preset}
+              {@const value = getDateRangeStr(preset.value)}
+              <ToggleOption
+                {value}
+                on:click={() => {
+                  selectedPreset = value;
+                  selected = preset.value;
+                }}
+              >
+                {preset.label}
+              </ToggleOption>
+            {/each}
+          </ToggleGroup>
+        {/key}
       {/if}
 
       {#if selected.periodType && hasDayOfWeek(selected.periodType)}
