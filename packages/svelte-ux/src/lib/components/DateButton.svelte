@@ -98,7 +98,7 @@
       (disabled || fade) && 'opacity-25',
       isCurrent ? 'font-bold' : 'font-normal'
     )}
-    variant={isSelected ? 'fill' : 'text'}
+    variant={isSelected ? 'fill' : 'default'}
     color={isSelected || isCurrent ? 'accent' : 'default'}
     {disabled}
     on:click={() => {
