@@ -41,8 +41,20 @@
 <Preview>
   <DateRangeField
     bind:value
-    periodTypeOptions={[PeriodType.Day, PeriodType.Month, PeriodType.CalendarYear]}
+    periodTypes={[PeriodType.Day, PeriodType.Month, PeriodType.CalendarYear]}
   />
+</Preview>
+
+<h2>Single PeriodType options with presets</h2>
+
+<Preview>
+  <DateRangeField bind:value periodTypes={[PeriodType.Day]} />
+</Preview>
+
+<h2>Single PeriodType options without presets</h2>
+
+<Preview>
+  <DateRangeField bind:value periodTypes={[PeriodType.Day]} getPeriodTypePresets={() => []} />
 </Preview>
 
 <h2>Icon</h2>

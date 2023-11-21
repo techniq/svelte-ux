@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
@@ -9,7 +9,7 @@
   import Field from './Field.svelte';
 
   import { PeriodType, getDateFuncsByPeriodType, getPeriodTypeName } from '../utils/date';
-  import type { DateRange as DateRangeType } from '../utils/dateRange';
+  import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange';
   import { cls } from '../utils/styles';
 
   const dispatch = createEventDispatcher();
@@ -23,7 +23,7 @@
   export let value: DateRangeType = _defaultValue;
   export let stepper: boolean = false;
   export let center: boolean = false;
-  export let periodTypeOptions: PeriodType[] = [
+  export let periodTypes: PeriodType[] = [
     PeriodType.Day,
     PeriodType.WeekSun,
     PeriodType.BiWeek1Sun,
@@ -33,6 +33,12 @@
     PeriodType.CalendarYear,
     PeriodType.FiscalYearOctober,
   ];
+  export let getPeriodTypePresets = getDateRangePresets;
+
+  export let classes: {
+    field?: ComponentProps<Field>['classes'];
+    dialog?: ComponentProps<Dialog>['classes'];
+  } = {};
 
   // Field props
   export let label: string | null = null;
@@ -62,6 +68,7 @@
   {rounded}
   {dense}
   {center}
+  classes={classes.field}
   let:id
   {...$$restProps}
 >
@@ -136,18 +143,24 @@
   </div>
 </Field>
 
-<Dialog classes={{ dialog: 'max-h-[90vh] grid grid-rows-[auto,1fr,auto]' }} bind:open>
+<Dialog
+  classes={{
+    ...classes.dialog,
+    dialog: cls('max-h-[90vh] grid grid-rows-[auto,1fr,auto]', classes.dialog?.dialog),
+  }}
+  bind:open
+>
   <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24">
     <div class="text-sm text-white/50">
       {currentValue.periodType ? getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
     </div>
-    <div class="text-3xl text-white">
+    <div class="text-xl sm:text-2xl text-white">
       <DateRangeDisplay value={currentValue} />
     </div>
   </div>
 
-  <div class="p-2 w-[640px] border-b overflow-auto">
-    <DateRange bind:selected={currentValue} {periodTypeOptions} class="h-full" />
+  <div class="p-2 border-b overflow-auto">
+    <DateRange bind:selected={currentValue} {periodTypes} {getPeriodTypePresets} class="h-full" />
   </div>
 
   <div slot="actions" class="flex items-center gap-2">
@@ -163,11 +176,14 @@
     >
       OK
     </Button>
+
     <Button
       on:click={() => {
         open = false;
         currentValue = value;
-      }}>Cancel</Button
+      }}
     >
+      Cancel
+    </Button>
   </div>
 </Dialog>
