@@ -31,6 +31,7 @@
     PeriodType.CalendarYear,
     PeriodType.FiscalYearOctober,
   ];
+  export let getPeriodTypePresets = getDateRangePresets;
 
   const theme = getComponentTheme('DateRange');
 
@@ -38,7 +39,7 @@
   let selectedDayOfWeek: DayOfWeek = DayOfWeek.SUN;
   let activeDate: 'from' | 'to' = 'from';
 
-  $: presets = selected.periodType ? getDateRangePresets(selected.periodType) : [];
+  $: presets = selected.periodType ? getPeriodTypePresets(selected.periodType) : [];
 
   /** Get date range (without period type) as string */
   function getDateRangeStr(range: DateRange) {
@@ -82,7 +83,7 @@
 
       // Attempt to maintain selected preset if labels match
       if (selected.from && selected.to && selected.periodType) {
-        const prevPeriodTypePreset = [...getDateRangePresets(selected.periodType)].find(
+        const prevPeriodTypePreset = [...getPeriodTypePresets(selected.periodType)].find(
           (x) =>
             x.value.from &&
             isSameDay(x.value.from, selected.from) &&
@@ -91,7 +92,7 @@
         );
 
         if (prevPeriodTypePreset && newPeriodType) {
-          const newPeriodTypePreset = [...getDateRangePresets(newPeriodType)].find(
+          const newPeriodTypePreset = [...getPeriodTypePresets(newPeriodType)].find(
             (x) => x.label === prevPeriodTypePreset.label
           );
 
