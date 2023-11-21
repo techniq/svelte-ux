@@ -1,4 +1,3 @@
-import type { Variables } from '../config/variables';
 import { startOfDay, isLeapYear, isAfter, isBefore, subYears } from 'date-fns';
 
 import { getDateFuncsByPeriodType, PeriodType } from './date';
@@ -45,7 +44,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 3 Days',
+          label: 'Last 3 days',
           value: {
             from: add(yesterday, -2),
             to: end(yesterday),
@@ -53,7 +52,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 7 Days',
+          label: 'Last 7 days',
           value: {
             from: add(yesterday, -6),
             to: end(yesterday),
@@ -61,7 +60,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 14 Days',
+          label: 'Last 14 days',
           value: {
             from: add(yesterday, -13),
             to: end(yesterday),
@@ -69,7 +68,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 30 Days',
+          label: 'Last 30 days',
           value: {
             from: add(yesterday, -29),
             to: end(yesterday),
@@ -77,7 +76,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         // {
-        //   label: 'Last 60 Days',
+        //   label: 'Last 60 days',
         //   value: {
         //     from: add(yesterday, -59),
         //     to: end(yesterday),
@@ -85,7 +84,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
         //   },
         // },
         // {
-        //   label: 'Last 90 Days',
+        //   label: 'Last 90 days',
         //   value: {
         //     from: add(yesterday, -89),
         //     to: end(yesterday),
@@ -106,7 +105,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
 
       return [
         {
-          label: 'Current Week', // Week to Date
+          label: 'Current week', // Week to Date
           value: {
             from: start(today),
             to: end(today),
@@ -114,7 +113,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last Week', // Week to Date
+          label: 'Last week', // Week to Date
           value: {
             from: lastWeek,
             to: end(lastWeek),
@@ -122,7 +121,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 2 Weeks',
+          label: 'Last 2 weeks',
           value: {
             from: start(add(lastWeek, -1)),
             to: end(lastWeek),
@@ -130,7 +129,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 4 Weeks',
+          label: 'Last 4 weeks',
           value: {
             from: start(add(lastWeek, -3)),
             to: end(lastWeek),
@@ -138,7 +137,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 6 Weeks',
+          label: 'Last 6 weeks',
           value: {
             from: start(add(lastWeek, -5)),
             to: end(lastWeek),
@@ -166,7 +165,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
 
       return [
         {
-          label: 'Current Bi-Week',
+          label: 'Current bi-week',
           value: {
             from: start(today),
             to: end(today),
@@ -174,7 +173,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last Bi-Week',
+          label: 'Last bi-week',
           value: {
             from: lastBiWeek,
             to: end(lastBiWeek),
@@ -182,7 +181,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 2 Bi-Weeks',
+          label: 'Last 2 bi-weeks',
           value: {
             from: start(add(lastBiWeek, -1)),
             to: end(lastBiWeek),
@@ -190,7 +189,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 4 Bi-Weeks',
+          label: 'Last 4 bi-weeks',
           value: {
             from: start(add(lastBiWeek, -3)),
             to: end(lastBiWeek),
@@ -198,7 +197,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 6 Bi-Weeks',
+          label: 'Last 6 bi-weeks',
           value: {
             from: start(add(lastBiWeek, -5)),
             to: end(lastBiWeek),
@@ -213,7 +212,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
 
       return [
         {
-          label: 'Current Month', // Month to Date
+          label: 'Current month', // Month to Date
           value: {
             from: start(today),
             to: end(today),
@@ -221,7 +220,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last Month',
+          label: 'Last month',
           value: {
             from: lastMonth,
             to: end(lastMonth),
@@ -229,7 +228,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 3 Months',
+          label: 'Last 3 months',
           value: {
             from: start(add(lastMonth, -2)),
             to: end(lastMonth),
@@ -237,7 +236,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 6 Months',
+          label: 'Last 6 months',
           value: {
             from: start(add(lastMonth, -5)),
             to: end(lastMonth),
@@ -245,7 +244,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 12 Months',
+          label: 'Last 12 months',
           value: {
             from: start(add(lastMonth, -11)),
             to: end(lastMonth),
@@ -260,7 +259,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
 
       return [
         {
-          label: 'Current Quarter', // Quarter to Date
+          label: 'Current quarter', // Quarter to Date
           value: {
             from: start(today),
             to: end(today),
@@ -268,7 +267,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last Quarter',
+          label: 'Last quarter',
           value: {
             from: lastQuarter,
             to: end(lastQuarter),
@@ -276,7 +275,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Same Quarter, Last Year',
+          label: 'Same quarter, last year',
           value: {
             from: start(add(today, -4)),
             to: end(add(today, -4)),
@@ -284,7 +283,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 4 Quarters',
+          label: 'Last 4 quarters',
           value: {
             from: start(add(lastQuarter, -3)),
             to: end(lastQuarter),
@@ -292,7 +291,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 3 Years',
+          label: 'Last 3 years',
           value: {
             from: start(add(lastQuarter, -11)),
             to: end(lastQuarter),
@@ -307,7 +306,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
 
       return [
         {
-          label: 'Current Year', // Year to Date
+          label: 'Current year', // Year to Date
           value: {
             from: start(today),
             to: end(today),
@@ -315,7 +314,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last Year',
+          label: 'Last year',
           value: {
             from: lastYear,
             to: end(lastYear),
@@ -323,7 +322,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 3 Years',
+          label: 'Last 3 years',
           value: {
             from: start(add(lastYear, -2)),
             to: end(lastYear),
@@ -331,7 +330,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 5 Years',
+          label: 'Last 5 years',
           value: {
             from: start(add(lastYear, -4)),
             to: end(lastYear),
@@ -346,7 +345,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
 
       return [
         {
-          label: 'Current Fiscal Year', // Fiscal Year to Date
+          label: 'Current fiscal year', // Fiscal Year to Date
           value: {
             from: start(today),
             to: end(today),
@@ -354,7 +353,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last Fiscal Year',
+          label: 'Last fiscal year',
           value: {
             from: lastFiscalYear,
             to: end(lastFiscalYear),
@@ -362,7 +361,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 3 Years',
+          label: 'Last 3 years',
           value: {
             from: start(add(lastFiscalYear, -2)),
             to: end(lastFiscalYear),
@@ -370,7 +369,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
           },
         },
         {
-          label: 'Last 5 Years',
+          label: 'Last 5 years',
           value: {
             from: start(add(lastFiscalYear, -4)),
             to: end(lastFiscalYear),
@@ -456,11 +455,8 @@ export function getPreviousYearPeriodOffset(
 
 export type PeriodComparison = 'prevPeriod' | 'prevYear' | 'fiftyTwoWeeksAgo';
 
-export function getPeriodComparisonOffset(
-  view: PeriodComparison,
-  period: Variables['Period'] | undefined
-) {
-  if (period == null) {
+export function getPeriodComparisonOffset(view: PeriodComparison, period: DateRange | undefined) {
+  if (period == null || period.from == null || period.to == null || period.periodType == null) {
     throw new Error('Period must be defined to calculate offset');
   }
 
