@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.57.0
+
+### Minor Changes
+
+- DateRange[Field] improvements including responsive design, passing classes to underlying Field/Dialog instances, setting custom preset options, and hiding type/preset sections, and general bug fixes. ([#138](https://github.com/techniq/svelte-ux/pull/138))
+
 ## 0.56.0
 
 ### Minor Changes
