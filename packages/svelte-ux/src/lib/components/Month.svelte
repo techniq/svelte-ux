@@ -8,7 +8,6 @@
     endOfMonth as endOfMonthFunc,
     format,
     addMonths,
-    subMonths,
     isSameDay,
     isWithinInterval,
   } from 'date-fns';
@@ -33,9 +32,13 @@
       startOfMonthFunc(selected.from)) ||
     startOfMonthFunc(new Date());
 
-  // TODO: Variable shows error if set to `endOfMonth` maybe due to import
-  $: endOfMonth2 = endOfMonthFunc(startOfMonth);
+  $: endOfMonth = endOfMonthFunc(startOfMonth);
   $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth);
+
+  /**
+   * Hide controls and date.  Useful to control externally
+   */
+  export let hideControls = false;
 
   /**
    * Show days before and after selected month
@@ -65,7 +68,7 @@
   $: isDayHidden = (day: Date) => {
     const isCurrentMonth = isWithinInterval(day, {
       start: startOfMonth,
-      end: endOfMonth2,
+      end: endOfMonth,
     });
     return !isCurrentMonth && !showOutsideDays;
   };
@@ -73,27 +76,31 @@
   $: isDayFaded = (day: Date) => {
     const isCurrentMonth = isWithinInterval(day, {
       start: startOfMonth,
-      end: endOfMonth2,
+      end: endOfMonth,
     });
     return !isCurrentMonth && showOutsideDays;
   };
 </script>
 
-<div class="flex m-2">
-  <Button
-    icon={mdiChevronLeft}
-    class="p-2"
-    on:click={() => (startOfMonth = subMonths(startOfMonth, 1))}
-  />
-  <div class="flex flex-1 items-center justify-center">
-    <span>{format(startOfMonth, 'MMMM yyyy')}</span>
+{#if !hideControls}
+  <div class="flex m-2">
+    <Button
+      icon={mdiChevronLeft}
+      class="p-2"
+      on:click={() => (startOfMonth = addMonths(startOfMonth, -1))}
+    />
+
+    <div class="flex flex-1 items-center justify-center">
+      <span>{format(startOfMonth, 'MMMM yyyy')}</span>
+    </div>
+
+    <Button
+      icon={mdiChevronRight}
+      class="p-2"
+      on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
+    />
   </div>
-  <Button
-    icon={mdiChevronRight}
-    class="p-2"
-    on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
-  />
-</div>
+{/if}
 
 <div class="flex">
   {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
