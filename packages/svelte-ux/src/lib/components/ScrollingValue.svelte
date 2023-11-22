@@ -8,6 +8,7 @@
   export let value = 0;
   export let single = false;
   export let format: (value: number) => string | number = (value) => value;
+  export let axis: 'x' | 'y' = 'y';
 
   export let classes: {
     root?: string;
@@ -19,6 +20,9 @@
   // 	const displayValue = tweened(value, { duration: 1000, easing: bounceOut });
   $: $displayValue = value;
   $: offset = modulo($displayValue, 1);
+
+  $: nextDisplayValue = Math.floor(single && $displayValue >= 9 ? 0 : $displayValue + 1);
+  $: currentDisplayValue = Math.floor($displayValue);
 </script>
 
 <div
@@ -32,14 +36,22 @@
 >
   <div
     class={cls('col-span-full row-span-full', theme.value, classes.value)}
-    style:transform="translateY({-100 + 100 * offset}%)"
+    style:transform={axis === 'x'
+      ? `translateX(${100 + 100 * -offset}%)`
+      : `translateY(${-100 + 100 * offset}%)`}
   >
-    {format(Math.floor(single && $displayValue >= 9 ? 0 : $displayValue + 1))}
+    <slot value={nextDisplayValue}>
+      {format(nextDisplayValue)}
+    </slot>
   </div>
   <div
     class={cls('col-span-full row-span-full', theme.value, classes.value)}
-    style:transform="translateY({100 * offset}%)"
+    style:transform={axis === 'x'
+      ? `translateX(${100 * -offset}%)`
+      : `translateY(${100 * offset}%)`}
   >
-    {format(Math.floor($displayValue))}
+    <slot value={currentDisplayValue}>
+      {format(currentDisplayValue)}
+    </slot>
   </div>
 </div>
