@@ -26,7 +26,7 @@ export type FetchConfig<TData = any> = {
   suppressErrors?: boolean;
 };
 
-const CONTEXT_KEY = {};
+const CONTEXT_KEY = Symbol();
 
 export function initFetchClient(config: FetchConfig<any>) {
   setContext(CONTEXT_KEY, config);

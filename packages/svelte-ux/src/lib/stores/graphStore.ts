@@ -16,7 +16,7 @@ export type GraphQLError = {
   extensions?: any;
 };
 
-const CONTEXT_KEY = {};
+const CONTEXT_KEY = Symbol();
 
 export function initGraphClient(config: ClientConfig) {
   setContext(CONTEXT_KEY, config);

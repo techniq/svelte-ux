@@ -1,5 +1,5 @@
 <script context="module">
-  export const groupKey = {};
+  export const groupKey = Symbol();
 </script>
 
 <script lang="ts">
