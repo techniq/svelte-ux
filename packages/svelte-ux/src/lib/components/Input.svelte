@@ -40,6 +40,10 @@
   $: firstPlaceholderPos = [...(mask ?? '')].findIndex((c) => replaceSet.has(c));
   $: acceptRegEx = accept instanceof RegExp ? accept : new RegExp(accept, 'g');
 
+  function typeAction(node: HTMLInputElement) {
+    node.type = type;
+  }
+
   function clean(inputValue: string) {
     // Get only accepted characters (no mask)
     const inputMatch = inputValue?.match(acceptRegEx) || [];
@@ -93,7 +97,7 @@
 <input
   {id}
   {value}
-  {type}
+  use:typeAction
   {inputmode}
   placeholder={isFocused && mask ? mask : placeholder}
   {disabled}
