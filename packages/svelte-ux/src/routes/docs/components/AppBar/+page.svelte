@@ -4,6 +4,7 @@
   import AppBar from '$lib/components/AppBar.svelte';
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import ListItem from '$lib/components/ListItem.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -24,6 +25,16 @@
 
 <Preview>
   <AppBar title={['One', 'Two', 'Three']} />
+</Preview>
+
+<h2>Title as slot</h2>
+
+<Preview>
+  <AppBar title="Example (shown in window title)">
+    <div slot="title">
+      <ListItem title="Example" subheading="Subheading" />
+    </div>
+  </AppBar>
 </Preview>
 
 <h2>Actions</h2>
