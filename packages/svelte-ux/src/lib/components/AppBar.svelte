@@ -29,13 +29,17 @@
   class={cls('AppBar', 'px-4 flex items-center relative z-50', theme.root, $$restProps.class)}
 >
   <Button icon={mdiMenu} on:click={() => ($showDrawer = !$showDrawer)} class="p-3" />
-  <div class="ml-2 text-lg">
-    {#if typeof title === 'string' || typeof title === 'number'}
-      {title}
-    {:else}
-      <Breadcrumb items={title} class="gap-2" />
-    {/if}
-  </div>
+  {#if $$slots.title}
+    <slot name="title" />
+  {:else}
+    <div class="ml-2 text-lg">
+      {#if typeof title === 'string' || typeof title === 'number'}
+        {title}
+      {:else}
+        <Breadcrumb items={title} class="gap-2" />
+      {/if}
+    </div>
+  {/if}
 
   <slot />
 
