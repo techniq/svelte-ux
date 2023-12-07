@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Add slot option for AppBar title.
+[AppBar] Add slot option for title.
