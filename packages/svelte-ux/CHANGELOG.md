@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.57.1
+
+### Patch Changes
+
+- [Month] Add `hideControls` prop ([`9021816`](https://github.com/techniq/svelte-ux/commit/9021816e92dbd024f71552c8b2b29e88e4ffe3f1))
+
+- [ScrollingValue] Add `axis` prop to control direction, and support <slot> rendering of value for custom component display ([`81b1f33`](https://github.com/techniq/svelte-ux/commit/81b1f33146b56ad70360f9314816526ff7acde1a))
+
+- [AppBar] Add slot option for title. ([#151](https://github.com/techniq/svelte-ux/pull/151))
+
+- Use Symbol() instead of empty object for context keys ([`02788d2`](https://github.com/techniq/svelte-ux/commit/02788d21ba389c1de60d3a25035b71a6e61c5f10))
+
 ## 0.57.0
 
 ### Minor Changes
