@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { inject } from '@vercel/analytics';
   import 'prism-themes/themes/prism-vsc-dark-plus.css';
   import { dev } from '$app/environment';
   import { mdiArrowTopRight, mdiGithub, mdiTwitter } from '@mdi/js';
@@ -12,8 +11,6 @@
   import QuickSearch from '$lib/components/QuickSearch.svelte';
   import { afterNavigate, goto } from '$app/navigation';
   import { settings } from '$lib';
-
-  inject({ mode: dev ? 'development' : 'production' });
 
   settings({
     // formats: {

@@ -53,7 +53,6 @@
     "@changesets/cli": "^2.26.2",
     "@floating-ui/dom": "^1.5.3",
     "@fortawesome/fontawesome-common-types": "^6.4.2",
-    "@vercel/analytics": "^1.1.1",
     "clsx": "^2.0.0",
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
