@@ -1,4 +1,4 @@
-import vercelAdapter from '@sveltejs/adapter-vercel';
+import cloudflareAdapter from '@sveltejs/adapter-cloudflare';
 import sveltePreprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
 
@@ -18,7 +18,7 @@ const config = {
   },
 
   kit: {
-    adapter: vercelAdapter(),
+    adapter: cloudflareAdapter(),
     alias: {
       $docs: 'src/docs',
     },
