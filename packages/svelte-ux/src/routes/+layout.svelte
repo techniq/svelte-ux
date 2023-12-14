@@ -61,7 +61,7 @@
           // Page navigated away
           posthog.capture('$pageleave');
         }
-        console.log('entering');
+
         // Page entered
         currentPath = $page.url.pathname;
         posthog.capture('$pageview');
