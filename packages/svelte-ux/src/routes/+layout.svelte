@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import posthog from 'posthog-js';
   import 'prism-themes/themes/prism-vsc-dark-plus.css';
-  import { dev } from '$app/environment';
   import { mdiArrowTopRight, mdiGithub, mdiTwitter } from '@mdi/js';
 
   import AppBar from '$lib/components/AppBar.svelte';
@@ -9,7 +10,11 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
   import NavMenu from './_NavMenu.svelte';
   import QuickSearch from '$lib/components/QuickSearch.svelte';
+
+  import { dev } from '$app/environment';
   import { afterNavigate, goto } from '$app/navigation';
+  import { page } from '$app/stores';
+
   import { settings } from '$lib';
 
   settings({
@@ -46,6 +51,34 @@
       };
     })
     .sort((a, b) => groups.indexOf(a.group) - groups.indexOf(b.group));
+
+  let currentPath = '';
+  onMount(() => {
+    // Posthog analytics
+    if (!dev) {
+      const unsubscribePage = page.subscribe(($page) => {
+        if (currentPath && currentPath !== $page.url.pathname) {
+          // Page navigated away
+          posthog.capture('$pageleave');
+        }
+        console.log('entering');
+        // Page entered
+        currentPath = $page.url.pathname;
+        posthog.capture('$pageview');
+      });
+
+      const handleBeforeUnload = () => {
+        // Hard reloads or browser exit
+        posthog.capture('$pageleave');
+      };
+      window.addEventListener('beforeunload', handleBeforeUnload);
+
+      return () => {
+        unsubscribePage();
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      };
+    }
+  });
 </script>
 
 <AppLayout>
