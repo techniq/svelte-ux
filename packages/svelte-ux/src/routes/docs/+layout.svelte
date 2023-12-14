@@ -30,7 +30,7 @@
   import { cls } from '$lib/utils/styles';
   import { toTitleCase } from '$lib/utils/string';
 
-  $: [path, type, name] = $page.url.pathname.match('.*/(.*)/(.*)') ?? [];
+  $: [type, name] = $page.url.pathname.split('/').slice(2) ?? [];
   $: title = $page.data.meta?.title ?? name;
   $: pageUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
