@@ -14,37 +14,40 @@
   import { delay } from '$lib/utils/promise';
   import { cls } from '$lib/utils/styles';
   import Icon from '$lib/components/Icon.svelte';
+  import type { MenuOption } from '$lib/types/options';
 
-  let options = [
-    { name: 'One', value: 1, icon: mdiMagnify },
-    { name: 'Two', value: 2, icon: mdiPlus },
-    { name: 'Three', value: 3, icon: mdiPencil },
-    { name: 'Four', value: 4, icon: mdiAccount },
+  let options: MenuOption[] = [
+    { label: 'One', value: 1, icon: mdiMagnify },
+    { label: 'Two', value: 2, icon: mdiPlus },
+    { label: 'Three', value: 3, icon: mdiPencil },
+    { label: 'Four', value: 4, icon: mdiAccount },
   ];
 
-  const optionsWithGroup = [
-    { name: 'One', value: 1, group: 'First' },
-    { name: 'Two', value: 2, group: 'First' },
-    { name: 'Three', value: 3, group: 'Second' },
-    { name: 'Four', value: 4, group: 'Second' },
-    { name: 'Five', value: 5, group: 'Second' },
-    { name: 'Six', value: 6, group: 'Third' },
-    { name: 'Seven', value: 7, group: 'Third' },
+  const optionsWithGroup: MenuOption[] = [
+    { label: 'One', value: 1, group: 'First' },
+    { label: 'Two', value: 2, group: 'First' },
+    { label: 'Three', value: 3, group: 'Second' },
+    { label: 'Four', value: 4, group: 'Second' },
+    { label: 'Five', value: 5, group: 'Second' },
+    { label: 'Six', value: 6, group: 'Third' },
+    { label: 'Seven', value: 7, group: 'Third' },
   ];
 
-  const manyOptions = Array.from({ length: 100 }).map((_, i) => ({
-    name: `${i + 1}`,
+  const manyOptions: MenuOption[] = Array.from({ length: 100 }).map((_, i) => ({
+    label: `${i + 1}`,
     value: i + 1,
   }));
 
-  const newOptions = [
-    { name: 'Empty', value: null },
-    { name: 'Foo', value: 1 },
-    { name: 'Bar', value: 2 },
-    { name: 'Baz', value: 3 },
+  const newOptions: MenuOption[] = [
+    { label: 'Empty', value: null },
+    { label: 'Foo', value: 1 },
+    { label: 'Bar', value: 2 },
+    { label: 'Baz', value: 3 },
   ];
 
-  let optionsAsync: { name: string; value: number }[] = [];
+  const newOption: () => MenuOption = () => { return { label: "", value: null }}
+
+  let optionsAsync: MenuOption[] = [];
   let loading = false;
 
   let value = 3;
@@ -158,7 +161,7 @@
         scrollIntoView={index === highlightIndex}
       >
         <div>
-          <div>{option.name}</div>
+          <div>{option.label}</div>
           <div class="text-sm text-black/50">{option.value}</div>
         </div>
       </MenuItem>
@@ -166,13 +169,13 @@
   </SelectField>
 </Preview>
 
-<h2>option slot with icon</h2>
+<h2>option slot with icon (field icon updates based on selected option)</h2>
 
 <Preview>
   <SelectField
     {options}
     bind:value
-    icon={options.find((c) => c.value === value)?.icon}
+    activeOptionIcon={true}
     on:change={(e) => console.log('on:change', e.detail)}
   >
     <div slot="option" let:option let:index let:selected let:highlightIndex>
@@ -185,7 +188,7 @@
         scrollIntoView={index === highlightIndex}
         icon={{ data: option.icon, style: 'color: #0000FF;' }}
       >
-        {option.name}
+        {option.label}
       </MenuItem>
     </div>
   </SelectField>
@@ -206,7 +209,7 @@
       >
         <div class="grid grid-cols-[1fr,auto] items-center w-full">
           <div>
-            <div>{option.name}</div>
+            <div>{option.label}</div>
             <div class="text-sm text-black/50">{option.value}</div>
           </div>
           <div on:click|stopPropagation>
@@ -218,7 +221,7 @@
               />
               <Drawer {open} on:close={toggleOff} class="w-[400px]">
                 <div class="p-4">
-                  Editing option: {option.name}
+                  Editing option: {option.label}
                 </div>
                 <div
                   class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
@@ -267,7 +270,7 @@
       </span>
     </SelectField>
     <Form
-      initial={{ name: null, value: null }}
+      initial={newOption()}
       on:change={(e) => {
         options = [e.detail, ...options];
       }}
@@ -279,10 +282,10 @@
         <div slot="title">Create new option</div>
         <div class="px-6 py-3 w-96 grid gap-2">
           <TextField
-            label="Name"
-            value={draft.name}
+            label="Label"
+            value={draft.label}
             on:change={(e) => {
-              draft.name = e.detail.value;
+              draft.label = e.detail.value;
             }}
             autofocus
           />
@@ -311,11 +314,12 @@
       <Toggle let:on={open} let:toggle>
         <Button icon={mdiPlus} color="blue" on:click={toggle}>New item</Button>
         <Form
-          initial={{ name: null, value: null }}
+          initial={newOption()}
           on:change={(e) => {
             options = [e.detail, ...options];
           }}
           let:draft
+          let:current
           let:commit
           let:revert
         >
@@ -329,10 +333,10 @@
             <div slot="title">Create new option</div>
             <div class="px-6 py-3 w-96 grid gap-2">
               <TextField
-                label="Name"
-                value={draft.name}
+                label="Label"
+                value={current.label}
                 on:change={(e) => {
-                  draft.name = e.detail.value;
+                  draft.label = e.detail.value;
                 }}
                 autofocus
               />
@@ -426,5 +430,16 @@
     bind:value
     clearSearchOnOpen
     classes={{ selected: 'bg-accent-500 text-white' }}
+  />
+</Preview>
+
+<h2>Inline options with icon (used by search bar dialog in top-right)</h2>
+
+<Preview>
+  <SelectField
+    {options}
+    icon={mdiMagnify}
+    bind:value
+    inlineOptions={true}
   />
 </Preview>

@@ -45,7 +45,7 @@
       const url = file.replace('.', '').replace(/\/\+page.(md|svelte)/, '');
       const [_, docs, group, name] = url.split('/');
       return {
-        name,
+        label: name,
         value: url,
         group: group,
       };

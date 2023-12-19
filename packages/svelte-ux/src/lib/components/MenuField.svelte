@@ -11,10 +11,9 @@
   import MenuItem from './MenuItem.svelte';
   import Button from './Button.svelte';
   import { getComponentTheme } from './theme';
+  import type { MenuOption } from '$lib/types/options';
 
-  type Options = Array<{ label: string; value: any; icon?: string; group?: string }>;
-
-  export let options: Options;
+  export let options: MenuOption[] = [];
   export let value: any = null;
   export let menuProps: ComponentProps<Menu> | undefined = {
     autoPlacement: true,
@@ -59,6 +58,10 @@
 
   const dispatch = createEventDispatcher();
   $: dispatch('change', { value });
+
+  function setValue(val: any): void {
+    value = val;
+  }
 </script>
 
 <Field
@@ -110,7 +113,7 @@
     matchWidth
     {...menuProps}
   >
-    <slot {options} {selected} close={() => (open = false)} setValue={(val) => (value = val)}>
+    <slot {options} {selected} close={() => (open = false)} {setValue}>
       <menu class="group p-1">
         {#each options as option, index (option.value)}
           {@const previousOption = options[index - 1]}

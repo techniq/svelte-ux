@@ -36,7 +36,7 @@
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 
-  function onClick(e) {
+  function onClick(e: MouseEvent) {
     try {
       if (e.target === menuItemsEl) {
         // Clicked within menu but outside of any items

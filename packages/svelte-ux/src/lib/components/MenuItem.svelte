@@ -2,7 +2,7 @@
   import Button from './Button.svelte';
   import type { ComponentProps } from '../types';
   import { cls } from '../utils/styles';
-  import { scrollIntoView as scrollIntoViewAction } from '../actions/scroll';
+  import { scrollIntoView as scrollIntoViewAction, type ScrollIntoViewOptions } from '../actions/scroll';
   import { setButtonGroup } from './ButtonGroup.svelte';
   import { getComponentTheme } from './theme';
   import { settings, getSettings } from './settings';
@@ -10,7 +10,7 @@
   type ButtonProps = ComponentProps<Button>;
 
   export let icon: ButtonProps['icon'] = undefined;
-  export let scrollIntoView = false;
+  export let scrollIntoView: ScrollIntoViewOptions | boolean = false;
   export let disabled = false;
   export let selected = false;
 
@@ -20,6 +20,9 @@
     selected: 'font-semibold [:not(.group:hover)>&]:bg-black/5',
   };
   const theme = getComponentTheme('MenuItem');
+
+  let scrollOptions: ScrollIntoViewOptions;
+  $: scrollOptions = typeof(scrollIntoView) === "boolean" ? { condition: scrollIntoView } as ScrollIntoViewOptions : scrollIntoView;
 
   // Clear ButtonGroup if set
   setButtonGroup(undefined);
@@ -33,7 +36,7 @@
   {icon}
   {classes}
   fullWidth
-  actions={(node) => [scrollIntoViewAction(node, { condition: scrollIntoView })]}
+  actions={(node) => [scrollIntoViewAction(node, scrollOptions)]}
   {disabled}
   {...$$restProps}
   class={cls(

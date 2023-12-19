@@ -23,9 +23,11 @@ export function objectToString(styleObj: { [key: string]: string }) {
  * Wrapper around `tailwind-merge` and `clsx`
  */
 const twMerge = extendTailwindMerge({
-  classGroups: {
-    shadow: ['shadow-border-l', 'shadow-border-r', 'shadow-border-t', 'shadow-border-b'],
-  },
+  extend: {
+    classGroups: {
+      shadow: ['shadow-border-l', 'shadow-border-r', 'shadow-border-t', 'shadow-border-b'],
+    },
+  }
 });
 
 export const cls = (...inputs: ClassValue[]) => twMerge(clsx(...inputs));
