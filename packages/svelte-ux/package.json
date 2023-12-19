@@ -20,7 +20,7 @@
     "prepare": "svelte-kit sync"
   },
   "devDependencies": {
-    "@sveltejs/adapter-cloudflare": "^2.3.4",
+    "@sveltejs/adapter-auto": "^3.0.1",
     "@sveltejs/kit": "^1.27.6",
     "@sveltejs/package": "^2.2.2",
     "@tailwindcss/typography": "^0.5.10",

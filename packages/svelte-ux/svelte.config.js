@@ -1,4 +1,4 @@
-import cloudflareAdapter from '@sveltejs/adapter-cloudflare';
+import adapter from '@sveltejs/adapter-auto';
 import sveltePreprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
 
@@ -18,7 +18,7 @@ const config = {
   },
 
   kit: {
-    adapter: cloudflareAdapter(),
+    adapter: adapter(),
     alias: {
       $docs: 'src/docs',
     },
