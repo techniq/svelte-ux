@@ -99,7 +99,7 @@
       {#if clearable && value}
         <Button
           icon={mdiClose}
-          class="text-black/50 p-1"
+          class="text-surface-content/50 p-1"
           on:click={() => {
             value = null;
             dispatch('clear');
@@ -127,11 +127,14 @@
 
 <Dialog bind:open>
   {#if currentValue}
-    <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24" transition:slide>
-      <div class="text-sm text-white/50">
+    <div
+      class="flex flex-col justify-center bg-primary text-primary-content px-6 h-24"
+      transition:slide
+    >
+      <div class="text-sm opacity-50">
         {dateDisplay(currentValue, { format: secondaryFormat })}
       </div>
-      <div class="text-3xl text-white">
+      <div class="text-3xl">
         {dateDisplay(currentValue, { format: primaryFormat })}
       </div>
     </div>
@@ -153,7 +156,8 @@
         value = currentValue;
         dispatch('change', value);
       }}
-      class="bg-accent-500 text-white hover:bg-accent-600">OK</Button
+      variant="fill"
+      color="primary">OK</Button
     >
     <Button
       on:click={() => {

@@ -54,15 +54,15 @@
     return disabledDays instanceof Function
       ? disabledDays(date)
       : disabledDays instanceof Date
-      ? isSameDay(date, disabledDays)
-      : disabledDays instanceof Array
-      ? disabledDays.some((d) => isSameDay(date, d))
-      : disabledDays instanceof Object
-      ? isWithinInterval(date, {
-          start: startOfDayFunc(disabledDays.from),
-          end: endOfDayFunc(disabledDays.to || disabledDays.from),
-        })
-      : false;
+        ? isSameDay(date, disabledDays)
+        : disabledDays instanceof Array
+          ? disabledDays.some((d) => isSameDay(date, d))
+          : disabledDays instanceof Object
+            ? isWithinInterval(date, {
+                start: startOfDayFunc(disabledDays.from),
+                end: endOfDayFunc(disabledDays.to || disabledDays.from),
+              })
+            : false;
   };
 
   $: isDayHidden = (day: Date) => {
@@ -105,7 +105,7 @@
 <div class="flex">
   {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
     <div class="flex-1 text-center">
-      <span class="text-xs text-black/50"> {format(day, 'eee')[0]} </span>
+      <span class="text-xs text-surface-content/50"> {format(day, 'eee')[0]} </span>
     </div>
   {/each}
 </div>

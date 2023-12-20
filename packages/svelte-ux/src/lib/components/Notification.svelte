@@ -41,7 +41,7 @@
 
 {#if open}
   <div
-    class="Notification rounded-lg border bg-white shadow-lg z-10"
+    class="Notification rounded-lg border bg-surface-100 shadow-lg z-10"
     transition:fly={{ duration: 200, easing: quadIn, x: 100 }}
     on:outroend={() => dispatch('close')}
     on:click={onClick}
@@ -62,7 +62,7 @@
           {/if}
 
           {#if $$slots.description}
-            <div class="text-sm text-black/50">
+            <div class="text-sm text-surface-content/50">
               <slot name="description" />
             </div>
           {/if}
@@ -84,7 +84,7 @@
           <Button
             icon={mdiClose}
             on:click={() => (open = false)}
-            class="text-black/25 self-start"
+            class="text-surface-content/25 self-start"
           />
         {/if}
       </div>

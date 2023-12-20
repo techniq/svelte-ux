@@ -6,6 +6,7 @@
   import Preview from '$lib/components/Preview.svelte';
 
   import { scrollIntoView, scrollFade, scrollShadow } from '$lib/actions/scroll';
+  import { cls } from '$lib/utils/styles';
 
   let filterItems = false;
 
@@ -32,7 +33,7 @@
     {#each items as item, i}
       <div
         use:scrollIntoView={{ condition: scrolledIndex === i }}
-        class:bg-gray-200={scrolledIndex === i}
+        class={cls(scrolledIndex === i && 'bg-surface-content/10')}
       >
         {item}
       </div>
@@ -51,7 +52,7 @@
     {#each items as item, i}
       <div
         use:scrollIntoView={{ condition: scrolledIndex === i, onlyIfNeeded: true }}
-        class:bg-gray-200={scrolledIndex === i}
+        class={cls(scrolledIndex === i && 'bg-surface-content/10')}
       >
         {item}
       </div>
@@ -149,7 +150,7 @@
 </Preview>
 
 <div>
-  <Button variant="fill" color="accent" on:click={() => (filterItems = !filterItems)}
+  <Button variant="fill" color="primary" on:click={() => (filterItems = !filterItems)}
     >Toggle filter</Button
   >
 </div>

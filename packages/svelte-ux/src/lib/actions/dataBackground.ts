@@ -95,8 +95,8 @@ export const dataBackground: Action<HTMLElement, DataBackgroundOptions> = (node,
           linear-gradient(
             to right,
             transparent var(--baseline),
-            #999 var(--baseline),
-            #999 calc(var(--baseline) + 1px),
+            currentColor var(--baseline),
+            currentColor calc(var(--baseline) + 1px),
             transparent 0%,
             transparent 100%
           ),

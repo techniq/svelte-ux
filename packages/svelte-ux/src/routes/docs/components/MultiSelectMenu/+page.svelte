@@ -133,7 +133,7 @@
         inlineSearch
       >
         <div slot="actions">
-          <Button color="accent" icon={mdiPlus}>Add item</Button>
+          <Button color="primary" icon={mdiPlus}>Add item</Button>
         </div>
       </MultiSelectMenu>
     </ToggleButton>

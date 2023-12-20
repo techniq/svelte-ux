@@ -32,7 +32,7 @@
   {#if $$slots.title}
     <slot name="title" />
   {:else}
-    <div class="ml-2 text-lg">
+    <div class="ml-2 text-lg font-medium">
       {#if typeof title === 'string' || typeof title === 'number'}
         {title}
       {:else}

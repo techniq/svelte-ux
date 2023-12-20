@@ -76,7 +76,7 @@
           value = e.detail;
           dispatch('change', { value });
         }}
-        class="p-1 text-black/50"
+        class="p-1 text-surface-content/50"
       />
     {/if}
   </span>

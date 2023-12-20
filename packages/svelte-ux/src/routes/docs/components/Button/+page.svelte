@@ -3,10 +3,15 @@
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
   import Button from '$lib/components/Button.svelte';
+  import Field from '$lib/components/Field.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
+  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
+  import ToggleOption from '$lib/components/ToggleOption.svelte';
+
+  let size: 'sm' | 'md' | 'lg' = 'md';
 </script>
 
 <h1>Examples</h1>
@@ -33,30 +38,30 @@
 
 <Preview>
   <Button loading>Loading...</Button>
-  <Button variant="outline" color="accent" loading>Loading...</Button>
-  <Button variant="fill" color="accent" loading>Loading...</Button>
-  <Button variant="fill-light" color="accent" loading>Loading...</Button>
-  <Button variant="fill-outline" color="accent" loading>Loading...</Button>
-  <Button variant="text" color="accent" loading>Loading...</Button>
+  <Button variant="outline" color="primary" loading>Loading...</Button>
+  <Button variant="fill" color="primary" loading>Loading...</Button>
+  <Button variant="fill-light" color="primary" loading>Loading...</Button>
+  <Button variant="fill-outline" color="primary" loading>Loading...</Button>
+  <Button variant="text" color="primary" loading>Loading...</Button>
 
   <div class="mt-2">
     <Toggle let:on={loading} let:toggle>
       <Button {loading} on:click={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="outline" color="accent" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="outline" color="primary" {loading} on:click={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="fill" color="accent" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="fill" color="primary" {loading} on:click={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="fill-light" color="accent" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="fill-light" color="primary" {loading} on:click={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="fill-outline" color="accent" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="fill-outline" color="primary" {loading} on:click={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="text" color="accent" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="text" color="primary" {loading} on:click={toggle}>Click me</Button>
     </Toggle>
   </div>
 
@@ -65,79 +70,75 @@
       <Button icon={faUser} {loading} on:click={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="outline" color="accent" {loading} on:click={toggle}
+      <Button icon={faUser} variant="outline" color="primary" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill" color="accent" {loading} on:click={toggle}
+      <Button icon={faUser} variant="fill" color="primary" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill-light" color="accent" {loading} on:click={toggle}
+      <Button icon={faUser} variant="fill-light" color="primary" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill-outline" color="accent" {loading} on:click={toggle}
+      <Button icon={faUser} variant="fill-outline" color="primary" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="text" color="accent" {loading} on:click={toggle}
+      <Button icon={faUser} variant="text" color="primary" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
   </div>
 </Preview>
 
-<h2>Variants</h2>
+<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+  <h2>Variants, Color & Size</h2>
+  <Field label="size: " labelPlacement="left" class="mb-1">
+    <ToggleGroup bind:value={size} size="sm">
+      <ToggleOption value="sm">sm</ToggleOption>
+      <ToggleOption value="md">md</ToggleOption>
+      <ToggleOption value="lg">lg</ToggleOption>
+    </ToggleGroup>
+  </Field>
+</div>
 
 <Preview>
-  <div class="grid gap-2">
-    <div>
-      <Button>default</Button>
-      <Button color="blue">default</Button>
-      <Button color="red">default</Button>
-      <Button color="green">default</Button>
-      <Button color="gray">default</Button>
-    </div>
-    <div>
-      <Button variant="outline">outline</Button>
-      <Button variant="outline" color="blue">outline</Button>
-      <Button variant="outline" color="red">outline</Button>
-      <Button variant="outline" color="green">outline</Button>
-      <Button variant="outline" color="gray">outline</Button>
-    </div>
-    <div>
-      <Button variant="fill">fill</Button>
-      <Button variant="fill" color="blue">fill</Button>
-      <Button variant="fill" color="red">fill</Button>
-      <Button variant="fill" color="green">fill</Button>
-      <Button variant="fill" color="gray">fill</Button>
-    </div>
-    <div>
-      <Button variant="fill-light">fill-light</Button>
-      <Button variant="fill-light" color="blue">fill-light</Button>
-      <Button variant="fill-light" color="red">fill-light</Button>
-      <Button variant="fill-light" color="green">fill-light</Button>
-      <Button variant="fill-light" color="gray">fill-light</Button>
-    </div>
-    <div>
-      <Button variant="fill-outline">fill-outline</Button>
-      <Button variant="fill-outline" color="blue">fill-outline</Button>
-      <Button variant="fill-outline" color="red">fill-outline</Button>
-      <Button variant="fill-outline" color="green">fill-outline</Button>
-      <Button variant="fill-outline" color="gray">fill-outline</Button>
-    </div>
-    <div>
-      <Button variant="text">text</Button>
-      <Button variant="text" color="blue">text</Button>
-      <Button variant="text" color="red">text</Button>
-      <Button variant="text" color="green">text</Button>
-      <Button variant="text" color="gray">text</Button>
-    </div>
+  <div class="grid gap-3 divide-y">
+    {#each ['default', 'outline', 'fill', 'fill-light', 'fill-outline', 'text'] as variant}
+      <div>
+        <div class="font-semibold my-2">{variant}</div>
+        <div class="grid gap-2 ml-4">
+          <!-- Theme colors -->
+          <div>
+            <Button {variant} {size}>Default</Button>
+            <Button {variant} {size} color="primary">Primary</Button>
+            <Button {variant} {size} color="secondary">Secondary</Button>
+          </div>
+          <div>
+            <!-- State colors -->
+            <Button {variant} {size} color="info">Info</Button>
+            <Button {variant} {size} color="success">Success</Button>
+            <Button {variant} {size} color="warning">Warning</Button>
+            <Button {variant} {size} color="error">Error</Button>
+          </div>
+          <div>
+            <!-- TODO: CSS variables for each variant -->
+            <!-- <Button {variant} {size} class="[--bg-color:theme(colors.blue.500)] [--text-color:white]">
+              Color Variables
+            </Button>
+            <Button {variant} {size} class="[--bg-color:theme(colors.emerald.500)] [--text-color:white]">
+              Color Variables
+            </Button> -->
+          </div>
+        </div>
+      </div>
+    {/each}
   </div>
 </Preview>
 
@@ -145,58 +146,6 @@
 
 <Preview>
   <Button variant="none">Click me</Button>
-</Preview>
-
-<h2>Size</h2>
-
-<Preview>
-  {#each ['sm', 'md', 'lg'] as size}
-    <div class="[&:not(:first-child)]:mt-4">{size}</div>
-    <div class="grid gap-2 ml-3">
-      <div>
-        <Button {size}>default</Button>
-        <Button color="blue" {size}>default</Button>
-        <Button color="red" {size}>default</Button>
-        <Button color="green" {size}>default</Button>
-        <Button color="gray" {size}>default</Button>
-      </div>
-      <div>
-        <Button variant="outline" {size}>outline</Button>
-        <Button variant="outline" {size} color="blue">outline</Button>
-        <Button variant="outline" {size} color="red">outline</Button>
-        <Button variant="outline" {size} color="green">outline</Button>
-        <Button variant="outline" {size} color="gray">outline</Button>
-      </div>
-      <div>
-        <Button variant="fill" {size}>fill</Button>
-        <Button variant="fill" {size} color="blue">fill</Button>
-        <Button variant="fill" {size} color="red">fill</Button>
-        <Button variant="fill" {size} color="green">fill</Button>
-        <Button variant="fill" {size} color="gray">fill</Button>
-      </div>
-      <div>
-        <Button variant="fill-light" {size}>fill-light</Button>
-        <Button variant="fill-light" {size} color="blue">fill-light</Button>
-        <Button variant="fill-light" {size} color="red">fill-light</Button>
-        <Button variant="fill-light" {size} color="green">fill-light</Button>
-        <Button variant="fill-light" {size} color="gray">fill-light</Button>
-      </div>
-      <div>
-        <Button variant="fill-outline" {size}>fill-outline</Button>
-        <Button variant="fill-outline" {size} color="blue">fill-outline</Button>
-        <Button variant="fill-outline" {size} color="red">fill-outline</Button>
-        <Button variant="fill-outline" {size} color="green">fill-outline</Button>
-        <Button variant="fill-outline" {size} color="gray">fill-outline</Button>
-      </div>
-      <div>
-        <Button variant="text" {size}>text</Button>
-        <Button variant="text" {size} color="blue">text</Button>
-        <Button variant="text" {size} color="red">text</Button>
-        <Button variant="text" {size} color="green">text</Button>
-        <Button variant="text" {size} color="gray">text</Button>
-      </div>
-    </div>
-  {/each}
 </Preview>
 
 <h2>Rounded</h2>
@@ -210,28 +159,28 @@
       <Button rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="outline" color="accent">default</Button>
-      <Button variant="outline" color="accent" rounded>rounded</Button>
-      <Button variant="outline" color="accent" rounded="full">full</Button>
-      <Button variant="outline" color="accent" rounded={false}>false</Button>
+      <Button variant="outline" color="primary">default</Button>
+      <Button variant="outline" color="primary" rounded>rounded</Button>
+      <Button variant="outline" color="primary" rounded="full">full</Button>
+      <Button variant="outline" color="primary" rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="fill" color="accent">default</Button>
-      <Button variant="fill" color="accent" rounded>rounded</Button>
-      <Button variant="fill" color="accent" rounded="full">full</Button>
-      <Button variant="fill" color="accent" rounded={false}>false</Button>
+      <Button variant="fill" color="primary">default</Button>
+      <Button variant="fill" color="primary" rounded>rounded</Button>
+      <Button variant="fill" color="primary" rounded="full">full</Button>
+      <Button variant="fill" color="primary" rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="fill-light" color="accent">default</Button>
-      <Button variant="fill-light" color="accent" rounded>rounded</Button>
-      <Button variant="fill-light" color="accent" rounded="full">full</Button>
-      <Button variant="fill-light" color="accent" rounded={false}>false</Button>
+      <Button variant="fill-light" color="primary">default</Button>
+      <Button variant="fill-light" color="primary" rounded>rounded</Button>
+      <Button variant="fill-light" color="primary" rounded="full">full</Button>
+      <Button variant="fill-light" color="primary" rounded={false}>false</Button>
     </div>
     <div>
-      <Button variant="fill-outline" color="accent">default</Button>
-      <Button variant="fill-outline" color="accent" rounded>rounded</Button>
-      <Button variant="fill-outline" color="accent" rounded="full">full</Button>
-      <Button variant="fill-outline" color="accent" rounded={false}>false</Button>
+      <Button variant="fill-outline" color="primary">default</Button>
+      <Button variant="fill-outline" color="primary" rounded>rounded</Button>
+      <Button variant="fill-outline" color="primary" rounded="full">full</Button>
+      <Button variant="fill-outline" color="primary" rounded={false}>false</Button>
     </div>
   </div>
 </Preview>
@@ -240,11 +189,11 @@
 
 <Preview>
   <Button class="uppercase">default</Button>
-  <Button class="uppercase" variant="outline" color="accent">outline</Button>
-  <Button class="uppercase" variant="fill" color="accent">fill</Button>
-  <Button class="uppercase" variant="fill-light" color="accent">fill-light</Button>
-  <Button class="uppercase" variant="fill-outline" color="accent">fill-outline</Button>
-  <Button class="uppercase" variant="text" color="accent">text</Button>
+  <Button class="uppercase" variant="outline" color="primary">outline</Button>
+  <Button class="uppercase" variant="fill" color="primary">fill</Button>
+  <Button class="uppercase" variant="fill-light" color="primary">fill-light</Button>
+  <Button class="uppercase" variant="fill-outline" color="primary">fill-outline</Button>
+  <Button class="uppercase" variant="text" color="primary">text</Button>
 </Preview>
 
 <h2>Tooltip</h2>
@@ -267,7 +216,7 @@
 
 <Preview>
   <div class="flex items-center">
-    <Button icon={mdiTrashCan} color="red">Delete</Button>
+    <Button icon={mdiTrashCan} color="error">Delete</Button>
     <Button icon={mdiMagnify} class="flex-row-reverse">Search</Button>
     <Button icon={mdiHome} class="flex-col">Home</Button>
     <Button icon={mdiHome} class="flex-col-reverse">Home</Button>
@@ -278,9 +227,9 @@
 <h2>Pass props to Icon</h2>
 
 <Preview>
-  <Button icon={{ data: mdiTrashCan, size: '2rem', style: 'color:#b91c1c' }} color="red"
-    >Delete</Button
-  >
+  <Button icon={{ data: mdiTrashCan, size: '2rem', style: 'color: crimson' }} color="error">
+    Delete
+  </Button>
 </Preview>
 
 <SectionDivider class="mt-12">Icon only</SectionDivider>
@@ -325,26 +274,26 @@
 <Preview>
   <div>
     <Button icon={mdiMenu} />
-    <Button icon={mdiMenu} color="accent" />
+    <Button icon={mdiMenu} color="primary" />
   </div>
   <div>
     <Button icon={mdiMenu} variant="outline" />
-    <Button icon={mdiMenu} variant="outline" color="accent" />
+    <Button icon={mdiMenu} variant="outline" color="primary" />
   </div>
   <div>
     <Button icon={mdiMenu} variant="fill" />
-    <Button icon={mdiMenu} variant="fill" color="accent" />
+    <Button icon={mdiMenu} variant="fill" color="primary" />
   </div>
   <div>
     <Button icon={mdiMenu} variant="fill-light" />
-    <Button icon={mdiMenu} variant="fill-light" color="accent" />
+    <Button icon={mdiMenu} variant="fill-light" color="primary" />
   </div>
   <div>
     <Button icon={mdiMenu} variant="fill-outline" />
-    <Button icon={mdiMenu} variant="fill-outline" color="accent" />
+    <Button icon={mdiMenu} variant="fill-outline" color="primary" />
   </div>
   <div>
     <Button icon={mdiMenu} variant="text" />
-    <Button icon={mdiMenu} variant="text" color="accent" />
+    <Button icon={mdiMenu} variant="text" color="primary" />
   </div>
 </Preview>

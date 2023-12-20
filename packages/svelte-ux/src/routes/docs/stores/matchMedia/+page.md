@@ -64,71 +64,71 @@
 <Preview>
   <div class="grid grid-cols-[auto,1fr] items-center gap-2">
     {#if $smScreen}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $smScreen (640px)
 
     {#if $mdScreen}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $mdScreen (768px)
 
     {#if $lgScreen}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $lgScreen (1024px)
 
     {#if $xlScreen}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $xlScreen (1280px)
 
     {#if $xxlScreen}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $xxlScreen (1536px)
 
     {#if $screen}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $screen
 
     {#if $print}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $print
 
     {#if $darkColorScheme}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $darkColorScheme
 
     {#if $motionReduce}
-      <Icon path={mdiCheckCircle} size="1rem" class="text-emerald-500" />
+      <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-red-500" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
     {/if}
     $motionReduce
 
   </div>
 
-  <div class="ml-6 mt-3 text-black/50 text-xs">
+  <div class="ml-6 mt-3 text-surface-content/50 text-xs">
     current width: {innerWidth}px
   </div>
 </Preview>
