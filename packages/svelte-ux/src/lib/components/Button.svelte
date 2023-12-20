@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
   import { slide } from 'svelte/transition';
 
   import Icon from './Icon.svelte';
@@ -7,7 +6,7 @@
   import { cls } from '../utils/styles';
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
-  import type { TailwindColors } from '$lib/types';
+  import type { ThemeColors } from '$lib/types';
   import { getComponentTheme } from './theme';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '$lib/utils/icons';
@@ -33,7 +32,7 @@
     | 'none'
     | undefined = undefined; // default in reactive groupContext below
   export let size: 'sm' | 'md' | 'lg' | undefined = undefined; // default in reactive groupContext below
-  export let color: TailwindColors | 'default' | undefined = undefined; // default in reactive groupContext below
+  export let color: ThemeColors | 'default' | undefined = undefined; // default in reactive groupContext below
 
   /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
@@ -52,7 +51,7 @@
 
   $: _class = cls(
     'Button',
-    'transition duration-200 ring-black/20',
+    'transition duration-200 ring-surface-content/60',
     'focus:outline-none focus-visible:ring-1',
     fullWidth ? 'flex w-full' : 'inline-flex',
     loading ? 'gap-2' : 'gap-1',
@@ -84,153 +83,294 @@
       text: 'p-0',
       none: '',
     }[variant ?? 'none'],
+
     // Variant specific colors
     {
       default: {
-        default: 'hover:bg-black/5 ring-black/10',
-        accent: 'text-accent-500 hover:bg-accent-500/10 ring-accent-500/60',
-        red: 'text-red-500 hover:bg-red-500/10 ring-red-500/60',
-        orange: 'text-orange-500 hover:bg-orange-500/10 ring-orange-500/60',
-        amber: 'text-amber-500 hover:bg-amber-500/10 ring-amber-500/60',
-        yellow: 'text-yellow-500 hover:bg-yellow-500/10 ring-yellow-500/60',
-        lime: 'text-lime-500 hover:bg-lime-500/10 ring-lime-500/60',
-        green: 'text-green-500 hover:bg-green-500/10 ring-green-500/60',
-        emerald: 'text-emerald-500 hover:bg-emerald-500/10 ring-emerald-500/60',
-        teal: 'text-teal-500 hover:bg-teal-500/10 ring-teal-500/60',
-        cyan: 'text-cyan-500 hover:bg-cyan-500/10 ring-cyan-500/60',
-        sky: 'text-sky-500 hover:bg-sky-500/10 ring-sky-500/60',
-        blue: 'text-blue-500 hover:bg-blue-500/10 ring-blue-500/60',
-        indigo: 'text-indigo-500 hover:bg-indigo-500/10 ring-indigo-500/60',
-        violet: 'text-violet-500 hover:bg-violet-500/10 ring-violet-500/60',
-        purple: 'text-purple-500 hover:bg-purple-500/10 ring-purple-500/60',
-        fuchsia: 'text-fuchsia-500 hover:bg-fuchsia-500/10 ring-fuchsia-500/60',
-        pink: 'text-pink-500 hover:bg-pink-500/10 ring-pink-500/60',
-        rose: 'text-rose-500 hover:bg-rose-500/10 ring-rose-500/60',
-        gray: 'text-gray-500 hover:bg-gray-500/10 ring-gray-500/60',
+        default: [
+          'hover:[--bg-color:theme(colors.surface-content/10%)]',
+          // '[--text-color:theme(colors.surface-content)]', // inherit
+          '[--ring-color:theme(colors.surface-content/60%)]',
+        ],
+        primary: [
+          'hover:[--bg-color:theme(colors.primary/10%)]',
+          '[--text-color:theme(colors.primary)]',
+          '[--ring-color:theme(colors.primary/60%)]',
+        ],
+        secondary: [
+          'hover:[--bg-color:theme(colors.secondary/10%)]',
+          '[--text-color:theme(colors.secondary)]',
+          '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        info: [
+          'hover:[--bg-color:theme(colors.info/10%)]',
+          '[--text-color:theme(colors.info)]',
+          '[--ring-color:theme(colors.info/60%)]',
+        ],
+        success: [
+          'hover:[--bg-color:theme(colors.success/10%)]',
+          '[--text-color:theme(colors.success)]',
+          '[--ring-color:theme(colors.success/60%)]',
+        ],
+        warning: [
+          'hover:[--bg-color:theme(colors.warning/10%)]',
+          '[--text-color:theme(colors.warning)]',
+          '[--ring-color:theme(colors.warning/60%)]',
+        ],
+        error: [
+          'hover:[--bg-color:theme(colors.error/10%)]',
+          '[--text-color:theme(colors.error)]',
+          '[--ring-color:theme(colors.error/60%)]',
+        ],
       },
       outline: {
-        default: 'bg-white hover:bg-black/5 ring-black/10',
-        accent: 'text-accent-500 border-accent-500 hover:bg-accent-500/10 ring-accent-500/60',
-        red: 'text-red-500 border-red-500 hover:bg-red-500/10 ring-red-500/60',
-        orange: 'text-orange-500 border-orange-500 hover:bg-orange-500/10 ring-orange-500/60',
-        amber: 'text-amber-500 border-amber-500 hover:bg-amber-500/10 ring-amber-500/60',
-        yellow: 'text-yellow-500 border-yellow-500 hover:bg-yellow-500/10 ring-yellow-500/60',
-        lime: 'text-lime-500 border-lime-500 hover:bg-lime-500/10 ring-lime-500/60',
-        green: 'text-green-500 border-green-500 hover:bg-green-500/10 ring-green-500/60',
-        emerald: 'text-emerald-500 border-emerald-500 hover:bg-emerald-500/10 ring-emerald-500/60',
-        teal: 'text-teal-500 border-teal-500 hover:bg-teal-500/10 ring-teal-500/60',
-        cyan: 'text-cyan-500 border-cyan-500 hover:bg-cyan-500/10 ring-cyan-500/60',
-        sky: 'text-sky-500 border-sky-500 hover:bg-sky-500/10 ring-sky-500/60',
-        blue: 'text-blue-500 border-blue-500 hover:bg-blue-500/10 ring-blue-500/60',
-        indigo: 'text-indigo-500 border-indigo-500 hover:bg-indigo-500/10 ring-indigo-500/60',
-        violet: 'text-violet-500 border-violet-500 hover:bg-violet-500/10 ring-violet-500/60',
-        purple: 'text-purple-500 border-purple-500 hover:bg-purple-500/10 ring-purple-500/60',
-        fuchsia: 'text-fuchsia-500 border-fuchsia-500 hover:bg-fuchsia-500/10 ring-fuchsia-500/60',
-        pink: 'text-pink-500 border-pink-500 hover:bg-pink-500/10 ring-pink-500/60',
-        rose: 'text-rose-500 border-rose-500 hover:bg-rose-500/10 ring-rose-500/60',
-        gray: 'text-gray-500 border-gray-500 hover:bg-gray-500/10 ring-gray-500/60',
+        default: [
+          'hover:[--bg-color:theme(colors.surface-content/10%)]',
+          '[--border-color:theme(colors.surface-content)]',
+          '[--text-color:theme(colors.surface-content)]',
+          '[--ring-color:theme(colors.surface-content/60%)]',
+        ],
+        primary: [
+          'hover:[--bg-color:theme(colors.primary/10%)]',
+          '[--border-color:theme(colors.primary)]',
+          '[--text-color:theme(colors.primary)]',
+          '[--ring-color:theme(colors.primary/60%)]',
+        ],
+        secondary: [
+          'hover:[--bg-color:theme(colors.secondary/10%)]',
+          '[--border-color:theme(colors.secondary)]',
+          '[--text-color:theme(colors.secondary)]',
+          '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        info: [
+          'hover:[--bg-color:theme(colors.info/10%)]',
+          '[--border-color:theme(colors.info)]',
+          '[--text-color:theme(colors.info)]',
+          '[--ring-color:theme(colors.info/60%)]',
+        ],
+        success: [
+          'hover:[--bg-color:theme(colors.success/10%)]',
+          '[--border-color:theme(colors.success)]',
+          '[--text-color:theme(colors.success)]',
+          '[--ring-color:theme(colors.success/60%)]',
+        ],
+        warning: [
+          'hover:[--bg-color:theme(colors.warning/10%)]',
+          '[--border-color:theme(colors.warning)]',
+          '[--text-color:theme(colors.warning)]',
+          '[--ring-color:theme(colors.warning/60%)]',
+        ],
+        error: [
+          'hover:[--bg-color:theme(colors.error/10%)]',
+          '[--border-color:theme(colors.error)]',
+          '[--text-color:theme(colors.error)]',
+          '[--ring-color:theme(colors.error/60%)]',
+        ],
       },
       fill: {
-        default: 'text-black bg-black/5 hover:bg-black/10 ring-black/10',
-        accent: 'text-white bg-accent-500 hover:bg-accent-600 ring-accent-500/60',
-        red: 'text-white bg-red-500 hover:bg-red-600 ring-red-500/60',
-        orange: 'text-white bg-orange-500 hover:bg-orange-600 ring-orange-500/60',
-        amber: 'text-white bg-amber-500 hover:bg-amber-600 ring-amber-500/60',
-        yellow: 'text-white bg-yellow-500 hover:bg-yellow-600 ring-yellow-500/60',
-        lime: 'text-white bg-lime-500 hover:bg-lime-600 ring-lime-500/60',
-        green: 'text-white bg-green-500 hover:bg-green-600 ring-green-500/60',
-        emerald: 'text-white bg-emerald-500 hover:bg-emerald-600 ring-emerald-500/60',
-        teal: 'text-white bg-teal-500 hover:bg-teal-600 ring-teal-500/60',
-        cyan: 'text-white bg-cyan-500 hover:bg-cyan-600 ring-cyan-500/60',
-        sky: 'text-white bg-sky-500 hover:bg-sky-600 ring-sky-500/60',
-        blue: 'text-white bg-blue-500 hover:bg-blue-600 ring-blue-500/60',
-        indigo: 'text-white bg-indigo-500 hover:bg-indigo-600 ring-indigo-500/60',
-        violet: 'text-white bg-violet-500 hover:bg-violet-600 ring-violet-500/60',
-        purple: 'text-white bg-purple-500 hover:bg-purple-600 ring-purple-500/60',
-        fuchsia: 'text-white bg-fuchsia-500 hover:bg-fuchsia-600 ring-fuchsia-500/60',
-        pink: 'text-white bg-pink-500 hover:bg-pink-600 ring-pink-500/60',
-        rose: 'text-white bg-rose-500 hover:bg-rose-600 ring-rose-500/60',
-        gray: 'text-white bg-gray-500 hover:bg-gray-600 ring-gray-500/60',
+        default: [
+          `[--bg-color:theme(colors.surface-300)]`,
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.surface-300)_90%,black)]',
+          '[--text-color:theme(colors.surface-content)]',
+          '[--ring-color:theme(colors.surface-content/60%)]',
+        ],
+        primary: [
+          `[--bg-color:theme(colors.primary)]`,
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.primary)_90%,black)]',
+          '[--text-color:theme(colors.primary-content)]',
+          '[--ring-color:theme(colors.primary/60%)]',
+        ],
+        secondary: [
+          '[--bg-color:theme(colors.secondary)]',
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.secondary)_90%,black)]',
+          '[--text-color:theme(colors.secondary-content)]',
+          '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        info: [
+          `[--bg-color:theme(colors.info)]`,
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.info)_90%,black)]',
+          '[--text-color:theme(colors.info-content)]',
+          '[--ring-color:theme(colors.info/60%)]',
+        ],
+        success: [
+          `[--bg-color:theme(colors.success)]`,
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.success)_90%,black)]',
+          '[--text-color:theme(colors.success-content)]',
+          '[--ring-color:theme(colors.success/60%)]',
+        ],
+        warning: [
+          `[--bg-color:theme(colors.warning)]`,
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.warning)_90%,black)]',
+          '[--text-color:theme(colors.warning-content)]',
+          '[--ring-color:theme(colors.warning/60%)]',
+        ],
+        error: [
+          `[--bg-color:theme(colors.error)]`,
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.error)_90%,black)]',
+          '[--text-color:theme(colors.error-content)]',
+          '[--ring-color:theme(colors.error/60%)]',
+        ],
       },
       'fill-light': {
-        default: 'text-black bg-black/5 hover:bg-black/10 ring-black/20',
-        accent:
-          'text-accent-500 bg-accent-500/10 hover:bg-accent-500/20 ring-accent-400 ring-accent-500/60',
-        red: 'text-red-500 bg-red-500/10 hover:bg-red-500/20 ring-red-500/60',
-        orange: 'text-orange-500 bg-orange-500/10 hover:bg-orange-500/20 ring-orange-500/60',
-        amber: 'text-amber-500 bg-amber-500/10 hover:bg-amber-500/20 ring-amber-500/60',
-        yellow: 'text-yellow-500 bg-yellow-500/10 hover:bg-yellow-500/20 ring-yellow-500/60',
-        lime: 'text-lime-500 bg-lime-500/10 hover:bg-lime-500/20 ring-lime-500/60',
-        green: 'text-green-500 bg-green-500/10 hover:bg-green-500/20 ring-green-500/60',
-        emerald: 'text-emerald-500 bg-emerald-500/10 hover:bg-emerald-500/20 ring-emerald-500/60',
-        teal: 'text-teal-500 bg-teal-500/10 hover:bg-teal-500/20 ring-teal-500/60',
-        cyan: 'text-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/20 ring-cyan-500/60',
-        sky: 'text-sky-500 bg-sky-500/10 hover:bg-sky-500/20 ring-sky-500/60',
-        blue: 'text-blue-500 bg-blue-500/10 hover:bg-blue-500/20 ring-blue-500/60',
-        indigo: 'text-indigo-500 bg-indigo-500/10 hover:bg-indigo-500/20 ring-indigo-500/60',
-        violet: 'text-violet-500 bg-violet-500/10 hover:bg-violet-500/20 ring-violet-500/60',
-        purple: 'text-purple-500 bg-purple-500/10 hover:bg-purple-500/20 ring-purple-500/60',
-        fuchsia: 'text-fuchsia-500 bg-fuchsia-500/10 hover:bg-fuchsia-500/20 ring-fuchsia-500/60',
-        pink: 'text-pink-500 bg-pink-500/10 hover:bg-pink-500/20 ring-pink-500/60',
-        rose: 'text-rose-500 bg-rose-500/10 hover:bg-rose-500/20 ring-rose-500/60',
-        gray: 'text-gray-500 bg-gray-500/10 hover:bg-gray-500/20 ring-gray-500/60',
+        default: [
+          '[--bg-color:theme(colors.surface-content/10%)]',
+          'hover:[--bg-color:theme(colors.surface-content/20%)]',
+          '[--text-color:theme(colors.surface-content)]',
+          '[--ring-color:theme(colors.surface-content/60%)]',
+        ],
+        primary: [
+          '[--bg-color:theme(colors.primary/10%)]',
+          'hover:[--bg-color:theme(colors.primary/20%)]',
+          '[--text-color:theme(colors.primary)]',
+          '[--ring-color:theme(colors.primary/60%)]',
+        ],
+        secondary: [
+          '[--bg-color:theme(colors.secondary/10%)]',
+          'hover:[--bg-color:theme(colors.secondary/20%)]',
+          '[--text-color:theme(colors.secondary)]',
+          '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        info: [
+          '[--bg-color:theme(colors.info/10%)]',
+          'hover:[--bg-color:theme(colors.info/20%)]',
+          '[--text-color:theme(colors.info)]',
+          '[--ring-color:theme(colors.info/60%)]',
+        ],
+        success: [
+          '[--bg-color:theme(colors.success/10%)]',
+          'hover:[--bg-color:theme(colors.success/20%)]',
+          '[--text-color:theme(colors.success)]',
+          '[--ring-color:theme(colors.success/60%)]',
+        ],
+        warning: [
+          '[--bg-color:theme(colors.warning/10%)]',
+          'hover:[--bg-color:theme(colors.warning/20%)]',
+          '[--text-color:theme(colors.warning)]',
+          '[--ring-color:theme(colors.warning/60%)]',
+        ],
+        error: [
+          '[--bg-color:theme(colors.error/10%)]',
+          'hover:[--bg-color:theme(colors.error/20%)]',
+          '[--text-color:theme(colors.error)]',
+          '[--ring-color:theme(colors.error/60%)]',
+        ],
       },
       'fill-outline': {
-        default: 'text-black bg-black/5 hover:bg-black/10 border-black/20 ring-black/10',
-        accent:
-          'text-accent-500 border-accent-500 bg-accent-500/10 hover:bg-accent-500/20 ring-accent-500/60',
-        red: 'text-red-500 border-red-500 bg-red-500/10 hover:bg-red-500/20 ring-red-500/60',
-        orange:
-          'text-orange-500 border-orange-500 bg-orange-500/10 hover:bg-orange-500/20 ring-orange-500/60',
-        amber:
-          'text-amber-500 border-amber-500 bg-amber-500/10 hover:bg-amber-500/20 ring-amber-500/60',
-        yellow:
-          'text-yellow-500 border-yellow-500 bg-yellow-500/10 hover:bg-yellow-500/20 ring-yellow-500/60',
-        lime: 'text-lime-500 border-lime-500 bg-lime-500/10 hover:bg-lime-500/20 ring-lime-500/60',
-        green:
-          'text-green-500 border-green-500 bg-green-500/10 hover:bg-green-500/20 ring-green-500/60',
-        emerald:
-          'text-emerald-500 border-emerald-500 bg-emerald-500/10 hover:bg-emerald-500/20 ring-emerald-500/60',
-        teal: 'text-teal-500 border-teal-500 bg-teal-500/10 hover:bg-teal-500/20 ring-teal-500/60',
-        cyan: 'text-cyan-500 border-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/20 ring-cyan-500/60',
-        sky: 'text-sky-500 border-sky-500 bg-sky-500/10 hover:bg-sky-500/20 ring-sky-500/60',
-        blue: 'text-blue-500 border-blue-500 bg-blue-500/10 hover:bg-blue-500/20 ring-blue-500/60',
-        indigo:
-          'text-indigo-500 border-indigo-500 bg-indigo-500/10 hover:bg-indigo-500/20 ring-indigo-500/60',
-        violet:
-          'text-violet-500 border-violet-500 bg-violet-500/10 hover:bg-violet-500/20 ring-violet-500/60',
-        purple:
-          'text-purple-500 border-purple-500 bg-purple-500/10 hover:bg-purple-500/20 ring-purple-500/60',
-        fuchsia:
-          'text-fuchsia-500 border-fuchsia-500 bg-fuchsia-500/10 hover:bg-fuchsia-500/20 ring-fuchsia-500/60',
-        pink: 'text-pink-500 border-pink-500 bg-pink-500/10 hover:bg-pink-500/20 ring-pink-500/60',
-        rose: 'text-rose-500 border-rose-500 bg-rose-500/10 hover:bg-rose-500/20 ring-rose-500/60',
-        gray: 'text-gray-500 border-gray-500 bg-gray-500/10 hover:bg-gray-500/20 ring-gray-500/60',
+        default: [
+          '[--bg-color:theme(colors.surface-content/10%)]',
+          'hover:[--bg-color:theme(colors.surface-content/20%)]',
+          '[--border-color:theme(colors.surface-content)]',
+          '[--text-color:theme(colors.surface-content)]',
+          '[--ring-color:theme(colors.surface-content/60%)]',
+        ],
+        primary: [
+          '[--bg-color:theme(colors.primary/10%)]',
+          'hover:[--bg-color:theme(colors.primary/20%)]',
+          '[--border-color:theme(colors.primary)]',
+          '[--text-color:theme(colors.primary)]',
+          '[--ring-color:theme(colors.primary/60%)]',
+        ],
+        secondary: [
+          '[--bg-color:theme(colors.secondary/10%)]',
+          'hover:[--bg-color:theme(colors.secondary/20%)]',
+          '[--border-color:theme(colors.secondary)]',
+          '[--text-color:theme(colors.secondary)]',
+          '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        info: [
+          '[--bg-color:theme(colors.info/10%)]',
+          'hover:[--bg-color:theme(colors.info/20%)]',
+          '[--border-color:theme(colors.info)]',
+          '[--text-color:theme(colors.info)]',
+          '[--ring-color:theme(colors.info/60%)]',
+        ],
+        success: [
+          '[--bg-color:theme(colors.success/10%)]',
+          'hover:[--bg-color:theme(colors.success/20%)]',
+          '[--border-color:theme(colors.success)]',
+          '[--text-color:theme(colors.success)]',
+          '[--ring-color:theme(colors.success/60%)]',
+        ],
+        warning: [
+          '[--bg-color:theme(colors.warning/10%)]',
+          'hover:[--bg-color:theme(colors.warning/20%)]',
+          '[--border-color:theme(colors.warning)]',
+          '[--text-color:theme(colors.warning)]',
+          '[--ring-color:theme(colors.warning/60%)]',
+        ],
+        error: [
+          '[--bg-color:theme(colors.error/10%)]',
+          'hover:[--bg-color:theme(colors.error/20%)]',
+          '[--border-color:theme(colors.error)]',
+          '[--text-color:theme(colors.error)]',
+          '[--ring-color:theme(colors.error/60%)]',
+        ],
       },
       text: {
-        default: 'hover:text-black/70 ring-black/10',
-        accent: 'text-accent-500 hover:text-accent-700 ring-accent-500/60',
-        red: 'text-red-500 hover:text-red-700 ring-red-500/60',
-        orange: 'text-orange-500 hover:text-orange-700 ring-orange-500/60',
-        amber: 'text-amber-500 hover:text-amber-700 ring-amber-500/60',
-        yellow: 'text-yellow-500 hover:text-yellow-700 ring-yellow-500/60',
-        lime: 'text-lime-500 hover:text-lime-700 ring-lime-500/60',
-        green: 'text-green-500 hover:text-green-700 ring-green-500/60',
-        emerald: 'text-emerald-500 hover:text-emerald-700 ring-emerald-500/60',
-        teal: 'text-teal-500 hover:text-teal-700 ring-teal-500/60',
-        cyan: 'text-cyan-500 hover:text-cyan-700 ring-cyan-500/60',
-        sky: 'text-sky-500 hover:text-sky-700 ring-sky-500/60',
-        blue: 'text-blue-500 hover:text-blue-700 ring-blue-500/60',
-        indigo: 'text-indigo-500 hover:text-indigo-700 ring-indigo-500/60',
-        violet: 'text-violet-500 hover:text-violet-700 ring-violet-500/60',
-        purple: 'text-purple-500 hover:text-purple-700 ring-purple-500/60',
-        fuchsia: 'text-fuchsia-500 hover:text-fuchsia-700 ring-fuchsia-500/60',
-        pink: 'text-pink-500 hover:text-pink-700 ring-pink-500/60',
-        rose: 'text-rose-500 hover:text-rose-700 ring-rose-500/60',
-        gray: 'text-gray-500 hover:text-gray-700 ring-gray-500/60',
+        default: [
+          '[--text-color:theme(colors.surface-content)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.surface-content)_80%,black)]',
+          '[--ring-color:theme(colors.surface-content/60%)]',
+        ],
+        primary: [
+          '[--text-color:theme(colors.primary)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.primary)_80%,black)]',
+          '[--ring-color:theme(colors.primary/60%)]',
+        ],
+        secondary: [
+          '[--text-color:theme(colors.secondary)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.secondary)_80%,black)]',
+          '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        info: [
+          '[--text-color:theme(colors.info)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.info)_80%,black)]',
+          '[--ring-color:theme(colors.info/60%)]',
+        ],
+        success: [
+          '[--text-color:theme(colors.success)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.success)_80%,black)]',
+          '[--ring-color:theme(colors.success/60%)]',
+        ],
+        warning: [
+          '[--text-color:theme(colors.warning)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.warning)_80%,black)]',
+          '[--ring-color:theme(colors.warning/60%)]',
+        ],
+        error: [
+          '[--text-color:theme(colors.error)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.error)_80%,black)]',
+          '[--ring-color:theme(colors.error/60%)]',
+        ],
       },
-      none: {},
+      none: {
+        default: '',
+        primary: '',
+        secondary: '',
+        info: '',
+        success: '',
+        warning: '',
+        error: '',
+      },
     }[variant ?? 'none']?.[color ?? 'default'],
+
+    // text color
+    ['default', 'outline', 'fill', 'fill-outline', 'fill-light', 'text'].includes(
+      variant ?? 'none'
+    ) && 'text-[--text-color]',
+
+    // background color
+    ['default', 'outline', 'fill', 'fill-outline', 'fill-light'].includes(variant ?? 'none') &&
+      'bg-[--bg-color] ',
+
+    // border color
+    ['outline', 'fill-outline'].includes(variant ?? 'none') && 'border-[--border-color]',
+
+    // ring color
+    ['default', 'outline', 'fill', 'fill-outline', 'fill-light', 'text'].includes(
+      variant ?? 'none'
+    ) && 'ring-[--ring-color]',
+
     theme.root,
     classes?.root,
     $$props.class
@@ -262,7 +402,10 @@
     <span in:slide={{ axis: 'x', duration: 200 }}>
       {#if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
-        <Icon data={asIconData(icon)} class={cls('pointer-events-none', theme.icon, classes.icon)} />
+        <Icon
+          data={asIconData(icon)}
+          class={cls('pointer-events-none', theme.icon, classes.icon)}
+        />
       {:else}
         <Icon class={cls('pointer-events-none', theme.icon, classes.icon)} {...icon} />
       {/if}

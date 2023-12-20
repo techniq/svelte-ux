@@ -9,11 +9,7 @@ const config = {
 		'./node_modules/layerchart/**/*.{svelte,js}'
 	],
 	theme: {
-		extend: {
-			colors: {
-				accent: colors.blue
-			}
-		}
+		extend: {}
 	},
 	variants: {
 		extend: {}

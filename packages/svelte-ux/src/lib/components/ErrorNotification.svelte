@@ -40,12 +40,12 @@
             e.stopPropagation();
             toggle();
           }}
-          class="text-accent-500"
+          class="primary"
         >
           View Details
         </Button>
       {/if}
-      <Button class={hasDetails ? '' : 'text-accent-500'}>Dismiss</Button>
+      <Button color={hasDetails ? 'default' : 'primary'}>Dismiss</Button>
     </div>
   </Notification>
 
@@ -61,7 +61,7 @@
     <div class="grid gap-4 p-6">
       {#if stackTrace}
         <div>
-          <div class="text-xs text-black/50 mb-1">Stacktrace:</div>
+          <div class="text-xs text-surface-content/50 mb-1">Stacktrace:</div>
           <pre class="bg-gray-100 border rounded p-2 text-xs">
             {stackTrace ?? '<Empty>'}
           </pre>
@@ -70,7 +70,7 @@
     </div>
 
     <div slot="actions">
-      <Button on:click={toggle} class="text-accent-500 hover:bg-accent-50">Close</Button>
+      <Button color="primary" on:click={toggle}>Close</Button>
     </div>
   </Dialog>
 </Toggle>

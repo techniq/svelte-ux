@@ -23,7 +23,7 @@
   {...$$restProps}
   class={cls(
     'Card',
-    'relative z-0 bg-white border rounded elevation-1 flex flex-col justify-between',
+    'relative z-0 bg-surface-100 border rounded elevation-1 flex flex-col justify-between',
     theme.root,
     $$props.class
   )}

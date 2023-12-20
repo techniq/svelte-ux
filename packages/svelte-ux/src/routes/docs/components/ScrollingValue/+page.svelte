@@ -71,13 +71,13 @@
   </ButtonGroup>
 
   <Field label="axis" labelPlacement="left">
-    <ToggleGroup bind:value={axis} variant="fill-white" inset>
+    <ToggleGroup bind:value={axis} variant="fill-surface" inset>
       <ToggleOption value="x">x</ToggleOption>
       <ToggleOption value="y">y</ToggleOption>
     </ToggleGroup>
   </Field>
 </div>
-<div class="text-xs ml-2 text-black/50">
+<div class="text-xs ml-2 text-surface-content/50">
   also keyboard up/down with shift: +/- 10 option: +/- 100
 </div>
 
@@ -182,7 +182,7 @@
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup color="accent" variant="fill-light">
+    <ButtonGroup color="primary" variant="fill-light">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
@@ -194,7 +194,7 @@
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup color="accent" variant="fill-outline">
+    <ButtonGroup color="primary" variant="fill-outline">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
