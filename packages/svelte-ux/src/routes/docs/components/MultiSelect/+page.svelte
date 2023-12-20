@@ -83,7 +83,7 @@
   <div class="flex flex-col max-h-[360px] overflow-auto">
     <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch>
       <div slot="actions">
-        <Button color="accent" icon={mdiPlus}>Add item</Button>
+        <Button color="primary" icon={mdiPlus}>Add item</Button>
       </div>
     </MultiSelect>
   </div>

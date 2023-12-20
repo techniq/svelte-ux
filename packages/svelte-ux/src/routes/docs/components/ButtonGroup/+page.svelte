@@ -22,7 +22,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup color="accent">
+    <ButtonGroup color="primary">
       <Button>Left</Button>
       <Button>Center</Button>
       <Button>Right</Button>
@@ -34,19 +34,19 @@
       <Button>Right</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill" color="accent">
+    <ButtonGroup variant="fill" color="primary">
       <Button>Left</Button>
       <Button>Center</Button>
       <Button>Right</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-light" color="accent">
+    <ButtonGroup variant="fill-light" color="primary">
       <Button>Left</Button>
       <Button>Center</Button>
       <Button>Right</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-outline" color="accent">
+    <ButtonGroup variant="fill-outline" color="primary">
       <Button>Left</Button>
       <Button>Center</Button>
       <Button>Right</Button>
@@ -58,7 +58,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup color="accent">
+    <ButtonGroup color="primary">
       <Button icon={mdiFormatAlignLeft} />
       <Button icon={mdiFormatAlignCenter} />
       <Button icon={mdiFormatAlignRight} />
@@ -70,19 +70,19 @@
       <Button icon={mdiFormatAlignRight} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill" color="accent">
+    <ButtonGroup variant="fill" color="primary">
       <Button icon={mdiFormatAlignLeft} />
       <Button icon={mdiFormatAlignCenter} />
       <Button icon={mdiFormatAlignRight} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-light" color="accent">
+    <ButtonGroup variant="fill-light" color="primary">
       <Button icon={mdiFormatAlignLeft} />
       <Button icon={mdiFormatAlignCenter} />
       <Button icon={mdiFormatAlignRight} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-outline" color="accent">
+    <ButtonGroup variant="fill-outline" color="primary">
       <Button icon={mdiFormatAlignLeft} />
       <Button icon={mdiFormatAlignCenter} />
       <Button icon={mdiFormatAlignRight} />
@@ -94,7 +94,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup color="accent">
+    <ButtonGroup color="primary">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
@@ -106,19 +106,19 @@
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill" color="accent">
+    <ButtonGroup variant="fill" color="primary">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-light" color="accent">
+    <ButtonGroup variant="fill-light" color="primary">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-outline" color="accent">
+    <ButtonGroup variant="fill-outline" color="primary">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
@@ -130,7 +130,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup color="accent">
+    <ButtonGroup color="primary">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} variant="fill-light" />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
@@ -142,29 +142,29 @@
         icon={mdiFormatAlignCenter}
         iconOnly={false}
         variant="fill-outline"
-        color="accent"
+        color="primary"
         class="z-10"
       />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill" color="accent">
+    <ButtonGroup variant="fill" color="primary">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button
         icon={mdiFormatAlignRight}
         iconOnly={false}
-        class="bg-accent-600 hover:bg-accent-700"
+        class="bg-mix-[theme(colors.primary)/-20] hover:bg-mix-[theme(colors.primary)/-40]"
       />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-light" color="accent">
+    <ButtonGroup variant="fill-light" color="primary">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} variant="fill" />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-outline" color="accent">
+    <ButtonGroup variant="fill-outline" color="primary">
       <Button icon={mdiFormatAlignLeft} iconOnly={false} variant="fill" />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
@@ -176,7 +176,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup size="sm" color="accent">
+    <ButtonGroup size="sm" color="primary">
       <Button icon={mdiBookmark}>Bookmark</Button>
       <Button>12k</Button>
     </ButtonGroup>
@@ -186,17 +186,17 @@
       <Button>12k</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill" size="sm" color="accent">
+    <ButtonGroup variant="fill" size="sm" color="primary">
       <Button icon={mdiBookmark}>Bookmark</Button>
       <Button>12k</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-light" size="sm" color="accent">
+    <ButtonGroup variant="fill-light" size="sm" color="primary">
       <Button icon={mdiBookmark}>Bookmark</Button>
       <Button>12k</Button>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-outline" size="sm" color="accent">
+    <ButtonGroup variant="fill-outline" size="sm" color="primary">
       <Button icon={mdiBookmark}>Bookmark</Button>
       <Button>12k</Button>
     </ButtonGroup>
@@ -207,7 +207,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup color="accent" disabled>
+    <ButtonGroup color="primary" disabled>
       <Button icon={mdiFormatAlignLeft} iconOnly={false} />
       <Button icon={mdiFormatAlignCenter} iconOnly={false} />
       <Button icon={mdiFormatAlignRight} iconOnly={false} />
@@ -220,21 +220,21 @@
     </ButtonGroup>
 
     <ButtonGroup variant="fill" disabled>
-      <Button color="accent" icon={mdiFormatAlignLeft} iconOnly={false} />
-      <Button color="accent" icon={mdiFormatAlignCenter} iconOnly={false} />
-      <Button color="accent" icon={mdiFormatAlignRight} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
 
     <ButtonGroup variant="fill-light" disabled>
-      <Button color="accent" icon={mdiFormatAlignLeft} iconOnly={false} />
-      <Button color="accent" icon={mdiFormatAlignCenter} iconOnly={false} />
-      <Button color="accent" icon={mdiFormatAlignRight} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
 
     <ButtonGroup variant="fill-outline" disabled>
-      <Button color="accent" icon={mdiFormatAlignLeft} iconOnly={false} />
-      <Button color="accent" icon={mdiFormatAlignCenter} iconOnly={false} />
-      <Button color="accent" icon={mdiFormatAlignRight} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignLeft} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignCenter} iconOnly={false} />
+      <Button color="primary" icon={mdiFormatAlignRight} iconOnly={false} />
     </ButtonGroup>
   </div>
 </Preview>
@@ -273,7 +273,7 @@
       </Toggle>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill" color="accent">
+    <ButtonGroup variant="fill" color="primary">
       <Button>Click me</Button>
       <Toggle let:on={open} let:toggle>
         <span>
@@ -288,7 +288,7 @@
       </Toggle>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-light" color="accent">
+    <ButtonGroup variant="fill-light" color="primary">
       <Button>Click me</Button>
       <Toggle let:on={open} let:toggle>
         <span>
@@ -303,7 +303,7 @@
       </Toggle>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-outline" color="accent">
+    <ButtonGroup variant="fill-outline" color="primary">
       <Button>Click me</Button>
       <Toggle let:on={open} let:toggle>
         <span>
@@ -324,7 +324,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <ButtonGroup color="accent">
+    <ButtonGroup color="primary">
       <Tooltip title="left" offset={2}>
         <Button icon={mdiFormatAlignLeft} />
       </Tooltip>
@@ -348,7 +348,7 @@
       </Tooltip>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill" color="accent">
+    <ButtonGroup variant="fill" color="primary">
       <Tooltip title="left" offset={2}>
         <Button icon={mdiFormatAlignLeft} />
       </Tooltip>
@@ -360,7 +360,7 @@
       </Tooltip>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-light" color="accent">
+    <ButtonGroup variant="fill-light" color="primary">
       <Tooltip title="left" offset={2}>
         <Button icon={mdiFormatAlignLeft} />
       </Tooltip>
@@ -372,7 +372,7 @@
       </Tooltip>
     </ButtonGroup>
 
-    <ButtonGroup variant="fill-outline" color="accent">
+    <ButtonGroup variant="fill-outline" color="primary">
       <Tooltip title="left" offset={2}>
         <Button icon={mdiFormatAlignLeft} />
       </Tooltip>

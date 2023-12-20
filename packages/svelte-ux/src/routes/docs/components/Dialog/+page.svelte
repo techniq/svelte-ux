@@ -21,7 +21,7 @@
   <Dialog bind:open>
     <div slot="title">Are you sure you want to do that?</div>
     <div slot="actions">
-      <Button variant="fill" color="accent">Close</Button>
+      <Button variant="fill" color="primary">Close</Button>
     </div>
   </Dialog>
 </Preview>
@@ -34,7 +34,7 @@
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="accent">Close</Button>
+        <Button variant="fill" color="primary">Close</Button>
       </div>
     </Dialog>
   </Toggle>
@@ -58,7 +58,7 @@
           }, 1000);
         }}
         variant="fill"
-        color="accent"
+        color="primary"
       >
         Save
       </Button>
@@ -86,7 +86,7 @@
             }, 1000);
           }}
           variant="fill"
-          color="accent"
+          color="primary"
         >
           Save
         </Button>
@@ -100,7 +100,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <Button icon={mdiTrashCan} on:click={toggle} color="red">Delete</Button>
+    <Button icon={mdiTrashCan} on:click={toggle} color="error">Delete</Button>
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure?</div>
       <div class="px-6 py-3">This will permanently delete the item and can not be undone.</div>
@@ -110,7 +110,7 @@
             console.log('Deleting item...');
           }}
           variant="fill"
-          color="red"
+          color="error"
         >
           Yes, delete item
         </Button>
@@ -124,7 +124,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle={toggleDelete}>
-    <Button icon={mdiTrashCan} on:click={toggleDelete} color="red">Delete</Button>
+    <Button icon={mdiTrashCan} on:click={toggleDelete} color="error">Delete</Button>
     <Dialog {open}>
       <div slot="title">Delete this item ?</div>
       <div class="px-6 py-3">This will permanently delete the item</div>
@@ -136,7 +136,7 @@
               e.stopPropagation();
               toggleConfirm();
             }}
-            color="red"
+            color="error"
             variant="fill"
           >
             Yes
@@ -154,7 +154,7 @@
                   toggleDelete();
                 }}
                 variant="fill"
-                color="red"
+                color="error"
               >
                 Yes, delete item
               </Button>
@@ -177,7 +177,7 @@
     <Dialog {open} on:close={toggle} loading>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="accent">Close</Button>
+        <Button variant="fill" color="primary">Close</Button>
       </div>
     </Dialog>
   </Toggle>
@@ -191,7 +191,7 @@
     <Dialog {open} on:close={toggle} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="accent">Yes</Button>
+        <Button variant="fill" color="primary">Yes</Button>
         <Button>No</Button>
       </div>
     </Dialog>
@@ -209,7 +209,7 @@
         <TextField label="Age" autofocus />
       </div>
       <div slot="actions">
-        <Button variant="fill" color="accent">OK</Button>
+        <Button variant="fill" color="primary">OK</Button>
         <Button>Cancel</Button>
       </div>
     </Dialog>
@@ -224,7 +224,7 @@
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="accent" disabled>Don't touch</Button>
+        <Button variant="fill" color="primary" disabled>Don't touch</Button>
         <Button>Close</Button>
       </div>
     </Dialog>

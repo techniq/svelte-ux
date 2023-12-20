@@ -52,7 +52,7 @@
   )}
 >
   <span class="flex-1 text-left max-sm:hidden">Search</span>
-  <kbd class="ml-2 font-sans text-white/50 max-sm:hidden">
+  <kbd class="ml-2 font-sans opacity-50 max-sm:hidden">
     <abbr title="Command" class="no-underline">⌘</abbr>
     K
   </kbd>
@@ -62,7 +62,7 @@
   bind:open
   classes={{
     root: cls('items-start mt-20', theme.root, classes.root, $$props.class),
-    backdrop: 'backdrop-blur-sm bg-black/70',
+    backdrop: 'backdrop-blur-sm',
   }}
 >
   <div class="overflow-auto max-h-[min(90dvh,600px)] min-w-[400px] py-1">

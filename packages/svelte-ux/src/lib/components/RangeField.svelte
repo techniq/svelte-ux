@@ -22,7 +22,7 @@
 
   <input type="range" bind:value {min} {max} {step} {id} class="h-6 w-full" />
 
-  <span class="ml-2 text-sm text-black/50 tabular-nums text-right inline-grid">
+  <span class="ml-2 text-sm text-surface-content/50 tabular-nums text-right inline-grid">
     <span class="col-span-full row-span-full invisible">{min}</span>
     <span class="col-span-full row-span-full">{value}</span>
     <span class="col-span-full row-span-full invisible">{max}</span>

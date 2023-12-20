@@ -110,7 +110,7 @@
     {#if clearable && (value?.periodType || value?.from || value?.to)}
       <Button
         icon={mdiClose}
-        class="text-black/50 p-1"
+        class="text-surface-content/50 p-1"
         on:click={() => {
           value = _defaultValue;
           dispatch('clear');
@@ -149,11 +149,11 @@
   }}
   bind:open
 >
-  <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24">
-    <div class="text-sm text-white/50">
+  <div class="flex flex-col justify-center bg-primary text-primary-content px-6 h-24">
+    <div class="text-sm opacity-50">
       {currentValue.periodType ? getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
     </div>
-    <div class="text-xl sm:text-2xl text-white">
+    <div class="text-xl sm:text-2xl">
       <DateRangeDisplay value={currentValue} />
     </div>
   </div>
@@ -170,7 +170,7 @@
         value = currentValue;
         dispatch('change', value);
       }}
-      color="blue"
+      color="primary"
       variant="fill"
     >
       OK

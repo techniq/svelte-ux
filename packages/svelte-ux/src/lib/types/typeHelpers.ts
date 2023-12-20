@@ -94,7 +94,6 @@ export type StoresValues<T> = T extends Readable<infer U>
 export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;
 
 export type TailwindColors =
-  | 'accent'
   | 'red'
   | 'orange'
   | 'amber'
@@ -113,6 +112,8 @@ export type TailwindColors =
   | 'pink'
   | 'rose'
   | 'gray';
+
+export type ThemeColors = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
 
 export type EventWithTarget = Partial<Pick<Event, 'currentTarget' | 'target'>>;
 

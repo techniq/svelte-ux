@@ -23,10 +23,7 @@
 <Preview>
   <Drawer bind:open={topOpen} placement="top" class="h-64">
     <h1>Contents</h1>
-    <div
-      class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-    >
+    <div slot="actions">
       <Button on:click={() => (topOpen = false)}>Close</Button>
     </div>
   </Drawer>
@@ -34,10 +31,7 @@
 
   <Drawer bind:open={bottomOpen} placement="bottom" class="h-64">
     <h1>Contents</h1>
-    <div
-      class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-    >
+    <div slot="actions">
       <Button on:click={() => (bottomOpen = false)}>Close</Button>
     </div>
   </Drawer>
@@ -45,10 +39,7 @@
 
   <Drawer bind:open={leftOpen} placement="left" class="w-[400px]">
     <h1>Contents</h1>
-    <div
-      class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-    >
+    <div slot="actions">
       <Button on:click={() => (leftOpen = false)}>Close</Button>
     </div>
   </Drawer>
@@ -56,10 +47,7 @@
 
   <Drawer bind:open={rightOpen} placement="right" class="w-[400px]">
     <h1>Contents</h1>
-    <div
-      class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-    >
+    <div slot="actions">
       <Button on:click={() => (rightOpen = false)}>Close</Button>
     </div>
   </Drawer>
@@ -72,10 +60,7 @@
   <Toggle let:on={open} let:toggle let:toggleOff>
     <Drawer {open} on:close={toggleOff} persistent class="w-[400px]">
       <h1>Contents</h1>
-      <div
-        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-      >
+      <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>
@@ -89,10 +74,7 @@
   <Toggle let:on={open} let:toggle let:toggleOff>
     <Drawer {open} on:close={toggleOff} class="w-[400px]" loading>
       <h1>Contents</h1>
-      <div
-        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-      >
+      <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>
@@ -108,10 +90,7 @@
       <div class="p-2">
         <TextField autofocus />
       </div>
-      <div
-        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-      >
+      <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>
@@ -130,15 +109,12 @@
           <Dialog {open} on:close={toggle}>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button variant="fill" color="accent">Close</Button>
+              <Button variant="fill" color="primary">Close</Button>
             </div>
           </Dialog>
         </Toggle>
       </div>
-      <div
-        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-      >
+      <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>
@@ -160,10 +136,7 @@
           ]}
         />
       </div>
-      <div
-        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-      >
+      <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>
@@ -192,10 +165,7 @@
             <Switch bind:checked={isChanged} />
           </div>
         </div>
-        <div
-          class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-        >
+        <div slot="actions">
           <Button on:click={isChanged ? openConfirmation : closeDrawer}>Close</Button>
         </div>
       </Drawer>
@@ -212,7 +182,7 @@
               isChanged = false;
             }}
             variant="fill"
-            color="red"
+            color="error"
           >
             Yes, lose changes
           </Button>
@@ -237,10 +207,7 @@
       portal={{ target: '#portal' }}
     >
       <h1>Contents</h1>
-      <div
-        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-    p-1 border-t border-gray-400"
-      >
+      <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>

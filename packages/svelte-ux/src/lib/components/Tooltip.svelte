@@ -88,7 +88,7 @@
     <slot name="title">
       <div
         class={cls(
-          'text-white text-xs bg-gray-900/90 px-2 py-1 rounded whitespace-nowrap',
+          'text-xs text-surface-100 bg-surface-content px-2 py-1 rounded whitespace-nowrap',
           theme.title,
           classes.title
         )}

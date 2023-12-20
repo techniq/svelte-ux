@@ -161,49 +161,49 @@
   <Stack stack inline>
     <Button variant="outline">Example</Button>
     <div
-      class="bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center"
+      class="bg-error rounded-full h-4 w-4 text-xs text-error-content flex items-center justify-center"
     >
       3
     </div>
   </Stack>
 </Preview>
 
-<h2>Corner w/ Button</h2>
+<h2>Corner with Button</h2>
 
 <Preview>
   <Stack stack inline>
     <Button variant="outline">Example</Button>
     <div
-      class="bg-red-500 rounded-full h-4 w-4 -mr-1 -mt-1 text-xs text-white flex items-center justify-center self-start justify-self-end"
+      class="bg-error rounded-full h-4 w-4 -mr-1 -mt-1 text-xs text-error-content flex items-center justify-center self-start justify-self-end"
     >
       3
     </div>
   </Stack>
 </Preview>
 
-<h2>Corner /w Icon Button</h2>
+<h2>Corner with Icon Button</h2>
 
 <Preview>
   <Stack stack inline>
     <Button variant="outline" icon={mdiFilterVariant} class="p-3" />
     <div
-      class="bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center self-start justify-self-end"
+      class="bg-error rounded-full h-4 w-4 text-xs text-error-content flex items-center justify-center self-start justify-self-end"
     >
       3
     </div>
   </Stack>
 </Preview>
 
-<h2>Corner (multi) /w Icon Button</h2>
+<h2>Corner (multi) with Icon Button</h2>
 
 <Preview>
   <Stack stack inline>
     <Button variant="outline" icon={mdiFilterVariant} class="p-3" />
     <div
-      class="bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center self-start justify-self-end border border-white"
+      class="bg-error rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center self-start justify-self-end border border-surface-100"
     />
     <div
-      class="bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center self-end justify-self-end border border-white"
+      class="bg-success rounded-full h-4 w-4 text-xs flex items-center justify-center self-end justify-self-end border border-surface-100"
     />
   </Stack>
 </Preview>

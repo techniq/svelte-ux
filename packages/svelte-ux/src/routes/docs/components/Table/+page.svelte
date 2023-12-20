@@ -211,8 +211,12 @@
 <Preview>
   <Button
     on:click={() => (randomData = randomDataGen())}
-    class="text-accent-500 border border-accent-500 bg-white mb-1">Randomize</Button
+    variant="outline"
+    color="primary"
+    class="mb-1"
   >
+    Randomize
+  </Button>
   <Table
     data={randomData}
     columns={[
@@ -225,9 +229,11 @@
         align: 'right',
         format: 'integer',
         dataBackground: {
-          color: 'var(--color-blue-100)',
           inset: [1, 2],
           tweened: { duration: 300 },
+        },
+        classes: {
+          td: 'from-primary/5 to-primary/10',
         },
       },
       {
@@ -235,9 +241,11 @@
         align: 'right',
         format: 'integer',
         dataBackground: {
-          color: 'var(--color-purple-100)',
           inset: [1, 2],
           tweened: { duration: 300 },
+        },
+        classes: {
+          td: 'from-secondary/5 to-secondary/10',
         },
       },
       {
@@ -245,9 +253,11 @@
         align: 'right',
         format: 'integer',
         dataBackground: {
-          color: 'var(--color-orange-100)',
           inset: [1, 2],
           tweened: { duration: 300 },
+        },
+        classes: {
+          td: 'from-success/5 to-success/10',
         },
       },
       {
@@ -255,9 +265,11 @@
         align: 'right',
         format: 'integer',
         dataBackground: {
-          color: 'var(--color-red-100)',
           inset: [1, 2],
           tweened: { duration: 300 },
+        },
+        classes: {
+          td: 'from-error/5 to-error/10',
         },
       },
     ]}
@@ -269,8 +281,12 @@
 <Preview>
   <Button
     on:click={() => (randomData = randomDataGen())}
-    class="text-accent-500 border border-accent-500 bg-white mb-1">Randomize</Button
+    variant="outline"
+    color="primary"
+    class="mb-1"
   >
+    Randomize
+  </Button>
   <Table
     data={randomData}
     columns={[
@@ -283,9 +299,11 @@
         align: 'right',
         format: 'integer',
         dataBackground: {
-          color: 'var(--color-blue-100)',
           inset: [1, 2],
           tweened: { duration: 300 },
+        },
+        classes: {
+          td: 'from-primary/5 to-primary/10',
         },
       },
       {
@@ -293,9 +311,11 @@
         align: 'right',
         format: 'integer',
         dataBackground: {
-          color: 'var(--color-purple-100)',
           inset: [1, 2],
           tweened: { duration: 300 },
+        },
+        classes: {
+          td: 'from-secondary/5 to-secondary/10',
         },
       },
       {
@@ -303,9 +323,11 @@
         align: 'right',
         format: 'integer',
         dataBackground: {
-          color: 'var(--color-orange-100)',
           inset: [1, 2],
           tweened: { duration: 300 },
+        },
+        classes: {
+          td: 'from-success/5 to-success/10',
         },
       },
       {
@@ -313,9 +335,11 @@
         align: 'right',
         format: 'integer',
         dataBackground: {
-          color: 'var(--color-red-100)',
           inset: [1, 2],
           tweened: { duration: 300 },
+        },
+        classes: {
+          td: 'from-error/5 to-error/10',
         },
       },
     ]}

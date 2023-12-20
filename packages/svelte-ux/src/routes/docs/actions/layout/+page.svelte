@@ -42,15 +42,15 @@
 
 <Preview>
   <div class="mb-2">
-    <Button on:click={() => (overflowItems += 1)} variant="fill" color="accent">+ item</Button>
+    <Button on:click={() => (overflowItems += 1)} variant="fill" color="primary">+ item</Button>
     <Button
       on:click={() => (overflowItems -= overflowItems > 1 ? 1 : 0)}
       variant="fill"
-      color="accent">- item</Button
+      color="primary">- item</Button
     >
   </div>
   <div
-    class="w-1/2 h-[100px] border border-black/20 rounded-lg bg-white whitespace-nowrap truncate p-4 resize overflow-auto"
+    class="w-1/2 h-[100px] border border-surface-content/20 rounded-lg bg-surface-100 whitespace-nowrap truncate p-4 resize overflow-auto"
     use:overflow
     on:overflow={(e) => {
       overflowX = e.detail.overflowX;

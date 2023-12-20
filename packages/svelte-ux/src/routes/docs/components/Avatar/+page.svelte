@@ -17,7 +17,7 @@
 <h2>Color</h2>
 
 <Preview>
-  <Avatar class="bg-accent-500 text-white font-bold">A</Avatar>
+  <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
 </Preview>
 
 <h2>Border</h2>
@@ -29,21 +29,21 @@
 <h2>Size</h2>
 
 <Preview>
-  <Avatar class="bg-accent-500 text-white font-bold text-xs" size="sm">sm</Avatar>
-  <Avatar class="bg-accent-500 text-white font-bold" size="md">md</Avatar>
-  <Avatar class="bg-accent-500 text-white font-bold" size="lg">lg</Avatar>
+  <Avatar class="bg-primary text-primary-content font-bold text-xs" size="sm">sm</Avatar>
+  <Avatar class="bg-primary text-primary-content font-bold" size="md">md</Avatar>
+  <Avatar class="bg-primary text-primary-content font-bold" size="lg">lg</Avatar>
 </Preview>
 
 <h2>Icon (prop)</h2>
 
 <Preview>
-  <Avatar class="bg-accent-500 text-white" icon={mdiAccount} />
+  <Avatar class="bg-primary text-primary-content" icon={mdiAccount} />
 </Preview>
 
 <h2>Icon (slot)</h2>
 
 <Preview>
-  <Avatar class="bg-accent-500">
-    <Icon path={mdiAccount} class="text-white" />
+  <Avatar class="bg-primary">
+    <Icon path={mdiAccount} class="text-primary-content" />
   </Avatar>
 </Preview>
