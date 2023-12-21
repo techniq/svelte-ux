@@ -19,6 +19,7 @@
   import type { PageData } from './$types';
 
   export let data: PageData;
+  console.log(`data`, data);
 
   const baseGh = 'https://github.com/techniq/svelte-ux';
   $: ghLink = data.pr_id ? `${baseGh}/pull/${data.pr_id}` : baseGh;
