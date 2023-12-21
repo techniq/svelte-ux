@@ -12,8 +12,6 @@
   "bin": "./bin.js",
   "scripts": {
     "dev": "node bin.js",
-    "build": "cd ../../ && ((pnpm run build && cd -) || (cd - && exit 1))",
-    "build:dev": "pnpm build && pnpm dev",
     "check": "tsc",
     "lint": "prettier --ignore-path .prettierignore --check .",
     "format": "prettier --ignore-path .prettierignore --write ."
