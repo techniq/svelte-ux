@@ -14,8 +14,8 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "test:unit": "vitest",
-    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
-    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "lint": "prettier --ignore-path ../../.gitignore --check .",
+    "format": "prettier --ignore-path ../../.gitignore --write .",
     "typedoc": "typedoc",
     "prepare": "svelte-kit sync"
   },

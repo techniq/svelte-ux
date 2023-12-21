@@ -22,7 +22,10 @@ type FormStoreOptions<T> = {
   schema?: Schema<T>;
 };
 
-export default function formStore<T extends Objectish = any>(initialState: T, options?: FormStoreOptions<T>) {
+export default function formStore<T extends Objectish = any>(
+  initialState: T,
+  options?: FormStoreOptions<T>
+) {
   const stateStore = writable(initialState);
   const draftStore = writable(createDraft(initialState));
   const errorsStore = writable({} as { [key: string]: string }); // TODO: Improve type (`{ [key in keyof T]: string }`?)

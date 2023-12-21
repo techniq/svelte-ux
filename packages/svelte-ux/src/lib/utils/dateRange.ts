@@ -413,8 +413,8 @@ export function getPreviousYearPeriodOffset(
       return options?.alignDayOfWeek
         ? -364 // Align day of week is always 364 days (52 *7).
         : adjustForLeapYear
-        ? -366
-        : -365;
+          ? -366
+          : -365;
 
     case PeriodType.WeekSun:
     case PeriodType.WeekMon:
