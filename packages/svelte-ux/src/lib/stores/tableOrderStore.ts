@@ -31,8 +31,8 @@ export default function tableOrderStore(props?: TableOrderProps) {
         typeof column.orderBy === 'string'
           ? column.orderBy
           : typeof column.value === 'string'
-          ? column.value
-          : column.name;
+            ? column.value
+            : column.name;
 
       const direction = prevState.by === by && prevState.direction === 'asc' ? 'desc' : 'asc';
 

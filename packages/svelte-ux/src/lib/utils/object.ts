@@ -38,8 +38,8 @@ export function propAccessor(prop?: string | ((x: any) => any) | null) {
   return typeof prop === 'function'
     ? prop
     : typeof prop === 'string'
-    ? (d: { [key: string]: any }) => get(d, prop)
-    : (x: any) => x;
+      ? (d: { [key: string]: any }) => get(d, prop)
+      : (x: any) => x;
 }
 
 /**

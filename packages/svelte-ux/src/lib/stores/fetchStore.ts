@@ -120,10 +120,10 @@ export default function fetchStore() {
             typeof as === 'function'
               ? as(response)
               : typeof as === 'object'
-              ? parseBody(response, as)
-              : as === 'auto'
-              ? parseBody(response)
-              : response[as]();
+                ? parseBody(response, as)
+                : as === 'auto'
+                  ? parseBody(response)
+                  : response[as]();
 
           try {
             const data = await dataPromise;
