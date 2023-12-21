@@ -10,5 +10,5 @@ export async function load({ url }) {
     throw redirect(302, newUrl.toString());
   }
 
-  return { pr_id: env };
+  return { pr_id: env.VERCEL_GIT_PULL_REQUEST_ID };
 }
