@@ -15,7 +15,15 @@
   import { afterNavigate, goto } from '$app/navigation';
   import { page } from '$app/stores';
 
-  import { settings } from '$lib';
+  import { settings, stringify } from '$lib';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
+
+  const baseGh = 'https://github.com/techniq/svelte-ux';
+  $: ghLink = data.pr_id ? `${baseGh}/pull/${data.pr_id}` : baseGh;
+  const baseTitle = 'Svelte UX';
+  $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
   settings({
     // formats: {
@@ -81,6 +89,20 @@
   });
 </script>
 
+<svelte:head>
+  {#if $page.url.origin.includes('https')}
+    <!-- Cloudflare Web Analytics -->
+    <!-- Cloudflare Web Analytics -->
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={JSON.stringify({ token: '1848f3c15bf0441f8cd02fe0c4acb3ce' })}
+    ></script>
+    <!-- End Cloudflare Web Analytics -->
+  {/if}
+</svelte:head>
+
 <AppLayout>
   <nav slot="nav" class="h-full">
     <NavMenu />
@@ -88,7 +110,7 @@
     <div class="h-4" />
   </nav>
 
-  <AppBar title="Svelte UX">
+  <AppBar {title}>
     <div slot="actions" class="flex gap-3">
       <Button
         href="https://www.layerchart.com"
@@ -120,12 +142,7 @@
       </Tooltip>
 
       <Tooltip title="View repository" placement="left" offset={2}>
-        <Button
-          icon={mdiGithub}
-          href="https://github.com/techniq/svelte-ux"
-          class="p-2"
-          target="_blank"
-        />
+        <Button icon={mdiGithub} href={ghLink} class="p-2" target="_blank" />
       </Tooltip>
     </div>
   </AppBar>
