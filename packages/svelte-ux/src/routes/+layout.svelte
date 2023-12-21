@@ -15,7 +15,7 @@
   import { afterNavigate, goto } from '$app/navigation';
   import { page } from '$app/stores';
 
-  import { settings, stringify } from '$lib';
+  import { settings } from '$lib';
   import type { PageData } from './$types';
 
   export let data: PageData;
@@ -91,9 +91,6 @@
 
 <svelte:head>
   {#if $page.url.origin.includes('https')}
-    <!-- Cloudflare Web Analytics -->
-    <!-- Cloudflare Web Analytics -->
-    <!-- Cloudflare Web Analytics -->
     <script
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"
