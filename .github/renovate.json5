@@ -1,0 +1,8 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>jycouet/jycouet//shared-config/renovate/default.json5"],
+
+  // Avoid noise in the middle of the day
+  "timezone": "Etc/Greenwich",
+  "schedule": ["after 4am and before 5am"]
+}
