@@ -1,0 +1,12 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "create-svelte-ux": "0.2.1",
+    "svelte-ux": "0.57.1"
+  },
+  "changesets": [
+    "quick-avocados-hope",
+    "yellow-oranges-fly"
+  ]
+}
