@@ -4,6 +4,7 @@
   import { mdiMoonWaningCrescent, mdiPalette, mdiUndoVariant, mdiWhiteBalanceSunny } from '@mdi/js';
 
   import Button from './Button.svelte';
+  import Kbd from './Kbd.svelte';
   import Menu from './Menu.svelte';
   import Switch from './Switch.svelte';
   import Icon from './Icon.svelte';
@@ -72,7 +73,7 @@
   <Menu bind:open on:close={() => (open = false)} offset={4} explicitClose resize>
     <label
       for="switch-color-scheme"
-      class="grid grid-cols-[1fr,auto,auto] items-center p-2 border-b mb-1 text-sm font-medium"
+      class="grid grid-cols-[1fr,auto,auto] items-center p-2 border-b border-surface-content/10 mb-1 text-sm font-medium"
     >
       Mode
 
@@ -113,7 +114,7 @@
       </Switch>
     </label>
 
-    <div class="grid grid-cols-2 gap-2 p-2">
+    <div class="grid grid-cols-2 gap-2 p-2 border-b border-surface-content/10">
       {#each themes as themeName}
         <MenuItem
           on:click={() => (theme = themeName)}
@@ -130,6 +131,18 @@
           {themeName}
         </MenuItem>
       {/each}
+    </div>
+
+    <div class="p-2 grid grid-cols-[auto,1fr] gap-2 items-center text-xs">
+      <span class="font-medium">Toggle scheme:</span>
+      <span>
+        <Kbd control /> + <Kbd>T</Kbd>
+      </span>
+
+      <span class="font-medium">Next theme:</span>
+      <span>
+        <Kbd control /> + <Kbd shift /> + <Kbd>T</Kbd>
+      </span>
     </div>
   </Menu>
 </Button>
