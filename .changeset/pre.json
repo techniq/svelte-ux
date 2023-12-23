@@ -6,6 +6,7 @@
     "svelte-ux": "0.57.1"
   },
   "changesets": [
+    "angry-zebras-remember",
     "quick-avocados-hope",
     "strong-flies-provide",
     "yellow-oranges-fly"
