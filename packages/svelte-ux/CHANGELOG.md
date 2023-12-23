@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.58.0-next.1
+
+### Minor Changes
+
+- Support `ux.themes` tailwind config, including Daisy UI ([#146](https://github.com/techniq/svelte-ux/pull/146))
+
 ## 0.58.0-next.0
 
 ### Minor Changes
