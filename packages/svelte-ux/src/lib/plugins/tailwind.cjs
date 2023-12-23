@@ -373,8 +373,6 @@ function injectThemes(addBase, config) {
       }
     });
 
-    console.log({ colors, result });
-
     return result;
   }
 
