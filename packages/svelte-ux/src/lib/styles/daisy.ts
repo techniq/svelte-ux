@@ -30,42 +30,17 @@ function mapColorsName(themes, colorMap) {
   );
 }
 
-export const themes = mapColorsName(daisyThemes, daisyColorMap);
+const themes = mapColorsName(daisyThemes, daisyColorMap);
 
-export const lightThemes = [
-  'light',
-  'acid',
-  'autumn',
-  'bumblebee',
-  'cmyk',
-  'corporate',
-  'cupcake',
-  'cyberpunk',
-  'emerald',
-  'fantasy',
-  'garden',
-  'lemonade',
-  'lofi',
-  'nord',
-  'pastel',
-  'retro',
-  'valentine',
-  'winter',
-  'wireframe',
-];
+let lightThemes: string[] = [];
+let darkThemes: string[] = [];
 
-export const darkThemes = [
-  'dark',
-  'aqua',
-  'black',
-  'business',
-  'coffee',
-  'dim',
-  'dracula',
-  'forest',
-  'halloween',
-  'luxury',
-  'night',
-  'sunset',
-  'synthwave',
-];
+Object.entries(themes).forEach(([themeName, colors]) => {
+  if (colors['color-scheme'] === 'dark') {
+    darkThemes.push(themeName);
+  } else {
+    lightThemes.push(themeName);
+  }
+});
+
+export { themes, lightThemes, darkThemes };
