@@ -30,6 +30,7 @@
     "@types/marked": "^6.0.0",
     "@types/prismjs": "^1.26.3",
     "autoprefixer": "^10.4.16",
+    "culori": "^3.3.0",
     "daisyui": "^4.4.19",
     "execa": "^8.0.1",
     "marked": "^10.0.0",
