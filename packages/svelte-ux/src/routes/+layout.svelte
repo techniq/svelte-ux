@@ -27,8 +27,6 @@
   const baseTitle = 'Svelte UX';
   $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
-  // import '$lib/styles/theme.css';
-  import '$lib/styles/daisy.css';
   import { lightThemes, darkThemes } from '$lib/styles/daisy';
 
   settings({
