@@ -1,8 +1,24 @@
 const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
+const { themes } = require('./src/lib/styles/daisy');
+
 module.exports = {
   content: ['./src/**/*.{html,svelte,md,ts,js}'],
+  ux: {
+    themes,
+    // themes: {
+    //   light: {
+    //     primary: colors['blue']['500'],
+    //     'primary-content': 'white',
+    //     secondary: colors['cyan']['300'],
+    //     'surface-100': 'white',
+    //     'surface-200': colors['gray']['100'],
+    //     'surface-300': colors['gray']['300'],
+    //     'surface-content': colors['gray']['900'],
+    //   },
+    // },
+  },
   theme: {
     extend: {
       backgroundImage: {
