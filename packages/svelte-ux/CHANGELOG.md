@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.58.0-next.2
+
+### Patch Changes
+
+- Add styles (with daisy) as top-level export ([#146](https://github.com/techniq/svelte-ux/pull/146))
+
 ## 0.58.0-next.1
 
 ### Minor Changes
