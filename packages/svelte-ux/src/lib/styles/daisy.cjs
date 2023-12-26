@@ -1,6 +1,6 @@
-import daisyThemes from 'daisyui/src/theming/themes';
-import { themeOrder } from 'daisyui/src/theming/themeDefaults';
-import { sortFunc } from '../utils/sort';
+const daisyThemes = require('daisyui/src/theming/themes');
+const { themeOrder } = require('daisyui/src/theming/themeDefaults');
+const { sortFunc } = require('../utils/sort');
 
 const daisyColorMap = {
   'base-100': 'surface-100',
@@ -31,8 +31,8 @@ function mapColorsName(themes, colorMap) {
 
 const themes = mapColorsName(daisyThemes, daisyColorMap);
 
-let lightThemes: string[] = [];
-let darkThemes: string[] = [];
+let lightThemes = [];
+let darkThemes = [];
 
 Object.entries(themes).forEach(([themeName, colors]) => {
   if (colors['color-scheme'] === 'dark') {
@@ -42,4 +42,4 @@ Object.entries(themes).forEach(([themeName, colors]) => {
   }
 });
 
-export { lightThemes, darkThemes };
+module.exports = { themes, lightThemes, darkThemes };

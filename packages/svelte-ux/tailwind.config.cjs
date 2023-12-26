@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
-const { themes } = require('./src/lib/styles/daisy');
+const { themes } = require('./src/lib/styles/daisy.cjs');
 
 module.exports = {
   content: ['./src/**/*.{html,svelte,md,ts,js}'],
