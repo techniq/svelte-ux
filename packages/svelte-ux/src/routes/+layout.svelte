@@ -96,7 +96,13 @@
       src="https://static.cloudflareinsights.com/beacon.min.js"
       data-cf-beacon={JSON.stringify({ token: '1848f3c15bf0441f8cd02fe0c4acb3ce' })}
     ></script>
-    <!-- End Cloudflare Web Analytics -->
+
+    <script
+      async
+      defer
+      src="https://us.umami.is/script.js"
+      data-website-id="f26cb766-3d47-4af4-a7a7-1cc519810b8f"
+    ></script>
   {/if}
 </svelte:head>
 
