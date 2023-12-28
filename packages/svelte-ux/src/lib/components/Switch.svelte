@@ -50,7 +50,7 @@
           info: 'bg-info border-info',
           success: 'bg-success border-success',
           warning: 'bg-warning border-warning',
-          error: 'bg-error border-error',
+          error: 'bg-danger border-danger',
         }[color],
       {
         primary: 'ring-primary/60',
@@ -58,7 +58,7 @@
         info: 'ring-info/60',
         success: 'ring-success/60',
         warning: 'ring-warning/60',
-        error: 'ring-error/60',
+        error: 'ring-danger/60',
       }[color],
       checked === false && 'bg-surface-content/20 border-surface-content/20',
       checked === null && 'border-surface-content/20',

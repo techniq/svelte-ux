@@ -74,7 +74,7 @@
       class={cls(
         'block text-sm font-medium',
         'truncate group-hover:text-surface-content/70 group-focus-within:text-primary group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
-        error ? 'text-error/80' : 'text-surface-content/50',
+        error ? 'text-danger/80' : 'text-surface-content/50',
         `placement-${labelPlacement}`,
         theme.label,
         classes.label
@@ -91,13 +91,13 @@
       class={cls(
         'border py-0 transition-shadow',
         disabled ? '' : 'hover:shadow',
-        disabled ? '' : error ? 'hover:border-error' : 'hover:border-surface-content',
+        disabled ? '' : error ? 'hover:border-danger' : 'hover:border-surface-content',
         {
           'px-2': !rounded,
           'px-6': rounded && !hasPrepend,
         },
         !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
-        error ? 'border-error' : 'border-surface-content/20',
+        error ? 'border-danger' : 'border-surface-content/20',
         'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
         theme.container,
         classes.container
@@ -129,7 +129,7 @@
               class={cls(
                 'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
                 center && 'justify-center',
-                error ? 'text-error/80' : 'text-surface-content/50',
+                error ? 'text-danger/80' : 'text-surface-content/50',
                 `placement-${labelPlacement}`,
                 (labelPlacement === 'inset' || hasValue) && 'shrink',
                 theme.label,
@@ -178,7 +178,7 @@
             <slot name="append" />
 
             {#if error}
-              <Icon path={mdiInformationOutline} class="text-error" />
+              <Icon path={mdiInformationOutline} class="text-danger" />
             {:else if iconRight}
               <Icon path={iconRight} class="text-surface-content/50" />
             {/if}
@@ -190,7 +190,7 @@
       class={cls(
         error ? 'error' : 'hint',
         'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
-        error ? 'text-error' : 'text-surface-content/50 scale-y-0',
+        error ? 'text-danger' : 'text-surface-content/50 scale-y-0',
         theme.error,
         classes.error
       )}

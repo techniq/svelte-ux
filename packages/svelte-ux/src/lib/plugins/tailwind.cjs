@@ -16,8 +16,8 @@ const colorNames = [
   'success-content',
   'warning',
   'warning-content',
-  'error',
-  'error-content',
+  'danger',
+  'danger-content',
 
   // Surfaces
   'surface-100',
@@ -315,8 +315,8 @@ function injectThemes(addBase, config) {
     if (!('warning' in input)) {
       colors['warning'] = 'oklch(0.8471 0.199 83.87)';
     }
-    if (!('error' in input)) {
-      colors['error'] = 'oklch(0.7176 0.221 22.18)';
+    if (!('danger' in input)) {
+      colors['danger'] = 'oklch(0.7176 0.221 22.18)';
     }
 
     // Generate optional content colors
@@ -356,11 +356,11 @@ function injectThemes(addBase, config) {
         colors['warning-content'] = '0 0 0';
       }
     }
-    if (!('error-content' in input)) {
-      if ('error' in input) {
-        colors['error-content'] = generateForegroundColorFrom(colors['error'], 0.8);
+    if (!('danger-content' in input)) {
+      if ('danger' in input) {
+        colors['danger-content'] = generateForegroundColorFrom(colors['danger'], 0.8);
       } else {
-        colors['error-content'] = '0 0 0';
+        colors['danger-content'] = '0 0 0';
       }
     }
 

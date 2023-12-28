@@ -85,7 +85,7 @@
 <h2>Multiple</h2>
 
 <Preview>
-  <Badge placement="bottom-right" {value} dot circle class="bg-error">
+  <Badge placement="bottom-right" {value} dot circle class="bg-danger">
     <Badge placement="top-right" {value} dot circle class="bg-success">
       <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
     </Badge>

@@ -113,7 +113,7 @@ export type TailwindColors =
   | 'rose'
   | 'gray';
 
-export type ThemeColors = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
+export type ThemeColors = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'danger';
 
 export type EventWithTarget = Partial<Pick<Event, 'currentTarget' | 'target'>>;
 

@@ -70,7 +70,7 @@
         class={cls('w-4 h-4 flex-shrink-0 rounded-full flex items-center', {
           'bg-success': item.status === 'completed',
           'bg-info': item.status === 'in-progress',
-          'bg-error': item.status === 'failed',
+          'bg-danger': item.status === 'failed',
         })}
       >
         {#if item.status === 'completed'}
@@ -78,7 +78,7 @@
         {:else if item.status === 'in-progress'}
           <Icon path={mdiTruck} size="1rem" class="text-info-content p-[2px]" />
         {:else if item.status === 'failed'}
-          <Icon path={mdiClose} size="1rem" class="text-error-content" />
+          <Icon path={mdiClose} size="1rem" class="text-danger-content" />
         {/if}
       </div>
     </div>

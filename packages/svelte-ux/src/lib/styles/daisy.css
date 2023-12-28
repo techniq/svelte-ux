@@ -20,8 +20,8 @@
   --color-warning: var(--wa);
   --color-warning-content: var(--wac);
 
-  --color-error: var(--er);
-  --color-error-content: var(--erc);
+  --color-danger: var(--er);
+  --color-danger-content: var(--erc);
 
   /** Surfaces **/
   --color-surface-100: var(--b1);

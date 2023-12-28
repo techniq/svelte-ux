@@ -53,7 +53,7 @@
   <Shine>
     <div class="flex items-center gap-2">
       <Button variant="fill" color="primary">Button</Button>
-      <Button icon={mdiTrashCan} variant="fill" color="error">Delete</Button>
+      <Button icon={mdiTrashCan} variant="fill" color="danger">Delete</Button>
       <Button icon={mdiMagnify} variant="fill" color="success" class="flex-row-reverse"
         >Search</Button
       >

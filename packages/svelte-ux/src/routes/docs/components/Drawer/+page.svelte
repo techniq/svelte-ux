@@ -182,7 +182,7 @@
               isChanged = false;
             }}
             variant="fill"
-            color="error"
+            color="danger"
           >
             Yes, lose changes
           </Button>

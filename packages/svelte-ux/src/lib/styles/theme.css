@@ -20,8 +20,8 @@
   --color-warning: 24.58 94.98% 53.14%;
   --color-warning-content: 0 100% 100%;
 
-  --color-error: 0 84.24% 60.2%;
-  --color-error-content: 0 100% 100%;
+  --color-danger: 0 84.24% 60.2%;
+  --color-danger-content: 0 100% 100%;
 
   /** Surfaces **/
   --color-surface-100: 0 0% 100%; /* white */

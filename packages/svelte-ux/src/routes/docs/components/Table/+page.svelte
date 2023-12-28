@@ -269,7 +269,7 @@
           tweened: { duration: 300 },
         },
         classes: {
-          td: 'from-error/5 to-error/10',
+          td: 'from-danger/5 to-danger/10',
         },
       },
     ]}
@@ -339,7 +339,7 @@
           tweened: { duration: 300 },
         },
         classes: {
-          td: 'from-error/5 to-error/10',
+          td: 'from-danger/5 to-danger/10',
         },
       },
     ]}

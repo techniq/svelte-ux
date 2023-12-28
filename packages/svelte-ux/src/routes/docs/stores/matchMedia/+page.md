@@ -66,63 +66,63 @@
     {#if $smScreen}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $smScreen (640px)
 
     {#if $mdScreen}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $mdScreen (768px)
 
     {#if $lgScreen}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $lgScreen (1024px)
 
     {#if $xlScreen}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $xlScreen (1280px)
 
     {#if $xxlScreen}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $xxlScreen (1536px)
 
     {#if $screen}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $screen
 
     {#if $print}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $print
 
     {#if $darkColorScheme}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $darkColorScheme
 
     {#if $motionReduce}
       <Icon path={mdiCheckCircle} size="1rem" class="text-success" />
     {:else}
-      <Icon path={mdiCloseCircle} size="1rem" class="text-error" />
+      <Icon path={mdiCloseCircle} size="1rem" class="text-danger" />
     {/if}
     $motionReduce
 

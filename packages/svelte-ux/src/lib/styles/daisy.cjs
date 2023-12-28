@@ -7,6 +7,8 @@ const daisyColorMap = {
   'base-200': 'surface-200',
   'base-300': 'surface-300',
   'base-content': 'surface-content',
+  error: 'danger',
+  'error-content': 'danger-content',
 };
 
 /**
