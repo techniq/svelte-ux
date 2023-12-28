@@ -100,7 +100,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle>
-    <Button icon={mdiTrashCan} on:click={toggle} color="error">Delete</Button>
+    <Button icon={mdiTrashCan} on:click={toggle} color="danger">Delete</Button>
     <Dialog {open} on:close={toggle}>
       <div slot="title">Are you sure?</div>
       <div class="px-6 py-3">This will permanently delete the item and can not be undone.</div>
@@ -110,7 +110,7 @@
             console.log('Deleting item...');
           }}
           variant="fill"
-          color="error"
+          color="danger"
         >
           Yes, delete item
         </Button>
@@ -124,7 +124,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle={toggleDelete}>
-    <Button icon={mdiTrashCan} on:click={toggleDelete} color="error">Delete</Button>
+    <Button icon={mdiTrashCan} on:click={toggleDelete} color="danger">Delete</Button>
     <Dialog {open}>
       <div slot="title">Delete this item ?</div>
       <div class="px-6 py-3">This will permanently delete the item</div>
@@ -136,7 +136,7 @@
               e.stopPropagation();
               toggleConfirm();
             }}
-            color="error"
+            color="danger"
             variant="fill"
           >
             Yes
@@ -154,7 +154,7 @@
                   toggleDelete();
                 }}
                 variant="fill"
-                color="error"
+                color="danger"
               >
                 Yes, delete item
               </Button>

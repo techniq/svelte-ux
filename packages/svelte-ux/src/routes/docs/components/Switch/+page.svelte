@@ -93,8 +93,8 @@
     <Switch checked color="secondary" />
     <Switch color="success" />
     <Switch checked color="success" />
-    <Switch color="error" />
-    <Switch checked color="error" />
+    <Switch color="danger" />
+    <Switch checked color="danger" />
   </div>
 </Preview>
 
@@ -104,12 +104,12 @@
   <div class="grid gap-2">
     <Switch
       color="success"
-      classes={{ switch: 'data-[checked=false]:bg-error data-[checked=false]:border-error' }}
+      classes={{ switch: 'data-[checked=false]:bg-danger data-[checked=false]:border-danger' }}
     />
     <Switch
       classes={{
         switch: 'bg-surface-100 border-surface-content/50',
-        toggle: 'data-[checked=false]:bg-error data-[checked=true]:bg-success',
+        toggle: 'data-[checked=false]:bg-danger data-[checked=true]:bg-success',
       }}
     />
   </div>

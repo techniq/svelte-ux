@@ -117,10 +117,10 @@
           '[--text-color:theme(colors.warning)]',
           '[--ring-color:theme(colors.warning/60%)]',
         ],
-        error: [
-          'hover:[--bg-color:theme(colors.error/10%)]',
-          '[--text-color:theme(colors.error)]',
-          '[--ring-color:theme(colors.error/60%)]',
+        danger: [
+          'hover:[--bg-color:theme(colors.danger/10%)]',
+          '[--text-color:theme(colors.danger)]',
+          '[--ring-color:theme(colors.danger/60%)]',
         ],
       },
       outline: {
@@ -160,11 +160,11 @@
           '[--text-color:theme(colors.warning)]',
           '[--ring-color:theme(colors.warning/60%)]',
         ],
-        error: [
-          'hover:[--bg-color:theme(colors.error/10%)]',
-          '[--border-color:theme(colors.error)]',
-          '[--text-color:theme(colors.error)]',
-          '[--ring-color:theme(colors.error/60%)]',
+        danger: [
+          'hover:[--bg-color:theme(colors.danger/10%)]',
+          '[--border-color:theme(colors.danger)]',
+          '[--text-color:theme(colors.danger)]',
+          '[--ring-color:theme(colors.danger/60%)]',
         ],
       },
       fill: {
@@ -204,11 +204,11 @@
           '[--text-color:theme(colors.warning-content)]',
           '[--ring-color:theme(colors.warning/60%)]',
         ],
-        error: [
-          `[--bg-color:theme(colors.error)]`,
-          'hover:[--bg-color:color-mix(in_oklab,theme(colors.error)_90%,black)]',
-          '[--text-color:theme(colors.error-content)]',
-          '[--ring-color:theme(colors.error/60%)]',
+        danger: [
+          `[--bg-color:theme(colors.danger)]`,
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.danger)_90%,black)]',
+          '[--text-color:theme(colors.danger-content)]',
+          '[--ring-color:theme(colors.danger/60%)]',
         ],
       },
       'fill-light': {
@@ -248,11 +248,11 @@
           '[--text-color:theme(colors.warning)]',
           '[--ring-color:theme(colors.warning/60%)]',
         ],
-        error: [
-          '[--bg-color:theme(colors.error/10%)]',
-          'hover:[--bg-color:theme(colors.error/20%)]',
-          '[--text-color:theme(colors.error)]',
-          '[--ring-color:theme(colors.error/60%)]',
+        danger: [
+          '[--bg-color:theme(colors.danger/10%)]',
+          'hover:[--bg-color:theme(colors.danger/20%)]',
+          '[--text-color:theme(colors.danger)]',
+          '[--ring-color:theme(colors.danger/60%)]',
         ],
       },
       'fill-outline': {
@@ -298,12 +298,12 @@
           '[--text-color:theme(colors.warning)]',
           '[--ring-color:theme(colors.warning/60%)]',
         ],
-        error: [
-          '[--bg-color:theme(colors.error/10%)]',
-          'hover:[--bg-color:theme(colors.error/20%)]',
-          '[--border-color:theme(colors.error)]',
-          '[--text-color:theme(colors.error)]',
-          '[--ring-color:theme(colors.error/60%)]',
+        danger: [
+          '[--bg-color:theme(colors.danger/10%)]',
+          'hover:[--bg-color:theme(colors.danger/20%)]',
+          '[--border-color:theme(colors.danger)]',
+          '[--text-color:theme(colors.danger)]',
+          '[--ring-color:theme(colors.danger/60%)]',
         ],
       },
       text: {
@@ -337,10 +337,10 @@
           'hover:[--text-color:color-mix(in_oklab,theme(colors.warning)_80%,black)]',
           '[--ring-color:theme(colors.warning/60%)]',
         ],
-        error: [
-          '[--text-color:theme(colors.error)]',
-          'hover:[--text-color:color-mix(in_oklab,theme(colors.error)_80%,black)]',
-          '[--ring-color:theme(colors.error/60%)]',
+        danger: [
+          '[--text-color:theme(colors.danger)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.danger)_80%,black)]',
+          '[--ring-color:theme(colors.danger/60%)]',
         ],
       },
       none: {
@@ -350,7 +350,7 @@
         info: '',
         success: '',
         warning: '',
-        error: '',
+        danger: '',
       },
     }[variant ?? 'none']?.[color ?? 'default'],
 

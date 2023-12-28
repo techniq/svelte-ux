@@ -125,7 +125,7 @@
             <Button {variant} {size} color="info">Info</Button>
             <Button {variant} {size} color="success">Success</Button>
             <Button {variant} {size} color="warning">Warning</Button>
-            <Button {variant} {size} color="error">Error</Button>
+            <Button {variant} {size} color="danger">Danger</Button>
           </div>
           <div>
             <!-- TODO: CSS variables for each variant -->
@@ -216,7 +216,7 @@
 
 <Preview>
   <div class="flex items-center">
-    <Button icon={mdiTrashCan} color="error">Delete</Button>
+    <Button icon={mdiTrashCan} color="danger">Delete</Button>
     <Button icon={mdiMagnify} class="flex-row-reverse">Search</Button>
     <Button icon={mdiHome} class="flex-col">Home</Button>
     <Button icon={mdiHome} class="flex-col-reverse">Home</Button>
@@ -227,7 +227,7 @@
 <h2>Pass props to Icon</h2>
 
 <Preview>
-  <Button icon={{ data: mdiTrashCan, size: '2rem', style: 'color: crimson' }} color="error">
+  <Button icon={{ data: mdiTrashCan, size: '2rem', style: 'color: crimson' }} color="danger">
     Delete
   </Button>
 </Preview>
