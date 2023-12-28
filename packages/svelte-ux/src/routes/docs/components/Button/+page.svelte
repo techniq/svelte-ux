@@ -119,6 +119,8 @@
             <Button {variant} {size}>Default</Button>
             <Button {variant} {size} color="primary">Primary</Button>
             <Button {variant} {size} color="secondary">Secondary</Button>
+            <Button {variant} {size} color="accent">Accent</Button>
+            <Button {variant} {size} color="neutral">Neutral</Button>
           </div>
           <div>
             <!-- State colors -->

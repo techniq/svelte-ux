@@ -102,6 +102,16 @@
           '[--text-color:theme(colors.secondary)]',
           '[--ring-color:theme(colors.secondary/60%)]',
         ],
+        accent: [
+          'hover:[--bg-color:theme(colors.accent/10%)]',
+          '[--text-color:theme(colors.accent)]',
+          '[--ring-color:theme(colors.accent/60%)]',
+        ],
+        neutral: [
+          'hover:[--bg-color:theme(colors.neutral/10%)]',
+          '[--text-color:theme(colors.neutral)]',
+          '[--ring-color:theme(colors.neutral/60%)]',
+        ],
         info: [
           'hover:[--bg-color:theme(colors.info/10%)]',
           '[--text-color:theme(colors.info)]',
@@ -141,6 +151,18 @@
           '[--border-color:theme(colors.secondary)]',
           '[--text-color:theme(colors.secondary)]',
           '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        accent: [
+          'hover:[--bg-color:theme(colors.accent/10%)]',
+          '[--border-color:theme(colors.accent)]',
+          '[--text-color:theme(colors.accent)]',
+          '[--ring-color:theme(colors.accent/60%)]',
+        ],
+        neutral: [
+          'hover:[--bg-color:theme(colors.neutral/10%)]',
+          '[--border-color:theme(colors.neutral)]',
+          '[--text-color:theme(colors.neutral)]',
+          '[--ring-color:theme(colors.neutral/60%)]',
         ],
         info: [
           'hover:[--bg-color:theme(colors.info/10%)]',
@@ -186,6 +208,18 @@
           '[--text-color:theme(colors.secondary-content)]',
           '[--ring-color:theme(colors.secondary/60%)]',
         ],
+        accent: [
+          '[--bg-color:theme(colors.accent)]',
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.accent)_90%,black)]',
+          '[--text-color:theme(colors.accent-content)]',
+          '[--ring-color:theme(colors.accent/60%)]',
+        ],
+        neutral: [
+          '[--bg-color:theme(colors.neutral)]',
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.neutral)_90%,black)]',
+          '[--text-color:theme(colors.neutral-content)]',
+          '[--ring-color:theme(colors.neutral/60%)]',
+        ],
         info: [
           `[--bg-color:theme(colors.info)]`,
           'hover:[--bg-color:color-mix(in_oklab,theme(colors.info)_90%,black)]',
@@ -229,6 +263,18 @@
           'hover:[--bg-color:theme(colors.secondary/20%)]',
           '[--text-color:theme(colors.secondary)]',
           '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        accent: [
+          '[--bg-color:theme(colors.accent/10%)]',
+          'hover:[--bg-color:theme(colors.accent/20%)]',
+          '[--text-color:theme(colors.accent)]',
+          '[--ring-color:theme(colors.secondary/60%)]',
+        ],
+        neutral: [
+          '[--bg-color:theme(colors.neutral/10%)]',
+          'hover:[--bg-color:theme(colors.neutral/20%)]',
+          '[--text-color:theme(colors.neutral)]',
+          '[--ring-color:theme(colors.neutral/60%)]',
         ],
         info: [
           '[--bg-color:theme(colors.info/10%)]',
@@ -277,6 +323,20 @@
           '[--text-color:theme(colors.secondary)]',
           '[--ring-color:theme(colors.secondary/60%)]',
         ],
+        accent: [
+          '[--bg-color:theme(colors.accent/10%)]',
+          'hover:[--bg-color:theme(colors.accent/20%)]',
+          '[--border-color:theme(colors.accent)]',
+          '[--text-color:theme(colors.accent)]',
+          '[--ring-color:theme(colors.accent/60%)]',
+        ],
+        neutral: [
+          '[--bg-color:theme(colors.neutral/10%)]',
+          'hover:[--bg-color:theme(colors.neutral/20%)]',
+          '[--border-color:theme(colors.neutral)]',
+          '[--text-color:theme(colors.neutral)]',
+          '[--ring-color:theme(colors.neutral/60%)]',
+        ],
         info: [
           '[--bg-color:theme(colors.info/10%)]',
           'hover:[--bg-color:theme(colors.info/20%)]',
@@ -322,6 +382,16 @@
           'hover:[--text-color:color-mix(in_oklab,theme(colors.secondary)_80%,black)]',
           '[--ring-color:theme(colors.secondary/60%)]',
         ],
+        accent: [
+          '[--text-color:theme(colors.accent)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.accent)_80%,black)]',
+          '[--ring-color:theme(colors.accent/60%)]',
+        ],
+        neutral: [
+          '[--text-color:theme(colors.neutral)]',
+          'hover:[--text-color:color-mix(in_oklab,theme(colors.neutral)_80%,black)]',
+          '[--ring-color:theme(colors.neutral/60%)]',
+        ],
         info: [
           '[--text-color:theme(colors.info)]',
           'hover:[--text-color:color-mix(in_oklab,theme(colors.info)_80%,black)]',
@@ -347,6 +417,8 @@
         default: '',
         primary: '',
         secondary: '',
+        accent: '',
+        neutral: '',
         info: '',
         success: '',
         warning: '',

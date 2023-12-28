@@ -10,6 +10,12 @@
   --color-secondary: var(--s);
   --color-secondary-content: var(--sc);
 
+  --color-accent: var(--a);
+  --color-accent-content: var(--ac);
+
+  --color-neutral: var(--n);
+  --color-neutral-content: var(--nc);
+
   /** State **/
   --color-info: var(--in);
   --color-info-content: var(--inc);

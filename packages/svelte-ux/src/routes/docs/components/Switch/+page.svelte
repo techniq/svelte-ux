@@ -91,6 +91,10 @@
     <Switch checked color="primary" />
     <Switch color="secondary" />
     <Switch checked color="secondary" />
+    <Switch color="accent" />
+    <Switch checked color="accent" />
+    <Switch color="neutral" />
+    <Switch checked color="neutral" />
     <Switch color="success" />
     <Switch checked color="success" />
     <Switch color="danger" />

@@ -7,7 +7,10 @@ const colorNames = [
   'primary-content',
   'secondary',
   'secondary-content',
-  // TODO: accent?, neutral?
+  'accent',
+  'accent-content',
+  'neutral',
+  'neutral-content',
 
   // State
   'info',
