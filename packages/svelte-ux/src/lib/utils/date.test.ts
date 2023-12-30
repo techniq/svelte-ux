@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { PeriodType, formatDate, getMonthDaysByWeek, localToUtcDate, utcToLocalDate } from './date';
+import {
+  PeriodType,
+  formatDate,
+  getMonthDaysByWeek,
+  localToUtcDate,
+  utcToLocalDate,
+  type FormatDateOptions,
+} from './date';
 
 const DATE = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
 
@@ -13,79 +20,164 @@ describe('formatDate()', () => {
     expect(formatDate('invalid date')).equal('');
   });
 
-  it('should format date for PeriodType.Day', () => {
-    const date = new Date(2023, 10, 21);
-    expect(formatDate(date, { periodType: PeriodType.Day, variant: 'short' })).equal('11/21');
-    expect(formatDate(date, { periodType: PeriodType.Day, variant: 'long' })).equal('Nov 21, 2023');
+  describe('should format date for PeriodType.Day', () => {
+    const localDate = new Date(2023, 10, 21);
+    const combi = [
+      ['short', undefined, '11/21'],
+      ['short', 'fr', '21/11'],
+      ['long', undefined, 'Nov 21, 2023'],
+      ['long', 'fr', '21 nov. 2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDate(localDate, { periodType: PeriodType.Day, variant, locales })).equal(
+          expected
+        );
+      });
+    }
   });
 
-  it('should format date string', () => {
-    expect(formatDate(DATE, { periodType: PeriodType.Day, variant: 'short' })).equal('11/21');
-    expect(formatDate(DATE, { periodType: PeriodType.Day, variant: 'long' })).equal('Nov 21, 2023');
+  describe('should format date string', () => {
+    const combi = [
+      ['short', undefined, '11/21'],
+      ['short', 'fr', '21/11'],
+      ['long', undefined, 'Nov 21, 2023'],
+      ['long', 'fr', '21 nov. 2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDate(DATE, { periodType: PeriodType.Day, variant, locales })).equal(expected);
+      });
+    }
   });
 
-  it('should format date for PeriodType.Week', () => {
-    expect(formatDate(DATE, { periodType: PeriodType.WeekSun, variant: 'short' })).equal(
-      '11/19 - 11/25'
-    );
-    expect(formatDate(DATE, { periodType: PeriodType.WeekSun, variant: 'long' })).equal(
-      '11/19/2023 - 11/25/2023'
-    );
-    expect(formatDate(DATE, { periodType: PeriodType.WeekMon, variant: 'long' })).equal(
-      '11/20/2023 - 11/26/2023'
-    );
+  describe('should format date for PeriodType.Week', () => {
+    const combi = [
+      [PeriodType.WeekSun, 'short', undefined, '11/19 - 11/25'],
+      [PeriodType.WeekSun, 'short', 'fr', '19/11 - 25/11'],
+      [PeriodType.WeekSun, 'long', undefined, '11/19/2023 - 11/25/2023'],
+      [PeriodType.WeekSun, 'long', 'fr', '19/11/2023 - 25/11/2023'],
+      [PeriodType.WeekMon, 'long', undefined, '11/20/2023 - 11/26/2023'],
+      [PeriodType.WeekMon, 'long', 'fr', '20/11/2023 - 26/11/2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [periodType, variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDate(DATE, { periodType, variant, locales })).equal(expected);
+      });
+    }
   });
 
-  it('should format date for PeriodType.Month', () => {
-    expect(formatDate(DATE, { periodType: PeriodType.Month, variant: 'short' })).equal('Nov 23');
-    expect(formatDate(DATE, { periodType: PeriodType.Month, variant: 'long' })).equal(
-      'November 2023'
-    );
+  describe('should format date for PeriodType.Month', () => {
+    const combi = [
+      ['short', undefined, 'Nov 23'],
+      ['short', 'fr', 'nov. 23'],
+      ['long', undefined, 'November 2023'],
+      ['long', 'fr', 'novembre 2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDate(DATE, { periodType: PeriodType.Month, variant, locales })).equal(
+          expected
+        );
+      });
+    }
   });
 
-  it('should format date for PeriodType.Quarter', () => {
-    expect(formatDate(DATE, { periodType: PeriodType.Quarter, variant: 'short' })).equal(
-      'Oct - Dec 23'
-    );
-    expect(formatDate(DATE, { periodType: PeriodType.Quarter, variant: 'long' })).equal(
-      'October - December 2023'
-    );
+  describe('should format date for PeriodType.Quarter', () => {
+    const combi = [
+      ['short', undefined, 'Oct - Dec 23'],
+      ['short', 'fr', 'oct. - déc. 23'],
+      ['long', undefined, 'October - December 2023'],
+      ['long', 'fr', 'octobre - décembre 2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDate(DATE, { periodType: PeriodType.Quarter, variant, locales })).equal(
+          expected
+        );
+      });
+    }
   });
 
-  it('should format date for PeriodType.CalendarYear', () => {
-    expect(formatDate(DATE, { periodType: PeriodType.CalendarYear, variant: 'short' })).equal('23');
-    expect(formatDate(DATE, { periodType: PeriodType.CalendarYear, variant: 'long' })).equal(
-      '2023'
-    );
+  describe('should format date for PeriodType.CalendarYear', () => {
+    const combi = [
+      ['short', undefined, '23'],
+      ['short', 'fr', '23'],
+      ['long', undefined, '2023'],
+      ['long', 'fr', '2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDate(DATE, { periodType: PeriodType.CalendarYear, variant, locales })).equal(
+          expected
+        );
+      });
+    }
   });
 
-  it('should format date for PeriodType.FiscalYearOctober', () => {
-    expect(
-      formatDate(DATE, {
-        periodType: PeriodType.FiscalYearOctober,
-        variant: 'short',
-      })
-    ).equal('24');
-    expect(
-      formatDate(DATE, {
-        periodType: PeriodType.FiscalYearOctober,
-        variant: 'long',
-      })
-    ).equal('2024');
+  describe('should format date for PeriodType.FiscalYearOctober', () => {
+    const combi = [
+      ['short', undefined, '24'],
+      ['short', 'fr', '24'],
+      ['long', undefined, '2024'],
+      ['long', 'fr', '2024'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(
+          formatDate(DATE, { periodType: PeriodType.FiscalYearOctober, variant, locales })
+        ).equal(expected);
+      });
+    }
   });
 
-  it('should format date for PeriodType.BiWeek1Sun', () => {
-    expect(formatDate(DATE, { periodType: PeriodType.BiWeek1Sun, variant: 'short' })).equal(
-      '11/12 - 11/25'
-    );
-    expect(formatDate(DATE, { periodType: PeriodType.BiWeek1Sun, variant: 'long' })).equal(
-      '11/12/2023 - 11/25/2023'
-    );
+  describe('should format date for PeriodType.BiWeek1Sun', () => {
+    const combi = [
+      ['short', undefined, '11/12 - 11/25'],
+      ['short', 'fr', '12/11 - 25/11'],
+      ['long', undefined, '11/12/2023 - 11/25/2023'],
+      ['long', 'fr', '12/11/2023 - 25/11/2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDate(DATE, { periodType: PeriodType.BiWeek1Sun, variant, locales })).equal(
+          expected
+        );
+      });
+    }
   });
 
-  it('should format date for PeriodType.undefined', () => {
-    expect(formatDate(DATE, { variant: 'short' })).equal('2023-11-21T00:00:00-04:00');
-    expect(formatDate(DATE, { variant: 'long' })).equal('2023-11-21T00:00:00-04:00');
+  describe('should format date for PeriodType.undefined', () => {
+    const expected = '2023-11-21T00:00:00-04:00';
+    const combi = [
+      ['short', undefined],
+      ['short', 'fr'],
+      ['long', undefined],
+      ['long', 'fr'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales] = c;
+      it(c.toString(), () => {
+        expect(formatDate(DATE, { variant, locales })).equal(expected);
+      });
+    }
   });
 });
 
