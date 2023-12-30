@@ -191,9 +191,9 @@
       },
       fill: {
         default: [
-          `[--bg-color:theme(colors.surface-300)]`,
-          'hover:[--bg-color:color-mix(in_oklab,theme(colors.surface-300)_90%,black)]',
-          '[--text-color:theme(colors.surface-content)]',
+          `[--bg-color:theme(colors.surface-content)]`,
+          'hover:[--bg-color:color-mix(in_oklab,theme(colors.surface-content)_90%,black)]',
+          '[--text-color:theme(colors.surface-200)]',
           '[--ring-color:theme(colors.surface-content/60%)]',
         ],
         primary: [
