@@ -55,14 +55,14 @@ function injectThemes(addBase, config) {
     }
 
     if (!('surface-200' in input)) {
-      colors['surface-200'] = generateDarkenColorFrom(colors['surface-100'], 0.07);
+      colors['surface-200'] = darkenColor(colors['surface-100'], 0.07);
     }
 
     if (!('surface-300' in input)) {
       if ('surface-200' in input) {
-        colors['surface-300'] = generateDarkenColorFrom(colors['surface-200'], 0.07);
+        colors['surface-300'] = darkenColor(colors['surface-200'], 0.07);
       } else {
-        colors['surface-300'] = generateDarkenColorFrom(colors['surface-100'], 0.14);
+        colors['surface-300'] = darkenColor(colors['surface-100'], 0.14);
       }
     }
 
@@ -82,44 +82,44 @@ function injectThemes(addBase, config) {
 
     // Generate optional content colors
     if (!('surface-content' in input)) {
-      colors['surface-content'] = generateForegroundColorFrom(colors['surface-100'], 0.8);
+      colors['surface-content'] = foregroundColor(colors['surface-100'], 0.8);
     }
     if (!('primary-content' in input)) {
-      colors['primary-content'] = generateForegroundColorFrom(colors['primary'], 0.8);
+      colors['primary-content'] = foregroundColor(colors['primary'], 0.8);
     }
     if (!('secondary-content' in input)) {
-      colors['secondary-content'] = generateForegroundColorFrom(colors['secondary'], 0.8);
+      colors['secondary-content'] = foregroundColor(colors['secondary'], 0.8);
     }
     if (!('accent-content' in input)) {
-      colors['accent-content'] = generateForegroundColorFrom(colors['accent'], 0.8);
+      colors['accent-content'] = foregroundColor(colors['accent'], 0.8);
     }
     if (!('neutral-content' in input)) {
-      colors['neutral-content'] = generateForegroundColorFrom(colors['neutral'], 0.8);
+      colors['neutral-content'] = foregroundColor(colors['neutral'], 0.8);
     }
     if (!('info-content' in input)) {
       if ('info' in input) {
-        colors['info-content'] = generateForegroundColorFrom(colors['info'], 0.8);
+        colors['info-content'] = foregroundColor(colors['info'], 0.8);
       } else {
         colors['info-content'] = '0 0 0';
       }
     }
     if (!('success-content' in input)) {
       if ('success' in input) {
-        colors['success-content'] = generateForegroundColorFrom(colors['success'], 0.8);
+        colors['success-content'] = foregroundColor(colors['success'], 0.8);
       } else {
         colors['success-content'] = '0 0 0';
       }
     }
     if (!('warning-content' in input)) {
       if ('warning' in input) {
-        colors['warning-content'] = generateForegroundColorFrom(colors['warning'], 0.8);
+        colors['warning-content'] = foregroundColor(colors['warning'], 0.8);
       } else {
         colors['warning-content'] = '0 0 0';
       }
     }
     if (!('danger-content' in input)) {
       if ('danger' in input) {
-        colors['danger-content'] = generateForegroundColorFrom(colors['danger'], 0.8);
+        colors['danger-content'] = foregroundColor(colors['danger'], 0.8);
       } else {
         colors['danger-content'] = '0 0 0';
       }
@@ -179,15 +179,24 @@ function isDark(color) {
   }
 }
 
-function generateForegroundColorFrom(input, percentage = 0.8) {
+/** Lighten or darken color based on contrast of input */
+function foregroundColor(input, percentage = 0.8) {
   try {
-    return formatCss(interpolate([input, isDark(input) ? 'white' : 'black'], 'oklch')(percentage));
+    return isDark(input) ? lightenColor(input, percentage) : darkenColor(input, percentage);
   } catch (e) {
     // console.error('Unable to generate foreground color', input);
   }
 }
 
-function generateDarkenColorFrom(input, percentage = 0.07) {
+function lightenColor(input, percentage = 0.8) {
+  try {
+    return formatCss(interpolate([input, 'white'], 'oklch')(percentage));
+  } catch (e) {
+    // console.error('Unable to generate lighten color', input);
+  }
+}
+
+function darkenColor(input, percentage = 0.8) {
   try {
     return formatCss(interpolate([input, 'black'], 'oklch')(percentage));
   } catch (e) {

@@ -9,7 +9,6 @@ module.exports = plugin(
     const { addBase, addUtilities, matchUtilities, config } = api;
 
     injectThemes(addBase, config);
-
     colorMix(api);
     elevation(api);
 
