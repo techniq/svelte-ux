@@ -1,0 +1,46 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  // Extend the base config
+  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
+
+  // Some tuning that works well for my repos
+  "automerge": false,
+  "rangeStrategy": "replace",
+  "baseBranches": ["main"],
+
+  // For a nice dashboard
+  "dependencyDashboardTitle": "📦 Dependency Dashboard",
+  "labels": ["dependencies"],
+
+  // Avoid noise in the middle of the day
+  "timezone": "EST",
+  "schedule": ["after 1am and before 5am"],
+
+  "packageRules": [
+    // Let's update each patch for these libs
+    {
+      "matchUpdateTypes": ["patch"],
+      "enabled": false,
+      "excludePackagePrefixes": ["layerchart", "svelte-ux"]
+    },
+    // devDependencies will be prioritized last
+    {
+      "matchDepTypes": ["devDependencies"],
+      "prPriority": -1
+    },
+    // Groupings
+    {
+      "groupName": "Svelte",
+      "matchPackagePrefixes": ["@sveltejs", "svelte-check", "svelte"]
+    },
+    {
+      "groupName": "Tailwind",
+      "matchPackagePrefixes": [
+        "@tailwindcss",
+        "tailwindcss",
+        "tailwind-scrollbar"
+      ]
+    }
+  ]
+}
