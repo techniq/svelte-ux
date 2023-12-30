@@ -31,8 +31,6 @@ import {
   formatISO,
 } from 'date-fns';
 
-import { timeDays } from 'd3-time';
-
 import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
@@ -292,12 +290,22 @@ export function getMonths(year = new Date().getFullYear()) {
   return Array.from({ length: 12 }, (_, i) => new Date(year, i, 1));
 }
 
-export function getMonthDaysByWeek(startOfMonth: Date): Date[][] {
-  const startOfFirstWeek = startOfWeek(startOfMonth);
-  const endOfLastWeek = endOfWeek(endOfMonth(startOfMonth));
-  const monthDaysByWeek = chunk(timeDays(startOfFirstWeek, endOfLastWeek), 7);
+export function getMonthDaysByWeek(
+  dateInTheMonth: Date,
+  weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined = undefined
+): Date[][] {
+  const startOfFirstWeek = startOfWeek(startOfMonth(dateInTheMonth), { weekStartsOn });
+  const endOfLastWeek = endOfWeek(endOfMonth(dateInTheMonth), { weekStartsOn });
 
-  return monthDaysByWeek;
+  const list = [];
+
+  let valueToAdd = startOfFirstWeek;
+  while (valueToAdd <= endOfLastWeek) {
+    list.push(valueToAdd);
+    valueToAdd = addDays(valueToAdd, 1);
+  }
+
+  return chunk(list, 7) as Date[][];
 }
 
 export function getMinSelectedDate(date: SelectedDate | null | undefined) {
@@ -549,11 +557,34 @@ export function formatISODate(
   return formatISO(date, { representation });
 }
 
+function range(
+  date: Date,
+  weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined,
+  variant: 'short' | 'long',
+  formats: { short: string; long: string },
+  biWeek: undefined | 1 | 2 = undefined // undefined means that it's not a bi-week
+) {
+  const start =
+    biWeek === undefined
+      ? startOfWeek(date, { weekStartsOn })
+      : startOfBiWeek(date, biWeek, weekStartsOn ?? 0);
+  const end =
+    biWeek === undefined
+      ? endOfWeek(date, { weekStartsOn })
+      : endOfBiWeek(date, biWeek, weekStartsOn ?? 0);
+
+  const formatToUse = variant === 'short' ? formats.short : formats.long;
+
+  return format(start, formatToUse) + ' - ' + format(end, formatToUse);
+}
+
 export function formatDate(
   date: Date | string | null | undefined,
   periodType?: PeriodType | null | undefined,
   variant?: 'short' | 'long' // TODO: Support x-long, etc (maybe call it sm, md, lg, xl, etc)
-) {
+): string {
+  variant = variant ?? 'long';
+
   if (typeof date === 'string') {
     date = parseISO(date);
   }
@@ -564,49 +595,80 @@ export function formatDate(
     return '';
   }
 
+  const formatsDay: { short: string; long: string } = { short: 'M/d', long: 'MMM d, yyyy' };
+  const formatsWeek: { short: string; long: string } = { short: 'M/d', long: 'M/d/yyyy' };
+  const formatsMonth: { short: string; long: string } = { short: 'MMM yyyy', long: 'MMMM yyyy' };
+  const formatsYear: { short: string; long: string } = { short: 'yy', long: 'yyyy' };
+
   switch (periodType) {
     case PeriodType.Day:
-      return variant === 'short' ? format(date, 'M/d') : format(date, 'MMM d, yyyy');
+      return variant === 'short' ? format(date, formatsDay.short) : format(date, formatsDay.long);
 
     case PeriodType.WeekSun:
+      return range(date, 0, variant, formatsWeek);
     case PeriodType.WeekMon:
+      return range(date, 1, variant, formatsWeek);
     case PeriodType.WeekTue:
+      return range(date, 2, variant, formatsWeek);
     case PeriodType.WeekWed:
+      return range(date, 3, variant, formatsWeek);
     case PeriodType.WeekThu:
+      return range(date, 4, variant, formatsWeek);
     case PeriodType.WeekFri:
+      return range(date, 5, variant, formatsWeek);
     case PeriodType.WeekSat:
-      return variant === 'short'
-        ? format(date, 'M/d') + ' - ' + format(addDays(date, 6), 'M/d')
-        : format(date, 'M/d/yyyy') + ' - ' + format(addDays(date, 6), 'M/d/yyyy');
+      return range(date, 6, variant, formatsWeek);
 
     case PeriodType.Month:
-      return variant === 'short' ? format(date, 'MMM yyyy') : format(date, 'MMMM yyyy');
+      return variant === 'short'
+        ? format(date, formatsMonth.short)
+        : format(date, formatsMonth.long);
+
     case PeriodType.Quarter:
       return variant === 'short'
-        ? format(date, 'MMM') + ' - ' + format(addMonths(date, 2), 'MMM yyyy')
-        : format(date, 'MMMM') + ' - ' + format(addMonths(date, 2), 'MMMM yyyy');
+        ? format(startOfQuarter(date), 'MMM') +
+            ' - ' +
+            format(endOfQuarter(date), formatsMonth.short)
+        : format(startOfQuarter(date), 'MMMM') +
+            ' - ' +
+            format(endOfQuarter(date), formatsMonth.long);
+
     case PeriodType.CalendarYear:
-      return variant === 'short' ? format(date, 'yy') : format(date, 'yyyy');
+      return variant === 'short' ? format(date, formatsYear.short) : format(date, formatsYear.long);
+
     case PeriodType.FiscalYearOctober:
       return variant === 'short' ? `${getFiscalYear(date)}`.substring(2) : `${getFiscalYear(date)}`;
 
     case PeriodType.BiWeek1Sun:
+      return range(date, 0, variant, formatsWeek, 1);
     case PeriodType.BiWeek1Mon:
+      return range(date, 1, variant, formatsWeek, 1);
     case PeriodType.BiWeek1Tue:
+      return range(date, 2, variant, formatsWeek, 1);
     case PeriodType.BiWeek1Wed:
+      return range(date, 3, variant, formatsWeek, 1);
     case PeriodType.BiWeek1Thu:
+      return range(date, 4, variant, formatsWeek, 1);
     case PeriodType.BiWeek1Fri:
+      return range(date, 5, variant, formatsWeek, 1);
     case PeriodType.BiWeek1Sat:
+      return range(date, 6, variant, formatsWeek, 1);
+
     case PeriodType.BiWeek2Sun:
+      return range(date, 0, variant, formatsWeek, 2);
     case PeriodType.BiWeek2Mon:
+      return range(date, 1, variant, formatsWeek, 2);
     case PeriodType.BiWeek2Tue:
+      return range(date, 2, variant, formatsWeek, 2);
     case PeriodType.BiWeek2Wed:
+      return range(date, 3, variant, formatsWeek, 2);
     case PeriodType.BiWeek2Thu:
+      return range(date, 4, variant, formatsWeek, 2);
     case PeriodType.BiWeek2Fri:
+      return range(date, 5, variant, formatsWeek, 2);
     case PeriodType.BiWeek2Sat:
-      return variant === 'short'
-        ? format(date, 'M/d') + ' - ' + format(addDays(date, 13), 'M/d')
-        : format(date, 'M/d/yyyy') + ' - ' + format(addDays(date, 13), 'M/d/yyyy');
+      return range(date, 6, variant, formatsWeek, 2);
+
     default:
       return formatISO(date);
   }
@@ -620,9 +682,6 @@ export function utcToLocalDate(date: Date | string | null | undefined) {
 
   // https://github.com/date-fns/date-fns/issues/376#issuecomment-454163253
   // return new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
-
-  // This approach seems to work more reliably with dates before 11/18/1883 @ 12:00
-  // https://github.com/d3/d3-time/issues/29#issuecomment-396415951
   const d = new Date(
     date.getUTCFullYear(),
     date.getUTCMonth(),
