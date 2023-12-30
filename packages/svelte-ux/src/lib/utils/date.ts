@@ -85,64 +85,83 @@ export enum DayOfWeek {
   SAT,
 }
 
-export function getPeriodTypeName(periodType: PeriodType) {
+function getDayOfWeekName(dayIndex: number, locales: string) {
+  // Create a date object for a specific day (0 = Sunday, 1 = Monday, etc.)
+  const date = new Date(Date.UTC(2023, 11, 4 + dayIndex));
+  const formatter = new Intl.DateTimeFormat(locales, { weekday: 'short' });
+  return formatter.format(date);
+}
+
+export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOptions = {}) {
+  const locales = options.locales ?? 'en';
+  const dico = {
+    Day: options.dico?.Day ?? 'Day',
+    Week: options.dico?.Week ?? 'Week',
+    BiWeek: options.dico?.BiWeek ?? 'Bi-Week',
+    Month: options.dico?.Month ?? 'Month',
+    Quarter: options.dico?.Quarter ?? 'Quarter',
+    CalendarYear: options.dico?.CalendarYear ?? 'Calendar Year',
+    FiscalYearOct: options.dico?.FiscalYearOct ?? 'Fiscal Year (Oct)',
+  };
+
+  // return getDayOfWeekName(0, 'en');
   switch (periodType) {
     case PeriodType.Day:
-      return 'Day';
+      return dico.Day;
 
     case PeriodType.WeekSun:
-      return 'Week (Sun)';
+      return `${dico.Week} (${getDayOfWeekName(0, locales)})`;
     case PeriodType.WeekMon:
-      return 'Week (Mon)';
+      return `${dico.Week} (${getDayOfWeekName(1, locales)})`;
     case PeriodType.WeekTue:
-      return 'Week (Tue)';
+      return `${dico.Week} (${getDayOfWeekName(2, locales)})`;
     case PeriodType.WeekWed:
-      return 'Week (Wed)';
+      return `${dico.Week} (${getDayOfWeekName(3, locales)})`;
     case PeriodType.WeekThu:
-      return 'Week (Thu)';
+      return `${dico.Week} (${getDayOfWeekName(4, locales)})`;
     case PeriodType.WeekFri:
-      return 'Week (Fri)';
+      return `${dico.Week} (${getDayOfWeekName(5, locales)})`;
     case PeriodType.WeekSat:
-      return 'Week (Sat)';
+      return `${dico.Week} (${getDayOfWeekName(6, locales)})`;
 
     case PeriodType.Month:
-      return 'Month';
+      return dico.Month;
     case PeriodType.Quarter:
-      return 'Quarter';
+      return dico.Quarter;
     case PeriodType.CalendarYear:
-      return 'Calendar Year';
+      return dico.CalendarYear;
     case PeriodType.FiscalYearOctober:
-      return 'Fiscal Year (Oct)';
+      return dico.FiscalYearOct;
 
     case PeriodType.BiWeek1Sun:
-      return 'Bi-Week (Sun)';
+      return `${dico.BiWeek} (${getDayOfWeekName(0, locales)})`;
     case PeriodType.BiWeek1Mon:
-      return 'Bi-Week (Mon)';
+      return `${dico.BiWeek} (${getDayOfWeekName(1, locales)})`;
     case PeriodType.BiWeek1Tue:
-      return 'Bi-Week (Tue)';
+      return `${dico.BiWeek} (${getDayOfWeekName(2, locales)})`;
     case PeriodType.BiWeek1Wed:
-      return 'Bi-Week (Wed)';
+      return `${dico.BiWeek} (${getDayOfWeekName(3, locales)})`;
     case PeriodType.BiWeek1Thu:
-      return 'Bi-Week (Thu)';
+      return `${dico.BiWeek} (${getDayOfWeekName(4, locales)})`;
     case PeriodType.BiWeek1Fri:
-      return 'Bi-Week (Fri)';
+      return `${dico.BiWeek} (${getDayOfWeekName(5, locales)})`;
     case PeriodType.BiWeek1Sat:
-      return 'Bi-Week (Sat)';
+      return `${dico.BiWeek} (${getDayOfWeekName(6, locales)})`;
 
     case PeriodType.BiWeek2Sun:
-      return 'Bi-Week 2 (Sun)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(0, locales)})`;
     case PeriodType.BiWeek2Mon:
-      return 'Bi-Week 2 (Mon)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(1, locales)})`;
     case PeriodType.BiWeek2Tue:
-      return 'Bi-Week 2 (Tue)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(2, locales)})`;
     case PeriodType.BiWeek2Wed:
-      return 'Bi-Week 2 (Wed)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(3, locales)})`;
     case PeriodType.BiWeek2Thu:
-      return 'Bi-Week 2 (Thu)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(4, locales)})`;
     case PeriodType.BiWeek2Fri:
-      return 'Bi-Week 2 (Fri)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(5, locales)})`;
     case PeriodType.BiWeek2Sat:
-      return 'Bi-Week 2 (Sat)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(6, locales)})`;
 
     default:
       return 'Unknown';
@@ -601,6 +620,15 @@ export type FormatDateOptions = {
   periodType?: PeriodType | null | undefined;
   locales?: string | undefined;
   variant?: 'short' | 'long'; // TODO: Support x-long, etc (maybe call it sm, md, lg, xl, etc) // QUESTION: rename to style? to be consistent with formatNumber
+  dico?: {
+    Day?: string;
+    Week?: string;
+    BiWeek?: string;
+    Month?: string;
+    Quarter?: string;
+    CalendarYear?: string;
+    FiscalYearOct?: string;
+  };
 };
 
 export function formatDate(

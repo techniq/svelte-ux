@@ -5,7 +5,7 @@ import {
   getMonthDaysByWeek,
   localToUtcDate,
   utcToLocalDate,
-  type FormatDateOptions,
+  getPeriodTypeName,
 } from './date';
 
 const DATE = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
@@ -321,4 +321,26 @@ describe('getMonthDaysByWeek()', () => {
       ]
     `);
   });
+});
+
+describe('getPeriodTypeName()', () => {
+  const combi = [
+    [PeriodType.Day, undefined, 'Day'],
+    [PeriodType.Day, { dico: { Day: 'Jour' } }, 'Jour'],
+    [PeriodType.WeekSun, undefined, 'Week (Sun)'],
+    [PeriodType.WeekSun, { dico: { Week: 'Semaine' }, locales: 'fr' }, 'Semaine (dim.)'],
+    [PeriodType.WeekWed, undefined, 'Week (Wed)'],
+    [PeriodType.WeekWed, { dico: { Week: 'Semaine' }, locales: 'fr' }, 'Semaine (mer.)'],
+    [PeriodType.Month, undefined, 'Month'],
+    [PeriodType.Month, { dico: { Month: 'Mois' } }, 'Mois'],
+    [PeriodType.BiWeek2Sat, undefined, 'Bi-Week 2 (Sat)'],
+    [PeriodType.BiWeek2Sat, { dico: { BiWeek: '2 sem.' }, locales: 'fr' }, '2 sem. 2 (sam.)'],
+  ] as const;
+
+  for (const c of combi) {
+    const [periodType, o, expected] = c;
+    it(c.toString(), () => {
+      expect(getPeriodTypeName(periodType, o)).equal(expected);
+    });
+  }
 });
