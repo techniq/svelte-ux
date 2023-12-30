@@ -270,23 +270,18 @@ module.exports = plugin(
  */
 function createTheme(colors, colorSpace = 'hsl') {
   return Object.fromEntries(
-    colors.map((color) => {
-      return [color, `${colorSpace}(var(--color-${color}) / <alpha-value>)`];
-      // return [color, `${colorSpace}(var(--color-${color}) / var(--tw-bg-opacity))`];
-    })
+    colors.map((color) => [color, `${colorSpace}(var(--color-${color}) / <alpha-value>)`])
   );
 }
 
 function injectThemes(addBase, config) {
-  const includedThemesObj = {};
-
   const themes = config('ux.themes');
   const themeRoot = config('ux.themeRoot') ?? ':root';
 
   /**
    * Convert names to CSS variables and color values common color space (hsl, oklch, etc) and space separated
    */
-  function processColors(input) {
+  function processThemeColors(input) {
     const result = {};
 
     const colors = { ...input };
@@ -384,18 +379,18 @@ function injectThemes(addBase, config) {
   Object.entries(themes).map(([themeName, themeColors], index) => {
     if (index === 0) {
       // Root / default theme
-      cssThemes[themeRoot] = processColors(themeColors);
+      cssThemes[themeRoot] = processThemeColors(themeColors);
       rootThemeName = themeName;
     } else if (index === 1) {
       // Dark theme
       cssThemes['@media (prefers-color-scheme: dark)'] = {
-        [themeRoot]: processColors(themeColors),
+        [themeRoot]: processThemeColors(themeColors),
       };
       // Also register first and second them by name AFTER @media for precedence
-      cssThemes[`[data-theme=${rootThemeName}]`] = processColors(themes[rootThemeName]);
-      cssThemes[`[data-theme=${themeName}]`] = processColors(themeColors);
+      cssThemes[`[data-theme=${rootThemeName}]`] = processThemeColors(themes[rootThemeName]);
+      cssThemes[`[data-theme=${themeName}]`] = processThemeColors(themeColors);
     } else {
-      cssThemes[`[data-theme=${themeName}]`] = processColors(themeColors);
+      cssThemes[`[data-theme=${themeName}]`] = processThemeColors(themeColors);
     }
   });
 
