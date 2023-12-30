@@ -597,7 +597,8 @@ export function formatDate(
 
   const formatsDay: { short: string; long: string } = { short: 'M/d', long: 'MMM d, yyyy' };
   const formatsWeek: { short: string; long: string } = { short: 'M/d', long: 'M/d/yyyy' };
-  const formatsMonth: { short: string; long: string } = { short: 'MMM yyyy', long: 'MMMM yyyy' };
+  const formatsMonthPart1: { short: string; long: string } = { short: 'MMM', long: 'MMMM' };
+  const formatsMonth: { short: string; long: string } = { short: 'MMM yy', long: 'MMMM yyyy' };
   const formatsYear: { short: string; long: string } = { short: 'yy', long: 'yyyy' };
 
   switch (periodType) {
@@ -626,10 +627,10 @@ export function formatDate(
 
     case PeriodType.Quarter:
       return variant === 'short'
-        ? format(startOfQuarter(date), 'MMM') +
+        ? format(startOfQuarter(date), formatsMonthPart1.short) +
             ' - ' +
             format(endOfQuarter(date), formatsMonth.short)
-        : format(startOfQuarter(date), 'MMMM') +
+        : format(startOfQuarter(date), formatsMonthPart1.long) +
             ' - ' +
             format(endOfQuarter(date), formatsMonth.long);
 

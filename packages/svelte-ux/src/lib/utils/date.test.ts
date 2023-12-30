@@ -31,12 +31,12 @@ describe('formatDate()', () => {
   });
 
   it('should format date for PeriodType.Month', () => {
-    expect(formatDate(DATE, PeriodType.Month, 'short')).equal('Nov 2023');
+    expect(formatDate(DATE, PeriodType.Month, 'short')).equal('Nov 23');
     expect(formatDate(DATE, PeriodType.Month, 'long')).equal('November 2023');
   });
 
   it('should format date for PeriodType.Quarter', () => {
-    expect(formatDate(DATE, PeriodType.Quarter, 'short')).equal('Oct - Dec 2023');
+    expect(formatDate(DATE, PeriodType.Quarter, 'short')).equal('Oct - Dec 23');
     expect(formatDate(DATE, PeriodType.Quarter, 'long')).equal('October - December 2023');
   });
 
