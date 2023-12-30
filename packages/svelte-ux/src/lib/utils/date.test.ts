@@ -15,49 +15,77 @@ describe('formatDate()', () => {
 
   it('should format date for PeriodType.Day', () => {
     const date = new Date(2023, 10, 21);
-    expect(formatDate(date, PeriodType.Day, 'short')).equal('11/21');
-    expect(formatDate(date, PeriodType.Day, 'long')).equal('Nov 21, 2023');
+    expect(formatDate(date, { periodType: PeriodType.Day, variant: 'short' })).equal('11/21');
+    expect(formatDate(date, { periodType: PeriodType.Day, variant: 'long' })).equal('Nov 21, 2023');
   });
 
   it('should format date string', () => {
-    expect(formatDate(DATE, PeriodType.Day, 'short')).equal('11/21');
-    expect(formatDate(DATE, PeriodType.Day, 'long')).equal('Nov 21, 2023');
+    expect(formatDate(DATE, { periodType: PeriodType.Day, variant: 'short' })).equal('11/21');
+    expect(formatDate(DATE, { periodType: PeriodType.Day, variant: 'long' })).equal('Nov 21, 2023');
   });
 
   it('should format date for PeriodType.Week', () => {
-    expect(formatDate(DATE, PeriodType.WeekSun, 'short')).equal('11/19 - 11/25');
-    expect(formatDate(DATE, PeriodType.WeekSun, 'long')).equal('11/19/2023 - 11/25/2023');
-    expect(formatDate(DATE, PeriodType.WeekMon, 'long')).equal('11/20/2023 - 11/26/2023');
+    expect(formatDate(DATE, { periodType: PeriodType.WeekSun, variant: 'short' })).equal(
+      '11/19 - 11/25'
+    );
+    expect(formatDate(DATE, { periodType: PeriodType.WeekSun, variant: 'long' })).equal(
+      '11/19/2023 - 11/25/2023'
+    );
+    expect(formatDate(DATE, { periodType: PeriodType.WeekMon, variant: 'long' })).equal(
+      '11/20/2023 - 11/26/2023'
+    );
   });
 
   it('should format date for PeriodType.Month', () => {
-    expect(formatDate(DATE, PeriodType.Month, 'short')).equal('Nov 23');
-    expect(formatDate(DATE, PeriodType.Month, 'long')).equal('November 2023');
+    expect(formatDate(DATE, { periodType: PeriodType.Month, variant: 'short' })).equal('Nov 23');
+    expect(formatDate(DATE, { periodType: PeriodType.Month, variant: 'long' })).equal(
+      'November 2023'
+    );
   });
 
   it('should format date for PeriodType.Quarter', () => {
-    expect(formatDate(DATE, PeriodType.Quarter, 'short')).equal('Oct - Dec 23');
-    expect(formatDate(DATE, PeriodType.Quarter, 'long')).equal('October - December 2023');
+    expect(formatDate(DATE, { periodType: PeriodType.Quarter, variant: 'short' })).equal(
+      'Oct - Dec 23'
+    );
+    expect(formatDate(DATE, { periodType: PeriodType.Quarter, variant: 'long' })).equal(
+      'October - December 2023'
+    );
   });
 
   it('should format date for PeriodType.CalendarYear', () => {
-    expect(formatDate(DATE, PeriodType.CalendarYear, 'short')).equal('23');
-    expect(formatDate(DATE, PeriodType.CalendarYear, 'long')).equal('2023');
+    expect(formatDate(DATE, { periodType: PeriodType.CalendarYear, variant: 'short' })).equal('23');
+    expect(formatDate(DATE, { periodType: PeriodType.CalendarYear, variant: 'long' })).equal(
+      '2023'
+    );
   });
 
   it('should format date for PeriodType.FiscalYearOctober', () => {
-    expect(formatDate(DATE, PeriodType.FiscalYearOctober, 'short')).equal('24');
-    expect(formatDate(DATE, PeriodType.FiscalYearOctober, 'long')).equal('2024');
+    expect(
+      formatDate(DATE, {
+        periodType: PeriodType.FiscalYearOctober,
+        variant: 'short',
+      })
+    ).equal('24');
+    expect(
+      formatDate(DATE, {
+        periodType: PeriodType.FiscalYearOctober,
+        variant: 'long',
+      })
+    ).equal('2024');
   });
 
   it('should format date for PeriodType.BiWeek1Sun', () => {
-    expect(formatDate(DATE, PeriodType.BiWeek1Sun, 'short')).equal('11/12 - 11/25');
-    expect(formatDate(DATE, PeriodType.BiWeek1Sun, 'long')).equal('11/12/2023 - 11/25/2023');
+    expect(formatDate(DATE, { periodType: PeriodType.BiWeek1Sun, variant: 'short' })).equal(
+      '11/12 - 11/25'
+    );
+    expect(formatDate(DATE, { periodType: PeriodType.BiWeek1Sun, variant: 'long' })).equal(
+      '11/12/2023 - 11/25/2023'
+    );
   });
 
   it('should format date for PeriodType.undefined', () => {
-    expect(formatDate(DATE, undefined, 'short')).equal('2023-11-21T00:00:00-04:00');
-    expect(formatDate(DATE, undefined, 'long')).equal('2023-11-21T00:00:00-04:00');
+    expect(formatDate(DATE, { variant: 'short' })).equal('2023-11-21T00:00:00-04:00');
+    expect(formatDate(DATE, { variant: 'long' })).equal('2023-11-21T00:00:00-04:00');
   });
 });
 
