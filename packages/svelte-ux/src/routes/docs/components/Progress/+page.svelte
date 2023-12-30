@@ -31,7 +31,7 @@
 <Preview>
   <Progress value={0.5} class="[--color:theme(colors.success)]" />
   <Progress value={0.7} class="[--color:theme(colors.warning)]" />
-  <Progress value={0.9} class="[--color:theme(colors.error)]" />
+  <Progress value={0.9} class="[--color:theme(colors.danger)]" />
 </Preview>
 
 <h2>Track color</h2>
@@ -48,7 +48,7 @@
   />
   <Progress
     value={0.9}
-    class="[--color:theme(colors.error)] [--track-color:theme(colors.error/5%)]"
+    class="[--color:theme(colors.danger)] [--track-color:theme(colors.danger/5%)]"
   />
 </Preview>
 
@@ -59,7 +59,7 @@
     bind:value
     class={cls(
       value > 90
-        ? '[--color:theme(colors.error)]'
+        ? '[--color:theme(colors.danger)]'
         : value > 50
           ? '[--color:theme(colors.warning)]'
           : '[--color:theme(colors.success)]'
