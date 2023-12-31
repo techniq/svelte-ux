@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { parse as parseDate, format as format_fns } from 'date-fns';
+  import { parse as parseDate } from 'date-fns';
+  import { PeriodType, format as format_ux } from '../utils';
+  import { getSettings } from './settings';
 
   import Field from './Field.svelte';
 
@@ -8,8 +10,8 @@
   import DatePickerField from './DatePickerField.svelte';
   import { getComponentTheme } from './theme';
 
-  export let value: Date = null;
-  export let format = 'MM/dd/yyyy';
+  export let value: Date | null = null;
+  export let format = getSettings().formats?.dates?.baseParsing ?? 'MM/dd/yyyy';
   export let mask = format.toLowerCase();
   export let replace = 'dmyh';
   export let picker = false;
@@ -27,14 +29,14 @@
 
   const theme = getComponentTheme('DateField');
 
-  let inputValue = '';
+  let inputValue: string | undefined = '';
 
   const dispatch = createEventDispatcher();
 
-  function onInputChange(e) {
+  function onInputChange(e: any) {
     inputValue = e.detail.value;
     const lastValue = value;
-    const parsedValue = parseDate(inputValue, format, new Date());
+    const parsedValue = parseDate(inputValue ?? '', format, new Date());
     value = isNaN(parsedValue.valueOf()) ? null : parsedValue;
     if (value != lastValue) {
       dispatch('change', { value });
@@ -55,13 +57,13 @@
   {clearable}
   on:clear={() => {
     value = null;
-    inputValue = null;
+    inputValue = undefined;
     dispatch('change', { value });
   }}
   let:id
 >
   <Input
-    value={value ? format_fns(value, format) : inputValue}
+    value={value ? format_ux(value, PeriodType.Day, { custom: format }) : inputValue}
     {mask}
     {replace}
     {id}

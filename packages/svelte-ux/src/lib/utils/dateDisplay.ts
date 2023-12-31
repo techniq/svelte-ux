@@ -24,8 +24,7 @@ export function dateDisplay(
     if (options?.format) {
       formattedDate = format_fns(date, options?.format);
     } else if (options?.periodType) {
-      formattedDate = formatDate(date, {
-        periodType: options?.periodType,
+      formattedDate = formatDate(date, options?.periodType, {
         variant: options?.variant,
       });
     } else {

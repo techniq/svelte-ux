@@ -47,8 +47,6 @@ describe('formatDate()', () => {
       ['long', 'fr', '21 nov. 2023'],
     ] as const;
 
-    // QUESTION 'dd/MM/yyyy' Would be the good default in french, is it another variant? :(
-
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
