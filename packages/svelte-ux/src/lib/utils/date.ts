@@ -33,6 +33,7 @@ import {
 import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
+import { getFormatDateOptions } from '$lib/components/settings';
 
 export type SelectedDate = Date | Date[] | DateRange | null;
 
@@ -52,6 +53,7 @@ export enum PeriodType {
   WeekThu = 24,
   WeekFri = 25,
   WeekSat = 26,
+  Week = 27, // will be replaced by WeekSun, WeekMon, etc depending on weekStartsOn
 
   Month = 30,
   Quarter = 40,
@@ -65,6 +67,7 @@ export enum PeriodType {
   BiWeek1Thu = 74,
   BiWeek1Fri = 75,
   BiWeek1Sat = 76,
+  BiWeek1 = 77, // will be replaced by BiWeek1Sun, BiWeek1Mon, etc depending on weekStartsOn
 
   BiWeek2Sun = 80,
   BiWeek2Mon = 81,
@@ -73,44 +76,35 @@ export enum PeriodType {
   BiWeek2Thu = 84,
   BiWeek2Fri = 85,
   BiWeek2Sat = 86,
+  BiWeek2 = 87, // will be replaced by BiWeek2Sun, BiWeek2Mon, etc depending on weekStartsOn
 }
 
 export enum DayOfWeek {
-  SUN,
-  MON,
-  TUE,
-  WED,
-  THU,
-  FRI,
-  SAT,
+  SUN = 0,
+  MON = 1,
+  TUE = 2,
+  WED = 3,
+  THU = 4,
+  FRI = 5,
+  SAT = 6,
 }
 
-function getDayOfWeekName(dayIndex: number, locales: string) {
+function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
   // Create a date object for a specific day (0 = Sunday, 1 = Monday, etc.)
-  const date = new Date(Date.UTC(2023, 11, 4 + dayIndex));
+  const date = new Date(Date.UTC(2023, 11, 4 + weekStartsOn));
   const formatter = new Intl.DateTimeFormat(locales, { weekday: 'short' });
   return formatter.format(date);
 }
 
 export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOptions = {}) {
-  const locales = options.locales ?? 'en';
-  const dico = {
-    Day: options.dico?.Day ?? 'Day',
-    Week: options.dico?.Week ?? 'Week',
-    BiWeek: options.dico?.BiWeek ?? 'Bi-Week',
-    Month: options.dico?.Month ?? 'Month',
-    Quarter: options.dico?.Quarter ?? 'Quarter',
-    CalendarYear: options.dico?.CalendarYear ?? 'Calendar Year',
-    FiscalYearOct: options.dico?.FiscalYearOct ?? 'Fiscal Year (Oct)',
-  };
+  const { locales, dico } = getFormatDateOptions(options);
 
-  // return getDayOfWeekName(0, 'en');
   switch (periodType) {
     case PeriodType.Day:
       return dico.Day;
 
     case PeriodType.WeekSun:
-      return `${dico.Week} (${getDayOfWeekName(0, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(DayOfWeek.SUN, locales)})`;
     case PeriodType.WeekMon:
       return `${dico.Week} (${getDayOfWeekName(1, locales)})`;
     case PeriodType.WeekTue:
@@ -310,7 +304,7 @@ export function getMonths(year = new Date().getFullYear()) {
 
 export function getMonthDaysByWeek(
   dateInTheMonth: Date,
-  weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined = undefined
+  weekStartsOn: DayOfWeek = DayOfWeek.SUN
 ): Date[][] {
   const startOfFirstWeek = startOfWeek(startOfMonth(dateInTheMonth), { weekStartsOn });
   const endOfLastWeek = endOfWeek(endOfMonth(dateInTheMonth), { weekStartsOn });
@@ -576,7 +570,7 @@ export function formatISODate(
 }
 
 function formatIntl(dt: Date, format: string, options: FormatDateOptions = {}) {
-  const locales = options.locales ?? 'en';
+  const { locales } = getFormatDateOptions(options);
 
   const o = new Intl.DateTimeFormat(locales, {
     year: format.includes('yyy') ? 'numeric' : format.includes('yy') ? '2-digit' : undefined,
@@ -597,7 +591,7 @@ function formatIntl(dt: Date, format: string, options: FormatDateOptions = {}) {
 
 function range(
   date: Date,
-  weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined,
+  weekStartsOn: DayOfWeek,
   options: FormatDateOptions,
   formats: { short: string; long: string },
   biWeek: undefined | 1 | 2 = undefined // undefined means that it's not a bi-week
@@ -605,11 +599,11 @@ function range(
   const start =
     biWeek === undefined
       ? startOfWeek(date, { weekStartsOn })
-      : startOfBiWeek(date, biWeek, weekStartsOn ?? 0);
+      : startOfBiWeek(date, biWeek, weekStartsOn);
   const end =
     biWeek === undefined
       ? endOfWeek(date, { weekStartsOn })
-      : endOfBiWeek(date, biWeek, weekStartsOn ?? 0);
+      : endOfBiWeek(date, biWeek, weekStartsOn);
 
   const formatToUse = options.variant === 'short' ? formats.short : formats.long;
 
@@ -617,8 +611,9 @@ function range(
 }
 
 export type FormatDateOptions = {
-  periodType?: PeriodType | null | undefined;
+  // periodType?: PeriodType | null | undefined;
   locales?: string | undefined;
+  weekStartsOn?: DayOfWeek;
   variant?: 'short' | 'long'; // TODO: Support x-long, etc (maybe call it sm, md, lg, xl, etc) // QUESTION: rename to style? to be consistent with formatNumber
   dico?: {
     Day?: string;
@@ -633,10 +628,11 @@ export type FormatDateOptions = {
 
 export function formatDate(
   date: Date | string | null | undefined,
+  periodType?: PeriodType | null | undefined,
   options: FormatDateOptions = {}
 ): string {
-  const variant = options.variant ?? 'long';
-  const periodType = options.periodType ?? undefined;
+  periodType = periodType ?? undefined;
+  const { variant, weekStartsOn } = getFormatDateOptions(options);
 
   if (typeof date === 'string') {
     date = parseISO(date);
@@ -653,6 +649,38 @@ export function formatDate(
   const formatsMonthPart1: { short: string; long: string } = { short: 'MMM', long: 'MMMM' };
   const formatsMonth: { short: string; long: string } = { short: 'MMM yy', long: 'MMMM yyyy' };
   const formatsYear: { short: string; long: string } = { short: 'yy', long: 'yyyy' };
+
+  if (periodType === PeriodType.Week) {
+    periodType = [
+      PeriodType.WeekSun,
+      PeriodType.WeekMon,
+      PeriodType.WeekTue,
+      PeriodType.WeekWed,
+      PeriodType.WeekThu,
+      PeriodType.WeekFri,
+      PeriodType.WeekSat,
+    ][weekStartsOn];
+  } else if (periodType === PeriodType.BiWeek1) {
+    periodType = [
+      PeriodType.BiWeek1Sun,
+      PeriodType.BiWeek1Mon,
+      PeriodType.BiWeek1Tue,
+      PeriodType.BiWeek1Wed,
+      PeriodType.BiWeek1Thu,
+      PeriodType.BiWeek1Fri,
+      PeriodType.BiWeek1Sat,
+    ][weekStartsOn];
+  } else if (periodType === PeriodType.BiWeek2) {
+    periodType = [
+      PeriodType.BiWeek2Sun,
+      PeriodType.BiWeek2Mon,
+      PeriodType.BiWeek2Tue,
+      PeriodType.BiWeek2Wed,
+      PeriodType.BiWeek2Thu,
+      PeriodType.BiWeek2Fri,
+      PeriodType.BiWeek2Sat,
+    ][weekStartsOn];
+  }
 
   switch (periodType) {
     case PeriodType.Day:

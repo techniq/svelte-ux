@@ -80,6 +80,22 @@ settings({
         fractionDigits: 4,
       },
     },
+
+    dates: {
+      // This is the default, but you can override it here for your app
+      locales: 'en',
+      weekStartsOn: 0, // Sunday
+      variant: 'long',
+      dico: {
+        Day: 'Day',
+        Week: 'Week',
+        BiWeek: 'Bi-Week',
+        Month: 'Month',
+        Quarter: 'Quarter',
+        CalendarYear: 'Calendar Year',
+        FiscalYearOct: 'Fiscal Year (Oct)',
+      },
+    },
   },
 });
 ```

@@ -83,13 +83,32 @@
   <div>{format(0.5678, 'percent', { locales: 'fr', fractionDigits: 1 })}</div>
 </Preview>
 
-<h2>Period formats</h2>
+<h2>Date / Period formats (defaut settings)</h2>
 
 <Preview showCode>
   <div>{format(date, PeriodType.Day)}</div>
   <div>{format(date, PeriodType.Month)}</div>
   <div>{format(date, PeriodType.CalendarYear)}</div>
-  <div>{format(date, PeriodType.Day, 'short')}</div>
-  <div>{format(date, PeriodType.Month, 'short')}</div>
-  <div>{format(date, PeriodType.CalendarYear, 'short')}</div>
+  <div>{format(date, PeriodType.Day, { variant: 'short' })}</div>
+  <div>{format(date, PeriodType.Month, { variant: 'short' })}</div>
+  <div>{format(date, PeriodType.CalendarYear, { variant: 'short' })}</div>
+</Preview>
+
+<h2>Date / Period formats (local settings)</h2>
+
+<span>
+  You can customize numbers with the 3rd arg. You can pass for example locales like <b>fr</b>,
+  <b>de</b>, ... You can also to that globally in the
+  <a class="text-accent-500" href="/customization#settings">Settings</a>.
+</span>
+
+<Preview showCode>
+  <div>{format(date, PeriodType.Day, { locales: 'fr' })}</div>
+  <div>{format(date, PeriodType.Month, { locales: 'fr' })}</div>
+  <div>{format(date, PeriodType.CalendarYear, { locales: 'fr' })}</div>
+  <div>{format(date, PeriodType.Day, { variant: 'short', locales: 'fr' })}</div>
+  <div>{format(date, PeriodType.Month, { variant: 'short', locales: 'fr' })}</div>
+  <div>
+    {format(date, PeriodType.CalendarYear, { variant: 'short', locales: 'fr' })}
+  </div>
 </Preview>

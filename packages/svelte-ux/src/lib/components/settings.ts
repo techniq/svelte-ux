@@ -2,6 +2,7 @@ import type { FormatNumberOptions, FormatNumberStyle } from '$lib/utils/number';
 import { getContext, setContext } from 'svelte';
 import type { Theme } from './theme';
 import type { Prettify } from '$lib/types/typeHelpers';
+import { type FormatDateOptions, DayOfWeek } from '$lib/utils/date';
 
 type ExcludeNone<T> = T extends 'none' ? never : T;
 export type Settings = {
@@ -13,6 +14,7 @@ export type Settings = {
         [key in ExcludeNone<FormatNumberStyle>]?: FormatNumberOptions;
       }
     >;
+    dates?: FormatDateOptions;
   };
   theme?: Theme;
 };
@@ -46,6 +48,25 @@ export function getFormatNumberOptions(style?: FormatNumberStyle) {
   if (style && style !== 'none') {
     toRet = { ...toRet, ...(settings.formats?.numbers?.[style] ?? {}) };
   }
+
+  return toRet;
+}
+
+export function getFormatDateOptions(options?: FormatDateOptions) {
+  let toRet = {
+    locales: options?.locales ?? 'en',
+    weekStartsOn: options?.weekStartsOn ?? DayOfWeek.SUN,
+    variant: options?.variant ?? 'long',
+    dico: {
+      Day: options?.dico?.Day ?? 'Day',
+      Week: options?.dico?.Week ?? 'Week',
+      BiWeek: options?.dico?.BiWeek ?? 'Bi-Week',
+      Month: options?.dico?.Month ?? 'Month',
+      Quarter: options?.dico?.Quarter ?? 'Quarter',
+      CalendarYear: options?.dico?.CalendarYear ?? 'Calendar Year',
+      FiscalYearOct: options?.dico?.FiscalYearOct ?? 'Fiscal Year (Oct)',
+    },
+  } as const;
 
   return toRet;
 }
