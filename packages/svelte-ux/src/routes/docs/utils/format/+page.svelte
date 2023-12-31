@@ -6,13 +6,14 @@
   import TextField from '$lib/components/TextField.svelte';
   import MenuField from '$lib/components/MenuField.svelte';
   import type { FormatNumberStyle } from '$lib/utils/number';
+  import DateField from '$lib/components/DateField.svelte';
 
   let value = 1234.56;
   let style: FormatNumberStyle = 'decimal';
-  let locales: string = 'en'; //
+  let locales: string = 'en';
   let currency: string = 'USD';
 
-  const date = new Date('1982-03-30T00:00:00');
+  let date = new Date('1982-11-30T00:00:00');
 </script>
 
 <h1>Usage</h1>
@@ -21,10 +22,16 @@
 
 <h1>Examples</h1>
 
-<h2>Playground</h2>
+<h2>Playground numbers</h2>
 
 <div class="grid grid-cols-xs gap-2 mb-2">
-  <TextField label="value" bind:value type="decimal" />
+  <TextField label="number" bind:value type="decimal" />
+
+  <MenuField
+    label="locale"
+    bind:value={locales}
+    options={['en', 'de', 'fr', 'jp'].map((value) => ({ label: value, value }))}
+  />
 
   <MenuField
     label="style"
@@ -32,12 +39,6 @@
     options={['integer', 'decimal', 'currency', 'percent', 'percentRound', 'metric'].map(
       (value) => ({ label: value, value })
     )}
-  />
-
-  <MenuField
-    label="locale"
-    bind:value={locales}
-    options={['en', 'de', 'fr', 'jp'].map((value) => ({ label: value, value }))}
   />
 
   <MenuField
@@ -49,6 +50,22 @@
 
 <Preview>
   <div>{format(value, style, { locales, currency })}</div>
+</Preview>
+
+<h2>Playground dates</h2>
+
+<div class="grid grid-cols-xs gap-2 mb-2">
+  <DateField format="dd/MM/yyyy" label="date" bind:value={date}></DateField>
+
+  <MenuField
+    label="locale"
+    bind:value={locales}
+    options={['en', 'de', 'fr', 'jp'].map((value) => ({ label: value, value }))}
+  />
+</div>
+
+<Preview>
+  <div>{format(date, PeriodType.Day, { locales })}</div>
 </Preview>
 
 <h2>number formats (defaut settings)</h2>
