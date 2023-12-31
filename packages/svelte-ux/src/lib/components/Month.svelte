@@ -6,7 +6,6 @@
     endOfDay as endOfDayFunc,
     startOfMonth as startOfMonthFunc,
     endOfMonth as endOfMonthFunc,
-    format as format_fns,
     addMonths,
     isSameDay,
     isWithinInterval,
@@ -16,10 +15,12 @@
 
   import { getMonthDaysByWeek, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
+  import { format } from '../utils';
   import { hasKeyOf } from '../types/typeGuards';
 
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
+  import { getSettings } from '.';
 
   export let selected: SelectedDate | undefined = undefined;
 
@@ -33,7 +34,7 @@
     startOfMonthFunc(new Date());
 
   $: endOfMonth = endOfMonthFunc(startOfMonth);
-  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth);
+  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, getSettings().formats?.dates?.weekStartsOn);
 
   /**
    * Hide controls and date.  Useful to control externally
@@ -91,7 +92,7 @@
     />
 
     <div class="flex flex-1 items-center justify-center">
-      <span>{format_fns(startOfMonth, 'MMMM yyyy')}</span>
+      <span>{format(startOfMonth, PeriodType.MonthYear)}</span>
     </div>
 
     <Button
@@ -105,7 +106,7 @@
 <div class="flex">
   {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
     <div class="flex-1 text-center">
-      <span class="text-xs text-black/50"> {format_fns(day, 'eee')[0]} </span>
+      <span class="text-xs text-black/50"> {format(day, PeriodType.Day, { custom: 'eee' })} </span>
     </div>
   {/each}
 </div>

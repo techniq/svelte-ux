@@ -589,6 +589,13 @@ export function formatIntl(dt: Date, format: string, options: FormatDateOptions 
     day: format.includes('dd') ? '2-digit' : format.includes('d') ? 'numeric' : undefined,
     hour: undefined,
     minute: undefined,
+    weekday: format.includes('eeeee')
+      ? 'narrow'
+      : format.includes('eeee')
+        ? 'long'
+        : format.includes('eee')
+          ? 'short'
+          : undefined,
   });
 
   return o.format(dt);
@@ -657,8 +664,7 @@ export function formatDate(
     return '';
   }
 
-  // TODO: check usage of dateDisplay & format_fns
-  // TODO: add a variant default? I want a date with: "MM/dd/yyyy"!
+  // TODO: check usage of dateDisplay
 
   const formatsDay: Record<DateFormatVariant, string> = {
     short: 'd M',

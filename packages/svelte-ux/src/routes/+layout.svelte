@@ -26,12 +26,17 @@
   $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
   settings({
+    // Usefull to test different locales with the docs
     // formats: {
     //   numbers: {
     //     defaults: {
     //       locales: 'fr',
     //       currency: 'EUR',
     //     },
+    //   },
+    //   dates: {
+    //     locales: 'fr',
+    //     weekStartsOn: 1,
     //   },
     // },
     // theme: {

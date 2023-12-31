@@ -57,22 +57,29 @@ export function getFormatDateOptions(options?: FormatDateOptions) {
   const variant: FormatDateOptions['variant'] =
     options?.custom && options?.variant === undefined ? 'custom' : options?.variant ?? 'default';
 
+  const settings = getSettings();
   let toRet = {
-    locales: options?.locales ?? 'en',
-    baseParsing: options?.baseParsing ?? 'MM/dd/yyyy',
-    weekStartsOn: options?.weekStartsOn ?? DayOfWeek.SUN,
+    locales: settings.formats?.dates?.locales ?? options?.locales ?? 'en',
+    baseParsing: settings.formats?.dates?.baseParsing ?? options?.baseParsing ?? 'MM/dd/yyyy',
+    weekStartsOn: settings.formats?.dates?.weekStartsOn ?? options?.weekStartsOn ?? DayOfWeek.SUN,
     variant,
     custom: options?.custom ?? '',
     dico: {
-      Day: options?.dico?.Day ?? 'Day',
-      Week: options?.dico?.Week ?? 'Week',
-      BiWeek: options?.dico?.BiWeek ?? 'Bi-Week',
-      Month: options?.dico?.Month ?? 'Month',
-      Quarter: options?.dico?.Quarter ?? 'Quarter',
-      CalendarYear: options?.dico?.CalendarYear ?? 'Calendar Year',
-      FiscalYearOct: options?.dico?.FiscalYearOct ?? 'Fiscal Year (Oct)',
+      Day: settings.formats?.dates?.dico?.Day ?? options?.dico?.Day ?? 'Day',
+      Week: settings.formats?.dates?.dico?.Week ?? options?.dico?.Week ?? 'Week',
+      BiWeek: settings.formats?.dates?.dico?.BiWeek ?? options?.dico?.BiWeek ?? 'Bi-Week',
+      Month: settings.formats?.dates?.dico?.Month ?? options?.dico?.Month ?? 'Month',
+      Quarter: settings.formats?.dates?.dico?.Quarter ?? options?.dico?.Quarter ?? 'Quarter',
+      CalendarYear:
+        settings.formats?.dates?.dico?.CalendarYear ??
+        options?.dico?.CalendarYear ??
+        'Calendar Year',
+      FiscalYearOct:
+        settings.formats?.dates?.dico?.FiscalYearOct ??
+        options?.dico?.FiscalYearOct ??
+        'Fiscal Year (Oct)',
     },
-  } as const;
+  };
 
   return toRet;
 }
