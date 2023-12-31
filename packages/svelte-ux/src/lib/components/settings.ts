@@ -53,10 +53,16 @@ export function getFormatNumberOptions(style?: FormatNumberStyle) {
 }
 
 export function getFormatDateOptions(options?: FormatDateOptions) {
+  // if custom is set && variant is not set, let's put custom as variant
+  const variant: FormatDateOptions['variant'] =
+    options?.custom && options?.variant === undefined ? 'custom' : options?.variant ?? 'default';
+
   let toRet = {
     locales: options?.locales ?? 'en',
+    baseParsing: options?.baseParsing ?? 'MM/dd/yyyy',
     weekStartsOn: options?.weekStartsOn ?? DayOfWeek.SUN,
-    variant: options?.variant ?? 'long',
+    variant,
+    custom: options?.custom ?? '',
     dico: {
       Day: options?.dico?.Day ?? 'Day',
       Week: options?.dico?.Week ?? 'Week',

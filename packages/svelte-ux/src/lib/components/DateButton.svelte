@@ -1,12 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { format as format_fns, isWithinInterval } from 'date-fns';
+  import { isWithinInterval } from 'date-fns';
 
   import Button from './Button.svelte';
-  import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
+  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
   import { cls } from '../utils/styles';
   import { getComponentTheme } from './theme';
+  import { format as format_ux } from '../utils';
 
   const dispatch = createEventDispatcher();
 
@@ -16,21 +17,17 @@
   export let selected: SelectedDate;
   export let hidden: boolean = false;
   export let fade: boolean = false;
-  export let format = getDefaultFormat(periodType);
+  export let format = getCustomFormat(periodType);
 
   const theme = getComponentTheme('DateButton');
 
-  function getDefaultFormat(periodType: PeriodType) {
+  function getCustomFormat(periodType: PeriodType) {
     switch (periodType) {
-      case PeriodType.CalendarYear:
-      case PeriodType.FiscalYearOctober:
-        return 'yyyy';
-      case PeriodType.Month:
-        return 'MMM';
       case PeriodType.Day:
-        return 'd';
+        return DateToken.SingleDigitDay;
       default:
-        return 'MM/dd/yyyy';
+        // returning undefined will use the default format of PeriodType
+        return undefined;
     }
   }
 
@@ -107,6 +104,6 @@
       dispatch('dateChange', date);
     }}
   >
-    {format_fns(date, format)}
+    {format_ux(date, periodType, { custom: format })}
   </Button>
 </div>

@@ -7,8 +7,8 @@ import {
   utcToLocalDate,
   getPeriodTypeName,
   DayOfWeek,
+  formatIntl,
 } from './date';
-import { startOfWeek } from 'date-fns';
 
 const DATE = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
 
@@ -98,6 +98,22 @@ describe('formatDate()', () => {
 
   describe('should format date for PeriodType.Month', () => {
     const combi = [
+      ['short', undefined, 'Nov'],
+      ['short', 'fr', 'nov.'],
+      ['long', undefined, 'November'],
+      ['long', 'fr', 'novembre'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDate(DATE, PeriodType.Month, { variant, locales })).equal(expected);
+      });
+    }
+  });
+
+  describe('should format date for PeriodType.MonthYear', () => {
+    const combi = [
       ['short', undefined, 'Nov 23'],
       ['short', 'fr', 'nov. 23'],
       ['long', undefined, 'November 2023'],
@@ -107,7 +123,7 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDate(DATE, PeriodType.Month, { variant, locales })).equal(expected);
+        expect(formatDate(DATE, PeriodType.MonthYear, { variant, locales })).equal(expected);
       });
     }
   });
@@ -194,6 +210,55 @@ describe('formatDate()', () => {
       });
     }
   });
+});
+
+describe('formatIntl()', () => {
+  const dt_2M_2d = new Date(2023, 10, 21);
+  const dt_2M_1d = new Date(2023, 10, 7);
+  const dt_1M_1d = new Date(2023, 2, 7);
+  const fr = { locales: 'fr' };
+
+  const combi = [
+    // ./date.ts:647 tokens
+    [dt_1M_1d, 'MM/dd/yyyy', undefined, '03/07/2023'],
+    [dt_2M_2d, 'M/d/yyyy', undefined, '11/21/2023'],
+    [dt_2M_1d, 'M/d/yyyy', undefined, '11/7/2023'],
+    [dt_2M_1d, 'M/dd/yyyy', undefined, '11/07/2023'],
+    [dt_1M_1d, 'M/d/yyyy', undefined, '3/7/2023'],
+    [dt_1M_1d, 'MM/d/yyyy', undefined, '03/7/2023'],
+    [dt_2M_2d, 'M/d', undefined, '11/21'],
+    [dt_2M_2d, 'MMM d, yyyy', undefined, 'Nov 21, 2023'],
+    [dt_2M_1d, 'MMM d, yyyy', undefined, 'Nov 7, 2023'],
+    [dt_2M_2d, 'MMM', undefined, 'Nov'],
+    [dt_2M_2d, 'MMMM', undefined, 'November'],
+    [dt_2M_2d, 'MMM yy', undefined, 'Nov 23'],
+    [dt_2M_2d, 'MMMM yyyy', undefined, 'November 2023'],
+    [dt_2M_2d, 'yy', undefined, '23'],
+    [dt_2M_2d, 'yyyy', undefined, '2023'],
+    // in fr
+    [dt_1M_1d, 'MM/dd/yyyy', fr, '07/03/2023'],
+    [dt_2M_2d, 'M/d/yyyy', fr, '21/11/2023'],
+    [dt_2M_1d, 'M/d/yyyy', fr, '07/11/2023'],
+    [dt_2M_1d, 'M/dd/yyyy', fr, '07/11/2023'],
+    [dt_1M_1d, 'M/d/yyyy', fr, '07/03/2023'],
+    [dt_1M_1d, 'MM/d/yyyy', fr, '7/03/2023'],
+    [dt_2M_2d, 'M/d', fr, '21/11'],
+    [dt_2M_2d, 'MMM d, yyyy', fr, '21 nov. 2023'],
+    [dt_2M_1d, 'MMM d, yyyy', fr, '7 nov. 2023'],
+    [dt_2M_2d, 'MMM', fr, 'nov.'],
+    [dt_2M_2d, 'MMMM', fr, 'novembre'],
+    [dt_2M_2d, 'MMM yy', fr, 'nov. 23'],
+    [dt_2M_2d, 'MMMM yyyy', fr, 'novembre 2023'],
+    [dt_2M_2d, 'yy', fr, '23'],
+    [dt_2M_2d, 'yyyy', fr, '2023'],
+  ] as const;
+
+  for (const c of combi) {
+    const [date, token, options, expected] = c;
+    it(c.toString(), () => {
+      expect(formatIntl(date, token, options)).equal(expected);
+    });
+  }
 });
 
 describe('utcToLocalDate()', () => {
