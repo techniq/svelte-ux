@@ -1,9 +1,9 @@
-import { format as dateFormat } from 'date-fns';
-import { formatDate, utcToLocalDate, PeriodType } from './date';
+import { format as format_fns } from 'date-fns';
+import { formatDate, utcToLocalDate, PeriodType, type FormatDateOptions } from './date';
 
 export type DateDisplayOptions = {
   periodType?: PeriodType | null;
-  variant?: Parameters<typeof formatDate>[2];
+  variant?: FormatDateOptions['variant'];
   format?: string;
   utc?: boolean;
 };
@@ -22,9 +22,12 @@ export function dateDisplay(
   let formattedDate = '';
   if (date) {
     if (options?.format) {
-      formattedDate = dateFormat(date, options?.format);
+      formattedDate = format_fns(date, options?.format);
     } else if (options?.periodType) {
-      formattedDate = formatDate(date, options?.periodType, options?.variant);
+      formattedDate = formatDate(date, {
+        periodType: options?.periodType,
+        variant: options?.variant,
+      });
     } else {
       formattedDate = date.toLocaleString();
     }

@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { formatDate, PeriodType, getDateFuncsByPeriodType } from '../utils/date';
+  import { PeriodType, getDateFuncsByPeriodType, type FormatDateOptions } from '../utils/date';
   import type { DateRange } from '../utils/dateRange';
 
   import { dateDisplay } from '../utils/dateDisplay';
 
   export let value: DateRange | null | undefined;
-  export let variant: Parameters<typeof formatDate>[2] = undefined;
-  export let format: string = undefined;
-  export let utc: boolean = undefined;
+  export let variant: FormatDateOptions['variant'] | undefined = undefined;
+  export let format: string | undefined = undefined;
+  export let utc: boolean | undefined = undefined;
 
   let showToValue = false;
   $: if (value?.to) {
