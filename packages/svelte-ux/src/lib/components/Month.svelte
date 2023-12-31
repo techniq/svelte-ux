@@ -6,7 +6,7 @@
     endOfDay as endOfDayFunc,
     startOfMonth as startOfMonthFunc,
     endOfMonth as endOfMonthFunc,
-    format,
+    format as format_fns,
     addMonths,
     isSameDay,
     isWithinInterval,
@@ -54,15 +54,15 @@
     return disabledDays instanceof Function
       ? disabledDays(date)
       : disabledDays instanceof Date
-      ? isSameDay(date, disabledDays)
-      : disabledDays instanceof Array
-      ? disabledDays.some((d) => isSameDay(date, d))
-      : disabledDays instanceof Object
-      ? isWithinInterval(date, {
-          start: startOfDayFunc(disabledDays.from),
-          end: endOfDayFunc(disabledDays.to || disabledDays.from),
-        })
-      : false;
+        ? isSameDay(date, disabledDays)
+        : disabledDays instanceof Array
+          ? disabledDays.some((d) => isSameDay(date, d))
+          : disabledDays instanceof Object
+            ? isWithinInterval(date, {
+                start: startOfDayFunc(disabledDays.from),
+                end: endOfDayFunc(disabledDays.to || disabledDays.from),
+              })
+            : false;
   };
 
   $: isDayHidden = (day: Date) => {
@@ -91,7 +91,7 @@
     />
 
     <div class="flex flex-1 items-center justify-center">
-      <span>{format(startOfMonth, 'MMMM yyyy')}</span>
+      <span>{format_fns(startOfMonth, 'MMMM yyyy')}</span>
     </div>
 
     <Button
@@ -105,7 +105,7 @@
 <div class="flex">
   {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
     <div class="flex-1 text-center">
-      <span class="text-xs text-black/50"> {format(day, 'eee')[0]} </span>
+      <span class="text-xs text-black/50"> {format_fns(day, 'eee')[0]} </span>
     </div>
   {/each}
 </div>

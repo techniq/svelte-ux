@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { parse as parseDate, format as formatDate } from 'date-fns';
+  import { parse as parseDate, format as format_fns } from 'date-fns';
 
   import Field from './Field.svelte';
 
@@ -61,7 +61,7 @@
   let:id
 >
   <Input
-    value={value ? formatDate(value, format) : inputValue}
+    value={value ? format_fns(value, format) : inputValue}
     {mask}
     {replace}
     {id}

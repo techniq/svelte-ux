@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { format, isAfter, isBefore, isSameDay } from 'date-fns';
+  import { format as format_fns, isAfter, isBefore, isSameDay } from 'date-fns';
 
   import {
     PeriodType,
@@ -168,7 +168,7 @@
       <ToggleOption value="from" class="flex-1">
         <div class="text-xs text-black/50">Start</div>
         {#if selected.from}
-          <div class="font-medium">{format(selected.from, 'M/d/yyyy')}</div>
+          <div class="font-medium">{format_fns(selected.from, 'M/d/yyyy')}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}
@@ -190,7 +190,7 @@
       <ToggleOption value="to" class="flex-1">
         <div class="text-xs text-black/50">End</div>
         {#if selected.to}
-          <div class="font-medium">{format(selected.to, 'M/d/yyyy')}</div>
+          <div class="font-medium">{format_fns(selected.to, 'M/d/yyyy')}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}

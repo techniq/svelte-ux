@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { format as dateFormat, isWithinInterval } from 'date-fns';
+  import { format as format_fns, isWithinInterval } from 'date-fns';
 
   import Button from './Button.svelte';
   import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
@@ -40,33 +40,33 @@
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
-      ? selected.some((d) => isSame(date, d))
-      : selected instanceof Object
-      ? selected.from
-        ? isWithinInterval(date, {
-            start: start(selected.from),
-            end: end(selected.to ?? selected.from),
-          })
-        : false
-      : false;
+        ? selected.some((d) => isSame(date, d))
+        : selected instanceof Object
+          ? selected.from
+            ? isWithinInterval(date, {
+                start: start(selected.from),
+                end: end(selected.to ?? selected.from),
+              })
+            : false
+          : false;
 
   $: isSelectedStart =
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
-      ? selected.some((d) => isSame(date, d))
-      : selected instanceof Object
-      ? isSame(date, selected.from ?? selected.to)
-      : false;
+        ? selected.some((d) => isSame(date, d))
+        : selected instanceof Object
+          ? isSame(date, selected.from ?? selected.to)
+          : false;
 
   $: isSelectedEnd =
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
-      ? selected.some((d) => isSame(date, d))
-      : selected instanceof Object
-      ? isSame(date, selected.to ?? selected.from)
-      : false;
+        ? selected.some((d) => isSame(date, d))
+        : selected instanceof Object
+          ? isSame(date, selected.to ?? selected.from)
+          : false;
 
   $: isCurrent = isSame(date, new Date());
 
@@ -107,6 +107,6 @@
       dispatch('dateChange', date);
     }}
   >
-    {dateFormat(date, format)}
+    {format_fns(date, format)}
   </Button>
 </div>
