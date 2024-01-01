@@ -1,6 +1,7 @@
-const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
+const svelteUx = require('./src/lib/plugins/tailwind.cjs');
 const { themes } = require('./src/lib/styles/daisy.cjs');
 
 module.exports = {
@@ -31,10 +32,10 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('./src/lib/plugins/tailwind.cjs'),
+    svelteUx({ colorSpace: 'rgb' }),
     require('@tailwindcss/typography'),
 
-    plugin(function ({ addBase, addComponents, theme }) {
+    plugin(function ({ addComponents }) {
       // Consider moving to tailwind plugin
       addComponents({
         '.grid-cols-xs': {

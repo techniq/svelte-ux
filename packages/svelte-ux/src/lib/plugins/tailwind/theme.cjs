@@ -1,43 +1,48 @@
-const { oklch, interpolate, wcagContrast, formatCss } = require('culori/require');
+const { rgb, hsl, oklch, interpolate, wcagContrast, formatCss } = require('culori/require');
 
 const { semanticColors, stateColors, colorNames, shades } = require('../../styles/theme');
 
 /**
  * Generate theme colors (ex. { primary: hsl(var(--color-primary) / <alpha-value>), ... })
+ * @param {'rgb' | 'hsl' | 'oklch'} colorSpace
  */
-function createThemeColors(colorSpace = 'hsl') {
+function createThemeColors(colorSpace) {
   return Object.fromEntries(
     colorNames.map((color) => [color, `${colorSpace}(var(--color-${color}) / <alpha-value>)`])
   );
 }
 
-function injectThemes(addBase, config) {
+/**
+ * Inject all Tailwind config themes (`{ ux: { themes: [] }}`) into base CSS
+ * @param {'rgb' | 'hsl' | 'oklch'} colorSpace
+ */
+function injectThemes(colorSpace, addBase, config) {
   const themes = config('ux.themes');
   const themeRoot = config('ux.themeRoot') ?? ':root';
 
   /**
    * Convert names to CSS variables and color values common color space (hsl, oklch, etc) and space separated
    */
-  function processThemeColors(input) {
-    const colors = { ...input };
+  function processThemeColors(themeColors) {
+    const colors = { ...themeColors };
 
     // Generate optional state colors
-    if (!('info' in input)) {
+    if (!('info' in themeColors)) {
       colors['info'] = 'oklch(0.7206 0.191 231.6)';
     }
-    if (!('success' in input)) {
+    if (!('success' in themeColors)) {
       colors['success'] = 'oklch(64.8% 0.150 160)';
     }
-    if (!('warning' in input)) {
+    if (!('warning' in themeColors)) {
       colors['warning'] = 'oklch(0.8471 0.199 83.87)';
     }
-    if (!('danger' in input)) {
+    if (!('danger' in themeColors)) {
       colors['danger'] = 'oklch(0.7176 0.221 22.18)';
     }
 
     // Generate optional content colors
     for (const color of [...semanticColors, ...stateColors]) {
-      if (!(`${color}-content` in input)) {
+      if (!(`${color}-content` in themeColors)) {
         colors[`${color}-content`] = foregroundColor(colors[color]);
       }
 
@@ -53,23 +58,23 @@ function injectThemes(addBase, config) {
     }
 
     // Generate optional surface colors
-    if (!('surface-100' in input)) {
+    if (!('surface-100' in themeColors)) {
       colors['surface-100'] = 'oklch(100 0 0)';
     }
 
-    if (!('surface-200' in input)) {
+    if (!('surface-200' in themeColors)) {
       colors['surface-200'] = darkenColor(colors['surface-100'], 0.07);
     }
 
-    if (!('surface-300' in input)) {
-      if ('surface-200' in input) {
+    if (!('surface-300' in themeColors)) {
+      if ('surface-200' in themeColors) {
         colors['surface-300'] = darkenColor(colors['surface-200'], 0.07);
       } else {
         colors['surface-300'] = darkenColor(colors['surface-100'], 0.14);
       }
     }
 
-    if (!('surface-content' in input)) {
+    if (!('surface-content' in themeColors)) {
       colors['surface-content'] = foregroundColor(colors['surface-100']);
     }
 
@@ -77,7 +82,7 @@ function injectThemes(addBase, config) {
       Object.entries(colors).map(([name, value]) => {
         if (colorNames.includes(name)) {
           // Add space separated color variables for each color
-          return [`--color-${name}`, colorObjToString(value)];
+          return [`--color-${name}`, colorVariableValue(value, colorSpace)];
         } else {
           // Additional properties such as `color-scheme` or CSS variable
           return [name, value];
@@ -132,36 +137,48 @@ function isDark(color) {
 }
 
 /** Lighten or darken color based on contrast of input */
-function foregroundColor(input, percentage = 0.8) {
+function foregroundColor(color, percentage = 0.8) {
   try {
-    return isDark(input) ? lightenColor(input, percentage) : darkenColor(input, percentage);
+    return isDark(color) ? lightenColor(color, percentage) : darkenColor(color, percentage);
   } catch (e) {
-    // console.error('Unable to generate foreground color', input);
+    // console.error('Unable to generate foreground color', color);
   }
 }
 
-function lightenColor(input, percentage) {
+function lightenColor(color, percentage) {
   try {
-    return formatCss(interpolate([input, 'white'], 'oklch')(percentage));
+    return formatCss(interpolate([color, 'white'], 'oklch')(percentage));
   } catch (e) {
-    // console.error('Unable to generate lighten color', input);
+    // console.error('Unable to generate lighten color', color);
   }
 }
 
-function darkenColor(input, percentage) {
+function darkenColor(color, percentage) {
   try {
-    return formatCss(interpolate([input, 'black'], 'oklch')(percentage));
+    return formatCss(interpolate([color, 'black'], 'oklch')(percentage));
   } catch (e) {
-    // console.error('Unable to generate darken color', input);
+    // console.error('Unable to generate darken color', color);
   }
 }
 
-function colorObjToString(input) {
+/**
+ * Convert color to space separated components string
+ * @param {'rgb' | 'hsl' | 'oklch'} colorSpace
+ */
+function colorVariableValue(color, colorSpace) {
   try {
-    const { l, c, h } = oklch(input);
-    return `${round(l, 6)} ${round(c, 6)} ${round(h, 6)}`;
+    if (colorSpace === 'rgb') {
+      const { r, g, b } = rgb(color);
+      return `${round(r * 255, 6)} ${round(g * 255, 6)} ${round(b * 255, 6)}`;
+    } else if (colorSpace === 'hsl') {
+      const { h, s, l } = hsl(color);
+      return `${round(h, 6)} ${round(s * 100, 6)}% ${round(l * 100, 6)}%`;
+    } else if (colorSpace === 'oklch') {
+      const { l, c, h } = oklch(color);
+      return `${round(l, 6)} ${round(c, 6)} ${round(h, 6)}`;
+    }
   } catch (e) {
-    // console.error('Unable to convert color object to string', input);
+    // console.error('Unable to convert color object to string', color);
   }
 }
 
