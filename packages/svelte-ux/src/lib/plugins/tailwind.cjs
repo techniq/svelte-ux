@@ -48,7 +48,7 @@ module.exports = plugin.withOptions(
         extend: {
           colors: createThemeColors(colorSpace),
           borderColor: (theme) => ({
-            DEFAULT: theme('colors.surface-300'),
+            DEFAULT: theme('colors.surface-content/20%'),
           }),
           outlineColor: (theme) => ({
             DEFAULT: theme('colors.surface-300'),
