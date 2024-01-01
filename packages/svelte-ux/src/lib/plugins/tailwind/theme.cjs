@@ -19,8 +19,6 @@ function injectThemes(addBase, config) {
    * Convert names to CSS variables and color values common color space (hsl, oklch, etc) and space separated
    */
   function processThemeColors(input) {
-    const result = {};
-
     const colors = { ...input };
 
     // Generate optional state colors
@@ -75,15 +73,17 @@ function injectThemes(addBase, config) {
       colors['surface-content'] = foregroundColor(colors['surface-100']);
     }
 
-    Object.entries(colors).forEach(([name, value]) => {
-      if (colorNames.includes(name)) {
-        // Add space separated color variables for each color
-        result[`--color-${name}`] = colorObjToString(value);
-      } else {
-        // Additional properties such as `color-scheme` or CSS variable
-        result[name] = value;
-      }
-    });
+    const result = Object.fromEntries(
+      Object.entries(colors).map(([name, value]) => {
+        if (colorNames.includes(name)) {
+          // Add space separated color variables for each color
+          return [`--color-${name}`, colorObjToString(value)];
+        } else {
+          // Additional properties such as `color-scheme` or CSS variable
+          return [name, value];
+        }
+      })
+    );
 
     return result;
   }
@@ -100,6 +100,7 @@ function injectThemes(addBase, config) {
       cssThemes['@media (prefers-color-scheme: dark)'] = {
         [themeRoot]: processThemeColors(themeColors),
       };
+
       // Also register first and second them by name AFTER @media for precedence
       cssThemes[`[data-theme=${rootThemeName}]`] = processThemeColors(themes[rootThemeName]);
       cssThemes[`[data-theme=${themeName}]`] = processThemeColors(themeColors);
