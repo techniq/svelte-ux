@@ -154,7 +154,7 @@
       <Button
         icon={mdiFormatAlignRight}
         iconOnly={false}
-        class="bg-mix-[theme(colors.primary)/-20] hover:bg-mix-[theme(colors.primary)/-40]"
+        class="bg-primary-700 hover:bg-primary-900"
       />
     </ButtonGroup>
 

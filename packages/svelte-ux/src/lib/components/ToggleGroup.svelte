@@ -37,8 +37,6 @@
   } = {};
   const theme = getComponentTheme('ToggleGroup');
 
-  // TODO: Consider replacing `bg-mix-[...]` with something simpler (explicit -100 and -50 shades?)
-
   $: variantClasses = {
     default: {
       options: '',
@@ -53,7 +51,7 @@
     fill: {
       options: cls(!gap && 'bg-primary/10'),
       label: cls(
-        'text-primary hover:text-mix-[theme(colors.primary)/-20] hover:bg-primary/10 [&.selected]:text-mix-[theme(colors.primary)/+90]',
+        'text-primary hover:text-primary-700 hover:bg-primary/10 [&.selected]:text-primary-content',
         gap && 'bg-primary/10'
       ),
       indicator: 'h-full bg-primary',

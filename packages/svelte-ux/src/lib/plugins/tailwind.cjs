@@ -9,7 +9,7 @@ module.exports = plugin(
     const { addBase, addUtilities, matchUtilities, config } = api;
 
     injectThemes(addBase, config);
-    colorMix(api);
+    // colorMix(api);
     elevation(api);
 
     // Stack grid children

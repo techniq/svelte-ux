@@ -1,32 +1,6 @@
 const { oklch, interpolate, wcagContrast, formatCss } = require('culori/require');
 
-const colorNames = [
-  // Semantic
-  'primary',
-  'primary-content',
-  'secondary',
-  'secondary-content',
-  'accent',
-  'accent-content',
-  'neutral',
-  'neutral-content',
-
-  // State
-  'info',
-  'info-content',
-  'success',
-  'success-content',
-  'warning',
-  'warning-content',
-  'danger',
-  'danger-content',
-
-  // Surfaces
-  'surface-100',
-  'surface-content',
-  'surface-200',
-  'surface-300',
-];
+const { semanticColors, stateColors, colorNames, shades } = require('../../styles/theme');
 
 /**
  * Generate theme colors (ex. { primary: hsl(var(--color-primary) / <alpha-value>), ... })
@@ -49,6 +23,37 @@ function injectThemes(addBase, config) {
 
     const colors = { ...input };
 
+    // Generate optional state colors
+    if (!('info' in input)) {
+      colors['info'] = 'oklch(0.7206 0.191 231.6)';
+    }
+    if (!('success' in input)) {
+      colors['success'] = 'oklch(64.8% 0.150 160)';
+    }
+    if (!('warning' in input)) {
+      colors['warning'] = 'oklch(0.8471 0.199 83.87)';
+    }
+    if (!('danger' in input)) {
+      colors['danger'] = 'oklch(0.7176 0.221 22.18)';
+    }
+
+    // Generate optional content colors
+    for (const color of [...semanticColors, ...stateColors]) {
+      if (!(`${color}-content` in input)) {
+        colors[`${color}-content`] = foregroundColor(colors[color]);
+      }
+
+      for (const shade of shades) {
+        const newColor =
+          shade < 500
+            ? lightenColor(colors[color], (500 - shade) / 1000) // 100 == 0.1
+            : shade > 500
+              ? darkenColor(colors[color], (shade - 500) / 1000) // 100 == 0.1
+              : colors[color];
+        colors[`${color}-${shade}`] = newColor;
+      }
+    }
+
     // Generate optional surface colors
     if (!('surface-100' in input)) {
       colors['surface-100'] = 'oklch(100 0 0)';
@@ -66,67 +71,13 @@ function injectThemes(addBase, config) {
       }
     }
 
-    // Generate optional state colors
-    if (!('info' in input)) {
-      colors['info'] = 'oklch(0.7206 0.191 231.6)';
-    }
-    if (!('success' in input)) {
-      colors['success'] = 'oklch(64.8% 0.150 160)';
-    }
-    if (!('warning' in input)) {
-      colors['warning'] = 'oklch(0.8471 0.199 83.87)';
-    }
-    if (!('danger' in input)) {
-      colors['danger'] = 'oklch(0.7176 0.221 22.18)';
-    }
-
-    // Generate optional content colors
     if (!('surface-content' in input)) {
-      colors['surface-content'] = foregroundColor(colors['surface-100'], 0.8);
-    }
-    if (!('primary-content' in input)) {
-      colors['primary-content'] = foregroundColor(colors['primary'], 0.8);
-    }
-    if (!('secondary-content' in input)) {
-      colors['secondary-content'] = foregroundColor(colors['secondary'], 0.8);
-    }
-    if (!('accent-content' in input)) {
-      colors['accent-content'] = foregroundColor(colors['accent'], 0.8);
-    }
-    if (!('neutral-content' in input)) {
-      colors['neutral-content'] = foregroundColor(colors['neutral'], 0.8);
-    }
-    if (!('info-content' in input)) {
-      if ('info' in input) {
-        colors['info-content'] = foregroundColor(colors['info'], 0.8);
-      } else {
-        colors['info-content'] = '0 0 0';
-      }
-    }
-    if (!('success-content' in input)) {
-      if ('success' in input) {
-        colors['success-content'] = foregroundColor(colors['success'], 0.8);
-      } else {
-        colors['success-content'] = '0 0 0';
-      }
-    }
-    if (!('warning-content' in input)) {
-      if ('warning' in input) {
-        colors['warning-content'] = foregroundColor(colors['warning'], 0.8);
-      } else {
-        colors['warning-content'] = '0 0 0';
-      }
-    }
-    if (!('danger-content' in input)) {
-      if ('danger' in input) {
-        colors['danger-content'] = foregroundColor(colors['danger'], 0.8);
-      } else {
-        colors['danger-content'] = '0 0 0';
-      }
+      colors['surface-content'] = foregroundColor(colors['surface-100']);
     }
 
     Object.entries(colors).forEach(([name, value]) => {
       if (colorNames.includes(name)) {
+        // Add space separated color variables for each color
         result[`--color-${name}`] = colorObjToString(value);
       } else {
         // Additional properties such as `color-scheme` or CSS variable
@@ -188,7 +139,7 @@ function foregroundColor(input, percentage = 0.8) {
   }
 }
 
-function lightenColor(input, percentage = 0.8) {
+function lightenColor(input, percentage) {
   try {
     return formatCss(interpolate([input, 'white'], 'oklch')(percentage));
   } catch (e) {
@@ -196,7 +147,7 @@ function lightenColor(input, percentage = 0.8) {
   }
 }
 
-function darkenColor(input, percentage = 0.8) {
+function darkenColor(input, percentage) {
   try {
     return formatCss(interpolate([input, 'black'], 'oklch')(percentage));
   } catch (e) {
