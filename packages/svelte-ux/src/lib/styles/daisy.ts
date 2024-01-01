@@ -44,4 +44,4 @@ Object.entries(themes).forEach(([themeName, colors]) => {
   }
 });
 
-export { lightThemes, darkThemes };
+export { themes, lightThemes, darkThemes };

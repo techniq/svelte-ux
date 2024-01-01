@@ -6,10 +6,10 @@ const elevation = require('./tailwind/elevation');
 
 module.exports = plugin(
   function (api) {
-    const { addBase, addUtilities, matchUtilities, config } = api;
+    const { addBase, addUtilities, config } = api;
 
     injectThemes(addBase, config);
-    // colorMix(api);
+    // colorMix(api); // Remove `bg-mix-*` / etc utils until needed (and better browser support)
     elevation(api);
 
     // Stack grid children
