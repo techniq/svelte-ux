@@ -227,6 +227,7 @@ describe('formatIntl()', () => {
     [dt_2M_2d, 'M/d', undefined, '11/21'],
     [dt_2M_2d, 'MMM d, yyyy', undefined, 'Nov 21, 2023'],
     [dt_2M_1d, 'MMM d, yyyy', undefined, 'Nov 7, 2023'],
+    [dt_2M_1d, 'MMM do, yyyy', undefined, 'Nov 7th, 2023'],
     [dt_2M_2d, 'MMM', undefined, 'Nov'],
     [dt_2M_2d, 'MMMM', undefined, 'November'],
     [dt_2M_2d, 'MMM yy', undefined, 'Nov 23'],

@@ -572,33 +572,93 @@ export function formatISODate(
   return formatISO(date, { representation });
 }
 
-export function formatIntl(dt: Date, format: string, options: FormatDateOptions = {}) {
-  const { locales } = getFormatDateOptions(options);
+export enum DateToken {
+  /** `1982, 1986, 2024` */
+  year_numeric = 'yyy',
+  /** `82, 86, 24` */
+  year_2_digit = 'yy',
 
-  const o = new Intl.DateTimeFormat(locales, {
-    year: format.includes('yyy') ? 'numeric' : format.includes('yy') ? '2-digit' : undefined,
-    month: format.includes('MMMM')
+  /** `January, February, ..., December` */
+  month_long = 'MMMM',
+  /** `Jan, Feb, ..., Dec` */
+  month_short = 'MMM',
+  /** `01, 02, ..., 12` */
+  month_2_digit = 'MM',
+  /** `1, 2, ..., 12` */
+  month_numeric = 'M',
+
+  /** Minimize digit: `1, 2, 11, ...` */
+  day_of_month_numeric = 'd',
+  /** `01, 02, 11, ...` */
+  day_of_month_2_digit = 'dd',
+  /** `1st, 2nd, 11th, ...` You can have your local ordinal by passing `ordinalSuffixes` in options / settings */
+  day_of_month_with_ordinal = 'do',
+
+  /** `M, T, W, T, F, S, S` */
+  day_of_week_narrow = 'eeeee',
+  /** `Monday, Tuesday, ..., Sunday` */
+  day_of_week_long = 'eeee',
+  /** `Mon, Tue, Wed, ..., Sun` */
+  day_of_week_short = 'eee',
+}
+
+export function formatIntl(dt: Date, format: string, options: FormatDateOptions = {}) {
+  const { locales, ordinalSuffixes } = getFormatDateOptions(options);
+
+  // Order of includes check is important! (longest first)
+  const formatter = new Intl.DateTimeFormat(locales, {
+    year: format.includes(DateToken.year_numeric)
+      ? 'numeric'
+      : format.includes(DateToken.year_2_digit)
+        ? '2-digit'
+        : undefined,
+
+    month: format.includes(DateToken.month_long)
       ? 'long'
-      : format.includes('MMM')
+      : format.includes(DateToken.month_short)
         ? 'short'
-        : format.includes('MM')
+        : format.includes(DateToken.month_2_digit)
           ? '2-digit'
-          : format.includes('M')
+          : format.includes(DateToken.month_numeric)
             ? 'numeric'
             : undefined,
-    day: format.includes('dd') ? '2-digit' : format.includes('d') ? 'numeric' : undefined,
+
+    day: format.includes(DateToken.day_of_month_2_digit)
+      ? '2-digit'
+      : format.includes(DateToken.day_of_month_numeric)
+        ? 'numeric'
+        : undefined,
+
     hour: undefined,
     minute: undefined,
-    weekday: format.includes('eeeee')
+
+    weekday: format.includes(DateToken.day_of_week_narrow)
       ? 'narrow'
-      : format.includes('eeee')
+      : format.includes(DateToken.day_of_week_long)
         ? 'long'
-        : format.includes('eee')
+        : format.includes(DateToken.day_of_week_short)
           ? 'short'
           : undefined,
   });
 
-  return o.format(dt);
+  if (format.includes(DateToken.day_of_month_with_ordinal)) {
+    const suffixes = ordinalSuffixes[locales] ?? ordinalSuffixes['en'];
+    const rules = new Intl.PluralRules(locales, { type: 'ordinal' });
+
+    const splited = formatter.formatToParts(dt);
+    return splited
+      .map((c) => {
+        if (c.type === 'day') {
+          const ordinal = rules.select(parseInt(c.value, 10));
+          const suffix = suffixes[ordinal];
+          return `${c.value}${suffix}`;
+        }
+        return c.value;
+      })
+      .join('');
+  }
+
+  return formatter.format(dt);
 }
 
 function range(
@@ -623,14 +683,22 @@ function range(
   return formatIntl(start, formatToUse, options) + ' - ' + formatIntl(end, formatToUse, options);
 }
 
+type OrdinalSuffixes = {
+  one: string;
+  two: string;
+  few: string;
+  other: string;
+  zero?: string;
+  many?: string;
+};
 type DateFormatVariant = 'short' | 'default' | 'long' | 'custom';
 export type FormatDateOptions = {
-  // periodType?: PeriodType | null | undefined;
   locales?: string | undefined;
   baseParsing?: string;
   weekStartsOn?: DayOfWeek;
   variant?: DateFormatVariant;
   custom?: string;
+  ordinalSuffixes?: Record<string, OrdinalSuffixes>;
   dico?: {
     Day?: string;
     Week?: string;
@@ -641,10 +709,6 @@ export type FormatDateOptions = {
     FiscalYearOct?: string;
   };
 };
-
-export enum DateToken {
-  SingleDigitDay = 'd',
-}
 
 export function formatDate(
   date: Date | string | null | undefined,

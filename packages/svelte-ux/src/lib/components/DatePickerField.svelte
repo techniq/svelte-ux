@@ -6,10 +6,10 @@
   import Button from './Button.svelte';
   import Field from './Field.svelte';
   import Dialog from './Dialog.svelte';
-  import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
+  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
-  import { dateDisplay } from '../utils/dateDisplay';
   import { getComponentTheme } from './theme';
+  import { format } from '../utils';
 
   const dispatch = createEventDispatcher();
 
@@ -42,13 +42,18 @@
 
   $: switch (periodType) {
     case PeriodType.Month:
-      primaryFormat = 'MMMM';
-      secondaryFormat = 'yyyy';
+      primaryFormat = DateToken.month_long;
+      secondaryFormat = DateToken.year_numeric;
       break;
     case PeriodType.Day:
     default:
-      primaryFormat = 'MMMM do, yyyy';
-      secondaryFormat = 'eeee';
+      primaryFormat = [
+        DateToken.month_long,
+        DateToken.day_of_month_with_ordinal,
+        DateToken.year_numeric,
+      ].join('');
+
+      secondaryFormat = DateToken.day_of_week_long;
   }
 
   $: currentValue = value;
@@ -58,7 +63,7 @@
   <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
-    label={label ?? dateDisplay(value, { format: secondaryFormat })}
+    label={label ?? format(value, PeriodType.Day, { custom: secondaryFormat })}
     {icon}
     {error}
     {hint}
@@ -92,7 +97,7 @@
       on:click={() => (open = true)}
       {id}
     >
-      {dateDisplay(value, { format: primaryFormat })}
+      {format(value, PeriodType.Day, { custom: primaryFormat })}
     </button>
 
     <div slot="append">
@@ -129,10 +134,10 @@
   {#if currentValue}
     <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24" transition:slide>
       <div class="text-sm text-white/50">
-        {dateDisplay(currentValue, { format: secondaryFormat })}
+        {format(currentValue, PeriodType.Day, { custom: secondaryFormat })}
       </div>
       <div class="text-3xl text-white">
-        {dateDisplay(currentValue, { format: primaryFormat })}
+        {format(currentValue, PeriodType.Day, { custom: primaryFormat })}
       </div>
     </div>
   {/if}

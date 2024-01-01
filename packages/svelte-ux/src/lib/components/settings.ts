@@ -52,18 +52,36 @@ export function getFormatNumberOptions(style?: FormatNumberStyle) {
   return toRet;
 }
 
+type Required<T> = {
+  [P in keyof T]-?: T[P];
+};
 export function getFormatDateOptions(options?: FormatDateOptions) {
   // if custom is set && variant is not set, let's put custom as variant
   const variant: FormatDateOptions['variant'] =
     options?.custom && options?.variant === undefined ? 'custom' : options?.variant ?? 'default';
 
   const settings = getSettings();
-  let toRet = {
+
+  let toRet: Required<FormatDateOptions> = {
     locales: settings.formats?.dates?.locales ?? options?.locales ?? 'en',
     baseParsing: settings.formats?.dates?.baseParsing ?? options?.baseParsing ?? 'MM/dd/yyyy',
     weekStartsOn: settings.formats?.dates?.weekStartsOn ?? options?.weekStartsOn ?? DayOfWeek.SUN,
     variant,
     custom: options?.custom ?? '',
+
+    // keep always the en fallback
+    ordinalSuffixes: {
+      en: {
+        one: 'st',
+        two: 'nd',
+        few: 'rd',
+        other: 'th',
+      },
+      ...settings.formats?.dates?.ordinalSuffixes,
+      ...options?.ordinalSuffixes,
+    },
+
+    // dico
     dico: {
       Day: settings.formats?.dates?.dico?.Day ?? options?.dico?.Day ?? 'Day',
       Week: settings.formats?.dates?.dico?.Week ?? options?.dico?.Week ?? 'Week',

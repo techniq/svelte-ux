@@ -14,8 +14,8 @@ export type FormatType =
  */
 export function format(
   value: null | undefined,
-  format?: FormatNumberStyle,
-  extraFuncArgs?: FormatNumberOptions
+  format?: FormatNumberStyle | PeriodType,
+  extraFuncArgs?: FormatNumberOptions | FormatDateOptions
 ): string;
 export function format(
   value: number,

@@ -24,7 +24,7 @@
   function getCustomFormat(periodType: PeriodType) {
     switch (periodType) {
       case PeriodType.Day:
-        return DateToken.SingleDigitDay;
+        return DateToken.day_of_month_numeric;
       default:
         // returning undefined will use the default format of PeriodType
         return undefined;

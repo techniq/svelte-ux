@@ -37,6 +37,14 @@
     //   dates: {
     //     locales: 'fr',
     //     weekStartsOn: 1,
+    //     ordinalSuffixes: {
+    //       fr: {
+    //         one: 'er',
+    //         two: '',
+    //         few: '',
+    //         other: '',
+    //       },
+    //     },
     //   },
     // },
     // theme: {
