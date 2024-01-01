@@ -37,8 +37,8 @@
 
   // let format: string = 'EEE, MMM d';
   // Show "Day of Week", "Year", etc based on perioType (see DayStepper, MonthStepper)
-  let primaryFormat = '';
-  let secondaryFormat = '';
+  let primaryFormat: string | string[] = '';
+  let secondaryFormat: string | string[] = '';
 
   $: switch (periodType) {
     case PeriodType.Month:
@@ -51,7 +51,7 @@
         DateToken.month_long,
         DateToken.day_of_month_with_ordinal,
         DateToken.year_numeric,
-      ].join('');
+      ];
 
       secondaryFormat = DateToken.day_of_week_long;
   }

@@ -8,6 +8,8 @@ import {
   getPeriodTypeName,
   DayOfWeek,
   formatIntl,
+  type CustomIntlDateTimeFormatOptions,
+  type FormatDateOptions,
 } from './date';
 
 const DATE = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
@@ -210,52 +212,56 @@ describe('formatDate()', () => {
   });
 });
 
-describe('formatIntl()', () => {
+describe('formatIntl() tokens', () => {
   const dt_2M_2d = new Date(2023, 10, 21);
   const dt_2M_1d = new Date(2023, 10, 7);
   const dt_1M_1d = new Date(2023, 2, 7);
-  const fr = { locales: 'fr' };
 
-  const combi = [
-    // ./date.ts:647 tokens
-    [dt_1M_1d, 'MM/dd/yyyy', undefined, '03/07/2023'],
-    [dt_2M_2d, 'M/d/yyyy', undefined, '11/21/2023'],
-    [dt_2M_1d, 'M/d/yyyy', undefined, '11/7/2023'],
-    [dt_2M_1d, 'M/dd/yyyy', undefined, '11/07/2023'],
-    [dt_1M_1d, 'M/d/yyyy', undefined, '3/7/2023'],
-    [dt_1M_1d, 'MM/d/yyyy', undefined, '03/7/2023'],
-    [dt_2M_2d, 'M/d', undefined, '11/21'],
-    [dt_2M_2d, 'MMM d, yyyy', undefined, 'Nov 21, 2023'],
-    [dt_2M_1d, 'MMM d, yyyy', undefined, 'Nov 7, 2023'],
-    [dt_2M_1d, 'MMM do, yyyy', undefined, 'Nov 7th, 2023'],
-    [dt_2M_2d, 'MMM', undefined, 'Nov'],
-    [dt_2M_2d, 'MMMM', undefined, 'November'],
-    [dt_2M_2d, 'MMM yy', undefined, 'Nov 23'],
-    [dt_2M_2d, 'MMMM yyyy', undefined, 'November 2023'],
-    [dt_2M_2d, 'yy', undefined, '23'],
-    [dt_2M_2d, 'yyyy', undefined, '2023'],
-    // in fr
-    [dt_1M_1d, 'MM/dd/yyyy', fr, '07/03/2023'],
-    [dt_2M_2d, 'M/d/yyyy', fr, '21/11/2023'],
-    [dt_2M_1d, 'M/d/yyyy', fr, '07/11/2023'],
-    [dt_2M_1d, 'M/dd/yyyy', fr, '07/11/2023'],
-    [dt_1M_1d, 'M/d/yyyy', fr, '07/03/2023'],
-    [dt_1M_1d, 'MM/d/yyyy', fr, '7/03/2023'],
-    [dt_2M_2d, 'M/d', fr, '21/11'],
-    [dt_2M_2d, 'MMM d, yyyy', fr, '21 nov. 2023'],
-    [dt_2M_1d, 'MMM d, yyyy', fr, '7 nov. 2023'],
-    [dt_2M_2d, 'MMM', fr, 'nov.'],
-    [dt_2M_2d, 'MMMM', fr, 'novembre'],
-    [dt_2M_2d, 'MMM yy', fr, 'nov. 23'],
-    [dt_2M_2d, 'MMMM yyyy', fr, 'novembre 2023'],
-    [dt_2M_2d, 'yy', fr, '23'],
-    [dt_2M_2d, 'yyyy', fr, '2023'],
-  ] as const;
+  const fr: FormatDateOptions = {
+    locales: 'fr',
+    ordinalSuffixes: {
+      fr: {
+        one: 'er',
+        two: '',
+        few: '',
+        other: '',
+      },
+    },
+  };
+
+  const combi: [Date, CustomIntlDateTimeFormatOptions, string[]][] = [
+    [dt_1M_1d, 'MM/dd/yyyy', ['03/07/2023', '07/03/2023']],
+    [dt_2M_2d, 'M/d/yyyy', ['11/21/2023', '21/11/2023']],
+    [dt_2M_1d, 'M/d/yyyy', ['11/7/2023', '07/11/2023']],
+    [dt_2M_1d, 'M/dd/yyyy', ['11/07/2023', '07/11/2023']],
+    [dt_1M_1d, 'M/d/yyyy', ['3/7/2023', '07/03/2023']],
+    [dt_1M_1d, 'MM/d/yyyy', ['03/7/2023', '7/03/2023']],
+    [dt_2M_2d, 'M/d', ['11/21', '21/11']],
+    [dt_2M_2d, 'MMM d, yyyy', ['Nov 21, 2023', '21 nov. 2023']],
+    [dt_2M_1d, 'MMM d, yyyy', ['Nov 7, 2023', '7 nov. 2023']],
+    [dt_2M_1d, 'MMM do, yyyy', ['Nov 7th, 2023', '7 nov. 2023']],
+    [dt_2M_2d, 'MMM', ['Nov', 'nov.']],
+    [dt_2M_2d, 'MMMM', ['November', 'novembre']],
+    [dt_2M_2d, 'MMM yy', ['Nov 23', 'nov. 23']],
+    [dt_2M_2d, 'MMMM yyyy', ['November 2023', 'novembre 2023']],
+    [dt_2M_2d, 'yy', ['23', '23']],
+    [dt_2M_2d, 'yyyy', ['2023', '2023']],
+    [dt_2M_2d, { dateStyle: 'full' }, ['Tuesday, November 21, 2023', 'mardi 21 novembre 2023']],
+    [dt_2M_2d, { dateStyle: 'long' }, ['November 21, 2023', '21 novembre 2023']],
+    [dt_2M_2d, { dateStyle: 'medium' }, ['Nov 21, 2023', '21 nov. 2023']],
+    [dt_2M_2d, { dateStyle: 'medium', with_ordinal: true }, ['Nov 21st, 2023', '21 nov. 2023']],
+    [dt_2M_2d, { dateStyle: 'short' }, ['11/21/23', '21/11/2023']],
+    [dt_1M_1d, { dateStyle: 'short' }, ['3/7/23', '07/03/2023']],
+  ];
 
   for (const c of combi) {
-    const [date, token, options, expected] = c;
+    const [date, tokens, [expected_default, expected_fr]] = c;
     it(c.toString(), () => {
-      expect(formatIntl(date, token, options)).equal(expected);
+      expect(formatIntl(date, tokens)).equal(expected_default);
+    });
+
+    it(c.toString() + 'fr', () => {
+      expect(formatIntl(date, tokens, fr)).equal(expected_fr);
     });
   }
 });
