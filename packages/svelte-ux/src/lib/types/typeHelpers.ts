@@ -1,7 +1,7 @@
 // https://basarat.gitbooks.io/typescript/docs/types/never.html#use-case-exhaustive-checks
 
 import type { colors } from '$lib/styles/theme';
-import type { SvelteComponentTyped } from 'svelte';
+import type { SvelteComponent } from 'svelte';
 import type { derived, Readable } from 'svelte/store';
 import type {
   FlyParams,
@@ -80,9 +80,9 @@ export type FilterPropKeys<T, Match> = {
 }[keyof T];
 
 // https://stackoverflow.com/a/72297256/191902
-export type ComponentProps<T> = T extends SvelteComponentTyped<infer P, any, any> ? P : never;
-export type ComponentEvents<T> = T extends SvelteComponentTyped<any, infer E, any> ? E : never;
-export type ComponentSlots<T> = T extends SvelteComponentTyped<any, any, infer S> ? S : never;
+export type ComponentProps<T> = T extends SvelteComponent<infer P, any, any> ? P : never;
+export type ComponentEvents<T> = T extends SvelteComponent<any, infer E, any> ? E : never;
+export type ComponentSlots<T> = T extends SvelteComponent<any, any, infer S> ? S : never;
 
 // Export until `Stores` and `StoresValues` are exported from svelte -  https://github.com/sveltejs/svelte/blob/master/src/runtime/store/index.ts#L111-L112
 export type Stores = Parameters<typeof derived>[0];
