@@ -1,5 +1,6 @@
 // https://basarat.gitbooks.io/typescript/docs/types/never.html#use-case-exhaustive-checks
 
+import type { colors } from '$lib/styles/theme';
 import type { SvelteComponentTyped } from 'svelte';
 import type { derived, Readable } from 'svelte/store';
 import type {
@@ -113,15 +114,7 @@ export type TailwindColors =
   | 'rose'
   | 'gray';
 
-export type ThemeColors =
-  | 'primary'
-  | 'secondary'
-  | 'accent'
-  | 'neutral'
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'danger';
+export type ThemeColors = (typeof colors)[number];
 
 export type EventWithTarget = Partial<Pick<Event, 'currentTarget' | 'target'>>;
 
