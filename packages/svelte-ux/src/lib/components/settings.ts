@@ -79,11 +79,13 @@ export function getFormatDate(options?: FormatDateOptions) {
     variant: DateFormatVariant;
     custom: CustomIntlDateTimeFormatOptions;
     presets: {
-      days: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
-      weeks: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
-      months: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
-      monthsYears: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
-      years: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
+      day: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
+      dayTime: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
+      timeOnly: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
+      week: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
+      month: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
+      monthYear: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
+      year: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
     };
     ordinalSuffixes: Record<string, OrdinalSuffixes>;
     dictionaryDate: DictionaryMessages['Date'];
@@ -108,73 +110,120 @@ export function getFormatDate(options?: FormatDateOptions) {
     },
 
     presets: {
-      days: {
+      day: {
         short:
-          options?.presets?.days?.short ?? settings.formats?.dates?.presets?.days?.short ?? 'd M',
-        default: options?.presets?.days?.default ??
-          settings.formats?.dates?.presets?.days?.default ?? [
+          options?.presets?.day?.short ?? settings.formats?.dates?.presets?.day?.short ?? 'd M',
+        default: options?.presets?.day?.default ??
+          settings.formats?.dates?.presets?.day?.default ?? [
             DateToken.DayOfMonth_numeric,
             DateToken.Month_numeric,
             DateToken.Year_numeric,
           ],
         long:
-          options?.presets?.days?.long ??
-          settings.formats?.dates?.presets?.days?.long ??
+          options?.presets?.day?.long ??
+          settings.formats?.dates?.presets?.day?.long ??
           'd MMM yyyy',
         custom,
       },
-      weeks: {
+      dayTime: {
+        short: options?.presets?.dayTime?.short ??
+          settings.formats?.dates?.presets?.dayTime?.short ?? [
+            DateToken.DayOfMonth_numeric,
+            DateToken.Month_numeric,
+            DateToken.Year_numeric,
+            DateToken.Hour_numeric,
+            DateToken.Minute_numeric,
+          ],
+        default: options?.presets?.dayTime?.default ??
+          settings.formats?.dates?.presets?.dayTime?.default ?? [
+            DateToken.DayOfMonth_numeric,
+            DateToken.Month_numeric,
+            DateToken.Year_numeric,
+            DateToken.Hour_2Digit,
+            DateToken.Minute_2Digit,
+          ],
+        long: options?.presets?.dayTime?.long ??
+          settings.formats?.dates?.presets?.dayTime?.long ?? [
+            DateToken.DayOfMonth_numeric,
+            DateToken.Month_numeric,
+            DateToken.Year_numeric,
+            DateToken.Hour_2Digit,
+            DateToken.Minute_2Digit,
+            DateToken.Second_2Digit,
+          ],
+        custom,
+      },
+
+      timeOnly: {
+        short: options?.presets?.timeOnly?.short ??
+          settings.formats?.dates?.presets?.timeOnly?.short ?? [
+            DateToken.Hour_numeric,
+            DateToken.Minute_numeric,
+          ],
+        default: options?.presets?.timeOnly?.default ??
+          settings.formats?.dates?.presets?.timeOnly?.default ?? [
+            DateToken.Hour_2Digit,
+            DateToken.Minute_2Digit,
+            DateToken.Second_2Digit,
+          ],
+        long: options?.presets?.timeOnly?.long ??
+          settings.formats?.dates?.presets?.timeOnly?.long ?? [
+            DateToken.Hour_2Digit,
+            DateToken.Minute_2Digit,
+            DateToken.Second_2Digit,
+            DateToken.MiliSecond_3,
+          ],
+        custom,
+      },
+
+      week: {
         short:
-          options?.presets?.weeks?.short ?? settings.formats?.dates?.presets?.weeks?.short ?? 'd M',
+          options?.presets?.week?.short ?? settings.formats?.dates?.presets?.week?.short ?? 'd M',
         default:
-          options?.presets?.weeks?.default ??
-          settings.formats?.dates?.presets?.weeks?.default ??
+          options?.presets?.week?.default ??
+          settings.formats?.dates?.presets?.week?.default ??
           'd M yyyy',
         long:
-          options?.presets?.weeks?.long ??
-          settings.formats?.dates?.presets?.weeks?.long ??
+          options?.presets?.week?.long ??
+          settings.formats?.dates?.presets?.week?.long ??
           'd M yyyy',
         custom,
       },
-      months: {
+      month: {
         short:
-          options?.presets?.months?.short ??
-          settings.formats?.dates?.presets?.months?.short ??
-          'MMM',
+          options?.presets?.month?.short ?? settings.formats?.dates?.presets?.month?.short ?? 'MMM',
         default:
-          options?.presets?.months?.default ??
-          settings.formats?.dates?.presets?.months?.default ??
+          options?.presets?.month?.default ??
+          settings.formats?.dates?.presets?.month?.default ??
           'MMM',
         long:
-          options?.presets?.months?.long ??
-          settings.formats?.dates?.presets?.months?.long ??
-          'MMMM',
+          options?.presets?.month?.long ?? settings.formats?.dates?.presets?.month?.long ?? 'MMMM',
         custom,
       },
-      monthsYears: {
+      monthYear: {
         short:
-          options?.presets?.monthsYears?.short ??
-          settings.formats?.dates?.presets?.monthsYears?.short ??
+          options?.presets?.monthsYear?.short ??
+          settings.formats?.dates?.presets?.monthsYear?.short ??
           'MMM yy',
         default:
-          options?.presets?.monthsYears?.default ??
-          settings.formats?.dates?.presets?.monthsYears?.default ??
+          options?.presets?.monthsYear?.default ??
+          settings.formats?.dates?.presets?.monthsYear?.default ??
           'MMMM yyyy',
         long:
-          options?.presets?.monthsYears?.long ??
-          settings.formats?.dates?.presets?.monthsYears?.long ??
+          options?.presets?.monthsYear?.long ??
+          settings.formats?.dates?.presets?.monthsYear?.long ??
           'MMMM yyyy',
         custom,
       },
-      years: {
+      year: {
         short:
-          options?.presets?.years?.short ?? settings.formats?.dates?.presets?.years?.short ?? 'yy',
+          options?.presets?.year?.short ?? settings.formats?.dates?.presets?.year?.short ?? 'yy',
         default:
-          options?.presets?.years?.default ??
-          settings.formats?.dates?.presets?.years?.default ??
+          options?.presets?.year?.default ??
+          settings.formats?.dates?.presets?.year?.default ??
           'yyyy',
         long:
-          options?.presets?.years?.long ?? settings.formats?.dates?.presets?.years?.long ?? 'yyyy',
+          options?.presets?.year?.long ?? settings.formats?.dates?.presets?.year?.long ?? 'yyyy',
         custom,
       },
     },

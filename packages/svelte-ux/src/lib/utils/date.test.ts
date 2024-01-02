@@ -9,9 +9,29 @@ import {
   formatIntl,
   type CustomIntlDateTimeFormatOptions,
   type FormatDateOptions,
+  DateToken,
 } from './date';
+import { format } from '.';
 
 const DATE = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
+const dt_2M_2d = new Date(2023, 10, 21);
+const dt_2M_1d = new Date(2023, 10, 7);
+const dt_1M_1d = new Date(2023, 2, 7);
+
+const dt_1M_1d_time_pm = new Date(2023, 2, 7, 14, 2, 3, 4);
+const dt_1M_1d_time_am = new Date(2023, 2, 7, 1, 2, 3, 4);
+
+const fr: FormatDateOptions = {
+  locales: 'fr',
+  ordinalSuffixes: {
+    fr: {
+      one: 'er',
+      two: '',
+      few: '',
+      other: '',
+    },
+  },
+};
 
 describe('formatDate()', () => {
   it('should return empty string for null or undefined date', () => {
@@ -40,7 +60,7 @@ describe('formatDate()', () => {
     }
   });
 
-  describe('should format date string', () => {
+  describe('should format date string for PeriodType.Day', () => {
     const combi = [
       ['short', undefined, '11/21'],
       ['short', 'fr', '21/11'],
@@ -52,6 +72,48 @@ describe('formatDate()', () => {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDate(DATE, PeriodType.Day, { variant, locales })).equal(expected);
+      });
+    }
+  });
+
+  describe('should format date string for DayTime, TimeOnly', () => {
+    const combi: [Date, PeriodType, FormatDateOptions, string[]][] = [
+      [
+        dt_1M_1d_time_pm,
+        PeriodType.DayTime,
+        { variant: 'short' },
+        ['3/7/2023, 2:02 PM', '07/03/2023 14:02'],
+      ],
+      [
+        dt_1M_1d_time_pm,
+        PeriodType.DayTime,
+        { variant: 'default' },
+        ['3/7/2023, 02:02 PM', '07/03/2023 14:02'],
+      ],
+      [
+        dt_1M_1d_time_pm,
+        PeriodType.DayTime,
+        { variant: 'long' },
+        ['3/7/2023, 02:02:03 PM', '07/03/2023 14:02:03'],
+      ],
+      [dt_1M_1d_time_pm, PeriodType.TimeOnly, { variant: 'short' }, ['2:02 PM', '14:02']],
+      [dt_1M_1d_time_pm, PeriodType.TimeOnly, { variant: 'default' }, ['02:02:03 PM', '14:02:03']],
+      [
+        dt_1M_1d_time_pm,
+        PeriodType.TimeOnly,
+        { variant: 'long' },
+        ['02:02:03.004 PM', '14:02:03,004'],
+      ],
+    ];
+
+    for (const c of combi) {
+      const [date, periodType, options, [expected_default, expected_fr]] = c;
+      it(c.toString(), () => {
+        expect(format(date, periodType, options)).equal(expected_default);
+      });
+
+      it(c.toString() + 'fr', () => {
+        expect(format(date, periodType, { ...options, ...fr })).equal(expected_fr);
       });
     }
   });
@@ -212,22 +274,6 @@ describe('formatDate()', () => {
 });
 
 describe('formatIntl() tokens', () => {
-  const dt_2M_2d = new Date(2023, 10, 21);
-  const dt_2M_1d = new Date(2023, 10, 7);
-  const dt_1M_1d = new Date(2023, 2, 7);
-
-  const fr: FormatDateOptions = {
-    locales: 'fr',
-    ordinalSuffixes: {
-      fr: {
-        one: 'er',
-        two: '',
-        few: '',
-        other: '',
-      },
-    },
-  };
-
   const combi: [Date, CustomIntlDateTimeFormatOptions, string[]][] = [
     [dt_1M_1d, 'MM/dd/yyyy', ['03/07/2023', '07/03/2023']],
     [dt_2M_2d, 'M/d/yyyy', ['11/21/2023', '21/11/2023']],
@@ -251,6 +297,35 @@ describe('formatIntl() tokens', () => {
     [dt_2M_2d, { dateStyle: 'medium', withOrdinal: true }, ['Nov 21st, 2023', '21 nov. 2023']],
     [dt_2M_2d, { dateStyle: 'short' }, ['11/21/23', '21/11/2023']],
     [dt_1M_1d, { dateStyle: 'short' }, ['3/7/23', '07/03/2023']],
+
+    // time
+    [dt_1M_1d_time_pm, [DateToken.Hour_numeric, DateToken.Minute_numeric], ['2:02 PM', '14:02']],
+    [dt_1M_1d_time_am, [DateToken.Hour_numeric, DateToken.Minute_numeric], ['1:02 AM', '01:02']],
+    [
+      dt_1M_1d_time_am,
+      [DateToken.Hour_numeric, DateToken.Minute_numeric, DateToken.Hour_wAMPM],
+      ['1:02 AM', '1:02 AM'],
+    ],
+    [
+      dt_1M_1d_time_am,
+      [DateToken.Hour_2Digit, DateToken.Minute_2Digit, DateToken.Hour_woAMPM],
+      ['01:02', '01:02'],
+    ],
+    [
+      dt_1M_1d_time_am,
+      [DateToken.Hour_numeric, DateToken.Minute_numeric, DateToken.Second_numeric],
+      ['1:02:03 AM', '01:02:03'],
+    ],
+    [
+      dt_1M_1d_time_am,
+      [
+        DateToken.Hour_numeric,
+        DateToken.Minute_numeric,
+        DateToken.Second_numeric,
+        DateToken.MiliSecond_3,
+      ],
+      ['1:02:03.004 AM', '01:02:03,004'],
+    ],
   ];
 
   for (const c of combi) {

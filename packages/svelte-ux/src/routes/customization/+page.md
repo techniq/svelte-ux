@@ -87,10 +87,10 @@ settings({
       weekStartsOn: DayOfWeek.Sunday,
 
       presets: {
-        days: {
+        day: {
           long: { dateStyle: 'full' },
         },
-        months: {
+        month: {
           default: [DateToken.Month_long],
         },
       },

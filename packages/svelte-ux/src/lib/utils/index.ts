@@ -1,6 +1,6 @@
 // top-level exports
 export { formatDate, PeriodType, DayOfWeek, DateToken } from './date';
-export { getDuration, humanizeDuration } from './duration';
+export * from './duration';
 export * from './file';
 export * from './format';
 export * from './json';
