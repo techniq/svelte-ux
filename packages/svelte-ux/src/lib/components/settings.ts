@@ -8,6 +8,7 @@ import {
   type DateFormatVariant,
   type CustomIntlDateTimeFormatOptions,
   type OrdinalSuffixes,
+  DateToken,
 } from '$lib/utils/date';
 
 type ExcludeNone<T> = T extends 'none' ? never : T;
@@ -116,10 +117,12 @@ export function getFormatDateOptions(options?: FormatDateOptions) {
       days: {
         short:
           options?.presets?.days?.short ?? settings.formats?.dates?.presets?.days?.short ?? 'd M',
-        default:
-          options?.presets?.days?.default ??
-          settings.formats?.dates?.presets?.days?.default ??
-          baseParsing,
+        default: options?.presets?.days?.default ??
+          settings.formats?.dates?.presets?.days?.default ?? [
+            DateToken.DayOfMonth_numeric,
+            DateToken.Month_numeric,
+            DateToken.Year_numeric,
+          ],
         long:
           options?.presets?.days?.long ??
           settings.formats?.dates?.presets?.days?.long ??

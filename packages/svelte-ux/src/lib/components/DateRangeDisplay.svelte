@@ -66,12 +66,12 @@
 </script>
 
 {#if value?.from}
-  {format_ux(value.from, getPeriodType(value))}
+  {format_ux(value.from, getPeriodType(value), { variant: 'long' })}
 {:else}
   <div>&nbsp;</div>
 {/if}
 
 {#if value?.to && showToValue}
   <span> - </span>
-  {format_ux(value.to, getPeriodType(value))}
+  {format_ux(value.to, getPeriodType(value), { variant: 'long' })}
 {/if}
