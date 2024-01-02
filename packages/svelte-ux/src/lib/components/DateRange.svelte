@@ -41,7 +41,7 @@
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
-  let selectedDayOfWeek: DayOfWeek = DayOfWeek.SUN;
+  let selectedDayOfWeek: DayOfWeek = DayOfWeek.Sunday;
   let activeDate: 'from' | 'to' = 'from';
 
   $: periodTypeOptions = periodTypes.map((pt) => {
@@ -292,13 +292,13 @@
             inset
             classes={{ root: 'bg-white', option: 'px-0' }}
           >
-            <ToggleOption value={DayOfWeek.SUN}>Sun</ToggleOption>
-            <ToggleOption value={DayOfWeek.MON}>Mon</ToggleOption>
-            <ToggleOption value={DayOfWeek.TUE}>Tue</ToggleOption>
-            <ToggleOption value={DayOfWeek.WED}>Wed</ToggleOption>
-            <ToggleOption value={DayOfWeek.THU}>Thu</ToggleOption>
-            <ToggleOption value={DayOfWeek.FRI}>Fri</ToggleOption>
-            <ToggleOption value={DayOfWeek.SAT}>Sat</ToggleOption>
+            <ToggleOption value={DayOfWeek.Sunday}>Sun</ToggleOption>
+            <ToggleOption value={DayOfWeek.Monday}>Mon</ToggleOption>
+            <ToggleOption value={DayOfWeek.Tuesday}>Tue</ToggleOption>
+            <ToggleOption value={DayOfWeek.Wendesay}>Wed</ToggleOption>
+            <ToggleOption value={DayOfWeek.Thursday}>Thu</ToggleOption>
+            <ToggleOption value={DayOfWeek.Friday}>Fri</ToggleOption>
+            <ToggleOption value={DayOfWeek.Saturday}>Sat</ToggleOption>
           </ToggleGroup>
         </div>
       {/if}

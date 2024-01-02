@@ -84,14 +84,14 @@ settings({
     dates: {
       // This is the default, but you can override it here for your app
       locales: 'en',
-      weekStartsOn: DayOfWeek.SUN,
+      weekStartsOn: DayOfWeek.Sunday,
 
       presets: {
         days: {
           long: { dateStyle: 'full' },
         },
         months: {
-          default: [DateToken.month_long],
+          default: [DateToken.Month_long],
         },
       },
 

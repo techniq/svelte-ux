@@ -84,13 +84,13 @@ export enum PeriodType {
 }
 
 export enum DayOfWeek {
-  SUN = 0,
-  MON = 1,
-  TUE = 2,
-  WED = 3,
-  THU = 4,
-  FRI = 5,
-  SAT = 6,
+  Sunday = 0,
+  Monday = 1,
+  Tuesday = 2,
+  Wednesday = 3,
+  Thursday = 4,
+  Friday = 5,
+  Saturday = 6,
 }
 
 function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
@@ -108,7 +108,7 @@ export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOpt
       return dico.Day;
 
     case PeriodType.WeekSun:
-      return `${dico.Week} (${getDayOfWeekName(DayOfWeek.SUN, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(DayOfWeek.Sunday, locales)})`;
     case PeriodType.WeekMon:
       return `${dico.Week} (${getDayOfWeekName(1, locales)})`;
     case PeriodType.WeekTue:
@@ -310,7 +310,7 @@ export function getMonths(year = new Date().getFullYear()) {
 
 export function getMonthDaysByWeek(
   dateInTheMonth: Date,
-  weekStartsOn: DayOfWeek = DayOfWeek.SUN
+  weekStartsOn: DayOfWeek = DayOfWeek.Sunday
 ): Date[][] {
   const startOfFirstWeek = startOfWeek(startOfMonth(dateInTheMonth), { weekStartsOn });
   const endOfLastWeek = endOfWeek(endOfMonth(dateInTheMonth), { weekStartsOn });
@@ -577,32 +577,32 @@ export function formatISODate(
 
 export enum DateToken {
   /** `1982, 1986, 2024` */
-  year_numeric = 'yyy',
+  Year_numeric = 'yyy',
   /** `82, 86, 24` */
-  year_2Digit = 'yy',
+  Year_2Digit = 'yy',
 
   /** `January, February, ..., December` */
-  month_long = 'MMMM',
+  Month_long = 'MMMM',
   /** `Jan, Feb, ..., Dec` */
-  month_short = 'MMM',
+  Month_short = 'MMM',
   /** `01, 02, ..., 12` */
-  month_2Digit = 'MM',
+  Month_2Digit = 'MM',
   /** `1, 2, ..., 12` */
-  month_numeric = 'M',
+  Month_numeric = 'M',
 
   /** Minimize digit: `1, 2, 11, ...` */
-  dayOfMonth_numeric = 'd',
+  DayOfMonth_numeric = 'd',
   /** `01, 02, 11, ...` */
-  dayOfMonth_2Digit = 'dd',
+  DayOfMonth_2Digit = 'dd',
   /** `1st, 2nd, 11th, ...` You can have your local ordinal by passing `ordinalSuffixes` in options / settings */
-  dayOfMonth_withOrdinal = 'do',
+  DayOfMonth_withOrdinal = 'do',
 
   /** `M, T, W, T, F, S, S` */
-  dayOfWeek_narrow = 'eeeee',
+  DayOfWeek_narrow = 'eeeee',
   /** `Monday, Tuesday, ..., Sunday` */
-  dayOfWeek_long = 'eeee',
+  DayOfWeek_long = 'eeee',
   /** `Mon, Tue, Wed, ..., Sun` */
-  dayOfWeek_short = 'eee',
+  DayOfWeek_short = 'eee',
 }
 
 export function formatIntl(
@@ -646,41 +646,41 @@ export function formatIntl(
 
   // Order of includes check is important! (longest first)
   const formatter = new Intl.DateTimeFormat(locales, {
-    year: tokens.includes(DateToken.year_numeric)
+    year: tokens.includes(DateToken.Year_numeric)
       ? 'numeric'
-      : tokens.includes(DateToken.year_2Digit)
+      : tokens.includes(DateToken.Year_2Digit)
         ? '2-digit'
         : undefined,
 
-    month: tokens.includes(DateToken.month_long)
+    month: tokens.includes(DateToken.Month_long)
       ? 'long'
-      : tokens.includes(DateToken.month_short)
+      : tokens.includes(DateToken.Month_short)
         ? 'short'
-        : tokens.includes(DateToken.month_2Digit)
+        : tokens.includes(DateToken.Month_2Digit)
           ? '2-digit'
-          : tokens.includes(DateToken.month_numeric)
+          : tokens.includes(DateToken.Month_numeric)
             ? 'numeric'
             : undefined,
 
-    day: tokens.includes(DateToken.dayOfMonth_2Digit)
+    day: tokens.includes(DateToken.DayOfMonth_2Digit)
       ? '2-digit'
-      : tokens.includes(DateToken.dayOfMonth_numeric)
+      : tokens.includes(DateToken.DayOfMonth_numeric)
         ? 'numeric'
         : undefined,
 
     hour: undefined,
     minute: undefined,
 
-    weekday: tokens.includes(DateToken.dayOfWeek_narrow)
+    weekday: tokens.includes(DateToken.DayOfWeek_narrow)
       ? 'narrow'
-      : tokens.includes(DateToken.dayOfWeek_long)
+      : tokens.includes(DateToken.DayOfWeek_long)
         ? 'long'
-        : tokens.includes(DateToken.dayOfWeek_short)
+        : tokens.includes(DateToken.DayOfWeek_short)
           ? 'short'
           : undefined,
   });
 
-  return formatIntlOrdinal(formatter, tokens.includes(DateToken.dayOfMonth_withOrdinal));
+  return formatIntlOrdinal(formatter, tokens.includes(DateToken.DayOfMonth_withOrdinal));
 }
 
 function range(

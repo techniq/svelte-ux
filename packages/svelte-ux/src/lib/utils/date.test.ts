@@ -77,15 +77,15 @@ describe('formatDate()', () => {
 
   describe('should format date for PeriodType.Week', () => {
     const combi = [
-      [PeriodType.Week, 'short', undefined, DayOfWeek.SUN, '11/19 - 11/25'],
-      [PeriodType.Week, 'short', 'fr', DayOfWeek.SUN, '19/11 - 25/11'],
-      [PeriodType.Week, 'long', undefined, DayOfWeek.SUN, '11/19/2023 - 11/25/2023'],
-      [PeriodType.Week, 'long', 'fr', DayOfWeek.SUN, '19/11/2023 - 25/11/2023'],
+      [PeriodType.Week, 'short', undefined, DayOfWeek.Sunday, '11/19 - 11/25'],
+      [PeriodType.Week, 'short', 'fr', DayOfWeek.Sunday, '19/11 - 25/11'],
+      [PeriodType.Week, 'long', undefined, DayOfWeek.Sunday, '11/19/2023 - 11/25/2023'],
+      [PeriodType.Week, 'long', 'fr', DayOfWeek.Sunday, '19/11/2023 - 25/11/2023'],
 
-      [PeriodType.Week, 'short', undefined, DayOfWeek.MON, '11/20 - 11/26'],
-      [PeriodType.Week, 'short', 'fr', DayOfWeek.MON, '20/11 - 26/11'],
-      [PeriodType.Week, 'long', undefined, DayOfWeek.MON, '11/20/2023 - 11/26/2023'],
-      [PeriodType.Week, 'long', 'fr', DayOfWeek.MON, '20/11/2023 - 26/11/2023'],
+      [PeriodType.Week, 'short', undefined, DayOfWeek.Monday, '11/20 - 11/26'],
+      [PeriodType.Week, 'short', 'fr', DayOfWeek.Monday, '20/11 - 26/11'],
+      [PeriodType.Week, 'long', undefined, DayOfWeek.Monday, '11/20/2023 - 11/26/2023'],
+      [PeriodType.Week, 'long', 'fr', DayOfWeek.Monday, '20/11/2023 - 26/11/2023'],
     ] as const;
 
     for (const c of combi) {

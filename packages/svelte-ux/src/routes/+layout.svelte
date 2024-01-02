@@ -43,7 +43,7 @@
             long: { dateStyle: 'full' },
           },
           months: {
-            default: [DateToken.month_long],
+            default: [DateToken.Month_long],
           },
         },
         ordinalSuffixes: {

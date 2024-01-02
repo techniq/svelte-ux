@@ -95,7 +95,8 @@ export function getFormatDateOptions(options?: FormatDateOptions) {
   } = {
     locales: options?.locales ?? settings.formats?.dates?.locales ?? 'en',
     baseParsing,
-    weekStartsOn: options?.weekStartsOn ?? settings.formats?.dates?.weekStartsOn ?? DayOfWeek.SUN,
+    weekStartsOn:
+      options?.weekStartsOn ?? settings.formats?.dates?.weekStartsOn ?? DayOfWeek.Sunday,
     variant,
     custom,
 
