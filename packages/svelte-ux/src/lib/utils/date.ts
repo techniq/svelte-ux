@@ -93,9 +93,10 @@ export enum DayOfWeek {
   Saturday = 6,
 }
 
-function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
+export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
   // Create a date object for a specific day (0 = Sunday, 1 = Monday, etc.)
-  const date = new Date(Date.UTC(2023, 11, 4 + weekStartsOn));
+  // And "7 of Jan 2024" is a Sunday
+  const date = new Date(2024, 0, 7 + weekStartsOn);
   const formatter = new Intl.DateTimeFormat(locales, { weekday: 'short' });
   return formatter.format(date);
 }

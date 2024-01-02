@@ -8,6 +8,7 @@
     hasDayOfWeek,
     replaceDayOfWeek,
     getPeriodTypeName,
+    getDayOfWeekName,
   } from '../utils/date';
   import { format } from '../utils';
   import { getDateRangePresets } from '../utils/dateRange';
@@ -21,6 +22,7 @@
   import ToggleOption from './ToggleOption.svelte';
   import { getComponentTheme } from './theme';
   import { mdScreen } from '$lib/stores/matchMedia';
+  import { getSettings } from '.';
 
   export let selected: DateRange | null = { from: null, to: null, periodType: null };
 
@@ -41,7 +43,7 @@
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
-  let selectedDayOfWeek: DayOfWeek = DayOfWeek.Sunday;
+  let selectedDayOfWeek: DayOfWeek = getSettings().formats?.dates?.weekStartsOn ?? DayOfWeek.Sunday;
   let activeDate: 'from' | 'to' = 'from';
 
   $: periodTypeOptions = periodTypes.map((pt) => {
@@ -292,13 +294,14 @@
             inset
             classes={{ root: 'bg-white', option: 'px-0' }}
           >
-            <ToggleOption value={DayOfWeek.Sunday}>Sun</ToggleOption>
-            <ToggleOption value={DayOfWeek.Monday}>Mon</ToggleOption>
-            <ToggleOption value={DayOfWeek.Tuesday}>Tue</ToggleOption>
-            <ToggleOption value={DayOfWeek.Wendesay}>Wed</ToggleOption>
-            <ToggleOption value={DayOfWeek.Thursday}>Thu</ToggleOption>
-            <ToggleOption value={DayOfWeek.Friday}>Fri</ToggleOption>
-            <ToggleOption value={DayOfWeek.Saturday}>Sat</ToggleOption>
+            {#each [DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday] as day}
+              <ToggleOption value={day}
+                >{getDayOfWeekName(
+                  day,
+                  getSettings().formats?.dates?.locales ?? 'en'
+                )}</ToggleOption
+              >
+            {/each}
           </ToggleGroup>
         </div>
       {/if}
