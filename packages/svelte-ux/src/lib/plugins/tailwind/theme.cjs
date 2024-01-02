@@ -1,4 +1,12 @@
-const { rgb, hsl, oklch, interpolate, wcagContrast, formatCss } = require('culori/require');
+const {
+  rgb,
+  hsl,
+  oklch,
+  clampRgb,
+  interpolate,
+  wcagContrast,
+  formatCss,
+} = require('culori/require');
 
 const { semanticColors, stateColors, colorNames, shades } = require('../../styles/theme');
 
@@ -171,8 +179,9 @@ function colorVariableValue(color, colorSpace) {
       const { r, g, b } = rgb(color);
       return `${round(r * 255, 6)} ${round(g * 255, 6)} ${round(b * 255, 6)}`;
     } else if (colorSpace === 'hsl') {
-      const { h, s, l } = hsl(color);
+      const { h, s, l } = hsl(clampRgb(color));
       return `${round(h, 6)} ${round(s * 100, 6)}% ${round(l * 100, 6)}%`;
+      // return `${round(h, 6)} ${round(Math.min(s * 100, 100), 6)}% ${round(Math.min(l * 100, 100), 6)}%`;
     } else if (colorSpace === 'oklch') {
       const { l, c, h } = oklch(color);
       return `${round(l, 6)} ${round(c, 6)} ${round(h, 6)}`;

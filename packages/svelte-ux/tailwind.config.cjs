@@ -32,7 +32,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    svelteUx({ colorSpace: 'rgb' }),
+    svelteUx({ colorSpace: 'hsl' }),
     require('@tailwindcss/typography'),
 
     plugin(function ({ addComponents }) {
