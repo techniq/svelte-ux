@@ -14,7 +14,7 @@
   let locales: string = 'en';
   let currency: string = 'USD';
 
-  let myDate = new Date('1982-03-30T00:00:00');
+  let myDate = new Date('1982-03-30T07:11:00');
 </script>
 
 <h1>Usage</h1>
@@ -156,6 +156,64 @@
     <h3>long</h3>
     <Preview>
       {format(myDate, PeriodType.Day, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType DayTime</h2>
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <Preview>
+      {format(myDate, PeriodType.DayTime, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <Preview>
+      {format(myDate, PeriodType.DayTime, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.DayTime, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType TimeOnly</h2>
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <Preview>
+      {format(myDate, PeriodType.TimeOnly, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <Preview>
+      {format(myDate, PeriodType.TimeOnly, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.TimeOnly, {
         variant: 'long',
       })}
     </Preview>
