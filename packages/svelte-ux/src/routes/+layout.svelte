@@ -28,34 +28,34 @@
 
   settings({
     // Usefull to test different locales with the docs
-    formats: {
-      numbers: {
-        defaults: {
-          locales: 'fr',
-          currency: 'EUR',
-        },
-      },
-      dates: {
-        locales: 'fr',
-        weekStartsOn: 1,
-        presets: {
-          days: {
-            long: { dateStyle: 'full' },
-          },
-          months: {
-            default: [DateToken.Month_long],
-          },
-        },
-        ordinalSuffixes: {
-          fr: {
-            one: 'er',
-            two: '',
-            few: '',
-            other: '',
-          },
-        },
-      },
-    },
+    // formats: {
+    //   numbers: {
+    //     defaults: {
+    //       locales: 'fr',
+    //       currency: 'EUR',
+    //     },
+    //   },
+    //   dates: {
+    //     locales: 'fr',
+    //     weekStartsOn: 1,
+    //     presets: {
+    //       days: {
+    //         long: { dateStyle: 'full' },
+    //       },
+    //       months: {
+    //         default: [DateToken.Month_long],
+    //       },
+    //     },
+    //     ordinalSuffixes: {
+    //       fr: {
+    //         one: 'er',
+    //         two: '',
+    //         few: '',
+    //         other: '',
+    //       },
+    //     },
+    //   },
+    // },
     // theme: {
     //   AppBar: 'bg-red-500 text-white shadow-md',
     // },
