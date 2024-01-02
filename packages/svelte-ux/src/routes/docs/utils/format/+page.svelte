@@ -156,7 +156,6 @@
   </div>
   <div>
     <h3>default</h3>
-    <!-- TODO JYC QUESTION: before: 3/30/1982, suggestion as default: 03/30/1982 -->
     <Preview>
       {format(myDate, PeriodType.Day, {
         // variant: 'default',
