@@ -43,17 +43,17 @@
   $: switch (periodType) {
     case PeriodType.Month:
       primaryFormat = DateToken.month_long;
-      secondaryFormat = DateToken.year_numeric;
+      secondaryFormat = DateToken.year_numeric_yyyy;
       break;
     case PeriodType.Day:
     default:
       primaryFormat = [
         DateToken.month_long,
-        DateToken.day_of_month_with_ordinal,
-        DateToken.year_numeric,
+        DateToken.dayOfMonth_withOrdinal,
+        DateToken.year_numeric_yyyy,
       ];
 
-      secondaryFormat = DateToken.day_of_week_long;
+      secondaryFormat = DateToken.dayOfWeek_long;
   }
 
   $: currentValue = value;

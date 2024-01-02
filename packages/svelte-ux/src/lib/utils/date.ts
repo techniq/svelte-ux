@@ -579,30 +579,30 @@ export enum DateToken {
   /** `1982, 1986, 2024` */
   year_numeric = 'yyy',
   /** `82, 86, 24` */
-  year_2_digit = 'yy',
+  year_2Digit = 'yy',
 
   /** `January, February, ..., December` */
   month_long = 'MMMM',
   /** `Jan, Feb, ..., Dec` */
   month_short = 'MMM',
   /** `01, 02, ..., 12` */
-  month_2_digit = 'MM',
+  month_2Digit = 'MM',
   /** `1, 2, ..., 12` */
   month_numeric = 'M',
 
   /** Minimize digit: `1, 2, 11, ...` */
-  day_of_month_numeric = 'd',
+  dayOfMonth_numeric = 'd',
   /** `01, 02, 11, ...` */
-  day_of_month_2_digit = 'dd',
+  dayOfMonth_2Digit = 'dd',
   /** `1st, 2nd, 11th, ...` You can have your local ordinal by passing `ordinalSuffixes` in options / settings */
-  day_of_month_with_ordinal = 'do',
+  dayOfMonth_withOrdinal = 'do',
 
   /** `M, T, W, T, F, S, S` */
-  day_of_week_narrow = 'eeeee',
+  dayOfWeek_narrow = 'eeeee',
   /** `Monday, Tuesday, ..., Sunday` */
-  day_of_week_long = 'eeee',
+  dayOfWeek_long = 'eeee',
   /** `Mon, Tue, Wed, ..., Sun` */
-  day_of_week_short = 'eee',
+  dayOfWeek_short = 'eee',
 }
 
 export function formatIntl(
@@ -636,7 +636,7 @@ export function formatIntl(
   if (typeof tokens_or_intlOptions !== 'string' && !Array.isArray(tokens_or_intlOptions)) {
     return formatIntlOrdinal(
       new Intl.DateTimeFormat(locales, tokens_or_intlOptions),
-      tokens_or_intlOptions.with_ordinal
+      tokens_or_intlOptions.withOrdinal
     );
   }
 
@@ -648,7 +648,7 @@ export function formatIntl(
   const formatter = new Intl.DateTimeFormat(locales, {
     year: tokens.includes(DateToken.year_numeric)
       ? 'numeric'
-      : tokens.includes(DateToken.year_2_digit)
+      : tokens.includes(DateToken.year_2Digit)
         ? '2-digit'
         : undefined,
 
@@ -656,31 +656,31 @@ export function formatIntl(
       ? 'long'
       : tokens.includes(DateToken.month_short)
         ? 'short'
-        : tokens.includes(DateToken.month_2_digit)
+        : tokens.includes(DateToken.month_2Digit)
           ? '2-digit'
           : tokens.includes(DateToken.month_numeric)
             ? 'numeric'
             : undefined,
 
-    day: tokens.includes(DateToken.day_of_month_2_digit)
+    day: tokens.includes(DateToken.dayOfMonth_2Digit)
       ? '2-digit'
-      : tokens.includes(DateToken.day_of_month_numeric)
+      : tokens.includes(DateToken.dayOfMonth_numeric)
         ? 'numeric'
         : undefined,
 
     hour: undefined,
     minute: undefined,
 
-    weekday: tokens.includes(DateToken.day_of_week_narrow)
+    weekday: tokens.includes(DateToken.dayOfWeek_narrow)
       ? 'narrow'
-      : tokens.includes(DateToken.day_of_week_long)
+      : tokens.includes(DateToken.dayOfWeek_long)
         ? 'long'
-        : tokens.includes(DateToken.day_of_week_short)
+        : tokens.includes(DateToken.dayOfWeek_short)
           ? 'short'
           : undefined,
   });
 
-  return formatIntlOrdinal(formatter, tokens.includes(DateToken.day_of_month_with_ordinal));
+  return formatIntlOrdinal(formatter, tokens.includes(DateToken.dayOfMonth_withOrdinal));
 }
 
 function range(
@@ -714,10 +714,15 @@ export type OrdinalSuffixes = {
   many?: string;
 };
 export type DateFormatVariant = 'short' | 'default' | 'long' | 'custom';
+type DateFormatVariantPreset = {
+  short?: CustomIntlDateTimeFormatOptions;
+  default?: CustomIntlDateTimeFormatOptions;
+  long?: CustomIntlDateTimeFormatOptions;
+};
 export type CustomIntlDateTimeFormatOptions =
   | string
   | string[]
-  | (Intl.DateTimeFormatOptions & { with_ordinal?: boolean });
+  | (Intl.DateTimeFormatOptions & { withOrdinal?: boolean });
 export type FormatDateOptions = {
   locales?: string | undefined;
   baseParsing?: string;
@@ -725,11 +730,11 @@ export type FormatDateOptions = {
   variant?: DateFormatVariant;
   custom?: CustomIntlDateTimeFormatOptions;
   presets?: {
-    days?: Record<Exclude<DateFormatVariant, 'custom'>, CustomIntlDateTimeFormatOptions>;
-    weeks?: Record<Exclude<DateFormatVariant, 'custom'>, CustomIntlDateTimeFormatOptions>;
-    months?: Record<Exclude<DateFormatVariant, 'custom'>, CustomIntlDateTimeFormatOptions>;
-    monthsYears?: Record<Exclude<DateFormatVariant, 'custom'>, CustomIntlDateTimeFormatOptions>;
-    years?: Record<Exclude<DateFormatVariant, 'custom'>, CustomIntlDateTimeFormatOptions>;
+    days?: DateFormatVariantPreset;
+    weeks?: DateFormatVariantPreset;
+    months?: DateFormatVariantPreset;
+    monthsYears?: DateFormatVariantPreset;
+    years?: DateFormatVariantPreset;
   };
   ordinalSuffixes?: Record<string, OrdinalSuffixes>;
   dico?: {

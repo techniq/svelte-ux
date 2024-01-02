@@ -84,8 +84,25 @@ settings({
     dates: {
       // This is the default, but you can override it here for your app
       locales: 'en',
-      weekStartsOn: 0, // Sunday
-      variant: 'long',
+      weekStartsOn: DayOfWeek.SUN,
+
+      presets: {
+        days: {
+          long: { dateStyle: 'full' },
+        },
+        months: {
+          default: [DateToken.month_long],
+        },
+      },
+
+      ordinalSuffixes: {
+        en: {
+          one: 'st',
+          two: 'nd',
+          few: 'rd',
+        },
+      },
+
       dico: {
         Day: 'Day',
         Week: 'Week',

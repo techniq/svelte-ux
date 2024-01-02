@@ -249,7 +249,7 @@ describe('formatIntl() tokens', () => {
     [dt_2M_2d, { dateStyle: 'full' }, ['Tuesday, November 21, 2023', 'mardi 21 novembre 2023']],
     [dt_2M_2d, { dateStyle: 'long' }, ['November 21, 2023', '21 novembre 2023']],
     [dt_2M_2d, { dateStyle: 'medium' }, ['Nov 21, 2023', '21 nov. 2023']],
-    [dt_2M_2d, { dateStyle: 'medium', with_ordinal: true }, ['Nov 21st, 2023', '21 nov. 2023']],
+    [dt_2M_2d, { dateStyle: 'medium', withOrdinal: true }, ['Nov 21st, 2023', '21 nov. 2023']],
     [dt_2M_2d, { dateStyle: 'short' }, ['11/21/23', '21/11/2023']],
     [dt_1M_1d, { dateStyle: 'short' }, ['3/7/23', '07/03/2023']],
   ];
