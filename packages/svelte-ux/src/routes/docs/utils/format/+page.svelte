@@ -293,7 +293,6 @@
 <div class="grid grid-cols-3 gap-4">
   <div>
     <h3>short</h3>
-    <!-- TODO JYC QUESTION: before: Mar, suggestion as default: 3 -->
     <Preview>
       {format(myDate, PeriodType.Month, {
         variant: 'short',
