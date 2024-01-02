@@ -104,16 +104,6 @@
 
 <h1>Dates</h1>
 
-<h2>No format</h2>
-
-<Preview>
-  {format(myDate)}
-  <!-- TODO JYC?
-    before: 30/03/1982 00:00:00
-    after: Tue Mar 30 1982 00:00:00 GMT+0200 (heure d’été d’Europe centrale)
-  -->
-</Preview>
-
 <h2>Custom format</h2>
 
 <div class="grid grid-cols-3 gap-4">
