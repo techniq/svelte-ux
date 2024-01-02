@@ -56,6 +56,12 @@
     //     },
     //   },
     // },
+    // dictionary: {
+    //   Cancel: 'Annuler',
+    //   Date: {
+    //     Day: 'Jour',
+    //   },
+    // },
     // theme: {
     //   AppBar: 'bg-red-500 text-white shadow-md',
     // },

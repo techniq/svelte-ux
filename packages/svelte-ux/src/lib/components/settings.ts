@@ -10,6 +10,7 @@ import {
   type OrdinalSuffixes,
   DateToken,
 } from '$lib/utils/date';
+import type { DictionaryMessages, DictionaryMessagesOptions } from '$lib/utils/dictionary';
 
 type ExcludeNone<T> = T extends 'none' ? never : T;
 export type Settings = {
@@ -23,6 +24,7 @@ export type Settings = {
     >;
     dates?: FormatDateOptions;
   };
+  dictionary?: DictionaryMessagesOptions;
   theme?: Theme;
 };
 
@@ -41,7 +43,7 @@ export function getSettings() {
   }
 }
 
-export function getFormatNumberOptions(style?: FormatNumberStyle) {
+export function getFormatNumber(style?: FormatNumberStyle) {
   let toRet = {
     locales: 'en',
     currency: 'USD',
@@ -59,7 +61,7 @@ export function getFormatNumberOptions(style?: FormatNumberStyle) {
   return toRet;
 }
 
-export function getFormatDateOptions(options?: FormatDateOptions) {
+export function getFormatDate(options?: FormatDateOptions) {
   // if custom is set && variant is not set, let's put custom as variant
   const variant: FormatDateOptions['variant'] =
     options?.custom && options?.variant === undefined ? 'custom' : options?.variant ?? 'default';
@@ -84,15 +86,7 @@ export function getFormatDateOptions(options?: FormatDateOptions) {
       years: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>;
     };
     ordinalSuffixes: Record<string, OrdinalSuffixes>;
-    dico: {
-      Day: string;
-      Week: string;
-      BiWeek: string;
-      Month: string;
-      Quarter: string;
-      CalendarYear: string;
-      FiscalYearOct: string;
-    };
+    dictionaryDate: DictionaryMessages['Date'];
   } = {
     locales: options?.locales ?? settings.formats?.dates?.locales ?? 'en',
     baseParsing,
@@ -186,19 +180,31 @@ export function getFormatDateOptions(options?: FormatDateOptions) {
     },
 
     // dico
-    dico: {
-      Day: options?.dico?.Day ?? settings.formats?.dates?.dico?.Day ?? 'Day',
-      Week: options?.dico?.Week ?? settings.formats?.dates?.dico?.Week ?? 'Week',
-      BiWeek: options?.dico?.BiWeek ?? settings.formats?.dates?.dico?.BiWeek ?? 'Bi-Week',
-      Month: options?.dico?.Month ?? settings.formats?.dates?.dico?.Month ?? 'Month',
-      Quarter: options?.dico?.Quarter ?? settings.formats?.dates?.dico?.Quarter ?? 'Quarter',
+    dictionaryDate: getDictionary().Date,
+  };
+
+  return toRet;
+}
+
+export function getDictionary(options?: DictionaryMessagesOptions) {
+  // if custom is set && variant is not set, let's put custom as variant
+  const settings = getSettings();
+
+  let toRet: DictionaryMessages = {
+    Ok: options?.Ok ?? settings.dictionary?.Ok ?? 'Ok',
+    Cancel: options?.Cancel ?? settings.dictionary?.Cancel ?? 'Cancel',
+
+    Date: {
+      Day: options?.Date?.Day ?? settings.dictionary?.Date?.Day ?? 'Day',
+      Week: options?.Date?.Week ?? settings.dictionary?.Date?.Week ?? 'Week',
+      BiWeek: options?.Date?.BiWeek ?? settings.dictionary?.Date?.BiWeek ?? 'Bi-Week',
+      Month: options?.Date?.Month ?? settings.dictionary?.Date?.Month ?? 'Month',
+      Quarter: options?.Date?.Quarter ?? settings.dictionary?.Date?.Quarter ?? 'Quarter',
       CalendarYear:
-        options?.dico?.CalendarYear ??
-        settings.formats?.dates?.dico?.CalendarYear ??
-        'Calendar Year',
+        options?.Date?.CalendarYear ?? settings.dictionary?.Date?.CalendarYear ?? 'Calendar Year',
       FiscalYearOct:
-        options?.dico?.FiscalYearOct ??
-        settings.formats?.dates?.dico?.FiscalYearOct ??
+        options?.Date?.FiscalYearOct ??
+        settings.dictionary?.Date?.FiscalYearOct ??
         'Fiscal Year (Oct)',
     },
   };

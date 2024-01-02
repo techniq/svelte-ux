@@ -33,8 +33,7 @@ import {
 import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
-import { getFormatDateOptions } from '$lib/components/settings';
-import { boolean } from 'zod';
+import { getFormatDate } from '$lib/components/settings';
 
 export type SelectedDate = Date | Date[] | DateRange | null;
 
@@ -102,7 +101,7 @@ export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
 }
 
 export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOptions = {}) {
-  const { locales, dico } = getFormatDateOptions(options);
+  const { locales, dictionaryDate: dico } = getFormatDate(options);
 
   switch (periodType) {
     case PeriodType.Day:
@@ -611,7 +610,7 @@ export function formatIntl(
   tokens_or_intlOptions: CustomIntlDateTimeFormatOptions,
   options: FormatDateOptions = {}
 ) {
-  const { locales, ordinalSuffixes } = getFormatDateOptions(options);
+  const { locales, ordinalSuffixes } = getFormatDate(options);
 
   function formatIntlOrdinal(formatter: Intl.DateTimeFormat, with_ordinal = false) {
     if (with_ordinal) {
@@ -738,15 +737,6 @@ export type FormatDateOptions = {
     years?: DateFormatVariantPreset;
   };
   ordinalSuffixes?: Record<string, OrdinalSuffixes>;
-  dico?: {
-    Day?: string;
-    Week?: string;
-    BiWeek?: string;
-    Month?: string;
-    Quarter?: string;
-    CalendarYear?: string;
-    FiscalYearOct?: string;
-  };
 };
 
 export function formatDate(
@@ -766,7 +756,7 @@ export function formatDate(
     return '';
   }
 
-  const { variant, weekStartsOn, custom, presets } = getFormatDateOptions(options);
+  const { variant, weekStartsOn, custom, presets } = getFormatDate(options);
   const { days, weeks, months, monthsYears, years } = presets;
 
   if (periodType === PeriodType.Week) {

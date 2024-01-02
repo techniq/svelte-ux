@@ -10,6 +10,7 @@
   import DateSelect from './DateSelect.svelte';
   import { getComponentTheme } from './theme';
   import { format } from '../utils';
+  import { getDictionary } from './settings';
 
   const dispatch = createEventDispatcher();
 
@@ -158,13 +159,13 @@
         value = currentValue;
         dispatch('change', value);
       }}
-      class="bg-accent-500 text-white hover:bg-accent-600">OK</Button
+      class="bg-accent-500 text-white hover:bg-accent-600">{getDictionary().Ok}</Button
     >
     <Button
       on:click={() => {
         open = false;
         currentValue = value;
-      }}>Cancel</Button
+      }}>{getDictionary().Cancel}</Button
     >
   </div>
 </Dialog>
