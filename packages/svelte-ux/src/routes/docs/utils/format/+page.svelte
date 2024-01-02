@@ -1,27 +1,27 @@
 <script lang="ts">
   import Preview from '$lib/components/Preview.svelte';
   import { format } from '$lib/utils/format';
-  import { PeriodType } from '$lib/utils/date';
+  import { DateToken, PeriodType } from '$lib/utils/date';
   import Code from '$lib/components/Code.svelte';
   import TextField from '$lib/components/TextField.svelte';
   import MenuField from '$lib/components/MenuField.svelte';
   import type { FormatNumberStyle } from '$lib/utils/number';
   import DateField from '$lib/components/DateField.svelte';
+  import DatePickerField from '$lib/components/DatePickerField.svelte';
 
   let value = 1234.56;
   let style: FormatNumberStyle = 'decimal';
   let locales: string = 'en';
   let currency: string = 'USD';
 
-  let date = new Date('1982-11-30T00:00:00');
+  let myDate = new Date('1982-03-30T00:00:00');
 </script>
 
 <h1>Usage</h1>
 
 <Code source={`import { format } from 'svelte-ux';`} language="javascript" class="mb-4" />
 
-<h1>Examples</h1>
-
+<h1>Playgrounds</h1>
 <h2>Playground numbers</h2>
 
 <div class="grid grid-cols-xs gap-2 mb-2">
@@ -55,7 +55,7 @@
 <h2>Playground dates</h2>
 
 <div class="grid grid-cols-xs gap-2 mb-2">
-  <DateField format="dd/MM/yyyy" label="date" bind:value={date}></DateField>
+  <DatePickerField format="dd/MM/yyyy" label="date" bind:value={myDate}></DatePickerField>
 
   <MenuField
     label="locale"
@@ -65,8 +65,10 @@
 </div>
 
 <Preview>
-  <div>{format(date, PeriodType.Day, { locales })}</div>
+  <div>{format(myDate, PeriodType.Day, { locales })}</div>
 </Preview>
+
+<h1>Numbers</h1>
 
 <h2>number formats (defaut settings)</h2>
 
@@ -100,16 +102,261 @@
   <div>{format(0.5678, 'percent', { locales: 'fr', fractionDigits: 1 })}</div>
 </Preview>
 
-<h2>Date / Period formats (defaut settings)</h2>
+<h1>Dates</h1>
 
-<Preview showCode>
-  <div>{format(date, PeriodType.Day)}</div>
-  <div>{format(date, PeriodType.Month)}</div>
-  <div>{format(date, PeriodType.CalendarYear)}</div>
-  <div>{format(date, PeriodType.Day, { variant: 'short' })}</div>
-  <div>{format(date, PeriodType.Month, { variant: 'short' })}</div>
-  <div>{format(date, PeriodType.CalendarYear, { variant: 'short' })}</div>
+<h2>No format</h2>
+
+<Preview>
+  {format(myDate)}
+  <!-- TODO JYC?
+    before: 30/03/1982 00:00:00
+    after: Tue Mar 30 1982 00:00:00 GMT+0200 (heure d’été d’Europe centrale)
+  -->
 </Preview>
+
+<h2>Custom format</h2>
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>With random string</h3>
+    <Preview>
+      {format(myDate, PeriodType.Custom, {
+        custom: 'eee, MMMM do',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>With descriptive tokens</h3>
+    <Preview>
+      {format(myDate, PeriodType.Custom, {
+        custom: [DateToken.DayOfWeek_short, DateToken.Month_long, DateToken.DayOfMonth_withOrdinal],
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>With full intl</h3>
+    <Preview>
+      {format(myDate, PeriodType.Custom, {
+        custom: { weekday: 'short', month: 'long', day: 'numeric', withOrdinal: true },
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType Day</h2>
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <Preview>
+      {format(myDate, PeriodType.Day, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <!-- TODO JYC QUESTION: before: 3/30/1982, suggestion as default: 03/30/1982 -->
+    <Preview>
+      {format(myDate, PeriodType.Day, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.Day, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType Week</h2>
+<span>
+  It will take your default <b>weekStartsOn</b>
+  <a class="text-accent-500" href="/customization#settings">settings</a>, if you want to be
+  specific, you can also use
+  <b>PeriodType.WeekSun</b>
+</span>
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <Preview>
+      {format(myDate, PeriodType.Week, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <Preview>
+      {format(myDate, PeriodType.Week, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.Week, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType BiWeek1</h2>
+<span>
+  It will take your default <b>weekStartsOn</b>
+  <a class="text-accent-500" href="/customization#settings">settings</a>, if you want to be
+  specific, you can also use
+  <b>PeriodType.BiWeek1Sun</b>
+</span>
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <Preview>
+      {format(myDate, PeriodType.BiWeek1, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <Preview>
+      {format(myDate, PeriodType.BiWeek1, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.BiWeek1, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType Month</h2>
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <!-- TODO JYC QUESTION: before: Mar, suggestion as default: 3 -->
+    <Preview>
+      {format(myDate, PeriodType.Month, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <Preview>
+      {format(myDate, PeriodType.Month, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.Month, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType Quarter</h2>
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <Preview>
+      {format(myDate, PeriodType.Quarter, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <Preview>
+      {format(myDate, PeriodType.Quarter, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.Quarter, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType CalendarYear</h2>
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <Preview>
+      {format(myDate, PeriodType.CalendarYear, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <Preview>
+      {format(myDate, PeriodType.CalendarYear, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.CalendarYear, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
+
+<h2>PeriodType FiscalYearOctober</h2>
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h3>short</h3>
+    <Preview>
+      {format(myDate, PeriodType.FiscalYearOctober, {
+        variant: 'short',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>default</h3>
+    <Preview>
+      {format(myDate, PeriodType.FiscalYearOctober, {
+        // variant: 'default',
+      })}
+    </Preview>
+  </div>
+  <div>
+    <h3>long</h3>
+    <Preview>
+      {format(myDate, PeriodType.FiscalYearOctober, {
+        variant: 'long',
+      })}
+    </Preview>
+  </div>
+</div>
 
 <h2>Date / Period formats (local settings)</h2>
 
@@ -120,12 +367,12 @@
 </span>
 
 <Preview showCode>
-  <div>{format(date, PeriodType.Day, { locales: 'fr' })}</div>
-  <div>{format(date, PeriodType.Month, { locales: 'fr' })}</div>
-  <div>{format(date, PeriodType.CalendarYear, { locales: 'fr' })}</div>
-  <div>{format(date, PeriodType.Day, { variant: 'short', locales: 'fr' })}</div>
-  <div>{format(date, PeriodType.Month, { variant: 'short', locales: 'fr' })}</div>
+  <div>{format(myDate, PeriodType.Day, { locales: 'fr' })}</div>
+  <div>{format(myDate, PeriodType.Month, { locales: 'fr' })}</div>
+  <div>{format(myDate, PeriodType.CalendarYear, { locales: 'fr' })}</div>
+  <div>{format(myDate, PeriodType.Day, { variant: 'short', locales: 'fr' })}</div>
+  <div>{format(myDate, PeriodType.Month, { variant: 'short', locales: 'fr' })}</div>
   <div>
-    {format(date, PeriodType.CalendarYear, { variant: 'short', locales: 'fr' })}
+    {format(myDate, PeriodType.CalendarYear, { variant: 'short', locales: 'fr' })}
   </div>
 </Preview>

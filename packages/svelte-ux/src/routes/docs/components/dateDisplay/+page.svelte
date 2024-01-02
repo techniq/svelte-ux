@@ -5,6 +5,8 @@
   import { PeriodType } from '$lib/utils/date';
 </script>
 
+<h1>??? TO REMOVE ???</h1>
+
 <h1>Examples</h1>
 
 <h2>No format</h2>

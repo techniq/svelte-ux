@@ -52,7 +52,7 @@
     ],
     Feedback: ['Badge', 'Progress', 'ProgressCircle'],
     Date: [
-      'dateDisplay',
+      'dateDisplay? (TO REMOVE?)',
       'DateField',
       'DatePickerField',
       'DateRange',
