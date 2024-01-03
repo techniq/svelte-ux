@@ -25,7 +25,7 @@
 
       {#if index < items.length - 1}
         <div
-          class="line absolute top-[var(--lineTop)] bottom-[var(--lineBottom)] left-0 w-[2px] translate-x-[var(--lineOffset)] bg-gray-300"
+          class="line absolute top-[var(--lineTop)] bottom-[var(--lineBottom)] left-0 w-[2px] translate-x-[var(--lineOffset)] bg-surface-content/20"
         />
       {/if}
 

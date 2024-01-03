@@ -22,7 +22,7 @@
   export let resize = false;
   export let disableTransition = false;
   export let transition = disableTransition
-    ? (node: HTMLElement, params: TransitionParams) => ({} as TransitionConfig)
+    ? (node: HTMLElement, params: TransitionParams) => ({}) as TransitionConfig
     : slide;
   export let transitionParams: TransitionParams = {};
   export let explicitClose = false;
@@ -62,7 +62,7 @@
   {open}
   class={cls(
     'Menu',
-    'bg-white rounded shadow border overflow-auto',
+    'bg-surface-100 rounded shadow border overflow-auto',
     theme.root,
     classes.root,
     $$props.class

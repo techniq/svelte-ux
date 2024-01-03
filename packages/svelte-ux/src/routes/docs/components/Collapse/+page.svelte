@@ -73,7 +73,7 @@
     {#each Array(5) as _, i}
       <Collapse>
         <div slot="trigger" class="flex-1 px-3 py-3">Item {i + 1}</div>
-        <div class="px-3 pb-3 bg-gray-100 border-t">
+        <div class="px-3 pb-3 border-t">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
           omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
           Inventore laborum rerum at id?
@@ -91,10 +91,10 @@
   {#each Array(5) as _, i}
     <Collapse
       popout
-      class="bg-white elevation-1 border-t first:border-t-0 first:rounded-t last:rounded-b"
+      class="bg-surface-100 elevation-1 border-t first:border-t-0 first:rounded-t last:rounded-b"
     >
       <div slot="trigger" class="flex-1 px-3 py-3">Item {i + 1}</div>
-      <div class="px-3 pb-3 bg-gray-100 border-t">
+      <div class="px-3 pb-3 bg-surface-200 border-t">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
         omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
         Inventore laborum rerum at id?

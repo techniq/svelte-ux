@@ -39,12 +39,16 @@
   <label
     for={id}
     class={cls(
-      'inline-grid place-items-center border-2 rounded-full bg-white',
+      'inline-grid place-items-center border-2 rounded-full bg-surface-100',
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
-        'peer-focus-visible:ring-2 peer-hover:border-accent-500 peer-focus-visible:border-accent-500 ring-accent-300 ring-offset-0',
-      !checked && !disabled && 'peer-hover:bg-accent-100',
-      checked ? (disabled ? ' border-gray-500' : 'border-accent-500') : 'border-gray-500',
+        'peer-focus-visible:ring-2 peer-hover:border-primary peer-focus-visible:border-primary ring-primary/20 ring-offset-0',
+      !checked && !disabled && 'peer-hover:bg-primary/10',
+      checked
+        ? disabled
+          ? 'border-surface-content/30'
+          : 'border-primary'
+        : 'border-surface-content/30',
       theme.checkbox,
       classes.checkbox
     )}
@@ -53,7 +57,7 @@
       path={mdiCheckboxBlankCircle}
       class={cls(
         'pointer-events-none transition-transform',
-        disabled ? 'text-gray-500' : 'text-accent-500',
+        disabled ? 'text-surface-content/30 border-surface-content/30' : 'text-primary',
         checked ? 'scale-100' : 'scale-0',
         theme.icon,
         classes.icon

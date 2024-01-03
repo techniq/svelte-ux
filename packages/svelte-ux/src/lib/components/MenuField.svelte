@@ -89,7 +89,7 @@
     <Icon
       path={menuIcon}
       class={cls(
-        'text-black/50 mr-1 transform transition-all duration-300',
+        'text-surface-content/50 mr-1 transform transition-all duration-300',
         {
           '-rotate-180': open,
         },
@@ -120,7 +120,7 @@
           {#if option.group && option.group !== previousOption?.group}
             <div
               class={cls(
-                'group-header text-xs leading-8 tracking-widest text-black/50 px-2',
+                'group-header text-xs leading-8 tracking-widest text-surface-content/50 px-2',
                 theme.group,
                 classes.group
               )}
