@@ -3,7 +3,7 @@
   import { elasticOut, backInOut, bounceOut } from 'svelte/easing';
   import { cls } from '$lib/utils/styles';
   import { modulo } from '$lib/utils/number';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value = 0;
   export let single = false;
@@ -14,7 +14,7 @@
     root?: string;
     value?: string;
   } = {};
-  const theme = getComponentTheme('ScrollingValue');
+  const settingsClasses = getComponentClasses('ScrollingValue');
 
   const displayValue = spring();
   // 	const displayValue = tweened(value, { duration: 1000, easing: bounceOut });
@@ -29,13 +29,13 @@
   class={cls(
     'ScrollingValue',
     'inline-grid overflow-hidden',
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
 >
   <div
-    class={cls('col-span-full row-span-full', theme.value, classes.value)}
+    class={cls('col-span-full row-span-full', settingsClasses.value, classes.value)}
     style:transform={axis === 'x'
       ? `translateX(${100 + 100 * -offset}%)`
       : `translateY(${-100 + 100 * offset}%)`}
@@ -45,7 +45,7 @@
     </slot>
   </div>
   <div
-    class={cls('col-span-full row-span-full', theme.value, classes.value)}
+    class={cls('col-span-full row-span-full', settingsClasses.value, classes.value)}
     style:transform={axis === 'x'
       ? `translateX(${100 * -offset}%)`
       : `translateY(${100 * offset}%)`}

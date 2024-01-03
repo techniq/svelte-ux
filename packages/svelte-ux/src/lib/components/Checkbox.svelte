@@ -4,7 +4,7 @@
   import Icon from './Icon.svelte';
   import { uniqueId } from '../utils/string';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let id = uniqueId('checkbox-');
   export let name = '';
@@ -22,7 +22,7 @@
     label?: string;
     icon?: string;
   } = {};
-  const theme = getComponentTheme('Checkbox');
+  const settingsClasses = getComponentClasses('Checkbox');
 
   // Update when group changes.  Separate function to break reactivity loop
   $: if (group !== null) {
@@ -47,7 +47,7 @@
   }
 </script>
 
-<div class={cls('Checkbox', 'inline-flex items-center', theme.root, classes.root, $$props.class)}>
+<div class={cls('Checkbox', 'inline-flex items-center', settingsClasses.root, classes.root, $$props.class)}>
   <input
     {id}
     {name}
@@ -73,7 +73,7 @@
           ? 'bg-gray-500 border-gray-500'
           : 'bg-primary border-primary'
         : 'border-gray-500',
-      theme.checkbox,
+      settingsClasses.checkbox,
       classes.checkbox
     )}
   >
@@ -82,7 +82,7 @@
       class={cls(
         'pointer-events-none text-primary-content transition-transform',
         checked ? 'scale-100' : 'scale-0',
-        theme.icon,
+        settingsClasses.icon,
         classes.icon
       )}
       size={{
@@ -105,7 +105,7 @@
           md: 'text-md', // 16px
           lg: 'text-lg', // 18px
         }[size],
-        theme.label,
+        settingsClasses.label,
         classes.label
       )}
     >

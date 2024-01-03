@@ -95,4 +95,4 @@ export { default as TweenedValue } from './TweenedValue.svelte';
 export { default as ViewportCenter } from './ViewportCenter.svelte';
 export { default as YearList } from './YearList.svelte';
 export { settings, getFormatNumber, getSettings, getDictionary } from './settings';
-export { getClasses, getComponentTheme } from './theme';
+export { getClasses, getComponentClasses } from './theme';

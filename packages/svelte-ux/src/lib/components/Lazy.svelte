@@ -1,7 +1,7 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
   import { intersection } from '../actions/observer';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   /**
    * Placeholder height.  Should match closely to resulting height to reducing scroll bouncing
@@ -24,7 +24,7 @@
 
   export let offset: Offset = {};
 
-  const theme = getComponentTheme('Lazy');
+  const settingsClasses = getComponentClasses('Lazy');
 </script>
 
 <div
@@ -44,7 +44,7 @@
   on:intersecting
   style:min-height={typeof height === 'number' ? `${height}px` : height}
   {...$$restProps}
-  class={cls('Lazy', theme.root, $$props.class)}
+  class={cls('Lazy', settingsClasses.root, $$props.class)}
 >
   {#if show}
     <slot />

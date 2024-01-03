@@ -1,6 +1,6 @@
 <script lang="ts">
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value: number = $$slots.value ? 1 : 0;
   export let small = false;
@@ -9,7 +9,7 @@
 
   export let placement: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' = 'top-right';
 
-  const theme = getComponentTheme('Badge');
+  const settingsClasses = getComponentClasses('Badge');
 </script>
 
 <div class="inline-grid grid-stack">
@@ -71,7 +71,7 @@
         'scale-0': (value ?? 0) === 0,
         'scale-100': (value ?? 0) !== 0,
       },
-      theme.root,
+      settingsClasses.root,
       $$props.class
     )}
   >

@@ -18,7 +18,7 @@ export function getClasses() {
   return getSettings().classes ?? {};
 }
 
-export function getComponentTheme(name: ComponentName) {
+export function getComponentClasses(name: ComponentName) {
   const theme = getClasses()[name] ?? {};
 
   return typeof theme === 'string' ? { root: theme } : theme;

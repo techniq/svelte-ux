@@ -11,7 +11,7 @@
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value = '';
   export let type: HTMLInputTypeAttribute = 'text';
@@ -27,7 +27,7 @@
   export let placeholder = mask;
   export let disabled = false;
 
-  const theme = getComponentTheme('Input');
+  const settingsClasses = getComponentClasses('Input');
 
   let isFocused = false;
 
@@ -126,7 +126,7 @@
     'Input',
     'text-sm w-full outline-none bg-transparent placeholder-surface/50 selection:bg-surface-content/10',
     mask && (mask == placeholder || isFocused || value) && 'font-mono',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
 />
