@@ -6,7 +6,6 @@
     endOfDay as endOfDayFunc,
     startOfMonth as startOfMonthFunc,
     endOfMonth as endOfMonthFunc,
-    format,
     addMonths,
     isSameDay,
     isWithinInterval,
@@ -16,10 +15,12 @@
 
   import { getMonthDaysByWeek, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
+  import { format } from '../utils';
   import { hasKeyOf } from '../types/typeGuards';
 
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
+  import { getSettings } from '.';
 
   export let selected: SelectedDate | undefined = undefined;
 
@@ -33,7 +34,7 @@
     startOfMonthFunc(new Date());
 
   $: endOfMonth = endOfMonthFunc(startOfMonth);
-  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth);
+  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, getSettings().formats?.dates?.weekStartsOn);
 
   /**
    * Hide controls and date.  Useful to control externally
@@ -54,15 +55,15 @@
     return disabledDays instanceof Function
       ? disabledDays(date)
       : disabledDays instanceof Date
-      ? isSameDay(date, disabledDays)
-      : disabledDays instanceof Array
-      ? disabledDays.some((d) => isSameDay(date, d))
-      : disabledDays instanceof Object
-      ? isWithinInterval(date, {
-          start: startOfDayFunc(disabledDays.from),
-          end: endOfDayFunc(disabledDays.to || disabledDays.from),
-        })
-      : false;
+        ? isSameDay(date, disabledDays)
+        : disabledDays instanceof Array
+          ? disabledDays.some((d) => isSameDay(date, d))
+          : disabledDays instanceof Object
+            ? isWithinInterval(date, {
+                start: startOfDayFunc(disabledDays.from),
+                end: endOfDayFunc(disabledDays.to || disabledDays.from),
+              })
+            : false;
   };
 
   $: isDayHidden = (day: Date) => {
@@ -91,7 +92,7 @@
     />
 
     <div class="flex flex-1 items-center justify-center">
-      <span>{format(startOfMonth, 'MMMM yyyy')}</span>
+      <span>{format(startOfMonth, PeriodType.MonthYear)}</span>
     </div>
 
     <Button
@@ -105,7 +106,7 @@
 <div class="flex">
   {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
     <div class="flex-1 text-center">
-      <span class="text-xs text-black/50"> {format(day, 'eee')[0]} </span>
+      <span class="text-xs text-black/50"> {format(day, PeriodType.Day, { custom: 'eee' })} </span>
     </div>
   {/each}
 </div>

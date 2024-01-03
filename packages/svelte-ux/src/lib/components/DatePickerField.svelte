@@ -6,10 +6,11 @@
   import Button from './Button.svelte';
   import Field from './Field.svelte';
   import Dialog from './Dialog.svelte';
-  import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
+  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
-  import { dateDisplay } from '../utils/dateDisplay';
   import { getComponentTheme } from './theme';
+  import { format } from '../utils';
+  import { getDictionary } from './settings';
 
   const dispatch = createEventDispatcher();
 
@@ -37,18 +38,23 @@
 
   // let format: string = 'EEE, MMM d';
   // Show "Day of Week", "Year", etc based on perioType (see DayStepper, MonthStepper)
-  let primaryFormat = '';
-  let secondaryFormat = '';
+  let primaryFormat: string | string[] = '';
+  let secondaryFormat: string | string[] = '';
 
   $: switch (periodType) {
     case PeriodType.Month:
-      primaryFormat = 'MMMM';
-      secondaryFormat = 'yyyy';
+      primaryFormat = DateToken.Month_long;
+      secondaryFormat = DateToken.Year_numeric;
       break;
     case PeriodType.Day:
     default:
-      primaryFormat = 'MMMM do, yyyy';
-      secondaryFormat = 'eeee';
+      primaryFormat = [
+        DateToken.Month_long,
+        DateToken.DayOfMonth_withOrdinal,
+        DateToken.Year_numeric,
+      ];
+
+      secondaryFormat = DateToken.DayOfWeek_long;
   }
 
   $: currentValue = value;
@@ -58,7 +64,7 @@
   <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
-    label={label ?? dateDisplay(value, { format: secondaryFormat })}
+    label={label ?? format(value, PeriodType.Day, { custom: secondaryFormat })}
     {icon}
     {error}
     {hint}
@@ -92,7 +98,7 @@
       on:click={() => (open = true)}
       {id}
     >
-      {dateDisplay(value, { format: primaryFormat })}
+      {format(value, PeriodType.Day, { custom: primaryFormat })}
     </button>
 
     <div slot="append">
@@ -129,10 +135,10 @@
   {#if currentValue}
     <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24" transition:slide>
       <div class="text-sm text-white/50">
-        {dateDisplay(currentValue, { format: secondaryFormat })}
+        {format(currentValue, PeriodType.Day, { custom: secondaryFormat })}
       </div>
       <div class="text-3xl text-white">
-        {dateDisplay(currentValue, { format: primaryFormat })}
+        {format(currentValue, PeriodType.Day, { custom: primaryFormat })}
       </div>
     </div>
   {/if}
@@ -153,13 +159,13 @@
         value = currentValue;
         dispatch('change', value);
       }}
-      class="bg-accent-500 text-white hover:bg-accent-600">OK</Button
+      class="bg-accent-500 text-white hover:bg-accent-600">{getDictionary().Ok}</Button
     >
     <Button
       on:click={() => {
         open = false;
         currentValue = value;
-      }}>Cancel</Button
+      }}>{getDictionary().Cancel}</Button
     >
   </div>
 </Dialog>
