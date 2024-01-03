@@ -3,13 +3,13 @@
 
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let items = [];
   export let divider: string | undefined = undefined;
   export let inline = false;
 
-  const theme = getComponentTheme('Breadcrumb');
+  const settingsClasses = getComponentClasses('Breadcrumb');
 
   $: displayItems = items?.filter((x) => x != null) ?? [];
 </script>
@@ -20,7 +20,7 @@
     'Breadcrumb',
     inline ? 'inline-flex' : 'flex',
     'items-center justify-start flex-wrap',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
 >

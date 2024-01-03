@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import { get } from 'lodash-es';
@@ -50,7 +50,7 @@
     field?: string;
     actions?: string;
   } = {};
-  const theme = getComponentTheme('MultiSelectField');
+  const settingsClasses = getComponentClasses('MultiSelectField');
 
   const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
 
@@ -135,7 +135,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-  class={cls(disabled && 'pointer-events-none', theme.root, classes.root, $$props.class)}
+  class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, $$props.class)}
   on:click={onClick}
 >
   <!-- TODO: Setup blur without jank on open or issues when clicking within menu -->
@@ -152,7 +152,7 @@
     bind:inputEl
     on:focus={onFocus}
     on:change={onSearchChange}
-    class={cls('h-full', theme.field, classes.field)}
+    class={cls('h-full', settingsClasses.field, classes.field)}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />

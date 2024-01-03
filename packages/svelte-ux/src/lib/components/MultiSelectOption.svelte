@@ -1,7 +1,7 @@
 <script lang="ts">
   import Checkbox from './Checkbox.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let checked: boolean;
   export let indeterminate = false;
@@ -12,14 +12,14 @@
     checkbox?: string;
     container?: string;
   } = {};
-  const theme = getComponentTheme('MultiSelectOption');
+  const settingsClasses = getComponentClasses('MultiSelectOption');
 </script>
 
 <div
   class={cls(
     'MultiSelectOption',
     'grid grid-cols-[1fr,auto] py-2',
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -29,13 +29,13 @@
     bind:indeterminate
     on:change
     {disabled}
-    class={cls(theme.checkbox, classes.checkbox)}
+    class={cls(settingsClasses.checkbox, classes.checkbox)}
   >
     <div
       class={cls(
         'ml-1 inline-block text-sm text-surface-content',
         !disabled && 'cursor-pointer',
-        theme.container,
+        settingsClasses.container,
         classes.container
       )}
     >

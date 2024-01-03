@@ -3,7 +3,7 @@
 
   import { uniqueId } from '$lib/utils/string';
   import { cls } from '$lib/utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   /** Apply gaussian blur.  Required unless blurring externally (`filter: blur()`, etc) */
   export let blur: number | undefined = undefined;
@@ -21,12 +21,12 @@
     root?: string;
     svg?: string;
   } = {};
-  const theme = getComponentTheme('Gooey');
+  const settingsClasses = getComponentClasses('Gooey');
 
   const filterId = uniqueId('filter-');
 </script>
 
-<svg class={cls('fixed inset-0 pointer-events-none', theme.svg, classes?.svg)}>
+<svg class={cls('fixed inset-0 pointer-events-none', settingsClasses.svg, classes?.svg)}>
   <filter id={filterId}>
     {#if blur}
       <feGaussianBlur in="SourceGraphic" stdDeviation={blur} result="blur" />
@@ -51,7 +51,7 @@
 <div
   style:filter="url(#{filterId})"
   {...$$restProps}
-  class={cls('inline-block', theme.root, classes?.root, $$props.class)}
+  class={cls('inline-block', settingsClasses.root, classes?.root, $$props.class)}
 >
   <slot />
 </div>

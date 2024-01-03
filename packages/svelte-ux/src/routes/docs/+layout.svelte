@@ -69,7 +69,7 @@
   }
 
   // Clear root layout theme so doesn't show on doc examples
-  settings({ ...getSettings(), theme: {} });
+  settings({ ...getSettings(), classes: {} });
 </script>
 
 <div

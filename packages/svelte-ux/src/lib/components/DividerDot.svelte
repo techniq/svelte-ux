@@ -1,8 +1,8 @@
 <script lang="ts">
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
-  const theme = getComponentTheme('DividerDot');
+  const settingsClasses = getComponentClasses('DividerDot');
 </script>
 
-<span class={cls('DividerDot mx-1', theme.root, $$props.class)}> • </span>
+<span class={cls('DividerDot mx-1', settingsClasses.root, $$props.class)}> • </span>

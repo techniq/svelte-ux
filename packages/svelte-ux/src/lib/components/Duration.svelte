@@ -1,7 +1,7 @@
 <script lang="ts">
   import { DurationUnits, getDuration, humanizeDuration } from '../utils/duration';
   import timerStore from '../stores/timerStore';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { cls } from '$lib/utils/styles';
 
   export let start: Date | undefined = undefined;
@@ -11,7 +11,7 @@
   export let totalUnits: number = 99;
   export let variant: 'short' | 'long' = 'short';
 
-  const theme = getComponentTheme('Duration');
+  const settingsClasses = getComponentClasses('Duration');
 
   function getDelay() {
     const newDuration = getDuration(start, end ?? $timer, duration);
@@ -57,4 +57,4 @@
   });
 </script>
 
-<span class={cls('Duration', theme.root, $$props.class)}>{displayDuration}</span>
+<span class={cls('Duration', settingsClasses.root, $$props.class)}>{displayDuration}</span>

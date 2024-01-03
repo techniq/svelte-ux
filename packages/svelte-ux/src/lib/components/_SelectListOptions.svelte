@@ -1,6 +1,6 @@
 <script lang="ts">
   import Logger from '../utils/logger';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { cls } from '../utils/styles';
 
   const logger = new Logger('SelectListOptions');
@@ -30,7 +30,7 @@
     empty?: string;
   } = {};
 
-  const theme = getComponentTheme('SelectField');
+  const settingsClasses = getComponentClasses('SelectField');
 
   export let menuOptionsEl: HTMLDivElement;
 </script>
@@ -41,7 +41,7 @@
   aria-expanded={open ? 'true' : 'false'}
   class={cls(
     '_SelectListOptions options group p-1 focus:outline-none',
-    theme.options,
+    settingsClasses.options,
     classes.root
   )}
   class:opacity-50={loading}
@@ -81,7 +81,7 @@
       <div
         class={cls(
           'group-header text-xs leading-8 tracking-widest text-surface-content/50 px-2',
-          theme.group,
+          settingsClasses.group,
           classes.group
         )}
       >
