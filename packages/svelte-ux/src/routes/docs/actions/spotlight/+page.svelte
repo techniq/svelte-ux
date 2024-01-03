@@ -33,16 +33,24 @@
         use:spotlight={{
           radius: '200px',
           borderWidth: '1px',
-          borderColorStops: '#999, #999, transparent',
-          surfaceColorStops: '#fff, #fff',
+          borderColorStops: 'var(--border_base), var(--border_base), transparent',
+          surfaceColorStops: 'var(--surface_base), var(--surface_base)',
           hover: {
             radius: '400px',
             borderWidth: '2px',
-            borderColorStops: 'var(--color-cyan-300) 5%, var(--color-blue-500)',
-            surfaceColorStops: 'rgb(255 255 255 / 90%), #fff',
+            borderColorStops: 'var(--border_hover_1) 5%, var(--border_hover_2)',
+            surfaceColorStops: 'var(--surface_hover_1), var(--surface_hover_2)',
           },
         }}
-        class="border p-4 transition-shadow hover:shadow-md rounded-lg before:rounded-lg"
+        class={cls(
+          'border p-4 transition-shadow hover:shadow-md rounded-lg before:rounded-lg',
+          '[--border_base:theme(colors.surface-content/50%)]',
+          '[--border_hover_1:theme(colors.primary)]',
+          '[--border_hover_2:theme(colors.secondary)]',
+          '[--surface_base:theme(colors.surface-200)]',
+          '[--surface_hover_1:theme(colors.surface-100/90%)]',
+          '[--surface_hover_2:theme(colors.surface-100)]'
+        )}
       >
         {item}
       </div>
@@ -61,11 +69,11 @@
           'border p-4 transition-shadow hover:shadow-md rounded-lg before:rounded-lg',
           '[--spotlight-radius:200px]',
           '[--spotlight-border-width:1px]',
-          '[--spotlight-border-color-stops:#999,#999,transparent]',
-          '[--spotlight-surface-color-stops:#fff,#fff]',
+          '[--spotlight-border-color-stops:theme(colors.surface-content/50%),theme(colors.surface-content/50%),transparent]',
+          '[--spotlight-surface-color-stops:theme(colors.surface-200),theme(colors.surface-200)]',
           'hover:[--spotlight-border-width:2px]',
-          'hover:[--spotlight-border-color-stops:var(--color-cyan-300)_5%,_var(--color-blue-500)]',
-          'hover:[--spotlight-surface-color-stops:rgb(255_255_255/90%),_#fff]'
+          'hover:[--spotlight-border-color-stops:theme(colors.primary)_5%,theme(colors.secondary)]',
+          'hover:[--spotlight-surface-color-stops:theme(colors.surface-100/90%),theme(colors.surface-100)]'
         )}
       >
         {item}
@@ -74,51 +82,24 @@
   </div>
 </Preview>
 
-<h2>Effect example 1</h2>
+<h2>Line example</h2>
 
 <Preview>
   <div class="grid grid-cols-sm gap-3">
     {#each items as item, i}
       <div
-        use:spotlight={{
-          radius: '200px',
-          borderWidth: '1px',
-          borderColorStops: '#999, #999, transparent',
-          surfaceColorStops: '#fff, #fff',
-          hover: {
-            radius: '400px',
-            borderWidth: '2px',
-            borderColorStops: 'var(--color-cyan-300) 5%, var(--color-blue-500)',
-            surfaceColorStops: 'rgb(255 255 255 / 90%), #fff',
-          },
-        }}
-        class="p-4 transition-shadow hover:shadow-md rounded-lg before:rounded-lg"
-      >
-        {item}
-      </div>
-    {/each}
-  </div>
-</Preview>
-
-<h2>Effect example 1</h2>
-
-<Preview>
-  <div class="grid grid-cols-sm gap-3">
-    {#each items as item, i}
-      <div
-        use:spotlight={{
-          radius: '100px',
-          borderWidth: '1px',
-          borderColorStops: '#999, #999, transparent',
-          surfaceColorStops: '#fff, #fff',
-          hover: {
-            radius: '50px',
-            borderWidth: '2px',
-            borderColorStops: 'var(--color-cyan-300) 100%, transparent',
-            surfaceColorStops: 'rgb(255 255 255 / 90%), #fff',
-          },
-        }}
-        class="border px-4 py-8 transition-shadow rounded-lg before:rounded-lg"
+        use:spotlight
+        class={cls(
+          'border px-4 py-8 transition-shadow hover:shadow-md rounded-lg before:rounded-lg',
+          '[--spotlight-radius:100px]',
+          '[--spotlight-border-width:1px]',
+          '[--spotlight-border-color-stops:theme(colors.surface-content/50%),theme(colors.surface-content/50%),transparent]',
+          '[--spotlight-surface-color-stops:theme(colors.surface-200),theme(colors.surface-200)]',
+          'hover:[--spotlight-radius:50px]',
+          'hover:[--spotlight-border-width:2px]',
+          'hover:[--spotlight-border-color-stops:theme(colors.primary)_100%,transparent]',
+          'hover:[--spotlight-surface-color-stops:theme(colors.surface-200/90%),theme(colors.surface-200)]'
+        )}
       >
         {item}
       </div>

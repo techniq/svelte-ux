@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   import { type ComponentProps, setContext, getContext } from 'svelte';
   import type Button from './Button.svelte';
-  import type { TailwindColors } from '$lib/types';
+  import type { ThemeColors } from '$lib/types';
 
   // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
   type ButtonProps = ComponentProps<Button>;
@@ -16,7 +16,7 @@
       | 'none'
       | undefined; // ButtonProps['variant'];
     size: 'sm' | 'md' | 'lg' | undefined; //ButtonProps['size'];
-    color: TailwindColors | 'default' | undefined; //ButtonProps['color'];
+    color: ThemeColors | 'default' | undefined; //ButtonProps['color'];
     rounded: boolean | 'full' | undefined; // ButtonProps['rounded']
   };
 

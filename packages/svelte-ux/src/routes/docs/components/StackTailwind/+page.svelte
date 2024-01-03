@@ -160,49 +160,49 @@
   <div class="inline-grid place-items-center">
     <Button class="col-span-full row-span-full border">Example</Button>
     <div
-      class="col-span-full row-span-full bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center"
+      class="col-span-full row-span-full bg-danger rounded-full h-4 w-4 text-xs text-danger-content flex items-center justify-center"
     >
       3
     </div>
   </div>
 </Preview>
 
-<h2>Corner w/ Button</h2>
+<h2>Corner with Button</h2>
 
 <Preview>
   <div class="inline-grid">
     <Button class="col-span-full row-span-full border">Example</Button>
     <div
-      class="col-span-full row-span-full bg-red-500 rounded-full h-4 w-4 -mr-1 -mt-1 text-xs text-white flex items-center justify-center self-start justify-self-end"
+      class="col-span-full row-span-full bg-danger rounded-full h-4 w-4 -mr-1 -mt-1 text-xs text-danger-content flex items-center justify-center self-start justify-self-end"
     >
       3
     </div>
   </div>
 </Preview>
 
-<h2>Corner /w Icon Button</h2>
+<h2>Corner with Icon Button</h2>
 
 <Preview>
   <div class="inline-grid">
     <Button icon={mdiFilterVariant} class="col-span-full row-span-full border p-3" />
     <div
-      class="col-span-full row-span-full bg-red-500 rounded-full h-4 w-4 text-xs text-white flex items-center justify-center self-start justify-self-end"
+      class="col-span-full row-span-full bg-danger rounded-full h-4 w-4 text-xs text-danger-content flex items-center justify-center self-start justify-self-end"
     >
       3
     </div>
   </div>
 </Preview>
 
-<h2>Corner (multi) /w Icon Button</h2>
+<h2>Corner (multi) with Icon Button</h2>
 
 <Preview>
   <div class="inline-grid">
     <Button icon={mdiFilterVariant} class="col-span-full row-span-full border p-3" />
     <div
-      class="col-span-full row-span-full self-start justify-self-end bg-red-500 rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center border border-white"
+      class="col-span-full row-span-full self-start justify-self-end bg-danger rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center border border-surface-100"
     />
     <div
-      class="col-span-full row-span-full self-end justify-self-end bg-green-500 rounded-full h-4 w-4 text-xs flex items-center justify-center border border-white"
+      class="col-span-full row-span-full self-end justify-self-end bg-success rounded-full h-4 w-4 text-xs flex items-center justify-center border border-surface-100"
     />
   </div>
 </Preview>

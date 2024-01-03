@@ -121,7 +121,7 @@
 <Preview>
   <MenuField {options}>
     <div slot="append">
-      <Button icon={mdiRefresh} class="p-2 text-black/50" />
+      <Button icon={mdiRefresh} class="p-2 text-surface-content/50" />
     </div>
   </MenuField>
 </Preview>
@@ -137,6 +137,6 @@
 <Preview>
   <MenuField
     {options}
-    classes={{ container: 'bg-accent-50 rounded-full border-0 text-accent-500' }}
+    classes={{ container: 'bg-primary/10 rounded-full border-0 text-primary' }}
   />
 </Preview>

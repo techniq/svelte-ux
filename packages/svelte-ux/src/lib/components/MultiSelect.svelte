@@ -105,7 +105,7 @@
 </script>
 
 {#if inlineSearch}
-  <div class="border-b border-gray-100 p-4 pb-2">
+  <div class="border-b border-surface-content/10 p-4 pb-2">
     <TextField
       {placeholder}
       iconRight={mdiMagnify}
@@ -148,7 +148,7 @@
 
   {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
     <!-- separator between selected and deselected -->
-    <div class="border-b border-gray-100" />
+    <div class="border-b border-surface-content/10" />
   {/if}
 
   <!-- initially unselected options -->
@@ -180,13 +180,13 @@
       </div>
     {:else}
       {#if !filteredSelectedOptions.length}
-        <div class="text-gray-400 text-xs py-2">There are no matching items.</div>
+        <div class="text-surface-content/50 text-xs py-2">There are no matching items.</div>
       {/if}
     {/each}
   </InfiniteScroll>
 </div>
 
-<div class="grid grid-cols-[auto,1fr,auto] border-t border-gray-100 px-4 py-2">
+<div class="grid grid-cols-[auto,1fr,auto] border-t border-surface-content/10 px-4 py-2">
   <slot name="actions" {searchText}>
     <div />
   </slot>
@@ -208,7 +208,7 @@
 
     <Button
       variant="fill"
-      color="accent"
+      color="primary"
       class="px-6"
       loading={applying}
       disabled={!$isSelectionDirty || applying}

@@ -78,10 +78,8 @@
     'inline-flex items-center justify-center',
     isSelectedStart
       ? '[--tw-gradient-from:transparent]'
-      : '[--tw-gradient-from:theme(colors.accent.500)]',
-    isSelectedEnd
-      ? '[--tw-gradient-to:transparent]'
-      : '[--tw-gradient-to:theme(colors.accent.500)]',
+      : '[--tw-gradient-from:theme(colors.primary)]',
+    isSelectedEnd ? '[--tw-gradient-to:transparent]' : '[--tw-gradient-to:theme(colors.primary)]',
     isSelected && (isVerticalSelection ? 'bg-gradient-to-b' : 'bg-gradient-to-r'),
     hidden && 'opacity-0 pointer-events-none',
     theme.root,
@@ -96,7 +94,7 @@
       isCurrent ? 'font-bold' : 'font-normal'
     )}
     variant={isSelected ? 'fill' : 'default'}
-    color={isSelected || isCurrent ? 'accent' : 'default'}
+    color={isSelected || isCurrent ? 'primary' : 'default'}
     {disabled}
     on:click={() => {
       // Do not set selected date as this is causing issues with controlled selected (ex. date ranges, arrays, etc) / changing from date to { from: ..., to: ... }
