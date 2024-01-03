@@ -1,7 +1,7 @@
 <script lang="ts">
   import { uniqueId } from '$lib/utils/string';
   import { cls } from '$lib/utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   /** Color of light */
   export let lightColor = '#666666';
@@ -26,7 +26,7 @@
     root?: string;
     svg?: string;
   } = {};
-  const theme = getComponentTheme('Shine');
+  const settingsClasses = getComponentClasses('Shine');
 
   const filterId = uniqueId('filter-');
 
@@ -46,7 +46,7 @@
 
 <svelte:window on:pointermove={onPointerMove} on:scroll={onScroll} />
 
-<svg class={cls('fixed inset-0 pointer-events-none', theme.svg, classes?.svg)}>
+<svg class={cls('fixed inset-0 pointer-events-none', settingsClasses.svg, classes?.svg)}>
   <filter id={filterId} color-interpolation-filters="sRGB">
     <feGaussianBlur in="SourceAlpha" stdDeviation={depth} />
 
@@ -77,7 +77,7 @@
 <div
   style:filter="url(#{filterId})"
   {...$$restProps}
-  class={cls('inline-block', theme.root, classes?.root, $$props.class)}
+  class={cls('inline-block', settingsClasses.root, classes?.root, $$props.class)}
   bind:this={wrapperEl}
 >
   <slot />

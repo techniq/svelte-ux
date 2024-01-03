@@ -4,7 +4,7 @@
   import { cls } from '../utils/styles';
   import { scrollIntoView as scrollIntoViewAction, type ScrollIntoViewOptions } from '../actions/scroll';
   import { setButtonGroup } from './ButtonGroup.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { settings, getSettings } from './settings';
 
   type ButtonProps = ComponentProps<Button>;
@@ -19,7 +19,7 @@
     icon: 'text-surface-content/50',
     selected: 'font-semibold [:not(.group:hover)>&]:bg-surface-content/5',
   };
-  const theme = getComponentTheme('MenuItem');
+  const settingsClasses = getComponentClasses('MenuItem');
 
   let scrollOptions: ScrollIntoViewOptions;
   $: scrollOptions = typeof(scrollIntoView) === "boolean" ? { condition: scrollIntoView } as ScrollIntoViewOptions : scrollIntoView;
@@ -43,7 +43,7 @@
     'MenuItem',
     'text-left items-center p-2 hover:bg-surface-content/5 rounded duration-75',
     selected && classes?.selected,
-    theme.root,
+    settingsClasses.root,
     classes?.root,
     $$props.class
   )}

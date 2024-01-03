@@ -6,7 +6,7 @@
   import Button from './Button.svelte';
   import { browser } from '../utils/env';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let title: string | number | Array<string | number> = '';
 
@@ -15,7 +15,7 @@
    */
   export let head = true;
 
-  const theme = getComponentTheme('AppBar');
+  const settingsClasses = getComponentClasses('AppBar');
 
   $: titleString = Array.isArray(title) ? title.filter((x) => x).join(' › ') : title.toString();
 
@@ -26,7 +26,7 @@
 </script>
 
 <header
-  class={cls('AppBar', 'px-4 flex items-center relative z-50', theme.root, $$restProps.class)}
+  class={cls('AppBar', 'px-4 flex items-center relative z-50', settingsClasses.root, $$restProps.class)}
 >
   <Button icon={mdiMenu} on:click={() => ($showDrawer = !$showDrawer)} class="p-3" />
   {#if $$slots.title}

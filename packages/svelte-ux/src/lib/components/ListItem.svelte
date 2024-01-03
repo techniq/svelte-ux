@@ -5,7 +5,7 @@
   import Overlay from './Overlay.svelte';
   import type { ComponentProps } from '../types';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let title: string | number | null = null;
   export let subheading: string | number | null = null;
@@ -41,7 +41,7 @@
     title?: string;
     subheading?: string;
   } = {};
-  const theme = getComponentTheme('ListItem');
+  const settingsClasses = getComponentClasses('ListItem');
 
   /**
    * Show loading overlay
@@ -60,7 +60,7 @@
     list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
     noShadow !== true && 'elevation-1',
     noBackground !== true && 'bg-surface-100',
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -75,11 +75,11 @@
   <slot name="avatar">
     {#if icon != null}
       {#if avatar}
-        <Avatar class={cls(theme.avatar, classes.avatar)} {...avatar}>
-          <Icon path={icon} class={cls(theme.icon, classes.icon)} />
+        <Avatar class={cls(settingsClasses.avatar, classes.avatar)} {...avatar}>
+          <Icon path={icon} class={cls(settingsClasses.icon, classes.icon)} />
         </Avatar>
       {:else}
-        <Icon path={icon} class={cls(theme.icon, classes.icon)} />
+        <Icon path={icon} class={cls(settingsClasses.icon, classes.icon)} />
       {/if}
     {/if}
   </slot>
@@ -87,13 +87,13 @@
   <div class="flex-grow">
     <slot name="title">
       {#if title != null}
-        <div class={cls(theme.title, classes.title)}>{title}</div>
+        <div class={cls(settingsClasses.title, classes.title)}>{title}</div>
       {/if}
     </slot>
 
     <slot name="subheading">
       {#if subheading != null}
-        <div class={cls('text-sm text-surface-content/50', theme.subheading, classes.subheading)}>
+        <div class={cls('text-sm text-surface-content/50', settingsClasses.subheading, classes.subheading)}>
           {subheading}
         </div>
       {/if}

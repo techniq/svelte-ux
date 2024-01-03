@@ -2,7 +2,7 @@
   import type { ThemeColors } from '$lib/types';
   import { uniqueId } from '$lib/utils/string';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let id: string = uniqueId('switch-');
   export let value: any = undefined;
@@ -18,17 +18,17 @@
     switch?: string;
     toggle?: string;
   } = {};
-  const theme = getComponentTheme('Switch');
+  const settingsClasses = getComponentClasses('Switch');
 </script>
 
-<div class={cls('Switch', 'inline-block', theme.root, classes.root)}>
+<div class={cls('Switch', 'inline-block', settingsClasses.root, classes.root)}>
   <input
     {id}
     type="checkbox"
     bind:checked
     on:change
     {value}
-    class={cls('peer appearance-none inline', theme.input, classes.input)}
+    class={cls('peer appearance-none inline', settingsClasses.input, classes.input)}
     {disabled}
   />
 
@@ -66,7 +66,7 @@
       }[color],
       checked === false && 'bg-surface-content/20',
       disabled ? 'opacity-50' : 'cursor-pointer peer-focus-visible:ring-2 ring-offset-1',
-      theme.switch,
+      settingsClasses.switch,
       classes.switch,
       $$props.class
     )}
@@ -77,7 +77,7 @@
         'toggle w-1/2 aspect-square h-full rounded-full transition-all duration-200 bg-surface-100 grid items-center justify-center transform',
         checked && 'translate-x-full',
         checked === null && 'border',
-        theme.toggle,
+        settingsClasses.toggle,
         classes.toggle
       )}
     >
