@@ -17,6 +17,7 @@
 
   import { settings } from '$lib';
   import type { PageData } from './$types';
+  import { DateToken } from '$lib/utils/date';
 
   export let data: PageData;
 
@@ -26,12 +27,39 @@
   $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
   settings({
+    // Usefull to test different locales with the docs
     // formats: {
     //   numbers: {
     //     defaults: {
     //       locales: 'fr',
     //       currency: 'EUR',
     //     },
+    //   },
+    //   dates: {
+    //     locales: 'fr',
+    //     weekStartsOn: 1,
+    //     presets: {
+    //       days: {
+    //         long: { dateStyle: 'full' },
+    //       },
+    //       months: {
+    //         default: [DateToken.Month_long],
+    //       },
+    //     },
+    //     ordinalSuffixes: {
+    //       fr: {
+    //         one: 'er',
+    //         two: '',
+    //         few: '',
+    //         other: '',
+    //       },
+    //     },
+    //   },
+    // },
+    // dictionary: {
+    //   Cancel: 'Annuler',
+    //   Date: {
+    //     Day: 'Jour',
     //   },
     // },
     // theme: {
