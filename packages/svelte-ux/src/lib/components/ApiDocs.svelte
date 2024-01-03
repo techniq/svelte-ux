@@ -25,17 +25,19 @@
 
 <div class="ApiDocs grid gap-8">
   <div>
-    <h2 id="props" class="text-xs uppercase leading-8 tracking-widest text-black/50">Props</h2>
-    <div class="border">
+    <h2 id="props" class="text-xs uppercase leading-8 tracking-widest text-surface-content/50">
+      Props
+    </h2>
+    <div>
       {#each api.props as prop}
         <ListItem
           list="type"
           icon={mdiCodeBraces}
-          avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
+          avatar={{ size: 'sm', class: 'text-xs text-white bg-blue-500' }}
         >
           <div slot="title">{prop.name}</div>
 
-          <div slot="subheading" class="text-black/50 text-xs">
+          <div slot="subheading" class="text-surface-content/50 text-xs">
             {#if prop.description}
               <span class="whitespace-pre-line">
                 {prop.description}
@@ -46,7 +48,7 @@
           <div slot="actions" class="flex flex-wrap justify-end gap-1">
             {#if prop.isRequired}
               <div
-                class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
+                class="inline-block border bg-red-500/10 border-red-500 text-red-600 px-2 rounded-full text-xs"
               >
                 Required
               </div>
@@ -54,7 +56,7 @@
 
             <Tooltip title="default" offset={2}>
               <div
-                class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
+                class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
               >
                 {prop.value}
               </div>
@@ -62,7 +64,7 @@
 
             <Tooltip title="type" offset={2}>
               <div
-                class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+                class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
               >
                 {prop.type ?? 'unknown'}
               </div>
@@ -75,7 +77,7 @@
     </div>
 
     {#if api.rest_props}
-      <div class="text-black/50 text-xs flex gap-2 mt-2 ml-4 items-center">
+      <div class="text-surface-content/50 text-xs flex gap-2 mt-2 ml-4 items-center">
         <Icon path={mdiInformationOutline} />
         <span>
           Remaining props are passed to underlying
@@ -84,7 +86,7 @@
               href="/docs/components/{api.rest_props.name}#props"
               target="_blank"
               variant="none"
-              class="text-xs font-semibold bg-white border border-black/30 px-2 rounded-full"
+              class="text-xs font-semibold bg-surface-100 border px-2 rounded-full"
             >
               &lt;{api.rest_props.name}&gt;
             </Button>
@@ -95,7 +97,7 @@
                 .name}#attributes"
               target="_blank"
               variant="none"
-              class="text-xs font-semibold bg-white border border-black/30 px-2 rounded-full"
+              class="text-xs font-semibold bg-surface-100 border px-2 rounded-full"
             >
               &lt;{api.rest_props.name}&gt;
             </Button>
@@ -107,8 +109,10 @@
   </div>
 
   <div>
-    <h2 id="slots" class="text-xs uppercase leading-8 tracking-widest text-black/50">Slots</h2>
-    <div class="border">
+    <h2 id="slots" class="text-xs uppercase leading-8 tracking-widest text-surface-content/50">
+      Slots
+    </h2>
+    <div>
       {#each api.slots as slot}
         <ListItem
           list="type"
@@ -123,7 +127,7 @@
             {/if}
           </div>
 
-          <div slot="subheading" class="text-black/50 text-xs">
+          <div slot="subheading" class="text-surface-content/50 text-xs">
             {slot.description ?? ''}
           </div>
 
@@ -132,7 +136,7 @@
               {#each parseSlotProps(slot.slot_props) as { key, value }}
                 <Tooltip title="slot prop" offset={2}>
                   <div
-                    class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+                    class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
                   >
                     {key}: {value}
                   </div>
@@ -148,8 +152,10 @@
   </div>
 
   <div>
-    <h2 id="events" class="text-xs uppercase leading-8 tracking-widest text-black/40">Events</h2>
-    <div class="border">
+    <h2 id="events" class="text-xs uppercase leading-8 tracking-widest text-surface-content/50">
+      Events
+    </h2>
+    <div>
       {#each api.events as event}
         <ListItem
           list="type"
@@ -161,13 +167,13 @@
           <div slot="actions" class="flex flex-wrap justify-end gap-1">
             {#if event.element != null}
               <div
-                class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+                class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
               >
                 {event.element}
               </div>
             {/if}
             <div
-              class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
+              class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
             >
               {event.type}
             </div>
@@ -180,19 +186,22 @@
   </div>
 
   <div>
-    <h2 id="module_exports" class="text-xs uppercase leading-8 tracking-widest text-black/50">
+    <h2
+      id="module_exports"
+      class="text-xs uppercase leading-8 tracking-widest text-surface-content/50"
+    >
       Module Exports
     </h2>
-    <div class="border">
+    <div>
       {#each api.moduleExports as prop}
         <ListItem
           list="type"
           icon={mdiCodeBraces}
-          avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
+          avatar={{ size: 'sm', class: 'text-xs text-white bg-blue-500' }}
         >
           <div slot="title">{prop.name}</div>
 
-          <div slot="subheading" class="text-black/50 text-xs">
+          <div slot="subheading" class="text-surface-content/50 text-xs">
             {#if prop.description}
               <span class="whitespace-pre-line">
                 {prop.description}
@@ -203,7 +212,7 @@
           <div slot="actions" class="flex flex-wrap justify-end gap-1">
             {#if prop.isRequired}
               <div
-                class="inline-block border bg-red-100 border-red-500 text-red-600 px-2 rounded-full text-xs"
+                class="inline-block border bg-red-500/10 border-red-500 text-red-600 px-2 rounded-full text-xs"
               >
                 Required
               </div>
@@ -211,7 +220,7 @@
 
             <Tooltip title="value" offset={2}>
               <div
-                class="inline-block border bg-gray-100 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
+                class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
               >
                 {prop.value}
               </div>
@@ -219,7 +228,7 @@
 
             <Tooltip title="type" offset={2}>
               <div
-                class="inline-block border bg-orange-100 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+                class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
               >
                 {prop.type ?? 'unknown'}
               </div>

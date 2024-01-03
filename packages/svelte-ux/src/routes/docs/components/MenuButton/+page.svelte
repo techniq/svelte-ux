@@ -48,7 +48,7 @@
 <h2>Variant</h2>
 
 <Preview>
-  <MenuButton {options} variant="fill" color="accent" />
+  <MenuButton {options} variant="fill" color="primary" />
 </Preview>
 
 <h2>Size</h2>

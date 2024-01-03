@@ -42,7 +42,7 @@
 <Preview>
   <AppBar title="Example">
     <div slot="actions">
-      <Button icon={mdiRefresh} class="p-2 hover:bg-white/10" />
+      <Button icon={mdiRefresh} class="p-2 hover:bg-surface-100/10" />
     </div>
   </AppBar>
 </Preview>
@@ -51,7 +51,7 @@
 
 <Preview>
   <div class="grid gap-2">
-    <AppBar title="Example" class="bg-accent-500 text-white" />
-    <AppBar title="Example" class="bg-purple-500 text-white" />
+    <AppBar title="Example" class="bg-primary text-primary-content" />
+    <AppBar title="Example" class="bg-blue-500 text-primary-content" />
   </div>
 </Preview>

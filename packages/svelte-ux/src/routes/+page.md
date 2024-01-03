@@ -2,7 +2,7 @@
   import Button from '$lib/components/Button.svelte';
 </script>
 
-<div class="prose max-w-none bg-white rounded border p-4">
+<div class="prose max-w-none bg-surface-100 rounded border p-4">
 
 <h1>Installation</h1>
 

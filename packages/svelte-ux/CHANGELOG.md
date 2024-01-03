@@ -1,5 +1,24 @@
 # svelte-ux
 
+## 0.58.0-next.2
+
+### Patch Changes
+
+- Add styles (with daisy) as top-level export ([#146](https://github.com/techniq/svelte-ux/pull/146))
+
+## 0.58.0-next.1
+
+### Minor Changes
+
+- Support `ux.themes` tailwind config, including Daisy UI ([#146](https://github.com/techniq/svelte-ux/pull/146))
+
+## 0.58.0-next.0
+
+### Minor Changes
+
+- Theme support ([#146](https://github.com/techniq/svelte-ux/pull/146))
+- Removes SelectList. Updates SelectField features to support SelectList's use case via property/attribute overrides. Updates QuickSearch to use SelectField. Defines MenuOption type & updates MenuField & SelectField to use it; this results in renaming of SelectField options' `name` field to become `label`, standardizing the API across the two. Also adds `activeOptionIcon` to SelectField so users can opt-in to dynamically updating the field icon based on the selected option. Also fixed a bug with the `scrollIntoView` action related to its `onlyIfNeeded` flag. ([#127](https://github.com/techniq/svelte-ux/pull/127))
+
 ## 0.58.1
 
 ### Patch Changes
@@ -7,10 +26,6 @@
 - Move `sveld` from peerDependencies to dependencies to fix install (and match next release) ([`7539e467edbb4506c1930f3fad0a4efd7e457ff0`](https://github.com/techniq/svelte-ux/commit/7539e467edbb4506c1930f3fad0a4efd7e457ff0))
 
 ## 0.58.0
-
-### Minor Changes
-
-- Removes SelectList. Updates SelectField features to support SelectList's use case via property/attribute overrides. Updates QuickSearch to use SelectField. Defines MenuOption type & updates MenuField & SelectField to use it; this results in renaming of SelectField options' `name` field to become `label`, standardizing the API across the two. Also adds `activeOptionIcon` to SelectField so users can opt-in to dynamically updating the field icon based on the selected option. Also fixed a bug with the `scrollIntoView` action related to its `onlyIfNeeded` flag. ([#127](https://github.com/techniq/svelte-ux/pull/127))
 
 ### Patch Changes
 

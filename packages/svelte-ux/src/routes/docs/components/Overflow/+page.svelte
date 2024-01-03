@@ -20,7 +20,7 @@
   <Overflow class="w-1/2 h-[200px] overflow-hidden" let:overflowX let:overflowY>
     <div>overflowX: {overflowX}</div>
     <div>overflowY: {overflowY}</div>
-    <div class="whitespace-nowrap border border-black/20 rounded-lg bg-white">
+    <div class="whitespace-nowrap border rounded-lg bg-surface-100">
       {#each { length: overflowItems } as _}
         <div>Resize the window to see text truncate and watch values</div>
       {/each}
@@ -44,7 +44,7 @@
     <Button icon={mdiChevronLeft} class="absolute top-1/2 left-0 -translate-y-1/2" size="sm" />
     <div class="flex gap-3 overflow-auto scrollbar-none">
       {#each { length: 20 } as _}
-        <div class="border rounded-lg px-4 bg-white">Item</div>
+        <div class="border rounded-lg px-4 bg-surface-100">Item</div>
       {/each}
     </div>
     <Button icon={mdiChevronRight} class="absolute top-1/2 right-0 -translate-y-1/2" size="sm" />

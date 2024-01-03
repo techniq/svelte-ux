@@ -170,9 +170,9 @@
   )}
 >
   <div class={cls(showSidebar && 'md:col-start-2')}>
-    <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-white">
+    <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-surface-100">
       <ToggleOption value="from" class="flex-1">
-        <div class="text-xs text-black/50">Start</div>
+        <div class="text-xs text-surface-content/50">Start</div>
         {#if selected?.from}
           <div class="font-medium">{format(selected.from, PeriodType.Day)}</div>
         {:else}
@@ -194,7 +194,7 @@
       </ToggleOption>
 
       <ToggleOption value="to" class="flex-1">
-        <div class="text-xs text-black/50">End</div>
+        <div class="text-xs text-surface-content/50">End</div>
         {#if selected?.to}
           <div class="font-medium">{format(selected.to, PeriodType.Day)}</div>
         {:else}
@@ -222,14 +222,13 @@
       {#if showPeriodTypes}
         {#if $mdScreen}
           <div>
-            <div class="text-xs text-black/50 uppercase mb-1">Type</div>
+            <div class="text-xs text-surface-content/50 uppercase mb-1">Type</div>
             <ToggleGroup
               bind:value={selectedPeriodType}
               on:change={(e) => onPeriodTypeChange(e.detail.value)}
               variant="outline"
               inset
               vertical
-              class="bg-white"
             >
               {#each periodTypeOptions as option}
                 <ToggleOption value={option.value}>
@@ -252,14 +251,8 @@
         {#key selectedPeriodType}
           {#if $mdScreen}
             <div>
-              <div class="text-xs text-black/50 uppercase mb-1">Presets</div>
-              <ToggleGroup
-                bind:value={selectedPreset}
-                variant="outline"
-                inset
-                vertical
-                class="bg-white"
-              >
+              <div class="text-xs text-surface-content/50 uppercase mb-1">Presets</div>
+              <ToggleGroup bind:value={selectedPreset} variant="outline" inset vertical>
                 {#each presetOptions as option}
                   <ToggleOption
                     value={option.value}
@@ -287,12 +280,12 @@
 
       {#if hasDayOfWeek(selectedPeriodType)}
         <div>
-          <div class="text-xs text-black/50 uppercase mb-1">Start day of week</div>
+          <div class="text-xs text-surface-content/50 uppercase mb-1">Start day of week</div>
           <ToggleGroup
             bind:value={selectedDayOfWeek}
             variant="outline"
             inset
-            classes={{ root: 'bg-white', option: 'px-0' }}
+            classes={{ root: 'bg-surface-100', option: 'px-0' }}
           >
             {#each [DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday] as day}
               <ToggleOption value={day}
@@ -308,7 +301,7 @@
     </div>
   {/if}
 
-  <div class="bg-white border rounded overflow-auto">
+  <div class="bg-surface-100 border rounded overflow-auto">
     <DateSelect
       {selected}
       periodType={selectedPeriodType}

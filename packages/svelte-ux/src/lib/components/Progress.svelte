@@ -17,12 +17,12 @@
     'h-2 w-full',
 
     // bar color
-    '[--color:theme(colors.accent.500)]',
+    '[--color:theme(colors.primary)]',
     '[&::-webkit-progress-value]:bg-[--color]',
     '[&::-moz-progress-bar]:bg-[--color]',
 
     // track color
-    '[--track-color:theme(colors.gray.100)]',
+    '[--track-color:theme(colors.surface-200)]',
     '[&::-webkit-progress-bar]:bg-[--track-color]',
     'bg-[--track-color]',
 

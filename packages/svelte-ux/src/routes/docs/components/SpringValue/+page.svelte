@@ -40,7 +40,7 @@
   <Button variant="fill" on:click={() => (value = Math.random() * 10)}>Random</Button>
   <Button variant="fill" on:click={() => (value = null)}>Null</Button>
 </div>
-<span class="text-xs ml-2 text-black/50">
+<span class="text-xs ml-2 text-surface-content/50">
   also keyboard up/down with shift: +/- 10 option: +/- 100
 </span>
 

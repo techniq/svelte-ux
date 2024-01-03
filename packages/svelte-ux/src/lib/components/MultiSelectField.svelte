@@ -162,14 +162,14 @@
 
       {#if loading}
         <span class="inline-block w-[29px] h-[28px] text-center">
-          <ProgressCircle size={16} width={2} class="text-black/50" />
+          <ProgressCircle size={16} width={2} class="text-surface-content/50" />
         </span>
         <!-- {:else if readonly} -->
         <!-- Do not show chevron or clear buttons -->
       {:else if value.length && clearable}
         <Button
           icon={mdiClose}
-          class="text-black/50 p-1"
+          class="text-surface-content/50 p-1"
           on:click={(e) => {
             e.stopPropagation();
             clear();
@@ -179,7 +179,7 @@
       {:else}
         <Button
           icon={mdiChevronDown}
-          class="text-black/50 p-1 transform {open ? 'rotate-180' : ''}"
+          class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
           tabindex="-1"
           on:click={(e) => {
             e.stopPropagation();

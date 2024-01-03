@@ -13,19 +13,19 @@
       <CopyButton value="Stop copying me!" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" />
+      <CopyButton value="Stop copying me!" color="primary" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" variant="outline" />
+      <CopyButton value="Stop copying me!" color="primary" variant="outline" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" variant="fill" />
+      <CopyButton value="Stop copying me!" color="primary" variant="fill" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" variant="fill-light" />
+      <CopyButton value="Stop copying me!" color="primary" variant="fill-light" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" variant="fill-outline" />
+      <CopyButton value="Stop copying me!" color="primary" variant="fill-outline" />
     </div>
   </div>
 </Preview>
@@ -38,19 +38,19 @@
       <CopyButton value="Stop copying me!" size="sm" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" size="sm" />
+      <CopyButton value="Stop copying me!" color="primary" size="sm" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" variant="outline" size="sm" />
+      <CopyButton value="Stop copying me!" color="primary" variant="outline" size="sm" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" variant="fill" size="sm" />
+      <CopyButton value="Stop copying me!" color="primary" variant="fill" size="sm" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" variant="fill-light" size="sm" />
+      <CopyButton value="Stop copying me!" color="primary" variant="fill-light" size="sm" />
     </div>
     <div>
-      <CopyButton value="Stop copying me!" color="accent" variant="fill-outline" size="sm" />
+      <CopyButton value="Stop copying me!" color="primary" variant="fill-outline" size="sm" />
     </div>
   </div>
 </Preview>

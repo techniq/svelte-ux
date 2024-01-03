@@ -33,7 +33,7 @@
   >
     <div
       class={cls(
-        'ml-1 inline-block text-sm text-gray-900',
+        'ml-1 inline-block text-sm text-surface-content',
         !disabled && 'cursor-pointer',
         theme.container,
         classes.container
