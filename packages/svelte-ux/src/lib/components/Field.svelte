@@ -4,7 +4,7 @@
   import { uniqueId } from 'lodash-es';
 
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -41,7 +41,7 @@
     prepend?: string;
     append?: string;
   } = {};
-  const theme = getComponentTheme('Field');
+  const settingsClasses = getComponentClasses('Field');
 
   $: hasValue = Array.isArray(value)
     ? value.length > 0
@@ -64,7 +64,7 @@
     error ? '[--color:theme(colors.danger)]' : '[--color:theme(colors.primary)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -76,7 +76,7 @@
         'truncate group-hover:text-surface-content/70 group-focus-within:text-primary group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
         error ? 'text-danger/80' : 'text-surface-content/50',
         `placement-${labelPlacement}`,
-        theme.label,
+        settingsClasses.label,
         classes.label
       )}
       for={id}
@@ -99,7 +99,7 @@
         !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
         error && 'border-danger',
         'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
-        theme.container,
+        settingsClasses.container,
         classes.container
       )}
     >
@@ -108,7 +108,7 @@
           <div
             class={cls(
               'prepend whitespace-nowrap flex items-center',
-              theme.prepend,
+              settingsClasses.prepend,
               classes.prepend
             )}
           >
@@ -132,7 +132,7 @@
                 error ? 'text-danger/80' : 'text-surface-content/50',
                 `placement-${labelPlacement}`,
                 (labelPlacement === 'inset' || hasValue) && 'shrink',
-                theme.label,
+                settingsClasses.label,
                 classes.label
               )}
               for={id}
@@ -148,7 +148,7 @@
               hasInsetLabel && 'pt-4',
               dense ? 'my-1' : 'my-2',
               center && 'text-center',
-              theme.input,
+              settingsClasses.input,
               classes.input
             )}
           >
@@ -161,7 +161,7 @@
         </div>
 
         {#if hasAppend}
-          <div class={cls('append whitespace-nowrap', theme.append, classes.append)}>
+          <div class={cls('append whitespace-nowrap', settingsClasses.append, classes.append)}>
             {#if clearable && hasValue}
               <Button
                 icon={mdiClose}
@@ -191,7 +191,7 @@
         error ? 'error' : 'hint',
         'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
         error ? 'text-danger' : 'text-surface-content/50 scale-y-0',
-        theme.error,
+        settingsClasses.error,
         classes.error
       )}
     >

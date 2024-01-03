@@ -12,7 +12,7 @@
   import MenuItem from './MenuItem.svelte';
   import Toggle from './Toggle.svelte';
   import Tooltip from './Tooltip.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   type Pagination = ReturnType<typeof paginationStore>;
 
@@ -39,12 +39,12 @@
     pagination?: string;
     perPage?: string;
   } = {};
-  const theme = getComponentTheme('Pagination');
+  const settingsClasses = getComponentClasses('Pagination');
 </script>
 
 {#if $pagination.totalPages > 1 || !hideSinglePage}
   <div
-    class={cls('Pagination', 'flex items-center gap-1', theme.root, classes.root, $$props.class)}
+    class={cls('Pagination', 'flex items-center gap-1', settingsClasses.root, classes.root, $$props.class)}
   >
     {#each show as component}
       {#if component === 'actions'}
@@ -58,7 +58,7 @@
             on:click={pagination.firstPage}
             disabled={$pagination.isFirst}
             aria-label="First Page"
-            class={cls('p-2', theme.buttons, classes.buttons)}
+            class={cls('p-2', settingsClasses.buttons, classes.buttons)}
           />
         </Tooltip>
       {/if}
@@ -70,7 +70,7 @@
             on:click={pagination.prevPage}
             disabled={$pagination.isFirst}
             aria-label="Previous Page"
-            class={cls('p-2', theme.buttons, classes.buttons)}
+            class={cls('p-2', settingsClasses.buttons, classes.buttons)}
           />
         </Tooltip>
       {/if}
@@ -82,7 +82,7 @@
             on:click={pagination.nextPage}
             disabled={$pagination.isLast}
             aria-label="Next Page"
-            class={cls('p-2', theme.buttons, classes.buttons)}
+            class={cls('p-2', settingsClasses.buttons, classes.buttons)}
           />
         </Tooltip>
       {/if}
@@ -94,13 +94,13 @@
             on:click={pagination.lastPage}
             disabled={$pagination.isLast}
             aria-label="Last Page"
-            class={cls('p-2', theme.buttons, classes.buttons)}
+            class={cls('p-2', settingsClasses.buttons, classes.buttons)}
           />
         </Tooltip>
       {/if}
 
       {#if component === 'perPage'}
-        <div class={cls('text-sm text-center', theme.perPage, classes.perPage)}>
+        <div class={cls('text-sm text-center', settingsClasses.perPage, classes.perPage)}>
           Per page:
           <Toggle let:on={open} let:toggle>
             <span>
@@ -133,7 +133,7 @@
 
       {#if component === 'pagination'}
         <slot name="pagination" pagination={$pagination}>
-          <div class={cls('text-sm tabular-nums', theme.pagination, classes.pagination)}>
+          <div class={cls('text-sm tabular-nums', settingsClasses.pagination, classes.pagination)}>
             {format($pagination)}
           </div>
         </slot>

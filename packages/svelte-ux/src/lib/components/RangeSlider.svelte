@@ -34,7 +34,7 @@
   import { decimalCount, round } from '$lib/utils/number';
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let min = 0;
   export let max = 100;
@@ -42,7 +42,7 @@
   export let value = [min, max];
   export let disabled = false;
 
-  const theme = getComponentTheme('RangeSlider');
+  const settingsClasses = getComponentClasses('RangeSlider');
 
   $: stepPercent = step / (max - min);
   $: stepDecimals = decimalCount(step);
@@ -226,7 +226,7 @@
     'RangeSlider',
     'group relative h-2 bg-surface-content/10 rounded-full select-none outline-none',
     disabled && ' pointer-events-none opacity-50',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
   style="--start: {$start}; --end: {$end};"

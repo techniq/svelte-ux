@@ -6,7 +6,7 @@
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { format as format_ux } from '../utils';
 
   const dispatch = createEventDispatcher();
@@ -19,7 +19,7 @@
   export let fade: boolean = false;
   export let format = getCustomFormat(periodType);
 
-  const theme = getComponentTheme('DateButton');
+  const settingsClasses = getComponentClasses('DateButton');
 
   function getCustomFormat(periodType: PeriodType) {
     switch (periodType) {
@@ -82,7 +82,7 @@
     isSelectedEnd ? '[--tw-gradient-to:transparent]' : '[--tw-gradient-to:theme(colors.primary)]',
     isSelected && (isVerticalSelection ? 'bg-gradient-to-b' : 'bg-gradient-to-r'),
     hidden && 'opacity-0 pointer-events-none',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
 >

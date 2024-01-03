@@ -8,7 +8,7 @@
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let options: Array<{ label: string; value: any; icon?: string }>;
   export let value: any = null;
@@ -21,7 +21,7 @@
     label?: string;
     icon?: string;
   } = {};
-  const theme = getComponentTheme('MenuButton');
+  const settingsClasses = getComponentClasses('MenuButton');
 
   let open = false;
 </script>
@@ -29,10 +29,10 @@
 <Button
   on:click={() => (open = !open)}
   {...$$restProps}
-  class={cls('MenuButton', theme.root, classes.root, $$props.class)}
+  class={cls('MenuButton', settingsClasses.root, classes.root, $$props.class)}
 >
   <slot name="selection">
-    <span class={cls('truncate', theme.label, classes.label)}>
+    <span class={cls('truncate', settingsClasses.label, classes.label)}>
       {selected?.label ?? 'No selection'}
     </span>
   </slot>
@@ -42,7 +42,7 @@
     class={cls(
       'opacity-50 transform transition-all -mr-2 duration-300',
       open && '-rotate-180',
-      theme.icon,
+      settingsClasses.icon,
       classes.icon
     )}
   />
