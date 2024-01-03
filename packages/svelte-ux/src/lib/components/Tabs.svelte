@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import Tab from './Tab.svelte';
 
   export let value: any = undefined;
@@ -17,7 +17,7 @@
     tab?: ComponentProps<Tab>['classes'];
     content?: string;
   } = {};
-  const theme = getComponentTheme('Tabs');
+  const settingsClasses = getComponentClasses('Tabs');
 </script>
 
 <div
@@ -31,7 +31,7 @@
       left: 'flex-row',
       right: 'flex-row-reverse',
     }[placement],
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -46,7 +46,7 @@
         left: '-mr-px',
         right: '-ml-px',
       }[placement],
-      theme.tabs,
+      settingsClasses.tabs,
       classes.tabs
     )}
   >
@@ -56,7 +56,7 @@
           {placement}
           selected={value === tab.value}
           on:click={() => (value = tab.value)}
-          classes={{ ...theme.tab, ...classes.tab }}
+          classes={{ ...settingsClasses.tab, ...classes.tab }}
         >
           {tab.label}
         </Tab>
@@ -73,7 +73,7 @@
         left: 'border-l',
         right: 'border-r',
       }[placement],
-      theme.content,
+      settingsClasses.content,
       classes.content
     )}
   >

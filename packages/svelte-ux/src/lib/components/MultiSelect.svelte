@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   import { type ComponentProps, createEventDispatcher } from 'svelte';
   import { flip } from 'svelte/animate';
@@ -36,7 +36,7 @@
   export let classes: {
     root?: string;
   } = {};
-  const theme = getComponentTheme('MultiSelect');
+  const settingsClasses = getComponentClasses('MultiSelect');
 
   export let onApply = async (ctx: {
     selection: typeof $selection;
@@ -115,7 +115,7 @@
   </div>
 {/if}
 
-<div class={cls('overflow-auto py-1 px-4', theme.root, classes.root, $$restProps.class)}>
+<div class={cls('overflow-auto py-1 px-4', settingsClasses.root, classes.root, $$restProps.class)}>
   <!-- initially selected options -->
   <InfiniteScroll items={filteredSelectedOptions} disabled={!infiniteScroll} let:visibleItems>
     {#each visibleItems as option (get(option, valueProp))}

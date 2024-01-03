@@ -1,7 +1,7 @@
 <script lang="ts">
   import Collapse from './Collapse.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   /**
    * Controls how first, last, and gap between are calculated
@@ -21,7 +21,7 @@
     root?: string;
     toggle?: string;
   } = {};
-  const theme = getComponentTheme('ExpansionPanel');
+  const settingsClasses = getComponentClasses('ExpansionPanel');
 </script>
 
 <Collapse
@@ -34,7 +34,7 @@
       list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
       list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
       list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
-      theme.root,
+      settingsClasses.root,
       classes.root,
       $$props.class
     ),
@@ -49,7 +49,7 @@
   <slot name="actions" />
 
   {#if enabled}
-    <div class={cls('px-3 pt-2 pb-3', theme.toggle, classes.toggle)}>
+    <div class={cls('px-3 pt-2 pb-3', settingsClasses.toggle, classes.toggle)}>
       <slot />
     </div>
   {/if}

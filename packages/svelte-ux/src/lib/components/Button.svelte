@@ -7,7 +7,7 @@
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import type { ThemeColors } from '$lib/types';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '$lib/utils/icons';
 
@@ -40,7 +40,7 @@
     icon?: string;
     loading?: string;
   } = {};
-  const theme = getComponentTheme('Button');
+  const settingsClasses = getComponentClasses('Button');
 
   // Override default from `ButtonGroup` if set
   const groupContext = getButtonGroup();
@@ -443,7 +443,7 @@
       variant ?? 'none'
     ) && 'ring-[--ring-color]',
 
-    theme.root,
+    settingsClasses.root,
     classes?.root,
     $$props.class
   );
@@ -468,7 +468,7 @@
 >
   {#if loading}
     <span transition:slide={{ axis: 'x', duration: 200 }}>
-      <ProgressCircle size={16} width={2} class={cls(theme.loading, classes.loading)} />
+      <ProgressCircle size={16} width={2} class={cls(settingsClasses.loading, classes.loading)} />
     </span>
   {:else if icon}
     <span in:slide={{ axis: 'x', duration: 200 }}>
@@ -476,10 +476,10 @@
         <!-- font path/url/etc or font-awesome IconDefinition -->
         <Icon
           data={asIconData(icon)}
-          class={cls('pointer-events-none', theme.icon, classes.icon)}
+          class={cls('pointer-events-none', settingsClasses.icon, classes.icon)}
         />
       {:else}
-        <Icon class={cls('pointer-events-none', theme.icon, classes.icon)} {...icon} />
+        <Icon class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} {...icon} />
       {/if}
     </span>
   {/if}

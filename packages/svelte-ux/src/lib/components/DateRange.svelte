@@ -20,7 +20,7 @@
   import MenuField from './MenuField.svelte';
   import ToggleGroup from './ToggleGroup.svelte';
   import ToggleOption from './ToggleOption.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { mdScreen } from '$lib/stores/matchMedia';
   import { getSettings } from '.';
 
@@ -39,7 +39,7 @@
   ];
   export let getPeriodTypePresets = getDateRangePresets;
 
-  const theme = getComponentTheme('DateRange');
+  const settingsClasses = getComponentClasses('DateRange');
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
@@ -165,7 +165,7 @@
     'DateRange grid gap-2',
     'w-[min(90vw,384px)]',
     showSidebar && 'md:w-[640px] md:grid-cols-[2fr,3fr]',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
 >

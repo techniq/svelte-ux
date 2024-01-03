@@ -8,7 +8,7 @@
   import Dialog from './Dialog.svelte';
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { format } from '../utils';
   import { getDictionary } from './settings';
 
@@ -32,7 +32,7 @@
   export let icon: string | null = null;
   export let center = false;
 
-  const theme = getComponentTheme('DatePickerField');
+  const settingsClasses = getComponentClasses('DatePickerField');
 
   let open: boolean = false;
 

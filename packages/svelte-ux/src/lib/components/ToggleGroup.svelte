@@ -9,7 +9,7 @@
 
   import { cls } from '../utils/styles';
   import Logger from '../utils/logger';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value: any = undefined; // index or value
   export let autoscroll: boolean = false;
@@ -35,7 +35,7 @@
     option?: string;
     indicator?: string;
   } = {};
-  const theme = getComponentTheme('ToggleGroup');
+  const settingsClasses = getComponentClasses('ToggleGroup');
 
   $: variantClasses = {
     default: {
@@ -98,7 +98,7 @@
       gap === true ? 'gap-1' : gap === 'px' ? 'gap-px' : '',
       inset ? 'p-[2px]' : '',
       variantClasses[variant].options,
-      theme.options,
+      settingsClasses.options,
       classes.options
     ),
 
@@ -127,7 +127,7 @@
               '[&:not(:last-child)_.indicator]:rounded-r-none',
             ]),
       variantClasses[variant].label,
-      theme.label,
+      settingsClasses.label,
       classes.label
     ),
 
@@ -140,7 +140,7 @@
         lg: 'py-1',
       }[size],
       variantClasses[variant].option,
-      theme.option,
+      settingsClasses.option,
       classes.option
     ),
 
@@ -148,7 +148,7 @@
       'z-0',
       rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
       variantClasses[variant].indicator,
-      theme.indicator,
+      settingsClasses.indicator,
       classes.indicator
     ),
   };
