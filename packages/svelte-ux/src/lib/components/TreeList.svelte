@@ -1,6 +1,6 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   type Node = { id: number; name: string; level: number; children: Node[] };
 
@@ -10,13 +10,13 @@
     ul?: string | ((nodes: Node[]) => string);
     li?: string | ((node: Node) => string);
   } = {};
-  const theme = getComponentTheme('TreeList');
+  const settingsClasses = getComponentClasses('TreeList');
 </script>
 
 <ul
   class={cls(
     'TreeList',
-    typeof theme.ul === 'string' ? theme.ul : theme.ul?.(nodes),
+    typeof settingsClasses.ul === 'string' ? settingsClasses.ul : settingsClasses.ul?.(nodes),
     typeof classes.ul === 'string' ? classes.ul : classes.ul?.(nodes),
     $$props.class
   )}
@@ -24,7 +24,7 @@
   {#each nodes ?? [] as node}
     <li
       class={cls(
-        typeof theme.li === 'string' ? theme.li : theme.li?.(node),
+        typeof settingsClasses.li === 'string' ? settingsClasses.li : settingsClasses.li?.(node),
         typeof classes.li === 'string' ? classes.li : classes.li?.(node)
       )}
     >

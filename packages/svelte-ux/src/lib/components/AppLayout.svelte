@@ -9,7 +9,7 @@
 
   import { breakpoints, mdScreen } from '../stores/matchMedia';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let navWidth = 240;
   export let headerHeight = 64;
@@ -28,7 +28,7 @@
     aside?: string;
     nav?: string;
   } = {};
-  const theme = getComponentTheme('AppLayout');
+  const settingsClasses = getComponentClasses('AppLayout');
 
   $: temporaryDrawer = browser ? !$mdScreen : false;
 </script>
@@ -41,7 +41,7 @@
   class={cls(
     'AppLayout',
     'grid grid-cols-[auto,1fr] grid-rows-[var(--headerHeight),1fr] h-screen',
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -58,11 +58,11 @@
     class={cls(
       'w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
       temporaryDrawer && 'fixed h-full z-50 elevation-10',
-      theme.aside,
+      settingsClasses.aside,
       classes.aside
     )}
   >
-    <nav class={cls('nav h-full overflow-scroll w-[var(--navWidth)]', theme.nav, classes.nav)}>
+    <nav class={cls('nav h-full overflow-scroll w-[var(--navWidth)]', settingsClasses.nav, classes.nav)}>
       <slot name="nav" />
     </nav>
   </aside>

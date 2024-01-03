@@ -9,7 +9,7 @@
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
   import { isLiteralObject } from '../utils/object';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -66,7 +66,7 @@
     prepend?: string;
     append?: string;
   } = {};
-  const theme = getComponentTheme('TextField');
+  const settingsClasses = getComponentClasses('TextField');
 
   // Input props
   export let mask: string | undefined = undefined;
@@ -196,7 +196,7 @@
     error ? '[--color:theme(colors.danger)]' : '[--color:theme(colors.primary)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -208,7 +208,7 @@
         'truncate group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
         error ? 'text-danger/80' : 'text-surface-content/50',
         `placement-${labelPlacement}`,
-        theme.label,
+        settingsClasses.label,
         classes.label
       )}
       for={id}
@@ -231,7 +231,7 @@
         !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
         error && 'border-danger',
         'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
-        theme.container,
+        settingsClasses.container,
         classes.container
       )}
     >
@@ -241,7 +241,7 @@
             class={cls(
               'prepend whitespace-nowrap',
               rounded && 'pl-3',
-              theme.prepend,
+              settingsClasses.prepend,
               classes.prepend
             )}
           >
@@ -263,7 +263,7 @@
                 error ? 'text-danger/80' : 'text-surface-content/50',
                 `placement-${labelPlacement}`,
                 (labelPlacement === 'inset' || hasInputValue) && 'shrink',
-                theme.label,
+                settingsClasses.label,
                 classes.label
               )}
               for={id}
@@ -316,7 +316,7 @@
                     'text-center': align === 'center',
                     'text-right': align === 'right',
                   },
-                  theme.input,
+                  settingsClasses.input,
                   classes.input
                 )}
                 use:multi={textAreaMultiAction}
@@ -353,7 +353,7 @@
                     'text-center': align === 'center',
                     'text-right': align === 'right',
                   },
-                  theme.input,
+                  settingsClasses.input,
                   classes.input
                 )}
               />
@@ -368,7 +368,7 @@
         </div>
 
         {#if hasAppend}
-          <div class={cls('append whitespace-nowrap', theme.append, classes.append)}>
+          <div class={cls('append whitespace-nowrap', settingsClasses.append, classes.append)}>
             {#if clearable && hasInputValue}
               <Button
                 icon={mdiClose}
@@ -430,7 +430,7 @@
         error ? 'error' : 'hint',
         'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
         error ? 'text-danger' : 'text-surface-content/50 scale-y-0',
-        theme.error,
+        settingsClasses.error,
         classes.error
       )}
     >

@@ -8,7 +8,7 @@
 
   import Input from './Input.svelte';
   import DatePickerField from './DatePickerField.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value: Date | null = null;
   export let format = getSettings().formats?.dates?.baseParsing ?? 'MM/dd/yyyy';
@@ -27,7 +27,7 @@
   export let dense = false;
   export let icon: string | null = null;
 
-  const theme = getComponentTheme('DateField');
+  const settingsClasses = getComponentClasses('DateField');
 
   let inputValue: string | undefined = '';
 

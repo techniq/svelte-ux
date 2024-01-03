@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   import type { Placement } from '@floating-ui/dom';
 
@@ -30,7 +30,7 @@
     root?: string;
     menu?: string;
   } = {};
-  const theme = getComponentTheme('MultiSelectMenu');
+  const settingsClasses = getComponentClasses('MultiSelectMenu');
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 </script>
@@ -44,8 +44,8 @@
   let:close
   {...$$restProps}
   classes={{
-    root: cls('MultiSelectMenu', theme.root, classes.root, $$restProps.class),
-    menu: cls('flex flex-col', theme.menu, classes.menu),
+    root: cls('MultiSelectMenu', settingsClasses.root, classes.root, $$restProps.class),
+    menu: cls('flex flex-col', settingsClasses.menu, classes.menu),
   }}
   bind:menuItemsEl
 >

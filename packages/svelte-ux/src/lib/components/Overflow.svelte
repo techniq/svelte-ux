@@ -1,9 +1,9 @@
 <script lang="ts">
   import { overflow } from '$lib/actions/layout';
   import { cls } from '$lib/utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
-  const theme = getComponentTheme('Overflow');
+  const settingsClasses = getComponentClasses('Overflow');
 
   let overflowX = 0;
   let overflowY = 0;
@@ -16,7 +16,7 @@
     overflowY = e.detail.overflowY;
   }}
   {...$$restProps}
-  class={cls('Overflow', theme.root, $$props.class)}
+  class={cls('Overflow', settingsClasses.root, $$props.class)}
 >
   <slot {overflowX} {overflowY} />
 </div>
