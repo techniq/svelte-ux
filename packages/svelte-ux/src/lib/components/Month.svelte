@@ -106,7 +106,9 @@
 <div class="flex">
   {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
     <div class="flex-1 text-center">
-      <span class="text-xs text-black/50"> {format(day, PeriodType.Day, { custom: 'eee' })} </span>
+      <span class="text-xs text-surface-content/50">
+        {format(day, PeriodType.Day, { custom: 'eee' })}
+      </span>
     </div>
   {/each}
 </div>

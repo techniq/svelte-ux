@@ -44,7 +44,7 @@
 
 <Preview>
   <Breadcrumb {items} class="gap-2">
-    <Icon slot="divider" path={mdiArrowRight} class="text-black/25" />
+    <Icon slot="divider" path={mdiArrowRight} class="text-surface-content/25" />
   </Breadcrumb>
 </Preview>
 
@@ -55,7 +55,7 @@
 <Preview>
   <Breadcrumb items={labeledItems} class="gap-2">
     <span slot="item" let:item>
-      <div class="text-black/50 text-xs uppercase">{item.label}</div>
+      <div class="text-surface-content/50 text-xs uppercase">{item.label}</div>
       <div>{item.value}</div>
     </span>
   </Breadcrumb>
@@ -69,7 +69,7 @@
   <Breadcrumb items={labeledItems}>
     <Button slot="item" let:item>
       <div>
-        <div class="text-black/50 text-xs uppercase">{item.label}</div>
+        <div class="text-surface-content/50 text-xs uppercase">{item.label}</div>
         <div>{item.value}</div>
       </div>
     </Button>
@@ -81,10 +81,10 @@
 <Preview>
   <Breadcrumb items={labeledItems} class="gap-2">
     <span slot="item" let:item>
-      <span class="text-black/50 text-sm font-extrabold">{item.label}:</span>
-      <span class="text-black/50 text-sm">{item.value}</span>
+      <span class="text-surface-content/50 text-sm font-extrabold">{item.label}:</span>
+      <span class="text-surface-content/50 text-sm">{item.value}</span>
     </span>
-    <DividerDot slot="divider" class="text-black/50" />
+    <DividerDot slot="divider" class="text-surface-content/50" />
   </Breadcrumb>
 </Preview>
 
@@ -105,7 +105,7 @@
 <h3>inherit</h3>
 
 <Preview>
-  <div class="bg-black text-white p-2 rounded">
+  <div class="bg-primary text-primary-content p-2 rounded">
     <Breadcrumb {items} />
   </div>
 </Preview>
@@ -115,7 +115,7 @@
 <h3>text class</h3>
 
 <Preview>
-  <Breadcrumb {items} class="text-accent-500" />
+  <Breadcrumb {items} class="text-primary" />
 </Preview>
 
 <h2>Truncate long text</h2>

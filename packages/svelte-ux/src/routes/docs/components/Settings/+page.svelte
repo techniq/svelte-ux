@@ -22,7 +22,7 @@
     }}
   >
     <Toggle let:on={open} let:toggle>
-      <Button on:click={toggle} variant="outline" color="accent">
+      <Button on:click={toggle} variant="outline" color="primary">
         Click me
         <Menu {open} on:close={toggle}>
           <MenuItem>Refresh</MenuItem>

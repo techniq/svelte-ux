@@ -20,6 +20,6 @@
     text="NavItem"
     currentUrl={$page.url}
     path="/docs/components/NavItem"
-    classes={{ root: 'pl-3', active: 'bg-accent-50 text-accent-500' }}
+    classes={{ root: 'pl-3', active: 'bg-primary/10 text-primary' }}
   />
 </Preview>

@@ -53,13 +53,13 @@
 <li
   class={cls(
     'ListItem',
-    'flex gap-4 items-center border-t py-2 px-4',
+    'flex gap-4 items-center border-t border-surface-content/10 py-2 px-4',
     'relative', // Needed for loading overlay
     list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
     list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',
     list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
     noShadow !== true && 'elevation-1',
-    noBackground !== true && 'bg-white',
+    noBackground !== true && 'bg-surface-100',
     theme.root,
     classes.root,
     $$props.class
@@ -93,7 +93,7 @@
 
     <slot name="subheading">
       {#if subheading != null}
-        <div class={cls('text-sm text-black/50', theme.subheading, classes.subheading)}>
+        <div class={cls('text-sm text-surface-content/50', theme.subheading, classes.subheading)}>
           {subheading}
         </div>
       {/if}

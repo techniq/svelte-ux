@@ -63,13 +63,13 @@
     <a
       href="#{node.id}"
       class={cls(
-        'flex gap-1 px-2 rounded-lg hover:bg-black/5 ',
+        'flex gap-1 px-2 rounded-lg hover:bg-surface-content/5 ',
         node.level === 1 ? 'font-semibold' : 'text-sm',
-        node.id && node.id === activeHeadingId && 'bg-black/5'
+        node.id && node.id === activeHeadingId && 'bg-surface-content/5'
       )}
     >
       {#if node.level > 1}
-        <Icon path={mdiCircleSmall} class="-mx-1 text-black/30" />
+        <Icon path={mdiCircleSmall} class="-mx-1 text-surface-content/30" />
       {/if}
       {@html node.name}
     </a>

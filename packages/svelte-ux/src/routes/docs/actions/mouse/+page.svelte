@@ -26,14 +26,14 @@
 
 <Preview>
   <button
-    class="border rounded p-2 text-sm hover:bg-black/5"
+    class="border rounded p-2 text-sm hover:bg-surface-content/5"
     use:longpress={1000}
     on:longpress={() => (longpressed = !longpressed)}
   >
     Click and hold
   </button>
   {#if longpressed}
-    <span class="text-xs text-black/50">Success! Repeat to hide</span>
+    <span class="text-xs text-surface-content/50">Success! Repeat to hide</span>
   {/if}
 </Preview>
 

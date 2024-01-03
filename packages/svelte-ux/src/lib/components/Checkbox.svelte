@@ -66,12 +66,12 @@
       circle ? 'rounded-full' : 'rounded',
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
-        'peer-hover:border-accent-500 peer-focus-visible:border-accent-500 peer-focus-visible:ring-2 ring-accent-400 ring-offset-1',
-      !checked && !disabled && 'peer-hover:bg-accent-100',
+        'peer-hover:border-primary peer-focus-visible:border-primary peer-focus-visible:ring-2 ring-primary/60 ring-offset-1',
+      !checked && !disabled && 'peer-hover:bg-primary/10',
       checked
         ? disabled
           ? 'bg-gray-500 border-gray-500'
-          : 'bg-accent-500 border-accent-500'
+          : 'bg-primary border-primary'
         : 'border-gray-500',
       theme.checkbox,
       classes.checkbox
@@ -80,7 +80,7 @@
     <Icon
       path={indeterminate ? mdiMinus : mdiCheck}
       class={cls(
-        'pointer-events-none text-white transition-transform',
+        'pointer-events-none text-primary-content transition-transform',
         checked ? 'scale-100' : 'scale-0',
         theme.icon,
         classes.icon

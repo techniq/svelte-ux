@@ -29,8 +29,8 @@
   class={cls(
     'NavItem',
     'flex items-center',
-    isPathActive && ['is-active', theme.active, classes.active],
     theme.root,
+    isPathActive && ['is-active', theme.active, classes.active],
     classes.root,
     $$props.class
   )}

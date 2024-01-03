@@ -41,14 +41,14 @@
   <div class="grid gap-2">
     <Switch let:checked>
       {#if checked}
-        <Icon path={mdiCheck} class="text-accent-500" size=".8em" />
+        <Icon path={mdiCheck} class="text-primary" size=".8em" />
       {/if}
     </Switch>
     <Switch let:checked>
       {#if checked}
-        <Icon path={mdiCheck} class="text-accent-500" size=".8em" />
+        <Icon path={mdiCheck} class="text-primary" size=".8em" />
       {:else}
-        <Icon path={mdiClose} class="text-gray-400" size=".8em" />
+        <Icon path={mdiClose} class="text-surface-content" size=".8em" />
       {/if}
     </Switch>
   </div>
@@ -61,7 +61,7 @@
     <Switch disabled />
     <Switch disabled checked />
     <Switch disabled>
-      <Icon path={mdiCheck} class="text-black/50" size=".8em" />
+      <Icon path={mdiCheck} class="text-surface-content/50" size=".8em" />
     </Switch>
   </div>
 </Preview>
@@ -87,12 +87,18 @@
 
 <Preview>
   <div class="inline-grid grid-cols-[auto,auto] gap-2">
-    <Switch color="red" />
-    <Switch checked color="red" />
-    <Switch color="green" />
-    <Switch checked color="green" />
-    <Switch color="purple" />
-    <Switch checked color="purple" />
+    <Switch color="primary" />
+    <Switch checked color="primary" />
+    <Switch color="secondary" />
+    <Switch checked color="secondary" />
+    <Switch color="accent" />
+    <Switch checked color="accent" />
+    <Switch color="neutral" />
+    <Switch checked color="neutral" />
+    <Switch color="success" />
+    <Switch checked color="success" />
+    <Switch color="danger" />
+    <Switch checked color="danger" />
   </div>
 </Preview>
 
@@ -101,13 +107,13 @@
 <Preview>
   <div class="grid gap-2">
     <Switch
-      color="green"
-      classes={{ switch: 'data-[checked=false]:bg-red-500 data-[checked=false]:border-red-500' }}
+      color="success"
+      classes={{ switch: 'data-[checked=false]:bg-danger data-[checked=false]:border-danger' }}
     />
     <Switch
       classes={{
-        switch: 'bg-white border-gray-400',
-        toggle: 'data-[checked=false]:bg-red-500 data-[checked=true]:bg-green-500',
+        switch: 'bg-surface-100 border-surface-content/50',
+        toggle: 'data-[checked=false]:bg-danger data-[checked=true]:bg-success',
       }}
     />
   </div>

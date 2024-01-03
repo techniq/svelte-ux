@@ -28,7 +28,7 @@
 
 <Preview>
   {#each Array(5) as _, i}
-    <ExpansionPanel classes={{ toggle: 'bg-gray-100 border-t border-gray-300' }}>
+    <ExpansionPanel classes={{ toggle: 'bg-surface-200 border-t' }}>
       <div slot="trigger" class="flex-1 p-3">Item {i + 1}</div>
       <div slot="actions" class="p-2">
         <Button>Action 1</Button>
@@ -68,7 +68,7 @@
         title="Item {i + 1}"
         subheading="List Item"
         icon={mdiAccount}
-        avatar={{ class: 'bg-gray-400 text-white/90' }}
+        avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
         class="flex-1"
         noShadow
       />
@@ -92,7 +92,7 @@
       title="Item 1"
       subheading="Expansion Panel"
       icon={mdiAccount}
-      avatar={{ class: 'bg-gray-400 text-white/90' }}
+      avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
       class="flex-1"
       noShadow
     />
@@ -106,7 +106,7 @@
     title="Item 2"
     subheading="List Item"
     icon={mdiAccount}
-    avatar={{ class: 'bg-gray-400 text-white/90' }}
+    avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
   <ExpansionPanel>
     <ListItem
@@ -114,7 +114,7 @@
       title="Item 3"
       subheading="Expansion Panel"
       icon={mdiAccount}
-      avatar={{ class: 'bg-gray-400 text-white/90' }}
+      avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
       class="flex-1"
       noShadow
     />
@@ -135,7 +135,7 @@
     title="Item 1"
     subheading="List Item"
     icon={mdiAccount}
-    avatar={{ class: 'bg-gray-400 text-white/90' }}
+    avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
   <ExpansionPanel>
     <ListItem
@@ -143,7 +143,7 @@
       title="Item 2"
       subheading="Expansion Panel"
       icon={mdiAccount}
-      avatar={{ class: 'bg-gray-400 text-white/90' }}
+      avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
       class="flex-1"
       noShadow
     />
@@ -157,6 +157,6 @@
     title="Item 3"
     subheading="List Item"
     icon={mdiAccount}
-    avatar={{ class: 'bg-gray-400 text-white/90' }}
+    avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
 </Preview>
