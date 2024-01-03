@@ -10,16 +10,16 @@ type ClassesProp<T> = T extends { prototype: infer PR extends SvelteComponent }
     : never
   : never;
 
-export type Theme = {
+export type ComponentClasses = {
   [key in ComponentName]?: ClassesProp<(typeof Components)[key]> | string;
 };
 
-export function getTheme() {
-  return getSettings().theme ?? {};
+export function getClasses() {
+  return getSettings().classes ?? {};
 }
 
 export function getComponentTheme(name: ComponentName) {
-  const theme = getTheme()[name] ?? {};
+  const theme = getClasses()[name] ?? {};
 
   return typeof theme === 'string' ? { root: theme } : theme;
 }
