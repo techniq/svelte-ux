@@ -51,7 +51,7 @@ module.exports = plugin.withOptions(
             DEFAULT: theme('colors.surface-content/20%'),
           }),
           outlineColor: (theme) => ({
-            DEFAULT: theme('colors.surface-300'),
+            DEFAULT: theme('colors.surface-content/20%'),
           }),
           ringOffsetColor: (theme) => ({
             DEFAULT: theme('colors.surface-100/100%'),

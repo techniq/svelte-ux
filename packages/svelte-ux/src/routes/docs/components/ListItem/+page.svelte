@@ -161,8 +161,8 @@
           on:click={() => (selectedId = choice.id)}
           class={cls(
             'px-8 py-4',
-            'cursor-pointer transition-shadow duration-100 border',
-            'hover:bg-surface-100',
+            'cursor-pointer transition-shadow duration-100',
+            'hover:bg-surface-100 hover:outline',
             selectedId == choice.id ? 'bg-surface-100 shadow-md' : ''
           )}
           noBackground
