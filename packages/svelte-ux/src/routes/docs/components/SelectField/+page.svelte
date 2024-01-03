@@ -244,7 +244,7 @@
     <SelectField {options}>
       <div slot="prepend" on:click|stopPropagation class="flex items-center">
         <select
-          class="appearance-none bg-surface-content/5 border border-surface-content/20 rounded-full mr-2 px-4"
+          class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
           style="text-align-last: center;"
         >
           <!-- <option /> -->
@@ -383,7 +383,7 @@
   <SelectField {options} icon={mdiMagnify} rounded>
     <span slot="prepend" on:click|stopPropagation>
       <select
-        class="appearance-none bg-surface-content/5 border border-surface-content/20 rounded-full mr-2 px-4"
+        class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
         style="text-align-last: center;"
       >
         <!-- <option /> -->

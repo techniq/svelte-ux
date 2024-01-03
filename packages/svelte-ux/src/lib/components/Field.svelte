@@ -97,7 +97,7 @@
           'px-6': rounded && !hasPrepend,
         },
         !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
-        error ? 'border-danger' : 'border-surface-content/20',
+        error && 'border-danger',
         'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
         theme.container,
         classes.container

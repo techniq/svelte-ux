@@ -62,7 +62,7 @@
   {open}
   class={cls(
     'Menu',
-    'bg-surface-100 rounded shadow border border-surface-200 overflow-auto',
+    'bg-surface-100 rounded shadow border overflow-auto',
     theme.root,
     classes.root,
     $$props.class

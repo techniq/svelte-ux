@@ -50,7 +50,7 @@
     >
   </div>
   <div
-    class="w-1/2 h-[100px] border border-surface-content/20 rounded-lg bg-surface-100 whitespace-nowrap truncate p-4 resize overflow-auto"
+    class="w-1/2 h-[100px] border rounded-lg bg-surface-100 whitespace-nowrap truncate p-4 resize overflow-auto"
     use:overflow
     on:overflow={(e) => {
       overflowX = e.detail.overflowX;

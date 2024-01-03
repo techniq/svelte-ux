@@ -86,7 +86,7 @@
               href="/docs/components/{api.rest_props.name}#props"
               target="_blank"
               variant="none"
-              class="text-xs font-semibold bg-surface-100 border border-surface-300 px-2 rounded-full"
+              class="text-xs font-semibold bg-surface-100 border px-2 rounded-full"
             >
               &lt;{api.rest_props.name}&gt;
             </Button>
@@ -97,7 +97,7 @@
                 .name}#attributes"
               target="_blank"
               variant="none"
-              class="text-xs font-semibold bg-surface-100 border border-surface-300 px-2 rounded-full"
+              class="text-xs font-semibold bg-surface-100 border px-2 rounded-full"
             >
               &lt;{api.rest_props.name}&gt;
             </Button>

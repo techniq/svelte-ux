@@ -20,7 +20,7 @@
   <Overflow class="w-1/2 h-[200px] overflow-hidden" let:overflowX let:overflowY>
     <div>overflowX: {overflowX}</div>
     <div>overflowY: {overflowY}</div>
-    <div class="whitespace-nowrap border border-surface-content/20 rounded-lg bg-surface-100">
+    <div class="whitespace-nowrap border rounded-lg bg-surface-100">
       {#each { length: overflowItems } as _}
         <div>Resize the window to see text truncate and watch values</div>
       {/each}

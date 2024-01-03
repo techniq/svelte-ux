@@ -53,7 +53,7 @@
 <li
   class={cls(
     'ListItem',
-    'flex gap-4 items-center border-t border-surface-200 py-2 px-4',
+    'flex gap-4 items-center border-t border-surface-content/10 py-2 px-4',
     'relative', // Needed for loading overlay
     list === 'type' && 'first-of-type:border-t-0 first-of-type:rounded-t last-of-type:rounded-b',
     list === 'parent' && 'first:border-t-0 first:rounded-t last:rounded-b',

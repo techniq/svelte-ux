@@ -229,7 +229,7 @@
           'px-6': rounded && !hasPrepend, // TODO: `hasPrepend` always true for SelectField, etc.  See: https://github.com/sveltejs/svelte/issues/6059
         },
         !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
-        error ? 'border-danger' : 'border-surface-content/20',
+        error && 'border-danger',
         'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
         theme.container,
         classes.container
@@ -389,7 +389,7 @@
                 {disabled}
                 value={operator}
                 on:change={onSelectChange}
-                class="appearance-none bg-surface-content/5 border border-surface-content/20 rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
+                class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
                 style="text-align-last: center;"
               >
                 {#each operators ?? [] as { label, value }}

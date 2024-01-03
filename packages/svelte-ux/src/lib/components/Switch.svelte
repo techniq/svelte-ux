@@ -64,8 +64,7 @@
         warning: 'ring-warning/60',
         danger: 'ring-danger/60',
       }[color],
-      checked === false && 'bg-surface-content/20 border-surface-content/20',
-      checked === null && 'border-surface-content/20',
+      checked === false && 'bg-surface-content/20',
       disabled ? 'opacity-50' : 'cursor-pointer peer-focus-visible:ring-2 ring-offset-1',
       theme.switch,
       classes.switch,
@@ -77,7 +76,7 @@
       class={cls(
         'toggle w-1/2 aspect-square h-full rounded-full transition-all duration-200 bg-surface-100 grid items-center justify-center transform',
         checked && 'translate-x-full',
-        checked === null && 'border border-surface-content/20',
+        checked === null && 'border',
         theme.toggle,
         classes.toggle
       )}
