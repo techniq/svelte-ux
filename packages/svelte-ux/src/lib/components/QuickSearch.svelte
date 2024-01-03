@@ -5,7 +5,7 @@
   import Dialog from '$lib/components/Dialog.svelte';
   import Kbd from './Kbd.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { cls } from '$lib/utils/styles';
   import { smScreen } from '$lib/stores';
   import { autoFocus, selectOnFocus } from '$lib/actions';
@@ -17,7 +17,7 @@
     root?: string;
     button?: string;
   } = {};
-  const theme = getComponentTheme('QuickSearch');
+  const settingsClasses = getComponentClasses('QuickSearch');
 
   let open = false;
 
@@ -48,7 +48,7 @@
   on:click={() => (open = true)}
   class={cls(
     'sm:bg-black/10 sm:hover:bg-black/20 rounded-full sm:w-56 justify-start',
-    theme.button,
+    settingsClasses.button,
     classes.button
   )}
 >
@@ -59,7 +59,7 @@
 <Dialog
   bind:open
   classes={{
-    root: cls('items-start mt-20', theme.root, classes.root, $$props.class),
+    root: cls('items-start mt-20', settingsClasses.root, classes.root, $$props.class),
     backdrop: 'backdrop-blur-sm',
   }}
 >

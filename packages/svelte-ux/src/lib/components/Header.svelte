@@ -1,15 +1,15 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
   import Breadcrumb from './Breadcrumb.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let title: string | string[] | null = null;
   export let subheading: string | string[] | null = null;
 
-  const theme = getComponentTheme('Header');
+  const settingsClasses = getComponentClasses('Header');
 </script>
 
-<div class={cls('Header', 'flex items-center gap-4', theme.root, $$props.class)}>
+<div class={cls('Header', 'flex items-center gap-4', settingsClasses.root, $$props.class)}>
   <slot name="avatar" />
 
   <div class="flex-1">

@@ -85,7 +85,7 @@
     //     Day: 'Jour',
     //   },
     // },
-    theme: {
+    classes: {
       AppLayout: {
         aside: 'border-r',
         nav: 'bg-surface-300 py-2',

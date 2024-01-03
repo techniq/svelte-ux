@@ -1,6 +1,6 @@
 import type { FormatNumberOptions, FormatNumberStyle } from '$lib/utils/number';
 import { getContext, setContext } from 'svelte';
-import type { Theme } from './theme';
+import type { ComponentClasses } from './theme';
 import type { Prettify } from '$lib/types/typeHelpers';
 import {
   type FormatDateOptions,
@@ -25,7 +25,7 @@ export type Settings = {
     dates?: FormatDateOptions;
   };
   dictionary?: DictionaryMessagesOptions;
-  theme?: Theme;
+  classes?: ComponentClasses;
 };
 
 const settingsKey = Symbol();

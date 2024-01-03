@@ -1,6 +1,6 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value: number | null = null;
   export let rotate = 0;
@@ -8,7 +8,7 @@
   export let width = 4;
   export let track = false;
 
-  const theme = getComponentTheme('ProgressCircle');
+  const settingsClasses = getComponentClasses('ProgressCircle');
 
   const radius = 20;
 
@@ -25,7 +25,7 @@
   class={cls(
     'ProgressCircular',
     'relative inline-flex justify-center items-center align-middle',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
   class:indeterminate
