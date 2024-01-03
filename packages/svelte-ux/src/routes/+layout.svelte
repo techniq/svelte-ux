@@ -96,6 +96,10 @@
         active: 'text-primary bg-surface-100 border-l-4 border-primary font-medium',
       },
     },
+    themes: {
+      light: lightThemes,
+      dark: darkThemes,
+    },
   });
 
   let mainEl: HTMLElement;
@@ -186,7 +190,7 @@
       <QuickSearch options={quickSearchOptions} on:change={(e) => goto(e.detail.value)} />
 
       <div class="border-r border-primary-content/20 pr-2">
-        <ThemeButton {lightThemes} {darkThemes} />
+        <ThemeButton />
       </div>
 
       <Tooltip title="Discord" placement="left" offset={2}>

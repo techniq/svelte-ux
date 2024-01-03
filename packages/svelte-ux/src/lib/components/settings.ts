@@ -11,9 +11,10 @@ import {
   DateToken,
 } from '$lib/utils/date';
 import type { DictionaryMessages, DictionaryMessagesOptions } from '$lib/utils/dictionary';
+import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
 
 type ExcludeNone<T> = T extends 'none' ? never : T;
-export type Settings = {
+export type SettingsInput = {
   formats?: {
     numbers?: Prettify<
       {
@@ -26,20 +27,46 @@ export type Settings = {
   };
   dictionary?: DictionaryMessagesOptions;
   classes?: ComponentClasses;
+  /** A list of the available themes */
+  themes?: {
+    light?: string[];
+    dark?: string[];
+  };
+  currentTheme?: ThemeStore;
 };
+
+export type Settings = SettingsInput & { currentTheme: ThemeStore };
 
 const settingsKey = Symbol();
 
-export function settings(settings: Settings) {
-  setContext(settingsKey, settings);
+export function settings(settings: SettingsInput) {
+  let lightThemes = settings.themes?.light ?? ['light'];
+  let darkThemes = settings.themes?.dark ?? ['dark'];
+
+  let currentTheme =
+    // In some cases, `settings` is called again from inside a component. Don't create a new theme store in this case.
+    settings.currentTheme ??
+    createThemeStore({
+      light: lightThemes,
+      dark: darkThemes,
+    });
+
+  setContext(settingsKey, {
+    ...settings,
+    themes: {
+      light: lightThemes,
+      dark: darkThemes,
+    },
+    currentTheme,
+  });
 }
 
-export function getSettings() {
+export function getSettings(): Settings {
   // in a try/catch to be able to test wo svelte components
   try {
     return getContext<Settings>(settingsKey) ?? {};
   } catch (error) {
-    return {};
+    return { currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }) };
   }
 }
 
