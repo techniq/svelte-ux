@@ -47,7 +47,10 @@
   export let tabindex = 0;
   export let autofocus: ComponentProps<TextField>['autofocus'] = undefined;
   export let fieldActions: ComponentProps<TextField>['actions'] = autofocus
-    ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined), selectOnFocus(node)]
+    ? (node) => [
+        autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined),
+        selectOnFocus(node),
+      ]
     : undefined;
 
   let originalIcon = icon;
@@ -66,7 +69,7 @@
   const theme = getComponentTheme('SelectField');
 
   let fieldClasses: ComponentProps<TextField>['classes'];
-  $: fieldClasses = typeof(classes.field) === "string" ? { root: classes.field } : classes.field;
+  $: fieldClasses = typeof classes.field === 'string' ? { root: classes.field } : classes.field;
 
   // Menu props
   export let placement: Placement = 'bottom-start';
@@ -207,7 +210,7 @@
     show();
   }
 
-  function onBlur(e: FocusEvent|CustomEvent<any>) {
+  function onBlur(e: FocusEvent | CustomEvent<any>) {
     const fe = e as FocusEvent;
     logger.debug('onBlur', { target: e.target, relatedTarget: fe?.relatedTarget, menuOptionsEl });
 
@@ -365,10 +368,15 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <button
   type="button"
-  aria-haspopup={!inlineOptions ? "listbox" : undefined}
-  class={cls("SelectField block w-full cursor-default text-left", theme.root, classes.root, $$props.class)}
-  on:click={onClick}>
-
+  aria-haspopup={!inlineOptions ? 'listbox' : undefined}
+  class={cls(
+    'SelectField block w-full cursor-default text-left',
+    theme.root,
+    classes.root,
+    $$props.class
+  )}
+  on:click={onClick}
+>
   <TextField
     {label}
     {placeholder}
@@ -385,11 +393,15 @@
     on:keydown={onKeyDown}
     on:keypress={onKeyPress}
     actions={fieldActions}
-    classes={{ container: inlineOptions ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none' : undefined }}
+    classes={{
+      container: inlineOptions
+        ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none'
+        : undefined,
+    }}
     class={cls('h-full', theme.field, fieldClasses)}
     role="combobox"
-    aria-expanded={open ? "true" : "false"}
-    aria-autocomplete={!inlineOptions ? "list" : undefined}
+    aria-expanded={open ? 'true' : 'false'}
+    aria-autocomplete={!inlineOptions ? 'list' : undefined}
     {...$$restProps}
   >
     <slot slot="prepend" name="prepend" />
@@ -399,26 +411,28 @@
 
       {#if loading}
         <span class="inline-block w-[29px] h-[28px] text-center">
-          <ProgressCircle size={16} width={2} class="text-black/50" />
+          <ProgressCircle size={16} width={2} class="text-surface-content/50" />
         </span>
       {:else if readonly}
         <!-- Do not show chevron or clear buttons -->
       {:else if value && clearable}
         <Button
           icon={closeIcon}
-          class="text-black/50 p-1"
+          class="text-surface-content/50 p-1"
           on:click={(e) => {
             e.stopPropagation();
-            logger.debug("closeIcon clicked");
+            logger.debug('closeIcon clicked');
             clear();
           }}
         />
       {:else if !inlineOptions}
         <Button
           icon={toggleIcon}
-          class="text-black/50 p-1 transform {open ? 'rotate-180' : ''}"
+          class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
           tabindex="-1"
-          on:click={() => {logger.debug("toggleIcon clicked")}}
+          on:click={() => {
+            logger.debug('toggleIcon clicked');
+          }}
         />
       {/if}
     </span>
@@ -437,28 +451,44 @@
         bind:open
         on:close={() => hide('menu on:close')}
         {...menuProps}
-        >
+      >
         <!-- TODO: Rework into hierarchy of snippets in v2.0 -->
         <SelectListOptions
           bind:menuOptionsEl
-          {open} {loading} {highlightIndex} {searchText} {filteredOptions}
-          classes={{...classes, root: cls(classes.options, inlineOptions ? "border-t mt-1 px-1" : "")}}
-          {optionText} {optionValue} {selectIndex} {selectOption} {onKeyPress} {onKeyDown}>
-
+          {open}
+          {loading}
+          {highlightIndex}
+          {searchText}
+          {filteredOptions}
+          classes={{
+            ...classes,
+            root: cls(classes.options, inlineOptions ? 'border-t mt-1 px-1' : ''),
+          }}
+          {optionText}
+          {optionValue}
+          {selectIndex}
+          {selectOption}
+          {onKeyPress}
+          {onKeyDown}
+        >
           <svelte:fragment slot="option" let:option let:index>
             <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
               <MenuItem
                 class={cls(
-                  index === highlightIndex && '[:not(.group:hover)>&]:bg-black/5',
+                  index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
                   option === selected && (classes.selected || 'font-semibold'),
                   option.group ? 'px-4' : 'px-2',
                   theme.option,
                   classes.option
                 )}
-                scrollIntoView={{ condition: index === highlightIndex, onlyIfNeeded: inlineOptions, ...scrollIntoView }}
+                scrollIntoView={{
+                  condition: index === highlightIndex,
+                  onlyIfNeeded: inlineOptions,
+                  ...scrollIntoView,
+                }}
                 role="option"
-                aria-selected={option === selected ? "true" : "false"}
-                aria-disabled={option?.disabled ? "true" : "false"}
+                aria-selected={option === selected ? 'true' : 'false'}
+                aria-disabled={option?.disabled ? 'true' : 'false'}
               >
                 {optionText(option)}
               </MenuItem>
@@ -466,7 +496,13 @@
           </svelte:fragment>
 
           <slot name="empty" slot="empty" let:loading>
-            <div class={cls('p-3 text-black/50 italic text-sm', theme.empty, classes.empty)}>
+            <div
+              class={cls(
+                'p-3 text-surface-content/5/50 italic text-sm',
+                theme.empty,
+                classes.empty
+              )}
+            >
               {loading ? 'Loading...' : 'No options found'}
             </div>
           </slot>
@@ -475,40 +511,58 @@
         <slot name="actions" {hide} />
       </Menu>
     {:else}
-        <!-- TODO: Rework into hierarchy of snippets in v2.0. -->
-        <!-- This code must be identical to the above block -->
-        <SelectListOptions
-          bind:menuOptionsEl
-          {open} {loading} {highlightIndex} {searchText} {filteredOptions}
-          classes={{...classes, root: cls(classes.options, inlineOptions ? "border-t mt-1 px-1" : "")}}
-          {optionText} {optionValue} {selectIndex} {selectOption} {onKeyPress} {onKeyDown}>
-
-          <svelte:fragment slot="option" let:option let:index>
-            <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
-              <MenuItem
-                class={cls(
-                  index === highlightIndex && '[:not(.group:hover)>&]:bg-black/5',
-                  option === selected && (classes.selected || 'font-semibold'),
-                  option.group ? 'px-4' : 'px-2',
-                  theme.option,
-                  classes.option
-                )}
-                scrollIntoView={{ condition: index === highlightIndex, onlyIfNeeded: inlineOptions, ...scrollIntoView }}
-                role="option"
-                aria-selected={option === selected ? "true" : "false"}
-                aria-disabled={option?.disabled ? "true" : "false"}
-              >
-                {optionText(option)}
-              </MenuItem>
-            </slot>
-          </svelte:fragment>
-
-          <slot name="empty" slot="empty" let:loading>
-            <div class={cls('p-3 text-black/50 italic text-sm', theme.empty, classes.empty)}>
-              {loading ? 'Loading...' : 'No options found'}
-            </div>
+      <!-- TODO: Rework into hierarchy of snippets in v2.0. -->
+      <!-- This code must be identical to the above block -->
+      <SelectListOptions
+        bind:menuOptionsEl
+        {open}
+        {loading}
+        {highlightIndex}
+        {searchText}
+        {filteredOptions}
+        classes={{
+          ...classes,
+          root: cls(classes.options, inlineOptions ? 'border-t mt-1 px-1' : ''),
+        }}
+        {optionText}
+        {optionValue}
+        {selectIndex}
+        {selectOption}
+        {onKeyPress}
+        {onKeyDown}
+      >
+        <svelte:fragment slot="option" let:option let:index>
+          <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
+            <MenuItem
+              class={cls(
+                index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
+                option === selected && (classes.selected || 'font-semibold'),
+                option.group ? 'px-4' : 'px-2',
+                theme.option,
+                classes.option
+              )}
+              scrollIntoView={{
+                condition: index === highlightIndex,
+                onlyIfNeeded: inlineOptions,
+                ...scrollIntoView,
+              }}
+              role="option"
+              aria-selected={option === selected ? 'true' : 'false'}
+              aria-disabled={option?.disabled ? 'true' : 'false'}
+            >
+              {optionText(option)}
+            </MenuItem>
           </slot>
-        </SelectListOptions>
+        </svelte:fragment>
+
+        <slot name="empty" slot="empty" let:loading>
+          <div
+            class={cls('p-3 text-surface-content/5/50 italic text-sm', theme.empty, classes.empty)}
+          >
+            {loading ? 'Loading...' : 'No options found'}
+          </div>
+        </slot>
+      </SelectListOptions>
     {/if}
   {/if}
 </button>

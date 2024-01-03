@@ -5,11 +5,7 @@ const svelte_ux = require('svelte-ux/plugins/tailwind.cjs');
 const config = {
 	content: ['./src/**/*.{html,svelte}', './node_modules/svelte-ux/**/*.{svelte,js}'],
 	theme: {
-		extend: {
-			colors: {
-				accent: colors.blue
-			}
-		}
+		extend: {}
 	},
 	variants: {
 		extend: {}

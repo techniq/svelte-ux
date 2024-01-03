@@ -20,10 +20,10 @@
 <h2>Basic</h2>
 
 <Preview>
-  <div class="inline-block bg-accent-100 rounded-lg">
+  <div class="inline-block bg-primary/10 rounded-lg">
     <Shine>
       <div
-        class="text-8xl text-accent-500 border-[12px] border-accent-500 py-2 font-semibold rounded-lg text-center w-[500px]"
+        class="text-8xl text-primary border-[12px] border-primary py-2 font-semibold rounded-lg text-center w-[500px]"
       >
         Shine
       </div>
@@ -52,12 +52,13 @@
 <Preview>
   <Shine>
     <div class="flex items-center gap-2">
-      <Button variant="fill" color="blue">Button</Button>
-      <Button icon={mdiTrashCan} variant="fill" color="red">Delete</Button>
-      <Button icon={mdiMagnify} variant="fill" color="green" class="flex-row-reverse">Search</Button
+      <Button variant="fill" color="primary">Button</Button>
+      <Button icon={mdiTrashCan} variant="fill" color="danger">Delete</Button>
+      <Button icon={mdiMagnify} variant="fill" color="success" class="flex-row-reverse"
+        >Search</Button
       >
-      <Button icon={mdiHome} variant="fill" color="blue" class="flex-col">Home</Button>
-      <Button icon={mdiHome} variant="fill" color="blue" class="flex-col-reverse">Home</Button>
+      <Button icon={mdiHome} variant="fill" color="primary" class="flex-col">Home</Button>
+      <Button icon={mdiHome} variant="fill" color="primary" class="flex-col-reverse">Home</Button>
     </div>
   </Shine>
 </Preview>

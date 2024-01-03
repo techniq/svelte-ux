@@ -47,7 +47,7 @@
   <Card>
     <Header title="Title" subheading="Subheading" slot="header">
       <div slot="avatar">
-        <Avatar class="bg-accent-500 text-white font-bold">A</Avatar>
+        <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
       </div>
     </Header>
   </Card>
@@ -71,7 +71,7 @@
   <Card>
     <Header title="Title" subheading="Subheading" slot="header">
       <div slot="avatar">
-        <Avatar class="bg-accent-500 text-white font-bold">A</Avatar>
+        <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
       </div>
       <div slot="actions">
         <Button icon={mdiDotsVertical} class="w-12 h-12" />
