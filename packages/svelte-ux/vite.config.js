@@ -6,5 +6,8 @@ export default defineConfig({
   plugins: [sveltekit(), sveld()],
   test: {
     include: ['src/**/*.{test,spec}.{js,ts}'],
+    coverage: {
+      reporter: ['html'],
+    },
   },
 });
