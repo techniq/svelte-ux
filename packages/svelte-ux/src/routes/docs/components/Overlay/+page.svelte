@@ -27,7 +27,7 @@
 
 <Preview>
   <div class="relative">
-    <Overlay center class="bg-black/10">
+    <Overlay center class="bg-surface-content/10">
       <ProgressCircle />
     </Overlay>
     <div>Some content</div>

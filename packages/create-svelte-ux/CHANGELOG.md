@@ -1,5 +1,11 @@
 # create-svelte-ux
 
+## 0.3.0-next.0
+
+### Minor Changes
+
+- Theme support ([#146](https://github.com/techniq/svelte-ux/pull/146))
+
 ## 0.2.1
 
 ### Patch Changes

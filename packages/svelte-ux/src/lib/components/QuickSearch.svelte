@@ -3,6 +3,7 @@
 
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
+  import Kbd from './Kbd.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
   import { getComponentTheme } from './theme';
   import { cls } from '$lib/utils/styles';
@@ -52,17 +53,14 @@
   )}
 >
   <span class="flex-1 text-left max-sm:hidden">Search</span>
-  <kbd class="ml-2 font-sans text-white/50 max-sm:hidden">
-    <abbr title="Command" class="no-underline">⌘</abbr>
-    K
-  </kbd>
+  <Kbd variant="none" class="opacity-50 max-sm:hidden" command>K</Kbd>
 </Button>
 
 <Dialog
   bind:open
   classes={{
     root: cls('items-start mt-20', theme.root, classes.root, $$props.class),
-    backdrop: 'backdrop-blur-sm bg-black/70',
+    backdrop: 'backdrop-blur-sm',
   }}
 >
   <div class="overflow-auto max-h-[min(90dvh,600px)] min-w-[400px] py-1">

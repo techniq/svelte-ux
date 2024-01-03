@@ -45,7 +45,9 @@
     { label: 'Baz', value: 3 },
   ];
 
-  const newOption: () => MenuOption = () => { return { label: "", value: null }}
+  const newOption: () => MenuOption = () => {
+    return { label: '', value: null };
+  };
 
   let optionsAsync: MenuOption[] = [];
   let loading = false;
@@ -154,7 +156,7 @@
     <div slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
-          index === highlightIndex && 'bg-black/5',
+          index === highlightIndex && 'bg-surface-content/5',
           option === selected && 'font-semibold',
           option.group ? 'px-4' : 'px-2'
         )}
@@ -162,7 +164,7 @@
       >
         <div>
           <div>{option.label}</div>
-          <div class="text-sm text-black/50">{option.value}</div>
+          <div class="text-sm text-text-surface-content/50">{option.value}</div>
         </div>
       </MenuItem>
     </div>
@@ -181,7 +183,7 @@
     <div slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
-          index === highlightIndex && 'bg-black/5',
+          index === highlightIndex && 'bg-surface-content/5',
           option === selected && 'font-semibold',
           option.group ? 'px-4' : 'px-2'
         )}
@@ -201,7 +203,7 @@
     <div slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
-          index === highlightIndex && 'bg-black/5',
+          index === highlightIndex && 'bg-surface-content/5',
           option === selected && 'font-semibold',
           option.group ? 'px-4' : 'px-2'
         )}
@@ -210,22 +212,20 @@
         <div class="grid grid-cols-[1fr,auto] items-center w-full">
           <div>
             <div>{option.label}</div>
-            <div class="text-sm text-black/50">{option.value}</div>
+            <div class="text-sm text-surface-content/50">{option.value}</div>
           </div>
           <div on:click|stopPropagation>
             <Toggle let:on={open} let:toggle let:toggleOff>
               <Button
                 icon={mdiPencil}
-                class="p-1 text-xs text-gray-400 z-[9999]"
+                class="p-1 text-xs text-surface-content/50 z-[9999]"
                 on:click={toggle}
               />
               <Drawer {open} on:close={toggleOff} class="w-[400px]">
                 <div class="p-4">
                   Editing option: {option.label}
                 </div>
-                <div
-                  class="fixed bottom-0 w-full flex justify-center bg-gray-500/25 p-1 border-t border-gray-400"
-                >
+                <div slot="actions">
                   <Button on:click={toggleOff}>Close</Button>
                 </div>
               </Drawer>
@@ -244,7 +244,7 @@
     <SelectField {options}>
       <div slot="prepend" on:click|stopPropagation class="flex items-center">
         <select
-          class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
+          class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
           style="text-align-last: center;"
         >
           <!-- <option /> -->
@@ -266,7 +266,7 @@
   <Toggle let:on={open} let:toggle>
     <SelectField {options}>
       <span slot="append" on:click|stopPropagation>
-        <Button icon={mdiPlus} class="text-black/50 p-2" on:click={toggle} />
+        <Button icon={mdiPlus} class="text-surface-content/50 p-2" on:click={toggle} />
       </span>
     </SelectField>
     <Form
@@ -298,7 +298,7 @@
           />
         </div>
         <div slot="actions">
-          <Button on:click={() => commit()} color="accent">Add option</Button>
+          <Button on:click={() => commit()} color="primary">Add option</Button>
           <Button on:click={() => revert()}>Cancel</Button>
         </div>
       </Dialog>
@@ -312,7 +312,7 @@
   <SelectField {options} bind:value>
     <div slot="actions" class="p-2 border-t" on:click|stopPropagation let:hide>
       <Toggle let:on={open} let:toggle>
-        <Button icon={mdiPlus} color="blue" on:click={toggle}>New item</Button>
+        <Button icon={mdiPlus} color="primary" on:click={toggle}>New item</Button>
         <Form
           initial={newOption()}
           on:change={(e) => {
@@ -349,7 +349,7 @@
               />
             </div>
             <div slot="actions">
-              <Button on:click={() => commit()} color="accent">Add option</Button>
+              <Button on:click={() => commit()} color="primary">Add option</Button>
               <Button on:click={() => revert()}>Cancel</Button>
             </div>
           </Dialog>
@@ -383,7 +383,7 @@
   <SelectField {options} icon={mdiMagnify} rounded>
     <span slot="prepend" on:click|stopPropagation>
       <select
-        class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
+        class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
         style="text-align-last: center;"
       >
         <!-- <option /> -->
@@ -429,17 +429,12 @@
     {options}
     bind:value
     clearSearchOnOpen
-    classes={{ selected: 'bg-accent-500 text-white' }}
+    classes={{ selected: 'bg-primary text-primary-content' }}
   />
 </Preview>
 
 <h2>Inline options with icon (used by search bar dialog in top-right)</h2>
 
 <Preview>
-  <SelectField
-    {options}
-    icon={mdiMagnify}
-    bind:value
-    inlineOptions={true}
-  />
+  <SelectField {options} icon={mdiMagnify} bind:value inlineOptions={true} />
 </Preview>

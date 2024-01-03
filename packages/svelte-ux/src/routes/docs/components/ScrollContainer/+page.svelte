@@ -10,12 +10,12 @@
 
 <Preview>
   <ScrollContainer class="scroll-mt-6 scroll-mb-6" let:scrollIntoView>
-    <Button variant="fill" color="accent" on:click={() => scrollIntoView({ block: 'end' })}
+    <Button variant="fill" color="primary" on:click={() => scrollIntoView({ block: 'end' })}
       >Scroll to bottom</Button
     >
     {#each { length: 100 } as _, i}
       <div>Item: {i + 1}</div>
     {/each}
-    <Button variant="fill" color="accent" on:click={() => scrollIntoView()}>Scroll to top</Button>
+    <Button variant="fill" color="primary" on:click={() => scrollIntoView()}>Scroll to top</Button>
   </ScrollContainer>
 </Preview>

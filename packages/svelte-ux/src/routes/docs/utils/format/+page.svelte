@@ -88,7 +88,7 @@
 <span>
   You can customize numbers with the 3rd arg that is an enhanced <b>`Intl.NumberFormatOptions`</b>
   type. You can pass for example locales like <b>fr</b>, <b>de</b>, ... You can also to that
-  globally in the <a class="text-accent-500" href="/customization#settings">Settings</a>.
+  globally in the <a class="text-primary" href="/customization#settings">Settings</a>.
 </span>
 
 <Preview showCode>

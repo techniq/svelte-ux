@@ -5,8 +5,8 @@
 	import '../app.postcss';
 
 	settings({
-		theme:{
-			AppBar: 'bg-accent-500 text-white shadow-md',
+		theme: {
+			AppBar: 'bg-primary text-white shadow-md',
 			AppLayout: {
 				nav: 'bg-neutral-800'
 			},

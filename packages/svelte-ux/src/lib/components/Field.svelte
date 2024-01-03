@@ -61,7 +61,7 @@
     'Field',
     'group flex gap-1',
     labelPlacement !== 'left' ? 'flex-col' : 'items-center',
-    error ? '[--color:theme(colors.red.500)]' : '[--color:theme(colors.accent.500)]',
+    error ? '[--color:theme(colors.danger)]' : '[--color:theme(colors.primary)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
     theme.root,
@@ -73,8 +73,8 @@
     <label
       class={cls(
         'block text-sm font-medium',
-        'truncate group-hover:text-gray-700 group-focus-within:text-accent-500 group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
-        error ? 'text-red-500/80' : 'text-black/50',
+        'truncate group-hover:text-surface-content/70 group-focus-within:text-primary group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+        error ? 'text-danger/80' : 'text-surface-content/50',
         `placement-${labelPlacement}`,
         theme.label,
         classes.label
@@ -91,13 +91,13 @@
       class={cls(
         'border py-0 transition-shadow',
         disabled ? '' : 'hover:shadow',
-        disabled ? '' : error ? 'hover:border-red-700' : 'hover:border-gray-700',
+        disabled ? '' : error ? 'hover:border-danger' : 'hover:border-surface-content',
         {
           'px-2': !rounded,
           'px-6': rounded && !hasPrepend,
         },
-        !base && ['bg-white', rounded ? 'rounded-full' : 'rounded'],
-        error ? 'border-red-500' : 'border-black/20',
+        !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
+        error && 'border-danger',
         'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
         theme.container,
         classes.container
@@ -116,7 +116,7 @@
 
             {#if icon}
               <span class={cls('mr-3', rounded && !$$slots.prepend && 'ml-3')}>
-                <Icon path={icon} class="text-black/50" />
+                <Icon path={icon} class="text-surface-content/50" />
               </span>
             {/if}
           </div>
@@ -127,9 +127,9 @@
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <label
               class={cls(
-                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
                 center && 'justify-center',
-                error ? 'text-red-500/80' : 'text-black/50',
+                error ? 'text-danger/80' : 'text-surface-content/50',
                 `placement-${labelPlacement}`,
                 (labelPlacement === 'inset' || hasValue) && 'shrink',
                 theme.label,
@@ -166,7 +166,7 @@
               <Button
                 icon={mdiClose}
                 {disabled}
-                class="text-black/50 p-1"
+                class="text-surface-content/50 p-1"
                 on:click={() => {
                   value = Array.isArray(value) ? [] : typeof value === 'string' ? '' : null;
                   dispatch('clear');
@@ -178,9 +178,9 @@
             <slot name="append" />
 
             {#if error}
-              <Icon path={mdiInformationOutline} class="text-red-500" />
+              <Icon path={mdiInformationOutline} class="text-danger" />
             {:else if iconRight}
-              <Icon path={iconRight} class="text-black/50" />
+              <Icon path={iconRight} class="text-surface-content/50" />
             {/if}
           </div>
         {/if}
@@ -190,7 +190,7 @@
       class={cls(
         error ? 'error' : 'hint',
         'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
-        error ? 'text-red-500' : 'text-black/50 scale-y-0',
+        error ? 'text-danger' : 'text-surface-content/50 scale-y-0',
         theme.error,
         classes.error
       )}

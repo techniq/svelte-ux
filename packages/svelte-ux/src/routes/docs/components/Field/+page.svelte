@@ -67,7 +67,7 @@
 <div class="grid grid-cols-2 gap-2">
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
-    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">default width</div>
+    <div class="text-xs font-semibold text-surface-content/50 mb-1 ml-2">default width</div>
     <Preview>
       <Field label="Is Active">
         <ToggleGroup variant="outline" inset>
@@ -81,7 +81,7 @@
 
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
-    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full width</div>
+    <div class="text-xs font-semibold text-surface-content/50 mb-1 ml-2">full width</div>
     <Preview>
       <Field label="Is Active">
         <ToggleGroup variant="outline" inset class="w-full">
@@ -95,7 +95,9 @@
 
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
-    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">full rounded and small</div>
+    <div class="text-xs font-semibold text-surface-content/50 mb-1 ml-2">
+      full rounded and small
+    </div>
     <Preview>
       <Field label="Is Active">
         <ToggleGroup variant="outline" inset rounded="full" size="sm" class="w-full">
@@ -109,7 +111,7 @@
 
   <div>
     <div class="text-lg font-semibold mt-8 ml-2">ToggleGroup</div>
-    <div class="text-xs font-semibold text-black/50 mb-1 ml-2">with icons</div>
+    <div class="text-xs font-semibold text-surface-content/50 mb-1 ml-2">with icons</div>
     <Preview>
       <Field label="Is Active">
         <ToggleGroup variant="outline" inset rounded="full">
@@ -140,7 +142,7 @@
 
 <Preview>
   <Field label="Date of Birth" let:id>
-    <input {id} type="date" class="text-sm w-full outline-none" />
+    <input {id} type="date" class="text-sm w-full outline-none bg-surface-100" />
   </Field>
 </Preview>
 
@@ -148,7 +150,14 @@
 
 <Preview>
   <Field label="Number" let:id>
-    <input {id} type="number" min={0} max={10} step={1} class="w-full outline-none" />
+    <input
+      {id}
+      type="number"
+      min={0}
+      max={10}
+      step={1}
+      class="w-full outline-none bg-surface-100"
+    />
   </Field>
 </Preview>
 
@@ -164,7 +173,7 @@
 
 <Preview>
   <Field label="Position" let:id>
-    <select {id} class="text-sm w-full outline-none appearance-none cursor-pointer">
+    <select {id} class="text-sm w-full outline-none appearance-none cursor-pointer bg-surface-100">
       <option value={1}>First</option>
       <option value={2}>Second</option>
       <option value={3}>Third</option>

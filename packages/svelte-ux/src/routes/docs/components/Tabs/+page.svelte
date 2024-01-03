@@ -134,7 +134,7 @@
 
         <Icon
           data={mdiClose}
-          class="rounded-full p-0.5 hover:bg-black/5"
+          class="rounded-full p-0.5 hover:bg-surface-content/5"
           on:click={(e) => {
             e.stopPropagation();
             options = options.filter((o) => o.value !== option.value);
@@ -149,7 +149,7 @@
         options = [...options, { label: 'New ' + newValue, value: newValue }];
       }}
     >
-      <Icon data={mdiPlus} class="rounded-full p-0.5 hover:bg-black/5" />
+      <Icon data={mdiPlus} class="rounded-full p-0.5 hover:bg-surface-content/5" />
     </Tab>
 
     <svelte:fragment slot="content">

@@ -40,7 +40,7 @@
         <ToggleOption value="calls">Calls</ToggleOption>
         <svelte:fragment slot="panes">
           {#if showPanes}
-            <div class="mt-2 p-4 bg-black/5 rounded border">
+            <div class="mt-2 p-4 bg-surface-content/5 rounded border">
               <TogglePanel>All panel</TogglePanel>
               <TogglePanel>Missed panel</TogglePanel>
               <TogglePanel>Calls panel</TogglePanel>
@@ -57,7 +57,7 @@
       <Radio name="variant" value="outline" bind:group={variant}>outline</Radio>
       <Radio name="variant" value="fill" bind:group={variant}>fill</Radio>
       <Radio name="variant" value="fill-light" bind:group={variant}>fill-light</Radio>
-      <Radio name="variant" value="fill-white" bind:group={variant}>fill-white</Radio>
+      <Radio name="variant" value="fill-surface" bind:group={variant}>fill-surface</Radio>
       <Radio name="variant" value="underline" bind:group={variant}>underline</Radio>
     </Field>
 
@@ -101,7 +101,7 @@
 
 <h2>Variants</h2>
 
-{#each ['default', 'outline', 'fill', 'fill-light', 'fill-white', 'underline'] as variant}
+{#each ['default', 'outline', 'fill', 'fill-light', 'fill-surface', 'underline'] as variant}
   <h3>{variant}</h3>
   <Preview>
     <div class="inline-grid gap-2">

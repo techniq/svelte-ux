@@ -26,9 +26,9 @@
     <slot name="subheading">
       {#if subheading}
         {#if Array.isArray(subheading)}
-          <Breadcrumb items={subheading} class="text-sm text-black/50" />
+          <Breadcrumb items={subheading} class="text-sm text-surface-content/50" />
         {:else}
-          <div class="text-sm text-black/50">{subheading}</div>
+          <div class="text-sm text-surface-content/50">{subheading}</div>
         {/if}
       {/if}
     </slot>

@@ -30,14 +30,14 @@
   <Tooltip>
     <div
       slot="title"
-      class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 bg-gray-900/90 text-white px-4 py-2 text-xs rounded shadow"
+      class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 bg-surface-content text-surface-100 px-4 py-2 text-xs rounded shadow"
     >
-      <div class="col-span-2 justify-self-center text-sm">Tue, March 30</div>
-      <div class="text-white/50 justify-self-end">Actual:</div>
+      <div class="col-span-2 justify-self-center text-sm font-semibold">Tue, March 30</div>
+      <div class="text-surface-100/50 justify-self-end">Actual:</div>
       <div class="justify-self-end">123.50</div>
-      <div class="text-white/50 justify-self-end">Target:</div>
+      <div class="text-surface-100/50 justify-self-end">Target:</div>
       <div class="justify-self-end">90.00</div>
-      <div class="text-white/50 justify-self-end">Variance:</div>
+      <div class="text-surface-100/50 justify-self-end">Variance:</div>
       <div class="justify-self-end">33.50</div>
     </div>
     <Button>Hover me</Button>
