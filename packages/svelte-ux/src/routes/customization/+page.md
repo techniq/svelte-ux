@@ -80,6 +80,39 @@ settings({
         fractionDigits: 4,
       },
     },
+
+    dates: {
+      // This is the default, but you can override it here for your app
+      locales: 'en',
+      weekStartsOn: DayOfWeek.Sunday,
+
+      presets: {
+        day: {
+          long: { dateStyle: 'full' },
+        },
+        month: {
+          default: [DateToken.Month_long],
+        },
+      },
+
+      ordinalSuffixes: {
+        en: {
+          one: 'st',
+          two: 'nd',
+          few: 'rd',
+        },
+      },
+
+      dico: {
+        Day: 'Day',
+        Week: 'Week',
+        BiWeek: 'Bi-Week',
+        Month: 'Month',
+        Quarter: 'Quarter',
+        CalendarYear: 'Calendar Year',
+        FiscalYearOct: 'Fiscal Year (Oct)',
+      },
+    },
   },
 });
 ```

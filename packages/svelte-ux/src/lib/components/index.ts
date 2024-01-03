@@ -92,5 +92,5 @@ export { default as TreeList } from './TreeList.svelte';
 export { default as TweenedValue } from './TweenedValue.svelte';
 export { default as ViewportCenter } from './ViewportCenter.svelte';
 export { default as YearList } from './YearList.svelte';
-export { settings, getFormatNumberOptions, getSettings } from './settings';
+export { settings, getFormatNumber, getSettings, getDictionary } from './settings';
 export { getTheme, getComponentTheme } from './theme';

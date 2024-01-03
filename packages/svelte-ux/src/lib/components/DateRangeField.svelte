@@ -53,7 +53,6 @@
   export let icon: string | null = null;
 
   let open: boolean = false;
-  let format: string = undefined;
 
   let currentValue = value;
 </script>
@@ -104,7 +103,7 @@
     on:click={() => (open = true)}
     {id}
   >
-    <DateRangeDisplay {value} {format} />
+    <DateRangeDisplay {value} />
   </button>
 
   <div slot="append" class="flex items-center">
