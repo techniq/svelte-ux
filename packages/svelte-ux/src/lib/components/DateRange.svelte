@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { format, isAfter, isBefore, isSameDay } from 'date-fns';
+  import { isAfter, isBefore, isSameDay } from 'date-fns';
 
   import {
     PeriodType,
@@ -8,7 +8,9 @@
     hasDayOfWeek,
     replaceDayOfWeek,
     getPeriodTypeName,
+    getDayOfWeekName,
   } from '../utils/date';
+  import { format } from '../utils';
   import { getDateRangePresets } from '../utils/dateRange';
   import type { DateRange } from '../utils/dateRange';
   import { cls } from '../utils/styles';
@@ -18,9 +20,9 @@
   import MenuField from './MenuField.svelte';
   import ToggleGroup from './ToggleGroup.svelte';
   import ToggleOption from './ToggleOption.svelte';
-  import DateField from './DateField.svelte';
   import { getComponentTheme } from './theme';
   import { mdScreen } from '$lib/stores/matchMedia';
+  import { getSettings } from '.';
 
   export let selected: DateRange | null = { from: null, to: null, periodType: null };
 
@@ -41,7 +43,7 @@
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
-  let selectedDayOfWeek: DayOfWeek = DayOfWeek.SUN;
+  let selectedDayOfWeek: DayOfWeek = getSettings().formats?.dates?.weekStartsOn ?? DayOfWeek.Sunday;
   let activeDate: 'from' | 'to' = 'from';
 
   $: periodTypeOptions = periodTypes.map((pt) => {
@@ -75,17 +77,19 @@
 
     if (activeDate === 'from') {
       newSelected.from = start(date);
-      if (selected.to != null && isAfter(date, selected.to)) {
+      if (selected!.to != null && isAfter(date, selected!.to)) {
         newSelected.to = end(date);
       }
     } else {
       newSelected.to = end(date);
-      if (selected.from != null && isBefore(date, selected.from)) {
+      if (selected!.from != null && isBefore(date, selected!.from)) {
         newSelected.from = start(date);
         newActiveDate = 'to';
       }
     }
 
+    // TODO
+    // @ts-expect-error (null / undefined issue...)
     selected = newSelected;
     activeDate = newActiveDate;
   }
@@ -93,11 +97,11 @@
   // Expand selection range to match period type (day => month, etc)
   function onPeriodTypeChange(periodType: PeriodType) {
     const { start, end } = getDateFuncsByPeriodType(periodType);
-    if (selected.from) {
-      selected.from = start(selected.from);
+    if (selected!.from) {
+      selected!.from = start(selected!.from);
     }
-    if (selected.to) {
-      selected.to = end(selected.to);
+    if (selected!.to) {
+      selected!.to = end(selected!.to);
     }
   }
 
@@ -117,13 +121,13 @@
       const newSelected = { ...selected, periodType: newPeriodType };
 
       // Attempt to maintain selected preset if labels match
-      if (selected.from && selected.to && selected.periodType) {
+      if (selected?.from && selected?.to && selected.periodType) {
         const prevPeriodTypePreset = [...getPeriodTypePresets(selected.periodType)].find(
           (x) =>
             x.value.from &&
-            isSameDay(x.value.from, selected.from) &&
+            isSameDay(x.value.from, selected!.from!) &&
             x.value.to &&
-            isSameDay(x.value.to, selected.to)
+            isSameDay(x.value.to, selected!.to!)
         );
 
         if (prevPeriodTypePreset && newPeriodType) {
@@ -138,6 +142,8 @@
         }
       }
 
+      // TODO
+      // @ts-expect-error (null / undefined issue...)
       selected = newSelected;
     }
   }
@@ -167,8 +173,8 @@
     <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-white">
       <ToggleOption value="from" class="flex-1">
         <div class="text-xs text-black/50">Start</div>
-        {#if selected.from}
-          <div class="font-medium">{format(selected.from, 'M/d/yyyy')}</div>
+        {#if selected?.from}
+          <div class="font-medium">{format(selected.from, PeriodType.Day)}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}
@@ -189,8 +195,8 @@
 
       <ToggleOption value="to" class="flex-1">
         <div class="text-xs text-black/50">End</div>
-        {#if selected.to}
-          <div class="font-medium">{format(selected.to, 'M/d/yyyy')}</div>
+        {#if selected?.to}
+          <div class="font-medium">{format(selected.to, PeriodType.Day)}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}
@@ -288,13 +294,14 @@
             inset
             classes={{ root: 'bg-white', option: 'px-0' }}
           >
-            <ToggleOption value={DayOfWeek.SUN}>Sun</ToggleOption>
-            <ToggleOption value={DayOfWeek.MON}>Mon</ToggleOption>
-            <ToggleOption value={DayOfWeek.TUE}>Tue</ToggleOption>
-            <ToggleOption value={DayOfWeek.WED}>Wed</ToggleOption>
-            <ToggleOption value={DayOfWeek.THU}>Thu</ToggleOption>
-            <ToggleOption value={DayOfWeek.FRI}>Fri</ToggleOption>
-            <ToggleOption value={DayOfWeek.SAT}>Sat</ToggleOption>
+            {#each [DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday] as day}
+              <ToggleOption value={day}
+                >{getDayOfWeekName(
+                  day,
+                  getSettings().formats?.dates?.locales ?? 'en'
+                )}</ToggleOption
+              >
+            {/each}
           </ToggleGroup>
         </div>
       {/if}

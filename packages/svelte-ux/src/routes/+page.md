@@ -110,12 +110,4 @@ Using `components`, `actions`, or `stores` is as simple as importing from `svelt
 <Button>Click here</Button>
 ```
 
-Currently, `utils` are not exposed as top-level exports to not polute the namespace, although this may change in the future. For now, you can import them using the full path.
-
-```js
-import { dateDisplay } from 'svelte-ux/utils/dateDisplay';
-```
-
-See each component page for detailed usage examples.
-
  </div>
