@@ -62,7 +62,7 @@
       classes.aside
     )}
   >
-    <nav class={cls('nav h-full overflow-scroll w-[var(--navWidth)]', theme.nav, classes.nav)}>
+    <nav class={cls('nav h-full overflow-auto w-[var(--navWidth)]', theme.nav, classes.nav)}>
       <slot name="nav" />
     </nav>
   </aside>
