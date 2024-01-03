@@ -10,7 +10,7 @@
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Button from './Button.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import type { MenuOption } from '$lib/types/options';
 
   export let options: MenuOption[] = [];
@@ -29,7 +29,7 @@
     menuIcon?: string;
     group?: string;
   } = {};
-  const theme = getComponentTheme('MenuField');
+  const settingsClasses = getComponentClasses('MenuField');
 
   let open = false;
   $: selected = options?.find((x) => x.value === value);
@@ -93,7 +93,7 @@
         {
           '-rotate-180': open,
         },
-        theme.menuIcon,
+        settingsClasses.menuIcon,
         classes.menuIcon
       )}
       on:click={() => (open = !open)}
@@ -121,7 +121,7 @@
             <div
               class={cls(
                 'group-header text-xs leading-8 tracking-widest text-surface-content/50 px-2',
-                theme.group,
+                settingsClasses.group,
                 classes.group
               )}
             >
@@ -132,7 +132,7 @@
           <MenuItem
             icon={option.icon}
             selected={option.value === value}
-            class={cls(option.group ? 'px-4' : 'px-2', theme.option, classes.option)}
+            class={cls(option.group ? 'px-4' : 'px-2', settingsClasses.option, classes.option)}
             classes={classes.menuItem}
             on:click={() => (value = option.value)}
           >

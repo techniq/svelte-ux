@@ -33,7 +33,7 @@
 
 <script lang="ts">
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let variant: ComponentProps<Button>['variant'] = undefined;
   export let size: ComponentProps<Button>['size'] | undefined = undefined;
@@ -41,7 +41,7 @@
   export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
   export let disabled: boolean = false;
 
-  const theme = getComponentTheme('ButtonGroup');
+  const settingsClasses = getComponentClasses('ButtonGroup');
 
   $: _class = cls(
     'ButtonGroup',
@@ -69,7 +69,7 @@
     '[&.variant-fill-light_.Button:not(:first-child)]:ml-px',
     '[&.variant-fill-light_:not(:first-child)_.Button]:ml-px',
 
-    theme.root,
+    settingsClasses.root,
     $$props.class
   );
 

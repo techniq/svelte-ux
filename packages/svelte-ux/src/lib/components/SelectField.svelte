@@ -14,7 +14,7 @@
   import MenuItem from './MenuItem.svelte';
   import SelectListOptions from './_SelectListOptions.svelte';
   import TextField from './TextField.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import type { IconInput } from '$lib/utils/icons';
   import type { MenuOption } from '$lib/types/options';
   import type { ScrollIntoViewOptions } from '$lib/actions';
@@ -66,7 +66,7 @@
     group?: string;
     empty?: string;
   } = {};
-  const theme = getComponentTheme('SelectField');
+  const settingsClasses = getComponentClasses('SelectField');
 
   let fieldClasses: ComponentProps<TextField>['classes'];
   $: fieldClasses = typeof classes.field === 'string' ? { root: classes.field } : classes.field;
@@ -371,7 +371,7 @@
   aria-haspopup={!inlineOptions ? 'listbox' : undefined}
   class={cls(
     'SelectField block w-full cursor-default text-left',
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -398,7 +398,7 @@
         ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none'
         : undefined,
     }}
-    class={cls('h-full', theme.field, fieldClasses)}
+    class={cls('h-full', settingsClasses.field, fieldClasses)}
     role="combobox"
     aria-expanded={open ? 'true' : 'false'}
     aria-autocomplete={!inlineOptions ? 'list' : undefined}
@@ -478,7 +478,7 @@
                   index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
                   option === selected && (classes.selected || 'font-semibold'),
                   option.group ? 'px-4' : 'px-2',
-                  theme.option,
+                  settingsClasses.option,
                   classes.option
                 )}
                 scrollIntoView={{
@@ -499,7 +499,7 @@
             <div
               class={cls(
                 'p-3 text-surface-content/5/50 italic text-sm',
-                theme.empty,
+                settingsClasses.empty,
                 classes.empty
               )}
             >
@@ -538,7 +538,7 @@
                 index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
                 option === selected && (classes.selected || 'font-semibold'),
                 option.group ? 'px-4' : 'px-2',
-                theme.option,
+                settingsClasses.option,
                 classes.option
               )}
               scrollIntoView={{
@@ -557,7 +557,7 @@
 
         <slot name="empty" slot="empty" let:loading>
           <div
-            class={cls('p-3 text-surface-content/5/50 italic text-sm', theme.empty, classes.empty)}
+            class={cls('p-3 text-surface-content/5/50 italic text-sm', settingsClasses.empty, classes.empty)}
           >
             {loading ? 'Loading...' : 'No options found'}
           </div>

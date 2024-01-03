@@ -3,7 +3,7 @@
   import type { Schema } from 'zod';
 
   import formStore from '../stores/formStore';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { cls } from '$lib/utils/styles';
 
   const dispatch = createEventDispatcher();
@@ -11,7 +11,7 @@
   export let initial: any = {};
   export let schema: Schema | undefined = undefined;
 
-  const theme = getComponentTheme('Form');
+  const settingsClasses = getComponentClasses('Form');
 
   const [state, draft, errors] = formStore(initial, { schema });
   $: current = draft.current;
@@ -26,7 +26,7 @@
   on:reset|preventDefault={(e) => {
     draft.revert();
   }}
-  class={cls(theme.root, $$props.class)}
+  class={cls(settingsClasses.root, $$props.class)}
   {...$$restProps}
 >
   <slot
