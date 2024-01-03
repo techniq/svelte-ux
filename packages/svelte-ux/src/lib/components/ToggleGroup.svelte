@@ -19,7 +19,7 @@
     | 'outline'
     | 'fill'
     | 'fill-light'
-    | 'fill-white'
+    | 'fill-surface'
     | 'underline'
     | 'none' = 'default';
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
@@ -40,44 +40,44 @@
   $: variantClasses = {
     default: {
       options: '',
-      label: 'text-gray-500 hover:text-accent-500 [&.selected]:text-accent-500',
-      indicator: 'h-full bg-accent-50',
+      label: 'text-surface-content/60 hover:text-primary [&.selected]:text-primary',
+      indicator: 'h-full bg-primary/10',
     },
     outline: {
-      options: 'border hover:border-gray-300',
-      label: 'text-gray-500 hover:text-accent-500 [&.selected]:text-accent-500',
-      indicator: 'h-full w-full bg-accent-50',
+      options: 'border',
+      label: 'text-surface-content/60 hover:text-primary [&.selected]:text-primary',
+      indicator: 'h-full w-full bg-primary/10',
     },
     fill: {
-      options: cls(!gap && 'bg-accent-500/10'),
+      options: cls(!gap && 'bg-primary/10'),
       label: cls(
-        'text-accent-500 hover:text-accent-600 hover:bg-accent-500/10 [&.selected]:text-accent-50',
-        gap && 'bg-accent-500/10'
+        'text-primary hover:text-primary-700 hover:bg-primary/10 [&.selected]:text-primary-content',
+        gap && 'bg-primary/10'
       ),
-      indicator: 'h-full bg-accent-500',
+      indicator: 'h-full bg-primary',
     },
     'fill-light': {
-      options: cls(!gap && 'bg-gray-500/10'),
+      options: cls(!gap && 'bg-surface-content/10'),
       label: cls(
-        'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500',
-        gap && 'bg-gray-500/10'
+        'text-surface-content/60 hover:text-surface-content/80 hover:bg-surface-content/10 [&.selected]:text-primary',
+        gap && 'bg-surface-content/10'
       ),
-      indicator: 'h-full bg-accent-100',
+      indicator: 'h-full bg-primary/10',
     },
-    'fill-white': {
-      options: cls(!gap && 'bg-gray-500/10'),
+    'fill-surface': {
+      options: cls(!gap && 'bg-surface-content/10'),
       label: cls(
-        'text-gray-500 hover:text-gray-600 hover:bg-gray-500/10 [&.selected]:text-accent-500',
-        gap && 'bg-gray-500/10'
+        'text-surface-content/60 hover:text-surface-content/80 hover:bg-surface-content/10 [&.selected]:text-primary',
+        gap && 'bg-surface-content/10'
       ),
-      indicator: 'h-full bg-white border',
+      indicator: 'h-full bg-surface-100 border',
     },
     underline: {
       options: vertical ? 'border-r' : 'border-b',
       label:
-        'relative text-black/50 font-bold hover:text-accent-500 hover:bg-accent-500/10 [&.selected]:text-accent-500',
+        'relative text-surface-content/50 font-bold hover:text-primary hover:bg-primary/10 [&.selected]:text-primary',
       indicator: cls(
-        'absolute border-accent-500',
+        'absolute border-primary',
         vertical
           ? 'top-0 right-0 h-full border-l-4 rounded-l'
           : 'bottom-0 left-0 w-full border-t-2 rounded-t'

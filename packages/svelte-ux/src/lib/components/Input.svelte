@@ -126,7 +126,7 @@
   {...$$restProps}
   class={cls(
     'Input',
-    'text-sm w-full outline-none bg-transparent selection:bg-gray-500/30',
+    'text-sm w-full outline-none bg-transparent placeholder-surface/50 selection:bg-surface-content/10',
     mask && (mask == placeholder || isFocused || value) && 'font-mono',
     theme.root,
     $$props.class

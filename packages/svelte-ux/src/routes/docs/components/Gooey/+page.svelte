@@ -43,15 +43,9 @@
 </Preview>
 
 <Blockquote>
-  Inspiration: <a
-    href="https://codepen.io/Valgo/pen/PowZaNY"
-    target="_blank"
-    class="text-accent-500"
-  >
-    Text Morph
-  </a>
+  Inspiration: <a href="https://codepen.io/Valgo/pen/PowZaNY" target="_blank"> Text Morph </a>
   by
-  <a href="https://codepen.io/Valgo" target="_blank" class="text-accent-500">Valgo</a>
+  <a href="https://codepen.io/Valgo" target="_blank">Valgo</a>
 </Blockquote>
 
 <h2>Morphing emoji</h2>
@@ -79,11 +73,11 @@
   <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
 </div>
 
-<Preview class="bg-indigo-900">
+<Preview class="bg-primary">
   <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9} composite="atop">
     <div
       contenteditable="true"
-      class="inline bg-white box-decoration-clone text-xl leading-7 px-2 py-1 outline-none"
+      class="inline bg-surface-100 box-decoration-clone text-xl leading-7 px-2 py-1 outline-none"
     >
       This is an example of a simple headline<br />or text with rounded corners<br />using a gooey
       SVG filter.<br />You can edit me!
@@ -92,11 +86,11 @@
 </Preview>
 
 <Blockquote>
-  Inspiration: <a href="https://codepen.io/ines/pen/NXbmRO" target="_blank" class="text-accent-500">
+  Inspiration: <a href="https://codepen.io/ines/pen/NXbmRO" target="_blank">
     Gooey text background with SVG filters
   </a>
   by
-  <a href="https://codepen.io/ines" target="_blank" class="text-accent-500">Ines Montani</a>
+  <a href="https://codepen.io/ines" target="_blank">Ines Montani</a>
 </Blockquote>
 
 <div class="grid grid-cols-[1fr,auto] gap-2 items-end">
@@ -126,15 +120,11 @@
 </Preview>
 
 <Blockquote>
-  Inspiration: <a
-    href="https://codepen.io/hostsamurai/pen/bodZvR"
-    target="_blank"
-    class="text-accent-500"
-  >
+  Inspiration: <a href="https://codepen.io/hostsamurai/pen/bodZvR" target="_blank">
     Spinner with Glowing, Gooey Effect
   </a>
   by
-  <a href="https://codepen.io/hostsamurai" target="_blank" class="text-accent-500">Lou</a>
+  <a href="https://codepen.io/hostsamurai" target="_blank">Lou</a>
 </Blockquote>
 
 <div class="grid grid-cols-[1fr,auto] gap-2 items-end">
@@ -165,15 +155,11 @@
 </Preview>
 
 <Blockquote>
-  Inspiration: <a
-    href="https://codepen.io/hostsamurai/pen/qPENyb"
-    target="_blank"
-    class="text-accent-500"
-  >
+  Inspiration: <a href="https://codepen.io/hostsamurai/pen/qPENyb" target="_blank">
     Loader/Scanner with Gooey Effect
   </a>
   by
-  <a href="https://codepen.io/hostsamurai" target="_blank" class="text-accent-500">Lou</a>
+  <a href="https://codepen.io/hostsamurai" target="_blank">Lou</a>
 </Blockquote>
 
 <div class="grid grid-cols-[1fr,auto] gap-2 items-end">

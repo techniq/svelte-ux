@@ -9,7 +9,7 @@
 			href="https://svelte-ux.techniq.dev"
 			target="_blank"
 			variant="fill-light"
-			color="accent"
+			color="primary"
 		>
 			Documentation
 		</Button>
@@ -17,7 +17,7 @@
 			href="https://svelte-ux.techniq.dev/customization"
 			target="_blank"
 			variant="fill-light"
-			color="accent"
+			color="primary"
 		>
 			Customization
 		</Button>

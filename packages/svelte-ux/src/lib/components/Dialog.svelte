@@ -108,7 +108,7 @@
   >
     <div
       class={cls(
-        'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
+        'dialog rounded bg-surface-100 elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
         theme.dialog,
         classes.dialog,
         $$props.class
@@ -142,7 +142,7 @@
       {#if $$slots.actions}
         <div
           class={cls(
-            'actions flex w-full justify-end p-2 bg-black/5 border-t',
+            'actions flex w-full justify-end p-2 bg-surface-content/5 border-t',
             theme.actions,
             classes.actions
           )}

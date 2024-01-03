@@ -71,7 +71,7 @@
 <Preview>
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)}>
     <div slot="actions">
-      <Button color="accent" icon={mdiPlus}>Add item</Button>
+      <Button color="primary" icon={mdiPlus}>Add item</Button>
     </div>
   </MultiSelectField>
 </Preview>
@@ -79,16 +79,13 @@
 <h2>within Drawer</h2>
 
 <Preview>
-  <ToggleButton let:on={open} let:toggle let:toggleOff>
+  <ToggleButton let:on={open}>
     Open Drawer
-    <Drawer slot="toggle" {open} on:close={toggleOff} class="w-[400px]">
+    <Drawer slot="toggle" let:toggleOff {open} on:close={toggleOff} class="w-[400px]">
       <div class="p-4">
         <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} />
       </div>
-      <div
-        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-      p-1 border-t border-gray-400"
-      >
+      <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>

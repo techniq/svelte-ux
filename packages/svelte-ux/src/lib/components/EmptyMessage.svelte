@@ -10,9 +10,9 @@
   class={cls(
     'EmptyMessage',
     'grid place-items-center',
-    'p-1 bg-black/10 shadow-inner ring-1 ring-black/30',
-    'text-black/50 text-xs tracking-wider',
-    'border rounded',
+    'p-1 bg-surface-300 _shadow-inner _ring-1 ring-surface-200/30',
+    'text-surface-content/50 text-xs tracking-wider',
+    'border border-surface-100/80 rounded',
     theme.root,
     $$props.class
   )}
