@@ -556,7 +556,11 @@
 
         <slot name="empty" slot="empty" let:loading>
           <div
-            class={cls('p-3 text-surface-content/5/50 italic text-sm', settingsClasses.empty, classes.empty)}
+            class={cls(
+              'p-3 text-surface-content/5/50 italic text-sm',
+              settingsClasses.empty,
+              classes.empty
+            )}
           >
             {loading ? 'Loading...' : 'No options found'}
           </div>

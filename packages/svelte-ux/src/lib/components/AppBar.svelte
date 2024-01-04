@@ -26,7 +26,12 @@
 </script>
 
 <header
-  class={cls('AppBar', 'px-4 flex items-center relative z-50', settingsClasses.root, $$restProps.class)}
+  class={cls(
+    'AppBar',
+    'px-4 flex items-center relative z-50',
+    settingsClasses.root,
+    $$restProps.class
+  )}
 >
   <Button icon={mdiMenu} on:click={() => ($showDrawer = !$showDrawer)} class="p-3" />
   {#if $$slots.title}

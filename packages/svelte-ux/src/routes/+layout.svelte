@@ -29,7 +29,6 @@
   const baseTitle = 'Svelte UX';
   $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
-
   settings({
     // Usefull to test different locales with the docs
     // formats: {
