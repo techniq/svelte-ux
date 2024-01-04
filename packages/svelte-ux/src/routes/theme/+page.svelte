@@ -8,6 +8,7 @@
   <div class="grid grid-cols-xs gap-3">
     <div class="swatch">
       <div class="bg-primary text-primary-content name">Primary</div>
+      <div class="bg-primary-50 shade"><span>50</span></div>
       <div class="bg-primary-100 shade"><span>100</span></div>
       <div class="bg-primary-200 shade"><span>200</span></div>
       <div class="bg-primary-300 shade"><span>300</span></div>
@@ -21,6 +22,7 @@
 
     <div class="swatch">
       <div class="bg-secondary text-secondary-content name">Secondary</div>
+      <div class="bg-secondary-50 shade"><span>50</span></div>
       <div class="bg-secondary-100 shade"><span>100</span></div>
       <div class="bg-secondary-200 shade"><span>200</span></div>
       <div class="bg-secondary-300 shade"><span>300</span></div>
@@ -34,6 +36,7 @@
 
     <div class="swatch">
       <div class="bg-accent text-accent-content name">Accent</div>
+      <div class="bg-accent-50 shade"><span>50</span></div>
       <div class="bg-accent-100 shade"><span>100</span></div>
       <div class="bg-accent-200 shade"><span>200</span></div>
       <div class="bg-accent-300 shade"><span>300</span></div>
@@ -47,6 +50,7 @@
 
     <div class="swatch">
       <div class="bg-neutral text-neutral-content name">Neutral</div>
+      <div class="bg-neutral-50 shade"><span>50</span></div>
       <div class="bg-neutral-100 shade"><span>100</span></div>
       <div class="bg-neutral-200 shade"><span>200</span></div>
       <div class="bg-neutral-300 shade"><span>300</span></div>
@@ -64,6 +68,7 @@
   <div class="grid grid-cols-xs gap-3">
     <div class="swatch">
       <div class="bg-info text-info-content name">Info</div>
+      <div class="bg-info-50 shade"><span>50</span></div>
       <div class="bg-info-100 shade"><span>100</span></div>
       <div class="bg-info-200 shade"><span>200</span></div>
       <div class="bg-info-300 shade"><span>300</span></div>
@@ -77,6 +82,7 @@
 
     <div class="swatch">
       <div class="bg-success text-success-content name">Success</div>
+      <div class="bg-success-50 shade"><span>50</span></div>
       <div class="bg-success-100 shade"><span>100</span></div>
       <div class="bg-success-200 shade"><span>200</span></div>
       <div class="bg-success-300 shade"><span>300</span></div>
@@ -90,6 +96,7 @@
 
     <div class="swatch">
       <div class="bg-warning text-warning-content name">Warning</div>
+      <div class="bg-warning-50 shade"><span>50</span></div>
       <div class="bg-warning-100 shade"><span>100</span></div>
       <div class="bg-warning-200 shade"><span>200</span></div>
       <div class="bg-warning-300 shade"><span>300</span></div>
@@ -103,6 +110,7 @@
 
     <div class="swatch">
       <div class="bg-danger text-danger-content name">Danger</div>
+      <div class="bg-danger-50 shade"><span>50</span></div>
       <div class="bg-danger-100 shade"><span>100</span></div>
       <div class="bg-danger-200 shade"><span>200</span></div>
       <div class="bg-danger-300 shade"><span>300</span></div>
