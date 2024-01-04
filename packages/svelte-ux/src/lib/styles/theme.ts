@@ -20,3 +20,27 @@ export const colorNames = [
   'surface-300',
   'surface-content',
 ];
+
+/** Return a script tag that will set the initial theme from localStorage. This allows setting
+ * the theme before anything starts rendering, even when SSR is in use.
+ *
+ * This feels a bit weird compared to just placing the function directly in svelte:head,
+ * but it's the only way to inject the `darkThemes` array into the function.
+ **/
+export function createHeadSnippet(darkThemes: string[]) {
+  function _applyInitialStyle(darkThemes) {
+    let theme = localStorage.getItem('theme');
+    if (theme) {
+      document.documentElement.dataset.theme = theme;
+      if (darkThemes.includes(theme)) {
+        document.documentElement.classList.add('dark');
+      }
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+  }
+
+  let darkThemeList = darkThemes.map((theme) => `'${theme}'`).join(', ');
+
+  return `<script>(${_applyInitialStyle.toString()})([${darkThemeList}])</script>`;
+}
