@@ -28,7 +28,7 @@
   setButtonGroup(undefined);
 
   // Clear theme to not expose to Button
-  settings({ ...getSettings(), theme: {} });
+  settings({ ...getSettings(), classes: {} });
 </script>
 
 <Button
