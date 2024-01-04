@@ -12,58 +12,30 @@
   import Tooltip from './Tooltip.svelte';
 
   import { cls } from '../utils/styles';
+  import { getSettings } from './settings';
 
-  export let darkThemes = ['dark'];
-  export let lightThemes = ['light'];
+  const { currentTheme, themes: allThemes } = getSettings();
+
+  /** The list of dark themes to chose from, if not the list provided to `settings`. */
+  export let darkThemes = allThemes?.dark ?? ['dark'];
+  /** The list of light themes to chose from, if not the list provided to `settings`. */
+  export let lightThemes = allThemes?.light ?? ['light'];
 
   let open = false;
 
-  $: themes = colorScheme === 'dark' ? darkThemes : lightThemes;
-
-  let theme: (typeof themes)[number] | null = localStorage.theme ?? 'system';
-
-  let colorScheme: 'light' | 'dark' =
-    (theme !== 'system' && darkThemes.includes(theme)) ||
-    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ? 'dark'
-      : 'light';
-
-  // TODO: Call inline in `head` to avoid FOUC.  Move to <Theme>?
-  function setTheme(themeName: typeof theme) {
-    if (themeName === 'system') {
-      // Remove setting
-      localStorage.removeItem('theme');
-      delete document.documentElement.dataset.theme;
-
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.classList.add('dark');
-      }
-    } else {
-      // Save theme to local storage, set `<html data-theme="">`, and set `<html class="dark">` if dark mode
-      localStorage.theme = themeName;
-      document.documentElement.dataset.theme = theme;
-
-      if (darkThemes.includes(themeName)) {
-        colorScheme = 'dark';
-        document.documentElement.classList.add('dark');
-      } else {
-        colorScheme = 'light';
-        document.documentElement.classList.remove('dark');
-      }
-    }
-  }
-  $: setTheme(theme);
+  $: themes = $currentTheme.dark ? darkThemes : lightThemes;
 
   function onKeyDown(e: KeyboardEvent) {
     if (e.ctrlKey && e.code === 'KeyT') {
       if (e.shiftKey) {
         // Pick next theme
-        const currentIndex = themes.indexOf(theme);
-        theme = themes[(currentIndex + 1) % themes.length];
+        const currentIndex = themes.indexOf($currentTheme.resolvedTheme);
+        let newTheme = themes[(currentIndex + 1) % themes.length];
+        currentTheme.setTheme(newTheme);
       } else {
         // Toggle light/dark
-        colorScheme = colorScheme === 'light' ? 'dark' : 'light';
-        theme = colorScheme;
+        let newTheme = $currentTheme.dark ? 'light' : 'dark';
+        currentTheme.setTheme(newTheme);
       }
     }
   }
@@ -77,7 +49,7 @@
     >
       Mode
 
-      {#if theme !== 'system'}
+      {#if $currentTheme.theme}
         <span transition:fly={{ x: 8 }}>
           <Tooltip title="Reset to System" offset={2}>
             <Button
@@ -86,10 +58,7 @@
               size="sm"
               class="mr-1"
               on:click={() => {
-                colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-                  ? 'dark'
-                  : 'light';
-                theme = 'system';
+                currentTheme.setTheme('system');
               }}
             />
           </Tooltip>
@@ -98,10 +67,10 @@
 
       <Switch
         id="switch-color-scheme"
-        checked={colorScheme === 'light'}
+        checked={!$currentTheme.dark}
         on:change={(e) => {
-          colorScheme = e.target?.checked ? 'light' : 'dark';
-          theme = colorScheme;
+          let newTheme = e.target?.checked ? 'light' : 'dark';
+          currentTheme.setTheme(newTheme);
         }}
         class="my-1"
         let:checked
@@ -117,11 +86,11 @@
     <div class="grid grid-cols-2 gap-2 p-2 border-b border-surface-content/10">
       {#each themes as themeName}
         <MenuItem
-          on:click={() => (theme = themeName)}
+          on:click={() => currentTheme.setTheme(themeName)}
           data-theme={themeName}
           class={cls(
             'bg-surface-100 text-surface-content font-semibold border shadow',
-            theme === themeName && 'ring-2 ring-surface-content'
+            $currentTheme.resolvedTheme === themeName && 'ring-2 ring-surface-content'
           )}
         >
           <div class="grid gap-1">

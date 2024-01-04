@@ -55,7 +55,7 @@ On each `ComponentName: ...` you can pass `class` (when value is a `string`) or 
 import { settings } from 'svelte-ux';
 
 settings({
-  theme: {
+  classes: {
     Button: 'flex-2', // same as <Button class="flex-2">
     TextField: {
       container: 'hover:shadow-none group-focus-within:shadow-none', // same as <TextField classes={{ container: '...' }}>
