@@ -131,7 +131,9 @@
 
       <slot name="header">
         {#if $$slots.title}
-          <div class={cls('text-xl font-bold pt-4 pb-2 px-6', settingsClasses.title, classes.title)}>
+          <div
+            class={cls('text-xl font-bold pt-4 pb-2 px-6', settingsClasses.title, classes.title)}
+          >
             <slot name="title" />
           </div>
         {/if}

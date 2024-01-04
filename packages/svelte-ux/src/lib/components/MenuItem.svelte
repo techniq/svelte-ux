@@ -2,7 +2,10 @@
   import Button from './Button.svelte';
   import type { ComponentProps } from '../types';
   import { cls } from '../utils/styles';
-  import { scrollIntoView as scrollIntoViewAction, type ScrollIntoViewOptions } from '../actions/scroll';
+  import {
+    scrollIntoView as scrollIntoViewAction,
+    type ScrollIntoViewOptions,
+  } from '../actions/scroll';
   import { setButtonGroup } from './ButtonGroup.svelte';
   import { getComponentClasses } from './theme';
   import { settings, getSettings } from './settings';
@@ -22,7 +25,10 @@
   const settingsClasses = getComponentClasses('MenuItem');
 
   let scrollOptions: ScrollIntoViewOptions;
-  $: scrollOptions = typeof(scrollIntoView) === "boolean" ? { condition: scrollIntoView } as ScrollIntoViewOptions : scrollIntoView;
+  $: scrollOptions =
+    typeof scrollIntoView === 'boolean'
+      ? ({ condition: scrollIntoView } as ScrollIntoViewOptions)
+      : scrollIntoView;
 
   // Clear ButtonGroup if set
   setButtonGroup(undefined);
