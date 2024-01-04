@@ -34,6 +34,17 @@ export interface ThemeStoreOptions {
 
 export function createThemeStore(options: ThemeStoreOptions): ThemeStore {
   let store = writable<CurrentTheme>(new CurrentTheme(null, false));
+  let darkMatcher = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function resolveSystemTheme({ matches }: { matches: boolean }) {
+    if (matches) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    store.set(new CurrentTheme(null, matches));
+  }
 
   function setTheme(themeName: string) {
     if (!browser) {
@@ -52,13 +63,11 @@ export function createThemeStore(options: ThemeStoreOptions): ThemeStore {
       localStorage.removeItem('theme');
       delete document.documentElement.dataset.theme;
 
-      let dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (dark) {
-        document.documentElement.classList.add('dark');
-      }
-
-      store.set(new CurrentTheme(null, dark));
+      resolveSystemTheme(darkMatcher);
+      darkMatcher.addEventListener('change', resolveSystemTheme);
     } else {
+      darkMatcher.removeEventListener('change', resolveSystemTheme);
+
       // Save theme to local storage, set `<html data-theme="">`, and set `<html class="dark">` if dark mode
       localStorage.theme = themeName;
       document.documentElement.dataset.theme = themeName;
