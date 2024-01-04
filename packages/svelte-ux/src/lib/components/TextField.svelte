@@ -120,13 +120,20 @@
       inputMode = 'text';
   }
 
-  $: inputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
+  let inputValue: InputValue = '';
+  $: potentialInputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
+  $: if(inputType !== 'number' || inputValue != potentialInputValue) {
+    // Update the inputValue, but when the input type is number only do it if the values are actually different.
+    // This avoids the cursor jumping around when backspacing numbers around a decimal point, since
+    // e.g. "123" and "123." are both 123.
+    inputValue = potentialInputValue;
+  }
+
   $: operator = isLiteralObject(value) ? Object.keys(value)[0] : operators?.[0].value;
 
   let lastTimeoutId: ReturnType<typeof setTimeout>;
   function updateValue() {
     let newValue;
-    // TODO: Improve handling of `1234.05` and backspacing the `5`, which results in `1234` (`.0` removed)
     const valueAsType = inputType === 'number' ? Number(inputValue) : inputValue;
     if (inputValue && operator) {
       // Add with operator if used
