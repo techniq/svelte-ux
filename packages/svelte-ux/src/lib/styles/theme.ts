@@ -22,9 +22,9 @@ export const colorNames = [
 ];
 
 /** Return a script tag that will set the initial theme from localStorage. This allows setting
-* the theme before anything starts rendering, even when SSR is in use. */
+ * the theme before anything starts rendering, even when SSR is in use. */
 export function createHeadSnippet(darkThemes: string[]) {
-  function _applyInitialStyle() {
+  function _applyInitialStyle(darkThemes) {
     let theme = localStorage.getItem('theme');
     if (theme) {
       document.documentElement.dataset.theme = theme;
