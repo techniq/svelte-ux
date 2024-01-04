@@ -10,6 +10,7 @@
   import NavMenu from './_NavMenu.svelte';
   import QuickSearch from '$lib/components/QuickSearch.svelte';
   import ThemeSelect from '$lib/components/ThemeSelect.svelte';
+  import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
 
   import { dev } from '$app/environment';
@@ -19,6 +20,7 @@
   import { settings } from '$lib/components/settings';
   import type { PageData } from './$types';
   import { DateToken } from '$lib/utils/date';
+  import { lightThemes, darkThemes } from '$lib/styles/daisy';
 
   export let data: PageData;
 
@@ -27,7 +29,6 @@
   const baseTitle = 'Svelte UX';
   $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
-  import { lightThemes, darkThemes } from '$lib/styles/daisy';
 
   settings({
     // Usefull to test different locales with the docs
@@ -189,8 +190,9 @@
 
       <QuickSearch options={quickSearchOptions} on:change={(e) => goto(e.detail.value)} />
 
-      <div class="border-r border-primary-content/20 pr-2">
+      <div class="border-r border-primary-content/20 pr-2 grid items-center">
         <ThemeSelect />
+        <!-- <ThemeSwitch classes={{ switch: 'bg-black/10 bornder-none' }} /> -->
       </div>
 
       <Tooltip title="Discord" placement="left" offset={2}>
