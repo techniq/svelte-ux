@@ -13,12 +13,10 @@
 
 <Preview>
   <Settings
-    settings={{
-      theme: {
-        Button: 'border-2 font-bold',
-        Menu: 'shadow-xl border-gray-500',
-        MenuItem: 'font-bold',
-      },
+    classes={{
+      Button: 'border-2 font-bold',
+      Menu: 'shadow-xl border-gray-500',
+      MenuItem: 'font-bold',
     }}
   >
     <Toggle let:on={open} let:toggle>
