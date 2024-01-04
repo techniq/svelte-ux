@@ -25,7 +25,15 @@
   $: checked = group !== undefined ? group === value : checked;
 </script>
 
-<div class={cls('Radio', 'inline-flex items-center', settingsClasses.root, classes.root, $$props.class)}>
+<div
+  class={cls(
+    'Radio',
+    'inline-flex items-center',
+    settingsClasses.root,
+    classes.root,
+    $$props.class
+  )}
+>
   <input
     {id}
     {name}

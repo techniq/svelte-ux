@@ -10,10 +10,10 @@
 
 ```svelte
 <script>
-	import { localStore } from 'svelte-ux';
-	import { addDays } from 'date-fns';
+  import { localStore } from 'svelte-ux';
+  import { addDays } from 'date-fns';
 
-	const store = localStore('some-key', defaultValue, { expiry: addDays(new Date(), 1) });
+  const store = localStore('some-key', defaultValue, { expiry: addDays(new Date(), 1) });
 </script>
 ```
 

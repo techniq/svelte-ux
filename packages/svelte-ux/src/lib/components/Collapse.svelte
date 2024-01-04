@@ -90,7 +90,10 @@
   </button>
 
   {#if open}
-    <div transition:transition={transitionParams} class={cls(settingsClasses.content, classes.content)}>
+    <div
+      transition:transition={transitionParams}
+      class={cls(settingsClasses.content, classes.content)}
+    >
       <slot {open} />
     </div>
   {/if}

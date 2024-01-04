@@ -44,7 +44,13 @@
 
 {#if $pagination.totalPages > 1 || !hideSinglePage}
   <div
-    class={cls('Pagination', 'flex items-center gap-1', settingsClasses.root, classes.root, $$props.class)}
+    class={cls(
+      'Pagination',
+      'flex items-center gap-1',
+      settingsClasses.root,
+      classes.root,
+      $$props.class
+    )}
   >
     {#each show as component}
       {#if component === 'actions'}

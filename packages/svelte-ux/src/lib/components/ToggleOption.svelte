@@ -62,7 +62,12 @@
   <!-- Stack indicator under option -->
   {#if selected}
     <div
-      class={cls('indicator', $classesContext.indicator, settingsClasses.indicator, classes.indicator)}
+      class={cls(
+        'indicator',
+        $classesContext.indicator,
+        settingsClasses.indicator,
+        classes.indicator
+      )}
       in:receive={{ key: 'indicator' }}
       out:send={{ key: 'indicator' }}
     />
