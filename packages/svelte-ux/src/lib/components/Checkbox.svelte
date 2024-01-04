@@ -47,7 +47,15 @@
   }
 </script>
 
-<div class={cls('Checkbox', 'inline-flex items-center', settingsClasses.root, classes.root, $$props.class)}>
+<div
+  class={cls(
+    'Checkbox',
+    'inline-flex items-center',
+    settingsClasses.root,
+    classes.root,
+    $$props.class
+  )}
+>
   <input
     {id}
     {name}

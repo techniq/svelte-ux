@@ -122,7 +122,7 @@
 
   let inputValue: InputValue = '';
   $: potentialInputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
-  $: if(inputType !== 'number' || inputValue != potentialInputValue) {
+  $: if (inputType !== 'number' || inputValue != potentialInputValue) {
     // Update the inputValue, but when the input type is number only do it if the values are actually different.
     // This avoids the cursor jumping around when backspacing numbers around a decimal point, since
     // e.g. "123" and "123." are both 123.

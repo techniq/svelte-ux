@@ -93,7 +93,13 @@
 
     <slot name="subheading">
       {#if subheading != null}
-        <div class={cls('text-sm text-surface-content/50', settingsClasses.subheading, classes.subheading)}>
+        <div
+          class={cls(
+            'text-sm text-surface-content/50',
+            settingsClasses.subheading,
+            classes.subheading
+          )}
+        >
           {subheading}
         </div>
       {/if}
