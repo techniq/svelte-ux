@@ -74,10 +74,19 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-  class={cls('Table', 'table-container', settingsClasses.container, classes.container, $$props.class)}
+  class={cls(
+    'Table',
+    'table-container',
+    settingsClasses.container,
+    classes.container,
+    $$props.class
+  )}
   style={styles.container}
 >
-  <div class={cls('table-wrapper', settingsClasses.wrapper, classes.wrapper)} style={styles.wrapper}>
+  <div
+    class={cls('table-wrapper', settingsClasses.wrapper, classes.wrapper)}
+    style={styles.wrapper}
+  >
     <table class={cls('w-full', settingsClasses.table, classes.table)} style={styles.table}>
       <slot name="headers" {headers} {getCellHeader}>
         <thead class={cls(settingsClasses.thead, classes.thead)} style={styles.thead}>

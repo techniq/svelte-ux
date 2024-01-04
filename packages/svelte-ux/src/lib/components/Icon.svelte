@@ -65,12 +65,12 @@
         .then((resp) => resp.text())
         .catch(() => {
           // Failed request, remove promise so fetched again
-          if (svgUrl && typeof(svgUrl) === "string") {
+          if (svgUrl && typeof svgUrl === 'string') {
             cache.delete(svgUrl);
           }
           // TODO: Consider showing error icon
           // throw e;
-          return "";
+          return '';
         });
       cache.set(svgUrl, promise);
       promise.then((text) => {
