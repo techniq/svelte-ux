@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
 
-  import { mdiMoonWaningCrescent, mdiPalette, mdiUndoVariant, mdiWhiteBalanceSunny } from '@mdi/js';
+  import { mdiPalette, mdiUndoVariant, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
 
   import Button from './Button.svelte';
   import Kbd from './Kbd.svelte';
@@ -78,7 +78,7 @@
         {#if checked}
           <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
         {:else}
-          <Icon data={mdiMoonWaningCrescent} size=".8rem" class="text-primary" />
+          <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
         {/if}
       </Switch>
     </label>
