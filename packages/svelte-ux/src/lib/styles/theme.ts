@@ -4,7 +4,7 @@ export const semanticColors = ['primary', 'secondary', 'accent', 'neutral'] as c
 export const stateColors = ['info', 'success', 'warning', 'danger'] as const;
 export const colors = [...semanticColors, ...stateColors];
 
-export const shades = range(100, 1000, 100);
+export const shades = [50, ...range(100, 1000, 100)];
 
 export const colorNames = [
   // Semantic & State colors (ex. `priamry`, 'primary-content`, 'primary-100`, ...)
