@@ -34,6 +34,17 @@ export interface ThemeStoreOptions {
 
 export function createThemeStore(options: ThemeStoreOptions): ThemeStore {
   let store = writable<CurrentTheme>(new CurrentTheme(null, false));
+
+  if (!browser) {
+    // Stub out most of the store when running SSR.
+    return {
+      subscribe: store.subscribe,
+      setTheme: (themeName: string) => {
+        store.set(new CurrentTheme(themeName, options.dark.includes(themeName)));
+      },
+    };
+  }
+
   let darkMatcher = window.matchMedia('(prefers-color-scheme: dark)');
 
   function resolveSystemTheme({ matches }: { matches: boolean }) {
@@ -47,17 +58,6 @@ export function createThemeStore(options: ThemeStoreOptions): ThemeStore {
   }
 
   function setTheme(themeName: string) {
-    if (!browser) {
-      // Stub this out for SSR
-      store.set(
-        new CurrentTheme(
-          themeName === 'system' ? null : themeName,
-          options.dark.includes(themeName)
-        )
-      );
-      return;
-    }
-
     if (themeName === 'system') {
       // Remove setting
       localStorage.removeItem('theme');
@@ -83,10 +83,8 @@ export function createThemeStore(options: ThemeStoreOptions): ThemeStore {
     }
   }
 
-  if (browser) {
-    let savedTheme = localStorage.getItem('theme') || 'system';
-    setTheme(savedTheme);
-  }
+  let savedTheme = localStorage.getItem('theme') || 'system';
+  setTheme(savedTheme);
 
   return {
     subscribe: store.subscribe,
