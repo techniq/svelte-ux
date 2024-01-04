@@ -1,5 +1,22 @@
 # svelte-ux
 
+## 0.58.0-next.8
+
+### Minor Changes
+
+- - Rename settings `theme` argument to `classes` ([#172](https://github.com/techniq/svelte-ux/pull/172))
+  - Rename getTheme to getClasses and getComponentTheme to getComponentClasses
+
+- BREAKING: removed `dateDisplay()` in favor of `format()` ([#137](https://github.com/techniq/svelte-ux/pull/137))
+
+### Patch Changes
+
+- Add ThemeInit component to prevent flash of unstyled content when SSR is enabled ([#176](https://github.com/techniq/svelte-ux/pull/176))
+
+- Add a store to manage the current theme ([#174](https://github.com/techniq/svelte-ux/pull/174))
+
+- add locale management of date leveraging intl ([#137](https://github.com/techniq/svelte-ux/pull/137))
+
 ## 0.58.0-next.2
 
 ### Patch Changes
