@@ -9,7 +9,7 @@
   import Button from '$lib/components/Button.svelte';
   import NavMenu from './_NavMenu.svelte';
   import QuickSearch from '$lib/components/QuickSearch.svelte';
-  import ThemeButton from '$lib/components/ThemeButton.svelte';
+  import ThemeSelect from '$lib/components/ThemeSelect.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
 
   import { dev } from '$app/environment';
@@ -190,7 +190,7 @@
       <QuickSearch options={quickSearchOptions} on:change={(e) => goto(e.detail.value)} />
 
       <div class="border-r border-primary-content/20 pr-2">
-        <ThemeButton />
+        <ThemeSelect />
       </div>
 
       <Tooltip title="Discord" placement="left" offset={2}>
