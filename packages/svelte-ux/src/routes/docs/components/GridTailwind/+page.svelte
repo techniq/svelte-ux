@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Preview from '$lib/components/Preview.svelte';
+  import Preview from '$lib/components/Preview.svelte';
 </script>
 
 <h1>Examples</h1>
@@ -66,7 +66,7 @@
     <div class="border">item</div>
     <div class="border">item</div>
     <div class="border">item</div>
-    </div>
+  </div>
 </Preview>
 
 <h2>Template</h2>

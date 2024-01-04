@@ -14,15 +14,15 @@
     return disabledMonths instanceof Function
       ? disabledMonths(date)
       : disabledMonths instanceof Date
-      ? isSameMonth(date, disabledMonths)
-      : disabledMonths instanceof Array
-      ? disabledMonths.some((d) => isSameMonth(date, d))
-      : disabledMonths instanceof Object
-      ? isWithinInterval(date, {
-          start: startOfMonth(disabledMonths.from),
-          end: endOfMonth(disabledMonths.to || disabledMonths.from),
-        })
-      : false;
+        ? isSameMonth(date, disabledMonths)
+        : disabledMonths instanceof Array
+          ? disabledMonths.some((d) => isSameMonth(date, d))
+          : disabledMonths instanceof Object
+            ? isWithinInterval(date, {
+                start: startOfMonth(disabledMonths.from),
+                end: endOfMonth(disabledMonths.to || disabledMonths.from),
+              })
+            : false;
   };
 </script>
 
