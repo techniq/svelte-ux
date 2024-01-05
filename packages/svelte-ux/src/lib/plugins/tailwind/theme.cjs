@@ -34,47 +34,61 @@ function injectThemes(colorSpace, addBase, config) {
   function processThemeColors(themeColors) {
     const colors = { ...themeColors };
 
+    // Generate optional semanatic colors
+    if (!('neutral' in colors) && !('neutral-500' in colors)) {
+      colors['neutral'] = 'oklch(.355192 .032071 262.988584)';
+    }
+
     // Generate optional state colors
-    if (!('info' in themeColors)) {
+    if (!('info' in colors) && !('info-500' in colors)) {
       colors['info'] = 'oklch(0.7206 0.191 231.6)';
     }
-    if (!('success' in themeColors)) {
+    if (!('success' in colors) && !('success-500' in colors)) {
       colors['success'] = 'oklch(64.8% 0.150 160)';
     }
-    if (!('warning' in themeColors)) {
+    if (!('warning' in colors) && !('warning-500' in colors)) {
       colors['warning'] = 'oklch(0.8471 0.199 83.87)';
     }
-    if (!('danger' in themeColors)) {
+    if (!('danger' in colors) && !('danger-500' in colors)) {
       colors['danger'] = 'oklch(0.7176 0.221 22.18)';
     }
 
     // Generate optional content colors
     for (const color of [...semanticColors, ...stateColors]) {
-      if (!(`${color}-content` in themeColors)) {
+      // Add `primary` from `primary-500` if not defined in theme (ex. Skeleton)
+      if (!(color in colors) && `${color}-500` in themeColors) {
+        colors[color] = themeColors[`${color}-500`];
+      }
+
+      if (!(`${color}-content` in colors)) {
         colors[`${color}-content`] = foregroundColor(colors[color]);
       }
 
+      // Generate color shades (ex. `primary-500`) if not defined.  Useful for Daisy but not Skeleton themes, for example
       for (const shade of shades) {
-        const newColor =
-          shade < 500
-            ? lightenColor(colors[color], (500 - shade) / 1000) // 100 == 0.1
-            : shade > 500
-              ? darkenColor(colors[color], (shade - 500) / 1000) // 100 == 0.1
-              : colors[color];
-        colors[`${color}-${shade}`] = newColor;
+        const shadeColorName = `${color}-${shade}`;
+        if (!(shadeColorName in colors)) {
+          const newColor =
+            shade < 500
+              ? lightenColor(colors[color], (500 - shade) / 1000) // 100 == 0.1
+              : shade > 500
+                ? darkenColor(colors[color], (shade - 500) / 1000) // 100 == 0.1
+                : colors[color];
+          colors[shadeColorName] = newColor;
+        }
       }
     }
 
     // Generate optional surface colors
-    if (!('surface-100' in themeColors)) {
+    if (!('surface-100' in colors)) {
       colors['surface-100'] = 'oklch(100 0 0)';
     }
 
-    if (!('surface-200' in themeColors)) {
+    if (!('surface-200' in colors)) {
       colors['surface-200'] = darkenColor(colors['surface-100'], 0.07);
     }
 
-    if (!('surface-300' in themeColors)) {
+    if (!('surface-300' in colors)) {
       if ('surface-200' in themeColors) {
         colors['surface-300'] = darkenColor(colors['surface-200'], 0.07);
       } else {
@@ -82,7 +96,7 @@ function injectThemes(colorSpace, addBase, config) {
       }
     }
 
-    if (!('surface-content' in themeColors)) {
+    if (!('surface-content' in colors)) {
       colors['surface-content'] = foregroundColor(colors['surface-100']);
     }
 
