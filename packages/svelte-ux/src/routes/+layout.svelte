@@ -20,7 +20,8 @@
   import { settings } from '$lib/components/settings';
   import type { PageData } from './$types';
   import { DateToken } from '$lib/utils/date';
-  import { lightThemes, darkThemes } from '$lib/styles/daisy';
+  // import { lightThemes, darkThemes } from '$lib/styles/daisy';
+  import { lightThemes, darkThemes } from '$lib/styles/skeleton';
 
   export let data: PageData;
 
