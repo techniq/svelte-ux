@@ -114,11 +114,36 @@
       stepper
     />
 
-    <CopyButton
-      variant="fill-light"
-      color="primary"
-      value={JSON.stringify({ light: selectedLightTheme, dark: selectedDarkTheme }, null, 2)}
-    />
+    <ButtonGroup variant="fill" color="primary">
+      <Tooltip title="Copy light and dark themes to clipboard" offset={2}>
+        <CopyButton
+          value={JSON.stringify({ light: selectedLightTheme, dark: selectedDarkTheme }, null, 2)}
+        />
+      </Tooltip>
+      <Toggle let:on={open} let:toggle>
+        <div class="grid">
+          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
+          <Menu {open} on:close={toggle} placement="bottom-start">
+            <MenuItem
+              on:click={() => {
+                const clipboardData = JSON.stringify(data.themes.daisy, null, 2);
+                navigator.clipboard.writeText(clipboardData);
+              }}
+            >
+              Copy all Daisy themes
+            </MenuItem>
+            <MenuItem
+              on:click={() => {
+                const clipboardData = JSON.stringify(data.themes.skeleton, null, 2);
+                navigator.clipboard.writeText(clipboardData);
+              }}
+            >
+              Copy all Skeleton themes
+            </MenuItem>
+          </Menu>
+        </div>
+      </Toggle>
+    </ButtonGroup>
   </div>
 
   <h1 class="grid grid-cols-[1fr,auto]">
