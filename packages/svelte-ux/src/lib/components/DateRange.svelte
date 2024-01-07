@@ -41,11 +41,11 @@
 
   const settingsClasses = getComponentClasses('DateRange');
   const settings = getSettings();
-  const dateFormat = settings.getFormatDate();
+  const settingsFormatDate = settings.getFormatDate();
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
-  let selectedDayOfWeek: DayOfWeek = dateFormat.weekStartsOn ?? DayOfWeek.Sunday;
+  let selectedDayOfWeek: DayOfWeek = settingsFormatDate.weekStartsOn ?? DayOfWeek.Sunday;
   let activeDate: 'from' | 'to' = 'from';
 
   $: periodTypeOptions = periodTypes.map((pt) => {
@@ -291,7 +291,7 @@
           >
             {#each [DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday] as day}
               <ToggleOption value={day}
-                >{getDayOfWeekName(day, dateFormat.locales ?? 'en')}</ToggleOption
+                >{getDayOfWeekName(day, settingsFormatDate.locales ?? 'en')}</ToggleOption
               >
             {/each}
           </ToggleGroup>

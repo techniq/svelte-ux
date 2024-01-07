@@ -11,10 +11,10 @@
   import { getComponentClasses } from './theme';
 
   const settings = getSettings();
-  const dateFormat = settings.getFormatDate();
+  const settingsFormatDate = settings.getFormatDate();
 
   export let value: Date | null = null;
-  export let format = dateFormat.baseParsing;
+  export let format = settingsFormatDate.baseParsing;
   export let mask = format.toLowerCase();
   export let replace = 'dmyh';
   export let picker = false;

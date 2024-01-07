@@ -1,13 +1,10 @@
 <script lang="ts">
-  import { getSettings } from '$lib/components/settings';
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SpringValue from '$lib/components/SpringValue.svelte';
   import { format } from '$lib/utils/format';
   import { cls } from '$lib/utils/styles';
-
-  const settings = getSettings();
 
   let value: number = 0;
 

@@ -34,10 +34,10 @@
     startOfMonthFunc(new Date());
 
   const settings = getSettings();
-  const dateFormat = settings.getFormatDate();
+  const settingsFormatDate = settings.getFormatDate();
 
   $: endOfMonth = endOfMonthFunc(startOfMonth);
-  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, dateFormat.weekStartsOn);
+  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, settingsFormatDate.weekStartsOn);
 
   /**
    * Hide controls and date.  Useful to control externally

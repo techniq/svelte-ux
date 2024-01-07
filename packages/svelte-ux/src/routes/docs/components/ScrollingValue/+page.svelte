@@ -11,7 +11,7 @@
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
 
-  import { PeriodType, format, getSettings, romanize, timerStore } from '$lib';
+  import { PeriodType, format, romanize, timerStore } from '$lib';
 
   let value = 0;
   let axis: 'x' | 'y' = 'x';
@@ -46,7 +46,6 @@
     }
   }
 
-  const settings = getSettings();
   const indexTimer = timerStore({
     initial: 0,
     delay: 2000,

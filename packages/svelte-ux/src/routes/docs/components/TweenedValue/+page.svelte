@@ -5,13 +5,10 @@
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
-  import { getSettings } from '$lib/components/settings';
   import { format } from '$lib/utils/format';
   import { cls } from '$lib/utils/styles';
 
   let value: number = 0;
-
-  const settings = getSettings();
 
   function onKeyDown(e: KeyboardEvent) {
     const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
