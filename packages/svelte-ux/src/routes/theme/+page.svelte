@@ -18,10 +18,13 @@
 
   export let data;
 
-  type ThemeMenuOption = MenuOption & { themeName: string };
+  type ThemeMenuOption = MenuOption & {
+    themeName: string;
+    theme: typeof data.themes.daisy | typeof data.themes.skeleton;
+  };
 
-  let selectedLightThemeOption: ThemeMenuOption;
-  let selectedDarkThemeOption: ThemeMenuOption;
+  let selectedLightThemeValue: string;
+  let selectedDarkThemeValue: string;
 
   const daisyThemeNames = getThemeNames(data.themes.daisy);
   const skeletonThemeNames = getThemeNames(data.themes.skeleton);
@@ -33,6 +36,7 @@
         value: themeName === 'light' ? 'daisy-light' : themeName,
         group: 'Daisy',
         themeName,
+        theme: data.themes.daisy[themeName],
       };
     }),
     ...skeletonThemeNames.light.map((themeName) => {
@@ -41,6 +45,7 @@
         value: themeName === 'light' ? 'skeleton-light' : themeName,
         group: 'Skeleton',
         themeName,
+        theme: data.themes.skeleton[themeName],
       };
     }),
   ] as ThemeMenuOption[];
@@ -52,6 +57,7 @@
         value: themeName === 'dark' ? 'daisy-dark' : themeName,
         group: 'Daisy',
         themeName,
+        theme: data.themes.daisy[themeName],
       };
     }),
     ...skeletonThemeNames.dark.map((themeName) => {
@@ -60,38 +66,22 @@
         value: themeName === 'dark' ? 'skeleton-dark' : themeName,
         group: 'Skeleton',
         themeName,
+        theme: data.themes.skeleton[themeName],
       };
     }),
   ] as ThemeMenuOption[];
 
-  // Set initial options
-  // $: if (selectedLightThemeOption === undefined) {
-  //   console.log({ selectedLightThemeOption, lightThemes });
-  //   debugger;
-  //   selectedLightThemeOption = lightThemes[0];
-  // }
-  // $: if (selectedDarkThemeOption === undefined) {
-  //   selectedDarkThemeOption = darkThemes[0];
-  // }
-
-  function getSelectedTheme(option: ThemeMenuOption) {
-    if (option) {
-      const themes =
-        option.group === 'Daisy'
-          ? data.themes.daisy
-          : option.group === 'Skeleton'
-            ? data.themes.skeleton
-            : [];
-      const themeName = option.themeName;
-      const theme = themes[themeName];
-      return theme;
-    }
+  // Set initial theme selections
+  $: if (selectedLightThemeValue === undefined) {
+    selectedLightThemeValue = lightThemes[0].value;
   }
-  $: selectedLightTheme = getSelectedTheme(selectedLightThemeOption);
-  $: selectedDarkTheme = getSelectedTheme(selectedDarkThemeOption);
+  $: if (selectedDarkThemeValue === undefined) {
+    selectedDarkThemeValue = darkThemes[0].value;
+  }
 
   let showDarkTheme = false;
-
+  $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)?.theme;
+  $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)?.theme;
   $: previewTheme = showDarkTheme ? selectedDarkTheme : selectedLightTheme;
 </script>
 
@@ -100,7 +90,7 @@
     <SelectField
       label="Light theme"
       options={lightThemes}
-      bind:selected={selectedLightThemeOption}
+      bind:value={selectedLightThemeValue}
       clearable={false}
       toggleIcon={null}
       stepper
@@ -108,7 +98,7 @@
     <SelectField
       label="Dark theme"
       options={darkThemes}
-      bind:selected={selectedDarkThemeOption}
+      bind:value={selectedDarkThemeValue}
       clearable={false}
       toggleIcon={null}
       stepper
