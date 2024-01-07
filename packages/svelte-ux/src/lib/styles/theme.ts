@@ -42,6 +42,24 @@ export function createThemeColors(colorSpace: 'rgb' | 'hsl' | 'oklch') {
 }
 
 /**
+ * Get themes names split into light and dark collections determined by `color-scheme` property
+ */
+export function getThemeNames(themes: Record<string, any>) {
+  const light: string[] = [];
+  const dark: string[] = [];
+
+  Object.entries(themes).map(([themeName, props]) => {
+    if (props['color-scheme'] === 'dark') {
+      dark.push(themeName);
+    } else {
+      light.push(themeName);
+    }
+  });
+
+  return { light, dark };
+}
+
+/**
  * Convert names to CSS variables and color values common color space (hsl, oklch, etc) and space separated
  */
 export function processThemeColors(

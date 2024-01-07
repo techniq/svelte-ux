@@ -20,10 +20,8 @@
   import { settings } from '$lib/components/settings';
   import type { PageData } from './$types';
 
-  import { lightThemes, darkThemes } from '$lib/styles/daisy';
   import { createLocaleSettings } from '$lib';
   import LanguageSelect from '$lib/components/LanguageSelect.svelte';
-  // import { lightThemes, darkThemes } from '$lib/styles/skeleton';
 
   export let data: PageData;
 
@@ -70,10 +68,7 @@
         active: 'text-primary bg-surface-100 border-l-4 border-primary font-medium',
       },
     },
-    themes: {
-      light: lightThemes,
-      dark: darkThemes,
-    },
+    themes: data.themes,
   });
 
   let mainEl: HTMLElement;

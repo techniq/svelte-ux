@@ -10,7 +10,7 @@ const themeNames = [
   'sahara',
   'hamlindigo',
   'gold-nouveau',
-];
+] as const;
 
 // Map Skeleton to Svelte UX theme colors
 const skeletonColorMap = {
@@ -27,7 +27,7 @@ const skeletonColorMap = {
   surface: 'surface',
 };
 
-function processTheme(themeName, scheme) {
+function processTheme(themeName: (typeof themeNames)[number], scheme: 'light' | 'dark') {
   const properties = getThemeProperties(themeName);
 
   let mappedThemeProperties = Object.entries(properties)
@@ -94,7 +94,4 @@ const themes = Object.fromEntries(
   })
 );
 
-const lightThemes = Object.keys(themes).filter((themeName) => !themeName.endsWith('dark'));
-const darkThemes = Object.keys(themes).filter((themeName) => themeName.endsWith('dark'));
-
-export { themes, lightThemes, darkThemes };
+export { themes };

@@ -1,17 +1,11 @@
 import * as daisy from '$lib/styles/daisy';
 import * as skeleton from '$lib/styles/skeleton';
 
-export async function load({ url }) {
+export async function load() {
   return {
-    daisy: {
-      themes: daisy.themes,
-      lightThemes: daisy.lightThemes,
-      darkThemes: daisy.darkThemes,
-    },
-    skeleton: {
-      themes: skeleton.themes,
-      lightThemes: skeleton.lightThemes,
-      darkThemes: skeleton.darkThemes,
+    themes: {
+      daisy: daisy.themes,
+      skeleton: skeleton.themes,
     },
   };
 }

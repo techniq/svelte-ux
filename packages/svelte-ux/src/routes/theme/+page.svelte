@@ -1,13 +1,20 @@
 <script lang="ts">
+  import { mdiChevronDown, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
+
+  import Button from '$lib/components/Button.svelte';
+  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import CopyButton from '$lib/components/CopyButton.svelte';
+  import Icon from '$lib/components/Icon.svelte';
+  import Menu from '$lib/components/Menu.svelte';
+  import MenuItem from '$lib/components/MenuItem.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
+  import Switch from '$lib/components/Switch.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
+  import Tooltip from '$lib/components/Tooltip.svelte';
 
   import { styleProps } from '$lib/actions/styleProps.js';
-  import { processThemeColors } from '$lib/styles/theme.js';
+  import { getThemeNames, processThemeColors } from '$lib/styles/theme.js';
   import type { MenuOption } from '$lib/types/options.js';
-  import Switch from '$lib/components/Switch.svelte';
-  import { mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
-  import Icon from '$lib/components/Icon.svelte';
 
   export let data;
 
@@ -16,8 +23,11 @@
   let selectedLightThemeOption: ThemeMenuOption;
   let selectedDarkThemeOption: ThemeMenuOption;
 
+  const daisyThemeNames = getThemeNames(data.themes.daisy);
+  const skeletonThemeNames = getThemeNames(data.themes.skeleton);
+
   $: lightThemes = [
-    ...data.daisy.lightThemes.map((themeName) => {
+    ...daisyThemeNames.light.map((themeName) => {
       return {
         label: themeName === 'light' ? 'light (daisy)' : themeName,
         value: themeName === 'light' ? 'daisy-light' : themeName,
@@ -25,7 +35,7 @@
         themeName,
       };
     }),
-    ...data.skeleton.lightThemes.map((themeName) => {
+    ...skeletonThemeNames.light.map((themeName) => {
       return {
         label: themeName === 'light' ? 'light (skeleton)' : themeName,
         value: themeName === 'light' ? 'skeleton-light' : themeName,
@@ -36,7 +46,7 @@
   ] as ThemeMenuOption[];
 
   $: darkThemes = [
-    ...data.daisy.darkThemes.map((themeName) => {
+    ...daisyThemeNames.dark.map((themeName) => {
       return {
         label: themeName === 'dark' ? 'dark (daisy)' : themeName,
         value: themeName === 'dark' ? 'daisy-dark' : themeName,
@@ -44,7 +54,7 @@
         themeName,
       };
     }),
-    ...data.skeleton.darkThemes.map((themeName) => {
+    ...skeletonThemeNames.light.map((themeName) => {
       return {
         label: themeName === 'dark' ? 'dark (skeleton)' : themeName,
         value: themeName === 'dark' ? 'skeleton-dark' : themeName,
@@ -68,9 +78,9 @@
     if (option) {
       const themes =
         option.group === 'Daisy'
-          ? data.daisy.themes
+          ? data.themes.daisy
           : option.group === 'Skeleton'
-            ? data.skeleton.themes
+            ? data.themes.skeleton
             : [];
       const themeName = option.themeName;
       const theme = themes[themeName];

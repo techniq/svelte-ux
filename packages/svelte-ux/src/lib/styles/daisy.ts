@@ -14,7 +14,7 @@ const daisyColorMap = {
 /**
  *  Map Daisy UI color names to Svelte UX names, and sort themes
  */
-function mapColorsName(themes, colorMap) {
+function mapColorsName(themes: typeof daisyThemes, colorMap: typeof daisyColorMap) {
   return Object.fromEntries(
     Object.entries(themes)
       .map(([themeName, colors]) => {
@@ -33,15 +33,4 @@ function mapColorsName(themes, colorMap) {
 
 const themes = mapColorsName(daisyThemes, daisyColorMap);
 
-let lightThemes: string[] = [];
-let darkThemes: string[] = [];
-
-Object.entries(themes).forEach(([themeName, colors]) => {
-  if (colors['color-scheme'] === 'dark') {
-    darkThemes.push(themeName);
-  } else {
-    lightThemes.push(themeName);
-  }
-});
-
-export { themes, lightThemes, darkThemes };
+export { themes };
