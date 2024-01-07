@@ -54,7 +54,7 @@
         themeName,
       };
     }),
-    ...skeletonThemeNames.light.map((themeName) => {
+    ...skeletonThemeNames.dark.map((themeName) => {
       return {
         label: themeName === 'dark' ? 'dark (skeleton)' : themeName,
         value: themeName === 'dark' ? 'skeleton-dark' : themeName,
