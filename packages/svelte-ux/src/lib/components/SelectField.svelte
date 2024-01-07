@@ -36,7 +36,8 @@
   export let disabled: boolean = false;
   export let readonly: boolean = false;
   export let icon: IconInput = undefined;
-  export let toggleIcon: IconInput = mdiChevronDown;
+  export let inlineOptions = false;
+  export let toggleIcon: IconInput = !inlineOptions ? mdiChevronDown : null;
   export let closeIcon: IconInput = mdiClose;
   export let activeOptionIcon: boolean = false;
   export let clearable = true;
@@ -78,7 +79,6 @@
   export let resize = true;
   export let disableTransition = false;
   export let menuProps: ComponentProps<Menu> | undefined = undefined;
-  export let inlineOptions = false;
 
   $: filteredOptions = options ?? [];
   let searchText = '';
@@ -157,6 +157,7 @@
   // Elements
   let inputEl: HTMLInputElement | null = null;
   let menuOptionsEl: HTMLDivElement;
+  let selectFieldEl: HTMLButtonElement;
 
   // UI state
   export let open = false;
@@ -219,7 +220,9 @@
       fe.relatedTarget instanceof HTMLElement &&
       !menuOptionsEl?.contains(fe.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
       fe.relatedTarget !== menuOptionsEl?.offsetParent && // click on scroll bar
-      !fe.relatedTarget.closest('menu > [slot=actions]') // click on action item
+      !fe.relatedTarget.closest('menu > [slot=actions]') && // click on action item
+      !selectFieldEl?.contains(fe.relatedTarget) && // click within <SelectField> (ex. toggleIcon)
+      fe.relatedTarget !== selectFieldEl // click on SelectField itself
     ) {
       hide('blur');
     } else {
@@ -374,6 +377,7 @@
     classes.root,
     $$props.class
   )}
+  bind:this={selectFieldEl}
   on:click={onClick}
 >
   <TextField
@@ -424,13 +428,15 @@
             clear();
           }}
         />
-      {:else if !inlineOptions}
+      {:else if toggleIcon}
         <Button
           icon={toggleIcon}
           class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
           tabindex="-1"
-          on:click={() => {
+          on:click={(e) => {
+            e.stopPropagation();
             logger.debug('toggleIcon clicked');
+            open ? hide() : show();
           }}
         />
       {/if}
