@@ -1,8 +1,13 @@
 // top-level exports
-export { formatDate, PeriodType, DayOfWeek, DateToken } from './date';
+export {
+  formatDate, // TODO JYC => to remove?
+  PeriodType,
+  DayOfWeek,
+  DateToken,
+} from './date';
 export * from './duration';
 export * from './file';
-export * from './format';
+export * from './format'; // TODO JYC => to remove
 export * from './json';
 export * from './logger';
 export { round, clamp } from './number';

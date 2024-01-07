@@ -13,6 +13,8 @@ import {
 } from '$lib/utils/date';
 import type { DictionaryMessages, DictionaryMessagesOptions } from '$lib/utils/dictionary';
 import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
+import { createDictionaryStore, type DictionaryStore } from '$lib/stores/dictionaryStore';
+import { get } from 'svelte/store';
 
 type ExcludeNone<T> = T extends 'none' ? never : T;
 export type SettingsInput = {
@@ -34,22 +36,23 @@ export type SettingsInput = {
     dark?: string[];
   };
   currentTheme?: ThemeStore;
+  currentDictionary?: DictionaryStore;
 };
 
 export interface Settings extends Omit<SettingsInput, 'formats'> {
-  getDictionary: ReturnType<typeof buildDictionary>;
   getFormatNumber: ReturnType<typeof buildNumberFormat>;
   getFormatDate: ReturnType<typeof buildDateFormat>;
   currentTheme: ThemeStore;
+  currentDictionary: DictionaryStore;
 }
 
 const settingsKey = Symbol();
 
 export function settings(settings: SettingsInput) {
-  let lightThemes = settings.themes?.light ?? ['light'];
-  let darkThemes = settings.themes?.dark ?? ['dark'];
+  const lightThemes = settings.themes?.light ?? ['light'];
+  const darkThemes = settings.themes?.dark ?? ['dark'];
 
-  let currentTheme =
+  const currentTheme =
     // In some cases, `settings` is called again from inside a component. Don't create a new theme store in this case.
     settings.currentTheme ??
     createThemeStore({
@@ -57,18 +60,18 @@ export function settings(settings: SettingsInput) {
       dark: darkThemes,
     });
 
-  let dictionary = buildDictionary(settings);
+  const currentdictionary = settings.currentDictionary ?? createDictionaryStore(settings);
 
-  setContext(settingsKey, {
+  setContext<Settings>(settingsKey, {
     ...settings,
     themes: {
       light: lightThemes,
       dark: darkThemes,
     },
     currentTheme,
+    currentDictionary: currentdictionary,
     getFormatNumber: buildNumberFormat(settings),
-    getFormatDate: buildDateFormat(settings, dictionary()),
-    getDictionary: dictionary,
+    getFormatDate: buildDateFormat(settings, get(currentdictionary)),
   });
 }
 
@@ -80,7 +83,7 @@ export function getSettings(): Settings {
     let dict = buildDictionary({});
     return {
       currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
-      getDictionary: dict,
+      currentDictionary: createDictionaryStore({}),
       getFormatNumber: buildNumberFormat({}),
       getFormatDate: buildDateFormat({}, dict()),
     };
@@ -310,7 +313,7 @@ export function buildDateFormat(settings: SettingsInput, dictionary: DictionaryM
   };
 }
 
-function buildDictionary(settings: SettingsInput) {
+export function buildDictionary(settings: SettingsInput) {
   return function getDictionary(options?: DictionaryMessagesOptions) {
     // if custom is set && variant is not set, let's put custom as variant
     let toRet: DictionaryMessages = {

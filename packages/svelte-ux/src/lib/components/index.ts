@@ -37,6 +37,7 @@ export { default as InfiniteScroll } from './InfiniteScroll.svelte';
 export { default as Input } from './Input.svelte';
 export { default as Form } from './Form.svelte';
 export { default as Kbd } from './Kbd.svelte';
+export { default as LanguageSelect } from './LanguageSelect.svelte';
 export { default as Lazy } from './Lazy.svelte';
 export { default as ListItem } from './ListItem.svelte';
 export { default as Menu } from './Menu.svelte';

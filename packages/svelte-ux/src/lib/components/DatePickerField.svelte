@@ -33,8 +33,7 @@
   export let center = false;
 
   const settingsClasses = getComponentClasses('DatePickerField');
-  const settings = getSettings();
-  const dictionary = settings.getDictionary();
+  const { currentDictionary } = getSettings();
 
   let open: boolean = false;
 
@@ -66,7 +65,7 @@
   <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
-    label={label ?? format(value, PeriodType.Day, { custom: secondaryFormat })}
+    label={label ?? format(value ?? '', PeriodType.Day, { custom: secondaryFormat })}
     {icon}
     {error}
     {hint}
@@ -100,7 +99,7 @@
       on:click={() => (open = true)}
       {id}
     >
-      {format(value, PeriodType.Day, { custom: primaryFormat })}
+      {format(value ?? '', PeriodType.Day, { custom: primaryFormat })}
     </button>
 
     <div slot="append">
@@ -165,13 +164,13 @@
         dispatch('change', value);
       }}
       variant="fill"
-      color="primary">{dictionary.Ok}</Button
+      color="primary">{$currentDictionary.Ok}</Button
     >
     <Button
       on:click={() => {
         open = false;
         currentValue = value;
-      }}>{dictionary.Cancel}</Button
+      }}>{$currentDictionary.Cancel}</Button
     >
   </div>
 </Dialog>

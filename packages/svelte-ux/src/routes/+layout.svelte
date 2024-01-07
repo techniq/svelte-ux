@@ -22,6 +22,7 @@
   import { DateToken } from '$lib/utils/date';
 
   import { lightThemes, darkThemes } from '$lib/styles/daisy';
+  import LanguageSelect from '$lib/components/LanguageSelect.svelte';
   // import { lightThemes, darkThemes } from '$lib/styles/skeleton';
 
   export let data: PageData;
@@ -173,7 +174,8 @@
 
       <QuickSearch options={quickSearchOptions} on:change={(e) => goto(e.detail.value)} />
 
-      <div class="border-r border-primary-content/20 pr-2 grid items-center">
+      <div class="border-r border-primary-content/20 grid-cols-2 pr-2 grid items-center">
+        <LanguageSelect />
         <ThemeSelect />
         <!-- <ThemeSwitch classes={{ switch: 'bg-black/10 bornder-none' }} /> -->
       </div>
