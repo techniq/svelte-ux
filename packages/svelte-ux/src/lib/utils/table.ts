@@ -4,6 +4,7 @@ import { parseISO } from 'date-fns';
 import type { ColumnDef } from '../types/table';
 import { PeriodType } from '../utils/date';
 import { format } from '../utils/format';
+import type { Settings } from '../components/settings';
 
 export function getHeaders(columns: ColumnDef[]) {
   const maxDepth = getDepth(columns);
@@ -122,7 +123,12 @@ export function getCellValue(column: ColumnDef, rowData: any, rowIndex?: number)
   return value;
 }
 
-export function getCellContent(column: ColumnDef, rowData: any, rowIndex?: number) {
+export function getCellContent(
+  settings: Settings,
+  column: ColumnDef,
+  rowData: any,
+  rowIndex?: number
+) {
   const value = getCellValue(column, rowData, rowIndex);
-  return format(value, column?.format, rowData, rowIndex);
+  return format(settings, value, column?.format, rowData, rowIndex);
 }

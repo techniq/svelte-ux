@@ -5,10 +5,13 @@
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
+  import { getSettings } from '$lib/components/settings';
   import { format } from '$lib/utils/format';
   import { cls } from '$lib/utils/styles';
 
   let value: number | null = 0;
+
+  const settings = getSettings();
 
   function onKeyDown(e: KeyboardEvent) {
     const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
@@ -69,7 +72,7 @@
 <Preview>
   <TweenedValue {value} let:value>
     <span class={cls('tabular-nums', (value ?? 0) < 0 ? 'text-red-500' : 'text-green-500')}>
-      {format(value, 'decimal')}
+      {format(settings, value, 'decimal')}
     </span>
   </TweenedValue>
 </Preview>

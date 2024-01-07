@@ -8,6 +8,9 @@
   import type { FormatNumberStyle } from '$lib/utils/number';
   import DateField from '$lib/components/DateField.svelte';
   import DatePickerField from '$lib/components/DatePickerField.svelte';
+  import { getSettings } from '$lib/components/settings';
+
+  const settings = getSettings();
 
   let value = 1234.56;
   let style: FormatNumberStyle = 'decimal';
@@ -49,7 +52,7 @@
 </div>
 
 <Preview>
-  <div>{format(value, style, { locales, currency })}</div>
+  <div>{format(settings, value, style, { locales, currency })}</div>
 </Preview>
 
 <h2>Playground dates</h2>
@@ -65,7 +68,7 @@
 </div>
 
 <Preview>
-  <div>{format(myDate, PeriodType.Day, { locales })}</div>
+  <div>{format(settings, myDate, PeriodType.Day, { locales })}</div>
 </Preview>
 
 <h1>Numbers</h1>
@@ -73,14 +76,14 @@
 <h2>number formats (defaut settings)</h2>
 
 <Preview showCode>
-  <div>{format(1234.56, 'integer')}</div>
-  <div>{format(1234.56, 'decimal')}</div>
-  <div>{format(1234.56, 'currency')}</div>
-  <div>{format(0.5678, 'percent')}</div>
-  <div>{format(0.5678, 'percentRound')}</div>
-  <div>{format(1_234_567, 'metric', { minimumSignificantDigits: 5 })}</div>
-  <div>{format(1_200_000, 'metric')}</div>
-  <div>{format(0.5678, 'percent', { fractionDigits: 1 })}</div>
+  <div>{format(settings, 1234.56, 'integer')}</div>
+  <div>{format(settings, 1234.56, 'decimal')}</div>
+  <div>{format(settings, 1234.56, 'currency')}</div>
+  <div>{format(settings, 0.5678, 'percent')}</div>
+  <div>{format(settings, 0.5678, 'percentRound')}</div>
+  <div>{format(settings, 1_234_567, 'metric', { minimumSignificantDigits: 5 })}</div>
+  <div>{format(settings, 1_200_000, 'metric')}</div>
+  <div>{format(settings, 0.5678, 'percent', { fractionDigits: 1 })}</div>
 </Preview>
 
 <h2>number formats (local settings)</h2>
@@ -92,14 +95,14 @@
 </span>
 
 <Preview showCode>
-  <div>{format(1234.56, 'integer', { locales: 'fr' })}</div>
-  <div>{format(1234.56, 'decimal', { locales: 'fr' })}</div>
-  <div>{format(1234.56, 'currency', { locales: 'fr', currency: 'EUR' })}</div>
-  <div>{format(0.5678, 'percent', { locales: 'fr' })}</div>
-  <div>{format(0.5678, 'percentRound', { locales: 'fr' })}</div>
-  <div>{format(1_234_567, 'metric', { locales: 'fr', minimumSignificantDigits: 5 })}</div>
-  <div>{format(1_200_000, 'metric', { locales: 'fr' })}</div>
-  <div>{format(0.5678, 'percent', { locales: 'fr', fractionDigits: 1 })}</div>
+  <div>{format(settings, 1234.56, 'integer', { locales: 'fr' })}</div>
+  <div>{format(settings, 1234.56, 'decimal', { locales: 'fr' })}</div>
+  <div>{format(settings, 1234.56, 'currency', { locales: 'fr', currency: 'EUR' })}</div>
+  <div>{format(settings, 0.5678, 'percent', { locales: 'fr' })}</div>
+  <div>{format(settings, 0.5678, 'percentRound', { locales: 'fr' })}</div>
+  <div>{format(settings, 1_234_567, 'metric', { locales: 'fr', minimumSignificantDigits: 5 })}</div>
+  <div>{format(settings, 1_200_000, 'metric', { locales: 'fr' })}</div>
+  <div>{format(settings, 0.5678, 'percent', { locales: 'fr', fractionDigits: 1 })}</div>
 </Preview>
 
 <h1>Dates</h1>
@@ -110,7 +113,7 @@
   <div>
     <h3>With random string</h3>
     <Preview>
-      {format(myDate, PeriodType.Custom, {
+      {format(settings, myDate, PeriodType.Custom, {
         custom: 'eee, MMMM do',
       })}
     </Preview>
@@ -118,7 +121,7 @@
   <div>
     <h3>With descriptive tokens</h3>
     <Preview>
-      {format(myDate, PeriodType.Custom, {
+      {format(settings, myDate, PeriodType.Custom, {
         custom: [DateToken.DayOfWeek_short, DateToken.Month_long, DateToken.DayOfMonth_withOrdinal],
       })}
     </Preview>
@@ -126,7 +129,7 @@
   <div>
     <h3>With full intl</h3>
     <Preview>
-      {format(myDate, PeriodType.Custom, {
+      {format(settings, myDate, PeriodType.Custom, {
         custom: { weekday: 'short', month: 'long', day: 'numeric', withOrdinal: true },
       })}
     </Preview>
@@ -139,7 +142,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.Day, {
+      {format(settings, myDate, PeriodType.Day, {
         variant: 'short',
       })}
     </Preview>
@@ -147,7 +150,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.Day, {
+      {format(settings, myDate, PeriodType.Day, {
         // variant: 'default',
       })}
     </Preview>
@@ -155,7 +158,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.Day, {
+      {format(settings, myDate, PeriodType.Day, {
         variant: 'long',
       })}
     </Preview>
@@ -168,7 +171,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.DayTime, {
+      {format(settings, myDate, PeriodType.DayTime, {
         variant: 'short',
       })}
     </Preview>
@@ -176,7 +179,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.DayTime, {
+      {format(settings, myDate, PeriodType.DayTime, {
         // variant: 'default',
       })}
     </Preview>
@@ -184,7 +187,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.DayTime, {
+      {format(settings, myDate, PeriodType.DayTime, {
         variant: 'long',
       })}
     </Preview>
@@ -197,7 +200,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.TimeOnly, {
+      {format(settings, myDate, PeriodType.TimeOnly, {
         variant: 'short',
       })}
     </Preview>
@@ -205,7 +208,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.TimeOnly, {
+      {format(settings, myDate, PeriodType.TimeOnly, {
         // variant: 'default',
       })}
     </Preview>
@@ -213,7 +216,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.TimeOnly, {
+      {format(settings, myDate, PeriodType.TimeOnly, {
         variant: 'long',
       })}
     </Preview>
@@ -231,7 +234,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.Week, {
+      {format(settings, myDate, PeriodType.Week, {
         variant: 'short',
       })}
     </Preview>
@@ -239,7 +242,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.Week, {
+      {format(settings, myDate, PeriodType.Week, {
         // variant: 'default',
       })}
     </Preview>
@@ -247,7 +250,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.Week, {
+      {format(settings, myDate, PeriodType.Week, {
         variant: 'long',
       })}
     </Preview>
@@ -265,7 +268,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.BiWeek1, {
+      {format(settings, myDate, PeriodType.BiWeek1, {
         variant: 'short',
       })}
     </Preview>
@@ -273,7 +276,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.BiWeek1, {
+      {format(settings, myDate, PeriodType.BiWeek1, {
         // variant: 'default',
       })}
     </Preview>
@@ -281,7 +284,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.BiWeek1, {
+      {format(settings, myDate, PeriodType.BiWeek1, {
         variant: 'long',
       })}
     </Preview>
@@ -294,7 +297,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.Month, {
+      {format(settings, myDate, PeriodType.Month, {
         variant: 'short',
       })}
     </Preview>
@@ -302,7 +305,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.Month, {
+      {format(settings, myDate, PeriodType.Month, {
         // variant: 'default',
       })}
     </Preview>
@@ -310,7 +313,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.Month, {
+      {format(settings, myDate, PeriodType.Month, {
         variant: 'long',
       })}
     </Preview>
@@ -323,7 +326,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.Quarter, {
+      {format(settings, myDate, PeriodType.Quarter, {
         variant: 'short',
       })}
     </Preview>
@@ -331,7 +334,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.Quarter, {
+      {format(settings, myDate, PeriodType.Quarter, {
         // variant: 'default',
       })}
     </Preview>
@@ -339,7 +342,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.Quarter, {
+      {format(settings, myDate, PeriodType.Quarter, {
         variant: 'long',
       })}
     </Preview>
@@ -352,7 +355,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.CalendarYear, {
+      {format(settings, myDate, PeriodType.CalendarYear, {
         variant: 'short',
       })}
     </Preview>
@@ -360,7 +363,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.CalendarYear, {
+      {format(settings, myDate, PeriodType.CalendarYear, {
         // variant: 'default',
       })}
     </Preview>
@@ -368,7 +371,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.CalendarYear, {
+      {format(settings, myDate, PeriodType.CalendarYear, {
         variant: 'long',
       })}
     </Preview>
@@ -381,7 +384,7 @@
   <div>
     <h3>short</h3>
     <Preview>
-      {format(myDate, PeriodType.FiscalYearOctober, {
+      {format(settings, myDate, PeriodType.FiscalYearOctober, {
         variant: 'short',
       })}
     </Preview>
@@ -389,7 +392,7 @@
   <div>
     <h3>default</h3>
     <Preview>
-      {format(myDate, PeriodType.FiscalYearOctober, {
+      {format(settings, myDate, PeriodType.FiscalYearOctober, {
         // variant: 'default',
       })}
     </Preview>
@@ -397,7 +400,7 @@
   <div>
     <h3>long</h3>
     <Preview>
-      {format(myDate, PeriodType.FiscalYearOctober, {
+      {format(settings, myDate, PeriodType.FiscalYearOctober, {
         variant: 'long',
       })}
     </Preview>
@@ -413,12 +416,12 @@
 </span>
 
 <Preview showCode>
-  <div>{format(myDate, PeriodType.Day, { locales: 'fr' })}</div>
-  <div>{format(myDate, PeriodType.Month, { locales: 'fr' })}</div>
-  <div>{format(myDate, PeriodType.CalendarYear, { locales: 'fr' })}</div>
-  <div>{format(myDate, PeriodType.Day, { variant: 'short', locales: 'fr' })}</div>
-  <div>{format(myDate, PeriodType.Month, { variant: 'short', locales: 'fr' })}</div>
+  <div>{format(settings, myDate, PeriodType.Day, { locales: 'fr' })}</div>
+  <div>{format(settings, myDate, PeriodType.Month, { locales: 'fr' })}</div>
+  <div>{format(settings, myDate, PeriodType.CalendarYear, { locales: 'fr' })}</div>
+  <div>{format(settings, myDate, PeriodType.Day, { variant: 'short', locales: 'fr' })}</div>
+  <div>{format(settings, myDate, PeriodType.Month, { variant: 'short', locales: 'fr' })}</div>
   <div>
-    {format(myDate, PeriodType.CalendarYear, { variant: 'short', locales: 'fr' })}
+    {format(settings, myDate, PeriodType.CalendarYear, { variant: 'short', locales: 'fr' })}
   </div>
 </Preview>

@@ -10,8 +10,11 @@
   import DatePickerField from './DatePickerField.svelte';
   import { getComponentClasses } from './theme';
 
+  const settings = getSettings();
+  const dateFormat = settings.getFormatDate();
+
   export let value: Date | null = null;
-  export let format = getSettings().formats?.dates?.baseParsing ?? 'MM/dd/yyyy';
+  export let format = dateFormat.baseParsing ?? 'MM/dd/yyyy';
   export let mask = format.toLowerCase();
   export let replace = 'dmyh';
   export let picker = false;
@@ -63,7 +66,7 @@
   let:id
 >
   <Input
-    value={value ? format_ux(value, PeriodType.Day, { custom: format }) : inputValue}
+    value={value ? format_ux(settings, value, PeriodType.Day, { custom: format }) : inputValue}
     {mask}
     {replace}
     {id}

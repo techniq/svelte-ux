@@ -22,7 +22,7 @@
   import ToggleOption from './ToggleOption.svelte';
   import { getComponentClasses } from './theme';
   import { mdScreen } from '$lib/stores/matchMedia';
-  import { getSettings } from '.';
+  import { getSettings } from './settings';
 
   export let selected: DateRange | null = { from: null, to: null, periodType: null };
 
@@ -40,16 +40,18 @@
   export let getPeriodTypePresets = getDateRangePresets;
 
   const settingsClasses = getComponentClasses('DateRange');
+  const settings = getSettings();
+  const dateFormat = settings.getFormatDate();
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
-  let selectedDayOfWeek: DayOfWeek = getSettings().formats?.dates?.weekStartsOn ?? DayOfWeek.Sunday;
+  let selectedDayOfWeek: DayOfWeek = dateFormat.weekStartsOn ?? DayOfWeek.Sunday;
   let activeDate: 'from' | 'to' = 'from';
 
   $: periodTypeOptions = periodTypes.map((pt) => {
     const value = adjustPeriodType(pt);
     return {
-      label: getPeriodTypeName(adjustPeriodType(pt)),
+      label: getPeriodTypeName(settings, adjustPeriodType(pt)),
       value,
     };
   });
@@ -174,7 +176,7 @@
       <ToggleOption value="from" class="flex-1">
         <div class="text-xs text-surface-content/50">Start</div>
         {#if selected?.from}
-          <div class="font-medium">{format(selected.from, PeriodType.Day)}</div>
+          <div class="font-medium">{format(settings, selected.from, PeriodType.Day)}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}
@@ -196,7 +198,7 @@
       <ToggleOption value="to" class="flex-1">
         <div class="text-xs text-surface-content/50">End</div>
         {#if selected?.to}
-          <div class="font-medium">{format(selected.to, PeriodType.Day)}</div>
+          <div class="font-medium">{format(settings, selected.to, PeriodType.Day)}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}
@@ -289,10 +291,7 @@
           >
             {#each [DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday] as day}
               <ToggleOption value={day}
-                >{getDayOfWeekName(
-                  day,
-                  getSettings().formats?.dates?.locales ?? 'en'
-                )}</ToggleOption
+                >{getDayOfWeekName(day, dateFormat.locales ?? 'en')}</ToggleOption
               >
             {/each}
           </ToggleGroup>

@@ -33,7 +33,7 @@ import {
 import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
-import { getFormatDate } from '$lib/components/settings';
+import type { Settings } from '../components/settings';
 
 export type SelectedDate = Date | Date[] | DateRange | null;
 
@@ -102,8 +102,12 @@ export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
   return formatter.format(date);
 }
 
-export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOptions = {}) {
-  const { locales, dictionaryDate: dico } = getFormatDate(options);
+export function getPeriodTypeName(
+  settings: Settings,
+  periodType: PeriodType,
+  options: FormatDateOptions = {}
+) {
+  const { locales, dictionaryDate: dico } = settings.getFormatDate(options);
 
   switch (periodType) {
     case PeriodType.Day:
@@ -630,11 +634,12 @@ export enum DateToken {
 }
 
 export function formatIntl(
+  settings: Settings,
   dt: Date,
   tokens_or_intlOptions: CustomIntlDateTimeFormatOptions,
   options: FormatDateOptions = {}
 ) {
-  const { locales, ordinalSuffixes } = getFormatDate(options);
+  const { locales, ordinalSuffixes } = settings.getFormatDate(options);
 
   function formatIntlOrdinal(formatter: Intl.DateTimeFormat, with_ordinal = false) {
     if (with_ordinal) {
@@ -730,6 +735,7 @@ export function formatIntl(
 }
 
 function range(
+  settings: Settings,
   date: Date,
   weekStartsOn: DayOfWeek,
   options: FormatDateOptions,
@@ -748,7 +754,11 @@ function range(
 
   const formatToUse = formats[variant];
 
-  return formatIntl(start, formatToUse, options) + ' - ' + formatIntl(end, formatToUse, options);
+  return (
+    formatIntl(settings, start, formatToUse, options) +
+    ' - ' +
+    formatIntl(settings, end, formatToUse, options)
+  );
 }
 
 export type OrdinalSuffixes = {
@@ -788,6 +798,7 @@ export type FormatDateOptions = {
 };
 
 export function formatDate(
+  settings: Settings,
   date: Date | string | null | undefined,
   periodType?: PeriodType | null | undefined,
   options: FormatDateOptions = {}
@@ -804,7 +815,7 @@ export function formatDate(
     return '';
   }
 
-  const { variant, weekStartsOn, custom, presets } = getFormatDate(options);
+  const { variant, weekStartsOn, custom, presets } = settings.getFormatDate(options);
   const { day, dayTime, timeOnly, week, month, monthYear, year } = presets;
 
   if (periodType === PeriodType.Week) {
@@ -841,80 +852,80 @@ export function formatDate(
 
   switch (periodType) {
     case PeriodType.Custom:
-      return formatIntl(date, custom, options);
+      return formatIntl(settings, date, custom, options);
 
     case PeriodType.Day:
-      return formatIntl(date, day[variant], options);
+      return formatIntl(settings, date, day[variant], options);
 
     case PeriodType.DayTime:
-      return formatIntl(date, dayTime[variant], options);
+      return formatIntl(settings, date, dayTime[variant], options);
 
     case PeriodType.TimeOnly:
-      return formatIntl(date, timeOnly[variant], options);
+      return formatIntl(settings, date, timeOnly[variant], options);
 
     case PeriodType.WeekSun:
-      return range(date, 0, options, week, variant);
+      return range(settings, date, 0, options, week, variant);
     case PeriodType.WeekMon:
-      return range(date, 1, options, week, variant);
+      return range(settings, date, 1, options, week, variant);
     case PeriodType.WeekTue:
-      return range(date, 2, options, week, variant);
+      return range(settings, date, 2, options, week, variant);
     case PeriodType.WeekWed:
-      return range(date, 3, options, week, variant);
+      return range(settings, date, 3, options, week, variant);
     case PeriodType.WeekThu:
-      return range(date, 4, options, week, variant);
+      return range(settings, date, 4, options, week, variant);
     case PeriodType.WeekFri:
-      return range(date, 5, options, week, variant);
+      return range(settings, date, 5, options, week, variant);
     case PeriodType.WeekSat:
-      return range(date, 6, options, week, variant);
+      return range(settings, date, 6, options, week, variant);
 
     case PeriodType.Month:
-      return formatIntl(date, month[variant], options);
+      return formatIntl(settings, date, month[variant], options);
 
     case PeriodType.MonthYear:
-      return formatIntl(date, monthYear[variant], options);
+      return formatIntl(settings, date, monthYear[variant], options);
 
     case PeriodType.Quarter:
       return [
-        formatIntl(startOfQuarter(date), month[variant], options),
-        formatIntl(endOfQuarter(date), monthYear[variant], options),
+        formatIntl(settings, startOfQuarter(date), month[variant], options),
+        formatIntl(settings, endOfQuarter(date), monthYear[variant], options),
       ].join(' - ');
 
     case PeriodType.CalendarYear:
-      return formatIntl(date, year[variant], options);
+      return formatIntl(settings, date, year[variant], options);
 
     case PeriodType.FiscalYearOctober:
       const fDate = new Date(getFiscalYear(date), 0, 1);
-      return formatIntl(fDate, year[variant], options);
+      return formatIntl(settings, fDate, year[variant], options);
 
     case PeriodType.BiWeek1Sun:
-      return range(date, 0, options, week, variant, 1);
+      return range(settings, date, 0, options, week, variant, 1);
     case PeriodType.BiWeek1Mon:
-      return range(date, 1, options, week, variant, 1);
+      return range(settings, date, 1, options, week, variant, 1);
     case PeriodType.BiWeek1Tue:
-      return range(date, 2, options, week, variant, 1);
+      return range(settings, date, 2, options, week, variant, 1);
     case PeriodType.BiWeek1Wed:
-      return range(date, 3, options, week, variant, 1);
+      return range(settings, date, 3, options, week, variant, 1);
     case PeriodType.BiWeek1Thu:
-      return range(date, 4, options, week, variant, 1);
+      return range(settings, date, 4, options, week, variant, 1);
     case PeriodType.BiWeek1Fri:
-      return range(date, 5, options, week, variant, 1);
+      return range(settings, date, 5, options, week, variant, 1);
     case PeriodType.BiWeek1Sat:
-      return range(date, 6, options, week, variant, 1);
+      return range(settings, date, 6, options, week, variant, 1);
 
     case PeriodType.BiWeek2Sun:
-      return range(date, 0, options, week, variant, 2);
+      return range(settings, date, 0, options, week, variant, 2);
     case PeriodType.BiWeek2Mon:
-      return range(date, 1, options, week, variant, 2);
+      return range(settings, date, 1, options, week, variant, 2);
     case PeriodType.BiWeek2Tue:
-      return range(date, 2, options, week, variant, 2);
+      return range(settings, date, 2, options, week, variant, 2);
     case PeriodType.BiWeek2Wed:
-      return range(date, 3, options, week, variant, 2);
+      return range(settings, date, 3, options, week, variant, 2);
     case PeriodType.BiWeek2Thu:
-      return range(date, 4, options, week, variant, 2);
+      return range(settings, date, 4, options, week, variant, 2);
     case PeriodType.BiWeek2Fri:
-      return range(date, 5, options, week, variant, 2);
+      return range(settings, date, 5, options, week, variant, 2);
     case PeriodType.BiWeek2Sat:
-      return range(date, 6, options, week, variant, 2);
+      return range(settings, date, 6, options, week, variant, 2);
 
     default:
       return formatISO(date);

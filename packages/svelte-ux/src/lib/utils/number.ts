@@ -1,4 +1,4 @@
-import { getFormatNumber } from '$lib/components/settings';
+import type { Settings } from '../components/settings';
 
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
@@ -23,7 +23,11 @@ export type FormatNumberOptions = Intl.NumberFormatOptions & {
 };
 
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
-export function formatNumber(number: number | null | undefined, options: FormatNumberOptions = {}) {
+export function formatNumber(
+  settings: Settings,
+  number: number | null | undefined,
+  options: FormatNumberOptions = {}
+) {
   if (number == null) {
     return '';
   }
@@ -32,7 +36,7 @@ export function formatNumber(number: number | null | undefined, options: FormatN
     return `${number}`;
   }
 
-  const defaults = getFormatNumber(options.style);
+  const defaults = settings.getFormatNumber(options.style);
 
   const formatter = Intl.NumberFormat(options.locales ?? defaults.locales ?? undefined, {
     // Let's always starts with all defaults
