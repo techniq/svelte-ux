@@ -439,7 +439,7 @@
           on:click={(e) => {
             e.stopPropagation();
             logger.debug('step left clicked');
-            value = previous();
+            selectValue(previous());
           }}
           class="mr-2"
           size="sm"
@@ -486,7 +486,7 @@
           on:click={(e) => {
             e.stopPropagation();
             logger.debug('step right clicked');
-            value = next();
+            selectValue(next());
           }}
           class="mr-2"
           size="sm"
