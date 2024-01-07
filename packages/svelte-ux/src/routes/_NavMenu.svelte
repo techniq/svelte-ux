@@ -69,7 +69,6 @@
   };
 
   const actions = [
-    'cssVars',
     'dataBackground',
     'input',
     'layout',
@@ -81,6 +80,7 @@
     'scroll',
     'spotlight',
     'sticky',
+    'styleProps',
     'table',
   ];
 
