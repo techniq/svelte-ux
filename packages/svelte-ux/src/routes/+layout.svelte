@@ -160,8 +160,11 @@
 
       <div class="border-r border-primary-content/20 pr-2 grid grid-cols-2 items-center">
         <LanguageSelect />
-        <ThemeSelect />
-        <!-- <ThemeSwitch classes={{ switch: 'bg-black/10 bornder-none' }} /> -->
+        {#if data.themes.light.length > 1 || data.themes.dark.length > 1}
+          <ThemeSelect />
+        {:else}
+          <ThemeSwitch classes={{ switch: 'bg-black/10 bornder-none' }} />
+        {/if}
       </div>
 
       <Tooltip title="Discord" placement="left" offset={2}>
