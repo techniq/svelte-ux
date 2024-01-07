@@ -40,53 +40,34 @@
     //       currency: 'EUR',
     //     },
     //   },
+
     //   dates: {
     //     locales: 'fr',
-    //     weekStartsOn: 1,
+
     //     presets: {
-    //       days: {
+    //       day: {
     //         long: { dateStyle: 'full' },
     //       },
-    //       months: {
+    //       month: {
     //         default: [DateToken.Month_long],
     //       },
     //     },
+
     //     ordinalSuffixes: {
     //       fr: {
     //         one: 'er',
-    //         two: '',
-    //         few: '',
-    //         other: '',
-    //       },
-    //     },
-    //   },
-    //   dates: {
-    //     locales: 'fr',
-    //     weekStartsOn: 1,
-    //     presets: {
-    //       days: {
-    //         long: { dateStyle: 'full' },
-    //       },
-    //       months: {
-    //         default: [DateToken.Month_long],
-    //       },
-    //     },
-    //     ordinalSuffixes: {
-    //       fr: {
-    //         one: 'er',
-    //         two: '',
-    //         few: '',
-    //         other: '',
     //       },
     //     },
     //   },
     // },
+
     // dictionary: {
     //   Cancel: 'Annuler',
     //   Date: {
     //     Day: 'Jour',
     //   },
     // },
+
     classes: {
       AppLayout: {
         aside: 'border-r',
@@ -98,6 +79,7 @@
         active: 'text-primary bg-surface-100 border-l-4 border-primary font-medium',
       },
     },
+
     themes: {
       light: lightThemes,
       dark: darkThemes,

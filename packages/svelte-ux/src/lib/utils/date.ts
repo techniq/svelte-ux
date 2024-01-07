@@ -102,6 +102,16 @@ export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
   return formatter.format(date);
 }
 
+export function getWeekStartsOnFromIntl(locales?: string): DayOfWeek {
+  if (!locales) {
+    return DayOfWeek.Sunday;
+  }
+
+  const info = new Intl.Locale(locales);
+  // @ts-ignore
+  return (info.weekInfo.firstDay ?? 0) % 7; // (in Intl, sunday is 7 not 0, so we need to mod 7)
+}
+
 export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOptions = {}) {
   const settings = getSettings();
   const { locales, dictionaryDate: dico } = settings.getFormatDate(options);
@@ -648,7 +658,7 @@ export function formatIntl(
         .map((c) => {
           if (c.type === 'day') {
             const ordinal = rules.select(parseInt(c.value, 10));
-            const suffix = suffixes[ordinal];
+            const suffix = suffixes[ordinal] ?? ''; // we never want to have 'undefined' as a suffix
             return `${c.value}${suffix}`;
           }
           return c.value;
@@ -759,10 +769,10 @@ function range(
 }
 
 export type OrdinalSuffixes = {
-  one: string;
-  two: string;
-  few: string;
-  other: string;
+  one?: string;
+  two?: string;
+  few?: string;
+  other?: string;
   zero?: string;
   many?: string;
 };
@@ -777,8 +787,8 @@ export type CustomIntlDateTimeFormatOptions =
   | string[]
   | (Intl.DateTimeFormatOptions & { withOrdinal?: boolean });
 export type FormatDateOptions = {
-  locales?: string | undefined;
   baseParsing?: string;
+  locales?: string | undefined;
   weekStartsOn?: DayOfWeek;
   variant?: DateFormatVariant;
   custom?: CustomIntlDateTimeFormatOptions;

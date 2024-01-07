@@ -10,6 +10,7 @@ import {
   type CustomIntlDateTimeFormatOptions,
   type FormatDateOptions,
   DateToken,
+  getWeekStartsOnFromIntl,
 } from './date';
 import { getSettings } from '$lib/components';
 
@@ -479,5 +480,22 @@ describe('getMonthDaysByWeek()', () => {
         ],
       ]
     `);
+  });
+});
+
+describe('getWeekStartsOnFromIntl() tokens', () => {
+  it('by default, sunday', () => {
+    const val = getWeekStartsOnFromIntl();
+    expect(val).toBe(DayOfWeek.Sunday);
+  });
+
+  it('For en it should be synday', () => {
+    const val = getWeekStartsOnFromIntl('en');
+    expect(val).toBe(DayOfWeek.Sunday);
+  });
+
+  it('For fr it should be monday', () => {
+    const val = getWeekStartsOnFromIntl('fr');
+    expect(val).toBe(DayOfWeek.Monday);
   });
 });

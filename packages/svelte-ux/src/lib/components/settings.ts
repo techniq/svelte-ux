@@ -9,6 +9,7 @@ import {
   type CustomIntlDateTimeFormatOptions,
   type OrdinalSuffixes,
   DateToken,
+  getWeekStartsOnFromIntl,
 } from '$lib/utils/date';
 import type { DictionaryMessages, DictionaryMessagesOptions } from '$lib/utils/dictionary';
 import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
@@ -107,18 +108,25 @@ function buildNumberFormat(settings: SettingsInput) {
 
 export function buildDateFormat(settings: SettingsInput, dictionary: DictionaryMessages) {
   return function getFormatDate(options?: FormatDateOptions) {
+    const baseParsing =
+      options?.baseParsing ?? settings.formats?.dates?.baseParsing ?? 'yyyy-MM-dd';
+
+    const locales = options?.locales ?? settings.formats?.dates?.locales ?? 'en';
+
+    const weekStartsOn =
+      options?.weekStartsOn ??
+      settings.formats?.dates?.weekStartsOn ??
+      getWeekStartsOnFromIntl(locales);
+
     // if custom is set && variant is not set, let's put custom as variant
     const variant: FormatDateOptions['variant'] =
       options?.custom && options?.variant === undefined ? 'custom' : options?.variant ?? 'default';
 
-    const baseParsing =
-      options?.baseParsing ?? settings.formats?.dates?.baseParsing ?? 'MM/dd/yyyy';
-
     const custom = options?.custom ?? '';
 
     let toRet: {
-      locales: string;
       baseParsing: string;
+      locales: string;
       weekStartsOn: DayOfWeek;
       variant: DateFormatVariant;
       custom: CustomIntlDateTimeFormatOptions;
@@ -134,10 +142,9 @@ export function buildDateFormat(settings: SettingsInput, dictionary: DictionaryM
       ordinalSuffixes: Record<string, OrdinalSuffixes>;
       dictionaryDate: DictionaryMessages['Date'];
     } = {
-      locales: options?.locales ?? settings.formats?.dates?.locales ?? 'en',
       baseParsing,
-      weekStartsOn:
-        options?.weekStartsOn ?? settings.formats?.dates?.weekStartsOn ?? DayOfWeek.Sunday,
+      locales,
+      weekStartsOn,
       variant,
       custom,
 
