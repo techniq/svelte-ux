@@ -114,7 +114,7 @@
     <span class="font-semibold">Svelte</span> is
     <ScrollingValue
       {axis}
-      value={$indexTimer}
+      value={$indexTimer ?? undefined}
       format={(value) => {
         const options = ['compiled', 'compact', 'complete'];
         return options[Math.abs(value) % options.length];
@@ -216,7 +216,7 @@
   <div class="grid w-96">
     <div class="grid grid-cols-[auto,1fr,auto] items-center justify-items-center">
       <Button icon={mdiChevronLeft} class="p-2" on:click={() => (value -= 1)} />
-      <div>{format(settings, startOfMonth, PeriodType.Month)}</div>
+      <div>{format(startOfMonth, PeriodType.Month)}</div>
       <Button icon={mdiChevronRight} class="p-2" on:click={() => (value += 1)} />
     </div>
     <ScrollingValue {value} {axis} let:value>

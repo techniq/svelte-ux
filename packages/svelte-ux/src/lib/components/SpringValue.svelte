@@ -1,6 +1,6 @@
 <script lang="ts">
   import { spring } from 'svelte/motion';
-  import { format as formatUtil, type FormatType } from '../utils/format';
+  import { format as format_ux, type FormatType } from '../utils/format';
   import { getSettings } from './settings';
 
   type T = $$Generic;
@@ -19,7 +19,7 @@
 
 <slot value={displayValue}>
   {#if format}
-    {formatUtil(settings, displayValue, format)}
+    {format_ux(displayValue, format)}
   {:else}
     {displayValue}
   {/if}

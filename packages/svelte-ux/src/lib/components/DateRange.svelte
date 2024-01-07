@@ -51,7 +51,7 @@
   $: periodTypeOptions = periodTypes.map((pt) => {
     const value = adjustPeriodType(pt);
     return {
-      label: getPeriodTypeName(settings, adjustPeriodType(pt)),
+      label: getPeriodTypeName(adjustPeriodType(pt)),
       value,
     };
   });
@@ -176,7 +176,7 @@
       <ToggleOption value="from" class="flex-1">
         <div class="text-xs text-surface-content/50">Start</div>
         {#if selected?.from}
-          <div class="font-medium">{format(settings, selected.from, PeriodType.Day)}</div>
+          <div class="font-medium">{format(selected.from, PeriodType.Day)}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}
@@ -198,7 +198,7 @@
       <ToggleOption value="to" class="flex-1">
         <div class="text-xs text-surface-content/50">End</div>
         {#if selected?.to}
-          <div class="font-medium">{format(settings, selected.to, PeriodType.Day)}</div>
+          <div class="font-medium">{format(selected.to, PeriodType.Day)}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}

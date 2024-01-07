@@ -9,7 +9,7 @@
   import { format } from '$lib/utils/format';
   import { cls } from '$lib/utils/styles';
 
-  let value: number | null = 0;
+  let value: number = 0;
 
   const settings = getSettings();
 
@@ -43,7 +43,12 @@
     <Button on:click={() => (value += 100)}>+100</Button>
   </ButtonGroup>
   <Button variant="fill" on:click={() => (value = Math.random() * 10)}>Random</Button>
-  <Button variant="fill" on:click={() => (value = null)}>Null</Button>
+  <Button
+    variant="fill"
+    on:click={() =>
+      // @ts-ignore
+      (value = null)}>Null</Button
+  >
 </div>
 <span class="text-xs ml-2 text-surface-content/50">
   also keyboard up/down with shift: +/- 10 option: +/- 100
@@ -72,7 +77,7 @@
 <Preview>
   <TweenedValue {value} let:value>
     <span class={cls('tabular-nums', (value ?? 0) < 0 ? 'text-red-500' : 'text-green-500')}>
-      {format(settings, value, 'decimal')}
+      {format(value, 'decimal')}
     </span>
   </TweenedValue>
 </Preview>

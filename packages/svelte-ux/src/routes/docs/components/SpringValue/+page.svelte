@@ -9,7 +9,7 @@
 
   const settings = getSettings();
 
-  let value: number | null = 0;
+  let value: number = 0;
 
   function onKeyDown(e: KeyboardEvent) {
     const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
@@ -41,7 +41,12 @@
     <Button on:click={() => (value += 100)}>+100</Button>
   </ButtonGroup>
   <Button variant="fill" on:click={() => (value = Math.random() * 10)}>Random</Button>
-  <Button variant="fill" on:click={() => (value = null)}>Null</Button>
+  <Button
+    variant="fill"
+    on:click={() =>
+      // @ts-ignore
+      (value = null)}>Null</Button
+  >
 </div>
 <span class="text-xs ml-2 text-surface-content/50">
   also keyboard up/down with shift: +/- 10 option: +/- 100
@@ -70,7 +75,7 @@
 <Preview>
   <SpringValue {value} let:value>
     <span class={cls('tabular-nums', (value ?? 0) < 0 ? 'text-red-500' : 'text-green-500')}>
-      {format(settings, value, 'decimal')}
+      {format(value, 'decimal')}
     </span>
   </SpringValue>
 </Preview>

@@ -95,7 +95,7 @@
     />
 
     <div class="flex flex-1 items-center justify-center">
-      <span>{format(settings, startOfMonth, PeriodType.MonthYear)}</span>
+      <span>{format(startOfMonth, PeriodType.MonthYear)}</span>
     </div>
 
     <Button
@@ -110,7 +110,7 @@
   {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
     <div class="flex-1 text-center">
       <span class="text-xs text-surface-content/50">
-        {format(settings, day, PeriodType.Day, { custom: 'eee' })}
+        {format(day, PeriodType.Day, { custom: 'eee' })}
       </span>
     </div>
   {/each}

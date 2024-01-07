@@ -130,5 +130,5 @@ export function getCellContent(
   rowIndex?: number
 ) {
   const value = getCellValue(column, rowData, rowIndex);
-  return format(settings, value, column?.format, rowData, rowIndex);
+  return format(value, column?.format, rowData);
 }

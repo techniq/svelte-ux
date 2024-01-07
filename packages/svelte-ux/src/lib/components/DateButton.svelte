@@ -20,7 +20,6 @@
   export let fade: boolean = false;
   export let format = getCustomFormat(periodType);
 
-  const settings = getSettings();
   const settingsClasses = getComponentClasses('DateButton');
 
   function getCustomFormat(periodType: PeriodType) {
@@ -104,6 +103,6 @@
       dispatch('dateChange', date);
     }}
   >
-    {format_ux(settings, date, periodType, { custom: format })}
+    {format_ux(date, periodType, { custom: format })}
   </Button>
 </div>

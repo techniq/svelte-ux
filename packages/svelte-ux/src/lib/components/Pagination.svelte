@@ -13,7 +13,6 @@
   import Toggle from './Toggle.svelte';
   import Tooltip from './Tooltip.svelte';
   import { getComponentClasses } from './theme';
-  import { getSettings } from './settings';
 
   type Pagination = ReturnType<typeof paginationStore>;
 
@@ -40,7 +39,7 @@
     pagination?: string;
     perPage?: string;
   } = {};
-  const settings = getSettings();
+
   const settingsClasses = getComponentClasses('Pagination');
 </script>
 
@@ -130,7 +129,7 @@
                     selected={$pagination.perPage === option}
                     on:click={() => pagination.setPerPage(option)}
                   >
-                    {formatValue(settings, option, 'integer')}
+                    {formatValue(option, 'integer')}
                   </MenuItem>
                 {/each}
               </Menu>

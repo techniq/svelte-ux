@@ -33,7 +33,7 @@ import {
 import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
-import type { Settings } from '../components/settings';
+import { getSettings, type Settings } from '../components/settings';
 
 export type SelectedDate = Date | Date[] | DateRange | null;
 
@@ -102,11 +102,8 @@ export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
   return formatter.format(date);
 }
 
-export function getPeriodTypeName(
-  settings: Settings,
-  periodType: PeriodType,
-  options: FormatDateOptions = {}
-) {
+export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOptions = {}) {
+  const settings = getSettings();
   const { locales, dictionaryDate: dico } = settings.getFormatDate(options);
 
   switch (periodType) {
@@ -798,11 +795,12 @@ export type FormatDateOptions = {
 };
 
 export function formatDate(
-  settings: Settings,
   date: Date | string | null | undefined,
   periodType?: PeriodType | null | undefined,
   options: FormatDateOptions = {}
 ): string {
+  const settings = getSettings();
+
   periodType = periodType ?? undefined;
 
   if (typeof date === 'string') {
