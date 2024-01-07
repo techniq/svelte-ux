@@ -2,7 +2,7 @@
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
-  import { mdiChevronDown, mdiClose } from '@mdi/js';
+  import { mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Logger from '../utils/logger';
   import { autoFocus, selectOnFocus } from '$lib/actions';
@@ -53,6 +53,9 @@
         selectOnFocus(node),
       ]
     : undefined;
+
+  /** If true, show left/right buttons to step through options */
+  export let stepper = false;
 
   let originalIcon = icon;
 
@@ -361,6 +364,28 @@
     return option;
   }
 
+  $: previous = () => {
+    const index = options.findIndex((o) => o.value === value);
+    if (index === 0 || index === -1) {
+      // If first item, or no selected value yet, return last item
+      return options[options.length - 1].value;
+    } else {
+      // Previous item
+      return options[index - 1].value;
+    }
+  };
+
+  $: next = () => {
+    const index = options.findIndex((x) => x.value === value);
+    if (index === options.length - 1) {
+      // First value
+      return options[0].value;
+    } else {
+      // Next value
+      return options[index + 1].value;
+    }
+  };
+
   function clear() {
     logger.info('clear');
     selectOption(null);
@@ -407,7 +432,21 @@
     aria-autocomplete={!inlineOptions ? 'list' : undefined}
     {...$$restProps}
   >
-    <slot slot="prepend" name="prepend" />
+    <span slot="prepend">
+      {#if stepper}
+        <Button
+          icon={mdiChevronLeft}
+          on:click={(e) => {
+            e.stopPropagation();
+            logger.debug('step left clicked');
+            value = previous();
+          }}
+          class="mr-2"
+          size="sm"
+        />
+      {/if}
+      <slot name="prepend" />
+    </span>
 
     <span slot="append" class="flex items-center">
       <slot name="append" />
@@ -438,6 +477,19 @@
             logger.debug('toggleIcon clicked');
             open ? hide() : show();
           }}
+        />
+      {/if}
+
+      {#if stepper}
+        <Button
+          icon={mdiChevronRight}
+          on:click={(e) => {
+            e.stopPropagation();
+            logger.debug('step right clicked');
+            value = next();
+          }}
+          class="mr-2"
+          size="sm"
         />
       {/if}
     </span>
