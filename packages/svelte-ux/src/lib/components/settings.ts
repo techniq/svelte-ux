@@ -112,7 +112,7 @@ function buildNumberFormat(settings: SettingsInput) {
 export function buildDateFormat(settings: SettingsInput, dictionary: DictionaryMessages) {
   return function getFormatDate(options?: FormatDateOptions) {
     const baseParsing =
-      options?.baseParsing ?? settings.formats?.dates?.baseParsing ?? 'yyyy-MM-dd';
+      options?.baseParsing ?? settings.formats?.dates?.baseParsing ?? 'MM/dd/yyyy';
 
     const locales = options?.locales ?? settings.formats?.dates?.locales ?? 'en';
 
