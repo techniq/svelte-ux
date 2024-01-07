@@ -94,6 +94,7 @@
       clearable={false}
       toggleIcon={null}
       stepper
+      on:change={() => (showDarkTheme = false)}
     />
     <SelectField
       label="Dark theme"
@@ -102,6 +103,7 @@
       clearable={false}
       toggleIcon={null}
       stepper
+      on:change={() => (showDarkTheme = true)}
     />
 
     <ButtonGroup variant="fill" color="primary">
