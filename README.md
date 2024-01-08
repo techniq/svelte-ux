@@ -15,7 +15,7 @@
 
 The projects aims to simplify building highly interactive and visual applications. It provides over 200 components, actions, stores, and utils, with many more planned.
 
-The components are built using Tailwind with extensibility and customization in mind through the use of theming, variants, granule class overrides, and slots. A rich design token system is also currently in the works.
+The components are built using Tailwind with extensibility and customization in mind through the use of theming, variants, granular class overrides, and slots. A rich design token system is also currently in the works.
 
 See also the companion library [LayerChart](https://layerchart.com) for a large collection of composable chart components to build a wide range of visualizations.
 
