@@ -45,9 +45,6 @@ importers:
       '@fortawesome/fontawesome-common-types':
         specifier: ^6.5.1
         version: 6.5.1
-      '@fortawesome/free-solid-svg-icons':
-        specifier: ^6.2.1
-        version: 6.2.1
       '@mdi/js':
         specifier: ^7.0.96
         version: 7.0.96
@@ -97,6 +94,9 @@ importers:
       '@changesets/cli':
         specifier: ^2.27.1
         version: 2.27.1
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^6.2.1
+        version: 6.2.1
       '@skeletonlabs/tw-plugin':
         specifier: ^0.3.1
         version: 0.3.1(tailwindcss@3.4.0)
@@ -681,7 +681,7 @@ packages:
     resolution: {integrity: sha512-Sz07mnQrTekFWLz5BMjOzHl/+NooTdW8F8kDQxjWwbpOJcnoSg4vUDng8d/WR1wOxM0O+CY9Zw0nR054riNYtQ==}
     engines: {node: '>=6'}
     requiresBuild: true
-    dev: false
+    dev: true
 
   /@fortawesome/fontawesome-common-types@6.5.1:
     resolution: {integrity: sha512-GkWzv+L6d2bI5f/Vk6ikJ9xtl7dfXtoRu3YGE6nq0p/FFqA1ebMOAWg3XgRyb0I6LYyYkiAo+3/KrwuBp8xG7A==}
@@ -695,7 +695,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@fortawesome/fontawesome-common-types': 6.2.1
-    dev: false
+    dev: true
 
   /@isaacs/cliui@8.0.2:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
