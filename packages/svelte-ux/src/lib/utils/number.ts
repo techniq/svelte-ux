@@ -22,6 +22,15 @@ export type FormatNumberOptions = Intl.NumberFormatOptions & {
   suffixExtraIfMany?: string;
 };
 
+function getFormatNumber(settings: LocaleSettings, style: FormatNumberStyle | undefined) {
+  const { numbers } = settings.formats;
+  const styleSettings = style ? numbers[style] : {};
+  return {
+    ...numbers.defaults,
+    ...styleSettings,
+  };
+}
+
 export function formatNumber(number: number | null | undefined, options: FormatNumberOptions) {
   return formatNumberWithLocale(knownLocales.en, number, options);
 }
@@ -40,9 +49,9 @@ export function formatNumberWithLocale(
     return `${number}`;
   }
 
-  const defaults = settings.getFormatNumber(options.style);
+  const defaults = getFormatNumber(settings, options.style);
 
-  const formatter = Intl.NumberFormat(options.locales ?? defaults.locales ?? undefined, {
+  const formatter = Intl.NumberFormat(settings.locale, {
     // Let's always starts with all defaults
     ...defaults,
 
@@ -53,10 +62,8 @@ export function formatNumberWithLocale(
 
     // Let's shorten min / max with fractionDigits
     ...{
-      minimumFractionDigits:
-        options.fractionDigits != null ? options.fractionDigits : defaults.fractionDigits,
-      maximumFractionDigits:
-        options.fractionDigits != null ? options.fractionDigits : defaults.fractionDigits,
+      minimumFractionDigits: options.fractionDigits ?? defaults.fractionDigits,
+      maximumFractionDigits: options.fractionDigits ?? defaults.fractionDigits,
     },
 
     // now we bring in user specified options
@@ -77,7 +84,7 @@ export function formatNumberWithLocale(
       maximumFractionDigits: 0,
     }),
 
-    // Let's overwrite for style=metric
+    // Let's overwrite for style=integer
     ...(options.style === 'integer' && {
       style: 'decimal',
       minimumFractionDigits: 0,

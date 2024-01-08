@@ -1,8 +1,15 @@
 import { type Writable, derived, type Readable, writable } from 'svelte/store';
 import type { Prettify } from '$lib/types/typeHelpers';
-import { DateToken, DayOfWeek, type FormatDateLocaleOptions, type FormatDateOptions } from './date';
-import type { DictionaryMessagesOptions } from './dictionary';
+import {
+  DateToken,
+  DayOfWeek,
+  type FormatDateLocaleOptions,
+  type FormatDateLocalePresets,
+  type FormatDateOptions,
+} from './date';
+import type { DictionaryMessages, DictionaryMessagesOptions } from './dictionary';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
+import { defaultsDeep } from 'lodash-es';
 
 function resolvedLocaleStore(
   supportedLocales: string[],
@@ -43,131 +50,148 @@ export function localeStore(
 }
 
 type ExcludeNone<T> = T extends 'none' ? never : T;
+
+export type NumberPresetsOptions = Prettify<
+  {
+    defaults?: FormatNumberOptions;
+  } & {
+    [key in ExcludeNone<FormatNumberStyle>]?: FormatNumberOptions;
+  }
+>;
+export type NumberPresets = Prettify<
+  {
+    defaults: FormatNumberOptions;
+  } & {
+    [key in ExcludeNone<FormatNumberStyle>]?: FormatNumberOptions;
+  }
+>;
+
 export interface LocaleSettingsInput {
+  locale: string;
   formats?: {
-    numbers?: Prettify<
-      {
-        defaults?: FormatNumberOptions;
-      } & {
-        [key in ExcludeNone<FormatNumberStyle>]?: FormatNumberOptions;
-      }
-    >;
+    numbers?: NumberPresetsOptions;
     dates?: FormatDateLocaleOptions;
   };
   dictionary?: DictionaryMessagesOptions;
 }
 
-type DeepRequired<T> = Required<{
-  [K in keyof T]: T[K] extends Required<T[K]> ? Required<T[K]> : DeepRequired<T[K]>;
-}>;
-export type LocaleSettings = DeepRequired<LocaleSettingsInput> & { locale: string };
+export interface LocaleSettings {
+  locale: string;
+  formats: {
+    numbers: NumberPresets;
+    dates: FormatDateLocalePresets;
+  };
+  dictionary: DictionaryMessages;
+}
 
-export const knownLocales: Record<string, LocaleSettingsInput> = {
-  en: {
-    dictionary: {
-      Ok: 'Ok',
-      Cancel: 'Cancel',
-      Date: {
-        Day: 'Day',
-        Week: 'Week',
-        BiWeek: 'Bi-Week',
-        Month: 'Month',
-        Quarter: 'Quarter',
-        CalendarYear: 'Calendar Year',
-        FiscalYearOct: 'Fiscal Year (Oct)',
+const defaultLocaleSettings: LocaleSettings = {
+  locale: 'en',
+  dictionary: {
+    Ok: 'Ok',
+    Cancel: 'Cancel',
+    Date: {
+      Day: 'Day',
+      Week: 'Week',
+      BiWeek: 'Bi-Week',
+      Month: 'Month',
+      Quarter: 'Quarter',
+      CalendarYear: 'Calendar Year',
+      FiscalYearOct: 'Fiscal Year (Oct)',
+    },
+  },
+  formats: {
+    numbers: {
+      defaults: {
+        currency: 'USD',
+        fractionDigits: 2,
+        currencyDisplay: 'symbol',
       },
     },
-    formats: {
-      numbers: {
-        defaults: {
-          currency: 'USD',
-          fractionDigits: 2,
-          currencyDisplay: 'symbol',
-        },
+    dates: {
+      baseParsing: 'MM/dd/yyyy',
+      weekStartsOn: DayOfWeek.Sunday,
+      ordinalSuffixes: {
+        one: 'st',
+        two: 'nd',
+        few: 'rd',
+        other: 'th',
       },
-      dates: {
-        baseParsing: 'MM/dd/yyyy',
-        weekStartsOn: DayOfWeek.Sunday,
-        ordinalSuffixes: {
-          one: 'st',
-          two: 'nd',
-          few: 'rd',
-          other: 'th',
+      presets: {
+        day: {
+          short: [DateToken.DayOfMonth_numeric, DateToken.Month_numeric],
+          default: [DateToken.DayOfMonth_numeric, DateToken.Month_numeric, DateToken.Year_numeric],
+          long: [DateToken.DayOfMonth_numeric, DateToken.Month_short, DateToken.Year_numeric],
         },
-        presets: {
-          day: {
-            short: [DateToken.DayOfMonth_numeric, DateToken.Month_numeric],
-            default: [
-              DateToken.DayOfMonth_numeric,
-              DateToken.Month_numeric,
-              DateToken.Year_numeric,
-            ],
-            long: [DateToken.DayOfMonth_numeric, DateToken.Month_short, DateToken.Year_numeric],
-          },
-          dayTime: {
-            short: [
-              DateToken.DayOfMonth_numeric,
-              DateToken.Month_numeric,
-              DateToken.Year_numeric,
-              DateToken.Hour_numeric,
-              DateToken.Minute_numeric,
-            ],
-            default: [
-              DateToken.DayOfMonth_numeric,
-              DateToken.Month_numeric,
-              DateToken.Year_numeric,
-              DateToken.Hour_2Digit,
-              DateToken.Minute_2Digit,
-            ],
-            long: [
-              DateToken.DayOfMonth_numeric,
-              DateToken.Month_numeric,
-              DateToken.Year_numeric,
-              DateToken.Hour_2Digit,
-              DateToken.Minute_2Digit,
-              DateToken.Second_2Digit,
-            ],
-          },
+        dayTime: {
+          short: [
+            DateToken.DayOfMonth_numeric,
+            DateToken.Month_numeric,
+            DateToken.Year_numeric,
+            DateToken.Hour_numeric,
+            DateToken.Minute_numeric,
+          ],
+          default: [
+            DateToken.DayOfMonth_numeric,
+            DateToken.Month_numeric,
+            DateToken.Year_numeric,
+            DateToken.Hour_2Digit,
+            DateToken.Minute_2Digit,
+          ],
+          long: [
+            DateToken.DayOfMonth_numeric,
+            DateToken.Month_numeric,
+            DateToken.Year_numeric,
+            DateToken.Hour_2Digit,
+            DateToken.Minute_2Digit,
+            DateToken.Second_2Digit,
+          ],
+        },
 
-          timeOnly: {
-            short: [DateToken.Hour_numeric, DateToken.Minute_numeric],
-            default: [DateToken.Hour_2Digit, DateToken.Minute_2Digit, DateToken.Second_2Digit],
-            long: [
-              DateToken.Hour_2Digit,
-              DateToken.Minute_2Digit,
-              DateToken.Second_2Digit,
-              DateToken.MiliSecond_3,
-            ],
-          },
+        timeOnly: {
+          short: [DateToken.Hour_numeric, DateToken.Minute_numeric],
+          default: [DateToken.Hour_2Digit, DateToken.Minute_2Digit, DateToken.Second_2Digit],
+          long: [
+            DateToken.Hour_2Digit,
+            DateToken.Minute_2Digit,
+            DateToken.Second_2Digit,
+            DateToken.MiliSecond_3,
+          ],
+        },
 
-          week: {
-            short: [DateToken.DayOfMonth_numeric, DateToken.Month_numeric],
-            default: [
-              DateToken.DayOfMonth_numeric,
-              DateToken.Month_numeric,
-              DateToken.Year_numeric,
-            ],
-            long: [DateToken.DayOfMonth_numeric, DateToken.Month_numeric, DateToken.Year_numeric],
-          },
-          month: {
-            short: DateToken.Month_short,
-            default: DateToken.Month_short,
-            long: DateToken.Month_long,
-          },
-          monthsYear: {
-            short: [DateToken.Month_short, DateToken.Year_2Digit],
-            default: [DateToken.Month_long, DateToken.Year_numeric],
-            long: [DateToken.Month_long, DateToken.Year_numeric],
-          },
-          year: {
-            short: DateToken.Year_2Digit,
-            default: DateToken.Year_numeric,
-            long: DateToken.Year_numeric,
-          },
+        week: {
+          short: [DateToken.DayOfMonth_numeric, DateToken.Month_numeric],
+          default: [DateToken.DayOfMonth_numeric, DateToken.Month_numeric, DateToken.Year_numeric],
+          long: [DateToken.DayOfMonth_numeric, DateToken.Month_numeric, DateToken.Year_numeric],
+        },
+        month: {
+          short: DateToken.Month_short,
+          default: DateToken.Month_short,
+          long: DateToken.Month_long,
+        },
+        monthsYear: {
+          short: [DateToken.Month_short, DateToken.Year_2Digit],
+          default: [DateToken.Month_long, DateToken.Year_numeric],
+          long: [DateToken.Month_long, DateToken.Year_numeric],
+        },
+        year: {
+          short: DateToken.Year_2Digit,
+          default: DateToken.Year_numeric,
+          long: DateToken.Year_numeric,
         },
       },
     },
   },
+};
+
+export function createLocaleSettings(
+  localeSettings: LocaleSettingsInput,
+  base = defaultLocaleSettings
+): LocaleSettings {
+  return defaultsDeep(localeSettings, base);
+}
+
+export const knownLocales: Record<string, LocaleSettings> = {
+  en: createLocaleSettings({ locale: 'en' }),
 };
 
 export function getAllKnownLocales(additionalLocales?: Record<string, LocaleSettingsInput>) {

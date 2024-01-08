@@ -33,7 +33,7 @@ import {
 import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
-import type { LocaleSettings } from './locale';
+import { knownLocales, type LocaleSettings } from './locale';
 
 export type SelectedDate = Date | Date[] | DateRange | null;
 
@@ -800,7 +800,16 @@ export interface FormatDateLocaleOptions {
   ordinalSuffixes?: OrdinalSuffixes;
 }
 
+export type FormatDateLocalePresets = Required<FormatDateLocaleOptions>;
+
 export function formatDate(
+  date: Date | string | null | undefined,
+  options: FormatDateOptions = {}
+): string {
+  return formatDateWithLocale(knownLocales.en, date, options);
+}
+
+export function formatDateWithLocale(
   settings: LocaleSettings,
   date: Date | string | null | undefined,
   options: FormatDateOptions = {}
@@ -815,10 +824,10 @@ export function formatDate(
     return '';
   }
 
-  let periodType = options.periodType;
   const weekStartsOn = options.weekStartsOn ?? settings.formats.dates.weekStartsOn;
   const { day, dayTime, timeOnly, week, month, monthsYear, year } = settings.formats.dates.presets;
 
+  let periodType = options.periodType;
   if (periodType === PeriodType.Week) {
     periodType = [
       PeriodType.WeekSun,

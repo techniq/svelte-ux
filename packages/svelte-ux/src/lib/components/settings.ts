@@ -57,10 +57,7 @@ export function settings(settings: SettingsInput): Settings {
   let supportedLocales = Object.keys(allLocales);
 
   let locale = localeStore(supportedLocales, settings.forceLocale, settings.fallbackLocale);
-  let localeSettings = derived(locale, ($locale) => ({
-    locale: $locale,
-    ...allLocales[$locale],
-  }));
+  let localeSettings = derived(locale, ($locale) => allLocales[$locale]);
 
   return setContext<Settings>(settingsKey, {
     ...settings,
