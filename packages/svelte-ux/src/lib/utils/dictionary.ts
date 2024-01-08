@@ -12,9 +12,3 @@ export type DictionaryMessagesOptions = {
     FiscalYearOct?: string;
   };
 };
-
-type DeepRequired<T> = Required<{
-  [K in keyof T]: T[K] extends Required<T[K]> ? Required<T[K]> : DeepRequired<T[K]>;
-}>;
-
-export type DictionaryMessages = DeepRequired<DictionaryMessagesOptions>;

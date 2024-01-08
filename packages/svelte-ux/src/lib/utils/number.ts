@@ -1,4 +1,5 @@
 import type { Settings } from '../components/settings';
+import { knownLocales, type LocaleSettings } from './locale';
 
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
@@ -12,7 +13,6 @@ export type FormatNumberStyle =
 
 export type FormatNumberOptions = Intl.NumberFormatOptions & {
   style?: FormatNumberStyle;
-  locales?: string | undefined;
   fractionDigits?: number;
   suffix?: string;
   /**
@@ -22,9 +22,13 @@ export type FormatNumberOptions = Intl.NumberFormatOptions & {
   suffixExtraIfMany?: string;
 };
 
+export function formatNumber(number: number | null | undefined, options: FormatNumberOptions) {
+  return formatNumberWithLocale(knownLocales.en, number, options);
+}
+
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
-export function formatNumber(
-  settings: Settings,
+export function formatNumberWithLocale(
+  settings: LocaleSettings,
   number: number | null | undefined,
   options: FormatNumberOptions = {}
 ) {
