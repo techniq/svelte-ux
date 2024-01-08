@@ -183,6 +183,8 @@ const defaultLocaleSettings: LocaleSettings = {
   },
 };
 
+/** Creates a locale settings object, using the `base` locale settings as defaults.
+ * If omitted, the `en` locale is used as the base. */
 export function createLocaleSettings(
   localeSettings: LocaleSettingsInput,
   base = defaultLocaleSettings

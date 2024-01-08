@@ -65,19 +65,27 @@ export function formatWithLocale(
   return formattedValue ?? ''; // return empty string so Svelte doesn't render `null` string;
 }
 
-export interface FormatFunctions {
-  /** Format an arbitrary value */
-  (
-    value: any,
-    style: FormatNumberStyle | PeriodType,
-    options?: FormatNumberOptions | FormatDateOptions
-  ): string;
+export type FormatFunction =
+  | ((
+      value: number | null | undefined,
+      style: FormatNumberStyle,
+      options?: FormatNumberOptions
+    ) => string)
+  | ((
+      value: Date | string | null | undefined,
+      period: PeriodType,
+      options?: FormatDateOptions
+    ) => string);
+
+export interface FormatFunctionProperties {
   number: (value: number, style: FormatNumberStyle, options?: FormatNumberOptions) => string;
   date: (value: Date | string, period: PeriodType, options?: FormatDateOptions) => string;
   getPeriodTypeName: (period: PeriodType) => string;
   getDayOfWeekName: (day: DayOfWeek) => string;
   settings: LocaleSettings;
 }
+
+export type FormatFunctions = FormatFunction & FormatFunctionProperties;
 
 export function buildFormatters(settings: LocaleSettings): FormatFunctions {
   const mainFormat = (

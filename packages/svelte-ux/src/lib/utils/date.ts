@@ -767,7 +767,7 @@ export type OrdinalSuffixes = {
   zero?: string;
   many?: string;
 };
-export type DateFormatVariant = 'short' | 'default' | 'long' | 'custom';
+export type DateFormatVariant = 'short' | 'default' | 'long';
 type DateFormatVariantPreset = {
   short?: CustomIntlDateTimeFormatOptions;
   default?: CustomIntlDateTimeFormatOptions;
@@ -780,14 +780,13 @@ export type CustomIntlDateTimeFormatOptions =
 
 export type FormatDateOptions = {
   weekStartsOn?: DayOfWeek;
-  variant?: DateFormatVariant;
+  variant?: DateFormatVariant | 'custom';
   custom?: CustomIntlDateTimeFormatOptions;
 };
 
 export interface FormatDateLocaleOptions {
   weekStartsOn?: DayOfWeek;
-  variant?: DateFormatVariant;
-  baseParsing: string;
+  baseParsing?: string;
   presets?: {
     day?: DateFormatVariantPreset;
     dayTime?: DateFormatVariantPreset;
@@ -861,12 +860,11 @@ export function formatDateWithLocale(
     ][weekStartsOn];
   }
 
-  const variant: FormatDateOptions['variant'] =
-    options?.custom && options?.variant === undefined ? 'custom' : options?.variant ?? 'default';
-
   /** Resolve a preset given the chosen variant */
   function rv(preset: DateFormatVariantPreset) {
-    if (options.custom && !options.variant) {
+    if (options.variant === 'custom') {
+      return options.custom ?? preset.default;
+    } else if (options.custom && !options.variant) {
       return options.custom;
     }
 
