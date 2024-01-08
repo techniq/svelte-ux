@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tweened } from 'svelte/motion';
-  import { format as formatUtil, type FormatType } from '../utils/format';
+  import type { FormatType } from '../utils/format';
   import { getSettings } from './settings';
 
   type T = $$Generic;
@@ -11,7 +11,7 @@
   export let options: TweenedOptions = undefined;
   export let disabled = false;
 
-  const settings = getSettings();
+  const { format: formatUtil } = getSettings();
   const tweenedValue = tweened(value, options);
   $: $tweenedValue = value ?? 0;
   $: displayValue = disabled || value == null ? value : $tweenedValue;
@@ -19,7 +19,7 @@
 
 <slot value={displayValue}>
   {#if format}
-    {formatUtil(settings, displayValue, format)}
+    {$formatUtil(displayValue, format)}
   {:else}
     {displayValue}
   {/if}

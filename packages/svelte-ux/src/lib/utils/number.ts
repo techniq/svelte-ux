@@ -12,7 +12,6 @@ export type FormatNumberStyle =
   | 'metric';
 
 export type FormatNumberOptions = Intl.NumberFormatOptions & {
-  style?: FormatNumberStyle;
   fractionDigits?: number;
   suffix?: string;
   /**
@@ -31,25 +30,30 @@ function getFormatNumber(settings: LocaleSettings, style: FormatNumberStyle | un
   };
 }
 
-export function formatNumber(number: number | null | undefined, options: FormatNumberOptions) {
-  return formatNumberWithLocale(knownLocales.en, number, options);
+export function formatNumber(
+  number: number | null | undefined,
+  style?: FormatNumberStyle,
+  options?: FormatNumberOptions
+) {
+  return formatNumberWithLocale(knownLocales.en, number, style, options);
 }
 
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
 export function formatNumberWithLocale(
   settings: LocaleSettings,
   number: number | null | undefined,
+  style?: FormatNumberStyle,
   options: FormatNumberOptions = {}
 ) {
   if (number == null) {
     return '';
   }
 
-  if (options.style === 'none') {
+  if (style === 'none') {
     return `${number}`;
   }
 
-  const defaults = getFormatNumber(settings, options.style);
+  const defaults = getFormatNumber(settings, style);
 
   const formatter = Intl.NumberFormat(settings.locale, {
     // Let's always starts with all defaults

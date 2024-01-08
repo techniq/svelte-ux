@@ -1,53 +1,64 @@
-import { isFunction } from 'lodash-es';
-
-import { formatDate, PeriodType, type FormatDateOptions } from './date';
+import {
+  formatDate,
+  PeriodType,
+  type FormatDateOptions,
+  formatDateWithLocale,
+  getPeriodTypeName,
+  getPeriodTypeNameWithLocale,
+  getDayOfWeekName,
+  DayOfWeek,
+} from './date';
 import { formatNumberWithLocale } from './number';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
-import type { LocaleSettings } from './locale';
+import { knownLocales, type LocaleSettings } from './locale';
 
-export type FormatType =
-  | FormatNumberStyle
-  | PeriodType
-  | ((value: any, ...extraArgs: any[]) => any);
+export type FormatType = FormatNumberStyle | PeriodType;
 
 /**
  * Generic format which can handle Dates, Numbers, or custom format function
  */
+export function format(value: null | undefined, format?: FormatNumberStyle | PeriodType): string;
 export function format(
-  settings: LocaleSettings,
-  value: null | undefined,
-  format?: FormatNumberStyle | PeriodType
+  value: number,
+  format?: FormatNumberStyle,
+  options?: FormatNumberOptions
 ): string;
-export function format(settings: LocaleSettings, value: number, format?: FormatNumberStyle): string;
 export function format(
-  settings: LocaleSettings,
   value: string | Date,
   format?: PeriodType,
-  extraFuncArgs?: FormatDateOptions
+  options?: FormatDateOptions
 ): string;
 export function format(
+  value: any,
+  format?: FormatType,
+  options?: FormatNumberOptions | FormatDateOptions
+): any {
+  return formatWithLocale(knownLocales.en, value, format, options);
+}
+
+export function formatWithLocale(
   settings: LocaleSettings,
   value: any,
   format?: FormatType,
-  ...extraFuncArgs: any[]
-): any {
-  let formattedValue = value ?? ''; // Do not render `null`
+  options?: FormatNumberOptions | FormatDateOptions
+) {
+  let formattedValue: string | undefined;
 
   if (format) {
-    if (isFunction(format)) {
-      formattedValue = format(value, ...extraFuncArgs);
-    } else if (format in PeriodType) {
-      formattedValue = formatDate(
+    if (format in PeriodType) {
+      formattedValue = formatDateWithLocale(
         settings,
         value,
         format as PeriodType,
-        extraFuncArgs.length > 0 ? extraFuncArgs[0] : undefined
+        options as FormatDateOptions
       );
     } else if (typeof value === 'number') {
-      formattedValue = formatNumberWithLocale(settings, value, {
-        style: format,
-        ...extraFuncArgs[0],
-      });
+      formattedValue = formatNumberWithLocale(
+        settings,
+        value,
+        format as FormatNumberStyle,
+        options as FormatNumberOptions
+      );
     }
   }
 
@@ -56,22 +67,35 @@ export function format(
 
 export interface FormatFunctions {
   /** Format an arbitrary value */
-  (value: any, style: FormatNumberOptions | PeriodType): string;
-  number: (value: number, style?: FormatNumberOptions) => string;
-  date: (value: Date | string | number, period?: PeriodType) => string;
+  (
+    value: any,
+    style: FormatNumberStyle | PeriodType,
+    options?: FormatNumberOptions | FormatDateOptions
+  ): string;
+  number: (value: number, style: FormatNumberStyle, options?: FormatNumberOptions) => string;
+  date: (value: Date | string, period: PeriodType, options?: FormatDateOptions) => string;
+  getPeriodTypeName: (period: PeriodType) => string;
+  getDayOfWeekName: (day: DayOfWeek) => string;
   settings: LocaleSettings;
 }
 
 export function buildFormatters(settings: LocaleSettings): FormatFunctions {
-  const mainFormat = (value: any, style: FormatNumberStyle | PeriodType) =>
-    format(settings, value, style);
+  const mainFormat = (
+    value: any,
+    style: FormatNumberStyle | PeriodType,
+    options?: FormatNumberOptions | FormatDateOptions
+  ) => formatWithLocale(settings, value, style, options);
 
   mainFormat.settings = settings;
 
-  mainFormat.number = (value: number, format?: FormatNumberOptions) =>
-    formatNumberWithLocale(settings, value, format);
-  mainFormat.date = (value: Date | string, period?: PeriodType) =>
-    formatDate(settings, value, period);
+  mainFormat.number = (value: number, style: FormatNumberStyle, format?: FormatNumberOptions) =>
+    formatNumberWithLocale(settings, value, style, format);
+  mainFormat.date = (value: Date | string, period: PeriodType, options?: FormatDateOptions) =>
+    formatDateWithLocale(settings, value, period, options);
+
+  mainFormat.getDayOfWeekName = (day: DayOfWeek) => getDayOfWeekName(day, settings.locale);
+  mainFormat.getPeriodTypeName = (period: PeriodType) =>
+    getPeriodTypeNameWithLocale(settings, period);
 
   return mainFormat;
 }

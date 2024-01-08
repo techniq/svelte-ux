@@ -7,10 +7,7 @@
     getDateFuncsByPeriodType,
     hasDayOfWeek,
     replaceDayOfWeek,
-    getPeriodTypeName,
-    getDayOfWeekName,
   } from '../utils/date';
-  import { format } from '../utils';
   import { getDateRangePresets } from '../utils/dateRange';
   import type { DateRange } from '../utils/dateRange';
   import { cls } from '../utils/styles';
@@ -40,8 +37,8 @@
   export let getPeriodTypePresets = getDateRangePresets;
 
   const settingsClasses = getComponentClasses('DateRange');
-  const settings = getSettings();
-  const dateFormat = settings.getFormatDate();
+  const { format } = getSettings();
+  $: dateFormat = $format.settings.formats.dates;
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
@@ -51,7 +48,7 @@
   $: periodTypeOptions = periodTypes.map((pt) => {
     const value = adjustPeriodType(pt);
     return {
-      label: getPeriodTypeName(settings, adjustPeriodType(pt)),
+      label: $format.getPeriodTypeName(adjustPeriodType(pt)),
       value,
     };
   });
@@ -176,7 +173,7 @@
       <ToggleOption value="from" class="flex-1">
         <div class="text-xs text-surface-content/50">Start</div>
         {#if selected?.from}
-          <div class="font-medium">{format(settings, selected.from, PeriodType.Day)}</div>
+          <div class="font-medium">{$format(selected.from, PeriodType.Day)}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}
@@ -198,7 +195,7 @@
       <ToggleOption value="to" class="flex-1">
         <div class="text-xs text-surface-content/50">End</div>
         {#if selected?.to}
-          <div class="font-medium">{format(settings, selected.to, PeriodType.Day)}</div>
+          <div class="font-medium">{$format(selected.to, PeriodType.Day)}</div>
         {:else}
           <div class="italic">Empty</div>
         {/if}
@@ -290,9 +287,7 @@
             classes={{ root: 'bg-surface-100', option: 'px-0' }}
           >
             {#each [DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday] as day}
-              <ToggleOption value={day}
-                >{getDayOfWeekName(day, dateFormat.locales ?? 'en')}</ToggleOption
-              >
+              <ToggleOption value={day}>{$format.getDayOfWeekName(day)}</ToggleOption>
             {/each}
           </ToggleGroup>
         </div>
