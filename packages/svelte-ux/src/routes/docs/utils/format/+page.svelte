@@ -5,15 +5,13 @@
   import TextField from '$lib/components/TextField.svelte';
   import MenuField from '$lib/components/MenuField.svelte';
   import type { FormatNumberStyle } from '$lib/utils/number';
-  import DateField from '$lib/components/DateField.svelte';
   import DatePickerField from '$lib/components/DatePickerField.svelte';
   import { getSettings } from '$lib/components/settings';
 
-  const { format } = getSettings();
+  const { format, locale } = getSettings();
 
   let value = 1234.56;
   let style: FormatNumberStyle = 'decimal';
-  let locales: string = 'en';
   let currency: string = 'USD';
 
   let myDate = new Date('1982-03-30T07:11:00');
@@ -21,7 +19,7 @@
 
 <h1>Usage</h1>
 
-<Code source={`import { format } from 'svelte-ux';`} language="javascript" class="mb-4" />
+<Code source={`const { format } = getSettings()`} language="javascript" class="mb-4" />
 
 <h1>Playgrounds</h1>
 <h2>Playground numbers</h2>
@@ -31,7 +29,7 @@
 
   <MenuField
     label="locale"
-    bind:value={locales}
+    bind:value={$locale}
     options={['en', 'de', 'fr', 'jp'].map((value) => ({ label: value, value }))}
   />
 
@@ -51,7 +49,7 @@
 </div>
 
 <Preview>
-  <div>{$format(value, style, { locales, currency })}</div>
+  <div>{$format(value, style, { currency })}</div>
 </Preview>
 
 <h2>Playground dates</h2>
@@ -61,18 +59,18 @@
 
   <MenuField
     label="locale"
-    bind:value={locales}
+    bind:value={$locale}
     options={['en', 'de', 'fr', 'jp'].map((value) => ({ label: value, value }))}
   />
 </div>
 
 <Preview>
-  <div>{$format(myDate, PeriodType.Day, { locales })}</div>
+  <div>{$format(myDate, PeriodType.Day)}</div>
 </Preview>
 
 <h1>Numbers</h1>
 
-<h2>number formats (defaut settings)</h2>
+<h2>number formats (default settings)</h2>
 
 <Preview showCode>
   <div>{$format(1234.56, 'integer')}</div>
@@ -88,20 +86,17 @@
 <h2>number formats (local settings)</h2>
 
 <span>
-  You can customize numbers with the 3rd arg that is an enhanced <b>`Intl.NumberFormatOptions`</b>
-  type. You can pass for example locales like <b>fr</b>, <b>de</b>, ... You can also to that
-  globally in the <a class="text-primary" href="/customization#settings">Settings</a>.
+  You can customize numbers with the 3rd arg that is an enhanced <b>`Intl.NumberFormatOptions`</b> type.
 </span>
 
 <Preview showCode>
-  <div>{$format(1234.56, 'integer', { locales: 'fr' })}</div>
-  <div>{$format(1234.56, 'decimal', { locales: 'fr' })}</div>
-  <div>{$format(1234.56, 'currency', { locales: 'fr', currency: 'EUR' })}</div>
-  <div>{$format(0.5678, 'percent', { locales: 'fr' })}</div>
-  <div>{$format(0.5678, 'percentRound', { locales: 'fr' })}</div>
-  <div>{$format(1_234_567, 'metric', { locales: 'fr', minimumSignificantDigits: 5 })}</div>
-  <div>{$format(1_200_000, 'metric', { locales: 'fr' })}</div>
-  <div>{$format(0.5678, 'percent', { locales: 'fr', fractionDigits: 1 })}</div>
+  <div>{$format(1234.56, 'integer', { maximumSignificantDigits: 2 })}</div>
+  <div>{$format(1234.56, 'decimal', { maximumSignificantDigits: 5 })}</div>
+  <div>{$format(1234.56, 'currency', { currency: 'EUR' })}</div>
+  <div>{$format(0.5678, 'percent', { signDisplay: 'always' })}</div>
+  <div>{$format(0.5678, 'percentRound', { signDisplay: 'always' })}</div>
+  <div>{$format(1_234_567, 'metric', { minimumSignificantDigits: 5 })}</div>
+  <div>{$format(0.5678, 'percent', { fractionDigits: 1 })}</div>
 </Preview>
 
 <h1>Dates</h1>
