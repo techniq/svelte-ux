@@ -20,6 +20,7 @@
     "prepare": "svelte-kit sync"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@skeletonlabs/tw-plugin": "^0.3.1",
     "@sveltejs/adapter-auto": "^2.1.1",
     "@sveltejs/kit": "^1.30.3",
@@ -52,7 +53,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@changesets/cli": "^2.27.1",
     "@floating-ui/dom": "^1.5.3",
     "@fortawesome/fontawesome-common-types": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
