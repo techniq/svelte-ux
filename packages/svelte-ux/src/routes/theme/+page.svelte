@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiChevronDown, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
+  import { mdiChevronDown, mdiPalette, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
@@ -13,7 +13,7 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
 
   import { styleProps } from '$lib/actions/styleProps.js';
-  import { getThemeNames, processThemeColors } from '$lib/styles/theme.js';
+  import { getThemeNames, processThemeColors, themeStylesString } from '$lib/styles/theme.js';
   import type { MenuOption } from '$lib/types/options.js';
 
   export let data;
@@ -25,6 +25,9 @@
 
   let selectedLightThemeValue: string;
   let selectedDarkThemeValue: string;
+
+  // Colorspace needs to always match app since using tailwind classes
+  const colorSpace = 'hsl';
 
   const daisyThemeNames = getThemeNames(data.themes.daisy);
   const skeletonThemeNames = getThemeNames(data.themes.skeleton);
@@ -107,11 +110,37 @@
     />
 
     <ButtonGroup variant="fill" color="primary">
-      <Tooltip title="Copy light and dark themes to clipboard" offset={2}>
+      <Tooltip title="Copy themes to clipboard" offset={2}>
         <CopyButton
           value={JSON.stringify({ light: selectedLightTheme, dark: selectedDarkTheme }, null, 2)}
         />
       </Tooltip>
+
+      <Tooltip title="Override current themes" offset={2}>
+        <Button
+          icon={mdiPalette}
+          iconOnly={false}
+          on:click={() => {
+            const style =
+              document.getElementById('custom-theme') ?? document.createElement('style');
+            style.id = 'custom-theme';
+
+            style.textContent = `
+              :root { ${themeStylesString(selectedLightTheme, colorSpace)} }
+              @media (prefers-color-scheme: dark) { ${themeStylesString(
+                selectedDarkTheme,
+                colorSpace
+              )} }
+              [data-theme=light] { ${themeStylesString(selectedLightTheme, colorSpace)} }
+              [data-theme=dark] { ${themeStylesString(selectedDarkTheme, colorSpace)} }
+            `;
+            document.head.appendChild(style);
+
+            // TODO: Update settings({ themes: { light: ['light'], dark: ['dark'] }})
+          }}
+        />
+      </Tooltip>
+
       <Toggle let:on={open} let:toggle>
         <div class="grid">
           <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />

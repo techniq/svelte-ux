@@ -11,6 +11,8 @@ import {
   type Color,
 } from 'culori';
 
+export type SupportedColorSpace = 'rgb' | 'hsl' | 'oklch';
+
 export const semanticColors = ['primary', 'secondary', 'accent', 'neutral'] as const;
 export const stateColors = ['info', 'success', 'warning', 'danger'] as const;
 export const colors = [...semanticColors, ...stateColors];
@@ -35,7 +37,7 @@ export const colorNames = [
 /**
  * Generate theme colors (ex. { primary: hsl(var(--color-primary) / <alpha-value>), ... })
  */
-export function createThemeColors(colorSpace: 'rgb' | 'hsl' | 'oklch') {
+export function createThemeColors(colorSpace: SupportedColorSpace) {
   return Object.fromEntries(
     colorNames.map((color) => [color, `${colorSpace}(var(--color-${color}) / <alpha-value>)`])
   );
@@ -64,7 +66,7 @@ export function getThemeNames(themes: Record<string, any>) {
  */
 export function processThemeColors(
   themeColors: Record<string, string>,
-  colorSpace: 'rgb' | 'hsl' | 'oklch'
+  colorSpace: SupportedColorSpace
 ) {
   const colors = { ...themeColors };
 
@@ -196,7 +198,7 @@ function darkenColor(color: Color | string, percentage: number) {
 /**
  * Convert color to space separated components string
  */
-function colorVariableValue(color: Color | string, colorSpace: 'rgb' | 'hsl' | 'oklch') {
+function colorVariableValue(color: Color | string, colorSpace: SupportedColorSpace) {
   try {
     if (colorSpace === 'rgb') {
       const { r, g, b } = rgb(color);
@@ -212,6 +214,18 @@ function colorVariableValue(color: Color | string, colorSpace: 'rgb' | 'hsl' | '
   } catch (e) {
     // console.error('Unable to convert color object to string', color);
   }
+}
+
+/**
+ * Process theme to style variables
+ */
+export function themeStylesString(theme: any, colorSpace: SupportedColorSpace) {
+  const styleProperties = processThemeColors(theme, colorSpace);
+  return Object.entries(styleProperties)
+    .map(([key, value]) => {
+      return `${key}: ${value};`;
+    })
+    .join('\n');
 }
 
 /** Return a script tag that will set the initial theme from localStorage. This allows setting
