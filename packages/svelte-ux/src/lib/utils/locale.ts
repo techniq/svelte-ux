@@ -192,6 +192,8 @@ export function createLocaleSettings(
 
 export const knownLocales: Record<string, LocaleSettings> = {
   en: createLocaleSettings({ locale: 'en' }),
+  // TODO fill in the real values for 'fr'
+  fr: createLocaleSettings({ locale: 'fr' }),
 };
 
 export function getAllKnownLocales(additionalLocales?: Record<string, LocaleSettingsInput>) {

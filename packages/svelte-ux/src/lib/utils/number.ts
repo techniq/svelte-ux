@@ -9,7 +9,8 @@ export type FormatNumberStyle =
   | 'none'
   | 'integer'
   | 'percentRound'
-  | 'metric';
+  | 'metric'
+  | 'default';
 
 export type FormatNumberOptions = Intl.NumberFormatOptions & {
   fractionDigits?: number;
