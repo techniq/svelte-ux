@@ -78,8 +78,6 @@ export type FormatFunction =
     ) => string);
 
 export interface FormatFunctionProperties {
-  number: (value: number, style: FormatNumberStyle, options?: FormatNumberOptions) => string;
-  date: (value: Date | string, period: PeriodType, options?: FormatDateOptions) => string;
   getPeriodTypeName: (period: PeriodType) => string;
   getDayOfWeekName: (day: DayOfWeek) => string;
   settings: LocaleSettings;
@@ -95,11 +93,6 @@ export function buildFormatters(settings: LocaleSettings): FormatFunctions {
   ) => formatWithLocale(settings, value, style, options);
 
   mainFormat.settings = settings;
-
-  mainFormat.number = (value: number, style: FormatNumberStyle, format?: FormatNumberOptions) =>
-    formatNumberWithLocale(settings, value, style, format);
-  mainFormat.date = (value: Date | string, period: PeriodType, options?: FormatDateOptions) =>
-    formatDateWithLocale(settings, value, period, options);
 
   mainFormat.getDayOfWeekName = (day: DayOfWeek) => getDayOfWeekName(day, settings.locale);
   mainFormat.getPeriodTypeName = (period: PeriodType) =>
