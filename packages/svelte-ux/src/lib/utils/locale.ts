@@ -1,15 +1,14 @@
-import { type Writable, derived, type Readable, writable } from 'svelte/store';
 import type { Prettify } from '$lib/types/typeHelpers';
+import { defaultsDeep } from 'lodash-es';
+import { derived, writable, type Readable, type Writable } from 'svelte/store';
 import {
   DateToken,
   DayOfWeek,
   type FormatDateLocaleOptions,
   type FormatDateLocalePresets,
-  type FormatDateOptions,
 } from './date';
 import type { DictionaryMessages, DictionaryMessagesOptions } from './dictionary';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
-import { defaultsDeep } from 'lodash-es';
 
 function resolvedLocaleStore(
   supportedLocales: string[],
@@ -26,7 +25,7 @@ function resolvedLocaleStore(
       }
     }
 
-    return result ?? fallbackLocale ?? 'en-US';
+    return result ?? fallbackLocale ?? 'en';
   });
 }
 
@@ -199,5 +198,8 @@ export const knownLocales: Record<string, LocaleSettings> = {
 };
 
 export function getAllKnownLocales(additionalLocales?: Record<string, LocaleSettingsInput>) {
-  return { ...knownLocales, ...additionalLocales };
+  const additional = additionalLocales
+    ? Object.entries(additionalLocales).map(([key, value]) => [key, createLocaleSettings(value)])
+    : [];
+  return { ...knownLocales, ...Object.fromEntries(additional) };
 }

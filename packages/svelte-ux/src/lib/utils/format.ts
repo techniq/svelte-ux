@@ -65,17 +65,16 @@ export function formatWithLocale(
   return formattedValue ?? ''; // return empty string so Svelte doesn't render `null` string;
 }
 
-export type FormatFunction =
-  | ((
-      value: number | null | undefined,
-      style: FormatNumberStyle,
-      options?: FormatNumberOptions
-    ) => string)
-  | ((
-      value: Date | string | null | undefined,
-      period: PeriodType,
-      options?: FormatDateOptions
-    ) => string);
+export type FormatFunction = ((
+  value: number | null | undefined,
+  style: FormatNumberStyle,
+  options?: FormatNumberOptions
+) => string) &
+  ((
+    value: Date | string | null | undefined,
+    period: PeriodType,
+    options?: FormatDateOptions
+  ) => string);
 
 export interface FormatFunctionProperties {
   getPeriodTypeName: (period: PeriodType) => string;

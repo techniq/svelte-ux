@@ -9,7 +9,6 @@
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
   import { getComponentClasses } from './theme';
-  import { format } from '../utils';
   import { getSettings } from './settings';
 
   const dispatch = createEventDispatcher();

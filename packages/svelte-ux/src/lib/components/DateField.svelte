@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { parse as parseDate } from 'date-fns';
-  import { PeriodType, format as format_ux } from '../utils';
+  import { PeriodType } from '../utils';
   import { getSettings } from './settings';
 
   import Field from './Field.svelte';
@@ -11,10 +11,9 @@
   import { getComponentClasses } from './theme';
 
   const { format: format_ux } = getSettings();
-  $: dateFormat = $format_ux.settings.formats.dates;
 
   export let value: Date | null = null;
-  export let format = dateFormat.baseParsing ?? 'MM/dd/yyyy';
+  export let format = $format_ux.settings.formats.dates.baseParsing ?? 'MM/dd/yyyy';
   export let mask = format.toLowerCase();
   export let replace = 'dmyh';
   export let picker = false;

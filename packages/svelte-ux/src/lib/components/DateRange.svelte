@@ -38,11 +38,11 @@
 
   const settingsClasses = getComponentClasses('DateRange');
   const { format } = getSettings();
-  $: dateFormat = $format.settings.formats.dates;
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
-  let selectedDayOfWeek: DayOfWeek = dateFormat.weekStartsOn ?? DayOfWeek.Sunday;
+  let selectedDayOfWeek: DayOfWeek =
+    $format.settings.formats.dates.weekStartsOn ?? DayOfWeek.Sunday;
   let activeDate: 'from' | 'to' = 'from';
 
   $: periodTypeOptions = periodTypes.map((pt) => {
