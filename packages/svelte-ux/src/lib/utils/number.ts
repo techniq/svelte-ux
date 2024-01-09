@@ -60,7 +60,9 @@ export function formatNumberWithLocale(
     // Let's always starts with all defaults
     ...defaults,
 
-    style,
+    ...(style !== 'default' && {
+      style,
+    }),
 
     // If currency is specified, then style must be currency
     ...(options.currency != null && {
