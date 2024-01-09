@@ -11,7 +11,6 @@ import type { DictionaryMessages, DictionaryMessagesOptions } from './dictionary
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
 
 function resolvedLocaleStore(
-  supportedLocales: string[],
   forceLocales: Writable<string | string[] | null>,
   fallbackLocale?: string
 ) {
@@ -19,8 +18,8 @@ function resolvedLocaleStore(
     let result: string | undefined;
     if ($forceLocales?.length) {
       if (Array.isArray($forceLocales)) {
-        result = $forceLocales.find((l) => supportedLocales.includes(l));
-      } else if (supportedLocales.includes($forceLocales)) {
+        result = $forceLocales[0];
+      } else {
         result = $forceLocales;
       }
     }
@@ -33,13 +32,9 @@ export interface LocaleStore extends Readable<string> {
   set(value: string | null): void;
 }
 
-export function localeStore(
-  supportedLocales: string[],
-  forceLocale: string | undefined,
-  fallbackLocale?: string
-): LocaleStore {
+export function localeStore(forceLocale: string | undefined, fallbackLocale?: string): LocaleStore {
   let currentLocale = writable(forceLocale ?? null);
-  let resolvedLocale = resolvedLocaleStore(supportedLocales, currentLocale, fallbackLocale);
+  let resolvedLocale = resolvedLocaleStore(currentLocale, fallbackLocale);
   return {
     ...resolvedLocale,
     set(value: string | null) {
@@ -197,7 +192,9 @@ export const knownLocales: Record<string, LocaleSettings> = {
   fr: createLocaleSettings({ locale: 'fr' }),
 };
 
-export function getAllKnownLocales(additionalLocales?: Record<string, LocaleSettingsInput>) {
+export function getAllKnownLocales(
+  additionalLocales?: Record<string, LocaleSettingsInput>
+): Record<string, LocaleSettings> {
   const additional = additionalLocales
     ? Object.entries(additionalLocales).map(([key, value]) => [key, createLocaleSettings(value)])
     : [];
