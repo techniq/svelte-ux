@@ -3,7 +3,6 @@
 
   import type paginationStore from '../stores/paginationStore';
   import { cls } from '../utils/styles';
-  import { format as formatValue } from '../utils/format';
   import type { StoresValues } from '../types/typeHelpers';
 
   import Button from './Button.svelte';
@@ -13,6 +12,7 @@
   import Toggle from './Toggle.svelte';
   import Tooltip from './Tooltip.svelte';
   import { getComponentClasses } from './theme';
+  import { getSettings } from './settings';
 
   type Pagination = ReturnType<typeof paginationStore>;
 
@@ -39,6 +39,7 @@
     pagination?: string;
     perPage?: string;
   } = {};
+  const { format: formatValue } = getSettings();
   const settingsClasses = getComponentClasses('Pagination');
 </script>
 
@@ -128,7 +129,7 @@
                     selected={$pagination.perPage === option}
                     on:click={() => pagination.setPerPage(option)}
                   >
-                    {formatValue(option, 'integer')}
+                    {$formatValue(option, 'integer')}
                   </MenuItem>
                 {/each}
               </Menu>

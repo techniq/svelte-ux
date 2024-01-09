@@ -18,7 +18,7 @@ export type ColumnDef<TData = any> = {
   name: string;
   header?: string;
   value?: string | ((rowData: TData, rowIndex?: number) => any);
-  format?: FormatType;
+  format?: FormatType | ((value: any, rowData: any, rowIndex: number) => string);
   /** Render as HTML.  Only enable if value from trusted source (else exposing to XSS vulnerability) */
   html?: boolean;
   orderBy?: string | boolean | ((a: any, b: any) => number);
