@@ -6,7 +6,7 @@ import {
   DayOfWeek,
   type FormatDateLocaleOptions,
   type FormatDateLocalePresets,
-} from './date';
+} from './date_types';
 import type { DictionaryMessages, DictionaryMessagesOptions } from './dictionary';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
 
