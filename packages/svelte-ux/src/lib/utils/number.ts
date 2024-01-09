@@ -60,6 +60,8 @@ export function formatNumberWithLocale(
     // Let's always starts with all defaults
     ...defaults,
 
+    style,
+
     // If currency is specified, then style must be currency
     ...(options.currency != null && {
       style: 'currency',
@@ -75,14 +77,14 @@ export function formatNumberWithLocale(
     ...options,
 
     // Let's overwrite for style=percentRound
-    ...(options.style === 'percentRound' && {
+    ...(style === 'percentRound' && {
       style: 'percent',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }),
 
     // Let's overwrite for style=metric
-    ...(options.style === 'metric' && {
+    ...(style === 'metric' && {
       style: 'decimal',
       notation: 'compact',
       minimumFractionDigits: 0,
@@ -90,7 +92,7 @@ export function formatNumberWithLocale(
     }),
 
     // Let's overwrite for style=integer
-    ...(options.style === 'integer' && {
+    ...(style === 'integer' && {
       style: 'decimal',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,

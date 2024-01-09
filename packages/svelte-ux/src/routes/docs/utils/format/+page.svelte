@@ -19,7 +19,11 @@
 
 <h1>Usage</h1>
 
-<Code source={`const { format } = getSettings()`} language="javascript" class="mb-4" />
+<Code
+  source={"const { format } = getSettings();\n$format(123.456, 'decimal');"}
+  language="javascript"
+  class="mb-4"
+/>
 
 <h1>Playgrounds</h1>
 <h2>Playground numbers</h2>
@@ -70,7 +74,7 @@
 
 <h1>Numbers</h1>
 
-<h2>number formats (default settings)</h2>
+<h2>Number Formats (default settings)</h2>
 
 <Preview showCode>
   <div>{$format(1234.56, 'integer')}</div>
@@ -78,12 +82,12 @@
   <div>{$format(1234.56, 'currency')}</div>
   <div>{$format(0.5678, 'percent')}</div>
   <div>{$format(0.5678, 'percentRound')}</div>
-  <div>{$format(1_234_567, 'metric', { minimumSignificantDigits: 5 })}</div>
+  <div>{$format(1_234_567, 'metric')}</div>
   <div>{$format(1_200_000, 'metric')}</div>
-  <div>{$format(0.5678, 'percent', { fractionDigits: 1 })}</div>
+  <div>{$format(0.5678, 'percent')}</div>
 </Preview>
 
-<h2>number formats (local settings)</h2>
+<h2>number formats (additional options)</h2>
 
 <span>
   You can customize numbers with the 3rd arg that is an enhanced <b>`Intl.NumberFormatOptions`</b> type.
@@ -95,7 +99,7 @@
   <div>{$format(1234.56, 'currency', { currency: 'EUR' })}</div>
   <div>{$format(0.5678, 'percent', { signDisplay: 'always' })}</div>
   <div>{$format(0.5678, 'percentRound', { signDisplay: 'always' })}</div>
-  <div>{$format(1_234_567, 'metric', { minimumSignificantDigits: 5 })}</div>
+  <div>{$format(1_234_567, 'metric', { minimumSignificantDigits: 12 })}</div>
   <div>{$format(0.5678, 'percent', { fractionDigits: 1 })}</div>
 </Preview>
 
@@ -400,22 +404,3 @@
     </Preview>
   </div>
 </div>
-
-<h2>Date / Period formats (local settings)</h2>
-
-<span>
-  You can customize numbers with the 3rd arg. You can pass for example locales like <b>fr</b>,
-  <b>de</b>, ... You can also to that globally in the
-  <a class="text-accent-500" href="/customization#settings">Settings</a>.
-</span>
-
-<Preview showCode>
-  <div>{$format(myDate, PeriodType.Day, { locales: 'fr' })}</div>
-  <div>{$format(myDate, PeriodType.Month, { locales: 'fr' })}</div>
-  <div>{$format(myDate, PeriodType.CalendarYear, { locales: 'fr' })}</div>
-  <div>{$format(myDate, PeriodType.Day, { variant: 'short', locales: 'fr' })}</div>
-  <div>{$format(myDate, PeriodType.Month, { variant: 'short', locales: 'fr' })}</div>
-  <div>
-    {$format(myDate, PeriodType.CalendarYear, { variant: 'short', locales: 'fr' })}
-  </div>
-</Preview>
