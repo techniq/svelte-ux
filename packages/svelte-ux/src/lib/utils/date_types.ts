@@ -1,3 +1,5 @@
+import type { DateRange } from './dateRange';
+
 export type SelectedDate = Date | Date[] | DateRange | null;
 
 export type Period = {
@@ -110,15 +112,15 @@ export enum DateToken {
 }
 
 export type OrdinalSuffixes = {
-  one: string;
-  two: string;
-  few: string;
-  other: string;
+  one?: string;
+  two?: string;
+  few?: string;
+  other?: string;
   zero?: string;
   many?: string;
 };
 export type DateFormatVariant = 'short' | 'default' | 'long';
-type DateFormatVariantPreset = {
+export type DateFormatVariantPreset = {
   short?: CustomIntlDateTimeFormatOptions;
   default?: CustomIntlDateTimeFormatOptions;
   long?: CustomIntlDateTimeFormatOptions;

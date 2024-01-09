@@ -9,6 +9,7 @@ import {
 } from './date_types';
 import type { DictionaryMessages, DictionaryMessagesOptions } from './dictionary';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
+import { getWeekStartsOnFromIntl } from './dateInternal';
 
 function resolvedLocaleStore(
   forceLocales: Writable<string | string[] | null>,
@@ -183,6 +184,26 @@ export function createLocaleSettings(
   localeSettings: LocaleSettingsInput,
   base = defaultLocaleSettings
 ): LocaleSettings {
+  // if ordinalSuffixes is specified, we want to make sure that all are empty first
+  if (localeSettings.formats?.dates?.ordinalSuffixes) {
+    localeSettings.formats.dates.ordinalSuffixes = {
+      one: '',
+      two: '',
+      few: '',
+      other: '',
+      zero: '',
+      many: '',
+      ...localeSettings.formats.dates.ordinalSuffixes,
+    };
+  }
+
+  // if weekStartsOn is not specified, let's default to the local one
+  if (localeSettings.formats?.dates?.weekStartsOn === undefined) {
+    localeSettings = defaultsDeep(localeSettings, {
+      formats: { dates: { weekStartsOn: getWeekStartsOnFromIntl(localeSettings.locale) } },
+    });
+  }
+
   return defaultsDeep(localeSettings, base);
 }
 
