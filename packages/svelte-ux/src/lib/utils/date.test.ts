@@ -10,9 +10,11 @@ import {
   type CustomIntlDateTimeFormatOptions,
   type FormatDateOptions,
   DateToken,
+  formatDateWithLocale,
 } from './date';
 import { getSettings } from '$lib/components';
-import { format } from '.';
+import { format, formatWithLocale } from '.';
+import { createLocaleSettings, defaultLocale } from './locale';
 
 const DATE = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
 const dt_2M_2d = new Date(2023, 10, 21);
@@ -22,41 +24,43 @@ const dt_1M_1d = new Date(2023, 2, 7);
 const dt_1M_1d_time_pm = new Date(2023, 2, 7, 14, 2, 3, 4);
 const dt_1M_1d_time_am = new Date(2023, 2, 7, 1, 2, 3, 4);
 
-const fr: FormatDateOptions = {
-  locales: 'fr',
-  ordinalSuffixes: {
-    fr: {
-      one: 'er',
-      two: '',
-      few: '',
-      other: '',
+const fr = createLocaleSettings({
+  locale: 'fr',
+  formats: {
+    dates: {
+      ordinalSuffixes: {
+        one: 'er',
+        two: '',
+        few: '',
+        other: '',
+      },
     },
   },
-};
+});
 
 describe('formatDate()', () => {
   it('should return empty string for null or undefined date', () => {
-    expect(formatDate(getSettings(), null)).equal('');
-    expect(formatDate(getSettings(), undefined)).equal('');
+    expect(formatDate(null)).equal('');
+    expect(formatDate(undefined)).equal('');
   });
 
   it('should return empty string for invalid date', () => {
-    expect(formatDate(getSettings(), 'invalid date')).equal('');
+    expect(formatDate('invalid date')).equal('');
   });
 
   describe('should format date for PeriodType.Day', () => {
     const localDate = new Date(2023, 10, 21);
     const combi = [
-      ['short', undefined, '11/21'],
-      ['short', 'fr', '21/11'],
-      ['long', undefined, 'Nov 21, 2023'],
-      ['long', 'fr', '21 nov. 2023'],
+      ['short', defaultLocale, '11/21'],
+      ['short', fr, '21/11'],
+      ['long', defaultLocale, 'Nov 21, 2023'],
+      ['long', fr, '21 nov. 2023'],
     ] as const;
 
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDate(getSettings(), localDate, PeriodType.Day, { variant, locales })).equal(
+        expect(formatDateWithLocale(locales, localDate, PeriodType.Day, { variant })).equal(
           expected
         );
       });
@@ -65,18 +69,16 @@ describe('formatDate()', () => {
 
   describe('should format date string for PeriodType.Day', () => {
     const combi = [
-      ['short', undefined, '11/21'],
-      ['short', 'fr', '21/11'],
-      ['long', undefined, 'Nov 21, 2023'],
-      ['long', 'fr', '21 nov. 2023'],
+      ['short', defaultLocale, '11/21'],
+      ['short', fr, '21/11'],
+      ['long', defaultLocale, 'Nov 21, 2023'],
+      ['long', fr, '21 nov. 2023'],
     ] as const;
 
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDate(getSettings(), DATE, PeriodType.Day, { variant, locales })).equal(
-          expected
-        );
+        expect(formatDateWithLocale(locales, DATE, PeriodType.Day, { variant })).equal(expected);
       });
     }
   });
@@ -114,86 +116,86 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [date, periodType, options, [expected_default, expected_fr]] = c;
       it(c.toString(), () => {
-        expect(format(getSettings(), date, periodType, options)).equal(expected_default);
+        expect(formatWithLocale(defaultLocale, date, periodType, options)).equal(expected_default);
       });
 
       it(c.toString() + 'fr', () => {
-        expect(format(getSettings(), date, periodType, { ...options, ...fr })).equal(expected_fr);
+        expect(formatWithLocale(fr, date, periodType, options)).equal(expected_fr);
       });
     }
   });
 
   describe('should format date for PeriodType.WeekSun / Mon', () => {
     const combi = [
-      [PeriodType.WeekSun, 'short', undefined, '11/19 - 11/25'],
-      [PeriodType.WeekSun, 'short', 'fr', '19/11 - 25/11'],
-      [PeriodType.WeekSun, 'long', undefined, '11/19/2023 - 11/25/2023'],
-      [PeriodType.WeekSun, 'long', 'fr', '19/11/2023 - 25/11/2023'],
-      [PeriodType.WeekMon, 'long', undefined, '11/20/2023 - 11/26/2023'],
-      [PeriodType.WeekMon, 'long', 'fr', '20/11/2023 - 26/11/2023'],
+      [PeriodType.WeekSun, 'short', defaultLocale, '11/19 - 11/25'],
+      [PeriodType.WeekSun, 'short', fr, '19/11 - 25/11'],
+      [PeriodType.WeekSun, 'long', defaultLocale, '11/19/2023 - 11/25/2023'],
+      [PeriodType.WeekSun, 'long', fr, '19/11/2023 - 25/11/2023'],
+      [PeriodType.WeekMon, 'long', defaultLocale, '11/20/2023 - 11/26/2023'],
+      [PeriodType.WeekMon, 'long', fr, '20/11/2023 - 26/11/2023'],
     ] as const;
 
     for (const c of combi) {
       const [periodType, variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDate(getSettings(), DATE, periodType, { variant, locales })).equal(expected);
-      });
-    }
-  });
-
-  describe('should format date for PeriodType.Week', () => {
-    const combi = [
-      [PeriodType.Week, 'short', undefined, DayOfWeek.Sunday, '11/19 - 11/25'],
-      [PeriodType.Week, 'short', 'fr', DayOfWeek.Sunday, '19/11 - 25/11'],
-      [PeriodType.Week, 'long', undefined, DayOfWeek.Sunday, '11/19/2023 - 11/25/2023'],
-      [PeriodType.Week, 'long', 'fr', DayOfWeek.Sunday, '19/11/2023 - 25/11/2023'],
-
-      [PeriodType.Week, 'short', undefined, DayOfWeek.Monday, '11/20 - 11/26'],
-      [PeriodType.Week, 'short', 'fr', DayOfWeek.Monday, '20/11 - 26/11'],
-      [PeriodType.Week, 'long', undefined, DayOfWeek.Monday, '11/20/2023 - 11/26/2023'],
-      [PeriodType.Week, 'long', 'fr', DayOfWeek.Monday, '20/11/2023 - 26/11/2023'],
-    ] as const;
-
-    for (const c of combi) {
-      const [periodType, variant, locales, weekStartsOn, expected] = c;
-      it(c.toString(), () => {
-        expect(
-          formatDate(getSettings(), DATE, periodType, { variant, locales, weekStartsOn })
-        ).equal(expected);
-      });
-    }
-  });
-
-  describe('should format date for PeriodType.Month', () => {
-    const combi = [
-      ['short', undefined, 'Nov'],
-      ['short', 'fr', 'nov.'],
-      ['long', undefined, 'November'],
-      ['long', 'fr', 'novembre'],
-    ] as const;
-
-    for (const c of combi) {
-      const [variant, locales, expected] = c;
-      it(c.toString(), () => {
-        expect(formatDate(getSettings(), DATE, PeriodType.Month, { variant, locales })).equal(
+        expect(formatDateWithLocale(locales, DATE, periodType, { variant, locales })).equal(
           expected
         );
       });
     }
   });
 
-  describe('should format date for PeriodType.MonthYear', () => {
+  describe('should format date for PeriodType.Week', () => {
     const combi = [
-      ['short', undefined, 'Nov 23'],
-      ['short', 'fr', 'nov. 23'],
-      ['long', undefined, 'November 2023'],
-      ['long', 'fr', 'novembre 2023'],
+      [PeriodType.Week, 'short', defaultLocale, DayOfWeek.Sunday, '11/19 - 11/25'],
+      [PeriodType.Week, 'short', fr, DayOfWeek.Sunday, '19/11 - 25/11'],
+      [PeriodType.Week, 'long', defaultLocale, DayOfWeek.Sunday, '11/19/2023 - 11/25/2023'],
+      [PeriodType.Week, 'long', fr, DayOfWeek.Sunday, '19/11/2023 - 25/11/2023'],
+
+      [PeriodType.Week, 'short', defaultLocale, DayOfWeek.Monday, '11/20 - 11/26'],
+      [PeriodType.Week, 'short', fr, DayOfWeek.Monday, '20/11 - 26/11'],
+      [PeriodType.Week, 'long', defaultLocale, DayOfWeek.Monday, '11/20/2023 - 11/26/2023'],
+      [PeriodType.Week, 'long', fr, DayOfWeek.Monday, '20/11/2023 - 26/11/2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [periodType, variant, locales, weekStartsOn, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDateWithLocale(locales, DATE, periodType, { variant, weekStartsOn })).equal(
+          expected
+        );
+      });
+    }
+  });
+
+  describe('should format date for PeriodType.Month', () => {
+    const combi = [
+      ['short', defaultLocale, 'Nov'],
+      ['short', fr, 'nov.'],
+      ['long', defaultLocale, 'November'],
+      ['long', fr, 'novembre'],
     ] as const;
 
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDate(getSettings(), DATE, PeriodType.MonthYear, { variant, locales })).equal(
+        expect(formatDateWithLocale(locales, DATE, PeriodType.Month, { variant })).equal(expected);
+      });
+    }
+  });
+
+  describe('should format date for PeriodType.MonthYear', () => {
+    const combi = [
+      ['short', defaultLocale, 'Nov 23'],
+      ['short', fr, 'nov. 23'],
+      ['long', defaultLocale, 'November 2023'],
+      ['long', fr, 'novembre 2023'],
+    ] as const;
+
+    for (const c of combi) {
+      const [variant, locales, expected] = c;
+      it(c.toString(), () => {
+        expect(formatDateWithLocale(locales, DATE, PeriodType.MonthYear, { variant })).equal(
           expected
         );
       });
@@ -202,16 +204,16 @@ describe('formatDate()', () => {
 
   describe('should format date for PeriodType.Quarter', () => {
     const combi = [
-      ['short', undefined, 'Oct - Dec 23'],
-      ['short', 'fr', 'oct. - déc. 23'],
-      ['long', undefined, 'October - December 2023'],
-      ['long', 'fr', 'octobre - décembre 2023'],
+      ['short', defaultLocale, 'Oct - Dec 23'],
+      ['short', fr, 'oct. - déc. 23'],
+      ['long', defaultLocale, 'October - December 2023'],
+      ['long', fr, 'octobre - décembre 2023'],
     ] as const;
 
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDate(getSettings(), DATE, PeriodType.Quarter, { variant, locales })).equal(
+        expect(formatDateWithLocale(locales, DATE, PeriodType.Quarter, { variant })).equal(
           expected
         );
       });
@@ -220,35 +222,35 @@ describe('formatDate()', () => {
 
   describe('should format date for PeriodType.CalendarYear', () => {
     const combi = [
-      ['short', undefined, '23'],
-      ['short', 'fr', '23'],
-      ['long', undefined, '2023'],
-      ['long', 'fr', '2023'],
+      ['short', defaultLocale, '23'],
+      ['short', fr, '23'],
+      ['long', defaultLocale, '2023'],
+      ['long', fr, '2023'],
     ] as const;
 
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(
-          formatDate(getSettings(), DATE, PeriodType.CalendarYear, { variant, locales })
-        ).equal(expected);
+        expect(formatDateWithLocale(locales, DATE, PeriodType.CalendarYear, { variant })).equal(
+          expected
+        );
       });
     }
   });
 
   describe('should format date for PeriodType.FiscalYearOctober', () => {
     const combi = [
-      ['short', undefined, '24'],
-      ['short', 'fr', '24'],
-      ['long', undefined, '2024'],
-      ['long', 'fr', '2024'],
+      ['short', defaultLocale, '24'],
+      ['short', fr, '24'],
+      ['long', defaultLocale, '2024'],
+      ['long', fr, '2024'],
     ] as const;
 
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(
-          formatDate(getSettings(), DATE, PeriodType.FiscalYearOctober, { variant, locales })
+          formatDateWithLocale(locales, DATE, PeriodType.FiscalYearOctober, { variant })
         ).equal(expected);
       });
     }
@@ -256,16 +258,16 @@ describe('formatDate()', () => {
 
   describe('should format date for PeriodType.BiWeek1Sun', () => {
     const combi = [
-      ['short', undefined, '11/12 - 11/25'],
-      ['short', 'fr', '12/11 - 25/11'],
-      ['long', undefined, '11/12/2023 - 11/25/2023'],
-      ['long', 'fr', '12/11/2023 - 25/11/2023'],
+      ['short', defaultLocale, '11/12 - 11/25'],
+      ['short', fr, '12/11 - 25/11'],
+      ['long', defaultLocale, '11/12/2023 - 11/25/2023'],
+      ['long', fr, '12/11/2023 - 25/11/2023'],
     ] as const;
 
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDate(getSettings(), DATE, PeriodType.BiWeek1Sun, { variant, locales })).equal(
+        expect(formatDateWithLocale(locales, DATE, PeriodType.BiWeek1Sun, { variant })).equal(
           expected
         );
       });
@@ -275,16 +277,16 @@ describe('formatDate()', () => {
   describe('should format date for PeriodType.undefined', () => {
     const expected = '2023-11-21T00:00:00-04:00';
     const combi = [
-      ['short', undefined],
-      ['short', 'fr'],
-      ['long', undefined],
-      ['long', 'fr'],
+      ['short', defaultLocale],
+      ['short', fr],
+      ['long', defaultLocale],
+      ['long', fr],
     ] as const;
 
     for (const c of combi) {
       const [variant, locales] = c;
       it(c.toString(), () => {
-        expect(formatDate(getSettings(), DATE, undefined, { variant, locales })).equal(expected);
+        expect(formatDateWithLocale(locales, DATE, undefined, { variant })).equal(expected);
       });
     }
   });
@@ -348,11 +350,11 @@ describe('formatIntl() tokens', () => {
   for (const c of combi) {
     const [date, tokens, [expected_default, expected_fr]] = c;
     it(c.toString(), () => {
-      expect(formatIntl(getSettings(), date, tokens)).equal(expected_default);
+      expect(formatIntl(defaultLocale, date, tokens)).equal(expected_default);
     });
 
     it(c.toString() + 'fr', () => {
-      expect(formatIntl(getSettings(), date, tokens, fr)).equal(expected_fr);
+      expect(formatIntl(fr, date, tokens)).equal(expected_fr);
     });
   }
 });
