@@ -1,10 +1,11 @@
 <script lang="ts">
   import { PeriodType, getDateFuncsByPeriodType, type FormatDateOptions } from '../utils/date';
   import type { DateRange } from '../utils/dateRange';
-
-  import { format as format_ux } from '../utils';
+  import { getSettings } from './settings';
 
   export let value: DateRange | null | undefined;
+
+  const { format: format_ux } = getSettings();
 
   let showToValue = false;
   $: if (value?.to) {
@@ -66,12 +67,12 @@
 </script>
 
 {#if value?.from}
-  {format_ux(value.from, getPeriodType(value), { variant: 'long' })}
+  {$format_ux(value.from, getPeriodType(value), { variant: 'long' })}
 {:else}
   <div>&nbsp;</div>
 {/if}
 
 {#if value?.to && showToValue}
   <span> - </span>
-  {format_ux(value.to, getPeriodType(value), { variant: 'long' })}
+  {$format_ux(value.to, getPeriodType(value), { variant: 'long' })}
 {/if}

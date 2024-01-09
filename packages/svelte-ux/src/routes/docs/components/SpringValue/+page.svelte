@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { getSettings } from '$lib/components/settings';
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SpringValue from '$lib/components/SpringValue.svelte';
-  import { format } from '$lib/utils/format';
   import { cls } from '$lib/utils/styles';
+
+  const { format } = getSettings();
 
   let value: number | null = 0;
 
@@ -67,7 +69,7 @@
 <Preview>
   <SpringValue {value} let:value>
     <span class={cls('tabular-nums', (value ?? 0) < 0 ? 'text-red-500' : 'text-green-500')}>
-      {format(value, 'decimal')}
+      {$format(value, 'decimal')}
     </span>
   </SpringValue>
 </Preview>
