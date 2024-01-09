@@ -11,8 +11,10 @@
   import { PeriodType, getDateFuncsByPeriodType, getPeriodTypeName } from '../utils/date';
   import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange';
   import { cls } from '../utils/styles';
+  import { getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
+  const settings = getSettings();
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -58,7 +60,7 @@
 </script>
 
 <Field
-  label={label ?? (value.periodType ? getPeriodTypeName(value.periodType) : '')}
+  label={label ?? (value.periodType ? getPeriodTypeName(settings, value.periodType) : '')}
   {icon}
   {error}
   {hint}
@@ -151,7 +153,7 @@
 >
   <div class="flex flex-col justify-center bg-primary text-primary-content px-6 h-24">
     <div class="text-sm opacity-50">
-      {currentValue.periodType ? getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
+      {currentValue.periodType ? getPeriodTypeName(settings, currentValue.periodType) : ''}&nbsp;
     </div>
     <div class="text-xl sm:text-2xl">
       <DateRangeDisplay value={currentValue} />

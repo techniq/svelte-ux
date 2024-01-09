@@ -33,7 +33,7 @@ import {
 import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
-import { getFormatDate } from '$lib/components/settings';
+import { knownLocales, type LocaleSettings } from './locale';
 
 export type SelectedDate = Date | Date[] | DateRange | null;
 
@@ -102,27 +102,34 @@ export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
   return formatter.format(date);
 }
 
-export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOptions = {}) {
-  const { locales, dictionaryDate: dico } = getFormatDate(options);
+export function getPeriodTypeName(periodType: PeriodType) {
+  return getPeriodTypeNameWithLocale(knownLocales.en, periodType);
+}
+
+export function getPeriodTypeNameWithLocale(settings: LocaleSettings, periodType: PeriodType) {
+  const {
+    locale: locale,
+    dictionary: { Date: dico },
+  } = settings;
 
   switch (periodType) {
     case PeriodType.Day:
-      return dico.Day;
+      return dico?.Day;
 
     case PeriodType.WeekSun:
-      return `${dico.Week} (${getDayOfWeekName(DayOfWeek.Sunday, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(DayOfWeek.Sunday, locale)})`;
     case PeriodType.WeekMon:
-      return `${dico.Week} (${getDayOfWeekName(1, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(1, locale)})`;
     case PeriodType.WeekTue:
-      return `${dico.Week} (${getDayOfWeekName(2, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(2, locale)})`;
     case PeriodType.WeekWed:
-      return `${dico.Week} (${getDayOfWeekName(3, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(3, locale)})`;
     case PeriodType.WeekThu:
-      return `${dico.Week} (${getDayOfWeekName(4, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(4, locale)})`;
     case PeriodType.WeekFri:
-      return `${dico.Week} (${getDayOfWeekName(5, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(5, locale)})`;
     case PeriodType.WeekSat:
-      return `${dico.Week} (${getDayOfWeekName(6, locales)})`;
+      return `${dico.Week} (${getDayOfWeekName(6, locale)})`;
 
     case PeriodType.Month:
       return dico.Month;
@@ -136,34 +143,34 @@ export function getPeriodTypeName(periodType: PeriodType, options: FormatDateOpt
       return dico.FiscalYearOct;
 
     case PeriodType.BiWeek1Sun:
-      return `${dico.BiWeek} (${getDayOfWeekName(0, locales)})`;
+      return `${dico.BiWeek} (${getDayOfWeekName(0, locale)})`;
     case PeriodType.BiWeek1Mon:
-      return `${dico.BiWeek} (${getDayOfWeekName(1, locales)})`;
+      return `${dico.BiWeek} (${getDayOfWeekName(1, locale)})`;
     case PeriodType.BiWeek1Tue:
-      return `${dico.BiWeek} (${getDayOfWeekName(2, locales)})`;
+      return `${dico.BiWeek} (${getDayOfWeekName(2, locale)})`;
     case PeriodType.BiWeek1Wed:
-      return `${dico.BiWeek} (${getDayOfWeekName(3, locales)})`;
+      return `${dico.BiWeek} (${getDayOfWeekName(3, locale)})`;
     case PeriodType.BiWeek1Thu:
-      return `${dico.BiWeek} (${getDayOfWeekName(4, locales)})`;
+      return `${dico.BiWeek} (${getDayOfWeekName(4, locale)})`;
     case PeriodType.BiWeek1Fri:
-      return `${dico.BiWeek} (${getDayOfWeekName(5, locales)})`;
+      return `${dico.BiWeek} (${getDayOfWeekName(5, locale)})`;
     case PeriodType.BiWeek1Sat:
-      return `${dico.BiWeek} (${getDayOfWeekName(6, locales)})`;
+      return `${dico.BiWeek} (${getDayOfWeekName(6, locale)})`;
 
     case PeriodType.BiWeek2Sun:
-      return `${dico.BiWeek} 2 (${getDayOfWeekName(0, locales)})`;
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(0, locale)})`;
     case PeriodType.BiWeek2Mon:
-      return `${dico.BiWeek} 2 (${getDayOfWeekName(1, locales)})`;
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(1, locale)})`;
     case PeriodType.BiWeek2Tue:
-      return `${dico.BiWeek} 2 (${getDayOfWeekName(2, locales)})`;
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(2, locale)})`;
     case PeriodType.BiWeek2Wed:
-      return `${dico.BiWeek} 2 (${getDayOfWeekName(3, locales)})`;
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(3, locale)})`;
     case PeriodType.BiWeek2Thu:
-      return `${dico.BiWeek} 2 (${getDayOfWeekName(4, locales)})`;
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(4, locale)})`;
     case PeriodType.BiWeek2Fri:
-      return `${dico.BiWeek} 2 (${getDayOfWeekName(5, locales)})`;
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(5, locale)})`;
     case PeriodType.BiWeek2Sat:
-      return `${dico.BiWeek} 2 (${getDayOfWeekName(6, locales)})`;
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(6, locale)})`;
 
     default:
       return 'Unknown';
@@ -630,16 +637,20 @@ export enum DateToken {
 }
 
 export function formatIntl(
+  settings: LocaleSettings,
   dt: Date,
-  tokens_or_intlOptions: CustomIntlDateTimeFormatOptions,
-  options: FormatDateOptions = {}
+  tokens_or_intlOptions: CustomIntlDateTimeFormatOptions
 ) {
-  const { locales, ordinalSuffixes } = getFormatDate(options);
+  const {
+    locale,
+    formats: {
+      dates: { ordinalSuffixes: suffixes },
+    },
+  } = settings;
 
   function formatIntlOrdinal(formatter: Intl.DateTimeFormat, with_ordinal = false) {
     if (with_ordinal) {
-      const suffixes = ordinalSuffixes[locales] ?? ordinalSuffixes['en'];
-      const rules = new Intl.PluralRules(locales, { type: 'ordinal' });
+      const rules = new Intl.PluralRules(locale, { type: 'ordinal' });
 
       const splited = formatter.formatToParts(dt);
       return splited
@@ -659,7 +670,7 @@ export function formatIntl(
 
   if (typeof tokens_or_intlOptions !== 'string' && !Array.isArray(tokens_or_intlOptions)) {
     return formatIntlOrdinal(
-      new Intl.DateTimeFormat(locales, tokens_or_intlOptions),
+      new Intl.DateTimeFormat(locale, tokens_or_intlOptions),
       tokens_or_intlOptions.withOrdinal
     );
   }
@@ -669,7 +680,7 @@ export function formatIntl(
     : tokens_or_intlOptions;
 
   // Order of includes check is important! (longest first)
-  const formatter = new Intl.DateTimeFormat(locales, {
+  const formatter = new Intl.DateTimeFormat(locale, {
     year: tokens.includes(DateToken.Year_numeric)
       ? 'numeric'
       : tokens.includes(DateToken.Year_2Digit)
@@ -730,11 +741,10 @@ export function formatIntl(
 }
 
 function range(
+  settings: LocaleSettings,
   date: Date,
   weekStartsOn: DayOfWeek,
-  options: FormatDateOptions,
-  formats: Record<DateFormatVariant, CustomIntlDateTimeFormatOptions>,
-  variant: DateFormatVariant,
+  formatToUse: CustomIntlDateTimeFormatOptions,
   biWeek: undefined | 1 | 2 = undefined // undefined means that it's not a bi-week
 ) {
   const start =
@@ -746,9 +756,7 @@ function range(
       ? endOfWeek(date, { weekStartsOn })
       : endOfBiWeek(date, biWeek, weekStartsOn);
 
-  const formatToUse = formats[variant];
-
-  return formatIntl(start, formatToUse, options) + ' - ' + formatIntl(end, formatToUse, options);
+  return formatIntl(settings, start, formatToUse) + ' - ' + formatIntl(settings, end, formatToUse);
 }
 
 export type OrdinalSuffixes = {
@@ -759,7 +767,7 @@ export type OrdinalSuffixes = {
   zero?: string;
   many?: string;
 };
-export type DateFormatVariant = 'short' | 'default' | 'long' | 'custom';
+export type DateFormatVariant = 'short' | 'default' | 'long';
 type DateFormatVariantPreset = {
   short?: CustomIntlDateTimeFormatOptions;
   default?: CustomIntlDateTimeFormatOptions;
@@ -769,12 +777,16 @@ export type CustomIntlDateTimeFormatOptions =
   | string
   | string[]
   | (Intl.DateTimeFormatOptions & { withOrdinal?: boolean });
+
 export type FormatDateOptions = {
-  locales?: string | undefined;
-  baseParsing?: string;
   weekStartsOn?: DayOfWeek;
-  variant?: DateFormatVariant;
+  variant?: DateFormatVariant | 'custom';
   custom?: CustomIntlDateTimeFormatOptions;
+};
+
+export interface FormatDateLocaleOptions {
+  weekStartsOn?: DayOfWeek;
+  baseParsing?: string;
   presets?: {
     day?: DateFormatVariantPreset;
     dayTime?: DateFormatVariantPreset;
@@ -784,16 +796,25 @@ export type FormatDateOptions = {
     monthsYear?: DateFormatVariantPreset;
     year?: DateFormatVariantPreset;
   };
-  ordinalSuffixes?: Record<string, OrdinalSuffixes>;
-};
+  ordinalSuffixes?: OrdinalSuffixes;
+}
+
+export type FormatDateLocalePresets = Required<FormatDateLocaleOptions>;
 
 export function formatDate(
   date: Date | string | null | undefined,
-  periodType?: PeriodType | null | undefined,
+  periodType: PeriodType,
   options: FormatDateOptions = {}
 ): string {
-  periodType = periodType ?? undefined;
+  return formatDateWithLocale(knownLocales.en, date, periodType, options);
+}
 
+export function formatDateWithLocale(
+  settings: LocaleSettings,
+  date: Date | string | null | undefined,
+  periodType: PeriodType,
+  options: FormatDateOptions = {}
+): string {
   if (typeof date === 'string') {
     date = parseISO(date);
   }
@@ -804,8 +825,8 @@ export function formatDate(
     return '';
   }
 
-  const { variant, weekStartsOn, custom, presets } = getFormatDate(options);
-  const { day, dayTime, timeOnly, week, month, monthYear, year } = presets;
+  const weekStartsOn = options.weekStartsOn ?? settings.formats.dates.weekStartsOn;
+  const { day, dayTime, timeOnly, week, month, monthsYear, year } = settings.formats.dates.presets;
 
   if (periodType === PeriodType.Week) {
     periodType = [
@@ -839,82 +860,93 @@ export function formatDate(
     ][weekStartsOn];
   }
 
+  /** Resolve a preset given the chosen variant */
+  function rv(preset: DateFormatVariantPreset) {
+    if (options.variant === 'custom') {
+      return options.custom ?? preset.default;
+    } else if (options.custom && !options.variant) {
+      return options.custom;
+    }
+
+    return preset[options.variant ?? 'default'];
+  }
+
   switch (periodType) {
     case PeriodType.Custom:
-      return formatIntl(date, custom, options);
+      return formatIntl(settings, date, options.custom);
 
     case PeriodType.Day:
-      return formatIntl(date, day[variant], options);
+      return formatIntl(settings, date, rv(day));
 
     case PeriodType.DayTime:
-      return formatIntl(date, dayTime[variant], options);
+      return formatIntl(settings, date, rv(dayTime));
 
     case PeriodType.TimeOnly:
-      return formatIntl(date, timeOnly[variant], options);
+      return formatIntl(settings, date, rv(timeOnly));
 
     case PeriodType.WeekSun:
-      return range(date, 0, options, week, variant);
+      return range(settings, date, 0, rv(week));
     case PeriodType.WeekMon:
-      return range(date, 1, options, week, variant);
+      return range(settings, date, 1, rv(week));
     case PeriodType.WeekTue:
-      return range(date, 2, options, week, variant);
+      return range(settings, date, 2, rv(week));
     case PeriodType.WeekWed:
-      return range(date, 3, options, week, variant);
+      return range(settings, date, 3, rv(week));
     case PeriodType.WeekThu:
-      return range(date, 4, options, week, variant);
+      return range(settings, date, 4, rv(week));
     case PeriodType.WeekFri:
-      return range(date, 5, options, week, variant);
+      return range(settings, date, 5, rv(week));
     case PeriodType.WeekSat:
-      return range(date, 6, options, week, variant);
+      return range(settings, date, 6, rv(week));
 
     case PeriodType.Month:
-      return formatIntl(date, month[variant], options);
+      return formatIntl(settings, date, rv(month));
 
     case PeriodType.MonthYear:
-      return formatIntl(date, monthYear[variant], options);
+      return formatIntl(settings, date, rv(monthsYear));
 
     case PeriodType.Quarter:
       return [
-        formatIntl(startOfQuarter(date), month[variant], options),
-        formatIntl(endOfQuarter(date), monthYear[variant], options),
+        formatIntl(settings, startOfQuarter(date), rv(month)),
+        formatIntl(settings, endOfQuarter(date), rv(monthsYear)),
       ].join(' - ');
 
     case PeriodType.CalendarYear:
-      return formatIntl(date, year[variant], options);
+      return formatIntl(settings, date, rv(year));
 
     case PeriodType.FiscalYearOctober:
       const fDate = new Date(getFiscalYear(date), 0, 1);
-      return formatIntl(fDate, year[variant], options);
+      return formatIntl(settings, fDate, rv(year));
 
     case PeriodType.BiWeek1Sun:
-      return range(date, 0, options, week, variant, 1);
+      return range(settings, date, 0, rv(week), 1);
     case PeriodType.BiWeek1Mon:
-      return range(date, 1, options, week, variant, 1);
+      return range(settings, date, 1, rv(week), 1);
     case PeriodType.BiWeek1Tue:
-      return range(date, 2, options, week, variant, 1);
+      return range(settings, date, 2, rv(week), 1);
     case PeriodType.BiWeek1Wed:
-      return range(date, 3, options, week, variant, 1);
+      return range(settings, date, 3, rv(week), 1);
     case PeriodType.BiWeek1Thu:
-      return range(date, 4, options, week, variant, 1);
+      return range(settings, date, 4, rv(week), 1);
     case PeriodType.BiWeek1Fri:
-      return range(date, 5, options, week, variant, 1);
+      return range(settings, date, 5, rv(week), 1);
     case PeriodType.BiWeek1Sat:
-      return range(date, 6, options, week, variant, 1);
+      return range(settings, date, 6, rv(week), 1);
 
     case PeriodType.BiWeek2Sun:
-      return range(date, 0, options, week, variant, 2);
+      return range(settings, date, 0, rv(week), 2);
     case PeriodType.BiWeek2Mon:
-      return range(date, 1, options, week, variant, 2);
+      return range(settings, date, 1, rv(week), 2);
     case PeriodType.BiWeek2Tue:
-      return range(date, 2, options, week, variant, 2);
+      return range(settings, date, 2, rv(week), 2);
     case PeriodType.BiWeek2Wed:
-      return range(date, 3, options, week, variant, 2);
+      return range(settings, date, 3, rv(week), 2);
     case PeriodType.BiWeek2Thu:
-      return range(date, 4, options, week, variant, 2);
+      return range(settings, date, 4, rv(week), 2);
     case PeriodType.BiWeek2Fri:
-      return range(date, 5, options, week, variant, 2);
+      return range(settings, date, 5, rv(week), 2);
     case PeriodType.BiWeek2Sat:
-      return range(date, 6, options, week, variant, 2);
+      return range(settings, date, 6, rv(week), 2);
 
     default:
       return formatISO(date);
