@@ -5,16 +5,11 @@
   import type { ColumnDef } from '../types/table';
   import { cls } from '../utils/styles';
 
-  import {
-    getCellValue,
-    getCellContent,
-    getCellHeader,
-    getHeaders,
-    getRowColumns,
-  } from '../utils/table';
+  import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '../utils/table';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
   import { getComponentClasses } from './theme';
+  import { getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
 
@@ -70,6 +65,20 @@
       },
     };
   });
+
+  const { format } = getSettings();
+  $: getCellContent = (column: ColumnDef, rowData: any, rowIndex: number) => {
+    let value = getCellValue(column, rowData, rowIndex);
+    if (column.format) {
+      if (typeof column.format === 'function') {
+        return column.format(value, rowData, rowIndex);
+      } else {
+        return $format(value, column.format);
+      }
+    } else {
+      return value;
+    }
+  };
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

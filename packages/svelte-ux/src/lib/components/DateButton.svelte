@@ -6,8 +6,8 @@
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
   import { cls } from '../utils/styles';
+  import { getSettings } from './settings';
   import { getComponentClasses } from './theme';
-  import { format as format_ux } from '../utils';
 
   const dispatch = createEventDispatcher();
 
@@ -19,6 +19,7 @@
   export let fade: boolean = false;
   export let format = getCustomFormat(periodType);
 
+  const { format: format_ux } = getSettings();
   const settingsClasses = getComponentClasses('DateButton');
 
   function getCustomFormat(periodType: PeriodType) {
@@ -102,6 +103,6 @@
       dispatch('dateChange', date);
     }}
   >
-    {format_ux(date, periodType, { custom: format })}
+    {$format_ux(date, periodType, { custom: format })}
   </Button>
 </div>

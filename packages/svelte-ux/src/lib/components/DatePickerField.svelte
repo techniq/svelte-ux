@@ -9,8 +9,7 @@
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
   import { getComponentClasses } from './theme';
-  import { format } from '../utils';
-  import { getDictionary } from './settings';
+  import { getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
 
@@ -33,6 +32,8 @@
   export let center = false;
 
   const settingsClasses = getComponentClasses('DatePickerField');
+  const { format } = getSettings();
+  $: dictionary = $format.settings.dictionary;
 
   let open: boolean = false;
 
@@ -64,7 +65,7 @@
   <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
-    label={label ?? format(value, PeriodType.Day, { custom: secondaryFormat })}
+    label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat })}
     {icon}
     {error}
     {hint}
@@ -98,7 +99,7 @@
       on:click={() => (open = true)}
       {id}
     >
-      {format(value, PeriodType.Day, { custom: primaryFormat })}
+      {$format(value, PeriodType.Day, { custom: primaryFormat })}
     </button>
 
     <div slot="append">
@@ -138,10 +139,10 @@
       transition:slide
     >
       <div class="text-sm opacity-50">
-        {format(currentValue, PeriodType.Day, { custom: secondaryFormat })}
+        {$format(currentValue, PeriodType.Day, { custom: secondaryFormat })}
       </div>
       <div class="text-3xl">
-        {format(currentValue, PeriodType.Day, { custom: primaryFormat })}
+        {$format(currentValue, PeriodType.Day, { custom: primaryFormat })}
       </div>
     </div>
   {/if}
@@ -163,13 +164,13 @@
         dispatch('change', value);
       }}
       variant="fill"
-      color="primary">{getDictionary().Ok}</Button
+      color="primary">{dictionary.Ok}</Button
     >
     <Button
       on:click={() => {
         open = false;
         currentValue = value;
-      }}>{getDictionary().Cancel}</Button
+      }}>{dictionary.Cancel}</Button
     >
   </div>
 </Dialog>

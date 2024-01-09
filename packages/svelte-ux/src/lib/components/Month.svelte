@@ -15,7 +15,6 @@
 
   import { getMonthDaysByWeek, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
-  import { format } from '../utils';
   import { hasKeyOf } from '../types/typeGuards';
 
   import Button from './Button.svelte';
@@ -33,8 +32,11 @@
       startOfMonthFunc(selected.from)) ||
     startOfMonthFunc(new Date());
 
+  const { format } = getSettings();
+  $: dateFormat = $format.settings.formats.dates;
+
   $: endOfMonth = endOfMonthFunc(startOfMonth);
-  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, getSettings().formats?.dates?.weekStartsOn);
+  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, dateFormat.weekStartsOn);
 
   /**
    * Hide controls and date.  Useful to control externally
@@ -92,7 +94,7 @@
     />
 
     <div class="flex flex-1 items-center justify-center">
-      <span>{format(startOfMonth, PeriodType.MonthYear)}</span>
+      <span>{$format(startOfMonth, PeriodType.MonthYear)}</span>
     </div>
 
     <Button
@@ -107,7 +109,7 @@
   {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
     <div class="flex-1 text-center">
       <span class="text-xs text-surface-content/50">
-        {format(day, PeriodType.Day, { custom: 'eee' })}
+        {$format(day, PeriodType.Day, { custom: 'eee' })}
       </span>
     </div>
   {/each}
