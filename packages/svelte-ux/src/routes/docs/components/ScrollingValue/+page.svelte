@@ -11,7 +11,7 @@
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
 
-  import { PeriodType, format, getSettings, romanize, timerStore } from '$lib';
+  import { PeriodType, getSettings, romanize, timerStore } from '$lib';
 
   let value = 0;
   let axis: 'x' | 'y' = 'x';
@@ -46,7 +46,7 @@
     }
   }
 
-  const settings = getSettings();
+  const { format } = getSettings();
   const indexTimer = timerStore({
     initial: 0,
     delay: 2000,
@@ -216,7 +216,7 @@
   <div class="grid w-96">
     <div class="grid grid-cols-[auto,1fr,auto] items-center justify-items-center">
       <Button icon={mdiChevronLeft} class="p-2" on:click={() => (value -= 1)} />
-      <div>{format(settings, startOfMonth, PeriodType.Month)}</div>
+      <div>{$format(startOfMonth, PeriodType.Month)}</div>
       <Button icon={mdiChevronRight} class="p-2" on:click={() => (value += 1)} />
     </div>
     <ScrollingValue {value} {axis} let:value>

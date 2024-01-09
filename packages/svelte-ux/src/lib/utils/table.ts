@@ -122,13 +122,3 @@ export function getCellValue(column: ColumnDef, rowData: any, rowIndex?: number)
 
   return value;
 }
-
-export function getCellContent(
-  settings: Settings,
-  column: ColumnDef,
-  rowData: any,
-  rowIndex?: number
-) {
-  const value = getCellValue(column, rowData, rowIndex);
-  return format(settings, value, column?.format, rowData, rowIndex);
-}
