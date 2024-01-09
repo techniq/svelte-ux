@@ -1,4 +1,17 @@
-import { getThemeProperties } from '@skeletonlabs/tw-plugin';
+/*
+ * Use local copy of Skeleton themes/getThemeProperties() due to:
+ *   - Skeleton themse only available in `@skeletonlabs/tw-plugin` package, which
+ *     - Does not publish the `src` directly
+ *     - Requires the Node.js runtime (fs, path, tty, url, util)
+ *   - Cloudflare not support Node.js runtime (unless using `require('node:...'))
+ *     - https://developers.cloudflare.com/workers/runtime-apis/nodejs/
+ *     - Builds work on Vercel (since they support the Node.js runtime)
+ *   - See: https://github.com/techniq/svelte-ux/pull/192
+ */
+//
+// https://github.com/skeletonlabs/skeleton/blob/dev/packages/plugin/src/tailwind/themes/index.ts#L17-L19
+// import { getThemeProperties } from '@skeletonlabs/tw-plugin';
+import { getThemeProperties } from './skeleton/index';
 
 const themeNames = [
   'skeleton',
