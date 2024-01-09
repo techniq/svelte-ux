@@ -1,16 +1,8 @@
-import {
-  formatDate,
-  PeriodType,
-  type FormatDateOptions,
-  formatDateWithLocale,
-  getPeriodTypeName,
-  getPeriodTypeNameWithLocale,
-  getDayOfWeekName,
-  DayOfWeek,
-} from './date';
+import { formatDateWithLocale, getPeriodTypeNameWithLocale, getDayOfWeekName } from './date';
 import { formatNumberWithLocale } from './number';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
 import { defaultLocale, type LocaleSettings } from './locale';
+import { PeriodType, type FormatDateOptions, DayOfWeek } from './date_types';
 
 export type FormatType = FormatNumberStyle | PeriodType;
 
