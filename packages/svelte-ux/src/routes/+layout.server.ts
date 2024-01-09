@@ -13,5 +13,9 @@ export async function load({ url }) {
     throw redirect(302, newUrl.toString());
   }
 
-  return { themes: getThemeNames(themes), pr_id: env.VERCEL_GIT_PULL_REQUEST_ID };
+  return {
+    themes: getThemeNames(themes),
+    // themes: { light: ['light'], dark: ['dark'] },
+    pr_id: env.VERCEL_GIT_PULL_REQUEST_ID,
+  };
 }

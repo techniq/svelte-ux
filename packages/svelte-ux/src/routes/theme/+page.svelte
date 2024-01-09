@@ -127,10 +127,11 @@
 
             style.textContent = `
               :root { ${themeStylesString(selectedLightTheme, colorSpace)} }
-              @media (prefers-color-scheme: dark) { ${themeStylesString(
-                selectedDarkTheme,
-                colorSpace
-              )} }
+              @media (prefers-color-scheme: dark) {
+                :root {
+                  ${themeStylesString(selectedDarkTheme, colorSpace)}
+                }
+              }
               [data-theme=light] { ${themeStylesString(selectedLightTheme, colorSpace)} }
               [data-theme=dark] { ${themeStylesString(selectedDarkTheme, colorSpace)} }
             `;
