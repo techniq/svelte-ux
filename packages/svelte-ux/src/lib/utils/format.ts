@@ -10,7 +10,7 @@ import {
 } from './date';
 import { formatNumberWithLocale } from './number';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
-import { knownLocales, type LocaleSettings } from './locale';
+import { defaultLocale, type LocaleSettings } from './locale';
 
 export type FormatType = FormatNumberStyle | PeriodType;
 
@@ -33,7 +33,7 @@ export function format(
   format?: FormatType,
   options?: FormatNumberOptions | FormatDateOptions
 ): any {
-  return formatWithLocale(knownLocales.en, value, format, options);
+  return formatWithLocale(defaultLocale, value, format, options);
 }
 
 export function formatWithLocale(
