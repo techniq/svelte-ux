@@ -1,6 +1,7 @@
 import { startOfDay, isLeapYear, isAfter, isBefore, subYears } from 'date-fns';
 
-import { getDateFuncsByPeriodType, PeriodType } from './date';
+import { getDateFuncsByPeriodType } from './date';
+import { PeriodType } from './date_types';
 
 export type DateRange = {
   from: Date | null;

@@ -19,9 +19,10 @@
 
   import { settings } from '$lib/components/settings';
   import type { PageData } from './$types';
-  import { DateToken } from '$lib/utils/date';
 
   import { lightThemes, darkThemes } from '$lib/styles/daisy';
+  import { createLocaleSettings } from '$lib';
+  import LanguageSelect from '$lib/components/LanguageSelect.svelte';
   // import { lightThemes, darkThemes } from '$lib/styles/skeleton';
 
   export let data: PageData;
@@ -32,61 +33,32 @@
   $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
   settings({
-    // Usefull to test different locales with the docs
-    // formats: {
-    //   numbers: {
-    //     defaults: {
-    //       locales: 'fr',
-    //       currency: 'EUR',
-    //     },
-    //   },
-    //   dates: {
-    //     locales: 'fr',
-    //     weekStartsOn: 1,
-    //     presets: {
-    //       days: {
-    //         long: { dateStyle: 'full' },
-    //       },
-    //       months: {
-    //         default: [DateToken.Month_long],
-    //       },
-    //     },
-    //     ordinalSuffixes: {
-    //       fr: {
-    //         one: 'er',
-    //         two: '',
-    //         few: '',
-    //         other: '',
-    //       },
-    //     },
-    //   },
-    //   dates: {
-    //     locales: 'fr',
-    //     weekStartsOn: 1,
-    //     presets: {
-    //       days: {
-    //         long: { dateStyle: 'full' },
-    //       },
-    //       months: {
-    //         default: [DateToken.Month_long],
-    //       },
-    //     },
-    //     ordinalSuffixes: {
-    //       fr: {
-    //         one: 'er',
-    //         two: '',
-    //         few: '',
-    //         other: '',
-    //       },
-    //     },
-    //   },
-    // },
-    // dictionary: {
-    //   Cancel: 'Annuler',
-    //   Date: {
-    //     Day: 'Jour',
-    //   },
-    // },
+    // fallbackLocale: 'fr',
+    localeFormats: {
+      fr: createLocaleSettings({
+        locale: 'fr',
+        formats: {
+          dates: {
+            baseParsing: 'dd/MM/yyyy',
+            ordinalSuffixes: {
+              one: 'er',
+            },
+          },
+          numbers: {
+            defaults: {
+              currency: 'EUR',
+            },
+          },
+        },
+        dictionary: {
+          Cancel: 'Annuler',
+          Date: {
+            Day: 'Jour',
+          },
+        },
+      }),
+    },
+
     classes: {
       AppLayout: {
         aside: 'border-r',
@@ -191,7 +163,8 @@
 
       <QuickSearch options={quickSearchOptions} on:change={(e) => goto(e.detail.value)} />
 
-      <div class="border-r border-primary-content/20 pr-2 grid items-center">
+      <div class="border-r border-primary-content/20 pr-2 grid grid-cols-2 items-center">
+        <LanguageSelect />
         <ThemeSelect />
         <!-- <ThemeSwitch classes={{ switch: 'bg-black/10 bornder-none' }} /> -->
       </div>
