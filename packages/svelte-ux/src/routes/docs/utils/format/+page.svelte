@@ -109,7 +109,7 @@
 
 <div class="grid grid-cols-3 gap-4">
   <div>
-    <h3>With random string</h3>
+    <h3>With format string</h3>
     <Preview>
       {$format(myDate, PeriodType.Custom, {
         custom: 'eee, MMMM do',
