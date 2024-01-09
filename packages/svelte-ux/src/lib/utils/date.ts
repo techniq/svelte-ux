@@ -43,6 +43,8 @@ import {
 } from './date_types';
 import { defaultLocale, type LocaleSettings } from './locale';
 
+export * from './date_types';
+
 export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
   // Create a date object for a specific day (0 = Sunday, 1 = Monday, etc.)
   // And "7 of Jan 2024" is a Sunday
