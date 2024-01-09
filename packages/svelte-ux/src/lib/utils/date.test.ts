@@ -1,25 +1,28 @@
 import { describe, it, expect } from 'vitest';
 import {
-  PeriodType,
   formatDate,
   getMonthDaysByWeek,
   localToUtcDate,
   utcToLocalDate,
-  DayOfWeek,
   formatIntl,
-  type CustomIntlDateTimeFormatOptions,
-  type FormatDateOptions,
-  DateToken,
   formatDateWithLocale,
 } from './date';
-import { getSettings } from '$lib/components';
-import { format, formatWithLocale } from '.';
+import { formatWithLocale } from '.';
 import { createLocaleSettings, defaultLocale } from './locale';
+import {
+  PeriodType,
+  type FormatDateOptions,
+  DayOfWeek,
+  type CustomIntlDateTimeFormatOptions,
+  DateToken,
+} from './date_types';
+import { getWeekStartsOnFromIntl } from './dateInternal';
 
 const DATE = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
 const dt_2M_2d = new Date(2023, 10, 21);
 const dt_2M_1d = new Date(2023, 10, 7);
 const dt_1M_1d = new Date(2023, 2, 7);
+const dt_first = new Date(2024, 1, 1);
 
 const dt_1M_1d_time_pm = new Date(2023, 2, 7, 14, 2, 3, 4);
 const dt_1M_1d_time_am = new Date(2023, 2, 7, 1, 2, 3, 4);
@@ -30,9 +33,6 @@ const fr = createLocaleSettings({
     dates: {
       ordinalSuffixes: {
         one: 'er',
-        two: '',
-        few: '',
-        other: '',
       },
     },
   },
@@ -40,11 +40,14 @@ const fr = createLocaleSettings({
 
 describe('formatDate()', () => {
   it('should return empty string for null or undefined date', () => {
+    // @ts-expect-error
     expect(formatDate(null)).equal('');
+    // @ts-expect-error
     expect(formatDate(undefined)).equal('');
   });
 
   it('should return empty string for invalid date', () => {
+    // @ts-expect-error
     expect(formatDate('invalid date')).equal('');
   });
 
@@ -125,7 +128,7 @@ describe('formatDate()', () => {
     }
   });
 
-  describe('should format date for PeriodType.WeekSun / Mon', () => {
+  describe('should format date for PeriodType.WeekSun / Mon no mather the locale', () => {
     const combi = [
       [PeriodType.WeekSun, 'short', defaultLocale, '11/19 - 11/25'],
       [PeriodType.WeekSun, 'short', fr, '19/11 - 25/11'],
@@ -138,32 +141,28 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [periodType, variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, periodType, { variant, locales })).equal(
-          expected
-        );
+        expect(formatDateWithLocale(locales, DATE, periodType, { variant })).equal(expected);
       });
     }
   });
 
-  describe('should format date for PeriodType.Week', () => {
+  describe('should format date for PeriodType.Week with the good weekstarton locale', () => {
     const combi = [
-      [PeriodType.Week, 'short', defaultLocale, DayOfWeek.Sunday, '11/19 - 11/25'],
-      [PeriodType.Week, 'short', fr, DayOfWeek.Sunday, '19/11 - 25/11'],
-      [PeriodType.Week, 'long', defaultLocale, DayOfWeek.Sunday, '11/19/2023 - 11/25/2023'],
-      [PeriodType.Week, 'long', fr, DayOfWeek.Sunday, '19/11/2023 - 25/11/2023'],
+      [PeriodType.Week, 'short', defaultLocale, '11/19 - 11/25'],
+      [PeriodType.Week, 'short', fr, '20/11 - 26/11'],
+      [PeriodType.Week, 'long', defaultLocale, '11/19/2023 - 11/25/2023'],
+      [PeriodType.Week, 'long', fr, '20/11/2023 - 26/11/2023'],
 
-      [PeriodType.Week, 'short', defaultLocale, DayOfWeek.Monday, '11/20 - 11/26'],
-      [PeriodType.Week, 'short', fr, DayOfWeek.Monday, '20/11 - 26/11'],
-      [PeriodType.Week, 'long', defaultLocale, DayOfWeek.Monday, '11/20/2023 - 11/26/2023'],
-      [PeriodType.Week, 'long', fr, DayOfWeek.Monday, '20/11/2023 - 26/11/2023'],
+      [PeriodType.Week, 'short', defaultLocale, '11/19 - 11/25'],
+      [PeriodType.Week, 'short', fr, '20/11 - 26/11'],
+      [PeriodType.Week, 'long', defaultLocale, '11/19/2023 - 11/25/2023'],
+      [PeriodType.Week, 'long', fr, '20/11/2023 - 26/11/2023'],
     ] as const;
 
     for (const c of combi) {
-      const [periodType, variant, locales, weekStartsOn, expected] = c;
+      const [periodType, variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, periodType, { variant, weekStartsOn })).equal(
-          expected
-        );
+        expect(formatDateWithLocale(locales, DATE, periodType, { variant })).equal(expected);
       });
     }
   });
@@ -286,6 +285,7 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [variant, locales] = c;
       it(c.toString(), () => {
+        // @ts-expect-error
         expect(formatDateWithLocale(locales, DATE, undefined, { variant })).equal(expected);
       });
     }
@@ -316,6 +316,7 @@ describe('formatIntl() tokens', () => {
     [dt_2M_2d, { dateStyle: 'medium', withOrdinal: true }, ['Nov 21st, 2023', '21 nov. 2023']],
     [dt_2M_2d, { dateStyle: 'short' }, ['11/21/23', '21/11/2023']],
     [dt_1M_1d, { dateStyle: 'short' }, ['3/7/23', '07/03/2023']],
+    [dt_first, DateToken.DayOfMonth_withOrdinal, ['1st', '1er']],
 
     // time
     [dt_1M_1d_time_pm, [DateToken.Hour_numeric, DateToken.Minute_numeric], ['2:02 PM', '14:02']],
@@ -498,5 +499,22 @@ describe('getMonthDaysByWeek()', () => {
         ],
       ]
     `);
+  });
+});
+
+describe('getWeekStartsOnFromIntl() tokens', () => {
+  it('by default, sunday', () => {
+    const val = getWeekStartsOnFromIntl();
+    expect(val).toBe(DayOfWeek.Sunday);
+  });
+
+  it('For en it should be synday', () => {
+    const val = getWeekStartsOnFromIntl('en');
+    expect(val).toBe(DayOfWeek.Sunday);
+  });
+
+  it('For fr it should be monday', () => {
+    const val = getWeekStartsOnFromIntl('fr');
+    expect(val).toBe(DayOfWeek.Monday);
   });
 });
