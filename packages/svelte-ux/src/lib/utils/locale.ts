@@ -6,7 +6,7 @@ import {
   DayOfWeek,
   type FormatDateLocaleOptions,
   type FormatDateLocalePresets,
-} from './date';
+} from './date_types';
 import type { DictionaryMessages, DictionaryMessagesOptions } from './dictionary';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
 
@@ -186,11 +186,7 @@ export function createLocaleSettings(
   return defaultsDeep(localeSettings, base);
 }
 
-export const knownLocales: Record<string, LocaleSettings> = {
-  en: createLocaleSettings({ locale: 'en' }),
-  // TODO fill in the real values for 'fr'
-  fr: createLocaleSettings({ locale: 'fr' }),
-};
+export const defaultLocale = createLocaleSettings({ locale: 'en' });
 
 export function getAllKnownLocales(
   additionalLocales?: Record<string, LocaleSettingsInput>
@@ -198,5 +194,5 @@ export function getAllKnownLocales(
   const additional = additionalLocales
     ? Object.entries(additionalLocales).map(([key, value]) => [key, createLocaleSettings(value)])
     : [];
-  return { ...knownLocales, ...Object.fromEntries(additional) };
+  return { en: defaultLocale, ...Object.fromEntries(additional) };
 }

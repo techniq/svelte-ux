@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { clamp, formatNumber, formatNumberWithLocale, round } from './number';
-import { createLocaleSettings, knownLocales } from './locale';
+import { defaultLocale, createLocaleSettings } from './locale';
 
 describe('clamp()', () => {
   it('no change', () => {
@@ -126,9 +126,14 @@ describe('formatNumber()', () => {
   });
 
   it('formats number with currency EUR with right local', () => {
-    const actual = formatNumberWithLocale(knownLocales.fr, 1234.5678, 'currency', {
-      currency: 'EUR',
-    });
+    const actual = formatNumberWithLocale(
+      createLocaleSettings({ locale: 'fr' }),
+      1234.5678,
+      'currency',
+      {
+        currency: 'EUR',
+      }
+    );
     expect(actual).equal('1 234,57 €');
   });
 
