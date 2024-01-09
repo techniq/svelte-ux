@@ -34,7 +34,7 @@ import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
 import type { DateRange } from './dateRange';
 import { PeriodType, DayOfWeek, DateToken } from './date_types';
-import { knownLocales, type LocaleSettings } from './locale';
+import { defaultLocale, type LocaleSettings } from './locale';
 
 export * from './date_types';
 
@@ -47,7 +47,7 @@ export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
 }
 
 export function getPeriodTypeName(periodType: PeriodType) {
-  return getPeriodTypeNameWithLocale(knownLocales.en, periodType);
+  return getPeriodTypeNameWithLocale(defaultLocale, periodType);
 }
 
 export function getPeriodTypeNameWithLocale(settings: LocaleSettings, periodType: PeriodType) {
@@ -656,7 +656,7 @@ export function formatDate(
   periodType: PeriodType,
   options: FormatDateOptions = {}
 ): string {
-  return formatDateWithLocale(knownLocales.en, date, periodType, options);
+  return formatDateWithLocale(defaultLocale, date, periodType, options);
 }
 
 export function formatDateWithLocale(

@@ -1,5 +1,5 @@
 import type { Settings } from '../components/settings';
-import { knownLocales, type LocaleSettings } from './locale';
+import { defaultLocale, createLocaleSettings, type LocaleSettings } from './locale';
 
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
@@ -36,7 +36,7 @@ export function formatNumber(
   style?: FormatNumberStyle,
   options?: FormatNumberOptions
 ) {
-  return formatNumberWithLocale(knownLocales.en, number, style, options);
+  return formatNumberWithLocale(defaultLocale, number, style, options);
 }
 
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
