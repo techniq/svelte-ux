@@ -214,11 +214,34 @@
           <Menu {open} on:close={toggle} placement="bottom-start">
             <MenuItem
               on:click={() => {
+                const allThemes = {
+                  ...data.themes.daisy,
+                  ...Object.fromEntries(
+                    Object.entries(data.themes.skeleton).map(([themeName, value]) => {
+                      return [
+                        themeName === 'light'
+                          ? 'skeleton-light'
+                          : themeName === 'dark'
+                            ? 'skeleton-dark'
+                            : themeName,
+                        value,
+                      ];
+                    })
+                  ),
+                };
+                const clipboardData = JSON.stringify(allThemes, null, 2);
+                navigator.clipboard.writeText(clipboardData);
+              }}
+            >
+              Copy All themes
+            </MenuItem>
+            <MenuItem
+              on:click={() => {
                 const clipboardData = JSON.stringify(data.themes.daisy, null, 2);
                 navigator.clipboard.writeText(clipboardData);
               }}
             >
-              Copy all Daisy themes
+              Copy Daisy themes
             </MenuItem>
             <MenuItem
               on:click={() => {
@@ -226,7 +249,7 @@
                 navigator.clipboard.writeText(clipboardData);
               }}
             >
-              Copy all Skeleton themes
+              Copy Skeleton themes
             </MenuItem>
           </Menu>
         </div>
