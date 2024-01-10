@@ -152,7 +152,7 @@
 <h2>option slot</h2>
 
 <Preview>
-  <SelectField {options} on:change={(e) => console.log('on:change', e.detail)}>
+  <SelectField {options}>
     <div slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
@@ -174,12 +174,7 @@
 <h2>option slot with icon (field icon updates based on selected option)</h2>
 
 <Preview>
-  <SelectField
-    {options}
-    bind:value
-    activeOptionIcon={true}
-    on:change={(e) => console.log('on:change', e.detail)}
-  >
+  <SelectField {options} bind:value activeOptionIcon={true}>
     <div slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
@@ -199,7 +194,7 @@
 <h2>option with action</h2>
 
 <Preview>
-  <SelectField {options} on:change={(e) => console.log('on:change', e.detail)}>
+  <SelectField {options}>
     <div slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
@@ -403,7 +398,6 @@
 <Preview>
   <SelectField
     {options}
-    on:change={(e) => console.log('on:change', e.detail)}
     search={async () => {
       console.log('search override...');
       await delay(1000);
@@ -415,11 +409,13 @@
 <h2>Placement</h2>
 
 <Preview>
-  <SelectField
-    {options}
-    on:change={(e) => console.log('on:change', e.detail)}
-    placement="top-start"
-  />
+  <SelectField {options} autoPlacement={false} placement="top-start" />
+</Preview>
+
+<h2>Stepper</h2>
+
+<Preview>
+  <SelectField {options} toggleIcon={null} stepper />
 </Preview>
 
 <h2>Custom selected class</h2>
