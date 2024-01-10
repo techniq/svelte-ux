@@ -104,13 +104,23 @@ export function processThemeColors(
     for (const shade of shades) {
       const shadeColorName = `${color}-${shade}`;
       if (!(shadeColorName in colors)) {
-        const newColor =
-          shade < 500
-            ? lightenColor(colors[color], (500 - shade) / 1000) // 100 == 0.1
-            : shade > 500
-              ? darkenColor(colors[color], (shade - 500) / 1000) // 100 == 0.1
-              : colors[color];
-        colors[shadeColorName] = newColor;
+        // Find the next shade above (shade < 500) or below (shade > 500) and use as reference, if available
+        const referenceShade =
+          Object.keys(colors)
+            .map((str) => {
+              const [c, s] = str.split('-');
+              return [c, Number(s)];
+            })
+            .find(([c, s]) => c === color && (s < 500 ? s > shade : s < shade))?.[1] ?? 500;
+        const referenceColor = colors[`${color}-${referenceShade}`] ?? colors[color];
+
+        if (shade < 500) {
+          colors[shadeColorName] = lightenColor(referenceColor, (referenceShade - shade) / 1000); // 100 == 0.1
+        } else if (shade > 500) {
+          colors[shadeColorName] = darkenColor(colors[color], (shade - referenceShade) / 1000); // 100 == 0.1
+        } else {
+          colors[shadeColorName] = colors[color];
+        }
       }
     }
   }
@@ -198,18 +208,21 @@ function darkenColor(color: Color | string, percentage: number) {
 /**
  * Convert color to space separated components string
  */
-function colorVariableValue(color: Color | string, colorSpace: SupportedColorSpace) {
+export function colorVariableValue(
+  color: Color | string,
+  colorSpace: SupportedColorSpace,
+  decimals = 4
+) {
   try {
     if (colorSpace === 'rgb') {
       const { r, g, b } = rgb(color);
-      return `${round(r * 255, 6)} ${round(g * 255, 6)} ${round(b * 255, 6)}`;
+      return `${round(r * 255, decimals)} ${round(g * 255, decimals)} ${round(b * 255, decimals)}`;
     } else if (colorSpace === 'hsl') {
       const { h, s, l } = hsl(clampRgb(color));
-      return `${round(h, 6)} ${round(s * 100, 6)}% ${round(l * 100, 6)}%`;
-      // return `${round(h, 6)} ${round(Math.min(s * 100, 100), 6)}% ${round(Math.min(l * 100, 100), 6)}%`;
+      return `${round(h, decimals)} ${round(s * 100, decimals)}% ${round(l * 100, decimals)}%`;
     } else if (colorSpace === 'oklch') {
       const { l, c, h } = oklch(color);
-      return `${round(l, 6)} ${round(c, 6)} ${round(h, 6)}`;
+      return `${round(l, decimals)} ${round(c, decimals)} ${round(h, decimals)}`;
     }
   } catch (e) {
     // console.error('Unable to convert color object to string', color);
