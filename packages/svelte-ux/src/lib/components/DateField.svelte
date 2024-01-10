@@ -13,10 +13,13 @@
   const { format: format_ux } = getSettings();
 
   export let value: Date | null = null;
-  export let format = $format_ux.settings.formats.dates.baseParsing ?? 'MM/dd/yyyy';
-  export let mask = format.toLowerCase();
+  export let format: string | undefined = undefined;
+  export let mask: string | undefined = undefined;
   export let replace = 'dmyh';
   export let picker = false;
+
+  $: actualFormat = format ?? $format_ux.settings.formats.dates.baseParsing ?? 'MM/dd/yyyy';
+  $: actualMask = mask ?? actualFormat.toLowerCase();
 
   // Field props
   export let label = '';
@@ -38,7 +41,7 @@
   function onInputChange(e: any) {
     inputValue = e.detail.value;
     const lastValue = value;
-    const parsedValue = parseDate(inputValue ?? '', format, new Date());
+    const parsedValue = parseDate(inputValue ?? '', actualFormat, new Date());
     value = isNaN(parsedValue.valueOf()) ? null : parsedValue;
     if (value != lastValue) {
       dispatch('change', { value });
@@ -65,8 +68,8 @@
   let:id
 >
   <Input
-    value={value ? $format_ux(value, PeriodType.Day, { custom: format }) : inputValue}
-    {mask}
+    value={value ? $format_ux(value, PeriodType.Day, { custom: actualFormat }) : inputValue}
+    mask={actualMask}
     {replace}
     {id}
     on:change={onInputChange}
