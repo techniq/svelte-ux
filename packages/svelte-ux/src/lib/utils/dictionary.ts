@@ -4,6 +4,8 @@ export type DictionaryMessagesOptions = {
 
   Date?: {
     Day?: string;
+    DayTime?: string;
+    Time?: string;
     Week?: string;
     BiWeek?: string;
     Month?: string;

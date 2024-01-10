@@ -64,8 +64,15 @@ export function getPeriodTypeNameWithLocale(settings: LocaleSettings, periodType
   } = settings;
 
   switch (periodType) {
+    case PeriodType.Custom:
+      return 'Custom';
+
     case PeriodType.Day:
-      return dico?.Day;
+      return dico.Day;
+    case PeriodType.DayTime:
+      return dico.DayTime;
+    case PeriodType.TimeOnly:
+      return dico.Time;
 
     case PeriodType.WeekSun:
       return `${dico.Week} (${getDayOfWeekName(DayOfWeek.Sunday, locale)})`;
@@ -81,6 +88,8 @@ export function getPeriodTypeNameWithLocale(settings: LocaleSettings, periodType
       return `${dico.Week} (${getDayOfWeekName(5, locale)})`;
     case PeriodType.WeekSat:
       return `${dico.Week} (${getDayOfWeekName(6, locale)})`;
+    case PeriodType.Week:
+      return dico.Week;
 
     case PeriodType.Month:
       return dico.Month;
@@ -107,6 +116,8 @@ export function getPeriodTypeNameWithLocale(settings: LocaleSettings, periodType
       return `${dico.BiWeek} (${getDayOfWeekName(5, locale)})`;
     case PeriodType.BiWeek1Sat:
       return `${dico.BiWeek} (${getDayOfWeekName(6, locale)})`;
+    case PeriodType.BiWeek1:
+      return dico.BiWeek;
 
     case PeriodType.BiWeek2Sun:
       return `${dico.BiWeek} 2 (${getDayOfWeekName(0, locale)})`;
@@ -122,10 +133,16 @@ export function getPeriodTypeNameWithLocale(settings: LocaleSettings, periodType
       return `${dico.BiWeek} 2 (${getDayOfWeekName(5, locale)})`;
     case PeriodType.BiWeek2Sat:
       return `${dico.BiWeek} 2 (${getDayOfWeekName(6, locale)})`;
+    case PeriodType.BiWeek2:
+      return `${dico.BiWeek} 2`;
 
     default:
-      return 'Unknown';
+      assertNever(periodType); // This will now report unhandled cases
   }
+}
+
+function assertNever(x: never): never {
+  throw new Error(`Unhandled enum case: ${x}`);
 }
 
 export function getPeriodTypeCode(periodType: PeriodType) {

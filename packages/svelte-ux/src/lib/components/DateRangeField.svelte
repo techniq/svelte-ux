@@ -14,8 +14,7 @@
   import { getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
-  const settings = getSettings();
-  const { format } = settings;
+  const { format } = getSettings();
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -28,9 +27,9 @@
   export let center: boolean = false;
   export let periodTypes: PeriodType[] = [
     PeriodType.Day,
-    PeriodType.WeekSun,
-    PeriodType.BiWeek1Sun,
-    // PeriodType.BiWeek2Sun,
+    PeriodType.Week,
+    PeriodType.BiWeek1,
+    // PeriodType.BiWeek2,
     PeriodType.Month,
     PeriodType.Quarter,
     PeriodType.CalendarYear,

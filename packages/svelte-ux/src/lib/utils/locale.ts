@@ -86,6 +86,8 @@ const defaultLocaleSettings: LocaleSettings = {
     Cancel: 'Cancel',
     Date: {
       Day: 'Day',
+      DayTime: 'Day Time',
+      Time: 'Time',
       Week: 'Week',
       BiWeek: 'Bi-Week',
       Month: 'Month',
