@@ -83,6 +83,7 @@ export { default as Tab } from './Tab.svelte';
 export { default as Tabs } from './Tabs.svelte';
 export { default as TextField } from './TextField.svelte';
 export { default as ThemeSelect } from './ThemeSelect.svelte';
+export { default as ThemeSwitch } from './ThemeSwitch.svelte';
 export { default as ThemeInit } from './ThemeInit.svelte';
 export { default as Tilt } from './Tilt.svelte';
 export { default as Toggle } from './Toggle.svelte';
