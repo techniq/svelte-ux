@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { cssVars } from '../actions/cssVars';
-
   export let columns = 0;
   export let gap = 0;
   export let columnGap = gap;
@@ -38,28 +36,23 @@
     templateColumns ??
     template ??
     (autoColumns ? `repeat(auto-fill, minmax(${autoColumns}, 1fr))` : `repeat(${columns}, 1fr)`);
-
-  $: styleVars = {
-    templateColumns: templateColumnsResolved,
-    templateRows,
-    gap,
-    columnGap,
-    rowGap,
-    autoFlow,
-    items, // TODO: Map start: flex-start?, end: flex-end?
-    justify, // TODO: Map start: flex-start?, end: flex-end?, between: space-between, around: space-around, evenly: space-evenly
-    justifyItems, // TODO: Map start: flex-start?, end: flex-end?, between: space-between, around: space-around, evenly: space-evenly
-    content, // TODO: Map start: flex-start?, end: flex-end?, between: space-between, around: space-around, evenly: space-evenly
-    // place, // TODO: Map start: flex-start?, end: flex-end?, between: space-between, around: space-around, evenly: space-evenly
-  };
 </script>
 
 <div
-  use:cssVars={styleVars}
   class="Grid"
   class:grid={!inline}
   class:inline-grid={inline}
   class:stack
+  style:--templateColumns={templateColumnsResolved}
+  style:--templateRows={templateRows}
+  style:--gap={gap}
+  style:--columnGap={columnGap}
+  style:--rowGap={rowGap}
+  style:--autoFlow={autoFlow}
+  style:--items={items}
+  style:--justify={justify}
+  style:--justifyItems={justifyItems}
+  style:--content={content}
   on:click
   {...$$restProps}
 >

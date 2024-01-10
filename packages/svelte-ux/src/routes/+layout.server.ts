@@ -2,6 +2,9 @@ import { redirect } from '@sveltejs/kit';
 
 import { env } from '$env/dynamic/private';
 
+import themes from '../../themes.json';
+import { getThemeNames } from '$lib/styles/theme';
+
 export async function load({ url }) {
   // Redirect `svelte-ux.vercel.app` to `svelte-ux.techniq.dev`
   if (url.host === 'svelte-ux.vercel.app') {
@@ -10,5 +13,9 @@ export async function load({ url }) {
     throw redirect(302, newUrl.toString());
   }
 
-  return { pr_id: env.VERCEL_GIT_PULL_REQUEST_ID };
+  return {
+    themes: getThemeNames(themes),
+    // themes: { light: ['light'], dark: ['dark'] },
+    pr_id: env.VERCEL_GIT_PULL_REQUEST_ID,
+  };
 }

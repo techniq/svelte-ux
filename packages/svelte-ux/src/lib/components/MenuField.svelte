@@ -32,6 +32,7 @@
   const settingsClasses = getComponentClasses('MenuField');
 
   let open = false;
+  export let selected: any = undefined;
   $: selected = options?.find((x) => x.value === value);
 
   $: previous = () => {
