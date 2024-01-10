@@ -86,6 +86,9 @@
   $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)?.theme;
   $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)?.theme;
   $: previewTheme = showDarkTheme ? selectedDarkTheme : selectedLightTheme;
+
+  // Update site dark/light mode with preview for better experience (previewing and applying)
+  $: currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');
 </script>
 
 <main class="p-4 grid gap-3">
