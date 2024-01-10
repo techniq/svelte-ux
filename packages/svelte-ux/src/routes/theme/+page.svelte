@@ -7,32 +7,53 @@
   import Icon from '$lib/components/Icon.svelte';
   import Menu from '$lib/components/Menu.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
+  import MenuField from '$lib/components/MenuField.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
   import Switch from '$lib/components/Switch.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
 
   import { styleProps } from '$lib/actions/styleProps.js';
-  import { getThemeNames, processThemeColors, themeStylesString } from '$lib/styles/theme.js';
+  import {
+    getThemeNames,
+    processThemeColors,
+    themeStylesString,
+    type SupportedColorSpace,
+  } from '$lib/styles/theme.js';
   import type { MenuOption } from '$lib/types/options.js';
+  import ColorField from './ColorField.svelte';
+  import { getSettings } from '$lib/components/settings';
 
   export let data;
 
   type ThemeMenuOption = MenuOption & {
     themeName: string;
-    theme: typeof data.themes.daisy | typeof data.themes.skeleton;
+    theme: typeof customLightTheme | typeof data.themes.daisy | typeof data.themes.skeleton;
   };
 
   let selectedLightThemeValue: string;
   let selectedDarkThemeValue: string;
 
-  // Colorspace needs to always match app since using tailwind classes
-  const colorSpace = 'hsl';
+  const { currentTheme } = getSettings();
+
+  let colorSpace: SupportedColorSpace = 'hsl';
+
+  // Needs to always match app since using tailwind classes
+  const themeColorSpace: SupportedColorSpace = 'hsl';
 
   const daisyThemeNames = getThemeNames(data.themes.daisy);
   const skeletonThemeNames = getThemeNames(data.themes.skeleton);
 
+  let customLightTheme = {};
+  let customDarkTheme = {};
+
   $: lightThemes = [
+    {
+      label: 'Custom',
+      value: 'custom',
+      themeName: 'custom',
+      theme: customLightTheme,
+    },
     ...daisyThemeNames.light.map((themeName) => {
       return {
         label: themeName === 'light' ? 'light (daisy)' : themeName,
@@ -54,6 +75,12 @@
   ] as ThemeMenuOption[];
 
   $: darkThemes = [
+    {
+      label: 'Custom',
+      value: 'custom',
+      themeName: 'custom',
+      theme: customDarkTheme,
+    },
     ...daisyThemeNames.dark.map((themeName) => {
       return {
         label: themeName === 'dark' ? 'dark (daisy)' : themeName,
@@ -74,12 +101,12 @@
     }),
   ] as ThemeMenuOption[];
 
-  // Set initial theme selections
+  // Set initial theme selections (skip custom)
   $: if (selectedLightThemeValue === undefined) {
-    selectedLightThemeValue = lightThemes[0].value;
+    selectedLightThemeValue = lightThemes[1].value;
   }
   $: if (selectedDarkThemeValue === undefined) {
-    selectedDarkThemeValue = darkThemes[0].value;
+    selectedDarkThemeValue = darkThemes[1].value;
   }
 
   let showDarkTheme = false;
@@ -89,10 +116,34 @@
 
   // Update site dark/light mode with preview for better experience (previewing and applying)
   $: currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');
+
+  // Break cyclical dependency with lightThemes => customLightTheme -> selectedLightTheme -> lightThemes
+  function updateCustomLightTheme() {
+    customLightTheme = {
+      ...selectedLightTheme,
+      primary: selectedLightTheme?.primary ?? selectedLightTheme?.['primary-500'],
+      secondary: selectedLightTheme?.secondary ?? selectedLightTheme?.['secondary-500'],
+      accent: selectedLightTheme?.accent ?? selectedLightTheme?.['accent-500'],
+      neutral: selectedLightTheme?.neutral ?? selectedLightTheme?.['neutral-500'],
+    };
+  }
+  $: selectedLightTheme && updateCustomLightTheme();
+
+  // Break cyclical dependency with darkThemes => customDarkTheme -> selectedDarkTheme -> darkThemes
+  function updateCustomLDarkTheme() {
+    customDarkTheme = {
+      ...selectedDarkTheme,
+      primary: selectedDarkTheme?.primary ?? selectedDarkTheme?.['primary-500'],
+      secondary: selectedDarkTheme?.secondary ?? selectedDarkTheme?.['secondary-500'],
+      accent: selectedDarkTheme?.accent ?? selectedDarkTheme?.['accent-500'],
+      neutral: selectedDarkTheme?.neutral ?? selectedDarkTheme?.['neutral-500'],
+    };
+  }
+  $: selectedDarkTheme && updateCustomLDarkTheme();
 </script>
 
 <main class="p-4 grid gap-3">
-  <div class="grid sm:grid-cols-[1fr,1fr,auto] gap-3">
+  <div class="grid sm:grid-cols-[1fr,1fr,auto,auto] gap-3">
     <SelectField
       label="Light theme"
       options={lightThemes}
@@ -112,6 +163,16 @@
       on:change={() => (showDarkTheme = true)}
     />
 
+    <MenuField
+      label="Color space"
+      bind:value={colorSpace}
+      options={[
+        { label: 'hsl', value: 'hsl' },
+        { label: 'rgb', value: 'rgb' },
+        { label: 'oklch', value: 'oklch' },
+      ]}
+    />
+
     <ButtonGroup variant="fill" color="primary">
       <Tooltip title="Copy themes to clipboard" offset={2}>
         <CopyButton
@@ -129,14 +190,14 @@
             style.id = 'custom-theme';
 
             style.textContent = `
-              :root { ${themeStylesString(selectedLightTheme, colorSpace)} }
+              :root { ${themeStylesString(selectedLightTheme, themeColorSpace)} }
               @media (prefers-color-scheme: dark) {
                 :root {
-                  ${themeStylesString(selectedDarkTheme, colorSpace)}
+                  ${themeStylesString(selectedDarkTheme, themeColorSpace)}
                 }
               }
-              [data-theme=light] { ${themeStylesString(selectedLightTheme, colorSpace)} }
-              [data-theme=dark] { ${themeStylesString(selectedDarkTheme, colorSpace)} }
+              [data-theme=light] { ${themeStylesString(selectedLightTheme, themeColorSpace)} }
+              [data-theme=dark] { ${themeStylesString(selectedDarkTheme, themeColorSpace)} }
             `;
             document.head.appendChild(style);
 
@@ -169,6 +230,140 @@
         </div>
       </Toggle>
     </ButtonGroup>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-2">
+    <div class="grid gap-2">
+      <ColorField
+        label="Primary"
+        bind:value={customLightTheme.primary}
+        on:change={() => {
+          selectedLightThemeValue = 'custom';
+          showDarkTheme = false;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Secondary"
+        bind:value={customLightTheme.secondary}
+        on:change={() => {
+          selectedLightThemeValue = 'custom';
+          showDarkTheme = false;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Accent"
+        bind:value={customLightTheme.accent}
+        on:change={() => {
+          selectedLightThemeValue = 'custom';
+          showDarkTheme = false;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Neutral (optional)"
+        bind:value={customLightTheme.neutral}
+        on:change={() => {
+          selectedLightThemeValue = 'custom';
+          showDarkTheme = false;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Surface 100"
+        bind:value={customLightTheme['surface-100']}
+        on:change={() => {
+          selectedLightThemeValue = 'custom';
+          showDarkTheme = false;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Surface 200"
+        bind:value={customLightTheme['surface-200']}
+        on:change={() => {
+          selectedLightThemeValue = 'custom';
+          showDarkTheme = false;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Surface 300"
+        bind:value={customLightTheme['surface-300']}
+        on:change={() => {
+          selectedLightThemeValue = 'custom';
+          showDarkTheme = false;
+        }}
+        {colorSpace}
+      />
+    </div>
+
+    <div class="grid gap-2">
+      <ColorField
+        label="Primary"
+        bind:value={customDarkTheme.primary}
+        on:change={() => {
+          selectedDarkThemeValue = 'custom';
+          showDarkTheme = true;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Secondary"
+        bind:value={customDarkTheme.secondary}
+        on:change={() => {
+          selectedDarkThemeValue = 'custom';
+          showDarkTheme = true;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Accent"
+        bind:value={customDarkTheme.accent}
+        on:change={() => {
+          selectedDarkThemeValue = 'custom';
+          showDarkTheme = true;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Neutral (optional)"
+        bind:value={customDarkTheme.neutral}
+        on:change={() => {
+          selectedDarkThemeValue = 'custom';
+          showDarkTheme = true;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Surface 100"
+        bind:value={customDarkTheme['surface-100']}
+        on:change={() => {
+          selectedDarkThemeValue = 'custom';
+          showDarkTheme = true;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Surface 200"
+        bind:value={customDarkTheme['surface-200']}
+        on:change={() => {
+          selectedDarkThemeValue = 'custom';
+          showDarkTheme = true;
+        }}
+        {colorSpace}
+      />
+      <ColorField
+        label="Surface 300"
+        bind:value={customDarkTheme['surface-300']}
+        on:change={() => {
+          selectedDarkThemeValue = 'custom';
+          showDarkTheme = true;
+        }}
+        {colorSpace}
+      />
+    </div>
   </div>
 
   <h1 class="grid grid-cols-[1fr,auto]">
