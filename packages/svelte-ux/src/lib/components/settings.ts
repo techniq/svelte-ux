@@ -27,6 +27,13 @@ export type SettingsInput = {
     dark?: string[];
   };
   currentTheme?: ThemeStore;
+
+  /** The existing locale store, if calling settings when there is already an existing `Settings` object */
+  locale?: LocaleStore;
+  /** The existing locale store, if calling settings when there is already an existing `Settings` object */
+  localeSettings?: Readable<LocaleSettings>;
+  /** The existing locale store, if calling settings when there is already an existing `Settings` object */
+  format?: Readable<FormatFunctions>;
 };
 
 export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> {
@@ -41,17 +48,14 @@ export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> 
 
 const settingsKey = Symbol();
 
-export function settings(settings: SettingsInput): Settings {
-  let lightThemes = settings.themes?.light ?? ['light'];
-  let darkThemes = settings.themes?.dark ?? ['dark'];
-
-  let currentTheme =
-    // In some cases, `settings` is called again from inside a component. Don't create a new theme store in this case.
-    settings.currentTheme ??
-    createThemeStore({
-      light: lightThemes,
-      dark: darkThemes,
-    });
+function createLocaleStores(settings: SettingsInput) {
+  if (settings.locale && settings.localeSettings && settings.format) {
+    return {
+      locale: settings.locale,
+      localeSettings: settings.localeSettings,
+      format: settings.format,
+    };
+  }
 
   let allLocales = getAllKnownLocales(settings.localeFormats);
 
@@ -68,6 +72,27 @@ export function settings(settings: SettingsInput): Settings {
     };
   });
 
+  return {
+    locale,
+    localeSettings,
+    format: derived(localeSettings, buildFormatters),
+  };
+}
+
+export function settings(settings: SettingsInput): Settings {
+  let lightThemes = settings.themes?.light ?? ['light'];
+  let darkThemes = settings.themes?.dark ?? ['dark'];
+
+  let currentTheme =
+    // In some cases, `settings` is called again from inside a component. Don't create a new theme store in this case.
+    settings.currentTheme ??
+    createThemeStore({
+      light: lightThemes,
+      dark: darkThemes,
+    });
+
+  let localeStores = createLocaleStores(settings);
+
   return setContext<Settings>(settingsKey, {
     ...settings,
     themes: {
@@ -75,9 +100,7 @@ export function settings(settings: SettingsInput): Settings {
       dark: darkThemes,
     },
     currentTheme,
-    locale,
-    localeSettings,
-    format: derived(localeSettings, buildFormatters),
+    ...localeStores,
   });
 }
 
