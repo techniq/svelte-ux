@@ -12,16 +12,21 @@
   type $$Props = ComponentProps<TextField> & { value: string };
 
   export let value: string;
-  export let colorSpace: SupportedColorSpace = 'rgb';
+  export let colorSpace: SupportedColorSpace | 'hex' = 'rgb';
 
-  function formatColor(value: string, colorSpace: SupportedColorSpace) {
+  function formatColor(value: string, colorSpace: SupportedColorSpace | 'hex') {
     if (value) {
-      const colorValue = colorVariableValue(value, colorSpace);
-      if (colorValue) {
-        return `${colorSpace}(${colorValue})`;
+      if (colorSpace === 'hex') {
+        // Only format if not already formatted.  Fixes `#123` becoming `#112233`
+        return value.startsWith('#') ? value : formatHex(value);
       } else {
-        // Return original if unable to convert (i.e invalid such as `rgb( 20 30)`)
-        return value;
+        const colorValue = colorVariableValue(value, colorSpace);
+        if (colorValue) {
+          return `${colorSpace}(${colorValue})`;
+        } else {
+          // Return original if unable to convert (i.e invalid such as `rgb( 20 30)`)
+          return value;
+        }
       }
     } else {
       return value;
@@ -39,7 +44,7 @@
   {...$$restProps}
 >
   <div slot="prepend" class="grid grid-stack mr-3">
-    <div class="w-6 h-6 rounded" style:background={value} />
+    <div class="w-6 h-6 border rounded" style:background={value} />
     <input
       type="color"
       value={formatHex(value)}

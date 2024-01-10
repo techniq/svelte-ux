@@ -169,6 +169,7 @@
       label="Color space"
       bind:value={colorSpace}
       options={[
+        { label: 'hex', value: 'hex' },
         { label: 'hsl', value: 'hsl' },
         { label: 'rgb', value: 'rgb' },
         { label: 'oklch', value: 'oklch' },
