@@ -1,5 +1,36 @@
 # svelte-ux
 
+## 0.58.0-next.9
+
+### Minor Changes
+
+- Update Settings component to expose each settings key as a component prop ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add theme selection/creation page and simplify loading themes ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+- - Add locale settings to settings object, and allow dynamically changing the current locale. ([#202](https://github.com/techniq/svelte-ux/pull/202))
+  - Move format function to be a store on the settings object, which updates when the locale changes.
+
+- Rename `cssVars` action to `styleVars` and do not prefix properties with `--` by default (more flexible) ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+### Patch Changes
+
+- [SelectField] Add `stepper` prop to iterate through options (like `MenuField`) ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+- [MenuField] Expose `selected` option via prop (similar to `SelectField`) ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+- Rename `ThemeButton` to `ThemeSelect` ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Map Skeleton themes to Svelte UX themes ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [SelectField] Fix toggling display of options menu using toggleIcon. Support hiding toggleIcon (`<SelectField toggleIcon={null} /> ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+- Prevent cursor jumping around when backspacing near a decimal point in a number TextField ([#178](https://github.com/techniq/svelte-ux/pull/178))
+
+- Update AppLayout nav to only show scrollbar when overflown (Windows, Mac with "Show scrollbars: always) ([#171](https://github.com/techniq/svelte-ux/pull/171))
+
+- Add `ThemeSwitch` component to toggle between light/dark theme ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
 ## 0.58.0-next.8
 
 ### Minor Changes
