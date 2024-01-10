@@ -94,6 +94,8 @@ const defaultLocaleSettings: LocaleSettings = {
       Quarter: 'Quarter',
       CalendarYear: 'Calendar Year',
       FiscalYearOct: 'Fiscal Year (Oct)',
+
+      Today: 'Today',
     },
   },
   formats: {

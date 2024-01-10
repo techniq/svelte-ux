@@ -1,7 +1,8 @@
 import { startOfDay, isLeapYear, isAfter, isBefore, subYears } from 'date-fns';
 
-import { getDateFuncsByPeriodType } from './date';
+import { getDateFuncsByPeriodType, updatePeriodeTypeWithWeekStartsOn } from './date';
 import { PeriodType } from './date_types';
+import type { LocaleSettings } from '.';
 
 export type DateRange = {
   from: Date | null;
@@ -9,19 +10,30 @@ export type DateRange = {
   periodType?: PeriodType | null;
 };
 
-export const dayPresets = getDateRangePresets(PeriodType.Day);
-export const biWeekSun1Presets = getDateRangePresets(PeriodType.BiWeek1Sun);
-export const biWeekMon1Presets = getDateRangePresets(PeriodType.BiWeek1Mon);
-export const monthPresets = getDateRangePresets(PeriodType.Month);
-export const quarterPresets = getDateRangePresets(PeriodType.Quarter);
-export const fiscalYearPresets = getDateRangePresets(PeriodType.FiscalYearOctober);
+// All this is exported, but never used. Is it usefull?
+export const dayPresets = getDateRangePresets(undefined, PeriodType.Day);
+export const biWeekSun1Presets = getDateRangePresets(undefined, PeriodType.BiWeek1Sun);
+export const biWeekMon1Presets = getDateRangePresets(undefined, PeriodType.BiWeek1Mon);
+export const monthPresets = getDateRangePresets(undefined, PeriodType.Month);
+export const quarterPresets = getDateRangePresets(undefined, PeriodType.Quarter);
+export const fiscalYearPresets = getDateRangePresets(undefined, PeriodType.FiscalYearOctober);
 
 const now = new Date();
 
-export function getDateRangePresets(periodType: PeriodType): { label: string; value: DateRange }[] {
+export function getDateRangePresets(
+  settings: LocaleSettings | undefined,
+  periodType: PeriodType
+): { label: string; value: DateRange }[] {
   let now = new Date();
   const today = startOfDay(now);
-  const { start, end, add } = getDateFuncsByPeriodType(periodType);
+
+  if (settings) {
+    periodType =
+      updatePeriodeTypeWithWeekStartsOn(settings.formats.dates.weekStartsOn, periodType) ??
+      periodType;
+  }
+
+  const { start, end, add } = getDateFuncsByPeriodType(settings, periodType);
 
   switch (periodType) {
     case PeriodType.Day: {
@@ -29,7 +41,7 @@ export function getDateRangePresets(periodType: PeriodType): { label: string; va
 
       return [
         {
-          label: 'Today', // Current Day
+          label: settings?.dictionary.Date.Today ?? 'Today', // Current Day
           value: {
             from: today,
             to: end(today),
@@ -456,14 +468,18 @@ export function getPreviousYearPeriodOffset(
 
 export type PeriodComparison = 'prevPeriod' | 'prevYear' | 'fiftyTwoWeeksAgo';
 
-export function getPeriodComparisonOffset(view: PeriodComparison, period: DateRange | undefined) {
+export function getPeriodComparisonOffset(
+  settings: LocaleSettings,
+  view: PeriodComparison,
+  period: DateRange | undefined
+) {
   if (period == null || period.from == null || period.to == null || period.periodType == null) {
     throw new Error('Period must be defined to calculate offset');
   }
 
   switch (view) {
     case 'prevPeriod':
-      const dateFuncs = getDateFuncsByPeriodType(period.periodType);
+      const dateFuncs = getDateFuncsByPeriodType(settings, period.periodType);
       return dateFuncs.difference(period.from, period.to) - 1; // Difference counts full days, need additoinal offset
 
     case 'prevYear':

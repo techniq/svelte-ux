@@ -14,7 +14,7 @@
   import { getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
-  const { format } = getSettings();
+  const { format, localeSettings } = getSettings();
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -82,7 +82,10 @@
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
-            const { difference, start, end, add } = getDateFuncsByPeriodType(value.periodType);
+            const { difference, start, end, add } = getDateFuncsByPeriodType(
+              $localeSettings,
+              value.periodType
+            );
             const offset = difference(value.from, value.to) - 1;
             value = {
               from: start(add(value.from, offset)),
@@ -129,7 +132,10 @@
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
-            const { difference, start, end, add } = getDateFuncsByPeriodType(value.periodType);
+            const { difference, start, end, add } = getDateFuncsByPeriodType(
+              $localeSettings,
+              value.periodType
+            );
             const offset = difference(value.to, value.from) + 1;
             value = {
               from: start(add(value.from, offset)),

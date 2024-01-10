@@ -4,6 +4,9 @@
   import Preview from '$lib/components/Preview.svelte';
   import DateRange from '$lib/components/DateRange.svelte';
   import { PeriodType, getDateFuncsByPeriodType } from '$lib/utils/date';
+  import { getSettings } from '$lib/components/settings';
+
+  const { localeSettings } = getSettings();
 
   let selected = {
     from: new Date('1982-03-01T00:00:00'),
@@ -57,8 +60,8 @@
 <Preview>
   <DateRange
     periodTypes={[PeriodType.Day, PeriodType.Month]}
-    getPeriodTypePresets={(periodType) => {
-      const { start, end, add } = getDateFuncsByPeriodType(periodType);
+    getPeriodTypePresets={(settings, periodType) => {
+      const { start, end, add } = getDateFuncsByPeriodType($localeSettings, periodType);
 
       if (periodType === PeriodType.Day) {
         const today = startOfDay(new Date());

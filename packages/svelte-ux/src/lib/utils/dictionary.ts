@@ -12,6 +12,8 @@ export type DictionaryMessagesOptions = {
     Quarter?: string;
     CalendarYear?: string;
     FiscalYearOct?: string;
+
+    Today?: string;
   };
 };
 

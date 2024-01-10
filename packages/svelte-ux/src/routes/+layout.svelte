@@ -31,7 +31,7 @@
   $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
   settings({
-    // fallbackLocale: 'fr',
+    fallbackLocale: 'fr',
     localeFormats: {
       fr: createLocaleSettings({
         locale: 'fr',
@@ -60,6 +60,8 @@
             CalendarYear: 'Année',
             FiscalYearOct: 'Année fiscale (octobre)',
             BiWeek: 'Bi-hebdomadaire',
+
+            Today: "Aujourd'hui",
           },
         },
       }),

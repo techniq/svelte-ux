@@ -32,7 +32,7 @@
   export let center = false;
 
   const settingsClasses = getComponentClasses('DatePickerField');
-  const { format } = getSettings();
+  const { format, localeSettings } = getSettings();
   $: dictionary = $format.settings.dictionary;
 
   let open: boolean = false;
@@ -83,7 +83,7 @@
           class="p-2"
           on:click={() => {
             if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType(periodType);
+              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
               value = add(value, -1);
               dispatch('change', value);
             }
@@ -121,7 +121,7 @@
           class="p-2"
           on:click={() => {
             if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType(periodType);
+              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
               value = add(value, 1);
               dispatch('change', value);
             }
