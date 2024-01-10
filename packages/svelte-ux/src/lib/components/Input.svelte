@@ -24,8 +24,11 @@
   export let mask = '';
   export let replace = '_';
   export let accept: string | RegExp = '\\d';
-  export let placeholder = mask;
+  let placeholderProp: string | undefined = undefined;
+  export { placeholderProp as placeholder };
   export let disabled = false;
+
+  $: placeholder = placeholderProp ?? mask;
 
   const settingsClasses = getComponentClasses('Input');
 
@@ -61,7 +64,11 @@
 
   function onInput(e: Event & { currentTarget: HTMLInputElement }) {
     const el = e.currentTarget;
+    applyMask(el, mask);
+    dispatch('change', { value });
+  }
 
+  function applyMask(el: HTMLInputElement, mask: string) {
     if (mask) {
       // For selection (including just cursor position), ...
       const [i, j] = [el.selectionStart, el.selectionEnd].map((i) => {
@@ -75,9 +82,9 @@
     } else {
       value = el.value;
     }
-
-    dispatch('change', { value });
   }
+
+  $: if (inputEl) applyMask(inputEl, mask);
 
   onMount(() => {
     // Format on initial to handle partial values as well as different (but compatible) formats (ex. phone numbers)
