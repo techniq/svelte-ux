@@ -1,6 +1,41 @@
 import daisyThemes from 'daisyui/src/theming/themes';
-import { themeOrder } from 'daisyui/src/theming/themeDefaults';
+// import { themeOrder } from 'daisyui/src/theming/themeDefaults'; // breaks build
 import { sortFunc } from '../utils/sort';
+
+const themeNames = [
+  'light',
+  'dark',
+  'cupcake',
+  'bumblebee',
+  'emerald',
+  'corporate',
+  'synthwave',
+  'retro',
+  'cyberpunk',
+  'valentine',
+  'halloween',
+  'garden',
+  'forest',
+  'aqua',
+  'lofi',
+  'pastel',
+  'fantasy',
+  'wireframe',
+  'black',
+  'luxury',
+  'dracula',
+  'cmyk',
+  'autumn',
+  'business',
+  'acid',
+  'lemonade',
+  'night',
+  'coffee',
+  'winter',
+  'dim',
+  'nord',
+  'sunset',
+];
 
 const daisyColorMap = {
   'base-100': 'surface-100',
@@ -14,7 +49,7 @@ const daisyColorMap = {
 /**
  *  Map Daisy UI color names to Svelte UX names, and sort themes
  */
-function mapColorsName(themes, colorMap) {
+function mapColorsName(themes: typeof daisyThemes, colorMap: typeof daisyColorMap) {
   return Object.fromEntries(
     Object.entries(themes)
       .map(([themeName, colors]) => {
@@ -27,21 +62,10 @@ function mapColorsName(themes, colorMap) {
           ),
         ];
       })
-      .sort(sortFunc(([themeName]) => themeOrder.indexOf(themeName)))
+      .sort(sortFunc(([themeName]) => themeNames.indexOf(themeName)))
   );
 }
 
 const themes = mapColorsName(daisyThemes, daisyColorMap);
 
-let lightThemes: string[] = [];
-let darkThemes: string[] = [];
-
-Object.entries(themes).forEach(([themeName, colors]) => {
-  if (colors['color-scheme'] === 'dark') {
-    darkThemes.push(themeName);
-  } else {
-    lightThemes.push(themeName);
-  }
-});
-
-export { themes, lightThemes, darkThemes };
+export { themes };

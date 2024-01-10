@@ -27,6 +27,7 @@
     "@sveltejs/kit": "^1.30.3",
     "@sveltejs/package": "^2.2.5",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/culori": "^2.0.4",
     "@types/d3-array": "^3.2.1",
     "@types/d3-scale": "^4.0.8",
     "@types/lodash-es": "^4.17.12",

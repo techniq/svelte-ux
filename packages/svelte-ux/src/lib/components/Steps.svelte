@@ -1,22 +1,17 @@
 <script lang="ts">
-  import { cssVars } from '../actions/cssVars';
-
   export let items: any[];
-
   export let lineGap = 4;
 
   // binded
   let circleSize = 0;
-
-  $: styleVars = {
-    circleSize,
-    lineTop: `${circleSize + lineGap}px`,
-    lineBottom: `${lineGap}px`,
-    lineOffset: `${circleSize / 2}px`,
-  };
 </script>
 
-<ol use:cssVars={styleVars}>
+<ol
+  style:--circleSize={circleSize}
+  style:--lineTop="{circleSize + lineGap}px"
+  style:--lineBottom="{lineGap}px"
+  style:--lineOffset="{circleSize / 2}px"
+>
   {#each items as item, index}
     <li class="step relative flex gap-4 pb-10">
       <div bind:clientWidth={circleSize}>
