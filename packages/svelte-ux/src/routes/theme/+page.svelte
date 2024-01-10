@@ -31,10 +31,12 @@
     theme: typeof customLightTheme | typeof data.themes.daisy | typeof data.themes.skeleton;
   };
 
+  const { currentTheme } = getSettings();
+
   let selectedLightThemeValue: string;
   let selectedDarkThemeValue: string;
 
-  const { currentTheme } = getSettings();
+  let showOptionalColors = false;
 
   let colorSpace: SupportedColorSpace = 'hsl';
 
@@ -261,15 +263,56 @@
         }}
         {colorSpace}
       />
-      <ColorField
-        label="Neutral (optional)"
-        bind:value={customLightTheme.neutral}
-        on:change={() => {
-          selectedLightThemeValue = 'custom';
-          showDarkTheme = false;
-        }}
-        {colorSpace}
-      />
+
+      {#if showOptionalColors}
+        <ColorField
+          label="Neutral (optional)"
+          bind:value={customLightTheme.neutral}
+          on:change={() => {
+            selectedLightThemeValue = 'custom';
+            showDarkTheme = false;
+          }}
+          {colorSpace}
+        />
+        <!-- State colors -->
+        <ColorField
+          label="Info (optional)"
+          bind:value={customLightTheme.info}
+          on:change={() => {
+            selectedLightThemeValue = 'custom';
+            showDarkTheme = false;
+          }}
+          {colorSpace}
+        />
+        <ColorField
+          label="Success (optional)"
+          bind:value={customLightTheme.success}
+          on:change={() => {
+            selectedLightThemeValue = 'custom';
+            showDarkTheme = false;
+          }}
+          {colorSpace}
+        />
+        <ColorField
+          label="Warning (optional)"
+          bind:value={customLightTheme.warning}
+          on:change={() => {
+            selectedLightThemeValue = 'custom';
+            showDarkTheme = false;
+          }}
+          {colorSpace}
+        />
+        <ColorField
+          label="Danger (optional)"
+          bind:value={customLightTheme.danger}
+          on:change={() => {
+            selectedLightThemeValue = 'custom';
+            showDarkTheme = false;
+          }}
+          {colorSpace}
+        />
+      {/if}
+
       <ColorField
         label="Surface 100"
         bind:value={customLightTheme['surface-100']}
@@ -279,24 +322,26 @@
         }}
         {colorSpace}
       />
-      <ColorField
-        label="Surface 200"
-        bind:value={customLightTheme['surface-200']}
-        on:change={() => {
-          selectedLightThemeValue = 'custom';
-          showDarkTheme = false;
-        }}
-        {colorSpace}
-      />
-      <ColorField
-        label="Surface 300"
-        bind:value={customLightTheme['surface-300']}
-        on:change={() => {
-          selectedLightThemeValue = 'custom';
-          showDarkTheme = false;
-        }}
-        {colorSpace}
-      />
+      {#if showOptionalColors}
+        <ColorField
+          label="Surface 200 (optional)"
+          bind:value={customLightTheme['surface-200']}
+          on:change={() => {
+            selectedLightThemeValue = 'custom';
+            showDarkTheme = false;
+          }}
+          {colorSpace}
+        />
+        <ColorField
+          label="Surface 300 (optional)"
+          bind:value={customLightTheme['surface-300']}
+          on:change={() => {
+            selectedLightThemeValue = 'custom';
+            showDarkTheme = false;
+          }}
+          {colorSpace}
+        />
+      {/if}
     </div>
 
     <div class="grid gap-2">
@@ -327,15 +372,56 @@
         }}
         {colorSpace}
       />
-      <ColorField
-        label="Neutral (optional)"
-        bind:value={customDarkTheme.neutral}
-        on:change={() => {
-          selectedDarkThemeValue = 'custom';
-          showDarkTheme = true;
-        }}
-        {colorSpace}
-      />
+
+      {#if showOptionalColors}
+        <ColorField
+          label="Neutral (optional)"
+          bind:value={customDarkTheme.neutral}
+          on:change={() => {
+            selectedDarkThemeValue = 'custom';
+            showDarkTheme = true;
+          }}
+          {colorSpace}
+        />
+        <!-- State colors -->
+        <ColorField
+          label="Info (optional)"
+          bind:value={customDarkTheme.info}
+          on:change={() => {
+            selectedDarkThemeValue = 'custom';
+            showDarkTheme = true;
+          }}
+          {colorSpace}
+        />
+        <ColorField
+          label="Success (optional)"
+          bind:value={customDarkTheme.success}
+          on:change={() => {
+            selectedDarkThemeValue = 'custom';
+            showDarkTheme = true;
+          }}
+          {colorSpace}
+        />
+        <ColorField
+          label="Warning (optional)"
+          bind:value={customDarkTheme.warning}
+          on:change={() => {
+            selectedDarkThemeValue = 'custom';
+            showDarkTheme = true;
+          }}
+          {colorSpace}
+        />
+        <ColorField
+          label="Danger (optional)"
+          bind:value={customDarkTheme.danger}
+          on:change={() => {
+            selectedDarkThemeValue = 'custom';
+            showDarkTheme = true;
+          }}
+          {colorSpace}
+        />
+      {/if}
+
       <ColorField
         label="Surface 100"
         bind:value={customDarkTheme['surface-100']}
@@ -345,26 +431,31 @@
         }}
         {colorSpace}
       />
-      <ColorField
-        label="Surface 200"
-        bind:value={customDarkTheme['surface-200']}
-        on:change={() => {
-          selectedDarkThemeValue = 'custom';
-          showDarkTheme = true;
-        }}
-        {colorSpace}
-      />
-      <ColorField
-        label="Surface 300"
-        bind:value={customDarkTheme['surface-300']}
-        on:change={() => {
-          selectedDarkThemeValue = 'custom';
-          showDarkTheme = true;
-        }}
-        {colorSpace}
-      />
+      {#if showOptionalColors}
+        <ColorField
+          label="Surface 200 (optional)"
+          bind:value={customDarkTheme['surface-200']}
+          on:change={() => {
+            selectedDarkThemeValue = 'custom';
+            showDarkTheme = true;
+          }}
+          {colorSpace}
+        />
+        <ColorField
+          label="Surface 300 (optional)"
+          bind:value={customDarkTheme['surface-300']}
+          on:change={() => {
+            selectedDarkThemeValue = 'custom';
+            showDarkTheme = true;
+          }}
+          {colorSpace}
+        />
+      {/if}
     </div>
   </div>
+  <Button color="primary" size="sm" on:click={() => (showOptionalColors = !showOptionalColors)}>
+    {showOptionalColors ? 'Hide' : 'Show'} optional colors
+  </Button>
 
   <h1 class="grid grid-cols-[1fr,auto]">
     Theme preview
