@@ -64,10 +64,12 @@
         aside: 'border-r',
         nav: 'bg-surface-300 py-2',
       },
-      AppBar: 'bg-primary text-primary-content shadow-md',
+      AppBar:
+        'bg-primary text-primary-content shadow-md [text-shadow:1px_1px_2px_theme(colors.primary-700)]',
       NavItem: {
-        root: 'text-sm text-surface-content/70 pl-5 py-2 border-l-4 border-transparent hover:bg-surface-100/70',
-        active: 'text-primary bg-surface-100 border-l-4 border-primary font-medium',
+        root: 'text-sm text-surface-content/70 pl-6 py-2 hover:bg-surface-100/70 relative',
+        active:
+          'text-primary bg-surface-100 font-medium before:absolute before:bg-primary before:rounded-full before:w-1 before:h-2/3 before:left-[6px] shadow z-10',
       },
     },
     themes: data.themes,
@@ -240,6 +242,9 @@
 
   :global(body) {
     @apply bg-surface-200 accent-primary;
+    /* background-image:
+      radial-gradient(at 0% 0%, hsl(var(--color-secondary) / 0.33) 0px, transparent 50%),
+      radial-gradient(at 98% 1%, hsl(var(--color-primary) / 0.33) 0px, transparent 50%); */
   }
 
   :global(nav h1) {
