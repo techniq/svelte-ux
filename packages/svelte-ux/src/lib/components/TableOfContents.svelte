@@ -10,6 +10,7 @@
 
   export let element = 'main';
   export let maxDepth = 6;
+  export let icon = mdiCircleSmall;
 
   let activeHeadingId = '';
   let headings = [];
@@ -69,7 +70,7 @@
       )}
     >
       {#if node.level > 1}
-        <Icon path={mdiCircleSmall} class="-mx-1 text-surface-content/30" />
+        <Icon path={icon} class="-mx-1 text-surface-content/30" />
       {/if}
       {@html node.name}
     </a>
