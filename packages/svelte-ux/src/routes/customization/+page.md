@@ -62,57 +62,54 @@ settings({
     },
   },
 
-  formats: {
-    numbers: {
-      // This is the default, but you can override it here for your app globally
-      default: {
-        locales: 'en',
-        currency: 'USD',
-        fractionDigits: 2,
-        currencyDisplay: 'symbol',
-      },
-      // and/or per preset
-      currency: {
-        locales: 'fr',
-        currency: 'EUR',
-      },
-      decimal: {
-        fractionDigits: 4,
-      },
-    },
+  // fallbackLocale: 'fr',
+  localeFormats: {
+    fr: createLocaleSettings({
+      locale: 'fr',
 
-    dates: {
-      // This is the default, but you can override it here for your app
-      locales: 'en',
-      weekStartsOn: DayOfWeek.Sunday,
-
-      presets: {
-        day: {
-          long: { dateStyle: 'full' },
+      formats: {
+        dates: {
+          baseParsing: 'dd/MM/yyyy',
+          ordinalSuffixes: {
+            one: 'er',
+          },
         },
-        month: {
-          default: [DateToken.Month_long],
+
+        numbers: {
+          defaults: {
+            currency: 'EUR',
+          },
         },
       },
 
-      ordinalSuffixes: {
-        en: {
-          one: 'st',
-          two: 'nd',
-          few: 'rd',
+      dictionary: {
+        Ok: 'Valider',
+        Cancel: 'Annuler',
+
+        Date: {
+          Start: 'Début',
+          End: 'Fin',
+
+          Day: 'Jour',
+          DayTime: 'Jour & Heure',
+          Time: 'Heure',
+          Week: 'Semaine',
+          Month: 'Mois',
+          Quarter: 'Trimestre',
+          CalendarYear: 'Année',
+          FiscalYearOct: 'Année fiscale (octobre)',
+          BiWeek: 'Bi-hebdomadaire',
+
+          PeriodDay: {
+            Current: "Aujourd'hui",
+            Last: 'Hier',
+            LastX: 'Les {0} derniers jours',
+          },
+
+          //...
         },
       },
-
-      dico: {
-        Day: 'Day',
-        Week: 'Week',
-        BiWeek: 'Bi-Week',
-        Month: 'Month',
-        Quarter: 'Quarter',
-        CalendarYear: 'Calendar Year',
-        FiscalYearOct: 'Fiscal Year (Oct)',
-      },
-    },
+    }),
   },
 });
 ```
