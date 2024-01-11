@@ -364,6 +364,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <button
+  type="button"
   aria-haspopup={!inlineOptions ? "listbox" : undefined}
   class={cls("SelectField block w-full cursor-default text-left", theme.root, classes.root, $$props.class)}
   on:click={onClick}>
