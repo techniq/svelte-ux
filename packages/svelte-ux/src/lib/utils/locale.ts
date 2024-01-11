@@ -99,38 +99,38 @@ const defaultLocaleSettings: LocaleSettings = {
       CalendarYear: 'Calendar Year',
       FiscalYearOct: 'Fiscal Year (Oct)',
 
-      PeriodeDay: {
+      PeriodDay: {
         Current: 'Today',
         Last: 'Yesterday',
         LastX: 'Last {0} days',
       },
-      PeriodeWeek: {
+      PeriodWeek: {
         Current: 'This week',
         Last: 'Last week',
         LastX: 'Last {0} weeks',
       },
-      PeriodeBiWeek: {
+      PeriodBiWeek: {
         Current: 'This bi-week',
         Last: 'Last bi-week',
         LastX: 'Last {0} bi-weeks',
       },
-      PeriodeMonth: {
+      PeriodMonth: {
         Current: 'This month',
         Last: 'Last month',
         LastX: 'Last {0} months',
       },
-      PeriodeQuarter: {
+      PeriodQuarter: {
         Current: 'This quarter',
         Last: 'Last quarter',
         LastX: 'Last {0} quarters',
       },
-      PeriodeQuarterSameLastyear: 'Same quarter last year',
-      PeriodeYear: {
+      PeriodQuarterSameLastyear: 'Same quarter last year',
+      PeriodYear: {
         Current: 'This year',
         Last: 'Last year',
         LastX: 'Last {0} years',
       },
-      PeriodeFiscalYear: {
+      PeriodFiscalYear: {
         Current: 'This fiscal year',
         Last: 'Last fiscal year',
         LastX: 'Last {0} fiscal years',

@@ -336,7 +336,7 @@ export function getDateFuncsByPeriodType(
   periodType: PeriodType | null | undefined
 ) {
   if (settings) {
-    periodType = updatePeriodeTypeWithWeekStartsOn(settings.formats.dates.weekStartsOn, periodType);
+    periodType = updatePeriodTypeWithWeekStartsOn(settings.formats.dates.weekStartsOn, periodType);
   }
 
   switch (periodType) {
@@ -650,7 +650,7 @@ export function formatDate(
   return formatDateWithLocale(defaultLocale, date, periodType, options);
 }
 
-export function updatePeriodeTypeWithWeekStartsOn(
+export function updatePeriodTypeWithWeekStartsOn(
   weekStartsOn: DayOfWeek,
   periodType: PeriodType | null | undefined
 ) {
@@ -709,7 +709,7 @@ export function formatDateWithLocale(
 
   const { day, dayTime, timeOnly, week, month, monthsYear, year } = settings.formats.dates.presets;
 
-  periodType = updatePeriodeTypeWithWeekStartsOn(weekStartsOn, periodType) ?? periodType;
+  periodType = updatePeriodTypeWithWeekStartsOn(weekStartsOn, periodType) ?? periodType;
 
   /** Resolve a preset given the chosen variant */
   function rv(preset: DateFormatVariantPreset) {

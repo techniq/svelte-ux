@@ -17,18 +17,18 @@ export type DictionaryMessagesOptions = {
     CalendarYear?: string;
     FiscalYearOct?: string;
 
-    PeriodeDay?: PeriodeDayMsg;
-    PeriodeWeek?: PeriodeDayMsg;
-    PeriodeBiWeek?: PeriodeDayMsg;
-    PeriodeMonth?: PeriodeDayMsg;
-    PeriodeQuarter?: PeriodeDayMsg;
-    PeriodeQuarterSameLastyear?: string;
-    PeriodeYear?: PeriodeDayMsg;
-    PeriodeFiscalYear?: PeriodeDayMsg;
+    PeriodDay?: PeriodDayMsg;
+    PeriodWeek?: PeriodDayMsg;
+    PeriodBiWeek?: PeriodDayMsg;
+    PeriodMonth?: PeriodDayMsg;
+    PeriodQuarter?: PeriodDayMsg;
+    PeriodQuarterSameLastyear?: string;
+    PeriodYear?: PeriodDayMsg;
+    PeriodFiscalYear?: PeriodDayMsg;
   };
 };
 
-export type PeriodeDayMsg = {
+export type PeriodDayMsg = {
   Current?: string;
   Last?: string;
   LastX?: string;

@@ -31,7 +31,7 @@
   $: title = data.pr_id ? `🚧 (pr:${data.pr_id}) - ${baseTitle}` : baseTitle;
 
   settings({
-    fallbackLocale: 'fr',
+    // fallbackLocale: 'fr',
     localeFormats: {
       fr: createLocaleSettings({
         locale: 'fr',
@@ -66,38 +66,38 @@
             FiscalYearOct: 'Année fiscale (octobre)',
             BiWeek: 'Bi-hebdomadaire',
 
-            PeriodeDay: {
+            PeriodDay: {
               Current: "Aujourd'hui",
               Last: 'Hier',
               LastX: 'Les {0} derniers jours',
             },
-            PeriodeWeek: {
+            PeriodWeek: {
               Current: 'Cette semaine',
               Last: 'La semaine dernière',
               LastX: 'Les {0} dernières semaines',
             },
-            PeriodeBiWeek: {
+            PeriodBiWeek: {
               Current: 'Cette quinzaine',
               Last: 'La quinzaine dernière',
               LastX: 'Les {0} dernières quinzaines',
             },
-            PeriodeMonth: {
+            PeriodMonth: {
               Current: 'Ce mois-ci',
               Last: 'Le mois dernier',
               LastX: 'Les {0} derniers mois',
             },
-            PeriodeQuarter: {
+            PeriodQuarter: {
               Current: 'Ce trimestre',
               Last: 'Le trimestre dernier',
               LastX: 'Les {0} derniers trimestres',
             },
-            PeriodeQuarterSameLastyear: "Même trimestre l'année dernière",
-            PeriodeYear: {
+            PeriodQuarterSameLastyear: "Même trimestre l'année dernière",
+            PeriodYear: {
               Current: 'Cette année',
               Last: "L'année dernière",
               LastX: 'Les {0} dernières années',
             },
-            PeriodeFiscalYear: {
+            PeriodFiscalYear: {
               Current: 'Cette année fiscale',
               Last: "L'année fiscale dernière",
               LastX: 'Les {0} dernières années fiscales',

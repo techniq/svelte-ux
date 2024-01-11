@@ -1,9 +1,8 @@
 import { startOfDay, isLeapYear, isAfter, isBefore, subYears } from 'date-fns';
 
-import { getDateFuncsByPeriodType, updatePeriodeTypeWithWeekStartsOn } from './date';
+import { getDateFuncsByPeriodType, updatePeriodTypeWithWeekStartsOn } from './date';
 import { PeriodType } from './date_types';
 import type { LocaleSettings } from '.';
-import type { PeriodeDayMsg } from './dictionary';
 
 export type DateRange = {
   from: Date | null;
@@ -14,13 +13,13 @@ export type DateRange = {
 function formatMsg(
   settings: LocaleSettings,
   type:
-    | 'PeriodeDay'
-    | 'PeriodeWeek'
-    | 'PeriodeBiWeek'
-    | 'PeriodeMonth'
-    | 'PeriodeQuarter'
-    | 'PeriodeYear'
-    | 'PeriodeFiscalYear',
+    | 'PeriodDay'
+    | 'PeriodWeek'
+    | 'PeriodBiWeek'
+    | 'PeriodMonth'
+    | 'PeriodQuarter'
+    | 'PeriodYear'
+    | 'PeriodFiscalYear',
   lastX: number
 ) {
   return lastX === 0
@@ -39,7 +38,7 @@ export function getDateRangePresets(
 
   if (settings) {
     periodType =
-      updatePeriodeTypeWithWeekStartsOn(settings.formats.dates.weekStartsOn, periodType) ??
+      updatePeriodTypeWithWeekStartsOn(settings.formats.dates.weekStartsOn, periodType) ??
       periodType;
   }
 
@@ -51,7 +50,7 @@ export function getDateRangePresets(
 
       return [0, 1, 3, 7, 14, 30].map((lastX) => {
         return {
-          label: formatMsg(settings, 'PeriodeDay', lastX),
+          label: formatMsg(settings, 'PeriodDay', lastX),
           value: {
             from: add(last, -lastX + 1),
             to: lastX === 0 ? end(today) : end(last),
@@ -72,7 +71,7 @@ export function getDateRangePresets(
 
       return [0, 1, 2, 4, 6].map((lastX) => {
         return {
-          label: formatMsg(settings, 'PeriodeWeek', lastX),
+          label: formatMsg(settings, 'PeriodWeek', lastX),
           value: {
             from: add(last, -lastX + 1),
             to: lastX === 0 ? end(today) : end(last),
@@ -100,7 +99,7 @@ export function getDateRangePresets(
 
       return [0, 1, 2, 4, 6].map((lastX) => {
         return {
-          label: formatMsg(settings, 'PeriodeBiWeek', lastX),
+          label: formatMsg(settings, 'PeriodBiWeek', lastX),
           value: {
             from: add(last, -lastX + 1),
             to: lastX === 0 ? end(today) : end(last),
@@ -115,7 +114,7 @@ export function getDateRangePresets(
 
       return [0, 1, 2, 3, 6, 12].map((lastX) => {
         return {
-          label: formatMsg(settings, 'PeriodeMonth', lastX),
+          label: formatMsg(settings, 'PeriodMonth', lastX),
           value: {
             from: add(last, -lastX + 1),
             to: lastX === 0 ? end(today) : end(last),
@@ -132,7 +131,7 @@ export function getDateRangePresets(
         // Special thing
         if (lastX === -1) {
           return {
-            label: settings.dictionary.Date.PeriodeQuarterSameLastyear,
+            label: settings.dictionary.Date.PeriodQuarterSameLastyear,
             value: {
               from: start(add(today, -4)),
               to: end(add(today, -4)),
@@ -142,7 +141,7 @@ export function getDateRangePresets(
         }
 
         return {
-          label: formatMsg(settings, 'PeriodeQuarter', lastX),
+          label: formatMsg(settings, 'PeriodQuarter', lastX),
           value: {
             from: add(last, -lastX + 1),
             to: lastX === 0 ? end(today) : end(last),
@@ -157,7 +156,7 @@ export function getDateRangePresets(
 
       return [0, 1, 3, 5].map((lastX) => {
         return {
-          label: formatMsg(settings, 'PeriodeYear', lastX),
+          label: formatMsg(settings, 'PeriodYear', lastX),
           value: {
             from: add(last, -lastX + 1),
             to: lastX === 0 ? end(today) : end(last),
@@ -172,7 +171,7 @@ export function getDateRangePresets(
 
       return [0, 1, 3, 5].map((lastX) => {
         return {
-          label: formatMsg(settings, 'PeriodeFiscalYear', lastX),
+          label: formatMsg(settings, 'PeriodFiscalYear', lastX),
           value: {
             from: add(last, -lastX + 1),
             to: lastX === 0 ? end(today) : end(last),
