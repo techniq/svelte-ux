@@ -173,11 +173,11 @@
   <div class={cls(showSidebar && 'md:col-start-2')}>
     <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-surface-100">
       <ToggleOption value="from" class="flex-1">
-        <div class="text-xs text-surface-content/50">Start</div>
+        <div class="text-xs text-surface-content/50">{$localeSettings.dictionary.Date.Start}</div>
         {#if selected?.from}
           <div class="font-medium">{$format(selected.from, PeriodType.Day)}</div>
         {:else}
-          <div class="italic">Empty</div>
+          <div class="italic">{$localeSettings.dictionary.Date.Empty}</div>
         {/if}
         <!-- <div class="p-1">
             <DateField
@@ -195,11 +195,11 @@
       </ToggleOption>
 
       <ToggleOption value="to" class="flex-1">
-        <div class="text-xs text-surface-content/50">End</div>
+        <div class="text-xs text-surface-content/50">{$localeSettings.dictionary.Date.End}</div>
         {#if selected?.to}
           <div class="font-medium">{$format(selected.to, PeriodType.Day)}</div>
         {:else}
-          <div class="italic">Empty</div>
+          <div class="italic">{$localeSettings.dictionary.Date.Empty}</div>
         {/if}
         <!-- <div class="p-1">
             <DateField

@@ -85,6 +85,10 @@ const defaultLocaleSettings: LocaleSettings = {
     Ok: 'Ok',
     Cancel: 'Cancel',
     Date: {
+      Start: 'Start',
+      End: 'End',
+      Empty: 'Empty',
+
       Day: 'Day',
       DayTime: 'Day Time',
       Time: 'Time',
@@ -95,7 +99,42 @@ const defaultLocaleSettings: LocaleSettings = {
       CalendarYear: 'Calendar Year',
       FiscalYearOct: 'Fiscal Year (Oct)',
 
-      Today: 'Today',
+      PeriodeDay: {
+        Current: 'Today',
+        Last: 'Yesterday',
+        LastX: 'Last {0} days',
+      },
+      PeriodeWeek: {
+        Current: 'This week',
+        Last: 'Last week',
+        LastX: 'Last {0} weeks',
+      },
+      PeriodeBiWeek: {
+        Current: 'This bi-week',
+        Last: 'Last bi-week',
+        LastX: 'Last {0} bi-weeks',
+      },
+      PeriodeMonth: {
+        Current: 'This month',
+        Last: 'Last month',
+        LastX: 'Last {0} months',
+      },
+      PeriodeQuarter: {
+        Current: 'This quarter',
+        Last: 'Last quarter',
+        LastX: 'Last {0} quarters',
+      },
+      PeriodeQuarterSameLastyear: 'Same quarter last year',
+      PeriodeYear: {
+        Current: 'This year',
+        Last: 'Last year',
+        LastX: 'Last {0} years',
+      },
+      PeriodeFiscalYear: {
+        Current: 'This fiscal year',
+        Last: 'Last fiscal year',
+        LastX: 'Last {0} fiscal years',
+      },
     },
   },
   formats: {

@@ -336,7 +336,7 @@ export function endOfBiWeek(date: Date, week: number, startOfWeek: DayOfWeek) {
 }
 
 export function getDateFuncsByPeriodType(
-  settings: LocaleSettings | undefined,
+  settings: LocaleSettings,
   periodType: PeriodType | null | undefined
 ) {
   if (settings) {

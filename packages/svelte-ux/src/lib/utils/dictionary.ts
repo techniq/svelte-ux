@@ -3,6 +3,10 @@ export type DictionaryMessagesOptions = {
   Cancel?: string;
 
   Date?: {
+    Start?: string;
+    End?: string;
+    Empty?: string;
+
     Day?: string;
     DayTime?: string;
     Time?: string;
@@ -13,8 +17,21 @@ export type DictionaryMessagesOptions = {
     CalendarYear?: string;
     FiscalYearOct?: string;
 
-    Today?: string;
+    PeriodeDay?: PeriodeDayMsg;
+    PeriodeWeek?: PeriodeDayMsg;
+    PeriodeBiWeek?: PeriodeDayMsg;
+    PeriodeMonth?: PeriodeDayMsg;
+    PeriodeQuarter?: PeriodeDayMsg;
+    PeriodeQuarterSameLastyear?: string;
+    PeriodeYear?: PeriodeDayMsg;
+    PeriodeFiscalYear?: PeriodeDayMsg;
   };
+};
+
+export type PeriodeDayMsg = {
+  Current?: string;
+  Last?: string;
+  LastX?: string;
 };
 
 type DeepRequired<T> = Required<{

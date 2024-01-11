@@ -49,8 +49,13 @@
           },
         },
         dictionary: {
+          Ok: 'Valider',
           Cancel: 'Annuler',
           Date: {
+            Start: 'Début',
+            End: 'Fin',
+            Empty: 'Vide',
+
             Day: 'Jour',
             DayTime: 'Jour & Heure',
             Time: 'Heure',
@@ -61,7 +66,42 @@
             FiscalYearOct: 'Année fiscale (octobre)',
             BiWeek: 'Bi-hebdomadaire',
 
-            Today: "Aujourd'hui",
+            PeriodeDay: {
+              Current: "Aujourd'hui",
+              Last: 'Hier',
+              LastX: 'Les {0} derniers jours',
+            },
+            PeriodeWeek: {
+              Current: 'Cette semaine',
+              Last: 'La semaine dernière',
+              LastX: 'Les {0} dernières semaines',
+            },
+            PeriodeBiWeek: {
+              Current: 'Cette quinzaine',
+              Last: 'La quinzaine dernière',
+              LastX: 'Les {0} dernières quinzaines',
+            },
+            PeriodeMonth: {
+              Current: 'Ce mois-ci',
+              Last: 'Le mois dernier',
+              LastX: 'Les {0} derniers mois',
+            },
+            PeriodeQuarter: {
+              Current: 'Ce trimestre',
+              Last: 'Le trimestre dernier',
+              LastX: 'Les {0} derniers trimestres',
+            },
+            PeriodeQuarterSameLastyear: "Même trimestre l'année dernière",
+            PeriodeYear: {
+              Current: 'Cette année',
+              Last: "L'année dernière",
+              LastX: 'Les {0} dernières années',
+            },
+            PeriodeFiscalYear: {
+              Current: 'Cette année fiscale',
+              Last: "L'année fiscale dernière",
+              LastX: 'Les {0} dernières années fiscales',
+            },
           },
         },
       }),

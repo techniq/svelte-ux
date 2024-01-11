@@ -181,7 +181,7 @@
       color="primary"
       variant="fill"
     >
-      OK
+      {$localeSettings.dictionary.Ok}
     </Button>
 
     <Button
@@ -190,7 +190,7 @@
         currentValue = value;
       }}
     >
-      Cancel
+      {$localeSettings.dictionary.Cancel}
     </Button>
   </div>
 </Dialog>

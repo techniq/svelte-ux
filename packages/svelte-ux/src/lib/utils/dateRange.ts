@@ -3,6 +3,7 @@ import { startOfDay, isLeapYear, isAfter, isBefore, subYears } from 'date-fns';
 import { getDateFuncsByPeriodType, updatePeriodeTypeWithWeekStartsOn } from './date';
 import { PeriodType } from './date_types';
 import type { LocaleSettings } from '.';
+import type { PeriodeDayMsg } from './dictionary';
 
 export type DateRange = {
   from: Date | null;
@@ -10,18 +11,27 @@ export type DateRange = {
   periodType?: PeriodType | null;
 };
 
-// All this is exported, but never used. Is it usefull?
-export const dayPresets = getDateRangePresets(undefined, PeriodType.Day);
-export const biWeekSun1Presets = getDateRangePresets(undefined, PeriodType.BiWeek1Sun);
-export const biWeekMon1Presets = getDateRangePresets(undefined, PeriodType.BiWeek1Mon);
-export const monthPresets = getDateRangePresets(undefined, PeriodType.Month);
-export const quarterPresets = getDateRangePresets(undefined, PeriodType.Quarter);
-export const fiscalYearPresets = getDateRangePresets(undefined, PeriodType.FiscalYearOctober);
-
-const now = new Date();
+function formatMsg(
+  settings: LocaleSettings,
+  type:
+    | 'PeriodeDay'
+    | 'PeriodeWeek'
+    | 'PeriodeBiWeek'
+    | 'PeriodeMonth'
+    | 'PeriodeQuarter'
+    | 'PeriodeYear'
+    | 'PeriodeFiscalYear',
+  lastX: number
+) {
+  return lastX === 0
+    ? settings.dictionary.Date[type].Current
+    : lastX === 1
+      ? settings.dictionary.Date[type].Last
+      : settings.dictionary.Date[type].LastX.replace('{0}', lastX.toString());
+}
 
 export function getDateRangePresets(
-  settings: LocaleSettings | undefined,
+  settings: LocaleSettings,
   periodType: PeriodType
 ): { label: string; value: DateRange }[] {
   let now = new Date();
@@ -37,74 +47,18 @@ export function getDateRangePresets(
 
   switch (periodType) {
     case PeriodType.Day: {
-      const yesterday = start(add(today, -1));
+      const last = start(add(today, -1));
 
-      return [
-        {
-          label: settings?.dictionary.Date.Today ?? 'Today', // Current Day
+      return [0, 1, 3, 7, 14, 30].map((lastX) => {
+        return {
+          label: formatMsg(settings, 'PeriodeDay', lastX),
           value: {
-            from: today,
-            to: end(today),
+            from: add(last, -lastX + 1),
+            to: lastX === 0 ? end(today) : end(last),
             periodType,
           },
-        },
-        {
-          label: 'Yesterday', // Last Day
-          value: {
-            from: yesterday,
-            to: end(yesterday),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 3 days',
-          value: {
-            from: add(yesterday, -2),
-            to: end(yesterday),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 7 days',
-          value: {
-            from: add(yesterday, -6),
-            to: end(yesterday),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 14 days',
-          value: {
-            from: add(yesterday, -13),
-            to: end(yesterday),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 30 days',
-          value: {
-            from: add(yesterday, -29),
-            to: end(yesterday),
-            periodType,
-          },
-        },
-        // {
-        //   label: 'Last 60 days',
-        //   value: {
-        //     from: add(yesterday, -59),
-        //     to: end(yesterday),
-        //     periodType,
-        //   },
-        // },
-        // {
-        //   label: 'Last 90 days',
-        //   value: {
-        //     from: add(yesterday, -89),
-        //     to: end(yesterday),
-        //     periodType,
-        //   },
-        // },
-      ];
+        };
+      });
     }
 
     case PeriodType.WeekSun:
@@ -114,50 +68,18 @@ export function getDateRangePresets(
     case PeriodType.WeekThu:
     case PeriodType.WeekFri:
     case PeriodType.WeekSat: {
-      const lastWeek = start(add(today, -1));
+      const last = start(add(today, -1));
 
-      return [
-        {
-          label: 'Current week', // Week to Date
+      return [0, 1, 2, 4, 6].map((lastX) => {
+        return {
+          label: formatMsg(settings, 'PeriodeWeek', lastX),
           value: {
-            from: start(today),
-            to: end(today),
+            from: add(last, -lastX + 1),
+            to: lastX === 0 ? end(today) : end(last),
             periodType,
           },
-        },
-        {
-          label: 'Last week', // Week to Date
-          value: {
-            from: lastWeek,
-            to: end(lastWeek),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 2 weeks',
-          value: {
-            from: start(add(lastWeek, -1)),
-            to: end(lastWeek),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 4 weeks',
-          value: {
-            from: start(add(lastWeek, -3)),
-            to: end(lastWeek),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 6 weeks',
-          value: {
-            from: start(add(lastWeek, -5)),
-            to: end(lastWeek),
-            periodType,
-          },
-        },
-      ];
+        };
+      });
     }
 
     case PeriodType.BiWeek1Sun:
@@ -174,222 +96,90 @@ export function getDateRangePresets(
     case PeriodType.BiWeek2Thu:
     case PeriodType.BiWeek2Fri:
     case PeriodType.BiWeek2Sat: {
-      const lastBiWeek = start(add(today, -1));
+      const last = start(add(today, -1));
 
-      return [
-        {
-          label: 'Current bi-week',
+      return [0, 1, 2, 4, 6].map((lastX) => {
+        return {
+          label: formatMsg(settings, 'PeriodeBiWeek', lastX),
           value: {
-            from: start(today),
-            to: end(today),
+            from: add(last, -lastX + 1),
+            to: lastX === 0 ? end(today) : end(last),
             periodType,
           },
-        },
-        {
-          label: 'Last bi-week',
-          value: {
-            from: lastBiWeek,
-            to: end(lastBiWeek),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 2 bi-weeks',
-          value: {
-            from: start(add(lastBiWeek, -1)),
-            to: end(lastBiWeek),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 4 bi-weeks',
-          value: {
-            from: start(add(lastBiWeek, -3)),
-            to: end(lastBiWeek),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 6 bi-weeks',
-          value: {
-            from: start(add(lastBiWeek, -5)),
-            to: end(lastBiWeek),
-            periodType,
-          },
-        },
-      ];
+        };
+      });
     }
 
     case PeriodType.Month: {
-      const lastMonth = start(add(today, -1));
+      const last = start(add(today, -1));
 
-      return [
-        {
-          label: 'Current month', // Month to Date
+      return [0, 1, 2, 3, 6, 12].map((lastX) => {
+        return {
+          label: formatMsg(settings, 'PeriodeMonth', lastX),
           value: {
-            from: start(today),
-            to: end(today),
+            from: add(last, -lastX + 1),
+            to: lastX === 0 ? end(today) : end(last),
             periodType,
           },
-        },
-        {
-          label: 'Last month',
-          value: {
-            from: lastMonth,
-            to: end(lastMonth),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 3 months',
-          value: {
-            from: start(add(lastMonth, -2)),
-            to: end(lastMonth),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 6 months',
-          value: {
-            from: start(add(lastMonth, -5)),
-            to: end(lastMonth),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 12 months',
-          value: {
-            from: start(add(lastMonth, -11)),
-            to: end(lastMonth),
-            periodType,
-          },
-        },
-      ];
+        };
+      });
     }
 
     case PeriodType.Quarter: {
-      const lastQuarter = start(add(today, -1));
+      const last = start(add(today, -1));
 
-      return [
-        {
-          label: 'Current quarter', // Quarter to Date
+      return [0, 1, -1, 4, 12].map((lastX) => {
+        // Special thing
+        if (lastX === -1) {
+          return {
+            label: settings.dictionary.Date.PeriodeQuarterSameLastyear,
+            value: {
+              from: start(add(today, -4)),
+              to: end(add(today, -4)),
+              periodType,
+            },
+          };
+        }
+
+        return {
+          label: formatMsg(settings, 'PeriodeQuarter', lastX),
           value: {
-            from: start(today),
-            to: end(today),
+            from: add(last, -lastX + 1),
+            to: lastX === 0 ? end(today) : end(last),
             periodType,
           },
-        },
-        {
-          label: 'Last quarter',
-          value: {
-            from: lastQuarter,
-            to: end(lastQuarter),
-            periodType,
-          },
-        },
-        {
-          label: 'Same quarter, last year',
-          value: {
-            from: start(add(today, -4)),
-            to: end(add(today, -4)),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 4 quarters',
-          value: {
-            from: start(add(lastQuarter, -3)),
-            to: end(lastQuarter),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 3 years',
-          value: {
-            from: start(add(lastQuarter, -11)),
-            to: end(lastQuarter),
-            periodType,
-          },
-        },
-      ];
+        };
+      });
     }
 
     case PeriodType.CalendarYear: {
-      const lastYear = start(add(today, -1));
+      const last = start(add(today, -1));
 
-      return [
-        {
-          label: 'Current year', // Year to Date
+      return [0, 1, 3, 5].map((lastX) => {
+        return {
+          label: formatMsg(settings, 'PeriodeYear', lastX),
           value: {
-            from: start(today),
-            to: end(today),
+            from: add(last, -lastX + 1),
+            to: lastX === 0 ? end(today) : end(last),
             periodType,
           },
-        },
-        {
-          label: 'Last year',
-          value: {
-            from: lastYear,
-            to: end(lastYear),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 3 years',
-          value: {
-            from: start(add(lastYear, -2)),
-            to: end(lastYear),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 5 years',
-          value: {
-            from: start(add(lastYear, -4)),
-            to: end(lastYear),
-            periodType,
-          },
-        },
-      ];
+        };
+      });
     }
 
     case PeriodType.FiscalYearOctober: {
-      const lastFiscalYear = start(add(today, -1));
+      const last = start(add(today, -1));
 
-      return [
-        {
-          label: 'Current fiscal year', // Fiscal Year to Date
+      return [0, 1, 3, 5].map((lastX) => {
+        return {
+          label: formatMsg(settings, 'PeriodeFiscalYear', lastX),
           value: {
-            from: start(today),
-            to: end(today),
+            from: add(last, -lastX + 1),
+            to: lastX === 0 ? end(today) : end(last),
             periodType,
           },
-        },
-        {
-          label: 'Last fiscal year',
-          value: {
-            from: lastFiscalYear,
-            to: end(lastFiscalYear),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 3 years',
-          value: {
-            from: start(add(lastFiscalYear, -2)),
-            to: end(lastFiscalYear),
-            periodType,
-          },
-        },
-        {
-          label: 'Last 5 years',
-          value: {
-            from: start(add(lastFiscalYear, -4)),
-            to: end(lastFiscalYear),
-            periodType,
-          },
-        },
-      ];
+        };
+      });
     }
 
     default: {
