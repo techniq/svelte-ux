@@ -22,8 +22,8 @@
   $: languageSelected = languagesDemo.find((c) => c.code === $locale)!;
 </script>
 
-<Button on:click={() => (open = !open)}>
-  {languageSelected.flag}
+<Button on:click={() => (open = !open)} class="font-mono font-semibold" iconOnly={true}>
+  {languageSelected.code}
   <Menu bind:open on:close={() => (open = false)} offset={4} explicitClose resize>
     <div class="grid gap-2 p-2 border-b border-surface-content/10">
       {#each languagesDemo as language}
