@@ -30,7 +30,7 @@
 <h1>Examples</h1>
 
 <div class="grid grid-cols-[1fr,auto,auto] gap-2">
-  <ButtonGroup variant="fill" class="grid grid-flow-col ml-2">
+  <ButtonGroup variant="fill-light" class="grid grid-flow-col ml-2">
     <Button on:click={() => (value -= 100)}>-100</Button>
     <Button on:click={() => (value -= 10)}>-10</Button>
     <Button on:click={() => (value -= 1)}>-1</Button>
@@ -39,8 +39,8 @@
     <Button on:click={() => (value += 10)}>+10</Button>
     <Button on:click={() => (value += 100)}>+100</Button>
   </ButtonGroup>
-  <Button variant="fill" on:click={() => (value = Math.random() * 10)}>Random</Button>
-  <Button variant="fill" on:click={() => (value = null)}>Null</Button>
+  <Button variant="fill-light" on:click={() => (value = Math.random() * 10)}>Random</Button>
+  <Button variant="fill-light" on:click={() => (value = null)}>Null</Button>
 </div>
 <span class="text-xs ml-2 text-surface-content/50">
   also keyboard up/down with shift: +/- 10 option: +/- 100
