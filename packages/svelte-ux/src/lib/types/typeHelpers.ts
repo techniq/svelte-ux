@@ -122,3 +122,21 @@ export type EventWithTarget = Partial<Pick<Event, 'currentTarget' | 'target'>>;
 export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
+
+/**
+ * util to make sure we have handled all enum cases in a switch statement
+ * Just add at the end of the switch statement a `default` like this:
+ *
+ * ```ts
+ * switch (periodType) {
+ *   case xxx:
+ *     ...
+ *
+ *   default:
+ *     assertNever(periodType); // This will now report unhandled cases
+ * }
+ * ```
+ */
+export function assertNever(x: never): never {
+  throw new Error(`Unhandled enum case: ${x}`);
+}

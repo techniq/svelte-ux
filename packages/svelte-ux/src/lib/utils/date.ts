@@ -42,6 +42,7 @@ import {
   type DateFormatVariantPreset,
 } from './date_types';
 import { defaultLocale, type LocaleSettings } from './locale';
+import { assertNever } from '$lib/types';
 
 export * from './date_types';
 
@@ -55,11 +56,6 @@ export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
 
 export function getPeriodTypeName(periodType: PeriodType) {
   return getPeriodTypeNameWithLocale(defaultLocale, periodType);
-}
-
-// util to make sure we have handled all enum cases
-function assertNever(x: never): never {
-  throw new Error(`Unhandled enum case: ${x}`);
 }
 
 export function getPeriodTypeNameWithLocale(settings: LocaleSettings, periodType: PeriodType) {
