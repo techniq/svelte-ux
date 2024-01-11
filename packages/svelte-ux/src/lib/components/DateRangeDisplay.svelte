@@ -5,12 +5,12 @@
 
   export let value: DateRange | null | undefined;
 
-  const { format: format_ux } = getSettings();
+  const { format: format_ux, localeSettings } = getSettings();
 
   let showToValue = false;
   $: if (value?.to) {
     if (value?.from && value?.periodType) {
-      const { isSame } = getDateFuncsByPeriodType(value.periodType);
+      const { isSame } = getDateFuncsByPeriodType($localeSettings, value.periodType);
 
       switch (value.periodType) {
         case PeriodType.Day:
@@ -39,6 +39,7 @@
       case PeriodType.WeekThu:
       case PeriodType.WeekFri:
       case PeriodType.WeekSat:
+      case PeriodType.Week:
 
       case PeriodType.BiWeek1Sun:
       case PeriodType.BiWeek1Mon:
@@ -47,6 +48,7 @@
       case PeriodType.BiWeek1Thu:
       case PeriodType.BiWeek1Fri:
       case PeriodType.BiWeek1Sat:
+      case PeriodType.BiWeek1:
 
       case PeriodType.BiWeek2Sun:
       case PeriodType.BiWeek2Mon:
@@ -55,6 +57,7 @@
       case PeriodType.BiWeek2Thu:
       case PeriodType.BiWeek2Fri:
       case PeriodType.BiWeek2Sat:
+      case PeriodType.BiWeek2:
         periodType = PeriodType.Day;
         break;
 
