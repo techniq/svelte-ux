@@ -4,6 +4,9 @@
   import Preview from '$lib/components/Preview.svelte';
   import DateRange from '$lib/components/DateRange.svelte';
   import { PeriodType, getDateFuncsByPeriodType } from '$lib/utils/date';
+  import { getSettings } from '$lib/components/settings';
+
+  const { localeSettings } = getSettings();
 
   let selected = {
     from: new Date('1982-03-01T00:00:00'),
@@ -57,10 +60,10 @@
 <Preview>
   <DateRange
     periodTypes={[PeriodType.Day, PeriodType.Month]}
-    getPeriodTypePresets={(periodType) => {
-      const { start, end, add } = getDateFuncsByPeriodType(periodType);
+    getPeriodTypePresets={(fnSettings, fnPeriodType) => {
+      const { start, end, add } = getDateFuncsByPeriodType($localeSettings, fnPeriodType);
 
-      if (periodType === PeriodType.Day) {
+      if (fnPeriodType === PeriodType.Day) {
         const today = startOfDay(new Date());
         const yesterday = start(add(today, -1));
         return [
@@ -69,7 +72,7 @@
             value: {
               from: startOfMonth(today),
               to: end(today),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -77,7 +80,7 @@
             value: {
               from: startOfYear(today),
               to: end(today),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -85,7 +88,7 @@
             value: {
               from: add(yesterday, -29),
               to: end(yesterday),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -93,7 +96,7 @@
             value: {
               from: add(yesterday, -59),
               to: end(yesterday),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -101,7 +104,7 @@
             value: {
               from: add(yesterday, -89),
               to: end(yesterday),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -109,7 +112,7 @@
             value: {
               from: add(yesterday, -179),
               to: end(yesterday),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -117,11 +120,11 @@
             value: {
               from: add(yesterday, -364),
               to: end(yesterday),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
         ];
-      } else if (periodType === PeriodType.Month) {
+      } else if (fnPeriodType === PeriodType.Month) {
         const today = endOfMonth(new Date());
         const lastMonth = start(add(today, -1));
 
@@ -131,7 +134,7 @@
             value: {
               from: start(today),
               to: end(today),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -139,7 +142,7 @@
             value: {
               from: lastMonth,
               to: end(lastMonth),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -147,7 +150,7 @@
             value: {
               from: start(add(lastMonth, -2)),
               to: end(lastMonth),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -155,7 +158,7 @@
             value: {
               from: start(add(lastMonth, -5)),
               to: end(lastMonth),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
           {
@@ -163,7 +166,7 @@
             value: {
               from: start(add(lastMonth, -11)),
               to: end(lastMonth),
-              periodType,
+              periodType: fnPeriodType,
             },
           },
         ];

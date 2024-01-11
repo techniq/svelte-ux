@@ -19,7 +19,7 @@
   export let fade: boolean = false;
   export let format = getCustomFormat(periodType);
 
-  const { format: format_ux } = getSettings();
+  const { format: format_ux, localeSettings } = getSettings();
   const settingsClasses = getComponentClasses('DateButton');
 
   function getCustomFormat(periodType: PeriodType) {
@@ -32,7 +32,7 @@
     }
   }
 
-  const { start, end, isSame } = getDateFuncsByPeriodType(periodType);
+  const { start, end, isSame } = getDateFuncsByPeriodType($localeSettings, periodType);
 
   $: isSelected =
     selected instanceof Date
