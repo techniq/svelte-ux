@@ -111,7 +111,7 @@
     selectedDarkThemeValue = darkThemes[1].value;
   }
 
-  let showDarkTheme = false;
+  $: showDarkTheme = $currentTheme.dark;
   $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)?.theme;
   $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)?.theme;
   $: previewTheme = showDarkTheme ? selectedDarkTheme : selectedLightTheme;
