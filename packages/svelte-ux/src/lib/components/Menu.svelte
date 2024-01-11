@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { slide } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
   import type { Placement } from '@floating-ui/dom';
@@ -19,7 +19,7 @@
   export let matchWidth: boolean = false;
   export let placement: Placement = matchWidth ? 'bottom-start' : 'bottom';
   export let autoPlacement = false;
-  export let resize = false;
+  export let resize: ComponentProps<Popover>['resize'] = false;
   export let disableTransition = false;
   export let transition = disableTransition
     ? (node: HTMLElement, params: TransitionParams) => ({}) as TransitionConfig

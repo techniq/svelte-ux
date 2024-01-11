@@ -14,14 +14,14 @@ import {
 
 import { portal } from './portal';
 
-type PopoverOptions = {
+export type PopoverOptions = {
   anchorEl?: HTMLElement;
   placement?: Placement;
   offset?: number;
   padding?: number;
   autoPlacement?: boolean;
   matchWidth?: boolean;
-  resize?: boolean;
+  resize?: boolean | 'width' | 'height';
 };
 
 export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
@@ -53,8 +53,12 @@ export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
             padding: options?.padding,
             apply({ availableWidth, availableHeight, elements }) {
               Object.assign(elements.floating.style, {
-                maxWidth: `${availableWidth}px`,
-                maxHeight: `${availableHeight}px`,
+                ...((options?.resize === true || options?.resize === 'width') && {
+                  maxWidth: `${availableWidth}px`,
+                }),
+                ...((options?.resize === true || options?.resize === 'height') && {
+                  maxHeight: `${availableHeight}px`,
+                }),
               });
             },
           }),
