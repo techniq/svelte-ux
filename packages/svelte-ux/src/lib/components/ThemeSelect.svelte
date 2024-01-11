@@ -42,7 +42,14 @@
 </script>
 
 <Button icon={mdiPalette} iconOnly on:click={() => (open = !open)}>
-  <Menu bind:open on:close={() => (open = false)} offset={4} explicitClose resize>
+  <Menu
+    bind:open
+    on:close={() => (open = false)}
+    offset={4}
+    explicitClose
+    resize="height"
+    classes={{ root: 'w-[400px] max-w-[95vw]' }}
+  >
     <label
       for="switch-color-scheme"
       class="grid grid-cols-[1fr,auto,auto] items-center p-2 border-b border-surface-content/10 mb-1 text-sm font-medium"
