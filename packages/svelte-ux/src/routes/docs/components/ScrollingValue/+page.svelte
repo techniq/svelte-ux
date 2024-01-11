@@ -61,7 +61,7 @@
 <h1>Examples</h1>
 
 <div class="grid grid-cols-[1fr,140px] items-center gap-6">
-  <ButtonGroup variant="fill" class="grid grid-flow-col ml-2">
+  <ButtonGroup variant="fill-light" class="grid grid-flow-col ml-2">
     <Button on:click={() => (value -= 100)}>-100</Button>
     <Button on:click={() => (value -= 10)}>-10</Button>
     <Button on:click={() => (value -= 1)}>-1</Button>
@@ -171,7 +171,7 @@
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill">
+    <ButtonGroup variant="fill-light">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
@@ -230,7 +230,7 @@
 
 <Preview>
   <ScrollingValue value={$timer ?? 0} {axis} class="text-6xl tabular-nums" />
-  <ButtonGroup variant="fill" class="ml-3">
+  <ButtonGroup variant="fill-light" class="ml-3">
     <Button on:click={timer.start} disabled={$isRunning}>Start</Button>
     <Button on:click={timer.stop} disabled={!$isRunning}>Stop</Button>
   </ButtonGroup>
