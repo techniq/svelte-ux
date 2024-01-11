@@ -10,17 +10,17 @@
 </script>
 
 <Switch
-  checked={!$currentTheme.dark}
+  checked={$currentTheme.dark}
   on:change={(e) => {
-    const newTheme = e.target?.checked ? 'light' : 'dark';
+    let newTheme = e.target?.checked ? 'dark' : 'light';
     currentTheme.setTheme(newTheme);
   }}
   let:checked
   {...$$restProps}
 >
   {#if checked}
-    <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
-  {:else}
     <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
+  {:else}
+    <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
   {/if}
 </Switch>
