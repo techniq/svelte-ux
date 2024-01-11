@@ -6,6 +6,8 @@ import {
   utcToLocalDate,
   formatIntl,
   formatDateWithLocale,
+  getPeriodTypeByCode,
+  getPeriodTypeCode,
 } from './date';
 import { formatWithLocale } from '.';
 import { createLocaleSettings, defaultLocale } from './locale';
@@ -516,5 +518,19 @@ describe('getWeekStartsOnFromIntl() tokens', () => {
   it('For fr it should be monday', () => {
     const val = getWeekStartsOnFromIntl('fr');
     expect(val).toBe(DayOfWeek.Monday);
+  });
+});
+
+describe('getPeriodTypeByCode()', () => {
+  it('week', () => {
+    const val = getPeriodTypeByCode('WEEK');
+    expect(val).toBe(PeriodType.Week);
+  });
+});
+
+describe('getPeriodTypeCode()', () => {
+  it('BiWeek1Sat', () => {
+    const val = getPeriodTypeCode(PeriodType.BiWeek1Sat);
+    expect(val).toBe('BIWEEK1-SAT');
   });
 });

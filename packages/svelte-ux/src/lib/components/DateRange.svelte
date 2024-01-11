@@ -26,8 +26,8 @@
   /** Period types to show */
   export let periodTypes: PeriodType[] = [
     PeriodType.Day,
-    PeriodType.WeekSun,
-    PeriodType.BiWeek1Sun,
+    PeriodType.Week,
+    PeriodType.BiWeek1,
     // PeriodType.BiWeek2Sun,
     PeriodType.Month,
     PeriodType.Quarter,
@@ -37,7 +37,7 @@
   export let getPeriodTypePresets = getDateRangePresets;
 
   const settingsClasses = getComponentClasses('DateRange');
-  const { format } = getSettings();
+  const { format, localeSettings } = getSettings();
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
@@ -53,7 +53,7 @@
     };
   });
 
-  $: presetOptions = getPeriodTypePresets(selectedPeriodType).map((preset) => {
+  $: presetOptions = getPeriodTypePresets($localeSettings, selectedPeriodType).map((preset) => {
     return {
       label: preset.label,
       value: getDateRangeStr(preset.value),
@@ -70,7 +70,7 @@
     // Apply date-fns function based on type and from/to.
     let newSelected = { ...selected, periodType: selectedPeriodType };
 
-    const { start, end } = getDateFuncsByPeriodType(selectedPeriodType);
+    const { start, end } = getDateFuncsByPeriodType($localeSettings, selectedPeriodType);
 
     let newActiveDate: typeof activeDate = activeDate === 'from' ? 'to' : 'from';
 
@@ -95,7 +95,7 @@
 
   // Expand selection range to match period type (day => month, etc)
   function onPeriodTypeChange(periodType: PeriodType) {
-    const { start, end } = getDateFuncsByPeriodType(periodType);
+    const { start, end } = getDateFuncsByPeriodType($localeSettings, periodType);
     if (selected!.from) {
       selected!.from = start(selected!.from);
     }
@@ -121,7 +121,9 @@
 
       // Attempt to maintain selected preset if labels match
       if (selected?.from && selected?.to && selected.periodType) {
-        const prevPeriodTypePreset = [...getPeriodTypePresets(selected.periodType)].find(
+        const prevPeriodTypePreset = [
+          ...getPeriodTypePresets($localeSettings, selected.periodType),
+        ].find(
           (x) =>
             x.value.from &&
             isSameDay(x.value.from, selected!.from!) &&
@@ -130,9 +132,9 @@
         );
 
         if (prevPeriodTypePreset && newPeriodType) {
-          const newPeriodTypePreset = [...getPeriodTypePresets(newPeriodType)].find(
-            (x) => x.label === prevPeriodTypePreset.label
-          );
+          const newPeriodTypePreset = [
+            ...getPeriodTypePresets($localeSettings, newPeriodType),
+          ].find((x) => x.label === prevPeriodTypePreset.label);
 
           if (newPeriodTypePreset) {
             newSelected.from = newPeriodTypePreset.value.from;
@@ -171,11 +173,11 @@
   <div class={cls(showSidebar && 'md:col-start-2')}>
     <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-surface-100">
       <ToggleOption value="from" class="flex-1">
-        <div class="text-xs text-surface-content/50">Start</div>
+        <div class="text-xs text-surface-content/50">{$localeSettings.dictionary.Date.Start}</div>
         {#if selected?.from}
           <div class="font-medium">{$format(selected.from, PeriodType.Day)}</div>
         {:else}
-          <div class="italic">Empty</div>
+          <div class="italic">{$localeSettings.dictionary.Date.Empty}</div>
         {/if}
         <!-- <div class="p-1">
             <DateField
@@ -193,11 +195,11 @@
       </ToggleOption>
 
       <ToggleOption value="to" class="flex-1">
-        <div class="text-xs text-surface-content/50">End</div>
+        <div class="text-xs text-surface-content/50">{$localeSettings.dictionary.Date.End}</div>
         {#if selected?.to}
           <div class="font-medium">{$format(selected.to, PeriodType.Day)}</div>
         {:else}
-          <div class="italic">Empty</div>
+          <div class="italic">{$localeSettings.dictionary.Date.Empty}</div>
         {/if}
         <!-- <div class="p-1">
             <DateField
