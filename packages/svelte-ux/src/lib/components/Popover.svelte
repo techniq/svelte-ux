@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
-  import { popover } from '../actions/popover';
+  import { popover, type PopoverOptions } from '../actions/popover';
   import { cls } from '../utils/styles';
   import { getComponentClasses } from './theme';
 
@@ -37,7 +37,7 @@
   /**
    * Set max-height of popover element to the remaining height from anchor element to bottom of viewport
    */
-  export let resize = false;
+  export let resize: PopoverOptions['resize'] = false;
 
   const dispatch = createEventDispatcher();
   const settingsClasses = getComponentClasses('Popover');
