@@ -14,8 +14,7 @@
   import { getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
-  const settings = getSettings();
-  const { format } = settings;
+  const { format, localeSettings } = getSettings();
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -28,9 +27,9 @@
   export let center: boolean = false;
   export let periodTypes: PeriodType[] = [
     PeriodType.Day,
-    PeriodType.WeekSun,
-    PeriodType.BiWeek1Sun,
-    // PeriodType.BiWeek2Sun,
+    PeriodType.Week,
+    PeriodType.BiWeek1,
+    // PeriodType.BiWeek2,
     PeriodType.Month,
     PeriodType.Quarter,
     PeriodType.CalendarYear,
@@ -83,7 +82,10 @@
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
-            const { difference, start, end, add } = getDateFuncsByPeriodType(value.periodType);
+            const { difference, start, end, add } = getDateFuncsByPeriodType(
+              $localeSettings,
+              value.periodType
+            );
             const offset = difference(value.from, value.to) - 1;
             value = {
               from: start(add(value.from, offset)),
@@ -130,7 +132,10 @@
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
-            const { difference, start, end, add } = getDateFuncsByPeriodType(value.periodType);
+            const { difference, start, end, add } = getDateFuncsByPeriodType(
+              $localeSettings,
+              value.periodType
+            );
             const offset = difference(value.to, value.from) + 1;
             value = {
               from: start(add(value.from, offset)),
@@ -176,7 +181,7 @@
       color="primary"
       variant="fill"
     >
-      OK
+      {$localeSettings.dictionary.Ok}
     </Button>
 
     <Button
@@ -185,7 +190,7 @@
         currentValue = value;
       }}
     >
-      Cancel
+      {$localeSettings.dictionary.Cancel}
     </Button>
   </div>
 </Dialog>
