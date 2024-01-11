@@ -52,7 +52,7 @@
         value = formatColor(e.target.value, colorSpace);
         dispatch('change', { value });
       }}
-      class="w-6 h-6 rounded opacity-0"
+      class="w-6 h-6 rounded opacity-0 cursor-pointer"
     />
   </div>
 </TextField>
