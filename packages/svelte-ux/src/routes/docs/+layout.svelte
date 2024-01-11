@@ -145,7 +145,7 @@
   {#if showTableOfContents && !$xlScreen}
     <div transition:fade class="mt-3">
       {#key $page.route.id}
-        <TableOfContents />
+        <TableOfContents icon={mdiChevronRight} />
       {/key}
     </div>
   {/if}
@@ -238,7 +238,7 @@
           </div>
           <!-- Rebuild toc when page changes -->
           {#key $page.route.id}
-            <TableOfContents class="text-surface-content" />
+            <TableOfContents icon={mdiChevronRight} class="text-surface-content" />
           {/key}
         </div>
       </div>
