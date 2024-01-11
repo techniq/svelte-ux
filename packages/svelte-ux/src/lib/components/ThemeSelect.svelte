@@ -74,18 +74,18 @@
 
       <Switch
         id="switch-color-scheme"
-        checked={!$currentTheme.dark}
+        checked={$currentTheme.dark}
         on:change={(e) => {
-          let newTheme = e.target?.checked ? 'light' : 'dark';
+          let newTheme = e.target?.checked ? 'dark' : 'light';
           currentTheme.setTheme(newTheme);
         }}
         class="my-1"
         let:checked
       >
         {#if checked}
-          <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
-        {:else}
           <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
+        {:else}
+          <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
         {/if}
       </Switch>
     </label>
