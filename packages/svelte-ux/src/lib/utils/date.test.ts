@@ -20,7 +20,7 @@ import {
 } from './date_types';
 import { getWeekStartsOnFromIntl } from './dateInternal';
 
-const DATE = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
+export const testDate = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
 const dt_2M_2d = new Date(2023, 10, 21);
 const dt_2M_1d = new Date(2023, 10, 7);
 const dt_1M_1d = new Date(2023, 2, 7);
@@ -83,7 +83,9 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, PeriodType.Day, { variant })).equal(expected);
+        expect(formatDateWithLocale(locales, testDate, PeriodType.Day, { variant })).equal(
+          expected
+        );
       });
     }
   });
@@ -143,7 +145,7 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [periodType, variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, periodType, { variant })).equal(expected);
+        expect(formatDateWithLocale(locales, testDate, periodType, { variant })).equal(expected);
       });
     }
   });
@@ -164,7 +166,7 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [periodType, variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, periodType, { variant })).equal(expected);
+        expect(formatDateWithLocale(locales, testDate, periodType, { variant })).equal(expected);
       });
     }
   });
@@ -180,7 +182,9 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, PeriodType.Month, { variant })).equal(expected);
+        expect(formatDateWithLocale(locales, testDate, PeriodType.Month, { variant })).equal(
+          expected
+        );
       });
     }
   });
@@ -196,7 +200,7 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, PeriodType.MonthYear, { variant })).equal(
+        expect(formatDateWithLocale(locales, testDate, PeriodType.MonthYear, { variant })).equal(
           expected
         );
       });
@@ -214,7 +218,7 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, PeriodType.Quarter, { variant })).equal(
+        expect(formatDateWithLocale(locales, testDate, PeriodType.Quarter, { variant })).equal(
           expected
         );
       });
@@ -232,7 +236,7 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, PeriodType.CalendarYear, { variant })).equal(
+        expect(formatDateWithLocale(locales, testDate, PeriodType.CalendarYear, { variant })).equal(
           expected
         );
       });
@@ -251,7 +255,7 @@ describe('formatDate()', () => {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(
-          formatDateWithLocale(locales, DATE, PeriodType.FiscalYearOctober, { variant })
+          formatDateWithLocale(locales, testDate, PeriodType.FiscalYearOctober, { variant })
         ).equal(expected);
       });
     }
@@ -268,7 +272,7 @@ describe('formatDate()', () => {
     for (const c of combi) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
-        expect(formatDateWithLocale(locales, DATE, PeriodType.BiWeek1Sun, { variant })).equal(
+        expect(formatDateWithLocale(locales, testDate, PeriodType.BiWeek1Sun, { variant })).equal(
           expected
         );
       });
@@ -288,7 +292,7 @@ describe('formatDate()', () => {
       const [variant, locales] = c;
       it(c.toString(), () => {
         // @ts-expect-error
-        expect(formatDateWithLocale(locales, DATE, undefined, { variant })).equal(expected);
+        expect(formatDateWithLocale(locales, testDate, undefined, { variant })).equal(expected);
       });
     }
   });
@@ -398,7 +402,7 @@ describe('localToUtcDate()', () => {
 
 describe('getMonthDaysByWeek()', () => {
   it('default starting Week: Sunday', () => {
-    const dates = getMonthDaysByWeek(new Date(DATE));
+    const dates = getMonthDaysByWeek(new Date(testDate));
     expect(dates).toMatchInlineSnapshot(`
       [
         [
@@ -451,7 +455,7 @@ describe('getMonthDaysByWeek()', () => {
   });
 
   it('Starting Week: Monday', () => {
-    const dates = getMonthDaysByWeek(new Date(DATE), 1);
+    const dates = getMonthDaysByWeek(new Date(testDate), 1);
     expect(dates).toMatchInlineSnapshot(`
       [
         [
