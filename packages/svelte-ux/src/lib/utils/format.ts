@@ -4,20 +4,21 @@ import type { FormatNumberOptions, FormatNumberStyle } from './number';
 import { defaultLocale, type LocaleSettings } from './locale';
 import { PeriodType, type FormatDateOptions, DayOfWeek } from './date_types';
 
-export type FormatType = FormatNumberStyle | PeriodType;
+export type FormatType = FormatNumberStyle | PeriodType | CustomFormatter;
+type CustomFormatter = (value: any) => string;
 
 /**
  * Generic format which can handle Dates, Numbers, or custom format function
  */
-export function format(value: null | undefined, format?: FormatNumberStyle | PeriodType): string;
+export function format(value: null | undefined, format?: FormatType): string;
 export function format(
   value: number,
-  format?: FormatNumberStyle,
+  format?: FormatNumberStyle | CustomFormatter,
   options?: FormatNumberOptions
 ): string;
 export function format(
   value: string | Date,
-  format?: PeriodType,
+  format?: PeriodType | CustomFormatter,
   options?: FormatDateOptions
 ): string;
 export function format(
@@ -37,7 +38,9 @@ export function formatWithLocale(
   let formattedValue: string | undefined;
 
   if (format) {
-    if (format in PeriodType) {
+    if (typeof format === 'function') {
+      formattedValue = format(value);
+    } else if (format in PeriodType) {
       formattedValue = formatDateWithLocale(
         settings,
         value,
