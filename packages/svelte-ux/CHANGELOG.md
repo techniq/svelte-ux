@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.58.0-next.10
+
+### Patch Changes
+
+- [SelectList] Add `type="button"` to `<button>` wrapper to not submit forms on click ([`a7b7a4ee800eb8f47040efbed751acc64514e9d3`](https://github.com/techniq/svelte-ux/commit/a7b7a4ee800eb8f47040efbed751acc64514e9d3))
+
+- [TableOfContents] Support changing icon ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [MenuButton] Support hiding `menuIcon` and dispatch `change` event ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [Popover|Menu|popover] Support `resize` width or height only ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
 ## 0.58.0-next.9
 
 ### Minor Changes
