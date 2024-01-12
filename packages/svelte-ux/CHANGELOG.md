@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.58.0-next.11
+
+### Patch Changes
+
+- Support passing a custom formatter function as `format` argument to format() / formatWithLocale() ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
 ## 0.58.0-next.10
 
 ### Patch Changes
