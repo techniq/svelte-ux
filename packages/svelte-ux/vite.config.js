@@ -4,6 +4,7 @@ import { sveld } from './src/lib/plugins/vite';
 
 export default defineConfig({
   plugins: [sveltekit(), sveld()],
+  // optimizeDeps: { exclude: ["fsevents"] },
   test: {
     include: ['src/**/*.{test,spec}.{js,ts}'],
     coverage: {
