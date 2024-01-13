@@ -6,12 +6,9 @@ import type { Action } from 'svelte/action';
 export function autoFocus(node: HTMLElement | SVGElement, options?: { delay?: number }) {
   // TODO: Add options to "restoreFocus" on destroy()
   // const elementFocused = document.activeElement as HTMLElement;
-  setTimeout(
-    () => {
-      node.focus();
-    },
-    options?.delay ?? 0
-  );
+  setTimeout(() => {
+    node.focus();
+  }, options?.delay ?? 0);
 }
 
 /**
