@@ -15,14 +15,14 @@ export enum PeriodType {
   DayTime = 11,
   TimeOnly = 15,
 
-  WeekSun = 20,
-  WeekMon = 21,
-  WeekTue = 22,
-  WeekWed = 23,
-  WeekThu = 24,
-  WeekFri = 25,
-  WeekSat = 26,
-  Week = 27, // will be replaced by WeekSun, WeekMon, etc depending on weekStartsOn
+  Week = 20, // will be replaced by WeekSun, WeekMon, etc depending on locale `weekStartsOn`
+  WeekSun = 21,
+  WeekMon = 22,
+  WeekTue = 23,
+  WeekWed = 24,
+  WeekThu = 25,
+  WeekFri = 26,
+  WeekSat = 27,
 
   Month = 30,
   MonthYear = 31,
@@ -30,23 +30,23 @@ export enum PeriodType {
   CalendarYear = 50,
   FiscalYearOctober = 60,
 
-  BiWeek1Sun = 70,
-  BiWeek1Mon = 71,
-  BiWeek1Tue = 72,
-  BiWeek1Wed = 73,
-  BiWeek1Thu = 74,
-  BiWeek1Fri = 75,
-  BiWeek1Sat = 76,
-  BiWeek1 = 77, // will be replaced by BiWeek1Sun, BiWeek1Mon, etc depending on weekStartsOn
+  BiWeek1 = 70, // will be replaced by BiWeek1Sun, BiWeek1Mon, etc depending on locale `weekStartsOn`
+  BiWeek1Sun = 71,
+  BiWeek1Mon = 72,
+  BiWeek1Tue = 73,
+  BiWeek1Wed = 74,
+  BiWeek1Thu = 75,
+  BiWeek1Fri = 76,
+  BiWeek1Sat = 77,
 
-  BiWeek2Sun = 80,
-  BiWeek2Mon = 81,
-  BiWeek2Tue = 82,
-  BiWeek2Wed = 83,
-  BiWeek2Thu = 84,
-  BiWeek2Fri = 85,
-  BiWeek2Sat = 86,
-  BiWeek2 = 87, // will be replaced by BiWeek2Sun, BiWeek2Mon, etc depending on weekStartsOn
+  BiWeek2 = 80, // will be replaced by BiWeek2Sun, BiWeek2Mon, etc depending on locale `weekStartsOn`
+  BiWeek2Sun = 81,
+  BiWeek2Mon = 82,
+  BiWeek2Tue = 83,
+  BiWeek2Wed = 84,
+  BiWeek2Thu = 85,
+  BiWeek2Fri = 86,
+  BiWeek2Sat = 87,
 }
 
 export enum DayOfWeek {
