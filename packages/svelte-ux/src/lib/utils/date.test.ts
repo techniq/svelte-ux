@@ -8,6 +8,9 @@ import {
   formatDateWithLocale,
   getPeriodTypeByCode,
   getPeriodTypeCode,
+  getDayOfWeek,
+  hasDayOfWeek,
+  replaceDayOfWeek,
 } from './date';
 import { formatWithLocale } from '.';
 import { createLocaleSettings, defaultLocale } from './locale';
@@ -536,5 +539,134 @@ describe('getPeriodTypeCode()', () => {
   it('BiWeek1Sat', () => {
     const val = getPeriodTypeCode(PeriodType.BiWeek1Sat);
     expect(val).toBe('BIWEEK1-SAT');
+  });
+});
+
+describe('hasDayOfWeek()', () => {
+  const data = [
+    // Week
+    [PeriodType.Week, false],
+    [PeriodType.WeekSun, true],
+    [PeriodType.WeekMon, true],
+    [PeriodType.WeekTue, true],
+    [PeriodType.WeekWed, true],
+    [PeriodType.WeekThu, true],
+    [PeriodType.WeekFri, true],
+    [PeriodType.WeekSat, true],
+    // BiWeek1
+    [PeriodType.BiWeek1, false],
+    [PeriodType.BiWeek1Sun, true],
+    [PeriodType.BiWeek1Mon, true],
+    [PeriodType.BiWeek1Tue, true],
+    [PeriodType.BiWeek1Wed, true],
+    [PeriodType.BiWeek1Thu, true],
+    [PeriodType.BiWeek1Fri, true],
+    [PeriodType.BiWeek1Sat, true],
+    // BiWeek2
+    [PeriodType.BiWeek2, false],
+    [PeriodType.BiWeek2Sun, true],
+    [PeriodType.BiWeek2Mon, true],
+    [PeriodType.BiWeek2Tue, true],
+    [PeriodType.BiWeek2Wed, true],
+    [PeriodType.BiWeek2Thu, true],
+    [PeriodType.BiWeek2Fri, true],
+    [PeriodType.BiWeek2Sat, true],
+    // Other
+    [PeriodType.Day, false],
+    [PeriodType.Month, false],
+    [PeriodType.CalendarYear, false],
+  ] as const;
+
+  data.forEach(([periodType, dayOfWeek]) => {
+    it(PeriodType[periodType], () => {
+      const val = hasDayOfWeek(periodType);
+      expect(val).toBe(dayOfWeek);
+    });
+  });
+});
+
+describe('getDayOfWeek()', () => {
+  const data = [
+    // Week
+    [PeriodType.Week, null],
+    [PeriodType.WeekSun, DayOfWeek.Sunday],
+    [PeriodType.WeekMon, DayOfWeek.Monday],
+    [PeriodType.WeekTue, DayOfWeek.Tuesday],
+    [PeriodType.WeekWed, DayOfWeek.Wednesday],
+    [PeriodType.WeekThu, DayOfWeek.Thursday],
+    [PeriodType.WeekFri, DayOfWeek.Friday],
+    [PeriodType.WeekSat, DayOfWeek.Saturday],
+    // BiWeek1
+    [PeriodType.BiWeek1, null],
+    [PeriodType.BiWeek1Sun, DayOfWeek.Sunday],
+    [PeriodType.BiWeek1Mon, DayOfWeek.Monday],
+    [PeriodType.BiWeek1Tue, DayOfWeek.Tuesday],
+    [PeriodType.BiWeek1Wed, DayOfWeek.Wednesday],
+    [PeriodType.BiWeek1Thu, DayOfWeek.Thursday],
+    [PeriodType.BiWeek1Fri, DayOfWeek.Friday],
+    [PeriodType.BiWeek1Sat, DayOfWeek.Saturday],
+    // BiWeek2
+    [PeriodType.BiWeek2, null],
+    [PeriodType.BiWeek2Sun, DayOfWeek.Sunday],
+    [PeriodType.BiWeek2Mon, DayOfWeek.Monday],
+    [PeriodType.BiWeek2Tue, DayOfWeek.Tuesday],
+    [PeriodType.BiWeek2Wed, DayOfWeek.Wednesday],
+    [PeriodType.BiWeek2Thu, DayOfWeek.Thursday],
+    [PeriodType.BiWeek2Fri, DayOfWeek.Friday],
+    [PeriodType.BiWeek2Sat, DayOfWeek.Saturday],
+    // Other
+    [PeriodType.Day, null],
+    [PeriodType.Month, null],
+    [PeriodType.CalendarYear, null],
+  ] as const;
+
+  data.forEach(([periodType, dayOfWeek]) => {
+    it(PeriodType[periodType], () => {
+      const val = getDayOfWeek(periodType);
+      expect(val).toBe(dayOfWeek);
+    });
+  });
+});
+
+describe('replaceDayOfWeek()', () => {
+  const data = [
+    // Week
+    [PeriodType.Week, DayOfWeek.Sunday, PeriodType.WeekSun],
+    [PeriodType.WeekSun, DayOfWeek.Sunday, PeriodType.WeekSun],
+    [PeriodType.WeekSun, DayOfWeek.Monday, PeriodType.WeekMon],
+    [PeriodType.WeekSun, DayOfWeek.Tuesday, PeriodType.WeekTue],
+    [PeriodType.WeekSun, DayOfWeek.Wednesday, PeriodType.WeekWed],
+    [PeriodType.WeekWed, DayOfWeek.Thursday, PeriodType.WeekThu],
+    [PeriodType.WeekWed, DayOfWeek.Friday, PeriodType.WeekFri],
+    [PeriodType.WeekSat, DayOfWeek.Saturday, PeriodType.WeekSat],
+    // BiWeek1
+    [PeriodType.BiWeek1, DayOfWeek.Sunday, PeriodType.BiWeek1Sun],
+    [PeriodType.BiWeek1Sun, DayOfWeek.Sunday, PeriodType.BiWeek1Sun],
+    [PeriodType.BiWeek1Sun, DayOfWeek.Monday, PeriodType.BiWeek1Mon],
+    [PeriodType.BiWeek1Sun, DayOfWeek.Tuesday, PeriodType.BiWeek1Tue],
+    [PeriodType.BiWeek1Sun, DayOfWeek.Wednesday, PeriodType.BiWeek1Wed],
+    [PeriodType.BiWeek1Wed, DayOfWeek.Thursday, PeriodType.BiWeek1Thu],
+    [PeriodType.BiWeek1Wed, DayOfWeek.Friday, PeriodType.BiWeek1Fri],
+    [PeriodType.BiWeek1Sat, DayOfWeek.Saturday, PeriodType.BiWeek1Sat],
+    // BiWeek2
+    [PeriodType.BiWeek2, DayOfWeek.Sunday, PeriodType.BiWeek2Sun],
+    [PeriodType.BiWeek2Sun, DayOfWeek.Sunday, PeriodType.BiWeek2Sun],
+    [PeriodType.BiWeek2Sun, DayOfWeek.Monday, PeriodType.BiWeek2Mon],
+    [PeriodType.BiWeek2Sun, DayOfWeek.Tuesday, PeriodType.BiWeek2Tue],
+    [PeriodType.BiWeek2Sun, DayOfWeek.Wednesday, PeriodType.BiWeek2Wed],
+    [PeriodType.BiWeek2Wed, DayOfWeek.Thursday, PeriodType.BiWeek2Thu],
+    [PeriodType.BiWeek2Wed, DayOfWeek.Friday, PeriodType.BiWeek2Fri],
+    [PeriodType.BiWeek2Sat, DayOfWeek.Saturday, PeriodType.BiWeek2Sat],
+    // Other
+    [PeriodType.Day, DayOfWeek.Sunday, PeriodType.Day],
+    [PeriodType.Month, DayOfWeek.Sunday, PeriodType.Month],
+    [PeriodType.CalendarYear, DayOfWeek.Sunday, PeriodType.CalendarYear],
+  ] as const;
+
+  data.forEach(([periodType, dayOfWeek, expected]) => {
+    it(`${PeriodType[periodType]} / ${DayOfWeek[dayOfWeek]}`, () => {
+      const val = replaceDayOfWeek(periodType, dayOfWeek);
+      expect(val).toBe(expected);
+    });
   });
 });
