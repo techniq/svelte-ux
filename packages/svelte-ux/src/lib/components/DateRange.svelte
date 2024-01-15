@@ -7,6 +7,7 @@
     getDateFuncsByPeriodType,
     hasDayOfWeek,
     replaceDayOfWeek,
+    missingDayOfWeek,
   } from '../utils/date';
   import { getDateRangePresets } from '../utils/dateRange';
   import type { DateRange } from '../utils/dateRange';
@@ -48,7 +49,7 @@
   $: periodTypeOptions = periodTypes.map((pt) => {
     const value = adjustPeriodType(pt);
     return {
-      label: $format.getPeriodTypeName(adjustPeriodType(pt)),
+      label: $format.getPeriodTypeName(value),
       value,
     };
   });
@@ -150,8 +151,8 @@
   }
 
   function adjustPeriodType(periodType: PeriodType) {
-    // Adjust value for currently selected day of week
-    return hasDayOfWeek(periodType)
+    // Adjust value for currently selected day of week, if needed
+    return missingDayOfWeek(periodType)
       ? replaceDayOfWeek(periodType, selectedDayOfWeek) || periodType
       : periodType;
   }

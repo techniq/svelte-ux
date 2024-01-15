@@ -192,40 +192,47 @@ export function getPeriodTypeByCode(code: string): PeriodType {
   return parseInt(element?.[0] ?? '1');
 }
 
-export function getDayOfWeek(periodType: PeriodType) {
-  const periodTypeCode = getPeriodTypeCode(periodType);
-  const matches = periodTypeCode.match(/\-(SUN|MON|TUE|WED|THU|FRI|SAT)/);
-  if (matches) {
-    return DayOfWeek[matches[1] as keyof typeof DayOfWeek];
+export function getDayOfWeek(periodType: PeriodType): DayOfWeek | null {
+  if (
+    (periodType >= PeriodType.WeekSun && periodType <= PeriodType.WeekSat) ||
+    (periodType >= PeriodType.BiWeek1Sun && periodType <= PeriodType.BiWeek1Sat) ||
+    (periodType >= PeriodType.BiWeek2Sun && periodType <= PeriodType.BiWeek2Sat)
+  ) {
+    return (periodType % 10) - 1;
   } else {
     return null;
   }
 }
 
-export function replaceDayOfWeek(periodType: PeriodType, dayOfWeek: DayOfWeek) {
-  const periodTypeCode = getPeriodTypeCode(periodType);
-  const dayOfWeekName = DayOfWeek[dayOfWeek];
-  // Replace everything after `-` with new dayOfWeek
-  const newPeriodTypeCode = periodTypeCode.replace(/\-(.*)/, `-${dayOfWeekName}`);
-  return getPeriodTypeByCode(newPeriodTypeCode);
+/** Replace day of week for `periodType`, if applicable */
+export function replaceDayOfWeek(periodType: PeriodType, dayOfWeek: DayOfWeek): PeriodType {
+  if (hasDayOfWeek(periodType)) {
+    return periodType - (getDayOfWeek(periodType) ?? 0) + dayOfWeek;
+  } else if (missingDayOfWeek(periodType)) {
+    return periodType + dayOfWeek + 1;
+  } else {
+    return periodType;
+  }
 }
 
+/** Check if `periodType` has day of week (Sun-Sat) */
 export function hasDayOfWeek(periodType: PeriodType) {
-  // It's more: is it week related and .Week, .BiWeek1 or .BiWeek2 don't contain a day...
-  // const periodTypeCode = getPeriodTypeCode(periodType);
-  // return /\-(SUN|MON|TUE|WED|THU|FRI|SAT)/.test(periodTypeCode);
-
-  if (periodType >= PeriodType.WeekSun && periodType <= PeriodType.Week) {
+  if (periodType >= PeriodType.WeekSun && periodType <= PeriodType.WeekSat) {
     return true;
   }
-  if (periodType >= PeriodType.BiWeek1Sun && periodType <= PeriodType.BiWeek1) {
+  if (periodType >= PeriodType.BiWeek1Sun && periodType <= PeriodType.BiWeek1Sat) {
     return true;
   }
-  if (periodType >= PeriodType.BiWeek2Sun && periodType <= PeriodType.BiWeek2) {
+  if (periodType >= PeriodType.BiWeek2Sun && periodType <= PeriodType.BiWeek2Sat) {
     return true;
   }
 
   return false;
+}
+
+/** Is `periodType` missing day of week (Sun-Sat) */
+export function missingDayOfWeek(periodType: PeriodType) {
+  return [PeriodType.Week, PeriodType.BiWeek1, PeriodType.BiWeek2].includes(periodType);
 }
 
 export function getMonths(year = new Date().getFullYear()) {
