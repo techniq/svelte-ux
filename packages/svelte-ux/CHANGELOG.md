@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.58.0-next.13
+
+### Patch Changes
+
+- Update dependencies (except vitest) ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
 ## 0.58.0-next.12
 
 ### Minor Changes
