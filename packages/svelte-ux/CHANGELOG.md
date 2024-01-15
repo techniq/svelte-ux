@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.58.0-next.12
+
+### Minor Changes
+
+- Change PeriodType values (0 = unqualified DoW, 1-7 = Sun-Sat) ([#217](https://github.com/techniq/svelte-ux/pull/217))
+
 ## 0.58.0-next.11
 
 ### Patch Changes
