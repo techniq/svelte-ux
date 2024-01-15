@@ -6,6 +6,7 @@
     "svelte-ux": "0.57.1"
   },
   "changesets": [
+    "angry-ads-carry",
     "angry-zebras-remember",
     "beige-papayas-study",
     "chilled-dingos-sell",
