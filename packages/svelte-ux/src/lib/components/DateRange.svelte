@@ -103,6 +103,9 @@
     if (selected!.to) {
       selected!.to = end(selected!.to);
     }
+    if (selected!.periodType) {
+      selected!.periodType = periodType;
+    }
   }
 
   // Lookup selected preset string value to actual preset
