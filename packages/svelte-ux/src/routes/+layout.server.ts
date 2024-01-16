@@ -10,7 +10,7 @@ export async function load({ url }) {
   if (url.host === 'svelte-ux.vercel.app') {
     const newUrl = new URL(url);
     newUrl.host = 'svelte-ux.techniq.dev';
-    throw redirect(302, newUrl.toString());
+    redirect(302, newUrl.toString());
   }
 
   return {
