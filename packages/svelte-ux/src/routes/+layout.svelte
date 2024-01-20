@@ -25,6 +25,8 @@
   import { createLocaleSettings } from '$lib';
   import LanguageSelect from '$lib/components/LanguageSelect.svelte';
 
+  import './app.css';
+
   export let data: PageData;
 
   const baseGh = 'https://github.com/techniq/svelte-ux';
@@ -290,10 +292,6 @@
 </AppLayout>
 
 <style lang="postcss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-
   :global(body) {
     @apply bg-surface-200 accent-primary;
     /* background-image:

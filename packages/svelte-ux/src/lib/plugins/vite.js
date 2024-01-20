@@ -1,5 +1,5 @@
 import s from 'sveld';
-import sveltePreprocess from 'svelte-preprocess';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { preprocess } from 'svelte/compiler';
 import qs from 'node:querystring';
 
@@ -12,7 +12,7 @@ export function sveld() {
       if ('raw' in query && 'sveld' in query) {
         const raw = JSON.parse(src.split('export default ')[1]);
 
-        let { code } = await preprocess(raw, sveltePreprocess(), {
+        let { code } = await preprocess(raw, vitePreprocess(), {
           filename: id,
         });
         const data = new s.ComponentParser({
