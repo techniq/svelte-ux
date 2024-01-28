@@ -223,7 +223,7 @@
         {#if data.themes.light.length > 1 || data.themes.dark.length > 1}
           <ThemeSelect />
         {:else}
-          <ThemeSwitch classes={{ switch: 'bg-black/10 bornder-none' }} />
+          <ThemeSwitch classes={{ switch: 'bg-black/10' }} />
         {/if}
       </div>
 
