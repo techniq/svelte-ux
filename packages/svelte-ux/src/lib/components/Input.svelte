@@ -72,6 +72,8 @@
       el.value = value;
       el.setSelectionRange(i, j);
       backspace = false;
+    } else {
+      value = el.value;
     }
 
     dispatch('change', { value });
