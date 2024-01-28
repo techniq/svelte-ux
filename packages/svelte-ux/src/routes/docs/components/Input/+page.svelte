@@ -3,6 +3,8 @@
   import Input from '$lib/components/Input.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SectionDivider from '$lib/components/SectionDivider.svelte';
+
+  let value = 'test';
 </script>
 
 <h1>Examples</h1>
@@ -91,4 +93,16 @@
 
 <Preview>
   <Input placeholder="Please enter your birthday" mask="mm/dd/yyyy" replace="dmyh" />
+</Preview>
+
+<h2>bind:value</h2>
+
+<Preview>
+  <div class="grid grid-cols-[60px,auto]">
+    <span class="font-semibold">Input:</span>
+    <Input bind:value />
+
+    <span class="font-semibold">input:</span>
+    <input bind:value />
+  </div>
 </Preview>
