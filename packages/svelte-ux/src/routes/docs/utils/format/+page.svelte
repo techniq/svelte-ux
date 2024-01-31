@@ -6,9 +6,9 @@
   import MenuField from '$lib/components/MenuField.svelte';
   import type { FormatNumberStyle } from '$lib/utils/number';
   import DatePickerField from '$lib/components/DatePickerField.svelte';
-  import { getSettings } from '$lib/components/settings';
+  import { settings } from '$lib/components/settings';
 
-  const { format, locale } = getSettings();
+  const { locale, format } = settings({});
 
   let value = 1234.56;
   let style: FormatNumberStyle = 'decimal';
