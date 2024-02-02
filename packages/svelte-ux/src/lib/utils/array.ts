@@ -37,7 +37,7 @@ export function sum(items: (object | null)[], prop?: PropAccessorArg) {
 /**
  * Sum array of objects by property
  */
-export function sumObjects(items: (object | null)[], prop?: PropAccessorArg) {
+export function sumObjects(items: (object | null)[]) {
   return Object.fromEntries(
     rollup(
       items.flatMap((x) => Object.entries(x ?? {})),
