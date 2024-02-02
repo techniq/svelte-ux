@@ -1,4 +1,4 @@
-import { greatest } from 'd3-array';
+import { greatest, rollup } from 'd3-array';
 
 import { propAccessor } from './object';
 import type { PropAccessorArg } from './object';
@@ -32,6 +32,16 @@ export function sum(items: (object | null)[], prop?: PropAccessorArg) {
   const values = items.map((x) => getProp(x as any));
 
   return combine(values, (total, operand) => (total || 0) + (operand || 0));
+}
+
+export function sumObjects(items: (object | null)[], prop?: PropAccessorArg) {
+  return Object.fromEntries(
+    rollup(
+      items.flatMap((x) => Object.entries(x ?? {})),
+      (values) => sum(values, (d) => (Number.isFinite(d[1]) ? d[1] : 0)),
+      (d) => d[0]
+    )
+  );
 }
 
 /**
