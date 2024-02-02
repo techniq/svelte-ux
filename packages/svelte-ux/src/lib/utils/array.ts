@@ -34,6 +34,9 @@ export function sum(items: (object | null)[], prop?: PropAccessorArg) {
   return combine(values, (total, operand) => (total || 0) + (operand || 0));
 }
 
+/**
+ * Sum array of objects by property
+ */
 export function sumObjects(items: (object | null)[], prop?: PropAccessorArg) {
   return Object.fromEntries(
     rollup(
