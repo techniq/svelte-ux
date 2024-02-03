@@ -25,10 +25,27 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(var(--tw-gradient-stops))',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            // Reduce font size
+            h1: {
+              fontSize: theme('fontSize.2xl')[0],
+              fontWeight: theme('fontWeight.extrabold'),
+            },
+            h2: {
+              fontSize: theme('fontSize.xl')[0],
+              fontWeight: theme('fontWeight.bold'),
+              marginTop: theme('spacing.3'),
+            },
+            h3: {
+              fontSize: theme('fontSize.lg')[0],
+              fontWeight: theme('fontWeight.semibold'),
+            },
+          },
+        },
+      }),
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [
     svelteUx({ colorSpace: 'hsl' }),
