@@ -11,7 +11,7 @@
   import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
-  const { defaults } = getComponentSettings('DatePickerField');
+  const defaults = getComponentSettings('DatePickerField');
 
   export let value: Date | null = null;
   export let periodType: PeriodType = PeriodType.Day;

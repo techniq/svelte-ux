@@ -13,7 +13,7 @@
   import type { MenuOption } from '$lib/types/options';
   import { getComponentSettings } from './settings';
 
-  const { defaults } = getComponentSettings('MenuField');
+  const defaults = getComponentSettings('MenuField');
   const settingsClasses = defaults.classes;
 
   export let options: MenuOption[] = [];

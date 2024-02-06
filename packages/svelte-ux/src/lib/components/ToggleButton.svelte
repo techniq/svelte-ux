@@ -6,7 +6,7 @@
   import type { TransitionParams } from '$lib/types';
   import { getComponentSettings } from './settings';
 
-  const { defaults } = getComponentSettings('ToggleButton');
+  const defaults = getComponentSettings('ToggleButton');
 
   export let on = false;
   export let transition: typeof fade | false = fade;

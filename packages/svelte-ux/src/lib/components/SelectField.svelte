@@ -23,7 +23,7 @@
     change: { value: any; option: any };
     inputChange: string;
   }>();
-  const { defaults } = getComponentSettings('SelectField');
+  const defaults = getComponentSettings('SelectField');
   const settingsClasses = defaults.classes;
 
   const logger = new Logger('SelectField');

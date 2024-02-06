@@ -6,6 +6,7 @@ export type MenuOption = {
 };
 
 export type LabelPlacement = 'inset' | 'float' | 'top' | 'left';
+export const DEFAULT_LABEL_PLACEMENT: LabelPlacement = 'inset';
 
 export type ButtonVariant =
   | 'default'

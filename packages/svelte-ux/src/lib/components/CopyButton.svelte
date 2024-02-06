@@ -6,7 +6,7 @@
   import { getComponentSettings } from './settings';
   import { slide } from 'svelte/transition';
 
-  const { defaults } = getComponentSettings('CopyButton');
+  const defaults = getComponentSettings('CopyButton');
   const settingsClasses = defaults.classes;
 
   export let value: string;

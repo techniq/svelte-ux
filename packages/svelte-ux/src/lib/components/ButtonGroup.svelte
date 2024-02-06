@@ -28,7 +28,7 @@
   import { cls } from '../utils/styles';
   import { getComponentSettings } from './settings';
 
-  const { defaults } = getComponentSettings('ButtonGroup');
+  const defaults = getComponentSettings('ButtonGroup');
   const settingsClasses = defaults.classes;
 
   export let variant: ComponentProps<Button>['variant'] = defaults.variant;

@@ -2,6 +2,7 @@ import type { ComponentProps, SvelteComponent } from 'svelte';
 import type * as Components from './';
 import { getSettings, type DefaultProps, type Settings } from './settings';
 import type { ButtonVariant, LabelPlacement } from '$lib/types/options';
+import type { Prettify } from '$lib/types';
 
 export type ComponentName = keyof typeof Components;
 
@@ -68,10 +69,12 @@ export type ResolvedComponentClassesProp<NAME extends ComponentName> =
     ? {}
     : NonNullable<ClassesProp<(typeof Components)[NAME]>>;
 
-export type ResolvedComponentSettings = {
-  [key in ComponentName]: {
-    classes: ResolvedComponentClassesProp<key>;
-  } & (key extends keyof ComponentDefaultProps ? ComponentDefaultProps[key] : {});
+export type AllDefaultProps<NAME extends ComponentName> = NAME extends keyof ComponentDefaultProps
+  ? ComponentDefaultProps[NAME]
+  : {};
+
+export type ResolvedComponentSettings<NAME extends ComponentName> = AllDefaultProps<NAME> & {
+  classes: ResolvedComponentClassesProp<NAME>;
 };
 
 export type ComponentSettings = {

@@ -12,7 +12,7 @@
   import MenuItem from './MenuItem.svelte';
 
   const dispatch = createEventDispatcher<{ change: { value: any } }>();
-  const { defaults } = getComponentSettings('MenuButton');
+  const defaults = getComponentSettings('MenuButton');
   const settingsClasses = defaults.classes;
 
   export let options: Array<{ label: string; value: any; icon?: string }>;

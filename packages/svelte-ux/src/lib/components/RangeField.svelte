@@ -5,7 +5,7 @@
   import Button from './Button.svelte';
   import { getComponentSettings } from './settings';
 
-  const { defaults } = getComponentSettings('RangeField');
+  const defaults = getComponentSettings('RangeField');
 
   export let value: number;
   export let min = 0;

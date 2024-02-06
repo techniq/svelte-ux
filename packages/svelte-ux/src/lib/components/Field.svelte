@@ -4,7 +4,7 @@
   import { uniqueId } from 'lodash-es';
 
   import { cls } from '../utils/styles';
-  import type { LabelPlacement } from '../types/options';
+  import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types/options';
   import { getComponentSettings } from './settings';
 
   import Button from './Button.svelte';
@@ -14,12 +14,11 @@
     clear: null;
   }>();
 
-  const { defaults, globalDefaults } = getComponentSettings('Field');
+  const defaults = getComponentSettings('Field');
   const settingsClasses = defaults.classes;
 
   export let label = '';
-  export let labelPlacement: LabelPlacement =
-    defaults.labelPlacement ?? globalDefaults.labelPlacement;
+  export let labelPlacement: LabelPlacement = defaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT;
   export let value: any = null;
   // export let placeholder = '';
   export let error: string | string[] | boolean | undefined = '';

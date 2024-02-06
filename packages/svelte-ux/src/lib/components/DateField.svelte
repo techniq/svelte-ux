@@ -10,7 +10,7 @@
   import DatePickerField from './DatePickerField.svelte';
 
   const { format: format_ux } = getSettings();
-  const { defaults } = getComponentSettings('DateField');
+  const defaults = getComponentSettings('DateField');
 
   export let value: Date | null = null;
   export let format: string | undefined = undefined;

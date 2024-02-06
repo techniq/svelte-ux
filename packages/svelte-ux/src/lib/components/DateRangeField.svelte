@@ -15,7 +15,7 @@
 
   const dispatch = createEventDispatcher();
   const { format, localeSettings } = getSettings();
-  const { defaults } = getComponentSettings('DatePickerField');
+  const defaults = getComponentSettings('DatePickerField');
 
   const _defaultValue: DateRangeType = {
     from: null,

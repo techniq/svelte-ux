@@ -18,7 +18,7 @@
 
   type Option = $$Generic;
 
-  const { defaults } = getComponentSettings('MultiSelectField');
+  const defaults = getComponentSettings('MultiSelectField');
   const settingsClasses = defaults.classes;
 
   // MultiSelectMenu props

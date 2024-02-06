@@ -38,8 +38,6 @@ export type SettingsInput = {
   };
   currentTheme?: ThemeStore;
 
-  defaultProps?: Partial<DefaultProps>;
-
   /** The existing locale store, if calling settings when there is already an existing `Settings` object */
   locale?: LocaleStore;
   /** The existing locale store, if calling settings when there is already an existing `Settings` object */
@@ -48,7 +46,7 @@ export type SettingsInput = {
   format?: Readable<FormatFunctions>;
 };
 
-export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary' | 'defaultProps'> {
+export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> {
   /** The currently selected locale */
   locale: LocaleStore;
   /** The settings for the currently selected locale */
@@ -56,9 +54,8 @@ export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary' |
   /** Formatting functions and information */
   format: Readable<FormatFunctions>;
   currentTheme: ThemeStore;
-  defaultProps: DefaultProps;
 
-  componentSettingsCache: Partial<Record<ComponentName, GetComponentSettingsResult<ComponentName>>>;
+  componentSettingsCache: Partial<Record<ComponentName, ResolvedComponentSettings<ComponentName>>>;
 }
 
 const settingsKey = Symbol();
@@ -94,10 +91,6 @@ function createLocaleStores(settings: SettingsInput) {
   };
 }
 
-const defaultProps: DefaultProps = {
-  labelPlacement: 'inset',
-};
-
 export function settings(settings: SettingsInput): Settings {
   let lightThemes = settings.themes?.light ?? ['light'];
   let darkThemes = settings.themes?.dark ?? ['dark'];
@@ -112,32 +105,25 @@ export function settings(settings: SettingsInput): Settings {
 
   let localeStores = createLocaleStores(settings);
 
-  const resolvedDefaultProps: DefaultProps = {
-    ...defaultProps,
-    ...settings.defaultProps,
-  };
-
   return setContext<Settings>(settingsKey, {
     ...settings,
     themes: {
       light: lightThemes,
       dark: darkThemes,
     },
-    defaultProps: resolvedDefaultProps,
     currentTheme,
-    ...localeStores,
     componentSettingsCache: {},
+    ...localeStores,
   });
 }
 
 export function getSettings(): Settings {
   // in a try/catch to be able to test wo svelte components
   try {
-    return getContext<Settings>(settingsKey) ?? { defaultProps };
+    return getContext<Settings>(settingsKey) ?? {};
   } catch (error) {
     return {
       currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
-      defaultProps,
       componentSettingsCache: {},
     };
   }
@@ -146,37 +132,30 @@ export function getSettings(): Settings {
 export function resolveComponentSettings<NAME extends ComponentName>(
   settings: Settings,
   name: NAME
-): ResolvedComponentSettings[NAME] {
+): ResolvedComponentSettings<NAME> {
   const theme = settings?.components?.[name];
+  const classes = resolveComponentClasses(theme);
 
-  return {
+  // @ts-expect-error TS has trouble merging these types together.
+  const output: ResolvedComponentSettings<NAME> = {
     ...theme,
-    classes: resolveComponentClasses(theme),
+    classes,
   };
-}
 
-export interface GetComponentSettingsResult<NAME extends ComponentName> {
-  defaults: ResolvedComponentSettings[NAME];
-  globalDefaults: DefaultProps;
+  return output;
 }
 
 export function getComponentSettings<NAME extends ComponentName>(
   name: NAME
-): GetComponentSettingsResult<NAME> {
+): ResolvedComponentSettings<NAME> {
   const settings = getSettings();
 
   const existing = settings.componentSettingsCache[name];
   if (existing) {
-    return existing as GetComponentSettingsResult<NAME>;
+    return existing as ResolvedComponentSettings<NAME>;
   }
 
-  const componentSettings = resolveComponentSettings(settings, name)!;
-
-  const output: GetComponentSettingsResult<NAME> = {
-    defaults: componentSettings,
-    globalDefaults: settings?.defaultProps ?? defaultProps,
-  };
-
+  const output = resolveComponentSettings(settings, name)!;
   settings.componentSettingsCache[name] = output;
   return output;
 }
