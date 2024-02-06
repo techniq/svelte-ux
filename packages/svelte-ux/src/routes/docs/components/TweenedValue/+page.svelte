@@ -70,7 +70,7 @@
 
 <Preview>
   <TweenedValue {value} let:value>
-    <span class={cls('tabular-nums', (value ?? 0) < 0 ? 'text-red-500' : 'text-green-500')}>
+    <span class={cls('tabular-nums', (value ?? 0) < 0 ? 'text-danger' : 'text-success')}>
       {$format(value, 'decimal')}
     </span>
   </TweenedValue>

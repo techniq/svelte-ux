@@ -121,7 +121,7 @@
       }}
       classes={{
         value:
-          'font-bold text-transparent bg-clip-text bg-gradient-to-b from-green-200 via-cyan-400 to-blue-500',
+          'font-bold text-transparent bg-clip-text bg-gradient-to-b from-success-200 via-cyan-400 to-blue-500',
       }}
     />
   </span>
@@ -243,7 +243,7 @@
   <ScrollingValue
     bind:value
     {axis}
-    classes={{ value: 'text-6xl first:bg-red-500/50 last:bg-green-500/50' }}
+    classes={{ value: 'text-6xl first:bg-danger/50 last:bg-success-500/50' }}
   />
   <div class="grid grid-flow-col">
     <Button on:click={() => (value -= 100)}>-100</Button>

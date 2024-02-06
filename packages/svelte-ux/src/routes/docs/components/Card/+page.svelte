@@ -110,10 +110,10 @@
       </div>
     </Card>
     <Card title="Title" subheading="with content">
-      <div slot="contents" class="bg-red-500/10">Contents</div>
+      <div slot="contents" class="bg-danger/10">Contents</div>
     </Card>
     <Card title="Title" subheading="with tall content">
-      <div slot="contents" class="bg-red-500/10 h-40">Contents</div>
+      <div slot="contents" class="bg-danger/10 h-40">Contents</div>
     </Card>
   </div>
 </Preview>

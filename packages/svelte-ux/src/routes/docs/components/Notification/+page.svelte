@@ -15,7 +15,7 @@
   <div class="w-[400px]">
     <Notification open closeIcon>
       <div slot="icon">
-        <Icon path={mdiCheckCircleOutline} class="text-green-500" />
+        <Icon path={mdiCheckCircleOutline} class="text-success-500" />
       </div>
       <div slot="title">Successfully Saved!</div>
       <div slot="description">Anyone with a link can now view this file.</div>

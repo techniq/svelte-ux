@@ -488,7 +488,7 @@
   <TextField
     label="Search"
     base
-    class="pl-2 text-red-500 bg-red-500/10 rounded-full"
+    class="pl-2 text-danger bg-danger/10 rounded-full"
   />
 </Preview>
 -->

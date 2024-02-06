@@ -42,7 +42,7 @@
 <Preview>
   <div class="h-40">
     <div
-      class="w-10 h-10 bg-red-500 rounded cursor-move"
+      class="w-10 h-10 bg-danger rounded cursor-move"
       use:movable
       on:movestart={() => {
         coords.stiffness = 1;
@@ -69,7 +69,7 @@
 <Preview>
   <div class="h-40">
     <div
-      class="w-10 h-10 bg-red-500 rounded cursor-move"
+      class="w-10 h-10 bg-danger rounded cursor-move"
       use:movable={{ step: 25 }}
       on:movestart={() => {
         coords.stiffness = 1;
@@ -96,7 +96,7 @@
 <Preview>
   <div class="h-40">
     <div
-      class="w-10 h-10 bg-red-500 rounded cursor-move"
+      class="w-10 h-10 bg-danger rounded cursor-move"
       use:movable={{ stepPercent: 0.1 }}
       on:movestart={() => {
         coords.stiffness = 1;
@@ -123,7 +123,7 @@
 <Preview>
   <div class="h-40">
     <div
-      class="w-10 h-10 bg-red-500 rounded cursor-move"
+      class="w-10 h-10 bg-danger rounded cursor-move"
       use:movable={{ axis: 'x' }}
       on:movestart={() => {
         coords.stiffness = 1;

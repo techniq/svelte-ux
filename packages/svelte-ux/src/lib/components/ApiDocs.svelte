@@ -48,7 +48,7 @@
           <div slot="actions" class="flex flex-wrap justify-end gap-1">
             {#if prop.isRequired}
               <div
-                class="inline-block border bg-red-500/10 border-red-500 text-red-600 px-2 rounded-full text-xs"
+                class="inline-block border bg-danger/10 border-danger text-danger-600 px-2 rounded-full text-xs"
               >
                 Required
               </div>
@@ -160,7 +160,7 @@
         <ListItem
           list="type"
           icon={mdiBullhorn}
-          avatar={{ size: 'sm', class: 'text-xs text-white bg-green-500' }}
+          avatar={{ size: 'sm', class: 'text-xs text-white bg-success-500' }}
         >
           <div slot="title">{event.name}</div>
 
@@ -212,7 +212,7 @@
           <div slot="actions" class="flex flex-wrap justify-end gap-1">
             {#if prop.isRequired}
               <div
-                class="inline-block border bg-red-500/10 border-red-500 text-red-600 px-2 rounded-full text-xs"
+                class="inline-block border bg-danger/10 border-danger text-danger-600 px-2 rounded-full text-xs"
               >
                 Required
               </div>

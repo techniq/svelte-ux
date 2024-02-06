@@ -54,7 +54,7 @@
     <svelte:fragment slot="beforeOptions" let:selection>
       {#if selection.isMaxSelected()}
         <div
-          class="bg-red-50 border-red-500 text-red-600 border text-sm font-semibold p-2 rounded mb-1"
+          class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded mb-1"
           transition:slide
         >
           Maximum selection reached
@@ -123,7 +123,7 @@
     <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch max={2}>
       <div slot="actions" let:selection class="flex items-center">
         {#if selection.isMaxSelected()}
-          <div class="text-sm text-red-500">Maximum selection reached</div>
+          <div class="text-sm text-danger">Maximum selection reached</div>
         {/if}
       </div>
     </MultiSelect>
@@ -148,7 +148,7 @@
         {indeterminate}
         on:change={onChange}
       >
-        <span class="uppercase text-red-500">{label}</span>
+        <span class="uppercase text-danger">{label}</span>
       </MultiSelectOption>
     </MultiSelect>
   </div>

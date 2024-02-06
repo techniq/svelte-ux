@@ -68,9 +68,9 @@
       use:intersection={{ threshold: 1 }}
       on:intersecting={(e) => {
         if (e.detail.isIntersecting) {
-          e.target.classList.add('bg-red-500');
+          e.target.classList.add('bg-danger');
         } else {
-          e.target.classList.remove('bg-red-500');
+          e.target.classList.remove('bg-danger');
         }
       }}
       class="transition-colors duration-500"

@@ -91,7 +91,7 @@
           class={cls(
             'text-sm  px-2 rounded',
             status === 'beta' && 'bg-yellow-500/20 text-yellow-800',
-            status === 'deprecated' && 'bg-red-500/20 text-red-900'
+            status === 'deprecated' && 'bg-danger/20 text-danger-900'
           )}
         >
           {status}

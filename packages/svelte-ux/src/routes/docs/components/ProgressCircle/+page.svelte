@@ -165,9 +165,9 @@
 <Preview>
   <div class="flex gap-4">
     <ProgressCircle class="text-blue-500" />
-    <ProgressCircle class="text-red-500" />
+    <ProgressCircle class="text-danger" />
     <ProgressCircle class="text-purple-500" />
-    <ProgressCircle class="text-green-500" />
+    <ProgressCircle class="text-success-500" />
     <ProgressCircle class="text-orange-500" />
   </div>
 </Preview>
@@ -177,9 +177,9 @@
 <Preview>
   <div class="flex gap-4">
     <ProgressCircle class="text-blue-500 [--track-color:theme(colors.blue.100)]" track />
-    <ProgressCircle class="text-red-500 [--track-color:theme(colors.red.100)]" track />
+    <ProgressCircle class="text-danger [--track-color:theme(colors.red.100)]" track />
     <ProgressCircle class="text-purple-500 [--track-color:theme(colors.purple.100)]" track />
-    <ProgressCircle class="text-green-500 [--track-color:theme(colors.green.100)]" track />
+    <ProgressCircle class="text-success-500 [--track-color:theme(colors.green.100)]" track />
     <ProgressCircle class="text-orange-500 [--track-color:theme(colors.orange.100)]" track />
   </div>
 </Preview>
