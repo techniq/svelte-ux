@@ -1,5 +1,23 @@
 # svelte-ux
 
+## 0.58.0
+
+### Minor Changes
+
+- Removes SelectList. Updates SelectField features to support SelectList's use case via property/attribute overrides. Updates QuickSearch to use SelectField. Defines MenuOption type & updates MenuField & SelectField to use it; this results in renaming of SelectField options' `name` field to become `label`, standardizing the API across the two. Also adds `activeOptionIcon` to SelectField so users can opt-in to dynamically updating the field icon based on the selected option. Also fixed a bug with the `scrollIntoView` action related to its `onlyIfNeeded` flag. ([#127](https://github.com/techniq/svelte-ux/pull/127))
+
+### Patch Changes
+
+- [SelectList] Add `type="button"` to `<button>` wrapper to not submit forms on click ([`a7b7a4ee800eb8f47040efbed751acc64514e9d3`](https://github.com/techniq/svelte-ux/commit/a7b7a4ee800eb8f47040efbed751acc64514e9d3))
+
+- Add `max` prop to limit the number of selected values for `selectionStore`, `Selection`, `MultiSelect`, `MultiSelectField`, and `MultiSelectMenu`. Add `beforeOptions` and `afterOptions` slots, and pass `selection` to `actions` slot ([#231](https://github.com/techniq/svelte-ux/pull/231))
+
+- Prevent cursor jumping around when backspacing near a decimal point in a number TextField ([#178](https://github.com/techniq/svelte-ux/pull/178))
+
+- Update AppLayout nav to only show scrollbar when overflown (Windows, Mac with "Show scrollbars: always) ([#171](https://github.com/techniq/svelte-ux/pull/171))
+
+- [Input] Fix `bind:value` ([#224](https://github.com/techniq/svelte-ux/pull/224))
+
 ## 0.57.1
 
 ### Patch Changes
