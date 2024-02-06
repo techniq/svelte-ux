@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.58.1
+
+### Patch Changes
+
+- Move `sveld` from peerDependencies to dependencies to fix install (and match next release) ([`7539e467edbb4506c1930f3fad0a4efd7e457ff0`](https://github.com/techniq/svelte-ux/commit/7539e467edbb4506c1930f3fad0a4efd7e457ff0))
+
 ## 0.58.0
 
 ### Minor Changes
