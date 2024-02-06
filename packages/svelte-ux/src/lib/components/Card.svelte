@@ -10,6 +10,13 @@
   export let loading: boolean | null = null;
 
   const settingsClasses = getComponentClasses('Card');
+
+  export let classes: {
+    root?: string;
+    header?: string;
+    contents?: string;
+    actions?: string;
+  } = {};
 </script>
 
 <!-- 
@@ -35,7 +42,7 @@
   {/if}
 
   {#if title || subheading || $$slots.header}
-    <div class="p-4">
+    <div class={cls('p-4', settingsClasses.header)}>
       <slot name="header">
         <Header {title} {subheading} />
       </slot>
@@ -45,13 +52,13 @@
   <slot />
 
   {#if $$slots.contents}
-    <div class="px-4 flex-1">
+    <div class={cls('px-4 flex-1', settingsClasses.contents)}>
       <slot name="contents" />
     </div>
   {/if}
 
   {#if $$slots.actions}
-    <div class="py-2 px-1">
+    <div class={cls('py-2 px-1', settingsClasses.actions)}>
       <slot name="actions" />
     </div>
   {/if}
