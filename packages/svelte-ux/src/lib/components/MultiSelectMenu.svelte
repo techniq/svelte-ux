@@ -22,6 +22,8 @@
   export let placeholder: string | undefined = undefined;
   export let infiniteScroll = false;
   export let searchText = '';
+  /** Maximum number of options that can be selected  */
+  export let max: number | undefined = undefined;
 
   export let labelProp = 'name';
   export let valueProp = 'value';
@@ -53,6 +55,7 @@
     {options}
     {value}
     {indeterminateSelected}
+    {max}
     {open}
     {duration}
     {inlineSearch}
@@ -74,10 +77,11 @@
       let:value
       let:checked
       let:indeterminate
+      let:disabled
       let:onChange
     >
-      <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
-        <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+      <slot name="option" {option} {label} {value} {checked} {indeterminate} {disabled} {onChange}>
+        <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
           {label}
         </MultiSelectOption>
       </slot>

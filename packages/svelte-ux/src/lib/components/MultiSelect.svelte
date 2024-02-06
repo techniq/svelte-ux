@@ -26,6 +26,8 @@
   export let inlineSearch = false;
   export let placeholder = 'Search items';
   export let infiniteScroll = false;
+  /** Maximum number of options that can be selected  */
+  export let max: number | undefined = undefined;
 
   export let labelProp = 'name';
   export let valueProp = 'value';
@@ -77,6 +79,7 @@
 
   $: selection = selectionStore({
     initial: selectedOptions.map((x) => get(x, valueProp)),
+    max,
   });
 
   $: isSelectionDirty = dirtyStore(selection);
@@ -123,6 +126,7 @@
       {@const value = get(option, valueProp)}
       {@const checked = $selection.isSelected(value)}
       {@const indeterminate = $indeterminateStore.has(value)}
+      {@const disabled = $selection.isDisabled(value)}
       {@const onChange = () => {
         // TODO: Try to figure out how to keep underling Checkbox controlled so state goes `indeterminate` => `checked` => `unchecked`
         // If partial/indeterminate, transition to fully selected, then deselect/select as usual
@@ -137,8 +141,17 @@
         $selection.toggleSelected(value);
       }}
       <div animate:flip={{ duration }}>
-        <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
-          <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+        <slot
+          name="option"
+          {option}
+          {label}
+          {value}
+          {checked}
+          {indeterminate}
+          {disabled}
+          {onChange}
+        >
+          <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
             {label}
           </MultiSelectOption>
         </slot>
@@ -158,6 +171,7 @@
       {@const value = get(option, valueProp)}
       {@const checked = $selection.isSelected(value)}
       {@const indeterminate = $indeterminateStore.has(value)}
+      {@const disabled = $selection.isDisabled(value)}
       {@const onChange = () => {
         // TODO: Try to figure out how to keep underling Checkbox controlled so state goes `indeterminate` => `checked` => `unchecked`
         // If partial/indeterminate, transition to fully selected, then deselect/select as usual
@@ -172,8 +186,17 @@
         $selection.toggleSelected(value);
       }}
       <div animate:flip={{ duration }}>
-        <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
-          <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+        <slot
+          name="option"
+          {option}
+          {label}
+          {value}
+          {checked}
+          {indeterminate}
+          {disabled}
+          {onChange}
+        >
+          <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
             {label}
           </MultiSelectOption>
         </slot>

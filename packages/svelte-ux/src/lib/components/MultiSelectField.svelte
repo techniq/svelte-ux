@@ -22,6 +22,8 @@
   export let options: Option[];
   export let value: any[] = [];
   export let indeterminateSelected: any[] = [];
+  /** Maximum number of options that can be selected  */
+  export let max: number | undefined = undefined;
   export let placement: Placement = 'bottom-start';
   export let infiniteScroll = false;
   export let labelProp = 'name'; // TODO: Default to 'label'
@@ -196,6 +198,7 @@
     {options}
     {value}
     {indeterminateSelected}
+    {max}
     {placement}
     {infiniteScroll}
     {labelProp}
@@ -217,10 +220,11 @@
       let:value
       let:checked
       let:indeterminate
+      let:disabled
       let:onChange
     >
-      <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
-        <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+      <slot name="option" {option} {label} {value} {checked} {indeterminate} {disabled} {onChange}>
+        <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
           {label}
         </MultiSelectOption>
       </slot>

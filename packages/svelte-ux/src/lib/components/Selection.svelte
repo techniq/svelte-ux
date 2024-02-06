@@ -6,8 +6,9 @@
   export let initial: any[] = [];
   export let all: any[] = [];
   export let single = false;
+  export let max = false;
 
-  const selection = selectionStore({ initial, all, single });
+  const selection = selectionStore({ initial, all, single, max });
   $: $selection.all.set(all);
 </script>
 
@@ -15,6 +16,7 @@
 <slot
   selected={$selection.selected}
   isSelected={$selection.isSelected}
+  isDisabled={$selection.isDisabled}
   toggleAll={$selection.toggleAll}
   toggleSelected={$selection.toggleSelected}
   isAllSelected={$selection.isAllSelected}

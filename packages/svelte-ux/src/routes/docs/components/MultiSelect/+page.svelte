@@ -38,6 +38,13 @@
   <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch />
 </Preview>
 
+<h2>max selected</h2>
+
+<Preview>
+  {value.length} selected
+  <MultiSelect {options} {value} max={2} on:change={(e) => (value = e.detail.value)} />
+</Preview>
+
 <h2>many options</h2>
 
 <Preview>

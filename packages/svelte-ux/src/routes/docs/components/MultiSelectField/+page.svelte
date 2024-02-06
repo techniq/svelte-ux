@@ -43,6 +43,12 @@
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} disabled />
 </Preview>
 
+<h2>max selected</h2>
+
+<Preview>
+  <MultiSelectField {options} {value} max={2} on:change={(e) => (value = e.detail.value)} />
+</Preview>
+
 <h2>many options</h2>
 
 <Preview>
