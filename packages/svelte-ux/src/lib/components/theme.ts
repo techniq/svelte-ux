@@ -1,8 +1,8 @@
 import type { ComponentProps, SvelteComponent } from 'svelte';
 import type * as Components from './';
-import { getSettings } from './settings';
+import { getSettings, type DefaultProps, type Settings } from './settings';
 
-type ComponentName = keyof typeof Components;
+export type ComponentName = keyof typeof Components;
 
 type ClassesProp<T> = T extends { prototype: infer PR extends SvelteComponent }
   ? ComponentProps<PR> extends { classes?: any }
@@ -10,16 +10,33 @@ type ClassesProp<T> = T extends { prototype: infer PR extends SvelteComponent }
     : never
   : never;
 
+export type ResolvedComponentClasses = {
+  [key in ComponentName]: ClassesProp<(typeof Components)[key]> extends never
+    ? {}
+    : NonNullable<ClassesProp<(typeof Components)[key]>>;
+};
+
 export type ComponentClasses = {
   [key in ComponentName]?: ClassesProp<(typeof Components)[key]> | string;
 };
 
-export function getClasses() {
+export function getClasses(): ComponentClasses {
   return getSettings().classes ?? {};
 }
 
-export function getComponentClasses(name: ComponentName) {
-  const theme = getClasses()[name] ?? {};
+export function resolveComponentClasses<NAME extends ComponentName>(
+  settings: Settings,
+  name: NAME
+) {
+  const theme = settings?.classes?.[name] ?? {};
+  const classes: ResolvedComponentClasses[NAME] =
+    typeof theme === 'string' ? { root: theme } : theme;
+  return classes;
+}
 
-  return typeof theme === 'string' ? { root: theme } : theme;
+export function getComponentClasses<NAME extends ComponentName>(
+  name: NAME
+): ResolvedComponentClasses[NAME] {
+  const settings = getSettings();
+  return resolveComponentClasses(settings, name);
 }

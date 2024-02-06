@@ -4,3 +4,5 @@ export type MenuOption = {
   icon?: string;
   group?: string;
 };
+
+export type LabelPlacement = 'inset' | 'float' | 'top' | 'left';

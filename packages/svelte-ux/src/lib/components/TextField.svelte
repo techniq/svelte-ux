@@ -9,7 +9,8 @@
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
   import { isLiteralObject } from '../utils/object';
-  import { getComponentClasses } from './theme';
+  import type { LabelPlacement } from '../types/options';
+  import { getComponentSettings } from './settings';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -23,9 +24,11 @@
     change: { value: typeof value; inputValue: InputValue; operator?: string };
   }>();
 
+  const { classes: settingsClasses, defaultProps } = getComponentSettings('TextField');
+
   export let name: string | undefined = undefined;
   export let label = '';
-  export let labelPlacement: 'inset' | 'float' | 'top' | 'left' = 'inset';
+  export let labelPlacement: LabelPlacement = defaultProps.labelPlacement;
   export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
   export let type:
     | 'text'
@@ -66,7 +69,6 @@
     prepend?: string;
     append?: string;
   } = {};
-  const settingsClasses = getComponentClasses('TextField');
 
   // Input props
   export let mask: string | undefined = undefined;

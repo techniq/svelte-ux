@@ -1,6 +1,12 @@
 import { getContext, setContext } from 'svelte';
-import type { ComponentClasses } from './theme';
+import {
+  type ComponentName,
+  type ComponentClasses,
+  type ResolvedComponentClasses,
+  resolveComponentClasses,
+} from './theme';
 import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
+import type { LabelPlacement } from '$lib/types/options';
 import {
   getAllKnownLocales,
   localeStore,
@@ -10,6 +16,10 @@ import {
 } from '$lib/utils/locale';
 import { buildFormatters, type FormatFunctions } from '$lib/utils/format';
 import { writable, type Readable, type Writable, derived } from 'svelte/store';
+
+export interface DefaultProps {
+  labelPlacement: LabelPlacement;
+}
 
 export type SettingsInput = {
   /** Force a specific locale setting. */
@@ -28,6 +38,8 @@ export type SettingsInput = {
   };
   currentTheme?: ThemeStore;
 
+  defaultProps?: Partial<DefaultProps>;
+
   /** The existing locale store, if calling settings when there is already an existing `Settings` object */
   locale?: LocaleStore;
   /** The existing locale store, if calling settings when there is already an existing `Settings` object */
@@ -36,7 +48,7 @@ export type SettingsInput = {
   format?: Readable<FormatFunctions>;
 };
 
-export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> {
+export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary' | 'defaultProps'> {
   /** The currently selected locale */
   locale: LocaleStore;
   /** The settings for the currently selected locale */
@@ -44,6 +56,7 @@ export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> 
   /** Formatting functions and information */
   format: Readable<FormatFunctions>;
   currentTheme: ThemeStore;
+  defaultProps: DefaultProps;
 }
 
 const settingsKey = Symbol();
@@ -79,6 +92,10 @@ function createLocaleStores(settings: SettingsInput) {
   };
 }
 
+const defaultProps: DefaultProps = {
+  labelPlacement: 'inset',
+};
+
 export function settings(settings: SettingsInput): Settings {
   let lightThemes = settings.themes?.light ?? ['light'];
   let darkThemes = settings.themes?.dark ?? ['dark'];
@@ -93,12 +110,18 @@ export function settings(settings: SettingsInput): Settings {
 
   let localeStores = createLocaleStores(settings);
 
+  const resolvedDefaultProps: DefaultProps = {
+    ...defaultProps,
+    ...settings.defaultProps,
+  };
+
   return setContext<Settings>(settingsKey, {
     ...settings,
     themes: {
       light: lightThemes,
       dark: darkThemes,
     },
+    defaultProps: resolvedDefaultProps,
     currentTheme,
     ...localeStores,
   });
@@ -107,10 +130,26 @@ export function settings(settings: SettingsInput): Settings {
 export function getSettings(): Settings {
   // in a try/catch to be able to test wo svelte components
   try {
-    return getContext<Settings>(settingsKey) ?? {};
+    return getContext<Settings>(settingsKey) ?? { defaultProps };
   } catch (error) {
     return {
       currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
+      defaultProps,
     };
   }
+}
+
+export function getComponentSettings<NAME extends ComponentName>(
+  name: NAME
+): {
+  classes: ResolvedComponentClasses[NAME];
+  defaultProps: DefaultProps;
+} {
+  const settings = getSettings();
+  const classes = resolveComponentClasses(settings, name)!;
+
+  return {
+    classes: classes,
+    defaultProps: settings?.defaultProps ?? defaultProps,
+  };
 }
