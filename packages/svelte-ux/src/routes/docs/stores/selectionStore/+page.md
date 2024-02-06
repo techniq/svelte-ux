@@ -15,9 +15,27 @@
   const selection2 = selectionStore({ initial: [3,4,5]})
   const selection3 = selectionStore({ all: items.map(item => item.id)});
   const selection4 = selectionStore({ single: true });
+  const selection5 = selectionStore({ max: 3 });
 </script>
 
 <h1>Usage</h1>
+
+<h2>Max</h2>
+
+```js
+const selection = selectionStore({ max: 3 });
+```
+
+<Preview>
+  {#each items as item}
+    <div>
+      <Checkbox checked={$selection5.isSelected(item.id)} on:change={() => $selection5.toggleSelected(item.id)} disabled={$selection5.isDisabled(item.id)}>
+        {item.id}
+      </Checkbox>
+    </div>
+  {/each}
+  selected: {JSON.stringify($selection5.selected)}
+</Preview>
 
 <h2>Basic</h2>
 

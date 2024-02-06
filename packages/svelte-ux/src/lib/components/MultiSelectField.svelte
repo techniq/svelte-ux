@@ -22,6 +22,8 @@
   export let options: Option[];
   export let value: any[] = [];
   export let indeterminateSelected: any[] = [];
+  /** Maximum number of options that can be selected  */
+  export let max: number | undefined = undefined;
   export let placement: Placement = 'bottom-start';
   export let infiniteScroll = false;
   export let labelProp = 'name'; // TODO: Default to 'label'
@@ -196,6 +198,7 @@
     {options}
     {value}
     {indeterminateSelected}
+    {max}
     {placement}
     {infiniteScroll}
     {labelProp}
@@ -209,6 +212,9 @@
     bind:menuOptionsEl
     {...menuProps}
   >
+    <slot name="beforeOptions" slot="beforeOptions" let:selection {selection} />
+    <slot name="afterOptions" slot="afterOptions" let:selection {selection} />
+
     <!-- TODO: If only `<slot name="option" slot="option" />` just worked  -->
     <svelte:fragment
       slot="option"
@@ -217,16 +223,17 @@
       let:value
       let:checked
       let:indeterminate
+      let:disabled
       let:onChange
     >
-      <slot name="option" {option} {label} {value} {checked} {indeterminate} {onChange}>
-        <MultiSelectOption {checked} {indeterminate} on:change={onChange}>
+      <slot name="option" {option} {label} {value} {checked} {indeterminate} {disabled} {onChange}>
+        <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
           {label}
         </MultiSelectOption>
       </slot>
     </svelte:fragment>
 
-    <slot name="actions" slot="actions">
+    <slot name="actions" slot="actions" let:selection {selection}>
       <div />
     </slot>
   </MultiSelectMenu>

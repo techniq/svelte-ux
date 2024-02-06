@@ -2,19 +2,32 @@ import { derived, writable } from 'svelte/store';
 import uniqueStore from './uniqueStore';
 
 export type SelectionProps<T> = {
+  /** Initial values */
   initial?: T[];
+
+  /** All values to select when `toggleAll()` is called */
   all?: T[];
+
+  /** Only allow 1 selected value */
   single?: boolean;
+
+  /** Maximum number of values that can be selected  */
+  max?: number;
 };
 
 export default function selectionStore<T>(props: SelectionProps<T> = {}) {
   const selected = uniqueStore(props.initial ?? []);
   const all = writable(props.all ?? []);
   const single = props.single ?? false;
+  const max = props.max;
 
   return derived([selected, all], ([$selected, $all]) => {
     function isSelected(value: T) {
       return $selected.has(value);
+    }
+
+    function isDisabled(value: T) {
+      return !isSelected(value) && isMaxSelected();
     }
 
     function toggleSelected(value: T) {
@@ -27,7 +40,11 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
           return new Set([value]);
         } else {
           // Add
-          return $selected.add(value);
+          if (max == null || $selected.size < max) {
+            return $selected.add(value);
+          } else {
+            return $selected;
+          }
         }
       });
     }
@@ -38,6 +55,10 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
 
     function isAnySelected() {
       return $all.some((v) => $selected.has(v));
+    }
+
+    function isMaxSelected() {
+      return max != null ? $selected.size >= max : false;
     }
 
     function toggleAll() {
@@ -66,9 +87,11 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
       selected: single ? selectedArr[0] ?? null : selectedArr,
       toggleSelected,
       isSelected,
+      isDisabled,
       toggleAll,
       isAllSelected,
       isAnySelected,
+      isMaxSelected,
       clear,
       reset,
       all,
