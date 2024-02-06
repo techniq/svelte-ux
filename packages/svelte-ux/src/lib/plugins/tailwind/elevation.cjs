@@ -1,6 +1,10 @@
 module.exports = function ({ addUtilities }) {
   addUtilities({
     // Add `elevation-#` classes
+    '.elevation-none': {
+      'box-shadow': 'none',
+    },
+
     '.elevation-0': {
       'box-shadow':
         '0px 0px 0px 0px rgba(0,0,0,0.20), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12)',

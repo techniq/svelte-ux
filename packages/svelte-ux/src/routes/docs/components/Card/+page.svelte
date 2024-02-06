@@ -123,3 +123,9 @@
 <Preview>
   <Card title="Title" loading />
 </Preview>
+
+<h2>remove shadow</h2>
+
+<Preview>
+  <Card class="elevation-none">Contents</Card>
+</Preview>
