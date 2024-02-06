@@ -14,7 +14,7 @@
   import MenuItem from './MenuItem.svelte';
   import SelectListOptions from './_SelectListOptions.svelte';
   import TextField from './TextField.svelte';
-  import { getComponentClasses } from './theme';
+  import { getComponentSettings } from './settings';
   import type { IconInput } from '$lib/utils/icons';
   import type { MenuOption } from '$lib/types/options';
   import type { ScrollIntoViewOptions } from '$lib/actions';
@@ -23,6 +23,8 @@
     change: { value: any; option: any };
     inputChange: string;
   }>();
+  const { defaults } = getComponentSettings('SelectField');
+  const settingsClasses = defaults.classes;
 
   const logger = new Logger('SelectField');
 
@@ -32,6 +34,7 @@
 
   export let label = '';
   export let placeholder = '';
+  export let labelPlacement = defaults.labelPlacement;
   export let loading: boolean = false;
   export let disabled: boolean = false;
   export let readonly: boolean = false;
@@ -70,7 +73,6 @@
     group?: string;
     empty?: string;
   } = {};
-  const settingsClasses = getComponentClasses('SelectField');
 
   let fieldClasses: ComponentProps<TextField>['classes'];
   $: fieldClasses = typeof classes.field === 'string' ? { root: classes.field } : classes.field;
@@ -408,6 +410,7 @@
 >
   <TextField
     {label}
+    {labelPlacement}
     {placeholder}
     {base}
     {rounded}

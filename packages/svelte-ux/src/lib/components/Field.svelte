@@ -14,10 +14,12 @@
     clear: null;
   }>();
 
-  const { classes: settingsClasses, defaultProps } = getComponentSettings('Field');
+  const { defaults, globalDefaults } = getComponentSettings('Field');
+  const settingsClasses = defaults.classes;
 
   export let label = '';
-  export let labelPlacement: LabelPlacement = defaultProps.labelPlacement;
+  export let labelPlacement: LabelPlacement =
+    defaults.labelPlacement ?? globalDefaults.labelPlacement;
   export let value: any = null;
   // export let placeholder = '';
   export let error: string | string[] | boolean | undefined = '';
@@ -172,7 +174,7 @@
                 on:click={() => {
                   value = Array.isArray(value) ? [] : typeof value === 'string' ? '' : null;
                   dispatch('clear');
-                  labelEl.focus();
+                  labelEl?.focus();
                 }}
               />
             {/if}

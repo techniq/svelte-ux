@@ -1,6 +1,7 @@
 import type { ComponentProps, SvelteComponent } from 'svelte';
 import type * as Components from './';
 import { getSettings, type DefaultProps, type Settings } from './settings';
+import type { ButtonVariant, LabelPlacement } from '$lib/types/options';
 
 export type ComponentName = keyof typeof Components;
 
@@ -10,33 +11,88 @@ type ClassesProp<T> = T extends { prototype: infer PR extends SvelteComponent }
     : never
   : never;
 
+interface ComponentDefaultProps {
+  Button?: {
+    variant?: ButtonVariant;
+  };
+  ButtonGroup?: {
+    variant?: ButtonVariant;
+  };
+  CopyButton?: {
+    variant?: ButtonVariant;
+  };
+  DateButton?: {
+    variant?: ButtonVariant;
+  };
+  DateField?: {
+    labelPlacement?: LabelPlacement;
+  };
+  DatePickerField?: {
+    labelPlacement?: LabelPlacement;
+  };
+  DateRangeField?: {
+    labelPlacement?: LabelPlacement;
+  };
+  Field?: {
+    labelPlacement?: LabelPlacement;
+  };
+  MenuButton?: {
+    variant?: ButtonVariant;
+  };
+  MenuField?: {
+    labelPlacement?: LabelPlacement;
+  };
+  MultiSelectField?: {
+    labelPlacement?: LabelPlacement;
+  };
+  RangeField?: {
+    labelPlacement?: LabelPlacement;
+  };
+  SelectField?: {
+    labelPlacement?: LabelPlacement;
+  };
+  TextField?: {
+    labelPlacement?: LabelPlacement;
+  };
+  ToggleButton?: {
+    variant?: ButtonVariant;
+  };
+}
+
 export type ResolvedComponentClasses = {
-  [key in ComponentName]: ClassesProp<(typeof Components)[key]> extends never
+  [key in ComponentName]: ResolvedComponentClassesProp<key>;
+};
+
+export type ResolvedComponentClassesProp<NAME extends ComponentName> =
+  ClassesProp<(typeof Components)[NAME]> extends never
     ? {}
-    : NonNullable<ClassesProp<(typeof Components)[key]>>;
+    : NonNullable<ClassesProp<(typeof Components)[NAME]>>;
+
+export type ResolvedComponentSettings = {
+  [key in ComponentName]: {
+    classes: ResolvedComponentClassesProp<key>;
+  } & (key extends keyof ComponentDefaultProps ? ComponentDefaultProps[key] : {});
 };
 
-export type ComponentClasses = {
-  [key in ComponentName]?: ClassesProp<(typeof Components)[key]> | string;
+export type ComponentSettings = {
+  [key in ComponentName]?: {
+    classes?: ClassesProp<(typeof Components)[key]> | string;
+  } & (key extends keyof ComponentDefaultProps ? ComponentDefaultProps[key] : {});
 };
 
-export function getClasses(): ComponentClasses {
-  return getSettings().classes ?? {};
+export function getComponents(): ComponentSettings {
+  return getSettings().components ?? {};
 }
 
 export function resolveComponentClasses<NAME extends ComponentName>(
-  settings: Settings,
-  name: NAME
-) {
-  const theme = settings?.classes?.[name] ?? {};
-  const classes: ResolvedComponentClasses[NAME] =
-    typeof theme === 'string' ? { root: theme } : theme;
-  return classes;
+  theme: ComponentSettings[NAME]
+): ResolvedComponentClassesProp<NAME> {
+  return typeof theme?.classes === 'string' ? { root: theme } : theme?.classes ?? {};
 }
 
 export function getComponentClasses<NAME extends ComponentName>(
   name: NAME
 ): ResolvedComponentClasses[NAME] {
   const settings = getSettings();
-  return resolveComponentClasses(settings, name);
+  return resolveComponentClasses(settings?.components?.[name]);
 }

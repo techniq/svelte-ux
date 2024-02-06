@@ -8,15 +8,16 @@
   import Dialog from './Dialog.svelte';
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
-  import { getComponentClasses } from './theme';
-  import { getSettings } from './settings';
+  import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
+  const { defaults } = getComponentSettings('DatePickerField');
 
   export let value: Date | null = null;
   export let periodType: PeriodType = PeriodType.Day;
   export let iconOnly: boolean = false;
   export let stepper: boolean = false;
+  export let labelPlacement = defaults.labelPlacement;
 
   // Field props
   export let label: string | null = null;
@@ -31,7 +32,6 @@
   export let icon: string | null = null;
   export let center = false;
 
-  const settingsClasses = getComponentClasses('DatePickerField');
   const { format, localeSettings } = getSettings();
   $: dictionary = $format.settings.dictionary;
 
@@ -66,6 +66,7 @@
 {:else}
   <Field
     label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat })}
+    {labelPlacement}
     {icon}
     {error}
     {hint}

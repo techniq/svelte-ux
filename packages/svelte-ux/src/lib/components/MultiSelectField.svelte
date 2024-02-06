@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentClasses } from './theme';
+  import { getComponentSettings } from './settings';
 
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import { get } from 'lodash-es';
@@ -18,6 +18,9 @@
 
   type Option = $$Generic;
 
+  const { defaults } = getComponentSettings('MultiSelectField');
+  const settingsClasses = defaults.classes;
+
   // MultiSelectMenu props
   export let options: Option[];
   export let value: any[] = [];
@@ -34,6 +37,7 @@
   export let placeholder = '';
   export let loading: boolean = false;
   export let disabled: boolean = false;
+  export let labelPlacement = defaults.labelPlacement;
   // export let readonly: boolean = false;
   export let icon: string | null = null;
   export let clearable = true;
@@ -50,7 +54,6 @@
     field?: string;
     actions?: string;
   } = {};
-  const settingsClasses = getComponentClasses('MultiSelectField');
 
   const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
 
@@ -142,6 +145,7 @@
   <!-- on:blur={onBlur} -->
   <TextField
     {label}
+    {labelPlacement}
     {placeholder}
     {base}
     {rounded}

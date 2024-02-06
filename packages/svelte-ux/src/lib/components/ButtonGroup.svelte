@@ -2,19 +2,12 @@
   import { type ComponentProps, setContext, getContext } from 'svelte';
   import type Button from './Button.svelte';
   import type { ThemeColors } from '$lib/types';
+  import type { ButtonVariant } from '$lib/types/options';
 
   // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
   type ButtonProps = ComponentProps<Button>;
   type ButtonGroupContext = {
-    variant:
-      | 'default'
-      | 'outline'
-      | 'fill'
-      | 'fill-outline'
-      | 'fill-light'
-      | 'text'
-      | 'none'
-      | undefined; // ButtonProps['variant'];
+    variant: ButtonVariant | undefined;
     size: 'sm' | 'md' | 'lg' | undefined; //ButtonProps['size'];
     color: ThemeColors | 'default' | undefined; //ButtonProps['color'];
     rounded: boolean | 'full' | undefined; // ButtonProps['rounded']
@@ -33,15 +26,16 @@
 
 <script lang="ts">
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentSettings } from './settings';
 
-  export let variant: ComponentProps<Button>['variant'] = undefined;
+  const { defaults } = getComponentSettings('ButtonGroup');
+  const settingsClasses = defaults.classes;
+
+  export let variant: ComponentProps<Button>['variant'] = defaults.variant;
   export let size: ComponentProps<Button>['size'] | undefined = undefined;
   export let color: ComponentProps<Button>['color'] | undefined = undefined;
   export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
   export let disabled: boolean = false;
-
-  const settingsClasses = getComponentClasses('ButtonGroup');
 
   $: _class = cls(
     'ButtonGroup',

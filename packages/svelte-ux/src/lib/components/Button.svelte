@@ -7,9 +7,13 @@
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import type { ThemeColors } from '$lib/types';
-  import { getComponentClasses } from './theme';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '$lib/utils/icons';
+  import type { ButtonVariant } from '$lib/types/options';
+  import { getComponentSettings } from './settings';
+
+  const { defaults } = getComponentSettings('Button');
+  const settingsClasses = defaults.classes;
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
@@ -22,15 +26,7 @@
   export let loading: boolean = false;
   export let disabled: boolean = false;
   export let rounded: boolean | 'full' | undefined = undefined; // default in reactive groupContext below
-  export let variant:
-    | 'default'
-    | 'outline'
-    | 'fill'
-    | 'fill-outline'
-    | 'fill-light'
-    | 'text'
-    | 'none'
-    | undefined = undefined; // default in reactive groupContext below
+  export let variant: ButtonVariant | undefined = undefined; // default in reactive groupContext below
   export let size: 'sm' | 'md' | 'lg' | undefined = undefined; // default in reactive groupContext below
   export let color: ThemeColors | 'default' | undefined = undefined; // default in reactive groupContext below
 
@@ -40,11 +36,10 @@
     icon?: string;
     loading?: string;
   } = {};
-  const settingsClasses = getComponentClasses('Button');
 
   // Override default from `ButtonGroup` if set
   const groupContext = getButtonGroup();
-  $: variant = variant ?? groupContext?.variant ?? 'default';
+  $: variant = variant ?? groupContext?.variant ?? defaults.variant ?? 'default';
   $: size = size ?? groupContext?.size ?? 'md';
   $: color = color ?? groupContext?.color ?? 'default';
   $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);

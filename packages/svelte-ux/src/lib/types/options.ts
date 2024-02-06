@@ -6,3 +6,12 @@ export type MenuOption = {
 };
 
 export type LabelPlacement = 'inset' | 'float' | 'top' | 'left';
+
+export type ButtonVariant =
+  | 'default'
+  | 'outline'
+  | 'fill'
+  | 'fill-outline'
+  | 'fill-light'
+  | 'text'
+  | 'none';

@@ -11,10 +11,11 @@
   import { PeriodType, getDateFuncsByPeriodType } from '../utils/date';
   import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange';
   import { cls } from '../utils/styles';
-  import { getSettings } from './settings';
+  import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
   const { format, localeSettings } = getSettings();
+  const { defaults } = getComponentSettings('DatePickerField');
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -53,6 +54,7 @@
   export let rounded = false;
   export let dense = false;
   export let icon: string | null = null;
+  export let labelPlacement = defaults.labelPlacement;
 
   let open: boolean = false;
 
@@ -61,6 +63,7 @@
 
 <Field
   label={label ?? (value.periodType ? $format.getPeriodTypeName(value.periodType) : '')}
+  {labelPlacement}
   {icon}
   {error}
   {hint}

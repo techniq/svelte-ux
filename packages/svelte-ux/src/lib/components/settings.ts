@@ -1,8 +1,8 @@
 import { getContext, setContext } from 'svelte';
 import {
   type ComponentName,
-  type ComponentClasses,
-  type ResolvedComponentClasses,
+  type ComponentSettings,
+  type ResolvedComponentSettings,
   resolveComponentClasses,
 } from './theme';
 import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
@@ -30,7 +30,7 @@ export type SettingsInput = {
   /** Format information for additional locales that are not built-in to svelte-ux. */
   localeFormats?: Record<string, LocaleSettingsInput>;
 
-  classes?: ComponentClasses;
+  components?: ComponentSettings;
   /** A list of the available themes */
   themes?: {
     light?: string[];
@@ -57,6 +57,8 @@ export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary' |
   format: Readable<FormatFunctions>;
   currentTheme: ThemeStore;
   defaultProps: DefaultProps;
+
+  componentSettingsCache: Partial<Record<ComponentName, GetComponentSettingsResult<ComponentName>>>;
 }
 
 const settingsKey = Symbol();
@@ -124,6 +126,7 @@ export function settings(settings: SettingsInput): Settings {
     defaultProps: resolvedDefaultProps,
     currentTheme,
     ...localeStores,
+    componentSettingsCache: {},
   });
 }
 
@@ -135,21 +138,45 @@ export function getSettings(): Settings {
     return {
       currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
       defaultProps,
+      componentSettingsCache: {},
     };
   }
 }
 
-export function getComponentSettings<NAME extends ComponentName>(
+export function resolveComponentSettings<NAME extends ComponentName>(
+  settings: Settings,
   name: NAME
-): {
-  classes: ResolvedComponentClasses[NAME];
-  defaultProps: DefaultProps;
-} {
-  const settings = getSettings();
-  const classes = resolveComponentClasses(settings, name)!;
+): ResolvedComponentSettings[NAME] {
+  const theme = settings?.components?.[name];
 
   return {
-    classes: classes,
-    defaultProps: settings?.defaultProps ?? defaultProps,
+    ...theme,
+    classes: resolveComponentClasses(theme),
   };
+}
+
+export interface GetComponentSettingsResult<NAME extends ComponentName> {
+  defaults: ResolvedComponentSettings[NAME];
+  globalDefaults: DefaultProps;
+}
+
+export function getComponentSettings<NAME extends ComponentName>(
+  name: NAME
+): GetComponentSettingsResult<NAME> {
+  const settings = getSettings();
+
+  const existing = settings.componentSettingsCache[name];
+  if (existing) {
+    return existing as GetComponentSettingsResult<NAME>;
+  }
+
+  const componentSettings = resolveComponentSettings(settings, name)!;
+
+  const output: GetComponentSettingsResult<NAME> = {
+    defaults: componentSettings,
+    globalDefaults: settings?.defaultProps ?? defaultProps,
+  };
+
+  settings.componentSettingsCache[name] = output;
+  return output;
 }

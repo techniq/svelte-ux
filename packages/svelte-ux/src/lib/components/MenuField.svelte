@@ -10,8 +10,11 @@
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Button from './Button.svelte';
-  import { getComponentClasses } from './theme';
   import type { MenuOption } from '$lib/types/options';
+  import { getComponentSettings } from './settings';
+
+  const { defaults } = getComponentSettings('MenuField');
+  const settingsClasses = defaults.classes;
 
   export let options: MenuOption[] = [];
   export let value: any = null;
@@ -20,6 +23,7 @@
     resize: true,
   };
   export let menuIcon = mdiMenuDown;
+  export let labelPlacement = defaults.labelPlacement;
   /** If true, show left/right buttons to step through options */
   export let stepper = false;
 
@@ -29,7 +33,6 @@
     menuIcon?: string;
     group?: string;
   } = {};
-  const settingsClasses = getComponentClasses('MenuField');
 
   let open = false;
   export let selected: any = undefined;
@@ -68,6 +71,7 @@
 <Field
   class="cursor-pointer"
   {...$$restProps}
+  {labelPlacement}
   classes={{ input: 'overflow-hidden', ...$$props.classes }}
   on:click={() => (open = !open)}
 >

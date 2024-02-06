@@ -24,11 +24,13 @@
     change: { value: typeof value; inputValue: InputValue; operator?: string };
   }>();
 
-  const { classes: settingsClasses, defaultProps } = getComponentSettings('TextField');
+  const { defaults, globalDefaults } = getComponentSettings('TextField');
+  const settingsClasses = defaults.classes;
 
   export let name: string | undefined = undefined;
   export let label = '';
-  export let labelPlacement: LabelPlacement = defaultProps.labelPlacement;
+  export let labelPlacement: LabelPlacement =
+    defaults.labelPlacement ?? globalDefaults.labelPlacement;
   export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
   export let type:
     | 'text'
