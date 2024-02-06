@@ -6,6 +6,7 @@
   import Preview from '$lib/components/Preview.svelte';
   import MultiSelect from '$lib/components/MultiSelect.svelte';
   import MultiSelectOption from '$lib/components/MultiSelectOption.svelte';
+  import { slide } from 'svelte/transition';
 
   const options = [
     { name: 'One', value: 1 },
@@ -43,6 +44,24 @@
 <Preview>
   {value.length} selected
   <MultiSelect {options} {value} max={2} on:change={(e) => (value = e.detail.value)} />
+</Preview>
+
+<h2>max selected with warning</h2>
+
+<Preview>
+  {value.length} selected
+  <MultiSelect {options} {value} max={2} on:change={(e) => (value = e.detail.value)}>
+    <svelte:fragment slot="beforeOptions" let:selection>
+      {#if selection.isMaxSelected()}
+        <div
+          class="bg-red-50 border-red-500 text-red-600 border text-sm font-semibold p-2 rounded mb-1"
+          transition:slide
+        >
+          Maximum selection reached
+        </div>
+      {/if}
+    </svelte:fragment>
+  </MultiSelect>
 </Preview>
 
 <h2>many options</h2>
@@ -91,6 +110,21 @@
     <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch>
       <div slot="actions">
         <Button color="accent" icon={mdiPlus}>Add item</Button>
+      </div>
+    </MultiSelect>
+  </div>
+</Preview>
+
+<h2>actions slot with max warning</h2>
+
+<Preview>
+  {value.length} selected
+  <div class="flex flex-col max-h-[360px] overflow-auto">
+    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch max={2}>
+      <div slot="actions" let:selection class="flex items-center">
+        {#if selection.isMaxSelected()}
+          <div class="text-sm text-red-500">Maximum selection reached</div>
+        {/if}
       </div>
     </MultiSelect>
   </div>

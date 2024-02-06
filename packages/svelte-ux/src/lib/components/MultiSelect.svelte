@@ -25,7 +25,10 @@
   export let duration = 200;
   export let inlineSearch = false;
   export let placeholder = 'Search items';
+
+  /** Wrap options in `InfiniteScroll` to amortize rendering of a large number of options */
   export let infiniteScroll = false;
+
   /** Maximum number of options that can be selected  */
   export let max: number | undefined = undefined;
 
@@ -119,6 +122,8 @@
 {/if}
 
 <div class={cls('overflow-auto py-1 px-4', theme.root, classes.root, $$restProps.class)}>
+  <slot name="beforeOptions" selection={$selection} />
+
   <!-- initially selected options -->
   <InfiniteScroll items={filteredSelectedOptions} disabled={!infiniteScroll} let:visibleItems>
     {#each visibleItems as option (get(option, valueProp))}
@@ -207,10 +212,12 @@
       {/if}
     {/each}
   </InfiniteScroll>
+
+  <slot name="afterOptions" selection={$selection} />
 </div>
 
 <div class="grid grid-cols-[auto,1fr,auto] border-t border-gray-100 px-4 py-2">
-  <slot name="actions" {searchText}>
+  <slot name="actions" selection={$selection} {searchText}>
     <div />
   </slot>
 

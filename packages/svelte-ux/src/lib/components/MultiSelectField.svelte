@@ -212,6 +212,9 @@
     bind:menuOptionsEl
     {...menuProps}
   >
+    <slot name="beforeOptions" slot="beforeOptions" let:selection {selection} />
+    <slot name="afterOptions" slot="afterOptions" let:selection {selection} />
+
     <!-- TODO: If only `<slot name="option" slot="option" />` just worked  -->
     <svelte:fragment
       slot="option"
@@ -230,7 +233,7 @@
       </slot>
     </svelte:fragment>
 
-    <slot name="actions" slot="actions">
+    <slot name="actions" slot="actions" let:selection {selection}>
       <div />
     </slot>
   </MultiSelectMenu>

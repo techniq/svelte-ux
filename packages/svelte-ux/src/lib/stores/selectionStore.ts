@@ -27,7 +27,7 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
     }
 
     function isDisabled(value: T) {
-      return !isSelected(value) && max != null && $selected.size >= max;
+      return !isSelected(value) && isMaxSelected();
     }
 
     function toggleSelected(value: T) {
@@ -55,6 +55,10 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
 
     function isAnySelected() {
       return $all.some((v) => $selected.has(v));
+    }
+
+    function isMaxSelected() {
+      return max != null ? $selected.size >= max : false;
     }
 
     function toggleAll() {
@@ -87,6 +91,7 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
       toggleAll,
       isAllSelected,
       isAnySelected,
+      isMaxSelected,
       clear,
       reset,
       all,
