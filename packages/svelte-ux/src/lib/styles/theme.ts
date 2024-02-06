@@ -70,6 +70,8 @@ export function processThemeColors(
 ) {
   const colors = { ...themeColors };
 
+  // TODO: make all semanatic colors optional as well
+
   // Generate optional semanatic colors
   if (!('neutral' in colors) && !('neutral-500' in colors)) {
     colors['neutral'] = 'oklch(.355192 .032071 262.988584)';
@@ -145,6 +147,8 @@ export function processThemeColors(
   if (!('surface-content' in colors)) {
     colors['surface-content'] = foregroundColor(colors['surface-100']);
   }
+
+  // TODO: add `color-scheme: "dark"` for `dark` theme (if not set)
 
   const result = Object.fromEntries(
     Object.entries(colors).map(([name, value]) => {
