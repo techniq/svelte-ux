@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type { ComponentProps } from '$lib/types';
+  import { getComponentSettings } from './settings';
   import { mdiMenuDown } from '@mdi/js';
 
   import { cls } from '../utils/styles';
@@ -9,9 +10,9 @@
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
-  import { getComponentClasses } from './theme';
 
   const dispatch = createEventDispatcher<{ change: { value: any } }>();
+  const { classes: settingsClasses, defaults } = getComponentSettings('MenuButton');
 
   export let options: Array<{ label: string; value: any; icon?: string }>;
   export let value: any = null;
@@ -24,14 +25,15 @@
     label?: string;
     icon?: string;
   } = {};
-  const settingsClasses = getComponentClasses('MenuButton');
 
   let open = false;
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Button
   on:click={() => (open = !open)}
-  {...$$restProps}
+  {...restProps}
   class={cls('MenuButton', settingsClasses.root, classes.root, $$props.class)}
 >
   <slot name="selection">

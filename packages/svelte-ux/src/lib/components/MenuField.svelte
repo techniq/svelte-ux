@@ -10,8 +10,10 @@
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Button from './Button.svelte';
-  import { getComponentClasses } from './theme';
-  import type { MenuOption } from '$lib/types/options';
+  import type { MenuOption } from '$lib/types';
+  import { getComponentSettings } from './settings';
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('MenuField');
 
   export let options: MenuOption[] = [];
   export let value: any = null;
@@ -29,7 +31,6 @@
     menuIcon?: string;
     group?: string;
   } = {};
-  const settingsClasses = getComponentClasses('MenuField');
 
   let open = false;
   export let selected: any = undefined;
@@ -63,11 +64,13 @@
   function setValue(val: any): void {
     value = val;
   }
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Field
   class="cursor-pointer"
-  {...$$restProps}
+  {...restProps}
   classes={{ input: 'overflow-hidden', ...$$props.classes }}
   on:click={() => (open = !open)}
 >

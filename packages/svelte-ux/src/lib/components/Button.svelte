@@ -6,10 +6,13 @@
   import { cls } from '../utils/styles';
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
-  import type { ThemeColors } from '$lib/types';
-  import { getComponentClasses } from './theme';
+  import type { ButtonColor, ButtonSize } from '$lib/types';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '$lib/utils/icons';
+  import type { ButtonRounded, ButtonVariant } from '$lib/types';
+  import { getComponentSettings } from './settings';
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('Button');
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
@@ -21,18 +24,10 @@
 
   export let loading: boolean = false;
   export let disabled: boolean = false;
-  export let rounded: boolean | 'full' | undefined = undefined; // default in reactive groupContext below
-  export let variant:
-    | 'default'
-    | 'outline'
-    | 'fill'
-    | 'fill-outline'
-    | 'fill-light'
-    | 'text'
-    | 'none'
-    | undefined = undefined; // default in reactive groupContext below
-  export let size: 'sm' | 'md' | 'lg' | undefined = undefined; // default in reactive groupContext below
-  export let color: ThemeColors | 'default' | undefined = undefined; // default in reactive groupContext below
+  export let rounded: ButtonRounded | undefined = undefined; // default in reactive groupContext below
+  export let variant: ButtonVariant | undefined = undefined; // default in reactive groupContext below
+  export let size: ButtonSize | undefined = undefined; // default in reactive groupContext below
+  export let color: ButtonColor | undefined = undefined; // default in reactive groupContext below
 
   /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
@@ -40,14 +35,13 @@
     icon?: string;
     loading?: string;
   } = {};
-  const settingsClasses = getComponentClasses('Button');
 
   // Override default from `ButtonGroup` if set
   const groupContext = getButtonGroup();
-  $: variant = variant ?? groupContext?.variant ?? 'default';
-  $: size = size ?? groupContext?.size ?? 'md';
-  $: color = color ?? groupContext?.color ?? 'default';
-  $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);
+  $: variant = variant ?? groupContext?.variant ?? defaults.variant ?? 'default';
+  $: size = size ?? groupContext?.size ?? defaults.size ?? 'md';
+  $: color = color ?? groupContext?.color ?? defaults.color ?? 'default';
+  $: rounded = rounded ?? groupContext?.rounded ?? defaults.rounded ?? (iconOnly ? 'full' : true);
 
   $: _class = cls(
     'Button',

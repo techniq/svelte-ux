@@ -1,6 +1,13 @@
 import { getContext, setContext } from 'svelte';
-import type { ComponentClasses } from './theme';
+import {
+  type ComponentName,
+  type ComponentSettings,
+  type ResolvedComponentSettings,
+  resolveComponentClasses,
+  type ResolvedDefaultProps,
+} from './theme';
 import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
+import type { LabelPlacement } from '$lib/types';
 import {
   getAllKnownLocales,
   localeStore,
@@ -9,7 +16,11 @@ import {
   type LocaleSettingsInput,
 } from '$lib/utils/locale';
 import { buildFormatters, type FormatFunctions } from '$lib/utils/format';
-import { writable, type Readable, type Writable, derived } from 'svelte/store';
+import { type Readable, derived } from 'svelte/store';
+
+export interface DefaultProps {
+  labelPlacement: LabelPlacement;
+}
 
 export type SettingsInput = {
   /** Force a specific locale setting. */
@@ -20,7 +31,7 @@ export type SettingsInput = {
   /** Format information for additional locales that are not built-in to svelte-ux. */
   localeFormats?: Record<string, LocaleSettingsInput>;
 
-  classes?: ComponentClasses;
+  components?: ComponentSettings;
   /** A list of the available themes */
   themes?: {
     light?: string[];
@@ -44,6 +55,8 @@ export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> 
   /** Formatting functions and information */
   format: Readable<FormatFunctions>;
   currentTheme: ThemeStore;
+
+  componentSettingsCache: Partial<Record<ComponentName, ResolvedComponentSettings<ComponentName>>>;
 }
 
 const settingsKey = Symbol();
@@ -100,6 +113,7 @@ export function settings(settings: SettingsInput): Settings {
       dark: darkThemes,
     },
     currentTheme,
+    componentSettingsCache: {},
     ...localeStores,
   });
 }
@@ -111,6 +125,37 @@ export function getSettings(): Settings {
   } catch (error) {
     return {
       currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
+      componentSettingsCache: {},
     };
   }
+}
+
+export function resolveComponentSettings<NAME extends ComponentName>(
+  settings: Settings,
+  name: NAME
+): ResolvedComponentSettings<NAME> {
+  const { classes: themeClasses, ...defaultProps } = settings?.components?.[name] ?? {};
+  const classes = resolveComponentClasses(themeClasses);
+
+  const output: ResolvedComponentSettings<NAME> = {
+    defaults: (defaultProps ?? {}) as ResolvedDefaultProps<NAME>,
+    classes,
+  };
+
+  return output;
+}
+
+export function getComponentSettings<NAME extends ComponentName>(
+  name: NAME
+): ResolvedComponentSettings<NAME> {
+  const settings = getSettings();
+
+  const existing = settings.componentSettingsCache[name];
+  if (existing) {
+    return existing as ResolvedComponentSettings<NAME>;
+  }
+
+  const output = resolveComponentSettings(settings, name)!;
+  settings.componentSettingsCache[name] = output;
+  return output;
 }

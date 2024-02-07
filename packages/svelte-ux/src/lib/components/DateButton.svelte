@@ -6,10 +6,11 @@
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
   import { cls } from '../utils/styles';
-  import { getSettings } from './settings';
-  import { getComponentClasses } from './theme';
+  import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('DateButton');
 
   export let date: Date;
   export let periodType: PeriodType;
@@ -18,9 +19,9 @@
   export let hidden: boolean = false;
   export let fade: boolean = false;
   export let format = getCustomFormat(periodType);
+  export let variant = defaults.variant;
 
   const { format: format_ux, localeSettings } = getSettings();
-  const settingsClasses = getComponentClasses('DateButton');
 
   function getCustomFormat(periodType: PeriodType) {
     switch (periodType) {
@@ -94,7 +95,7 @@
       (disabled || fade) && 'opacity-25',
       isCurrent ? 'font-bold' : 'font-normal'
     )}
-    variant={isSelected ? 'fill' : 'default'}
+    variant={isSelected ? 'fill' : variant ?? 'default'}
     color={isSelected || isCurrent ? 'primary' : 'default'}
     {disabled}
     on:click={() => {

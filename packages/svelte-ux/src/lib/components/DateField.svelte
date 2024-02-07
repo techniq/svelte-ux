@@ -2,15 +2,15 @@
   import { createEventDispatcher } from 'svelte';
   import { parse as parseDate } from 'date-fns';
   import { PeriodType } from '../utils';
-  import { getSettings } from './settings';
+  import { getComponentSettings, getSettings } from './settings';
 
   import Field from './Field.svelte';
 
   import Input from './Input.svelte';
   import DatePickerField from './DatePickerField.svelte';
-  import { getComponentClasses } from './theme';
 
   const { format: format_ux } = getSettings();
+  const { classes: settingsClasses, defaults } = getComponentSettings('DateField');
 
   export let value: Date | null = null;
   export let format: string | undefined = undefined;
@@ -23,6 +23,7 @@
 
   // Field props
   export let label = '';
+  export let labelPlacement = defaults.labelPlacement;
   export let error = '';
   export let hint = '';
   export let disabled = false;
@@ -31,8 +32,6 @@
   export let rounded = false;
   export let dense = false;
   export let icon: string | null = null;
-
-  const settingsClasses = getComponentClasses('DateField');
 
   let inputValue: string | undefined = '';
 
@@ -60,6 +59,7 @@
   {rounded}
   {dense}
   {clearable}
+  {labelPlacement}
   on:clear={() => {
     value = null;
     inputValue = undefined;

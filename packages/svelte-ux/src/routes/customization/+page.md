@@ -232,26 +232,40 @@ Two components, `ThemeSelect` and `ThemeSwitch` are available to easily change t
 
 ## Settings
 
-At the root of your app, you can call `settings({ ... })` to set component classes and define formats. Usually this is done in `+layout.svelte`.
+At the root of your app, you can call `settings({ ... })` to set component classes, define some default component props such as `variant` and `labelPlacement`, and define locales / formats. Usually this is done in `+layout.svelte`.
 
-For each `ComponentName: ...` you can pass `class` (when value is a `string`) or `classes` (when value is an `object`) props to each component via context to allow convenient global styling, including access to internal elements (when using `classes`)
+For each `ComponentName: ...` you can add convenient global styling by passing `classes` as a `string` to alter the root class string, or an `object` for finer control over internal elements.
+
+Components based on Button and Field also let you customize the default `variant` and `labelPlacement` properties, respectively.
 
 ```svelte
 <script>
   import { settings } from 'svelte-ux';
 
   settings({
-    classes: {
-      Button: 'flex-2', // same as <Button class="flex-2">
+    components: {
+      Button: {
+        // same as <Button class="flex-2">
+        classes: 'flex-2',
+        // All component that wrap Button will also use this variant by default,
+        variant: 'outline',
+      },
+      Field: {
+        // All components based on Field will use this as well.
+        labelPlacement: 'top',
+      },
       TextField: {
-        container: 'hover:shadow-none group-focus-within:shadow-none', // same as <TextField classes={{ container: '...' }}>
+        classes: {
+          // same as <TextField classes={{ container: '...' }}>
+          container: 'hover:shadow-none group-focus-within:shadow-none',
+        },
       },
     },
   });
 </script>
 ```
 
-`settings()` is also used to define `localeFormats`, which are used by the `format()` util as well as components (such as `DateField`, `DatePickerField`, and `DateRangeField`)
+`settings()` is also used to define `localeFormats`, which are used by the `format()` util as well as date components (such as `DateField`, `DatePickerField`, and `DateRangeField`)
 
 ```js
 settings({
@@ -327,15 +341,13 @@ Internally, each component uses the `cls()` util which leverages [tailwind-merge
 
 ---
 
----
-
 ## Class precedence
 
-Classes are applied in the following order, and [tailwind-merge](https://github.com/dcastil/tailwind-merge) handles overrides (last wins)
+Classes are applied in the following order, and [tailwind-merge](https://github.com/dcastil/tailwind-merge) handles conflict resolution (last wins).
 
 - Base component classes
 - Variant specific classes
-- Setting `classes` (context)
+- settings() `classes` (context)
 - `classes` prop
 - `class` prop
 
@@ -343,7 +355,7 @@ Classes are applied in the following order, and [tailwind-merge](https://github.
 
 ## Global classes
 
-All components with top-level elements add a `{ComponentName}` class, to allow easy overriding using global CSS rules, if desired.
+All components with top-level elements add a `{ComponentName}` class, to allow global CSS rules, if desired.
 
 ```css
 :global(.Button) {
@@ -371,11 +383,16 @@ If a default variant is applied (for example Button uses `text`), you can use th
 <Button variant="none" />
 ```
 
-These variants can also be styled using via `createTheme()`
+These variants can also be styled using via `settings()`, and the defaults can be overridden as well.
 
 ```js
-createTheme({
-  Button: '[&.variant-outline]:border-2',
+settings({
+  components: {
+    Button: {
+      classes: '[&.variant-outline]:border-2',
+      variant: 'outline',
+    },
+  },
 });
 ```
 

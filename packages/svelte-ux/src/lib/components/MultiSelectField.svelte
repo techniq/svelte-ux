@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentClasses } from './theme';
+  import { getComponentSettings } from './settings';
 
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import { get } from 'lodash-es';
@@ -17,6 +17,8 @@
   import ProgressCircle from './ProgressCircle.svelte';
 
   type Option = $$Generic;
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 
   // MultiSelectMenu props
   export let options: Option[];
@@ -50,7 +52,6 @@
     field?: string;
     actions?: string;
   } = {};
-  const settingsClasses = getComponentClasses('MultiSelectField');
 
   const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
 
@@ -131,6 +132,8 @@
     value = [];
     dispatch('change', { value });
   }
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -153,7 +156,7 @@
     on:focus={onFocus}
     on:change={onSearchChange}
     class={cls('h-full', settingsClasses.field, classes.field)}
-    {...$$restProps}
+    {...restProps}
   >
     <slot slot="prepend" name="prepend" />
 

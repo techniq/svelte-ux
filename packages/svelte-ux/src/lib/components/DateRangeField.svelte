@@ -11,10 +11,11 @@
   import { PeriodType, getDateFuncsByPeriodType } from '../utils/date';
   import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange';
   import { cls } from '../utils/styles';
-  import { getSettings } from './settings';
+  import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
   const { format, localeSettings } = getSettings();
+  const { classes: settingsClasses, defaults } = getComponentSettings('DateRangeField');
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -57,6 +58,8 @@
   let open: boolean = false;
 
   let currentValue = value;
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Field
@@ -71,7 +74,7 @@
   {center}
   classes={classes.field}
   let:id
-  {...$$restProps}
+  {...restProps}
 >
   <span slot="prepend" class="flex items-center">
     <slot name="prepend" />

@@ -3,14 +3,19 @@
 
   import Field from './Field.svelte';
   import Button from './Button.svelte';
+  import { getComponentSettings } from './settings';
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('RangeField');
 
   export let value: number;
   export let min = 0;
   export let max = 100;
   export let step = 1;
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
-<Field let:id classes={{ input: 'my-1' }} {...$$restProps}>
+<Field let:id classes={{ input: 'my-1' }} {...restProps}>
   <span slot="prepend">
     <Button
       icon={mdiChevronLeft}

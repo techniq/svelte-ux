@@ -4,7 +4,8 @@
   import { uniqueId } from 'lodash-es';
 
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types';
+  import { getComponentSettings } from './settings';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -13,8 +14,10 @@
     clear: null;
   }>();
 
+  const { classes: settingsClasses, defaults } = getComponentSettings('Field');
+
   export let label = '';
-  export let labelPlacement: 'inset' | 'float' | 'top' | 'left' = 'inset';
+  export let labelPlacement: LabelPlacement = defaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT;
   export let value: any = null;
   // export let placeholder = '';
   export let error: string | string[] | boolean | undefined = '';
@@ -41,7 +44,6 @@
     prepend?: string;
     append?: string;
   } = {};
-  const settingsClasses = getComponentClasses('Field');
 
   $: hasValue = Array.isArray(value)
     ? value.length > 0
@@ -170,7 +172,7 @@
                 on:click={() => {
                   value = Array.isArray(value) ? [] : typeof value === 'string' ? '' : null;
                   dispatch('clear');
-                  labelEl.focus();
+                  labelEl?.focus();
                 }}
               />
             {/if}

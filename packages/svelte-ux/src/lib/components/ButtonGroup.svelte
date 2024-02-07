@@ -1,23 +1,14 @@
 <script lang="ts" context="module">
   import { type ComponentProps, setContext, getContext } from 'svelte';
   import type Button from './Button.svelte';
-  import type { ThemeColors } from '$lib/types';
+  import type { ButtonColor, ButtonSize } from '$lib/types';
+  import type { ButtonRounded, ButtonVariant } from '$lib/types';
 
-  // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
-  type ButtonProps = ComponentProps<Button>;
   type ButtonGroupContext = {
-    variant:
-      | 'default'
-      | 'outline'
-      | 'fill'
-      | 'fill-outline'
-      | 'fill-light'
-      | 'text'
-      | 'none'
-      | undefined; // ButtonProps['variant'];
-    size: 'sm' | 'md' | 'lg' | undefined; //ButtonProps['size'];
-    color: ThemeColors | 'default' | undefined; //ButtonProps['color'];
-    rounded: boolean | 'full' | undefined; // ButtonProps['rounded']
+    variant: ButtonVariant | undefined;
+    size: ButtonSize | undefined;
+    color: ButtonColor | undefined;
+    rounded: ButtonRounded | undefined;
   };
 
   const buttonGroupKey = Symbol();
@@ -33,15 +24,15 @@
 
 <script lang="ts">
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentSettings } from './settings';
 
-  export let variant: ComponentProps<Button>['variant'] = undefined;
-  export let size: ComponentProps<Button>['size'] | undefined = undefined;
-  export let color: ComponentProps<Button>['color'] | undefined = undefined;
-  export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
+  const { classes: settingsClasses, defaults } = getComponentSettings('ButtonGroup');
+
+  export let variant: ComponentProps<Button>['variant'] = defaults.variant;
+  export let size: ComponentProps<Button>['size'] | undefined = defaults.size;
+  export let color: ComponentProps<Button>['color'] | undefined = defaults.color;
+  export let rounded: ComponentProps<Button>['rounded'] | undefined = defaults.rounded;
   export let disabled: boolean = false;
-
-  const settingsClasses = getComponentClasses('ButtonGroup');
 
   $: _class = cls(
     'ButtonGroup',

@@ -4,16 +4,21 @@
 
   import { fade } from 'svelte/transition';
   import type { TransitionParams } from '$lib/types';
+  import { getComponentSettings } from './settings';
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('ToggleButton');
 
   export let on = false;
   export let transition: typeof fade | false = fade;
   export let transitionParams: TransitionParams = {};
   export let buttonPlacement: 'before' | 'after' = 'before';
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Toggle bind:on let:toggle let:toggleOn let:toggleOff>
   {#if buttonPlacement === 'before'}
-    <Button {...$$restProps} on:click={toggle} on:click>
+    <Button {...restProps} on:click={toggle} on:click>
       <slot {on} {toggle} {toggleOn} {toggleOff} />
     </Button>
   {/if}
@@ -30,7 +35,7 @@
   {/if}
 
   {#if buttonPlacement === 'after'}
-    <Button {...$$restProps} on:click={toggle} on:click>
+    <Button {...restProps} on:click={toggle} on:click>
       <slot {on} {toggle} {toggleOn} {toggleOff} />
     </Button>
   {/if}

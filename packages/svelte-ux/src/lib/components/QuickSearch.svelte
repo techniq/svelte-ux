@@ -9,7 +9,7 @@
   import { cls } from '$lib/utils/styles';
   import { smScreen } from '$lib/stores';
   import { autoFocus, selectOnFocus } from '$lib/actions';
-  import type { MenuOption } from '$lib/types/options';
+  import type { MenuOption } from '$lib/types';
 
   export let options: MenuOption[] = [];
 
