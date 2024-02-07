@@ -12,14 +12,12 @@
   import MenuItem from './MenuItem.svelte';
 
   const dispatch = createEventDispatcher<{ change: { value: any } }>();
-  const defaults = getComponentSettings('MenuButton');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('MenuButton');
 
   export let options: Array<{ label: string; value: any; icon?: string }>;
   export let value: any = null;
   export let menuProps: ComponentProps<Menu> = { placement: 'bottom-start' };
   export let menuIcon: string | null = mdiMenuDown;
-  export let variant = defaults.variant;
   $: selected = options?.find((x) => x.value === value);
 
   export let classes: {
@@ -29,11 +27,13 @@
   } = {};
 
   let open = false;
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Button
   on:click={() => (open = !open)}
-  {...$$restProps}
+  {...restProps}
   class={cls('MenuButton', settingsClasses.root, classes.root, $$props.class)}
 >
   <slot name="selection">
