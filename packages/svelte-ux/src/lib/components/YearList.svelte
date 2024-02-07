@@ -13,7 +13,6 @@
 
   import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
-  import { scrollIntoView } from '../actions/scroll';
 
   export let selected: SelectedDate | undefined = undefined;
   export let minDate: Date | undefined = undefined;
