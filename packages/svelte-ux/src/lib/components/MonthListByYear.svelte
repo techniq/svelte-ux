@@ -6,7 +6,6 @@
 
   import { getMinSelectedDate, getMaxSelectedDate } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
-  import { scrollIntoView } from '../actions/scroll';
 
   export let selected: SelectedDate | undefined = undefined;
   export let minDate: Date | undefined = undefined;
@@ -35,7 +34,7 @@
 
   {#each years ?? [] as year (year)}
     <div class="grid grid-cols-[auto,1fr] items-center gap-2 p-2">
-      <div class="text-xl font-bold" use:scrollIntoView={{ condition: year === selectedYear }}>
+      <div class="text-xl font-bold">
         {year}
       </div>
       <div class="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-y-4">
