@@ -6,7 +6,7 @@
   import { cls } from '../utils/styles';
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
-  import type { ThemeColors } from '$lib/types';
+  import type { ButtonColor, ButtonSize } from '$lib/types';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '$lib/utils/icons';
   import type { ButtonRounded, ButtonVariant } from '$lib/types';
@@ -26,8 +26,8 @@
   export let disabled: boolean = false;
   export let rounded: ButtonRounded | undefined = undefined; // default in reactive groupContext below
   export let variant: ButtonVariant | undefined = undefined; // default in reactive groupContext below
-  export let size: 'sm' | 'md' | 'lg' | undefined = undefined; // default in reactive groupContext below
-  export let color: ThemeColors | 'default' | undefined = undefined; // default in reactive groupContext below
+  export let size: ButtonSize | undefined = undefined; // default in reactive groupContext below
+  export let color: ButtonColor | undefined = undefined; // default in reactive groupContext below
 
   /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
@@ -39,8 +39,8 @@
   // Override default from `ButtonGroup` if set
   const groupContext = getButtonGroup();
   $: variant = variant ?? groupContext?.variant ?? defaults.variant ?? 'default';
-  $: size = size ?? groupContext?.size ?? 'md';
-  $: color = color ?? groupContext?.color ?? 'default';
+  $: size = size ?? groupContext?.size ?? defaults.size ?? 'md';
+  $: color = color ?? groupContext?.color ?? defaults.color ?? 'default';
   $: rounded = rounded ?? groupContext?.rounded ?? defaults.rounded ?? (iconOnly ? 'full' : true);
 
   $: _class = cls(

@@ -1,16 +1,14 @@
 <script lang="ts" context="module">
   import { type ComponentProps, setContext, getContext } from 'svelte';
   import type Button from './Button.svelte';
-  import type { ThemeColors } from '$lib/types';
+  import type { ButtonColor, ButtonSize } from '$lib/types';
   import type { ButtonRounded, ButtonVariant } from '$lib/types';
 
-  // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
-  type ButtonProps = ComponentProps<Button>;
   type ButtonGroupContext = {
     variant: ButtonVariant | undefined;
-    size: 'sm' | 'md' | 'lg' | undefined; //ButtonProps['size'];
-    color: ThemeColors | 'default' | undefined; //ButtonProps['color'];
-    rounded: ButtonRounded | undefined; // ButtonProps['rounded']
+    size: ButtonSize | undefined;
+    color: ButtonColor | undefined;
+    rounded: ButtonRounded | undefined;
   };
 
   const buttonGroupKey = Symbol();
@@ -31,8 +29,8 @@
   const { classes: settingsClasses, defaults } = getComponentSettings('ButtonGroup');
 
   export let variant: ComponentProps<Button>['variant'] = defaults.variant;
-  export let size: ComponentProps<Button>['size'] | undefined = undefined;
-  export let color: ComponentProps<Button>['color'] | undefined = undefined;
+  export let size: ComponentProps<Button>['size'] | undefined = defaults.size;
+  export let color: ComponentProps<Button>['color'] | undefined = defaults.color;
   export let rounded: ComponentProps<Button>['rounded'] | undefined = defaults.rounded;
   export let disabled: boolean = false;
 

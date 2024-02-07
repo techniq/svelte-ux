@@ -1,3 +1,5 @@
+import type { ThemeColors } from './typeHelpers';
+
 export * from './table';
 export * from './typeHelpers';
 export * from './typeGuards';
@@ -21,4 +23,6 @@ export type ButtonVariant =
   | 'text'
   | 'none';
 
+export type ButtonColor = ThemeColors | 'default';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonRounded = boolean | 'full';
