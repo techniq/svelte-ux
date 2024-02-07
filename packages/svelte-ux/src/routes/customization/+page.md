@@ -232,12 +232,11 @@ Two components, `ThemeSelect` and `ThemeSwitch` are available to easily change t
 
 ## Settings
 
-At the root of your app, you can call `settings({ ... })` to set component classes and define formats. Usually this is done in `+layout.svelte`.
+At the root of your app, you can call `settings({ ... })` to set component classes, define some default component props such as `variant` and `labelPlacement`, and define locales / formats. Usually this is done in `+layout.svelte`.
 
-For each `ComponentName: ...` you can allow convenient global styling by passing `classes` as a `string` to alter the root class string, or an `object` for finer control over internal elements.
+For each `ComponentName: ...` you can add convenient global styling by passing `classes` as a `string` to alter the root class string, or an `object` for finer control over internal elements.
 
-Components based on Button and Field also let you customize the default `variant` and `labelPlacement` properties,
-respectively.
+Components based on Button and Field also let you customize the default `variant` and `labelPlacement` properties, respectively.
 
 ```svelte
 <script>
@@ -266,7 +265,7 @@ respectively.
 </script>
 ```
 
-`settings()` is also used to define `localeFormats`, which are used by the `format()` util as well as components (such as `DateField`, `DatePickerField`, and `DateRangeField`)
+`settings()` is also used to define `localeFormats`, which are used by the `format()` util as well as date components (such as `DateField`, `DatePickerField`, and `DateRangeField`)
 
 ```js
 settings({
@@ -342,15 +341,13 @@ Internally, each component uses the `cls()` util which leverages [tailwind-merge
 
 ---
 
----
-
 ## Class precedence
 
-Classes are applied in the following order, and [tailwind-merge](https://github.com/dcastil/tailwind-merge) handles overrides (last wins)
+Classes are applied in the following order, and [tailwind-merge](https://github.com/dcastil/tailwind-merge) handles conflict resolution (last wins).
 
 - Base component classes
 - Variant specific classes
-- Setting `classes` (context)
+- settings() `classes` (context)
 - `classes` prop
 - `class` prop
 
@@ -358,7 +355,7 @@ Classes are applied in the following order, and [tailwind-merge](https://github.
 
 ## Global classes
 
-All components with top-level elements add a `{ComponentName}` class, to allow easy overriding using global CSS rules, if desired.
+All components with top-level elements add a `{ComponentName}` class, to allow global CSS rules, if desired.
 
 ```css
 :global(.Button) {
