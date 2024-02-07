@@ -1,7 +1,7 @@
 import type { ComponentProps, SvelteComponent } from 'svelte';
 import type * as Components from './';
 import { getSettings } from './settings';
-import type { ButtonVariant, LabelPlacement } from '$lib/types/options';
+import type { ButtonRounded, ButtonVariant, LabelPlacement } from '$lib/types/options';
 
 export type ComponentName = keyof typeof Components;
 
@@ -14,12 +14,15 @@ type ClassesProp<T> = T extends { prototype: infer PR extends SvelteComponent }
 interface ComponentDefaultProps {
   Button?: {
     variant?: ButtonVariant;
+    rounded?: ButtonRounded;
   };
   ButtonGroup?: {
     variant?: ButtonVariant;
+    rounded?: ButtonRounded;
   };
   CopyButton?: {
     variant?: ButtonVariant;
+    rounded?: ButtonRounded;
   };
   DateButton?: {
     variant?: ButtonVariant;
@@ -38,6 +41,7 @@ interface ComponentDefaultProps {
   };
   MenuButton?: {
     variant?: ButtonVariant;
+    rounded?: ButtonRounded;
   };
   MenuField?: {
     labelPlacement?: LabelPlacement;
@@ -56,6 +60,7 @@ interface ComponentDefaultProps {
   };
   ToggleButton?: {
     variant?: ButtonVariant;
+    rounded?: ButtonRounded;
   };
 }
 

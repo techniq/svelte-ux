@@ -2,7 +2,7 @@
   import { type ComponentProps, setContext, getContext } from 'svelte';
   import type Button from './Button.svelte';
   import type { ThemeColors } from '$lib/types';
-  import type { ButtonVariant } from '$lib/types/options';
+  import type { ButtonRounded, ButtonVariant } from '$lib/types/options';
 
   // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
   type ButtonProps = ComponentProps<Button>;
@@ -10,7 +10,7 @@
     variant: ButtonVariant | undefined;
     size: 'sm' | 'md' | 'lg' | undefined; //ButtonProps['size'];
     color: ThemeColors | 'default' | undefined; //ButtonProps['color'];
-    rounded: boolean | 'full' | undefined; // ButtonProps['rounded']
+    rounded: ButtonRounded | undefined; // ButtonProps['rounded']
   };
 
   const buttonGroupKey = Symbol();
@@ -33,7 +33,7 @@
   export let variant: ComponentProps<Button>['variant'] = defaults.variant;
   export let size: ComponentProps<Button>['size'] | undefined = undefined;
   export let color: ComponentProps<Button>['color'] | undefined = undefined;
-  export let rounded: ComponentProps<Button>['rounded'] | undefined = undefined;
+  export let rounded: ComponentProps<Button>['rounded'] | undefined = defaults.rounded;
   export let disabled: boolean = false;
 
   $: _class = cls(

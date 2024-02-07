@@ -16,3 +16,5 @@ export type ButtonVariant =
   | 'fill-light'
   | 'text'
   | 'none';
+
+export type ButtonRounded = boolean | 'full';

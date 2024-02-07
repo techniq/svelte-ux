@@ -9,7 +9,7 @@
   import type { ThemeColors } from '$lib/types';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '$lib/utils/icons';
-  import type { ButtonVariant } from '$lib/types/options';
+  import type { ButtonRounded, ButtonVariant } from '$lib/types/options';
   import { getComponentSettings } from './settings';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');
@@ -24,7 +24,7 @@
 
   export let loading: boolean = false;
   export let disabled: boolean = false;
-  export let rounded: boolean | 'full' | undefined = undefined; // default in reactive groupContext below
+  export let rounded: ButtonRounded | undefined = undefined; // default in reactive groupContext below
   export let variant: ButtonVariant | undefined = undefined; // default in reactive groupContext below
   export let size: 'sm' | 'md' | 'lg' | undefined = undefined; // default in reactive groupContext below
   export let color: ThemeColors | 'default' | undefined = undefined; // default in reactive groupContext below
@@ -41,7 +41,7 @@
   $: variant = variant ?? groupContext?.variant ?? defaults.variant ?? 'default';
   $: size = size ?? groupContext?.size ?? 'md';
   $: color = color ?? groupContext?.color ?? 'default';
-  $: rounded = rounded ?? groupContext?.rounded ?? (iconOnly ? 'full' : true);
+  $: rounded = rounded ?? groupContext?.rounded ?? defaults.rounded ?? (iconOnly ? 'full' : true);
 
   $: _class = cls(
     'Button',
