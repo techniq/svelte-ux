@@ -9,7 +9,7 @@
   import type { ThemeColors } from '$lib/types';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '$lib/utils/icons';
-  import type { ButtonRounded, ButtonVariant } from '$lib/types/options';
+  import type { ButtonRounded, ButtonVariant } from '$lib/types';
   import { getComponentSettings } from './settings';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');

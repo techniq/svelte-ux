@@ -1,7 +1,7 @@
 import type { ComponentProps, SvelteComponent } from 'svelte';
 import type * as Components from './';
 import { getSettings } from './settings';
-import type { ButtonRounded, ButtonVariant, LabelPlacement } from '$lib/types/options';
+import type { ButtonRounded, ButtonVariant, LabelPlacement } from '$lib/types';
 
 export type ComponentName = keyof typeof Components;
 

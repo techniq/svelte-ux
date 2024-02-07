@@ -9,7 +9,7 @@
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
   import { isLiteralObject } from '../utils/object';
-  import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types/options';
+  import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types';
   import { getComponentSettings } from './settings';
 
   import Button from './Button.svelte';

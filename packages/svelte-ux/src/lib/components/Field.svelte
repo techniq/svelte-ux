@@ -4,7 +4,7 @@
   import { uniqueId } from 'lodash-es';
 
   import { cls } from '../utils/styles';
-  import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types/options';
+  import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types';
   import { getComponentSettings } from './settings';
 
   import Button from './Button.svelte';

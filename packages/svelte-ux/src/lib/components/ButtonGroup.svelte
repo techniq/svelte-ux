@@ -2,7 +2,7 @@
   import { type ComponentProps, setContext, getContext } from 'svelte';
   import type Button from './Button.svelte';
   import type { ThemeColors } from '$lib/types';
-  import type { ButtonRounded, ButtonVariant } from '$lib/types/options';
+  import type { ButtonRounded, ButtonVariant } from '$lib/types';
 
   // TODO: Use `ButtonProps['...']` if can work around circular reference (Button <-> ButtonGroup)
   type ButtonProps = ComponentProps<Button>;

@@ -16,7 +16,7 @@
   import TextField from './TextField.svelte';
   import { getComponentSettings } from './settings';
   import type { IconInput } from '$lib/utils/icons';
-  import type { MenuOption } from '$lib/types/options';
+  import type { MenuOption } from '$lib/types';
   import type { ScrollIntoViewOptions } from '$lib/actions';
 
   const dispatch = createEventDispatcher<{

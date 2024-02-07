@@ -7,7 +7,7 @@ import {
   type ResolvedDefaultProps,
 } from './theme';
 import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
-import type { LabelPlacement } from '$lib/types/options';
+import type { LabelPlacement } from '$lib/types';
 import {
   getAllKnownLocales,
   localeStore,

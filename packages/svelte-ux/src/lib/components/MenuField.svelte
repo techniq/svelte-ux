@@ -10,7 +10,7 @@
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Button from './Button.svelte';
-  import type { MenuOption } from '$lib/types/options';
+  import type { MenuOption } from '$lib/types';
   import { getComponentSettings } from './settings';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('MenuField');
