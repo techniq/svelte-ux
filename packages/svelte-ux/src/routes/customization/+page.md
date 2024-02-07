@@ -234,10 +234,10 @@ Two components, `ThemeSelect` and `ThemeSwitch` are available to easily change t
 
 At the root of your app, you can call `settings({ ... })` to set component classes and define formats. Usually this is done in `+layout.svelte`.
 
-For each `ComponentName: ...` you can allow convenient global styling by passing `classes` as a `string` to alter the root class string, or an `object` for finer control over internal elements. 
+For each `ComponentName: ...` you can allow convenient global styling by passing `classes` as a `string` to alter the root class string, or an `object` for finer control over internal elements.
 
 Components based on Button and Field also let you customize the default `variant` and `labelPlacement` properties,
-respectively. 
+respectively.
 
 ```svelte
 <script>
@@ -247,7 +247,7 @@ respectively.
     components: {
       Button: {
         // same as <Button class="flex-2">
-        classes: 'flex-2', 
+        classes: 'flex-2',
         // All component that wrap Button will also use this variant by default,
         variant: 'outline',
       },
@@ -258,7 +258,7 @@ respectively.
       TextField: {
         classes: {
           // same as <TextField classes={{ container: '...' }}>
-          container: 'hover:shadow-none group-focus-within:shadow-none', 
+          container: 'hover:shadow-none group-focus-within:shadow-none',
         },
       },
     },
@@ -395,7 +395,7 @@ settings({
       classes: '[&.variant-outline]:border-2',
       variant: 'outline',
     },
-  }
+  },
 });
 ```
 
