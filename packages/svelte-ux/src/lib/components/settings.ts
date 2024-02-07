@@ -16,7 +16,7 @@ import {
   type LocaleSettingsInput,
 } from '$lib/utils/locale';
 import { buildFormatters, type FormatFunctions } from '$lib/utils/format';
-import { writable, type Readable, type Writable, derived } from 'svelte/store';
+import { type Readable, derived } from 'svelte/store';
 
 export interface DefaultProps {
   labelPlacement: LabelPlacement;
