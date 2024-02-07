@@ -24,6 +24,7 @@
   export let indeterminateSelected: string[] = [];
   export let duration = 200;
   export let inlineSearch = false;
+  export let autoFocusSearch = false;
   export let placeholder = 'Search items';
 
   /** Wrap options in `InfiniteScroll` to amortize rendering of a large number of options */
@@ -116,7 +117,7 @@
       {placeholder}
       iconRight={mdiMagnify}
       bind:value={searchText}
-      autofocus={{ delay: 100 }}
+      autofocus={{ delay: 100, disabled: !autoFocusSearch }}
     />
   </div>
 {/if}
