@@ -28,8 +28,7 @@
   import { cls } from '../utils/styles';
   import { getComponentSettings } from './settings';
 
-  const defaults = getComponentSettings('ButtonGroup');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('ButtonGroup');
 
   export let variant: ComponentProps<Button>['variant'] = defaults.variant;
   export let size: ComponentProps<Button>['size'] | undefined = undefined;

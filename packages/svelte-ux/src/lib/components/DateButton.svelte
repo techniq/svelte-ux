@@ -10,8 +10,7 @@
 
   const dispatch = createEventDispatcher();
 
-  const defaults = getComponentSettings('DateButton');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('DateButton');
 
   export let date: Date;
   export let periodType: PeriodType;

@@ -15,7 +15,7 @@
 
   const dispatch = createEventDispatcher();
   const { format, localeSettings } = getSettings();
-  const defaults = getComponentSettings('DatePickerField');
+  const { classes: settingsClasses, defaults } = getComponentSettings('DateRangeField');
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -54,16 +54,16 @@
   export let rounded = false;
   export let dense = false;
   export let icon: string | null = null;
-  export let labelPlacement = defaults.labelPlacement;
 
   let open: boolean = false;
 
   let currentValue = value;
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Field
   label={label ?? (value.periodType ? $format.getPeriodTypeName(value.periodType) : '')}
-  {labelPlacement}
   {icon}
   {error}
   {hint}
@@ -74,7 +74,7 @@
   {center}
   classes={classes.field}
   let:id
-  {...$$restProps}
+  {...restProps}
 >
   <span slot="prepend" class="flex items-center">
     <slot name="prepend" />

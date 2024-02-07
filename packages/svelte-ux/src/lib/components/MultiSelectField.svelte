@@ -18,8 +18,7 @@
 
   type Option = $$Generic;
 
-  const defaults = getComponentSettings('MultiSelectField');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 
   // MultiSelectMenu props
   export let options: Option[];
@@ -37,7 +36,6 @@
   export let placeholder = '';
   export let loading: boolean = false;
   export let disabled: boolean = false;
-  export let labelPlacement = defaults.labelPlacement;
   // export let readonly: boolean = false;
   export let icon: string | null = null;
   export let clearable = true;
@@ -134,6 +132,8 @@
     value = [];
     dispatch('change', { value });
   }
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -145,7 +145,6 @@
   <!-- on:blur={onBlur} -->
   <TextField
     {label}
-    {labelPlacement}
     {placeholder}
     {base}
     {rounded}
@@ -157,7 +156,7 @@
     on:focus={onFocus}
     on:change={onSearchChange}
     class={cls('h-full', settingsClasses.field, classes.field)}
-    {...$$restProps}
+    {...restProps}
   >
     <slot slot="prepend" name="prepend" />
 

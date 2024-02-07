@@ -13,8 +13,7 @@
   import type { MenuOption } from '$lib/types/options';
   import { getComponentSettings } from './settings';
 
-  const defaults = getComponentSettings('MenuField');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('MenuField');
 
   export let options: MenuOption[] = [];
   export let value: any = null;
@@ -23,7 +22,6 @@
     resize: true,
   };
   export let menuIcon = mdiMenuDown;
-  export let labelPlacement = defaults.labelPlacement;
   /** If true, show left/right buttons to step through options */
   export let stepper = false;
 
@@ -66,12 +64,13 @@
   function setValue(val: any): void {
     value = val;
   }
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Field
   class="cursor-pointer"
-  {...$$restProps}
-  {labelPlacement}
+  {...restProps}
   classes={{ input: 'overflow-hidden', ...$$props.classes }}
   on:click={() => (open = !open)}
 >

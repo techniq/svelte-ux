@@ -4,6 +4,7 @@ import {
   type ComponentSettings,
   type ResolvedComponentSettings,
   resolveComponentClasses,
+  type ResolvedDefaultProps,
 } from './theme';
 import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
 import type { LabelPlacement } from '$lib/types/options';
@@ -133,12 +134,11 @@ export function resolveComponentSettings<NAME extends ComponentName>(
   settings: Settings,
   name: NAME
 ): ResolvedComponentSettings<NAME> {
-  const theme = settings?.components?.[name];
-  const classes = resolveComponentClasses(theme);
+  const { classes: themeClasses, ...defaultProps } = settings?.components?.[name] ?? {};
+  const classes = resolveComponentClasses(themeClasses);
 
-  // @ts-expect-error TS has trouble merging these types together.
   const output: ResolvedComponentSettings<NAME> = {
-    ...theme,
+    defaults: (defaultProps ?? {}) as ResolvedDefaultProps<NAME>,
     classes,
   };
 

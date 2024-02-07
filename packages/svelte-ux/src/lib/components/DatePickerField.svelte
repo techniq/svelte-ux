@@ -11,16 +11,16 @@
   import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
-  const defaults = getComponentSettings('DatePickerField');
+  const { classes: settingsClasses, defaults } = getComponentSettings('DatePickerField');
 
   export let value: Date | null = null;
   export let periodType: PeriodType = PeriodType.Day;
   export let iconOnly: boolean = false;
   export let stepper: boolean = false;
-  export let labelPlacement = defaults.labelPlacement;
 
   // Field props
   export let label: string | null = null;
+  export let labelPlacement = defaults.labelPlacement;
   // export let value = '';
   export let error = '';
   export let hint = '';

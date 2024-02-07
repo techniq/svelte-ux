@@ -24,9 +24,8 @@
     change: { value: typeof value; inputValue: InputValue; operator?: string };
   }>();
 
-  const defaults = getComponentSettings('TextField');
-  const fieldDefaults = getComponentSettings('Field');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('TextField');
+  const { defaults: fieldDefaults } = getComponentSettings('Field');
 
   export let name: string | undefined = undefined;
   export let label = '';

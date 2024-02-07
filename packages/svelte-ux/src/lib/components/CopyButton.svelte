@@ -6,22 +6,21 @@
   import { getComponentSettings } from './settings';
   import { slide } from 'svelte/transition';
 
-  const defaults = getComponentSettings('CopyButton');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('CopyButton');
 
   export let value: string;
-  export let variant = defaults.variant;
 
   let showMessage = false;
   $: if (showMessage) {
     setTimeout(() => (showMessage = false), 3000);
   }
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Button
   icon={mdiContentCopy}
-  {variant}
-  {...$$restProps}
+  {...restProps}
   class={cls('CopyButton', settingsClasses.root, $$props.class)}
   on:click={() => {
     navigator.clipboard.writeText(value);

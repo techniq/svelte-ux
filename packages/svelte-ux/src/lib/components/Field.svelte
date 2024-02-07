@@ -14,8 +14,7 @@
     clear: null;
   }>();
 
-  const defaults = getComponentSettings('Field');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('Field');
 
   export let label = '';
   export let labelPlacement: LabelPlacement = defaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT;

@@ -69,13 +69,13 @@ export type ResolvedComponentClassesProp<NAME extends ComponentName> =
     ? {}
     : NonNullable<ClassesProp<(typeof Components)[NAME]>>;
 
-export type AllDefaultProps<NAME extends ComponentName> = NAME extends keyof ComponentDefaultProps
-  ? ComponentDefaultProps[NAME]
-  : {};
+export type ResolvedDefaultProps<NAME extends ComponentName> =
+  NAME extends keyof ComponentDefaultProps ? NonNullable<ComponentDefaultProps[NAME]> : {};
 
-export type ResolvedComponentSettings<NAME extends ComponentName> = AllDefaultProps<NAME> & {
+export interface ResolvedComponentSettings<NAME extends ComponentName> {
+  defaults: ResolvedDefaultProps<NAME>;
   classes: ResolvedComponentClassesProp<NAME>;
-};
+}
 
 export type ComponentSettings = {
   [key in ComponentName]?: {
@@ -88,7 +88,7 @@ export function getComponents(): ComponentSettings {
 }
 
 export function resolveComponentClasses<NAME extends ComponentName>(
-  theme: ComponentSettings[NAME]
+  theme: ClassesProp<(typeof Components)[NAME]>
 ): ResolvedComponentClassesProp<NAME> {
   return typeof theme?.classes === 'string' ? { root: theme } : theme?.classes ?? {};
 }

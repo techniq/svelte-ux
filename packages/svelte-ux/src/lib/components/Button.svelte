@@ -12,8 +12,7 @@
   import type { ButtonVariant } from '$lib/types/options';
   import { getComponentSettings } from './settings';
 
-  const defaults = getComponentSettings('Button');
-  const settingsClasses = defaults.classes;
+  const { classes: settingsClasses, defaults } = getComponentSettings('Button');
 
   export let type: 'button' | 'submit' | 'reset' = 'button';
   export let href: string | undefined = undefined;
