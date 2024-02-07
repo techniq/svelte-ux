@@ -9,6 +9,7 @@
   import { getComponentClasses } from './theme';
 
   export let title: string | number | Array<string | number> = '';
+  export let menuIcon: string | null = mdiMenu;
 
   /**
    * Update head / document.title.  Set to false to disable
@@ -23,6 +24,10 @@
     // Appears to be needed for some reactive updates
     document.title = titleString;
   }
+
+  function toggleMenu() {
+    $showDrawer = !$showDrawer;
+  }
 </script>
 
 <header
@@ -33,7 +38,12 @@
     $$restProps.class
   )}
 >
-  <Button icon={mdiMenu} on:click={() => ($showDrawer = !$showDrawer)} class="p-3" />
+  {#if menuIcon}
+    <slot name="menuIcon" {toggleMenu} isMenuOpen={$showDrawer}>
+      <Button icon={menuIcon} on:click={toggleMenu} class="p-3" />
+    </slot>
+  {/if}
+
   {#if $$slots.title}
     <slot name="title" />
   {:else}
