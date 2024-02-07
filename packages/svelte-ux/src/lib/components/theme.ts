@@ -110,12 +110,12 @@ export function getComponents(): ComponentSettings {
 export function resolveComponentClasses<NAME extends ComponentName>(
   theme: ClassesProp<(typeof Components)[NAME]>
 ): ResolvedComponentClassesProp<NAME> {
-  return typeof theme?.classes === 'string' ? { root: theme?.classes } : theme?.classes ?? {};
+  return typeof theme === 'string' ? { root: theme } : theme ?? {};
 }
 
 export function getComponentClasses<NAME extends ComponentName>(
   name: NAME
 ): ResolvedComponentClasses[NAME] {
   const settings = getSettings();
-  return resolveComponentClasses(settings?.components?.[name]);
+  return resolveComponentClasses(settings?.components?.[name]?.classes);
 }
