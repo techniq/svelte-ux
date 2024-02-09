@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { parse as parseDate, format as formatDate } from 'date-fns';
+  import { cls } from '../utils/styles';
 
   import Field from './Field.svelte';
 
@@ -24,6 +25,15 @@
   export let rounded = false;
   export let dense = false;
   export let icon: string | null = null;
+  export let classes: {
+    root?: string;
+    container?: string;
+    label?: string;
+    input?: string;
+    error?: string;
+    prepend?: string;
+    append?: string;
+  } = {};
 
   const theme = getComponentTheme('DateField');
 
@@ -58,6 +68,8 @@
     inputValue = null;
     dispatch('change', { value });
   }}
+  {classes}
+  class={cls('DateField', $$props.class)}
   let:id
 >
   <Input
