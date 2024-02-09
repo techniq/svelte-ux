@@ -22,11 +22,9 @@
   $: actualFormat = format ?? $format_ux.settings.formats.dates.baseParsing ?? 'MM/dd/yyyy';
   $: actualMask = mask ?? actualFormat.toLowerCase();
 
-  type FieldClasses = NonNullable<ComponentProps<Field>['classes']>;
-
   export let classes: {
-    root?: FieldClasses['root'];
-    field?: FieldClasses;
+    root?: string;
+    field?: ComponentProps<Field>['classes'];
   } = {};
 
   // Field props
