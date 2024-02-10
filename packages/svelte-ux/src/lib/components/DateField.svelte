@@ -71,7 +71,7 @@
   {labelPlacement}
   on:clear={() => {
     value = null;
-    inputValue = undefined;
+    inputValue = '';
     dispatch('change', { value });
   }}
   classes={classes.field}
