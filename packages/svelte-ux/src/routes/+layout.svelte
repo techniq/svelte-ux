@@ -227,7 +227,7 @@
       <div class="border-r border-primary-content/20 pr-2 grid grid-cols-2 items-center">
         <LanguageSelect />
         {#if data.themes.light.length > 1 || data.themes.dark.length > 1}
-          <ThemeSelect />
+          <ThemeSelect keyboardShortcuts />
         {:else}
           <ThemeSwitch classes={{ switch: 'bg-black/10' }} />
         {/if}

@@ -21,6 +21,9 @@
   /** The list of light themes to chose from, if not the list provided to `settings`. */
   export let lightThemes = allThemes?.light ?? ['light'];
 
+  /** Add keyboard shorts to quickly toggle color scheme and cycle themes */
+  export let keyboardShortcuts = false;
+
   let open = false;
 
   $: themes = $currentTheme.dark ? darkThemes : lightThemes;
@@ -109,18 +112,20 @@
       {/each}
     </div>
 
-    <div class="p-2 grid grid-cols-[auto,1fr] gap-2 items-center text-xs">
-      <span class="font-medium">Toggle scheme:</span>
-      <span>
-        <Kbd control /> + <Kbd>T</Kbd>
-      </span>
+    {#if keyboardShortcuts}
+      <div class="p-2 grid grid-cols-[auto,1fr] gap-2 items-center text-xs">
+        <span class="font-medium">Toggle scheme:</span>
+        <span>
+          <Kbd control /> + <Kbd>T</Kbd>
+        </span>
 
-      <span class="font-medium">Next theme:</span>
-      <span>
-        <Kbd control /> + <Kbd shift /> + <Kbd>T</Kbd>
-      </span>
-    </div>
+        <span class="font-medium">Next theme:</span>
+        <span>
+          <Kbd control /> + <Kbd shift /> + <Kbd>T</Kbd>
+        </span>
+      </div>
+    {/if}
   </Menu>
 </Button>
 
-<svelte:window on:keydown={onKeyDown} />
+<svelte:window on:keydown={keyboardShortcuts ? onKeyDown : undefined} />
