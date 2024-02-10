@@ -10,7 +10,6 @@ const defaultThemes = {
     'surface-200': colors['gray']['100'],
     'surface-300': colors['gray']['300'],
     'surface-content': colors['gray']['900'],
-    'color-scheme': 'light',
   },
   dark: {
     primary: colors['blue']['500'],
@@ -20,7 +19,6 @@ const defaultThemes = {
     'surface-200': colors['zinc']['900'],
     'surface-300': colors['zinc']['950'],
     'surface-content': colors['zinc']['100'],
-    'color-scheme': 'dark',
   },
 };
 
@@ -45,7 +43,7 @@ function injectThemes(colorSpace, addBase, config) {
         [themeRoot]: processThemeColors(themeColors, colorSpace),
       };
 
-      // Also register first and second them by name AFTER @media for precedence
+      // Also register first and second theme by name AFTER @media for precedence
       cssThemes[`[data-theme=${rootThemeName}]`] = processThemeColors(
         themes[rootThemeName],
         colorSpace

@@ -148,7 +148,10 @@ export function processThemeColors(
     colors['surface-content'] = foregroundColor(colors['surface-100']);
   }
 
-  // TODO: add `color-scheme: "dark"` for `dark` theme (if not set)
+  // Add `color-scheme: "dark"` for `dark` theme (if not set)
+  if (!('color-scheme' in colors)) {
+    colors['color-scheme'] = isDark(colors['surface-content']) ? 'light' : 'dark';
+  }
 
   const result = Object.fromEntries(
     Object.entries(colors).map(([name, value]) => {

@@ -19,7 +19,6 @@ module.exports = {
     themes: {
       // light mode
       light: {
-        'color-scheme': 'light',
         primary: 'oklch(49.12% 0.3096 275.75)',
         secondary: 'oklch(69.71% 0.329 342.55)',
         'secondary-content': 'oklch(98.71% 0.0106 342.55)',
@@ -34,7 +33,6 @@ module.exports = {
 
       // dark mode
       dark: {
-        'color-scheme': 'dark',
         primary: 'oklch(65.69% 0.196 275.75)',
         secondary: 'oklch(74.8% 0.26 342.55)',
         accent: 'oklch(74.51% 0.167 183.61)',
@@ -78,7 +76,6 @@ module.exports = {
         'surface-200': colors['gray']['100'],
         'surface-300': colors['gray']['300'],
         'surface-content': colors['gray']['900'],
-        'color-scheme': 'light',
       },
       dark: {
         primary: colors['orange']['500'],
@@ -88,7 +85,6 @@ module.exports = {
         'surface-200': colors['zinc']['900'],
         'surface-300': colors['zinc']['950'],
         'surface-content': colors['zinc']['100'],
-        'color-scheme': 'dark',
       },
     },
   },
@@ -170,7 +166,7 @@ Lastly, you can reference the theme colors directly as CSS variables, for exampl
 
 ### Additional themes
 
-Additional light and dark themes can be defined. You can also copy all Daisy UI and/or Skeleton themes using the theme generator, if preferred. You will need to set the CSS [color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme) to `light` or `dark` to make sure the default text color and other elements are legible for the theme.
+Additional light and dark themes can be defined. You can also copy all Daisy UI and/or Skeleton themes using the [theme generator](/theme), if preferred. Svelte UX will attempt to set the correct [color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme) CSS property value (`light` or `dark`) based on the `surface-content` color, but you may explicitly define it to guarantee the default text color and other elements are legible for the theme.
 
 ```json
 {
