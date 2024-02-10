@@ -32,12 +32,19 @@
 
 <Preview>
   <DateField {value} />
-  <Button on:click={() => (value = new Date())}>{$localeSettings.dictionary.Date.Today}</Button>
-  <Button on:click={() => (value = addDays(new Date(), -1))}
-    >{$localeSettings.dictionary.Date.Yesterday}</Button
-  >
-  <Button on:click={() => (value = addDays(new Date(), -7))}>Last Week</Button>
-  <Button on:click={() => (value = addDays(new Date(), 7))}>Next Week</Button>
+  <Button on:click={() => (value = new Date())}>
+    {$localeSettings.dictionary.Date.PeriodDay.Current}
+  </Button>
+  <Button on:click={() => (value = addDays(new Date(), -1))}>
+    {$localeSettings.dictionary.Date.PeriodDay.Last}
+  </Button>
+  <Button on:click={() => (value = addDays(new Date(), -7))}>
+    {$localeSettings.dictionary.Date.PeriodWeek.Last}
+  </Button>
+  <Button on:click={() => (value = addDays(new Date(), 7))}>
+    <!-- TODO: Add to dictionary -->
+    Next week
+  </Button>
 </Preview>
 
 <h2>Picker</h2>
