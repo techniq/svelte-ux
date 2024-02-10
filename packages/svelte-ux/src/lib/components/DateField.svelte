@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { parse as parseDate } from 'date-fns';
   import { PeriodType } from '../utils';
   import { getComponentSettings, getSettings } from './settings';
+  import { cls } from '../utils/styles';
 
   import Field from './Field.svelte';
 
@@ -20,6 +21,11 @@
 
   $: actualFormat = format ?? $format_ux.settings.formats.dates.baseParsing ?? 'MM/dd/yyyy';
   $: actualMask = mask ?? actualFormat.toLowerCase();
+
+  export let classes: {
+    root?: string;
+    field?: ComponentProps<Field>['classes'];
+  } = {};
 
   // Field props
   export let label = '';
@@ -46,9 +52,12 @@
       dispatch('change', { value });
     }
   }
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Field
+  {...restProps}
   {label}
   {value}
   {icon}
@@ -65,6 +74,8 @@
     inputValue = undefined;
     dispatch('change', { value });
   }}
+  classes={classes.field}
+  class={cls('DateField', settingsClasses.root, classes.root, $$props.class)}
   let:id
 >
   <Input
