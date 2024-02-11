@@ -2,7 +2,8 @@
   import { createEventDispatcher } from 'svelte';
   import { mdiMinus, mdiPlus } from '@mdi/js';
 
-  import { Button, TextField } from '.';
+  import Button from './Button.svelte';
+  import TextField from './TextField.svelte';
   import { selectOnFocus } from '$lib/actions/input';
   import { getComponentClasses } from './theme';
   import { cls } from '$lib/utils/styles';

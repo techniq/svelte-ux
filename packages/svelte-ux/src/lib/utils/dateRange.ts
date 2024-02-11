@@ -2,7 +2,7 @@ import { startOfDay, isLeapYear, isAfter, isBefore, subYears } from 'date-fns';
 
 import { getDateFuncsByPeriodType, updatePeriodTypeWithWeekStartsOn } from './date';
 import { PeriodType } from './date_types';
-import type { LocaleSettings } from '.';
+import type { LocaleSettings } from './locale';
 
 export type DateRange = {
   from: Date | null;

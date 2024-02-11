@@ -12,7 +12,7 @@ import {
   hasDayOfWeek,
   replaceDayOfWeek,
 } from './date';
-import { formatWithLocale } from '.';
+import { formatWithLocale } from './format';
 import { createLocaleSettings, defaultLocale } from './locale';
 import {
   PeriodType,
