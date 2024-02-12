@@ -69,7 +69,7 @@
         source={`const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
-const svelteUx = require('./src/lib/plugins/tailwind.cjs');
+const svelteUx = require('svelte-ux/plugins/tailwind.cjs');
 
 module.exports = {
   content: [
