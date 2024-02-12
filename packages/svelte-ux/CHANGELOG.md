@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.60.1
+
+### Patch Changes
+
+- Do not require `settings()` to be defined ([`68f886e0b3d64edea62bfd896fd0608a3efe87a1`](https://github.com/techniq/svelte-ux/commit/68f886e0b3d64edea62bfd896fd0608a3efe87a1))
+
 ## 0.60.0
 
 ### Minor Changes
