@@ -1,5 +1,79 @@
 # svelte-ux
 
+## 0.60.0
+
+### Minor Changes
+
+- Update Settings component to expose each settings key as a component prop ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add ability to set a default values for labelPlacement and variant props ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add `sumObjects` array util ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- - Rename settings `theme` argument to `classes` ([#167](https://github.com/techniq/svelte-ux/pull/167))
+  - Rename getTheme to getClasses and getComponentTheme to getComponentClasses
+
+- BREAKING: removed `dateDisplay()` in favor of `format()` ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add theme selection/creation page and simplify loading themes ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add support for passing `class` and `classes` props to the DateField component ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- - Add locale settings to settings object, and allow dynamically changing the current locale. ([#167](https://github.com/techniq/svelte-ux/pull/167))
+  - Move format function to be a store on the settings object, which updates when the locale changes.
+
+- Change PeriodType values (0 = unqualified DoW, 1-7 = Sun-Sat) ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Support `ux.themes` tailwind config, including Daisy UI ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Rename `cssVars` action to `styleVars` and do not prefix properties with `--` by default (more flexible) ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Theme support ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+### Patch Changes
+
+- Update dependencies (except vitest) ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add styles (with daisy) as top-level export ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [SelectField] Add `stepper` prop to iterate through options (like `MenuField`) ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [TableOfContents] Support changing icon ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [MenuField] Expose `selected` option via prop (similar to `SelectField`) ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add ThemeInit component to prevent flash of unstyled content when SSR is enabled ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [MenuButton] Support hiding `menuIcon` and dispatch `change` event ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Rename `ThemeButton` to `ThemeSelect` ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add a store to manage the current theme ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Support passing a custom formatter function as `format` argument to format() / formatWithLocale() ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Fix ThemeSwitch SSR behavior by using `dark` class to define positioning and icon display ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [MultiSelect] Add `autoFocusSearch` to opt into functionality, which `MultiSelectMenu` maintains ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- add locale management of date leveraging intl ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Map Skeleton themes to Svelte UX themes ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [SelectField] Fix toggling display of options menu using toggleIcon. Support hiding toggleIcon (`<SelectField toggleIcon={null} /> ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [DateRange] Remove `scrollIntoView` for date selection components (month, year) ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [DateField] Fix input value when clearing value ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Fix overriding `elevation-#` classes. Add `elevation-none` to remove `elevation-#` ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [Appbar] Add `menuIcon` prop and slot ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [Popover|Menu|popover] Support `resize` width or height only ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add `ThemeSwitch` component to toggle between light/dark theme ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
 ## 0.58.0-next.13
 
 ### Patch Changes
