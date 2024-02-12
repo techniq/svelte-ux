@@ -13,7 +13,6 @@
 
   import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
-  import { scrollIntoView } from '../actions/scroll';
 
   export let selected: SelectedDate | undefined = undefined;
   export let minDate: Date | undefined = undefined;
@@ -42,15 +41,15 @@
     return disabledYears instanceof Function
       ? disabledYears(date)
       : disabledYears instanceof Date
-      ? isSameYear(date, disabledYears)
-      : disabledYears instanceof Array
-      ? disabledYears.some((d) => isSameYear(date, d))
-      : disabledYears instanceof Object
-      ? isWithinInterval(date, {
-          start: startOfYear(disabledYears.from),
-          end: endOfYear(disabledYears.to || disabledYears.from),
-        })
-      : false;
+        ? isSameYear(date, disabledYears)
+        : disabledYears instanceof Array
+          ? disabledYears.some((d) => isSameYear(date, d))
+          : disabledYears instanceof Object
+            ? isWithinInterval(date, {
+                start: startOfYear(disabledYears.from),
+                end: endOfYear(disabledYears.to || disabledYears.from),
+              })
+            : false;
   };
 </script>
 

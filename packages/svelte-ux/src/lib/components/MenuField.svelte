@@ -10,8 +10,10 @@
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Button from './Button.svelte';
-  import { getComponentTheme } from './theme';
-  import type { MenuOption } from '$lib/types/options';
+  import type { MenuOption } from '$lib/types';
+  import { getComponentSettings } from './settings';
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('MenuField');
 
   export let options: MenuOption[] = [];
   export let value: any = null;
@@ -29,9 +31,9 @@
     menuIcon?: string;
     group?: string;
   } = {};
-  const theme = getComponentTheme('MenuField');
 
   let open = false;
+  export let selected: any = undefined;
   $: selected = options?.find((x) => x.value === value);
 
   $: previous = () => {
@@ -62,11 +64,13 @@
   function setValue(val: any): void {
     value = val;
   }
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Field
   class="cursor-pointer"
-  {...$$restProps}
+  {...restProps}
   classes={{ input: 'overflow-hidden', ...$$props.classes }}
   on:click={() => (open = !open)}
 >
@@ -89,11 +93,11 @@
     <Icon
       path={menuIcon}
       class={cls(
-        'text-black/50 mr-1 transform transition-all duration-300',
+        'text-surface-content/50 mr-1 transform transition-all duration-300',
         {
           '-rotate-180': open,
         },
-        theme.menuIcon,
+        settingsClasses.menuIcon,
         classes.menuIcon
       )}
       on:click={() => (open = !open)}
@@ -120,8 +124,8 @@
           {#if option.group && option.group !== previousOption?.group}
             <div
               class={cls(
-                'group-header text-xs leading-8 tracking-widest text-black/50 px-2',
-                theme.group,
+                'group-header text-xs leading-8 tracking-widest text-surface-content/50 px-2',
+                settingsClasses.group,
                 classes.group
               )}
             >
@@ -132,7 +136,7 @@
           <MenuItem
             icon={option.icon}
             selected={option.value === value}
-            class={cls(option.group ? 'px-4' : 'px-2', theme.option, classes.option)}
+            class={cls(option.group ? 'px-4' : 'px-2', settingsClasses.option, classes.option)}
             classes={classes.menuItem}
             on:click={() => (value = option.value)}
           >

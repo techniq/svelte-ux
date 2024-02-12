@@ -15,7 +15,7 @@
   <div class="w-[400px]">
     <Notification open closeIcon>
       <div slot="icon">
-        <Icon path={mdiCheckCircleOutline} class="text-green-500" />
+        <Icon path={mdiCheckCircleOutline} class="text-success-500" />
       </div>
       <div slot="title">Successfully Saved!</div>
       <div slot="description">Anyone with a link can now view this file.</div>
@@ -30,7 +30,7 @@
     <Notification open actions="right" closeIcon>
       <div slot="title">Discussion archived</div>
       <div slot="actions">
-        <Button color="accent">Undo</Button>
+        <Button color="primary">Undo</Button>
       </div>
     </Notification>
   </div>
@@ -49,7 +49,7 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit oluptatum tenetur.
       </div>
       <div slot="actions">
-        <Button color="accent">Undo</Button>
+        <Button color="primary">Undo</Button>
         <Button>Dismiss</Button>
       </div>
     </Notification>
@@ -65,7 +65,7 @@
       <div slot="description">Notifications may include alerts, sounds, and badges</div>
       <div slot="actions" class="h-full">
         <div class="grid border-l divide-y h-full">
-          <Button color="accent">Reply</Button>
+          <Button color="primary">Reply</Button>
           <Button>Don't Allow</Button>
         </div>
       </div>

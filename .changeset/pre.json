@@ -1,0 +1,38 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "create-svelte-ux": "0.2.1",
+    "svelte-ux": "0.57.1"
+  },
+  "changesets": [
+    "angry-ads-carry",
+    "angry-zebras-remember",
+    "beige-papayas-study",
+    "chilled-dingos-sell",
+    "cool-hotels-own",
+    "eight-bottles-eat",
+    "fair-trees-sparkle",
+    "for-you-sean",
+    "friendly-pets-reflect",
+    "healthy-files-search",
+    "light-pianos-refuse",
+    "light-ways-dress",
+    "modern-pumpkins-march",
+    "moody-cows-pull",
+    "ninety-carpets-cross",
+    "quick-avocados-hope",
+    "quick-carrots-grab",
+    "rare-flowers-flash",
+    "selfish-hounds-dance",
+    "shiny-hornets-study",
+    "shy-peaches-ring",
+    "sixty-walls-rest",
+    "sour-cougars-beg",
+    "strong-flies-provide",
+    "tidy-gifts-yawn",
+    "wicked-melons-fold",
+    "yellow-nails-vanish",
+    "yellow-oranges-fly"
+  ]
+}

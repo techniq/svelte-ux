@@ -8,11 +8,14 @@
   import Dialog from './Dialog.svelte';
   import Field from './Field.svelte';
 
-  import { PeriodType, getDateFuncsByPeriodType, getPeriodTypeName } from '../utils/date';
+  import { PeriodType, getDateFuncsByPeriodType } from '../utils/date';
   import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange';
   import { cls } from '../utils/styles';
+  import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
+  const { format, localeSettings } = getSettings();
+  const { classes: settingsClasses, defaults } = getComponentSettings('DateRangeField');
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -25,9 +28,9 @@
   export let center: boolean = false;
   export let periodTypes: PeriodType[] = [
     PeriodType.Day,
-    PeriodType.WeekSun,
-    PeriodType.BiWeek1Sun,
-    // PeriodType.BiWeek2Sun,
+    PeriodType.Week,
+    PeriodType.BiWeek1,
+    // PeriodType.BiWeek2,
     PeriodType.Month,
     PeriodType.Quarter,
     PeriodType.CalendarYear,
@@ -53,13 +56,14 @@
   export let icon: string | null = null;
 
   let open: boolean = false;
-  let format: string = undefined;
 
   let currentValue = value;
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Field
-  label={label ?? (value.periodType ? getPeriodTypeName(value.periodType) : '')}
+  label={label ?? (value.periodType ? $format.getPeriodTypeName(value.periodType) : '')}
   {icon}
   {error}
   {hint}
@@ -70,7 +74,7 @@
   {center}
   classes={classes.field}
   let:id
-  {...$$restProps}
+  {...restProps}
 >
   <span slot="prepend" class="flex items-center">
     <slot name="prepend" />
@@ -81,7 +85,10 @@
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
-            const { difference, start, end, add } = getDateFuncsByPeriodType(value.periodType);
+            const { difference, start, end, add } = getDateFuncsByPeriodType(
+              $localeSettings,
+              value.periodType
+            );
             const offset = difference(value.from, value.to) - 1;
             value = {
               from: start(add(value.from, offset)),
@@ -104,14 +111,14 @@
     on:click={() => (open = true)}
     {id}
   >
-    <DateRangeDisplay {value} {format} />
+    <DateRangeDisplay {value} />
   </button>
 
   <div slot="append" class="flex items-center">
     {#if clearable && (value?.periodType || value?.from || value?.to)}
       <Button
         icon={mdiClose}
-        class="text-black/50 p-1"
+        class="text-surface-content/50 p-1"
         on:click={() => {
           value = _defaultValue;
           dispatch('clear');
@@ -128,7 +135,10 @@
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
-            const { difference, start, end, add } = getDateFuncsByPeriodType(value.periodType);
+            const { difference, start, end, add } = getDateFuncsByPeriodType(
+              $localeSettings,
+              value.periodType
+            );
             const offset = difference(value.to, value.from) + 1;
             value = {
               from: start(add(value.from, offset)),
@@ -150,11 +160,11 @@
   }}
   bind:open
 >
-  <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24">
-    <div class="text-sm text-white/50">
-      {currentValue.periodType ? getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
+  <div class="flex flex-col justify-center bg-primary text-primary-content px-6 h-24">
+    <div class="text-sm opacity-50">
+      {currentValue.periodType ? $format.getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
     </div>
-    <div class="text-xl sm:text-2xl text-white">
+    <div class="text-xl sm:text-2xl">
       <DateRangeDisplay value={currentValue} />
     </div>
   </div>
@@ -171,10 +181,10 @@
         value = currentValue;
         dispatch('change', value);
       }}
-      color="blue"
+      color="primary"
       variant="fill"
     >
-      OK
+      {$localeSettings.dictionary.Ok}
     </Button>
 
     <Button
@@ -183,7 +193,7 @@
         currentValue = value;
       }}
     >
-      Cancel
+      {$localeSettings.dictionary.Cancel}
     </Button>
   </div>
 </Dialog>

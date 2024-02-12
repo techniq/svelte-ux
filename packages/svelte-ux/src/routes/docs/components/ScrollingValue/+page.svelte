@@ -11,7 +11,7 @@
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
 
-  import { PeriodType, format, romanize, timerStore } from '$lib';
+  import { PeriodType, getSettings, romanize, timerStore } from '$lib';
 
   let value = 0;
   let axis: 'x' | 'y' = 'x';
@@ -46,6 +46,7 @@
     }
   }
 
+  const { format } = getSettings();
   const indexTimer = timerStore({
     initial: 0,
     delay: 2000,
@@ -60,7 +61,7 @@
 <h1>Examples</h1>
 
 <div class="grid grid-cols-[1fr,140px] items-center gap-6">
-  <ButtonGroup variant="fill" class="grid grid-flow-col ml-2">
+  <ButtonGroup variant="fill-light" class="grid grid-flow-col ml-2">
     <Button on:click={() => (value -= 100)}>-100</Button>
     <Button on:click={() => (value -= 10)}>-10</Button>
     <Button on:click={() => (value -= 1)}>-1</Button>
@@ -71,13 +72,13 @@
   </ButtonGroup>
 
   <Field label="axis" labelPlacement="left">
-    <ToggleGroup bind:value={axis} variant="fill-white" inset>
+    <ToggleGroup bind:value={axis} variant="fill-surface" inset>
       <ToggleOption value="x">x</ToggleOption>
       <ToggleOption value="y">y</ToggleOption>
     </ToggleGroup>
   </Field>
 </div>
-<div class="text-xs ml-2 text-black/50">
+<div class="text-xs ml-2 text-surface-content/50">
   also keyboard up/down with shift: +/- 10 option: +/- 100
 </div>
 
@@ -120,7 +121,7 @@
       }}
       classes={{
         value:
-          'font-bold text-transparent bg-clip-text bg-gradient-to-b from-green-200 via-cyan-400 to-blue-500',
+          'font-bold text-transparent bg-clip-text bg-gradient-to-b from-success-200 via-cyan-400 to-blue-500',
       }}
     />
   </span>
@@ -170,7 +171,7 @@
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup variant="fill">
+    <ButtonGroup variant="fill-light">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
@@ -182,7 +183,7 @@
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup color="accent" variant="fill-light">
+    <ButtonGroup color="primary" variant="fill-light">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
@@ -194,7 +195,7 @@
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
-    <ButtonGroup color="accent" variant="fill-outline">
+    <ButtonGroup color="primary" variant="fill-outline">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
@@ -215,7 +216,7 @@
   <div class="grid w-96">
     <div class="grid grid-cols-[auto,1fr,auto] items-center justify-items-center">
       <Button icon={mdiChevronLeft} class="p-2" on:click={() => (value -= 1)} />
-      <div>{format(startOfMonth, PeriodType.Month)}</div>
+      <div>{$format(startOfMonth, PeriodType.Month)}</div>
       <Button icon={mdiChevronRight} class="p-2" on:click={() => (value += 1)} />
     </div>
     <ScrollingValue {value} {axis} let:value>
@@ -229,7 +230,7 @@
 
 <Preview>
   <ScrollingValue value={$timer ?? 0} {axis} class="text-6xl tabular-nums" />
-  <ButtonGroup variant="fill" class="ml-3">
+  <ButtonGroup variant="fill-light" class="ml-3">
     <Button on:click={timer.start} disabled={$isRunning}>Start</Button>
     <Button on:click={timer.stop} disabled={!$isRunning}>Stop</Button>
   </ButtonGroup>
@@ -242,7 +243,7 @@
   <ScrollingValue
     bind:value
     {axis}
-    classes={{ value: 'text-6xl first:bg-red-500/50 last:bg-green-500/50' }}
+    classes={{ value: 'text-6xl first:bg-danger/50 last:bg-success-500/50' }}
   />
   <div class="grid grid-flow-col">
     <Button on:click={() => (value -= 100)}>-100</Button>

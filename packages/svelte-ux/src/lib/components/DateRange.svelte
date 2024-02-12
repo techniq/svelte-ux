@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { format, isAfter, isBefore, isSameDay } from 'date-fns';
+  import { isAfter, isBefore, isSameDay } from 'date-fns';
 
   import {
     PeriodType,
@@ -7,7 +7,7 @@
     getDateFuncsByPeriodType,
     hasDayOfWeek,
     replaceDayOfWeek,
-    getPeriodTypeName,
+    missingDayOfWeek,
   } from '../utils/date';
   import { getDateRangePresets } from '../utils/dateRange';
   import type { DateRange } from '../utils/dateRange';
@@ -18,17 +18,17 @@
   import MenuField from './MenuField.svelte';
   import ToggleGroup from './ToggleGroup.svelte';
   import ToggleOption from './ToggleOption.svelte';
-  import DateField from './DateField.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { mdScreen } from '$lib/stores/matchMedia';
+  import { getSettings } from './settings';
 
   export let selected: DateRange | null = { from: null, to: null, periodType: null };
 
   /** Period types to show */
   export let periodTypes: PeriodType[] = [
     PeriodType.Day,
-    PeriodType.WeekSun,
-    PeriodType.BiWeek1Sun,
+    PeriodType.Week,
+    PeriodType.BiWeek1,
     // PeriodType.BiWeek2Sun,
     PeriodType.Month,
     PeriodType.Quarter,
@@ -37,22 +37,24 @@
   ];
   export let getPeriodTypePresets = getDateRangePresets;
 
-  const theme = getComponentTheme('DateRange');
+  const settingsClasses = getComponentClasses('DateRange');
+  const { format, localeSettings } = getSettings();
 
   let selectedPeriodType = selected?.periodType ?? periodTypes[0];
   let selectedPreset: string | null = null;
-  let selectedDayOfWeek: DayOfWeek = DayOfWeek.SUN;
+  let selectedDayOfWeek: DayOfWeek =
+    $format.settings.formats.dates.weekStartsOn ?? DayOfWeek.Sunday;
   let activeDate: 'from' | 'to' = 'from';
 
   $: periodTypeOptions = periodTypes.map((pt) => {
     const value = adjustPeriodType(pt);
     return {
-      label: getPeriodTypeName(adjustPeriodType(pt)),
+      label: $format.getPeriodTypeName(value),
       value,
     };
   });
 
-  $: presetOptions = getPeriodTypePresets(selectedPeriodType).map((preset) => {
+  $: presetOptions = getPeriodTypePresets($localeSettings, selectedPeriodType).map((preset) => {
     return {
       label: preset.label,
       value: getDateRangeStr(preset.value),
@@ -69,35 +71,40 @@
     // Apply date-fns function based on type and from/to.
     let newSelected = { ...selected, periodType: selectedPeriodType };
 
-    const { start, end } = getDateFuncsByPeriodType(selectedPeriodType);
+    const { start, end } = getDateFuncsByPeriodType($localeSettings, selectedPeriodType);
 
     let newActiveDate: typeof activeDate = activeDate === 'from' ? 'to' : 'from';
 
     if (activeDate === 'from') {
       newSelected.from = start(date);
-      if (selected.to != null && isAfter(date, selected.to)) {
+      if (selected!.to != null && isAfter(date, selected!.to)) {
         newSelected.to = end(date);
       }
     } else {
       newSelected.to = end(date);
-      if (selected.from != null && isBefore(date, selected.from)) {
+      if (selected!.from != null && isBefore(date, selected!.from)) {
         newSelected.from = start(date);
         newActiveDate = 'to';
       }
     }
 
+    // TODO
+    // @ts-expect-error (null / undefined issue...)
     selected = newSelected;
     activeDate = newActiveDate;
   }
 
   // Expand selection range to match period type (day => month, etc)
   function onPeriodTypeChange(periodType: PeriodType) {
-    const { start, end } = getDateFuncsByPeriodType(periodType);
-    if (selected.from) {
-      selected.from = start(selected.from);
+    const { start, end } = getDateFuncsByPeriodType($localeSettings, periodType);
+    if (selected!.from) {
+      selected!.from = start(selected!.from);
     }
-    if (selected.to) {
-      selected.to = end(selected.to);
+    if (selected!.to) {
+      selected!.to = end(selected!.to);
+    }
+    if (selected!.periodType) {
+      selected!.periodType = periodType;
     }
   }
 
@@ -117,19 +124,21 @@
       const newSelected = { ...selected, periodType: newPeriodType };
 
       // Attempt to maintain selected preset if labels match
-      if (selected.from && selected.to && selected.periodType) {
-        const prevPeriodTypePreset = [...getPeriodTypePresets(selected.periodType)].find(
+      if (selected?.from && selected?.to && selected.periodType) {
+        const prevPeriodTypePreset = [
+          ...getPeriodTypePresets($localeSettings, selected.periodType),
+        ].find(
           (x) =>
             x.value.from &&
-            isSameDay(x.value.from, selected.from) &&
+            isSameDay(x.value.from, selected!.from!) &&
             x.value.to &&
-            isSameDay(x.value.to, selected.to)
+            isSameDay(x.value.to, selected!.to!)
         );
 
         if (prevPeriodTypePreset && newPeriodType) {
-          const newPeriodTypePreset = [...getPeriodTypePresets(newPeriodType)].find(
-            (x) => x.label === prevPeriodTypePreset.label
-          );
+          const newPeriodTypePreset = [
+            ...getPeriodTypePresets($localeSettings, newPeriodType),
+          ].find((x) => x.label === prevPeriodTypePreset.label);
 
           if (newPeriodTypePreset) {
             newSelected.from = newPeriodTypePreset.value.from;
@@ -138,13 +147,15 @@
         }
       }
 
+      // TODO
+      // @ts-expect-error (null / undefined issue...)
       selected = newSelected;
     }
   }
 
   function adjustPeriodType(periodType: PeriodType) {
-    // Adjust value for currently selected day of week
-    return hasDayOfWeek(periodType)
+    // Adjust value for currently selected day of week, if needed
+    return missingDayOfWeek(periodType)
       ? replaceDayOfWeek(periodType, selectedDayOfWeek) || periodType
       : periodType;
   }
@@ -159,18 +170,18 @@
     'DateRange grid gap-2',
     'w-[min(90vw,384px)]',
     showSidebar && 'md:w-[640px] md:grid-cols-[2fr,3fr]',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
 >
   <div class={cls(showSidebar && 'md:col-start-2')}>
-    <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-white">
+    <ToggleGroup bind:value={activeDate} variant="outline" inset class="bg-surface-100">
       <ToggleOption value="from" class="flex-1">
-        <div class="text-xs text-black/50">Start</div>
-        {#if selected.from}
-          <div class="font-medium">{format(selected.from, 'M/d/yyyy')}</div>
+        <div class="text-xs text-surface-content/50">{$localeSettings.dictionary.Date.Start}</div>
+        {#if selected?.from}
+          <div class="font-medium">{$format(selected.from, PeriodType.Day)}</div>
         {:else}
-          <div class="italic">Empty</div>
+          <div class="italic">{$localeSettings.dictionary.Date.Empty}</div>
         {/if}
         <!-- <div class="p-1">
             <DateField
@@ -188,11 +199,11 @@
       </ToggleOption>
 
       <ToggleOption value="to" class="flex-1">
-        <div class="text-xs text-black/50">End</div>
-        {#if selected.to}
-          <div class="font-medium">{format(selected.to, 'M/d/yyyy')}</div>
+        <div class="text-xs text-surface-content/50">{$localeSettings.dictionary.Date.End}</div>
+        {#if selected?.to}
+          <div class="font-medium">{$format(selected.to, PeriodType.Day)}</div>
         {:else}
-          <div class="italic">Empty</div>
+          <div class="italic">{$localeSettings.dictionary.Date.Empty}</div>
         {/if}
         <!-- <div class="p-1">
             <DateField
@@ -216,14 +227,13 @@
       {#if showPeriodTypes}
         {#if $mdScreen}
           <div>
-            <div class="text-xs text-black/50 uppercase mb-1">Type</div>
+            <div class="text-xs text-surface-content/50 uppercase mb-1">Type</div>
             <ToggleGroup
               bind:value={selectedPeriodType}
               on:change={(e) => onPeriodTypeChange(e.detail.value)}
               variant="outline"
               inset
               vertical
-              class="bg-white"
             >
               {#each periodTypeOptions as option}
                 <ToggleOption value={option.value}>
@@ -246,14 +256,8 @@
         {#key selectedPeriodType}
           {#if $mdScreen}
             <div>
-              <div class="text-xs text-black/50 uppercase mb-1">Presets</div>
-              <ToggleGroup
-                bind:value={selectedPreset}
-                variant="outline"
-                inset
-                vertical
-                class="bg-white"
-              >
+              <div class="text-xs text-surface-content/50 uppercase mb-1">Presets</div>
+              <ToggleGroup bind:value={selectedPreset} variant="outline" inset vertical>
                 {#each presetOptions as option}
                   <ToggleOption
                     value={option.value}
@@ -281,27 +285,23 @@
 
       {#if hasDayOfWeek(selectedPeriodType)}
         <div>
-          <div class="text-xs text-black/50 uppercase mb-1">Start day of week</div>
+          <div class="text-xs text-surface-content/50 uppercase mb-1">Start day of week</div>
           <ToggleGroup
             bind:value={selectedDayOfWeek}
             variant="outline"
             inset
-            classes={{ root: 'bg-white', option: 'px-0' }}
+            classes={{ root: 'bg-surface-100', option: 'px-0' }}
           >
-            <ToggleOption value={DayOfWeek.SUN}>Sun</ToggleOption>
-            <ToggleOption value={DayOfWeek.MON}>Mon</ToggleOption>
-            <ToggleOption value={DayOfWeek.TUE}>Tue</ToggleOption>
-            <ToggleOption value={DayOfWeek.WED}>Wed</ToggleOption>
-            <ToggleOption value={DayOfWeek.THU}>Thu</ToggleOption>
-            <ToggleOption value={DayOfWeek.FRI}>Fri</ToggleOption>
-            <ToggleOption value={DayOfWeek.SAT}>Sat</ToggleOption>
+            {#each [DayOfWeek.Sunday, DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday] as day}
+              <ToggleOption value={day}>{$format.getDayOfWeekName(day)}</ToggleOption>
+            {/each}
           </ToggleGroup>
         </div>
       {/if}
     </div>
   {/if}
 
-  <div class="bg-white border rounded overflow-auto">
+  <div class="bg-surface-100 border rounded overflow-auto">
     <DateSelect
       {selected}
       periodType={selectedPeriodType}

@@ -5,13 +5,19 @@
 	import '../app.postcss';
 
 	settings({
-		theme:{
-			AppBar: 'bg-accent-500 text-white shadow-md',
+		components: {
+			AppBar: {
+				classes: 'bg-primary text-white shadow-md'
+			},
 			AppLayout: {
-				nav: 'bg-neutral-800'
+				classes: {
+					nav: 'bg-neutral-800'
+				}
 			},
 			NavItem: {
-				root: 'text-sm text-gray-400 pl-6 py-2 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10'
+				classes: {
+					root: 'text-sm text-gray-400 pl-6 py-2 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10'
+				}
 			}
 		}
 	});

@@ -1,5 +1,6 @@
 import clsx, { type ClassValue } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
+import { range } from 'd3-array';
 
 /**
  * Convert object to style string
@@ -25,7 +26,14 @@ export function objectToString(styleObj: { [key: string]: string }) {
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      shadow: ['shadow-border-l', 'shadow-border-r', 'shadow-border-t', 'shadow-border-b'],
+      shadow: [
+        'shadow-border-l',
+        'shadow-border-r',
+        'shadow-border-t',
+        'shadow-border-b',
+        'elevation-none',
+        ...range(1, 25).map((x) => `elevation-${x}`),
+      ],
     },
   },
 });

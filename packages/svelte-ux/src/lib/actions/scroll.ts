@@ -21,12 +21,9 @@ export const scrollIntoView: Action<HTMLElement, ScrollIntoViewOptions | undefin
     const needed = options?.onlyIfNeeded ? !isVisibleInScrollParent(node) : true;
 
     if (condition && needed) {
-      setTimeout(
-        () => {
-          scrollIntoViewUtil(node);
-        },
-        options?.delay ?? 0
-      );
+      setTimeout(() => {
+        scrollIntoViewUtil(node);
+      }, options?.delay ?? 0);
     }
   }
 

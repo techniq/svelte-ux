@@ -4,7 +4,8 @@
   import { uniqueId } from 'lodash-es';
 
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types';
+  import { getComponentSettings } from './settings';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -13,8 +14,10 @@
     clear: null;
   }>();
 
+  const { classes: settingsClasses, defaults } = getComponentSettings('Field');
+
   export let label = '';
-  export let labelPlacement: 'inset' | 'float' | 'top' | 'left' = 'inset';
+  export let labelPlacement: LabelPlacement = defaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT;
   export let value: any = null;
   // export let placeholder = '';
   export let error: string | string[] | boolean | undefined = '';
@@ -41,7 +44,6 @@
     prepend?: string;
     append?: string;
   } = {};
-  const theme = getComponentTheme('Field');
 
   $: hasValue = Array.isArray(value)
     ? value.length > 0
@@ -61,10 +63,10 @@
     'Field',
     'group flex gap-1',
     labelPlacement !== 'left' ? 'flex-col' : 'items-center',
-    error ? '[--color:theme(colors.red.500)]' : '[--color:theme(colors.accent.500)]',
+    error ? '[--color:theme(colors.danger)]' : '[--color:theme(colors.primary)]',
     disabled && 'opacity-50 pointer-events-none',
     !base && (rounded ? 'rounded-full' : 'rounded'),
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -73,10 +75,10 @@
     <label
       class={cls(
         'block text-sm font-medium',
-        'truncate group-hover:text-gray-700 group-focus-within:text-accent-500 group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
-        error ? 'text-red-500/80' : 'text-black/50',
+        'truncate group-hover:text-surface-content/70 group-focus-within:text-primary group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+        error ? 'text-danger/80' : 'text-surface-content/50',
         `placement-${labelPlacement}`,
-        theme.label,
+        settingsClasses.label,
         classes.label
       )}
       for={id}
@@ -91,15 +93,15 @@
       class={cls(
         'border py-0 transition-shadow',
         disabled ? '' : 'hover:shadow',
-        disabled ? '' : error ? 'hover:border-red-700' : 'hover:border-gray-700',
+        disabled ? '' : error ? 'hover:border-danger' : 'hover:border-surface-content',
         {
           'px-2': !rounded,
           'px-6': rounded && !hasPrepend,
         },
-        !base && ['bg-white', rounded ? 'rounded-full' : 'rounded'],
-        error ? 'border-red-500' : 'border-black/20',
+        !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
+        error && 'border-danger',
         'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
-        theme.container,
+        settingsClasses.container,
         classes.container
       )}
     >
@@ -108,7 +110,7 @@
           <div
             class={cls(
               'prepend whitespace-nowrap flex items-center',
-              theme.prepend,
+              settingsClasses.prepend,
               classes.prepend
             )}
           >
@@ -116,7 +118,7 @@
 
             {#if icon}
               <span class={cls('mr-3', rounded && !$$slots.prepend && 'ml-3')}>
-                <Icon path={icon} class="text-black/50" />
+                <Icon path={icon} class="text-surface-content/50" />
               </span>
             {/if}
           </div>
@@ -127,12 +129,12 @@
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <label
               class={cls(
-                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-gray-700 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
                 center && 'justify-center',
-                error ? 'text-red-500/80' : 'text-black/50',
+                error ? 'text-danger/80' : 'text-surface-content/50',
                 `placement-${labelPlacement}`,
                 (labelPlacement === 'inset' || hasValue) && 'shrink',
-                theme.label,
+                settingsClasses.label,
                 classes.label
               )}
               for={id}
@@ -148,7 +150,7 @@
               hasInsetLabel && 'pt-4',
               dense ? 'my-1' : 'my-2',
               center && 'text-center',
-              theme.input,
+              settingsClasses.input,
               classes.input
             )}
           >
@@ -161,16 +163,16 @@
         </div>
 
         {#if hasAppend}
-          <div class={cls('append whitespace-nowrap', theme.append, classes.append)}>
+          <div class={cls('append whitespace-nowrap', settingsClasses.append, classes.append)}>
             {#if clearable && hasValue}
               <Button
                 icon={mdiClose}
                 {disabled}
-                class="text-black/50 p-1"
+                class="text-surface-content/50 p-1"
                 on:click={() => {
                   value = Array.isArray(value) ? [] : typeof value === 'string' ? '' : null;
                   dispatch('clear');
-                  labelEl.focus();
+                  labelEl?.focus();
                 }}
               />
             {/if}
@@ -178,9 +180,9 @@
             <slot name="append" />
 
             {#if error}
-              <Icon path={mdiInformationOutline} class="text-red-500" />
+              <Icon path={mdiInformationOutline} class="text-danger" />
             {:else if iconRight}
-              <Icon path={iconRight} class="text-black/50" />
+              <Icon path={iconRight} class="text-surface-content/50" />
             {/if}
           </div>
         {/if}
@@ -190,8 +192,8 @@
       class={cls(
         error ? 'error' : 'hint',
         'text-xs ml-2 transition-transform ease-out overflow-hidden origin-top transform group-focus-within:scale-y-100',
-        error ? 'text-red-500' : 'text-black/50 scale-y-0',
-        theme.error,
+        error ? 'text-danger' : 'text-surface-content/50 scale-y-0',
+        settingsClasses.error,
         classes.error
       )}
     >

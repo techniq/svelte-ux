@@ -1,14 +1,16 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { format as dateFormat, isWithinInterval } from 'date-fns';
+  import { isWithinInterval } from 'date-fns';
 
   import Button from './Button.svelte';
-  import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
+  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('DateButton');
 
   export let date: Date;
   export let periodType: PeriodType;
@@ -16,57 +18,54 @@
   export let selected: SelectedDate;
   export let hidden: boolean = false;
   export let fade: boolean = false;
-  export let format = getDefaultFormat(periodType);
+  export let format = getCustomFormat(periodType);
+  export let variant = defaults.variant;
 
-  const theme = getComponentTheme('DateButton');
+  const { format: format_ux, localeSettings } = getSettings();
 
-  function getDefaultFormat(periodType: PeriodType) {
+  function getCustomFormat(periodType: PeriodType) {
     switch (periodType) {
-      case PeriodType.CalendarYear:
-      case PeriodType.FiscalYearOctober:
-        return 'yyyy';
-      case PeriodType.Month:
-        return 'MMM';
       case PeriodType.Day:
-        return 'd';
+        return DateToken.DayOfMonth_numeric;
       default:
-        return 'MM/dd/yyyy';
+        // returning undefined will use the default format of PeriodType
+        return undefined;
     }
   }
 
-  const { start, end, isSame } = getDateFuncsByPeriodType(periodType);
+  const { start, end, isSame } = getDateFuncsByPeriodType($localeSettings, periodType);
 
   $: isSelected =
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
-      ? selected.some((d) => isSame(date, d))
-      : selected instanceof Object
-      ? selected.from
-        ? isWithinInterval(date, {
-            start: start(selected.from),
-            end: end(selected.to ?? selected.from),
-          })
-        : false
-      : false;
+        ? selected.some((d) => isSame(date, d))
+        : selected instanceof Object
+          ? selected.from
+            ? isWithinInterval(date, {
+                start: start(selected.from),
+                end: end(selected.to ?? selected.from),
+              })
+            : false
+          : false;
 
   $: isSelectedStart =
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
-      ? selected.some((d) => isSame(date, d))
-      : selected instanceof Object
-      ? isSame(date, selected.from ?? selected.to)
-      : false;
+        ? selected.some((d) => isSame(date, d))
+        : selected instanceof Object
+          ? isSame(date, selected.from ?? selected.to)
+          : false;
 
   $: isSelectedEnd =
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
-      ? selected.some((d) => isSame(date, d))
-      : selected instanceof Object
-      ? isSame(date, selected.to ?? selected.from)
-      : false;
+        ? selected.some((d) => isSame(date, d))
+        : selected instanceof Object
+          ? isSame(date, selected.to ?? selected.from)
+          : false;
 
   $: isCurrent = isSame(date, new Date());
 
@@ -81,13 +80,11 @@
     'inline-flex items-center justify-center',
     isSelectedStart
       ? '[--tw-gradient-from:transparent]'
-      : '[--tw-gradient-from:theme(colors.accent.500)]',
-    isSelectedEnd
-      ? '[--tw-gradient-to:transparent]'
-      : '[--tw-gradient-to:theme(colors.accent.500)]',
+      : '[--tw-gradient-from:theme(colors.primary)]',
+    isSelectedEnd ? '[--tw-gradient-to:transparent]' : '[--tw-gradient-to:theme(colors.primary)]',
     isSelected && (isVerticalSelection ? 'bg-gradient-to-b' : 'bg-gradient-to-r'),
     hidden && 'opacity-0 pointer-events-none',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
 >
@@ -98,8 +95,8 @@
       (disabled || fade) && 'opacity-25',
       isCurrent ? 'font-bold' : 'font-normal'
     )}
-    variant={isSelected ? 'fill' : 'default'}
-    color={isSelected || isCurrent ? 'accent' : 'default'}
+    variant={isSelected ? 'fill' : variant ?? 'default'}
+    color={isSelected || isCurrent ? 'primary' : 'default'}
     {disabled}
     on:click={() => {
       // Do not set selected date as this is causing issues with controlled selected (ex. date ranges, arrays, etc) / changing from date to { from: ..., to: ... }
@@ -107,6 +104,6 @@
       dispatch('dateChange', date);
     }}
   >
-    {dateFormat(date, format)}
+    {$format_ux(date, periodType, { custom: format })}
   </Button>
 </div>

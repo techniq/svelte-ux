@@ -1,31 +1,323 @@
 <script>
   import Button from '$lib/components/Button.svelte';
+  import Preview from '$lib/components/Preview.svelte';
+  import ThemeSelect from '$lib/components/ThemeSelect.svelte';
+  import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
 </script>
 
 # Customization
 
-## Colors
+## Theme
 
-You can adjust any color by updating your `tailwind.config.cjs`. See Tailwind's [customizing colors](https://tailwindcss.com/docs/customizing-colors) page for more details.
+Svelte UX uses a collection of theme colors, enabling robust styling including light and dark modes. There are a handlful of required colors, and the Tailwind plugin will create or generate the additional colors and shades. You can also explicitly specify all colors, or use the [theme generator](/theme) to browse, create, or modify a large collection of themes, converted from [Daisy UI](https://daisyui.com/docs/themes/) and [Skeleton](https://www.skeleton.dev/) themes.
 
-Many components leverage the `accent` color as the default color (`Checkbox`, `Radio`, `Switch`, etc) which should be set in `tailwind.config.cjs`.
+Theme colors are defined using `ux.themes` in `tailwind.config.cjs` and can be defined in any color format including `#000`, `rgb()`, `hsl()`, and `oklch()`
 
 ```js
 module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        accent: colors.blue,
+  ux: {
+    themes: {
+      // light mode
+      light: {
+        primary: 'oklch(49.12% 0.3096 275.75)',
+        secondary: 'oklch(69.71% 0.329 342.55)',
+        'secondary-content': 'oklch(98.71% 0.0106 342.55)',
+        accent: 'oklch(76.76% 0.184 183.61)',
+        neutral: '#2B3440',
+        'neutral-content': '#D7DDE4',
+        'surface-100': 'oklch(100% 0 0)',
+        'surface-200': '#F2F2F2',
+        'surface-300': '#E5E6E6',
+        'surface-content': '#1f2937',
+      },
+
+      // dark mode
+      dark: {
+        primary: 'oklch(65.69% 0.196 275.75)',
+        secondary: 'oklch(74.8% 0.26 342.55)',
+        accent: 'oklch(74.51% 0.167 183.61)',
+        neutral: '#2a323c',
+        'neutral-content': '#A6ADBB',
+        'surface-100': '#1d232a',
+        'surface-200': '#191e24',
+        'surface-300': '#15191e',
+        'surface-content': '#A6ADBB',
       },
     },
   },
-  // ...
 };
 ```
 
-This is fairly synonymous with the CSS [accent-color](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color) property.
+The Svelte UX tailwind plugin (`svelte-ux/plugins/tailwind.cjs`) will translate the defined colors to a common color space, which uses `hsl()` by default. If you would like to change the color space, for example use `oklch()` for an increased gamut of colors, simply call the plugin with the `colorSpace` option defined.
+
+```js
+const svelteUx = require('./src/lib/plugins/tailwind.cjs');
+
+module.exports = {
+  // ...
+  plugins: [svelteUx({ colorSpace: 'oklch' })],
+};
+```
+
+There are a few ways to quickly create themes for your site. You can use the [tailwindcss/colors](https://tailwindcss.com/docs/customizing-colors) package to easily select colors...
+
+```js
+const colors = require('tailwindcss/colors');
+
+module.exports = {
+  // ...
+  ux: {
+    themes: {
+      light: {
+        primary: colors['orange']['500'],
+        'primary-content': 'white',
+        secondary: colors['blue']['500'],
+        'surface-100': 'white',
+        'surface-200': colors['gray']['100'],
+        'surface-300': colors['gray']['300'],
+        'surface-content': colors['gray']['900'],
+      },
+      dark: {
+        primary: colors['orange']['500'],
+        'primary-content': 'white',
+        secondary: colors['blue']['500'],
+        'surface-100': colors['zinc']['800'],
+        'surface-200': colors['zinc']['900'],
+        'surface-300': colors['zinc']['950'],
+        'surface-content': colors['zinc']['100'],
+      },
+    },
+  },
+};
+```
+
+or use the [theme generator](/theme) to browse, create, or modify a large collection of themes, converted from [Daisy UI](https://daisyui.com/docs/themes/) and [Skeleton](https://www.skeleton.dev/) themes.
+
+If referencing a lot of colors, such as those captured from the theme generator, it can be helpful to put those in a separate file, such as `themes.json`, and reference the file in your `tailwind.config.cjs`.
+
+```js
+module.exports = {
+  ux: {
+    themes: require('./themes.json'),
+  },
+};
+```
 
 ---
+
+### Theme colors
+
+- Semantic
+  - `primary`
+  - `secondary`
+  - `accent`
+  - `neutral`
+- State
+  - `info`
+  - `success`
+  - `warning`
+  - `danger`
+- `surface`
+
+Semantic and state colors have a default color (ex. `bg-primary`), shades `50`-`900` (ex. `bg-primary-700`), and a `content` color (ex. `text-primary-content`). Shades can be explicitly provided (such as when using Skeleton themes) or will be generated if only the default/500 color is defined. The `content` color will be generated as a WCAG compatible lighter or darker shade color of the related color using the default/500 shade, if not explicitly defined.
+
+<Preview>
+  <div class="grid grid-cols-2 gap-2">
+    <div class="bg-primary text-primary-content px-2 rounded">primary example</div>
+    <div class="bg-secondary text-secondary-content px-2 rounded">secondary example</div>
+    <div class="bg-success text-success-content px-2 rounded">Success example</div>
+    <div class="bg-danger text-danger-content px-2 rounded">danger example</div>
+  </div>
+</Preview>
+
+Surface colors are defined as `100` (lightest), `200` (medium), and `300` (darkest) shades as well as `content`.
+
+<Preview>
+  <div class="grid grid-cols-3 gap-2">
+    <div class="bg-surface-100 text-surface-content px-2 rounded">surface-100 example</div>
+    <div class="bg-surface-200 text-surface-content px-2 rounded">surface-100 example</div>
+    <div class="bg-surface-300 text-surface-content px-2 rounded">surface-100 example</div>
+  </div>
+</Preview>
+
+---
+
+### Referencing theme colors
+
+Colors can be referenced using Tailwind classes such as `bg-primary`, `text-primary-content`, and can even change the opacity (`bg-primary-600/50`).
+
+You can also reference the colors using `theme()`, which is helpful to set CSS variables.
+
+```html
+<div class="[--text-color:theme(colors.primary)]" />
+<div class="[--text-color:theme(colors.primary/50%)]" />
+
+<style>
+  div {
+    --text-color: theme(colors.primary);
+    --bg-color: theme(colors.primary / 50%);
+  }
+</style>
+```
+
+Lastly, you can reference the theme colors directly as CSS variables, for example `hsl(var(--color-primary))`. This can be helpful when it is not optimal to use a Tailwind class, such as within a Svelte action, or available, such as within the range of a `d3-scale`. Just be sure to wrap the variable in the same color space function as set in the Tailwind plugin (`hsl()` by default).
+
+---
+
+### Additional themes
+
+Additional light and dark themes can be defined. You can also copy all Daisy UI and/or Skeleton themes using the [theme generator](/theme), if preferred. Svelte UX will attempt to set the correct [color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme) CSS property value (`light` or `dark`) based on the `surface-content` color, but you may explicitly define it to guarantee the default text color and other elements are legible for the theme.
+
+```json
+{
+  "light": {
+    "color-scheme": "light",
+    // ...
+  },
+  "dark": {
+    "color-scheme": "dark",
+    // ...
+  },
+  "winter": {
+    "color-scheme": "light",
+    // ...
+  },
+  "black": {
+    "color-scheme": "dark",
+    // ...
+  },
+  "dracula": {
+    "color-scheme": "dark",
+    // ...
+  },
+```
+
+You will also need to update your `settings()` (typically defined in `+layout.svelte`) with these additional theme names.
+
+```svelte
+<script>
+  import { settings } from 'svelte-ux';
+
+  settings({
+    themes: {
+      light: ['light', 'winter'],
+      dark: ['dark', 'black', 'dracula'],
+    },
+  });
+</script>
+```
+
+`light` and `dark` should always be the first 2 themes defined, in that order, to properly setup the themes based on system/browser preferences. Additional themes can be defined in any order.
+
+---
+
+### Theme selection
+
+Two components, `ThemeSelect` and `ThemeSwitch` are available to easily change the theme. `ThemeSwitch` can be used to simply toggle between `light` and `dark` themes. `ThemeSelect` supports selecting a theme when additional light and/or dark themes are defined.
+
+<Preview>
+  <div class="grid grid-cols-[auto,1fr] gap-3 items-center justify-items-start">
+    <div class="font-semibold text-sm">ThemeSwitch</div>
+    <ThemeSwitch />
+    <div class="font-semibold text-sm">ThemeSelect</div>
+    <ThemeSelect />
+  </div>
+</Preview>
+
+---
+
+## Settings
+
+At the root of your app, you can call `settings({ ... })` to set component classes, define some default component props such as `variant` and `labelPlacement`, and define locales / formats. Usually this is done in `+layout.svelte`.
+
+For each `ComponentName: ...` you can add convenient global styling by passing `classes` as a `string` to alter the root class string, or an `object` for finer control over internal elements.
+
+Components based on Button and Field also let you customize the default `variant` and `labelPlacement` properties, respectively.
+
+```svelte
+<script>
+  import { settings } from 'svelte-ux';
+
+  settings({
+    components: {
+      Button: {
+        // same as <Button class="flex-2">
+        classes: 'flex-2',
+        // All component that wrap Button will also use this variant by default,
+        variant: 'outline',
+      },
+      Field: {
+        // All components based on Field will use this as well.
+        labelPlacement: 'top',
+      },
+      TextField: {
+        classes: {
+          // same as <TextField classes={{ container: '...' }}>
+          container: 'hover:shadow-none group-focus-within:shadow-none',
+        },
+      },
+    },
+  });
+</script>
+```
+
+`settings()` is also used to define `localeFormats`, which are used by the `format()` util as well as date components (such as `DateField`, `DatePickerField`, and `DateRangeField`)
+
+```js
+settings({
+  // ...
+
+  // fallbackLocale: 'fr',
+  localeFormats: {
+    fr: createLocaleSettings({
+      locale: 'fr',
+
+      formats: {
+        dates: {
+          baseParsing: 'dd/MM/yyyy',
+          ordinalSuffixes: {
+            one: 'er',
+          },
+        },
+
+        numbers: {
+          defaults: {
+            currency: 'EUR',
+          },
+        },
+      },
+
+      dictionary: {
+        Ok: 'Valider',
+        Cancel: 'Annuler',
+
+        Date: {
+          Start: 'Début',
+          End: 'Fin',
+
+          Day: 'Jour',
+          DayTime: 'Jour & Heure',
+          Time: 'Heure',
+          Week: 'Semaine',
+          Month: 'Mois',
+          Quarter: 'Trimestre',
+          CalendarYear: 'Année',
+          FiscalYearOct: 'Année fiscale (octobre)',
+          BiWeek: 'Bi-hebdomadaire',
+
+          PeriodDay: {
+            Current: "Aujourd'hui",
+            Last: 'Hier',
+            LastX: 'Les {0} derniers jours',
+          },
+
+          //...
+        },
+      },
+    }),
+  },
+});
+```
 
 ## `class` and `classes` props
 
@@ -45,54 +337,13 @@ Internally, each component uses the `cls()` util which leverages [tailwind-merge
 
 ---
 
-## Settings with YOUR preferences
-
-At the root of your app, you can call `settings({ ... })` to set up your own defaults for your theme, components, formats, ... Usually this is done in `+layout.svelte`.
-
-On each `ComponentName: ...` you can pass `class` (when value is a `string`) or `classes` (when value is an `object`) props to each component via context to allow convenient global styling, including access to internal element (when using `classes`)
-
-```js
-import { settings } from 'svelte-ux';
-
-settings({
-  theme: {
-    Button: 'flex-2', // same as <Button class="flex-2">
-    TextField: {
-      container: 'hover:shadow-none group-focus-within:shadow-none', // same as <TextField classes={{ container: '...' }}>
-    },
-  },
-
-  formats: {
-    numbers: {
-      // This is the default, but you can override it here for your app globally
-      default: {
-        locales: 'en',
-        currency: 'USD',
-        fractionDigits: 2,
-        currencyDisplay: 'symbol',
-      },
-      // and/or per preset
-      currency: {
-        locales: 'fr',
-        currency: 'EUR',
-      },
-      decimal: {
-        fractionDigits: 4,
-      },
-    },
-  },
-});
-```
-
----
-
 ## Class precedence
 
-Classes are applied in the following order, and [tailwind-merge](https://github.com/dcastil/tailwind-merge) handles overrides (last wins)
+Classes are applied in the following order, and [tailwind-merge](https://github.com/dcastil/tailwind-merge) handles conflict resolution (last wins).
 
 - Base component classes
 - Variant specific classes
-- Theme classes
+- settings() `classes` (context)
 - `classes` prop
 - `class` prop
 
@@ -100,7 +351,7 @@ Classes are applied in the following order, and [tailwind-merge](https://github.
 
 ## Global classes
 
-All components with top-level elements add a `{ComponentName}` class, to allow easy overriding using global CSS rules, if desired.
+All components with top-level elements add a `{ComponentName}` class, to allow global CSS rules, if desired.
 
 ```css
 :global(.Button) {
@@ -128,11 +379,16 @@ If a default variant is applied (for example Button uses `text`), you can use th
 <Button variant="none" />
 ```
 
-These variants can also be styled using via `createTheme()`
+These variants can also be styled using via `settings()`, and the defaults can be overridden as well.
 
 ```js
-createTheme({
-  Button: '[&.variant-outline]:border-2',
+settings({
+  components: {
+    Button: {
+      classes: '[&.variant-outline]:border-2',
+      variant: 'outline',
+    },
+  },
 });
 ```
 

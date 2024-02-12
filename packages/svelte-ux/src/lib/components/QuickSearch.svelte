@@ -3,12 +3,13 @@
 
   import Button from '$lib/components/Button.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
+  import Kbd from './Kbd.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { cls } from '$lib/utils/styles';
   import { smScreen } from '$lib/stores';
   import { autoFocus, selectOnFocus } from '$lib/actions';
-  import type { MenuOption } from '$lib/types/options';
+  import type { MenuOption } from '$lib/types';
 
   export let options: MenuOption[] = [];
 
@@ -16,7 +17,7 @@
     root?: string;
     button?: string;
   } = {};
-  const theme = getComponentTheme('QuickSearch');
+  const settingsClasses = getComponentClasses('QuickSearch');
 
   let open = false;
 
@@ -47,25 +48,22 @@
   on:click={() => (open = true)}
   class={cls(
     'sm:bg-black/10 sm:hover:bg-black/20 rounded-full sm:w-56 justify-start',
-    theme.button,
+    settingsClasses.button,
     classes.button
   )}
 >
   <span class="flex-1 text-left max-sm:hidden">Search</span>
-  <kbd class="ml-2 font-sans text-white/50 max-sm:hidden">
-    <abbr title="Command" class="no-underline">⌘</abbr>
-    K
-  </kbd>
+  <Kbd variant="none" class="opacity-50 max-sm:hidden" command>K</Kbd>
 </Button>
 
 <Dialog
   bind:open
   classes={{
-    root: cls('items-start mt-20', theme.root, classes.root, $$props.class),
-    backdrop: 'backdrop-blur-sm bg-black/70',
+    root: cls('items-start mt-20', settingsClasses.root, classes.root, $$props.class),
+    backdrop: 'backdrop-blur-sm',
   }}
 >
-  <div class="overflow-auto max-h-[min(90dvh,600px)] min-w-[400px] py-1">
+  <div class="overflow-auto max-h-[min(90dvh,600px)] w-[400px] max-w-[95vw] py-1">
     <SelectField
       icon={mdiMagnify}
       placeholder="Search..."

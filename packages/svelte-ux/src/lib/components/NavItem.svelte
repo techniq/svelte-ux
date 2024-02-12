@@ -5,7 +5,7 @@
   import { scrollIntoView } from '../actions/scroll';
   import { getScrollParent } from '../utils/dom';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
   import { showDrawer } from './AppLayout.svelte';
   import { mdScreen } from '../stores/matchMedia';
 
@@ -19,7 +19,7 @@
     active?: string;
     icon?: string;
   } = {};
-  const theme = getComponentTheme('NavItem');
+  const settingsClasses = getComponentClasses('NavItem');
 
   $: isPathActive = path ? isActive(currentUrl, path) : false;
 </script>
@@ -29,8 +29,8 @@
   class={cls(
     'NavItem',
     'flex items-center',
-    isPathActive && ['is-active', theme.active, classes.active],
-    theme.root,
+    settingsClasses.root,
+    isPathActive && ['is-active', settingsClasses.active, classes.active],
     classes.root,
     $$props.class
   )}
@@ -52,7 +52,7 @@
   {/if}
 
   {#if icon}
-    <Icon path={icon} class={cls('mr-3 flex-shrink-0', theme.icon, classes.icon)} />
+    <Icon path={icon} class={cls('mr-3 flex-shrink-0', settingsClasses.icon, classes.icon)} />
   {/if}
 
   {text}

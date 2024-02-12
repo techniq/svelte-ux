@@ -1,5 +1,4 @@
 import {
-  format,
   startOfDay,
   endOfDay,
   startOfWeek,
@@ -31,273 +30,231 @@ import {
   formatISO,
 } from 'date-fns';
 
-import { timeDays } from 'd3-time';
-
 import { hasKeyOf } from '../types/typeGuards';
 import { chunk } from './array';
-import type { DateRange } from './dateRange';
+import {
+  PeriodType,
+  DayOfWeek,
+  DateToken,
+  type SelectedDate,
+  type CustomIntlDateTimeFormatOptions,
+  type FormatDateOptions,
+  type DateFormatVariantPreset,
+} from './date_types';
+import { defaultLocale, type LocaleSettings } from './locale';
+import { assertNever } from '$lib/types';
 
-export type SelectedDate = Date | Date[] | DateRange | null;
+export * from './date_types';
 
-export type Period = {
-  start: Date;
-  end: Date;
-  periodTypeId: PeriodType;
-};
-
-export enum PeriodType {
-  Day = 10,
-
-  WeekSun = 20,
-  WeekMon = 21,
-  WeekTue = 22,
-  WeekWed = 23,
-  WeekThu = 24,
-  WeekFri = 25,
-  WeekSat = 26,
-
-  Month = 30,
-  Quarter = 40,
-  CalendarYear = 50,
-  FiscalYearOctober = 60,
-
-  BiWeek1Sun = 70,
-  BiWeek1Mon = 71,
-  BiWeek1Tue = 72,
-  BiWeek1Wed = 73,
-  BiWeek1Thu = 74,
-  BiWeek1Fri = 75,
-  BiWeek1Sat = 76,
-
-  BiWeek2Sun = 80,
-  BiWeek2Mon = 81,
-  BiWeek2Tue = 82,
-  BiWeek2Wed = 83,
-  BiWeek2Thu = 84,
-  BiWeek2Fri = 85,
-  BiWeek2Sat = 86,
-}
-
-export enum DayOfWeek {
-  SUN,
-  MON,
-  TUE,
-  WED,
-  THU,
-  FRI,
-  SAT,
+export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
+  // Create a date object for a specific day (0 = Sunday, 1 = Monday, etc.)
+  // And "7 of Jan 2024" is a Sunday
+  const date = new Date(2024, 0, 7 + weekStartsOn);
+  const formatter = new Intl.DateTimeFormat(locales, { weekday: 'short' });
+  return formatter.format(date);
 }
 
 export function getPeriodTypeName(periodType: PeriodType) {
+  return getPeriodTypeNameWithLocale(defaultLocale, periodType);
+}
+
+export function getPeriodTypeNameWithLocale(settings: LocaleSettings, periodType: PeriodType) {
+  const {
+    locale: locale,
+    dictionary: { Date: dico },
+  } = settings;
+
   switch (periodType) {
+    case PeriodType.Custom:
+      return 'Custom';
+
     case PeriodType.Day:
-      return 'Day';
+      return dico.Day;
+    case PeriodType.DayTime:
+      return dico.DayTime;
+    case PeriodType.TimeOnly:
+      return dico.Time;
 
     case PeriodType.WeekSun:
-      return 'Week (Sun)';
+      return `${dico.Week} (${getDayOfWeekName(DayOfWeek.Sunday, locale)})`;
     case PeriodType.WeekMon:
-      return 'Week (Mon)';
+      return `${dico.Week} (${getDayOfWeekName(1, locale)})`;
     case PeriodType.WeekTue:
-      return 'Week (Tue)';
+      return `${dico.Week} (${getDayOfWeekName(2, locale)})`;
     case PeriodType.WeekWed:
-      return 'Week (Wed)';
+      return `${dico.Week} (${getDayOfWeekName(3, locale)})`;
     case PeriodType.WeekThu:
-      return 'Week (Thu)';
+      return `${dico.Week} (${getDayOfWeekName(4, locale)})`;
     case PeriodType.WeekFri:
-      return 'Week (Fri)';
+      return `${dico.Week} (${getDayOfWeekName(5, locale)})`;
     case PeriodType.WeekSat:
-      return 'Week (Sat)';
+      return `${dico.Week} (${getDayOfWeekName(6, locale)})`;
+    case PeriodType.Week:
+      return dico.Week;
 
     case PeriodType.Month:
-      return 'Month';
+      return dico.Month;
+    case PeriodType.MonthYear:
+      return dico.Month;
     case PeriodType.Quarter:
-      return 'Quarter';
+      return dico.Quarter;
     case PeriodType.CalendarYear:
-      return 'Calendar Year';
+      return dico.CalendarYear;
     case PeriodType.FiscalYearOctober:
-      return 'Fiscal Year (Oct)';
+      return dico.FiscalYearOct;
 
     case PeriodType.BiWeek1Sun:
-      return 'Bi-Week (Sun)';
+      return `${dico.BiWeek} (${getDayOfWeekName(0, locale)})`;
     case PeriodType.BiWeek1Mon:
-      return 'Bi-Week (Mon)';
+      return `${dico.BiWeek} (${getDayOfWeekName(1, locale)})`;
     case PeriodType.BiWeek1Tue:
-      return 'Bi-Week (Tue)';
+      return `${dico.BiWeek} (${getDayOfWeekName(2, locale)})`;
     case PeriodType.BiWeek1Wed:
-      return 'Bi-Week (Wed)';
+      return `${dico.BiWeek} (${getDayOfWeekName(3, locale)})`;
     case PeriodType.BiWeek1Thu:
-      return 'Bi-Week (Thu)';
+      return `${dico.BiWeek} (${getDayOfWeekName(4, locale)})`;
     case PeriodType.BiWeek1Fri:
-      return 'Bi-Week (Fri)';
+      return `${dico.BiWeek} (${getDayOfWeekName(5, locale)})`;
     case PeriodType.BiWeek1Sat:
-      return 'Bi-Week (Sat)';
+      return `${dico.BiWeek} (${getDayOfWeekName(6, locale)})`;
+    case PeriodType.BiWeek1:
+      return dico.BiWeek;
 
     case PeriodType.BiWeek2Sun:
-      return 'Bi-Week 2 (Sun)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(0, locale)})`;
     case PeriodType.BiWeek2Mon:
-      return 'Bi-Week 2 (Mon)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(1, locale)})`;
     case PeriodType.BiWeek2Tue:
-      return 'Bi-Week 2 (Tue)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(2, locale)})`;
     case PeriodType.BiWeek2Wed:
-      return 'Bi-Week 2 (Wed)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(3, locale)})`;
     case PeriodType.BiWeek2Thu:
-      return 'Bi-Week 2 (Thu)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(4, locale)})`;
     case PeriodType.BiWeek2Fri:
-      return 'Bi-Week 2 (Fri)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(5, locale)})`;
     case PeriodType.BiWeek2Sat:
-      return 'Bi-Week 2 (Sat)';
+      return `${dico.BiWeek} 2 (${getDayOfWeekName(6, locale)})`;
+    case PeriodType.BiWeek2:
+      return `${dico.BiWeek} 2`;
 
     default:
-      return 'Unknown';
+      assertNever(periodType); // This will now report unhandled cases
   }
 }
 
-export function getPeriodTypeCode(periodType: PeriodType) {
-  switch (periodType) {
-    case PeriodType.Day:
-      return 'DAY';
+const periodTypeMappings: Record<PeriodType, string> = {
+  [PeriodType.Custom]: 'CUSTOM',
 
-    case PeriodType.WeekSun:
-      return 'WEEK-SUN';
-    case PeriodType.WeekMon:
-      return 'WEEK-MON';
-    case PeriodType.WeekTue:
-      return 'WEEK-TUE';
-    case PeriodType.WeekWed:
-      return 'WEEK-WED';
-    case PeriodType.WeekThu:
-      return 'WEEK-THU';
-    case PeriodType.WeekFri:
-      return 'WEEK-FRI';
-    case PeriodType.WeekSat:
-      return 'WEEK-SAT';
+  [PeriodType.Day]: 'DAY',
+  [PeriodType.DayTime]: 'DAY-TIME',
+  [PeriodType.TimeOnly]: 'TIME',
 
-    case PeriodType.Month:
-      return 'MTH';
-    case PeriodType.Quarter:
-      return 'QTR';
-    case PeriodType.CalendarYear:
-      return 'CY';
-    case PeriodType.FiscalYearOctober:
-      return 'FY-OCT';
+  [PeriodType.WeekSun]: 'WEEK-SUN',
+  [PeriodType.WeekMon]: 'WEEK-MON',
+  [PeriodType.WeekTue]: 'WEEK-TUE',
+  [PeriodType.WeekWed]: 'WEEK-WED',
+  [PeriodType.WeekThu]: 'WEEK-THU',
+  [PeriodType.WeekFri]: 'WEEK-FRI',
+  [PeriodType.WeekSat]: 'WEEK-SAT',
+  [PeriodType.Week]: 'WEEK',
 
-    case PeriodType.BiWeek1Sun:
-      return 'BIWEEK1-SUN';
-    case PeriodType.BiWeek1Mon:
-      return 'BIWEEK1-MON';
-    case PeriodType.BiWeek1Tue:
-      return 'BIWEEK1-TUE';
-    case PeriodType.BiWeek1Wed:
-      return 'BIWEEK1-WED';
-    case PeriodType.BiWeek1Thu:
-      return 'BIWEEK1-THU';
-    case PeriodType.BiWeek1Fri:
-      return 'BIWEEK1-FRI';
-    case PeriodType.BiWeek1Sat:
-      return 'BIWEEK1-SAT';
+  [PeriodType.Month]: 'MTH',
+  [PeriodType.MonthYear]: 'MTH-CY',
+  [PeriodType.Quarter]: 'QTR',
+  [PeriodType.CalendarYear]: 'CY',
+  [PeriodType.FiscalYearOctober]: 'FY-OCT',
 
-    case PeriodType.BiWeek2Sun:
-      return 'BIWEEK2-SUN';
-    case PeriodType.BiWeek2Mon:
-      return 'BIWEEK2-MON';
-    case PeriodType.BiWeek2Tue:
-      return 'BIWEEK2-TUE';
-    case PeriodType.BiWeek2Wed:
-      return 'BIWEEK2-WED';
-    case PeriodType.BiWeek2Thu:
-      return 'BIWEEK2-THU';
-    case PeriodType.BiWeek2Fri:
-      return 'BIWEEK2-FRI';
-    case PeriodType.BiWeek2Sat:
-      return 'BIWEEK2-SAT';
+  [PeriodType.BiWeek1Sun]: 'BIWEEK1-SUN',
+  [PeriodType.BiWeek1Mon]: 'BIWEEK1-MON',
+  [PeriodType.BiWeek1Tue]: 'BIWEEK1-TUE',
+  [PeriodType.BiWeek1Wed]: 'BIWEEK1-WED',
+  [PeriodType.BiWeek1Thu]: 'BIWEEK1-THU',
+  [PeriodType.BiWeek1Fri]: 'BIWEEK1-FRI',
+  [PeriodType.BiWeek1Sat]: 'BIWEEK1-SAT',
+  [PeriodType.BiWeek1]: 'BIWEEK1',
 
-    default:
-      return 'UNK';
-  }
+  [PeriodType.BiWeek2Sun]: 'BIWEEK2-SUN',
+  [PeriodType.BiWeek2Mon]: 'BIWEEK2-MON',
+  [PeriodType.BiWeek2Tue]: 'BIWEEK2-TUE',
+  [PeriodType.BiWeek2Wed]: 'BIWEEK2-WED',
+  [PeriodType.BiWeek2Thu]: 'BIWEEK2-THU',
+  [PeriodType.BiWeek2Fri]: 'BIWEEK2-FRI',
+  [PeriodType.BiWeek2Sat]: 'BIWEEK2-SAT',
+  [PeriodType.BiWeek2]: 'BIWEEK2',
+};
+
+export function getPeriodTypeCode(periodType: PeriodType): string {
+  return periodTypeMappings[periodType];
 }
 
-export function getPeriodTypeByCode(code: string) {
-  switch (code) {
-    case 'DAY':
-      return PeriodType.Day;
-
-    case 'WEEK-SUN':
-      return PeriodType.WeekSun;
-    case 'WEEK-MON':
-      return PeriodType.WeekMon;
-    case 'WEEK-TUE':
-      return PeriodType.WeekTue;
-    case 'WEEK-WED':
-      return PeriodType.WeekWed;
-    case 'WEEK-THU':
-      return PeriodType.WeekThu;
-    case 'WEEK-FRI':
-      return PeriodType.WeekFri;
-    case 'WEEK-SAT':
-      return PeriodType.WeekSat;
-
-    case 'MTH':
-      return PeriodType.Month;
-    case 'QTR':
-      return PeriodType.Quarter;
-    case 'CY':
-      return PeriodType.CalendarYear;
-    case 'FY-OCT':
-      return PeriodType.FiscalYearOctober;
-
-    case 'BIWEEK1-SUN':
-      return PeriodType.BiWeek1Sun;
-    case 'BIWEEK1-MON':
-      return PeriodType.BiWeek1Mon;
-    case 'BIWEEK1-TUE':
-      return PeriodType.BiWeek1Tue;
-    case 'BIWEEK1-WED':
-      return PeriodType.BiWeek1Wed;
-    case 'BIWEEK1-THU':
-      return PeriodType.BiWeek1Thu;
-    case 'BIWEEK1-FRI':
-      return PeriodType.BiWeek1Fri;
-    case 'BIWEEK1-SAT':
-      return PeriodType.BiWeek1Sat;
-
-    default:
-      return null;
-  }
+export function getPeriodTypeByCode(code: string): PeriodType {
+  const element = Object.entries(periodTypeMappings).find((c) => c[1] === code);
+  return parseInt(element?.[0] ?? '1');
 }
 
-export function getDayOfWeek(periodType: PeriodType) {
-  const periodTypeCode = getPeriodTypeCode(periodType);
-  const matches = periodTypeCode.match(/\-(SUN|MON|TUE|WED|THU|FRI|SAT)/);
-  if (matches) {
-    return DayOfWeek[matches[1] as keyof typeof DayOfWeek];
+export function getDayOfWeek(periodType: PeriodType): DayOfWeek | null {
+  if (
+    (periodType >= PeriodType.WeekSun && periodType <= PeriodType.WeekSat) ||
+    (periodType >= PeriodType.BiWeek1Sun && periodType <= PeriodType.BiWeek1Sat) ||
+    (periodType >= PeriodType.BiWeek2Sun && periodType <= PeriodType.BiWeek2Sat)
+  ) {
+    return (periodType % 10) - 1;
   } else {
     return null;
   }
 }
 
-export function replaceDayOfWeek(periodType: PeriodType, dayOfWeek: DayOfWeek) {
-  const periodTypeCode = getPeriodTypeCode(periodType);
-  const dayOfWeekName = DayOfWeek[dayOfWeek];
-  // Replace everything after `-` with new dayOfWeek
-  const newPeriodTypeCode = periodTypeCode.replace(/\-(.*)/, `-${dayOfWeekName}`);
-  return getPeriodTypeByCode(newPeriodTypeCode);
+/** Replace day of week for `periodType`, if applicable */
+export function replaceDayOfWeek(periodType: PeriodType, dayOfWeek: DayOfWeek): PeriodType {
+  if (hasDayOfWeek(periodType)) {
+    return periodType - (getDayOfWeek(periodType) ?? 0) + dayOfWeek;
+  } else if (missingDayOfWeek(periodType)) {
+    return periodType + dayOfWeek + 1;
+  } else {
+    return periodType;
+  }
 }
 
+/** Check if `periodType` has day of week (Sun-Sat) */
 export function hasDayOfWeek(periodType: PeriodType) {
-  const periodTypeCode = getPeriodTypeCode(periodType);
-  return /\-(SUN|MON|TUE|WED|THU|FRI|SAT)/.test(periodTypeCode);
+  if (periodType >= PeriodType.WeekSun && periodType <= PeriodType.WeekSat) {
+    return true;
+  }
+  if (periodType >= PeriodType.BiWeek1Sun && periodType <= PeriodType.BiWeek1Sat) {
+    return true;
+  }
+  if (periodType >= PeriodType.BiWeek2Sun && periodType <= PeriodType.BiWeek2Sat) {
+    return true;
+  }
+
+  return false;
+}
+
+/** Is `periodType` missing day of week (Sun-Sat) */
+export function missingDayOfWeek(periodType: PeriodType) {
+  return [PeriodType.Week, PeriodType.BiWeek1, PeriodType.BiWeek2].includes(periodType);
 }
 
 export function getMonths(year = new Date().getFullYear()) {
   return Array.from({ length: 12 }, (_, i) => new Date(year, i, 1));
 }
 
-export function getMonthDaysByWeek(startOfMonth: Date): Date[][] {
-  const startOfFirstWeek = startOfWeek(startOfMonth);
-  const endOfLastWeek = endOfWeek(endOfMonth(startOfMonth));
-  const monthDaysByWeek = chunk(timeDays(startOfFirstWeek, endOfLastWeek), 7);
+export function getMonthDaysByWeek(
+  dateInTheMonth: Date,
+  weekStartsOn: DayOfWeek = DayOfWeek.Sunday
+): Date[][] {
+  const startOfFirstWeek = startOfWeek(startOfMonth(dateInTheMonth), { weekStartsOn });
+  const endOfLastWeek = endOfWeek(endOfMonth(dateInTheMonth), { weekStartsOn });
 
-  return monthDaysByWeek;
+  const list = [];
+
+  let valueToAdd = startOfFirstWeek;
+  while (valueToAdd <= endOfLastWeek) {
+    list.push(valueToAdd);
+    valueToAdd = addDays(valueToAdd, 1);
+  }
+
+  return chunk(list, 7) as Date[][];
 }
 
 export function getMinSelectedDate(date: SelectedDate | null | undefined) {
@@ -381,7 +338,14 @@ export function endOfBiWeek(date: Date, week: number, startOfWeek: DayOfWeek) {
   return addDays(startOfBiWeek(date, week, startOfWeek), 13);
 }
 
-export function getDateFuncsByPeriodType(periodType: PeriodType | null | undefined) {
+export function getDateFuncsByPeriodType(
+  settings: LocaleSettings,
+  periodType: PeriodType | null | undefined
+) {
+  if (settings) {
+    periodType = updatePeriodTypeWithWeekStartsOn(settings.formats.dates.weekStartsOn, periodType);
+  }
+
   switch (periodType) {
     case PeriodType.Day:
       return {
@@ -392,6 +356,7 @@ export function getDateFuncsByPeriodType(periodType: PeriodType | null | undefin
         isSame: isSameDay,
       };
 
+    case PeriodType.Week:
     case PeriodType.WeekSun:
       return {
         start: startOfWeek,
@@ -489,6 +454,7 @@ export function getDateFuncsByPeriodType(periodType: PeriodType | null | undefin
       };
 
     // BiWeek 1
+    case PeriodType.BiWeek1:
     case PeriodType.BiWeek1Sun:
     case PeriodType.BiWeek1Mon:
     case PeriodType.BiWeek1Tue:
@@ -497,6 +463,7 @@ export function getDateFuncsByPeriodType(periodType: PeriodType | null | undefin
     case PeriodType.BiWeek1Fri:
     case PeriodType.BiWeek1Sat:
     // BiWeek 2
+    case PeriodType.BiWeek2:
     case PeriodType.BiWeek2Sun:
     case PeriodType.BiWeek2Mon:
     case PeriodType.BiWeek2Tue:
@@ -522,7 +489,14 @@ export function getDateFuncsByPeriodType(periodType: PeriodType | null | undefin
       };
     }
 
-    default:
+    // All cases not handled above
+    case PeriodType.Custom:
+    case PeriodType.DayTime:
+    case PeriodType.TimeOnly:
+
+    case PeriodType.MonthYear:
+    case null:
+    case undefined:
       // Default to end of day if periodType == null, etc
       return {
         start: startOfDay,
@@ -531,6 +505,9 @@ export function getDateFuncsByPeriodType(periodType: PeriodType | null | undefin
         difference: differenceInDays,
         isSame: isSameDay,
       };
+
+    default:
+      assertNever(periodType); // This will now report unhandled cases
   }
 }
 
@@ -549,11 +526,182 @@ export function formatISODate(
   return formatISO(date, { representation });
 }
 
+export function formatIntl(
+  settings: LocaleSettings,
+  dt: Date,
+  tokens_or_intlOptions: CustomIntlDateTimeFormatOptions
+) {
+  const {
+    locale,
+    formats: {
+      dates: { ordinalSuffixes: suffixes },
+    },
+  } = settings;
+
+  function formatIntlOrdinal(formatter: Intl.DateTimeFormat, with_ordinal = false) {
+    if (with_ordinal) {
+      const rules = new Intl.PluralRules(locale, { type: 'ordinal' });
+
+      const splited = formatter.formatToParts(dt);
+      return splited
+        .map((c) => {
+          if (c.type === 'day') {
+            const ordinal = rules.select(parseInt(c.value, 10));
+            const suffix = suffixes[ordinal];
+            return `${c.value}${suffix}`;
+          }
+          return c.value;
+        })
+        .join('');
+    }
+
+    return formatter.format(dt);
+  }
+
+  if (typeof tokens_or_intlOptions !== 'string' && !Array.isArray(tokens_or_intlOptions)) {
+    return formatIntlOrdinal(
+      new Intl.DateTimeFormat(locale, tokens_or_intlOptions),
+      tokens_or_intlOptions.withOrdinal
+    );
+  }
+
+  const tokens = Array.isArray(tokens_or_intlOptions)
+    ? tokens_or_intlOptions.join('')
+    : tokens_or_intlOptions;
+
+  // Order of includes check is important! (longest first)
+  const formatter = new Intl.DateTimeFormat(locale, {
+    year: tokens.includes(DateToken.Year_numeric)
+      ? 'numeric'
+      : tokens.includes(DateToken.Year_2Digit)
+        ? '2-digit'
+        : undefined,
+
+    month: tokens.includes(DateToken.Month_long)
+      ? 'long'
+      : tokens.includes(DateToken.Month_short)
+        ? 'short'
+        : tokens.includes(DateToken.Month_2Digit)
+          ? '2-digit'
+          : tokens.includes(DateToken.Month_numeric)
+            ? 'numeric'
+            : undefined,
+
+    day: tokens.includes(DateToken.DayOfMonth_2Digit)
+      ? '2-digit'
+      : tokens.includes(DateToken.DayOfMonth_numeric)
+        ? 'numeric'
+        : undefined,
+
+    hour: tokens.includes(DateToken.Hour_2Digit)
+      ? '2-digit'
+      : tokens.includes(DateToken.Hour_numeric)
+        ? 'numeric'
+        : undefined,
+    hour12: tokens.includes(DateToken.Hour_woAMPM)
+      ? false
+      : tokens.includes(DateToken.Hour_wAMPM)
+        ? true
+        : undefined,
+
+    minute: tokens.includes(DateToken.Minute_2Digit)
+      ? '2-digit'
+      : tokens.includes(DateToken.Minute_numeric)
+        ? 'numeric'
+        : undefined,
+
+    second: tokens.includes(DateToken.Second_2Digit)
+      ? '2-digit'
+      : tokens.includes(DateToken.Second_numeric)
+        ? 'numeric'
+        : undefined,
+
+    fractionalSecondDigits: tokens.includes(DateToken.MiliSecond_3) ? 3 : undefined,
+
+    weekday: tokens.includes(DateToken.DayOfWeek_narrow)
+      ? 'narrow'
+      : tokens.includes(DateToken.DayOfWeek_long)
+        ? 'long'
+        : tokens.includes(DateToken.DayOfWeek_short)
+          ? 'short'
+          : undefined,
+  });
+
+  return formatIntlOrdinal(formatter, tokens.includes(DateToken.DayOfMonth_withOrdinal));
+}
+
+function range(
+  settings: LocaleSettings,
+  date: Date,
+  weekStartsOn: DayOfWeek,
+  formatToUse: CustomIntlDateTimeFormatOptions,
+  biWeek: undefined | 1 | 2 = undefined // undefined means that it's not a bi-week
+) {
+  const start =
+    biWeek === undefined
+      ? startOfWeek(date, { weekStartsOn })
+      : startOfBiWeek(date, biWeek, weekStartsOn);
+  const end =
+    biWeek === undefined
+      ? endOfWeek(date, { weekStartsOn })
+      : endOfBiWeek(date, biWeek, weekStartsOn);
+
+  return formatIntl(settings, start, formatToUse) + ' - ' + formatIntl(settings, end, formatToUse);
+}
+
 export function formatDate(
   date: Date | string | null | undefined,
-  periodType?: PeriodType | null | undefined,
-  variant?: 'short' | 'long' // TODO: Support x-long, etc (maybe call it sm, md, lg, xl, etc)
+  periodType: PeriodType,
+  options: FormatDateOptions = {}
+): string {
+  return formatDateWithLocale(defaultLocale, date, periodType, options);
+}
+
+export function updatePeriodTypeWithWeekStartsOn(
+  weekStartsOn: DayOfWeek,
+  periodType: PeriodType | null | undefined
 ) {
+  if (periodType === PeriodType.Week) {
+    periodType = [
+      PeriodType.WeekSun,
+      PeriodType.WeekMon,
+      PeriodType.WeekTue,
+      PeriodType.WeekWed,
+      PeriodType.WeekThu,
+      PeriodType.WeekFri,
+      PeriodType.WeekSat,
+    ][weekStartsOn];
+  } else if (periodType === PeriodType.BiWeek1) {
+    periodType = [
+      PeriodType.BiWeek1Sun,
+      PeriodType.BiWeek1Mon,
+      PeriodType.BiWeek1Tue,
+      PeriodType.BiWeek1Wed,
+      PeriodType.BiWeek1Thu,
+      PeriodType.BiWeek1Fri,
+      PeriodType.BiWeek1Sat,
+    ][weekStartsOn];
+  } else if (periodType === PeriodType.BiWeek2) {
+    periodType = [
+      PeriodType.BiWeek2Sun,
+      PeriodType.BiWeek2Mon,
+      PeriodType.BiWeek2Tue,
+      PeriodType.BiWeek2Wed,
+      PeriodType.BiWeek2Thu,
+      PeriodType.BiWeek2Fri,
+      PeriodType.BiWeek2Sat,
+    ][weekStartsOn];
+  }
+
+  return periodType;
+}
+
+export function formatDateWithLocale(
+  settings: LocaleSettings,
+  date: Date | string | null | undefined,
+  periodType: PeriodType,
+  options: FormatDateOptions = {}
+): string {
   if (typeof date === 'string') {
     date = parseISO(date);
   }
@@ -564,51 +712,107 @@ export function formatDate(
     return '';
   }
 
-  switch (periodType) {
-    case PeriodType.Day:
-      return variant === 'short' ? format(date, 'M/d') : format(date, 'MMM d, yyyy');
+  const weekStartsOn = options.weekStartsOn ?? settings.formats.dates.weekStartsOn;
 
+  const { day, dayTime, timeOnly, week, month, monthsYear, year } = settings.formats.dates.presets;
+
+  periodType = updatePeriodTypeWithWeekStartsOn(weekStartsOn, periodType) ?? periodType;
+
+  /** Resolve a preset given the chosen variant */
+  function rv(preset: DateFormatVariantPreset) {
+    if (options.variant === 'custom') {
+      return options.custom ?? preset.default;
+    } else if (options.custom && !options.variant) {
+      return options.custom;
+    }
+
+    return preset[options.variant ?? 'default'];
+  }
+
+  switch (periodType) {
+    case PeriodType.Custom:
+      return formatIntl(settings, date, options.custom!);
+
+    case PeriodType.Day:
+      return formatIntl(settings, date, rv(day!)!);
+
+    case PeriodType.DayTime:
+      return formatIntl(settings, date, rv(dayTime!)!);
+
+    case PeriodType.TimeOnly:
+      return formatIntl(settings, date, rv(timeOnly!)!);
+
+    case PeriodType.Week: //Should never happen, but to make types happy
     case PeriodType.WeekSun:
+      return range(settings, date, 0, rv(week!)!);
     case PeriodType.WeekMon:
+      return range(settings, date, 1, rv(week!)!);
     case PeriodType.WeekTue:
+      return range(settings, date, 2, rv(week!)!);
     case PeriodType.WeekWed:
+      return range(settings, date, 3, rv(week!)!);
     case PeriodType.WeekThu:
+      return range(settings, date, 4, rv(week!)!);
     case PeriodType.WeekFri:
+      return range(settings, date, 5, rv(week!)!);
     case PeriodType.WeekSat:
-      return variant === 'short'
-        ? format(date, 'M/d') + ' - ' + format(addDays(date, 6), 'M/d')
-        : format(date, 'M/d/yyyy') + ' - ' + format(addDays(date, 6), 'M/d/yyyy');
+      return range(settings, date, 6, rv(week!)!);
 
     case PeriodType.Month:
-      return variant === 'short' ? format(date, 'MMM yyyy') : format(date, 'MMMM yyyy');
-    case PeriodType.Quarter:
-      return variant === 'short'
-        ? format(date, 'MMM') + ' - ' + format(addMonths(date, 2), 'MMM yyyy')
-        : format(date, 'MMMM') + ' - ' + format(addMonths(date, 2), 'MMMM yyyy');
-    case PeriodType.CalendarYear:
-      return variant === 'short' ? format(date, 'yy') : format(date, 'yyyy');
-    case PeriodType.FiscalYearOctober:
-      return variant === 'short' ? `${getFiscalYear(date)}`.substring(2) : `${getFiscalYear(date)}`;
+      return formatIntl(settings, date, rv(month!)!);
 
+    case PeriodType.MonthYear:
+      return formatIntl(settings, date, rv(monthsYear!)!);
+
+    case PeriodType.Quarter:
+      return [
+        formatIntl(settings, startOfQuarter(date), rv(month!)!),
+        formatIntl(settings, endOfQuarter(date), rv(monthsYear!)!),
+      ].join(' - ');
+
+    case PeriodType.CalendarYear:
+      return formatIntl(settings, date, rv(year!)!);
+
+    case PeriodType.FiscalYearOctober:
+      const fDate = new Date(getFiscalYear(date), 0, 1);
+      return formatIntl(settings, fDate, rv(year!)!);
+
+    case PeriodType.BiWeek1: //Should never happen, but to make types happy
     case PeriodType.BiWeek1Sun:
+      return range(settings, date, 0, rv(week!)!, 1);
     case PeriodType.BiWeek1Mon:
+      return range(settings, date, 1, rv(week!)!, 1);
     case PeriodType.BiWeek1Tue:
+      return range(settings, date, 2, rv(week!)!, 1);
     case PeriodType.BiWeek1Wed:
+      return range(settings, date, 3, rv(week!)!, 1);
     case PeriodType.BiWeek1Thu:
+      return range(settings, date, 4, rv(week!)!, 1);
     case PeriodType.BiWeek1Fri:
+      return range(settings, date, 5, rv(week!)!, 1);
     case PeriodType.BiWeek1Sat:
+      return range(settings, date, 6, rv(week!)!, 1);
+
+    case PeriodType.BiWeek2: //Should never happen, but to make types happy
     case PeriodType.BiWeek2Sun:
+      return range(settings, date, 0, rv(week!)!, 2);
     case PeriodType.BiWeek2Mon:
+      return range(settings, date, 1, rv(week!)!, 2);
     case PeriodType.BiWeek2Tue:
+      return range(settings, date, 2, rv(week!)!, 2);
     case PeriodType.BiWeek2Wed:
+      return range(settings, date, 3, rv(week!)!, 2);
     case PeriodType.BiWeek2Thu:
+      return range(settings, date, 4, rv(week!)!, 2);
     case PeriodType.BiWeek2Fri:
+      return range(settings, date, 5, rv(week!)!, 2);
     case PeriodType.BiWeek2Sat:
-      return variant === 'short'
-        ? format(date, 'M/d') + ' - ' + format(addDays(date, 13), 'M/d')
-        : format(date, 'M/d/yyyy') + ' - ' + format(addDays(date, 13), 'M/d/yyyy');
+      return range(settings, date, 6, rv(week!)!, 2);
+
     default:
       return formatISO(date);
+    // default:
+    //   assertNever(periodType); // This will now report unhandled cases
   }
 }
 
@@ -620,9 +824,6 @@ export function utcToLocalDate(date: Date | string | null | undefined) {
 
   // https://github.com/date-fns/date-fns/issues/376#issuecomment-454163253
   // return new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
-
-  // This approach seems to work more reliably with dates before 11/18/1883 @ 12:00
-  // https://github.com/d3/d3-time/issues/29#issuecomment-396415951
   const d = new Date(
     date.getUTCFullYear(),
     date.getUTCMonth(),

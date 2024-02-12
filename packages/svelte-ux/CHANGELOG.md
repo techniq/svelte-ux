@@ -1,5 +1,102 @@
 # svelte-ux
 
+## 0.58.0-next.13
+
+### Patch Changes
+
+- Update dependencies (except vitest) ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+## 0.58.0-next.12
+
+### Minor Changes
+
+- Change PeriodType values (0 = unqualified DoW, 1-7 = Sun-Sat) ([#217](https://github.com/techniq/svelte-ux/pull/217))
+
+## 0.58.0-next.11
+
+### Patch Changes
+
+- Support passing a custom formatter function as `format` argument to format() / formatWithLocale() ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+## 0.58.0-next.10
+
+### Patch Changes
+
+- [SelectList] Add `type="button"` to `<button>` wrapper to not submit forms on click ([`a7b7a4ee800eb8f47040efbed751acc64514e9d3`](https://github.com/techniq/svelte-ux/commit/a7b7a4ee800eb8f47040efbed751acc64514e9d3))
+
+- [TableOfContents] Support changing icon ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [MenuButton] Support hiding `menuIcon` and dispatch `change` event ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [Popover|Menu|popover] Support `resize` width or height only ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+## 0.58.0-next.9
+
+### Minor Changes
+
+- Update Settings component to expose each settings key as a component prop ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Add theme selection/creation page and simplify loading themes ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+- - Add locale settings to settings object, and allow dynamically changing the current locale. ([#202](https://github.com/techniq/svelte-ux/pull/202))
+  - Move format function to be a store on the settings object, which updates when the locale changes.
+
+- Rename `cssVars` action to `styleVars` and do not prefix properties with `--` by default (more flexible) ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+### Patch Changes
+
+- [SelectField] Add `stepper` prop to iterate through options (like `MenuField`) ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+- [MenuField] Expose `selected` option via prop (similar to `SelectField`) ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+- Rename `ThemeButton` to `ThemeSelect` ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- Map Skeleton themes to Svelte UX themes ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+- [SelectField] Fix toggling display of options menu using toggleIcon. Support hiding toggleIcon (`<SelectField toggleIcon={null} /> ([#192](https://github.com/techniq/svelte-ux/pull/192))
+
+- Prevent cursor jumping around when backspacing near a decimal point in a number TextField ([#178](https://github.com/techniq/svelte-ux/pull/178))
+
+- Update AppLayout nav to only show scrollbar when overflown (Windows, Mac with "Show scrollbars: always) ([#171](https://github.com/techniq/svelte-ux/pull/171))
+
+- Add `ThemeSwitch` component to toggle between light/dark theme ([#167](https://github.com/techniq/svelte-ux/pull/167))
+
+## 0.58.0-next.8
+
+### Minor Changes
+
+- - Rename settings `theme` argument to `classes` ([#172](https://github.com/techniq/svelte-ux/pull/172))
+  - Rename getTheme to getClasses and getComponentTheme to getComponentClasses
+
+- BREAKING: removed `dateDisplay()` in favor of `format()` ([#137](https://github.com/techniq/svelte-ux/pull/137))
+
+### Patch Changes
+
+- Add ThemeInit component to prevent flash of unstyled content when SSR is enabled ([#176](https://github.com/techniq/svelte-ux/pull/176))
+
+- Add a store to manage the current theme ([#174](https://github.com/techniq/svelte-ux/pull/174))
+
+- add locale management of date leveraging intl ([#137](https://github.com/techniq/svelte-ux/pull/137))
+
+## 0.58.0-next.2
+
+### Patch Changes
+
+- Add styles (with daisy) as top-level export ([#146](https://github.com/techniq/svelte-ux/pull/146))
+
+## 0.58.0-next.1
+
+### Minor Changes
+
+- Support `ux.themes` tailwind config, including Daisy UI ([#146](https://github.com/techniq/svelte-ux/pull/146))
+
+## 0.58.0-next.0
+
+### Minor Changes
+
+- Theme support ([#146](https://github.com/techniq/svelte-ux/pull/146))
+- Removes SelectList. Updates SelectField features to support SelectList's use case via property/attribute overrides. Updates QuickSearch to use SelectField. Defines MenuOption type & updates MenuField & SelectField to use it; this results in renaming of SelectField options' `name` field to become `label`, standardizing the API across the two. Also adds `activeOptionIcon` to SelectField so users can opt-in to dynamically updating the field icon based on the selected option. Also fixed a bug with the `scrollIntoView` action related to its `onlyIfNeeded` flag. ([#127](https://github.com/techniq/svelte-ux/pull/127))
+
 ## 0.58.1
 
 ### Patch Changes
@@ -7,10 +104,6 @@
 - Move `sveld` from peerDependencies to dependencies to fix install (and match next release) ([`7539e467edbb4506c1930f3fad0a4efd7e457ff0`](https://github.com/techniq/svelte-ux/commit/7539e467edbb4506c1930f3fad0a4efd7e457ff0))
 
 ## 0.58.0
-
-### Minor Changes
-
-- Removes SelectList. Updates SelectField features to support SelectList's use case via property/attribute overrides. Updates QuickSearch to use SelectField. Defines MenuOption type & updates MenuField & SelectField to use it; this results in renaming of SelectField options' `name` field to become `label`, standardizing the API across the two. Also adds `activeOptionIcon` to SelectField so users can opt-in to dynamically updating the field icon based on the selected option. Also fixed a bug with the `scrollIntoView` action related to its `onlyIfNeeded` flag. ([#127](https://github.com/techniq/svelte-ux/pull/127))
 
 ### Patch Changes
 

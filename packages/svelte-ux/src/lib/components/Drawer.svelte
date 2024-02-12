@@ -9,7 +9,7 @@
   import { focusMove } from '../actions/focus';
   import { portal as portalAction, type PortalOptions } from '../actions/portal';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -22,8 +22,9 @@
   export let classes: {
     root?: string;
     backdrop?: string;
+    actions?: string;
   } = {};
-  const theme = getComponentTheme('Drawer');
+  const settingsClasses = getComponentClasses('Drawer');
 
   $: dispatch('change', { open });
 
@@ -44,14 +45,14 @@
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
     }}
-    class={cls('z-50', theme.backdrop, classes.backdrop)}
+    class={cls('z-50', settingsClasses.backdrop, classes.backdrop)}
     {portal}
   />
 
   <div
     class={cls(
       'Drawer',
-      'bg-white fixed overflow-auto transform z-50 outline-none',
+      'bg-surface-100 fixed overflow-auto transform z-50 outline-none',
       {
         'h-full': ['left', 'right'].includes(placement),
         'w-full': ['top', 'bottom'].includes(placement),
@@ -60,7 +61,7 @@
         'left-0': ['top', 'top', 'bottom'].includes(placement),
         'right-0': placement === 'right',
       },
-      theme.root,
+      settingsClasses.root,
       classes.root,
       $$props.class
     )}
@@ -102,5 +103,17 @@
     {/if}
 
     <slot {open} />
+
+    {#if $$slots.actions}
+      <div
+        class={cls(
+          'actions fixed bottom-0 w-full flex justify-center bg-surface-content/5 p-1 border-t',
+          settingsClasses.actions,
+          classes.actions
+        )}
+      >
+        <slot name="actions" />
+      </div>
+    {/if}
   </div>
 {/if}

@@ -4,7 +4,7 @@
   import { groupKey } from './ToggleGroup.svelte';
   import { scrollIntoView } from '../utils/dom';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value: any;
 
@@ -13,7 +13,7 @@
     option?: string;
     indicator?: string;
   } = {};
-  const theme = getComponentTheme('ToggleOption');
+  const settingsClasses = getComponentClasses('ToggleOption');
 
   const {
     registerOption,
@@ -54,7 +54,7 @@
     'label',
     'grid items-center',
     $classesContext.label,
-    theme.root,
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -62,13 +62,18 @@
   <!-- Stack indicator under option -->
   {#if selected}
     <div
-      class={cls('indicator', $classesContext.indicator, theme.indicator, classes.indicator)}
+      class={cls(
+        'indicator',
+        $classesContext.indicator,
+        settingsClasses.indicator,
+        classes.indicator
+      )}
       in:receive={{ key: 'indicator' }}
       out:send={{ key: 'indicator' }}
     />
   {/if}
 
-  <div class={cls('option', $classesContext.option, theme.option, classes.option)}>
+  <div class={cls('option', $classesContext.option, settingsClasses.option, classes.option)}>
     <slot {selected} />
   </div>
 

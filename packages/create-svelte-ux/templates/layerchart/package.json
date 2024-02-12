@@ -41,6 +41,6 @@
 	},
 	"dependencies": {
 		"dotenv": "16.3.1",
-		"layerchart": "^0.27.0"
+		"layerchart": "latest"
 	}
 }

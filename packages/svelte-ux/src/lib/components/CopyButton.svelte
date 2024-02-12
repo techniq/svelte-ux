@@ -3,8 +3,10 @@
 
   import { cls } from '../utils/styles';
   import Button from './Button.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentSettings } from './settings';
   import { slide } from 'svelte/transition';
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('CopyButton');
 
   export let value: string;
 
@@ -13,13 +15,13 @@
     setTimeout(() => (showMessage = false), 3000);
   }
 
-  const theme = getComponentTheme('CopyButton');
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Button
   icon={mdiContentCopy}
-  {...$$restProps}
-  class={cls('CopyButton', theme.root, $$props.class)}
+  {...restProps}
+  class={cls('CopyButton', settingsClasses.root, $$props.class)}
   on:click={() => {
     navigator.clipboard.writeText(value);
     showMessage = true;

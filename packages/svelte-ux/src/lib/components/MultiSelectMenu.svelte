@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   import type { Placement } from '@floating-ui/dom';
 
@@ -19,6 +19,7 @@
   export let placement: Placement = 'bottom-start';
   export let autoPlacement = true;
   export let inlineSearch = false;
+  export let autoFocusSearch = inlineSearch;
   export let placeholder: string | undefined = undefined;
   export let infiniteScroll = false;
   export let searchText = '';
@@ -32,7 +33,7 @@
     root?: string;
     menu?: string;
   } = {};
-  const theme = getComponentTheme('MultiSelectMenu');
+  const settingsClasses = getComponentClasses('MultiSelectMenu');
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 </script>
@@ -46,8 +47,8 @@
   let:close
   {...$$restProps}
   classes={{
-    root: cls('MultiSelectMenu', theme.root, classes.root, $$restProps.class),
-    menu: cls('flex flex-col', theme.menu, classes.menu),
+    root: cls('MultiSelectMenu', settingsClasses.root, classes.root, $$restProps.class),
+    menu: cls('flex flex-col', settingsClasses.menu, classes.menu),
   }}
   bind:menuItemsEl
 >
@@ -59,6 +60,7 @@
     {open}
     {duration}
     {inlineSearch}
+    {autoFocusSearch}
     {placeholder}
     {infiniteScroll}
     {labelProp}

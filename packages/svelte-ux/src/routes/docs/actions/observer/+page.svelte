@@ -24,7 +24,7 @@
       console.log(e.detail);
       e.target.innerText = JSON.stringify(e.detail.contentRect, null, 2);
     }}
-    class="resize overflow-auto whitespace-pre outline outline-gray-200 rounded"
+    class="resize overflow-auto whitespace-pre outline rounded"
   />
 </Preview>
 
@@ -36,7 +36,7 @@
     on:resize={(e) => {
       e.target.innerText = JSON.stringify(e.target.getBoundingClientRect(), null, 2);
     }}
-    class="resize overflow-auto whitespace-pre outline outline-gray-200 rounded"
+    class="resize overflow-auto whitespace-pre outline rounded"
   />
 </Preview>
 
@@ -68,9 +68,9 @@
       use:intersection={{ threshold: 1 }}
       on:intersecting={(e) => {
         if (e.detail.isIntersecting) {
-          e.target.classList.add('bg-red-500');
+          e.target.classList.add('bg-danger');
         } else {
-          e.target.classList.remove('bg-red-500');
+          e.target.classList.remove('bg-danger');
         }
       }}
       class="transition-colors duration-500"
@@ -90,7 +90,7 @@
     <div class="relative overflow-hidden">
       {#if showHeader}
         <div
-          class="absolute top-0 left-0 bg-accent-500 text-white p-4 w-full"
+          class="absolute top-0 left-0 bg-primary text-primary-content p-4 w-full"
           transition:fly={{ y: '-100%', opacity: 1 }}
         >
           Header

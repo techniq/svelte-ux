@@ -1,9 +1,16 @@
 <script lang="ts">
-  import { settings as setSettings, type Settings } from './settings';
+  import ThemeInit from './ThemeInit.svelte';
+  import { settings as setSettings, type SettingsInput } from './settings';
 
-  export let settings: Settings;
+  type $$Props = SettingsInput & { themeInit?: boolean };
 
-  setSettings(settings);
+  /** Include the ThemeInit component to improve SSR compatibility. */
+  export let themeInit = true;
+
+  setSettings($$restProps);
 </script>
 
+{#if themeInit}
+  <ThemeInit />
+{/if}
 <slot />

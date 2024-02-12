@@ -67,7 +67,7 @@
     title="Title"
     subheading="Subheading"
     icon={mdiAccount}
-    avatar={{ class: 'bg-gray-400 text-white/90' }}
+    avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
 </Preview>
 
@@ -76,7 +76,7 @@
 <Preview>
   <ListItem title="Title">
     <div slot="actions">
-      <Button icon={mdiChevronRight} class="p-2 text-black/50" />
+      <Button icon={mdiChevronRight} class="p-2 text-surface-content/50" />
     </div>
   </ListItem>
 </Preview>
@@ -112,8 +112,8 @@
         on:click={() => (selectedId = choice.id)}
         class={cls(
           'cursor-pointer',
-          'hover:bg-accent-50',
-          selectedId == choice.id ? 'bg-accent-50' : ''
+          'hover:bg-primary/5',
+          selectedId == choice.id ? 'bg-primary/5' : ''
         )}
       >
         <div slot="avatar" class="contents">
@@ -138,9 +138,9 @@
           on:click={() => (selectedId = choice.id)}
           class={cls(
             'px-8 py-4',
-            'cursor-pointer ring ring-inset ring-accent-500 transition-shadow duration-100',
-            'hover:bg-accent-50',
-            selectedId == choice.id ? 'ring-1 bg-accent-50' : 'ring-0'
+            'cursor-pointer ring ring-inset ring-primary transition-shadow duration-100',
+            'hover:bg-primary/5',
+            selectedId == choice.id ? 'ring-1 bg-primary/5' : 'ring-0'
           )}
           noShadow
         />
@@ -152,7 +152,7 @@
 <h3>example 3</h3>
 
 <Preview>
-  <div class="grid gap-4 bg-gray-100 p-4">
+  <div class="grid gap-4 bg-surface-200 p-4">
     {#each choices as choice}
       <div>
         <ListItem
@@ -161,9 +161,9 @@
           on:click={() => (selectedId = choice.id)}
           class={cls(
             'px-8 py-4',
-            'cursor-pointer transition-shadow duration-100 border',
-            'hover:bg-white',
-            selectedId == choice.id ? 'bg-white shadow-md' : ''
+            'cursor-pointer transition-shadow duration-100',
+            'hover:bg-surface-100 hover:outline',
+            selectedId == choice.id ? 'bg-surface-100 shadow-md' : ''
           )}
           noBackground
           noShadow

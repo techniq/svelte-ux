@@ -1,43 +1,96 @@
-import { isFunction } from 'lodash-es';
-
-import { formatDate, PeriodType } from './date';
-import { formatNumber } from './number';
+import { formatDateWithLocale, getPeriodTypeNameWithLocale, getDayOfWeekName } from './date';
+import { formatNumberWithLocale } from './number';
 import type { FormatNumberOptions, FormatNumberStyle } from './number';
+import { defaultLocale, type LocaleSettings } from './locale';
+import { PeriodType, type FormatDateOptions, DayOfWeek } from './date_types';
 
-export type FormatType =
-  | FormatNumberStyle
-  | PeriodType
-  | ((value: any, ...extraArgs: any[]) => any);
+export type FormatType = FormatNumberStyle | PeriodType | CustomFormatter;
+type CustomFormatter = (value: any) => string;
 
 /**
  * Generic format which can handle Dates, Numbers, or custom format function
  */
-export function format(
-  value: null | undefined,
-  format?: FormatNumberStyle,
-  extraFuncArgs?: FormatNumberOptions
-): string;
+export function format(value: null | undefined, format?: FormatType): string;
 export function format(
   value: number,
-  format?: FormatNumberStyle,
-  extraFuncArgs?: FormatNumberOptions
+  format?: FormatNumberStyle | CustomFormatter,
+  options?: FormatNumberOptions
 ): string;
-export function format(value: string | Date, format?: PeriodType, ...extraFuncArgs: any[]): string;
-export function format(value: any, format?: FormatType, ...extraFuncArgs: any[]): any {
-  let formattedValue = value ?? ''; // Do not render `null`
+export function format(
+  value: string | Date,
+  format?: PeriodType | CustomFormatter,
+  options?: FormatDateOptions
+): string;
+export function format(
+  value: any,
+  format?: FormatType,
+  options?: FormatNumberOptions | FormatDateOptions
+): any {
+  return formatWithLocale(defaultLocale, value, format, options);
+}
+
+export function formatWithLocale(
+  settings: LocaleSettings,
+  value: any,
+  format?: FormatType,
+  options?: FormatNumberOptions | FormatDateOptions
+) {
+  let formattedValue: string | undefined;
 
   if (format) {
-    if (isFunction(format)) {
-      formattedValue = format(value, ...extraFuncArgs);
+    if (typeof format === 'function') {
+      formattedValue = format(value);
     } else if (format in PeriodType) {
-      formattedValue = formatDate(value, format as PeriodType, ...extraFuncArgs);
+      formattedValue = formatDateWithLocale(
+        settings,
+        value,
+        format as PeriodType,
+        options as FormatDateOptions
+      );
     } else if (typeof value === 'number') {
-      formattedValue = formatNumber(value, {
-        style: format,
-        ...extraFuncArgs[0],
-      });
+      formattedValue = formatNumberWithLocale(
+        settings,
+        value,
+        format as FormatNumberStyle,
+        options as FormatNumberOptions
+      );
     }
   }
 
   return formattedValue ?? ''; // return empty string so Svelte doesn't render `null` string;
+}
+
+export type FormatFunction = ((
+  value: number | null | undefined,
+  style: FormatNumberStyle,
+  options?: FormatNumberOptions
+) => string) &
+  ((
+    value: Date | string | null | undefined,
+    period: PeriodType,
+    options?: FormatDateOptions
+  ) => string);
+
+export interface FormatFunctionProperties {
+  getPeriodTypeName: (period: PeriodType) => string;
+  getDayOfWeekName: (day: DayOfWeek) => string;
+  settings: LocaleSettings;
+}
+
+export type FormatFunctions = FormatFunction & FormatFunctionProperties;
+
+export function buildFormatters(settings: LocaleSettings): FormatFunctions {
+  const mainFormat = (
+    value: any,
+    style: FormatNumberStyle | PeriodType,
+    options?: FormatNumberOptions | FormatDateOptions
+  ) => formatWithLocale(settings, value, style, options);
+
+  mainFormat.settings = settings;
+
+  mainFormat.getDayOfWeekName = (day: DayOfWeek) => getDayOfWeekName(day, settings.locale);
+  mainFormat.getPeriodTypeName = (period: PeriodType) =>
+    getPeriodTypeNameWithLocale(settings, period);
+
+  return mainFormat;
 }

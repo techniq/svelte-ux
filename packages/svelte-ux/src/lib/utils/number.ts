@@ -1,4 +1,5 @@
-import { getFormatNumberOptions } from '$lib/components/settings';
+import type { Settings } from '../components/settings';
+import { defaultLocale, createLocaleSettings, type LocaleSettings } from './locale';
 
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
@@ -8,11 +9,10 @@ export type FormatNumberStyle =
   | 'none'
   | 'integer'
   | 'percentRound'
-  | 'metric';
+  | 'metric'
+  | 'default';
 
 export type FormatNumberOptions = Intl.NumberFormatOptions & {
-  style?: FormatNumberStyle;
-  locales?: string | undefined;
   fractionDigits?: number;
   suffix?: string;
   /**
@@ -22,21 +22,47 @@ export type FormatNumberOptions = Intl.NumberFormatOptions & {
   suffixExtraIfMany?: string;
 };
 
+function getFormatNumber(settings: LocaleSettings, style: FormatNumberStyle | undefined) {
+  const { numbers } = settings.formats;
+  const styleSettings = style ? numbers[style] : {};
+  return {
+    ...numbers.defaults,
+    ...styleSettings,
+  };
+}
+
+export function formatNumber(
+  number: number | null | undefined,
+  style?: FormatNumberStyle,
+  options?: FormatNumberOptions
+) {
+  return formatNumberWithLocale(defaultLocale, number, style, options);
+}
+
 // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat
-export function formatNumber(number: number | null | undefined, options: FormatNumberOptions = {}) {
+export function formatNumberWithLocale(
+  settings: LocaleSettings,
+  number: number | null | undefined,
+  style?: FormatNumberStyle,
+  options: FormatNumberOptions = {}
+) {
   if (number == null) {
     return '';
   }
 
-  if (options.style === 'none') {
+  if (style === 'none') {
     return `${number}`;
   }
 
-  const defaults = getFormatNumberOptions(options.style);
+  const defaults = getFormatNumber(settings, style);
 
-  const formatter = Intl.NumberFormat(options.locales ?? defaults.locales ?? undefined, {
+  const formatter = Intl.NumberFormat(settings.locale, {
     // Let's always starts with all defaults
     ...defaults,
+
+    ...(style !== 'default' && {
+      style,
+    }),
 
     // If currency is specified, then style must be currency
     ...(options.currency != null && {
@@ -45,32 +71,30 @@ export function formatNumber(number: number | null | undefined, options: FormatN
 
     // Let's shorten min / max with fractionDigits
     ...{
-      minimumFractionDigits:
-        options.fractionDigits != null ? options.fractionDigits : defaults.fractionDigits,
-      maximumFractionDigits:
-        options.fractionDigits != null ? options.fractionDigits : defaults.fractionDigits,
+      minimumFractionDigits: options.fractionDigits ?? defaults.fractionDigits,
+      maximumFractionDigits: options.fractionDigits ?? defaults.fractionDigits,
     },
 
     // now we bring in user specified options
     ...options,
 
     // Let's overwrite for style=percentRound
-    ...(options.style === 'percentRound' && {
+    ...(style === 'percentRound' && {
       style: 'percent',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }),
 
     // Let's overwrite for style=metric
-    ...(options.style === 'metric' && {
+    ...(style === 'metric' && {
       style: 'decimal',
       notation: 'compact',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }),
 
-    // Let's overwrite for style=metric
-    ...(options.style === 'integer' && {
+    // Let's overwrite for style=integer
+    ...(style === 'integer' && {
       style: 'decimal',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,

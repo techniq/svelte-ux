@@ -133,7 +133,7 @@
         inlineSearch
       >
         <div slot="actions">
-          <Button color="accent" icon={mdiPlus}>Add item</Button>
+          <Button color="primary" icon={mdiPlus}>Add item</Button>
         </div>
       </MultiSelectMenu>
     </ToggleButton>
@@ -170,7 +170,7 @@
             root: 'py-1',
           }}
         >
-          <span class="uppercase text-red-500">{label}</span>
+          <span class="uppercase text-danger">{label}</span>
         </MultiSelectOption>
       </MultiSelectMenu>
     </ToggleButton>

@@ -34,7 +34,7 @@
   import { decimalCount, round } from '$lib/utils/number';
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let min = 0;
   export let max = 100;
@@ -42,7 +42,7 @@
   export let value = [min, max];
   export let disabled = false;
 
-  const theme = getComponentTheme('RangeSlider');
+  const settingsClasses = getComponentClasses('RangeSlider');
 
   $: stepPercent = step / (max - min);
   $: stepDecimals = decimalCount(step);
@@ -224,9 +224,9 @@
 <div
   class={cls(
     'RangeSlider',
-    'group relative h-2 bg-black/10 rounded-full select-none outline-none',
+    'group relative h-2 bg-surface-content/10 rounded-full select-none outline-none',
     disabled && ' pointer-events-none opacity-50',
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
   style="--start: {$start}; --end: {$end};"
@@ -243,7 +243,7 @@
       left:  calc(var(--start) * 100%);
       right: calc((1 - var(--end)) * 100%);
     "
-    class="range absolute top-0 bottom-0 bg-accent-400 active:bg-accent-500"
+    class="range absolute top-0 bottom-0 bg-primary"
   />
 
   <div
@@ -264,7 +264,7 @@
       'transition-opacity'
     )}
   >
-    <Icon path={mdiDragHorizontal} class="text-white" />
+    <Icon path={mdiDragHorizontal} class="text-primary-content" />
   </div>
 
   <div
@@ -279,10 +279,10 @@
     class={cls(
       'thumb',
       'absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2',
-      'border border-black/30 bg-white rounded-full outline-4',
-      'hover:outline hover:outline-accent-500/20',
+      'border bg-white rounded-full outline-4',
+      'hover:outline hover:outline-primary/20',
       (lastMoved === 'start' || lastMoved === 'range') &&
-        'group-focus:outline group-focus:outline-accent-500/40'
+        'group-focus:outline group-focus:outline-primary/40'
     )}
   />
 
@@ -298,18 +298,18 @@
     class={cls(
       'thumb',
       'absolute top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2',
-      'border border-black/30 bg-white rounded-full outline-4',
-      'outline-accent-500/20',
-      'hover:outline hover:outline-accent-500/20',
+      'border bg-white rounded-full outline-4',
+      'outline-primary/20',
+      'hover:outline hover:outline-primary/20',
       (lastMoved === 'end' || lastMoved === 'range') &&
-        'group-focus:outline group-focus:outline-accent-500/40'
+        'group-focus:outline group-focus:outline-primary/40'
     )}
   />
 
   {#if showStartValue}
     <output
       style="left: calc(var(--start) * 100%);"
-      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
+      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow"
       transition:fly={{ y: 4, duration: 300 }}
     >
       {value[0]}
@@ -319,7 +319,7 @@
   {#if showEndValue}
     <output
       style="left: calc(var(--end) * 100%);"
-      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-white bg-accent-500 rounded-full px-2 shadow"
+      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow"
       transition:fly={{ y: 4, duration: 300 }}
     >
       {value[1]}

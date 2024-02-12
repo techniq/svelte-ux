@@ -1,6 +1,6 @@
 <script lang="ts">
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value: number = $$slots.value ? 1 : 0;
   export let small = false;
@@ -9,7 +9,7 @@
 
   export let placement: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' = 'top-right';
 
-  const theme = getComponentTheme('Badge');
+  const settingsClasses = getComponentClasses('Badge');
 </script>
 
 <div class="inline-grid grid-stack">
@@ -19,7 +19,7 @@
       'Badge',
       'rounded-full flex items-center justify-center transform transition-transform',
 
-      !$$slots.value && 'bg-accent-500 text-white',
+      !$$slots.value && 'bg-primary text-primary-content',
 
       {
         'self-start': placement.startsWith('top'),
@@ -50,28 +50,28 @@
             'translate-x-[-10%]': !small && placement.endsWith('right'),
           }
         : circle
-        ? {
-            'translate-y-[-10%]': small && placement.startsWith('top'),
-            'translate-y-[10%]': small && placement.startsWith('bottom'),
-            'translate-x-[-10%]': small && placement.endsWith('left'),
-            'translate-x-[10%]': small && placement.endsWith('right'),
-            'translate-y-[-20%]': !small && placement.startsWith('top'),
-            'translate-y-[20%]': !small && placement.startsWith('bottom'),
-            'translate-x-[-20%]': !small && placement.endsWith('left'),
-            'translate-x-[20%]': !small && placement.endsWith('right'),
-          }
-        : {
-            '-translate-y-1/3': placement.startsWith('top'),
-            'translate-y-1/3': placement.startsWith('bottom'),
-            '-translate-x-1/3': placement.endsWith('left'),
-            'translate-x-1/3': placement.endsWith('right'),
-          },
+          ? {
+              'translate-y-[-10%]': small && placement.startsWith('top'),
+              'translate-y-[10%]': small && placement.startsWith('bottom'),
+              'translate-x-[-10%]': small && placement.endsWith('left'),
+              'translate-x-[10%]': small && placement.endsWith('right'),
+              'translate-y-[-20%]': !small && placement.startsWith('top'),
+              'translate-y-[20%]': !small && placement.startsWith('bottom'),
+              'translate-x-[-20%]': !small && placement.endsWith('left'),
+              'translate-x-[20%]': !small && placement.endsWith('right'),
+            }
+          : {
+              '-translate-y-1/3': placement.startsWith('top'),
+              'translate-y-1/3': placement.startsWith('bottom'),
+              '-translate-x-1/3': placement.endsWith('left'),
+              'translate-x-1/3': placement.endsWith('right'),
+            },
 
       {
         'scale-0': (value ?? 0) === 0,
         'scale-100': (value ?? 0) !== 0,
       },
-      theme.root,
+      settingsClasses.root,
       $$props.class
     )}
   >

@@ -7,7 +7,7 @@
 
   import { uniqueId } from '../utils/string';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let size: string | number = '1.5em';
   export let width = size;
@@ -29,7 +29,7 @@
     root?: string;
     path?: string | string[];
   } = {};
-  const theme = getComponentTheme('Icon');
+  const settingsClasses = getComponentClasses('Icon');
 
   $: if (typeof data === 'object' && data && 'icon' in data) {
     // Font Awesome
@@ -65,12 +65,12 @@
         .then((resp) => resp.text())
         .catch(() => {
           // Failed request, remove promise so fetched again
-          if (svgUrl && typeof(svgUrl) === "string") {
+          if (svgUrl && typeof svgUrl === 'string') {
             cache.delete(svgUrl);
           }
           // TODO: Consider showing error icon
           // throw e;
-          return "";
+          return '';
         });
       cache.set(svgUrl, promise);
       promise.then((text) => {
@@ -85,7 +85,7 @@
     class={cls(
       'Icon',
       'icon-container inline-block flex-shrink-0 align-middle fill-current',
-      theme.root,
+      settingsClasses.root,
       classes.root,
       $$props.class
     )}
@@ -110,7 +110,7 @@
     class={cls(
       'Icon',
       'inline-block flex-shrink-0 fill-current',
-      theme.root,
+      settingsClasses.root,
       classes.root,
       $$props.class
     )}
@@ -131,7 +131,7 @@
         {d}
         fill="currentColor"
         class={cls(
-          Array.isArray(theme.path) ? theme.path[i] : theme.path,
+          Array.isArray(settingsClasses.path) ? settingsClasses.path[i] : settingsClasses.path,
           Array.isArray(classes.path) ? classes.path[i] : classes.path
         )}
       />

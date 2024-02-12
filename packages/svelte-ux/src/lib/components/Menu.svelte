@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { slide } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
   import type { Placement } from '@floating-ui/dom';
@@ -9,7 +9,7 @@
 
   import Popover from './Popover.svelte';
   import type { TransitionParams } from '$lib/types';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -19,10 +19,10 @@
   export let matchWidth: boolean = false;
   export let placement: Placement = matchWidth ? 'bottom-start' : 'bottom';
   export let autoPlacement = false;
-  export let resize = false;
+  export let resize: ComponentProps<Popover>['resize'] = false;
   export let disableTransition = false;
   export let transition = disableTransition
-    ? (node: HTMLElement, params: TransitionParams) => ({} as TransitionConfig)
+    ? (node: HTMLElement, params: TransitionParams) => ({}) as TransitionConfig
     : slide;
   export let transitionParams: TransitionParams = {};
   export let explicitClose = false;
@@ -32,7 +32,7 @@
     root?: string;
     menu?: string;
   } = {};
-  const theme = getComponentTheme('Menu');
+  const settingsClasses = getComponentClasses('Menu');
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 
@@ -62,8 +62,8 @@
   {open}
   class={cls(
     'Menu',
-    'bg-white rounded shadow border overflow-auto',
-    theme.root,
+    'bg-surface-100 rounded shadow border overflow-auto',
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}
@@ -73,7 +73,7 @@
 >
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <menu
-    class={cls('menu-items outline-none max-h-screen', theme.menu, classes.menu)}
+    class={cls('menu-items outline-none max-h-screen', settingsClasses.menu, classes.menu)}
     bind:this={menuItemsEl}
     on:click={onClick}
     on:mouseup={(e) => {

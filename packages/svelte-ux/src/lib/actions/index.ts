@@ -1,4 +1,3 @@
-export * from './cssVars';
 export * from './dataBackground';
 export * from './input';
 export * from './layout';
@@ -9,4 +8,5 @@ export * from './portal';
 export * from './scroll';
 export * from './spotlight';
 export * from './sticky';
+export * from './styleProps';
 export * from './table';

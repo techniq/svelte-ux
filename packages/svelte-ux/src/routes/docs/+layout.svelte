@@ -69,17 +69,17 @@
   }
 
   // Clear root layout theme so doesn't show on doc examples
-  settings({ ...getSettings(), theme: {} });
+  settings({ ...getSettings(), components: {} });
 </script>
 
 <div
-  class="[@media(min-height:900px)]:sticky top-0 z-20 bg-neutral-200/90 backdrop-blur px-5 py-4 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1)calc(100%-4px),rgba(0,0,0,0))]"
+  class="[@media(min-height:900px)]:sticky top-0 z-[60] bg-surface-200/90 backdrop-blur px-5 py-4 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1)calc(100%-4px),rgba(0,0,0,0))]"
 >
   {#if title}
     <div>
-      <div class="inline-block text-xs font-bold text-gray-500 capitalize">Docs</div>
+      <div class="inline-block text-xs font-bold text-surface-content/50 capitalize">Docs</div>
       <Icon path={mdiChevronRight} class="divider opacity-25" />
-      <div class="inline-block text-xs font-bold text-accent-500 capitalize">
+      <div class="inline-block text-xs font-bold text-primary capitalize">
         {type}
       </div>
     </div>
@@ -91,7 +91,7 @@
           class={cls(
             'text-sm  px-2 rounded',
             status === 'beta' && 'bg-yellow-500/20 text-yellow-800',
-            status === 'deprecated' && 'bg-red-500/20 text-red-900'
+            status === 'deprecated' && 'bg-danger/20 text-danger-900'
           )}
         >
           {status}
@@ -100,7 +100,7 @@
     </div>
 
     {#if description}
-      <div class="text-sm text-black/60">
+      <div class="text-sm text-surface-content/60 xl:pr-[240px]">
         {description}
       </div>
     {/if}
@@ -131,7 +131,7 @@
             showTableOfContents = !showTableOfContents;
           }}
           variant="fill-light"
-          color="accent"
+          color="primary"
           size="sm"
         >
           On this page
@@ -145,7 +145,7 @@
   {#if showTableOfContents && !$xlScreen}
     <div transition:fade class="mt-3">
       {#key $page.route.id}
-        <TableOfContents />
+        <TableOfContents icon={mdiChevronRight} />
       {/key}
     </div>
   {/if}
@@ -162,10 +162,10 @@
       {#if features}
         {#key $page.route.id}
           <h1 id="features">Features</h1>
-          <ul class="pl-4 text-gray-700 divide-y-4">
+          <ul class="grid gap-2 pl-4 text-surface-content">
             {#each features as feature}
               <li class="grid grid-cols-[auto,1fr] gap-2">
-                <Icon data={mdiCheckCircle} class="text-emerald-600 pt-1" />
+                <Icon data={mdiCheckCircle} class="text-success pt-1" />
                 <span>{@html feature}</span>
               </li>
             {/each}
@@ -182,7 +182,7 @@
             <div>
               <h2
                 id="related-{type}"
-                class="text-xs uppercase leading-8 tracking-widest text-black/50"
+                class="text-xs uppercase leading-8 tracking-widest text-surface-content/50"
               >
                 {type}
               </h2>
@@ -201,7 +201,7 @@
                   <ListItem
                     title={item.name}
                     {icon}
-                    avatar={{ size: 'sm', class: 'text-xs text-white bg-accent-500' }}
+                    avatar={{ size: 'sm', class: 'text-xs text-white bg-primary' }}
                     on:click={() => {
                       if (item.url instanceof URL) {
                         // open in new window
@@ -211,10 +211,10 @@
                         goto(item.url);
                       }
                     }}
-                    class="hover:bg-accent-50 cursor-pointer"
+                    class="hover:bg-surface-200 cursor-pointer"
                   >
                     <div slot="actions">
-                      <Icon data={mdiChevronRight} class="text-black/50" />
+                      <Icon data={mdiChevronRight} class="text-surface-content/50" />
                     </div>
                   </ListItem>
                 {/each}
@@ -232,11 +232,13 @@
 
     {#if showTableOfContents && $xlScreen}
       <div transition:slide={{ axis: 'x' }}>
-        <div class="w-[224px] sticky top-0 pr-2 max-h-[calc(100dvh-64px)] overflow-auto z-20">
-          <div class="text-xs uppercase leading-8 tracking-widest text-black/50">On this page</div>
+        <div class="w-[224px] sticky top-10 pr-2 max-h-[calc(100dvh-64px)] overflow-auto z-[60]">
+          <div class="text-xs uppercase leading-8 tracking-widest text-surface-content/50">
+            On this page
+          </div>
           <!-- Rebuild toc when page changes -->
           {#key $page.route.id}
-            <TableOfContents />
+            <TableOfContents icon={mdiChevronRight} class="text-surface-content" />
           {/key}
         </div>
       </div>

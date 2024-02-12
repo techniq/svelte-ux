@@ -15,16 +15,16 @@
 
 <h2>Demo</h2>
 
-<div class="border border-black/20 rounded bg-white">
+<div class="border rounded bg-surface-100">
   <div class="grid grid-cols-[1fr,auto] items-center justify-items-center gap-4">
     <ProgressCircle value={indeterminate ? null : value} {size} {width} {rotate} {track}>
       {#if label}
-        <span class="text-black/50 text-xs">
+        <span class="text-surface-content/50 text-xs">
           {#if indeterminate}Loading...{:else}{value}%{/if}
         </span>
       {/if}
     </ProgressCircle>
-    <div class="bg-black/5 border-l border-black/20 p-4">
+    <div class="bg-surface-content/5 border-l p-4">
       <label class="block">
         size:
         <input type="range" min={0} max={120} bind:value={size} />
@@ -94,22 +94,22 @@
 <Preview>
   <div class="flex gap-4">
     <ProgressCircle value={0}>
-      <span class="text-black/50 text-xs">0%</span>
+      <span class="text-surface-content/50 text-xs">0%</span>
     </ProgressCircle>
     <ProgressCircle value={20}>
-      <span class="text-black/50 text-xs">20%</span>
+      <span class="text-surface-content/50 text-xs">20%</span>
     </ProgressCircle>
     <ProgressCircle value={40}>
-      <span class="text-black/50 text-xs">40%</span>
+      <span class="text-surface-content/50 text-xs">40%</span>
     </ProgressCircle>
     <ProgressCircle value={60}>
-      <span class="text-black/50 text-xs">60%</span>
+      <span class="text-surface-content/50 text-xs">60%</span>
     </ProgressCircle>
     <ProgressCircle value={80}>
-      <span class="text-black/50 text-xs">80%</span>
+      <span class="text-surface-content/50 text-xs">80%</span>
     </ProgressCircle>
     <ProgressCircle value={100}>
-      <span class="text-black/50 text-xs">100%</span>
+      <span class="text-surface-content/50 text-xs">100%</span>
     </ProgressCircle>
   </div>
 </Preview>
@@ -119,22 +119,22 @@
 <Preview>
   <div class="flex gap-4">
     <ProgressCircle value={0} track>
-      <span class="text-black/50 text-xs">0%</span>
+      <span class="text-surface-content/50 text-xs">0%</span>
     </ProgressCircle>
     <ProgressCircle value={20} track>
-      <span class="text-black/50 text-xs">20%</span>
+      <span class="text-surface-content/50 text-xs">20%</span>
     </ProgressCircle>
     <ProgressCircle value={40} track>
-      <span class="text-black/50 text-xs">40%</span>
+      <span class="text-surface-content/50 text-xs">40%</span>
     </ProgressCircle>
     <ProgressCircle value={60} track>
-      <span class="text-black/50 text-xs">60%</span>
+      <span class="text-surface-content/50 text-xs">60%</span>
     </ProgressCircle>
     <ProgressCircle value={80} track>
-      <span class="text-black/50 text-xs">80%</span>
+      <span class="text-surface-content/50 text-xs">80%</span>
     </ProgressCircle>
     <ProgressCircle value={100} track>
-      <span class="text-black/50 text-xs">100%</span>
+      <span class="text-surface-content/50 text-xs">100%</span>
     </ProgressCircle>
   </div>
 </Preview>
@@ -165,9 +165,9 @@
 <Preview>
   <div class="flex gap-4">
     <ProgressCircle class="text-blue-500" />
-    <ProgressCircle class="text-red-500" />
+    <ProgressCircle class="text-danger" />
     <ProgressCircle class="text-purple-500" />
-    <ProgressCircle class="text-green-500" />
+    <ProgressCircle class="text-success-500" />
     <ProgressCircle class="text-orange-500" />
   </div>
 </Preview>
@@ -177,9 +177,9 @@
 <Preview>
   <div class="flex gap-4">
     <ProgressCircle class="text-blue-500 [--track-color:theme(colors.blue.100)]" track />
-    <ProgressCircle class="text-red-500 [--track-color:theme(colors.red.100)]" track />
+    <ProgressCircle class="text-danger [--track-color:theme(colors.red.100)]" track />
     <ProgressCircle class="text-purple-500 [--track-color:theme(colors.purple.100)]" track />
-    <ProgressCircle class="text-green-500 [--track-color:theme(colors.green.100)]" track />
+    <ProgressCircle class="text-success-500 [--track-color:theme(colors.green.100)]" track />
     <ProgressCircle class="text-orange-500 [--track-color:theme(colors.orange.100)]" track />
   </div>
 </Preview>

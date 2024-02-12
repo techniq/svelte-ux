@@ -1,6 +1,7 @@
 // https://basarat.gitbooks.io/typescript/docs/types/never.html#use-case-exhaustive-checks
 
-import type { SvelteComponentTyped } from 'svelte';
+import type { colors } from '$lib/styles/theme';
+import type { SvelteComponent } from 'svelte';
 import type { derived, Readable } from 'svelte/store';
 import type {
   FlyParams,
@@ -79,22 +80,22 @@ export type FilterPropKeys<T, Match> = {
 }[keyof T];
 
 // https://stackoverflow.com/a/72297256/191902
-export type ComponentProps<T> = T extends SvelteComponentTyped<infer P, any, any> ? P : never;
-export type ComponentEvents<T> = T extends SvelteComponentTyped<any, infer E, any> ? E : never;
-export type ComponentSlots<T> = T extends SvelteComponentTyped<any, any, infer S> ? S : never;
+export type ComponentProps<T> = T extends SvelteComponent<infer P, any, any> ? P : never;
+export type ComponentEvents<T> = T extends SvelteComponent<any, infer E, any> ? E : never;
+export type ComponentSlots<T> = T extends SvelteComponent<any, any, infer S> ? S : never;
 
 // Export until `Stores` and `StoresValues` are exported from svelte -  https://github.com/sveltejs/svelte/blob/master/src/runtime/store/index.ts#L111-L112
 export type Stores = Parameters<typeof derived>[0];
-export type StoresValues<T> = T extends Readable<infer U>
-  ? U
-  : {
-      [K in keyof T]: T[K] extends Readable<infer U> ? U : never;
-    };
+export type StoresValues<T> =
+  T extends Readable<infer U>
+    ? U
+    : {
+        [K in keyof T]: T[K] extends Readable<infer U> ? U : never;
+      };
 
 export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;
 
 export type TailwindColors =
-  | 'accent'
   | 'red'
   | 'orange'
   | 'amber'
@@ -114,9 +115,29 @@ export type TailwindColors =
   | 'rose'
   | 'gray';
 
+export type ThemeColors = (typeof colors)[number];
+
 export type EventWithTarget = Partial<Pick<Event, 'currentTarget' | 'target'>>;
 
 // Matt Pocock tips //https://www.youtube.com/watch?v=2lCCKiWGlC0
 export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
+
+/**
+ * util to make sure we have handled all enum cases in a switch statement
+ * Just add at the end of the switch statement a `default` like this:
+ *
+ * ```ts
+ * switch (periodType) {
+ *   case xxx:
+ *     ...
+ *
+ *   default:
+ *     assertNever(periodType); // This will now report unhandled cases
+ * }
+ * ```
+ */
+export function assertNever(x: never): never {
+  throw new Error(`Unhandled enum case: ${x}`);
+}

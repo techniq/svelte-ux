@@ -1,6 +1,6 @@
 <script lang="ts">
   import { format } from 'date-fns';
-  import { mdiCheck, mdiCircle, mdiClockOutline, mdiClose, mdiMapMarker } from '@mdi/js';
+  import { mdiCheck, mdiClockOutline, mdiClose, mdiMapMarker, mdiTruck } from '@mdi/js';
 
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -56,11 +56,11 @@
   <Steps {items}>
     <div slot="item" let:item>
       <div class="text-lg font-bold">{item.title}</div>
-      <div class="text-sm text-black/50">
+      <div class="text-sm text-surface-content/50">
         <Icon path={mdiMapMarker} size="1rem" />
         {item.location}
       </div>
-      <div class="text-sm text-black/50">
+      <div class="text-sm text-surface-content/50">
         <Icon path={mdiClockOutline} size=".9rem" />
         {format(item.date, 'M/d/yyyy @ h:mm aa')}
       </div>
@@ -68,17 +68,17 @@
     <div slot="marker" let:item>
       <div
         class={cls('w-4 h-4 flex-shrink-0 rounded-full flex items-center', {
-          'bg-green-500': item.status === 'completed',
-          'border-2 border-accent-500 bg-accent-100': item.status === 'in-progress',
-          'bg-red-500': item.status === 'failed',
+          'bg-success': item.status === 'completed',
+          'bg-info': item.status === 'in-progress',
+          'bg-danger': item.status === 'failed',
         })}
       >
         {#if item.status === 'completed'}
-          <Icon path={mdiCheck} size="1rem" class="text-white" />
+          <Icon path={mdiCheck} size="1rem" class="text-success-content" />
         {:else if item.status === 'in-progress'}
-          <Icon path={mdiCircle} size="1rem" class="text-accent-500" />
+          <Icon path={mdiTruck} size="1rem" class="text-info-content p-[2px]" />
         {:else if item.status === 'failed'}
-          <Icon path={mdiClose} size="1rem" class="text-white" />
+          <Icon path={mdiClose} size="1rem" class="text-danger-content" />
         {/if}
       </div>
     </div>

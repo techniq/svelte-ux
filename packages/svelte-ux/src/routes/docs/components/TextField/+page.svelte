@@ -255,7 +255,7 @@
     <Preview>
       <TextField label="User Search">
         <div slot="prepend">
-          <Icon path={mdiAccountSearch} class="text-black/50 mr-2" />
+          <Icon path={mdiAccountSearch} class="text-surface-content/50 mr-2" />
         </div>
       </TextField>
     </Preview>
@@ -267,7 +267,7 @@
       <TextField label="Start Date">
         <div slot="prepend">
           <select
-            class="appearance-none bg-black/5 border rounded-full mr-2 px-4"
+            class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
             style="text-align-last: center;"
           >
             <!-- <option /> -->
@@ -289,7 +289,7 @@
 <Preview>
   <TextField label="Name">
     <span slot="append">
-      <Button icon={mdiRefresh} class="text-black/50 p-2" />
+      <Button icon={mdiRefresh} class="text-surface-content/50 p-2" />
     </span>
   </TextField>
 </Preview>
@@ -299,7 +299,7 @@
 <Preview>
   <TextField label="Amount">
     <div slot="prefix">
-      <Icon path={mdiCurrencyUsd} size="1.1em" class="text-black/50 -mt-1" />
+      <Icon path={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
     </div>
   </TextField>
 </Preview>
@@ -309,7 +309,7 @@
     <div class="text-lg font-semibold mt-8 ml-2">Suffix</div>
     <Preview>
       <TextField label="Weight">
-        <div slot="suffix" class="text-black/50">lbs</div>
+        <div slot="suffix" class="text-surface-content/50">lbs</div>
       </TextField>
     </Preview>
   </div>
@@ -319,7 +319,7 @@
     <Preview>
       <TextField label="Ratio" align="right">
         <div slot="suffix">
-          <Icon path={mdiPercent} size="1.1em" class="text-black/50 -mt-1 ml-1" />
+          <Icon path={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
         </div>
       </TextField>
     </Preview>
@@ -349,7 +349,7 @@
 <Preview>
   <TextField label="Search" clearable>
     <span slot="append">
-      <Button icon={mdiArrowRight} class="text-black/50 p-2" />
+      <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
     </span>
   </TextField>
 </Preview>
@@ -371,15 +371,15 @@
 <Preview>
   <TextField label="Transfer amount">
     <div slot="prepend">
-      <Icon path={mdiCreditCardOutline} class="text-black/50 mr-2" />
+      <Icon path={mdiCreditCardOutline} class="text-surface-content/50 mr-2" />
     </div>
     <div slot="append">
-      <Button icon={mdiArrowRight} class="text-black/50 p-2" />
+      <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
     </div>
     <div slot="prefix">
-      <Icon path={mdiCurrencyUsd} size="1.1em" class="text-black/50 -mt-1" />
+      <Icon path={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
     </div>
-    <div slot="suffix" class="text-black/50">usd</div>
+    <div slot="suffix" class="text-surface-content/50">usd</div>
   </TextField>
 </Preview>
 
@@ -388,12 +388,12 @@
 <Preview>
   <TextField label="Date Range">
     <div slot="prepend" class="flex items-center">
-      <Button icon={mdiChevronLeft} class="text-black/50 p-2" />
-      <Icon path={mdiCalendar} class="text-black/50 mr-2" />
+      <Button icon={mdiChevronLeft} class="text-surface-content/50 p-2" />
+      <Icon path={mdiCalendar} class="text-surface-content/50 mr-2" />
     </div>
     <div slot="append" class="flex items-center">
-      <Icon path={mdiRefresh} class="text-black/50 mr-2" />
-      <Button icon={mdiChevronRight} class="text-black/50 p-2" />
+      <Icon path={mdiRefresh} class="text-surface-content/50 mr-2" />
+      <Button icon={mdiChevronRight} class="text-surface-content/50 p-2" />
     </div>
   </TextField>
 </Preview>
@@ -461,9 +461,9 @@
 
 <Preview>
   <TextField icon={mdiInformationOutline}>
-    <div slot="prefix" class="text-black/50">http://</div>
+    <div slot="prefix" class="text-surface-content/50">http://</div>
     <div slot="append">
-      <Button icon={mdiStarOutline} class="text-black/50 p-2" />
+      <Button icon={mdiStarOutline} class="text-surface-content/50 p-2" />
     </div>
   </TextField>
 </Preview>
@@ -488,7 +488,7 @@
   <TextField
     label="Search"
     base
-    class="pl-2 text-red-500 bg-red-500/10 rounded-full"
+    class="pl-2 text-danger bg-danger/10 rounded-full"
   />
 </Preview>
 -->

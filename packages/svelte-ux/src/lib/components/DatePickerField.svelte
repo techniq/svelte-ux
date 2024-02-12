@@ -6,12 +6,12 @@
   import Button from './Button.svelte';
   import Field from './Field.svelte';
   import Dialog from './Dialog.svelte';
-  import { getDateFuncsByPeriodType, PeriodType } from '../utils/date';
+  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
-  import { dateDisplay } from '../utils/dateDisplay';
-  import { getComponentTheme } from './theme';
+  import { getComponentSettings, getSettings } from './settings';
 
   const dispatch = createEventDispatcher();
+  const { classes: settingsClasses, defaults } = getComponentSettings('DatePickerField');
 
   export let value: Date | null = null;
   export let periodType: PeriodType = PeriodType.Day;
@@ -20,6 +20,7 @@
 
   // Field props
   export let label: string | null = null;
+  export let labelPlacement = defaults.labelPlacement;
   // export let value = '';
   export let error = '';
   export let hint = '';
@@ -31,24 +32,30 @@
   export let icon: string | null = null;
   export let center = false;
 
-  const theme = getComponentTheme('DatePickerField');
+  const { format, localeSettings } = getSettings();
+  $: dictionary = $format.settings.dictionary;
 
   let open: boolean = false;
 
   // let format: string = 'EEE, MMM d';
   // Show "Day of Week", "Year", etc based on perioType (see DayStepper, MonthStepper)
-  let primaryFormat = '';
-  let secondaryFormat = '';
+  let primaryFormat: string | string[] = '';
+  let secondaryFormat: string | string[] = '';
 
   $: switch (periodType) {
     case PeriodType.Month:
-      primaryFormat = 'MMMM';
-      secondaryFormat = 'yyyy';
+      primaryFormat = DateToken.Month_long;
+      secondaryFormat = DateToken.Year_numeric;
       break;
     case PeriodType.Day:
     default:
-      primaryFormat = 'MMMM do, yyyy';
-      secondaryFormat = 'eeee';
+      primaryFormat = [
+        DateToken.Month_long,
+        DateToken.DayOfMonth_withOrdinal,
+        DateToken.Year_numeric,
+      ];
+
+      secondaryFormat = DateToken.DayOfWeek_long;
   }
 
   $: currentValue = value;
@@ -58,7 +65,8 @@
   <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
-    label={label ?? dateDisplay(value, { format: secondaryFormat })}
+    label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat })}
+    {labelPlacement}
     {icon}
     {error}
     {hint}
@@ -76,7 +84,7 @@
           class="p-2"
           on:click={() => {
             if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType(periodType);
+              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
               value = add(value, -1);
               dispatch('change', value);
             }
@@ -92,14 +100,14 @@
       on:click={() => (open = true)}
       {id}
     >
-      {dateDisplay(value, { format: primaryFormat })}
+      {$format(value, PeriodType.Day, { custom: primaryFormat })}
     </button>
 
     <div slot="append">
       {#if clearable && value}
         <Button
           icon={mdiClose}
-          class="text-black/50 p-1"
+          class="text-surface-content/50 p-1"
           on:click={() => {
             value = null;
             dispatch('clear');
@@ -114,7 +122,7 @@
           class="p-2"
           on:click={() => {
             if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType(periodType);
+              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
               value = add(value, 1);
               dispatch('change', value);
             }
@@ -127,12 +135,15 @@
 
 <Dialog bind:open>
   {#if currentValue}
-    <div class="flex flex-col justify-center bg-accent-500 text-white px-6 h-24" transition:slide>
-      <div class="text-sm text-white/50">
-        {dateDisplay(currentValue, { format: secondaryFormat })}
+    <div
+      class="flex flex-col justify-center bg-primary text-primary-content px-6 h-24"
+      transition:slide
+    >
+      <div class="text-sm opacity-50">
+        {$format(currentValue, PeriodType.Day, { custom: secondaryFormat })}
       </div>
-      <div class="text-3xl text-white">
-        {dateDisplay(currentValue, { format: primaryFormat })}
+      <div class="text-3xl">
+        {$format(currentValue, PeriodType.Day, { custom: primaryFormat })}
       </div>
     </div>
   {/if}
@@ -153,13 +164,14 @@
         value = currentValue;
         dispatch('change', value);
       }}
-      class="bg-accent-500 text-white hover:bg-accent-600">OK</Button
+      variant="fill"
+      color="primary">{dictionary.Ok}</Button
     >
     <Button
       on:click={() => {
         open = false;
         currentValue = value;
-      }}>Cancel</Button
+      }}>{dictionary.Cancel}</Button
     >
   </div>
 </Dialog>

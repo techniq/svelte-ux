@@ -1,7 +1,7 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let selected: boolean = false;
   export let placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
@@ -11,7 +11,7 @@
   export let classes: {
     root?: string;
   } = {};
-  const theme = getComponentTheme('Tab');
+  const settingsClasses = getComponentClasses('Tab');
 </script>
 
 <button
@@ -21,15 +21,15 @@
     'inline-flex items-center gap-1 whitespace-nowrap border px-3 py-2 text-xs',
     `placement-${placement}`,
     {
-      top: selected && 'border-b-white',
-      bottom: selected && 'border-t-white',
-      left: selected && 'border-r-white',
-      right: selected && 'border-l-white',
+      top: selected && 'border-b-surface-100',
+      bottom: selected && 'border-t-surface-100',
+      left: selected && 'border-r-surface-100',
+      right: selected && 'border-l-surface-100',
     }[placement],
     selected
-      ? 'bg-white text-gray-900'
-      : 'bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-    theme.root,
+      ? 'bg-surface-100 text-surface-content'
+      : 'bg-surface-200 text-surface-content/50 hover:text-surface-content hover:bg-surface-100',
+    settingsClasses.root,
     classes.root,
     $$props.class
   )}

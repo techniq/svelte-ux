@@ -8,7 +8,7 @@
 
   import Popover from './Popover.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let title = '';
   export let open = false;
@@ -29,7 +29,7 @@
     title?: string;
     content?: string;
   } = {};
-  const theme = getComponentTheme('Tooltip');
+  const settingsClasses = getComponentClasses('Tooltip');
 
   $: hasTitle = title || $$slots.title;
 
@@ -82,14 +82,14 @@
     {offset}
     {matchWidth}
     {open}
-    class={cls('Tooltip pointer-events-none', theme.popover, classes.popover)}
+    class={cls('Tooltip pointer-events-none', settingsClasses.popover, classes.popover)}
     {...$$restProps}
   >
     <slot name="title">
       <div
         class={cls(
-          'text-white text-xs bg-gray-900/90 px-2 py-1 rounded whitespace-nowrap',
-          theme.title,
+          'text-xs text-surface-100 bg-surface-content px-2 py-1 rounded whitespace-nowrap',
+          settingsClasses.title,
           classes.title
         )}
         transition:fly={{
@@ -106,7 +106,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-  class={cls('contents', theme.content, classes.content)}
+  class={cls('contents', settingsClasses.content, classes.content)}
   on:mouseenter={showTooltip}
   on:mouseleave={hideTooltip}
   on:focusin={onFocusIn}
@@ -119,7 +119,7 @@
       class={cls(
         hasTitle && underline && 'border-b border-dotted',
         hasTitle && cursor && 'cursor-help',
-        theme.root,
+        settingsClasses.root,
         classes.root,
         $$props.class
       )}

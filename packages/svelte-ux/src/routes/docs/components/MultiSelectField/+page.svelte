@@ -57,7 +57,7 @@
     <svelte:fragment slot="beforeOptions" let:selection>
       {#if selection.isMaxSelected()}
         <div
-          class="bg-red-50 border-red-500 text-red-600 border text-sm font-semibold p-2 rounded mb-1"
+          class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded mb-1"
           transition:slide
         >
           Maximum selection reached
@@ -95,7 +95,7 @@
 <Preview>
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)}>
     <div slot="actions">
-      <Button color="accent" icon={mdiPlus}>Add item</Button>
+      <Button color="primary" icon={mdiPlus}>Add item</Button>
     </div>
   </MultiSelectField>
 </Preview>
@@ -106,7 +106,7 @@
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} max={2}>
     <div slot="actions" let:selection class="flex items-center">
       {#if selection.isMaxSelected()}
-        <div class="text-sm text-red-500">Maximum selection reached</div>
+        <div class="text-sm text-danger">Maximum selection reached</div>
       {/if}
     </div>
   </MultiSelectField>
@@ -115,16 +115,13 @@
 <h2>within Drawer</h2>
 
 <Preview>
-  <ToggleButton let:on={open} let:toggle let:toggleOff>
+  <ToggleButton let:on={open}>
     Open Drawer
-    <Drawer slot="toggle" {open} on:close={toggleOff} class="w-[400px]">
+    <Drawer slot="toggle" let:toggleOff {open} on:close={toggleOff} class="w-[400px]">
       <div class="p-4">
         <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} />
       </div>
-      <div
-        class="fixed bottom-0 w-full flex justify-center bg-gray-500/25
-      p-1 border-t border-gray-400"
-      >
+      <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
       </div>
     </Drawer>
@@ -147,7 +144,7 @@
       {indeterminate}
       on:change={onChange}
     >
-      <span class="uppercase text-red-500">{label}</span>
+      <span class="uppercase text-danger">{label}</span>
     </MultiSelectOption>
   </MultiSelectField>
 </Preview>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentTheme } from './theme';
+  import { getComponentSettings } from './settings';
 
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import { get } from 'lodash-es';
@@ -17,6 +17,8 @@
   import ProgressCircle from './ProgressCircle.svelte';
 
   type Option = $$Generic;
+
+  const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 
   // MultiSelectMenu props
   export let options: Option[];
@@ -50,7 +52,6 @@
     field?: string;
     actions?: string;
   } = {};
-  const theme = getComponentTheme('MultiSelectField');
 
   const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
 
@@ -131,11 +132,13 @@
     value = [];
     dispatch('change', { value });
   }
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-  class={cls(disabled && 'pointer-events-none', theme.root, classes.root, $$props.class)}
+  class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, $$props.class)}
   on:click={onClick}
 >
   <!-- TODO: Setup blur without jank on open or issues when clicking within menu -->
@@ -152,8 +155,8 @@
     bind:inputEl
     on:focus={onFocus}
     on:change={onSearchChange}
-    class={cls('h-full', theme.field, classes.field)}
-    {...$$restProps}
+    class={cls('h-full', settingsClasses.field, classes.field)}
+    {...restProps}
   >
     <slot slot="prepend" name="prepend" />
 
@@ -162,14 +165,14 @@
 
       {#if loading}
         <span class="inline-block w-[29px] h-[28px] text-center">
-          <ProgressCircle size={16} width={2} class="text-black/50" />
+          <ProgressCircle size={16} width={2} class="text-surface-content/50" />
         </span>
         <!-- {:else if readonly} -->
         <!-- Do not show chevron or clear buttons -->
       {:else if value.length && clearable}
         <Button
           icon={mdiClose}
-          class="text-black/50 p-1"
+          class="text-surface-content/50 p-1"
           on:click={(e) => {
             e.stopPropagation();
             clear();
@@ -179,7 +182,7 @@
       {:else}
         <Button
           icon={mdiChevronDown}
-          class="text-black/50 p-1 transform {open ? 'rotate-180' : ''}"
+          class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
           tabindex="-1"
           on:click={(e) => {
             e.stopPropagation();

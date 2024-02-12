@@ -6,7 +6,7 @@
 ![](https://img.shields.io/github/license/techniq/svelte-ux?style=flat)
 [![](https://img.shields.io/github/actions/workflow/status/techniq/svelte-ux/ci.yml?style=flat)](https://github.com/techniq/svelte-ux/actions/workflows/ci.yml)
 [![](https://img.shields.io/npm/v/svelte-ux?style=flat)](https://www.npmjs.com/package/svelte-ux)
-![npm](https://img.shields.io/npm/dw/svelte-ux?style=flat&color=orange)
+[![](https://img.shields.io/npm/dw/svelte-ux?style=flat&color=orange)](https://www.npmjs.com/package/svelte-ux)
 
 [![](https://img.shields.io/badge/Open_in-SvelteLab-black?logo=svelte&color=%23FF3E00)](https://www.sveltelab.dev/?provider=github&owner=techniq&repo=svelte-ux&branch=main&path=%2Fpackages%2Fcreate-svelte-ux%2Ftemplates%2Fstarter) [![](https://img.shields.io/badge/Open_in-StackBlitz-black?logo=stackblitz&color=%231269D3)](https://stackblitz.com/github/techniq/svelte-ux/tree/main/packages/create-svelte-ux/templates/starter) [![](https://img.shields.io/badge/Open_in-CodeSandbox-black?logo=codesandbox&color=%23151515)](https://codesandbox.io/p/sandbox/github/techniq/svelte-ux/tree/main/packages/create-svelte-ux/templates/starter)
 

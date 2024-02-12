@@ -1,27 +1,57 @@
-const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
+
+const svelteUx = require('./src/lib/plugins/tailwind.cjs');
 
 module.exports = {
   content: ['./src/**/*.{html,svelte,md,ts,js}'],
+  ux: {
+    themes: require('./themes.json'),
+    // themes: {
+    //   light: {
+    //     primary: colors['blue']['500'],
+    //     'primary-content': 'white',
+    //     secondary: colors['cyan']['300'],
+    //     'surface-100': 'white',
+    //     'surface-200': colors['gray']['100'],
+    //     'surface-300': colors['gray']['300'],
+    //     'surface-content': colors['gray']['900'],
+    //   },
+    // },
+  },
   theme: {
     extend: {
-      colors: {
-        accent: colors.blue,
-      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(var(--tw-gradient-stops))',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            // Reduce font size
+            h1: {
+              fontSize: theme('fontSize.2xl')[0],
+              fontWeight: theme('fontWeight.extrabold'),
+            },
+            h2: {
+              fontSize: theme('fontSize.xl')[0],
+              fontWeight: theme('fontWeight.bold'),
+              marginTop: theme('spacing.3'),
+            },
+            h3: {
+              fontSize: theme('fontSize.lg')[0],
+              fontWeight: theme('fontWeight.semibold'),
+            },
+          },
+        },
+      }),
     },
   },
-  variants: {
-    extend: {},
-  },
   plugins: [
-    require('./src/lib/plugins/tailwind.cjs'),
+    svelteUx({ colorSpace: 'hsl' }),
     require('@tailwindcss/typography'),
 
-    plugin(function ({ addBase, addComponents, theme }) {
+    plugin(function ({ addComponents }) {
       // Consider moving to tailwind plugin
       addComponents({
         '.grid-cols-xs': {
@@ -36,24 +66,6 @@ module.exports = {
         '.grid-cols-lg': {
           '@apply grid-cols-1 md:grid-cols-[repeat(auto-fill,minmax(600px,1fr))]': {},
         },
-      });
-
-      // Expose color palette as CSS variables (--color-xxx-yyy) - https://gist.github.com/Merott/d2a19b32db07565e94f10d13d11a8574
-      function extractColorVars(colorObj, colorGroup = '') {
-        return Object.keys(colorObj).reduce((vars, colorKey) => {
-          const value = colorObj[colorKey];
-
-          const newVars =
-            typeof value === 'string'
-              ? { [`--color${colorGroup}-${colorKey}`]: value }
-              : extractColorVars(value, `-${colorKey}`);
-
-          return { ...vars, ...newVars };
-        }, {});
-      }
-
-      addBase({
-        ':root': extractColorVars(theme('colors')),
       });
     }),
   ],

@@ -12,7 +12,7 @@
   import Backdrop from './Backdrop.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   const dispatch = createEventDispatcher();
 
@@ -28,7 +28,7 @@
     actions?: string;
     backdrop?: string;
   } = {};
-  const theme = getComponentTheme('Dialog');
+  const settingsClasses = getComponentClasses('Dialog');
 
   let dialogEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
@@ -76,7 +76,7 @@
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
     }}
-    class={cls('z-50', theme.backdrop, classes.backdrop)}
+    class={cls('z-50', settingsClasses.backdrop, classes.backdrop)}
     fadeParams={{ duration: 150 }}
     {portal}
   />
@@ -85,7 +85,7 @@
     class={cls(
       'Dialog',
       'fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center pointer-events-none',
-      theme.root,
+      settingsClasses.root,
       classes.root
     )}
     on:click={onClick}
@@ -108,8 +108,8 @@
   >
     <div
       class={cls(
-        'dialog rounded bg-white elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
-        theme.dialog,
+        'dialog rounded bg-surface-100 elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
+        settingsClasses.dialog,
         classes.dialog,
         $$props.class
       )}
@@ -131,7 +131,9 @@
 
       <slot name="header">
         {#if $$slots.title}
-          <div class={cls('text-xl font-bold pt-4 pb-2 px-6', theme.title, classes.title)}>
+          <div
+            class={cls('text-xl font-bold pt-4 pb-2 px-6', settingsClasses.title, classes.title)}
+          >
             <slot name="title" />
           </div>
         {/if}
@@ -142,8 +144,8 @@
       {#if $$slots.actions}
         <div
           class={cls(
-            'actions flex w-full justify-end p-2 bg-black/5 border-t',
-            theme.actions,
+            'actions flex w-full justify-end p-2 bg-surface-content/5 border-t',
+            settingsClasses.actions,
             classes.actions
           )}
           bind:this={actionsEl}

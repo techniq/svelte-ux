@@ -1,7 +1,0 @@
-{
-  "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["src/lib/index.ts"],
-  "json": "src/docs/api.json",
-  "tsconfig": "tsconfig.json",
-  "skipErrorChecking": true
-}

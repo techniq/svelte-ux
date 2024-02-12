@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   import { type ComponentProps, createEventDispatcher } from 'svelte';
   import { flip } from 'svelte/animate';
@@ -24,6 +24,7 @@
   export let indeterminateSelected: string[] = [];
   export let duration = 200;
   export let inlineSearch = false;
+  export let autoFocusSearch = false;
   export let placeholder = 'Search items';
 
   /** Wrap options in `InfiniteScroll` to amortize rendering of a large number of options */
@@ -41,7 +42,7 @@
   export let classes: {
     root?: string;
   } = {};
-  const theme = getComponentTheme('MultiSelect');
+  const settingsClasses = getComponentClasses('MultiSelect');
 
   export let onApply = async (ctx: {
     selection: typeof $selection;
@@ -111,17 +112,17 @@
 </script>
 
 {#if inlineSearch}
-  <div class="border-b border-gray-100 p-4 pb-2">
+  <div class="border-b border-surface-content/10 p-4 pb-2">
     <TextField
       {placeholder}
       iconRight={mdiMagnify}
       bind:value={searchText}
-      autofocus={{ delay: 100 }}
+      autofocus={{ delay: 100, disabled: !autoFocusSearch }}
     />
   </div>
 {/if}
 
-<div class={cls('overflow-auto py-1 px-4', theme.root, classes.root, $$restProps.class)}>
+<div class={cls('overflow-auto py-1 px-4', settingsClasses.root, classes.root, $$restProps.class)}>
   <slot name="beforeOptions" selection={$selection} />
 
   <!-- initially selected options -->
@@ -166,7 +167,7 @@
 
   {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
     <!-- separator between selected and deselected -->
-    <div class="border-b border-gray-100" />
+    <div class="border-b border-surface-content/10" />
   {/if}
 
   <!-- initially unselected options -->
@@ -208,7 +209,7 @@
       </div>
     {:else}
       {#if !filteredSelectedOptions.length}
-        <div class="text-gray-400 text-xs py-2">There are no matching items.</div>
+        <div class="text-surface-content/50 text-xs py-2">There are no matching items.</div>
       {/if}
     {/each}
   </InfiniteScroll>
@@ -216,7 +217,7 @@
   <slot name="afterOptions" selection={$selection} />
 </div>
 
-<div class="grid grid-cols-[auto,1fr,auto] border-t border-gray-100 px-4 py-2">
+<div class="grid grid-cols-[auto,1fr,auto] border-t border-surface-content/10 px-4 py-2">
   <slot name="actions" selection={$selection} {searchText}>
     <div />
   </slot>
@@ -238,7 +239,7 @@
 
     <Button
       variant="fill"
-      color="accent"
+      color="primary"
       class="px-6"
       loading={applying}
       disabled={!$isSelectionDirty || applying}

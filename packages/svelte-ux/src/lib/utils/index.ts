@@ -1,9 +1,15 @@
 // top-level exports
-export { formatDate, PeriodType } from './date';
-export * from './dateDisplay';
+export { formatDate } from './date';
+export { PeriodType, DayOfWeek, DateToken } from './date_types';
 export * from './duration';
 export * from './file';
-export * from './format';
+export {
+  format,
+  formatWithLocale,
+  type FormatFunction,
+  type FormatFunctionProperties,
+  type FormatFunctions,
+} from './format';
 export * from './json';
 export * from './logger';
 export { round, clamp } from './number';
@@ -18,6 +24,15 @@ export * as date from './date';
 export * as dateRange from './dateRange';
 export * as dom from './dom';
 export * as env from './env';
+export {
+  defaultLocale,
+  createLocaleSettings,
+  type LocaleStore,
+  type LocaleSettings,
+  type LocaleSettingsInput,
+  type NumberPresets,
+  type NumberPresetsOptions,
+} from './locale';
 // export * as excel from './excel'; // Remove until `await import('exceljs')` works externally
 export * as map from './map';
 export * as number from './number';

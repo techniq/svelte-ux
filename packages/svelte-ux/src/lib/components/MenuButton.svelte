@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import type { ComponentProps } from '$lib/types';
+  import { getComponentSettings } from './settings';
   import { mdiMenuDown } from '@mdi/js';
 
   import { cls } from '../utils/styles';
@@ -8,12 +10,14 @@
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
-  import { getComponentTheme } from './theme';
+
+  const dispatch = createEventDispatcher<{ change: { value: any } }>();
+  const { classes: settingsClasses, defaults } = getComponentSettings('MenuButton');
 
   export let options: Array<{ label: string; value: any; icon?: string }>;
   export let value: any = null;
   export let menuProps: ComponentProps<Menu> = { placement: 'bottom-start' };
-  export let menuIcon = mdiMenuDown;
+  export let menuIcon: string | null = mdiMenuDown;
   $: selected = options?.find((x) => x.value === value);
 
   export let classes: {
@@ -21,31 +25,34 @@
     label?: string;
     icon?: string;
   } = {};
-  const theme = getComponentTheme('MenuButton');
 
   let open = false;
+
+  $: restProps = { ...defaults, ...$$restProps };
 </script>
 
 <Button
   on:click={() => (open = !open)}
-  {...$$restProps}
-  class={cls('MenuButton', theme.root, classes.root, $$props.class)}
+  {...restProps}
+  class={cls('MenuButton', settingsClasses.root, classes.root, $$props.class)}
 >
   <slot name="selection">
-    <span class={cls('truncate', theme.label, classes.label)}>
+    <span class={cls('truncate', settingsClasses.label, classes.label)}>
       {selected?.label ?? 'No selection'}
     </span>
   </slot>
 
-  <Icon
-    path={menuIcon}
-    class={cls(
-      'opacity-50 transform transition-all -mr-2 duration-300',
-      open && '-rotate-180',
-      theme.icon,
-      classes.icon
-    )}
-  />
+  {#if menuIcon}
+    <Icon
+      path={menuIcon}
+      class={cls(
+        'opacity-50 transform transition-all -mr-2 duration-300',
+        open && '-rotate-180',
+        settingsClasses.icon,
+        classes.icon
+      )}
+    />
+  {/if}
 
   <Menu
     {open}
@@ -60,7 +67,10 @@
           <MenuItem
             icon={option.icon}
             selected={option.value === value}
-            on:click={() => (value = option.value)}
+            on:click={() => {
+              value = option.value;
+              dispatch('change', { value });
+            }}
           >
             {option.label}
           </MenuItem>

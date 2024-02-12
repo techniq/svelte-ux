@@ -1,8 +1,8 @@
 <script lang="ts">
   import { cls } from '../utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
-  const theme = getComponentTheme('EmptyMessage');
+  const settingsClasses = getComponentClasses('EmptyMessage');
 </script>
 
 <div
@@ -10,10 +10,10 @@
   class={cls(
     'EmptyMessage',
     'grid place-items-center',
-    'p-1 bg-black/10 shadow-inner ring-1 ring-black/30',
-    'text-black/50 text-xs tracking-wider',
-    'border rounded',
-    theme.root,
+    'p-1 bg-surface-300 _shadow-inner _ring-1 ring-surface-200/30',
+    'text-surface-content/50 text-xs tracking-wider',
+    'border border-surface-100/80 rounded',
+    settingsClasses.root,
     $$props.class
   )}
 >

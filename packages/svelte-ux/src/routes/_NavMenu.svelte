@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import NavItem from '$lib/components/NavItem.svelte';
-  import { mdiFormatListBulleted, mdiHome, mdiPalette } from '@mdi/js';
+  import { mdiCog, mdiFormatListBulleted, mdiHome, mdiPalette } from '@mdi/js';
 
   const components = {
     App: ['AppBar', 'AppLayout', 'NavItem', 'Settings'],
@@ -52,7 +52,6 @@
     ],
     Feedback: ['Badge', 'Progress', 'ProgressCircle'],
     Date: [
-      'dateDisplay',
       'DateField',
       'DatePickerField',
       'DateRange',
@@ -70,7 +69,6 @@
   };
 
   const actions = [
-    'cssVars',
     'dataBackground',
     'input',
     'layout',
@@ -82,6 +80,7 @@
     'scroll',
     'spotlight',
     'sticky',
+    'styleProps',
     'table',
   ];
 
@@ -108,7 +107,8 @@
 </script>
 
 <NavItem text="Getting Started" icon={mdiHome} currentUrl={$page.url} path="/" />
-<NavItem text="Customization" icon={mdiPalette} currentUrl={$page.url} path="/customization" />
+<NavItem text="Customization" icon={mdiCog} currentUrl={$page.url} path="/customization" />
+<NavItem text="Theme" icon={mdiPalette} currentUrl={$page.url} path="/theme" />
 <NavItem text="Changelog" icon={mdiFormatListBulleted} currentUrl={$page.url} path="/changelog" />
 
 <h1>Components</h1>

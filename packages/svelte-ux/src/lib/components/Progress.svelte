@@ -1,11 +1,11 @@
 <script lang="ts">
   import { cls } from '$lib/utils/styles';
-  import { getComponentTheme } from './theme';
+  import { getComponentClasses } from './theme';
 
   export let value: number | null;
   export let max: number | undefined = undefined;
 
-  const theme = getComponentTheme('Progress');
+  const settingsClasses = getComponentClasses('Progress');
 </script>
 
 <progress
@@ -17,12 +17,12 @@
     'h-2 w-full',
 
     // bar color
-    '[--color:theme(colors.accent.500)]',
+    '[--color:theme(colors.primary)]',
     '[&::-webkit-progress-value]:bg-[--color]',
     '[&::-moz-progress-bar]:bg-[--color]',
 
     // track color
-    '[--track-color:theme(colors.gray.100)]',
+    '[--track-color:theme(colors.surface-200)]',
     '[&::-webkit-progress-bar]:bg-[--track-color]',
     'bg-[--track-color]',
 
@@ -32,7 +32,7 @@
     '[&::-webkit-progress-bar]:rounded-full',
     'rounded-full',
 
-    theme.root,
+    settingsClasses.root,
     $$props.class
   )}
 />

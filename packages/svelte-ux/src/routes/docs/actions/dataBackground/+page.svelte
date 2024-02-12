@@ -87,7 +87,8 @@
     </div>
   </Field>
 
-  <Button on:click={() => (values = getValues())} variant="fill" color="accent">Update data</Button>
+  <Button on:click={() => (values = getValues())} variant="fill" color="primary">Update data</Button
+  >
 </div>
 
 <h2>Basic</h2>
@@ -99,7 +100,7 @@
       {#key duration}
         <tr>
           <td
-            class="text-right border border-gray-100 tabular-nums"
+            class="text-right border tabular-nums"
             use:dataBackground={{
               value,
               color: value > 0 ? 'hsl(140 80% 80%)' : 'hsl(0 80% 80%)',
@@ -128,8 +129,8 @@
         <tr>
           <td
             class={cls(
-              'text-right border border-gray-100 tabular-nums',
-              value > 0 ? 'from-green-300 to-green-500' : 'from-red-500 to-red-300'
+              'text-right border tabular-nums',
+              value > 0 ? 'from-success-300 to-success-500' : 'from-danger to-danger-300'
             )}
             use:dataBackground={{
               value,
