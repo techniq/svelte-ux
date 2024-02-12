@@ -51,7 +51,7 @@ module.exports = {
 The Svelte UX tailwind plugin (`svelte-ux/plugins/tailwind.cjs`) will translate the defined colors to a common color space, which uses `hsl()` by default. If you would like to change the color space, for example use `oklch()` for an increased gamut of colors, simply call the plugin with the `colorSpace` option defined.
 
 ```js
-const svelteUx = require('./src/lib/plugins/tailwind.cjs');
+const svelteUx = require('svelte-ux/plugins/tailwind.cjs');
 
 module.exports = {
   // ...
