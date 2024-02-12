@@ -118,15 +118,19 @@ export function settings(settings: SettingsInput): Settings {
   });
 }
 
+const FALLBACK_CONTEXT: Settings = {
+  currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
+  componentSettingsCache: {},
+  ...createLocaleStores({}),
+};
+
 export function getSettings(): Settings {
-  // in a try/catch to be able to test wo svelte components
+  // in a try/catch to be able to test w/o svelte components
+
   try {
-    return getContext<Settings>(settingsKey) ?? {};
+    return getContext<Settings>(settingsKey) ?? FALLBACK_CONTEXT;
   } catch (error) {
-    return {
-      currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
-      componentSettingsCache: {},
-    };
+    return FALLBACK_CONTEXT;
   }
 }
 
