@@ -260,7 +260,10 @@
             <slot name="prepend" />
             {#if icon}
               <span class="mr-3">
-                <Icon data={asIconData(icon)} class={cls("text-surface-content/50", classes.icon)} />
+                <Icon
+                  data={asIconData(icon)}
+                  class={cls('text-surface-content/50', classes.icon)}
+                />
               </span>
             {/if}
           </div>

@@ -75,31 +75,31 @@
 
   let fieldClasses: ComponentProps<TextField>['classes'];
   $: {
-    let v: {root?: any} = {};
+    let v: { root?: any } = {};
     if (typeof settingsClasses?.field === 'string') {
       v = { root: settingsClasses.field };
     } else {
       v = settingsClasses?.field ?? {};
     }
     if (typeof classes?.field === 'string') {
-      fieldClasses = { ...v, root: cls(v.root, classes.field)};
+      fieldClasses = { ...v, root: cls(v.root, classes.field) };
     } else {
-      fieldClasses = { ...v, ...classes?.field ?? {} };
+      fieldClasses = { ...v, ...(classes?.field ?? {}) };
     }
   }
 
   let optionClasses: ComponentProps<MenuItem>['classes'];
   $: {
-    let v: {root?: any} = {};
+    let v: { root?: any } = {};
     if (typeof settingsClasses?.option === 'string') {
       v = { root: settingsClasses.option };
     } else {
       v = settingsClasses?.option ?? {};
     }
     if (typeof classes?.option === 'string') {
-      optionClasses = { ...v, root: cls(v.root, classes.option)};
+      optionClasses = { ...v, root: cls(v.root, classes.option) };
     } else {
-      optionClasses = { ...v, ...classes?.option ?? {} };
+      optionClasses = { ...v, ...(classes?.option ?? {}) };
     }
   }
 
@@ -454,9 +454,11 @@
     classes={{
       ...fieldClasses,
       container: inlineOptions
-        ? cls('border-none shadow-none hover:shadow-none group-focus-within:shadow-none', fieldClasses?.container)
+        ? cls(
+            'border-none shadow-none hover:shadow-none group-focus-within:shadow-none',
+            fieldClasses?.container
+          )
         : fieldClasses?.container,
-      
     }}
     class={cls('h-full')}
     role="combobox"
@@ -563,7 +565,7 @@
           <svelte:fragment slot="option" let:option let:index>
             <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
               <MenuItem
-              	classes={optionClasses}
+                classes={optionClasses}
                 class={cls(
                   index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
                   option === selected && (classes.selected || 'font-semibold'),

@@ -22,7 +22,9 @@
     { label: 'Four', value: 4, icon: mdiAccount },
   ];
 
-  let options: MenuOption[] = graphicOptions.map(o => { return { ...o, icon: undefined }; });
+  let options: MenuOption[] = graphicOptions.map((o) => {
+    return { ...o, icon: undefined };
+  });
 
   const optionsWithGroup: MenuOption[] = [
     { label: 'One', value: 1, group: 'First' },
