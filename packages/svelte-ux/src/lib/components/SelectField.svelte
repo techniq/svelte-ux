@@ -67,14 +67,41 @@
     root?: string;
     field?: string | ComponentProps<TextField>['classes'];
     options?: string;
-    option?: string;
+    option?: string | ComponentProps<MenuItem>['classes'];
     selected?: string;
     group?: string;
     empty?: string;
   } = {};
 
   let fieldClasses: ComponentProps<TextField>['classes'];
-  $: fieldClasses = typeof classes.field === 'string' ? { root: classes.field } : classes.field;
+  $: {
+    let v: {root?: any} = {};
+    if (typeof settingsClasses?.field === 'string') {
+      v = { root: settingsClasses.field };
+    } else {
+      v = settingsClasses?.field ?? {};
+    }
+    if (typeof classes?.field === 'string') {
+      fieldClasses = { ...v, root: cls(v.root, classes.field)};
+    } else {
+      fieldClasses = { ...v, ...classes?.field ?? {} };
+    }
+  }
+
+  let optionClasses: ComponentProps<MenuItem>['classes'];
+  $: {
+    let v: {root?: any} = {};
+    if (typeof settingsClasses?.option === 'string') {
+      v = { root: settingsClasses.option };
+    } else {
+      v = settingsClasses?.option ?? {};
+    }
+    if (typeof classes?.option === 'string') {
+      optionClasses = { ...v, root: cls(v.root, classes.option)};
+    } else {
+      optionClasses = { ...v, ...classes?.option ?? {} };
+    }
+  }
 
   // Menu props
   export let placement: Placement = 'bottom-start';
@@ -425,11 +452,13 @@
     on:keypress={onKeyPress}
     actions={fieldActions}
     classes={{
+      ...fieldClasses,
       container: inlineOptions
-        ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none'
-        : undefined,
+        ? cls('border-none shadow-none hover:shadow-none group-focus-within:shadow-none', fieldClasses?.container)
+        : fieldClasses?.container,
+      
     }}
-    class={cls('h-full', settingsClasses.field, fieldClasses)}
+    class={cls('h-full')}
     role="combobox"
     aria-expanded={open ? 'true' : 'false'}
     aria-autocomplete={!inlineOptions ? 'list' : undefined}
@@ -534,6 +563,7 @@
           <svelte:fragment slot="option" let:option let:index>
             <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
               <MenuItem
+              	classes={optionClasses}
                 class={cls(
                   index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
                   option === selected && (classes.selected || 'font-semibold'),
@@ -549,6 +579,7 @@
                 role="option"
                 aria-selected={option === selected ? 'true' : 'false'}
                 aria-disabled={option?.disabled ? 'true' : 'false'}
+                icon={option.icon}
               >
                 {optionText(option)}
               </MenuItem>
@@ -594,6 +625,7 @@
         <svelte:fragment slot="option" let:option let:index>
           <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
             <MenuItem
+              classes={optionClasses}
               class={cls(
                 index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
                 option === selected && (classes.selected || 'font-semibold'),
@@ -609,6 +641,7 @@
               role="option"
               aria-selected={option === selected ? 'true' : 'false'}
               aria-disabled={option?.disabled ? 'true' : 'false'}
+              icon={option.icon}
             >
               {optionText(option)}
             </MenuItem>
