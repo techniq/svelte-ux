@@ -109,7 +109,7 @@
         {#if hasPrepend}
           <div
             class={cls(
-              'prepend whitespace-nowrap flex items-center',
+              'prepend flex items-center whitespace-nowrap',
               settingsClasses.prepend,
               classes.prepend
             )}
@@ -163,7 +163,13 @@
         </div>
 
         {#if hasAppend}
-          <div class={cls('append whitespace-nowrap', settingsClasses.append, classes.append)}>
+          <div
+            class={cls(
+              'append flex items-center whitespace-nowrap',
+              settingsClasses.append,
+              classes.append
+            )}
+          >
             {#if clearable && hasValue}
               <Button
                 icon={mdiClose}

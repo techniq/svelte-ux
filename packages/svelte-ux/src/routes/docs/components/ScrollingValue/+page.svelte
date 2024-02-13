@@ -132,8 +132,8 @@
 
 <Preview>
   <Field label="Value">
-    <ScrollingValue bind:value {axis} class="w-full" />
-    <div slot="append" class="flex">
+    <ScrollingValue bind:value axis="y" class="w-full" />
+    <div slot="append">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
     </div>
@@ -145,11 +145,11 @@
 
 <Preview>
   <Field class="w-36">
-    <div slot="prepend" class="flex">
+    <div slot="prepend">
       <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
     </div>
     <ScrollingValue bind:value {axis} classes={{ root: 'w-full', value: 'w-full text-center' }} />
-    <div slot="append" class="flex">
+    <div slot="append">
       <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
     </div>
   </Field>

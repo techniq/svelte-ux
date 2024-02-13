@@ -72,6 +72,18 @@
   <Button on:click={() => (value = 4)}>Pick 4</Button>
 </Preview>
 
+<h2>Error</h2>
+
+<Preview>
+  <SelectField {options} error />
+</Preview>
+
+<h2>Error message</h2>
+
+<Preview>
+  <SelectField {options} error="This is a required field" />
+</Preview>
+
 <h2>clearable=false</h2>
 
 <Preview>

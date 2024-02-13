@@ -387,11 +387,11 @@
 
 <Preview>
   <TextField label="Date Range">
-    <div slot="prepend" class="flex items-center">
+    <div slot="prepend">
       <Button icon={mdiChevronLeft} class="text-surface-content/50 p-2" />
       <Icon path={mdiCalendar} class="text-surface-content/50 mr-2" />
     </div>
-    <div slot="append" class="flex items-center">
+    <div slot="append">
       <Icon path={mdiRefresh} class="text-surface-content/50 mr-2" />
       <Button icon={mdiChevronRight} class="text-surface-content/50 p-2" />
     </div>

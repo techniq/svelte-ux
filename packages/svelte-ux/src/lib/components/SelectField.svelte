@@ -435,7 +435,7 @@
     aria-autocomplete={!inlineOptions ? 'list' : undefined}
     {...$$restProps}
   >
-    <span slot="prepend">
+    <span slot="prepend" class="flex items-center">
       {#if stepper}
         <Button
           icon={mdiChevronLeft}
