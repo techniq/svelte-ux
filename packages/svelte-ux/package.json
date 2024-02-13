@@ -59,7 +59,7 @@
     "@fortawesome/fontawesome-common-types": "^6.5.1",
     "@mdi/js": "^7.4.47",
     "clsx": "^2.1.0",
-    "culori": "^3.3.0",
+    "culori": "^4.0.0",
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
     "date-fns": "^3.2.0",
