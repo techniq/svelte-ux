@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.60.2
+
+### Patch Changes
+
+- Update dependencies ([`877c11d4acaf8bdfa4f807dff6b9843731e8e7b9`](https://github.com/techniq/svelte-ux/commit/877c11d4acaf8bdfa4f807dff6b9843731e8e7b9))
+
+- [Field/TextField/SelectField] Center flex align prepend/append slot containers ([`3d425c27353476a307f8994c1051f06554cd8da2`](https://github.com/techniq/svelte-ux/commit/3d425c27353476a307f8994c1051f06554cd8da2))
+
 ## 0.60.1
 
 ### Patch Changes
