@@ -198,7 +198,8 @@
   let labelEl: HTMLLabelElement | null = null;
 </script>
 
-<div
+<label
+  for={id}
   role="group"
   class={cls(
     'TextField',
@@ -454,7 +455,7 @@
       {error && error != true ? error : hint}
     </div>
   </div>
-</div>
+</label>
 
 <style lang="postcss">
   div.TextField:focus-within label.placement-float,
