@@ -57,7 +57,8 @@
   let labelEl: HTMLLabelElement | null = null;
 </script>
 
-<div
+<label
+  for={id}
   role="group"
   class={cls(
     'Field',
@@ -208,7 +209,7 @@
   </div>
 
   <slot name="root" />
-</div>
+</label>
 
 <style lang="postcss">
   div.Field:focus-within label.placement-float,
