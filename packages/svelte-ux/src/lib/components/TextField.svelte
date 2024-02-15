@@ -288,7 +288,7 @@
             class={cls(
               'input col-span-full row-span-full flex items-center',
               hasInsetLabel && 'pt-4',
-              dense ? 'my-1' : 'my-2',
+              hasInsetLabel && (dense ? 'my-1' : 'my-2'),
               (hasPrefix || hasSuffix) &&
                 label &&
                 labelPlacement === 'float' &&
@@ -322,6 +322,7 @@
                   'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
                   error && 'placeholder-danger',
                   (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-50',
+                  !hasInsetLabel && (dense ? 'py-1' : 'py-2'),
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
@@ -359,6 +360,7 @@
                   'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
                   error && 'placeholder-danger',
                   (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-50',
+                  !hasInsetLabel && (dense ? 'py-1' : 'py-2'),
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
