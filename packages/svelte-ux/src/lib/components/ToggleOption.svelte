@@ -45,8 +45,6 @@
 
 <label
   class:selected
-  on:click={() => selectOption(optionElement, value)}
-  on:click
   bind:this={optionElement}
   {...$$restProps}
   class={cls(
@@ -77,7 +75,14 @@
     <slot {selected} />
   </div>
 
-  <input type="radio" bind:value class="appearance-none absolute" checked={selected} />
+  <input
+    on:click={() => selectOption(optionElement, value)}
+    on:click
+    type="radio"
+    bind:value
+    class="appearance-none absolute"
+    checked={selected}
+  />
 </label>
 
 <style lang="postcss">

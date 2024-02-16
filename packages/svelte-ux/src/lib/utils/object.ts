@@ -1,7 +1,7 @@
 import { get, camelCase, mergeWith } from 'lodash-es';
 import { entries } from '../types/typeHelpers';
 
-export function isLiteralObject(obj: any) {
+export function isLiteralObject(obj: any): obj is object {
   return obj && typeof obj === 'object' && obj.constructor === Object;
 }
 
@@ -83,7 +83,10 @@ export type Expiry = Date | { [prop: string]: Date | { [prop: string]: Date } };
 /**
  * Remove properties from object based on expiration
  */
-export function expireObject<TObject>(object, expiry: Expiry): Partial<TObject> | null {
+export function expireObject<TObject extends object>(
+  object: TObject,
+  expiry: Expiry
+): Partial<TObject> | null {
   const now = new Date();
 
   if (expiry instanceof Date && expiry < now) {
@@ -96,16 +99,18 @@ export function expireObject<TObject>(object, expiry: Expiry): Partial<TObject> 
         if (propExpiry < now) {
           if (prop === '$default') {
             // Delete all properties which do not have explicit expiry to check
-            for (let [objProp, value] of Object.entries(object)) {
+            for (let objProp of Object.keys(object) as Array<keyof TObject>) {
               if (!(objProp in expiry)) {
                 delete object[objProp];
               }
             }
 
             // Remove expired `$default` property
+            // @ts-expect-error it's fine if the property doesn't exist in object
             delete object[prop];
           } else {
             // Remove expired property
+            // @ts-expect-error it's fine if the property doesn't exist in object
             delete object[prop];
           }
         } else {
@@ -113,13 +118,14 @@ export function expireObject<TObject>(object, expiry: Expiry): Partial<TObject> 
         }
       } else {
         // Check expiry for each property in object.  Skip if prop not in object (expiry only)
-        if (prop in object) {
-          expireObject(object[prop], propExpiry);
-        }
+        const value = object[prop as keyof TObject];
+        if (value && typeof value === 'object') {
+          expireObject(value, propExpiry);
 
-        // Remove property if empty object (all properties removed)
-        if (isLiteralObject(object[prop]) && Object.keys(object[prop]).length === 0) {
-          delete object[prop];
+          // Remove property if empty object (all properties removed)
+          if (isLiteralObject(value) && Object.keys(value).length === 0) {
+            delete object[prop as keyof TObject];
+          }
         }
       }
     }
@@ -149,7 +155,7 @@ export function pick<T extends object = {}>(obj: T, keys: string[]): Partial<T> 
     return obj;
   } else {
     return Object.fromEntries(
-      keys.filter((key) => key in obj).map((key) => [key, obj[key]])
+      keys.filter((key) => key in obj).map((key) => [key, obj[key as keyof T]])
     ) as Partial<T>;
   }
 }
