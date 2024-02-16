@@ -3,7 +3,7 @@ import { writable } from 'svelte/store';
 /**
  * Store to manage unique values using `Set` with improves ergonomics and better control of updates
  */
-export default function uniqueStore<T = string>(initialValues?: T[]) {
+export default function uniqueStore<T = string | number>(initialValues?: T[]) {
   const store = writable<Set<T>>(new Set(initialValues ?? []));
 
   return {

@@ -12,6 +12,8 @@
   import ToggleOption from '$lib/components/ToggleOption.svelte';
 
   let size: 'sm' | 'md' | 'lg' = 'md';
+
+  const variants = ['default', 'outline', 'fill', 'fill-light', 'fill-outline', 'text'] as const;
 </script>
 
 <h1>Examples</h1>
@@ -110,7 +112,7 @@
 
 <Preview>
   <div class="grid gap-3 divide-y">
-    {#each ['default', 'outline', 'fill', 'fill-light', 'fill-outline', 'text'] as variant}
+    {#each variants as variant}
       <div>
         <div class="font-semibold my-2">{variant}</div>
         <div class="grid gap-2 ml-4">

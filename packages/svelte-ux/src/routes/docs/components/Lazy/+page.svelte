@@ -4,7 +4,7 @@
   import Preview from '$lib/components/Preview.svelte';
 
   const items = Array(100)
-    .fill()
+    .fill(null)
     .map((x, i) => ({ name: `Item: ${i + 1}` }));
 </script>
 

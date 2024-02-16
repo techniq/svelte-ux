@@ -69,6 +69,6 @@
       close('clickOutside');
     }}
   >
-    <slot {close} />
+    <slot close={() => close()} />
   </div>
 {/if}

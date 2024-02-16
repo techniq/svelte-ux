@@ -35,7 +35,7 @@
 <h3>with prop</h3>
 
 <Preview>
-  <Breadcrumb {items} divider="\" class="gap-2" />
+  <Breadcrumb {items} divider="/" class="gap-2" />
 </Preview>
 
 <h2>Custom divider</h2>

@@ -6,7 +6,7 @@
 	import Paginate from '$lib/components/Paginate.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 
-	const items = Array(100).fill().map((x, i) => ({ name: `Item: ${i + 1}`}))
+	const items = Array(100).fill(null).map((x, i) => ({ name: `Item: ${i + 1}`}))
 </script>
 
 <h1>Usage</h1>

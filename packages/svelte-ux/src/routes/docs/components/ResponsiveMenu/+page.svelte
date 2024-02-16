@@ -181,13 +181,15 @@ See also
 >
 to add `pb-safe` util class
 
-<h2>Theme example</h2>
+<h2>Settings example</h2>
 
 <Preview>
   <Settings
-    classes={{
-      Drawer:
-        '[&.ResponsiveMenu]:rounded-t-xl [&.ResponsiveMenu]:py-2 [&.ResponsiveMenu]:pb-[env(safe-area-inset-bottom)]',
+    components={{
+      Drawer: {
+        classes:
+          '[&.ResponsiveMenu]:rounded-t-xl [&.ResponsiveMenu]:py-2 [&.ResponsiveMenu]:pb-[env(safe-area-inset-bottom)]',
+      },
     }}
   >
     <Toggle let:on={open} let:toggle let:toggleOff>

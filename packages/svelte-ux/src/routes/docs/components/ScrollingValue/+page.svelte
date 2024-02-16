@@ -114,7 +114,7 @@
     <span class="font-semibold">Svelte</span> is
     <ScrollingValue
       {axis}
-      value={$indexTimer}
+      value={$indexTimer ?? 0}
       format={(value) => {
         const options = ['compiled', 'compact', 'complete'];
         return options[Math.abs(value) % options.length];
