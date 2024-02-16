@@ -17,8 +17,8 @@
   const callsValue = {};
 
   let selected = 1;
-  let selectedStr = 'all';
-  let selectedObj = missedValue;
+  let selectedStr: string | undefined | null = 'all';
+  let selectedObj: object | undefined | null = missedValue;
 
   let variant: ComponentProps<ToggleGroup>['variant'] = 'default';
   let size: ComponentProps<ToggleGroup>['size'] = 'md';
@@ -27,6 +27,15 @@
   let gap: ComponentProps<ToggleGroup>['gap'] = false;
   let vertical: ComponentProps<ToggleGroup>['vertical'] = false;
   let showPanes = false;
+
+  const variants = [
+    'default',
+    'outline',
+    'fill',
+    'fill-light',
+    'fill-surface',
+    'underline',
+  ] as const;
 </script>
 
 <h1>Playground</h1>
@@ -101,7 +110,7 @@
 
 <h2>Variants</h2>
 
-{#each ['default', 'outline', 'fill', 'fill-light', 'fill-surface', 'underline'] as variant}
+{#each variants as variant}
   <h3>{variant}</h3>
   <Preview>
     <div class="inline-grid gap-2">

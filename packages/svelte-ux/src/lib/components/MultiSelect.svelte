@@ -20,8 +20,8 @@
   type Option = $$Generic;
 
   export let options: Option[];
-  export let value: string[] = [];
-  export let indeterminateSelected: string[] = [];
+  export let value: string[] | number[] = [];
+  export let indeterminateSelected: string[] | number[] = [];
   export let duration = 200;
   export let inlineSearch = false;
   export let autoFocusSearch = false;

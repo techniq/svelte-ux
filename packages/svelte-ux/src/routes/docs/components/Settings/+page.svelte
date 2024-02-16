@@ -13,10 +13,10 @@
 
 <Preview>
   <Settings
-    classes={{
-      Button: 'border-2 font-bold',
-      Menu: 'shadow-xl border-gray-500',
-      MenuItem: 'font-bold',
+    components={{
+      Button: { classes: 'border-2 font-bold' },
+      Menu: { classes: 'shadow-xl border-gray-500' },
+      MenuItem: { classes: 'font-bold' },
     }}
   >
     <Toggle let:on={open} let:toggle>

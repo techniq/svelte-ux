@@ -14,14 +14,18 @@
     const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
     switch (e.code) {
       case 'ArrowUp':
-        value += step;
+        increment(step);
         e.preventDefault();
         break;
       case 'ArrowDown':
-        value -= step;
+        increment(-step);
         e.preventDefault();
         break;
     }
+  }
+
+  function increment(newValue: number) {
+    value = (value ?? 0) + newValue;
   }
 </script>
 
@@ -31,13 +35,13 @@
 
 <div class="grid grid-cols-[1fr,auto,auto] gap-2">
   <ButtonGroup variant="fill-light" class="grid grid-flow-col ml-2">
-    <Button on:click={() => (value -= 100)}>-100</Button>
-    <Button on:click={() => (value -= 10)}>-10</Button>
-    <Button on:click={() => (value -= 1)}>-1</Button>
+    <Button on:click={() => increment(-100)}>-100</Button>
+    <Button on:click={() => increment(-10)}>-10</Button>
+    <Button on:click={() => increment(-1)}>-1</Button>
     <Button on:click={() => (value = 0)}>0</Button>
-    <Button on:click={() => (value += 1)}>+1</Button>
-    <Button on:click={() => (value += 10)}>+10</Button>
-    <Button on:click={() => (value += 100)}>+100</Button>
+    <Button on:click={() => increment(1)}>+1</Button>
+    <Button on:click={() => increment(10)}>+10</Button>
+    <Button on:click={() => increment(100)}>+100</Button>
   </ButtonGroup>
   <Button variant="fill-light" on:click={() => (value = Math.random() * 10)}>Random</Button>
   <Button variant="fill-light" on:click={() => (value = null)}>Null</Button>

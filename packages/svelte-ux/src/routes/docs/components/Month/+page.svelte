@@ -13,8 +13,8 @@
   import Month from '$lib/components/Month.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
-  let selected = null;
-  let selectedArr = [];
+  let selected: Date | null = null;
+  let selectedArr: Date[] = [];
   let selectedRange = { from: null, to: null };
   let selectedWeek = { from: null, to: null };
   let selectedMultiMonth = { from: null, to: null };

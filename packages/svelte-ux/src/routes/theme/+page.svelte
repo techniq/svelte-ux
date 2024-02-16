@@ -46,8 +46,8 @@
   const daisyThemeNames = getThemeNames(data.themes.daisy);
   const skeletonThemeNames = getThemeNames(data.themes.skeleton);
 
-  let customLightTheme = {};
-  let customDarkTheme = {};
+  let customLightTheme: Record<string, string> = {};
+  let customDarkTheme: Record<string, string> = {};
 
   $: lightThemes = [
     {

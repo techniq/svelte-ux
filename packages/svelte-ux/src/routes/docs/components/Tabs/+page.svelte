@@ -145,7 +145,7 @@
 
     <Tab
       on:click={() => {
-        const newValue = max(options, (d) => d.value) + 1;
+        const newValue = max(options, (d) => d.value) ?? 0 + 1;
         options = [...options, { label: 'New ' + newValue, value: newValue }];
       }}
     >

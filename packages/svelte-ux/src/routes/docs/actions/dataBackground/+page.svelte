@@ -15,7 +15,7 @@
   import NumberStepper from '$lib/components/NumberStepper.svelte';
   import { cls } from '$lib/utils/styles';
 
-  let originalDomain = [-100, 100];
+  const originalDomain: [number, number] = [-100, 100];
 
   function getValues() {
     return Array.from({ length: 20 }).map(() =>
@@ -26,13 +26,15 @@
   let values = getValues();
   let domainSelected = 'original'; // 'derived'
   let sorted = false;
-  let inset = [0, 0];
+  let inset: [number, number] = [0, 0];
   let baseline = false;
   let duration = 300;
 
   // Use original domain (ex. -100 => 100) or derive based on data
   $: domain =
-    domainSelected === 'original' ? originalDomain : [Math.min(...values), Math.max(...values)];
+    domainSelected === 'original'
+      ? originalDomain
+      : ([Math.min(...values), Math.max(...values)] as [number, number]);
 </script>
 
 <h1>Usage</h1>
@@ -105,7 +107,6 @@
               value,
               color: value > 0 ? 'hsl(140 80% 80%)' : 'hsl(0 80% 80%)',
               domain,
-              bar: true,
               inset,
               baseline,
               tweened: { duration },
@@ -135,7 +136,6 @@
             use:dataBackground={{
               value,
               domain,
-              bar: true,
               inset,
               baseline,
               tweened: { duration },

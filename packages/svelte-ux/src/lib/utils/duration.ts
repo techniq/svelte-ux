@@ -91,8 +91,8 @@ export function getDuration(
 
 // See also: https://stackoverflow.com/questions/19700283/how-to-convert-time-milliseconds-to-hours-min-sec-format-in-javascript/33909506
 export function humanizeDuration(config: {
-  start?: Date;
-  end?: Date | null;
+  start?: Date | string;
+  end?: Date | string | null;
   duration?: Partial<Duration>;
   minUnits?: DurationUnits;
   totalUnits?: number;

@@ -47,7 +47,7 @@
 
 <Preview>
   {#each Array(5) as _, i}
-    <ExpansionPanel disabled={i % 2}>
+    <ExpansionPanel disabled={i % 2 > 0}>
       <div slot="trigger" class="flex-1 p-3">Item {i + 1}</div>
       <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
