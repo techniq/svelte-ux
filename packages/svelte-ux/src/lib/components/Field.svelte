@@ -71,10 +71,12 @@
     classes.root,
     $$props.class
   )}
+  bind:this={labelEl}
 >
   {#if label && ['top', 'left'].includes(labelPlacement)}
-    <label
+    <span
       class={cls(
+        'label',
         'block text-sm font-medium',
         'truncate group-hover:text-surface-content/70 group-focus-within:text-primary group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
         error ? 'text-danger/80' : 'text-surface-content/50',
@@ -82,11 +84,9 @@
         settingsClasses.label,
         classes.label
       )}
-      for={id}
-      bind:this={labelEl}
     >
       {label}
-    </label>
+    </span>
   {/if}
 
   <div class="flex-1">
@@ -128,8 +128,9 @@
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="flex-grow inline-grid" on:click>
           {#if label && ['inset', 'float'].includes(labelPlacement)}
-            <label
+            <span
               class={cls(
+                'label',
                 'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
                 center && 'justify-center',
                 error ? 'text-danger/80' : 'text-surface-content/50',
@@ -138,11 +139,9 @@
                 settingsClasses.label,
                 classes.label
               )}
-              for={id}
-              bind:this={labelEl}
             >
               {label}
-            </label>
+            </span>
           {/if}
 
           <div
@@ -212,8 +211,8 @@
 </label>
 
 <style lang="postcss">
-  div.Field:focus-within label.placement-float,
-  label.shrink {
+  .Field:focus-within .label.placement-float,
+  .label.shrink {
     transform: scale(0.75);
     width: 133%; /* offset 75% scale */
     height: 32px;
