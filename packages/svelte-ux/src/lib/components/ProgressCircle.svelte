@@ -7,6 +7,8 @@
   export let size = 40;
   export let width = 4;
   export let track = false;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('ProgressCircle');
 
@@ -26,7 +28,7 @@
     'ProgressCircular',
     'relative inline-flex justify-center items-center align-middle',
     settingsClasses.root,
-    $$props.class
+    className
   )}
   class:indeterminate
   style="height: {size}px; width: {size}px; {$$props.style}"

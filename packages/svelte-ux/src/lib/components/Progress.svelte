@@ -4,6 +4,8 @@
 
   export let value: number | null;
   export let max: number | undefined = undefined;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('Progress');
 </script>
@@ -33,6 +35,6 @@
     'rounded-full',
 
     settingsClasses.root,
-    $$props.class
+    className
   )}
 />

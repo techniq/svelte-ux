@@ -23,6 +23,8 @@
   import { getSettings } from './settings';
 
   export let selected: DateRange | null = { from: null, to: null, periodType: null };
+  let className: string | undefined = undefined;
+  export { className as class };
 
   /** Period types to show */
   export let periodTypes: PeriodType[] = [
@@ -171,7 +173,7 @@
     'w-[min(90vw,384px)]',
     showSidebar && 'md:w-[640px] md:grid-cols-[2fr,3fr]',
     settingsClasses.root,
-    $$props.class
+    className
   )}
 >
   <div class={cls(showSidebar && 'md:col-start-2')}>

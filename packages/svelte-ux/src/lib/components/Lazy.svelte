@@ -13,6 +13,9 @@
    */
   export let unmount = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   let show = false;
 
   type Offset = {
@@ -44,7 +47,7 @@
   on:intersecting
   style:min-height={typeof height === 'number' ? `${height}px` : height}
   {...$$restProps}
-  class={cls('Lazy', settingsClasses.root, $$props.class)}
+  class={cls('Lazy', settingsClasses.root, className)}
 >
   {#if show}
     <slot />

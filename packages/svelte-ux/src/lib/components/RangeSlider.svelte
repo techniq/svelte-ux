@@ -42,6 +42,9 @@
   export let value = [min, max];
   export let disabled = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   const settingsClasses = getComponentClasses('RangeSlider');
 
   $: stepPercent = step / (max - min);
@@ -227,7 +230,7 @@
     'group relative h-2 bg-surface-content/10 rounded-full select-none outline-none',
     disabled && ' pointer-events-none opacity-50',
     settingsClasses.root,
-    $$props.class
+    className
   )}
   style="--start: {$start}; --end: {$end};"
   {disabled}

@@ -14,7 +14,9 @@ export type ComponentName = keyof typeof Components;
 type ClassesProp<T> = T extends { prototype: infer PR extends SvelteComponent }
   ? ComponentProps<PR> extends { classes?: any }
     ? ComponentProps<PR>['classes']
-    : never
+    : ComponentProps<PR> extends { class?: string }
+      ? { root?: string }
+      : never
   : never;
 
 interface ComponentDefaultProps {

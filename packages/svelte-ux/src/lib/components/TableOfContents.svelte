@@ -11,6 +11,8 @@
   export let element = 'main';
   export let maxDepth = 6;
   export let icon = mdiCircleSmall;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   let activeHeadingId = '';
   let headings = [];
@@ -57,7 +59,7 @@
   {nodes}
   classes={{ li: (node) => cls(node.level === 1 ? 'mb-2' : node.level > 2 ? 'ml-3' : '') }}
   {...$$restProps}
-  class={cls('TableOfContents', settingsClasses.root, $$props.class)}
+  class={cls('TableOfContents', settingsClasses.root, className)}
   let:node
 >
   <slot {node} {activeHeadingId}>

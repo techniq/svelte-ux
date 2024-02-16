@@ -8,6 +8,8 @@
 
   export let open = false;
   export let placement: Placement | undefined = undefined;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   /**
    * Place popover based on which side of the viewport has more space
@@ -61,7 +63,7 @@
 
 {#if open}
   <div
-    class={cls('Popover absolute z-50 outline-none', settingsClasses.root, $$props.class)}
+    class={cls('Popover absolute z-50 outline-none', settingsClasses.root, className)}
     tabindex="-1"
     use:popover={{ anchorEl, placement, autoPlacement, offset, padding, matchWidth, resize }}
     on:clickOutside={(e) => {

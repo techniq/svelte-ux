@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DurationUnits, getDuration, humanizeDuration } from '../utils/duration';
+  import { DurationUnits, getDuration, humanizeDuration, type Duration } from '../utils/duration';
   import timerStore from '../stores/timerStore';
   import { getComponentClasses } from './theme';
   import { cls } from '$lib/utils/styles';
@@ -7,9 +7,11 @@
   export let start: Date | undefined = undefined;
   export let end: Date | undefined = undefined;
   export let duration: Partial<Duration> | undefined = undefined;
-  export let minUnits: DurationUnits | undefined = DurationUnits.Millisecond;
+  export let minUnits: DurationUnits = DurationUnits.Millisecond;
   export let totalUnits: number = 99;
   export let variant: 'short' | 'long' = 'short';
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('Duration');
 
@@ -57,4 +59,4 @@
   });
 </script>
 
-<span class={cls('Duration', settingsClasses.root, $$props.class)}>{displayDuration}</span>
+<span class={cls('Duration', settingsClasses.root, className)}>{displayDuration}</span>

@@ -5,6 +5,8 @@
 
   export let size: 'sm' | 'md' | 'lg' | 'unset' = 'md';
   export let icon: string | undefined = undefined;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('Avatar');
 </script>
@@ -17,9 +19,10 @@
       sm: 'w-6 h-6',
       md: 'w-10 h-10',
       lg: 'w-14 h-14',
+      unset: '',
     }[size],
     settingsClasses.root,
-    $$props.class
+    className
   )}
 >
   <slot>
