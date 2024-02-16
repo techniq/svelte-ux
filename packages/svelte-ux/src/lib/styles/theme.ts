@@ -111,7 +111,7 @@ export function processThemeColors(
           Object.keys(colors)
             .map((str) => {
               const [c, s] = str.split('-');
-              return [c, Number(s)];
+              return [c, Number(s)] as [string, number];
             })
             .find(([c, s]) => c === color && (s < 500 ? s > shade : s < shade))?.[1] ?? 500;
         const referenceColor = colors[`${color}-${referenceShade}`] ?? colors[color];

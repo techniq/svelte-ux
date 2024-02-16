@@ -33,13 +33,13 @@ export type ValueOf<T> = T[keyof T];
 
 // Get keys of object (strongly-typed)
 // Reason Object.keys() isn't like this by default due to runtime properties: https://github.com/Microsoft/TypeScript/pull/12253#issuecomment-263132208
-export function keys<T>(o: T) {
+export function keys<T extends object>(o: T) {
   return Object.keys(o) as (keyof T)[];
 }
 // export const keys = Object.keys as <T>(obj: T) => (Extract<keyof T, string>)[];
 
 // Get entries (array of [key, value] arrays) of object (strongly-typed)
-export function entries<T>(o: T) {
+export function entries<T extends object>(o: T) {
   return Object.entries(o) as [keyof T, T[keyof T]][]; // TODO: Improve based on key/value pair - https://stackoverflow.com/questions/60141960/typescript-key-value-relation-preserving-object-entries-type
 }
 
