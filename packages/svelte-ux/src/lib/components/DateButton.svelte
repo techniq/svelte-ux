@@ -20,6 +20,8 @@
   export let fade: boolean = false;
   export let format = getCustomFormat(periodType);
   export let variant = defaults.variant;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const { format: format_ux, localeSettings } = getSettings();
 
@@ -85,7 +87,7 @@
     isSelected && (isVerticalSelection ? 'bg-gradient-to-b' : 'bg-gradient-to-r'),
     hidden && 'opacity-0 pointer-events-none',
     settingsClasses.root,
-    $$props.class
+    className
   )}
 >
   <Button

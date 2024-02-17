@@ -5,6 +5,8 @@
 
   export let maxRotation = 20;
   export let setBrightness = false;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('Tilt');
 
@@ -46,7 +48,7 @@
     '[&>*]:[transform:rotateX(var(--rotateX))_rotateY(var(--rotateY))]',
     '[&>*]:brightness-[var(--brightness)]',
     settingsClasses.root,
-    $$props.class
+    className
   )}
   bind:clientWidth={width}
   bind:clientHeight={height}

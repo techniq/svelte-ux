@@ -33,6 +33,8 @@
   export let color: ComponentProps<Button>['color'] | undefined = defaults.color;
   export let rounded: ComponentProps<Button>['rounded'] | undefined = defaults.rounded;
   export let disabled: boolean = false;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   $: _class = cls(
     'ButtonGroup',
@@ -61,7 +63,7 @@
     '[&.variant-fill-light_:not(:first-child)_.Button]:ml-px',
 
     settingsClasses.root,
-    $$props.class
+    className
   );
 
   setButtonGroup({

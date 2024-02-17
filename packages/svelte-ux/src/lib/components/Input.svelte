@@ -20,6 +20,8 @@
   export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = undefined;
   export let inputEl: HTMLInputElement | null = null;
   export let autocapitalize: HTMLInputAttributes['autocapitalize'] = undefined;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let mask = '';
   export let replace = '_';
@@ -136,7 +138,7 @@
     'text-sm w-full outline-none bg-transparent placeholder-surface/50 selection:bg-surface-content/10',
     mask && (mask == placeholder || isFocused || value) && 'font-mono',
     settingsClasses.root,
-    $$props.class
+    className
   )}
 />
 

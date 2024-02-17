@@ -10,6 +10,8 @@
 
   export let initial: any = {};
   export let schema: Schema | undefined = undefined;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('Form');
 
@@ -26,7 +28,7 @@
   on:reset|preventDefault={(e) => {
     draft.revert();
   }}
-  class={cls(settingsClasses.root, $$props.class)}
+  class={cls(settingsClasses.root, className)}
   {...$$restProps}
 >
   <slot

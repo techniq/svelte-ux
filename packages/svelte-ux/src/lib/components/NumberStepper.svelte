@@ -11,6 +11,8 @@
   export let value: number = 0;
   export let min: number | undefined = undefined;
   export let max: number | undefined = undefined;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('NumberStepper');
 
@@ -23,7 +25,7 @@
   type="integer"
   bind:value
   align="center"
-  class={cls('NumberStepper w-24', settingsClasses.root, $$props.class)}
+  class={cls('NumberStepper w-24', settingsClasses.root, className)}
   actions={(node) => [selectOnFocus(node)]}
   {...$$restProps}
 >

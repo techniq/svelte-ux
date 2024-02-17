@@ -6,7 +6,7 @@
   export let initial: any[] = [];
   export let all: any[] = [];
   export let single = false;
-  export let max = false;
+  export let max: number | undefined = undefined;
 
   const selection = selectionStore({ initial, all, single, max });
   $: $selection.all.set(all);

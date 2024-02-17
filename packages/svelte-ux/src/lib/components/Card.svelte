@@ -8,11 +8,13 @@
   export let title: string | string[] | null = null;
   export let subheading: string | string[] | null = null;
   export let loading: boolean | null = null;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('Card');
 </script>
 
-<!-- 
+<!--
   `position:relative` sets a container for `position:absolute` children (ex. Overlay)
 
   `position: relative` with `z-index` sets new stacking context to keep
@@ -25,7 +27,7 @@
     'Card',
     'relative z-0 bg-surface-100 border rounded elevation-1 flex flex-col justify-between',
     settingsClasses.root,
-    $$props.class
+    className
   )}
 >
   {#if loading}

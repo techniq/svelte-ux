@@ -5,11 +5,13 @@
 
   export let title: string | string[] | null = null;
   export let subheading: string | string[] | null = null;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('Header');
 </script>
 
-<div class={cls('Header', 'flex items-center gap-4', settingsClasses.root, $$props.class)}>
+<div class={cls('Header', 'flex items-center gap-4', settingsClasses.root, className)}>
   <slot name="avatar" />
 
   <div class="flex-1">

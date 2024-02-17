@@ -10,6 +10,8 @@
 
   export let title: string | number | Array<string | number> = '';
   export let menuIcon: string | null = mdiMenu;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   /**
    * Update head / document.title.  Set to false to disable
@@ -31,12 +33,7 @@
 </script>
 
 <header
-  class={cls(
-    'AppBar',
-    'px-4 flex items-center relative z-50',
-    settingsClasses.root,
-    $$restProps.class
-  )}
+  class={cls('AppBar', 'px-4 flex items-center relative z-50', settingsClasses.root, className)}
 >
   {#if menuIcon}
     <slot name="menuIcon" {toggleMenu} isMenuOpen={$showDrawer}>

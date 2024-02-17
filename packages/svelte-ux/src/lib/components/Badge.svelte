@@ -6,6 +6,8 @@
   export let small = false;
   export let circle = false;
   export let dot = false;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let placement: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' = 'top-right';
 
@@ -72,7 +74,7 @@
         'scale-100': (value ?? 0) !== 0,
       },
       settingsClasses.root,
-      $$props.class
+      className
     )}
   >
     <slot name="value">

@@ -5,9 +5,11 @@
   import { cls } from '../utils/styles';
   import { getComponentClasses } from './theme';
 
-  export let items = [];
+  export let items: (string | null | undefined)[] = [];
   export let divider: string | undefined = undefined;
   export let inline = false;
+  let className: string | undefined = undefined;
+  export { className as class };
 
   const settingsClasses = getComponentClasses('Breadcrumb');
 
@@ -21,7 +23,7 @@
     inline ? 'inline-flex' : 'flex',
     'items-center justify-start flex-wrap',
     settingsClasses.root,
-    $$props.class
+    className
   )}
 >
   {#each displayItems as item, index}
