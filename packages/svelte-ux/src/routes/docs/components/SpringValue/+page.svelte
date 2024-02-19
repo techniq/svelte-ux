@@ -2,6 +2,7 @@
   import { getSettings } from '$lib/components/settings';
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
+  import Kbd from '$lib/components/Kbd.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SpringValue from '$lib/components/SpringValue.svelte';
   import { cls } from '$lib/utils/styles';
@@ -46,9 +47,10 @@
   <Button variant="fill-light" on:click={() => (value = Math.random() * 10)}>Random</Button>
   <Button variant="fill-light" on:click={() => (value = null)}>Null</Button>
 </div>
-<span class="text-xs ml-2 text-surface-content/50">
-  also keyboard up/down with shift: +/- 10 option: +/- 100
-</span>
+<div class="text-xs mt-1 ml-2 text-surface-content/50">
+  Keyboard: <Kbd>↑</Kbd>
+  <Kbd>↓</Kbd> +/- 1. With <Kbd shift>shift</Kbd> +/- 10. With <Kbd option>option</Kbd>: +/- 100
+</div>
 
 <h2>Basic</h2>
 

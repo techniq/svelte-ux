@@ -5,6 +5,7 @@
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Field from '$lib/components/Field.svelte';
+  import Kbd from '$lib/components/Kbd.svelte';
   import Month from '$lib/components/Month.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import ScrollingValue from '$lib/components/ScrollingValue.svelte';
@@ -79,7 +80,8 @@
   </Field>
 </div>
 <div class="text-xs ml-2 text-surface-content/50">
-  also keyboard up/down with shift: +/- 10 option: +/- 100
+  Keyboard: <Kbd>↑</Kbd>
+  <Kbd>↓</Kbd> +/- 1. With <Kbd shift>shift</Kbd> +/- 10. With <Kbd option>option</Kbd>: +/- 100
 </div>
 
 <h2>Basic</h2>
