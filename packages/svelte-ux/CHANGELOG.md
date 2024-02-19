@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.60.3
+
+### Patch Changes
+
+- [Field/TextField] Fix focus target by changing root container to `<label>` ([#259](https://github.com/techniq/svelte-ux/pull/259))
+
 ## 0.60.2
 
 ### Patch Changes
