@@ -56,7 +56,7 @@ function createState(page: number, perPage: number, total: number) {
     hasPrevious: totalPages > 1 && page > 1,
     hasNext: page < totalPages,
 
-    slice(items: any[]) {
+    slice<T>(items: T[]) {
       return items.slice((page - 1) * perPage, page * perPage);
     },
   };
