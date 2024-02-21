@@ -14,11 +14,26 @@
   import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
 </script>
+
+<svelte:head>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1"
+    rel="stylesheet"
+  />
+</svelte:head>
 
 <h1>Examples</h1>
 
-<h2>Material Design icons</h2>
+<div class="grid grid-cols-[1fr,auto] items-center gap-2">
+  <h2>Material Design icons</h2>
+
+  <ButtonGroup variant="fill-light" color="primary" size="sm">
+    <Button href="https://pictogrammers.com/library/mdi/" target="_blank">icons</Button>
+  </ButtonGroup>
+</div>
 
 <Preview>
   <Icon data={mdiAccount} />
@@ -36,10 +51,36 @@
   </Icon>
 </Preview>
 
-<h2>Font Awesome icons</h2>
+<div class="grid grid-cols-[1fr,auto] items-center gap-2">
+  <h2>Font Awesome icons</h2>
+  <ButtonGroup variant="fill-light" color="primary" size="sm">
+    <Button href="https://fontawesome.com/icons" target="blank">Icons</Button>
+  </ButtonGroup>
+</div>
 
 <Preview>
   <Icon data={faUser} />
+</Preview>
+
+<div class="grid grid-cols-[1fr,auto] items-center gap-2">
+  <h2>Material Symbols font</h2>
+  <ButtonGroup variant="fill-light" color="primary" size="sm">
+    <Button href="https://fonts.google.com/icons" target="blank">Icons</Button>
+    <Button href="https://developers.google.com/fonts/docs/material_symbols" target="blank">
+      Docs
+    </Button>
+  </ButtonGroup>
+</div>
+
+<Preview>
+  <Icon>
+    <span class="material-symbols-outlined">person</span>
+  </Icon>
+  <Icon>
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">
+      person
+    </span>
+  </Icon>
 </Preview>
 
 <h2>Sizes</h2>
