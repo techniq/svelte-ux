@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.60.4
+
+### Patch Changes
+
+- Add `classes` to Card to Header ([#268](https://github.com/techniq/svelte-ux/pull/268))
+
+- Make paginationStore.slice use the type of the input as the output type ([#265](https://github.com/techniq/svelte-ux/pull/265))
+
 ## 0.60.3
 
 ### Patch Changes
