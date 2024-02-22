@@ -236,6 +236,14 @@
   </Button>
 </Preview>
 
+<h2>Pass class to Icon</h2>
+
+<Preview>
+  <Button icon={mdiTrashCan} classes={{ icon: 'text-danger-300 text-lg' }} color="danger">
+    Delete
+  </Button>
+</Preview>
+
 <SectionDivider class="mt-12">Icon only</SectionDivider>
 
 <h2>Icon-only button</h2>
