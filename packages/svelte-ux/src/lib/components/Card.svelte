@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { ComponentProps } from 'svelte';
+
   import ProgressCircle from './ProgressCircle.svelte';
   import Header from './Header.svelte';
   import Overlay from './Overlay.svelte';
@@ -10,6 +12,14 @@
   export let loading: boolean | null = null;
   let className: string | undefined = undefined;
   export { className as class };
+
+  export let classes: {
+    root?: string;
+    header?: ComponentProps<Header>['classes'];
+    headerContainer?: string;
+    content?: string;
+    actions?: string;
+  } = {};
 
   const settingsClasses = getComponentClasses('Card');
 </script>
@@ -27,6 +37,7 @@
     'Card',
     'relative z-0 bg-surface-100 border rounded elevation-1 flex flex-col justify-between',
     settingsClasses.root,
+    classes.root,
     className
   )}
 >
@@ -37,9 +48,9 @@
   {/if}
 
   {#if title || subheading || $$slots.header}
-    <div class="p-4">
+    <div class={cls('p-4', classes.headerContainer)}>
       <slot name="header">
-        <Header {title} {subheading} />
+        <Header {title} {subheading} classes={classes.header} />
       </slot>
     </div>
   {/if}
@@ -47,13 +58,13 @@
   <slot />
 
   {#if $$slots.contents}
-    <div class="px-4 flex-1">
+    <div class={cls('px-4 flex-1', classes.content)}>
       <slot name="contents" />
     </div>
   {/if}
 
   {#if $$slots.actions}
-    <div class="py-2 px-1">
+    <div class={cls('py-2 px-1', classes.actions)}>
       <slot name="actions" />
     </div>
   {/if}
