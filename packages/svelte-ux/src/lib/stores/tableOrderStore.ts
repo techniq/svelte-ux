@@ -25,7 +25,16 @@ export default function tableOrderStore(props?: TableOrderProps) {
     handler: props?.initialHandler ?? sortFunc(props?.initialBy, props?.initialDirection ?? 'asc'),
   });
 
+  // TODO: (Breaking change) Take in an event with `e.detail.column` (like <Table on:headerClick={...} />) to simplify usage
+  // <Table on:headerClick={(e) => tableOrder.onHeaderClick(e.detail.column)} />
+  // vs
+  // <Table on:headerClick={tableOrder.onHeaderClick} />
   function onHeaderClick(column: ColumnDef) {
+    if (column.orderBy === false) {
+      // ignore
+      return;
+    }
+
     state.update((prevState) => {
       const by =
         typeof column.orderBy === 'string'

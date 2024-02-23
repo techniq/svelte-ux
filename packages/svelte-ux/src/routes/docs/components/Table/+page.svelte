@@ -42,8 +42,6 @@
     });
   }
   let randomData = randomDataGen();
-
-  $: sortedData = [...data].sort($order.handler);
 </script>
 
 <h1>Examples</h1>
@@ -169,7 +167,7 @@
 
 <Preview>
   <Table
-    data={sortedData}
+    data={[...data].sort($order.handler)}
     columns={[
       {
         name: 'name',
@@ -189,6 +187,7 @@
         name: 'carbs',
         align: 'right',
         format: 'integer',
+        orderBy: false,
       },
       {
         name: 'protein',
@@ -198,11 +197,7 @@
     ]}
     orderBy={$order.by}
     orderDirection={$order.direction}
-    on:headerClick={(e) => {
-      if (e.detail.column.orderBy !== false) {
-        order.onHeaderClick(e.detail.column);
-      }
-    }}
+    on:headerClick={(e) => order.onHeaderClick(e.detail.column)}
   />
 </Preview>
 
