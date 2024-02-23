@@ -28,7 +28,7 @@
     bind:checked
     on:change
     {value}
-    class={cls('peer appearance-none hidden', settingsClasses.input, classes.input)}
+    class={cls('peer appearance-none block', settingsClasses.input, classes.input)}
     {disabled}
   />
 
