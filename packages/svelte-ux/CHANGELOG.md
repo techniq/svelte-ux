@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.60.5
+
+### Patch Changes
+
+- [tableOrderStore] Ignore `column.orderBy` when `false` ([`74f05e7b70eba97cf86150be6cd3c070cd003b2c`](https://github.com/techniq/svelte-ux/commit/74f05e7b70eba97cf86150be6cd3c070cd003b2c))
+
+- [Switch] Switch internal/invisible `input` from `inline` to `block` to work around Chromium 122 regression (visible in Chrome, Edge, Arc, and Brave) ([`76e432a2531057ca51f634a79d466e77e49c5768`](https://github.com/techniq/svelte-ux/commit/76e432a2531057ca51f634a79d466e77e49c5768))
+
 ## 0.60.4
 
 ### Patch Changes
