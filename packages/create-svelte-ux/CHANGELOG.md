@@ -1,5 +1,11 @@
 # create-svelte-ux
 
+## 0.3.2
+
+### Patch Changes
+
+- Fix vitePreprocess import ([`c5961b1e48a23030be343f3942af140f645f6746`](https://github.com/techniq/svelte-ux/commit/c5961b1e48a23030be343f3942af140f645f6746))
+
 ## 0.3.1
 
 ### Patch Changes
