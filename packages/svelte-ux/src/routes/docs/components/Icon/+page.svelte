@@ -8,6 +8,7 @@
     mdiHeart,
     mdiCircleMedium,
     mdiArrowRight,
+    mdiOpenInNew,
   } from '@mdi/js';
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -31,7 +32,14 @@
   <h2>Material Design icons</h2>
 
   <ButtonGroup variant="fill-light" color="primary" size="sm">
-    <Button href="https://pictogrammers.com/library/mdi/" target="_blank">icons</Button>
+    <Button
+      href="https://pictogrammers.com/library/mdi/"
+      target="_blank"
+      class="flex-row-reverse"
+      icon={mdiOpenInNew}
+    >
+      Icons
+    </Button>
   </ButtonGroup>
 </div>
 
@@ -54,7 +62,14 @@
 <div class="grid grid-cols-[1fr,auto] items-center gap-2">
   <h2>Font Awesome icons</h2>
   <ButtonGroup variant="fill-light" color="primary" size="sm">
-    <Button href="https://fontawesome.com/icons" target="blank">Icons</Button>
+    <Button
+      href="https://fontawesome.com/icons"
+      target="_blank"
+      class="flex-row-reverse"
+      icon={mdiOpenInNew}
+    >
+      Icons
+    </Button>
   </ButtonGroup>
 </div>
 
@@ -64,9 +79,22 @@
 
 <div class="grid grid-cols-[1fr,auto] items-center gap-2">
   <h2>Material Symbols font</h2>
+
   <ButtonGroup variant="fill-light" color="primary" size="sm">
-    <Button href="https://fonts.google.com/icons" target="blank">Icons</Button>
-    <Button href="https://developers.google.com/fonts/docs/material_symbols" target="blank">
+    <Button
+      href="https://fonts.google.com/icons"
+      target="_blank"
+      class="flex-row-reverse"
+      icon={mdiOpenInNew}
+    >
+      Icons
+    </Button>
+    <Button
+      href="https://developers.google.com/fonts/docs/material_symbols"
+      target="_blank"
+      class="flex-row-reverse"
+      icon={mdiOpenInNew}
+    >
       Docs
     </Button>
   </ButtonGroup>
