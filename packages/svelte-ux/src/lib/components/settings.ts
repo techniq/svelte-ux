@@ -118,19 +118,23 @@ export function settings(settings: SettingsInput): Settings {
   });
 }
 
-const FALLBACK_CONTEXT: Settings = {
-  currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
-  componentSettingsCache: {},
-  ...createLocaleStores({}),
-};
+let FALLBACK_SETTINGS: Settings | null = null;
+
+function getFallbackSettings() {
+  FALLBACK_SETTINGS = FALLBACK_SETTINGS ?? {
+    currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
+    componentSettingsCache: {},
+    ...createLocaleStores({}),
+  };
+  return FALLBACK_SETTINGS;
+}
 
 export function getSettings(): Settings {
   // in a try/catch to be able to test w/o svelte components
-
   try {
-    return getContext<Settings>(settingsKey) ?? FALLBACK_CONTEXT;
+    return getContext<Settings>(settingsKey) ?? getFallbackSettings();
   } catch (error) {
-    return FALLBACK_CONTEXT;
+    return getFallbackSettings();
   }
 }
 
