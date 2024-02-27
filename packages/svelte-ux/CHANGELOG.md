@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.60.6
+
+### Patch Changes
+
+- Create `FALLBACK_SETTINGS` on demand so we don't call `createThemeStore()` eagerly and thus set `<html class="dark">` unintentional ([`84bea840cad3b73a35f7d4d7834d3c2d31862b78`](https://github.com/techniq/svelte-ux/commit/84bea840cad3b73a35f7d4d7834d3c2d31862b78))
+
 ## 0.60.5
 
 ### Patch Changes
