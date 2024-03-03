@@ -30,6 +30,8 @@
     { id: 13, name: 'Oreo', calories: 437, fat: 18.0, carbs: 63, protein: 4.0 },
   ];
 
+  $: sorted_data = data.sort($order.handler)
+
   function randomDataGen() {
     return data.map((d) => {
       return {
@@ -199,6 +201,51 @@
     orderDirection={$order.direction}
     on:headerClick={(e) => order.onHeaderClick(e.detail.column)}
   />
+</Preview>
+
+<h2>Order + Pagination</h2>
+
+<Preview>
+  <Paginate items={sorted_data} perPage={5} let:pageItems let:pagination>
+    <Table
+      data={pageItems}
+      columns={[
+        {
+          name: 'name',
+          align: 'left',
+        },
+        {
+          name: 'calories',
+          align: 'right',
+          format: 'integer',
+        },
+        {
+          name: 'fat',
+          align: 'right',
+          format: 'integer',
+        },
+        {
+          name: 'carbs',
+          align: 'right',
+          format: 'integer',
+        },
+        {
+          name: 'protein',
+          align: 'right',
+          format: 'integer',
+        },
+      ]}
+      orderBy={$order.by}
+      orderDirection={$order.direction}
+      on:headerClick={(e) => order.onHeaderClick(e.detail.column)}      
+    />
+    <Pagination
+      {pagination}
+      perPageOptions={[5, 10, 25, 100]}
+      show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+      classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+    />
+  </Paginate>
 </Preview>
 
 <h2>Data background</h2>
