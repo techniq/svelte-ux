@@ -80,47 +80,6 @@
   />
 </Preview>
 
-<h2>Basic</h2>
-
-<Preview>
-  <Table
-    {data}
-    columns={[
-      {
-        name: 'name',
-        align: 'left',
-        format: (value) =>
-          '<a href="https://www.google.com/search?q=' +
-          value +
-          '" class="underline" target="_blank">' +
-          value +
-          '</a>',
-        html: true,
-      },
-      {
-        name: 'calories',
-        align: 'right',
-        format: 'integer',
-      },
-      {
-        name: 'fat',
-        align: 'right',
-        format: 'integer',
-      },
-      {
-        name: 'carbs',
-        align: 'right',
-        format: 'integer',
-      },
-      {
-        name: 'protein',
-        align: 'right',
-        format: 'integer',
-      },
-    ]}
-  />
-</Preview>
-
 <h2>Pagination</h2>
 
 <Preview>
@@ -266,6 +225,51 @@
         classes: {
           td: 'from-danger/5 to-danger/10',
         },
+      },
+    ]}
+  />
+</Preview>
+
+<h2>Formatting with HTML</h2>
+
+<Preview>
+  <Table
+    {data}
+    columns={[
+      {
+        name: 'name',
+        align: 'left',
+        format: (value) => {
+          // TODO: Docs currently do not support backticks (template literals)
+          return (
+            '<a href="https://www.google.com/search?q=' +
+            value +
+            '" class="underline" target="_blank">' +
+            value +
+            '</a>'
+          );
+        },
+        html: true,
+      },
+      {
+        name: 'calories',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'fat',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'carbs',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'protein',
+        align: 'right',
+        format: 'integer',
       },
     ]}
   />
