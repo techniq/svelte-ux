@@ -30,7 +30,7 @@
     { id: 13, name: 'Oreo', calories: 437, fat: 18.0, carbs: 63, protein: 4.0 },
   ];
 
-  $: sorted_data = data.sort($order.handler)
+  $: sorted_data = data.sort($order.handler);
 
   function randomDataGen() {
     return data.map((d) => {
@@ -237,7 +237,7 @@
       ]}
       orderBy={$order.by}
       orderDirection={$order.direction}
-      on:headerClick={(e) => order.onHeaderClick(e.detail.column)}      
+      on:headerClick={(e) => order.onHeaderClick(e.detail.column)}
     />
     <Pagination
       {pagination}
