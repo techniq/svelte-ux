@@ -9,7 +9,7 @@
   export let column: ColumnDef;
 </script>
 
-{#if order.by && (order.by === column.name || order.by === column.orderBy)}
+{#if order.by && (order.by === column.value || order.by === column.name || order.by === column.orderBy)}
   <div
     class="TableOrderIcon inline-block transition duration-100 transform"
     class:rotate-180={order.direction === 'desc'}
