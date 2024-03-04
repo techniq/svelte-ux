@@ -30,8 +30,6 @@
     { id: 13, name: 'Oreo', calories: 437, fat: 18.0, carbs: 63, protein: 4.0 },
   ];
 
-  $: sorted_data = data.sort($order.handler);
-
   function randomDataGen() {
     return data.map((d) => {
       return {
@@ -206,7 +204,7 @@
 <h2>Order + Pagination</h2>
 
 <Preview>
-  <Paginate items={sorted_data} perPage={5} let:pageItems let:pagination>
+  <Paginate items={data.sort($order.handler)} perPage={5} let:pageItems let:pagination>
     <Table
       data={pageItems}
       columns={[
@@ -237,7 +235,11 @@
       ]}
       orderBy={$order.by}
       orderDirection={$order.direction}
-      on:headerClick={(e) => order.onHeaderClick(e.detail.column)}
+      on:headerClick={(e) => {
+        //Switch back to page 1 when sorting
+        pagination.setPage(1);
+        order.onHeaderClick(e.detail.column);
+      }}
     />
     <Pagination
       {pagination}
