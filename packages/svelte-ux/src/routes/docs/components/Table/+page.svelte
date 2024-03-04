@@ -160,6 +160,55 @@
   />
 </Preview>
 
+<h2>Order + Pagination</h2>
+
+<Preview>
+  <Paginate items={data.sort($order.handler)} perPage={5} let:pageItems let:pagination>
+    <Table
+      data={pageItems}
+      columns={[
+        {
+          name: 'name',
+          align: 'left',
+        },
+        {
+          name: 'calories',
+          align: 'right',
+          format: 'integer',
+        },
+        {
+          name: 'fat',
+          align: 'right',
+          format: 'integer',
+        },
+        {
+          name: 'carbs',
+          align: 'right',
+          format: 'integer',
+        },
+        {
+          name: 'protein',
+          align: 'right',
+          format: 'integer',
+        },
+      ]}
+      orderBy={$order.by}
+      orderDirection={$order.direction}
+      on:headerClick={(e) => {
+        //Switch back to page 1 when sorting
+        pagination.setPage(1);
+        order.onHeaderClick(e.detail.column);
+      }}
+    />
+    <Pagination
+      {pagination}
+      perPageOptions={[5, 10, 25, 100]}
+      show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+      classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+    />
+  </Paginate>
+</Preview>
+
 <h2>Data background</h2>
 
 <Preview>
