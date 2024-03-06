@@ -2,7 +2,7 @@
   import { fade } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
 
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let center = false;

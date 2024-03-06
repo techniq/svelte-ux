@@ -4,10 +4,10 @@
   import Icon from './Icon.svelte';
   import { scrollIntoView } from '../actions/scroll';
   import { getScrollParent } from '../utils/dom';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import { showDrawer } from './AppLayout.svelte';
-  import { mdScreen } from '../stores/matchMedia';
+  import { mdScreen } from '../stores/matchMedia.js';
 
   export let currentUrl: URL;
   export let path: string;

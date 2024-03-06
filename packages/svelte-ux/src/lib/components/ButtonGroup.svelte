@@ -23,7 +23,7 @@
 </script>
 
 <script lang="ts">
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('ButtonGroup');

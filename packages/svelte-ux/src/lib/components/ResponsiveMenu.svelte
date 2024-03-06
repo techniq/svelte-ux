@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
-  import { matchMediaWidth } from '../stores/matchMedia';
+  import { matchMediaWidth } from '../stores/matchMedia.js';
   import Drawer from './Drawer.svelte';
   import Menu from './Menu.svelte';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   export let open = true;
   export let screenWidth = 768; // md+

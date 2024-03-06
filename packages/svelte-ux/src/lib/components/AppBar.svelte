@@ -4,8 +4,8 @@
   import { showDrawer } from './AppLayout.svelte';
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
-  import { browser } from '../utils/env';
-  import { cls } from '../utils/styles';
+  import { browser } from '../utils/env.js';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let title: string | number | Array<string | number> = '';

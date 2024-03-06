@@ -3,7 +3,7 @@
 
   import Icon from './Icon.svelte';
   import { uniqueId } from '../utils/string';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let id = uniqueId('radio-');

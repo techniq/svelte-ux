@@ -1,5 +1,5 @@
 import { writable, type Readable } from 'svelte/store';
-import { browser } from '../utils/env';
+import { browser } from '../utils/env.js';
 
 /** Information about the currently chosen theme. */
 export class CurrentTheme {

@@ -11,7 +11,7 @@
   } from '../utils/date';
   import { getDateRangePresets } from '../utils/dateRange';
   import type { DateRange } from '../utils/dateRange';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { omit } from '../utils/object';
 
   import DateSelect from './DateSelect.svelte';

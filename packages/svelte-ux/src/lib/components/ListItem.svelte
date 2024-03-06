@@ -4,7 +4,7 @@
   import Icon from './Icon.svelte';
   import Overlay from './Overlay.svelte';
   import type { ComponentProps } from '../types';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let title: string | number | null = null;

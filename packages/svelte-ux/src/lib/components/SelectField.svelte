@@ -6,7 +6,7 @@
 
   import Logger from '../utils/logger';
   import { autoFocus, selectOnFocus } from '$lib/actions/input.js';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import Button from './Button.svelte';
   import ProgressCircle from './ProgressCircle.svelte';

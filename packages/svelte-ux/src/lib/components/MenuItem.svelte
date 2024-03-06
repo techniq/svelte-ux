@@ -1,7 +1,7 @@
 <script lang="ts">
   import Button from './Button.svelte';
   import type { ComponentProps } from '../types';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import {
     scrollIntoView as scrollIntoViewAction,
     type ScrollIntoViewOptions,

@@ -1,5 +1,5 @@
 import { readable, writable } from 'svelte/store';
-import { browser } from '../utils/env';
+import { browser } from '../utils/env.js';
 
 export function matchMedia(queryString: string) {
   if (browser) {

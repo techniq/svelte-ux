@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   const settingsClasses = getComponentClasses('DividerDot');

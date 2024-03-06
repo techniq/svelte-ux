@@ -7,7 +7,7 @@
 
   import { focusMove } from '../actions/focus';
   import { portal as portalAction, type PortalOptions } from '../actions/portal';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import Backdrop from './Backdrop.svelte';
   import ProgressCircle from './ProgressCircle.svelte';

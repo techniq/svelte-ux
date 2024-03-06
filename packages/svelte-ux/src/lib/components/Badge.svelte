@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let value: number = $$slots.value ? 1 : 0;

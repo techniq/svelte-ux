@@ -10,7 +10,7 @@
 
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let value = '';

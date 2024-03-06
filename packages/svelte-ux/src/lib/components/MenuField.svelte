@@ -3,7 +3,7 @@
   import type { ComponentProps } from '$lib/types/index.js';
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js';
 
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import Field from './Field.svelte';
   import Icon from './Icon.svelte';

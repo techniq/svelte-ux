@@ -4,7 +4,7 @@ import { isFunction } from 'lodash-es';
 import { parse, stringify } from '../utils/json';
 import { expireObject } from '../utils/object';
 import type { Expiry } from '../utils/object';
-import { browser } from '../utils/env';
+import { browser } from '../utils/env.js';
 
 type LocalStoreOptions<Value> = {
   expiry?: Expiry | ((previousExpiry: Expiry | undefined | null) => Expiry);

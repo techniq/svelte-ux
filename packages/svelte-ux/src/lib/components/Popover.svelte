@@ -3,7 +3,7 @@
   import type { Placement } from '@floating-ui/dom';
 
   import { popover, type PopoverOptions } from '../actions/popover';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let open = false;

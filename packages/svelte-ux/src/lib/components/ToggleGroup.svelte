@@ -7,7 +7,7 @@
   import { writable } from 'svelte/store';
   import { crossfade, fade } from 'svelte/transition';
 
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import Logger from '../utils/logger';
   import { getComponentClasses } from './theme.js';
 

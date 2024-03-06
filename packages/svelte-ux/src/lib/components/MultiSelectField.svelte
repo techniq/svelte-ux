@@ -12,7 +12,7 @@
   import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
 
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import Logger from '../utils/logger';
   import ProgressCircle from './ProgressCircle.svelte';
 

@@ -33,7 +33,7 @@
   import { movable } from '$lib/actions/mouse.js';
   import { decimalCount, round } from '$lib/utils/number.js';
   import Icon from './Icon.svelte';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let min = 0;

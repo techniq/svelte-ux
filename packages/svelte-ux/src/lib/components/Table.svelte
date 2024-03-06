@@ -3,7 +3,7 @@
 
   import { tableCell } from '../actions/table';
   import type { ColumnDef } from '../types/table';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '../utils/table';
 

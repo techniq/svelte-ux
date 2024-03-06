@@ -4,7 +4,7 @@
   import { getComponentSettings } from './settings.js';
   import { mdiMenuDown } from '@mdi/js';
 
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';

@@ -3,7 +3,7 @@
   import { parse as parseDate } from 'date-fns';
   import { PeriodType } from '../utils';
   import { getComponentSettings, getSettings } from './settings.js';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import Field from './Field.svelte';
 
