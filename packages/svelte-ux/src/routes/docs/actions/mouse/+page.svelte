@@ -3,7 +3,7 @@
 
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
-  import { longpress, movable } from '$lib/actions/mouse';
+  import { longpress, movable } from '$lib/actions/mouse.js';
 
   let longpressed = false;
 

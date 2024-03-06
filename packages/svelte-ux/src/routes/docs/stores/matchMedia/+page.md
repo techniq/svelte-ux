@@ -4,7 +4,7 @@
 	import Preview from '$lib/components/Preview.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 
-	import { matchMedia, matchMediaWidth, smScreen, mdScreen, lgScreen, xlScreen, xxlScreen, screen, print, darkColorScheme, motionReduce } from '$lib/stores/matchMedia';
+	import { matchMedia, matchMediaWidth, smScreen, mdScreen, lgScreen, xlScreen, xxlScreen, screen, print, darkColorScheme, motionReduce } from '$lib/stores/matchMedia.js';
 
   let innerWidth = 0;
 </script>

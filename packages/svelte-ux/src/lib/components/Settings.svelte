@@ -1,6 +1,6 @@
 <script lang="ts">
   import ThemeInit from './ThemeInit.svelte';
-  import { settings as setSettings, type SettingsInput } from './settings';
+  import { settings as setSettings, type SettingsInput } from './settings.js';
 
   type $$Props = SettingsInput & { themeInit?: boolean };
 

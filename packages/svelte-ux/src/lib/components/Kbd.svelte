@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 
   // keys
   export let control = false;

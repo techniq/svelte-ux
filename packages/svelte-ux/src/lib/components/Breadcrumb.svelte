@@ -3,7 +3,7 @@
 
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let items: (string | null | undefined)[] = [];
   export let divider: string | undefined = undefined;

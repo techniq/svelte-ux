@@ -3,8 +3,8 @@
   import type { Schema } from 'zod';
 
   import formStore from '../stores/formStore';
-  import { getComponentClasses } from './theme';
-  import { cls } from '$lib/utils/styles';
+  import { getComponentClasses } from './theme.js';
+  import { cls } from '$lib/utils/styles.js';
 
   const dispatch = createEventDispatcher();
 

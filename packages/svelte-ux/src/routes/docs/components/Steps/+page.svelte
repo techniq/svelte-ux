@@ -6,7 +6,7 @@
   import Preview from '$lib/components/Preview.svelte';
   import Steps from '$lib/components/Steps.svelte';
 
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 
   const items = [
     {

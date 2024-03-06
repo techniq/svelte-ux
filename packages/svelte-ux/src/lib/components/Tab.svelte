@@ -1,7 +1,7 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let selected: boolean = false;
   export let placement: 'top' | 'bottom' | 'left' | 'right' = 'top';

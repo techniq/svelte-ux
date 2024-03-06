@@ -2,7 +2,7 @@
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
 
-  import { tableCell } from '$lib/actions/table';
+  import { tableCell } from '$lib/actions/table.js';
 </script>
 
 <h1>Usage</h1>

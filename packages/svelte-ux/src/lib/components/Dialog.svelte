@@ -12,7 +12,7 @@
   import Backdrop from './Backdrop.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   const dispatch = createEventDispatcher();
 

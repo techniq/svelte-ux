@@ -8,8 +8,8 @@
   import { cls } from '../utils/styles';
 
   import Popover from './Popover.svelte';
-  import type { TransitionParams } from '$lib/types';
-  import { getComponentClasses } from './theme';
+  import type { TransitionParams } from '$lib/types/index.js';
+  import { getComponentClasses } from './theme.js';
 
   const dispatch = createEventDispatcher();
 

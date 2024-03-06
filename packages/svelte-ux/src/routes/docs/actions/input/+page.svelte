@@ -8,7 +8,7 @@
     blurOnEscape,
     selectOnFocus,
     debounceEvent,
-  } from '$lib/actions/input';
+  } from '$lib/actions/input.js';
 </script>
 
 <h1>Usage</h1>

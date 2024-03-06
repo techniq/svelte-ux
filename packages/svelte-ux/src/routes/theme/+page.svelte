@@ -20,9 +20,9 @@
     themeStylesString,
     type SupportedColorSpace,
   } from '$lib/styles/theme.js';
-  import type { MenuOption } from '$lib/types';
+  import type { MenuOption } from '$lib/types/index.js';
   import ColorField from './ColorField.svelte';
-  import { getSettings } from '$lib/components/settings';
+  import { getSettings } from '$lib/components/settings.js';
 
   export let data;
 

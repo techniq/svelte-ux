@@ -1,4 +1,4 @@
-import daisyThemes from 'daisyui/src/theming/themes';
+import daisyThemes from 'daisyui/src/theming/themes.js';
 // import { themeOrder } from 'daisyui/src/theming/themeDefaults'; // breaks build
 import { sortFunc } from '../utils/sort';
 

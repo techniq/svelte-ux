@@ -4,7 +4,7 @@
   import Icon from './Icon.svelte';
   import { uniqueId } from '../utils/string';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let id = uniqueId('checkbox-');
   export let name = '';

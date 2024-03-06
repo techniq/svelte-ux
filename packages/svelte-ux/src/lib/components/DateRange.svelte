@@ -18,9 +18,9 @@
   import MenuField from './MenuField.svelte';
   import ToggleGroup from './ToggleGroup.svelte';
   import ToggleOption from './ToggleOption.svelte';
-  import { getComponentClasses } from './theme';
-  import { mdScreen } from '$lib/stores/matchMedia';
-  import { getSettings } from './settings';
+  import { getComponentClasses } from './theme.js';
+  import { mdScreen } from '$lib/stores/matchMedia.js';
+  import { getSettings } from './settings.js';
 
   export let selected: DateRange | null = { from: null, to: null, periodType: null };
   let className: string | undefined = undefined;

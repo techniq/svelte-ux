@@ -7,7 +7,7 @@
 
   import { uniqueId } from '../utils/string';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let size: string | number = '1.5em';
   export let width = size;

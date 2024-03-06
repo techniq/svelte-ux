@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { isFunction } from 'lodash-es';
 import type { ColumnDef } from '../types/table';
-import { sortFunc } from '$lib/utils/sort';
+import { sortFunc } from '$lib/utils/sort.js';
 
 type SortFunc = (a: any, b: any) => number;
 type OrderDirection = 'asc' | 'desc';

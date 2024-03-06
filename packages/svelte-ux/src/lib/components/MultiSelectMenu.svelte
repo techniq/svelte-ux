@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   import type { Placement } from '@floating-ui/dom';
 
   import Menu from './Menu.svelte';
 
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
   import MultiSelect from './MultiSelect.svelte';
   import MultiSelectOption from './MultiSelectOption.svelte';
 

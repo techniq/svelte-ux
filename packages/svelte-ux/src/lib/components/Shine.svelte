@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { uniqueId } from '$lib/utils/string';
-  import { cls } from '$lib/utils/styles';
-  import { getComponentClasses } from './theme';
+  import { uniqueId } from '$lib/utils/string.js';
+  import { cls } from '$lib/utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   /** Color of light */
   export let lightColor = '#666666';

@@ -11,7 +11,7 @@
   import { PeriodType, getDateFuncsByPeriodType } from '../utils/date';
   import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange';
   import { cls } from '../utils/styles';
-  import { getComponentSettings, getSettings } from './settings';
+  import { getComponentSettings, getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();
   const { format, localeSettings } = getSettings();

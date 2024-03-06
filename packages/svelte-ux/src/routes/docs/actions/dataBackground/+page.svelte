@@ -6,14 +6,14 @@
   import Code from '$lib/components/Code.svelte';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
 
-  import { dataBackground } from '$lib/actions/dataBackground';
-  import { randomInteger } from '$lib/utils/number';
+  import { dataBackground } from '$lib/actions/dataBackground.js';
+  import { randomInteger } from '$lib/utils/number.js';
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
   import Field from '$lib/components/Field.svelte';
   import Switch from '$lib/components/Switch.svelte';
   import NumberStepper from '$lib/components/NumberStepper.svelte';
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 
   const originalDomain: [number, number] = [-100, 100];
 

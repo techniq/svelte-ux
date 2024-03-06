@@ -19,7 +19,7 @@
 
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
-  import { getSettings } from './settings';
+  import { getSettings } from './settings.js';
 
   export let selected: SelectedDate | undefined = undefined;
 

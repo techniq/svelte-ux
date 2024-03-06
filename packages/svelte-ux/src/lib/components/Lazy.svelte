@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
   import { intersection } from '../actions/observer';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   /**
    * Placeholder height.  Should match closely to resulting height to reducing scroll bouncing

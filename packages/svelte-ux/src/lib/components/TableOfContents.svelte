@@ -6,7 +6,7 @@
   import { cls } from '../utils/styles';
   import TreeList from './TreeList.svelte';
   import Icon from './Icon.svelte';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let element = 'main';
   export let maxDepth = 6;

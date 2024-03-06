@@ -5,7 +5,7 @@
   import Header from './Header.svelte';
   import Overlay from './Overlay.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let title: string | string[] | null = null;
   export let subheading: string | string[] | null = null;

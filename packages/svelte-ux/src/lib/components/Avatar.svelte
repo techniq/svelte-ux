@@ -1,7 +1,7 @@
 <script lang="ts">
   import { cls } from '../utils/styles';
   import Icon from './Icon.svelte';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let size: 'sm' | 'md' | 'lg' | 'unset' = 'md';
   export let icon: string | undefined = undefined;

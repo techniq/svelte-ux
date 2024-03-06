@@ -9,7 +9,7 @@
 
   import { breakpoints, mdScreen } from '../stores/matchMedia';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let navWidth = 240;
   export let headerHeight = 64;

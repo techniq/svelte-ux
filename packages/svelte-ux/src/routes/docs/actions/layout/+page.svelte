@@ -4,7 +4,11 @@
   import Code from '$lib/components/Code.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
 
-  import { remainingViewportHeight, remainingViewportWidth, overflow } from '$lib/actions/layout';
+  import {
+    remainingViewportHeight,
+    remainingViewportWidth,
+    overflow,
+  } from '$lib/actions/layout.js';
 
   let overflowX = 0;
   let overflowY = 0;

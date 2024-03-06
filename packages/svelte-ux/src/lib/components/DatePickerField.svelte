@@ -8,7 +8,7 @@
   import Dialog from './Dialog.svelte';
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import DateSelect from './DateSelect.svelte';
-  import { getComponentSettings, getSettings } from './settings';
+  import { getComponentSettings, getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();
   const { classes: settingsClasses, defaults } = getComponentSettings('DatePickerField');

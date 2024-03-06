@@ -6,10 +6,10 @@
   import Gooey from '$lib/components/Gooey.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
-  import timerStore from '$lib/stores/timerStore';
-  import { cls } from '$lib/utils/styles';
+  import timerStore from '$lib/stores/timerStore.js';
+  import { cls } from '$lib/utils/styles.js';
   import RangeField from '$lib/components/RangeField.svelte';
-  import { mouseCoords } from '$lib/actions/mouse';
+  import { mouseCoords } from '$lib/actions/mouse.js';
 
   export let gooeyBlur = 5;
 

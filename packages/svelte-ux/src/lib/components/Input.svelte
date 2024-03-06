@@ -11,7 +11,7 @@
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let value = '';
   export let type: HTMLInputTypeAttribute = 'text';

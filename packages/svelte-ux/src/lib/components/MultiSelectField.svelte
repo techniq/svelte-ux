@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentSettings } from './settings';
+  import { getComponentSettings } from './settings.js';
 
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import { get } from 'lodash-es';

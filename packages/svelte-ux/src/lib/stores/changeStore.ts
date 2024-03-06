@@ -1,5 +1,5 @@
 import { derived } from 'svelte/store';
-import type { Stores, StoresValues } from '$lib/types';
+import type { Stores, StoresValues } from '$lib/types/index.js';
 
 function changeStore<T extends Stores>(
   store: T,

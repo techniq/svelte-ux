@@ -4,7 +4,7 @@
 	import Preview from '$lib/components/Preview.svelte';
 	import Switch from '$lib/components/Switch.svelte';
 
-	import timerStore from '$lib/stores/timerStore';
+	import timerStore from '$lib/stores/timerStore.js';
 
   const dateTimer = timerStore({ initial: new Date(), onTick: () => new Date() })
   $: ({ isRunning: isDateRunning } = dateTimer);

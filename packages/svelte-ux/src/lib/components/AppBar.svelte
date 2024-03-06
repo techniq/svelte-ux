@@ -6,7 +6,7 @@
   import Button from './Button.svelte';
   import { browser } from '../utils/env';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let title: string | number | Array<string | number> = '';
   export let menuIcon: string | null = mdiMenu;

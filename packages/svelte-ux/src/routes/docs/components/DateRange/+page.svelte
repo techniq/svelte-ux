@@ -3,8 +3,8 @@
 
   import Preview from '$lib/components/Preview.svelte';
   import DateRange from '$lib/components/DateRange.svelte';
-  import { PeriodType, getDateFuncsByPeriodType } from '$lib/utils/date';
-  import { getSettings } from '$lib/components/settings';
+  import { PeriodType, getDateFuncsByPeriodType } from '$lib/utils/date.js';
+  import { getSettings } from '$lib/components/settings.js';
 
   const { localeSettings } = getSettings();
 

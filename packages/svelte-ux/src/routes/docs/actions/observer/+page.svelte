@@ -6,7 +6,7 @@
   import Code from '$lib/components/Code.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 
-  import { resize, intersection, mutate } from '$lib/actions/observer';
+  import { resize, intersection, mutate } from '$lib/actions/observer.js';
 </script>
 
 <h1>Usage</h1>

@@ -5,8 +5,8 @@
   import { cls } from '../utils/styles';
 
   import Icon from './Icon.svelte';
-  import type { TransitionParams } from '$lib/types';
-  import { getComponentClasses } from './theme';
+  import type { TransitionParams } from '$lib/types/index.js';
+  import { getComponentClasses } from './theme.js';
 
   /**
    * @slot {{ active: number }} trigger - Primary content to trigger the show/hide

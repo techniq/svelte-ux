@@ -5,7 +5,7 @@
   import { scrollIntoView } from '../actions/scroll';
   import { getScrollParent } from '../utils/dom';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
   import { showDrawer } from './AppLayout.svelte';
   import { mdScreen } from '../stores/matchMedia';
 

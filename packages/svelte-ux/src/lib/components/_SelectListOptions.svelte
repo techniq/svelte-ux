@@ -1,6 +1,6 @@
 <script lang="ts">
   import Logger from '../utils/logger';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles';
 
   const logger = new Logger('SelectListOptions');

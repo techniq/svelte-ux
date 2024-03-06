@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { overflow } from '$lib/actions/layout';
-  import { cls } from '$lib/utils/styles';
-  import { getComponentClasses } from './theme';
+  import { overflow } from '$lib/actions/layout.js';
+  import { cls } from '$lib/utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   const settingsClasses = getComponentClasses('Overflow');
 

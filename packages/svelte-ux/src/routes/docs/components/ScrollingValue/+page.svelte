@@ -12,7 +12,10 @@
   import ToggleGroup from '$lib/components/ToggleGroup.svelte';
   import ToggleOption from '$lib/components/ToggleOption.svelte';
 
-  import { PeriodType, getSettings, romanize, timerStore } from '$lib';
+  import { getSettings } from '$lib/components/settings.js';
+  import timerStore from '$lib/stores/timerStore.js';
+  import { romanize } from '$lib/utils/string.js';
+  import { PeriodType } from '$lib/utils/date_types.js';
 
   let value = 0;
   let axis: 'x' | 'y' = 'x';

@@ -6,7 +6,7 @@
   import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
   import type { SelectedDate } from '../utils/date';
   import { cls } from '../utils/styles';
-  import { getComponentSettings, getSettings } from './settings';
+  import { getComponentSettings, getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();
 

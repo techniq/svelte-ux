@@ -6,7 +6,7 @@
   import Preview from '$lib/components/Preview.svelte';
   import DateRangeField from '$lib/components/DateRangeField.svelte';
 
-  import { PeriodType } from '$lib/utils/date';
+  import { PeriodType } from '$lib/utils/date.js';
 
   let today = new Date();
   let value = {

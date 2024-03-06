@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { cls } from '$lib/utils/styles';
-  import { getComponentClasses } from './theme';
+  import { cls } from '$lib/utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   type Node = { id: number; name: string; level: number; children: Node[] };
 

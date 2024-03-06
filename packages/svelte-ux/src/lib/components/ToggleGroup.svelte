@@ -9,7 +9,7 @@
 
   import { cls } from '../utils/styles';
   import Logger from '../utils/logger';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let value: any = undefined; // index or value
   export let autoscroll: boolean = false;

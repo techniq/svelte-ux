@@ -3,7 +3,7 @@
   import type { TransitionConfig } from 'svelte/transition';
 
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let center = false;
   export let transition = [fade, { duration: 100 }] as [

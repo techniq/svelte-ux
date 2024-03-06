@@ -30,11 +30,11 @@
   import { scaleLinear } from 'd3-scale';
   import { mdiDragHorizontal } from '@mdi/js';
 
-  import { movable } from '$lib/actions/mouse';
-  import { decimalCount, round } from '$lib/utils/number';
+  import { movable } from '$lib/actions/mouse.js';
+  import { decimalCount, round } from '$lib/utils/number.js';
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let min = 0;
   export let max = 100;

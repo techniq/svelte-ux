@@ -8,7 +8,7 @@
 
   import Popover from './Popover.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let title = '';
   export let open = false;

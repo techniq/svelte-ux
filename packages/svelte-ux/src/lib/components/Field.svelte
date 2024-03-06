@@ -5,7 +5,7 @@
 
   import { cls } from '../utils/styles';
   import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types';
-  import { getComponentSettings } from './settings';
+  import { getComponentSettings } from './settings.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';

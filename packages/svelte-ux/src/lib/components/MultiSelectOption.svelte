@@ -1,7 +1,7 @@
 <script lang="ts">
   import Checkbox from './Checkbox.svelte';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let checked: boolean;
   export let indeterminate = false;

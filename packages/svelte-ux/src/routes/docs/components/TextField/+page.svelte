@@ -23,7 +23,7 @@
   import SectionDivider from '$lib/components/SectionDivider.svelte';
   import TextField from '$lib/components/TextField.svelte';
 
-  import { autoHeight, debounceEvent } from '$lib/actions/input';
+  import { autoHeight, debounceEvent } from '$lib/actions/input.js';
 
   const numberOperators = [
     { label: '=', value: 'equal' },

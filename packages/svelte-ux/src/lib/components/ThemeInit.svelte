@@ -1,6 +1,6 @@
 <script>
   import { createHeadSnippet } from '../styles/theme';
-  import { getSettings } from './settings';
+  import { getSettings } from './settings.js';
 
   const darkThemes = getSettings().themes?.dark ?? [];
 

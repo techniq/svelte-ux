@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { ThemeColors } from '$lib/types';
-  import { uniqueId } from '$lib/utils/string';
+  import type { ThemeColors } from '$lib/types/index.js';
+  import { uniqueId } from '$lib/utils/string.js';
   import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let id: string = uniqueId('switch-');
   export let value: any = undefined;

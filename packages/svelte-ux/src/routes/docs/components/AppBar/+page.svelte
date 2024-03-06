@@ -5,7 +5,7 @@
   import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import ListItem from '$lib/components/ListItem.svelte';
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 </script>
 
 <h1>Examples</h1>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   import { type ComponentProps, createEventDispatcher } from 'svelte';
   import { flip } from 'svelte/animate';
@@ -15,7 +15,7 @@
   import dirtyStore from '../stores/dirtyStore';
   import selectionStore from '../stores/selectionStore';
   import uniqueStore from '../stores/uniqueStore';
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 
   type Option = $$Generic;
 

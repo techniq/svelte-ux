@@ -7,7 +7,7 @@
 
   import Button from './Button.svelte';
   import Code from './Code.svelte';
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 
   export let code: string | null = null;
   export let language = 'svelte';
