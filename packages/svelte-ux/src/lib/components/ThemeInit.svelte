@@ -1,5 +1,5 @@
-<script>
-  import { createHeadSnippet } from '../styles/theme';
+<script lang="ts">
+  import { createHeadSnippet } from '../styles/theme.js';
   import { getSettings } from './settings.js';
 
   const darkThemes = getSettings().themes?.dark ?? [];
