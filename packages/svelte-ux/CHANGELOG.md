@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.1
+
+### Patch Changes
+
+- Fix date_types.js import in utils/index.ts ([`9b926b4f5d94507700a02d3e246eea21638f9d0b`](https://github.com/techniq/svelte-ux/commit/9b926b4f5d94507700a02d3e246eea21638f9d0b))
+
 ## 0.61.0
 
 ### Minor Changes
