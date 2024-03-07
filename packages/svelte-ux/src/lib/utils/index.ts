@@ -2,6 +2,7 @@
 export { formatDate } from './date.js';
 export { PeriodType, DayOfWeek, DateToken } from './date_types.js';
 export * from './date_types.js';
+export { getDuration, humanizeDuration, DurationUnits } from './duration.js';
 export * from './file.js';
 export {
   format,
@@ -23,6 +24,7 @@ export * as array from './array.js';
 export * as date from './date.js';
 export * as dateRange from './dateRange.js';
 export * as dom from './dom.js';
+export * as duration from './duration.js';
 export * as env from './env.js';
 export {
   defaultLocale,
