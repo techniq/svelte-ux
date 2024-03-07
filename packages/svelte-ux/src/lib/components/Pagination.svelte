@@ -43,7 +43,7 @@
   const settingsClasses = getComponentClasses('Pagination');
 </script>
 
-k{#if $pagination.totalPages > 1 || !hideSinglePage}
+{#if $pagination.totalPages > 1 || !hideSinglePage}
   <div
     class={cls(
       'Pagination',
