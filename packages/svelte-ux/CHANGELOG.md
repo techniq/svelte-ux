@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.0
+
+### Minor Changes
+
+- Support `NodeNext` packages ([#281](https://github.com/techniq/svelte-ux/pull/281))
+
 ## 0.60.6
 
 ### Patch Changes
