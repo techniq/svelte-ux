@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.3
+
+### Patch Changes
+
+- [Pagination] Remove rogue `k` (thanks vim bindings) ([`f0b8bdc2919aadfb316a35b27ae7816e26dae944`](https://github.com/techniq/svelte-ux/commit/f0b8bdc2919aadfb316a35b27ae7816e26dae944))
+
 ## 0.61.2
 
 ### Patch Changes
