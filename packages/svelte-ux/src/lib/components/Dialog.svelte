@@ -5,8 +5,8 @@
   import { scale } from 'svelte/transition';
   import { quadIn } from 'svelte/easing';
 
-  import { focusMove } from '../actions/focus';
-  import { portal as portalAction, type PortalOptions } from '../actions/portal';
+  import { focusMove } from '../actions/focus.js';
+  import { portal as portalAction, type PortalOptions } from '../actions/portal.js';
   import { cls } from '../utils/styles.js';
 
   import Backdrop from './Backdrop.svelte';

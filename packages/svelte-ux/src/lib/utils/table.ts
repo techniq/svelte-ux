@@ -1,10 +1,8 @@
 import { isFunction, get } from 'lodash-es';
 import { parseISO } from 'date-fns';
 
-import type { ColumnDef } from '../types/table';
-import { PeriodType } from '../utils/date';
-import { format } from '../utils/format';
-import type { Settings } from '../components/settings';
+import type { ColumnDef } from '../types/table.js';
+import { PeriodType } from '../utils/date_types.js';
 
 export function getHeaders(columns: ColumnDef[]) {
   const maxDepth = getDepth(columns);

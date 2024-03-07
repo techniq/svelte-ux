@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
-import { clamp, formatNumber, formatNumberWithLocale, round } from './number';
-import { defaultLocale, createLocaleSettings } from './locale';
+import { clamp, formatNumber, formatNumberWithLocale, round } from './number.js';
+import { defaultLocale, createLocaleSettings } from './locale.js';
 
 describe('clamp()', () => {
   it('no change', () => {

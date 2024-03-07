@@ -1,29 +1,29 @@
 // top-level exports
-export { formatDate } from './date';
-export { PeriodType, DayOfWeek, DateToken } from './date_types';
-export * from './duration';
-export * from './file';
+export { formatDate } from './date.js';
+export { PeriodType, DayOfWeek, DateToken } from './date_types.js';
+export * from 'date_types.js';
+export * from './file.js';
 export {
   format,
   formatWithLocale,
   type FormatFunction,
   type FormatFunctionProperties,
   type FormatFunctions,
-} from './format';
-export * from './json';
-export * from './logger';
-export { round, clamp } from './number';
-export * from './promise';
-export * from './sort';
-export { cls } from './styles';
-export * from './string';
+} from './format.js';
+export * from './json.js';
+export * from './logger.js';
+export { round, clamp } from './number.js';
+export * from './promise.js';
+export * from './sort.js';
+export { cls } from './styles.js';
+export * from './string.js';
 
 // aliased exports to remove conflicts (and make imports less noisy from top-level)
-export * as array from './array';
-export * as date from './date';
-export * as dateRange from './dateRange';
-export * as dom from './dom';
-export * as env from './env';
+export * as array from './array.js';
+export * as date from './date.js';
+export * as dateRange from './dateRange.js';
+export * as dom from './dom.js';
+export * as env from './env.js';
 export {
   defaultLocale,
   createLocaleSettings,
@@ -32,13 +32,13 @@ export {
   type LocaleSettingsInput,
   type NumberPresets,
   type NumberPresetsOptions,
-} from './locale';
+} from './locale.js';
 // export * as excel from './excel'; // Remove until `await import('exceljs')` works externally
-export * as map from './map';
-export * as number from './number';
-export * as object from './object';
-export * as rollup from './rollup';
-export * as routing from './routing';
-export * as serialize from './serialize';
-export * as styles from './styles';
-export * as table from './table';
+export * as map from './map.js';
+export * as number from './number.js';
+export * as object from './object.js';
+export * as rollup from './rollup.js';
+export * as routing from './routing.js';
+export * as serialize from './serialize.js';
+export * as styles from './styles.js';
+export * as table from './table.js';

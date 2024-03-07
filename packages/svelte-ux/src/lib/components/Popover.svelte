@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
-  import { popover, type PopoverOptions } from '../actions/popover';
+  import { popover, type PopoverOptions } from '../actions/popover.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 

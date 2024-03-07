@@ -3,7 +3,7 @@
 	import Checkbox from '$lib/components/Checkbox.svelte';
 	import TextField from '$lib/components/TextField.svelte';
 
-	import uniqueStore from '$lib/stores/uniqueStore';
+	import uniqueStore from '$lib/stores/uniqueStore.js';
 
 	const items = Array.from({ length: 5 }).map((_,i) => {
     return {

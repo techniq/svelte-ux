@@ -1,13 +1,13 @@
-import crimson from './crimson';
-import goldNouveau from './gold-nouveau';
-import hamlindigo from './hamlindigo';
-import modern from './modern';
-import rocket from './rocket';
-import sahara from './sahara';
-import seafoam from './seafoam';
-import skeleton from './skeleton';
-import vintage from './vintage';
-import wintry from './wintry';
+import crimson from './crimson.js';
+import goldNouveau from './gold-nouveau.js';
+import hamlindigo from './hamlindigo.js';
+import modern from './modern.js';
+import rocket from './rocket.js';
+import sahara from './sahara.js';
+import seafoam from './seafoam.js';
+import skeleton from './skeleton.js';
+import vintage from './vintage.js';
+import wintry from './wintry.js';
 import type { CSSRuleObject } from 'tailwindcss/types/config.js';
 
 export const themes = {

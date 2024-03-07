@@ -1,8 +1,8 @@
-import { formatDateWithLocale, getPeriodTypeNameWithLocale, getDayOfWeekName } from './date';
-import { formatNumberWithLocale } from './number';
-import type { FormatNumberOptions, FormatNumberStyle } from './number';
-import { defaultLocale, type LocaleSettings } from './locale';
-import { PeriodType, type FormatDateOptions, DayOfWeek } from './date_types';
+import { formatDateWithLocale, getPeriodTypeNameWithLocale, getDayOfWeekName } from './date.js';
+import { formatNumberWithLocale } from './number.js';
+import type { FormatNumberOptions, FormatNumberStyle } from './number.js';
+import { defaultLocale, type LocaleSettings } from './locale.js';
+import { PeriodType, type FormatDateOptions, DayOfWeek } from './date_types.js';
 
 export type FormatType = FormatNumberStyle | PeriodType | CustomFormatter;
 type CustomFormatter = (value: any) => string;

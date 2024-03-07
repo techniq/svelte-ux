@@ -3,7 +3,7 @@
 	import Checkbox from '$lib/components/Checkbox.svelte';
 	import Radio from '$lib/components/Radio.svelte';
 
-	import selectionStore from '$lib/stores/selectionStore';
+	import selectionStore from '$lib/stores/selectionStore.js';
 
   const items = Array.from({ length: 5 }).map((_,i) => {
     return {

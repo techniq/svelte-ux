@@ -1,4 +1,4 @@
-import type { DateRange } from './dateRange';
+import type { DateRange } from './dateRange.js';
 
 export type SelectedDate = Date | Date[] | DateRange | null;
 

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { addHours, subHours } from 'date-fns';
 
-import { expireObject } from './object';
+import { expireObject } from './object.js';
 
 describe('expireObject', () => {
   it('simple value not expired', () => {

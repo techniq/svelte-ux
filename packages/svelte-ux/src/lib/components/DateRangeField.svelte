@@ -8,8 +8,8 @@
   import Dialog from './Dialog.svelte';
   import Field from './Field.svelte';
 
-  import { PeriodType, getDateFuncsByPeriodType } from '../utils/date';
-  import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange';
+  import { PeriodType, getDateFuncsByPeriodType } from '../utils/date.js';
+  import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange.js';
   import { cls } from '../utils/styles.js';
   import { getComponentSettings, getSettings } from './settings.js';
 

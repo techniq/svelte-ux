@@ -1,5 +1,5 @@
 import { get, camelCase, mergeWith } from 'lodash-es';
-import { entries } from '../types/typeHelpers';
+import { entries } from '../types/typeHelpers.js';
 
 export function isLiteralObject(obj: any): obj is object {
   return obj && typeof obj === 'object' && obj.constructor === Object;

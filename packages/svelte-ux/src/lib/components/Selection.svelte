@@ -1,5 +1,5 @@
 <script lang="ts">
-  import selectionStore from '../stores/selectionStore';
+  import selectionStore from '../stores/selectionStore.js';
 
   type T = $$Generic;
 

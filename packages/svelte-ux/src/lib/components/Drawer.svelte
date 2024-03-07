@@ -6,8 +6,8 @@
   import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
 
-  import { focusMove } from '../actions/focus';
-  import { portal as portalAction, type PortalOptions } from '../actions/portal';
+  import { focusMove } from '../actions/focus.js';
+  import { portal as portalAction, type PortalOptions } from '../actions/portal.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 

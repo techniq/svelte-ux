@@ -6,7 +6,7 @@
   import Button from './Button.svelte';
   import Field from './Field.svelte';
   import Dialog from './Dialog.svelte';
-  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
+  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date.js';
   import DateSelect from './DateSelect.svelte';
   import { getComponentSettings, getSettings } from './settings.js';
 

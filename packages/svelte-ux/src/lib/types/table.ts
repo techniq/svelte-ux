@@ -1,6 +1,6 @@
-import type { DataBackgroundOptions } from '../actions/dataBackground';
-import type { Edge } from '../actions/sticky';
-import type { FormatType } from '../utils/format';
+import type { DataBackgroundOptions } from '../actions/dataBackground.js';
+import type { Edge } from '../actions/sticky.js';
+import type { FormatType } from '../utils/format.js';
 
 export type ResolveContext<TData = any> = {
   column: ColumnDef;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tweened } from 'svelte/motion';
-  import type { FormatType } from '../utils/format';
+  import type { FormatType } from '../utils/format.js';
   import { getSettings } from './settings.js';
 
   type T = $$Generic;

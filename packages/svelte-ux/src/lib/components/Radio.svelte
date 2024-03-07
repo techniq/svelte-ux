@@ -2,7 +2,7 @@
   import { mdiCheckboxBlankCircle } from '@mdi/js';
 
   import Icon from './Icon.svelte';
-  import { uniqueId } from '../utils/string';
+  import { uniqueId } from '../utils/string.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 

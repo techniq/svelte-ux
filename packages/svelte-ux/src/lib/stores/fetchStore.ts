@@ -42,7 +42,7 @@ export type FetchState = {
 
 export const defaultOptions: RequestInit = {
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json.js',
   },
 };
 
@@ -296,8 +296,8 @@ function parseBody(response: Response, mapping: ResponseMapping = {}) {
     // Direct mapping of `Content-Type`/`mimeType` to response handler
     return mapping[mimeType](response);
   } else if (
-    mimeType === 'application/json' ||
-    mimeType === 'text/json' ||
+    mimeType === 'application/json.js' ||
+    mimeType === 'text/json.js' ||
     /\+json$/.test(mimeType) // ends with "+json"
   ) {
     // https://mimesniff.spec.whatwg.org/#json-mime-type

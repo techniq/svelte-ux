@@ -1,6 +1,6 @@
 import daisyThemes from 'daisyui/src/theming/themes.js';
 // import { themeOrder } from 'daisyui/src/theming/themeDefaults'; // breaks build
-import { sortFunc } from '../utils/sort';
+import { sortFunc } from '../utils/sort.js';
 
 const themeNames = [
   'light',

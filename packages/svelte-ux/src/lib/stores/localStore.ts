@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 import { isFunction } from 'lodash-es';
 
-import { parse, stringify } from '../utils/json';
-import { expireObject } from '../utils/object';
-import type { Expiry } from '../utils/object';
+import { parse, stringify } from '../utils/json.js';
+import { expireObject } from '../utils/object.js';
+import type { Expiry } from '../utils/object.js';
 import { browser } from '../utils/env.js';
 
 type LocalStoreOptions<Value> = {

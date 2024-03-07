@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { isActive } from './routing';
+import { isActive } from './routing.js';
 
 describe('isActive()', () => {
   it('identifical path', () => {

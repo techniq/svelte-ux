@@ -6,10 +6,10 @@ import {
   DayOfWeek,
   type FormatDateLocaleOptions,
   type FormatDateLocalePresets,
-} from './date_types';
-import type { DictionaryMessages, DictionaryMessagesOptions } from './dictionary';
-import type { FormatNumberOptions, FormatNumberStyle } from './number';
-import { getWeekStartsOnFromIntl } from './dateInternal';
+} from './date_types.js';
+import type { DictionaryMessages, DictionaryMessagesOptions } from './dictionary.js';
+import type { FormatNumberOptions, FormatNumberStyle } from './number.js';
+import { getWeekStartsOnFromIntl } from './dateInternal.js';
 
 function resolvedLocaleStore(
   forceLocales: Writable<string | string[] | null>,

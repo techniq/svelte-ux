@@ -1,8 +1,8 @@
 <script lang="ts">
   import { isSameMonth, isWithinInterval, startOfMonth, endOfMonth } from 'date-fns';
 
-  import { getMonths, PeriodType } from '../utils/date';
-  import type { SelectedDate } from '../utils/date';
+  import { getMonths, PeriodType } from '../utils/date.js';
+  import type { SelectedDate } from '../utils/date.js';
   import DateButton from './DateButton.svelte';
 
   export let year: number | undefined = undefined;

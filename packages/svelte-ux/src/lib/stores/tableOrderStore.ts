@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import { isFunction } from 'lodash-es';
-import type { ColumnDef } from '../types/table';
+import type { ColumnDef } from '../types/table.js';
 import { sortFunc } from '$lib/utils/sort.js';
 
 type SortFunc = (a: any, b: any) => number;

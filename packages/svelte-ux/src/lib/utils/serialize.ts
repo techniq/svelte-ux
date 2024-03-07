@@ -1,4 +1,4 @@
-import { parse, reviver, stringify } from './json';
+import { parse, reviver, stringify } from './json.js';
 
 // See: https://github.com/pbeshai/serialize-query-params/blob/master/src/serialize.ts
 

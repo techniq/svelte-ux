@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store';
-import uniqueStore from './uniqueStore';
+import uniqueStore from './uniqueStore.js';
 
 export type SelectionProps<T> = {
   /** Initial values */

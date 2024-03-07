@@ -4,8 +4,8 @@
   import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
   import { cls } from '../utils/styles.js';
-  import { multi } from '../actions/multi';
-  import type { Actions } from '../actions/multi';
+  import { multi } from '../actions/multi.js';
+  import type { Actions } from '../actions/multi.js';
   import type { ButtonColor, ButtonSize } from '$lib/types/index.js';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '$lib/utils/icons.js';

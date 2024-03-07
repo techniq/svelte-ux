@@ -1,8 +1,8 @@
-import type { ThemeColors } from './typeHelpers';
+import type { ThemeColors } from './typeHelpers.js';
 
-export * from './table';
-export * from './typeHelpers';
-export * from './typeGuards';
+export * from './table.js';
+export * from './typeHelpers.js';
+export * from './typeGuards.js';
 
 export type MenuOption = {
   label: string;

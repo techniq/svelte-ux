@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { parse as parseDate } from 'date-fns';
-  import { PeriodType } from '../utils';
+  import { PeriodType } from '../utils/date_types.js';
   import { getComponentSettings, getSettings } from './settings.js';
   import { cls } from '../utils/styles.js';
 

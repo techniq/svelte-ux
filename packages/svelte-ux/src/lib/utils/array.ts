@@ -1,7 +1,7 @@
 import { greatest, rollup } from 'd3-array';
 
-import { propAccessor } from './object';
-import type { PropAccessorArg } from './object';
+import { propAccessor } from './object.js';
+import type { PropAccessorArg } from './object.js';
 
 // Helper until Array.flat is more mainstream - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 // See also: https://lodash.com/docs/4.17.11#flatten

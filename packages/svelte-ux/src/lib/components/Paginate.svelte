@@ -1,5 +1,5 @@
 <script lang="ts">
-  import paginationStore from '../stores/paginationStore';
+  import paginationStore from '../stores/paginationStore.js';
 
   export let items: any[];
   export let perPage = 10;

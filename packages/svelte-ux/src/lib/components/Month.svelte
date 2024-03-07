@@ -13,9 +13,9 @@
 
   import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 
-  import { getMonthDaysByWeek, PeriodType } from '../utils/date';
-  import type { SelectedDate } from '../utils/date';
-  import { hasKeyOf } from '../types/typeGuards';
+  import { getMonthDaysByWeek, PeriodType } from '../utils/date.js';
+  import type { SelectedDate } from '../utils/date.js';
+  import { hasKeyOf } from '../types/typeGuards.js';
 
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';

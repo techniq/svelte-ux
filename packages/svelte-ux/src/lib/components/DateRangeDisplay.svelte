@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { PeriodType, getDateFuncsByPeriodType, type FormatDateOptions } from '../utils/date';
-  import type { DateRange } from '../utils/dateRange';
+  import { PeriodType, getDateFuncsByPeriodType, type FormatDateOptions } from '../utils/date.js';
+  import type { DateRange } from '../utils/dateRange.js';
   import { getSettings } from './settings.js';
 
   export let value: DateRange | null | undefined;

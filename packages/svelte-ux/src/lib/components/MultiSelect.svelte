@@ -12,9 +12,9 @@
   import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
 
-  import dirtyStore from '../stores/dirtyStore';
-  import selectionStore from '../stores/selectionStore';
-  import uniqueStore from '../stores/uniqueStore';
+  import dirtyStore from '../stores/dirtyStore.js';
+  import selectionStore from '../stores/selectionStore.js';
+  import uniqueStore from '../stores/uniqueStore.js';
   import { cls } from '$lib/utils/styles.js';
 
   type Option = $$Generic;

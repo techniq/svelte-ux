@@ -1,8 +1,8 @@
-// import { getCellContent, getCellValue, getHeaders, getRowColumns } from './table';
-// import type { ColumnDef } from '$lib/types/table';
-// import { PeriodType } from './date';
+// import { getCellContent, getCellValue, getHeaders, getRowColumns } from './table.js';
+// import type { ColumnDef } from '$lib/types/table.js';
+// import { PeriodType } from './date.js';
 // import { saveAs } from './file';
-// import { isLiteralObject } from './object';
+// import { isLiteralObject } from './object.js';
 
 // const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 // const fileExtension = '.xlsx';

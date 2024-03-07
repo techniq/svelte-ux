@@ -4,12 +4,12 @@
   import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
-  import { autoFocus } from '../actions/input';
-  import { multi } from '../actions/multi';
-  import type { Actions } from '../actions/multi';
+  import { autoFocus } from '../actions/input.js';
+  import { multi } from '../actions/multi.js';
+  import type { Actions } from '../actions/multi.js';
   import { cls } from '../utils/styles.js';
-  import { isLiteralObject } from '../utils/object';
-  import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types';
+  import { isLiteralObject } from '../utils/object.js';
+  import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types/index.js';
   import { getComponentSettings } from './settings.js';
 
   import Button from './Button.svelte';

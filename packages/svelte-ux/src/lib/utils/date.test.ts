@@ -11,17 +11,17 @@ import {
   getDayOfWeek,
   hasDayOfWeek,
   replaceDayOfWeek,
-} from './date';
-import { formatWithLocale } from './format';
-import { createLocaleSettings, defaultLocale } from './locale';
+} from './date.js';
+import { formatWithLocale } from './format.js';
+import { createLocaleSettings, defaultLocale } from './locale.js';
 import {
   PeriodType,
   type FormatDateOptions,
   DayOfWeek,
   type CustomIntlDateTimeFormatOptions,
   DateToken,
-} from './date_types';
-import { getWeekStartsOnFromIntl } from './dateInternal';
+} from './date_types.js';
+import { getWeekStartsOnFromIntl } from './dateInternal.js';
 
 export const testDate = '2023-11-21'; // "good" default date as the day (21) is bigger than 12 (number of months). And november is a good month1 (because why not?)
 const dt_2M_2d = new Date(2023, 10, 21);

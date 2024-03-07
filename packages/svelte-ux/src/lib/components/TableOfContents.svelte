@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte';
   import { mdiCircleSmall } from '@mdi/js';
 
-  import { buildTree } from '../utils/array';
+  import { buildTree } from '../utils/array.js';
   import { cls } from '../utils/styles.js';
   import TreeList from './TreeList.svelte';
   import Icon from './Icon.svelte';

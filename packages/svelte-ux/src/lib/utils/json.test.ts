@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { parse, stringify, reviver } from './json';
+import { parse, stringify, reviver } from './json.js';
 
 describe('json', () => {
   it('parse dates', () => {

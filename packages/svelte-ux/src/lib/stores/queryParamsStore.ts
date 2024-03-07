@@ -3,10 +3,10 @@ import type { Readable } from 'svelte/store';
 import type { Page } from '@sveltejs/kit';
 import { isEqual } from 'lodash-es';
 
-import * as Serialize from '../utils/serialize';
+import * as Serialize from '../utils/serialize.js';
 
-import rollup from '../utils/rollup';
-import type { ValueOf } from '../types/typeHelpers';
+import rollup from '../utils/rollup.js';
+import type { ValueOf } from '../types/typeHelpers.js';
 
 // Matches $app/navigation's goto without dependency - https://kit.svelte.dev/docs/modules#$app-navigation-goto
 type Goto = (url: string | URL, opts?: any) => any;

@@ -4,7 +4,7 @@
   import type { TransitionConfig } from 'svelte/transition';
   import type { Placement } from '@floating-ui/dom';
 
-  import { focusMove } from '../actions/focus';
+  import { focusMove } from '../actions/focus.js';
   import { cls } from '../utils/styles.js';
 
   import Popover from './Popover.svelte';

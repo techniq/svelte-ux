@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { intersection } from '../actions/observer';
+  import { intersection } from '../actions/observer.js';
 
   export let items: any[];
   export let perPage = 10;

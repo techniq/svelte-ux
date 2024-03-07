@@ -11,8 +11,8 @@
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
 
-  import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date';
-  import type { SelectedDate } from '../utils/date';
+  import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date.js';
+  import type { SelectedDate } from '../utils/date.js';
 
   export let selected: SelectedDate | undefined = undefined;
   export let minDate: Date | undefined = undefined;

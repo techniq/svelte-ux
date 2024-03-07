@@ -1,11 +1,11 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
-  import { tableCell } from '../actions/table';
-  import type { ColumnDef } from '../types/table';
+  import { tableCell } from '../actions/table.js';
+  import type { ColumnDef } from '../types/table.js';
   import { cls } from '../utils/styles.js';
 
-  import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '../utils/table';
+  import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '../utils/table.js';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
   import { getComponentClasses } from './theme.js';

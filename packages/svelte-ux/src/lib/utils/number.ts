@@ -1,5 +1,5 @@
-import type { Settings } from '../components/settings';
-import { defaultLocale, createLocaleSettings, type LocaleSettings } from './locale';
+import type { Settings } from '../components/settings.js';
+import { defaultLocale, createLocaleSettings, type LocaleSettings } from './locale.js';
 
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions

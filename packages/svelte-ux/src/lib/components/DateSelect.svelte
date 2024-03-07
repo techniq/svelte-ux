@@ -4,8 +4,8 @@
       - [ ] Set max-height / overflow on MonthListByYear, YearList
   */
   import { startOfMonth as startOfMonthFunc } from 'date-fns';
-  import type { SelectedDate } from '../utils/date';
-  import { PeriodType } from '../utils/date';
+  import type { SelectedDate } from '../utils/date.js';
+  import { PeriodType } from '../utils/date.js';
 
   import Month from './Month.svelte';
   import MonthListByYear from './MonthListByYear.svelte';

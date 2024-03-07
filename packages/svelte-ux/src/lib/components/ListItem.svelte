@@ -1,9 +1,10 @@
 <script lang="ts">
+  import type { ComponentProps } from 'svelte';
+
   import Avatar from './Avatar.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
   import Icon from './Icon.svelte';
   import Overlay from './Overlay.svelte';
-  import type { ComponentProps } from '../types';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
@@ -14,7 +15,7 @@
   /**
    * Wrap icon in Avatar
    */
-  export let avatar: boolean | ComponentProps<Avatar> = null;
+  export let avatar: boolean | ComponentProps<Avatar> | null = null;
 
   /**
    * Controls how first, last, and gap between are calculated

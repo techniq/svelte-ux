@@ -4,7 +4,7 @@
 
   import { mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
-  import Logger from '../utils/logger';
+  import Logger from '../utils/logger.js';
   import { autoFocus, selectOnFocus } from '$lib/actions/input.js';
   import { cls } from '../utils/styles.js';
 

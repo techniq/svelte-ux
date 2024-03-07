@@ -2,8 +2,8 @@ import { setContext, getContext } from 'svelte';
 import { writable } from 'svelte/store';
 import { merge } from 'lodash-es';
 
-import fetchStore, { initFetchClient } from './fetchStore';
-import type { FetchConfig } from './fetchStore';
+import fetchStore, { initFetchClient } from './fetchStore.js';
+import type { FetchConfig } from './fetchStore.js';
 import { parse, stringify } from '$lib/utils/json.js';
 
 type ClientConfig = {
@@ -50,7 +50,7 @@ export default function graphStore(baseQueryConfig?: QueryConfig) {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json.js',
         },
         body: stringify({ query, variables }),
       },

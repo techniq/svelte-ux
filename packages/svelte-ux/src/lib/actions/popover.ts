@@ -12,7 +12,7 @@ import {
   type Alignment,
 } from '@floating-ui/dom';
 
-import { portal } from './portal';
+import { portal } from './portal.js';
 
 export type PopoverOptions = {
   anchorEl?: HTMLElement;

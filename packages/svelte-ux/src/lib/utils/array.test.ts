@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { sumObjects } from './array';
+import { sumObjects } from './array.js';
 
 describe('sumObjects', () => {
   it('Sum array of objects ', () => {

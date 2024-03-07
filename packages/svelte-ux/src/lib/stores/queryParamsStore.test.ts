@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { getParamConfig } from './queryParamsStore';
+import { getParamConfig } from './queryParamsStore.js';
 
 describe('getParamConfig', () => {
   it('string encode', () => {

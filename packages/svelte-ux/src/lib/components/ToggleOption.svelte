@@ -2,7 +2,7 @@
   import { onMount, onDestroy, getContext } from 'svelte';
 
   import { groupKey } from './ToggleGroup.svelte';
-  import { scrollIntoView } from '../utils/dom';
+  import { scrollIntoView } from '../utils/dom.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 

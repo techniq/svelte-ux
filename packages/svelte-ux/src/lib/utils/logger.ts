@@ -1,4 +1,4 @@
-import { browser } from './env';
+import { browser } from './env.js';
 
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'] as const;
 type LogLevel = (typeof logLevels)[number];

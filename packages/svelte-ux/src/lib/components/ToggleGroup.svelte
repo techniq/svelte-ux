@@ -8,7 +8,7 @@
   import { crossfade, fade } from 'svelte/transition';
 
   import { cls } from '../utils/styles.js';
-  import Logger from '../utils/logger';
+  import Logger from '../utils/logger.js';
   import { getComponentClasses } from './theme.js';
 
   export let value: any = undefined; // index or value

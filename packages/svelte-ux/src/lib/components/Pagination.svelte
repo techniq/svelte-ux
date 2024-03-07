@@ -1,9 +1,9 @@
 <script lang="ts">
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown, mdiPageFirst, mdiPageLast } from '@mdi/js';
 
-  import type paginationStore from '../stores/paginationStore';
+  import type paginationStore from '../stores/paginationStore.js';
   import { cls } from '../utils/styles.js';
-  import type { StoresValues } from '../types/typeHelpers';
+  import type { StoresValues } from '../types/typeHelpers.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -43,7 +43,7 @@
   const settingsClasses = getComponentClasses('Pagination');
 </script>
 
-{#if $pagination.totalPages > 1 || !hideSinglePage}
+k{#if $pagination.totalPages > 1 || !hideSinglePage}
   <div
     class={cls(
       'Pagination',

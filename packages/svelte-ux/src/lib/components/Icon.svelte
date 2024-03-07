@@ -5,7 +5,7 @@
 <script lang="ts">
   import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
-  import { uniqueId } from '../utils/string';
+  import { uniqueId } from '../utils/string.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 

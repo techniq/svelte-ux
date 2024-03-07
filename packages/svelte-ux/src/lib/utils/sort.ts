@@ -1,4 +1,4 @@
-import { propAccessor, type PropAccessorArg } from './object';
+import { propAccessor, type PropAccessorArg } from './object.js';
 
 export function sortFunc(value?: PropAccessorArg, direction: 'asc' | 'desc' = 'asc') {
   const sortDirection = direction === 'asc' ? 1 : -1;

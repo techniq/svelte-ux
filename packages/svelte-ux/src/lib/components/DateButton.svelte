@@ -3,8 +3,8 @@
   import { isWithinInterval } from 'date-fns';
 
   import Button from './Button.svelte';
-  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date';
-  import type { SelectedDate } from '../utils/date';
+  import { getDateFuncsByPeriodType } from '../utils/date.js';
+  import type { DateToken, PeriodType, SelectedDate } from '../utils/date_types.js';
   import { cls } from '../utils/styles.js';
   import { getComponentSettings, getSettings } from './settings.js';
 

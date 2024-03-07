@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import type { Schema } from 'zod';
 
-  import formStore from '../stores/formStore';
+  import formStore from '../stores/formStore.js';
   import { getComponentClasses } from './theme.js';
   import { cls } from '$lib/utils/styles.js';
 

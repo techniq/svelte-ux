@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { nestedSort, sortFunc } from './sort';
+import { nestedSort, sortFunc } from './sort.js';
 
 describe('nestedSort', () => {
   it('basic', () => {

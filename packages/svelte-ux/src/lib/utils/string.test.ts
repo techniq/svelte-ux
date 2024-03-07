@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { toTitleCase } from './string';
+import { toTitleCase } from './string.js';
 
 describe('toTitleCase()', () => {
   it('basic', () => {

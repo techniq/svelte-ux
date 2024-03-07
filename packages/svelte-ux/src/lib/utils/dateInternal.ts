@@ -1,4 +1,4 @@
-import { DayOfWeek } from './date_types';
+import { DayOfWeek } from './date_types.js';
 
 export function getWeekStartsOnFromIntl(locales?: string): DayOfWeek {
   if (!locales) {

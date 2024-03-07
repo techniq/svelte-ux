@@ -30,8 +30,8 @@ import {
   formatISO,
 } from 'date-fns';
 
-import { hasKeyOf } from '../types/typeGuards';
-import { chunk } from './array';
+import { hasKeyOf } from '../types/typeGuards.js';
+import { chunk } from './array.js';
 import {
   PeriodType,
   DayOfWeek,
@@ -40,11 +40,11 @@ import {
   type CustomIntlDateTimeFormatOptions,
   type FormatDateOptions,
   type DateFormatVariantPreset,
-} from './date_types';
-import { defaultLocale, type LocaleSettings } from './locale';
-import { assertNever } from '$lib/types/index.js';
+} from './date_types.js';
+import { defaultLocale, type LocaleSettings } from './locale.js';
+import { assertNever } from '$lib/types/typeHelpers.js';
 
-export * from './date_types';
+export * from './date_types.js';
 
 export function getDayOfWeekName(weekStartsOn: DayOfWeek, locales: string) {
   // Create a date object for a specific day (0 = Sunday, 1 = Monday, etc.)

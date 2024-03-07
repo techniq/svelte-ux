@@ -1,8 +1,8 @@
 <script lang="ts">
   import { mdiArrowUp } from '@mdi/js';
 
-  import type { TableOrderState } from '../stores/tableOrderStore';
-  import type { ColumnDef } from '../types/table';
+  import type { TableOrderState } from '../stores/tableOrderStore.js';
+  import type { ColumnDef } from '../types/table.js';
   import Icon from '../components/Icon.svelte';
 
   export let order: TableOrderState;

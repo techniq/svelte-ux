@@ -1,6 +1,11 @@
 <script lang="ts">
-  import { DurationUnits, getDuration, humanizeDuration, type Duration } from '../utils/duration';
-  import timerStore from '../stores/timerStore';
+  import {
+    DurationUnits,
+    getDuration,
+    humanizeDuration,
+    type Duration,
+  } from '../utils/duration.js';
+  import timerStore from '../stores/timerStore.js';
   import { getComponentClasses } from './theme.js';
   import { cls } from '$lib/utils/styles.js';
 

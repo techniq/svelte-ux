@@ -8,11 +8,11 @@
     hasDayOfWeek,
     replaceDayOfWeek,
     missingDayOfWeek,
-  } from '../utils/date';
-  import { getDateRangePresets } from '../utils/dateRange';
-  import type { DateRange } from '../utils/dateRange';
+  } from '../utils/date.js';
+  import { getDateRangePresets } from '../utils/dateRange.js';
+  import type { DateRange } from '../utils/dateRange.js';
   import { cls } from '../utils/styles.js';
-  import { omit } from '../utils/object';
+  import { omit } from '../utils/object.js';
 
   import DateSelect from './DateSelect.svelte';
   import MenuField from './MenuField.svelte';

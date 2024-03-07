@@ -1,8 +1,8 @@
 import { startOfDay, isLeapYear, isAfter, isBefore, subYears } from 'date-fns';
 
-import { getDateFuncsByPeriodType, updatePeriodTypeWithWeekStartsOn } from './date';
-import { PeriodType } from './date_types';
-import type { LocaleSettings } from './locale';
+import { getDateFuncsByPeriodType, updatePeriodTypeWithWeekStartsOn } from './date.js';
+import { PeriodType } from './date_types.js';
+import type { LocaleSettings } from './locale.js';
 
 export type DateRange = {
   from: Date | null;

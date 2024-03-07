@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { isActive, url } from '../utils/routing';
+  import { isActive, url } from '../utils/routing.js';
 
   import Icon from './Icon.svelte';
-  import { scrollIntoView } from '../actions/scroll';
-  import { getScrollParent } from '../utils/dom';
+  import { scrollIntoView } from '../actions/scroll.js';
+  import { getScrollParent } from '../utils/dom.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import { showDrawer } from './AppLayout.svelte';
