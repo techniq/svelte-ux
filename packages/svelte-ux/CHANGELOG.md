@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.2
+
+### Patch Changes
+
+- Add duration utils to top-level export ([`9afe883235de2d4bf2c3e76200c995e05e4d1a49`](https://github.com/techniq/svelte-ux/commit/9afe883235de2d4bf2c3e76200c995e05e4d1a49))
+
 ## 0.61.1
 
 ### Patch Changes
