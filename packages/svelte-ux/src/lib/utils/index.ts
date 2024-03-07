@@ -1,7 +1,7 @@
 // top-level exports
 export { formatDate } from './date.js';
 export { PeriodType, DayOfWeek, DateToken } from './date_types.js';
-export * from 'date_types.js';
+export * from './date_types.js';
 export * from './file.js';
 export {
   format,
