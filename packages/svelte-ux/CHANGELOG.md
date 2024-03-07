@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.4
+
+### Patch Changes
+
+- Add extentions to tailwind plugin require statements ([`0a777e71fd211b9719592682baf1fab756cf9e1a`](https://github.com/techniq/svelte-ux/commit/0a777e71fd211b9719592682baf1fab756cf9e1a))
+
 ## 0.61.3
 
 ### Patch Changes
