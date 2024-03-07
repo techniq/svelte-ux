@@ -1,6 +1,6 @@
 <script lang="ts">
   import Preview from '$lib/components/Preview.svelte';
-  import { uniqueId, truncate, toTitleCase } from '$lib/utils/string';
+  import { uniqueId, truncate, toTitleCase } from '$lib/utils/string.js';
   import Code from '$lib/components/Code.svelte';
   import RangeField from '$lib/components/RangeField.svelte';
 

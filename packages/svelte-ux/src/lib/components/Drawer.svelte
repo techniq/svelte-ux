@@ -8,8 +8,8 @@
 
   import { focusMove } from '../actions/focus';
   import { portal as portalAction, type PortalOptions } from '../actions/portal';
-  import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { cls } from '../utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   const dispatch = createEventDispatcher();
 

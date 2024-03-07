@@ -1,17 +1,17 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import type { ComponentProps } from '$lib/types';
+  import type { ComponentProps } from '$lib/types/index.js';
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js';
 
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import Field from './Field.svelte';
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Button from './Button.svelte';
-  import type { MenuOption } from '$lib/types';
-  import { getComponentSettings } from './settings';
+  import type { MenuOption } from '$lib/types/index.js';
+  import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('MenuField');
 

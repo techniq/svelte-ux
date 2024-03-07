@@ -5,11 +5,11 @@
   import Dialog from '$lib/components/Dialog.svelte';
   import Kbd from './Kbd.svelte';
   import SelectField from '$lib/components/SelectField.svelte';
-  import { getComponentClasses } from './theme';
-  import { cls } from '$lib/utils/styles';
-  import { smScreen } from '$lib/stores';
-  import { autoFocus, selectOnFocus } from '$lib/actions';
-  import type { MenuOption } from '$lib/types';
+  import { getComponentClasses } from './theme.js';
+  import { cls } from '$lib/utils/styles.js';
+  import { smScreen } from '$lib/stores/matchMedia.js';
+  import { autoFocus, selectOnFocus } from '$lib/actions/input.js';
+  import type { MenuOption } from '$lib/types/index.js';
 
   export let options: MenuOption[] = [];
 

@@ -5,8 +5,8 @@
   import { mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Logger from '../utils/logger';
-  import { autoFocus, selectOnFocus } from '$lib/actions';
-  import { cls } from '../utils/styles';
+  import { autoFocus, selectOnFocus } from '$lib/actions/input.js';
+  import { cls } from '../utils/styles.js';
 
   import Button from './Button.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
@@ -14,10 +14,10 @@
   import MenuItem from './MenuItem.svelte';
   import SelectListOptions from './_SelectListOptions.svelte';
   import TextField from './TextField.svelte';
-  import { getComponentSettings } from './settings';
-  import type { IconInput } from '$lib/utils/icons';
-  import type { MenuOption } from '$lib/types';
-  import type { ScrollIntoViewOptions } from '$lib/actions';
+  import { getComponentSettings } from './settings.js';
+  import type { IconInput } from '$lib/utils/icons.js';
+  import type { MenuOption } from '$lib/types/index.js';
+  import type { ScrollIntoViewOptions } from '$lib/actions/scroll.js';
 
   const dispatch = createEventDispatcher<{
     change: { value: any; option: any };

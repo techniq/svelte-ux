@@ -3,7 +3,7 @@
   import Blockquote from '$docs/Blockquote.svelte';
   import Code from '$lib/components/Code.svelte';
 
-  import { sticky, stickyContext } from '$lib/actions/sticky';
+  import { sticky, stickyContext } from '$lib/actions/sticky.js';
 </script>
 
 <h1>Usage</h1>

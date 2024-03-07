@@ -5,8 +5,8 @@
   import Code from '$lib/components/Code.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
-  import { scrollIntoView, scrollFade, scrollShadow } from '$lib/actions/scroll';
-  import { cls } from '$lib/utils/styles';
+  import { scrollIntoView, scrollFade, scrollShadow } from '$lib/actions/scroll.js';
+  import { cls } from '$lib/utils/styles.js';
 
   let filterItems = false;
 

@@ -5,11 +5,11 @@
   import Preview from '$lib/components/Preview.svelte';
   import Table from '$lib/components/Table.svelte';
 
-  import tableOrderStore from '$lib/stores/tableOrderStore';
+  import tableOrderStore from '$lib/stores/tableOrderStore.js';
 
-  import { tableCell } from '$lib/actions/table';
+  import { tableCell } from '$lib/actions/table.js';
 
-  import { randomInteger } from '$lib/utils/number';
+  import { randomInteger } from '$lib/utils/number.js';
   import TweenedValue from '$lib/components/TweenedValue.svelte';
 
   const order = tableOrderStore({ initialBy: 'calories', initialDirection: 'desc' });

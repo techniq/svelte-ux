@@ -6,7 +6,7 @@
   import ListItem from '$lib/components/ListItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Radio from '$lib/components/Radio.svelte';
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 
   let selectedId = 1;
   const choices = [

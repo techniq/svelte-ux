@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 
 import themes from '../../themes.json';
-import { getThemeNames } from '$lib/styles/theme';
+import { getThemeNames } from '$lib/styles/theme.js';
 
 export async function load({ url }) {
   // Redirect `svelte-ux.vercel.app` to `svelte-ux.techniq.dev`

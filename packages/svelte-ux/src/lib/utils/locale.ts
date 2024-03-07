@@ -1,4 +1,4 @@
-import type { Prettify } from '$lib/types/typeHelpers';
+import type { Prettify } from '$lib/types/typeHelpers.js';
 import { defaultsDeep } from 'lodash-es';
 import { derived, writable, type Readable, type Writable } from 'svelte/store';
 import {

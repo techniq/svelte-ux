@@ -3,14 +3,14 @@
 
   import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
-  import type { ButtonColor, ButtonSize } from '$lib/types';
+  import type { ButtonColor, ButtonSize } from '$lib/types/index.js';
   import { getButtonGroup } from './ButtonGroup.svelte';
-  import { asIconData, type IconInput } from '$lib/utils/icons';
-  import type { ButtonRounded, ButtonVariant } from '$lib/types';
-  import { getComponentSettings } from './settings';
+  import { asIconData, type IconInput } from '$lib/utils/icons.js';
+  import type { ButtonRounded, ButtonVariant } from '$lib/types/index.js';
+  import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');
 

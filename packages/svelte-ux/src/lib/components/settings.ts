@@ -5,17 +5,17 @@ import {
   type ResolvedComponentSettings,
   resolveComponentClasses,
   type ResolvedDefaultProps,
-} from './theme';
-import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore';
-import type { LabelPlacement } from '$lib/types';
+} from './theme.js';
+import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore.js';
+import type { LabelPlacement } from '$lib/types/index.js';
 import {
   getAllKnownLocales,
   localeStore,
   type LocaleSettings,
   type LocaleStore,
   type LocaleSettingsInput,
-} from '$lib/utils/locale';
-import { buildFormatters, type FormatFunctions } from '$lib/utils/format';
+} from '$lib/utils/locale.js';
+import { buildFormatters, type FormatFunctions } from '$lib/utils/format.js';
 import { type Readable, derived } from 'svelte/store';
 
 export interface DefaultProps {

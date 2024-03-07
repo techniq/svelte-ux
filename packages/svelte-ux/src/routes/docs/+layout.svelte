@@ -24,11 +24,11 @@
 
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { settings, getSettings } from '$lib/components/settings';
+  import { settings, getSettings } from '$lib/components/settings.js';
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';
-  import { xlScreen } from '$lib/stores/matchMedia';
-  import { cls } from '$lib/utils/styles';
-  import { toTitleCase } from '$lib/utils/string';
+  import { xlScreen } from '$lib/stores/matchMedia.js';
+  import { cls } from '$lib/utils/styles.js';
+  import { toTitleCase } from '$lib/utils/string.js';
 
   $: [type, name] = $page.url.pathname.split('/').slice(2) ?? [];
   $: title = $page.data.meta?.title ?? name;

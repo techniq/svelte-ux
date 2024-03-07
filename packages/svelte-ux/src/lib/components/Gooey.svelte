@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { SVGAttributes } from 'svelte/elements';
 
-  import { uniqueId } from '$lib/utils/string';
-  import { cls } from '$lib/utils/styles';
-  import { getComponentClasses } from './theme';
+  import { uniqueId } from '$lib/utils/string.js';
+  import { cls } from '$lib/utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   /** Apply gaussian blur.  Required unless blurring externally (`filter: blur()`, etc) */
   export let blur: number | undefined = undefined;

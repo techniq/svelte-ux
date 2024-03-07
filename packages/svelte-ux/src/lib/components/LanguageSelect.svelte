@@ -2,8 +2,8 @@
   import Button from './Button.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
-  import { cls } from '../utils/styles';
-  import { getSettings } from './settings';
+  import { cls } from '../utils/styles.js';
+  import { getSettings } from './settings.js';
   const { locale } = getSettings();
 
   let open = false;

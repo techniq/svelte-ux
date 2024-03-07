@@ -3,9 +3,9 @@
   import { mdiClose, mdiInformationOutline } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types';
-  import { getComponentSettings } from './settings';
+  import { getComponentSettings } from './settings.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';

@@ -2,7 +2,7 @@
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown, mdiPageFirst, mdiPageLast } from '@mdi/js';
 
   import type paginationStore from '../stores/paginationStore';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import type { StoresValues } from '../types/typeHelpers';
 
   import Button from './Button.svelte';
@@ -11,8 +11,8 @@
   import MenuItem from './MenuItem.svelte';
   import Toggle from './Toggle.svelte';
   import Tooltip from './Tooltip.svelte';
-  import { getComponentClasses } from './theme';
-  import { getSettings } from './settings';
+  import { getComponentClasses } from './theme.js';
+  import { getSettings } from './settings.js';
 
   type Pagination = ReturnType<typeof paginationStore>;
 

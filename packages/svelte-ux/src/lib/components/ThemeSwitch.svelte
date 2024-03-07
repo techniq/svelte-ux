@@ -4,7 +4,7 @@
   import Switch from './Switch.svelte';
   import Icon from './Icon.svelte';
 
-  import { getSettings } from './settings';
+  import { getSettings } from './settings.js';
 
   const { currentTheme } = getSettings();
 </script>

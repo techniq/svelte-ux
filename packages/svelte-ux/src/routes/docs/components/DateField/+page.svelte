@@ -7,7 +7,7 @@
   import DateField from '$lib/components/DateField.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
-  import { getSettings } from '$lib/components/settings';
+  import { getSettings } from '$lib/components/settings.js';
   const { localeSettings } = getSettings();
 
   let value: Date;

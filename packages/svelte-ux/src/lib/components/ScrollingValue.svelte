@@ -1,9 +1,9 @@
 <script lang="ts">
   import { spring, tweened } from 'svelte/motion';
   import { elasticOut, backInOut, bounceOut } from 'svelte/easing';
-  import { cls } from '$lib/utils/styles';
-  import { modulo } from '$lib/utils/number';
-  import { getComponentClasses } from './theme';
+  import { cls } from '$lib/utils/styles.js';
+  import { modulo } from '$lib/utils/number.js';
+  import { getComponentClasses } from './theme.js';
 
   export let value = 0;
   export let single = false;

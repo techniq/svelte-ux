@@ -2,8 +2,8 @@
   import { fade, type FadeParams } from 'svelte/transition';
 
   import { portal as portalAction, type PortalOptions } from '../actions/portal';
-  import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { cls } from '../utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   export let blur: boolean = false;
   export let portal: PortalOptions = false;

@@ -1,13 +1,13 @@
 import type { ComponentProps, SvelteComponent } from 'svelte';
-import type * as Components from './';
-import { getSettings } from './settings';
+import type * as Components from './index.js';
+import { getSettings } from './settings.js';
 import type {
   ButtonColor,
   ButtonRounded,
   ButtonSize,
   ButtonVariant,
   LabelPlacement,
-} from '$lib/types';
+} from '$lib/types/index.js';
 
 export type ComponentName = keyof typeof Components;
 

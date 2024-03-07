@@ -18,16 +18,15 @@
   import { afterNavigate, goto } from '$app/navigation';
   import { page } from '$app/stores';
 
-  import { settings } from '$lib/components/settings';
-  import { lgScreen } from '$lib/stores/matchMedia';
-  import type { PageData } from './$types';
+  import { settings } from '$lib/components/settings.js';
+  import { lgScreen } from '$lib/stores/matchMedia.js';
 
-  import { createLocaleSettings } from '$lib';
+  import { createLocaleSettings } from '$lib/utils/locale.js';
   import LanguageSelect from '$lib/components/LanguageSelect.svelte';
 
   import './app.css';
 
-  export let data: PageData;
+  export let data;
 
   const baseGh = 'https://github.com/techniq/svelte-ux';
   $: ghLink = data.pr_id ? `${baseGh}/pull/${data.pr_id}` : baseGh;

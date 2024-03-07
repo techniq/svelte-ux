@@ -11,9 +11,9 @@
   import TextField from '$lib/components/TextField.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
 
-  import { delay } from '$lib/utils/promise';
-  import { cls } from '$lib/utils/styles';
-  import type { MenuOption } from '$lib/types';
+  import { delay } from '$lib/utils/promise.js';
+  import { cls } from '$lib/utils/styles.js';
+  import type { MenuOption } from '$lib/types/index.js';
 
   let options: MenuOption[] = [
     { label: 'One', value: 1, icon: mdiMagnify },

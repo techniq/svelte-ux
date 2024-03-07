@@ -3,7 +3,7 @@
   import Code from '$lib/components/Code.svelte';
   import TextField from '$lib/components/TextField.svelte';
 
-  import { styleProps } from '$lib/actions/styleProps';
+  import { styleProps } from '$lib/actions/styleProps.js';
 
   let background = '#ddd';
   let border = '1px solid #aaa';

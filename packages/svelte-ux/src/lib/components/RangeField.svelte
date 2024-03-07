@@ -3,7 +3,7 @@
 
   import Field from './Field.svelte';
   import Button from './Button.svelte';
-  import { getComponentSettings } from './settings';
+  import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('RangeField');
 

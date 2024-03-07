@@ -1,15 +1,15 @@
 <script context="module">
   import { writable } from 'svelte/store';
-  import { browser } from '../utils/env';
+  import { browser } from '../utils/env.js';
   export const showDrawer = writable(browser ? window.innerWidth >= breakpoints.md : true);
 </script>
 
 <script lang="ts">
   import Backdrop from './Backdrop.svelte';
 
-  import { breakpoints, mdScreen } from '../stores/matchMedia';
-  import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { breakpoints, mdScreen } from '../stores/matchMedia.js';
+  import { cls } from '../utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   export let navWidth = 240;
   export let headerHeight = 64;

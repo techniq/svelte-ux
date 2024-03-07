@@ -1,7 +1,7 @@
 <script lang="ts">
   import Collapse from './Collapse.svelte';
-  import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { cls } from '../utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   /**
    * Controls how first, last, and gap between are calculated

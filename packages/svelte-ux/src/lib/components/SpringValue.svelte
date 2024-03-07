@@ -1,7 +1,7 @@
 <script lang="ts">
   import { spring } from 'svelte/motion';
   import type { FormatType } from '../utils/format';
-  import { getSettings } from './settings';
+  import { getSettings } from './settings.js';
 
   type T = $$Generic;
   type SpringOptions = Parameters<typeof spring<T>>[1];

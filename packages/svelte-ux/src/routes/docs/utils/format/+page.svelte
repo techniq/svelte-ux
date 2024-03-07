@@ -1,12 +1,12 @@
 <script lang="ts">
   import Preview from '$lib/components/Preview.svelte';
-  import { DateToken, PeriodType } from '$lib/utils/date';
+  import { DateToken, PeriodType } from '$lib/utils/date.js';
   import Code from '$lib/components/Code.svelte';
   import TextField from '$lib/components/TextField.svelte';
   import MenuField from '$lib/components/MenuField.svelte';
-  import type { FormatNumberStyle } from '$lib/utils/number';
+  import type { FormatNumberStyle } from '$lib/utils/number.js';
   import DatePickerField from '$lib/components/DatePickerField.svelte';
-  import { settings } from '$lib/components/settings';
+  import { settings } from '$lib/components/settings.js';
 
   const { locale, format } = settings({});
 

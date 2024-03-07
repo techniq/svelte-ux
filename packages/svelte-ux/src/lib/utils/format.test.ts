@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest';
 
-import { format, formatWithLocale } from './format';
-import { defaultLocale, createLocaleSettings } from './locale';
-import { PeriodType } from './date_types';
-import { testDate } from './date.test';
+import { format } from './format.js';
+import { PeriodType } from './date_types.js';
+import { testDate } from './date.test.js';
 
 describe('format()', () => {
   it('returns empty string for null', () => {

@@ -7,15 +7,15 @@
   import { autoFocus } from '../actions/input';
   import { multi } from '../actions/multi';
   import type { Actions } from '../actions/multi';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import { isLiteralObject } from '../utils/object';
   import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types';
-  import { getComponentSettings } from './settings';
+  import { getComponentSettings } from './settings.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import Input from './Input.svelte';
-  import { type IconInput, asIconData } from '$lib/utils/icons';
+  import { type IconInput, asIconData } from '$lib/utils/icons.js';
 
   type InputValue = string | number;
 

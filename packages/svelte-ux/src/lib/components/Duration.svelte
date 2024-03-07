@@ -1,8 +1,8 @@
 <script lang="ts">
   import { DurationUnits, getDuration, humanizeDuration, type Duration } from '../utils/duration';
   import timerStore from '../stores/timerStore';
-  import { getComponentClasses } from './theme';
-  import { cls } from '$lib/utils/styles';
+  import { getComponentClasses } from './theme.js';
+  import { cls } from '$lib/utils/styles.js';
 
   export let start: Date | undefined = undefined;
   export let end: Date | undefined = undefined;

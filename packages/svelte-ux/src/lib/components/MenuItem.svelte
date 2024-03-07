@@ -1,14 +1,14 @@
 <script lang="ts">
   import Button from './Button.svelte';
   import type { ComponentProps } from '../types';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import {
     scrollIntoView as scrollIntoViewAction,
     type ScrollIntoViewOptions,
   } from '../actions/scroll';
   import { setButtonGroup } from './ButtonGroup.svelte';
-  import { getComponentClasses } from './theme';
-  import { settings, getSettings } from './settings';
+  import { getComponentClasses } from './theme.js';
+  import { settings, getSettings } from './settings.js';
 
   type ButtonProps = ComponentProps<Button>;
 

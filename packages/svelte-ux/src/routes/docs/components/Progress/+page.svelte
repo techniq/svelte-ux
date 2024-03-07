@@ -1,7 +1,7 @@
 <script lang="ts">
   import Progress from '$lib/components/Progress.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 
   let value = 50;
 </script>

@@ -5,8 +5,8 @@
   import Code from '$lib/components/Code.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
-  import { spotlight } from '$lib/actions/spotlight';
-  import { cls } from '$lib/utils/styles';
+  import { spotlight } from '$lib/actions/spotlight.js';
+  import { cls } from '$lib/utils/styles.js';
 
   const itemCount = 12;
   $: items = Array.from({ length: itemCount }).map((_, i) => `Item ${i + 1}`);

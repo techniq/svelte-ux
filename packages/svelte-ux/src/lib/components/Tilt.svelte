@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
   import { scaleLinear } from 'd3-scale';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let maxRotation = 20;
   export let setBrightness = false;

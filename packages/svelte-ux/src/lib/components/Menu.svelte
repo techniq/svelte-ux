@@ -5,11 +5,11 @@
   import type { Placement } from '@floating-ui/dom';
 
   import { focusMove } from '../actions/focus';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import Popover from './Popover.svelte';
-  import type { TransitionParams } from '$lib/types';
-  import { getComponentClasses } from './theme';
+  import type { TransitionParams } from '$lib/types/index.js';
+  import { getComponentClasses } from './theme.js';
 
   const dispatch = createEventDispatcher();
 

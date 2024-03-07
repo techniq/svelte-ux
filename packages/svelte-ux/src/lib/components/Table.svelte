@@ -3,13 +3,13 @@
 
   import { tableCell } from '../actions/table';
   import type { ColumnDef } from '../types/table';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
 
   import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '../utils/table';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
-  import { getComponentClasses } from './theme';
-  import { getSettings } from './settings';
+  import { getComponentClasses } from './theme.js';
+  import { getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();
 

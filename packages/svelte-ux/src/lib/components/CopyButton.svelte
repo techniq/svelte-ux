@@ -1,9 +1,9 @@
 <script lang="ts">
   import { mdiContentCopy } from '@mdi/js';
 
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import Button from './Button.svelte';
-  import { getComponentSettings } from './settings';
+  import { getComponentSettings } from './settings.js';
   import { slide } from 'svelte/transition';
   let className: string | undefined = undefined;
   export { className as class };

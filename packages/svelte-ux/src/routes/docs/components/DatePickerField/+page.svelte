@@ -4,7 +4,7 @@
   import Preview from '$lib/components/Preview.svelte';
   import DatePickerField from '$lib/components/DatePickerField.svelte';
 
-  import { PeriodType } from '$lib/utils/date';
+  import { PeriodType } from '$lib/utils/date.js';
 
   let value = new Date();
 </script>

@@ -11,8 +11,8 @@
   import MenuItem from './MenuItem.svelte';
   import Tooltip from './Tooltip.svelte';
 
-  import { cls } from '../utils/styles';
-  import { getSettings } from './settings';
+  import { cls } from '../utils/styles.js';
+  import { getSettings } from './settings.js';
 
   const { currentTheme, themes: allThemes } = getSettings();
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
   import Breadcrumb from './Breadcrumb.svelte';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let title: string | string[] | null = null;
   export let subheading: string | string[] | null = null;

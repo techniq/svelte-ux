@@ -3,10 +3,10 @@
   import { mdiCircleSmall } from '@mdi/js';
 
   import { buildTree } from '../utils/array';
-  import { cls } from '../utils/styles';
+  import { cls } from '../utils/styles.js';
   import TreeList from './TreeList.svelte';
   import Icon from './Icon.svelte';
-  import { getComponentClasses } from './theme';
+  import { getComponentClasses } from './theme.js';
 
   export let element = 'main';
   export let maxDepth = 6;

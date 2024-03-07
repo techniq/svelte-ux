@@ -3,8 +3,8 @@
 
   import { groupKey } from './ToggleGroup.svelte';
   import { scrollIntoView } from '../utils/dom';
-  import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { cls } from '../utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   export let value: any;
 

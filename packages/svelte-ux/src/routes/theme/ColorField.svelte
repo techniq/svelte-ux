@@ -3,7 +3,7 @@
   import { formatHex } from 'culori';
 
   import TextField from '$lib/components/TextField.svelte';
-  import { colorVariableValue, type SupportedColorSpace } from '$lib/styles/theme';
+  import { colorVariableValue, type SupportedColorSpace } from '$lib/styles/theme.js';
 
   const dispatch = createEventDispatcher<{
     change: { value: string | undefined };

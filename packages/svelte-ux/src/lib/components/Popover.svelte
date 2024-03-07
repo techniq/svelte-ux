@@ -3,8 +3,8 @@
   import type { Placement } from '@floating-ui/dom';
 
   import { popover, type PopoverOptions } from '../actions/popover';
-  import { cls } from '../utils/styles';
-  import { getComponentClasses } from './theme';
+  import { cls } from '../utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   export let open = false;
   export let placement: Placement | undefined = undefined;

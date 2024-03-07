@@ -3,8 +3,8 @@
   import Toggle from './Toggle.svelte';
 
   import { fade } from 'svelte/transition';
-  import type { TransitionParams } from '$lib/types';
-  import { getComponentSettings } from './settings';
+  import type { TransitionParams } from '$lib/types/index.js';
+  import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('ToggleButton');
 

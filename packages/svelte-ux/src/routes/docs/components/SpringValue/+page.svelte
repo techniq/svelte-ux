@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { getSettings } from '$lib/components/settings';
+  import { getSettings } from '$lib/components/settings.js';
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import Kbd from '$lib/components/Kbd.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import SpringValue from '$lib/components/SpringValue.svelte';
-  import { cls } from '$lib/utils/styles';
+  import { cls } from '$lib/utils/styles.js';
 
   const { format } = getSettings();
 
