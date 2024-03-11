@@ -4,7 +4,7 @@
   import { mdiCog, mdiFormatListBulleted, mdiHome, mdiPalette } from '@mdi/js';
 
   const components = {
-    App: ['AppBar', 'AppLayout', 'NavItem', 'Settings', 'ThemeSelect', 'ThemeSwitch'],
+    App: ['AppBar', 'AppLayout', 'NavItem', 'Settings', 'ThemeInit', 'ThemeSelect', 'ThemeSwitch'],
     Elements: ['Avatar', 'Button', 'ButtonGroup', 'Card', 'Icon'],
     Inputs: [
       'Checkbox',

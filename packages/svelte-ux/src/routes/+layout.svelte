@@ -10,6 +10,7 @@
   import MenuButton from '$lib/components/MenuButton.svelte';
   import NavMenu from './_NavMenu.svelte';
   import QuickSearch from '$lib/components/QuickSearch.svelte';
+  import ThemeInit from '$lib/components/ThemeInit.svelte';
   import ThemeSelect from '$lib/components/ThemeSelect.svelte';
   import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
@@ -198,6 +199,9 @@
     ></script>
   {/if}
 </svelte:head>
+
+<!-- Set theme before anything renders (even when SSR is in use) -->
+<ThemeInit />
 
 <AppLayout>
   <nav slot="nav" class="h-full">

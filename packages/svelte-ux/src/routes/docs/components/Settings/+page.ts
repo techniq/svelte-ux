@@ -10,7 +10,7 @@ export async function load() {
       pageSource,
       description:
         'Create settings context as a component.  Useful to scope theme, numbers, ... within a component tree, although typically `settings()` is used directly',
-      related: ['/customization'],
+      related: ['components/ThemeInit', '/customization'],
     },
   };
 }
