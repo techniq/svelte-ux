@@ -4,7 +4,7 @@
 
   import Button from './Button.svelte';
   import { getDateFuncsByPeriodType } from '../utils/date.js';
-  import type { DateToken, PeriodType, SelectedDate } from '../utils/date_types.js';
+  import { DateToken, PeriodType, type SelectedDate } from '../utils/date_types.js';
   import { cls } from '../utils/styles.js';
   import { getComponentSettings, getSettings } from './settings.js';
 
