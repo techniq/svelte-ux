@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.7
+
+### Patch Changes
+
+- Allow disabling `dark` themes (fix `dark:` modifiers for light-only themes with dark system settings) ([`42ccce391f6b0f7ba82702a47f03d1d9f998fd04`](https://github.com/techniq/svelte-ux/commit/42ccce391f6b0f7ba82702a47f03d1d9f998fd04))
+
 ## 0.61.6
 
 ### Patch Changes
