@@ -257,13 +257,16 @@ export function themeStylesString(theme: any, colorSpace: SupportedColorSpace) {
 export function createHeadSnippet(darkThemes: string[]) {
   function _applyInitialStyle(darkThemes) {
     let theme = localStorage.getItem('theme');
-    if (theme) {
-      document.documentElement.dataset.theme = theme;
-      if (darkThemes.includes(theme)) {
+    // Ignore if no dark things registered (default `dark` removed)
+    if (darkThemes.length > 0) {
+      if (theme) {
+        document.documentElement.dataset.theme = theme;
+        if (darkThemes.includes(theme)) {
+          document.documentElement.classList.add('dark');
+        }
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.classList.add('dark');
       }
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
     }
   }
 

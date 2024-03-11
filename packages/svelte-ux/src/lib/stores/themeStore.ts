@@ -48,7 +48,7 @@ export function createThemeStore(options: ThemeStoreOptions): ThemeStore {
   let darkMatcher = window.matchMedia('(prefers-color-scheme: dark)');
 
   function resolveSystemTheme({ matches }: { matches: boolean }) {
-    if (matches) {
+    if (matches && options.dark.length) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
