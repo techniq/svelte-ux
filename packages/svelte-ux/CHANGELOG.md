@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.6
+
+### Patch Changes
+
+- Pass `data` instead of `path` to underlying <Icon> for more flexability (Avatar, Field, ListItem, NavItem, etc) ([`e27fa56226a9adc7471781106d94b2c108f9d7b7`](https://github.com/techniq/svelte-ux/commit/e27fa56226a9adc7471781106d94b2c108f9d7b7))
+
 ## 0.61.5
 
 ### Patch Changes
