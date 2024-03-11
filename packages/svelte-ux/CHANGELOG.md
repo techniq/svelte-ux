@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.8
+
+### Patch Changes
+
+- [NavItem] Pass `classes` to icon instead of single `class` (i.e. support path class(es)) ([`f8338570a1a09e7acbb676d3cec39c7b2db223b0`](https://github.com/techniq/svelte-ux/commit/f8338570a1a09e7acbb676d3cec39c7b2db223b0))
+
 ## 0.61.7
 
 ### Patch Changes
