@@ -213,7 +213,31 @@ You will also need to update your `settings()` (typically defined in `+layout.sv
 
 ### Theme selection
 
-Two components, `ThemeSelect` and `ThemeSwitch` are available to easily change the theme. `ThemeSwitch` can be used to simply toggle between `light` and `dark` themes. `ThemeSelect` supports selecting a theme when additional light and/or dark themes are defined.
+To handle theme selection, the theme store must be created using either the `settings()` function (along with `<ThemeInit>` to handle SSR theme initialization from localStorage)...
+
+```svelte
+<script>
+  import { settings, ThemeInit } from 'svelte-ux';
+
+  settings();
+</script>
+
+<ThemeInit />
+```
+
+or using the [Settings](/docs/components/Settings) component (which will also setup `<ThemeInit>` internally, by default)
+
+```svelte
+<script>
+  import { Settings } from 'svelte-ux';
+</script>
+
+<Settings />
+```
+
+These are typically setup within your root `+layout.svelte`.
+
+To easily change the active theme, [ThemeSelect](/docs/components/ThemeSelect) and [ThemeSwitch](/docs/components/ThemeSwitch) are provided. `ThemeSwitch` can be used to simply toggle between `light` and `dark` themes, and `ThemeSelect` supports selecting a theme when additional light and/or dark themes are defined.
 
 <Preview>
   <div class="grid grid-cols-[auto,1fr] gap-3 items-center justify-items-start">
@@ -223,6 +247,27 @@ Two components, `ThemeSelect` and `ThemeSwitch` are available to easily change t
     <ThemeSelect />
   </div>
 </Preview>
+
+You can also build your own theme selection using the `currentTheme` store from `getSettings()`.
+
+```svelte
+<script>
+  import { getSettings } from 'svelte-ux';
+
+  const { currentTheme, themes } = getSettings();
+
+  // Current theme
+  $currentTheme.theme;
+
+  // Change theme
+  currentTheme.setTheme('my-theme');
+
+  // Is current theme dark color scheme
+  $currentTheme.dark;
+</script>
+```
+
+See the implementations of [ThemeSelect](/docs/components/ThemeSelect) and [ThemeSwitch](/docs/components/ThemeSwitch) for more details
 
 ---
 
