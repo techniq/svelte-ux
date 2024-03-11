@@ -17,7 +17,7 @@
     root?: string;
     active?: string;
     icon?: {
-      root?: string |
+      root?: string,
       path?: string | string[]
     };
   } = {};
