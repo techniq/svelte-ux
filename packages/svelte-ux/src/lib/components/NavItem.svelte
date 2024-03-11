@@ -3,7 +3,6 @@
 
   import Icon from './Icon.svelte';
   import { scrollIntoView } from '../actions/scroll.js';
-  import { getScrollParent } from '../utils/dom.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import { showDrawer } from './AppLayout.svelte';
@@ -52,7 +51,7 @@
   {/if}
 
   {#if icon}
-    <Icon path={icon} class={cls('mr-3 flex-shrink-0', settingsClasses.icon, classes.icon)} />
+    <Icon data={icon} class={cls('mr-3 flex-shrink-0', settingsClasses.icon, classes.icon)} />
   {/if}
 
   {text}
