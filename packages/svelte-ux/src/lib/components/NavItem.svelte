@@ -17,8 +17,8 @@
     root?: string;
     active?: string;
     icon?: {
-      root?: string,
-      path?: string | string[]
+      root?: string;
+      path?: string | string[];
     };
   } = {};
   const settingsClasses = getComponentClasses('NavItem');
@@ -54,7 +54,11 @@
   {/if}
 
   {#if icon}
-    <Icon data={icon} class={cls('mr-3 flex-shrink-0', settingsClasses.icon)} classes={classes.icon} />
+    <Icon
+      data={icon}
+      class={cls('mr-3 flex-shrink-0', settingsClasses.icon)}
+      classes={classes.icon}
+    />
   {/if}
 
   {text}
