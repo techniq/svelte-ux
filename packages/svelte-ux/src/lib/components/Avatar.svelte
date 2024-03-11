@@ -27,7 +27,7 @@
 >
   <slot>
     {#if icon}
-      <Icon path={icon} />
+      <Icon data={icon} />
     {/if}
   </slot>
 </div>

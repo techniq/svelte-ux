@@ -300,7 +300,7 @@
             <slot name="prefix" />
 
             {#if type === 'currency'}
-              <Icon path={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+              <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
             {/if}
 
             {#if multiline}
@@ -371,7 +371,7 @@
             {/if}
 
             {#if type === 'percent'}
-              <Icon path={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
+              <Icon data={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
             {/if}
 
             <slot name="suffix" />
@@ -433,7 +433,7 @@
             <slot name="append" />
 
             {#if error}
-              <Icon path={mdiInformationOutline} class="text-danger" />
+              <Icon data={mdiInformationOutline} class="text-danger" />
             {:else if iconRight}
               <Icon data={asIconData(iconRight)} class="text-surface-content/50" />
             {/if}

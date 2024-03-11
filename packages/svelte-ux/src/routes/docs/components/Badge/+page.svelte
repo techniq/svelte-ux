@@ -77,7 +77,7 @@
   <Badge {value} circle>
     <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
     <div slot="value" class="bg-success text-success-content rounded-full">
-      <Icon path={mdiPlus} />
+      <Icon data={mdiPlus} />
     </div>
   </Badge>
 </Preview>

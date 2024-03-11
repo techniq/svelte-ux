@@ -36,7 +36,7 @@
         {#if divider}
           <div class="divider opacity-25">{divider}</div>
         {:else}
-          <Icon path={mdiChevronRight} class="divider opacity-25" />
+          <Icon data={mdiChevronRight} class="divider opacity-25" />
         {/if}
       </slot>
     {/if}

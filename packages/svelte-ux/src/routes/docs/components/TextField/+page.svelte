@@ -255,7 +255,7 @@
     <Preview>
       <TextField label="User Search">
         <div slot="prepend">
-          <Icon path={mdiAccountSearch} class="text-surface-content/50 mr-2" />
+          <Icon data={mdiAccountSearch} class="text-surface-content/50 mr-2" />
         </div>
       </TextField>
     </Preview>
@@ -299,7 +299,7 @@
 <Preview>
   <TextField label="Amount">
     <div slot="prefix">
-      <Icon path={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+      <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
     </div>
   </TextField>
 </Preview>
@@ -319,7 +319,7 @@
     <Preview>
       <TextField label="Ratio" align="right">
         <div slot="suffix">
-          <Icon path={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
+          <Icon data={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
         </div>
       </TextField>
     </Preview>
@@ -371,13 +371,13 @@
 <Preview>
   <TextField label="Transfer amount">
     <div slot="prepend">
-      <Icon path={mdiCreditCardOutline} class="text-surface-content/50 mr-2" />
+      <Icon data={mdiCreditCardOutline} class="text-surface-content/50 mr-2" />
     </div>
     <div slot="append">
       <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
     </div>
     <div slot="prefix">
-      <Icon path={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+      <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
     </div>
     <div slot="suffix" class="text-surface-content/50">usd</div>
   </TextField>
@@ -389,10 +389,10 @@
   <TextField label="Date Range">
     <div slot="prepend">
       <Button icon={mdiChevronLeft} class="text-surface-content/50 p-2" />
-      <Icon path={mdiCalendar} class="text-surface-content/50 mr-2" />
+      <Icon data={mdiCalendar} class="text-surface-content/50 mr-2" />
     </div>
     <div slot="append">
-      <Icon path={mdiRefresh} class="text-surface-content/50 mr-2" />
+      <Icon data={mdiRefresh} class="text-surface-content/50 mr-2" />
       <Button icon={mdiChevronRight} class="text-surface-content/50 p-2" />
     </div>
   </TextField>

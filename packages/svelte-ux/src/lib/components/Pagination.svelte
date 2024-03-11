@@ -113,7 +113,7 @@
             <span>
               <Button on:click={toggle}>
                 {$pagination.perPage}
-                <Icon path={mdiMenuDown} />
+                <Icon data={mdiMenuDown} />
               </Button>
 
               <Menu

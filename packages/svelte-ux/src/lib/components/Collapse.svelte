@@ -84,7 +84,7 @@
           classes.icon
         )}
       >
-        <Icon path={icon} />
+        <Icon data={icon} />
       </div>
     </slot>
   </button>

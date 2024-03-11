@@ -44,6 +44,6 @@
 
 <Preview>
   <Avatar class="bg-primary">
-    <Icon path={mdiAccount} class="text-primary-content" />
+    <Icon data={mdiAccount} class="text-primary-content" />
   </Avatar>
 </Preview>

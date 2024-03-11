@@ -119,7 +119,7 @@
 
             {#if icon}
               <span class={cls('mr-3', rounded && !$$slots.prepend && 'ml-3')}>
-                <Icon path={icon} class="text-surface-content/50" />
+                <Icon data={icon} class="text-surface-content/50" />
               </span>
             {/if}
           </div>
@@ -186,9 +186,9 @@
             <slot name="append" />
 
             {#if error}
-              <Icon path={mdiInformationOutline} class="text-danger" />
+              <Icon data={mdiInformationOutline} class="text-danger" />
             {:else if iconRight}
-              <Icon path={iconRight} class="text-surface-content/50" />
+              <Icon data={iconRight} class="text-surface-content/50" />
             {/if}
           </div>
         {/if}

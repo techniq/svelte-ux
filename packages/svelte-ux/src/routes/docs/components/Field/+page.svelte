@@ -116,13 +116,13 @@
       <Field label="Is Active">
         <ToggleGroup variant="outline" inset rounded="full">
           <ToggleOption value="yes">
-            <Icon path={mdiAccount} />
+            <Icon data={mdiAccount} />
           </ToggleOption>
           <ToggleOption value="no">
-            <Icon path={mdiAccountOutline} />
+            <Icon data={mdiAccountOutline} />
           </ToggleOption>
           <ToggleOption value="all">
-            <Icon path={mdiAccountMultipleOutline} />
+            <Icon data={mdiAccountMultipleOutline} />
           </ToggleOption>
         </ToggleGroup>
       </Field>
@@ -180,7 +180,7 @@
       <option value={4}>Fourth</option>
     </select>
     <span slot="append">
-      <Icon path={mdiChevronDown} />
+      <Icon data={mdiChevronDown} />
     </span>
   </Field>
 </Preview>

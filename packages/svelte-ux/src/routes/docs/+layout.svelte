@@ -78,7 +78,7 @@
   {#if title}
     <div>
       <div class="inline-block text-xs font-bold text-surface-content/50 capitalize">Docs</div>
-      <Icon path={mdiChevronRight} class="divider opacity-25" />
+      <Icon data={mdiChevronRight} class="divider opacity-25" />
       <div class="inline-block text-xs font-bold text-primary capitalize">
         {type}
       </div>

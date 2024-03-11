@@ -114,23 +114,23 @@
 <h2>Sizes</h2>
 
 <Preview>
-  <Icon path={mdiAccount} size="8px" />
-  <Icon path={mdiAccount} size="1em" />
-  <Icon path={mdiAccount} size="1.5em" />
-  <Icon path={mdiAccount} size="2em" />
-  <Icon path={mdiAccount} size="2.5em" />
-  <Icon path={mdiAccount} size="3em" />
-  <Icon path={mdiAccount} size="64px" />
+  <Icon data={mdiAccount} size="8px" />
+  <Icon data={mdiAccount} size="1em" />
+  <Icon data={mdiAccount} size="1.5em" />
+  <Icon data={mdiAccount} size="2em" />
+  <Icon data={mdiAccount} size="2.5em" />
+  <Icon data={mdiAccount} size="3em" />
+  <Icon data={mdiAccount} size="64px" />
   <Icon svgUrl="https://api.iconify.design/mdi:account.svg" size="64px" />
 </Preview>
 
 <h2>Color</h2>
 
 <Preview>
-  <Icon path={mdiAccount} class="text-danger" />
-  <Icon path={mdiAccount} class="text-blue-500" />
-  <Icon path={mdiAccount} class="text-success-500" />
-  <Icon path={mdiAccount} class="text-surface-content/50" />
+  <Icon data={mdiAccount} class="text-danger" />
+  <Icon data={mdiAccount} class="text-blue-500" />
+  <Icon data={mdiAccount} class="text-success-500" />
+  <Icon data={mdiAccount} class="text-surface-content/50" />
   <Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="text-danger" />
   <Icon
     svg={'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>'}
@@ -140,7 +140,7 @@
     svgUrl="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/user.svg"
     class="text-success-500"
   />
-  <Icon path={mdiAccount} style="color:red" />
+  <Icon data={mdiAccount} style="color:red" />
 </Preview>
 
 <h2>Multiple paths</h2>
@@ -155,27 +155,27 @@
 <h2>Rotate / Scale / Flip</h2>
 
 <Preview>
-  <Icon path={mdiArrowRight} class="-rotate-45" />
-  <Icon path={mdiArrowRight} class="scale-75" />
-  <Icon path={mdiArrowRight} class="-scale-x-100" />
-  <Icon path={mdiAccount} class="-scale-y-100" />
+  <Icon data={mdiArrowRight} class="-rotate-45" />
+  <Icon data={mdiArrowRight} class="scale-75" />
+  <Icon data={mdiArrowRight} class="-scale-x-100" />
+  <Icon data={mdiAccount} class="-scale-y-100" />
   <Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="-scale-y-100" />
 </Preview>
 
 <h2>Animation</h2>
 
 <Preview>
-  <Icon path={mdiLoading} class="animate-spin" />
-  <Icon path={mdiHeart} class="animate-pulse" />
-  <Icon path={mdiCircleMedium} class="animate-ping" />
-  <Icon path={mdiDownload} class="animate-bounce" />
+  <Icon data={mdiLoading} class="animate-spin" />
+  <Icon data={mdiHeart} class="animate-pulse" />
+  <Icon data={mdiCircleMedium} class="animate-ping" />
+  <Icon data={mdiDownload} class="animate-bounce" />
 </Preview>
 
 <h2>with Tooltip</h2>
 
 <Preview>
   <Tooltip title="User">
-    <Icon path={mdiAccount} />
+    <Icon data={mdiAccount} />
   </Tooltip>
   <Tooltip title="User">
     <Icon svgUrl="https://api.iconify.design/mdi:account.svg" />

@@ -57,11 +57,11 @@
     <div slot="item" let:item>
       <div class="text-lg font-bold">{item.title}</div>
       <div class="text-sm text-surface-content/50">
-        <Icon path={mdiMapMarker} size="1rem" />
+        <Icon data={mdiMapMarker} size="1rem" />
         {item.location}
       </div>
       <div class="text-sm text-surface-content/50">
-        <Icon path={mdiClockOutline} size=".9rem" />
+        <Icon data={mdiClockOutline} size=".9rem" />
         {format(item.date, 'M/d/yyyy @ h:mm aa')}
       </div>
     </div>
@@ -74,11 +74,11 @@
         })}
       >
         {#if item.status === 'completed'}
-          <Icon path={mdiCheck} size="1rem" class="text-success-content" />
+          <Icon data={mdiCheck} size="1rem" class="text-success-content" />
         {:else if item.status === 'in-progress'}
-          <Icon path={mdiTruck} size="1rem" class="text-info-content p-[2px]" />
+          <Icon data={mdiTruck} size="1rem" class="text-info-content p-[2px]" />
         {:else if item.status === 'failed'}
-          <Icon path={mdiClose} size="1rem" class="text-danger-content" />
+          <Icon data={mdiClose} size="1rem" class="text-danger-content" />
         {/if}
       </div>
     </div>

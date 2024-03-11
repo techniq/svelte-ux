@@ -1,5 +1,5 @@
 ---
-"svelte-ux": patch
+'svelte-ux': patch
 ---
 
-[NavItem] Pass `data` instead of `path` to <Icon> for more flexability
+Pass `data` instead of `path` to underlying <Icon> for more flexability (Avatar, Field, ListItem, NavItem, etc)

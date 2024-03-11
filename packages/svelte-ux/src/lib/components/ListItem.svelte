@@ -77,10 +77,10 @@
     {#if icon != null}
       {#if avatar}
         <Avatar class={cls(settingsClasses.avatar, classes.avatar)} {...avatar}>
-          <Icon path={icon} class={cls(settingsClasses.icon, classes.icon)} />
+          <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
         </Avatar>
       {:else}
-        <Icon path={icon} class={cls(settingsClasses.icon, classes.icon)} />
+        <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
       {/if}
     {/if}
   </slot>

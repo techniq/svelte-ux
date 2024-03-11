@@ -41,14 +41,14 @@
   <div class="grid gap-2">
     <Switch let:checked>
       {#if checked}
-        <Icon path={mdiCheck} class="text-primary" size=".8em" />
+        <Icon data={mdiCheck} class="text-primary" size=".8em" />
       {/if}
     </Switch>
     <Switch let:checked>
       {#if checked}
-        <Icon path={mdiCheck} class="text-primary" size=".8em" />
+        <Icon data={mdiCheck} class="text-primary" size=".8em" />
       {:else}
-        <Icon path={mdiClose} class="text-surface-content" size=".8em" />
+        <Icon data={mdiClose} class="text-surface-content" size=".8em" />
       {/if}
     </Switch>
   </div>
@@ -61,7 +61,7 @@
     <Switch disabled />
     <Switch disabled checked />
     <Switch disabled>
-      <Icon path={mdiCheck} class="text-surface-content/50" size=".8em" />
+      <Icon data={mdiCheck} class="text-surface-content/50" size=".8em" />
     </Switch>
   </div>
 </Preview>

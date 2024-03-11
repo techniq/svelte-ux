@@ -15,7 +15,7 @@
   <div class="w-[400px]">
     <Notification open closeIcon>
       <div slot="icon">
-        <Icon path={mdiCheckCircleOutline} class="text-success-500" />
+        <Icon data={mdiCheckCircleOutline} class="text-success-500" />
       </div>
       <div slot="title">Successfully Saved!</div>
       <div slot="description">Anyone with a link can now view this file.</div>
@@ -42,7 +42,7 @@
   <div class="w-[400px]">
     <Notification actions="below" closeIcon>
       <div slot="icon" class="self-start">
-        <Icon path={mdiInbox} />
+        <Icon data={mdiInbox} />
       </div>
       <div slot="title">Discussion moved</div>
       <div slot="description">

@@ -14,6 +14,6 @@
     class="TableOrderIcon inline-block transition duration-100 transform"
     class:rotate-180={order.direction === 'desc'}
   >
-    <Icon path={mdiArrowUp} />
+    <Icon data={mdiArrowUp} />
   </div>
 {/if}

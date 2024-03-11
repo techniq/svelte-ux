@@ -78,7 +78,7 @@
 
     {#if api.rest_props}
       <div class="text-surface-content/50 text-xs flex gap-2 mt-2 ml-4 items-center">
-        <Icon path={mdiInformationOutline} />
+        <Icon data={mdiInformationOutline} />
         <span>
           Remaining props are passed to underlying
           {#if api.rest_props.type === 'InlineComponent'}

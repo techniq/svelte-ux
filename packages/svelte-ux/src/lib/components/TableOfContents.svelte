@@ -72,7 +72,7 @@
       )}
     >
       {#if node.level > 1}
-        <Icon path={icon} class="-mx-1 text-surface-content/30" />
+        <Icon data={icon} class="-mx-1 text-surface-content/30" />
       {/if}
       {@html node.name}
     </a>

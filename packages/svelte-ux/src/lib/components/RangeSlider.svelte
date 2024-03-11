@@ -267,7 +267,7 @@
       'transition-opacity'
     )}
   >
-    <Icon path={mdiDragHorizontal} class="text-primary-content" />
+    <Icon data={mdiDragHorizontal} class="text-primary-content" />
   </div>
 
   <div
