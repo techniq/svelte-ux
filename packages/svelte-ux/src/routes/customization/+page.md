@@ -273,11 +273,13 @@ See the implementations of [ThemeSelect](/docs/components/ThemeSelect) and [Them
 
 ## Settings
 
-At the root of your app, you can call `settings({ ... })` to set component classes, define some default component props such as `variant` and `labelPlacement`, and define locales / formats. Usually this is done in `+layout.svelte`.
+At the root of your app, you can use `settings({ ... })` or `<Settings ...>` to set component classes, define some default component props such as `variant` and `labelPlacement`, define locales / formats, or register additional `light `/ `dark` themes.
 
 For each `ComponentName: ...` you can add convenient global styling by passing `classes` as a `string` to alter the root class string, or an `object` for finer control over internal elements.
 
-Components based on Button and Field also let you customize the default `variant` and `labelPlacement` properties, respectively.
+Components based on `Button` and `Field` also let you customize the default `variant` and `labelPlacement` properties, respectively.
+
+This is typically done in your root `+layout.svelte`.
 
 ```svelte
 <script>
