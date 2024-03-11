@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { isActive, url } from '../utils/routing.js';
+  import type { ComponentProps } from 'svelte';
 
+  import { isActive, url } from '../utils/routing.js';
   import Icon from './Icon.svelte';
   import { scrollIntoView } from '../actions/scroll.js';
   import { cls } from '../utils/styles.js';
@@ -16,10 +17,7 @@
   export let classes: {
     root?: string;
     active?: string;
-    icon?: {
-      root?: string;
-      path?: string | string[];
-    };
+    icon?: ComponentProps<Icon>['classes'];
   } = {};
   const settingsClasses = getComponentClasses('NavItem');
 
