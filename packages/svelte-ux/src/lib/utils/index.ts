@@ -7,6 +7,7 @@ export * from './file.js';
 export {
   format,
   formatWithLocale,
+  type FormatType,
   type FormatFunction,
   type FormatFunctionProperties,
   type FormatFunctions,
