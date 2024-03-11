@@ -92,7 +92,7 @@ function createLocaleStores(settings: SettingsInput) {
   };
 }
 
-export function settings(settings: SettingsInput): Settings {
+export function settings(settings: SettingsInput = {}): Settings {
   let lightThemes = settings.themes?.light ?? ['light'];
   let darkThemes = settings.themes?.dark ?? ['dark'];
 
