@@ -16,8 +16,8 @@
   export let classes: {
     root?: string;
     active?: string;
-    icon?: string | {
-      root?: string |;
+    icon?: {
+      root?: string |
       path?: string | string[]
     };
   } = {};
@@ -54,7 +54,7 @@
   {/if}
 
   {#if icon}
-    <Icon data={icon} class={cls('mr-3 flex-shrink-0', settingsClasses.icon, (typeof classes.icon === 'string') ? classes.icon : '')} classes={(typeof classes.icon === 'object') ? classes.icon : {}} />
+    <Icon data={icon} class={cls('mr-3 flex-shrink-0', settingsClasses.icon)} classes={classes.icon} />
   {/if}
 
   {text}
