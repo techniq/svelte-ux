@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.61.5
+
+### Patch Changes
+
+- Fix build of PeriodType/DateToken in DateButton (enum not type) ([`57f2072802b2fb5ff025fd5f57ef8c5c8561c5f1`](https://github.com/techniq/svelte-ux/commit/57f2072802b2fb5ff025fd5f57ef8c5c8561c5f1))
+
+- Support calling `settings()` (without any config) ([`178f896381a8218044295de3d17d1a64189844bd`](https://github.com/techniq/svelte-ux/commit/178f896381a8218044295de3d17d1a64189844bd))
+
+- Add `FormatType` as top-level export ([`d910afe63710f27ddfdace5d3ff4fe4646a39e1b`](https://github.com/techniq/svelte-ux/commit/d910afe63710f27ddfdace5d3ff4fe4646a39e1b))
+
+- Update dependencies ([`6a266d314dadbca5ef7ed1711351e0a17e2b2b75`](https://github.com/techniq/svelte-ux/commit/6a266d314dadbca5ef7ed1711351e0a17e2b2b75))
+
 ## 0.61.4
 
 ### Patch Changes
