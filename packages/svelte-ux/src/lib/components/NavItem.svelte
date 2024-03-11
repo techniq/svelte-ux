@@ -16,7 +16,10 @@
   export let classes: {
     root?: string;
     active?: string;
-    icon?: string;
+    icon?: string | {
+      root?: string |;
+      path?: string | string[]
+    };
   } = {};
   const settingsClasses = getComponentClasses('NavItem');
 
@@ -51,7 +54,7 @@
   {/if}
 
   {#if icon}
-    <Icon data={icon} class={cls('mr-3 flex-shrink-0', settingsClasses.icon, classes.icon)} />
+    <Icon data={icon} class={cls('mr-3 flex-shrink-0', settingsClasses.icon, (typeof classes.icon === 'string') ? classes.icon : '')} classes={(typeof classes.icon === 'object') ? classes.icon : {}} />
   {/if}
 
   {text}
