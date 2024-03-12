@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.61.9
+
+### Patch Changes
+
+- Fix ToggleOption value sometimes being converted to string due to bind:value ([#294](https://github.com/techniq/svelte-ux/pull/294))
+
 ## 0.61.8
 
 ### Patch Changes
