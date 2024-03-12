@@ -79,7 +79,6 @@
     on:click={() => selectOption(optionElement, value)}
     on:click
     type="radio"
-    bind:value
     class="appearance-none absolute"
     checked={selected}
   />
