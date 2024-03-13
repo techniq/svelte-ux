@@ -8,9 +8,11 @@
   import { crossfade, fade } from 'svelte/transition';
 
   import { cls } from '../utils/styles.js';
+  import { uniqueId } from '../utils/string.js';
   import Logger from '../utils/logger.js';
   import { getComponentClasses } from './theme.js';
 
+  export let name = uniqueId('group-');
   export let value: any = undefined; // index or value
   export let autoscroll: boolean = false;
 
@@ -218,6 +220,7 @@
   }
 
   setContext(groupKey, {
+    name,
     registerOption,
     unregisterOption,
     registerPanel,

@@ -16,6 +16,7 @@
   const settingsClasses = getComponentClasses('ToggleOption');
 
   const {
+    name,
     registerOption,
     unregisterOption,
     selectOption,
@@ -76,11 +77,12 @@
   </div>
 
   <input
-    on:click={() => selectOption(optionElement, value)}
-    on:click
+    {name}
     type="radio"
     class="appearance-none absolute"
     checked={selected}
+    on:click={() => selectOption(optionElement, value)}
+    on:click
   />
 </label>
 
