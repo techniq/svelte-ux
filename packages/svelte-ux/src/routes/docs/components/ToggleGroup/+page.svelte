@@ -40,13 +40,14 @@
 
 <h1>Playground</h1>
 
-<div class="grid grid-cols-[1fr,200px] gap-3">
+<div class="grid gap-2">
   <div>
     <Preview>
       <ToggleGroup {variant} {size} {rounded} {gap} {inset} {vertical}>
         <ToggleOption value="all">All</ToggleOption>
         <ToggleOption value="missed">Missed</ToggleOption>
         <ToggleOption value="calls">Calls</ToggleOption>
+
         <svelte:fragment slot="panes">
           {#if showPanes}
             <div class="mt-2 p-4 bg-surface-content/5 rounded border">
@@ -60,46 +61,46 @@
     </Preview>
   </div>
 
-  <div class="grid gap-2">
-    <Field label="Variant" classes={{ input: 'grid gap-1' }}>
-      <Radio name="variant" value="default" bind:group={variant}>default</Radio>
-      <Radio name="variant" value="outline" bind:group={variant}>outline</Radio>
-      <Radio name="variant" value="fill" bind:group={variant}>fill</Radio>
-      <Radio name="variant" value="fill-light" bind:group={variant}>fill-light</Radio>
-      <Radio name="variant" value="fill-surface" bind:group={variant}>fill-surface</Radio>
-      <Radio name="variant" value="underline" bind:group={variant}>underline</Radio>
-    </Field>
+  <Field label="Variant" classes={{ input: 'flex flex-wrap gap-3' }}>
+    <Radio name="variant" value="default" bind:group={variant}>default</Radio>
+    <Radio name="variant" value="outline" bind:group={variant}>outline</Radio>
+    <Radio name="variant" value="fill" bind:group={variant}>fill</Radio>
+    <Radio name="variant" value="fill-light" bind:group={variant}>fill-light</Radio>
+    <Radio name="variant" value="fill-surface" bind:group={variant}>fill-surface</Radio>
+    <Radio name="variant" value="underline" bind:group={variant}>underline</Radio>
+  </Field>
 
-    <Field label="Size" classes={{ input: 'grid gap-1' }}>
+  <div class="grid md:grid-cols-3 gap-2">
+    <Field label="Size" classes={{ container: 'h-full', input: 'flex gap-3 md:grid md:gap-1' }}>
       <Radio name="size" value="xs" bind:group={size}>xs</Radio>
       <Radio name="size" value="sm" bind:group={size}>sm</Radio>
       <Radio name="size" value="md" bind:group={size}>md</Radio>
       <Radio name="size" value="lg" bind:group={size}>lg</Radio>
     </Field>
 
-    <Field label="Rounded" classes={{ input: 'grid gap-1' }}>
+    <Field label="Rounded" classes={{ container: 'h-full', input: 'flex gap-3 md:grid md:gap-1' }}>
       <Radio name="rounded" value={false} bind:group={rounded}>false</Radio>
       <Radio name="rounded" value={true} bind:group={rounded}>true</Radio>
       <Radio name="rounded" value="full" bind:group={rounded}>full</Radio>
     </Field>
 
-    <Field label="Gap" classes={{ input: 'grid gap-1' }}>
+    <Field label="Gap" classes={{ container: 'h-full', input: 'flex gap-3 md:grid md:gap-1' }}>
       <Radio name="gap" value={false} bind:group={gap}>false</Radio>
       <Radio name="gap" value={true} bind:group={gap}>true</Radio>
       <Radio name="gap" value="px" bind:group={gap}>px</Radio>
     </Field>
 
-    <Field label="Inset" classes={{ input: 'grid gap-1' }}>
+    <Field label="Inset" classes={{ input: 'flex gap-3 md:grid md:gap-1' }}>
       <Radio name="inset" value={false} bind:group={inset}>false</Radio>
       <Radio name="inset" value={true} bind:group={inset}>true</Radio>
     </Field>
 
-    <Field label="Vertical" classes={{ input: 'grid gap-1' }}>
+    <Field label="Vertical" classes={{ input: 'flex gap-3 md:grid md:gap-1' }}>
       <Radio name="vertical" value={false} bind:group={vertical}>false</Radio>
       <Radio name="vertical" value={true} bind:group={vertical}>true</Radio>
     </Field>
 
-    <Field label="Show panes" classes={{ input: 'grid gap-1' }}>
+    <Field label="Show panes" classes={{ input: 'flex gap-3 md:grid md:gap-1' }}>
       <Radio name="panes" value={false} bind:group={showPanes}>false</Radio>
       <Radio name="panes" value={true} bind:group={showPanes}>true</Radio>
     </Field>
