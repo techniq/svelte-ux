@@ -44,8 +44,8 @@ export function entries<T extends object>(o: T) {
 }
 
 // Get object from entries (array of [key, value] arrays) (strongly-typed)
-export function fromEntries<T extends object>(o: [keyof T, T[keyof T]][]): Record<keyof T, T[keyof T]> {
-  return Object.fromEntries(o) as Record<keyof T, T[keyof T]>;
+export function fromEntries<K extends string, V>(entries: [K, V][]): Record<K, V> {
+  return Object.fromEntries(entries) as Record<K, V>;
 }
 
 // https://github.com/Microsoft/TypeScript/issues/17198#issuecomment-315400819
