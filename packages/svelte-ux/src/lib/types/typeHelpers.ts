@@ -43,6 +43,11 @@ export function entries<T extends object>(o: T) {
   return Object.entries(o) as [keyof T, T[keyof T]][]; // TODO: Improve based on key/value pair - https://stackoverflow.com/questions/60141960/typescript-key-value-relation-preserving-object-entries-type
 }
 
+// Get object from entries (array of [key, value] arrays) (strongly-typed)
+export function fromEntries<T extends object>(o: [keyof T, T[keyof T]][]): Record<keyof T, T[keyof T]> {
+  return Object.fromEntries(o) as Record<keyof T, T[keyof T]>;
+}
+
 // https://github.com/Microsoft/TypeScript/issues/17198#issuecomment-315400819
 export function enumKeys(E: any) {
   return Object.keys(E).filter((k) => typeof E[k as any] === 'number'); // ["A", "B"]
