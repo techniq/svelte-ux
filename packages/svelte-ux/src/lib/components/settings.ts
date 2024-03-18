@@ -97,7 +97,7 @@ function createLocaleStores(settings: SettingsInput) {
 }
 
 function createShowDrawer() {
-  return writable(browser ? window.innerWidth >= breakpoints.md : true)
+  return writable(browser ? window.innerWidth >= breakpoints.md : true);
 }
 
 export function settings(settings: SettingsInput = {}): Settings {
