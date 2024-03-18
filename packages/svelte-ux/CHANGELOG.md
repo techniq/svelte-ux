@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.61.10
+
+### Patch Changes
+
+- [Switch] Fix height on mobile Safari ([`c6587f649212acd71bf0679f787780b4e9a9c973`](https://github.com/techniq/svelte-ux/commit/c6587f649212acd71bf0679f787780b4e9a9c973))
+
+- Implement type-safe fromEntries type helper for Object.fromEntries ([#297](https://github.com/techniq/svelte-ux/pull/297))
+
+- [ToggleGroup] Support passing `name` prop to group underlying radio options. Improves keyboard navigation and form support ([`e4b66e85d07d994b3203208f78dd1b76c4018077`](https://github.com/techniq/svelte-ux/commit/e4b66e85d07d994b3203208f78dd1b76c4018077))
+
 ## 0.61.9
 
 ### Patch Changes
