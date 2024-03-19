@@ -1,7 +1,9 @@
 import { writable } from 'svelte/store';
+import type { ComponentEvents } from 'svelte';
 import { isFunction } from 'lodash-es';
-import type { ColumnDef } from '../types/table.js';
-import { sortFunc } from '$lib/utils/sort.js';
+
+import { sortFunc } from '../utils/sort.js';
+import Table from '../components/Table.svelte';
 
 type SortFunc = (a: any, b: any) => number;
 type OrderDirection = 'asc' | 'desc';
@@ -25,11 +27,9 @@ export default function tableOrderStore(props?: TableOrderProps) {
     handler: props?.initialHandler ?? sortFunc(props?.initialBy, props?.initialDirection ?? 'asc'),
   });
 
-  // TODO: (Breaking change) Take in an event with `e.detail.column` (like <Table on:headerClick={...} />) to simplify usage
-  // <Table on:headerClick={(e) => tableOrder.onHeaderClick(e.detail.column)} />
-  // vs
-  // <Table on:headerClick={tableOrder.onHeaderClick} />
-  function onHeaderClick(column: ColumnDef) {
+  function onHeaderClick(e: ComponentEvents<Table>['headerClick']) {
+    const column = e.detail.column;
+
     if (column.orderBy === false) {
       // ignore
       return;

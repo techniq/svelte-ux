@@ -156,7 +156,7 @@
     ]}
     orderBy={$order.by}
     orderDirection={$order.direction}
-    on:headerClick={(e) => order.onHeaderClick(e.detail.column)}
+    on:headerClick={order.onHeaderClick}
   />
 </Preview>
 
@@ -197,7 +197,7 @@
       on:headerClick={(e) => {
         //Switch back to page 1 when sorting
         pagination.setPage(1);
-        order.onHeaderClick(e.detail.column);
+        order.onHeaderClick(e);
       }}
     />
     <Pagination

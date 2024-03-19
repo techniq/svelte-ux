@@ -11,7 +11,10 @@
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './settings.js';
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{
+    headerClick: { column: ColumnDef };
+    cellClick: { column: ColumnDef; rowData: any };
+  }>();
 
   export let columns: ColumnDef[] = [];
   export let data: any[] | null = [];
