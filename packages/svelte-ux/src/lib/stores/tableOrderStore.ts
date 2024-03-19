@@ -43,7 +43,12 @@ export default function tableOrderStore(props?: TableOrderProps) {
             ? column.value
             : column.name;
 
-      const direction = prevState.by === by && prevState.direction === 'asc' ? 'desc' : 'asc';
+      const direction =
+        prevState.by !== by
+          ? props?.initialDirection ?? 'asc'
+          : prevState.direction === 'asc'
+            ? 'desc'
+            : 'asc';
 
       let handler: SortFunc | undefined = undefined;
       if (isFunction(column.orderBy)) {
