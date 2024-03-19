@@ -38,7 +38,7 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
 
         if (order) {
           tracker.addEventListener('click', () =>
-            order.onHeaderClick(new CustomEvent('headerClick', { detail: column }))
+            order.onHeaderClick(new CustomEvent('headerClick', { detail: { column } }))
           );
         }
       }
