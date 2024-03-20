@@ -3,8 +3,8 @@
 
   type T = $$Generic;
 
-  export let initial: any[] = [];
-  export let all: any[] = [];
+  export let initial: T[] = [];
+  export let all: T[] = [];
   export let single = false;
   export let max: number | undefined = undefined;
 

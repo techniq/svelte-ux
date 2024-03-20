@@ -83,9 +83,9 @@
 <h2>Pagination</h2>
 
 <Preview>
-  <Paginate items={data} perPage={5} let:pageItems let:pagination>
+  <Paginate {data} perPage={5} let:pageData let:pagination>
     <Table
-      data={pageItems}
+      data={pageData}
       columns={[
         {
           name: 'name',
@@ -161,9 +161,9 @@
 <h2>Order + Pagination</h2>
 
 <Preview>
-  <Paginate items={data.sort($order.handler)} perPage={5} let:pageItems let:pagination>
+  <Paginate data={data.sort($order.handler)} perPage={5} let:pageData let:pagination>
     <Table
-      data={pageItems}
+      data={pageData}
       columns={[
         {
           name: 'name',

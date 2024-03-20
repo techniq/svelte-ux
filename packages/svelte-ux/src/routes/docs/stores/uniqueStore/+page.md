@@ -5,7 +5,7 @@
 
 	import uniqueStore from '$lib/stores/uniqueStore.js';
 
-	const items = Array.from({ length: 5 }).map((_,i) => {
+	const data = Array.from({ length: 5 }).map((_,i) => {
     return {
       id: i + 1
     }
@@ -32,10 +32,10 @@ const store = uniqueStore();
 <h2>Basic</h2>
 
 <Preview>
-	{#each items as item}
+	{#each data as d}
 		<div>
-			<Checkbox checked={$selected.has(item.id)} on:change={() => selected.toggle(item.id)}>
-				{item.id}
+			<Checkbox checked={$selected.has(d.id)} on:change={() => selected.toggle(d.id)}>
+				{d.id}
 			</Checkbox>
 		</div>
 	{/each}

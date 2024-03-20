@@ -1,7 +1,9 @@
 <script lang="ts">
   import { intersection } from '../actions/observer.js';
 
-  export let items: any[];
+  type T = $$Generic;
+
+  export let items: T[];
   export let perPage = 10;
   export let disabled = false;
 

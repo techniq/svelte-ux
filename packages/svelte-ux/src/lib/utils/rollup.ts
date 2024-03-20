@@ -3,7 +3,7 @@ import { get, isFunction } from 'lodash-es';
 
 export default function <T = any>(
   data: T[],
-  reduce: (items: T[]) => any,
+  reduce: (values: T[]) => any,
   keys: (((d: any) => any) | string | null)[] = [],
   emptyKey = 'Unknown'
 ) {

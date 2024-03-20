@@ -8,7 +8,7 @@
 
   import { cls } from '$lib/utils/styles.js';
 
-  const items = [
+  const data = [
     {
       title: 'Label Created',
       location: 'United States',
@@ -53,7 +53,7 @@
 <h2>Basic</h2>
 
 <Preview>
-  <Steps {items}>
+  <Steps {data}>
     <div slot="item" let:item>
       <div class="text-lg font-bold">{item.title}</div>
       <div class="text-sm text-surface-content/50">

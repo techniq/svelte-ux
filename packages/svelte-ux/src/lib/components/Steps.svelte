@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let items: any[];
+  type T = $$Generic;
+
+  export let data: T[];
   export let lineGap = 4;
 
   // binded
@@ -12,13 +14,13 @@
   style:--lineBottom="{lineGap}px"
   style:--lineOffset="{circleSize / 2}px"
 >
-  {#each items as item, index}
+  {#each data as item, index}
     <li class="step relative flex gap-4 pb-10">
       <div bind:clientWidth={circleSize}>
         <slot name="marker" {item} />
       </div>
 
-      {#if index < items.length - 1}
+      {#if index < data.length - 1}
         <div
           class="line absolute top-[var(--lineTop)] bottom-[var(--lineBottom)] left-0 w-[2px] translate-x-[var(--lineOffset)] bg-surface-content/20"
         />

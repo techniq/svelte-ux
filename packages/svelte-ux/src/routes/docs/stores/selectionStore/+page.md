@@ -5,7 +5,7 @@
 
 	import selectionStore from '$lib/stores/selectionStore.js';
 
-  const items = Array.from({ length: 5 }).map((_,i) => {
+  const data = Array.from({ length: 5 }).map((_,i) => {
     return {
       id: i + 1
     }
@@ -13,7 +13,7 @@
 
   const selection = selectionStore()
   const selection2 = selectionStore({ initial: [3,4,5]})
-  const selection3 = selectionStore({ all: items.map(item => item.id)});
+  const selection3 = selectionStore({ all: data.map(d => d.id)});
   const selection4 = selectionStore({ single: true });
   const selection5 = selectionStore({ max: 3 });
 </script>
@@ -27,10 +27,10 @@ const selection = selectionStore({ max: 3 });
 ```
 
 <Preview>
-  {#each items as item}
+  {#each data as d}
     <div>
-      <Checkbox checked={$selection5.isSelected(item.id)} on:change={() => $selection5.toggleSelected(item.id)} disabled={$selection5.isDisabled(item.id)}>
-        {item.id}
+      <Checkbox checked={$selection5.isSelected(d.id)} on:change={() => $selection5.toggleSelected(d.id)} disabled={$selection5.isDisabled(d.id)}>
+        {d.id}
       </Checkbox>
     </div>
   {/each}
@@ -44,10 +44,10 @@ const selection = selectionStore();
 ```
 
 <Preview>
-  {#each items as item}
+  {#each data as d}
     <div>
-      <Checkbox checked={$selection.isSelected(item.id)} on:change={() => $selection.toggleSelected(item.id)}>
-        {item.id}
+      <Checkbox checked={$selection.isSelected(d.id)} on:change={() => $selection.toggleSelected(d.id)}>
+        {d.id}
       </Checkbox>
     </div>
   {/each}
@@ -61,10 +61,10 @@ const selection2 = selectionStore({ initial: [1, 2, 3] });
 ```
 
 <Preview>
-  {#each items as item}
+  {#each data as d}
     <div>
-      <Checkbox checked={$selection2.isSelected(item.id)} on:change={() => $selection2.toggleSelected(item.id)}>
-        {item.id}
+      <Checkbox checked={$selection2.isSelected(d.id)} on:change={() => $selection2.toggleSelected(d.id)}>
+        {d.id}
       </Checkbox>
     </div>
   {/each}
@@ -74,17 +74,17 @@ const selection2 = selectionStore({ initial: [1, 2, 3] });
 <h2>Select all</h2>
 
 ```js
-const selection3 = selectionStore({ all: items.map((item) => item.id) });
+const selection3 = selectionStore({ all: data.map((d) => d.id) });
 ```
 
 <Preview>
   <Checkbox checked={$selection3.isAnySelected()} indeterminate={!$selection3.isAllSelected()} on:change={() => $selection3.toggleAll()}>
     Select all
   </Checkbox>
-  {#each items as item}
+  {#each data as d}
     <div>
-      <Checkbox checked={$selection3.isSelected(item.id)} on:change={() => $selection3.toggleSelected(item.id)}>
-        {item.id}
+      <Checkbox checked={$selection3.isSelected(d.id)} on:change={() => $selection3.toggleSelected(d.id)}>
+        {d.id}
       </Checkbox>
     </div>
   {/each}
@@ -98,10 +98,10 @@ const selection4 = selectionStore({ single: true });
 ```
 
 <Preview>
-  {#each items as item}
+  {#each data as d}
     <div>
-      <Radio group={$selection4.selected} value={item.id} on:change={() => $selection4.toggleSelected(item.id)}>
-        {item.id}
+      <Radio group={$selection4.selected} value={d.id} on:change={() => $selection4.toggleSelected(d.id)}>
+        {d.id}
       </Radio>
     </div>
   {/each}

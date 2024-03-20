@@ -12,13 +12,15 @@
   import { getSettings } from './settings.js';
   import type { tableOrderStore } from '$lib/index.js';
 
+  type T = $$Generic;
+
   const dispatch = createEventDispatcher<{
     headerClick: { column: ColumnDef };
-    cellClick: { column: ColumnDef; rowData: any };
+    cellClick: { column: ColumnDef; rowData: T };
   }>();
 
   export let columns: ColumnDef[] = [];
-  export let data: any[] | null = [];
+  export let data: T[] | null = [];
 
   export let order: ReturnType<typeof tableOrderStore> | undefined = undefined;
 
@@ -69,7 +71,7 @@
   });
 
   const { format } = getSettings();
-  $: getCellContent = (column: ColumnDef, rowData: any, rowIndex: number) => {
+  $: getCellContent = (column: ColumnDef, rowData: T, rowIndex: number) => {
     let value = getCellValue(column, rowData, rowIndex);
     if (column.format) {
       if (typeof column.format === 'function') {
