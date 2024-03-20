@@ -6,8 +6,8 @@
   import { scrollIntoView } from '../actions/scroll.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
-  import { showDrawer } from './AppLayout.svelte';
   import { mdScreen } from '../stores/matchMedia.js';
+  import { getSettings } from './index.js';
 
   export let currentUrl: URL;
   export let path: string;
@@ -20,6 +20,8 @@
     icon?: ComponentProps<Icon>['classes'];
   } = {};
   const settingsClasses = getComponentClasses('NavItem');
+
+  const { showDrawer } = getSettings();
 
   $: isPathActive = path ? isActive(currentUrl, path) : false;
 </script>
