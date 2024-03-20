@@ -154,9 +154,7 @@
         format: 'integer',
       },
     ]}
-    orderBy={$order.by}
-    orderDirection={$order.direction}
-    on:headerClick={order.onHeaderClick}
+    {order}
   />
 </Preview>
 
@@ -192,12 +190,10 @@
           format: 'integer',
         },
       ]}
-      orderBy={$order.by}
-      orderDirection={$order.direction}
+      {order}
       on:headerClick={(e) => {
         //Switch back to page 1 when sorting
         pagination.setPage(1);
-        order.onHeaderClick(e);
       }}
     />
     <Pagination

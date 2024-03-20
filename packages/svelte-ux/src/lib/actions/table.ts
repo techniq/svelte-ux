@@ -33,7 +33,8 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
     tracker.reset();
 
     if (node.nodeName === 'TH') {
-      if (column.orderBy !== false) {
+      // Order by
+      if (order && column.orderBy !== false) {
         tracker.addClass('cursor-pointer');
 
         if (order) {

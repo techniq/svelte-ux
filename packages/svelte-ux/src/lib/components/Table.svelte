@@ -10,6 +10,7 @@
   import TableOrderIcon from './TableOrderIcon.svelte';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './settings.js';
+  import type { tableOrderStore } from '$lib/index.js';
 
   const dispatch = createEventDispatcher<{
     headerClick: { column: ColumnDef };
@@ -18,8 +19,8 @@
 
   export let columns: ColumnDef[] = [];
   export let data: any[] | null = [];
-  export let orderBy: string | undefined = undefined;
-  export let orderDirection: 'asc' | 'desc' | undefined = undefined;
+
+  export let order: ReturnType<typeof tableOrderStore> | undefined = undefined;
 
   export let classes: {
     container?: string;
@@ -45,8 +46,6 @@
     th?: string;
     td?: string;
   } = {};
-
-  $: order = { by: orderBy, direction: orderDirection };
 
   $: headers = getHeaders(columns).map((headerRow) => {
     return headerRow.map((column) => {
@@ -106,14 +105,16 @@
             <tr class={cls(settingsClasses.tr, classes.tr)} style={styles.tr}>
               {#each headerRow ?? [] as column}
                 <th
-                  use:tableCell={{ column }}
+                  use:tableCell={{ column, order }}
                   class="column-{column.name}"
-                  class:whitespace-nowrap={orderBy}
+                  class:whitespace-nowrap={order}
                   style={styles.th}
                   on:click={(e) => dispatch('headerClick', { column })}
                 >
                   {getCellHeader(column)}
-                  <TableOrderIcon {order} {column} />
+                  {#if order}
+                    <TableOrderIcon {order} {column} />
+                  {/if}
                 </th>
               {/each}
             </tr>
