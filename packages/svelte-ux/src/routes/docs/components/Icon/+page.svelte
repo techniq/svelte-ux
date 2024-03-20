@@ -9,6 +9,8 @@
     mdiCircleMedium,
     mdiArrowRight,
     mdiOpenInNew,
+    mdiMenuUp,
+    mdiMenuDown,
   } from '@mdi/js';
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -128,17 +130,17 @@
 
 <Preview>
   <Icon data={mdiAccount} class="text-danger" />
-  <Icon data={mdiAccount} class="text-blue-500" />
-  <Icon data={mdiAccount} class="text-success-500" />
+  <Icon data={mdiAccount} class="text-primary" />
+  <Icon data={mdiAccount} class="text-success" />
   <Icon data={mdiAccount} class="text-surface-content/50" />
   <Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="text-danger" />
   <Icon
     svg={'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>'}
-    class="fill-blue-500"
+    class="fill-primary"
   />
   <Icon
     svgUrl="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/user.svg"
-    class="text-success-500"
+    class="text-success"
   />
   <Icon data={mdiAccount} style="color:red" />
 </Preview>
@@ -148,7 +150,11 @@
 <Preview>
   <Icon
     path={[mdiDecagramOutline, mdiCheck]}
-    classes={{ path: ['', 'text-blue-500 scale-50 origin-center'] }}
+    classes={{ path: ['', 'text-primary scale-50 origin-center'] }}
+  />
+  <Icon
+    path={[mdiMenuUp, mdiMenuDown]}
+    classes={{ path: ['translate-y-[-4px]', 'translate-y-[4px] text-primary'] }}
   />
 </Preview>
 
