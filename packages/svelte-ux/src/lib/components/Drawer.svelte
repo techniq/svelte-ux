@@ -79,9 +79,10 @@
     on:introend
     on:outroend
     on:keydown={(e) => {
-      // Do not allow event to reach Popover's on:keydown
-      e.stopPropagation();
       if (e.key === 'Escape') {
+        // Do not allow event to reach Popover's on:keydown
+        e.stopPropagation();
+
         if (!persistent) {
           open = false;
         }
