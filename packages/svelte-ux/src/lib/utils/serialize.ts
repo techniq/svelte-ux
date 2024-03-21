@@ -1,4 +1,5 @@
 import { parse, reviver, stringify } from './json.js';
+import { isEmptyObject } from './object.js';
 
 // See: https://github.com/pbeshai/serialize-query-params/blob/master/src/serialize.ts
 
@@ -457,7 +458,7 @@ export function encodeObject(
   entrySeparator = '_'
 ): string | null | undefined {
   if (obj == null) return obj; // null or undefined
-  if (!Object.keys(obj).length) return ''; // {} case
+  if (isEmptyObject(obj)) return ''; // {} case
 
   return Object.keys(obj)
     .map((key) => {

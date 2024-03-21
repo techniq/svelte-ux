@@ -5,6 +5,10 @@ export function isLiteralObject(obj: any): obj is object {
   return obj && typeof obj === 'object' && obj.constructor === Object;
 }
 
+export function isEmptyObject(obj: any) {
+  return isLiteralObject(obj) && Object.keys(obj).length === 0;
+}
+
 export function camelCaseKeys(obj: any) {
   return Object.keys(obj).reduce((acc, key) => ((acc[camelCase(key)] = obj[key]), acc), {} as any);
 }
@@ -123,7 +127,7 @@ export function expireObject<TObject extends object>(
           expireObject(value, propExpiry);
 
           // Remove property if empty object (all properties removed)
-          if (isLiteralObject(value) && Object.keys(value).length === 0) {
+          if (isEmptyObject(value)) {
             delete object[prop as keyof TObject];
           }
         }
@@ -131,7 +135,7 @@ export function expireObject<TObject extends object>(
     }
   }
 
-  return isLiteralObject(object) && Object.keys(object).length === 0 ? null : object;
+  return isEmptyObject(object) ? null : object;
 }
 
 /**
