@@ -1,3 +1,5 @@
+import { entries } from "$lib/types/typeHelpers.js";
+
 /**
  * Check if str only contians upper case letters
  */
@@ -68,7 +70,7 @@ export function romanize(value: number) {
 
   let result = '';
 
-  for (let [numeral, numeralValue] of Object.entries(lookup)) {
+  for (let [numeral, numeralValue] of entries(lookup)) {
     while (value >= numeralValue) {
       result += numeral;
       value -= numeralValue;

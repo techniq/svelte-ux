@@ -9,6 +9,7 @@ import { dataBackground } from './dataBackground.js';
 import { sticky } from './sticky.js';
 import { getCellValue } from '../utils/table.js';
 import DomTracker from './_domTracker.js';
+import { entries } from '$lib/types/typeHelpers.js';
 
 type TableCellOptions = {
   column?: ColumnDef;
@@ -202,6 +203,6 @@ function getStyleProperties(
       return style.split(':').map((x) => x.trim());
     });
   } else {
-    return Object.entries(resolvedStyleProp);
+    return entries(resolvedStyleProp);
   }
 }

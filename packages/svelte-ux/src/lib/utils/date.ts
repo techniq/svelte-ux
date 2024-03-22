@@ -42,7 +42,7 @@ import {
   type DateFormatVariantPreset,
 } from './date_types.js';
 import { defaultLocale, type LocaleSettings } from './locale.js';
-import { assertNever } from '$lib/types/typeHelpers.js';
+import { assertNever, entries } from '$lib/types/typeHelpers.js';
 
 export * from './date_types.js';
 
@@ -188,8 +188,8 @@ export function getPeriodTypeCode(periodType: PeriodType): string {
 }
 
 export function getPeriodTypeByCode(code: string): PeriodType {
-  const element = Object.entries(periodTypeMappings).find((c) => c[1] === code);
-  return parseInt(element?.[0] ?? '1');
+  const element = entries(periodTypeMappings).find((c) => c[1] === code);
+  return parseInt(String(element?.[0] ?? '1'));
 }
 
 export function getDayOfWeek(periodType: PeriodType): DayOfWeek | null {

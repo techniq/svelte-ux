@@ -1,3 +1,4 @@
+import { keys } from '$lib/types/typeHelpers.js';
 import { parse, reviver, stringify } from './json.js';
 import { isEmptyObject } from './object.js';
 
@@ -460,7 +461,7 @@ export function encodeObject(
   if (obj == null) return obj; // null or undefined
   if (isEmptyObject(obj)) return ''; // {} case
 
-  return Object.keys(obj)
+  return keys(obj)
     .map((key) => {
       const value = encodeJson(obj[key]);
       return `${key}${keyValSeparator}${value}`;
@@ -545,7 +546,7 @@ export function decodeNumericObject(
 
   // convert to numbers
   const decodedNumberObj: { [key: string]: number | null | undefined } = {};
-  for (const key of Object.keys(decoded)) {
+  for (const key of keys(decoded)) {
     decodedNumberObj[key] = decodeNumber(decoded[key]);
   }
 

@@ -1,12 +1,13 @@
 import clsx, { type ClassValue } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
 import { range } from 'd3-array';
+import { entries } from '$lib/types/typeHelpers.js';
 
 /**
  * Convert object to style string
  */
 export function objectToString(styleObj: { [key: string]: string }) {
-  return Object.entries(styleObj)
+  return entries(styleObj)
     .map(([key, value]) => {
       if (value) {
         // Convert camelCase into kaboob-case (ex.  (transformOrigin => transform-origin))

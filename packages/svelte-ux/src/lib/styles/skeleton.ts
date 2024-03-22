@@ -11,6 +11,7 @@
 //
 // https://github.com/skeletonlabs/skeleton/blob/dev/packages/plugin/src/tailwind/themes/index.ts#L17-L19
 // import { getThemeProperties } from '@skeletonlabs/tw-plugin';
+import { entries, fromEntries } from '$lib/types/typeHelpers.js';
 import { getThemeProperties } from './skeleton/index.js';
 
 const themeNames = [
@@ -40,28 +41,28 @@ const skeletonColorMap = {
   surface: 'surface',
 };
 
-function processTheme(themeName: (typeof themeNames)[number], scheme: 'light' | 'dark') {
+function processTheme(themeName: (typeof themeNames)[number], scheme: 'light' | 'dark'): [string, Record<string, string>] {
   const properties = getThemeProperties(themeName);
 
-  let mappedThemeProperties = Object.entries(properties)
+  let mappedThemeProperties: [string, string][] = entries(properties)
     .map(([key, value]) => {
       if (key.startsWith('--color')) {
         // `--color-primary-500` => `primary-500`
         // `--color-primary-500` => `primary`
         const matches = key.match(/--color-(\w*)-([0-9]{3})/);
-        const skeletonColorName = matches?.[1];
+        const skeletonColorName = matches?.[1] as keyof typeof skeletonColorMap | undefined;
         const skeletonColorShade = matches?.[2];
-        const themeColorName = skeletonColorMap[skeletonColorName];
+        const themeColorName = skeletonColorName && skeletonColorMap[skeletonColorName];
         if (themeColorName) {
-          return [`${themeColorName}-${skeletonColorShade}`, `rgb(${value})`];
+          return [`${themeColorName}-${skeletonColorShade}`, `rgb(${value})`] satisfies [string, string];
         }
       } else if (key.startsWith('--on-')) {
         // `--on-primary` => `primary-content`
         const matches = key.match(/--on-(\w*)/);
-        const skeletonColorName = matches?.[1];
-        const themeColorName = skeletonColorMap[skeletonColorName];
+        const skeletonColorName = matches?.[1] as keyof typeof skeletonColorMap | undefined;
+        const themeColorName = skeletonColorName && skeletonColorMap[skeletonColorName];
         if (themeColorName) {
-          return [`${themeColorName}-content`, `rgb(${value})`];
+          return [`${themeColorName}-content`, `rgb(${value})`] satisfies [string, string];
         }
       } else {
         // consider mapping additional properties
@@ -74,7 +75,7 @@ function processTheme(themeName: (typeof themeNames)[number], scheme: 'light' | 
         // '--theme-border-base': '1px',
       }
     })
-    .filter((d) => d);
+    .filter((d): d is [string, string] => Boolean(d));
 
   mappedThemeProperties =
     scheme === 'light'
@@ -97,11 +98,11 @@ function processTheme(themeName: (typeof themeNames)[number], scheme: 'light' | 
 
   return [
     themeName === 'skeleton' ? scheme : scheme === 'dark' ? themeName + '-dark' : themeName,
-    Object.fromEntries(mappedThemeProperties),
+    fromEntries(mappedThemeProperties),
   ];
 }
 
-const themes = Object.fromEntries(
+const themes = fromEntries(
   themeNames.flatMap((themeName) => {
     return [processTheme(themeName, 'light'), processTheme(themeName, 'dark')];
   })

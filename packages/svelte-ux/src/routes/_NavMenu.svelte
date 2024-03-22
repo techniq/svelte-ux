@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import NavItem from '$lib/components/NavItem.svelte';
+  import { entries } from '$lib/types/typeHelpers.js';
   import { mdiCog, mdiFormatListBulleted, mdiHome, mdiPalette } from '@mdi/js';
 
   const components = {
@@ -112,7 +113,7 @@
 <NavItem text="Changelog" icon={mdiFormatListBulleted} currentUrl={$page.url} path="/changelog" />
 
 <h1>Components</h1>
-{#each Object.entries(components) as [header, items]}
+{#each entries(components) as [header, items]}
   <h2>{header}</h2>
   {#each items as item}
     {#if typeof item === 'object'}

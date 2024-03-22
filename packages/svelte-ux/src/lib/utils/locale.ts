@@ -1,4 +1,4 @@
-import type { Prettify } from '$lib/types/typeHelpers.js';
+import { entries, fromEntries, type Prettify } from '$lib/types/typeHelpers.js';
 import { defaultsDeep } from 'lodash-es';
 import { derived, writable, type Readable, type Writable } from 'svelte/store';
 import {
@@ -256,7 +256,7 @@ export function getAllKnownLocales(
   additionalLocales?: Record<string, LocaleSettingsInput>
 ): Record<string, LocaleSettings> {
   const additional = additionalLocales
-    ? Object.entries(additionalLocales).map(([key, value]) => [key, createLocaleSettings(value)])
+    ? entries(additionalLocales).map(([key, value]) => [key, createLocaleSettings(value)] satisfies [string, LocaleSettings])
     : [];
-  return { en: defaultLocale, ...Object.fromEntries(additional) };
+  return { en: defaultLocale, ...fromEntries(additional) };
 }

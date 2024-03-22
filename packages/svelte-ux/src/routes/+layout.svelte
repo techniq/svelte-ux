@@ -26,6 +26,7 @@
   import LanguageSelect from '$lib/components/LanguageSelect.svelte';
 
   import './app.css';
+  import { entries } from '$lib/types/typeHelpers.js';
 
   export let data;
 
@@ -140,7 +141,7 @@
   });
 
   const groups = ['components', 'actions', 'stores', 'utils'];
-  const quickSearchOptions = Object.entries(
+  const quickSearchOptions = entries(
     import.meta.glob('./docs/**/+page.(md|svelte)', { query: '?raw', eager: true })
   )
     .flatMap(([file, source]) => {

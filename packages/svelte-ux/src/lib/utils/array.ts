@@ -2,6 +2,7 @@ import { greatest, rollup } from 'd3-array';
 
 import { propAccessor } from './object.js';
 import type { PropAccessorArg } from './object.js';
+import { entries, fromEntries } from '$lib/types/typeHelpers.js';
 
 // Helper until Array.flat is more mainstream - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 // See also: https://lodash.com/docs/4.17.11#flatten
@@ -38,9 +39,9 @@ export function sum(items: (object | null)[], prop?: PropAccessorArg) {
  * Sum array of objects by property
  */
 export function sumObjects(items: (object | null)[]) {
-  return Object.fromEntries(
+  return fromEntries(
     rollup(
-      items.flatMap((x) => Object.entries(x ?? {})),
+      items.flatMap((x) => entries(x ?? {})),
       (values) => sum(values, (d) => (Number.isFinite(d[1]) ? d[1] : 0)),
       (d) => d[0]
     )
