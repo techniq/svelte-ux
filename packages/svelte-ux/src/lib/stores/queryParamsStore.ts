@@ -6,7 +6,7 @@ import { isEqual } from 'lodash-es';
 import * as Serialize from '../utils/serialize.js';
 
 import rollup from '../utils/rollup.js';
-import type { ValueOf } from '../types/typeHelpers.js';
+import { entries, type ValueOf } from '../types/typeHelpers.js';
 
 // Matches $app/navigation's goto without dependency - https://kit.svelte.dev/docs/modules#$app-navigation-goto
 type Goto = (url: string | URL, opts?: any) => any;
@@ -108,13 +108,13 @@ export function queryParamsStore<Values extends { [key: string]: any }>(
       const params = new URLSearchParams(); // queryParamsStore controls full params so start fresh
 
       if (newValues != null) {
-        Object.entries(newValues).forEach(([key, value]) => {
+        entries(newValues).forEach(([key, value]) => {
           const paramType =
             typeof props.paramTypes === 'function'
               ? props.paramTypes(key as string)
               : props.paramTypes?.[key as string];
 
-          applyParam(params, key, value, props.defaults?.[key], paramType);
+          applyParam(params, key as string, value, props.defaults?.[key], paramType);
         });
       }
 
@@ -229,18 +229,4 @@ export function getParamConfig(paramType: ParamType) {
     default:
       throw new Error('No param config found');
   }
-}
-
-/**
- *
- * @param params
- * @returns
- */
-function stringify(params: URLSearchParams) {
-  // Use `encodeURIComponent` instead of `params.toString()` as is more lenient (doesn't encode `(` or `)` where are used )
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
-  // https://stackoverflow.com/a/62969380/191902
-  return Object.entries(params)
-    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-    .join('&');
 }

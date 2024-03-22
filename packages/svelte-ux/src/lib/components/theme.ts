@@ -7,7 +7,7 @@ import type {
   ButtonSize,
   ButtonVariant,
   LabelPlacement,
-} from '$lib/types/index.js';
+} from '../types/index.js';
 
 export type ComponentName = keyof typeof Components;
 

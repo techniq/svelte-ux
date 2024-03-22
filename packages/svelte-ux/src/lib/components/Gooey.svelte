@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { SVGAttributes } from 'svelte/elements';
 
-  import { uniqueId } from '$lib/utils/string.js';
-  import { cls } from '$lib/utils/styles.js';
+  import { uniqueId } from '../utils/string.js';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   /** Apply gaussian blur.  Required unless blurring externally (`filter: blur()`, etc) */

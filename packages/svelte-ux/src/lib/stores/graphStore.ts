@@ -4,7 +4,7 @@ import { merge } from 'lodash-es';
 
 import fetchStore, { initFetchClient } from './fetchStore.js';
 import type { FetchConfig } from './fetchStore.js';
-import { parse, stringify } from '$lib/utils/json.js';
+import { parse, stringify } from '../utils/json.js';
 
 type ClientConfig = {
   url: string;

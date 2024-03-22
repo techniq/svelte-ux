@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
   import Breadcrumb from './Breadcrumb.svelte';
   import { getComponentClasses } from './theme.js';
 

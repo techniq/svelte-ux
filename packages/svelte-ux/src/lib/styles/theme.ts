@@ -9,7 +9,11 @@ import {
   wcagContrast,
   formatCss,
   type Color,
+  type Hsl,
+  type Oklch,
+  type Rgb,
 } from 'culori';
+import { entries, fromEntries, keys } from '../types/typeHelpers.js';
 
 export type SupportedColorSpace = 'rgb' | 'hsl' | 'oklch';
 
@@ -38,7 +42,7 @@ export const colorNames = [
  * Generate theme colors (ex. { primary: hsl(var(--color-primary) / <alpha-value>), ... })
  */
 export function createThemeColors(colorSpace: SupportedColorSpace) {
-  return Object.fromEntries(
+  return fromEntries(
     colorNames.map((color) => [color, `${colorSpace}(var(--color-${color}) / <alpha-value>)`])
   );
 }
@@ -50,7 +54,7 @@ export function getThemeNames(themes: Record<string, any>) {
   const light: string[] = [];
   const dark: string[] = [];
 
-  Object.entries(themes).map(([themeName, props]) => {
+  entries(themes).map(([themeName, props]) => {
     if (props['color-scheme'] === 'dark') {
       dark.push(themeName);
     } else {
@@ -98,9 +102,7 @@ export function processThemeColors(
       colors[color] = themeColors[`${color}-500`];
     }
 
-    if (!(`${color}-content` in colors)) {
-      colors[`${color}-content`] = foregroundColor(colors[color]);
-    }
+    colors[`${color}-content`] ??= foregroundColor(colors[color]) as string;
 
     // Generate color shades (ex. `primary-500`) if not defined.  Useful for Daisy but not Skeleton themes, for example
     for (const shade of shades) {
@@ -108,54 +110,43 @@ export function processThemeColors(
       if (!(shadeColorName in colors)) {
         // Find the next shade above (shade < 500) or below (shade > 500) and use as reference, if available
         const referenceShade =
-          Object.keys(colors)
-            .map((str) => {
-              const [c, s] = str.split('-');
+          keys(colors)
+            .map((key) => {
+              const [c, s] = String(key).split('-');
               return [c, Number(s)] as [string, number];
             })
             .find(([c, s]) => c === color && (s < 500 ? s > shade : s < shade))?.[1] ?? 500;
         const referenceColor = colors[`${color}-${referenceShade}`] ?? colors[color];
 
         if (shade < 500) {
-          colors[shadeColorName] = lightenColor(referenceColor, (referenceShade - shade) / 1000); // 100 == 0.1
+          colors[shadeColorName] ??= lightenColor(
+            referenceColor,
+            (referenceShade - shade) / 1000
+          ) as string; // 100 == 0.1
         } else if (shade > 500) {
-          colors[shadeColorName] = darkenColor(colors[color], (shade - referenceShade) / 1000); // 100 == 0.1
+          colors[shadeColorName] ??= darkenColor(
+            colors[color],
+            (shade - referenceShade) / 1000
+          ) as string; // 100 == 0.1
         } else {
-          colors[shadeColorName] = colors[color];
+          colors[shadeColorName] ??= colors[color] as string;
         }
       }
     }
   }
 
   // Generate optional surface colors
-  if (!('surface-100' in colors)) {
-    colors['surface-100'] = 'oklch(100 0 0)';
-  }
-
-  if (!('surface-200' in colors)) {
-    colors['surface-200'] = darkenColor(colors['surface-100'], 0.07);
-  }
-
-  if (!('surface-300' in colors)) {
-    if ('surface-200' in themeColors) {
-      colors['surface-300'] = darkenColor(colors['surface-200'], 0.07);
-    } else {
-      colors['surface-300'] = darkenColor(colors['surface-100'], 0.14);
-    }
-  }
-
-  if (!('surface-content' in colors)) {
-    colors['surface-content'] = foregroundColor(colors['surface-100']);
-  }
+  colors['surface-100'] ??= 'oklch(100 0 0)';
+  colors['surface-200'] ??= darkenColor(colors['surface-100'], 0.07) as string;
+  colors['surface-300'] ??= darkenColor(colors['surface-200'], 0.07) as string;
+  colors['surface-content'] ??= foregroundColor(colors['surface-100']) as string;
 
   // Add `color-scheme: "dark"` for `dark` theme (if not set)
-  if (!('color-scheme' in colors)) {
-    colors['color-scheme'] = isDark(colors['surface-content']) ? 'light' : 'dark';
-  }
+  colors['color-scheme'] ??= isDark(colors['surface-content']) ? 'light' : 'dark';
 
-  const result = Object.fromEntries(
-    Object.entries(colors).map(([name, value]) => {
-      if (colorNames.includes(name)) {
+  const result = fromEntries(
+    entries(colors).map(([name, value]) => {
+      if (colorNames.includes(String(name))) {
         // Add space separated color variables for each color
         return [`--color-${name}`, colorVariableValue(value, colorSpace)];
       } else {
@@ -222,14 +213,23 @@ export function colorVariableValue(
 ) {
   try {
     if (colorSpace === 'rgb') {
-      const { r, g, b } = rgb(color);
-      return `${round(r * 255, decimals)} ${round(g * 255, decimals)} ${round(b * 255, decimals)}`;
+      const computedColor = typeof color === 'string' ? rgb(color) : (color as Rgb);
+      if (computedColor) {
+        const { r, g, b } = computedColor;
+        return `${round(r * 255, decimals)} ${round(g * 255, decimals)} ${round(b * 255, decimals)}`;
+      }
     } else if (colorSpace === 'hsl') {
-      const { h, s, l } = hsl(clampRgb(color));
-      return `${round(h, decimals)} ${round(s * 100, decimals)}% ${round(l * 100, decimals)}%`;
+      const computedColor = typeof color === 'string' ? hsl(clampRgb(color)) : (color as Hsl);
+      if (computedColor) {
+        const { h, s, l } = computedColor;
+        return `${round(h ?? 0, decimals)} ${round(s * 100, decimals)}% ${round(l * 100, decimals)}%`;
+      }
     } else if (colorSpace === 'oklch') {
-      const { l, c, h } = oklch(color);
-      return `${round(l, decimals)} ${round(c, decimals)} ${round(h, decimals)}`;
+      const computedColor = typeof color === 'string' ? oklch(clampRgb(color)) : (color as Oklch);
+      if (computedColor) {
+        const { l, c, h } = computedColor;
+        return `${round(l, decimals)} ${round(c, decimals)} ${round(h ?? 0, decimals)}`;
+      }
     }
   } catch (e) {
     // console.error('Unable to convert color object to string', color);
@@ -241,7 +241,7 @@ export function colorVariableValue(
  */
 export function themeStylesString(theme: any, colorSpace: SupportedColorSpace) {
   const styleProperties = processThemeColors(theme, colorSpace);
-  return Object.entries(styleProperties)
+  return entries(styleProperties)
     .map(([key, value]) => {
       return `${key}: ${value};`;
     })
@@ -255,7 +255,7 @@ export function themeStylesString(theme: any, colorSpace: SupportedColorSpace) {
  * but it's the only way to inject the `darkThemes` array into the function.
  **/
 export function createHeadSnippet(darkThemes: string[]) {
-  function _applyInitialStyle(darkThemes) {
+  function _applyInitialStyle(darkThemes: string[]) {
     let theme = localStorage.getItem('theme');
     // Ignore if no dark things registered (default `dark` removed)
     if (darkThemes.length > 0) {

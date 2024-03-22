@@ -20,7 +20,7 @@
     themeStylesString,
     type SupportedColorSpace,
   } from '$lib/styles/theme.js';
-  import type { MenuOption } from '$lib/types/index.js';
+  import { entries, fromEntries, type MenuOption } from '$lib/types/index.js';
   import ColorField from './ColorField.svelte';
   import { getSettings } from '$lib/components/settings.js';
 
@@ -114,7 +114,10 @@
   $: showDarkTheme = $currentTheme.dark;
   $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)?.theme;
   $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)?.theme;
-  $: previewTheme = showDarkTheme ? selectedDarkTheme : selectedLightTheme;
+  $: previewTheme = (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as Record<
+    string,
+    string
+  >;
 
   // Update site dark/light mode with preview for better experience (previewing and applying)
   $: currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');
@@ -127,7 +130,7 @@
       secondary: selectedLightTheme?.secondary ?? selectedLightTheme?.['secondary-500'],
       accent: selectedLightTheme?.accent ?? selectedLightTheme?.['accent-500'],
       neutral: selectedLightTheme?.neutral ?? selectedLightTheme?.['neutral-500'],
-    };
+    } as Record<string, string>;
   }
   $: selectedLightTheme && updateCustomLightTheme();
 
@@ -139,7 +142,7 @@
       secondary: selectedDarkTheme?.secondary ?? selectedDarkTheme?.['secondary-500'],
       accent: selectedDarkTheme?.accent ?? selectedDarkTheme?.['accent-500'],
       neutral: selectedDarkTheme?.neutral ?? selectedDarkTheme?.['neutral-500'],
-    };
+    } as Record<string, string>;
   }
   $: selectedDarkTheme && updateCustomLDarkTheme();
 </script>
@@ -217,8 +220,8 @@
               on:click={() => {
                 const allThemes = {
                   ...data.themes.daisy,
-                  ...Object.fromEntries(
-                    Object.entries(data.themes.skeleton).map(([themeName, value]) => {
+                  ...fromEntries(
+                    entries(data.themes.skeleton).map(([themeName, value]) => {
                       return [
                         themeName === 'light'
                           ? 'skeleton-light'

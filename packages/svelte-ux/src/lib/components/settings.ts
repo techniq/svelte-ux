@@ -6,16 +6,16 @@ import {
   resolveComponentClasses,
   type ResolvedDefaultProps,
 } from './theme.js';
-import { createThemeStore, type ThemeStore } from '$lib/stores/themeStore.js';
-import type { LabelPlacement } from '$lib/types/index.js';
+import { createThemeStore, type ThemeStore } from '../stores/themeStore.js';
+import type { LabelPlacement } from '../types/index.js';
 import {
   getAllKnownLocales,
   localeStore,
   type LocaleSettings,
   type LocaleStore,
   type LocaleSettingsInput,
-} from '$lib/utils/locale.js';
-import { buildFormatters, type FormatFunctions } from '$lib/utils/format.js';
+} from '../utils/locale.js';
+import { buildFormatters, type FormatFunctions } from '../utils/format.js';
 import { type Readable, derived } from 'svelte/store';
 
 export interface DefaultProps {

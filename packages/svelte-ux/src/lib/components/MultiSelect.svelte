@@ -15,7 +15,7 @@
   import dirtyStore from '../stores/dirtyStore.js';
   import selectionStore from '../stores/selectionStore.js';
   import uniqueStore from '../stores/uniqueStore.js';
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
 
   type Option = $$Generic;
 

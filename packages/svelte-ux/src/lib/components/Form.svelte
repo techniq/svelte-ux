@@ -4,7 +4,7 @@
 
   import formStore from '../stores/formStore.js';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
 
   const dispatch = createEventDispatcher();
 

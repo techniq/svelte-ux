@@ -1,16 +1,19 @@
 import { get, camelCase, mergeWith } from 'lodash-es';
-import { entries } from '../types/typeHelpers.js';
+import { entries, fromEntries, keys } from '../types/typeHelpers.js';
 
 export function isLiteralObject(obj: any): obj is object {
   return obj && typeof obj === 'object' && obj.constructor === Object;
 }
 
 export function isEmptyObject(obj: any) {
-  return isLiteralObject(obj) && Object.keys(obj).length === 0;
+  return isLiteralObject(obj) && keys(obj).length === 0;
 }
 
 export function camelCaseKeys(obj: any) {
-  return Object.keys(obj).reduce((acc, key) => ((acc[camelCase(key)] = obj[key]), acc), {} as any);
+  return keys(obj).reduce(
+    (acc, key) => ((acc[camelCase(key ? String(key) : undefined)] = obj[key]), acc),
+    {} as any
+  );
 }
 
 // https://codereview.stackexchange.com/questions/73714/find-a-nested-property-in-an-object
@@ -58,8 +61,7 @@ export function objectId(object: any) {
 }
 
 export function distinctKeys(...objs: object[]) {
-  const keys: string[] = [...new Set(flatten(objs.map((x: object) => Object.keys(x))))];
-  return keys;
+  return [...new Set(flatten(objs.map((x: object) => keys(x as Record<string, any>))))];
 }
 
 // Copied from `array.ts` to remove circular dependency
@@ -93,43 +95,48 @@ export function expireObject<TObject extends object>(
 ): Partial<TObject> | null {
   const now = new Date();
 
-  if (expiry instanceof Date && expiry < now) {
+  if (expiry instanceof Date) {
     // Expired
-    return null;
-  } else if (typeof expiry === 'object') {
-    for (let [prop, propExpiry] of Object.entries(expiry)) {
-      if (propExpiry instanceof Date) {
-        // Check if expired
-        if (propExpiry < now) {
-          if (prop === '$default') {
-            // Delete all properties which do not have explicit expiry to check
-            for (let objProp of Object.keys(object) as Array<keyof TObject>) {
-              if (!(objProp in expiry)) {
-                delete object[objProp];
-              }
-            }
+    if (expiry < now) {
+      return null;
+    }
+    // Not expired
+    return object;
+  }
 
-            // Remove expired `$default` property
-            // @ts-expect-error it's fine if the property doesn't exist in object
-            delete object[prop];
-          } else {
-            // Remove expired property
-            // @ts-expect-error it's fine if the property doesn't exist in object
-            delete object[prop];
+  // LoopIterate over the properties in `object`
+  for (let [prop, propExpiry] of entries(expiry)) {
+    if (propExpiry instanceof Date) {
+      // Check if expired
+      if (propExpiry < now) {
+        if (prop === '$default') {
+          // Delete all properties which do not have explicit expiry to check
+          for (let objProp of keys(object) as Array<keyof TObject>) {
+            if (!(objProp in expiry)) {
+              delete object[objProp];
+            }
           }
+
+          // Remove expired `$default` property
+          // @ts-expect-error it's fine if the property doesn't exist in object
+          delete object[prop];
         } else {
-          // Keep value
+          // Remove expired property
+          // @ts-expect-error it's fine if the property doesn't exist in object
+          delete object[prop];
         }
       } else {
-        // Check expiry for each property in object.  Skip if prop not in object (expiry only)
-        const value = object[prop as keyof TObject];
-        if (value && typeof value === 'object') {
-          expireObject(value, propExpiry);
+        // Keep value
+      }
+    } else {
+      // Check expiry for each property in object.  Skip if prop not in object (expiry only)
+      const value = object[prop as keyof TObject];
+      if (value && typeof value === 'object') {
+        expireObject(value, propExpiry);
 
-          // Remove property if empty object (all properties removed)
-          if (isEmptyObject(value)) {
-            delete object[prop as keyof TObject];
-          }
+        // Remove property if empty object (all properties removed)
+        if (isEmptyObject(value)) {
+          delete object[prop as keyof TObject];
         }
       }
     }
@@ -141,12 +148,12 @@ export function expireObject<TObject extends object>(
 /**
  * Remove properties from an object.  See also lodash `_.omit()`
  */
-export function omit<T extends object = {}>(obj: T, keys: string[]): Partial<T> {
+export function omit<T extends object = {}>(obj: T, keys: (keyof T)[]): Partial<T> {
   if (keys.length === 0) {
     return obj;
   } else {
-    return Object.fromEntries(
-      Object.entries(obj).filter(([key, value]) => !keys.includes(key))
+    return fromEntries(
+      entries(obj).filter(([key]: [keyof T, T[keyof T]]) => !keys.includes(key))
     ) as Partial<T>;
   }
 }
@@ -158,7 +165,7 @@ export function pick<T extends object = {}>(obj: T, keys: string[]): Partial<T> 
   if (keys.length === 0) {
     return obj;
   } else {
-    return Object.fromEntries(
+    return fromEntries(
       keys.filter((key) => key in obj).map((key) => [key, obj[key as keyof T]])
     ) as Partial<T>;
   }
@@ -167,6 +174,6 @@ export function pick<T extends object = {}>(obj: T, keys: string[]): Partial<T> 
 /**
  * Create new object with keys and values swapped.  Last value's key is used if duplicated
  */
-export function keysByValues<T extends object = {}>(obj: T) {
-  return Object.fromEntries(entries(obj).map(([key, value]) => [value, key]));
+export function keysByValues<T extends object>(obj: T): Record<string, keyof T> {
+  return fromEntries(entries(obj).map(([key, value]) => [String(value), key]));
 }

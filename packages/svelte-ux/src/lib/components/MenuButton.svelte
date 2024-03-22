@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import type { ComponentProps } from '$lib/types/index.js';
+  import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { getComponentSettings } from './settings.js';
   import { mdiMenuDown } from '@mdi/js';
 

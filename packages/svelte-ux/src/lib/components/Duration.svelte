@@ -7,7 +7,7 @@
   } from '../utils/duration.js';
   import timerStore from '../stores/timerStore.js';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
 
   export let start: Date | undefined = undefined;
   export let end: Date | undefined = undefined;

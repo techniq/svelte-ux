@@ -6,10 +6,9 @@
   import { cls } from '../utils/styles.js';
   import { multi } from '../actions/multi.js';
   import type { Actions } from '../actions/multi.js';
-  import type { ButtonColor, ButtonSize } from '$lib/types/index.js';
+  import type { ButtonColor, ButtonRounded, ButtonSize, ButtonVariant } from '../types/index.js';
   import { getButtonGroup } from './ButtonGroup.svelte';
-  import { asIconData, type IconInput } from '$lib/utils/icons.js';
-  import type { ButtonRounded, ButtonVariant } from '$lib/types/index.js';
+  import { asIconData, type IconInput } from '../utils/icons.js';
   import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');

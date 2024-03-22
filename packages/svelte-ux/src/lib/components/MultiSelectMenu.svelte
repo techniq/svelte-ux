@@ -5,7 +5,7 @@
 
   import Menu from './Menu.svelte';
 
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
   import MultiSelect from './MultiSelect.svelte';
   import MultiSelectOption from './MultiSelectOption.svelte';
 

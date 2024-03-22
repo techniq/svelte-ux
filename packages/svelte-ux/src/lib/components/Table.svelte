@@ -10,7 +10,7 @@
   import TableOrderIcon from './TableOrderIcon.svelte';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './settings.js';
-  import type { tableOrderStore } from '$lib/index.js';
+  import tableOrderStore from '../stores/tableOrderStore.js';
 
   type T = $$Generic;
 

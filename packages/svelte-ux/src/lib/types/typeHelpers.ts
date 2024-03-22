@@ -1,7 +1,7 @@
 // https://basarat.gitbooks.io/typescript/docs/types/never.html#use-case-exhaustive-checks
 
-import type { colors } from '$lib/styles/theme.js';
-import type { SvelteComponent } from 'svelte';
+import type { colors } from '../styles/theme.js';
+import type { ComponentProps as SvelteComponentProps, SvelteComponent } from 'svelte';
 import type { derived, Readable } from 'svelte/store';
 import type {
   FlyParams,
@@ -38,19 +38,24 @@ export function keys<T extends object>(o: T) {
 }
 // export const keys = Object.keys as <T>(obj: T) => (Extract<keyof T, string>)[];
 
+export type ObjectKey = string | number | symbol;
+
 // Get entries (array of [key, value] arrays) of object (strongly-typed)
-export function entries<T extends object>(o: T) {
-  return Object.entries(o) as [keyof T, T[keyof T]][]; // TODO: Improve based on key/value pair - https://stackoverflow.com/questions/60141960/typescript-key-value-relation-preserving-object-entries-type
+export function entries<K extends ObjectKey, V>(o: Record<K, V>): [K, V][];
+export function entries<K, V>(o: Map<K, V>): [K, V][];
+export function entries<K extends ObjectKey | unknown, V>(o: Record<K, V> | Map<K, V>): [K, V][] {
+  if (o instanceof Map) return Array.from(o.entries()) as unknown as [K, V][];
+  return Object.entries(o) as unknown as [K, V][]; // TODO: Improve based on key/value pair - https://stackoverflow.com/questions/60141960/typescript-key-value-relation-preserving-object-entries-type
 }
 
 // Get object from entries (array of [key, value] arrays) (strongly-typed)
-export function fromEntries<K extends string, V>(entries: [K, V][]): Record<K, V> {
+export function fromEntries<K extends ObjectKey, V>(entries: [K, V][] | Map<K, V>): Record<K, V> {
   return Object.fromEntries(entries) as Record<K, V>;
 }
 
 // https://github.com/Microsoft/TypeScript/issues/17198#issuecomment-315400819
 export function enumKeys(E: any) {
-  return Object.keys(E).filter((k) => typeof E[k as any] === 'number'); // ["A", "B"]
+  return keys(E).filter((k) => typeof E[k as any] === 'number'); // ["A", "B"]
 }
 export function enumValues(E: any) {
   const keys = enumKeys(E);
@@ -84,8 +89,18 @@ export type FilterPropKeys<T, Match> = {
   [P in keyof T]: T[P] extends Match ? P : never;
 }[keyof T];
 
-// https://stackoverflow.com/a/72297256/191902
-export type ComponentProps<T> = T extends SvelteComponent<infer P, any, any> ? P : never;
+/**
+ * @deprecated ComponentProps should be imported from 'svelte' instead of 'svelte-ux', as it is now included in the main 'svelte' package. This export may be removed in a future release.
+ * @see https://svelte.dev/docs/svelte#types-componentprops
+ * @example
+ * ```ts
+ * import { ComponentProps } from 'svelte';
+ * import MyComponent from './MyComponent.svelte';
+ *
+ * type MyComponentProps = ComponentProps<typeof MyComponent>;
+ * ```
+ */
+export type ComponentProps<T extends SvelteComponent> = SvelteComponentProps<T>;
 export type ComponentEvents<T> = T extends SvelteComponent<any, infer E, any> ? E : never;
 export type ComponentSlots<T> = T extends SvelteComponent<any, any, infer S> ? S : never;
 

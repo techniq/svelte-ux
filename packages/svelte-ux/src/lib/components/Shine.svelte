@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { uniqueId } from '$lib/utils/string.js';
-  import { cls } from '$lib/utils/styles.js';
+  import { uniqueId } from '../utils/string.js';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   /** Color of light */

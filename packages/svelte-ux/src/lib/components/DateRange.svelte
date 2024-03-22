@@ -19,7 +19,7 @@
   import ToggleGroup from './ToggleGroup.svelte';
   import ToggleOption from './ToggleOption.svelte';
   import { getComponentClasses } from './theme.js';
-  import { mdScreen } from '$lib/stores/matchMedia.js';
+  import { mdScreen } from '../stores/matchMedia.js';
   import { getSettings } from './settings.js';
 
   export let selected: DateRange | null = { from: null, to: null, periodType: null };

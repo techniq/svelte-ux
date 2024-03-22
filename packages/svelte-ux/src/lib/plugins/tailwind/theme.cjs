@@ -1,5 +1,6 @@
 const colors = require('tailwindcss/colors');
 const { createThemeColors, processThemeColors } = require('../../styles/theme');
+const { entries } = require('../../types/typeHelpers');
 
 const defaultThemes = {
   light: {
@@ -32,7 +33,7 @@ function injectThemes(colorSpace, addBase, config) {
 
   const cssThemes = {};
   let rootThemeName = null;
-  Object.entries(themes).map(([themeName, themeColors], index) => {
+  entries(themes).map(([themeName, themeColors], index) => {
     if (index === 0) {
       // Root / default theme
       cssThemes[themeRoot] = processThemeColors(themeColors, colorSpace);
