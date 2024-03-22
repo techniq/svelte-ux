@@ -4,7 +4,7 @@ import { parseISO } from 'date-fns';
 import type { ColumnDef } from '../types/table.js';
 import { PeriodType } from '../utils/date_types.js';
 
-/** Get columsn represent headers with rowSpan/colSpan set based on structure */
+/** Get columns representing headers with rowSpan/colSpan set based on structure */
 export function getHeaders(columns: ColumnDef[]) {
   const maxDepth = getDepth(columns);
   const result: ColumnDef[][] = Array.from({
