@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'svelte';
-import type { default as Icon } from '$lib/components/Icon.svelte';
+import type { default as Icon } from '../components/Icon.svelte';
 import { isLiteralObject } from './object.js';
 
 export type IconInput = ComponentProps<Icon>['data'] | ComponentProps<Icon>;

@@ -1,5 +1,5 @@
 import { derived, get } from 'svelte/store';
-import type { Stores } from '$lib/types/index.js';
+import type { Stores } from '../types/index.js';
 
 function debounceStore<T extends Stores>(original: T, timeout = 300) {
   return derived(

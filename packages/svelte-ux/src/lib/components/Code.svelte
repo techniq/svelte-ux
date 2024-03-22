@@ -2,7 +2,7 @@
   import Prism from 'prismjs';
   import 'prism-svelte';
 
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import CopyButton from './CopyButton.svelte';
 

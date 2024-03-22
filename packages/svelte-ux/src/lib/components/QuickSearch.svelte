@@ -1,15 +1,15 @@
 <script lang="ts">
   import { mdiMagnify } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Dialog from '$lib/components/Dialog.svelte';
+  import Button from '../components/Button.svelte';
+  import Dialog from '../components/Dialog.svelte';
   import Kbd from './Kbd.svelte';
-  import SelectField from '$lib/components/SelectField.svelte';
+  import SelectField from '../components/SelectField.svelte';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '$lib/utils/styles.js';
-  import { smScreen } from '$lib/stores/matchMedia.js';
-  import { autoFocus, selectOnFocus } from '$lib/actions/input.js';
-  import type { MenuOption } from '$lib/types/index.js';
+  import { cls } from '../utils/styles.js';
+  import { smScreen } from '../stores/matchMedia.js';
+  import { autoFocus, selectOnFocus } from '../actions/input.js';
+  import type { MenuOption } from '../types/index.js';
 
   export let options: MenuOption[] = [];
 

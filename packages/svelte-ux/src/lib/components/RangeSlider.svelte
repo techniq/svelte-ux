@@ -30,8 +30,8 @@
   import { scaleLinear } from 'd3-scale';
   import { mdiDragHorizontal } from '@mdi/js';
 
-  import { movable } from '$lib/actions/mouse.js';
-  import { decimalCount, round } from '$lib/utils/number.js';
+  import { movable } from '../actions/mouse.js';
+  import { decimalCount, round } from '../utils/number.js';
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';

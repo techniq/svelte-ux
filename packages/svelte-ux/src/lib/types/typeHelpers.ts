@@ -1,6 +1,6 @@
 // https://basarat.gitbooks.io/typescript/docs/types/never.html#use-case-exhaustive-checks
 
-import type { colors } from '$lib/styles/theme.js';
+import type { colors } from '../styles/theme.js';
 import type { SvelteComponent } from 'svelte';
 import type { derived, Readable } from 'svelte/store';
 import type {

@@ -1,7 +1,7 @@
 import clsx, { type ClassValue } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
 import { range } from 'd3-array';
-import { entries } from '$lib/types/typeHelpers.js';
+import { entries } from '../types/typeHelpers.js';
 
 /**
  * Convert object to style string

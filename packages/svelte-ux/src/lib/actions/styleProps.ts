@@ -1,4 +1,4 @@
-import { entries, keys } from '$lib/types/typeHelpers.js';
+import { entries, keys } from '../types/typeHelpers.js';
 import type { Action } from 'svelte/action';
 
 type CSSProps = { [key: string]: string | number | boolean | null | undefined };

@@ -15,7 +15,7 @@
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import Input from './Input.svelte';
-  import { type IconInput, asIconData } from '$lib/utils/icons.js';
+  import { type IconInput, asIconData } from '../utils/icons.js';
 
   type InputValue = string | number;
 

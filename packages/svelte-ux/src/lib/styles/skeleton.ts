@@ -11,7 +11,7 @@
 //
 // https://github.com/skeletonlabs/skeleton/blob/dev/packages/plugin/src/tailwind/themes/index.ts#L17-L19
 // import { getThemeProperties } from '@skeletonlabs/tw-plugin';
-import { entries, fromEntries } from '$lib/types/typeHelpers.js';
+import { entries, fromEntries } from '../types/typeHelpers.js';
 import { getThemeProperties } from './skeleton/index.js';
 
 const themeNames = [

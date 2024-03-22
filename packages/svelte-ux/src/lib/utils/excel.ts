@@ -1,5 +1,5 @@
 // import { getCellContent, getCellValue, getHeaders, getRowColumns } from './table.js';
-// import type { ColumnDef } from '$lib/types/table.js';
+// import type { ColumnDef } from '../types/table.js';
 // import { PeriodType } from './date.js';
 // import { saveAs } from './file';
 // import { isLiteralObject } from './object.js';

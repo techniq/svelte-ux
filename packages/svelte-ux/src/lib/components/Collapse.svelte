@@ -5,7 +5,7 @@
   import { cls } from '../utils/styles.js';
 
   import Icon from './Icon.svelte';
-  import type { TransitionParams } from '$lib/types/index.js';
+  import type { TransitionParams } from '../types/index.js';
   import { getComponentClasses } from './theme.js';
 
   /**

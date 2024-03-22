@@ -1,6 +1,6 @@
 const colors = require('tailwindcss/colors');
 const { createThemeColors, processThemeColors } = require('../../styles/theme');
-const { entries } = require('../../types/typeHelpers.js');
+const { entries } = require('../../types/typeHelpers');
 
 const defaultThemes = {
   light: {

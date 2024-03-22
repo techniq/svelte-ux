@@ -13,7 +13,7 @@ import {
   type Oklch,
   type Rgb,
 } from 'culori';
-import { entries, fromEntries, keys } from '$lib/types/typeHelpers.js';
+import { entries, fromEntries, keys } from '../types/typeHelpers.js';
 
 export type SupportedColorSpace = 'rgb' | 'hsl' | 'oklch';
 

@@ -1,4 +1,4 @@
-import { keys } from '$lib/types/typeHelpers.js';
+import { keys } from '../types/typeHelpers.js';
 import { parse, reviver, stringify } from './json.js';
 import { isEmptyObject } from './object.js';
 

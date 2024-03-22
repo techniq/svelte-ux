@@ -4,9 +4,9 @@
 
   import Button from './Button.svelte';
   import TextField from './TextField.svelte';
-  import { selectOnFocus } from '$lib/actions/input.js';
+  import { selectOnFocus } from '../actions/input.js';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
 
   export let value: number = 0;
   export let min: number | undefined = undefined;

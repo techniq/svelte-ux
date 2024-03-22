@@ -42,7 +42,7 @@ import {
   type DateFormatVariantPreset,
 } from './date_types.js';
 import { defaultLocale, type LocaleSettings } from './locale.js';
-import { assertNever, entries } from '$lib/types/typeHelpers.js';
+import { assertNever, entries } from '../types/typeHelpers.js';
 
 export * from './date_types.js';
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
   import { intersection } from '../actions/observer.js';
   import { getComponentClasses } from './theme.js';
 

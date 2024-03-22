@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ThemeColors } from '$lib/types/index.js';
-  import { uniqueId } from '$lib/utils/string.js';
+  import type { ThemeColors } from '../types/index.js';
+  import { uniqueId } from '../utils/string.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
