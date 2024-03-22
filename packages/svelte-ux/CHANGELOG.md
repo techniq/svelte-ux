@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.62.1
+
+### Patch Changes
+
+- Make options optional `scrollFade`, `scrollShadow`, and `sticky` actions ([#301](https://github.com/techniq/svelte-ux/pull/301))
+
 ## 0.62.0
 
 ### Minor Changes
