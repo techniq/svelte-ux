@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.62.2
+
+### Patch Changes
+
+- [tableOrderStore] Process `columns` using `getRowColumns()` to get "leaf columns" when columns are nested ([`b805bc45381485edfdf875ad3bff24561e529690`](https://github.com/techniq/svelte-ux/commit/b805bc45381485edfdf875ad3bff24561e529690))
+
 ## 0.62.1
 
 ### Patch Changes
