@@ -1,6 +1,6 @@
 import type { Action, ActionReturn } from 'svelte/action';
 import { isVisibleInScrollParent, scrollIntoView as scrollIntoViewUtil } from '../utils/dom.js';
-import type { EventWithTarget } from '../types/index.js';
+import type { EventWithTarget } from '../types/typeHelpers.js';
 
 export type ScrollIntoViewOptions = {
   condition: boolean | ((node: HTMLElement) => boolean);

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ThemeColors } from '../types/index.js';
+  import type { ThemeColors } from '../types/typeHelpers.js';
   import { uniqueId } from '../utils/string.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
