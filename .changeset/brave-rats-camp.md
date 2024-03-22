@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Fix: Make ScrollFadeOptions optional in `scrollFade` action
+Make options optional `scrollFade`, `scrollShadow`, and `sticky` actions

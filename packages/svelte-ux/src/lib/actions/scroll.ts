@@ -48,7 +48,10 @@ type ScrollShadowOptions = {
   };
 };
 
-export const scrollShadow: Action<HTMLElement, ScrollShadowOptions> = (node, options) => {
+export const scrollShadow: Action<HTMLElement, ScrollShadowOptions | undefined> = (
+  node,
+  options
+) => {
   const defaultOptions = {
     offset: 10,
     blur: 6,
@@ -169,7 +172,7 @@ type ScrollFadeOptions = {
   scrollRatio?: number;
 };
 
-export const scrollFade: Action<HTMLElement, ScrollFadeOptions> = (node, options?) => {
+export const scrollFade: Action<HTMLElement, ScrollFadeOptions | undefined> = (node, options) => {
   const length = options?.length ?? 50;
   const scrollRatio = options?.scrollRatio ?? 5;
 

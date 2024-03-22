@@ -13,7 +13,7 @@ type StickyOptions = {
   TODO
     - [ ] Consider raising a `stuck` event for styling (example: https://svelte.dev/repl/4ad71e00c86c47d29806e17f09ff0869?version=3.35.0)
 */
-export const sticky: Action<HTMLElement, StickyOptions> = (node, options) => {
+export const sticky: Action<HTMLElement, StickyOptions | undefined> = (node, options) => {
   // Track changes so they can be reversed on an update
   const tracker = new DomTracker(node);
 
