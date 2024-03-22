@@ -6,6 +6,7 @@ import { index } from 'd3-array';
 import { sortFunc } from '../utils/sort.js';
 import type { ColumnDef } from '../types/table.js';
 import Table from '../components/Table.svelte';
+import { getRowColumns } from '$lib/utils/table.js';
 
 type SortFunc = (a: any, b: any) => number;
 type OrderDirection = 'asc' | 'desc';
@@ -26,7 +27,7 @@ export type TableOrderProps = {
 
 export default function tableOrderStore(props?: TableOrderProps) {
   const { initialBy, initialDirection, initialHandler, columns } = props ?? {};
-  const columnsByName = columns ? index(columns, (d) => d.name) : null;
+  const columnsByName = columns ? index(getRowColumns(columns), (d) => d.name) : null;
 
   const initialState =
     initialBy && columns && columnsByName

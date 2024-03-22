@@ -4,6 +4,7 @@ import { parseISO } from 'date-fns';
 import type { ColumnDef } from '../types/table.js';
 import { PeriodType } from '../utils/date_types.js';
 
+/** Get columsn represent headers with rowSpan/colSpan set based on structure */
 export function getHeaders(columns: ColumnDef[]) {
   const maxDepth = getDepth(columns);
   const result: ColumnDef[][] = Array.from({
@@ -39,6 +40,7 @@ export function getHeaders(columns: ColumnDef[]) {
   return result;
 }
 
+/** Get columns representing rows (i.e. flattened leaf columns if nested columns are used) */
 export function getRowColumns(columns: ColumnDef[]) {
   const result: ColumnDef[] = [];
 
