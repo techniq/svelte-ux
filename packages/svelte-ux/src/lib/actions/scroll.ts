@@ -169,7 +169,7 @@ type ScrollFadeOptions = {
   scrollRatio?: number;
 };
 
-export const scrollFade: Action<HTMLElement, ScrollFadeOptions> = (node, options) => {
+export const scrollFade: Action<HTMLElement, ScrollFadeOptions> = (node, options?) => {
   const length = options?.length ?? 50;
   const scrollRatio = options?.scrollRatio ?? 5;
 
