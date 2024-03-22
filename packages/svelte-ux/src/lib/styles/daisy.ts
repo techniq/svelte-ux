@@ -57,7 +57,7 @@ function mapColorsName(themes: typeof daisyThemes, colorMap: typeof daisyColorMa
 
   return fromEntries(
     entries(themesGeneric)
-      .map(([themeName, colors]) : [string | Theme, Record<string, string>] => {
+      .map(([themeName, colors]): [string | Theme, Record<string, string>] => {
         const mappedColors = fromEntries(
           entries(colors).map(([key, value]): [string, string] => {
             return [colorMapGeneric[key] ?? key, value];
@@ -68,7 +68,6 @@ function mapColorsName(themes: typeof daisyThemes, colorMap: typeof daisyColorMa
       .sort(sortFunc(([themeName]) => themeNames.indexOf(themeName as string)))
   );
 }
-
 
 const themes = mapColorsName(daisyThemes, daisyColorMap);
 

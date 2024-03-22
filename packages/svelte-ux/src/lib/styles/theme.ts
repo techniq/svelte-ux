@@ -119,9 +119,15 @@ export function processThemeColors(
         const referenceColor = colors[`${color}-${referenceShade}`] ?? colors[color];
 
         if (shade < 500) {
-          colors[shadeColorName] ??= lightenColor(referenceColor, (referenceShade - shade) / 1000) as string; // 100 == 0.1
+          colors[shadeColorName] ??= lightenColor(
+            referenceColor,
+            (referenceShade - shade) / 1000
+          ) as string; // 100 == 0.1
         } else if (shade > 500) {
-          colors[shadeColorName] ??= darkenColor(colors[color], (shade - referenceShade) / 1000) as string; // 100 == 0.1
+          colors[shadeColorName] ??= darkenColor(
+            colors[color],
+            (shade - referenceShade) / 1000
+          ) as string; // 100 == 0.1
         } else {
           colors[shadeColorName] ??= colors[color] as string;
         }
@@ -207,19 +213,19 @@ export function colorVariableValue(
 ) {
   try {
     if (colorSpace === 'rgb') {
-      const computedColor = typeof color === 'string' ? rgb(color) : color as Rgb;
+      const computedColor = typeof color === 'string' ? rgb(color) : (color as Rgb);
       if (computedColor) {
         const { r, g, b } = computedColor;
         return `${round(r * 255, decimals)} ${round(g * 255, decimals)} ${round(b * 255, decimals)}`;
       }
     } else if (colorSpace === 'hsl') {
-      const computedColor = typeof color === 'string' ? hsl(clampRgb(color)) : color as Hsl;
+      const computedColor = typeof color === 'string' ? hsl(clampRgb(color)) : (color as Hsl);
       if (computedColor) {
         const { h, s, l } = computedColor;
         return `${round(h ?? 0, decimals)} ${round(s * 100, decimals)}% ${round(l * 100, decimals)}%`;
       }
     } else if (colorSpace === 'oklch') {
-      const computedColor = typeof color === 'string' ? oklch(clampRgb(color)) : color as Oklch;
+      const computedColor = typeof color === 'string' ? oklch(clampRgb(color)) : (color as Oklch);
       if (computedColor) {
         const { l, c, h } = computedColor;
         return `${round(l, decimals)} ${round(c, decimals)} ${round(h ?? 0, decimals)}`;

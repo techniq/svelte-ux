@@ -1,12 +1,7 @@
 <script lang="ts" context="module">
   import { type ComponentProps, setContext, getContext } from 'svelte';
   import type Button from './Button.svelte';
-  import type {
-    ButtonColor,
-    ButtonRounded,
-    ButtonSize,
-    ButtonVariant,
-  } from '../types/index.js';
+  import type { ButtonColor, ButtonRounded, ButtonSize, ButtonVariant } from '../types/index.js';
 
   type ButtonGroupContext = {
     variant: ButtonVariant | undefined;

@@ -41,7 +41,10 @@ const skeletonColorMap = {
   surface: 'surface',
 };
 
-function processTheme(themeName: (typeof themeNames)[number], scheme: 'light' | 'dark'): [string, Record<string, string>] {
+function processTheme(
+  themeName: (typeof themeNames)[number],
+  scheme: 'light' | 'dark'
+): [string, Record<string, string>] {
   const properties = getThemeProperties(themeName);
 
   let mappedThemeProperties: [string, string][] = entries(properties)
@@ -54,7 +57,10 @@ function processTheme(themeName: (typeof themeNames)[number], scheme: 'light' | 
         const skeletonColorShade = matches?.[2];
         const themeColorName = skeletonColorName && skeletonColorMap[skeletonColorName];
         if (themeColorName) {
-          return [`${themeColorName}-${skeletonColorShade}`, `rgb(${value})`] satisfies [string, string];
+          return [`${themeColorName}-${skeletonColorShade}`, `rgb(${value})`] satisfies [
+            string,
+            string,
+          ];
         }
       } else if (key.startsWith('--on-')) {
         // `--on-primary` => `primary-content`

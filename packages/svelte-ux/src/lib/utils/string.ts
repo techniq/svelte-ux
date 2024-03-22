@@ -1,4 +1,4 @@
-import { entries } from "../types/typeHelpers.js";
+import { entries } from '../types/typeHelpers.js';
 
 /**
  * Check if str only contians upper case letters

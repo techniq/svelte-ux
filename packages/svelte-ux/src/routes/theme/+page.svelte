@@ -114,7 +114,10 @@
   $: showDarkTheme = $currentTheme.dark;
   $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)?.theme;
   $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)?.theme;
-  $: previewTheme = (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as Record<string, string>;
+  $: previewTheme = (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as Record<
+    string,
+    string
+  >;
 
   // Update site dark/light mode with preview for better experience (previewing and applying)
   $: currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');

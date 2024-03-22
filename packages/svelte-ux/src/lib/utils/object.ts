@@ -10,7 +10,10 @@ export function isEmptyObject(obj: any) {
 }
 
 export function camelCaseKeys(obj: any) {
-  return keys(obj).reduce((acc, key) => ((acc[camelCase(key ? String(key) : undefined)] = obj[key]), acc), {} as any);
+  return keys(obj).reduce(
+    (acc, key) => ((acc[camelCase(key ? String(key) : undefined)] = obj[key]), acc),
+    {} as any
+  );
 }
 
 // https://codereview.stackexchange.com/questions/73714/find-a-nested-property-in-an-object
@@ -172,7 +175,5 @@ export function pick<T extends object = {}>(obj: T, keys: string[]): Partial<T> 
  * Create new object with keys and values swapped.  Last value's key is used if duplicated
  */
 export function keysByValues<T extends object>(obj: T): Record<string, keyof T> {
-  return fromEntries(
-    entries(obj).map(([key, value]) => [String(value), key])
-  );
+  return fromEntries(entries(obj).map(([key, value]) => [String(value), key]));
 }

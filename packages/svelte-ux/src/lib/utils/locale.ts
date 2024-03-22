@@ -256,7 +256,9 @@ export function getAllKnownLocales(
   additionalLocales?: Record<string, LocaleSettingsInput>
 ): Record<string, LocaleSettings> {
   const additional = additionalLocales
-    ? entries(additionalLocales).map(([key, value]) => [key, createLocaleSettings(value)] satisfies [string, LocaleSettings])
+    ? entries(additionalLocales).map(
+        ([key, value]) => [key, createLocaleSettings(value)] satisfies [string, LocaleSettings]
+      )
     : [];
   return { en: defaultLocale, ...fromEntries(additional) };
 }
