@@ -1,5 +1,65 @@
 # svelte-ux
 
+## 0.62.0
+
+### Minor Changes
+
+- Breaking change: `tableOrderStore` now takes in the full event with `e.detail.column` instead of just `column` to simplify usage. ([`341b51a47df0db4774a6470ecbcee36e21002188`](https://github.com/techniq/svelte-ux/commit/341b51a47df0db4774a6470ecbcee36e21002188))
+
+  ## Before
+
+  ```svelte
+  <Table on:headerClick={(e) => tableOrder.onHeaderClick(e.detail.column)} />
+  ```
+
+  ## After
+
+  ```svelte
+  <Table on:headerClick={tableOrder.onHeaderClick} />
+  ```
+
+- Breaking change: Simplify Table ordering by passing instance of `tableOrderStore` instead of `orderBy`, `orderDirection`, and handling `on:headerClick`. Also fixes display of clickable headers when order is not used, and improves sort arrow size. ([`e72a154524d0a8583717f58617984b1ea46f187b`](https://github.com/techniq/svelte-ux/commit/e72a154524d0a8583717f58617984b1ea46f187b))
+
+  ## Before
+
+  ```svelte
+  <script>
+    const order = tableOrderStore();
+  </script>
+
+  <Table
+    orderBy={$order.by}
+    orderDirection={$order.direction}
+    on:headerClick={order.onHeaderClick}
+  />
+  ```
+
+  ## After
+
+  ```svelte
+  <script>
+    const order = tableOrderStore();
+  </script>
+
+  <Table {order} />
+  ```
+
+- Breaking change: [Paginate] Rename `items` to `data` and `pageItems` slot prop to `pageData` to better integrate with `Table`. Maintain `data` type to `pageData`. ([`fc50ca2d5670596dd9c125725fff1ad38c07e723`](https://github.com/techniq/svelte-ux/commit/fc50ca2d5670596dd9c125725fff1ad38c07e723))
+
+### Patch Changes
+
+- Add support for the Map iterable type in the entries function ([#300](https://github.com/techniq/svelte-ux/pull/300))
+
+- [Dialog / Drawer] Only stop keydown event propagation for `Escape` key (allow arrow keys, etc) ([`4b9824f6e2a7fef4621c0aeaf3a4f3080ba8e124`](https://github.com/techniq/svelte-ux/commit/4b9824f6e2a7fef4621c0aeaf3a4f3080ba8e124))
+
+- [tableOrderStore] Support passing `columns` to simplify creating initialHandler for complex columns (using value, orderBy, etc) ([`772699ea0940cea2b350e10a9848df69cade1b15`](https://github.com/techniq/svelte-ux/commit/772699ea0940cea2b350e10a9848df69cade1b15))
+
+- Improve types for Table, Paginate, Selection, Steps, and InfiniteScroll ([`fc50ca2d5670596dd9c125725fff1ad38c07e723`](https://github.com/techniq/svelte-ux/commit/fc50ca2d5670596dd9c125725fff1ad38c07e723))
+
+- Add `isEmptyObject()` util ([`e2b97b616cd1bdbfd5a6d480c829351a66b30251`](https://github.com/techniq/svelte-ux/commit/e2b97b616cd1bdbfd5a6d480c829351a66b30251))
+
+- [tableOrderStore] Use `initialDirection` when changing column sorted by ([`8ea0a4dd4680dc31495b5d4b521b11624760f5e2`](https://github.com/techniq/svelte-ux/commit/8ea0a4dd4680dc31495b5d4b521b11624760f5e2))
+
 ## 0.61.10
 
 ### Patch Changes
