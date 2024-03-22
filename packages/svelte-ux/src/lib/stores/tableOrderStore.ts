@@ -1,8 +1,10 @@
 import { writable } from 'svelte/store';
 import type { ComponentEvents } from 'svelte';
 import { isFunction } from 'lodash-es';
+import { index } from 'd3-array';
 
 import { sortFunc } from '../utils/sort.js';
+import type { ColumnDef } from '../types/table.js';
 import Table from '../components/Table.svelte';
 
 type SortFunc = (a: any, b: any) => number;
@@ -18,16 +20,26 @@ export type TableOrderProps = {
   initialBy?: string;
   initialDirection?: OrderDirection;
   initialHandler?: SortFunc;
+  /** Passing will create initialHandler automatically */
+  columns?: ColumnDef[];
 };
 
 export default function tableOrderStore(props?: TableOrderProps) {
-  const state = writable({
-    by: props?.initialBy ?? '',
-    direction: props?.initialDirection ?? 'asc',
-    handler: props?.initialHandler ?? sortFunc(props?.initialBy, props?.initialDirection ?? 'asc'),
-  });
+  const { initialBy, initialDirection, initialHandler, columns } = props ?? {};
+  const columnsByName = columns ? index(columns, (d) => d.name) : null;
 
-  function onHeaderClick(e: ComponentEvents<Table>['headerClick']) {
+  const initialState =
+    initialBy && columns && columnsByName
+      ? createState(columnsByName.get(initialBy)!, props)
+      : {
+          by: initialBy ?? '',
+          direction: initialDirection ?? 'asc',
+          handler: initialHandler ?? sortFunc(initialBy, initialDirection ?? 'asc'),
+        };
+
+  const state = writable(initialState);
+
+  function onHeaderClick(e: ComponentEvents<Table<unknown>>['headerClick']) {
     const column = e.detail.column;
 
     if (column.orderBy === false) {
@@ -36,39 +48,43 @@ export default function tableOrderStore(props?: TableOrderProps) {
     }
 
     state.update((prevState) => {
-      const by =
-        typeof column.orderBy === 'string'
-          ? column.orderBy
-          : typeof column.value === 'string'
-            ? column.value
-            : column.name;
-
-      const direction =
-        prevState.by !== by
-          ? props?.initialDirection ?? 'asc'
-          : prevState.direction === 'asc'
-            ? 'desc'
-            : 'asc';
-
-      let handler: SortFunc | undefined = undefined;
-      if (isFunction(column.orderBy)) {
-        handler = column.orderBy;
-      } else if (typeof column.orderBy === 'string') {
-        handler = sortFunc(column.orderBy, direction);
-      } else {
-        handler = sortFunc(column.value ?? column.name, direction);
-      }
-
-      return {
-        by,
-        direction,
-        handler,
-      };
+      return createState(column, props, prevState);
     });
   }
 
   return {
     ...state,
     onHeaderClick,
+  };
+}
+
+function createState(column: ColumnDef, props?: TableOrderProps, prevState?: TableOrderState) {
+  const by =
+    typeof column.orderBy === 'string'
+      ? column.orderBy
+      : typeof column.value === 'string'
+        ? column.value
+        : column.name;
+
+  const direction =
+    prevState?.by !== by
+      ? props?.initialDirection ?? 'asc'
+      : prevState.direction === 'asc'
+        ? 'desc'
+        : 'asc';
+
+  let handler: SortFunc | undefined = undefined;
+  if (isFunction(column.orderBy)) {
+    handler = column.orderBy;
+  } else if (typeof column.orderBy === 'string') {
+    handler = sortFunc(column.orderBy, direction);
+  } else {
+    handler = sortFunc(column.value ?? column.name, direction);
+  }
+
+  return {
+    by,
+    direction,
+    handler,
   };
 }
