@@ -8,7 +8,7 @@ export const styleProps: Action<HTMLElement, CSSProps> = (node, props) => {
     // Ignore if null or undefined
     if (value != null) {
       value = typeof value === 'boolean' ? (value ? 1 : 0) : value;
-      node.style.setProperty(String(key), `${value}`);
+      node.style.setProperty(String(key), String(value));
     }
   });
 
@@ -24,7 +24,7 @@ export const styleProps: Action<HTMLElement, CSSProps> = (node, props) => {
       entries(newProps).forEach(([key, value]) => {
         // Ignore if null or undefined
         if (value != null) {
-          node.style.setProperty(String(key), `${value}`);
+          node.style.setProperty(String(key), String(value));
         }
         if (props) {
           delete props[key];
