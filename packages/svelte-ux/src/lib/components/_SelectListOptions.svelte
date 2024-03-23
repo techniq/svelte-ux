@@ -24,10 +24,7 @@
 
   export let classes: {
     root?: string;
-    option?: string;
-    selected?: string;
     group?: string;
-    empty?: string;
   } = {};
 
   const settingsClasses = getComponentClasses('SelectField');
