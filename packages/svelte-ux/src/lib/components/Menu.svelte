@@ -9,7 +9,7 @@
 
   import Popover from './Popover.svelte';
   import type { TransitionParams } from '../types/typeHelpers.js';
-  import { getComponentClasses } from './theme.js';
+  import { getComponentSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();
 
@@ -21,10 +21,10 @@
   export let autoPlacement = false;
   export let resize: ComponentProps<Popover>['resize'] = false;
   export let disableTransition = false;
-  export let transition = disableTransition
-    ? (node: HTMLElement, params: TransitionParams) => ({}) as TransitionConfig
-    : slide;
-  export let transitionParams: TransitionParams = {};
+  export let transition:
+    | ((node: HTMLElement, params: TransitionParams) => TransitionConfig)
+    | undefined = undefined;
+  export let transitionParams: TransitionParams | undefined = undefined;
   export let explicitClose = false;
   export let moveFocus = true;
 
@@ -32,7 +32,15 @@
     root?: string;
     menu?: string;
   } = {};
-  const settingsClasses = getComponentClasses('Menu');
+  const { classes: settingsClasses, defaults } = getComponentSettings('Menu');
+
+  $: resolvedTransition =
+    transition ??
+    defaults.transition ??
+    (disableTransition
+      ? (node: HTMLElement, params: TransitionParams) => ({}) as TransitionConfig
+      : slide);
+  $: resolvedTransitionParams = transitionParams ?? defaults.transitionParams ?? {};
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 
@@ -80,7 +88,7 @@
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
     }}
-    transition:transition={transitionParams}
+    transition:resolvedTransition={resolvedTransitionParams}
     use:focusMove={{ disabled: !moveFocus }}
   >
     <slot {close} />
