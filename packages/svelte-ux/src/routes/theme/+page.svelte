@@ -19,6 +19,7 @@
     processThemeColors,
     themeStylesString,
     type SupportedColorSpace,
+    type NestedColors,
   } from '$lib/styles/theme.js';
   import { entries, fromEntries, type MenuOption } from '$lib/types/index.js';
   import ColorField from './ColorField.svelte';
@@ -114,10 +115,7 @@
   $: showDarkTheme = $currentTheme.dark;
   $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)?.theme;
   $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)?.theme;
-  $: previewTheme = (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as Record<
-    string,
-    string
-  >;
+  $: previewTheme = (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as NestedColors;
 
   // Update site dark/light mode with preview for better experience (previewing and applying)
   $: currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');
