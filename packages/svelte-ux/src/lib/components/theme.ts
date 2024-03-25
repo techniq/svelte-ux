@@ -7,7 +7,9 @@ import type {
   ButtonSize,
   ButtonVariant,
   LabelPlacement,
+  TransitionParams,
 } from '../types/index.js';
+import type { TransitionConfig } from 'svelte/transition';
 
 export type ComponentName = keyof typeof Components;
 
@@ -58,6 +60,10 @@ interface ComponentDefaultProps {
     color?: ButtonColor;
     size?: ButtonSize;
     rounded?: ButtonRounded;
+  };
+  Menu?: {
+    transition?: (node: HTMLElement, params: TransitionParams) => TransitionConfig;
+    transitionParams?: TransitionParams;
   };
   MenuField?: {
     labelPlacement?: LabelPlacement;
