@@ -65,43 +65,49 @@ export function getThemeNames(themes: Record<string, any>) {
   return { light, dark };
 }
 
+export interface NestedColors {
+  [key: string]: string | NestedColors;
+}
+
+/**
+ * Flatten nested color objects into a single-level color object with concatenated keys
+ */
+export function flattenThemeColors(
+  themeColors: NestedColors,
+  keys: (string | number)[] = [],
+  memo?: Record<string, string>
+) {
+  return entries(themeColors).reduce<Record<string, string>>((memo, [key, value]) => {
+    if (typeof value === 'string') {
+      memo[(key === 'DEFAULT' ? keys : [...keys, key]).join('-')] = value;
+    } else {
+      flattenThemeColors(value, [...keys, key], memo);
+    }
+    return memo;
+  }, memo ?? {});
+}
+
 /**
  * Convert names to CSS variables and color values common color space (hsl, oklch, etc) and space separated
  */
-export function processThemeColors(
-  themeColors: Record<string, string>,
-  colorSpace: SupportedColorSpace
-) {
-  const colors = { ...themeColors };
+export function processThemeColors(themeColors: NestedColors, colorSpace: SupportedColorSpace) {
+  const colors = flattenThemeColors(themeColors);
 
   // TODO: make all semanatic colors optional as well
 
   // Generate optional semanatic colors
-  if (!('neutral' in colors) && !('neutral-500' in colors)) {
-    colors['neutral'] = 'oklch(.355192 .032071 262.988584)';
-  }
+  colors['neutral'] ??= colors['neutral-500'] ?? 'oklch(.355192 .032071 262.988584)';
 
   // Generate optional state colors
-  if (!('info' in colors) && !('info-500' in colors)) {
-    colors['info'] = 'oklch(0.7206 0.191 231.6)';
-  }
-  if (!('success' in colors) && !('success-500' in colors)) {
-    colors['success'] = 'oklch(64.8% 0.150 160)';
-  }
-  if (!('warning' in colors) && !('warning-500' in colors)) {
-    colors['warning'] = 'oklch(0.8471 0.199 83.87)';
-  }
-  if (!('danger' in colors) && !('danger-500' in colors)) {
-    colors['danger'] = 'oklch(0.7176 0.221 22.18)';
-  }
+  colors['info'] ??= colors['info-500'] ?? 'oklch(0.7206 0.191 231.6)';
+  colors['success'] ??= colors['success-500'] ?? 'oklch(64.8% 0.150 160)';
+  colors['warning'] ??= colors['warning-500'] ?? 'oklch(0.8471 0.199 83.87)';
+  colors['danger'] ??= colors['danger-500'] ?? 'oklch(0.7176 0.221 22.18)';
 
   // Generate optional content colors
   for (const color of [...semanticColors, ...stateColors]) {
     // Add `primary` from `primary-500` if not defined in theme (ex. Skeleton)
-    if (!(color in colors) && `${color}-500` in themeColors) {
-      colors[color] = themeColors[`${color}-500`];
-    }
-
+    colors[color] ??= colors[`${color}-500`];
     colors[`${color}-content`] ??= foregroundColor(colors[color]) as string;
 
     // Generate color shades (ex. `primary-500`) if not defined.  Useful for Daisy but not Skeleton themes, for example
@@ -239,7 +245,7 @@ export function colorVariableValue(
 /**
  * Process theme to style variables
  */
-export function themeStylesString(theme: any, colorSpace: SupportedColorSpace) {
+export function themeStylesString(theme: NestedColors, colorSpace: SupportedColorSpace) {
   const styleProperties = processThemeColors(theme, colorSpace);
   return entries(styleProperties)
     .map(([key, value]) => {
