@@ -78,11 +78,10 @@ export function flattenColors(
   memo?: Record<string, string>
 ) {
   return entries(themeColors).reduce<Record<string, string>>((memo, [key, value]) => {
-    const newKeys = [...keys, key];
     if (typeof value === 'string') {
-      memo[newKeys.join('-')] = value;
+      memo[(key === 'DEFAULT' ? keys : [...keys, key]).join('-')] = value;
     } else {
-      flattenColors(value, newKeys, memo);
+      flattenColors(value, [...keys, key], memo);
     }
     return memo;
   }, memo ?? {});

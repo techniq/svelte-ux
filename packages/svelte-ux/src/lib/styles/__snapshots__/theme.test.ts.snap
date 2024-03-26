@@ -50,7 +50,7 @@ exports[`processThemeColors > Process theme colors recursive colors object 1`] =
   "--color-neutral-800": "215 27.907% 16.8627%",
   "--color-neutral-900": "220.9091 39.2857% 10.9804%",
   "--color-neutral-content": "0 0% 100%",
-  "--color-primary": "217.2193 91.2195% 59.8039%",
+  "--color-primary": "221.2121 83.1933% 53.3333%",
   "--color-primary-100": "214.2857 94.5946% 92.7451%",
   "--color-primary-200": "213.3333 96.9231% 87.2549%",
   "--color-primary-300": "211.6981 96.3636% 78.4314%",
