@@ -8,7 +8,7 @@ export async function load() {
       api,
       source,
       pageSource,
-      related: ['stores/timerStore'],
+      related: ['stores/timerStore', 'utils/duration'],
     },
   };
 }
