@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { flattenColors, processThemeColors } from './theme.js';
+import { flattenThemeColors, processThemeColors } from './theme.js';
 import tailwindColors from 'tailwindcss/colors.js';
 
-describe('flattenColors', () => {
+describe('flattenThemeColors', () => {
   it('Flatten recursive colors object', () => {
-    const actual = flattenColors({
+    const actual = flattenThemeColors({
       // Simple key-value pair
       primary: '#ff0000',
       dark: {

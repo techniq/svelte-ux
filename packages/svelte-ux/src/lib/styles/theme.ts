@@ -72,7 +72,7 @@ export interface NestedColors {
 /**
  * Flatten nested color objects into a single-level color object with concatenated keys
  */
-export function flattenColors(
+export function flattenThemeColors(
   themeColors: NestedColors,
   keys: (string | number)[] = [],
   memo?: Record<string, string>
@@ -81,7 +81,7 @@ export function flattenColors(
     if (typeof value === 'string') {
       memo[(key === 'DEFAULT' ? keys : [...keys, key]).join('-')] = value;
     } else {
-      flattenColors(value, [...keys, key], memo);
+      flattenThemeColors(value, [...keys, key], memo);
     }
     return memo;
   }, memo ?? {});
@@ -91,7 +91,7 @@ export function flattenColors(
  * Convert names to CSS variables and color values common color space (hsl, oklch, etc) and space separated
  */
 export function processThemeColors(themeColors: NestedColors, colorSpace: SupportedColorSpace) {
-  const colors = flattenColors(themeColors);
+  const colors = flattenThemeColors(themeColors);
 
   // TODO: make all semanatic colors optional as well
 
