@@ -35,6 +35,7 @@
   export let placeholder = '';
   export let labelPlacement = defaults.labelPlacement;
   export let loading: boolean = false;
+  export let required = false;
   export let disabled: boolean = false;
   export let readonly: boolean = false;
   export let icon: IconInput = undefined;
@@ -415,6 +416,7 @@
     {rounded}
     {icon}
     {dense}
+    {required}
     {disabled}
     bind:inputEl
     bind:value={searchText}

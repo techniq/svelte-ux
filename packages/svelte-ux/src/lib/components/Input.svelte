@@ -28,6 +28,7 @@
   export let accept: string | RegExp = '\\d';
   let placeholderProp: string | undefined = undefined;
   export { placeholderProp as placeholder };
+  export let required = false;
   export let disabled = false;
 
   $: placeholder = placeholderProp ?? mask;
