@@ -48,6 +48,15 @@
   <Checkbox checked>Label</Checkbox>
 </Preview>
 
+<h2>Full width</h2>
+
+<Preview>
+  <Checkbox fullWidth>One</Checkbox>
+  <Checkbox fullWidth>Two</Checkbox>
+  <Checkbox fullWidth>Three</Checkbox>
+  <Checkbox fullWidth>Four (disabled)</Checkbox>
+</Preview>
+
 <h2>Long labels</h2>
 
 <Preview>

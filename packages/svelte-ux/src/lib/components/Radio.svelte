@@ -13,11 +13,13 @@
   export let checked = false;
   export let required = false;
   export let disabled = false;
+  export let fullWidth = false;
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
 
   export let classes: {
     root?: string;
-    checkbox?: string;
+    input?: string;
+    radio?: string;
     label?: string;
     icon?: string;
   } = {};
@@ -29,7 +31,8 @@
 <div
   class={cls(
     'Radio',
-    'inline-flex items-center',
+    fullWidth ? 'flex' : 'inline-flex',
+    'items-center',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -42,13 +45,14 @@
     bind:group
     on:change
     {value}
-    class="peer appearance-none absolute"
+    class={cls('input', 'peer appearance-none absolute', settingsClasses.input, classes.input)}
     {required}
     {disabled}
   />
   <label
     for={id}
     class={cls(
+      'radio',
       'inline-grid place-items-center border-2 rounded-full bg-surface-100',
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
@@ -59,13 +63,14 @@
           ? 'border-surface-content/30'
           : 'border-primary'
         : 'border-surface-content/30',
-      settingsClasses.checkbox,
-      classes.checkbox
+      settingsClasses.radio,
+      classes.radio
     )}
   >
     <Icon
       path={mdiCheckboxBlankCircle}
       class={cls(
+        'icon',
         'pointer-events-none transition-transform',
         disabled ? 'text-surface-content/30 border-surface-content/30' : 'text-primary',
         checked ? 'scale-100' : 'scale-0',
@@ -85,7 +90,9 @@
     <label
       for={id}
       class={cls(
-        'peer-disabled:opacity-50 pl-1',
+        'label',
+        'flex-1',
+        'pl-1 peer-disabled:opacity-50',
         {
           xs: 'text-xs', // 12px
           sm: 'text-sm', // 14px

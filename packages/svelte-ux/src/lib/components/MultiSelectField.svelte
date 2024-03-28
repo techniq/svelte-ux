@@ -48,7 +48,7 @@
 
   export let classes: {
     root?: string;
-    menu?: string;
+    multiSelectMenu?: ComponentProps<MultiSelectMenu<Option>>['classes'];
     field?: string;
     actions?: string;
   } = {};
@@ -207,7 +207,7 @@
     {labelProp}
     {valueProp}
     {searchText}
-    {classes}
+    classes={{ ...settingsClasses.multiSelectMenu, ...classes.multiSelectMenu }}
     matchWidth
     bind:open
     on:change={onSelectChange}
