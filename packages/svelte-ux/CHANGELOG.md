@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.62.3
+
+### Patch Changes
+
+- Add `required` prop to Checkbox, Radio, and Switch. Add `name` to Switch. ([#309](https://github.com/techniq/svelte-ux/pull/309))
+
+- Add `required` prop to Input, TextField, SelectField, and DateField ([#308](https://github.com/techniq/svelte-ux/pull/308))
+
+- Add Menu `transition` and `transitionParams` customization to `settings` ([#305](https://github.com/techniq/svelte-ux/pull/305))
+
+- Add support for color objects with nested keys to `processThemeColors` ([#307](https://github.com/techniq/svelte-ux/pull/307))
+
 ## 0.62.2
 
 ### Patch Changes
