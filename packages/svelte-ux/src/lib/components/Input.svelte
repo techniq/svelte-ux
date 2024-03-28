@@ -28,6 +28,7 @@
   export let accept: string | RegExp = '\\d';
   let placeholderProp: string | undefined = undefined;
   export { placeholderProp as placeholder };
+  export let required = false;
   export let disabled = false;
 
   $: placeholder = placeholderProp ?? mask;
@@ -107,6 +108,7 @@
   {type}
   {inputmode}
   placeholder={isFocused && mask ? mask : placeholder}
+  {required}
   {disabled}
   {autocapitalize}
   bind:this={inputEl}

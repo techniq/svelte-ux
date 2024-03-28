@@ -46,6 +46,7 @@
   export let hint = '';
   export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
   export let multiline = false;
+  export let required = false;
   export let disabled = false;
   export let clearable = false;
   export let base = false;
@@ -309,6 +310,7 @@
                 {name}
                 {placeholder}
                 {autocomplete}
+                {required}
                 {disabled}
                 value={inputValue}
                 {autocapitalize}
@@ -337,6 +339,7 @@
                 {id}
                 {name}
                 {placeholder}
+                {required}
                 {disabled}
                 {autocomplete}
                 type={inputType}

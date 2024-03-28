@@ -32,6 +32,7 @@
   export let labelPlacement = defaults.labelPlacement;
   export let error = '';
   export let hint = '';
+  export let required = false;
   export let disabled = false;
   export let clearable = false;
   export let base = false;
@@ -79,6 +80,7 @@
   let:id
 >
   <Input
+    {required}
     value={value ? $format_ux(value, PeriodType.Day, { custom: actualFormat }) : inputValue}
     mask={actualMask}
     {replace}
