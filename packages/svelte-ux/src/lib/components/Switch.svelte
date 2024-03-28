@@ -5,9 +5,11 @@
   import { getComponentClasses } from './theme.js';
 
   export let id: string = uniqueId('switch-');
+  export let name = '';
   export let value: any = undefined;
   export let checked: boolean | null = false;
-  export let disabled: boolean = false;
+  export let required = false;
+  export let disabled = false;
   export let size: 'sm' | 'md' | 'lg' = 'lg';
 
   export let color: ThemeColors = 'primary';
@@ -24,11 +26,13 @@
 <div class={cls('Switch', 'inline-block', settingsClasses.root, classes.root)}>
   <input
     {id}
+    {name}
     type="checkbox"
     bind:checked
     on:change
     {value}
     class={cls('peer appearance-none block h-0', settingsClasses.input, classes.input)}
+    {required}
     {disabled}
   />
 
