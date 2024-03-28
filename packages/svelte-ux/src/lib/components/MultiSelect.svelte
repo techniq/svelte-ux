@@ -41,6 +41,7 @@
 
   export let classes: {
     root?: string;
+    actions?: string;
   } = {};
   const settingsClasses = getComponentClasses('MultiSelect');
 
@@ -112,7 +113,7 @@
 </script>
 
 {#if inlineSearch}
-  <div class="border-b border-surface-content/10 p-4 pb-2">
+  <div class="border-b border-surface-content/10 pb-2">
     <TextField
       {placeholder}
       iconRight={mdiMagnify}
@@ -122,7 +123,7 @@
   </div>
 {/if}
 
-<div class={cls('overflow-auto py-1 px-4', settingsClasses.root, classes.root, $$restProps.class)}>
+<div class={cls('overflow-auto', settingsClasses.root, classes.root, $$restProps.class)}>
   <slot name="beforeOptions" selection={$selection} />
 
   <!-- initially selected options -->
@@ -209,7 +210,9 @@
       </div>
     {:else}
       {#if !filteredSelectedOptions.length}
-        <div class="text-surface-content/50 text-xs py-2">There are no matching items.</div>
+        <div class="text-surface-content/50 text-xs py-2 px-4 mb-1">
+          There are no matching items.
+        </div>
       {/if}
     {/each}
   </InfiniteScroll>
@@ -217,7 +220,14 @@
   <slot name="afterOptions" selection={$selection} />
 </div>
 
-<div class="grid grid-cols-[auto,1fr,auto] border-t border-surface-content/10 px-4 py-2">
+<div
+  class={cls(
+    'actions',
+    'grid grid-cols-[auto,1fr,auto] border-t border-surface-content/10 pt-2',
+    settingsClasses.actions,
+    classes.actions
+  )}
+>
   <slot name="actions" selection={$selection} {searchText}>
     <div />
   </slot>

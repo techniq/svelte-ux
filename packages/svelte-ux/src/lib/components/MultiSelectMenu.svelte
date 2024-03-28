@@ -48,7 +48,7 @@
   {...$$restProps}
   classes={{
     root: cls('MultiSelectMenu', settingsClasses.root, classes.root, $$restProps.class),
-    menu: cls('flex flex-col', settingsClasses.menu, classes.menu),
+    menu: cls('flex flex-col p-2', settingsClasses.menu, classes.menu),
   }}
   bind:menuItemsEl
 >
