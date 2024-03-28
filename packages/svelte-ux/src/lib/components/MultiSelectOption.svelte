@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { ComponentProps } from 'svelte';
+
   import Checkbox from './Checkbox.svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
@@ -9,7 +11,7 @@
 
   export let classes: {
     root?: string;
-    checkbox?: string;
+    checkbox?: ComponentProps<Checkbox>['classes'];
     container?: string;
   } = {};
   const settingsClasses = getComponentClasses('MultiSelectOption');
@@ -18,7 +20,7 @@
 <div
   class={cls(
     'MultiSelectOption',
-    'grid grid-cols-[1fr,auto] py-2',
+    'grid grid-cols-[1fr,auto]',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -29,7 +31,12 @@
     bind:indeterminate
     on:change
     {disabled}
-    class={cls(settingsClasses.checkbox, classes.checkbox)}
+    classes={{
+      root: 'px-2 rounded hover:bg-surface-content/5',
+      label: 'py-2',
+      ...settingsClasses.checkbox,
+      ...classes.checkbox,
+    }}
   >
     <div
       class={cls(
