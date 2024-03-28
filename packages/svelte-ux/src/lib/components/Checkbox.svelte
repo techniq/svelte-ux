@@ -9,11 +9,12 @@
   export let id = uniqueId('checkbox-');
   export let name = '';
   export let value: any = undefined;
-  export let checked: boolean = false;
+  export let checked = false;
   export let group: any[] | null = null;
-  export let indeterminate: boolean = false;
-  export let disabled: boolean = false;
-  export let circle: boolean = false;
+  export let indeterminate = false;
+  export let required = false;
+  export let disabled = false;
+  export let circle = false;
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
 
   export let classes: {
@@ -65,6 +66,7 @@
     on:change
     {value}
     class="peer appearance-none absolute"
+    {required}
     {disabled}
   />
   <label

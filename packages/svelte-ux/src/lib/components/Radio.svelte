@@ -7,11 +7,12 @@
   import { getComponentClasses } from './theme.js';
 
   export let id = uniqueId('radio-');
-  export let name: string = '';
+  export let name = '';
   export let value: any = undefined;
   export let group: any = undefined;
-  export let checked: boolean = false;
-  export let disabled: boolean = false;
+  export let checked = false;
+  export let required = false;
+  export let disabled = false;
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
 
   export let classes: {
@@ -42,6 +43,7 @@
     on:change
     {value}
     class="peer appearance-none absolute"
+    {required}
     {disabled}
   />
   <label
