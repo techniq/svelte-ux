@@ -108,6 +108,7 @@
   {type}
   {inputmode}
   placeholder={isFocused && mask ? mask : placeholder}
+  {required}
   {disabled}
   {autocapitalize}
   bind:this={inputEl}
