@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.62.4
+
+### Patch Changes
+
+- [Checkbox / Radio] Add `fullWidth` prop. Add `input` to classes, and class names to all internal elements for easier devtool recognition and CSS targeting ([#310](https://github.com/techniq/svelte-ux/pull/310))
+
+- [MultiSelect] Remove default outer padding (add to MultiSelectMenu) and add `classes.action` ([#310](https://github.com/techniq/svelte-ux/pull/310))
+
+- [MultiSelectOption] Improve default styling (align with SelectField) including `:hover`. Leverage recent Checkbox fullWidth changes for better pointer targets (full width and height). Support passing all `Checkbox` classes. ([#310](https://github.com/techniq/svelte-ux/pull/310))
+
 ## 0.62.3
 
 ### Patch Changes
