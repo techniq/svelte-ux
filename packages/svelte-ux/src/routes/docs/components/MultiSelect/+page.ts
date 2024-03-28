@@ -8,6 +8,11 @@ export async function load() {
       api,
       source,
       pageSource,
+      related: [
+        'components/InfiniteScroll',
+        'components/MultiSelectField',
+        'components/MultiSelectMenu',
+      ],
     },
   };
 }
