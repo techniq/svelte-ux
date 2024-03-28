@@ -31,6 +31,14 @@
   <Radio name="label" bind:group value={3}>Third</Radio>
 </Preview>
 
+<h2>Full width</h2>
+
+<Preview>
+  <Radio name="label" bind:group value={1} fullWidth>First</Radio>
+  <Radio name="label" bind:group value={2} fullWidth>Second</Radio>
+  <Radio name="label" bind:group value={3} fullWidth>Third</Radio>
+</Preview>
+
 <h2>Long labels</h2>
 
 <Preview>

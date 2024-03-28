@@ -14,11 +14,13 @@
   export let indeterminate = false;
   export let required = false;
   export let disabled = false;
-  export let circle = false;
+  export let fullWidth = false;
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+  export let circle = false;
 
   export let classes: {
     root?: string;
+    input?: string;
     checkbox?: string;
     label?: string;
     icon?: string;
@@ -51,7 +53,8 @@
 <div
   class={cls(
     'Checkbox',
-    'inline-flex items-center',
+    fullWidth ? 'flex' : 'inline-flex',
+    'items-center',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -65,13 +68,14 @@
     on:change={onChange}
     on:change
     {value}
-    class="peer appearance-none absolute"
+    class={cls('input', 'peer appearance-none absolute', settingsClasses.input, classes.input)}
     {required}
     {disabled}
   />
   <label
     for={id}
     class={cls(
+      'checkbox',
       'inline-grid place-items-center border-2',
       circle ? 'rounded-full' : 'rounded',
       'peer-disabled:opacity-50 transition-shadow duration-300',
@@ -90,6 +94,7 @@
     <Icon
       path={indeterminate ? mdiMinus : mdiCheck}
       class={cls(
+        'icon',
         'pointer-events-none text-primary-content transition-transform',
         checked ? 'scale-100' : 'scale-0',
         settingsClasses.icon,
@@ -108,7 +113,9 @@
     <label
       for={id}
       class={cls(
-        'peer-disabled:opacity-50 pl-1',
+        'label',
+        'flex-1',
+        'pl-1 peer-disabled:opacity-50',
         {
           xs: 'text-xs', // 12px
           sm: 'text-sm', // 14px
