@@ -46,7 +46,18 @@
       indicator: 'h-full bg-primary/10',
     },
     outline: {
-      options: 'border',
+      options: cls(
+        'border',
+        gap === true
+          ? vertical
+            ? 'divide-y divide-y-4'
+            : 'divide-x divide-x-4'
+          : gap === 'px'
+            ? vertical
+              ? 'divide-y'
+              : 'divide-x'
+            : ''
+      ),
       label: 'text-surface-content/60 hover:text-primary [&.selected]:text-primary',
       indicator: 'h-full w-full bg-primary/10',
     },
@@ -97,7 +108,7 @@
       'grid overflow-auto',
       vertical ? 'grid-flow-row' : 'grid-flow-col',
       rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
-      gap === true ? 'gap-1' : gap === 'px' ? 'gap-px' : '',
+      variant !== 'outline' && (gap === true ? 'gap-1' : gap === 'px' ? 'gap-px' : ''),
       inset ? 'p-[2px]' : '',
       variantClasses[variant].options,
       settingsClasses.options,
