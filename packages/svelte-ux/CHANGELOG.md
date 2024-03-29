@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.62.5
+
+### Patch Changes
+
+- [MultiSelect Menu/Field] Refine default styles and add additional classes to customize inner elements/components ([`4d4950aa715394b649a6df60eadc37939d1b82e8`](https://github.com/techniq/svelte-ux/commit/4d4950aa715394b649a6df60eadc37939d1b82e8))
+
 ## 0.62.4
 
 ### Patch Changes
