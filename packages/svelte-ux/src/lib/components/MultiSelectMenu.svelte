@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { getComponentClasses } from './theme.js';
-
+  import type { ComponentProps } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
   import Menu from './Menu.svelte';
-
-  import { cls } from '../utils/styles.js';
   import MultiSelect from './MultiSelect.svelte';
   import MultiSelectOption from './MultiSelectOption.svelte';
+
+  import { cls } from '../utils/styles.js';
+  import { getComponentClasses } from './theme.js';
 
   type Option = $$Generic;
 
@@ -32,6 +32,7 @@
   export let classes: {
     root?: string;
     menu?: string;
+    multiSelect?: ComponentProps<MultiSelect<Option>>['classes'];
   } = {};
   const settingsClasses = getComponentClasses('MultiSelectMenu');
 
@@ -48,7 +49,7 @@
   {...$$restProps}
   classes={{
     root: cls('MultiSelectMenu', settingsClasses.root, classes.root, $$restProps.class),
-    menu: cls('flex flex-col p-2', settingsClasses.menu, classes.menu),
+    menu: cls('flex flex-col', settingsClasses.menu, classes.menu),
   }}
   bind:menuItemsEl
 >
@@ -66,6 +67,13 @@
     {labelProp}
     {valueProp}
     {searchText}
+    classes={{
+      search: 'p-2',
+      options: 'px-2',
+      actions: 'p-2',
+      ...settingsClasses.multiSelect,
+      ...classes.multiSelect,
+    }}
     on:cancel={() => close()}
     on:cancel
     on:change={() => close()}

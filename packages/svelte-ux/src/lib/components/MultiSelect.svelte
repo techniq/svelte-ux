@@ -41,6 +41,8 @@
 
   export let classes: {
     root?: string;
+    search?: string;
+    options?: string;
     actions?: string;
   } = {};
   const settingsClasses = getComponentClasses('MultiSelect');
@@ -113,7 +115,14 @@
 </script>
 
 {#if inlineSearch}
-  <div class="border-b border-surface-content/10 pb-2">
+  <div
+    class={cls(
+      'search',
+      'border-b border-surface-content/10 pb-2',
+      settingsClasses.search,
+      classes.search
+    )}
+  >
     <TextField
       {placeholder}
       iconRight={mdiMagnify}
@@ -123,7 +132,17 @@
   </div>
 {/if}
 
-<div class={cls('overflow-auto', settingsClasses.root, classes.root, $$restProps.class)}>
+<div
+  class={cls(
+    'options',
+    'overflow-auto py-1',
+    settingsClasses.options,
+    classes.options,
+    settingsClasses.root,
+    classes.root,
+    $$restProps.class
+  )}
+>
   <slot name="beforeOptions" selection={$selection} />
 
   <!-- initially selected options -->
@@ -168,7 +187,7 @@
 
   {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
     <!-- separator between selected and deselected -->
-    <div class="border-b border-surface-content/10" />
+    <div class="border-b my-1 border-surface-content/10" />
   {/if}
 
   <!-- initially unselected options -->

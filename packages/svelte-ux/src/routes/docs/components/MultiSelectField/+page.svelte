@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { slide } from 'svelte/transition';
   import { mdiPlus } from '@mdi/js';
 
   import Button from '$lib/components/Button.svelte';
@@ -7,7 +8,6 @@
   import MultiSelectField from '$lib/components/MultiSelectField.svelte';
   import MultiSelectOption from '$lib/components/MultiSelectOption.svelte';
   import ToggleButton from '$lib/components/ToggleButton.svelte';
-  import { slide } from 'svelte/transition';
 
   const options = [
     { name: 'One', value: 1 },
@@ -74,7 +74,11 @@
     options={manyOptions}
     {value}
     on:change={(e) => (value = e.detail.value)}
-    classes={{ menu: 'max-h-[360px]' }}
+    classes={{
+      multiSelectMenu: {
+        menu: 'max-h-[360px]',
+      },
+    }}
     menuProps={{ autoPlacement: true }}
   />
 </Preview>

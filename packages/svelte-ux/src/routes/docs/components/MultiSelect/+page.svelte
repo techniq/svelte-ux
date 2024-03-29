@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { mdiPlus } from '@mdi/js';
+  import { slide } from 'svelte/transition';
+  import { mdiDotsVertical, mdiPlus } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Form from '$lib/components/Form.svelte';
   import Preview from '$lib/components/Preview.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Drawer from '$lib/components/Drawer.svelte';
+  import Form from '$lib/components/Form.svelte';
   import MultiSelect from '$lib/components/MultiSelect.svelte';
   import MultiSelectOption from '$lib/components/MultiSelectOption.svelte';
-  import { slide } from 'svelte/transition';
+  import ToggleButton from '$lib/components/ToggleButton.svelte';
 
   const options = [
     { name: 'One', value: 1 },
@@ -148,7 +150,28 @@
         {indeterminate}
         on:change={onChange}
       >
-        <span class="uppercase text-danger">{label}</span>
+        <div class="uppercase">{label}</div>
+        <div class="text-xs text-surface-content/50">value: {value}</div>
+
+        <div slot="actions" class="flex items-center">
+          <ToggleButton icon={mdiDotsVertical} iconOnly class="text-surface-content/50">
+            <Drawer
+              slot="toggle"
+              let:on={open}
+              {open}
+              on:close={toggleOff}
+              class="w-[400px]"
+              let:toggleOff
+            >
+              <h1>Edit: {label}</h1>
+              <div
+                class="fixed bottom-0 w-full flex justify-center bg-surface-content/5 border-t p-1"
+              >
+                <Button on:click={toggleOff}>Close</Button>
+              </div>
+            </Drawer>
+          </ToggleButton>
+        </div>
       </MultiSelectOption>
     </MultiSelect>
   </div>
