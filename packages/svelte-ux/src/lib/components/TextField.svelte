@@ -125,7 +125,7 @@
       inputMode = 'text';
   }
 
-  let inputValue: InputValue = '';
+  let inputValue: InputValue = value == null ? '' : String(value);
   $: potentialInputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
   $: if (inputType !== 'number' || inputValue != potentialInputValue) {
     // Update the inputValue, but when the input type is number only do it if the values are actually different.
