@@ -211,7 +211,7 @@
     />
 
     <Tooltip title="Apply theme colors to the site as they are changed" offset={2}>
-      <Field label="Site-wide Preview">
+      <Field label="Preview">
         <Switch size="md" bind:checked={applyToSiteImmediately} />
       </Field>
     </Tooltip>
@@ -221,10 +221,6 @@
         <CopyButton
           value={JSON.stringify({ light: selectedLightTheme, dark: selectedDarkTheme }, null, 2)}
         />
-      </Tooltip>
-
-      <Tooltip title="Override current themes" offset={2}>
-        <Button icon={mdiPalette} iconOnly={false} on:click={applySelectedThemeToSite} />
       </Tooltip>
 
       <Toggle let:on={open} let:toggle>
