@@ -7,10 +7,12 @@
   import { selectOnFocus } from '../actions/input.js';
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
+  import { step as stepUtil } from '../utils/number.js';
 
   export let value: number = 0;
   export let min: number | undefined = undefined;
   export let max: number | undefined = undefined;
+  export let step = 1;
   let className: string | undefined = undefined;
   export { className as class };
 
@@ -24,6 +26,9 @@
 <TextField
   type="integer"
   bind:value
+  {min}
+  {max}
+  {step}
   align="center"
   class={cls('NumberStepper w-24', settingsClasses.root, className)}
   actions={(node) => [selectOnFocus(node)]}
@@ -32,7 +37,7 @@
   <div slot="prepend">
     <Button
       icon={mdiMinus}
-      on:click={() => (value -= 1)}
+      on:click={() => (value = stepUtil(value, -step))}
       size="sm"
       disabled={min != null && value <= min}
     />
@@ -40,7 +45,7 @@
   <div slot="append">
     <Button
       icon={mdiPlus}
-      on:click={() => (value += 1)}
+      on:click={() => (value = stepUtil(value, step))}
       size="sm"
       disabled={max != null && value >= max}
     />
