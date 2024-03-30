@@ -135,8 +135,8 @@ Surface colors are defined as `100` (lightest), `200` (medium), and `300` (darke
 <Preview>
   <div class="grid grid-cols-3 gap-2">
     <div class="bg-surface-100 text-surface-content px-2 rounded">surface-100 example</div>
-    <div class="bg-surface-200 text-surface-content px-2 rounded">surface-100 example</div>
-    <div class="bg-surface-300 text-surface-content px-2 rounded">surface-100 example</div>
+    <div class="bg-surface-200 text-surface-content px-2 rounded">surface-200 example</div>
+    <div class="bg-surface-300 text-surface-content px-2 rounded">surface-300 example</div>
   </div>
 </Preview>
 
