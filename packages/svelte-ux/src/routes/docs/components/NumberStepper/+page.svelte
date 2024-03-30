@@ -37,3 +37,9 @@
 <Preview>
   <NumberStepper min={0} max={10} />
 </Preview>
+
+<h2>step</h2>
+
+<Preview>
+  <NumberStepper step={0.1} />
+</Preview>

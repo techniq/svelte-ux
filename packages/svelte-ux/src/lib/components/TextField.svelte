@@ -81,6 +81,19 @@
   export let autocapitalize: ComponentProps<Input>['autocapitalize'] = undefined;
   export let role: AriaRole | undefined = undefined;
 
+  /**
+   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
+   */
+  export let min: number | undefined = undefined;
+  /**
+   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
+   */
+  export let max: number | undefined = undefined;
+  /**
+   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step
+   */
+  export let step: number | undefined = type === 'decimal' ? 0.1 : 1;
+
   let inputType = 'text';
   $: switch (type) {
     case 'integer':
@@ -349,6 +362,9 @@
                 {replace}
                 {accept}
                 {autocapitalize}
+                {min}
+                {max}
+                {step}
                 {actions}
                 bind:inputEl
                 on:input={handleInput}
