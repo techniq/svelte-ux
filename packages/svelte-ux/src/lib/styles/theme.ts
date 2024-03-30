@@ -80,7 +80,7 @@ export function flattenThemeColors(
   return entries(themeColors).reduce<Record<string, string>>((memo, [key, value]) => {
     if (typeof value === 'string') {
       memo[(key === 'DEFAULT' ? keys : [...keys, key]).join('-')] = value;
-    } else {
+    } else if (value) {
       flattenThemeColors(value, [...keys, key], memo);
     }
     return memo;
