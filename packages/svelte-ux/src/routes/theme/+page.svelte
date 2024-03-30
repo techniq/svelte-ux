@@ -4,6 +4,7 @@
   import Button from '$lib/components/Button.svelte';
   import ButtonGroup from '$lib/components/ButtonGroup.svelte';
   import CopyButton from '$lib/components/CopyButton.svelte';
+  import Field from '$lib/components/Field.svelte';
   import Icon from '$lib/components/Icon.svelte';
   import Menu from '$lib/components/Menu.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
@@ -49,6 +50,8 @@
 
   let customLightTheme: Record<string, string> = {};
   let customDarkTheme: Record<string, string> = {};
+
+  let applyToSiteImmediately = false;
 
   $: lightThemes = [
     {
@@ -121,7 +124,7 @@
   $: currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');
 
   // Break cyclical dependency with lightThemes => customLightTheme -> selectedLightTheme -> lightThemes
-  function updateCustomLightTheme() {
+  function updateLightTheme() {
     customLightTheme = {
       ...selectedLightTheme,
       primary: selectedLightTheme?.primary ?? selectedLightTheme?.['primary-500'],
@@ -129,11 +132,15 @@
       accent: selectedLightTheme?.accent ?? selectedLightTheme?.['accent-500'],
       neutral: selectedLightTheme?.neutral ?? selectedLightTheme?.['neutral-500'],
     } as Record<string, string>;
+
+    if (applyToSiteImmediately) {
+      applySelectedThemeToSite();
+    }
   }
-  $: selectedLightTheme && updateCustomLightTheme();
+  $: selectedLightTheme && updateLightTheme();
 
   // Break cyclical dependency with darkThemes => customDarkTheme -> selectedDarkTheme -> darkThemes
-  function updateCustomLDarkTheme() {
+  function updateDarkTheme() {
     customDarkTheme = {
       ...selectedDarkTheme,
       primary: selectedDarkTheme?.primary ?? selectedDarkTheme?.['primary-500'],
@@ -141,12 +148,38 @@
       accent: selectedDarkTheme?.accent ?? selectedDarkTheme?.['accent-500'],
       neutral: selectedDarkTheme?.neutral ?? selectedDarkTheme?.['neutral-500'],
     } as Record<string, string>;
+
+    if (applyToSiteImmediately) {
+      applySelectedThemeToSite();
+    }
   }
-  $: selectedDarkTheme && updateCustomLDarkTheme();
+  $: selectedDarkTheme && updateDarkTheme();
+  $: if (applyToSiteImmediately) {
+    applySelectedThemeToSite();
+  }
+
+  function applySelectedThemeToSite() {
+    const style = document.getElementById('custom-theme') ?? document.createElement('style');
+    style.id = 'custom-theme';
+
+    style.textContent = `
+      :root { ${themeStylesString(selectedLightTheme, themeColorSpace)} }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          ${themeStylesString(selectedDarkTheme, themeColorSpace)}
+        }
+      }
+      [data-theme=light] { ${themeStylesString(selectedLightTheme, themeColorSpace)} }
+      [data-theme=dark] { ${themeStylesString(selectedDarkTheme, themeColorSpace)} }
+    `;
+    document.head.appendChild(style);
+
+    // TODO: Update settings({ themes: { light: ['light'], dark: ['dark'] }})
+  }
 </script>
 
 <main class="p-4 grid gap-5">
-  <div class="grid sm:grid-cols-[1fr,1fr,auto,auto] gap-3">
+  <div class="grid sm:grid-cols-[1fr,1fr,auto,auto,auto] gap-3">
     <SelectField
       label="Light theme"
       options={lightThemes}
@@ -177,6 +210,12 @@
       ]}
     />
 
+    <Tooltip title="Apply theme colors to the site as they are changed" offset={2}>
+      <Field label="Site-wide Preview">
+        <Switch size="md" bind:checked={applyToSiteImmediately} />
+      </Field>
+    </Tooltip>
+
     <ButtonGroup variant="fill" color="primary">
       <Tooltip title="Copy themes to clipboard" offset={2}>
         <CopyButton
@@ -185,29 +224,7 @@
       </Tooltip>
 
       <Tooltip title="Override current themes" offset={2}>
-        <Button
-          icon={mdiPalette}
-          iconOnly={false}
-          on:click={() => {
-            const style =
-              document.getElementById('custom-theme') ?? document.createElement('style');
-            style.id = 'custom-theme';
-
-            style.textContent = `
-              :root { ${themeStylesString(selectedLightTheme, themeColorSpace)} }
-              @media (prefers-color-scheme: dark) {
-                :root {
-                  ${themeStylesString(selectedDarkTheme, themeColorSpace)}
-                }
-              }
-              [data-theme=light] { ${themeStylesString(selectedLightTheme, themeColorSpace)} }
-              [data-theme=dark] { ${themeStylesString(selectedDarkTheme, themeColorSpace)} }
-            `;
-            document.head.appendChild(style);
-
-            // TODO: Update settings({ themes: { light: ['light'], dark: ['dark'] }})
-          }}
-        />
+        <Button icon={mdiPalette} iconOnly={false} on:click={applySelectedThemeToSite} />
       </Tooltip>
 
       <Toggle let:on={open} let:toggle>
