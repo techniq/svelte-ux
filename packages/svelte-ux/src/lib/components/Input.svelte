@@ -31,6 +31,19 @@
   export let required = false;
   export let disabled = false;
 
+  /**
+   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
+   */
+  export let min: number | undefined = undefined;
+  /**
+   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
+   */
+  export let max: number | undefined = undefined;
+  /**
+   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step
+   */
+  export let step: number | undefined = undefined;
+
   $: placeholder = placeholderProp ?? mask;
 
   const settingsClasses = getComponentClasses('Input');
@@ -104,8 +117,11 @@
 
 <input
   {id}
-  {value}
   {type}
+  {value}
+  {min}
+  {max}
+  {step}
   {inputmode}
   placeholder={isFocused && mask ? mask : placeholder}
   {required}
