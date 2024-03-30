@@ -212,7 +212,7 @@
 
     <Tooltip title="Apply theme colors to the site as they are changed" offset={2}>
       <Field label="Site-wide Preview">
-        <Switch bind:checked={applyToSiteImmediately} />
+        <Switch size="md" bind:checked={applyToSiteImmediately} />
       </Field>
     </Tooltip>
 
