@@ -132,6 +132,13 @@ export function round(value: number, decimals: number) {
 }
 
 /**
+ * Step value while rounding to the nearest step precision (work around float issues such as `0.2` + `0.1`)
+ */
+export function step(value: number, step: number) {
+  return round(value + step, decimalCount(step));
+}
+
+/**
  * Get random number between min and max (inclusive).  See also d3.randomInt()
  */
 export function randomInteger(min: number, max: number) {

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
-import { clamp, formatNumber, formatNumberWithLocale, round } from './number.js';
-import { defaultLocale, createLocaleSettings } from './locale.js';
+import { clamp, formatNumber, formatNumberWithLocale, round, step } from './number.js';
+import { createLocaleSettings } from './locale.js';
 
 describe('clamp()', () => {
   it('no change', () => {
@@ -46,6 +46,48 @@ describe('round()', () => {
     const original = 123.456;
     const actual = round(original, 2);
     expect(actual).equal(123.46);
+  });
+});
+
+describe('step()', () => {
+  it('integer (step up)', () => {
+    const actual = step(2, 1);
+    expect(actual).equal(3);
+  });
+
+  it('integer (step down)', () => {
+    const actual = step(2, -1);
+    expect(actual).equal(1);
+  });
+
+  it('decimal (step up)', () => {
+    const actual = step(0.2, 0.1);
+    expect(actual).equal(0.3);
+  });
+
+  it('decimal (step down)', () => {
+    const actual = step(0.2, -0.1);
+    expect(actual).equal(0.1);
+  });
+
+  it('decimal with integer step (step up)', () => {
+    const actual = step(0.2, 1);
+    expect(actual).equal(1);
+  });
+
+  it('decimal with integer step (step down)', () => {
+    const actual = step(0.2, -1);
+    expect(actual).equal(-1);
+  });
+
+  it('integer with decimal step (step up)', () => {
+    const actual = step(2, 0.1);
+    expect(actual).equal(2.1);
+  });
+
+  it('integer with decimal step (step down)', () => {
+    const actual = step(2, -0.1);
+    expect(actual).equal(1.9);
   });
 });
 
