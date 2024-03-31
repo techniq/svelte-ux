@@ -26,12 +26,15 @@
   import ColorField from './ColorField.svelte';
   import { formatColor } from './colors.js';
   import { getSettings } from '$lib/components/settings.js';
+  import localStore from '$lib/stores/localStore.js';
+  import type { Writable } from 'svelte/store';
+  import { isEmptyObject } from '$lib/utils/object.js';
 
   export let data;
 
   type ThemeMenuOption = MenuOption & {
     themeName: string;
-    theme: typeof customLightTheme | typeof data.themes.daisy | typeof data.themes.skeleton;
+    theme: Record<string, string> | typeof data.themes.daisy | typeof data.themes.skeleton;
   };
 
   const { currentTheme } = getSettings();
@@ -49,8 +52,14 @@
   const daisyThemeNames = getThemeNames(data.themes.daisy);
   const skeletonThemeNames = getThemeNames(data.themes.skeleton);
 
-  let customLightTheme: Record<string, string> = {};
-  let customDarkTheme: Record<string, string> = {};
+  let customLightTheme: Writable<Record<string, string>> = localStore(
+    'svelte-ux-custom-light-theme',
+    {}
+  );
+  let customDarkTheme: Writable<Record<string, string>> = localStore(
+    'svelte-ux-custom-dark-theme',
+    {}
+  );
 
   let applyToSiteImmediately = false;
 
@@ -59,7 +68,7 @@
       label: 'Custom',
       value: 'custom',
       themeName: 'custom',
-      theme: customLightTheme,
+      theme: $customLightTheme,
     },
     ...daisyThemeNames.light.map((themeName) => {
       return {
@@ -86,7 +95,7 @@
       label: 'Custom',
       value: 'custom',
       themeName: 'custom',
-      theme: customDarkTheme,
+      theme: $customDarkTheme,
     },
     ...daisyThemeNames.dark.map((themeName) => {
       return {
@@ -108,12 +117,12 @@
     }),
   ] as ThemeMenuOption[];
 
-  // Set initial theme selections (skip custom)
+  // Set initial theme selections (skip custom if not set)
   $: if (selectedLightThemeValue === undefined) {
-    selectedLightThemeValue = lightThemes[1].value;
+    selectedLightThemeValue = isEmptyObject($customLightTheme) ? lightThemes[1].value : 'custom';
   }
   $: if (selectedDarkThemeValue === undefined) {
-    selectedDarkThemeValue = darkThemes[1].value;
+    selectedDarkThemeValue = isEmptyObject($customDarkTheme) ? darkThemes[1].value : 'custom';
   }
 
   $: showDarkTheme = $currentTheme.dark;
@@ -126,7 +135,7 @@
 
   // Break cyclical dependency with lightThemes => customLightTheme -> selectedLightTheme -> lightThemes
   function updateLightTheme() {
-    customLightTheme = {
+    $customLightTheme = {
       ...selectedLightTheme,
       primary: selectedLightTheme?.primary ?? selectedLightTheme?.['primary-500'],
       secondary: selectedLightTheme?.secondary ?? selectedLightTheme?.['secondary-500'],
@@ -142,7 +151,7 @@
 
   // Break cyclical dependency with darkThemes => customDarkTheme -> selectedDarkTheme -> darkThemes
   function updateDarkTheme() {
-    customDarkTheme = {
+    $customDarkTheme = {
       ...selectedDarkTheme,
       primary: selectedDarkTheme?.primary ?? selectedDarkTheme?.['primary-500'],
       secondary: selectedDarkTheme?.secondary ?? selectedDarkTheme?.['secondary-500'],
@@ -194,11 +203,11 @@
 
   $: currentThemeSettings = themeKeys.reduce(
     (acc, { key }) => {
-      if (customDarkTheme[key]) {
-        acc.dark[key] = formatColor(customDarkTheme[key], colorSpace);
+      if ($customDarkTheme[key]) {
+        acc.dark[key] = formatColor($customDarkTheme[key], colorSpace);
       }
-      if (customLightTheme[key]) {
-        acc.light[key] = formatColor(customLightTheme[key], colorSpace);
+      if ($customLightTheme[key]) {
+        acc.light[key] = formatColor($customLightTheme[key], colorSpace);
       }
       return acc;
     },
@@ -317,7 +326,7 @@
         {#if showOptionalColors || !optional}
           <ColorField
             label={optional ? `${label} (optional)` : label}
-            bind:value={customLightTheme[key]}
+            bind:value={$customLightTheme[key]}
             on:change={() => {
               selectedLightThemeValue = 'custom';
               showDarkTheme = false;
@@ -334,7 +343,7 @@
         {#if showOptionalColors || !optional}
           <ColorField
             label={optional ? `${label} (optional)` : label}
-            bind:value={customDarkTheme[key]}
+            bind:value={$customDarkTheme[key]}
             on:change={() => {
               selectedDarkThemeValue = 'custom';
               showDarkTheme = true;
