@@ -24,6 +24,7 @@
   } from '$lib/styles/theme.js';
   import { entries, fromEntries, type MenuOption } from '$lib/types/index.js';
   import ColorField from './ColorField.svelte';
+  import { formatColor } from './colors.js';
   import { getSettings } from '$lib/components/settings.js';
 
   export let data;
@@ -176,6 +177,33 @@
 
     // TODO: Update settings({ themes: { light: ['light'], dark: ['dark'] }})
   }
+
+  const themeKeys = [
+    { key: 'primary', label: 'Primary', optional: false },
+    { key: 'secondary', label: 'Secondary', optional: false },
+    { key: 'accent', label: 'Accent', optional: false },
+    { key: 'neutral', label: 'Neutral', optional: true },
+    { key: 'info', label: 'Info', optional: true },
+    { key: 'success', label: 'Success', optional: true },
+    { key: 'warning', label: 'Warning', optional: true },
+    { key: 'danger', label: 'Danger', optional: true },
+    { key: 'surface-100', label: 'Surface 100', optional: false },
+    { key: 'surface-200', label: 'Surface 200', optional: true },
+    { key: 'surface-300', label: 'Surface 300', optional: true },
+  ];
+
+  $: currentThemeSettings = themeKeys.reduce(
+    (acc, { key }) => {
+      if (customDarkTheme[key]) {
+        acc.dark[key] = formatColor(customDarkTheme[key], colorSpace);
+      }
+      if (customLightTheme[key]) {
+        acc.light[key] = formatColor(customLightTheme[key], colorSpace);
+      }
+      return acc;
+    },
+    { light: {}, dark: {} }
+  );
 </script>
 
 <main class="p-4 grid gap-5">
@@ -218,15 +246,25 @@
 
     <ButtonGroup variant="fill" color="primary">
       <Tooltip title="Copy themes to clipboard" offset={2}>
-        <CopyButton
-          value={JSON.stringify({ light: selectedLightTheme, dark: selectedDarkTheme }, null, 2)}
-        />
+        <CopyButton value={JSON.stringify(currentThemeSettings, null, 2)} />
       </Tooltip>
 
       <Toggle let:on={open} let:toggle>
         <div class="grid">
           <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
           <Menu {open} on:close={toggle} placement="bottom-start">
+            <MenuItem
+              on:click={() => {
+                const value = JSON.stringify(
+                  { light: selectedLightTheme, dark: selectedDarkTheme },
+                  null,
+                  2
+                );
+                navigator.clipboard.writeText(value);
+              }}
+            >
+              Copy Full Theme
+            </MenuItem>
             <MenuItem
               on:click={() => {
                 const allThemes = {
@@ -275,222 +313,36 @@
   <div class="grid sm:grid-cols-2 gap-2">
     <div class="grid gap-2">
       <div class="text-xs -mb-1 text-surface-content/50 font-semibold">Light theme</div>
-      <ColorField
-        label="Primary"
-        bind:value={customLightTheme.primary}
-        on:change={() => {
-          selectedLightThemeValue = 'custom';
-          showDarkTheme = false;
-        }}
-        {colorSpace}
-      />
-      <ColorField
-        label="Secondary"
-        bind:value={customLightTheme.secondary}
-        on:change={() => {
-          selectedLightThemeValue = 'custom';
-          showDarkTheme = false;
-        }}
-        {colorSpace}
-      />
-      <ColorField
-        label="Accent"
-        bind:value={customLightTheme.accent}
-        on:change={() => {
-          selectedLightThemeValue = 'custom';
-          showDarkTheme = false;
-        }}
-        {colorSpace}
-      />
-
-      {#if showOptionalColors}
-        <ColorField
-          label="Neutral (optional)"
-          bind:value={customLightTheme.neutral}
-          on:change={() => {
-            selectedLightThemeValue = 'custom';
-            showDarkTheme = false;
-          }}
-          {colorSpace}
-        />
-        <!-- State colors -->
-        <ColorField
-          label="Info (optional)"
-          bind:value={customLightTheme.info}
-          on:change={() => {
-            selectedLightThemeValue = 'custom';
-            showDarkTheme = false;
-          }}
-          {colorSpace}
-        />
-        <ColorField
-          label="Success (optional)"
-          bind:value={customLightTheme.success}
-          on:change={() => {
-            selectedLightThemeValue = 'custom';
-            showDarkTheme = false;
-          }}
-          {colorSpace}
-        />
-        <ColorField
-          label="Warning (optional)"
-          bind:value={customLightTheme.warning}
-          on:change={() => {
-            selectedLightThemeValue = 'custom';
-            showDarkTheme = false;
-          }}
-          {colorSpace}
-        />
-        <ColorField
-          label="Danger (optional)"
-          bind:value={customLightTheme.danger}
-          on:change={() => {
-            selectedLightThemeValue = 'custom';
-            showDarkTheme = false;
-          }}
-          {colorSpace}
-        />
-      {/if}
-
-      <ColorField
-        label="Surface 100"
-        bind:value={customLightTheme['surface-100']}
-        on:change={() => {
-          selectedLightThemeValue = 'custom';
-          showDarkTheme = false;
-        }}
-        {colorSpace}
-      />
-      {#if showOptionalColors}
-        <ColorField
-          label="Surface 200 (optional)"
-          bind:value={customLightTheme['surface-200']}
-          on:change={() => {
-            selectedLightThemeValue = 'custom';
-            showDarkTheme = false;
-          }}
-          {colorSpace}
-        />
-        <ColorField
-          label="Surface 300 (optional)"
-          bind:value={customLightTheme['surface-300']}
-          on:change={() => {
-            selectedLightThemeValue = 'custom';
-            showDarkTheme = false;
-          }}
-          {colorSpace}
-        />
-      {/if}
+      {#each themeKeys as { key, label, optional }}
+        {#if showOptionalColors || !optional}
+          <ColorField
+            label={optional ? `${label} (optional)` : label}
+            bind:value={customLightTheme[key]}
+            on:change={() => {
+              selectedLightThemeValue = 'custom';
+              showDarkTheme = false;
+            }}
+            {colorSpace}
+          />
+        {/if}
+      {/each}
     </div>
 
     <div class="grid gap-2">
       <div class="text-xs -mb-1 text-surface-content/50 font-semibold">Dark theme</div>
-      <ColorField
-        label="Primary"
-        bind:value={customDarkTheme.primary}
-        on:change={() => {
-          selectedDarkThemeValue = 'custom';
-          showDarkTheme = true;
-        }}
-        {colorSpace}
-      />
-      <ColorField
-        label="Secondary"
-        bind:value={customDarkTheme.secondary}
-        on:change={() => {
-          selectedDarkThemeValue = 'custom';
-          showDarkTheme = true;
-        }}
-        {colorSpace}
-      />
-      <ColorField
-        label="Accent"
-        bind:value={customDarkTheme.accent}
-        on:change={() => {
-          selectedDarkThemeValue = 'custom';
-          showDarkTheme = true;
-        }}
-        {colorSpace}
-      />
-
-      {#if showOptionalColors}
-        <ColorField
-          label="Neutral (optional)"
-          bind:value={customDarkTheme.neutral}
-          on:change={() => {
-            selectedDarkThemeValue = 'custom';
-            showDarkTheme = true;
-          }}
-          {colorSpace}
-        />
-        <!-- State colors -->
-        <ColorField
-          label="Info (optional)"
-          bind:value={customDarkTheme.info}
-          on:change={() => {
-            selectedDarkThemeValue = 'custom';
-            showDarkTheme = true;
-          }}
-          {colorSpace}
-        />
-        <ColorField
-          label="Success (optional)"
-          bind:value={customDarkTheme.success}
-          on:change={() => {
-            selectedDarkThemeValue = 'custom';
-            showDarkTheme = true;
-          }}
-          {colorSpace}
-        />
-        <ColorField
-          label="Warning (optional)"
-          bind:value={customDarkTheme.warning}
-          on:change={() => {
-            selectedDarkThemeValue = 'custom';
-            showDarkTheme = true;
-          }}
-          {colorSpace}
-        />
-        <ColorField
-          label="Danger (optional)"
-          bind:value={customDarkTheme.danger}
-          on:change={() => {
-            selectedDarkThemeValue = 'custom';
-            showDarkTheme = true;
-          }}
-          {colorSpace}
-        />
-      {/if}
-
-      <ColorField
-        label="Surface 100"
-        bind:value={customDarkTheme['surface-100']}
-        on:change={() => {
-          selectedDarkThemeValue = 'custom';
-          showDarkTheme = true;
-        }}
-        {colorSpace}
-      />
-      {#if showOptionalColors}
-        <ColorField
-          label="Surface 200 (optional)"
-          bind:value={customDarkTheme['surface-200']}
-          on:change={() => {
-            selectedDarkThemeValue = 'custom';
-            showDarkTheme = true;
-          }}
-          {colorSpace}
-        />
-        <ColorField
-          label="Surface 300 (optional)"
-          bind:value={customDarkTheme['surface-300']}
-          on:change={() => {
-            selectedDarkThemeValue = 'custom';
-            showDarkTheme = true;
-          }}
-          {colorSpace}
-        />
-      {/if}
+      {#each themeKeys as { key, label, optional }}
+        {#if showOptionalColors || !optional}
+          <ColorField
+            label={optional ? `${label} (optional)` : label}
+            bind:value={customDarkTheme[key]}
+            on:change={() => {
+              selectedDarkThemeValue = 'custom';
+              showDarkTheme = true;
+            }}
+            {colorSpace}
+          />
+        {/if}
+      {/each}
     </div>
 
     <div>
