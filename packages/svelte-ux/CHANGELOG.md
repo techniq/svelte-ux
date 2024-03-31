@@ -1,5 +1,19 @@
 # svelte-ux
 
+## 0.62.6
+
+### Patch Changes
+
+- Add `step()` number util which combines `round()` and `decimalCount()` to simplify handling floating point handling with stepping ([#319](https://github.com/techniq/svelte-ux/pull/319))
+
+- [ToggleGroup] Use border instead of space for `variant="outline"` and `gap` ([`0c30818e9ddbaaf1bc0713a3225e17eb6e7c0a71`](https://github.com/techniq/svelte-ux/commit/0c30818e9ddbaaf1bc0713a3225e17eb6e7c0a71))
+
+- [TextField/Input] Add `min`/`max`/`step` support (for `integer` / `decimal` types) ([#319](https://github.com/techniq/svelte-ux/pull/319))
+
+- [NumberStepper / TextField] Fix handling of initial `0` ([`111c67aa5d0a03b33b727c89db8d432143ed1b55`](https://github.com/techniq/svelte-ux/commit/111c67aa5d0a03b33b727c89db8d432143ed1b55))
+
+- [NumberStepper] Add `step` support (to support `decimal` including HTML form validation) ([#319](https://github.com/techniq/svelte-ux/pull/319))
+
 ## 0.62.5
 
 ### Patch Changes
