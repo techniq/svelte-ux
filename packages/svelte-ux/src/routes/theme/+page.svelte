@@ -202,7 +202,10 @@
       }
       return acc;
     },
-    { light: {}, dark: {} }
+    {
+      light: { 'color-scheme': 'light' },
+      dark: { 'color-scheme': 'dark' },
+    }
   );
 </script>
 
