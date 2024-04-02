@@ -3,7 +3,8 @@
   import { formatHex } from 'culori';
 
   import TextField from '$lib/components/TextField.svelte';
-  import { colorVariableValue, type SupportedColorSpace } from '$lib/styles/theme.js';
+  import { formatColor } from './colors.js';
+  import { type SupportedColorSpace } from '$lib/styles/theme.js';
 
   const dispatch = createEventDispatcher<{
     change: { value: string | undefined };
@@ -13,32 +14,12 @@
 
   export let value: string;
   export let colorSpace: SupportedColorSpace | 'hex' = 'rgb';
-
-  function formatColor(value: string, colorSpace: SupportedColorSpace | 'hex') {
-    if (value) {
-      if (colorSpace === 'hex') {
-        // Only format if not already formatted.  Fixes `#123` becoming `#112233`
-        return value.startsWith('#') ? value : formatHex(value);
-      } else {
-        const colorValue = colorVariableValue(value, colorSpace);
-        if (colorValue) {
-          return `${colorSpace}(${colorValue})`;
-        } else {
-          // Return original if unable to convert (i.e invalid such as `rgb( 20 30)`)
-          return value;
-        }
-      }
-    } else {
-      return value;
-    }
-  }
 </script>
 
 <TextField
   value={formatColor(value, colorSpace)}
   on:change={(e) => {
     value = formatColor(e.detail.inputValue, colorSpace);
-    console.log(value, e.detail.inputValue);
     dispatch('change', { value });
   }}
   {...$$restProps}
