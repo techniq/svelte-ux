@@ -13,6 +13,7 @@
   let value = 1234.56;
   let style: FormatNumberStyle = 'decimal';
   let currency: string = 'USD';
+  let notation: Intl.NumberFormatOptions['notation'] = 'standard';
 
   let myDate = new Date('1982-03-30T07:11:00');
 </script>
@@ -50,10 +51,19 @@
     bind:value={currency}
     options={['USD', 'EUR', 'GBP', 'JPY'].map((value) => ({ label: value, value }))}
   />
+
+  <MenuField
+    label="notation"
+    bind:value={notation}
+    options={['standard', 'scientific', 'engineering', 'compact'].map((value) => ({
+      label: value,
+      value,
+    }))}
+  />
 </div>
 
 <Preview>
-  <div>{$format(value, style, { currency })}</div>
+  <div>{$format(value, style, { currency, notation })}</div>
 </Preview>
 
 <h2>Playground dates</h2>
@@ -97,6 +107,9 @@
   <div>{$format(1234.56, 'integer', { maximumSignificantDigits: 2 })}</div>
   <div>{$format(1234.56, 'decimal', { maximumSignificantDigits: 5 })}</div>
   <div>{$format(1234.56, 'currency', { currency: 'EUR' })}</div>
+  <div>
+    {$format(123_456_789.99, 'currency', { notation: 'compact', maximumSignificantDigits: 3 })}
+  </div>
   <div>{$format(0.5678, 'percent', { signDisplay: 'always' })}</div>
   <div>{$format(0.5678, 'percentRound', { signDisplay: 'always' })}</div>
   <div>{$format(1_234_567, 'metric', { minimumSignificantDigits: 12 })}</div>
