@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { sumObjects } from './array.js';
+import { testDate } from './date.test.js';
 
 describe('sumObjects', () => {
   it('Sum array of objects ', () => {
@@ -10,7 +11,7 @@ describe('sumObjects', () => {
       { one: null, two: null, three: null, four: null },
       { one: NaN, two: NaN, three: NaN, four: NaN },
       { one: 'NaN', two: 'NaN', three: 'NaN', four: 'NaN' },
-      { one: '3', two: 6, four: '4', startDate: new Date('2024-04-05T20:58:04.000Z') },
+      { one: '3', two: 6, four: '4', startDate: new Date(testDate) },
     ];
 
     const actual = sumObjects(values);
@@ -20,7 +21,7 @@ describe('sumObjects', () => {
       three: 9,
       four: 4,
       extra: 0,
-      startDate: 1712350684000,
+      startDate: +new Date(testDate),
     };
 
     expect(actual).toEqual(expected);
