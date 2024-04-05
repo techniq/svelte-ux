@@ -5,7 +5,7 @@ import { defaultLocale, type LocaleSettings } from './locale.js';
 import { PeriodType, type FormatDateOptions, DayOfWeek } from './date_types.js';
 
 export type FormatType = FormatNumberStyle | PeriodType | CustomFormatter;
-type CustomFormatter = (value: any) => string;
+export type CustomFormatter = (value: any) => string;
 
 /**
  * Generic format which can handle Dates, Numbers, or custom format function

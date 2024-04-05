@@ -3,14 +3,18 @@
 
   import Field from './Field.svelte';
   import Button from './Button.svelte';
-  import { getComponentSettings } from './settings.js';
+  import { getComponentSettings, getSettings } from './settings.js';
+  import type { FormatType } from '../utils/format.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('RangeField');
 
-  export let value: number;
+  const { format: formatUtil } = getSettings();
+
+  export let value = 0;
   export let min = 0;
   export let max = 100;
   export let step = 1;
+  export let format: FormatType = 'none';
 
   $: restProps = { ...defaults, ...$$restProps };
 </script>
@@ -27,10 +31,11 @@
 
   <input type="range" bind:value {min} {max} {step} {id} class="h-6 w-full" />
 
+  <!-- Stack on top to account for min/max value width -->
   <span class="ml-2 text-sm text-surface-content/50 tabular-nums text-right inline-grid">
-    <span class="col-span-full row-span-full invisible">{min}</span>
-    <span class="col-span-full row-span-full">{value}</span>
-    <span class="col-span-full row-span-full invisible">{max}</span>
+    <span class="col-span-full row-span-full invisible">{$formatUtil(min, format)}</span>
+    <span class="col-span-full row-span-full">{$formatUtil(value, format)}</span>
+    <span class="col-span-full row-span-full invisible">{$formatUtil(max, format)}</span>
   </span>
 
   <span slot="append">

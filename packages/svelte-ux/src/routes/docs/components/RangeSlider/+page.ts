@@ -8,6 +8,7 @@ export async function load() {
       api,
       source,
       pageSource,
+      related: ['components/RangeField'],
       status: 'beta',
       features: [
         'Drag start and end points individually, or drag the middle together',

@@ -7,7 +7,7 @@
   type TweenedOptions = Parameters<typeof tweened<T>>[1];
 
   export let value: T | 0;
-  export let format: FormatType | undefined = undefined;
+  export let format: FormatType = 'none';
   export let options: TweenedOptions = undefined;
   export let disabled = false;
 
@@ -18,9 +18,5 @@
 </script>
 
 <slot value={displayValue}>
-  {#if format}
-    {$formatUtil(displayValue, format)}
-  {:else}
-    {displayValue}
-  {/if}
+  {$formatUtil(displayValue, format)}
 </slot>

@@ -16,6 +16,7 @@
       'MultiSelectMenu',
       'NumberStepper',
       'Radio',
+      'RangeField',
       'RangeSlider',
       'SelectField',
       'Switch',
