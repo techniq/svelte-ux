@@ -50,7 +50,7 @@ export function sumObjects(items: (object | null)[], prop?: PropAccessorArg) {
     (d) => d[0]
   );
 
-  return items.every(item => Array.isArray(item)) ? Array.from(result.values()) : fromEntries(result);
+  return items.every(Array.isArray) ? Array.from(result.values()) : fromEntries(result);
 }
 
 /**
