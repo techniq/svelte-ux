@@ -24,7 +24,7 @@ export function replacer(key: string, value: any) {
 }
 
 /**
- * JSON.parse() but supports restoring `Date`, `Map`, and `Set` instances. `Map` and `Set` require using accompanying `stringify()`
+ * JSON.parse() with support for restoring `Date`, `Map`, and `Set` instances. `Map` and `Set` require using accompanying `stringify()`
  */
 export function parse<T = any>(value: string): T {
   let result;
