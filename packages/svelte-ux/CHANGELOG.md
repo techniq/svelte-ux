@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.62.7
+
+### Patch Changes
+
+- Fix warning `<Popover> was created with unknown prop 'style'` ([`4d9aa1f5b5a3c0fbf5e3ff5d5e7bff4b2ae7e7bd`](https://github.com/techniq/svelte-ux/commit/4d9aa1f5b5a3c0fbf5e3ff5d5e7bff4b2ae7e7bd))
+
+- Re-export `FormatNumberStyle` and `PeriodType` from `utils/format.ts` for convenience ([`acd5d9646c3f7807d9ce758468a663fa31e93426`](https://github.com/techniq/svelte-ux/commit/acd5d9646c3f7807d9ce758468a663fa31e93426))
+
+- Add BarStack component ([`68c9e700bec3e3a4e3a33f7a4bd455e464b5cfee`](https://github.com/techniq/svelte-ux/commit/68c9e700bec3e3a4e3a33f7a4bd455e464b5cfee))
+
+- [RangeField] Add `format` prop and docs page ([`1057214390fea45be95400cc53c65bc05cf639c5`](https://github.com/techniq/svelte-ux/commit/1057214390fea45be95400cc53c65bc05cf639c5))
+
 ## 0.62.6
 
 ### Patch Changes
