@@ -6,6 +6,8 @@ import { PeriodType, type FormatDateOptions, DayOfWeek } from './date_types.js';
 
 export type FormatType = FormatNumberStyle | PeriodType | CustomFormatter;
 export type CustomFormatter = (value: any) => string;
+// re-export for convenience
+export type { FormatNumberStyle, PeriodType };
 
 /**
  * Generic format which can handle Dates, Numbers, or custom format function
