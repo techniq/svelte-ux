@@ -98,7 +98,7 @@
   <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
 </div>
 
-<Preview class="bg-gradient-radial from-slate-800 to-slate-900">
+<Preview class="bg-gradient-radial from-neutral-600 to-neutral-800">
   <div class="grid grid-stack place-items-center" style:--orbit-radius="75px">
     <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9}>
       <div class="w-[300px] h-[300px] grid grid-stack place-items-center">
@@ -132,7 +132,7 @@
   <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
 </div>
 
-<Preview class="bg-gradient-radial from-slate-800 to-slate-900 text-center">
+<Preview class="bg-gradient-radial from-neutral-600 to-neutral-800 text-center">
   <div class="relative inline-block">
     <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9}>
       <div class="flex gap-8">
