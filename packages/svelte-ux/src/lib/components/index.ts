@@ -4,6 +4,7 @@ export { default as AppLayout } from './AppLayout.svelte';
 export { default as Avatar } from './Avatar.svelte';
 export { default as Backdrop } from './Backdrop.svelte';
 export { default as Badge } from './Badge.svelte';
+export { default as BarStack } from './BarStack.svelte';
 export { default as Breadcrumb } from './Breadcrumb.svelte';
 export { default as Button } from './Button.svelte';
 export { default as ButtonGroup } from './ButtonGroup.svelte';

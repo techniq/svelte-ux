@@ -53,6 +53,7 @@
       'Tooltip',
     ],
     Feedback: ['Badge', 'Progress', 'ProgressCircle'],
+    Visualization: ['BarStack'],
     Date: [
       'DateField',
       'DatePickerField',

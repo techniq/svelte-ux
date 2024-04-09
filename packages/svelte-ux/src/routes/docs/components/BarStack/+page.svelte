@@ -1,0 +1,131 @@
+<script lang="ts">
+  import Preview from '$lib/components/Preview.svelte';
+  import BarStack from '$lib/components/BarStack.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Tooltip from '$lib/components/Tooltip.svelte';
+  import TweenedValue from '$lib/components/TweenedValue.svelte';
+
+  import { randomInteger } from '$lib/utils/number.js';
+  import { format } from '$lib/utils/format.js';
+  import { cls } from '$lib/utils/styles.js';
+
+  const data = [
+    { label: 'Chrome', value: 65, classes: { bar: 'bg-warning' }, _style: 'background:red' },
+    { label: 'Safari', value: 18.55, classes: { bar: 'bg-info' } },
+    { label: 'Edge', value: 5.03, classes: { bar: 'bg-success' } },
+    { label: 'Firefox', value: 2.8, classes: { bar: 'bg-danger' } },
+  ];
+
+  function randomDataGen() {
+    return data.map((d) => {
+      return {
+        ...d,
+        value: randomInteger(3, 70),
+      };
+    });
+  }
+
+  let randomData = randomDataGen();
+
+  let duration = 300;
+</script>
+
+<h1>Examples</h1>
+
+<h2>Basic</h2>
+
+<Preview>
+  <BarStack {data} />
+</Preview>
+
+<h2>Larger gap</h2>
+
+<Preview>
+  <BarStack {data} class="gap-1" />
+</Preview>
+
+<h2>Bar slot</h2>
+
+<Preview>
+  <BarStack {data}>
+    <div
+      slot="bar"
+      class="flex items-center gap-2 truncate py-1 px-2 text-gray-900"
+      let:item
+      let:total
+    >
+      <span class="text-sm font-semibold">
+        {format(item.value / total, 'percent')}
+      </span>
+
+      <span class="text-xs truncate">
+        ({format(item.value, 'integer')})
+      </span>
+    </div>
+  </BarStack>
+</Preview>
+
+<h2>Label using default slot</h2>
+
+<Preview>
+  <BarStack {data} let:item let:total>
+    <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)} />
+    <div class="truncate text-xs font-semibold text-surface-content">
+      {item.label}
+    </div>
+  </BarStack>
+</Preview>
+
+<h2>Label with Tooltip</h2>
+
+<Preview>
+  <BarStack {data} let:item let:total>
+    <Tooltip
+      title="{item.label}: {format(item.value / total, 'percent')} ({format(
+        item.value,
+        'integer'
+      )})"
+      placement="bottom-start"
+      offset={2}
+    >
+      <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)} />
+      <div class="truncate text-xs font-semibold text-surface-content">
+        {item.label}
+      </div>
+    </Tooltip>
+  </BarStack>
+</Preview>
+
+<h2>Tweened values</h2>
+
+<Preview>
+  <Button
+    on:click={() => (randomData = randomDataGen())}
+    variant="outline"
+    color="primary"
+    class="mb-2"
+    size="sm"
+  >
+    Randomize
+  </Button>
+  <BarStack data={randomData} let:item let:total>
+    <div class={cls('group-first:rounded-l group-last:rounded-r', item.classes?.bar)}>
+      <div class="flex items-center gap-1 truncate py-1 px-2">
+        <span class="text-sm font-semibold text-gray-900">
+          <TweenedValue value={item.value / total} let:value options={{ duration }}>
+            {format(value, 'percent')}
+          </TweenedValue>
+        </span>
+
+        <span class="truncate text-xs text-gray-900">
+          <TweenedValue value={item.value} let:value options={{ duration }}>
+            ({format(value, 'integer')})
+          </TweenedValue>
+        </span>
+      </div>
+    </div>
+    <div class="truncate text-xs font-semibold text-surface-content">
+      {item.label}
+    </div>
+  </BarStack>
+</Preview>
