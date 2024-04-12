@@ -10,10 +10,17 @@
   import { cls } from '$lib/utils/styles.js';
 
   const data = [
-    { label: 'Chrome', value: 65, classes: { bar: 'bg-warning' }, _style: 'background:red' },
+    { label: 'Chrome', value: 65, classes: { bar: 'bg-warning' } },
     { label: 'Safari', value: 18.55, classes: { bar: 'bg-info' } },
     { label: 'Edge', value: 5.03, classes: { bar: 'bg-success' } },
     { label: 'Firefox', value: 2.8, classes: { bar: 'bg-danger' } },
+  ];
+
+  const dataWithColorProp = [
+    { label: 'Chrome', value: 65, color: 'yellow' },
+    { label: 'Safari', value: 18.55, color: 'blue' },
+    { label: 'Edge', value: 5.03, color: 'green' },
+    { label: 'Firefox', value: 2.8, color: 'red' },
   ];
 
   function randomDataGen() {
@@ -42,6 +49,12 @@
 
 <Preview>
   <BarStack {data} class="gap-1" />
+</Preview>
+
+<h2>Color via prop</h2>
+
+<Preview>
+  <BarStack data={dataWithColorProp} class="gap-1" />
 </Preview>
 
 <h2>Bar slot</h2>

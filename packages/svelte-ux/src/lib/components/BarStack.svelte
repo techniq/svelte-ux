@@ -12,6 +12,7 @@
   export let data: {
     label: string;
     value: number;
+    color?: string;
     style?: string;
     classes?: {
       root?: string;
@@ -45,6 +46,7 @@
         <slot {item} total={total ?? sum(data, (d) => d.value)}>
           <div
             class={cls('group-first:rounded-l group-last:rounded-r', item.classes?.bar)}
+            style:background-color={item.color}
             style={item.style}
           >
             <slot name="bar" {item} total={total ?? sum(data, (d) => d.value)}>
