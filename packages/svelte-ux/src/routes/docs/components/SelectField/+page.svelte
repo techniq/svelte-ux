@@ -102,6 +102,19 @@
   <SelectField options={optionsWithGroup} on:change={(e) => console.log('on:change', e.detail)} />
 </Preview>
 
+<h2>Same option value in different group</h2>
+
+<Preview>
+  <SelectField
+    options={[
+      { label: 'One', value: 1, group: 'Primary' },
+      { label: 'Two', value: 2, group: 'Primary' },
+      { label: 'One', value: 1, group: 'Additional' },
+    ]}
+    on:change={(e) => console.log('on:change', e.detail)}
+  />
+</Preview>
+
 <h2>Many options</h2>
 
 <Preview>

@@ -75,7 +75,7 @@
     onKeyPress(e);
   }}
 >
-  {#each filteredOptions ?? [] as option, index (optionValue(option))}
+  {#each filteredOptions ?? [] as option, index (`${option.group}-${optionValue(option)}`)}
     {@const previousOption = filteredOptions[index - 1]}
     {#if option.group && option.group !== previousOption?.group}
       <div
