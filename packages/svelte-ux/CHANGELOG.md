@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.62.8
+
+### Patch Changes
+
+- [SelectField / MenuField] Allow multiple options with same value, but in different groups ([`2a4f3f2d3b2254fcdba39568fff11e066797e594`](https://github.com/techniq/svelte-ux/commit/2a4f3f2d3b2254fcdba39568fff11e066797e594))
+
 ## 0.62.7
 
 ### Patch Changes
