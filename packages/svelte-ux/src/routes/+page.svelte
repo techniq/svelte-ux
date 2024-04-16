@@ -67,8 +67,6 @@
       <div>Update <code>tailwind.config.cjs</code></div>
       <Code
         source={`const colors = require('tailwindcss/colors');
-const plugin = require('tailwindcss/plugin');
-
 const svelteUx = require('svelte-ux/plugins/tailwind.cjs');
 
 module.exports = {
@@ -76,8 +74,9 @@ module.exports = {
     './src/**/*.{html,svelte}', 
     './node_modules/svelte-ux/**/*.{svelte,js}'
   ],
+
+  // See customization docs: https://svelte-ux.techniq.dev/customization
   ux: {
-    // See customization docs
     themes: {
       light: {
         primary: colors['orange']['500'],
@@ -101,8 +100,9 @@ module.exports = {
       },
     },
   },
+
   plugins: [
-    svelteUx, // Can also call with colorSpace options
+    svelteUx,  // uses hsl() color space by default. To use oklch(), use: svelteUx({ colorSpace: 'oklch' }),
   ]
 };`}
         language="js"
