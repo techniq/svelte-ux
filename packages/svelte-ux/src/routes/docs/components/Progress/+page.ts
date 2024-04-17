@@ -8,7 +8,7 @@ export async function load() {
       api,
       source,
       pageSource,
-      related: ['components/ProgressCircle'],
+      related: ['components/BarStack', 'components/ProgressCircle'],
     },
   };
 }
