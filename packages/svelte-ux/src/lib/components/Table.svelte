@@ -12,6 +12,8 @@
   import { getSettings } from './settings.js';
   import tableOrderStore from '../stores/tableOrderStore.js';
 
+  const settingsClasses = getComponentClasses('Table');
+
   type T = $$Generic;
 
   const dispatch = createEventDispatcher<{
