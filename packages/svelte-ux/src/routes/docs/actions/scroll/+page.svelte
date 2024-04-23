@@ -92,13 +92,13 @@
   </div>
 </Preview>
 
-<h3>White shadow on bottom (fade content)</h3>
+<h3>Surface shadow on bottom (fade content)</h3>
 
 <Preview>
   <div
     class="h-40 border rounded"
     use:scrollShadow={{
-      bottom: { color: 'rgb(255 255 255 / 1)', offset: 30, blur: 30, scrollRatio: 0 },
+      bottom: { color: 'hsl(var(--color-surface-100))', offset: 30, blur: 30, scrollRatio: 0 },
     }}
   >
     {#each items as item, i}
