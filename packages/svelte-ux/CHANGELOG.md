@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.62.9
+
+### Patch Changes
+
+- [BarStack] Support passing `color` for data item (along with `classes` and `style`) ([`35aa4e59dcec3aaf2b8e344fb2b01eb6191bd1e8`](https://github.com/techniq/svelte-ux/commit/35aa4e59dcec3aaf2b8e344fb2b01eb6191bd1e8))
+
+- [format] Add `currencyRound` style and improve currency option handling ([`0a11a579debc439d4857b1df8c9b4a7340c86824`](https://github.com/techniq/svelte-ux/commit/0a11a579debc439d4857b1df8c9b4a7340c86824))
+
+- Add `omitNil()` object util to easily remove `null` and `undefined` properties ([`d3fdbec7b15c6b88bcb7705e4d005dff0e9e20e2`](https://github.com/techniq/svelte-ux/commit/d3fdbec7b15c6b88bcb7705e4d005dff0e9e20e2))
+
 ## 0.62.8
 
 ### Patch Changes
