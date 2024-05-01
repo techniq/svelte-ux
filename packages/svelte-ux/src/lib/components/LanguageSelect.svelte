@@ -43,7 +43,7 @@
     </div>
 
     <div class="p-2 grid grid-cols-[auto,1fr] gap-2 items-center text-xs">
-      <span class="font-medium">Affect dates & numbers formats</span>
+      <span class="font-medium">Affects date & number formats</span>
     </div>
   </Menu>
 </Button>

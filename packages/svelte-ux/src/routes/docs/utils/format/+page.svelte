@@ -12,10 +12,12 @@
 
   let value = 1234.56;
   let style: FormatNumberStyle = 'decimal';
-  let currency: string = 'USD';
+  let currency: Intl.NumberFormatOptions['currency'] | null = 'USD';
   let notation: Intl.NumberFormatOptions['notation'] = 'standard';
 
   let myDate = new Date('1982-03-30T07:11:00');
+
+  const locales = ['en', 'de', 'fr', 'jp', 'zh'];
 </script>
 
 <h1>Usage</h1>
@@ -30,26 +32,35 @@
 <h2>Playground numbers</h2>
 
 <div class="grid grid-cols-xs gap-2 mb-2">
-  <TextField label="number" bind:value type="decimal" />
-
-  <MenuField
-    label="locale"
-    bind:value={$locale}
-    options={['en', 'de', 'fr', 'jp'].map((value) => ({ label: value, value }))}
-  />
+  <TextField label="value" bind:value type="decimal" />
 
   <MenuField
     label="style"
     bind:value={style}
-    options={['integer', 'decimal', 'currency', 'percent', 'percentRound', 'metric'].map(
-      (value) => ({ label: value, value })
-    )}
+    options={[
+      'integer',
+      'decimal',
+      'currency',
+      'currencyRound',
+      'percent',
+      'percentRound',
+      'metric',
+    ].map((value) => ({ label: value, value }))}
   />
 
   <MenuField
     label="currency"
     bind:value={currency}
-    options={['USD', 'EUR', 'GBP', 'JPY'].map((value) => ({ label: value, value }))}
+    options={[null, 'USD', 'EUR', 'GBP', 'JPY', 'CNY'].map((value) => ({
+      label: value ?? 'None',
+      value,
+    }))}
+  />
+
+  <MenuField
+    label="locale"
+    bind:value={$locale}
+    options={locales.map((value) => ({ label: value, value }))}
   />
 
   <MenuField
@@ -74,7 +85,7 @@
   <MenuField
     label="locale"
     bind:value={$locale}
-    options={['en', 'de', 'fr', 'jp'].map((value) => ({ label: value, value }))}
+    options={locales.map((value) => ({ label: value, value }))}
   />
 </div>
 

@@ -179,6 +179,11 @@ describe('formatNumber()', () => {
     expect(actual).equal('1 234,57 €');
   });
 
+  it('formats number with currencyRound', () => {
+    const actual = formatNumber(1234.5678, 'currencyRound');
+    expect(actual).equal('$1,235');
+  });
+
   it('returns value with percent symbol for style "percent"', () => {
     const actual = formatNumber(0.1234, 'percent');
     expect(actual).equal('12.34%');

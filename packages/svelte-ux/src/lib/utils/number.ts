@@ -1,5 +1,5 @@
-import type { Settings } from '../components/settings.js';
-import { defaultLocale, createLocaleSettings, type LocaleSettings } from './locale.js';
+import { defaultLocale, type LocaleSettings } from './locale.js';
+import { omitNil } from './object.js';
 
 export type FormatNumberStyle =
   | 'decimal' // from Intl.NumberFormat options.style NumberFormatOptions
@@ -8,6 +8,7 @@ export type FormatNumberStyle =
   | 'unit' // from Intl.NumberFormat options.style NumberFormatOptions
   | 'none'
   | 'integer'
+  | 'currencyRound'
   | 'percentRound'
   | 'metric'
   | 'default';
@@ -24,7 +25,7 @@ export type FormatNumberOptions = Intl.NumberFormatOptions & {
 
 function getFormatNumber(settings: LocaleSettings, style: FormatNumberStyle | undefined) {
   const { numbers } = settings.formats;
-  const styleSettings = style ? numbers[style] : {};
+  const styleSettings = style && style != 'none' ? numbers[style] : {};
   return {
     ...numbers.defaults,
     ...styleSettings,
@@ -64,11 +65,6 @@ export function formatNumberWithLocale(
       style,
     }),
 
-    // If currency is specified, then style must be currency
-    ...(options.currency != null && {
-      style: 'currency',
-    }),
-
     // Let's shorten min / max with fractionDigits
     ...{
       minimumFractionDigits: options.fractionDigits ?? defaults.fractionDigits,
@@ -76,7 +72,13 @@ export function formatNumberWithLocale(
     },
 
     // now we bring in user specified options
-    ...options,
+    ...omitNil(options),
+
+    ...(style === 'currencyRound' && {
+      style: 'currency',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }),
 
     // Let's overwrite for style=percentRound
     ...(style === 'percentRound' && {
