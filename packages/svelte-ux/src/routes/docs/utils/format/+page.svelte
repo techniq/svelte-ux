@@ -17,7 +17,7 @@
 
   let myDate = new Date('1982-03-30T07:11:00');
 
-  const locales = ['en', 'de', 'fr', 'jp', 'zh'];
+  const locales = ['en', 'de', 'fr', 'it', 'es', 'jp', 'zh'];
 </script>
 
 <h1>Usage</h1>
@@ -51,7 +51,7 @@
   <MenuField
     label="currency"
     bind:value={currency}
-    options={[null, 'USD', 'EUR', 'GBP', 'JPY', 'CNY'].map((value) => ({
+    options={[null, 'USD', 'EUR', 'GBP', 'JPY', 'CNY', 'MXN'].map((value) => ({
       label: value ?? 'None',
       value,
     }))}
