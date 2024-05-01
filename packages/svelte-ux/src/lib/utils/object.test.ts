@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { addHours, subHours } from 'date-fns';
 
-import { expireObject } from './object.js';
+import { expireObject, omit, omitNil, pick } from './object.js';
 
 describe('expireObject', () => {
   it('simple value not expired', () => {
@@ -195,5 +195,46 @@ describe('expireObject', () => {
     // Test cleaning up expiry
     const expiryActual = expireObject(expiry, expiry);
     expect(expiryActual).eql({ one: expiry.one });
+  });
+});
+
+describe('omit', () => {
+  it('remove single property', () => {
+    const original = { one: 1, two: 2, three: 3 };
+
+    const actual = omit(original, ['three']);
+    expect(actual).eql({ one: 1, two: 2 });
+  });
+});
+
+describe('omitNil', () => {
+  it('removes null values', () => {
+    const original = { one: 1, two: null, three: 3 };
+
+    const actual = omitNil(original);
+    expect(actual).eql({ one: 1, three: 3 });
+  });
+
+  it('removes undefined values', () => {
+    const original = { one: 1, two: undefined, three: 3 };
+
+    const actual = omitNil(original);
+    expect(actual).eql({ one: 1, three: 3 });
+  });
+});
+
+describe('pick', () => {
+  it('pick single property', () => {
+    const original = { one: 1, two: 2, three: 3 };
+
+    const actual = pick(original, ['one']);
+    expect(actual).eql({ one: 1 });
+  });
+
+  it('pick multiple properties', () => {
+    const original = { one: 1, two: 2, three: 3 };
+
+    const actual = pick(original, ['two', 'three']);
+    expect(actual).eql({ two: 2, three: 3 });
   });
 });

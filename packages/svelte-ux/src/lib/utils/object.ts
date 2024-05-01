@@ -159,6 +159,19 @@ export function omit<T extends object = {}>(obj: T, keys: (keyof T)[]): Partial<
 }
 
 /**
+ * Remove `null` or `undefined` properties from an object
+ */
+export function omitNil<T extends object = {}>(obj: T): Partial<T> {
+  if (keys.length === 0) {
+    return obj;
+  } else {
+    return fromEntries(
+      entries(obj).filter(([key, value]: [keyof T, T[keyof T]]) => value != null)
+    ) as Partial<T>;
+  }
+}
+
+/**
  * Pick properties from an object.  See also lodash `_.pick()`
  */
 export function pick<T extends object = {}>(obj: T, keys: string[]): Partial<T> {
