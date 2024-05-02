@@ -22,6 +22,10 @@ export interface DefaultProps {
   labelPlacement: LabelPlacement;
 }
 
+type ActionSettings = {
+  portal?: { target: HTMLElement | string };
+}
+
 export type SettingsInput = {
   /** Force a specific locale setting. */
   forceLocale?: string;
@@ -32,6 +36,7 @@ export type SettingsInput = {
   localeFormats?: Record<string, LocaleSettingsInput>;
 
   components?: ComponentSettings;
+  actions?: ActionSettings;
   /** A list of the available themes */
   themes?: {
     light?: string[];

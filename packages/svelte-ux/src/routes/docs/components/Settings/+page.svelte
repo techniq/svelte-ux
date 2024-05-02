@@ -18,6 +18,9 @@
       Menu: { classes: 'shadow-xl border-gray-500' },
       MenuItem: { classes: 'font-bold' },
     }}
+    actions={{
+      portal: { target: '.portal-target' },
+    }}
   >
     <Toggle let:on={open} let:toggle>
       <Button on:click={toggle} variant="outline" color="primary">
@@ -32,4 +35,6 @@
       </Button>
     </Toggle>
   </Settings>
+
+  <div class="portal-target"></div>
 </Preview>
