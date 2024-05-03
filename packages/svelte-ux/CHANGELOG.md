@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.62.10
+
+### Patch Changes
+
+- Add well known PortalTarget class and examples ([#334](https://github.com/techniq/svelte-ux/pull/334))
+
 ## 0.62.9
 
 ### Patch Changes
