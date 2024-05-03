@@ -25,7 +25,6 @@ export const portal: Action<HTMLElement, PortalOptions> = (node, options) => {
 
   return {
     update(options) {
-      console.log(options);
       moveNode(node, options, targets);
     },
     destroy() {
