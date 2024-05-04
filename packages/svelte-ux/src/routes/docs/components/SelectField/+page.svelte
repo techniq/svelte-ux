@@ -458,3 +458,18 @@
 <Preview>
   <SelectField {options} icon={mdiMagnify} bind:value inlineOptions={true} />
 </Preview>
+
+<h2>with form</h2>
+
+<Preview>
+  <form
+    on:submit={(e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      alert(formData.get('test'));
+    }}
+  >
+    <SelectField {options} name="test" />
+    <Button type="submit">Submit</Button>
+  </form>
+</Preview>
