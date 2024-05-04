@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.62.11
+
+### Patch Changes
+
+- [SelectField] Pass option value instead of label when submitted within form ([#337](https://github.com/techniq/svelte-ux/pull/337))
+
 ## 0.62.10
 
 ### Patch Changes
