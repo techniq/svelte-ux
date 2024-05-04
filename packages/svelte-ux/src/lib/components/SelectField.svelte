@@ -31,6 +31,7 @@
   export let optionText = (option: any) => (option?.label as string) ?? '';
   export let optionValue = (option: any) => option?.value ?? null;
 
+  export let name = '';
   export let label = '';
   export let placeholder = '';
   export let labelPlacement = defaults.labelPlacement;
@@ -438,6 +439,8 @@
     {...$$restProps}
   >
     <span slot="prepend" class="flex items-center">
+      <input type="hidden" {name} {value} />
+
       {#if stepper}
         <Button
           icon={mdiChevronLeft}
