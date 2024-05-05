@@ -19,7 +19,7 @@
   export let label = '';
   export let labelPlacement: LabelPlacement = defaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT;
   export let value: any = null;
-  // export let placeholder = '';
+  export let placeholder = '';
   export let error: string | string[] | boolean | undefined = '';
   export let hint = '';
   // export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
@@ -156,7 +156,17 @@
           >
             <slot name="prefix" />
 
-            <slot {id} />
+            <slot {id}>
+              {#if value}
+                {value}
+              {:else if placeholder}
+                <span class="text-surface-content/50">
+                  {placeholder}
+                </span>
+              {:else}
+                &nbsp
+              {/if}
+            </slot>
 
             <slot name="suffix" />
           </div>
