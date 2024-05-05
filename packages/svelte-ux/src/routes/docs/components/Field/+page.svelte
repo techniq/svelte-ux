@@ -21,12 +21,39 @@
 
 <h1>Examples</h1>
 
-<h2>Text (display only)</h2>
+<h2>Text (display only) as value</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <Field label="First Name" value="Sean" />
+    <Field label="Last Name" value="Lynch" />
+  </div>
+</Preview>
+
+<h2>Text (display only) as slot</h2>
 
 <Preview>
   <div class="grid grid-flow-col gap-2">
     <Field label="First Name">Sean</Field>
     <Field label="Last Name">Lynch</Field>
+  </div>
+</Preview>
+
+<h2>Empty (null / undefined)</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <Field label="First name" value={null} />
+    <Field label="Last name" value={undefined} />
+  </div>
+</Preview>
+
+<h2>Placeholder</h2>
+
+<Preview>
+  <div class="grid grid-flow-col gap-2">
+    <Field label="First name" value={null} placeholder="empty" />
+    <Field label="Last name" value={undefined} placeholder="empty" />
   </div>
 </Preview>
 
