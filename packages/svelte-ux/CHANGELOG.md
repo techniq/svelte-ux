@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.62.12
+
+### Patch Changes
+
+- [Field] Support passing `value` for simple display with handling of empty (null/undefined) with custom placeholder ([#339](https://github.com/techniq/svelte-ux/pull/339))
+
 ## 0.62.11
 
 ### Patch Changes
