@@ -33,7 +33,7 @@ export const popover: Action<Element | HTMLElement, PopoverOptions> = (node, opt
     return;
   }
 
-  const cleanup = autoUpdate(anchorEl, (popoverEl as HTMLElement), () => {
+  const cleanup = autoUpdate(anchorEl, popoverEl as HTMLElement, () => {
     // Only allow autoPlacement to swap sides (ex. top/bottom) and not also axises (ex. left/right).  Matches flip behavor
     const alignment =
       options?.autoPlacement && options?.placement
