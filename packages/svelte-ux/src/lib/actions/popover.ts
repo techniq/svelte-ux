@@ -7,9 +7,10 @@ import {
   shift,
   autoPlacement,
   size,
-  type Placement,
-  type ComputePositionConfig,
   type Alignment,
+  type ComputePositionConfig,
+  type OffsetOptions,
+  type Placement,
 } from '@floating-ui/dom';
 
 import { portal } from './portal.js';
@@ -17,14 +18,14 @@ import { portal } from './portal.js';
 export type PopoverOptions = {
   anchorEl?: HTMLElement;
   placement?: Placement;
-  offset?: number;
+  offset?: OffsetOptions;
   padding?: number;
   autoPlacement?: boolean;
   matchWidth?: boolean;
   resize?: boolean | 'width' | 'height';
 };
 
-export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
+export const popover: Action<Element | HTMLElement, PopoverOptions> = (node, options) => {
   const popoverEl = node;
   const anchorEl = options?.anchorEl ?? node.parentElement;
 
@@ -32,7 +33,7 @@ export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
     return;
   }
 
-  const cleanup = autoUpdate(anchorEl, popoverEl, () => {
+  const cleanup = autoUpdate(anchorEl, (popoverEl as HTMLElement), () => {
     // Only allow autoPlacement to swap sides (ex. top/bottom) and not also axises (ex. left/right).  Matches flip behavor
     const alignment =
       options?.autoPlacement && options?.placement
@@ -65,8 +66,8 @@ export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
         shift({ padding: options?.padding }),
       ],
     };
-    computePosition(anchorEl, popoverEl, positionOptions).then(({ x, y }) => {
-      Object.assign(popoverEl.style, {
+    computePosition(anchorEl, popoverEl as HTMLElement, positionOptions).then(({ x, y }) => {
+      Object.assign((popoverEl as HTMLElement).style, {
         left: `${x}px`,
         top: `${y}px`,
         ...(options?.matchWidth && {
@@ -95,7 +96,7 @@ export const popover: Action<HTMLElement, PopoverOptions> = (node, options) => {
   }
   document.addEventListener('mouseup', onMouseUp);
 
-  const portalResult = portal(node);
+  const portalResult = portal(node as HTMLElement, {});
 
   return {
     destroy() {
