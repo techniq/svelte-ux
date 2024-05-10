@@ -5,12 +5,16 @@
   import Button from './Button.svelte';
   import { getComponentSettings } from './settings.js';
   import { slide } from 'svelte/transition';
+  import { createEventDispatcher } from 'svelte';
   let className: string | undefined = undefined;
   export { className as class };
+
+  const dispatch = createEventDispatcher<{ click: void }>();
 
   const { classes: settingsClasses, defaults } = getComponentSettings('CopyButton');
 
   export let value: string | (() => string);
+  export let message: string | null = 'Copied!';
 
   let showMessage = false;
   $: if (showMessage) {
@@ -27,10 +31,13 @@
   on:click={() => {
     let copyValue = typeof value === 'function' ? value() : value;
     navigator.clipboard.writeText(copyValue);
-    showMessage = true;
+    dispatch('click');
+    if (message) {
+      showMessage = true;
+    }
   }}
 >
-  {#if showMessage}
-    <span transition:slide={{ axis: 'x', duration: 200 }}>Copied!</span>
+  {#if showMessage && message}
+    <span transition:slide={{ axis: 'x', duration: 200 }}>{message}</span>
   {/if}
 </Button>
