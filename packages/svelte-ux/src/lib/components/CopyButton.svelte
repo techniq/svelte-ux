@@ -10,7 +10,7 @@
 
   const { classes: settingsClasses, defaults } = getComponentSettings('CopyButton');
 
-  export let value: string;
+  export let value: string | (() => string);
 
   let showMessage = false;
   $: if (showMessage) {
@@ -25,7 +25,8 @@
   {...restProps}
   class={cls('CopyButton', settingsClasses.root, className)}
   on:click={() => {
-    navigator.clipboard.writeText(value);
+    let copyValue = typeof value === 'function' ? value() : value;
+    navigator.clipboard.writeText(copyValue);
     showMessage = true;
   }}
 >

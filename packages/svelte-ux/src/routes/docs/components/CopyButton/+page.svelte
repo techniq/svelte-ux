@@ -54,3 +54,9 @@
     </div>
   </div>
 </Preview>
+
+<h2>Using a Function</h2>
+
+<Preview>
+  <CopyButton value={() => 'Stop copying me!'} />
+</Preview>
