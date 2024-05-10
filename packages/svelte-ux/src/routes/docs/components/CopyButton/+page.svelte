@@ -54,3 +54,21 @@
     </div>
   </div>
 </Preview>
+
+<h2>Using a Function</h2>
+
+<Preview>
+  <CopyButton value={() => 'Stop copying me!'} />
+</Preview>
+
+<h2>With Custom Message</h2>
+
+<Preview>
+  <CopyButton value="Stop copying me!" message="I copied it..." />
+</Preview>
+
+<h2>With Alternate Notification</h2>
+
+<Preview>
+  <CopyButton value="Stop copying me!" on:click={() => alert('Copied!')} message={null} />
+</Preview>
