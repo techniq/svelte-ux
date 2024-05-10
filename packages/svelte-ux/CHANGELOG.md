@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.63.0
+
+### Minor Changes
+
+- Allow customizing CopyButton notification ([#346](https://github.com/techniq/svelte-ux/pull/346))
+
+- Allow CopyButton to take a function that returns a string ([#346](https://github.com/techniq/svelte-ux/pull/346))
+
+### Patch Changes
+
+- Add support for axis-specific offsets in Popover and other Popover-based components ([#344](https://github.com/techniq/svelte-ux/pull/344))
+
 ## 0.62.12
 
 ### Patch Changes
