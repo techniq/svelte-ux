@@ -1,12 +1,12 @@
 <script lang="ts">
   import { mdiMenu } from '@mdi/js';
 
-  import { showDrawer } from './AppLayout.svelte';
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
   import { browser } from '../utils/env.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import { getSettings } from './index.js';
 
   export let title: string | number | Array<string | number> = '';
   export let menuIcon: string | null = mdiMenu;
@@ -18,6 +18,7 @@
    */
   export let head = true;
 
+  const { showDrawer } = getSettings();
   const settingsClasses = getComponentClasses('AppBar');
 
   $: titleString = Array.isArray(title) ? title.filter((x) => x).join(' › ') : title.toString();

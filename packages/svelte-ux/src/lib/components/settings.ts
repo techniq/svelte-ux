@@ -1,4 +1,6 @@
 import { getContext, setContext } from 'svelte';
+import { writable, derived, type Readable, type Writable } from 'svelte/store';
+
 import {
   type ComponentName,
   type ComponentSettings,
@@ -14,9 +16,10 @@ import {
   type LocaleSettings,
   type LocaleStore,
   type LocaleSettingsInput,
-} from '../utils/locale.js';
+} from '$lib/utils/locale.js';
 import { buildFormatters, type FormatFunctions } from '../utils/format.js';
-import { type Readable, derived } from 'svelte/store';
+import { breakpoints } from '../stores/matchMedia.js';
+import { browser } from '../utils/env.js';
 
 export interface DefaultProps {
   labelPlacement: LabelPlacement;
@@ -55,6 +58,7 @@ export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> 
   /** Formatting functions and information */
   format: Readable<FormatFunctions>;
   currentTheme: ThemeStore;
+  showDrawer: Writable<boolean>;
 
   componentSettingsCache: Partial<Record<ComponentName, ResolvedComponentSettings<ComponentName>>>;
 }
@@ -92,11 +96,15 @@ function createLocaleStores(settings: SettingsInput) {
   };
 }
 
-export function settings(settings: SettingsInput = {}): Settings {
-  let lightThemes = settings.themes ? settings.themes.light ?? [] : ['light'];
-  let darkThemes = settings.themes ? settings.themes.dark ?? [] : ['dark'];
+function createShowDrawer() {
+  return writable(browser ? window.innerWidth >= breakpoints.md : true);
+}
 
-  let currentTheme =
+export function settings(settings: SettingsInput = {}): Settings {
+  const lightThemes = settings.themes ? settings.themes.light ?? [] : ['light'];
+  const darkThemes = settings.themes ? settings.themes.dark ?? [] : ['dark'];
+
+  const currentTheme =
     // In some cases, `settings` is called again from inside a component. Don't create a new theme store in this case.
     settings.currentTheme ??
     createThemeStore({
@@ -104,7 +112,9 @@ export function settings(settings: SettingsInput = {}): Settings {
       dark: darkThemes,
     });
 
-  let localeStores = createLocaleStores(settings);
+  const localeStores = createLocaleStores(settings);
+
+  const showDrawer = createShowDrawer();
 
   return setContext<Settings>(settingsKey, {
     ...settings,
@@ -114,6 +124,7 @@ export function settings(settings: SettingsInput = {}): Settings {
     },
     currentTheme,
     componentSettingsCache: {},
+    showDrawer,
     ...localeStores,
   });
 }
@@ -124,6 +135,7 @@ function getFallbackSettings() {
   FALLBACK_SETTINGS = FALLBACK_SETTINGS ?? {
     currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
     componentSettingsCache: {},
+    showDrawer: createShowDrawer(),
     ...createLocaleStores({}),
   };
   return FALLBACK_SETTINGS;
