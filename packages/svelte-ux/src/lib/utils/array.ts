@@ -38,14 +38,20 @@ export function sum(items: (object | null)[], prop?: PropAccessorArg) {
 /**
  * Sum array of objects by property
  */
-export function sumObjects(items: (object | null)[]) {
-  return fromEntries(
-    rollup(
-      items.flatMap((x) => entries(x ?? {})),
-      (values) => sum(values, (d) => (Number.isFinite(d[1]) ? d[1] : 0)),
-      (d) => d[0]
-    )
+export function sumObjects(items: (object | null)[], prop?: PropAccessorArg) {
+  const getProp = propAccessor(prop);
+
+  const result = rollup(
+    items.flatMap((x) => entries(x ?? {})),
+    (values) =>
+      sum(values, (d) => {
+        const value = Number(getProp(d[1]));
+        return Number.isFinite(value) ? value : 0;
+      }),
+    (d) => d[0]
   );
+
+  return items.every(Array.isArray) ? Array.from(result.values()) : fromEntries(result);
 }
 
 /**
