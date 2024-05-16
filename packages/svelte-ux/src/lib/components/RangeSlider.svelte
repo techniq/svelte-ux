@@ -41,6 +41,7 @@
   export let step = 1;
   export let value = [min, max];
   export let disabled = false;
+  export let disableTooltips = false;
 
   let className: string | undefined = undefined;
   export { className as class };
@@ -309,7 +310,7 @@
     )}
   />
 
-  {#if showStartValue}
+  {#if showStartValue && !disableTooltips}
     <output
       style="left: calc(var(--start) * 100%);"
       class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow"
@@ -319,7 +320,7 @@
     </output>
   {/if}
 
-  {#if showEndValue}
+  {#if showEndValue && !disableTooltips}
     <output
       style="left: calc(var(--end) * 100%);"
       class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow"

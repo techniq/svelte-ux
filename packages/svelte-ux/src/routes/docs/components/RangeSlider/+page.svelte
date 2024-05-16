@@ -48,3 +48,9 @@
 <Preview>
   <RangeSlider max={100} step={10} />
 </Preview>
+
+<h2>disableTooltips</h2>
+
+<Preview>
+  <RangeSlider disableTooltips />
+</Preview>
