@@ -79,8 +79,8 @@ importers:
         specifier: ^1.29.0
         version: 1.29.0
       sveld:
-        specifier: ^0.19.1
-        version: 0.19.1(postcss@8.4.36)
+        specifier: ^0.20.0
+        version: 0.20.0(postcss@8.4.36)
       tailwind-merge:
         specifier: ^2.2.2
         version: 2.2.2
@@ -1269,12 +1269,6 @@ packages:
     resolution: {integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==}
     engines: {node: '>=0.4.0'}
     dev: true
-
-  /acorn@8.11.2:
-    resolution: {integrity: sha512-nc0Axzp/0FILLEVsm4fNwLCwMttvhEI263QtVPQcbpfZZ3ts0hLsZGOpE6czNlid7CJ9MlyH8reXkpsf3YUY4w==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
-    dev: false
 
   /acorn@8.11.3:
     resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
@@ -3954,12 +3948,12 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  /sveld@0.19.1(postcss@8.4.36):
-    resolution: {integrity: sha512-ec4fRABGafRNASMdvyztLLlkjLBvBdlI7p3egd9HtIai1ThPwdu7eNn044ywKtzjtjRy0JIvaucHCfGt1YyP8Q==}
+  /sveld@0.20.0(postcss@8.4.36):
+    resolution: {integrity: sha512-PQRs0evdOjsFzjHuPu8B/flqbJX2osN2D0++6nl77jhwriQazaEF0pkQAMwPRaSn/kMivvUdWkkPKi1NmHLosg==}
     hasBin: true
     dependencies:
       '@rollup/plugin-node-resolve': 13.3.0(rollup@2.79.1)
-      acorn: 8.11.2
+      acorn: 8.11.3
       comment-parser: 1.4.1
       fast-glob: 3.3.2
       prettier: 2.8.8
