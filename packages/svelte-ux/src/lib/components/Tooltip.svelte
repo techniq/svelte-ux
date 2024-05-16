@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import { fly } from 'svelte/transition';
-  import type { Placement } from '@floating-ui/dom';
+  import type { OffsetOptions, Placement } from '@floating-ui/dom';
 
   import Popover from './Popover.svelte';
   import { cls } from '../utils/styles.js';
@@ -12,7 +12,7 @@
 
   export let title = '';
   export let open = false;
-  export let offset = 0;
+  export let offset: OffsetOptions = 0;
   export let delay = 500;
   export let underline = false;
   export let cursor = false;
@@ -41,7 +41,7 @@
     if (
       delay === 0 ||
       e instanceof FocusEvent ||
-      new Date().valueOf() - lastShown?.valueOf() < 500
+      new Date().valueOf() - (lastShown?.valueOf() ?? 0) < 500
     ) {
       // If no delay, focus event, or any tooltips shown in the last 1/2 second, show immediately
       lastShown = new Date();
@@ -63,7 +63,7 @@
 
   function onFocusIn(e: FocusEvent) {
     // TODO: Is there a better way to differentiate between focus from click vs tab?
-    if (e.target?.parentElement?.querySelector(':focus-visible')) {
+    if ((e.target as Element)?.parentElement?.querySelector(':focus-visible')) {
       // tab focused
       showTooltip(e);
     } else {
@@ -76,7 +76,7 @@
 
 {#if enabled && (title || $$slots.title)}
   <Popover
-    anchorEl={containerEl?.firstElementChild}
+    anchorEl={containerEl?.firstElementChild ?? undefined}
     {placement}
     {autoPlacement}
     {offset}

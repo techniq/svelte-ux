@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import type { Placement } from '@floating-ui/dom';
+  import type { OffsetOptions, Placement } from '@floating-ui/dom';
 
   import { popover, type PopoverOptions } from '../actions/popover.js';
   import { cls } from '../utils/styles.js';
@@ -21,12 +21,12 @@
   /**
    * Provide element to anchor.  If not provided, uses direct parent of Popover
    */
-  export let anchorEl: HTMLElement | undefined = undefined;
+  export let anchorEl: Element | HTMLElement | undefined = undefined;
 
   /**
    * Offset between anchor and popover
    */
-  export let offset = 0;
+  export let offset: OffsetOptions = 0;
 
   /**
    * Shift popover if within threshold of window
