@@ -14,8 +14,8 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "test:unit": "TZ=UTC+4 vitest --coverage",
-    "lint": "prettier --ignore-path ../../.gitignore --check .",
-    "format": "prettier --ignore-path ../../.gitignore --write .",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
     "prepare": "svelte-kit sync"
   },
   "devDependencies": {
