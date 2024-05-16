@@ -43,10 +43,11 @@ export function sumObjects(items: (object | null)[], prop?: PropAccessorArg) {
 
   const result = rollup(
     items.flatMap((x) => entries(x ?? {})),
-    (values) => sum(values, (d) => {
-      const value = Number(getProp(d[1]));
-      return Number.isFinite(value) ? value : 0;
-    }),
+    (values) =>
+      sum(values, (d) => {
+        const value = Number(getProp(d[1]));
+        return Number.isFinite(value) ? value : 0;
+      }),
     (d) => d[0]
   );
 
