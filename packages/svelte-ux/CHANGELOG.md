@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.63.1
+
+### Patch Changes
+
+- [RangeSlider] Add disableTooltips property ([#348](https://github.com/techniq/svelte-ux/pull/348))
+
 ## 0.63.0
 
 ### Minor Changes
