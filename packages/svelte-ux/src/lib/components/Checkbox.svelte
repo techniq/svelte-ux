@@ -84,9 +84,9 @@
       !checked && !disabled && 'peer-hover:bg-primary/10',
       checked
         ? disabled
-          ? 'bg-gray-500 border-gray-500'
+          ? 'bg-surface-content border-surface-content'
           : 'bg-primary border-primary'
-        : 'border-gray-500',
+        : 'border-surface-content/50',
       settingsClasses.checkbox,
       classes.checkbox
     )}

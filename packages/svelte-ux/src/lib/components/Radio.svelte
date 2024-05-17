@@ -60,9 +60,9 @@
       !checked && !disabled && 'peer-hover:bg-primary/10',
       checked
         ? disabled
-          ? 'border-surface-content/30'
+          ? 'border-surface-content/50'
           : 'border-primary'
-        : 'border-surface-content/30',
+        : 'border-surface-content/50',
       settingsClasses.radio,
       classes.radio
     )}
@@ -72,7 +72,7 @@
       class={cls(
         'icon',
         'pointer-events-none transition-transform',
-        disabled ? 'text-surface-content/30 border-surface-content/30' : 'text-primary',
+        disabled ? 'text-surface-content' : 'text-primary',
         checked ? 'scale-100' : 'scale-0',
         settingsClasses.icon,
         classes.icon
