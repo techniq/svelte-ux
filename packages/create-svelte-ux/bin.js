@@ -190,7 +190,7 @@ function copy(
 
 function sourcePath(/** @type {string} */ file) {
   let __dirname = path.dirname(fileURLToPath(import.meta.url));
-  return path.resolve(__dirname, file)
+  return path.resolve(__dirname, file);
 }
 
 function pCancel(cancelText = 'Operation cancelled.') {
