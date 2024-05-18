@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.63.4
+
+### Patch Changes
+
+- Adding $restProps to ButtonGroup ([#354](https://github.com/techniq/svelte-ux/pull/354))
+
 ## 0.63.3
 
 ### Patch Changes
