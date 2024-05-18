@@ -1,5 +1,11 @@
 # create-svelte-ux
 
+## 0.4.0
+
+### Minor Changes
+
+- Fix path error on windows machines ([#353](https://github.com/techniq/svelte-ux/pull/353))
+
 ## 0.3.4
 
 ### Patch Changes

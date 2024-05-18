@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.63.3
+
+### Patch Changes
+
+- [Checkbox/Radio] Improve and align border colors ([`337f4b32c0d74f063b6914a5dc15358c29002d18`](https://github.com/techniq/svelte-ux/commit/337f4b32c0d74f063b6914a5dc15358c29002d18))
+
 ## 0.63.2
 
 ### Patch Changes
