@@ -11,7 +11,7 @@
 			},
 			AppLayout: {
 				classes: {
-					nav: 'bg-neutral-800'
+					nav: 'bg-neutral-800 py-2'
 				}
 			},
 			NavItem: {
@@ -30,7 +30,6 @@
 			text="Home"
 			icon="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
 			currentUrl={$page.url}
-			class="mt-2"
 		/>
 
 		<NavItem

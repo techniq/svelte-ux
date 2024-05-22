@@ -8,7 +8,7 @@
 		classes: {
 			AppBar: 'bg-primary text-white shadow-md',
 			AppLayout: {
-				nav: 'bg-neutral-800'
+				nav: 'bg-neutral-800 py-2'
 			},
 			NavItem: {
 				root: 'text-sm text-gray-400 pl-6 py-2 hover:text-white hover:bg-gray-300/10 [&:where(.is-active)]:text-sky-400 [&:where(.is-active)]:bg-gray-500/10'
@@ -24,7 +24,6 @@
 			text="Home"
 			icon="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
 			currentUrl={$page.url}
-			class="mt-2"
 		/>
 
 		<NavItem
