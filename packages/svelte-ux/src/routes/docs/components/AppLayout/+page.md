@@ -8,7 +8,7 @@
 
 ```svelte
 <AppLayout>
-	<svelte:fragment slot="nav">
+  <svelte:fragment slot="nav">
     <!-- Nav menu -->
   </svelte:fragment>
 
@@ -28,7 +28,7 @@
 
 ```svelte
 <AppLayout areas="'header header' 'aside main'">
-	<svelte:fragment slot="nav">
+  <svelte:fragment slot="nav">
     <!-- Nav menu -->
   </svelte:fragment>
 
