@@ -205,11 +205,11 @@
 <ThemeInit />
 
 <AppLayout>
-  <nav slot="nav" class="h-full">
+  <svelte:fragment slot="nav">
     <NavMenu />
     <!-- Spacer -->
     <div class="h-4" />
-  </nav>
+  </svelte:fragment>
 
   <AppBar {title}>
     <div slot="actions" class="flex gap-3">
