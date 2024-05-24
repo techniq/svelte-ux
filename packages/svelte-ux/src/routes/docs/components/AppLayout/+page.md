@@ -8,9 +8,9 @@
 
 ```svelte
 <AppLayout>
-  <nav slot="nav" class="h-full">
+  <svelte:fragment slot="nav">
     <!-- Nav menu -->
-  </nav>
+  </svelte:fragment>
 
   <AppBar title="Example">
     <div slot="actions">
@@ -28,9 +28,9 @@
 
 ```svelte
 <AppLayout areas="'header header' 'aside main'">
-  <nav slot="nav" class="h-full">
+  <svelte:fragment slot="nav">
     <!-- Nav menu -->
-  </nav>
+  </svelte:fragment>
 
   <AppBar title="Example">
     <div slot="actions">
