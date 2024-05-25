@@ -152,6 +152,7 @@
     <DateSelect
       bind:selected={currentValue}
       {periodType}
+      {...$$restProps}
       on:dateChange={(e) => (currentValue = e.detail)}
     />
   </div>

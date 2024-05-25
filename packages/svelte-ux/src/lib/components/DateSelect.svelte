@@ -19,9 +19,9 @@
 </script>
 
 {#if periodType === PeriodType.Month || periodType === PeriodType.Quarter}
-  <MonthListByYear {selected} on:dateChange />
+  <MonthListByYear {selected} on:dateChange {...$$restProps} />
 {:else if periodType === PeriodType.CalendarYear}
-  <YearList {selected} on:dateChange />
+  <YearList {selected} on:dateChange {...$$restProps} />
 {:else if periodType === PeriodType.FiscalYearOctober}
   <!-- dateFuncs={{
         startOfYear: startOfFiscalYear,
@@ -29,8 +29,8 @@
         isSameYear: isSameFiscalYear,
         getYear: getFiscalYear,
       }} -->
-  <YearList {selected} on:dateChange />
+  <YearList {selected} on:dateChange {...$$restProps} />
 {:else}
   <!-- Day, Week, etc -->
-  <Month {selected} on:dateChange {startOfMonth} />
+  <Month {selected} on:dateChange {startOfMonth} {...$$restProps} />
 {/if}
