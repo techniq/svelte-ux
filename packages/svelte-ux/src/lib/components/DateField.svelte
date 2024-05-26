@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { parse as parseDate } from 'date-fns';
-  import { PeriodType } from '../utils/date_types.js';
+  import { PeriodType, type DisabledDate } from '../utils/date_types.js';
   import { getComponentSettings, getSettings } from './settings.js';
   import { cls } from '../utils/styles.js';
 
@@ -18,6 +18,11 @@
   export let mask: string | undefined = undefined;
   export let replace = 'dmyh';
   export let picker = false;
+
+  /**
+   * Dates to disable (not selectable)
+   */
+  export let disabledDates: DisabledDate | undefined = undefined;
 
   $: actualFormat = format ?? $format_ux.settings.formats.dates.baseParsing ?? 'MM/dd/yyyy';
   $: actualMask = mask ?? actualFormat.toLowerCase();
@@ -92,6 +97,7 @@
       <DatePickerField
         iconOnly
         {value}
+        {disabledDates}
         on:change={(e) => {
           value = e.detail;
           dispatch('change', { value });
