@@ -36,6 +36,9 @@
     if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
       open = !open;
+    } else if (open && e.key === 'Escape') {
+      e.preventDefault();
+      open = !open;
     }
   }
 </script>
