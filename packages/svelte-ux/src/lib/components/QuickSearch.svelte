@@ -62,7 +62,7 @@
 <Dialog
   bind:open
   classes={{
-    root: cls('items-start mt-20', settingsClasses.root, classes.root, $$props.class),
+    root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, $$props.class),
     backdrop: 'backdrop-blur-sm',
   }}
 >
