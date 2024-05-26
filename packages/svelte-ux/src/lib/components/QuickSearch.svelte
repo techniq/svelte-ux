@@ -66,21 +66,21 @@
     backdrop: 'backdrop-blur-sm',
   }}
 >
-  <div class="overflow-auto max-h-[min(90dvh,600px)] w-[400px] max-w-[95vw] py-1">
-    <SelectField
-      icon={mdiMagnify}
-      placeholder="Search..."
-      inlineOptions={true}
-      {options}
-      {fieldActions}
-      on:change
-      on:change={() => (open = false)}
-      classes={{
-        field: {
-          container: 'border-none hover:shadow-none group-focus-within:shadow-none',
-        },
-        group: 'capitalize',
-      }}
-    />
-  </div>
+  <SelectField
+    icon={mdiMagnify}
+    placeholder="Search..."
+    inlineOptions={true}
+    {options}
+    {fieldActions}
+    on:change
+    on:change={() => (open = false)}
+    classes={{
+      root: 'w-[420px] max-w-[95vw] py-1',
+      field: {
+        container: 'border-none hover:shadow-none group-focus-within:shadow-none',
+      },
+      options: 'overflow-auto max-h-[min(90dvh,380px)]',
+      group: 'capitalize',
+    }}
+  />
 </Dialog>
