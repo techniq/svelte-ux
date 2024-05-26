@@ -6,7 +6,12 @@
   import Button from './Button.svelte';
   import Field from './Field.svelte';
   import Dialog from './Dialog.svelte';
-  import { DateToken, getDateFuncsByPeriodType, PeriodType } from '../utils/date.js';
+  import {
+    DateToken,
+    getDateFuncsByPeriodType,
+    PeriodType,
+    type DisabledDate,
+  } from '../utils/date.js';
   import DateSelect from './DateSelect.svelte';
   import { getComponentSettings, getSettings } from './settings.js';
 
@@ -31,6 +36,11 @@
   export let dense = false;
   export let icon: string | null = null;
   export let center = false;
+
+  /**
+   * Dates to disable (not selectable)
+   */
+  export let disabledDates: DisabledDate | undefined = undefined;
 
   const { format, localeSettings } = getSettings();
   $: dictionary = $format.settings.dictionary;
@@ -152,6 +162,7 @@
     <DateSelect
       bind:selected={currentValue}
       {periodType}
+      {disabledDates}
       on:dateChange={(e) => (currentValue = e.detail)}
     />
   </div>

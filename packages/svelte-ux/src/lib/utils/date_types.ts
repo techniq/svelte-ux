@@ -2,6 +2,8 @@ import type { DateRange } from './dateRange.js';
 
 export type SelectedDate = Date | Date[] | DateRange | null;
 
+export type DisabledDate = ((date: Date) => boolean) | Date | Date[] | { from: Date; to: Date };
+
 export type Period = {
   start: Date;
   end: Date;

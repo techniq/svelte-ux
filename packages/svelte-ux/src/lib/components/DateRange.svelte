@@ -8,6 +8,7 @@
     hasDayOfWeek,
     replaceDayOfWeek,
     missingDayOfWeek,
+    type DisabledDate,
   } from '../utils/date.js';
   import { getDateRangePresets } from '../utils/dateRange.js';
   import type { DateRange } from '../utils/dateRange.js';
@@ -38,6 +39,11 @@
     PeriodType.FiscalYearOctober,
   ];
   export let getPeriodTypePresets = getDateRangePresets;
+
+  /**
+   * Dates to disable (not selectable)
+   */
+  export let disabledDates: DisabledDate | undefined = undefined;
 
   const settingsClasses = getComponentClasses('DateRange');
   const { format, localeSettings } = getSettings();
@@ -307,8 +313,9 @@
     <DateSelect
       {selected}
       periodType={selectedPeriodType}
-      on:dateChange={(e) => onDateChange(e.detail)}
       {activeDate}
+      {disabledDates}
+      on:dateChange={(e) => onDateChange(e.detail)}
     />
   </div>
 </div>

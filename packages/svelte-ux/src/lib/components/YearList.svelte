@@ -12,13 +12,17 @@
   import DateButton from './DateButton.svelte';
 
   import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date.js';
-  import type { SelectedDate } from '../utils/date.js';
+  import type { DisabledDate, SelectedDate } from '../utils/date.js';
 
   export let selected: SelectedDate | undefined = undefined;
   export let minDate: Date | undefined = undefined;
   export let maxDate: Date | undefined = undefined;
   export let format: string | undefined = undefined;
-  export let disabledYears: any = undefined; // TODO: Improve types - See isYearDisabled
+
+  /**
+   * Dates to disable (not selectable)
+   */
+  export let disabledDates: DisabledDate | undefined = undefined;
 
   $: minYear =
     minYear ??
@@ -37,17 +41,17 @@
   // TODO: Scroll into view not typically centered
   $: selectedYear = (getMinSelectedDate(selected) || new Date()).getFullYear();
 
-  $: isYearDisabled = (date: Date) => {
-    return disabledYears instanceof Function
-      ? disabledYears(date)
-      : disabledYears instanceof Date
-        ? isSameYear(date, disabledYears)
-        : disabledYears instanceof Array
-          ? disabledYears.some((d) => isSameYear(date, d))
-          : disabledYears instanceof Object
+  $: isDateDisabled = (date: Date) => {
+    return disabledDates instanceof Function
+      ? disabledDates(date)
+      : disabledDates instanceof Date
+        ? isSameYear(date, disabledDates)
+        : disabledDates instanceof Array
+          ? disabledDates.some((d) => isSameYear(date, d))
+          : disabledDates instanceof Object
             ? isWithinInterval(date, {
-                start: startOfYear(disabledYears.from),
-                end: endOfYear(disabledYears.to || disabledYears.from),
+                start: startOfYear(disabledDates.from),
+                end: endOfYear(disabledDates.to || disabledDates.from),
               })
             : false;
   };
@@ -62,7 +66,7 @@
         date={year}
         periodType={PeriodType.CalendarYear}
         bind:selected
-        disabled={isYearDisabled(year)}
+        disabled={isDateDisabled(year)}
         {format}
         on:dateChange
       />

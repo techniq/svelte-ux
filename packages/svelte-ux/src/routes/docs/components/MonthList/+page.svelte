@@ -74,20 +74,20 @@
 <h2>Disabled months w/ single</h2>
 
 <Preview>
-  <MonthList disabledMonths={new Date()} />
+  <MonthList disabledDates={new Date()} />
 </Preview>
 
 <h2>Disabled months w/ array</h2>
 
 <Preview>
-  <MonthList disabledMonths={[subMonths(new Date(), 2), new Date(), addMonths(new Date(), 2)]} />
+  <MonthList disabledDates={[subMonths(new Date(), 2), new Date(), addMonths(new Date(), 2)]} />
 </Preview>
 
 <h2>Disabled months w/ range</h2>
 
 <Preview>
   <MonthList
-    disabledMonths={{
+    disabledDates={{
       from: subMonths(new Date(), 2),
       to: addMonths(new Date(), 2),
     }}
@@ -97,7 +97,7 @@
 <h2>Disabled months w/ function</h2>
 
 <Preview>
-  <MonthList disabledMonths={(date) => isAfter(date, new Date())} />
+  <MonthList disabledDates={(date) => isAfter(date, new Date())} />
 </Preview>
 
 <h2>Selected w/ single</h2>

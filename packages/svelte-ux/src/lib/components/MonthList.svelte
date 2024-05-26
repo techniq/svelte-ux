@@ -2,25 +2,28 @@
   import { isSameMonth, isWithinInterval, startOfMonth, endOfMonth } from 'date-fns';
 
   import { getMonths, PeriodType } from '../utils/date.js';
-  import type { SelectedDate } from '../utils/date.js';
+  import type { DisabledDate, SelectedDate } from '../utils/date.js';
   import DateButton from './DateButton.svelte';
 
   export let year: number | undefined = undefined;
   export let selected: SelectedDate | undefined = undefined;
   export let format: string | undefined = undefined;
-  export let disabledMonths: any = undefined; // TODO: Improve types - See isMonthDisabled
+  /**
+   * Dates to disable (not selectable)
+   */
+  export let disabledDates: DisabledDate | undefined = undefined;
 
-  $: isMonthDisabled = (date: Date) => {
-    return disabledMonths instanceof Function
-      ? disabledMonths(date)
-      : disabledMonths instanceof Date
-        ? isSameMonth(date, disabledMonths)
-        : disabledMonths instanceof Array
-          ? disabledMonths.some((d) => isSameMonth(date, d))
-          : disabledMonths instanceof Object
+  $: isDateDisabled = (date: Date) => {
+    return disabledDates instanceof Function
+      ? disabledDates(date)
+      : disabledDates instanceof Date
+        ? isSameMonth(date, disabledDates)
+        : disabledDates instanceof Array
+          ? disabledDates.some((d) => isSameMonth(date, d))
+          : disabledDates instanceof Object
             ? isWithinInterval(date, {
-                start: startOfMonth(disabledMonths.from),
-                end: endOfMonth(disabledMonths.to || disabledMonths.from),
+                start: startOfMonth(disabledDates.from),
+                end: endOfMonth(disabledDates.to || disabledDates.from),
               })
             : false;
   };
@@ -32,7 +35,7 @@
     date={month}
     periodType={PeriodType.Month}
     {selected}
-    disabled={isMonthDisabled(month)}
+    disabled={isDateDisabled(month)}
     {format}
     on:dateChange
   />

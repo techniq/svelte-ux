@@ -8,7 +8,7 @@
   import Dialog from './Dialog.svelte';
   import Field from './Field.svelte';
 
-  import { PeriodType, getDateFuncsByPeriodType } from '../utils/date.js';
+  import { PeriodType, getDateFuncsByPeriodType, type DisabledDate } from '../utils/date.js';
   import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange.js';
   import { cls } from '../utils/styles.js';
   import { getComponentSettings, getSettings } from './settings.js';
@@ -37,6 +37,11 @@
     PeriodType.FiscalYearOctober,
   ];
   export let getPeriodTypePresets = getDateRangePresets;
+
+  /**
+   * Dates to disable (not selectable)
+   */
+  export let disabledDates: DisabledDate | undefined = undefined;
 
   export let classes: {
     field?: ComponentProps<Field>['classes'];
@@ -170,7 +175,13 @@
   </div>
 
   <div class="p-2 border-b overflow-auto">
-    <DateRange bind:selected={currentValue} {periodTypes} {getPeriodTypePresets} class="h-full" />
+    <DateRange
+      bind:selected={currentValue}
+      {periodTypes}
+      {getPeriodTypePresets}
+      {disabledDates}
+      class="h-full"
+    />
   </div>
 
   <div slot="actions" class="flex items-center gap-2">

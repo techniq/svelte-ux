@@ -48,22 +48,24 @@
    */
   export let showOutsideDays: boolean | undefined = undefined;
 
-  /**
-   * Day(s) to disable (not selectable)
-   */
-  export let disabledDays: any = undefined; // TODO: Improve types - See isDayDisabled
+  type DisabledDate = ((date: Date) => boolean) | Date | Date[] | { from: Date; to: Date };
 
-  $: isDayDisabled = (date: Date) => {
-    return disabledDays instanceof Function
-      ? disabledDays(date)
-      : disabledDays instanceof Date
-        ? isSameDay(date, disabledDays)
-        : disabledDays instanceof Array
-          ? disabledDays.some((d) => isSameDay(date, d))
-          : disabledDays instanceof Object
+  /**
+   * Dates to disable (not selectable)
+   */
+  export let disabledDates: DisabledDate | undefined = undefined;
+
+  $: isDateDisabled = (date: Date) => {
+    return disabledDates instanceof Function
+      ? disabledDates(date)
+      : disabledDates instanceof Date
+        ? isSameDay(date, disabledDates)
+        : disabledDates instanceof Array
+          ? disabledDates.some((d) => isSameDay(date, d))
+          : disabledDates instanceof Object
             ? isWithinInterval(date, {
-                start: startOfDayFunc(disabledDays.from),
-                end: endOfDayFunc(disabledDays.to || disabledDays.from),
+                start: startOfDayFunc(disabledDates.from),
+                end: endOfDayFunc(disabledDates.to || disabledDates.from),
               })
             : false;
   };
@@ -124,7 +126,7 @@
         bind:selected
         hidden={isDayHidden(day)}
         fade={isDayFaded(day)}
-        disabled={isDayDisabled(day)}
+        disabled={isDateDisabled(day)}
         on:dateChange
       />
     {/each}
