@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import * as p from '@clack/prompts';
 import { program, Option, InvalidArgumentError } from 'commander';
 import { bold, cyan, gray, green, italic } from '@kitql/helpers';
@@ -120,8 +121,7 @@ copy(
     PROJECT_NAME: projectName,
     SVELTE_UX_VERSION: version,
   },
-  { '.meta.gitignore': '.gitignore' },
-  ['.meta.json']
+  ['.meta.json', '.meta..gitignore']
 );
 
 p.outro(`🎉 Everything is ready!
@@ -146,44 +146,34 @@ function copy(
   /** @type {string} */ sourceDir,
   /** @type {string} */ destDir = projectDir,
   /** @type {Record<string, string>} */ transformMap = {},
-  /** @type {Record<string, string>} */ transformFileMap = {},
   /** @type {string[]} */ ignoreList = []
 ) {
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir);
   }
 
-  const files = fs.readdirSync(sourceDir);
-  for (const fileSource of files) {
-    const fileDest = Object.entries(transformFileMap).reduce((acc, [key, value]) => {
-      return acc.replace(key, value);
-    }, fileSource);
-    // const file = fileSource.replace(".meta.gitignore", ".gitignore")
-    const sourceFilePath = path.join(sourceDir, fileSource);
-    const sourceRelative = path.relative(templateDir, sourceFilePath);
-    // skip the ignore list
-    if (!ignoreList.includes(sourceRelative)) {
-      const destFilePath = path.join(destDir, fileDest);
-
-      const stats = fs.statSync(sourceFilePath);
-
-      // files need to be copied and potentially transformed
-      if (stats.isFile()) {
-        // read the source file
-        const source = fs.readFileSync(sourceFilePath);
-
-        // apply any transformations if necessary
-        const transformed = Object.entries(transformMap).reduce((prev, [pattern, value]) => {
-          return prev.replaceAll(pattern, value);
-        }, source.toString());
-
-        // write the result
-        fs.writeFileSync(destFilePath, transformed);
-      }
-      // if we run into a directory then we should keep going
-      else if (stats.isDirectory()) {
-        copy(sourceFilePath, destFilePath, transformMap, transformFileMap, ignoreList);
-      }
+  const paths = fs.readdirSync(sourceDir);
+  for (const p of paths) {
+    const sourcePath = path.join(sourceDir, p);
+    const sourcePathRel = path.relative(sourceDir, sourcePath);
+    if (ignoreList.includes(sourcePathRel)) {
+      // Skip ignored sources.
+      continue;
+    }
+    const destFilePath = path.join(destDir, sourcePathRel);
+    const stats = fs.statSync(sourcePath);
+    if (stats.isDirectory()) {
+      // In case of a directory, copy files recursively.
+      copy(sourcePath, destFilePath, transformMap, ignoreList);
+    } else if (stats.isFile()) {
+      // Read the source file.
+      const source = fs.readFileSync(sourcePath);
+      // Apply transformations if necessary.
+      const result = Object.entries(transformMap).reduce((prev, [pattern, value]) => {
+        return prev.replaceAll(pattern, value);
+      }, source.toString());
+      // Copy result to destination.
+      fs.writeFileSync(destFilePath, result);
     }
   }
 }
