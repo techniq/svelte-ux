@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.64.0
+
+### Minor Changes
+
+- Standardize `disabledDate` prop across Month/MonthList/YearList and add to DatePickerField/DateRange/DateRangeField/DateSelect ([`c04a5aa286eb82b55225f61f1d15b57a180e4113`](https://github.com/techniq/svelte-ux/commit/c04a5aa286eb82b55225f61f1d15b57a180e4113))
+
 ## 0.63.4
 
 ### Patch Changes
