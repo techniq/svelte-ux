@@ -1,5 +1,11 @@
 # create-svelte-ux
 
+## 0.4.2
+
+### Patch Changes
+
+- Fix `.gitignore` not being copied again ([#363](https://github.com/techniq/svelte-ux/pull/363))
+
 ## 0.4.1
 
 ### Patch Changes
