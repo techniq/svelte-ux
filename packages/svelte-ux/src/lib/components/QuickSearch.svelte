@@ -25,11 +25,7 @@
 
   /*
     TODO:
-     - [ ] Sticky search
-     - [ ] Improve size of Dialog (move class to Dialog without breaking overflow)
      - [ ] Load descriptions/meta from +page.ts
-     - [ ] Improve dialog positioning on small viewports (consistent top/bottom with max height)
-     - [ ] Improve look of search field
   */
 
   function onKeyDown(e: KeyboardEvent) {
