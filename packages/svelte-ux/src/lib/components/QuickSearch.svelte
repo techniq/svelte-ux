@@ -25,15 +25,14 @@
 
   /*
     TODO:
-     - [ ] Sticky search
-     - [ ] Improve size of Dialog (move class to Dialog without breaking overflow)
      - [ ] Load descriptions/meta from +page.ts
-     - [ ] Improve dialog positioning on small viewports (consistent top/bottom with max height)
-     - [ ] Improve look of search field
   */
 
   function onKeyDown(e: KeyboardEvent) {
     if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      open = !open;
+    } else if (open && e.key === 'Escape') {
       e.preventDefault();
       open = !open;
     }
@@ -59,25 +58,25 @@
 <Dialog
   bind:open
   classes={{
-    root: cls('items-start mt-20', settingsClasses.root, classes.root, $$props.class),
+    root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, $$props.class),
     backdrop: 'backdrop-blur-sm',
   }}
 >
-  <div class="overflow-auto max-h-[min(90dvh,600px)] w-[400px] max-w-[95vw] py-1">
-    <SelectField
-      icon={mdiMagnify}
-      placeholder="Search..."
-      inlineOptions={true}
-      {options}
-      {fieldActions}
-      on:change
-      on:change={() => (open = false)}
-      classes={{
-        field: {
-          container: 'border-none hover:shadow-none group-focus-within:shadow-none',
-        },
-        group: 'capitalize',
-      }}
-    />
-  </div>
+  <SelectField
+    icon={mdiMagnify}
+    placeholder="Search..."
+    inlineOptions={true}
+    {options}
+    {fieldActions}
+    on:change
+    on:change={() => (open = false)}
+    classes={{
+      root: 'w-[420px] max-w-[95vw] py-1',
+      field: {
+        container: 'border-none hover:shadow-none group-focus-within:shadow-none',
+      },
+      options: 'overflow-auto max-h-[min(90dvh,380px)]',
+      group: 'capitalize',
+    }}
+  />
 </Dialog>
