@@ -8,6 +8,7 @@
 
   import Popover from './Popover.svelte';
   import { cls } from '../utils/styles.js';
+  import { print } from '../stores/matchMedia.js';
   import { getComponentClasses } from './theme.js';
 
   export let title = '';
@@ -74,7 +75,7 @@
   }
 </script>
 
-{#if enabled && (title || $$slots.title)}
+{#if !$print && enabled && (title || $$slots.title)}
   <Popover
     anchorEl={containerEl?.firstElementChild ?? undefined}
     {placement}
