@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.64.1
+
+### Patch Changes
+
+- [DateField] Add `disabledDates` ([`3ddcb6c64f6f1a98cdfbcae3db8fb877706d7003`](https://github.com/techniq/svelte-ux/commit/3ddcb6c64f6f1a98cdfbcae3db8fb877706d7003))
+
 ## 0.64.0
 
 ### Minor Changes

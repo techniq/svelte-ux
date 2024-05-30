@@ -121,7 +121,8 @@ copy(
     PROJECT_NAME: projectName,
     SVELTE_UX_VERSION: version,
   },
-  ['.meta.json', '.meta..gitignore']
+  { '.meta..gitignore': '.gitignore' },
+  ['.meta.json']
 );
 
 p.outro(`🎉 Everything is ready!
@@ -146,6 +147,7 @@ function copy(
   /** @type {string} */ sourceDir,
   /** @type {string} */ destDir = projectDir,
   /** @type {Record<string, string>} */ transformMap = {},
+  /** @type {Record<string, string>} */ transformFileMap = {},
   /** @type {string[]} */ ignoreList = []
 ) {
   if (!fs.existsSync(destDir)) {
@@ -160,11 +162,14 @@ function copy(
       // Skip ignored sources.
       continue;
     }
-    const destFilePath = path.join(destDir, sourcePathRel);
+    const fileDest = Object.entries(transformFileMap).reduce((acc, [key, value]) => {
+      return acc.replace(key, value);
+    }, p);
+    const destFilePath = path.join(destDir, fileDest);
     const stats = fs.statSync(sourcePath);
     if (stats.isDirectory()) {
       // In case of a directory, copy files recursively.
-      copy(sourcePath, destFilePath, transformMap, ignoreList);
+      copy(sourcePath, destFilePath, transformMap, transformFileMap, ignoreList);
     } else if (stats.isFile()) {
       // Read the source file.
       const source = fs.readFileSync(sourcePath);
