@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.65.0
+
+### Minor Changes
+
+- Add Steps to top-level exports ([#372](https://github.com/techniq/svelte-ux/pull/372))
+
+- Improve search accessibility and make minor style updates ([#369](https://github.com/techniq/svelte-ux/pull/369))
+
 ## 0.64.1
 
 ### Patch Changes
