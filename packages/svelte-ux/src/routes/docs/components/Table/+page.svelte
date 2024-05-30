@@ -1,9 +1,14 @@
 <script lang="ts">
+  import { mdiDotsVertical } from '@mdi/js';
+
   import Button from '$lib/components/Button.svelte';
+  import Menu from '$lib/components/Menu.svelte';
+  import MenuItem from '$lib/components/MenuItem.svelte';
   import Paginate from '$lib/components/Paginate.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
   import Preview from '$lib/components/Preview.svelte';
   import Table from '$lib/components/Table.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
 
   import tableOrderStore from '$lib/stores/tableOrderStore.js';
 
@@ -394,19 +399,81 @@
           {#each columns as column (column.name)}
             {@const value = getCellValue(column, rowData, rowIndex)}
 
-            {#if column.name === 'name'}
-              <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+            <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+              {#if column.name === 'name'}
                 {value}
-              </td>
-            {:else}
-              <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+              {:else}
                 <TweenedValue
                   {value}
                   format={column.format}
                   options={column.dataBackground?.tweened}
                 />
-              </td>
-            {/if}
+              {/if}
+            </td>{/each}
+        </tr>
+      {/each}
+    </tbody>
+  </Table>
+</Preview>
+
+<h2>Row actions</h2>
+
+<Preview>
+  <Table
+    {data}
+    columns={[
+      {
+        name: 'name',
+        align: 'left',
+      },
+      {
+        name: 'calories',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'fat',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'carbs',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'protein',
+        align: 'right',
+        format: 'integer',
+      },
+      {
+        name: 'actions',
+        header: '',
+        align: 'right',
+      },
+    ]}
+  >
+    <tbody slot="data" let:columns let:data let:getCellValue let:getCellContent>
+      {#each data ?? [] as rowData, rowIndex}
+        <tr class="tabular-nums">
+          {#each columns as column (column.name)}
+            {@const value = getCellValue(column, rowData, rowIndex)}
+            {@const content = getCellContent(column, rowData, rowIndex)}
+
+            <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+              {#if column.name === 'actions'}
+                <Toggle let:on={open} let:toggle>
+                  <Button icon={mdiDotsVertical} iconOnly size="sm" on:click={toggle}>
+                    <Menu {open} on:close={toggle} placement="bottom-end">
+                      <MenuItem>Edit</MenuItem>
+                      <MenuItem class="text-danger">Delete</MenuItem>
+                    </Menu>
+                  </Button>
+                </Toggle>
+              {:else}
+                {content}
+              {/if}
+            </td>
           {/each}
         </tr>
       {/each}
