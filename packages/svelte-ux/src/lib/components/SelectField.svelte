@@ -20,7 +20,7 @@
   import type { ScrollIntoViewOptions } from '../actions/scroll.js';
 
   const dispatch = createEventDispatcher<{
-    change: { value: any; option: any };
+    change: { value: any; option: MenuOption };
     inputChange: string;
   }>();
   const { classes: settingsClasses, defaults } = getComponentSettings('SelectField');
@@ -341,7 +341,7 @@
   /**
    * Select option by object
    */
-  function selectOption(option: any) {
+  function selectOption(option: MenuOption) {
     logger.info('selectOption', { option });
 
     const previousValue = value;

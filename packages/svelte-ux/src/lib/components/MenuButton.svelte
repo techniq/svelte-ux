@@ -9,11 +9,12 @@
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
+  import type { MenuOption } from '../types/index.js';
 
-  const dispatch = createEventDispatcher<{ change: { value: any } }>();
+  const dispatch = createEventDispatcher<{ change: { value: any; option: MenuOption } }>();
   const { classes: settingsClasses, defaults } = getComponentSettings('MenuButton');
 
-  export let options: Array<{ label: string; value: any; icon?: string }>;
+  export let options: MenuOption[] = [];
   export let value: any = null;
   export let menuProps: ComponentProps<Menu> = { placement: 'bottom-start' };
   export let menuIcon: string | null = mdiMenuDown;
@@ -68,7 +69,7 @@
             selected={option.value === value}
             on:click={() => {
               value = option.value;
-              dispatch('change', { value });
+              dispatch('change', { option, value });
             }}
           >
             {option.label}
