@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.66.0
+
+### Minor Changes
+
+- Add Svelte 5 to peerDependencies ([`e159b8814c59035b4cfbc9c0ab73efda6545e9be`](https://github.com/techniq/svelte-ux/commit/e159b8814c59035b4cfbc9c0ab73efda6545e9be))
+
+### Patch Changes
+
+- Update dependencies ([`c7910ddc8eb927fee4e1e189a3065a93368e7272`](https://github.com/techniq/svelte-ux/commit/c7910ddc8eb927fee4e1e189a3065a93368e7272))
+
 ## 0.65.0
 
 ### Minor Changes
