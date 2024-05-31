@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.66.1
+
+### Patch Changes
+
+- [MenuButton] Include `option` in dispatched `change` event. Improve types ([`0c3de55d5e6b545dfd824a36d6c1540a82b78e19`](https://github.com/techniq/svelte-ux/commit/0c3de55d5e6b545dfd824a36d6c1540a82b78e19))
+
 ## 0.66.0
 
 ### Minor Changes
