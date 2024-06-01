@@ -114,7 +114,7 @@ const svelteNext = await p.confirm({
 if (p.isCancel(svelteNext)) {
   process.exit(1);
 }
-const svelteVersion = svelteNext ? '^5.0.0-next.148' : '^4.2.17';
+const svelteVersion = svelteNext ? 'next' : 'latest';
 
 const templateDir = path.join(templatesDir, template);
 const templateMeta = options.find((option) => option.value === template);
