@@ -1,5 +1,11 @@
 # create-svelte-ux
 
+## 0.5.0
+
+### Minor Changes
+
+- Detect package manager for customized "Next Steps" ([#375](https://github.com/techniq/svelte-ux/pull/375))
+
 ## 0.4.3
 
 ### Patch Changes
