@@ -107,6 +107,15 @@ const template = options_cli.template
 if (p.isCancel(template)) {
   process.exit(1);
 }
+const svelteNext = await p.confirm({
+  message: 'Would you like to use Svelte 5 (unstable)?',
+  initialValue: false,
+});
+if (p.isCancel(svelteNext)) {
+  process.exit(1);
+}
+const svelteVersion = svelteNext ? '^5.0.0-next.148' : '^4.2.17';
+
 const templateDir = path.join(templatesDir, template);
 const templateMeta = options.find((option) => option.value === template);
 if (!templateMeta) {
@@ -120,6 +129,7 @@ copy(
   {
     PROJECT_NAME: projectName,
     SVELTE_UX_VERSION: version,
+    SVELTE_VERSION: svelteVersion,
   },
   { '.meta..gitignore': '.gitignore' },
   ['.meta.json']
