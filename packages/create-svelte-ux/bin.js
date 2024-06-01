@@ -125,12 +125,16 @@ copy(
   ['.meta.json']
 );
 
+const userAgent = process.env.npm_config_user_agent;
+const pm = userAgent ? userAgent.split('/')[0] : 'npm';
+const runCmd = pm === 'pnpm' ? 'dev' : 'run dev';
+
 p.outro(`🎉 Everything is ready!
 
 👉 Next Steps
 0️⃣  Go to your project     :  cd ${green(projectDir)}
-1️⃣  Install dependencies   :  ${green(`npm i`)}       | ${green(`pnpm i`)}
-2️⃣  Start your application :  ${green(`npm run dev`)} | ${green(`pnpm dev`)}`);
+1️⃣  Install dependencies   :  ${green(`${pm} i`)}
+2️⃣  Start your application :  ${green(`${pm} ${runCmd}`)}`)
 
 console.log(
   gray(
