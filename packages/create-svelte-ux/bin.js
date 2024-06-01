@@ -134,7 +134,7 @@ p.outro(`🎉 Everything is ready!
 👉 Next Steps
 0️⃣  Go to your project     :  cd ${green(projectDir)}
 1️⃣  Install dependencies   :  ${green(`${pm} i`)}
-2️⃣  Start your application :  ${green(`${pm} ${runCmd}`)}`)
+2️⃣  Start your application :  ${green(`${pm} ${runCmd}`)}`);
 
 console.log(
   gray(
