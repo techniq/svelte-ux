@@ -1,5 +1,15 @@
 # create-svelte-ux
 
+## 0.6.0
+
+### Minor Changes
+
+- Allow to set up templates with Svelte 5 ([#378](https://github.com/techniq/svelte-ux/pull/378))
+
+### Patch Changes
+
+- Update dependency versions in create templates ([#377](https://github.com/techniq/svelte-ux/pull/377))
+
 ## 0.5.0
 
 ### Minor Changes
