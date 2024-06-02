@@ -58,14 +58,14 @@ describe('formatDate()', () => {
 
   describe('should format date for PeriodType.Day', () => {
     const localDate = new Date(2023, 10, 21);
-    const combi = [
+    const cases = [
       ['short', defaultLocale, '11/21'],
       ['short', fr, '21/11'],
       ['long', defaultLocale, 'Nov 21, 2023'],
       ['long', fr, '21 nov. 2023'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, localDate, PeriodType.Day, { variant })).equal(
@@ -76,14 +76,14 @@ describe('formatDate()', () => {
   });
 
   describe('should format date string for PeriodType.Day', () => {
-    const combi = [
+    const cases = [
       ['short', defaultLocale, '11/21'],
       ['short', fr, '21/11'],
       ['long', defaultLocale, 'Nov 21, 2023'],
       ['long', fr, '21 nov. 2023'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, testDate, PeriodType.Day, { variant })).equal(
@@ -94,7 +94,7 @@ describe('formatDate()', () => {
   });
 
   describe('should format date string for DayTime, TimeOnly', () => {
-    const combi: [Date, PeriodType, FormatDateOptions, string[]][] = [
+    const cases: [Date, PeriodType, FormatDateOptions, string[]][] = [
       [
         dt_1M_1d_time_pm,
         PeriodType.DayTime,
@@ -123,7 +123,7 @@ describe('formatDate()', () => {
       ],
     ];
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [date, periodType, options, [expected_default, expected_fr]] = c;
       it(c.toString(), () => {
         expect(formatWithLocale(defaultLocale, date, periodType, options)).equal(expected_default);
@@ -136,7 +136,7 @@ describe('formatDate()', () => {
   });
 
   describe('should format date for PeriodType.WeekSun / Mon no mather the locale', () => {
-    const combi = [
+    const cases = [
       [PeriodType.WeekSun, 'short', defaultLocale, '11/19 - 11/25'],
       [PeriodType.WeekSun, 'short', fr, '19/11 - 25/11'],
       [PeriodType.WeekSun, 'long', defaultLocale, '11/19/2023 - 11/25/2023'],
@@ -145,7 +145,7 @@ describe('formatDate()', () => {
       [PeriodType.WeekMon, 'long', fr, '20/11/2023 - 26/11/2023'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [periodType, variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, testDate, periodType, { variant })).equal(expected);
@@ -154,7 +154,7 @@ describe('formatDate()', () => {
   });
 
   describe('should format date for PeriodType.Week with the good weekstarton locale', () => {
-    const combi = [
+    const cases = [
       [PeriodType.Week, 'short', defaultLocale, '11/19 - 11/25'],
       [PeriodType.Week, 'short', fr, '20/11 - 26/11'],
       [PeriodType.Week, 'long', defaultLocale, '11/19/2023 - 11/25/2023'],
@@ -166,7 +166,7 @@ describe('formatDate()', () => {
       [PeriodType.Week, 'long', fr, '20/11/2023 - 26/11/2023'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [periodType, variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, testDate, periodType, { variant })).equal(expected);
@@ -175,14 +175,14 @@ describe('formatDate()', () => {
   });
 
   describe('should format date for PeriodType.Month', () => {
-    const combi = [
+    const cases = [
       ['short', defaultLocale, 'Nov'],
       ['short', fr, 'nov.'],
       ['long', defaultLocale, 'November'],
       ['long', fr, 'novembre'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, testDate, PeriodType.Month, { variant })).equal(
@@ -193,14 +193,14 @@ describe('formatDate()', () => {
   });
 
   describe('should format date for PeriodType.MonthYear', () => {
-    const combi = [
+    const cases = [
       ['short', defaultLocale, 'Nov 23'],
       ['short', fr, 'nov. 23'],
       ['long', defaultLocale, 'November 2023'],
       ['long', fr, 'novembre 2023'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, testDate, PeriodType.MonthYear, { variant })).equal(
@@ -211,14 +211,14 @@ describe('formatDate()', () => {
   });
 
   describe('should format date for PeriodType.Quarter', () => {
-    const combi = [
+    const cases = [
       ['short', defaultLocale, 'Oct - Dec 23'],
       ['short', fr, 'oct. - déc. 23'],
       ['long', defaultLocale, 'October - December 2023'],
       ['long', fr, 'octobre - décembre 2023'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, testDate, PeriodType.Quarter, { variant })).equal(
@@ -229,14 +229,14 @@ describe('formatDate()', () => {
   });
 
   describe('should format date for PeriodType.CalendarYear', () => {
-    const combi = [
+    const cases = [
       ['short', defaultLocale, '23'],
       ['short', fr, '23'],
       ['long', defaultLocale, '2023'],
       ['long', fr, '2023'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, testDate, PeriodType.CalendarYear, { variant })).equal(
@@ -247,14 +247,14 @@ describe('formatDate()', () => {
   });
 
   describe('should format date for PeriodType.FiscalYearOctober', () => {
-    const combi = [
+    const cases = [
       ['short', defaultLocale, '24'],
       ['short', fr, '24'],
       ['long', defaultLocale, '2024'],
       ['long', fr, '2024'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(
@@ -265,14 +265,14 @@ describe('formatDate()', () => {
   });
 
   describe('should format date for PeriodType.BiWeek1Sun', () => {
-    const combi = [
+    const cases = [
       ['short', defaultLocale, '11/12 - 11/25'],
       ['short', fr, '12/11 - 25/11'],
       ['long', defaultLocale, '11/12/2023 - 11/25/2023'],
       ['long', fr, '12/11/2023 - 25/11/2023'],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales, expected] = c;
       it(c.toString(), () => {
         expect(formatDateWithLocale(locales, testDate, PeriodType.BiWeek1Sun, { variant })).equal(
@@ -284,14 +284,14 @@ describe('formatDate()', () => {
 
   describe('should format date for PeriodType.undefined', () => {
     const expected = '2023-11-21T00:00:00-04:00';
-    const combi = [
+    const cases = [
       ['short', defaultLocale],
       ['short', fr],
       ['long', defaultLocale],
       ['long', fr],
     ] as const;
 
-    for (const c of combi) {
+    for (const c of cases) {
       const [variant, locales] = c;
       it(c.toString(), () => {
         // @ts-expect-error
@@ -302,7 +302,7 @@ describe('formatDate()', () => {
 });
 
 describe('formatIntl() tokens', () => {
-  const combi: [Date, CustomIntlDateTimeFormatOptions, string[]][] = [
+  const cases: [Date, CustomIntlDateTimeFormatOptions, string[]][] = [
     [dt_1M_1d, 'MM/dd/yyyy', ['03/07/2023', '07/03/2023']],
     [dt_2M_2d, 'M/d/yyyy', ['11/21/2023', '21/11/2023']],
     [dt_2M_1d, 'M/d/yyyy', ['11/7/2023', '07/11/2023']],
@@ -357,7 +357,7 @@ describe('formatIntl() tokens', () => {
     ],
   ];
 
-  for (const c of combi) {
+  for (const c of cases) {
     const [date, tokens, [expected_default, expected_fr]] = c;
     it(c.toString(), () => {
       expect(formatIntl(defaultLocale, date, tokens)).equal(expected_default);
