@@ -20,6 +20,7 @@
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
   import { getSettings } from './settings.js';
+  import MonthListByYear from './MonthListByYear.svelte';
 
   export let selected: SelectedDate | undefined = undefined;
 
@@ -85,53 +86,69 @@
     });
     return !isCurrentMonth && showOutsideDays;
   };
+
+  let showMonthSelect = false;
 </script>
 
-{#if !hideControls}
-  <div class="flex m-2">
-    <Button
-      icon={mdiChevronLeft}
-      class="p-2"
-      on:click={() => (startOfMonth = addMonths(startOfMonth, -1))}
-    />
-
-    <div class="flex flex-1 items-center justify-center">
-      <span>{$format(startOfMonth, PeriodType.MonthYear)}</span>
-    </div>
-
-    <Button
-      icon={mdiChevronRight}
-      class="p-2"
-      on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
+{#if showMonthSelect}
+  <div class="max-h-[350px] overflow-auto">
+    <MonthListByYear
+      selected={startOfMonth}
+      on:dateChange={(e) => {
+        startOfMonth = e.detail;
+        showMonthSelect = false;
+      }}
     />
   </div>
-{/if}
-
-<div class="flex">
-  {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
-    <div class="flex-1 text-center">
-      <span class="text-xs text-surface-content/50">
-        {$format(day, PeriodType.Day, { custom: 'eee' })}
-      </span>
-    </div>
-  {/each}
-</div>
-
-<div class="grid grid-cols-7 grid-rows-6 gap-y-4">
-  {#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
-    {#each week ?? [] as day (day.valueOf())}
-      <DateButton
-        date={day}
-        periodType={PeriodType.Day}
-        bind:selected
-        hidden={isDayHidden(day)}
-        fade={isDayFaded(day)}
-        disabled={isDateDisabled(day)}
-        on:dateChange
+{:else}
+  {#if !hideControls}
+    <div class="flex m-2">
+      <Button
+        icon={mdiChevronLeft}
+        class="p-2"
+        on:click={() => (startOfMonth = addMonths(startOfMonth, -1))}
       />
+
+      <div class="flex flex-1 items-center justify-center">
+        <Button on:click={() => (showMonthSelect = true)}>
+          {$format(startOfMonth, PeriodType.MonthYear)}
+        </Button>
+      </div>
+
+      <Button
+        icon={mdiChevronRight}
+        class="p-2"
+        on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
+      />
+    </div>
+  {/if}
+
+  <div class="grid grid-cols-7">
+    {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
+      <div class="text-center">
+        <span class="text-xs text-surface-content/50">
+          {$format(day, PeriodType.Day, { custom: 'eee' })}
+        </span>
+      </div>
     {/each}
-  {/each}
-</div>
+  </div>
+
+  <div class="grid grid-cols-7 grid-rows-6 gap-y-4">
+    {#each monthDaysByWeek ?? [] as week, weekIndex (weekIndex)}
+      {#each week ?? [] as day (day.valueOf())}
+        <DateButton
+          date={day}
+          periodType={PeriodType.Day}
+          bind:selected
+          hidden={isDayHidden(day)}
+          fade={isDayFaded(day)}
+          disabled={isDateDisabled(day)}
+          on:dateChange
+        />
+      {/each}
+    {/each}
+  </div>
+{/if}
 
 <!-- 
   TODO: Transition
