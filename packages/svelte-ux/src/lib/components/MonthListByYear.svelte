@@ -30,7 +30,7 @@
 </script>
 
 <div class="grid divide-y">
-  <Button on:click={() => (minYear -= 1)}>More</Button>
+  <Button on:click={() => (minYear -= 10)}>More</Button>
 
   {#each years ?? [] as year (year)}
     <div class="grid grid-cols-[auto,1fr] items-center gap-2 p-2">
@@ -43,5 +43,5 @@
     </div>
   {/each}
 
-  <Button on:click={() => (maxYear += 1)}>More</Button>
+  <Button on:click={() => (maxYear += 10)}>More</Button>
 </div>
