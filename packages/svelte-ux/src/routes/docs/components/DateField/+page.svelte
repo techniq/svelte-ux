@@ -91,3 +91,17 @@
 <Preview>
   <DateField label="Birth date" on:change={(e) => console.log(e.detail)} />
 </Preview>
+
+<h2>Custom format (ignore Intl settings)</h2>
+
+<Preview>
+  <DateField
+    label="Birth date"
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+    picker
+    clearable
+    format="dd/MM/yyyy"
+  />
+  value: {value}
+</Preview>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import { parse as parseDate } from 'date-fns';
-  import { PeriodType, type DisabledDate } from '../utils/date_types.js';
+  import { parse as parseDate, format as formatDate } from 'date-fns';
+  import { type DisabledDate } from '../utils/date_types.js';
   import { getComponentSettings, getSettings } from './settings.js';
   import { cls } from '../utils/styles.js';
 
@@ -86,7 +86,7 @@
 >
   <Input
     {required}
-    value={value ? $format_ux(value, PeriodType.Day, { custom: actualFormat }) : inputValue}
+    value={value ? formatDate(value, actualFormat) : inputValue}
     mask={actualMask}
     {replace}
     {id}
