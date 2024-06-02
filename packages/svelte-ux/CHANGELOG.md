@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.66.2
+
+### Patch Changes
+
+- [DateField] Properly support custom format (ignore Intl/locale) ([`6b4196855d5363b41c232a7d248b226c16d2b5a1`](https://github.com/techniq/svelte-ux/commit/6b4196855d5363b41c232a7d248b226c16d2b5a1))
+
 ## 0.66.1
 
 ### Patch Changes
