@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.66.3
+
+### Patch Changes
+
+- [MonthListByYear] Increase more/less buttons by 10 years ([`f4fa342ec83f5de8028bb3ba0a7f699dae882bec`](https://github.com/techniq/svelte-ux/commit/f4fa342ec83f5de8028bb3ba0a7f699dae882bec))
+
+- [Month] Add year/month selection for quickly selecting historical dates (birth date, etc) ([`6546b50692268d4fea5b0d0a0b6991c26806aa68`](https://github.com/techniq/svelte-ux/commit/6546b50692268d4fea5b0d0a0b6991c26806aa68))
+
 ## 0.66.2
 
 ### Patch Changes
