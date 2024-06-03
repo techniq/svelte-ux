@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.66.4
+
+### Patch Changes
+
+- [MenuField] Include selected `option` when dispatching `change` event. Add type to event ([`eff59e1e240c7d31d3d22b15a42745d634afb468`](https://github.com/techniq/svelte-ux/commit/eff59e1e240c7d31d3d22b15a42745d634afb468))
+
+- [State] Improve typing ([`b57e07a42866093df4ccd807acfd7aac762fd00b`](https://github.com/techniq/svelte-ux/commit/b57e07a42866093df4ccd807acfd7aac762fd00b))
+
 ## 0.66.3
 
 ### Patch Changes
