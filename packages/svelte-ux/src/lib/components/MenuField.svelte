@@ -57,8 +57,8 @@
     }
   };
 
-  const dispatch = createEventDispatcher();
-  $: dispatch('change', { value });
+  const dispatch = createEventDispatcher<{ change: { value: any; option: MenuOption } }>();
+  $: dispatch('change', { value, option: selected });
 
   function setValue(val: any): void {
     value = val;
