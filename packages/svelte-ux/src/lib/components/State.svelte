@@ -1,9 +1,11 @@
 <script lang="ts">
-  export let initial: any = null;
+  type T = $$Generic;
+
+  export let initial: T | null = null;
 
   let value = initial;
 
-  function set(newValue: any) {
+  function set(newValue: T) {
     value = newValue;
   }
 </script>
