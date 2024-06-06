@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.66.5
+
+### Patch Changes
+
+- [MenuButton] Pass selected `value` to `selection` slot and add examples leveraging value ([`98231366b4c5e69d34e94687ad9db2be6dc1f504`](https://github.com/techniq/svelte-ux/commit/98231366b4c5e69d34e94687ad9db2be6dc1f504))
+
 ## 0.66.4
 
 ### Patch Changes
