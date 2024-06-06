@@ -1,6 +1,13 @@
 <script lang="ts">
-  import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify } from '@mdi/js';
+  import {
+    mdiContentCopy,
+    mdiContentCut,
+    mdiContentPaste,
+    mdiMagnify,
+    mdiChevronDown,
+  } from '@mdi/js';
 
+  import Icon from '$lib/components/Icon.svelte';
   import MenuButton from '$lib/components/MenuButton.svelte';
   import MenuItem from '$lib/components/MenuItem.svelte';
   import Preview from '$lib/components/Preview.svelte';
@@ -45,6 +52,36 @@
   <MenuButton {options} icon={mdiMagnify} />
 </Preview>
 
+<h2>Option icons</h2>
+
+<Preview>
+  <MenuButton options={optionsWithIcons} />
+</Preview>
+
+<h2>Option icons with selected icon</h2>
+
+<Preview>
+  <MenuButton options={optionsWithIcons}>
+    <svelte:fragment slot="selection" let:value>
+      {#if value}
+        <Icon data={value?.icon ?? mdiChevronDown} /> {value.label}
+      {:else}
+        No selection
+      {/if}
+    </svelte:fragment>
+  </MenuButton>
+</Preview>
+
+<h2>Icon only</h2>
+
+<Preview>
+  <MenuButton options={optionsWithIcons} menuIcon={null}>
+    <svelte:fragment slot="selection" let:value>
+      <Icon data={value?.icon ?? mdiChevronDown} />
+    </svelte:fragment>
+  </MenuButton>
+</Preview>
+
 <h2>Variant</h2>
 
 <Preview>
@@ -55,12 +92,6 @@
 
 <Preview>
   <MenuButton {options} size="sm" />
-</Preview>
-
-<h2>Option icons</h2>
-
-<Preview>
-  <MenuButton options={optionsWithIcons} />
 </Preview>
 
 <h2>menuProps (placement)</h2>

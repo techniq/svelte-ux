@@ -36,7 +36,7 @@
   {...restProps}
   class={cls('MenuButton', settingsClasses.root, classes.root, $$props.class)}
 >
-  <slot name="selection">
+  <slot name="selection" value={selected}>
     <span class={cls('truncate', settingsClasses.label, classes.label)}>
       {selected?.label ?? 'No selection'}
     </span>
