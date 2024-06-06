@@ -156,6 +156,22 @@
   </Toggle>
 </Preview>
 
+<h2>explicit placement</h2>
+
+<Preview>
+  <Toggle let:on={open} let:toggle>
+    <Button on:click={toggle}>
+      Click me
+      <Menu {open} on:close={toggle} placement="right-start">
+        <MenuItem>Refresh</MenuItem>
+        <MenuItem>Settings</MenuItem>
+        <MenuItem>Help</MenuItem>
+        <MenuItem>Sign In</MenuItem>
+      </Menu>
+    </Button>
+  </Toggle>
+</Preview>
+
 <h2>disableTransition</h2>
 
 <h3>Useful when menu will exceed window and need repositioned.</h3>
