@@ -11,7 +11,7 @@ type LogLevel = (typeof logLevels)[number];
  *   localStorage.logger = 'SelectField:INFO,Dialog'
  */
 
-export default class Logger {
+export class Logger {
   name: string;
 
   constructor(name: string) {

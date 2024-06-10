@@ -9,7 +9,7 @@
 
   import { cls } from '../utils/styles.js';
   import { uniqueId } from '../utils/string.js';
-  import Logger from '../utils/logger.js';
+  import { Logger } from '../utils/logger.js';
   import { getComponentClasses } from './theme.js';
 
   export let name = uniqueId('group-');

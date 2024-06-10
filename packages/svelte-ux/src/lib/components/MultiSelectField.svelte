@@ -13,7 +13,7 @@
   import TextField from './TextField.svelte';
 
   import { cls } from '../utils/styles.js';
-  import Logger from '../utils/logger.js';
+  import { Logger } from '../utils/logger.js';
   import ProgressCircle from './ProgressCircle.svelte';
 
   type Option = $$Generic;
