@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.66.6
+
+### Patch Changes
+
+- Change Logger to named export and expose in top-level exports ([`da765a43cdfeec87997c75e60e9165985986f108`](https://github.com/techniq/svelte-ux/commit/da765a43cdfeec87997c75e60e9165985986f108))
+
 ## 0.66.5
 
 ### Patch Changes
