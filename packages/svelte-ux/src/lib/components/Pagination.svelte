@@ -31,6 +31,8 @@
     | 'pagination'
     | 'perPage'
     | 'actions';
+
+  /** Determine which actions to show */
   export let show: ShowComponent[] = ['prevPage', 'pagination', 'nextPage'];
 
   export let classes: {
