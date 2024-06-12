@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.66.7
+
+### Patch Changes
+
+- Update dependencies ([`a86aa6a10ea06dee4fd58016fe2d9c81a26d7393`](https://github.com/techniq/svelte-ux/commit/a86aa6a10ea06dee4fd58016fe2d9c81a26d7393))
+
+- [ThemeSelect] Use simplified menu when single light/dark themes are used ([`2c49470c5c1ea310760eb561ac8b44eb3de073ba`](https://github.com/techniq/svelte-ux/commit/2c49470c5c1ea310760eb561ac8b44eb3de073ba))
+
+- [ThemeSelect] Show current scheme (light/dark) as icon ([`2c49470c5c1ea310760eb561ac8b44eb3de073ba`](https://github.com/techniq/svelte-ux/commit/2c49470c5c1ea310760eb561ac8b44eb3de073ba))
+
 ## 0.66.6
 
 ### Patch Changes
