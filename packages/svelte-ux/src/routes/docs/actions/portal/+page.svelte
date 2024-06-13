@@ -8,6 +8,8 @@
   let optionsAnscestor: PortalOptions = false;
   let optionsSibling: PortalOptions = false;
   let optionsCustom: PortalOptions = false;
+  let optionsDestroyable: PortalOptions = { target: undefined, enabled: false };
+  let destroy = false;
 </script>
 
 <h1>Usage</h1>
@@ -92,6 +94,37 @@
     </div>
   </div>
   <div class="custom-portal-target relative h-32 bg-surface-200 mt-4"></div>
+</Preview>
+
+<h2>Destroyable</h2>
+
+<Preview>
+  {#if !destroy}
+    <div class="PortalTarget relative">
+      <div class="relative">
+        <Button
+          on:click={() => (optionsDestroyable = { target: '.destroyable-example-target' })}
+          class="border mt-4">Move to target</Button
+        >
+        <Button on:click={() => (destroy = !destroy)} class="border mt-4">
+          {#if destroy}
+            Recreate
+          {:else}
+            Destroy
+          {/if}
+        </Button>
+        <div use:portal={optionsDestroyable} class="portal-content">
+          <div>Portal content</div>
+          {#if optionsBasic}
+            <Button on:click={() => (optionsBasic = false)} class="border mt-4">
+              Move to back to parent
+            </Button>
+          {/if}
+        </div>
+      </div>
+      <div class="destroyable-example-target relative h-32 bg-surface-200 mt-4"></div>
+    </div>
+  {/if}
 </Preview>
 
 <style lang="postcss">
