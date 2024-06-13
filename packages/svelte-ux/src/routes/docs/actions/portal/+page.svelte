@@ -27,7 +27,7 @@
       <div>Portal content</div>
       {#if optionsBasic}
         <Button on:click={() => (optionsBasic = false)} class="border mt-4">
-          Move to back to parent
+          Move back to parent
         </Button>
       {/if}
     </div>
@@ -45,7 +45,7 @@
       <div>Portal content</div>
       {#if optionsSibling}
         <Button on:click={() => (optionsSibling = false)} class="border mt-4">
-          Move to back to parent
+          Move back to parent
         </Button>
       {/if}
     </div>
@@ -66,7 +66,7 @@
         <div>Portal content</div>
         {#if optionsAnscestor}
           <Button on:click={() => (optionsAnscestor = false)} class="border mt-4">
-            Move to back to parent
+            Move back to parent
           </Button>
         {/if}
       </div>
@@ -88,7 +88,7 @@
       <div>Portal content</div>
       {#if optionsCustom}
         <Button on:click={() => (optionsCustom = false)} class="border mt-4">
-          Move to back to parent
+          Move back to parent
         </Button>
       {/if}
     </div>
@@ -117,7 +117,7 @@
           <div>Portal content</div>
           {#if optionsBasic}
             <Button on:click={() => (optionsBasic = false)} class="border mt-4">
-              Move to back to parent
+              Move back to parent
             </Button>
           {/if}
         </div>
