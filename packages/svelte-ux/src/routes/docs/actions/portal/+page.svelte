@@ -106,13 +106,7 @@
           on:click={() => (optionsDestroyable = { target: '.destroyable-example-target' })}
           class="border mt-4">Move to target</Button
         >
-        <Button on:click={() => (destroy = !destroy)} class="border mt-4">
-          {#if destroy}
-            Recreate
-          {:else}
-            Destroy
-          {/if}
-        </Button>
+        <Button on:click={() => (destroy = true)} class="border mt-4">Destroy</Button>
         <div use:portal={optionsDestroyable} class="portal-content">
           <div>Portal content</div>
           {#if optionsBasic}
@@ -124,6 +118,8 @@
       </div>
       <div class="destroyable-example-target relative h-32 bg-surface-200 mt-4"></div>
     </div>
+  {:else}
+    <Button on:click={() => (destroy = false)} class="border mt-4">Recreate</Button>
   {/if}
 </Preview>
 
