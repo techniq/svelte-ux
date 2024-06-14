@@ -1,4 +1,4 @@
-import api from '$lib/components/Button.svelte?raw&sveld';
+import api from '$lib/components/ButtonGroup.svelte?raw&sveld';
 import source from '$lib/components/ButtonGroup.svelte?raw';
 import pageSource from './+page.svelte?raw';
 
