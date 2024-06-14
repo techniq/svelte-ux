@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ProgressCircle from '$lib/components/ProgressCircle.svelte';
+  import { ProgressCircle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   let value = 50;

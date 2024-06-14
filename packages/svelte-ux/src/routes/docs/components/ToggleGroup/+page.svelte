@@ -1,16 +1,12 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
-  import toggleGroupApi from '$lib/components/ToggleGroup.svelte?raw&sveld';
-  import toggleOptionApi from '$lib/components/ToggleOption.svelte?raw&sveld';
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
+
+  import { ApiDocs, Button, Field, Radio, ToggleGroup, ToggleOption, TogglePanel } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import Field from '$lib/components/Field.svelte';
-  import Radio from '$lib/components/Radio.svelte';
-  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
-  import ToggleOption from '$lib/components/ToggleOption.svelte';
-  import TogglePanel from '$lib/components/TogglePanel.svelte';
+
+  import toggleGroupApi from '$lib/components/ToggleGroup.svelte?raw&sveld';
+  import toggleOptionApi from '$lib/components/ToggleOption.svelte?raw&sveld';
 
   const allValue = {};
   const missedValue = {};

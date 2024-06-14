@@ -1,12 +1,10 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
+  import { Toggle, resize, intersection, mutate } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
   import Code from '$lib/components/Code.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
-
-  import { resize, intersection, mutate } from '$lib/actions/observer.js';
 </script>
 
 <h1>Usage</h1>

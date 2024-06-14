@@ -1,9 +1,7 @@
 <script lang="ts">
   import { mdiAccount } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import ExpansionPanel from '$lib/components/ExpansionPanel.svelte';
-  import ListItem from '$lib/components/ListItem.svelte';
+  import { Button, ExpansionPanel, ListItem } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 </script>
 

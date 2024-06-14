@@ -1,9 +1,9 @@
 <script lang="ts">
+  import { sticky, stickyContext } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
   import Code from '$lib/components/Code.svelte';
-
-  import { sticky, stickyContext } from '$lib/actions/sticky.js';
 </script>
 
 <h1>Usage</h1>

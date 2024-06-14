@@ -1,14 +1,9 @@
 <script lang="ts">
+  import { Button, remainingViewportHeight, remainingViewportWidth, overflow } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
-  import Button from '$lib/components/Button.svelte';
   import Code from '$lib/components/Code.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
-
-  import {
-    remainingViewportHeight,
-    remainingViewportWidth,
-    overflow,
-  } from '$lib/actions/layout.js';
 
   let overflowX = 0;
   let overflowY = 0;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import NavItem from '$lib/components/NavItem.svelte';
+  import { NavItem } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   import { page } from '$app/stores';

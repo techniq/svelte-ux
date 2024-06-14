@@ -1,10 +1,8 @@
 <script lang="ts">
   import { mdiInbox, mdiCheckCircleOutline } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Icon from '$lib/components/Icon.svelte';
+  import { Button, Icon, Notification } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Notification from '$lib/components/Notification.svelte';
 </script>
 
 <h1>Examples</h1>

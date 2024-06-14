@@ -2,20 +2,21 @@
   import { mdiChevronLeft, mdiChevronRight, mdiMinus, mdiPlus } from '@mdi/js';
   import { addMonths, startOfMonth } from 'date-fns';
 
-  import Button from '$lib/components/Button.svelte';
-  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
-  import Field from '$lib/components/Field.svelte';
-  import Kbd from '$lib/components/Kbd.svelte';
-  import Month from '$lib/components/Month.svelte';
+  import {
+    Button,
+    ButtonGroup,
+    Field,
+    Kbd,
+    Month,
+    ScrollingValue,
+    ToggleGroup,
+    ToggleOption,
+    getSettings,
+    timerStore,
+    romanize,
+    PeriodType,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import ScrollingValue from '$lib/components/ScrollingValue.svelte';
-  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
-  import ToggleOption from '$lib/components/ToggleOption.svelte';
-
-  import { getSettings } from '$lib/components/settings.js';
-  import timerStore from '$lib/stores/timerStore.js';
-  import { romanize } from '$lib/utils/string.js';
-  import { PeriodType } from '$lib/utils/date_types.js';
 
   let value = 0;
   let axis: 'x' | 'y' = 'x';

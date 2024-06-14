@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { RangeSlider } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import RangeSlider from '$lib/components/RangeSlider.svelte';
 
   let value = [25, 75];
 </script>

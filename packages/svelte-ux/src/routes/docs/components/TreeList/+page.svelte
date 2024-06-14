@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TreeList from '$lib/components/TreeList.svelte';
+  import { TreeList } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
 </script>

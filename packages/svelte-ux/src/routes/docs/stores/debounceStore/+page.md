@@ -1,10 +1,8 @@
 <script lang="ts">
   import { writable } from 'svelte/store';
 
+	import { TextField, debounceStore } from 'svelte-ux';
 	import Preview from '$lib/components/Preview.svelte';
-	import TextField from '$lib/components/TextField.svelte';
-
-	import debounceStore from '$lib/stores/debounceStore';
 
   const value = writable(null);
   const debouncedValue = debounceStore(value)

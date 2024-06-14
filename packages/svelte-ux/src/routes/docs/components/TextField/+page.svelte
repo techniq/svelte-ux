@@ -16,14 +16,10 @@
     mdiPlus,
   } from '@mdi/js';
 
-  import Blockquote from '$docs/Blockquote.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import Icon from '$lib/components/Icon.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
-  import TextField from '$lib/components/TextField.svelte';
+  import { Button, Icon, SectionDivider, TextField, autoHeight, debounceEvent } from 'svelte-ux';
 
-  import { autoHeight, debounceEvent } from '$lib/actions/input.js';
+  import Preview from '$lib/components/Preview.svelte';
+  import Blockquote from '$docs/Blockquote.svelte';
 
   const numberOperators = [
     { label: '=', value: 'equal' },

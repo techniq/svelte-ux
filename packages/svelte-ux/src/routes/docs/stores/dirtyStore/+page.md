@@ -1,11 +1,8 @@
 <script lang="ts">
   import { writable } from 'svelte/store';
 
-	import Button from '$lib/components/Button.svelte';
+	import { Button, TextField, dirtyStore } from 'svelte-ux';
 	import Preview from '$lib/components/Preview.svelte';
-	import TextField from '$lib/components/TextField.svelte';
-
-	import dirtyStore from '$lib/stores/dirtyStore';
 
   const value = writable('');
   const isDirty = dirtyStore(value)

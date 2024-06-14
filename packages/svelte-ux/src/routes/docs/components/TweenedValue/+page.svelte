@@ -1,13 +1,8 @@
 <script lang="ts">
   import * as easings from 'svelte/easing';
 
-  import Button from '$lib/components/Button.svelte';
-  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
-  import Kbd from '$lib/components/Kbd.svelte';
+  import { Button, ButtonGroup, Kbd, TweenedValue, cls, getSettings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import TweenedValue from '$lib/components/TweenedValue.svelte';
-  import { getSettings } from '$lib/components/settings.js';
-  import { cls } from '$lib/utils/styles.js';
 
   const { format } = getSettings();
 

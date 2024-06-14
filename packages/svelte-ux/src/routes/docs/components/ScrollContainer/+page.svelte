@@ -1,7 +1,6 @@
 <script lang="ts">
-  import Button from '$lib/components/Button.svelte';
+  import { Button, ScrollContainer } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import ScrollContainer from '$lib/components/ScrollContainer.svelte';
 </script>
 
 <h1>Examples</h1>

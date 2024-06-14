@@ -1,5 +1,5 @@
 // top-level exports
-export { formatDate } from './date.js';
+export { formatDate, getDateFuncsByPeriodType } from './date.js';
 export { PeriodType, DayOfWeek, DateToken } from './date_types.js';
 export * from './date_types.js';
 export { getDuration, humanizeDuration, DurationUnits } from './duration.js';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
+  import { SectionDivider } from 'svelte-ux';
 </script>
 
 <!--

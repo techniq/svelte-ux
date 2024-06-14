@@ -1,12 +1,6 @@
 <script lang="ts">
-  import Button from '$lib/components/Button.svelte';
-  import Dialog from '$lib/components/Dialog.svelte';
-  import Drawer from '$lib/components/Drawer.svelte';
-  import MenuField from '$lib/components/MenuField.svelte';
+  import { Button, Dialog, Drawer, MenuField, Switch, TextField, Toggle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Switch from '$lib/components/Switch.svelte';
-  import TextField from '$lib/components/TextField.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
 
   let leftOpen = false;
   let rightOpen = false;

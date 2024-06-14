@@ -1,11 +1,8 @@
 <script lang="ts">
+  import { AppBar, Button, ListItem, cls } from 'svelte-ux';
   import { mdiRefresh, mdiChevronRight, mdiMicrosoftXboxControllerMenu } from '@mdi/js';
 
-  import AppBar from '$lib/components/AppBar.svelte';
-  import Button from '$lib/components/Button.svelte';
   import Preview from '$lib/components/Preview.svelte';
-  import ListItem from '$lib/components/ListItem.svelte';
-  import { cls } from '$lib/utils/styles.js';
 </script>
 
 <h1>Examples</h1>

@@ -1,14 +1,8 @@
 <script lang="ts">
   import { mdiMagnify } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Dialog from '$lib/components/Dialog.svelte';
-  import Drawer from '$lib/components/Drawer.svelte';
-  import Menu from '$lib/components/Menu.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
+  import { Button, Dialog, Drawer, Menu, MenuItem, TextField, Toggle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import TextField from '$lib/components/TextField.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
 </script>
 
 <h1>Examples</h1>

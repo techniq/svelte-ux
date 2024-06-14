@@ -1,12 +1,8 @@
 <script lang="ts">
   import { mdiAccount, mdiChevronRight } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Checkbox from '$lib/components/Checkbox.svelte';
-  import ListItem from '$lib/components/ListItem.svelte';
+  import { Button, Checkbox, ListItem, Radio, cls } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Radio from '$lib/components/Radio.svelte';
-  import { cls } from '$lib/utils/styles.js';
 
   let selectedId = 1;
   const choices = [

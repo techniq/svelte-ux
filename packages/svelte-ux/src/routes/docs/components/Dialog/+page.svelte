@@ -1,11 +1,8 @@
 <script lang="ts">
   import { mdiTrashCan } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Dialog from '$lib/components/Dialog.svelte';
+  import { Button, Dialog, TextField, Toggle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import TextField from '$lib/components/TextField.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
 
   let open = false;
   let openAsync = false;

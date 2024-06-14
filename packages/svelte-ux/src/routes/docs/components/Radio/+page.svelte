@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { Radio } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Radio from '$lib/components/Radio.svelte';
 
   let group: number | undefined = undefined;
 </script>

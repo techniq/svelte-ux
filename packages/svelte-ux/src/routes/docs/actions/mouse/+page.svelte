@@ -1,9 +1,9 @@
 <script lang="ts">
   import { spring } from 'svelte/motion';
+  import { longpress, movable } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
-  import { longpress, movable } from '$lib/actions/mouse.js';
 
   let longpressed = false;
 

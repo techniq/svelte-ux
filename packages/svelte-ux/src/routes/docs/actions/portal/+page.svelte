@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { Button, portal, type PortalOptions } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
-  import { portal, type PortalOptions } from '$lib/actions/portal.js';
-  import Button from '$lib/components/Button.svelte';
 
   let optionsBasic: PortalOptions = false;
   let optionsAnscestor: PortalOptions = false;

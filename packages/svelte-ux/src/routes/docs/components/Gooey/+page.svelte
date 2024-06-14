@@ -2,14 +2,10 @@
   import { blur } from 'svelte/transition';
   import { circIn, circOut } from 'svelte/easing';
 
-  import Blockquote from '$docs/Blockquote.svelte';
-  import Gooey from '$lib/components/Gooey.svelte';
-  import Preview from '$lib/components/Preview.svelte';
+  import { Gooey, RangeField, cls, mouseCoords, timerStore } from 'svelte-ux';
 
-  import timerStore from '$lib/stores/timerStore.js';
-  import { cls } from '$lib/utils/styles.js';
-  import RangeField from '$lib/components/RangeField.svelte';
-  import { mouseCoords } from '$lib/actions/mouse.js';
+  import Preview from '$lib/components/Preview.svelte';
+  import Blockquote from '$docs/Blockquote.svelte';
 
   export let gooeyBlur = 5;
 

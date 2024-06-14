@@ -1,9 +1,6 @@
 <script lang="ts">
+	import { Checkbox, TextField, mapStore } from 'svelte-ux';
 	import Preview from '$lib/components/Preview.svelte';
-	import Checkbox from '$lib/components/Checkbox.svelte';
-	import TextField from '$lib/components/TextField.svelte';
-
-	import mapStore from '$lib/stores/mapStore';
 
 	const items = Array.from({ length: 5 }).map((_,i) => {
     return {

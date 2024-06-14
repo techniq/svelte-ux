@@ -7,11 +7,8 @@
     mdiChevronDown,
   } from '@mdi/js';
 
-  import Icon from '$lib/components/Icon.svelte';
-  import MenuButton from '$lib/components/MenuButton.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
+  import { Icon, MenuButton, MenuItem, TextField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import TextField from '$lib/components/TextField.svelte';
 
   const options = [
     { label: 'Cut', value: 'cut' },

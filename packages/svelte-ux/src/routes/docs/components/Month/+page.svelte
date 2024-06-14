@@ -10,7 +10,7 @@
     startOfMonth,
   } from 'date-fns';
 
-  import Month from '$lib/components/Month.svelte';
+  import { Month } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   let selected: Date | null = null;

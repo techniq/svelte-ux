@@ -1,5 +1,5 @@
 <script lang="ts">
-  import NumberStepper from '$lib/components/NumberStepper.svelte';
+  import { NumberStepper } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   let value = 10;

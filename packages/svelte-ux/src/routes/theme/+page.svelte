@@ -1,20 +1,26 @@
 <script lang="ts">
-  import { mdiChevronDown, mdiPalette, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
+  import { mdiChevronDown, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
-  import CopyButton from '$lib/components/CopyButton.svelte';
-  import Field from '$lib/components/Field.svelte';
-  import Icon from '$lib/components/Icon.svelte';
-  import Menu from '$lib/components/Menu.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
-  import MenuField from '$lib/components/MenuField.svelte';
-  import SelectField from '$lib/components/SelectField.svelte';
-  import Switch from '$lib/components/Switch.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
+  import {
+    Button,
+    ButtonGroup,
+    CopyButton,
+    Field,
+    Icon,
+    Menu,
+    MenuItem,
+    MenuField,
+    SelectField,
+    Switch,
+    Toggle,
+    Tooltip,
+    entries,
+    fromEntries,
+    getSettings,
+    styleProps,
+    type MenuOption,
+  } from 'svelte-ux';
 
-  import { styleProps } from '$lib/actions/styleProps.js';
   import {
     getThemeNames,
     processThemeColors,
@@ -22,10 +28,8 @@
     type SupportedColorSpace,
     type NestedColors,
   } from '$lib/styles/theme.js';
-  import { entries, fromEntries, type MenuOption } from '$lib/types/index.js';
   import ColorField from './ColorField.svelte';
   import { formatColor } from './colors.js';
-  import { getSettings } from '$lib/components/settings.js';
 
   export let data;
 

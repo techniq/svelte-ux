@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { subDays, subMonths, subSeconds } from 'date-fns';
+  import { subDays, subSeconds } from 'date-fns';
 
+  import { Duration, DurationUnits } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-
-  import Duration from '$lib/components/Duration.svelte';
-  import { getDuration, humanizeDuration, DurationUnits } from '$lib/utils/duration.js';
 </script>
 
 <h1>Examples</h1>

@@ -1,13 +1,9 @@
 <script lang="ts">
+  import { BarStack, Button, Tooltip, TweenedValue, cls, format } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
-  import BarStack from '$lib/components/BarStack.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
-  import TweenedValue from '$lib/components/TweenedValue.svelte';
 
   import { randomInteger } from '$lib/utils/number.js';
-  import { format } from '$lib/utils/format.js';
-  import { cls } from '$lib/utils/styles.js';
 
   const data = [
     { label: 'Chrome', value: 65, classes: { bar: 'bg-warning' } },

@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { NavItem } from 'svelte-ux';
+
   import { page } from '$app/stores';
-  import NavItem from '$lib/components/NavItem.svelte';
   import { entries } from '$lib/types/typeHelpers.js';
   import { mdiCog, mdiFormatListBulleted, mdiHome, mdiPalette } from '@mdi/js';
 

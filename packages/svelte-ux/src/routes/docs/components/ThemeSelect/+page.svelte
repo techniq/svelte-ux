@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { ThemeSelect } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import ThemeSelect from '$lib/components/ThemeSelect.svelte';
 
   export let data;
 </script>

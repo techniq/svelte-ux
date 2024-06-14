@@ -1,21 +1,21 @@
 <script lang="ts">
   import { mdiDotsVertical } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Menu from '$lib/components/Menu.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
-  import Paginate from '$lib/components/Paginate.svelte';
-  import Pagination from '$lib/components/Pagination.svelte';
+  import {
+    Button,
+    Menu,
+    MenuItem,
+    Paginate,
+    Pagination,
+    Table,
+    Toggle,
+    TweenedValue,
+    tableOrderStore,
+    tableCell,
+  } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
-  import Table from '$lib/components/Table.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
-
-  import tableOrderStore from '$lib/stores/tableOrderStore.js';
-
-  import { tableCell } from '$lib/actions/table.js';
-
   import { randomInteger } from '$lib/utils/number.js';
-  import TweenedValue from '$lib/components/TweenedValue.svelte';
 
   const order = tableOrderStore({ initialBy: 'calories', initialDirection: 'desc' });
 

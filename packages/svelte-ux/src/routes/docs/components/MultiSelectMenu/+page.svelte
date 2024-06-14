@@ -1,11 +1,8 @@
 <script lang="ts">
   import { mdiPlus } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
+  import { Button, MultiSelectMenu, MultiSelectOption, ToggleButton } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import MultiSelectMenu from '$lib/components/MultiSelectMenu.svelte';
-  import MultiSelectOption from '$lib/components/MultiSelectOption.svelte';
-  import ToggleButton from '$lib/components/ToggleButton.svelte';
 
   const options = [
     { name: 'One', value: 1 },

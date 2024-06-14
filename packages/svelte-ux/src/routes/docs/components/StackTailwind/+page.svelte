@@ -1,9 +1,8 @@
 <script lang="ts">
   import { mdiFilterVariant } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
+  import { Button, SectionDivider } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
 </script>
 
 <h1>Examples</h1>

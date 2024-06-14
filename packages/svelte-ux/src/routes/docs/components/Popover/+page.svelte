@@ -1,8 +1,6 @@
 <script lang="ts">
-  import Button from '$lib/components/Button.svelte';
+  import { Button, Popover, Toggle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Popover from '$lib/components/Popover.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
 
   let open = false;
 </script>

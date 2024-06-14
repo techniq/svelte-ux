@@ -2,11 +2,8 @@
   import { format } from 'date-fns';
   import { mdiCheck, mdiClockOutline, mdiClose, mdiMapMarker, mdiTruck } from '@mdi/js';
 
-  import Icon from '$lib/components/Icon.svelte';
+  import { Icon, Steps, cls } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Steps from '$lib/components/Steps.svelte';
-
-  import { cls } from '$lib/utils/styles.js';
 
   const data = [
     {

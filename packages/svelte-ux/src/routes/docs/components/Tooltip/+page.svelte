@@ -1,9 +1,8 @@
 <script lang="ts">
   import { mdiTrashCan } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
+  import { Button, Tooltip } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
 <h1>Examples</h1>

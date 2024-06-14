@@ -1,9 +1,6 @@
 <script lang="ts">
+	import { ListItem, Pagination, Paginate } from 'svelte-ux';
 
-
-	import ListItem from '$lib/components/ListItem.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
-	import Paginate from '$lib/components/Paginate.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 
 	const data = Array(100).fill(null).map((x, i) => ({ name: `Item: ${i + 1}`}))

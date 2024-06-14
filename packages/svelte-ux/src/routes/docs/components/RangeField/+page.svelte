@@ -1,5 +1,5 @@
 <script lang="ts">
-  import RangeField from '$lib/components/RangeField.svelte';
+  import { RangeField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   let value = 10;

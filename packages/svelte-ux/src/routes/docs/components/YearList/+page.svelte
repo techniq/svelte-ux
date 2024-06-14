@@ -1,8 +1,8 @@
 <script lang="ts">
   import { addYears, startOfYear, subYears } from 'date-fns';
 
+  import { YearList } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import YearList from '$lib/components/YearList.svelte';
 
   let selected = new Date('1982-03-30');
 </script>

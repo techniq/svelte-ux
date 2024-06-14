@@ -1,8 +1,6 @@
-<script>
-  import Button from '$lib/components/Button.svelte';
+<script lang="ts">
+  import { Button, ThemeSelect, ThemeSwitch } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import ThemeSelect from '$lib/components/ThemeSelect.svelte';
-  import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
 </script>
 
 # Customization

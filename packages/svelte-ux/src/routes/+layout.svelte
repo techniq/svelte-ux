@@ -4,29 +4,30 @@
   import 'prism-themes/themes/prism-vsc-dark-plus.css';
   import { mdiArrowTopRight, mdiDotsVertical, mdiGithub, mdiTwitter } from '@mdi/js';
 
-  import AppBar from '$lib/components/AppBar.svelte';
-  import AppLayout from '$lib/components/AppLayout.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import MenuButton from '$lib/components/MenuButton.svelte';
+  import {
+    AppBar,
+    AppLayout,
+    Button,
+    MenuButton,
+    QuickSearch,
+    ThemeInit,
+    ThemeSelect,
+    ThemeSwitch,
+    Tooltip,
+    settings,
+    lgScreen,
+    createLocaleSettings,
+    entries,
+  } from 'svelte-ux';
+
   import NavMenu from './_NavMenu.svelte';
-  import QuickSearch from '$lib/components/QuickSearch.svelte';
-  import ThemeInit from '$lib/components/ThemeInit.svelte';
-  import ThemeSelect from '$lib/components/ThemeSelect.svelte';
-  import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
+  import LanguageSelect from '$lib/components/LanguageSelect.svelte';
 
   import { dev } from '$app/environment';
   import { afterNavigate, goto } from '$app/navigation';
   import { page } from '$app/stores';
 
-  import { settings } from '$lib/components/settings.js';
-  import { lgScreen } from '$lib/stores/matchMedia.js';
-
-  import { createLocaleSettings } from '$lib/utils/locale.js';
-  import LanguageSelect from '$lib/components/LanguageSelect.svelte';
-
   import './app.css';
-  import { entries } from '$lib/types/typeHelpers.js';
 
   export let data;
 

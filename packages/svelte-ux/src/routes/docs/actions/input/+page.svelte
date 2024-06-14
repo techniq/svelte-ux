@@ -1,14 +1,8 @@
 <script lang="ts">
+  import { autoFocus, autoHeight, blurOnEscape, selectOnFocus, debounceEvent } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
-
-  import {
-    autoFocus,
-    autoHeight,
-    blurOnEscape,
-    selectOnFocus,
-    debounceEvent,
-  } from '$lib/actions/input.js';
 </script>
 
 <h1>Usage</h1>

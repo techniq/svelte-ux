@@ -1,7 +1,6 @@
 <script lang="ts">
-  import TableOfContents from '$lib/components/TableOfContents.svelte';
+  import { Card, TableOfContents } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Card from '$lib/components/Card.svelte';
 </script>
 
 <h1>Examples</h1>

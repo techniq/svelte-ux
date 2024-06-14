@@ -1,9 +1,8 @@
 <script lang="ts">
+  import { TextField, styleProps } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
-  import TextField from '$lib/components/TextField.svelte';
-
-  import { styleProps } from '$lib/actions/styleProps.js';
 
   let background = '#ddd';
   let border = '1px solid #aaa';

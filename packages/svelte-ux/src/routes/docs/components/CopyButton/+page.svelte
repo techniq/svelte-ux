@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CopyButton from '$lib/components/CopyButton.svelte';
+  import { CopyButton } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 </script>
 

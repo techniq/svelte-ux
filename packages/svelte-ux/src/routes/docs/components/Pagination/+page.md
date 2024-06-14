@@ -1,11 +1,6 @@
 <script lang="ts">
-
-
-	import Button from '$lib/components/Button.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
+	import { Button, Pagination, paginationStore } from 'svelte-ux';
 	import Preview from '$lib/components/Preview.svelte';
-
-	import paginationStore from '$lib/stores/paginationStore';
 
 	const pagination = paginationStore();
 	pagination.setTotal(100);
