@@ -1,19 +1,21 @@
 <script lang="ts">
   import { mdiMagnify, mdiPlus, mdiPencil, mdiAccount } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Dialog from '$lib/components/Dialog.svelte';
-  import Drawer from '$lib/components/Drawer.svelte';
-  import Form from '$lib/components/Form.svelte';
-  import Preview from '$lib/components/Preview.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
-  import SelectField from '$lib/components/SelectField.svelte';
-  import TextField from '$lib/components/TextField.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
+  import {
+    Button,
+    Dialog,
+    Drawer,
+    Form,
+    MenuItem,
+    SelectField,
+    TextField,
+    Toggle,
+    delay,
+    cls,
+    type MenuOption,
+  } from 'svelte-ux';
 
-  import { delay } from '$lib/utils/promise.js';
-  import { cls } from '$lib/utils/styles.js';
-  import type { MenuOption } from '$lib/types/index.js';
+  import Preview from '$lib/components/Preview.svelte';
 
   let options: MenuOption[] = [
     { label: 'One', value: 1, icon: mdiMagnify },

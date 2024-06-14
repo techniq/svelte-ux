@@ -1,9 +1,6 @@
 <script lang="ts">
+	import { Checkbox, Radio, selectionStore } from 'svelte-ux';
 	import Preview from '$lib/components/Preview.svelte';
-	import Checkbox from '$lib/components/Checkbox.svelte';
-	import Radio from '$lib/components/Radio.svelte';
-
-	import selectionStore from '$lib/stores/selectionStore.js';
 
   const data = Array.from({ length: 5 }).map((_,i) => {
     return {

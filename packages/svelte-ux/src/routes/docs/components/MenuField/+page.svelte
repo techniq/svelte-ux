@@ -1,11 +1,8 @@
 <script lang="ts">
   import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify, mdiRefresh } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import MenuField from '$lib/components/MenuField.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
+  import { Button, MenuField, MenuItem, TextField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import TextField from '$lib/components/TextField.svelte';
 
   const options = [
     { label: 'Cut', value: 'cut' },

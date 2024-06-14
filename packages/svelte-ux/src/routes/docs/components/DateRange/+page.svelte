@@ -1,10 +1,8 @@
 <script lang="ts">
   import { endOfMonth, startOfDay, startOfMonth, startOfYear } from 'date-fns';
 
+  import { DateRange, PeriodType, getDateFuncsByPeriodType, getSettings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import DateRange from '$lib/components/DateRange.svelte';
-  import { PeriodType, getDateFuncsByPeriodType } from '$lib/utils/date.js';
-  import { getSettings } from '$lib/components/settings.js';
 
   const { localeSettings } = getSettings();
 

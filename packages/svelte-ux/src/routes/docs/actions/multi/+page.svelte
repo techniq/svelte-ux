@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { multi } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
-
-  import { multi } from '$lib/actions/multi.js';
 </script>
 
 <h1>Usage</h1>

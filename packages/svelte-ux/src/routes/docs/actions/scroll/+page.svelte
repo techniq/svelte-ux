@@ -1,12 +1,9 @@
 <script lang="ts">
   import { flip } from 'svelte/animate';
+  import { Button, scrollIntoView, scrollFade, scrollShadow, cls } from 'svelte-ux';
 
-  import Button from '$lib/components/Button.svelte';
   import Code from '$lib/components/Code.svelte';
   import Preview from '$lib/components/Preview.svelte';
-
-  import { scrollIntoView, scrollFade, scrollShadow } from '$lib/actions/scroll.js';
-  import { cls } from '$lib/utils/styles.js';
 
   let filterItems = false;
 

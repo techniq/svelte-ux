@@ -4,6 +4,7 @@ export * from './layout.js';
 export * from './mouse.js';
 export * from './multi.js';
 export * from './observer.js';
+export * from './popover.js';
 export * from './portal.js';
 export * from './scroll.js';
 export * from './spotlight.js';

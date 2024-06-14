@@ -1,11 +1,6 @@
 <script lang="ts">
-  import Button from '$lib/components/Button.svelte';
-  import Checkbox from '$lib/components/Checkbox.svelte';
-  import Paginate from '$lib/components/Paginate.svelte';
-  import Pagination from '$lib/components/Pagination.svelte';
+  import { Button, Checkbox, Paginate, Pagination, Radio, Selection } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Radio from '$lib/components/Radio.svelte';
-  import Selection from '$lib/components/Selection.svelte';
 
   const data = Array.from({ length: 5 }).map((_, i) => {
     return {

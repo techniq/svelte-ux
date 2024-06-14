@@ -1,10 +1,6 @@
 <script lang="ts">
+  import { Button, Menu, MenuItem, Settings, Toggle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import Menu from '$lib/components/Menu.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
-  import Settings from '$lib/components/Settings.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
 </script>
 
 <h1>Examples</h1>

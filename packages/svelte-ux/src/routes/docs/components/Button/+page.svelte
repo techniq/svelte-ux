@@ -2,14 +2,16 @@
   import { mdiHome, mdiMagnify, mdiMenu, mdiTrashCan } from '@mdi/js';
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-  import Button from '$lib/components/Button.svelte';
-  import Field from '$lib/components/Field.svelte';
+  import {
+    Button,
+    Field,
+    SectionDivider,
+    Tooltip,
+    Toggle,
+    ToggleGroup,
+    ToggleOption,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
-  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
-  import ToggleOption from '$lib/components/ToggleOption.svelte';
 
   let size: 'sm' | 'md' | 'lg' = 'md';
 

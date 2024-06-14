@@ -2,10 +2,8 @@
   import { max } from 'd3-array';
   import { mdiClose, mdiPlus } from '@mdi/js';
 
+  import { Icon, Tab, Tabs } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Tabs from '$lib/components/Tabs.svelte';
-  import Tab from '$lib/components/Tab.svelte';
-  import Icon from '$lib/components/Icon.svelte';
 
   let options = [
     { label: 'One', value: 1 },

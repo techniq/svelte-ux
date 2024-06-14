@@ -2,9 +2,7 @@
   import { fade } from 'svelte/transition';
   import { mdiArrowRight } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Card from '$lib/components/Card.svelte';
-  import Collapse from '$lib/components/Collapse.svelte';
+  import { Button, Card, Collapse } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   let group = undefined;

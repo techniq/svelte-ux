@@ -1,10 +1,8 @@
 <script lang="ts">
   import { mdiHome, mdiMagnify, mdiTrashCan } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
+  import { Button, Shine, Tilt } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Shine from '$lib/components/Shine.svelte';
-  import Tilt from '$lib/components/Tilt.svelte';
 
   const images = [
     'https://nelsoncodepen.s3.eu-west-2.amazonaws.com/thb-250-plains.png',

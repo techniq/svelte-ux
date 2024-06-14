@@ -1,6 +1,5 @@
 <script lang="ts">
-  import InfiniteScroll from '$lib/components/InfiniteScroll.svelte';
-  import ListItem from '$lib/components/ListItem.svelte';
+  import { InfiniteScroll, ListItem } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const items = Array(100)

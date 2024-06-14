@@ -1,10 +1,23 @@
-<script>
+<script lang="ts">
   import { mdiCheckCircle, mdiCloseCircle } from '@mdi/js';
 
-	import Preview from '$lib/components/Preview.svelte';
-	import Icon from '$lib/components/Icon.svelte';
+	import {
+    Icon,
+    matchMedia,
+    matchMediaWidth,
+    smScreen,
+    mdScreen,
+    lgScreen,
+    xlScreen,
+    xxlScreen,
+    screen,
+    print,
+    darkColorScheme,
+    motionReduce
+   } from 'svelte-ux';
 
-	import { matchMedia, matchMediaWidth, smScreen, mdScreen, lgScreen, xlScreen, xxlScreen, screen, print, darkColorScheme, motionReduce } from '$lib/stores/matchMedia';
+	import Preview from '$lib/components/Preview.svelte';
+
 
   let innerWidth = 0;
 </script>

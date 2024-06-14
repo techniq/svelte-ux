@@ -8,7 +8,7 @@
     endOfQuarter,
   } from 'date-fns';
 
-  import MonthList from '$lib/components/MonthList.svelte';
+  import { MonthList } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   let selected = null;

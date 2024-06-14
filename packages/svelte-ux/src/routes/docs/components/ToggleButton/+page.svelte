@@ -2,14 +2,8 @@
   import { slide } from 'svelte/transition';
   import { mdiChevronDown } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
-  import Dialog from '$lib/components/Dialog.svelte';
-  import Drawer from '$lib/components/Drawer.svelte';
-  import Menu from '$lib/components/Menu.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
+  import { Button, ButtonGroup, Dialog, Drawer, Menu, MenuItem, ToggleButton } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import ToggleButton from '$lib/components/ToggleButton.svelte';
 </script>
 
 <h1>Examples</h1>

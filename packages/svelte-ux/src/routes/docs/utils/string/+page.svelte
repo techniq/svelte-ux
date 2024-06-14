@@ -1,8 +1,7 @@
 <script lang="ts">
+  import { RangeField, uniqueId, truncate, toTitleCase } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import { uniqueId, truncate, toTitleCase } from '$lib/utils/string.js';
   import Code from '$lib/components/Code.svelte';
-  import RangeField from '$lib/components/RangeField.svelte';
 
   let str = 'This is very long text that will be truncated';
   let totalChars = 20;

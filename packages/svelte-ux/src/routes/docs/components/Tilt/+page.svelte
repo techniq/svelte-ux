@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { Shine, Tilt } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
-  import Tilt from '$lib/components/Tilt.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
-  import Shine from '$lib/components/Shine.svelte';
 
   const images = [
     'https://nelsoncodepen.s3.eu-west-2.amazonaws.com/thb-250-plains.png',

@@ -1,9 +1,7 @@
 <script lang="ts">
   import { mdiCheck, mdiClose } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Icon from '$lib/components/Icon.svelte';
-  import Switch from '$lib/components/Switch.svelte';
+  import { Button, Icon, Switch } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   let checked: boolean | null = null;

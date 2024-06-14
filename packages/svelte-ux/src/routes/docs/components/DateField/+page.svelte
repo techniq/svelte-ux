@@ -1,13 +1,10 @@
 <script lang="ts">
   import { addDays } from 'date-fns';
-
   import { mdiCalendarStart, mdiCalendarEnd } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import DateField from '$lib/components/DateField.svelte';
+  import { Button, DateField, getSettings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  import { getSettings } from '$lib/components/settings.js';
   const { localeSettings } = getSettings();
 
   let value: Date;

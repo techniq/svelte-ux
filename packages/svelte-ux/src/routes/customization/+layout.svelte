@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TableOfContents from '$lib/components/TableOfContents.svelte';
+  import { TableOfContents } from 'svelte-ux';
 </script>
 
 <div class="grid grid-cols-[1fr,auto] gap-6 pt-2 pb-4">

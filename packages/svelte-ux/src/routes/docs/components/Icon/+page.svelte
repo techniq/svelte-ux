@@ -14,11 +14,8 @@
   } from '@mdi/js';
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-  import Icon from '$lib/components/Icon.svelte';
+  import { Button, ButtonGroup, Icon, Tooltip } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
 </script>
 
 <svelte:head>

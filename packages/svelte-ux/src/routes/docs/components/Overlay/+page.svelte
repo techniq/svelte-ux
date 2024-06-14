@@ -1,10 +1,6 @@
 <script lang="ts">
+  import { Button, ProgressCircle, Overlay, Toggle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-
-  import Button from '$lib/components/Button.svelte';
-  import ProgressCircle from '$lib/components/ProgressCircle.svelte';
-  import Overlay from '$lib/components/Overlay.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
 </script>
 
 <h1>Examples</h1>

@@ -2,7 +2,7 @@
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { formatHex } from 'culori';
 
-  import TextField from '$lib/components/TextField.svelte';
+  import { TextField } from 'svelte-ux';
   import { formatColor } from './colors.js';
   import { type SupportedColorSpace } from '$lib/styles/theme.js';
 

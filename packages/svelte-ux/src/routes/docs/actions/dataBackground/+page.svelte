@@ -1,19 +1,22 @@
 <script lang="ts">
   import { sort } from 'd3-array';
 
-  import Preview from '$lib/components/Preview.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import Code from '$lib/components/Code.svelte';
-  import TweenedValue from '$lib/components/TweenedValue.svelte';
+  import {
+    Button,
+    Field,
+    NumberStepper,
+    Switch,
+    ToggleGroup,
+    ToggleOption,
+    TweenedValue,
+    cls,
+    dataBackground,
+  } from 'svelte-ux';
 
-  import { dataBackground } from '$lib/actions/dataBackground.js';
+  import Preview from '$lib/components/Preview.svelte';
+  import Code from '$lib/components/Code.svelte';
+
   import { randomInteger } from '$lib/utils/number.js';
-  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
-  import ToggleOption from '$lib/components/ToggleOption.svelte';
-  import Field from '$lib/components/Field.svelte';
-  import Switch from '$lib/components/Switch.svelte';
-  import NumberStepper from '$lib/components/NumberStepper.svelte';
-  import { cls } from '$lib/utils/styles.js';
 
   const originalDomain: [number, number] = [-100, 100];
 

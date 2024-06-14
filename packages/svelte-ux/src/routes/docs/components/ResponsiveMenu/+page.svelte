@@ -1,15 +1,18 @@
 <script lang="ts">
   import { mdiMagnify } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Dialog from '$lib/components/Dialog.svelte';
-  import Drawer from '$lib/components/Drawer.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
+  import {
+    Button,
+    Dialog,
+    Drawer,
+    MenuItem,
+    ResponsiveMenu,
+    TextField,
+    Toggle,
+    Settings,
+  } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
-  import ResponsiveMenu from '$lib/components/ResponsiveMenu.svelte';
-  import TextField from '$lib/components/TextField.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
-  import Settings from '$lib/components/Settings.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
 </script>
 

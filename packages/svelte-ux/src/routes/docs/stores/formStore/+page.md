@@ -1,8 +1,6 @@
 <script lang="ts">
+	import { TextField, formStore } from 'svelte-ux';
 	import Preview from '$lib/components/Preview.svelte';
-	import TextField from '$lib/components/TextField.svelte';
-
-	import formStore from '$lib/stores/formStore.js';
 </script>
 
 <h1>Usage</h1>

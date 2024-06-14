@@ -15,20 +15,24 @@
     mdiLink,
   } from '@mdi/js';
 
-  import ApiDocs from '$lib/components/ApiDocs.svelte';
-  import Button from '$lib/components/Button.svelte';
+  import {
+    ApiDocs,
+    Button,
+    Icon,
+    ListItem,
+    TableOfContents,
+    toTitleCase,
+    cls,
+    xlScreen,
+    settings,
+    getSettings,
+  } from 'svelte-ux';
+
   import Code from '$lib/components/Code.svelte';
-  import Icon from '$lib/components/Icon.svelte';
-  import ListItem from '$lib/components/ListItem.svelte';
-  import TableOfContents from '$lib/components/TableOfContents.svelte';
+  import ViewSourceButton from '$docs/ViewSourceButton.svelte';
 
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import { settings, getSettings } from '$lib/components/settings.js';
-  import ViewSourceButton from '$docs/ViewSourceButton.svelte';
-  import { xlScreen } from '$lib/stores/matchMedia.js';
-  import { cls } from '$lib/utils/styles.js';
-  import { toTitleCase } from '$lib/utils/string.js';
 
   $: [type, name] = $page.url.pathname.split('/').slice(2) ?? [];
   $: title = $page.data.meta?.title ?? name;

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { marked } from 'marked';
+  import { TableOfContents } from 'svelte-ux';
 
   import changelog from '../../../CHANGELOG.md?raw';
-  import TableOfContents from '$lib/components/TableOfContents.svelte';
 
   function sanitize(str: string) {
     return str.replace(/</g, '\\<').replace(/>/g, '\\>');

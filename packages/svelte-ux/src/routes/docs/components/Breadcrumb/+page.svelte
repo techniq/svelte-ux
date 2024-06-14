@@ -1,10 +1,7 @@
 <script lang="ts">
+  import { Button, Breadcrumb, DividerDot, Icon } from 'svelte-ux';
   import { mdiArrowRight } from '@mdi/js';
 
-  import Breadcrumb from '$lib/components/Breadcrumb.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import DividerDot from '$lib/components/DividerDot.svelte';
-  import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
   let items = ['First', 'Second', 'Third'];

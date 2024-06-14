@@ -7,13 +7,9 @@
     mdiBookmark,
   } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import ButtonGroup from '$lib/components/ButtonGroup.svelte';
-  import Menu from '$lib/components/Menu.svelte';
-  import MenuItem from '$lib/components/MenuItem.svelte';
+  import { Button, ButtonGroup, Menu, MenuItem, Toggle, Tooltip } from 'svelte-ux';
+
   import Preview from '$lib/components/Preview.svelte';
-  import Toggle from '$lib/components/Toggle.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
 </script>
 
 <h1>Examples</h1>

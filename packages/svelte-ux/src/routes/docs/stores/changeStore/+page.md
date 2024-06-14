@@ -1,13 +1,9 @@
 <script lang="ts">
   import { writable } from 'svelte/store';
 
-	import Button from '$lib/components/Button.svelte';
-	import Preview from '$lib/components/Preview.svelte';
-	import TextField from '$lib/components/TextField.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
+  import { Button, Pagination, TextField, changeStore, paginationStore  } from 'svelte-ux';
 
-	import changeStore from '$lib/stores/changeStore';
-	import paginationStore from '$lib/stores/paginationStore';
+	import Preview from '$lib/components/Preview.svelte';
 
   const value = writable('');
   const changed = changeStore(value, (value) => console.log('text changed', value));

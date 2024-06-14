@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { ThemeSwitch } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
 </script>
 
 <h1>Examples</h1>

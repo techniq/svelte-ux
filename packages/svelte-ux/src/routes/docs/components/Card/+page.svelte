@@ -1,11 +1,7 @@
 <script lang="ts">
   import { mdiDotsVertical } from '@mdi/js';
 
-  import AppBar from '$lib/components/AppBar.svelte';
-  import Avatar from '$lib/components/Avatar.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import Card from '$lib/components/Card.svelte';
-  import Header from '$lib/components/Header.svelte';
+  import { Avatar, Button, Card, Header } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 </script>
 

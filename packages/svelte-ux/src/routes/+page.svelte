@@ -1,8 +1,7 @@
 <script lang="ts">
+  import { Kbd, ToggleGroup, ToggleOption } from 'svelte-ux';
+
   import Code from '$lib/components/Code.svelte';
-  import Kbd from '$lib/components/Kbd.svelte';
-  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
-  import ToggleOption from '$lib/components/ToggleOption.svelte';
 
   let selectedTab = 'cli';
 </script>

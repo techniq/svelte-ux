@@ -1,8 +1,6 @@
 <script lang="ts">
-  import Field from '$lib/components/Field.svelte';
-  import Input from '$lib/components/Input.svelte';
+  import { Field, Input, SectionDivider } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
 
   let value = 'test';
 </script>

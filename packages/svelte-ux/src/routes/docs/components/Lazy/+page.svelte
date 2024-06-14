@@ -1,6 +1,5 @@
 <script lang="ts">
-  import Lazy from '$lib/components/Lazy.svelte';
-  import ListItem from '$lib/components/ListItem.svelte';
+  import { Lazy, ListItem } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const items = Array(100)

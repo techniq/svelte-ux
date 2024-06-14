@@ -1,8 +1,7 @@
 <script lang="ts">
+  import { Avatar, Icon } from 'svelte-ux';
   import { mdiAccount } from '@mdi/js';
 
-  import Avatar from '$lib/components/Avatar.svelte';
-  import Icon from '$lib/components/Icon.svelte';
   import Preview from '$lib/components/Preview.svelte';
 </script>
 

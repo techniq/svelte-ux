@@ -1,8 +1,6 @@
 <script lang="ts">
-  import Button from '$lib/components/Button.svelte';
-  import Overflow from '$lib/components/Overflow.svelte';
+  import { Button, Overflow, Tooltip } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import Tooltip from '$lib/components/Tooltip.svelte';
 
   let overflowItems = 1;
   const text = 'This is really long text used to demonstrate overflow.';

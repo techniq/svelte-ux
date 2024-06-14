@@ -2,12 +2,8 @@
   import { slide } from 'svelte/transition';
   import { mdiPlus } from '@mdi/js';
 
-  import Button from '$lib/components/Button.svelte';
-  import Drawer from '$lib/components/Drawer.svelte';
+  import { Button, Drawer, MultiSelectField, MultiSelectOption, ToggleButton } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import MultiSelectField from '$lib/components/MultiSelectField.svelte';
-  import MultiSelectOption from '$lib/components/MultiSelectOption.svelte';
-  import ToggleButton from '$lib/components/ToggleButton.svelte';
 
   const options = [
     { name: 'One', value: 1 },

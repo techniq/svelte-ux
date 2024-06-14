@@ -1,10 +1,8 @@
 <script lang="ts">
   import { z } from 'zod';
 
-  import Button from '$lib/components/Button.svelte';
-  import Form from '$lib/components/Form.svelte';
+  import { Button, Form, TextField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import TextField from '$lib/components/TextField.svelte';
 
   let data = {
     name: 'Sean Lynch',

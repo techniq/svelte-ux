@@ -1,8 +1,6 @@
 <script lang="ts">
-  import Button from '$lib/components/Button.svelte';
-  import Checkbox from '$lib/components/Checkbox.svelte';
+  import { Button, Checkbox, SectionDivider } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import SectionDivider from '$lib/components/SectionDivider.svelte';
 
   let checked = true;
   let group = [2];
