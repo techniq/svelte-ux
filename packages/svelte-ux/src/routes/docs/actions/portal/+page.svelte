@@ -8,6 +8,8 @@
   let optionsAnscestor: PortalOptions = false;
   let optionsSibling: PortalOptions = false;
   let optionsCustom: PortalOptions = false;
+  let optionsDestroyable: PortalOptions = { target: undefined, enabled: false };
+  let destroy = false;
 </script>
 
 <h1>Usage</h1>
@@ -25,7 +27,7 @@
       <div>Portal content</div>
       {#if optionsBasic}
         <Button on:click={() => (optionsBasic = false)} class="border mt-4">
-          Move to back to parent
+          Move back to parent
         </Button>
       {/if}
     </div>
@@ -43,7 +45,7 @@
       <div>Portal content</div>
       {#if optionsSibling}
         <Button on:click={() => (optionsSibling = false)} class="border mt-4">
-          Move to back to parent
+          Move back to parent
         </Button>
       {/if}
     </div>
@@ -64,7 +66,7 @@
         <div>Portal content</div>
         {#if optionsAnscestor}
           <Button on:click={() => (optionsAnscestor = false)} class="border mt-4">
-            Move to back to parent
+            Move back to parent
           </Button>
         {/if}
       </div>
@@ -86,12 +88,39 @@
       <div>Portal content</div>
       {#if optionsCustom}
         <Button on:click={() => (optionsCustom = false)} class="border mt-4">
-          Move to back to parent
+          Move back to parent
         </Button>
       {/if}
     </div>
   </div>
   <div class="custom-portal-target relative h-32 bg-surface-200 mt-4"></div>
+</Preview>
+
+<h2>Destroyable</h2>
+
+<Preview>
+  {#if !destroy}
+    <div class="PortalTarget relative">
+      <div class="relative">
+        <Button
+          on:click={() => (optionsDestroyable = { target: '.destroyable-example-target' })}
+          class="border mt-4">Move to target</Button
+        >
+        <Button on:click={() => (destroy = true)} class="border mt-4">Destroy</Button>
+        <div use:portal={optionsDestroyable} class="portal-content">
+          <div>Portal content</div>
+          {#if optionsBasic}
+            <Button on:click={() => (optionsBasic = false)} class="border mt-4">
+              Move back to parent
+            </Button>
+          {/if}
+        </div>
+      </div>
+      <div class="destroyable-example-target relative h-32 bg-surface-200 mt-4"></div>
+    </div>
+  {:else}
+    <Button on:click={() => (destroy = false)} class="border mt-4">Recreate</Button>
+  {/if}
 </Preview>
 
 <style lang="postcss">
