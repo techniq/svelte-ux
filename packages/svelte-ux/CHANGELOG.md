@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.66.8
+
+### Patch Changes
+
+- Fix destroyable portal logic ([#391](https://github.com/techniq/svelte-ux/pull/391))
+
 ## 0.66.7
 
 ### Patch Changes
