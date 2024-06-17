@@ -12,6 +12,9 @@
 
   export let icon: ComponentProps<Icon>['data'] = undefined;
 
+  /** If complete, will color icon and line leading up to item */
+  export let complete = false;
+
   /** Align timeline vertically (default: horizontal)*/
   export let vertical = false;
 
@@ -44,6 +47,8 @@
       : '',
     compact && vertical ? 'grid-cols-[0_auto_minmax(0,1fr)]' : '',
     vertical && 'justify-items-center',
+    complete &&
+      'timelineitem-complete [&_hr:last-child]:has-[~li.timelineitem-complete]:bg-primary',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -53,6 +58,7 @@
     class={cls(
       'border-0 bg-surface-300',
       vertical ? 'w-1 h-full col-start-2 row-start-1' : 'w-full h-1 col-start-1 row-start-2',
+      complete && 'bg-primary',
       '[:first-child>&]:hidden',
       settingsClasses.line,
       classes.line
@@ -86,7 +92,13 @@
   {#if icon}
     <Icon
       data={icon}
-      class={cls('icon', 'col-start-2 row-start-2', settingsClasses.icon, classes.icon)}
+      class={cls(
+        'icon',
+        'col-start-2 row-start-2',
+        complete && 'text-primary',
+        settingsClasses.icon,
+        classes.icon
+      )}
     />
   {:else}
     <div />

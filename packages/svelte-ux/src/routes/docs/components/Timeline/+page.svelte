@@ -59,18 +59,18 @@
     { start: 2015, end: 'Apple Watch' },
   ];
 
-  const appleHistoryStartOnly = [
-    { start: 'First Macintosh computer' },
-    { start: 'iMac' },
-    { start: 'iPod' },
-    { start: 'iPhone' },
-    { start: 'Apple Watch' },
-  ];
-
   const appleHistoryAlternating = [
     { start: 'First Macintosh computer' },
     { end: 'iMac' },
     { start: 'iPod' },
+    { end: 'iPhone' },
+    { start: 'Apple Watch' },
+  ];
+
+  const appleHistoryAlternatingWithComplete = [
+    { start: 'First Macintosh computer', complete: true },
+    { end: 'iMac', complete: true },
+    { start: 'iPod', complete: true },
     { end: 'iPhone' },
     { start: 'Apple Watch' },
   ];
@@ -172,6 +172,22 @@
   />
 </Preview>
 
+<h2>Completed items</h2>
+
+<Preview>
+  <Timeline
+    data={appleHistoryAlternatingWithComplete}
+    icon={mdiCheckCircle}
+    classes={{
+      item: {
+        start: 'border rounded-lg text-sm p-2 m-1',
+        end: 'border rounded-lg text-sm p-2 m-1',
+        icon: 'size-5',
+      },
+    }}
+  />
+</Preview>
+
 <h2>Vertical</h2>
 
 <Preview>
@@ -182,6 +198,40 @@
     classes={{
       item: {
         start: 'text-sm font-semibold',
+        end: 'border rounded-lg text-sm p-2 m-1',
+        icon: 'size-5',
+      },
+    }}
+  />
+</Preview>
+
+<h2>Vertical / Alternating sides</h2>
+
+<Preview>
+  <Timeline
+    data={appleHistoryAlternating}
+    icon={mdiCheckCircle}
+    vertical
+    classes={{
+      item: {
+        start: 'border rounded-lg text-sm p-2 m-1',
+        end: 'border rounded-lg text-sm p-2 m-1',
+        icon: 'size-5',
+      },
+    }}
+  />
+</Preview>
+
+<h2>Completed items</h2>
+
+<Preview>
+  <Timeline
+    data={appleHistoryAlternatingWithComplete}
+    icon={mdiCheckCircle}
+    vertical
+    classes={{
+      item: {
+        start: 'border rounded-lg text-sm p-2 m-1',
         end: 'border rounded-lg text-sm p-2 m-1',
         icon: 'size-5',
       },
@@ -248,6 +298,7 @@
         classes={{
           icon: 'size-5',
         }}
+        complete={i < 3}
       >
         <div class="mt-0.5 mb-10 mx-2">
           <time class="font-mono italic">{item.date}</time>

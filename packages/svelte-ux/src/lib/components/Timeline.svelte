@@ -5,7 +5,16 @@
   import { cls } from '$lib/utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let data: ComponentProps<TimelineItem>[] = [];
+  import Icon from './Icon.svelte';
+
+  type TimelineItemData = {
+    start?: string | boolean;
+    end?: string | boolean;
+    icon?: ComponentProps<Icon>['data'];
+    complete?: boolean;
+  };
+
+  export let data: TimelineItemData[] = [];
 
   export let vertical = false;
   export let compact = false;
