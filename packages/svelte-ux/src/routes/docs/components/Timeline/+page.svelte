@@ -223,7 +223,7 @@
           icon: 'size-5',
         }}
       >
-        <div class="mb-10 mt-0.5 mx-2">
+        <div class="mt-0.5 mb-10 mx-2">
           <time class="font-mono italic">{item.date}</time>
           <div class="text-lg font-black">{item.title}</div>
           {item.description}
@@ -249,7 +249,7 @@
           icon: 'size-5',
         }}
       >
-        <div class="mb-10 mx-2 -mt-0.5">
+        <div class="mt-0.5 mb-10 mx-2">
           <time class="font-mono italic">{item.date}</time>
           <div class="text-lg font-black">{item.title}</div>
           {item.description}

@@ -35,16 +35,15 @@
   class={cls(
     'TimelineItem',
     'relative grid shrink-0 items-center',
-    'grid-cols-[var(--timeline-col-start,minmax(0,1fr))_auto_var(--timeline-col-end,minmax(0,1fr))]',
-    'grid-rows-[var(--timeline-row-start,minmax(0,1fr))_auto_var(--timeline-row-end,minmax(0,1fr))]',
-    vertical && 'justify-items-center',
+    'grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]',
+    'grid-rows-[minmax(0,1fr)_auto_minmax(0,1fr)]',
     snapIcon
       ? vertical
-        ? '[--timeline-row-start:0.25rem]'
-        : '[--timeline-col-start:0.25rem]'
+        ? 'grid-rows-[0.25rem_auto_minmax(0,1fr)]'
+        : 'grid-cols-[0.25rem_auto_minmax(0,1fr)]'
       : '',
-    compact ? '[--timeline-row-start:0]' : '',
-    compact && vertical ? '[--timeline-col-start:0]' : '',
+    compact && vertical ? 'grid-cols-[0_auto_minmax(0,1fr)]' : '',
+    vertical && 'justify-items-center',
     settingsClasses.root,
     classes.root,
     $$props.class
