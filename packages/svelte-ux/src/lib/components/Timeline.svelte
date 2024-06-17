@@ -8,7 +8,7 @@
   export let data: ComponentProps<TimelineItem>[] = [];
 
   export let vertical = false;
-  // export let compact = false;
+  export let compact = false;
 
   /** Common icon for all items */
   export let icon: ComponentProps<TimelineItem>['icon'] = undefined;
@@ -35,7 +35,7 @@
 >
   <slot {data}>
     {#each data as item}
-      <TimelineItem {vertical} {icon} {snapIcon} classes={classes.item} {...item} />
+      <TimelineItem {vertical} {compact} {icon} {snapIcon} classes={classes.item} {...item} />
     {/each}
   </slot>
 </ul>

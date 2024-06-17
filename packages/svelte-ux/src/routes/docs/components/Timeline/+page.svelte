@@ -189,32 +189,25 @@
   />
 </Preview>
 
-<h2>TimelineItem component (compact)</h2>
+<h2>Vertical (fixed width start)</h2>
 
 <Preview>
-  <Timeline vertical>
-    {#each appleHistoryDetails as item, i}
-      <TimelineItem
-        vertical
-        icon={mdiCheckCircle}
-        snapIcon
-        classes={{
-          icon: 'size-5',
-        }}
-        end
-        compact
-      >
-        <div class="mb-10 mt-0.5 mx-2">
-          <time class="font-mono italic">{item.date}</time>
-          <div class="text-lg font-black">{item.title}</div>
-          {item.description}
-        </div>
-      </TimelineItem>
-    {/each}
-  </Timeline>
+  <Timeline
+    data={appleHistory}
+    icon={mdiCheckCircle}
+    vertical
+    classes={{
+      item: {
+        root: 'grid-cols-[40px,auto,1fr]',
+        start: 'text-sm font-semibold mr-1',
+        end: 'border rounded-lg text-sm p-2 m-1',
+        icon: 'size-5',
+      },
+    }}
+  />
 </Preview>
 
-<h2>TimelineItem component (alternating sides)</h2>
+<h2>Vertical / Alternating (using TimelineItem component)</h2>
 
 <Preview>
   <Timeline vertical>
@@ -231,6 +224,32 @@
         }}
       >
         <div class="mb-10 mt-0.5 mx-2">
+          <time class="font-mono italic">{item.date}</time>
+          <div class="text-lg font-black">{item.title}</div>
+          {item.description}
+        </div>
+      </TimelineItem>
+    {/each}
+  </Timeline>
+</Preview>
+
+<h2>Vertical / Compact (using TimelineItem component)</h2>
+
+<Preview>
+  <Timeline vertical>
+    {#each appleHistoryDetails as item, i}
+      <TimelineItem
+        vertical
+        compact
+        icon={mdiCheckCircle}
+        snapIcon
+        start={i % 2 === 0}
+        end={i % 2 !== 0}
+        classes={{
+          icon: 'size-5',
+        }}
+      >
+        <div class="mb-10 mx-2 -mt-0.5">
           <time class="font-mono italic">{item.date}</time>
           <div class="text-lg font-black">{item.title}</div>
           {item.description}

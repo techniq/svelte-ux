@@ -4,10 +4,19 @@
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
 
-  export let start: any = undefined;
-  export let end: any = undefined;
+  /** Value shown above (horizontal) or left (vertical).  If true, sets location of default slot */
+  export let start: string | boolean = false;
+
+  /** Value shown below (horizontal) or right (vertical).  If true, sets location of default slot */
+  export let end: string | boolean = false;
+
   export let icon: ComponentProps<Icon>['data'] = undefined;
+
+  /** Align timeline vertically (default: horizontal)*/
   export let vertical = false;
+
+  /** Place timeline on left and all start/end items on end side  */
+  export let compact = false;
 
   /** Snap icon to start */
   export let snapIcon = false;
@@ -26,12 +35,16 @@
   class={cls(
     'TimelineItem',
     'relative grid shrink-0 items-center',
+    'grid-cols-[var(--timeline-col-start,minmax(0,1fr))_auto_var(--timeline-col-end,minmax(0,1fr))]',
+    'grid-rows-[var(--timeline-row-start,minmax(0,1fr))_auto_var(--timeline-row-end,minmax(0,1fr))]',
     vertical && 'justify-items-center',
     snapIcon
       ? vertical
-        ? '[--timeline-col-start:minmax(0,1fr)] [--timeline-row-start:0.25rem]'
-        : '[--timeline-col-start:0.25rem] [--timeline-row-start:minmax(0,1fr)]'
+        ? '[--timeline-row-start:0.25rem]'
+        : '[--timeline-col-start:0.25rem]'
       : '',
+    compact ? '[--timeline-row-start:0]' : '',
+    compact && vertical ? '[--timeline-col-start:0]' : '',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -53,7 +66,12 @@
         'start',
         vertical
           ? 'col-start-1 col-end-2 row-start-1 row-end-4 self-center justify-self-end'
-          : 'col-start-1 col-end-4 row-start-1 row-end-2 m-1 self-end justify-self-center',
+          : 'col-start-1 col-end-4 row-start-1 row-end-2 self-end justify-self-center m-1',
+        compact
+          ? vertical
+            ? 'col-start-3 col-end-4 row-start-1 row-end-4 self-center justify-self-start'
+            : 'col-start-1 col-end-4 row-start-3 row-end-4 self-start justify-self-center m-1'
+          : '',
         settingsClasses.start,
         classes.start
       )}
@@ -106,16 +124,3 @@
     )}
   />
 </li>
-
-<style>
-  li {
-    grid-template-rows: var(--timeline-row-start, minmax(0, 1fr)) auto var(
-        --timeline-row-end,
-        minmax(0, 1fr)
-      );
-    grid-template-columns: var(--timeline-col-start, minmax(0, 1fr)) auto var(
-        --timeline-col-end,
-        minmax(0, 1fr)
-      );
-  }
-</style>
