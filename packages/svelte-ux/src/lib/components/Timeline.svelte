@@ -1,6 +1,25 @@
-<script lang="ts">
-  import type { ComponentProps } from 'svelte';
+<script lang="ts" context="module">
+  import { type ComponentProps, setContext, getContext } from 'svelte';
 
+  type TimelineContext = {
+    vertical: boolean;
+    compact: boolean;
+    icon: ComponentProps<Icon>['icon'];
+    snapIcon: boolean;
+  };
+
+  const timelineKey = Symbol();
+
+  export function setTimeline(value: TimelineContext | undefined) {
+    setContext(timelineKey, value);
+  }
+
+  export function getTimeline() {
+    return getContext<TimelineContext | undefined>(timelineKey);
+  }
+</script>
+
+<script lang="ts">
   import TimelineItem from './TimelineItem.svelte';
   import { cls } from '$lib/utils/styles.js';
   import { getComponentClasses } from './theme.js';
@@ -16,8 +35,11 @@
 
   export let data: TimelineItemData[] = [];
 
-  export let vertical = false;
-  export let compact = false;
+  /** Align timeline vertically (default: horizontal) */
+  export let vertical: boolean = false;
+
+  /** Place timeline on left and all start/end items on end side  */
+  export let compact: boolean = false;
 
   /** Common icon for all items */
   export let icon: ComponentProps<TimelineItem>['icon'] = undefined;
@@ -30,6 +52,13 @@
     item?: ComponentProps<TimelineItem>['classes'];
   } = {};
   const settingsClasses = getComponentClasses('Timeline');
+
+  setTimeline({
+    vertical,
+    compact,
+    icon,
+    snapIcon,
+  });
 </script>
 
 <ul
@@ -44,7 +73,7 @@
 >
   <slot {data}>
     {#each data as item}
-      <TimelineItem {vertical} {compact} {icon} {snapIcon} classes={classes.item} {...item} />
+      <TimelineItem classes={classes.item} {...item} />
     {/each}
   </slot>
 </ul>

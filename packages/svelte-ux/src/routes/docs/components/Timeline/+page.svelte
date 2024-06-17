@@ -260,12 +260,10 @@
 <h2>Vertical / Alternating (using TimelineItem component)</h2>
 
 <Preview>
-  <Timeline vertical>
+  <Timeline vertical snapIcon>
     {#each appleHistoryDetails as item, i}
       <TimelineItem
-        vertical
         icon={mdiCheckCircle}
-        snapIcon
         start={i % 2 === 0}
         end={i % 2 !== 0}
         classes={{
@@ -286,13 +284,10 @@
 <h2>Vertical / Compact (using TimelineItem component)</h2>
 
 <Preview>
-  <Timeline vertical>
+  <Timeline vertical compact snapIcon>
     {#each appleHistoryDetails as item, i}
       <TimelineItem
-        vertical
-        compact
         icon={mdiCheckCircle}
-        snapIcon
         start={i % 2 === 0}
         end={i % 2 !== 0}
         classes={{

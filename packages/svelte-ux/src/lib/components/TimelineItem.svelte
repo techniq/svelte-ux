@@ -3,6 +3,7 @@
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
+  import { getTimeline } from './Timeline.svelte';
 
   /** Value shown above (horizontal) or left (vertical).  If true, sets location of default slot */
   export let start: string | boolean = false;
@@ -10,19 +11,11 @@
   /** Value shown below (horizontal) or right (vertical).  If true, sets location of default slot */
   export let end: string | boolean = false;
 
+  /** Icon to show on timeline */
   export let icon: ComponentProps<Icon>['data'] = undefined;
 
   /** If complete, will color icon and line leading up to item */
   export let complete = false;
-
-  /** Align timeline vertically (default: horizontal)*/
-  export let vertical = false;
-
-  /** Place timeline on left and all start/end items on end side  */
-  export let compact = false;
-
-  /** Snap icon to start */
-  export let snapIcon = false;
 
   export let classes: {
     root?: string;
@@ -32,6 +25,12 @@
     line?: string;
   } = {};
   const settingsClasses = getComponentClasses('TimelineItem');
+
+  const timelineContext = getTimeline();
+  $: vertical = timelineContext?.vertical ?? false;
+  $: compact = timelineContext?.compact ?? false;
+  $: icon = icon ?? timelineContext?.icon ?? undefined;
+  $: snapIcon = timelineContext?.snapIcon ?? false;
 </script>
 
 <li
