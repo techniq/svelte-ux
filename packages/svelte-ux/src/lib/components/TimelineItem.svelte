@@ -14,8 +14,8 @@
   /** Icon to show on timeline */
   export let icon: ComponentProps<Icon>['data'] = undefined;
 
-  /** If complete, will color icon and line leading up to item */
-  export let complete = false;
+  /** If completed, will color icon and line leading up to item */
+  export let completed = false;
 
   export let classes: {
     root?: string;
@@ -39,15 +39,16 @@
     'relative grid shrink-0 items-center',
     'grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]',
     'grid-rows-[minmax(0,1fr)_auto_minmax(0,1fr)]',
+    '[--color-completed:theme(colors.primary)]',
     snapIcon
       ? vertical
         ? 'grid-rows-[0.25rem_auto_minmax(0,1fr)]'
         : 'grid-cols-[0.25rem_auto_minmax(0,1fr)]'
       : '',
-    compact && vertical ? 'grid-cols-[0_auto_minmax(0,1fr)]' : '',
+    compact && vertical ? 'grid-cols-[0_auto_minmax(0,1fr)] grid-rows-[0_auto_minmax(0,1fr)]' : '',
     vertical && 'justify-items-center',
-    complete &&
-      'timelineitem-complete [&_hr:last-child]:has-[~li.timelineitem-complete]:bg-primary',
+    completed &&
+      'timelineitem-completed [&_hr:last-child]:has-[~li.timelineitem-completed]:bg-[--color-completed]',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -57,7 +58,7 @@
     class={cls(
       'border-0 bg-surface-300',
       vertical ? 'w-1 h-full col-start-2 row-start-1' : 'w-full h-1 col-start-1 row-start-2',
-      complete && 'bg-primary',
+      completed && 'bg-[--color-completed]',
       '[:first-child>&]:hidden',
       settingsClasses.line,
       classes.line
@@ -94,7 +95,7 @@
       class={cls(
         'icon',
         'col-start-2 row-start-2',
-        complete && 'text-primary',
+        completed && 'text-[--color-completed]',
         settingsClasses.icon,
         classes.icon
       )}

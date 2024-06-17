@@ -30,7 +30,7 @@
     start?: string | boolean;
     end?: string | boolean;
     icon?: ComponentProps<Icon>['data'];
-    complete?: boolean;
+    completed?: boolean;
   };
 
   export let data: TimelineItemData[] = [];

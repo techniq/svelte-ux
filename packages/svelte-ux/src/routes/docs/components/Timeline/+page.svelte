@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { format } from 'date-fns';
   import {
     mdiCheck,
     mdiCheckCircle,
@@ -9,10 +8,12 @@
     mdiTruck,
   } from '@mdi/js';
 
-  import { Icon, Timeline, TimelineItem, cls } from 'svelte-ux';
+  import { Icon, PeriodType, Timeline, TimelineItem, cls, getSettings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  const data = [
+  const { format } = getSettings();
+
+  const customData = [
     {
       title: 'Label Created',
       location: 'United States',
@@ -43,12 +44,6 @@
       date: new Date('2021-06-04T16:53:00-04:00'),
       status: 'failed',
     },
-    {
-      title: 'Delivered',
-      location: 'Lavalette, WV',
-      date: new Date('2021-06-04T16:53:00-04:00'),
-      status: 'completed',
-    },
   ];
 
   const appleHistory = [
@@ -67,10 +62,10 @@
     { start: 'Apple Watch' },
   ];
 
-  const appleHistoryAlternatingWithComplete = [
-    { start: 'First Macintosh computer', complete: true },
-    { end: 'iMac', complete: true },
-    { start: 'iPod', complete: true },
+  const appleHistoryAlternatingWithCompleted = [
+    { start: 'First Macintosh computer', completed: true },
+    { end: 'iMac', completed: true },
+    { start: 'iPod', completed: true },
     { end: 'iPhone' },
     { start: 'Apple Watch' },
   ];
@@ -176,7 +171,7 @@
 
 <Preview>
   <Timeline
-    data={appleHistoryAlternatingWithComplete}
+    data={appleHistoryAlternatingWithCompleted}
     icon={mdiCheckCircle}
     classes={{
       item: {
@@ -226,7 +221,7 @@
 
 <Preview>
   <Timeline
-    data={appleHistoryAlternatingWithComplete}
+    data={appleHistoryAlternatingWithCompleted}
     icon={mdiCheckCircle}
     vertical
     classes={{
@@ -274,7 +269,9 @@
         <div class="mt-0.5 mb-10 mx-2">
           <time class="font-mono italic">{item.date}</time>
           <div class="text-lg font-black">{item.title}</div>
-          {item.description}
+          <div class="text-surface-content/70 text-sm">
+            {item.description}
+          </div>
         </div>
       </TimelineItem>
     {/each}
@@ -293,12 +290,56 @@
         classes={{
           icon: 'size-5',
         }}
-        complete={i < 3}
+        completed={i < 3}
       >
-        <div class="mt-0.5 mb-10 mx-2">
+        <div class="-mt-0.5 mb-10 mx-2">
           <time class="font-mono italic">{item.date}</time>
           <div class="text-lg font-black">{item.title}</div>
-          {item.description}
+          <div class="text-surface-content/70 text-sm">
+            {item.description}
+          </div>
+        </div>
+      </TimelineItem>
+    {/each}
+  </Timeline>
+</Preview>
+
+<h2>Custom data and display</h2>
+
+<Preview>
+  <Timeline vertical compact snapIcon>
+    {#each customData as item, i}
+      <TimelineItem
+        icon={{
+          'in-progress': mdiTruck,
+          completed: mdiCheck,
+          failed: mdiClose,
+        }[item.status]}
+        start={i % 2 === 0}
+        end={i % 2 !== 0}
+        completed={i < 4}
+        classes={{
+          root: cls(
+            {
+              completed: '[--color-completed:theme(colors.success)]',
+              failed: '[--color-completed:theme(colors.danger)]',
+              'in-progress': '[--color-completed:theme(colors.info)]',
+            }[item.status]
+          ),
+          line: 'w-0.5',
+          icon: cls('size-5 rounded-full p-0.5 text-surface-100 bg-[--color-completed]'),
+        }}
+      >
+        <div class="-mt-1 mb-5 mx-2">
+          <div class="font-bold">{item.title}</div>
+          <div class="text-sm text-surface-content/70">
+            <Icon data={mdiMapMarker} size="1rem" />
+            {item.location}
+          </div>
+          <div class="text-sm text-surface-content/70">
+            <Icon data={mdiClockOutline} size=".9rem" />
+            {$format(item.date, PeriodType.DayTime)}
+          </div>
         </div>
       </TimelineItem>
     {/each}
