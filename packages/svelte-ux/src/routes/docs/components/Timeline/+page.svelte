@@ -156,7 +156,7 @@
   <Timeline
     data={appleHistoryAlternating}
     icon={mdiCheckCircle}
-    snapIcon
+    snapPoint
     classes={{
       item: {
         start: 'border rounded-lg text-sm p-2',
@@ -181,6 +181,22 @@
       },
     }}
   />
+</Preview>
+
+<h2>TimelineItem component with custom point</h2>
+
+<Preview>
+  <Timeline>
+    {#each appleHistory as item, i}
+      <TimelineItem icon={mdiCheckCircle} start={i % 2 === 0} end={i % 2 !== 0}>
+        <div class="font-semibold px-2">{item.end}</div>
+
+        <div slot="point" class="border rounded-full px-2 text-xs">
+          {item.start}
+        </div>
+      </TimelineItem>
+    {/each}
+  </Timeline>
 </Preview>
 
 <h2>Vertical</h2>
@@ -255,7 +271,7 @@
 <h2>Vertical / Alternating (using TimelineItem component)</h2>
 
 <Preview>
-  <Timeline vertical snapIcon>
+  <Timeline vertical snapPoint>
     {#each appleHistoryDetails as item, i}
       <TimelineItem
         icon={mdiCheckCircle}
@@ -281,7 +297,7 @@
 <h2>Vertical / Compact (using TimelineItem component)</h2>
 
 <Preview>
-  <Timeline vertical compact snapIcon>
+  <Timeline vertical compact snapPoint>
     {#each appleHistoryDetails as item, i}
       <TimelineItem
         icon={mdiCheckCircle}
@@ -307,7 +323,7 @@
 <h2>Custom data and display</h2>
 
 <Preview>
-  <Timeline vertical compact snapIcon>
+  <Timeline vertical compact snapPoint>
     {#each customData as item, i}
       <TimelineItem
         icon={{

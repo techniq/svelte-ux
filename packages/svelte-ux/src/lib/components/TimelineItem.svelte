@@ -4,6 +4,7 @@
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
   import { getTimeline } from './Timeline.svelte';
+  import { mdiCircle, mdiCircleMedium } from '@mdi/js';
 
   /** Value shown above (horizontal) or left (vertical).  If true, sets location of default slot */
   export let start: string | boolean = false;
@@ -21,6 +22,7 @@
     root?: string;
     start?: string;
     end?: string;
+    point?: string;
     icon?: string;
     line?: string;
   } = {};
@@ -30,7 +32,7 @@
   $: vertical = timelineContext?.vertical ?? false;
   $: compact = timelineContext?.compact ?? false;
   $: icon = icon ?? timelineContext?.icon ?? undefined;
-  $: snapIcon = timelineContext?.snapIcon ?? false;
+  $: snapPoint = timelineContext?.snapPoint ?? false;
 </script>
 
 <li
@@ -40,7 +42,7 @@
     'grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]',
     'grid-rows-[minmax(0,1fr)_auto_minmax(0,1fr)]',
     '[--color-completed:theme(colors.primary)]',
-    snapIcon
+    snapPoint
       ? vertical
         ? 'grid-rows-[0.25rem_auto_minmax(0,1fr)]'
         : 'grid-cols-[0.25rem_auto_minmax(0,1fr)]'
@@ -92,20 +94,20 @@
     </div>
   {/if}
 
-  {#if icon}
-    <Icon
-      data={icon}
-      class={cls(
-        'icon',
-        'col-start-2 row-start-2',
-        completed && 'text-[--color-completed]',
-        settingsClasses.icon,
-        classes.icon
-      )}
-    />
-  {:else}
-    <div />
-  {/if}
+  <div class={cls('point', 'col-start-2 row-start-2 grid', settingsClasses.point, classes.point)}>
+    <slot name="point">
+      <Icon
+        data={icon ?? mdiCircle}
+        size={icon ? '1rem' : '.5rem'}
+        class={cls(
+          'icon',
+          completed && 'text-[--color-completed]',
+          settingsClasses.icon,
+          classes.icon
+        )}
+      />
+    </slot>
+  </div>
 
   {#if end || $$slots.end}
     <div

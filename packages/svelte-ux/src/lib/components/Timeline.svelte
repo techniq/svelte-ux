@@ -5,7 +5,7 @@
     vertical: boolean;
     compact: boolean;
     icon: ComponentProps<Icon>['icon'];
-    snapIcon: boolean;
+    snapPoint: boolean;
   };
 
   const timelineKey = Symbol();
@@ -44,8 +44,8 @@
   /** Common icon for all items */
   export let icon: ComponentProps<TimelineItem>['icon'] = undefined;
 
-  /** Snap icon to start */
-  export let snapIcon = false;
+  /** Snap point to start */
+  export let snapPoint = false;
 
   export let classes: {
     root?: string;
@@ -57,7 +57,7 @@
     vertical,
     compact,
     icon,
-    snapIcon,
+    snapPoint,
   });
 </script>
 
