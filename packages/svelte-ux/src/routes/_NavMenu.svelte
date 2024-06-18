@@ -40,6 +40,7 @@
       { label: 'Stack (classes)', value: 'StackTailwind' },
       'Steps',
       'Table',
+      'Timeline',
     ],
     Modal: [
       'Dialog',

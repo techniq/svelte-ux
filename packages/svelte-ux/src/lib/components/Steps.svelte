@@ -1,32 +1,65 @@
-<script lang="ts">
-  type T = $$Generic;
+<script lang="ts" context="module">
+  import { type ComponentProps, setContext, getContext } from 'svelte';
 
-  export let data: T[];
-  export let lineGap = 4;
+  type StepsContext = {
+    vertical: boolean;
+  };
 
-  // binded
-  let circleSize = 0;
+  const stepsKey = Symbol();
+
+  export function setSteps(value: StepsContext | undefined) {
+    setContext(stepsKey, value);
+  }
+
+  export function getSteps() {
+    return getContext<StepsContext | undefined>(stepsKey);
+  }
 </script>
 
-<ol
-  style:--circleSize={circleSize}
-  style:--lineTop="{circleSize + lineGap}px"
-  style:--lineBottom="{lineGap}px"
-  style:--lineOffset="{circleSize / 2}px"
+<script lang="ts">
+  import Step from './Step.svelte';
+  import { cls } from '../utils/styles.js';
+  import { getComponentClasses } from './theme.js';
+
+  import Icon from './Icon.svelte';
+
+  type StepData = {
+    label: string;
+    content?: string;
+    icon?: ComponentProps<Icon>['data'];
+  };
+
+  export let data: StepData[] = [];
+
+  /** Align vertically (default: horizontal) */
+  export let vertical: boolean = false;
+
+  export let classes: {
+    root?: string;
+    item?: ComponentProps<Step>['classes'];
+  } = {};
+  const settingsClasses = getComponentClasses('Steps');
+
+  setSteps({
+    vertical,
+  });
+</script>
+
+<ul
+  class={cls(
+    'Steps',
+    'inline-grid grid-flow-col overflow-hidden overflow-x-auto auto-cols-fr [counter-reset:step]',
+    vertical ? 'grid-flow-row' : 'grid-flow-col',
+    settingsClasses.root,
+    classes.root,
+    $$props.class
+  )}
 >
-  {#each data as item, index}
-    <li class="step relative flex gap-4 pb-10">
-      <div bind:clientWidth={circleSize}>
-        <slot name="marker" {item} />
-      </div>
-
-      {#if index < data.length - 1}
-        <div
-          class="line absolute top-[var(--lineTop)] bottom-[var(--lineBottom)] left-0 w-[2px] translate-x-[var(--lineOffset)] bg-surface-content/20"
-        />
-      {/if}
-
-      <slot name="item" {item} />
-    </li>
-  {/each}
-</ol>
+  <slot {data}>
+    {#each data as item}
+      <Step classes={classes.item} {...item}>
+        {item.label}
+      </Step>
+    {/each}
+  </slot>
+</ul>

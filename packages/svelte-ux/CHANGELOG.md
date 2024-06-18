@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.67.0
+
+### Minor Changes
+
+- Add new `Steps` component ([#395](https://github.com/techniq/svelte-ux/pull/395))
+
+- Add new `Timeline` component (replaces old `Steps` component usage). See also new `Steps` component ([#395](https://github.com/techniq/svelte-ux/pull/395))
+
+### Patch Changes
+
+- Add `popover` action to top-level exports ([#393](https://github.com/techniq/svelte-ux/pull/393))
+
 ## 0.66.8
 
 ### Patch Changes
