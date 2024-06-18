@@ -27,6 +27,7 @@
     label: string;
     content?: string;
     icon?: ComponentProps<Icon>['data'];
+    completed?: boolean;
   };
 
   export let data: StepData[] = [];
