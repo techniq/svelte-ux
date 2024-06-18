@@ -2,4 +2,4 @@
 'svelte-ux': minor
 ---
 
-Add new Steps component
+Add new `Steps` component
