@@ -75,6 +75,8 @@ export { default as Shine } from './Shine.svelte';
 export { default as SpringValue } from './SpringValue.svelte';
 export { default as Stack } from './Stack.svelte';
 export { default as State } from './State.svelte';
+export { default as Step } from './Step.svelte';
+export { default as Steps } from './Steps.svelte';
 export { default as StoreSubscribe } from './StoreSubscribe.svelte';
 export { default as Switch } from './Switch.svelte';
 export { default as Table } from './Table.svelte';

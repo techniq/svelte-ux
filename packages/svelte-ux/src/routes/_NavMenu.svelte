@@ -38,6 +38,7 @@
       'ScrollContainer',
       'Stack',
       { label: 'Stack (classes)', value: 'StackTailwind' },
+      'Steps',
       'Table',
       'Timeline',
     ],

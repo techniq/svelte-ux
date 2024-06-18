@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import TimelineItem from './TimelineItem.svelte';
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   import Icon from './Icon.svelte';
@@ -35,7 +35,7 @@
 
   export let data: TimelineItemData[] = [];
 
-  /** Align timeline vertically (default: horizontal) */
+  /** Align vertically (default: horizontal) */
   export let vertical: boolean = false;
 
   /** Place timeline on left and all start/end items on end side  */
