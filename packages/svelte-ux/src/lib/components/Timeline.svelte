@@ -20,36 +20,36 @@
 </script>
 
 <script lang="ts">
-  import TimelineItem from './TimelineItem.svelte';
+  import TimelineEvent from './TimelineEvent.svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   import Icon from './Icon.svelte';
 
-  type TimelineItemData = {
+  type TimelineEventData = {
     start?: string | boolean;
     end?: string | boolean;
     icon?: ComponentProps<Icon>['data'];
     completed?: boolean;
   };
 
-  export let data: TimelineItemData[] = [];
+  export let data: TimelineEventData[] = [];
 
   /** Align vertically (default: horizontal) */
   export let vertical: boolean = false;
 
-  /** Place timeline on left and all start/end items on end side  */
+  /** Place timeline on left and all start/end events on same/end side  */
   export let compact: boolean = false;
 
-  /** Common icon for all items */
-  export let icon: ComponentProps<TimelineItem>['icon'] = undefined;
+  /** Common icon for all events */
+  export let icon: ComponentProps<TimelineEvent>['icon'] = undefined;
 
   /** Snap point to start */
   export let snapPoint = false;
 
   export let classes: {
     root?: string;
-    item?: ComponentProps<TimelineItem>['classes'];
+    event?: ComponentProps<TimelineEvent>['classes'];
   } = {};
   const settingsClasses = getComponentClasses('Timeline');
 
@@ -73,7 +73,7 @@
 >
   <slot {data}>
     {#each data as item}
-      <TimelineItem classes={classes.item} {...item} />
+      <TimelineEvent classes={classes.event} {...item} />
     {/each}
   </slot>
 </ul>

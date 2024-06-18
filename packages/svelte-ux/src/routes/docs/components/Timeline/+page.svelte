@@ -8,7 +8,7 @@
     mdiTruck,
   } from '@mdi/js';
 
-  import { Icon, PeriodType, Timeline, TimelineItem, cls, getSettings } from 'svelte-ux';
+  import { Icon, PeriodType, Timeline, TimelineEvent, cls, getSettings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const { format } = getSettings();
@@ -125,7 +125,7 @@
     data={appleHistory}
     icon={mdiCheckCircle}
     classes={{
-      item: {
+      event: {
         start: 'text-sm font-semibold',
         end: 'border rounded-lg text-sm p-2',
         icon: 'size-5',
@@ -141,7 +141,7 @@
     data={appleHistoryAlternating}
     icon={mdiCheckCircle}
     classes={{
-      item: {
+      event: {
         start: 'border rounded-lg text-sm p-2',
         end: 'border rounded-lg text-sm p-2',
         icon: 'size-5',
@@ -158,7 +158,7 @@
     icon={mdiCheckCircle}
     snapPoint
     classes={{
-      item: {
+      event: {
         start: 'border rounded-lg text-sm p-2',
         end: 'border rounded-lg text-sm p-2',
         icon: 'size-5',
@@ -167,14 +167,14 @@
   />
 </Preview>
 
-<h2>Completed items</h2>
+<h2>Completed events</h2>
 
 <Preview>
   <Timeline
     data={appleHistoryAlternatingWithCompleted}
     icon={mdiCheckCircle}
     classes={{
-      item: {
+      event: {
         start: 'border rounded-lg text-sm p-2 m-1',
         end: 'border rounded-lg text-sm p-2 m-1',
         icon: 'size-5',
@@ -183,18 +183,18 @@
   />
 </Preview>
 
-<h2>TimelineItem component with custom point</h2>
+<h2>TimelineEvent component with custom point</h2>
 
 <Preview>
   <Timeline>
     {#each appleHistory as item, i}
-      <TimelineItem icon={mdiCheckCircle} start={i % 2 === 0} end={i % 2 !== 0}>
+      <TimelineEvent icon={mdiCheckCircle} start={i % 2 === 0} end={i % 2 !== 0}>
         <div class="font-semibold px-2">{item.end}</div>
 
         <div slot="point" class="border rounded-full px-2 text-xs">
           {item.start}
         </div>
-      </TimelineItem>
+      </TimelineEvent>
     {/each}
   </Timeline>
 </Preview>
@@ -207,7 +207,7 @@
     icon={mdiCheckCircle}
     vertical
     classes={{
-      item: {
+      event: {
         start: 'text-sm font-semibold',
         end: 'border rounded-lg text-sm p-2 m-1',
         icon: 'size-5',
@@ -224,7 +224,7 @@
     icon={mdiCheckCircle}
     vertical
     classes={{
-      item: {
+      event: {
         start: 'border rounded-lg text-sm p-2 m-1',
         end: 'border rounded-lg text-sm p-2 m-1',
         icon: 'size-5',
@@ -233,7 +233,7 @@
   />
 </Preview>
 
-<h2>Completed items</h2>
+<h2>Completed events</h2>
 
 <Preview>
   <Timeline
@@ -241,7 +241,7 @@
     icon={mdiCheckCircle}
     vertical
     classes={{
-      item: {
+      event: {
         start: 'border rounded-lg text-sm p-2 m-1',
         end: 'border rounded-lg text-sm p-2 m-1',
         icon: 'size-5',
@@ -258,7 +258,7 @@
     icon={mdiCheckCircle}
     vertical
     classes={{
-      item: {
+      event: {
         root: 'grid-cols-[40px,auto,1fr]',
         start: 'text-sm font-semibold mr-1',
         end: 'border rounded-lg text-sm p-2 m-1',
@@ -268,12 +268,12 @@
   />
 </Preview>
 
-<h2>Vertical / Alternating (using TimelineItem component)</h2>
+<h2>Vertical / Alternating (using TimelineEvent component)</h2>
 
 <Preview>
   <Timeline vertical snapPoint>
     {#each appleHistoryDetails as item, i}
-      <TimelineItem
+      <TimelineEvent
         icon={mdiCheckCircle}
         start={i % 2 === 0}
         end={i % 2 !== 0}
@@ -289,17 +289,17 @@
             {item.description}
           </div>
         </div>
-      </TimelineItem>
+      </TimelineEvent>
     {/each}
   </Timeline>
 </Preview>
 
-<h2>Vertical / Compact (using TimelineItem component)</h2>
+<h2>Vertical / Compact (using TimelineEvent component)</h2>
 
 <Preview>
   <Timeline vertical compact snapPoint>
     {#each appleHistoryDetails as item, i}
-      <TimelineItem
+      <TimelineEvent
         icon={mdiCheckCircle}
         start={i % 2 === 0}
         end={i % 2 !== 0}
@@ -315,7 +315,7 @@
             {item.description}
           </div>
         </div>
-      </TimelineItem>
+      </TimelineEvent>
     {/each}
   </Timeline>
 </Preview>
@@ -325,7 +325,7 @@
 <Preview>
   <Timeline vertical compact snapPoint>
     {#each customData as item, i}
-      <TimelineItem
+      <TimelineEvent
         icon={{
           'in-progress': mdiTruck,
           completed: mdiCheck,
@@ -357,7 +357,7 @@
             {$format(item.date, PeriodType.DayTime)}
           </div>
         </div>
-      </TimelineItem>
+      </TimelineEvent>
     {/each}
   </Timeline>
 </Preview>

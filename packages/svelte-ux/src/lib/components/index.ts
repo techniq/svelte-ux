@@ -90,7 +90,7 @@ export { default as ThemeSwitch } from './ThemeSwitch.svelte';
 export { default as ThemeInit } from './ThemeInit.svelte';
 export { default as Tilt } from './Tilt.svelte';
 export { default as Timeline } from './Timeline.svelte';
-export { default as TimelineItem } from './TimelineItem.svelte';
+export { default as TimelineEvent } from './TimelineEvent.svelte';
 export { default as Toggle } from './Toggle.svelte';
 export { default as ToggleButton } from './ToggleButton.svelte';
 export { default as ToggleGroup } from './ToggleGroup.svelte';

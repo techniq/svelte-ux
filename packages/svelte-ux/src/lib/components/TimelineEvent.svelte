@@ -15,7 +15,7 @@
   /** Icon to show on timeline */
   export let icon: ComponentProps<Icon>['data'] = undefined;
 
-  /** If completed, will color icon and line leading up to item */
+  /** If completed, will color icon and line leading up to event */
   export let completed = false;
 
   export let classes: {
@@ -26,7 +26,7 @@
     icon?: string;
     line?: string;
   } = {};
-  const settingsClasses = getComponentClasses('TimelineItem');
+  const settingsClasses = getComponentClasses('TimelineEvent');
 
   const timelineContext = getTimeline();
   $: vertical = timelineContext?.vertical ?? false;
@@ -37,7 +37,7 @@
 
 <li
   class={cls(
-    'TimelineItem',
+    'TimelineEvent',
     'relative grid shrink-0 items-center',
     'grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]',
     'grid-rows-[minmax(0,1fr)_auto_minmax(0,1fr)]',
@@ -50,7 +50,7 @@
     compact && vertical ? 'grid-cols-[0_auto_minmax(0,1fr)] grid-rows-[0_auto_minmax(0,1fr)]' : '',
     vertical && 'justify-items-center',
     completed &&
-      'timelineitem-completed [&_hr:last-child]:has-[~li.timelineitem-completed]:bg-[--color-completed]',
+      'timelineevent-completed [&_hr:last-child]:has-[~li.timelineevent-completed]:bg-[--color-completed]',
     settingsClasses.root,
     classes.root,
     $$props.class
