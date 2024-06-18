@@ -128,3 +128,63 @@
 <Preview>
   <Steps data={stepsWithIcon} classes={{ item: { content: 'size-6 text-xs', line: 'h-1' } }} />
 </Preview>
+
+<h2>Remove point background</h2>
+
+<Preview>
+  <Steps
+    data={stepsWithIcon}
+    classes={{
+      item: {
+        content: 'bg-surface-100 size-12',
+        line: 'h-0.5',
+        completed: 'text-primary bg-primary',
+      },
+    }}
+  />
+</Preview>
+
+<h2>Remove point background (vertical)</h2>
+
+<Preview>
+  <Steps
+    data={stepsWithIcon}
+    vertical
+    classes={{
+      item: {
+        content: 'bg-surface-100 size-10',
+        line: 'w-0.5',
+        completed: 'text-primary bg-primary',
+      },
+    }}
+  />
+</Preview>
+
+<h2>Gradient</h2>
+
+<Preview>
+  <Steps
+    data={stepsWithIcon}
+    classes={{
+      item: {
+        content: 'size-10',
+        completed: 'bg-gradient-to-br from-primary to-secondary text-primary-content',
+      },
+    }}
+  />
+</Preview>
+
+<h2>Gradient (vertical)</h2>
+
+<Preview>
+  <Steps
+    data={stepsWithIcon}
+    vertical
+    classes={{
+      item: {
+        content: 'size-10',
+        completed: 'bg-gradient-to-br from-primary to-secondary text-primary-content',
+      },
+    }}
+  />
+</Preview>
