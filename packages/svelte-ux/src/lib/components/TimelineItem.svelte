@@ -57,9 +57,12 @@
   <hr
     class={cls(
       'border-0 bg-surface-300',
-      vertical ? 'w-1 h-full col-start-2 row-start-1' : 'w-full h-1 col-start-1 row-start-2',
-      completed && 'bg-[--color-completed]',
       '[:first-child>&]:hidden',
+      vertical
+        ? 'w-1 h-full col-start-2 row-start-1 rounded-b'
+        : 'w-full h-1 col-start-1 row-start-2 rounded-r',
+      !icon && 'rounded-none',
+      completed && 'bg-[--color-completed]',
       settingsClasses.line,
       classes.line
     )}
@@ -126,10 +129,11 @@
   <hr
     class={cls(
       'border-0 bg-surface-300',
-      vertical
-        ? 'w-1 h-full col-start-2 col-end-auto row-start-3 row-end-[none]'
-        : 'w-full h-1 col-start-3 col-end-[none] row-start-2 row-end-auto',
       '[:last-child>&]:hidden',
+      vertical
+        ? 'w-1 h-full col-start-2 col-end-auto row-start-3 row-end-[none] rounded-t'
+        : 'w-full h-1 col-start-3 col-end-[none] row-start-2 row-end-auto rounded-l',
+      !icon && 'rounded-none',
       settingsClasses.line,
       classes.line
     )}
