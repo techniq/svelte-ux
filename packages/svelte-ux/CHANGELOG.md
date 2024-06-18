@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.68.0
+
+### Minor Changes
+
+- Rename `TimelineItem` to `TimelineEvent` (and related classes/props) ([`e0f7217ae945e5ef1c0f7f8dad19875e503e207a`](https://github.com/techniq/svelte-ux/commit/e0f7217ae945e5ef1c0f7f8dad19875e503e207a))
+
 ## 0.67.0
 
 ### Minor Changes
