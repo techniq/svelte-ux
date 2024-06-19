@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.68.1
+
+### Patch Changes
+
+- [Steps] Update `data` type to include `completed` ([`5f235e39c2ace566428150fbb37f195afbb2c545`](https://github.com/techniq/svelte-ux/commit/5f235e39c2ace566428150fbb37f195afbb2c545))
+
+- Update dependencies ([`3b873213b52ead101e94e92c9b843443c9ebb4cb`](https://github.com/techniq/svelte-ux/commit/3b873213b52ead101e94e92c9b843443c9ebb4cb))
+
 ## 0.68.0
 
 ### Minor Changes
