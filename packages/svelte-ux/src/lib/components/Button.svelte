@@ -18,7 +18,7 @@
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
   export let icon: IconInput = undefined;
-  export let iconOnly = icon !== undefined && $$slots.default !== true;
+  export let iconOnly = icon !== undefined && !$$slots.default;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
 
   export let loading: boolean = false;
