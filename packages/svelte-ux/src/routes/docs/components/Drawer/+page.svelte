@@ -98,9 +98,9 @@
   <Toggle let:on={open} let:toggle let:toggleOff>
     <Drawer {open} on:close={toggleOff} class="w-[400px]">
       <div class="p-2">
-        <Toggle let:on={open} let:toggle>
+        <Toggle let:on={open} let:toggle let:toggleOff>
           <Button on:click={toggle}>Show Dialog</Button>
-          <Dialog {open} on:close={toggle}>
+          <Dialog {open} on:close={toggleOff}>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
               <Button variant="fill" color="primary">Close</Button>

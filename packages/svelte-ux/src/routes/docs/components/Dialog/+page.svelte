@@ -26,9 +26,9 @@
 <h2>Basic (with Toggle)</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>Show Dialog</Button>
-    <Dialog {open} on:close={toggle}>
+    <Dialog {open} on:close={toggleOff}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
         <Button variant="fill" color="primary">Close</Button>
@@ -96,9 +96,9 @@
 <h2>Confirmation dialog</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button icon={mdiTrashCan} on:click={toggle} color="danger">Delete</Button>
-    <Dialog {open} on:close={toggle}>
+    <Dialog {open} on:close={toggleOff}>
       <div slot="title">Are you sure?</div>
       <div class="px-6 py-3">This will permanently delete the item and can not be undone.</div>
       <div slot="actions">
@@ -169,9 +169,9 @@
 <h2>Loading</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>Show Dialog</Button>
-    <Dialog {open} on:close={toggle} loading>
+    <Dialog {open} on:close={toggleOff} loading>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
         <Button variant="fill" color="primary">Close</Button>
@@ -183,9 +183,9 @@
 <h2>Persistent</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>Show Dialog</Button>
-    <Dialog {open} on:close={toggle} persistent>
+    <Dialog {open} on:close={toggleOff} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
         <Button variant="fill" color="primary">Yes</Button>
@@ -198,9 +198,9 @@
 <h2>With autofocus TextField</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>Show Dialog</Button>
-    <Dialog {open} on:close={toggle}>
+    <Dialog {open} on:close={toggleOff}>
       <div slot="title">How old are you?</div>
       <div class="p-2">
         <TextField label="Age" autofocus />
@@ -216,9 +216,9 @@
 <h2>Disabled action</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>Show Dialog</Button>
-    <Dialog {open} on:close={toggle}>
+    <Dialog {open} on:close={toggleOff}>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
         <Button variant="fill" color="primary" disabled>Don't touch</Button>

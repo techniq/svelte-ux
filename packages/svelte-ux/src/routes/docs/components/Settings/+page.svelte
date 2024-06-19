@@ -15,10 +15,10 @@
       MenuItem: { classes: 'font-bold' },
     }}
   >
-    <Toggle let:on={open} let:toggle>
+    <Toggle let:on={open} let:toggle let:toggleOff>
       <Button on:click={toggle} variant="outline" color="primary">
         Click me
-        <Menu {open} on:close={toggle}>
+        <Menu {open} on:close={toggleOff}>
           <MenuItem>Refresh</MenuItem>
           <MenuItem>Settings</MenuItem>
           <MenuItem>Help</MenuItem>

@@ -256,10 +256,10 @@
         <CopyButton value={JSON.stringify(currentThemeSettings, null, 2)} />
       </Tooltip>
 
-      <Toggle let:on={open} let:toggle>
+      <Toggle let:on={open} let:toggle let:toggleOff>
         <div class="grid">
           <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
-          <Menu {open} on:close={toggle} placement="bottom-start">
+          <Menu {open} on:close={toggleOff} placement="bottom-start">
             <MenuItem
               on:click={() => {
                 const value = JSON.stringify(

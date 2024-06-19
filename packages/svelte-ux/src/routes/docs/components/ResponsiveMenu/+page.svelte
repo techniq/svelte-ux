@@ -108,10 +108,10 @@
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Drawer with another Menu...</MenuItem>
           <Drawer {open} on:close={toggleOff} class="w-[400px]">
-            <Toggle let:on={open} let:toggle>
+            <Toggle let:on={open} let:toggle let:toggleOff>
               <span>
                 <Button on:click={toggle}>Click me</Button>
-                <ResponsiveMenu {open} on:close={toggle}>
+                <ResponsiveMenu {open} on:close={toggleOff}>
                   <MenuItem>Refresh</MenuItem>
                   <MenuItem>Settings</MenuItem>
                   <MenuItem>Help</MenuItem>
@@ -132,12 +132,12 @@
 <h2>menuProps</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
       <ResponsiveMenu
         {open}
-        on:close={toggle}
+        on:close={toggleOff}
         menuProps={{ autoPlacement: true, matchWidth: true }}
       >
         <MenuItem>Refresh</MenuItem>
@@ -152,12 +152,12 @@
 <h2>drawerProps</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
       <ResponsiveMenu
         {open}
-        on:close={toggle}
+        on:close={toggleOff}
         drawerProps={{ class: 'rounded-t-lg pb-[env(safe-area-inset-bottom)]' }}
       >
         <MenuItem>Refresh</MenuItem>

@@ -13,7 +13,7 @@
 <Preview>
   <ToggleButton let:on={open}>
     Open Dialog
-    <Dialog slot="toggle" {open} on:close={toggle} let:toggle>
+    <Dialog slot="toggle" {open} on:close={toggleOff} let:toggle let:toggleOff>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
         <Button variant="fill" color="primary">Close</Button>

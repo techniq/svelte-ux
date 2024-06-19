@@ -10,10 +10,10 @@
 <h2>Basic</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
-      <Menu {open} on:close={toggle}>
+      <Menu {open} on:close={toggleOff}>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
@@ -27,10 +27,10 @@
 <h2>Explicit close</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
-      <Menu {open} on:close={toggle} explicitClose let:close>
+      <Menu {open} on:close={toggleOff} explicitClose let:close>
         <div class="p-2">
           <TextField
             icon={mdiMagnify}
@@ -97,10 +97,10 @@
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Drawer with another Menu...</MenuItem>
           <Drawer {open} on:close={toggleOff} class="w-[400px]">
-            <Toggle let:on={open} let:toggle>
+            <Toggle let:on={open} let:toggle let:toggleOff>
               <span>
                 <Button on:click={toggle}>Click me</Button>
-                <Menu {open} on:close={toggle}>
+                <Menu {open} on:close={toggleOff}>
                   <MenuItem>Refresh</MenuItem>
                   <MenuItem>Settings</MenuItem>
                   <MenuItem>Help</MenuItem>
@@ -121,10 +121,10 @@
 <h2>matchWidth</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
-      <Menu {open} on:close={toggle} matchWidth>
+      <Menu {open} on:close={toggleOff} matchWidth>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
@@ -137,10 +137,10 @@
 <h2>autoPlacement</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
-      <Menu {open} on:close={toggle} autoPlacement>
+      <Menu {open} on:close={toggleOff} autoPlacement>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
@@ -153,10 +153,10 @@
 <h2>explicit placement</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
-      <Menu {open} on:close={toggle} placement="right-start">
+      <Menu {open} on:close={toggleOff} placement="right-start">
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
@@ -171,10 +171,10 @@
 <h3>Useful when menu will exceed window and need repositioned.</h3>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
-      <Menu {open} on:close={toggle} disableTransition>
+      <Menu {open} on:close={toggleOff} disableTransition>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>
@@ -187,10 +187,10 @@
 <h2>transition params</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>
       Click me
-      <Menu {open} on:close={toggle} transitionParams={{ duration: 2000 }}>
+      <Menu {open} on:close={toggleOff} transitionParams={{ duration: 2000 }}>
         <MenuItem>Refresh</MenuItem>
         <MenuItem>Settings</MenuItem>
         <MenuItem>Help</MenuItem>

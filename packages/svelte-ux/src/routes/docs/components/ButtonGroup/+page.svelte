@@ -241,10 +241,10 @@
   <div class="grid gap-2">
     <ButtonGroup>
       <Button>Click me</Button>
-      <Toggle let:on={open} let:toggle>
+      <Toggle let:on={open} let:toggle let:toggleOff>
         <span>
           <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
-          <Menu {open} on:close={toggle} placement="bottom-start">
+          <Menu {open} on:close={toggleOff} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
@@ -256,10 +256,10 @@
 
     <ButtonGroup variant="outline">
       <Button>Click me</Button>
-      <Toggle let:on={open} let:toggle>
+      <Toggle let:on={open} let:toggle let:toggleOff>
         <span>
           <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
-          <Menu {open} on:close={toggle} placement="bottom-start">
+          <Menu {open} on:close={toggleOff} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
@@ -271,10 +271,10 @@
 
     <ButtonGroup variant="fill" color="primary">
       <Button>Click me</Button>
-      <Toggle let:on={open} let:toggle>
+      <Toggle let:on={open} let:toggle let:toggleOff>
         <span>
           <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
-          <Menu {open} on:close={toggle} placement="bottom-start">
+          <Menu {open} on:close={toggleOff} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
@@ -286,10 +286,10 @@
 
     <ButtonGroup variant="fill-light" color="primary">
       <Button>Click me</Button>
-      <Toggle let:on={open} let:toggle>
+      <Toggle let:on={open} let:toggle let:toggleOff>
         <span>
           <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
-          <Menu {open} on:close={toggle} placement="bottom-start">
+          <Menu {open} on:close={toggleOff} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
@@ -301,10 +301,10 @@
 
     <ButtonGroup variant="fill-outline" color="primary">
       <Button>Click me</Button>
-      <Toggle let:on={open} let:toggle>
+      <Toggle let:on={open} let:toggle let:toggleOff>
         <span>
           <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
-          <Menu {open} on:close={toggle} placement="bottom-start">
+          <Menu {open} on:close={toggleOff} placement="bottom-start">
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>
             <MenuItem>Hello</MenuItem>

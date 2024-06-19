@@ -462,9 +462,9 @@
 
             <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
               {#if column.name === 'actions'}
-                <Toggle let:on={open} let:toggle>
+                <Toggle let:on={open} let:toggle let:toggleOff>
                   <Button icon={mdiDotsVertical} iconOnly size="sm" on:click={toggle}>
-                    <Menu {open} on:close={toggle} placement="bottom-end">
+                    <Menu {open} on:close={toggleOff} placement="bottom-end">
                       <MenuItem>Edit</MenuItem>
                       <MenuItem class="text-danger">Delete</MenuItem>
                     </Menu>

@@ -111,7 +111,7 @@
       {#if component === 'perPage'}
         <div class={cls('text-sm text-center', settingsClasses.perPage, classes.perPage)}>
           Per page:
-          <Toggle let:on={open} let:toggle>
+          <Toggle let:on={open} let:toggle let:toggleOff>
             <span>
               <Button on:click={toggle}>
                 {$pagination.perPage}
@@ -120,7 +120,7 @@
 
               <Menu
                 {open}
-                on:close={toggle}
+                on:close={toggleOff}
                 autoPlacement
                 offset={12}
                 classes={{ menu: 'group p-1' }}

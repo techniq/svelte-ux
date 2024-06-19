@@ -284,7 +284,7 @@
 <h2>`append` slot (field actions)</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle>
+  <Toggle let:on={open} let:toggle let:toggleOff>
     <SelectField {options}>
       <span slot="append" on:click|stopPropagation>
         <Button icon={mdiPlus} class="text-surface-content/50 p-2" on:click={toggle} />
@@ -299,7 +299,7 @@
       let:commit
       let:revert
     >
-      <Dialog {open} on:close={toggle}>
+      <Dialog {open} on:close={toggleOff}>
         <div slot="title">Create new option</div>
         <div class="px-6 py-3 w-96 grid gap-2">
           <TextField
