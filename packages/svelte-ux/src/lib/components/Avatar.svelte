@@ -3,7 +3,7 @@
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
 
-  export let size: 'sm' | 'md' | 'lg' | 'unset' = 'md';
+  export let size = 'md' as 'sm' | 'md' | 'lg' | 'unset';
   export let icon: string | undefined = undefined;
   let className: string | undefined = undefined;
   export { className as class };
