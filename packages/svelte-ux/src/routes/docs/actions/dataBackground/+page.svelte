@@ -100,26 +100,28 @@
 
 <Preview>
   <table class="w-full border">
-    {#each sorted ? sort(values) : values as value}
-      <!-- re-mount if duration changes so action is updated -->
-      {#key duration}
-        <tr>
-          <td
-            class="text-right border tabular-nums"
-            use:dataBackground={{
-              value,
-              color: value > 0 ? 'hsl(140 80% 80%)' : 'hsl(0 80% 80%)',
-              domain,
-              inset,
-              baseline,
-              tweened: { duration },
-            }}
-          >
-            <TweenedValue {value} format="integer" options={{ duration }} />
-          </td>
-        </tr>
-      {/key}
-    {/each}
+    <tbody>
+      {#each sorted ? sort(values) : values as value}
+        <!-- re-mount if duration changes so action is updated -->
+        {#key duration}
+          <tr>
+            <td
+              class="text-right border tabular-nums"
+              use:dataBackground={{
+                value,
+                color: value > 0 ? 'hsl(140 80% 80%)' : 'hsl(0 80% 80%)',
+                domain,
+                inset,
+                baseline,
+                tweened: { duration },
+              }}
+            >
+              <TweenedValue {value} format="integer" options={{ duration }} />
+            </td>
+          </tr>
+        {/key}
+      {/each}
+    </tbody>
   </table>
 </Preview>
 
@@ -127,27 +129,29 @@
 
 <Preview>
   <table class="w-full border">
-    {#each sorted ? sort(values) : values as value}
-      <!-- re-mount if duration changes so action is updated -->
-      {#key duration}
-        <tr>
-          <td
-            class={cls(
-              'text-right border tabular-nums',
-              value > 0 ? 'from-success-300 to-success-500' : 'from-danger to-danger-300'
-            )}
-            use:dataBackground={{
-              value,
-              domain,
-              inset,
-              baseline,
-              tweened: { duration },
-            }}
-          >
-            <TweenedValue {value} format="integer" options={{ duration }} />
-          </td>
-        </tr>
-      {/key}
-    {/each}
+    <tbody>
+      {#each sorted ? sort(values) : values as value}
+        <!-- re-mount if duration changes so action is updated -->
+        {#key duration}
+          <tr>
+            <td
+              class={cls(
+                'text-right border tabular-nums',
+                value > 0 ? 'from-success-300 to-success-500' : 'from-danger to-danger-300'
+              )}
+              use:dataBackground={{
+                value,
+                domain,
+                inset,
+                baseline,
+                tweened: { duration },
+              }}
+            >
+              <TweenedValue {value} format="integer" options={{ duration }} />
+            </td>
+          </tr>
+        {/key}
+      {/each}
+    </tbody>
   </table>
 </Preview>
