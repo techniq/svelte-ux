@@ -20,7 +20,7 @@
   export let perPageOptions = [10, 25, 50, 100, 1000];
   export let hideSinglePage = false;
   export let format: (pagination: StoresValues<Pagination>) => string = (pagination) => {
-    return `${$pagination.from.toLocaleString()}-${$pagination.to.toLocaleString()} of ${$pagination.total.toLocaleString()}`;
+    return `${pagination.from.toLocaleString()}-${pagination.to.toLocaleString()} of ${pagination.total.toLocaleString()}`;
   };
 
   type ShowComponent =
