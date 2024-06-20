@@ -1,5 +1,5 @@
-import { tick } from 'svelte';
 import type { ActionReturn } from 'svelte/action';
+import { delay } from '$lib/utils/promise.js';
 
 export function focusMove(
   node: HTMLElement,
@@ -14,7 +14,7 @@ export function focusMove(
     // Set `tabIndex` to `-1` which makes any element (ex. div) focusable programmaitcally (and mouse), but not via keyboard navigation - https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
     node.tabIndex = -1;
     // Appear to need to wait for tabIndex to update before applying focus
-    tick().then(() => {
+    delay(0).then(() => {
       node.focus();
     });
 
