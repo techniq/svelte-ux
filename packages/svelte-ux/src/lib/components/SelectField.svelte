@@ -539,6 +539,7 @@
           <svelte:fragment slot="option" let:option let:index>
             <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
               <MenuItem
+                icon={option.icon}
                 class={cls(
                   index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
                   option === selected && (classes.selected || 'font-semibold'),
@@ -599,6 +600,7 @@
         <svelte:fragment slot="option" let:option let:index>
           <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
             <MenuItem
+              icon={option.icon}
               class={cls(
                 index === highlightIndex && '[:not(.group:hover)>&]:bg-surface-content/5',
                 option === selected && (classes.selected || 'font-semibold'),

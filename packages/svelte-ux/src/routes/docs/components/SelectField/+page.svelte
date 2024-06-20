@@ -18,6 +18,13 @@
   import Preview from '$lib/components/Preview.svelte';
 
   let options: MenuOption[] = [
+    { label: 'One', value: 1 },
+    { label: 'Two', value: 2 },
+    { label: 'Three', value: 3 },
+    { label: 'Four', value: 4 },
+  ];
+
+  let optionsWithIcon: MenuOption[] = [
     { label: 'One', value: 1, icon: mdiMagnify },
     { label: 'Two', value: 2, icon: mdiPlus },
     { label: 'Three', value: 3, icon: mdiPencil },
@@ -115,6 +122,12 @@
     ]}
     on:change={(e) => console.log('on:change', e.detail)}
   />
+</Preview>
+
+<h2>Options with icons</h2>
+
+<Preview>
+  <SelectField options={optionsWithIcon} />
 </Preview>
 
 <h2>Many options</h2>
