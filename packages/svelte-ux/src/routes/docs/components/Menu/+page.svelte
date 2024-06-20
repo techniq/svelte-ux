@@ -32,6 +32,7 @@
       Click me
       <Menu {open} on:close={toggleOff} explicitClose let:close>
         <div class="p-2">
+          <!-- Add autofocus delay to keep the opening transition smooth  -->
           <TextField
             icon={mdiMagnify}
             placeholder="Search"

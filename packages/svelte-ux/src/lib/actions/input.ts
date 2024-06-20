@@ -1,19 +1,15 @@
 import type { Action } from 'svelte/action';
+import { focusMove } from './focus.js';
 
 /**
  * Auto focus node when rendered.  Useful for inputs
  */
 export function autoFocus(
   node: HTMLElement | SVGElement,
-  options?: { delay?: number; disabled?: boolean }
+  options?: Parameters<typeof focusMove>['1']
 ) {
-  // TODO: Add options to "restoreFocus" on destroy()
-  // const elementFocused = document.activeElement as HTMLElement;
-  if (options?.disabled !== true) {
-    setTimeout(() => {
-      node.focus();
-    }, options?.delay ?? 0);
-  }
+  // Delay by 1ms by default since Dialog/Drawer/Menu also call `focusMove` but with default `0ms` delay, and we want to focus last
+  return focusMove(node, { delay: 1, ...options });
 }
 
 /**

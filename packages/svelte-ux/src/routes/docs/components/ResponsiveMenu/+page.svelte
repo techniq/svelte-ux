@@ -43,6 +43,7 @@
       Click me
       <ResponsiveMenu {open} on:close={toggleOff} menuProps={{ explicitClose: true }}>
         <div class="p-2">
+          <!-- Add autofocus delay to keep the opening transition smooth  -->
           <TextField
             icon={mdiMagnify}
             placeholder="Search"
