@@ -117,6 +117,19 @@
   />
 </Preview>
 
+<h2>Object value options</h2>
+
+<Preview>
+  <SelectField
+    options={[
+      { label: 'Empty', value: null },
+      { label: 'Foo', value: { id: 1 } },
+      { label: 'Bar', value: { id: 2 } },
+      { label: 'Baz', value: { id: 3 } },
+    ]}
+  />
+</Preview>
+
 <h2>Many options</h2>
 
 <Preview>
