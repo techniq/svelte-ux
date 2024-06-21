@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.69.1
+
+### Patch Changes
+
+- [AppLayout] Use margin instead of padding on main to not conflict with `<main class="p-4">` usage ([`11b68b0389f14184443c2feaf7249f3482713487`](https://github.com/techniq/svelte-ux/commit/11b68b0389f14184443c2feaf7249f3482713487))
+
 ## 0.69.0
 
 ### Minor Changes
