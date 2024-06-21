@@ -12,4 +12,4 @@
   $: pageData = $pagination.slice(data);
 </script>
 
-<slot {pagination} {pageData} />
+<slot {pagination} {pageData} current={$pagination} />
