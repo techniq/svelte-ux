@@ -158,6 +158,12 @@
 
   let currentPath = '';
   onMount(() => {
+    // Delay adding `scroll-smooth` to `<html>` as provides better refresh experience
+    // and fixes issue where sometimes doesn't scroll far enough
+    setTimeout(() => {
+      document.documentElement.classList.add('scroll-smooth');
+    }, 0);
+
     // Posthog analytics
     if (!dev) {
       const unsubscribePage = page.subscribe(($page) => {
@@ -304,7 +310,7 @@
 
 <style lang="postcss">
   :global(html) {
-    @apply bg-surface-200 accent-primary scroll-smooth;
+    @apply bg-surface-200 accent-primary;
     /* background-image:
       radial-gradient(at 0% 0%, hsl(var(--color-secondary) / 0.33) 0px, transparent 50%),
       radial-gradient(at 98% 1%, hsl(var(--color-primary) / 0.33) 0px, transparent 50%); */
