@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { clamp } from '../utils/number.js';
 
 export type PaginationProps = {
   page?: number;
@@ -40,8 +41,10 @@ export default function paginationStore(props?: PaginationProps) {
   };
 }
 
-function createState(page: number, perPage: number, total: number) {
+function createState(_page: number, perPage: number, total: number) {
   const totalPages = Math.ceil(total / perPage);
+  // Do not allow page to exceed bounds (ex. call nextPage() when on last page)
+  const page = clamp(_page, 1, totalPages);
 
   return {
     page,
