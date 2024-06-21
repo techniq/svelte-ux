@@ -1,5 +1,19 @@
 # svelte-ux
 
+## 0.69.0
+
+### Minor Changes
+
+- [AppLayout] Fix scrolling to #fragment on page load by making body scrollable instead of <main>. Remove `overlapHeader` prop (always overlap). ([#404](https://github.com/techniq/svelte-ux/pull/404))
+
+### Patch Changes
+
+- [autoFocus] Add short delay to fix timing when used within modal (Dialog/Drawer/Menu) which also move focus ([`7d9f09cc999eea8d8244edffe818a36220680621`](https://github.com/techniq/svelte-ux/commit/7d9f09cc999eea8d8244edffe818a36220680621))
+
+- Fix scrolling away when opening menu ([#400](https://github.com/techniq/svelte-ux/pull/400))
+
+- [SelectField] Support option icons ([`91b58c5d6f00e6e9cee4b95cfb92498feda882c1`](https://github.com/techniq/svelte-ux/commit/91b58c5d6f00e6e9cee4b95cfb92498feda882c1))
+
 ## 0.68.1
 
 ### Patch Changes
