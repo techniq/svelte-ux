@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.70.0
+
+### Minor Changes
+
+- [Step] Rename `content` to `point` (prop and classes). Add `classes.label` ([`a82087855e298d718e13fc46a8cb2f8b685841c3`](https://github.com/techniq/svelte-ux/commit/a82087855e298d718e13fc46a8cb2f8b685841c3))
+
 ## 0.69.2
 
 ### Patch Changes
