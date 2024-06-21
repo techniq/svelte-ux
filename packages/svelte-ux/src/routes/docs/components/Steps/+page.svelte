@@ -5,8 +5,9 @@
     mdiListBoxOutline,
     mdiTruckDeliveryOutline,
   } from '@mdi/js';
+  import { range } from 'd3-array';
 
-  import { Steps, Step } from 'svelte-ux';
+  import { Button, Paginate, Steps, Step } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const steps = [
@@ -29,8 +30,6 @@
     { label: 'Purchase', completed: false, icon: mdiCreditCardOutline },
     { label: 'Receive product', completed: false, icon: mdiTruckDeliveryOutline },
   ];
-
-  const steps2 = ['Fly to moon', 'Shrink the moon', 'Grab the moon', 'Sit on toilet'];
 </script>
 
 <h1>Examples</h1>
@@ -187,4 +186,29 @@
       },
     }}
   />
+</Preview>
+
+<h2>Pagination integration</h2>
+
+<Preview>
+  <Paginate data={range(4)} perPage={1} let:pagination let:current>
+    <div class="inline-grid gap-5">
+      <Steps>
+        <Step completed={current.page >= 1}>Register</Step>
+        <Step completed={current.page >= 2}>Choose plan</Step>
+        <Step completed={current.page >= 3}>Purchase</Step>
+        <Step completed={current.page >= 4}>Receive product</Step>
+      </Steps>
+
+      <div>
+        <Button on:click={pagination.prevPage} disabled={current.isFirst}>Previous</Button>
+        <Button
+          on:click={pagination.nextPage}
+          color="primary"
+          variant="fill"
+          disabled={current.isLast}>Next</Button
+        >
+      </div>
+    </div>
+  </Paginate>
 </Preview>
