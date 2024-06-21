@@ -10,24 +10,17 @@
   export let navWidth = 240;
   export let headerHeight = 64;
 
-  /** Control whether nav should be full height (default) or header should be full width */
+  /** Control whether header should be full width (deafult) or nav should be full height */
   export let headerPosition: 'full' | 'inset' = 'full';
-
-  /** Overlap `main` under header using negative top margin with positive top padding to support background blur */
-  export let overlapHeader = false;
-
-  $: areas =
-    headerPosition === 'full' ? "'header header' 'aside main'" : "'aside header' 'aside main'";
 
   export let classes: {
     root?: string;
     aside?: string;
     nav?: string;
   } = {};
+
   const settingsClasses = getComponentClasses('AppLayout');
-
   const { showDrawer } = getSettings();
-
   $: temporaryDrawer = browser ? !$mdScreen : false;
 </script>
 
@@ -35,7 +28,6 @@
   style:--headerHeight="{headerHeight}px"
   style:--drawerWidth="{$showDrawer ? navWidth : 0}px"
   style:--navWidth="{navWidth}px"
-  style:--areas={areas}
   class={cls(
     'AppLayout',
     '[&>header]:fixed [&>header]:top-0 [&>header]:h-[var(--headerHeight)] [&>header]:transition-all',
@@ -49,7 +41,6 @@
     classes.root,
     $$props.class
   )}
-  class:overlapHeader
 >
   <slot />
 
@@ -60,41 +51,24 @@
 
   <aside
     class={cls(
-      'w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
-      temporaryDrawer && 'fixed h-full z-50 elevation-10',
+      'fixed top-0 h-full w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
+      temporaryDrawer
+        ? 'fixed h-full z-50 elevation-10'
+        : headerPosition === 'full'
+          ? 'mt-[var(--headerHeight)]'
+          : '',
       settingsClasses.aside,
       classes.aside
     )}
   >
     <nav
-      class={cls('nav h-full overflow-auto w-[var(--navWidth)]', settingsClasses.nav, classes.nav)}
+      class={cls(
+        'nav h-full overflow-auto overscroll-contain w-[var(--navWidth)]',
+        settingsClasses.nav,
+        classes.nav
+      )}
     >
       <slot name="nav" />
     </nav>
   </aside>
 </div>
-
-<style>
-  .AppLayout {
-    grid-template-areas: var(--areas);
-  }
-
-  .AppLayout aside {
-    grid-area: aside;
-  }
-
-  .AppLayout :global(> header) {
-    grid-area: header;
-  }
-
-  .AppLayout :global(> main) {
-    grid-area: main;
-    overflow: auto;
-  }
-
-  /* Overlap under header to support background blur */
-  .AppLayout.overlapHeader :global(> main) {
-    margin-top: calc(var(--headerHeight) * -1);
-    padding-top: var(--headerHeight);
-  }
-</style>
