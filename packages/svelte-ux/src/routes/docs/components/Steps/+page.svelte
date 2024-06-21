@@ -17,11 +17,11 @@
     { label: 'Receive product', completed: false },
   ];
 
-  const stepsWithContent = [
-    { label: 'Register', completed: true, content: '✓' },
-    { label: 'Choose plan', completed: true, content: '✓' },
-    { label: 'Purchase', completed: false, content: '' },
-    { label: 'Receive product', completed: false, content: '' },
+  const stepsWithPoint = [
+    { label: 'Register', completed: true, point: '✓' },
+    { label: 'Choose plan', completed: true, point: '✓' },
+    { label: 'Purchase', completed: false, point: '' },
+    { label: 'Receive product', completed: false, point: '' },
   ];
 
   const stepsWithIcon = [
@@ -46,23 +46,23 @@
   <Steps data={steps} vertical />
 </Preview>
 
-<h2>Custom content (step data)</h2>
+<h2>Custom point content (step data)</h2>
 
 <Preview>
-  <Steps data={stepsWithContent} />
+  <Steps data={stepsWithPoint} />
 </Preview>
 
-<h2>Custom content (Step component)</h2>
+<h2>Custom point (Step component)</h2>
 
 <Preview>
   <Steps>
-    <Step content="?">Step 1</Step>
-    <Step content="!">Step 2</Step>
-    <Step content="✓">Step 3</Step>
-    <Step content="✕">Step 4</Step>
-    <Step content="★">Step 5</Step>
-    <Step content="">Step 6</Step>
-    <Step content="●">Step 7</Step>
+    <Step point="?">Step 1</Step>
+    <Step point="!">Step 2</Step>
+    <Step point="✓">Step 3</Step>
+    <Step point="✕">Step 4</Step>
+    <Step point="★">Step 5</Step>
+    <Step point="">Step 6</Step>
+    <Step point="●">Step 7</Step>
     <Step>Step 8</Step>
     <Step>Step 9</Step>
   </Steps>
@@ -85,23 +85,23 @@
   </Steps>
 </Preview>
 
-<h2>Custom content and completed colors</h2>
+<h2>Custom point content and completed colors</h2>
 
 <Preview>
   <Steps>
-    <Step content="?">Step 1</Step>
-    <Step content="!" classes={{ completed: 'bg-secondary text-secondary-content' }} completed>
+    <Step point="?">Step 1</Step>
+    <Step point="!" classes={{ completed: 'bg-secondary text-secondary-content' }} completed>
       Step 2
     </Step>
-    <Step content="✓" classes={{ completed: 'bg-secondary text-secondary-content' }} completed>
+    <Step point="✓" classes={{ completed: 'bg-secondary text-secondary-content' }} completed>
       Step 3
     </Step>
-    <Step content="✕" classes={{ completed: 'bg-secondary text-secondary-content' }} completed>
+    <Step point="✕" classes={{ completed: 'bg-secondary text-secondary-content' }} completed>
       Step 4
     </Step>
-    <Step content="★">Step 5</Step>
-    <Step content="" classes={{ completed: 'bg-info text-info-content' }} completed>Step 6</Step>
-    <Step content="●" classes={{ completed: 'bg-success text-success-content' }} completed>
+    <Step point="★">Step 5</Step>
+    <Step point="" classes={{ completed: 'bg-info text-info-content' }} completed>Step 6</Step>
+    <Step point="●" classes={{ completed: 'bg-success text-success-content' }} completed>
       Step 7
     </Step>
     <Step classes={{ completed: 'bg-success text-success-content' }} completed>Step 8</Step>
@@ -117,15 +117,29 @@
     <Step completed classes={{ completed: 'bg-success text-success-content' }}>Shrink the moon</Step
     >
     <Step completed classes={{ completed: 'bg-success text-success-content' }}>Grab the moon</Step>
-    <Step content="?" classes={{ content: 'bg-danger text-danger-content' }}>Sit on the toilet</Step
-    >
+    <Step point="?" classes={{ point: 'bg-danger text-danger-content' }}>Sit on the toilet</Step>
   </Steps>
 </Preview>
 
 <h2>Change line and point size</h2>
 
 <Preview>
-  <Steps data={stepsWithIcon} classes={{ item: { content: 'size-6 text-xs', line: 'h-1' } }} />
+  <Steps data={stepsWithIcon} classes={{ item: { point: 'size-6 text-xs', line: 'h-1' } }} />
+</Preview>
+
+<h2>Add line gap</h2>
+
+<Preview>
+  <div class="inline-grid gap-2 justify-items-center">
+    <Steps data={stepsWithIcon} classes={{ item: { line: 'h-1 w-1/2 rounded' } }} />
+    <div>or</div>
+    <Steps
+      data={stepsWithIcon}
+      classes={{
+        item: { label: 'z-[1]', point: 'outline outline-[20px] outline-surface-100', line: 'h-1' },
+      }}
+    />
+  </div>
 </Preview>
 
 <h2>Remove point background</h2>
@@ -135,7 +149,7 @@
     data={stepsWithIcon}
     classes={{
       item: {
-        content: 'bg-surface-100 size-12',
+        point: 'bg-surface-100 size-12',
         line: 'h-0.5',
         completed: 'text-primary bg-primary',
       },
@@ -151,7 +165,7 @@
     vertical
     classes={{
       item: {
-        content: 'bg-surface-100 size-10',
+        point: 'bg-surface-100 size-10',
         line: 'w-0.5',
         completed: 'text-primary bg-primary',
       },
@@ -166,7 +180,7 @@
     data={stepsWithIcon}
     classes={{
       item: {
-        content: 'size-10',
+        point: 'size-10',
         completed: 'bg-gradient-to-br from-primary to-secondary text-primary-content',
       },
     }}
@@ -181,7 +195,7 @@
     vertical
     classes={{
       item: {
-        content: 'size-10',
+        point: 'size-10',
         completed: 'bg-gradient-to-br from-primary to-secondary text-primary-content',
       },
     }}

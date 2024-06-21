@@ -6,10 +6,10 @@
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
 
-  /** Override content (by default uses an incrementing counter)*/
-  export let content: string | undefined = undefined;
+  /** Override point content (by default uses an incrementing counter) */
+  export let point: string | undefined = undefined;
 
-  /** Use icon instead of content */
+  /** Use icon instead of point content */
   export let icon: ComponentProps<Icon>['data'] = undefined;
 
   /** If completed, will color content and line leading up to item */
@@ -17,8 +17,9 @@
 
   export let classes: {
     root?: string;
+    label?: string;
     line?: string;
-    content?: string;
+    point?: string;
     /** Apply classes to completed item point and line leading up to item */
     completed?: string;
   } = {};
@@ -50,23 +51,25 @@
     )}
   />
 
-  <slot />
+  <span class={cls(settingsClasses.label, classes.label)}>
+    <slot />
+  </span>
 
   <div
     class={cls(
       'bg-surface-300 text-surface-content relative col-start-1 row-start-1 grid size-8 place-items-center place-self-center rounded-full [counter-increment:step]',
-      content == null && !$$slots.content && icon == null && 'before:content-[counter(step)]',
+      point == null && !$$slots.point && icon == null && 'before:content-[counter(step)]',
       completed &&
         (settingsClasses.completed ?? classes.completed ?? 'bg-primary text-primary-content'),
-      settingsClasses.content,
-      classes.content
+      settingsClasses.point,
+      classes.point
     )}
   >
-    <slot name="content">
+    <slot name="point">
       {#if icon}
         <Icon data={icon} />
       {:else}
-        {content ?? ''}
+        {point ?? ''}
       {/if}
     </slot>
   </div>
