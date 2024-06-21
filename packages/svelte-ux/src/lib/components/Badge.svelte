@@ -2,7 +2,7 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let value: number = $$slots.value ? 1 : 0;
+  export let value = $$slots.value ? 1 : 0;
   export let small = false;
   export let circle = false;
   export let dot = false;
