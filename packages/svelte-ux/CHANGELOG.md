@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.69.2
+
+### Patch Changes
+
+- [Pagination] Pass current pagination value as slot prop to simplify creating custom controls ([`671fc2a69081aace18b2fe69b8582fed0a7697ae`](https://github.com/techniq/svelte-ux/commit/671fc2a69081aace18b2fe69b8582fed0a7697ae))
+
+- [paginationStore] Clamp page between valid values ([`6adc3f29e3b3a8c8de9a9f265849c8ce42aad0ad`](https://github.com/techniq/svelte-ux/commit/6adc3f29e3b3a8c8de9a9f265849c8ce42aad0ad))
+
 ## 0.69.1
 
 ### Patch Changes
