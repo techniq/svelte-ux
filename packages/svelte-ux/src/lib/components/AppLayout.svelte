@@ -38,7 +38,13 @@
   style:--areas={areas}
   class={cls(
     'AppLayout',
-    'grid grid-cols-[auto,1fr] grid-rows-[var(--headerHeight),1fr] h-screen',
+    '[&>header]:fixed [&>header]:top-0 [&>header]:h-[var(--headerHeight)] [&>header]:transition-all',
+    headerPosition === 'full' || temporaryDrawer
+      ? '[&>header]:w-full'
+      : '[&>header]:w-[calc(100%-var(--drawerWidth))] [&>header]:left-[var(--drawerWidth)] [&>header]:duration-500',
+    '[&>main]:md:ml-[var(--drawerWidth)] [&>main]:mt-[var(--headerHeight)] [&>main]:transition-[margin] [&>main]:duration-500',
+    /* Fix scrolling offset for headings (h1, ...) or other elements with an id set (`<a href="#id">`) */
+    '[:where(&_[id])]:scroll-m-[var(--headerHeight)]',
     settingsClasses.root,
     classes.root,
     $$props.class
