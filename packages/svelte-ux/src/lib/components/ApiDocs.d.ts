@@ -54,7 +54,7 @@ interface SveldJson {
   slots: SveldSlot[];
   events: SveldEvent[];
   typedefs: SveldTypedefs[];
-  rest_props: SveldRestProps[];
+  rest_props: SveldRestProps;
   moduleExports: SveldProp[];
   componentComment?: string;
   extends?: {
