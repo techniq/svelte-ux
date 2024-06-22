@@ -5,7 +5,7 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let items: (string | null | undefined)[] = [];
+  export let items: (string | number | null | undefined)[] = [];
   export let divider: string | undefined = undefined;
   export let inline = false;
   let className: string | undefined = undefined;
