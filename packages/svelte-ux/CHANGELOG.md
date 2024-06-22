@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.70.1
+
+### Patch Changes
+
+- [TableOfContents] Fix active heading support after AppLayout scrolling container change ([`7c98d45614ef96d1823d7394ba50bd17eeafbf54`](https://github.com/techniq/svelte-ux/commit/7c98d45614ef96d1823d7394ba50bd17eeafbf54))
+
 ## 0.70.0
 
 ### Minor Changes
