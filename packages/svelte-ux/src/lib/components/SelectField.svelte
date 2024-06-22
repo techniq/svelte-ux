@@ -49,7 +49,6 @@
   export let rounded = false;
   export let dense = false;
   export let clearSearchOnOpen = true;
-  export let tabindex = 0;
   export let autofocus: ComponentProps<TextField>['autofocus'] = undefined;
   export let fieldActions: ComponentProps<TextField>['actions'] = autofocus
     ? (node) => [
@@ -522,17 +521,14 @@
           bind:menuOptionsEl
           {open}
           {loading}
-          {highlightIndex}
           {searchText}
           {filteredOptions}
           classes={{
             ...classes,
             root: cls(classes.options, inlineOptions ? 'border-t mt-1 px-1' : ''),
           }}
-          {optionText}
           {optionValue}
           {selectIndex}
-          {selectOption}
           {onKeyPress}
           {onKeyDown}
         >
@@ -583,17 +579,14 @@
         bind:menuOptionsEl
         {open}
         {loading}
-        {highlightIndex}
         {searchText}
         {filteredOptions}
         classes={{
           ...classes,
           root: cls(classes.options, inlineOptions ? 'border-t mt-1 px-1' : ''),
         }}
-        {optionText}
         {optionValue}
         {selectIndex}
-        {selectOption}
         {onKeyPress}
         {onKeyDown}
       >

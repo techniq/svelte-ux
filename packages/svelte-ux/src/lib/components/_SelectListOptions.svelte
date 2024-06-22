@@ -5,10 +5,8 @@
 
   const logger = new Logger('SelectListOptions');
 
-  export let optionText: (option: any) => string;
   export let optionValue: (option: any) => any;
   export let selectIndex: (index: number) => any;
-  export let selectOption: (x: any) => any;
   export let onKeyDown: (x: KeyboardEvent) => void;
   export let onKeyPress: (x: KeyboardEvent) => void;
 
@@ -16,10 +14,6 @@
   export let loading: boolean;
   export let filteredOptions: any[];
 
-  export let value: any = undefined;
-  export let selected: any = undefined;
-
-  export let highlightIndex: number;
   export let searchText: string;
 
   export let classes: {
