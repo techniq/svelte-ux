@@ -133,7 +133,7 @@
 
           <div slot="actions" class="flex flex-wrap justify-end gap-1">
             {#if slot.slot_props != '{}'}
-              {#each parseSlotProps(slot.slot_props) as { key, value }}
+              {#each parseSlotProps(slot.slot_props ?? '') as { key, value }}
                 <Tooltip title="slot prop" offset={2}>
                   <div
                     class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
