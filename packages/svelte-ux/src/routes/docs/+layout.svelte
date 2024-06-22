@@ -7,6 +7,7 @@
     mdiCheckCircle,
     mdiChevronDown,
     mdiChevronRight,
+    mdiClose,
     mdiCodeBraces,
     mdiCodeTags,
     mdiDatabaseOutline,
@@ -18,6 +19,7 @@
   import {
     ApiDocs,
     Button,
+    Dialog,
     Icon,
     ListItem,
     TableOfContents,
@@ -50,7 +52,7 @@
     status,
   } = $page.data.meta ?? {});
 
-  $: showTableOfContents = false;
+  $: showTableOfContents = $xlScreen;
 
   onMount(() => {
     showTableOfContents = !hideTableOfContents && $xlScreen;
@@ -146,12 +148,20 @@
 </div>
 
 <div class="px-4">
-  {#if showTableOfContents && !$xlScreen}
-    <div transition:fade class="mt-3">
-      {#key $page.route.id}
-        <TableOfContents icon={mdiChevronRight} />
-      {/key}
-    </div>
+  {#if !$xlScreen}
+    {#key $page.route.id}
+      <Dialog bind:open={showTableOfContents}>
+        <div slot="title">On this page</div>
+        <Button
+          icon={mdiClose}
+          class="absolute top-1 right-1"
+          size="sm"
+          color="neutral"
+          on:click={() => (showTableOfContents = false)}
+        />
+        <TableOfContents icon={mdiChevronRight} class="w-[420px] max-w-[95vw] px-4 py-2" />
+      </Dialog>
+    {/key}
   {/if}
 
   <div class="grid xl:grid-cols-[1fr,auto] gap-6 pb-4">
@@ -235,18 +245,16 @@
     </div>
 
     {#if showTableOfContents && $xlScreen}
-      <div transition:slide={{ axis: 'x' }}>
-        <div
-          class="w-[224px] sticky top-[calc(var(--headerHeight)+10px)] pr-2 max-h-[calc(100dvh-64px)] overflow-auto z-[60]"
-        >
-          <div class="text-xs uppercase leading-8 tracking-widest text-surface-content/50">
-            On this page
-          </div>
-          <!-- Rebuild toc when page changes -->
-          {#key $page.route.id}
-            <TableOfContents icon={mdiChevronRight} class="text-surface-content" />
-          {/key}
+      <div
+        class="w-[224px] sticky top-[calc(var(--headerHeight)+10px)] pr-2 max-h-[calc(100dvh-64px)] overflow-auto z-[60]"
+      >
+        <div class="text-xs uppercase leading-8 tracking-widest text-surface-content/50">
+          On this page
         </div>
+        <!-- Rebuild toc when page changes -->
+        {#key $page.route.id}
+          <TableOfContents icon={mdiChevronRight} class="border-l pl-3" scrollOffset={184} />
+        {/key}
       </div>
     {/if}
   </div>
