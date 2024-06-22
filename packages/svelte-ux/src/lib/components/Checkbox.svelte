@@ -32,7 +32,7 @@
     groupCheck();
   }
   function groupCheck() {
-    checked = group.includes(value);
+    checked = group?.includes(value) ?? false;
   }
 
   // Update group when checkbox changes
