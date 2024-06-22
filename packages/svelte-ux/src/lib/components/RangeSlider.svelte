@@ -225,6 +225,7 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-role-has-required-aria-props -->
 <div
   class={cls(
     'RangeSlider',
@@ -239,7 +240,9 @@
   on:click={onClick}
   on:keydown={onKeyDown}
   {...$$restProps}
+  role="slider"
 >
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     on:mouseenter={onMouseEnter('range')}
     on:mouseleave={onMouseLeave('range')}
@@ -250,6 +253,7 @@
     class="range absolute top-0 bottom-0 bg-primary"
   />
 
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
     on:movestart={onMoveStart('range')}
@@ -271,6 +275,7 @@
     <Icon data={mdiDragHorizontal} class="text-primary-content" />
   </div>
 
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
     on:movestart={onMoveStart('start')}
@@ -290,6 +295,7 @@
     )}
   />
 
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
     on:movestart={onMoveStart('end')}

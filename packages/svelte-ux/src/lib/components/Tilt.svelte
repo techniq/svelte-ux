@@ -39,6 +39,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   style:--rotateX="{rotateX}deg"
   style:--rotateY="{rotateY}deg"
