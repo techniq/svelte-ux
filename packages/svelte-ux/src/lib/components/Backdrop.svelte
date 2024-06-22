@@ -32,6 +32,7 @@
   in:fade|global={fadeParams}
   out:fade={fadeParams}
   use:portalAction={portal}
+  role="none"
 >
   <slot />
 </div>
