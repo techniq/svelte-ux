@@ -137,6 +137,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, $$props.class)}
   on:click={onClick}

@@ -57,7 +57,8 @@
       : selected instanceof Array
         ? selected.some((d) => isSame(date, d))
         : selected instanceof Object
-          ? isSame(date, selected.from ?? selected.to)
+          ? // @ts-ignore
+            isSame(date, selected.from ?? selected.to)
           : false;
 
   $: isSelectedEnd =
@@ -66,7 +67,8 @@
       : selected instanceof Array
         ? selected.some((d) => isSame(date, d))
         : selected instanceof Object
-          ? isSame(date, selected.to ?? selected.from)
+          ? // @ts-ignore
+            isSame(date, selected.to ?? selected.from)
           : false;
 
   $: isCurrent = isSame(date, new Date());

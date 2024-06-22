@@ -24,10 +24,10 @@
     const newDuration = getDuration(start, end ?? $timer, duration);
 
     const unitsMoreThanSeconds = [
-      newDuration.years,
-      newDuration.days,
-      newDuration.hours,
-      newDuration.minutes,
+      newDuration?.years,
+      newDuration?.days,
+      newDuration?.hours,
+      newDuration?.minutes,
     ].filter((x) => x).length;
 
     // DurationUnits is indexed biggest (Year) to smallest (Milliseconds)

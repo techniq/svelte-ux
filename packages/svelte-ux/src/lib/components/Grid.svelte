@@ -38,6 +38,7 @@
     (autoColumns ? `repeat(auto-fill, minmax(${autoColumns}, 1fr))` : `repeat(${columns}, 1fr)`);
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class="Grid"
   class:grid={!inline}
