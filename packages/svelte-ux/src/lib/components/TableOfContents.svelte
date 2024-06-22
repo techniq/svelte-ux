@@ -9,6 +9,8 @@
   import { getComponentClasses } from './theme.js';
 
   export let element = 'main';
+  export let scrollContainer = window;
+  export let scrollOffset = 0;
   export let maxDepth = 6;
   export let icon = mdiCircleSmall;
   let className: string | undefined = undefined;
@@ -22,7 +24,7 @@
 
   function onScroll(e) {
     activeHeadingId = headings?.find(
-      (heading) => heading.element.offsetTop >= e.target.scrollTop + e.target.offsetTop
+      (heading) => heading.element.offsetTop >= window.scrollY + scrollOffset
     )?.id;
   }
 
@@ -44,14 +46,13 @@
     });
     nodes = buildTree(headings);
 
-    el?.addEventListener('scroll', onScroll, { passive: true });
+    scrollContainer.addEventListener('scroll', onScroll, { passive: true });
     // set first heading until scrolled
     activeHeadingId = headings[0]?.id;
   });
 
   onDestroy(() => {
-    const el = document.querySelector(element);
-    el?.removeEventListener('scroll', onScroll);
+    scrollContainer.removeEventListener('scroll', onScroll);
   });
 </script>
 
