@@ -1,6 +1,6 @@
 import type { DateRange } from './dateRange.js';
 
-export type SelectedDate = Date | Date[] | DateRange | null;
+export type SelectedDate = Date | Date[] | DateRange | null | undefined;
 
 export type DisabledDate = ((date: Date) => boolean) | Date | Date[] | { from: Date; to: Date };
 

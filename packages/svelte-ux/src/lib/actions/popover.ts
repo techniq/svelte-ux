@@ -16,7 +16,7 @@ import {
 import { portal } from './portal.js';
 
 export type PopoverOptions = {
-  anchorEl?: HTMLElement;
+  anchorEl?: Element | HTMLElement;
   placement?: Placement;
   offset?: OffsetOptions;
   padding?: number;

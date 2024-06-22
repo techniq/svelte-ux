@@ -14,7 +14,7 @@
   import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date.js';
   import type { DisabledDate, SelectedDate } from '../utils/date.js';
 
-  export let selected: SelectedDate | undefined = undefined;
+  export let selected: SelectedDate = undefined;
   export let minDate: Date | undefined = undefined;
   export let maxDate: Date | undefined = undefined;
   export let format: string | undefined = undefined;

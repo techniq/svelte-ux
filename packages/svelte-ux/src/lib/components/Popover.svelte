@@ -64,6 +64,7 @@
 <svelte:window on:keydown={onKeydown} />
 
 {#if open}
+  <!-- @ts-ignore -->
   <div
     class={cls('Popover absolute z-50 outline-none', settingsClasses.root, className)}
     {style}

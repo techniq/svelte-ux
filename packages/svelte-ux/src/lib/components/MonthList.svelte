@@ -6,7 +6,7 @@
   import DateButton from './DateButton.svelte';
 
   export let year: number | undefined = undefined;
-  export let selected: SelectedDate | undefined = undefined;
+  export let selected: SelectedDate = undefined;
   export let format: string | undefined = undefined;
   /**
    * Dates to disable (not selectable)
