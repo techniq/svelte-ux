@@ -150,16 +150,18 @@
 <div class="px-4">
   {#if !$xlScreen}
     {#key $page.route.id}
-      <Dialog bind:open={showTableOfContents}>
+      <Dialog
+        bind:open={showTableOfContents}
+        classes={{ dialog: 'w-[420px] max-w-[95vw] max-h-[95dvh]' }}
+      >
         <div slot="title">On this page</div>
         <Button
           icon={mdiClose}
           class="absolute top-1 right-1"
           size="sm"
-          color="neutral"
           on:click={() => (showTableOfContents = false)}
         />
-        <TableOfContents icon={mdiChevronRight} class="w-[420px] max-w-[95vw] px-4 py-2" />
+        <TableOfContents icon={mdiChevronRight} class="px-4 py-2" />
       </Dialog>
     {/key}
   {/if}
