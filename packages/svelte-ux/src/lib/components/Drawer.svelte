@@ -49,6 +49,7 @@
     {portal}
   />
 
+  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
   <div
     class={cls(
       'Drawer',
@@ -96,6 +97,7 @@
     }}
     use:portalAction={portal}
     use:focusMove={{ restoreFocus: true }}
+    role="dialog"
   >
     {#if loading}
       <Overlay center class="rounded">

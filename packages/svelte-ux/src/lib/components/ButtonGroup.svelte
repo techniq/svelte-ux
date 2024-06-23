@@ -73,6 +73,6 @@
   });
 </script>
 
-<div role="group" class={_class} on:keydown on:keyup on:keypress on:click {...$$restProps}>
+<div role="group" class={_class} {...$$restProps}>
   <slot />
 </div>

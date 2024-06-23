@@ -1,13 +1,12 @@
 <script lang="ts">
   import { spring } from 'svelte/motion';
-  import type { FormatType } from '../utils/format.js';
+  import type { FormatNumberStyle } from '../utils/format.js';
   import { getSettings } from './settings.js';
 
-  type T = $$Generic;
-  type SpringOptions = Parameters<typeof spring<T>>[1];
+  type SpringOptions = Parameters<typeof spring<number | null>>[1];
 
-  export let value: T | 0;
-  export let format: FormatType = 'none';
+  export let value: number | null;
+  export let format: FormatNumberStyle = 'none';
   export let options: SpringOptions = undefined;
   export let disabled = false;
 

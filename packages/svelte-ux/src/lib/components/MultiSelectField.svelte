@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="TOption, TValue extends string | number">
   import { getComponentSettings } from './settings.js';
 
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
@@ -16,14 +16,12 @@
   import { Logger } from '../utils/logger.js';
   import ProgressCircle from './ProgressCircle.svelte';
 
-  type Option = $$Generic;
-
   const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 
   // MultiSelectMenu props
-  export let options: Option[];
-  export let value: any[] = [];
-  export let indeterminateSelected: any[] = [];
+  export let options: TOption[];
+  export let value: TValue[] = [];
+  export let indeterminateSelected: typeof value = [];
   /** Maximum number of options that can be selected  */
   export let max: number | undefined = undefined;
   export let placement: Placement = 'bottom-start';
@@ -43,12 +41,12 @@
   export let rounded = false;
   export let dense = false;
 
-  export let formatSelected: (ctx: { value: any[]; options: Option[] }) => string = ({ value }) =>
+  export let formatSelected: (ctx: { value: any[]; options: TOption[] }) => string = ({ value }) =>
     `${value.length} selected`;
 
   export let classes: {
     root?: string;
-    multiSelectMenu?: ComponentProps<MultiSelectMenu<Option>>['classes'];
+    multiSelectMenu?: ComponentProps<MultiSelectMenu<TOption, TValue>>['classes'];
     field?: string;
     actions?: string;
   } = {};
@@ -59,8 +57,9 @@
   let inputEl: HTMLInputElement | undefined;
   let menuOptionsEl: HTMLDivElement | undefined;
 
-  export let menuProps: Omit<ComponentProps<MultiSelectMenu<Option>>, 'options'> | undefined =
-    undefined;
+  export let menuProps:
+    | Omit<ComponentProps<MultiSelectMenu<TOption, TValue>>, 'options'>
+    | undefined = undefined;
 
   const logger = new Logger('MultiSelectField');
 
@@ -120,7 +119,7 @@
     }
   }
 
-  function onSelectChange(e: ComponentEvents<MultiSelectMenu<Option>>['change']) {
+  function onSelectChange(e: ComponentEvents<MultiSelectMenu<TOption, TValue>>['change']) {
     logger.info('onSelectChange', e);
     value = e.detail.selection.selected;
     // TODO: Also dispatch `indeterminate: e.detail.indeterminate`?
@@ -137,6 +136,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, $$props.class)}
   on:click={onClick}

@@ -4,7 +4,7 @@
     DatePickerField,
     MenuField,
     DateToken,
-    FormatNumberStyle,
+    type FormatNumberStyle,
     PeriodType,
     settings,
   } from 'svelte-ux';
@@ -16,7 +16,7 @@
 
   let value = 1234.56;
   let style: FormatNumberStyle = 'decimal';
-  let currency: Intl.NumberFormatOptions['currency'] | null = 'USD';
+  let currency: Intl.NumberFormatOptions['currency'] | undefined = 'USD';
   let notation: Intl.NumberFormatOptions['notation'] = 'standard';
 
   let myDate = new Date('1982-03-30T07:11:00');
@@ -55,7 +55,7 @@
   <MenuField
     label="currency"
     bind:value={currency}
-    options={[null, 'USD', 'EUR', 'GBP', 'JPY', 'CNY', 'MXN'].map((value) => ({
+    options={[undefined, 'USD', 'EUR', 'GBP', 'JPY', 'CNY', 'MXN'].map((value) => ({
       label: value ?? 'None',
       value,
     }))}

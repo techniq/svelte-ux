@@ -52,8 +52,8 @@
   <Dialog {open} style="max-width: 90vw">
     <div slot="title">
       {#if message}
-        {#each message.split('\n') as message}
-          <div>{message}</div>
+        {#each message.split('\n') as msg}
+          <div>{msg}</div>
         {/each}
       {/if}
     </div>

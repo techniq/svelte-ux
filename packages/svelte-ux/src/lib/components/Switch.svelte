@@ -24,6 +24,7 @@
 </script>
 
 <div class={cls('Switch', 'inline-block', settingsClasses.root, classes.root)}>
+  <!-- TODO: Consider dispatch custom event for `change` so `e.target.checked` is guaranteed downstream -->
   <input
     {id}
     {name}

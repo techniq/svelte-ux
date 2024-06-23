@@ -22,7 +22,7 @@
   import { getSettings } from './settings.js';
   import MonthListByYear from './MonthListByYear.svelte';
 
-  export let selected: SelectedDate | undefined = undefined;
+  export let selected: SelectedDate = undefined;
 
   export let startOfMonth =
     (selected instanceof Date && startOfMonthFunc(selected)) ||

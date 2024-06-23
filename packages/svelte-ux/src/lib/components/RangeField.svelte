@@ -4,7 +4,7 @@
   import Field from './Field.svelte';
   import Button from './Button.svelte';
   import { getComponentSettings, getSettings } from './settings.js';
-  import type { FormatType } from '../utils/format.js';
+  import type { FormatNumberStyle } from '../utils/format.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('RangeField');
 
@@ -14,7 +14,7 @@
   export let min = 0;
   export let max = 100;
   export let step = 1;
-  export let format: FormatType = 'none';
+  export let format: FormatNumberStyle = 'none';
 
   $: restProps = { ...defaults, ...$$restProps };
 </script>

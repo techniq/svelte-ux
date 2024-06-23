@@ -20,6 +20,7 @@
     use:resize
     on:resize={(e) => {
       console.log(e.detail);
+      // @ts-ignore
       e.target.innerText = JSON.stringify(e.detail.contentRect, null, 2);
     }}
     class="resize overflow-auto whitespace-pre outline rounded"
@@ -32,6 +33,7 @@
   <div
     use:resize
     on:resize={(e) => {
+      // @ts-ignore
       e.target.innerText = JSON.stringify(e.target.getBoundingClientRect(), null, 2);
     }}
     class="resize overflow-auto whitespace-pre outline rounded"
@@ -44,6 +46,7 @@
   <div
     use:resize
     on:resize={(e) => {
+      // @ts-ignore
       e.target.style.setProperty('--color', e.detail.contentRect.width % 255);
     }}
     style:background-color="hsl(var(--color), 100%, 70%)"
@@ -66,8 +69,10 @@
       use:intersection={{ threshold: 1 }}
       on:intersecting={(e) => {
         if (e.detail.isIntersecting) {
+          // @ts-ignore
           e.target.classList.add('bg-danger');
         } else {
+          // @ts-ignore
           e.target.classList.remove('bg-danger');
         }
       }}

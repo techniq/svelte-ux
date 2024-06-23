@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="TOption, TValue extends string | number">
   import { getComponentClasses } from './theme.js';
 
   import { type ComponentProps, createEventDispatcher } from 'svelte';
@@ -17,11 +17,9 @@
   import uniqueStore from '../stores/uniqueStore.js';
   import { cls } from '../utils/styles.js';
 
-  type Option = $$Generic;
-
-  export let options: Option[];
-  export let value: string[] | number[] = [];
-  export let indeterminateSelected: string[] | number[] = [];
+  export let options: TOption[];
+  export let value: TValue[] = [];
+  export let indeterminateSelected: typeof value = [];
   export let duration = 200;
   export let inlineSearch = false;
   export let autoFocusSearch = false;
@@ -50,16 +48,17 @@
   export let onApply = async (ctx: {
     selection: typeof $selection;
     indeterminate: typeof $indeterminateStore;
-    original: { selected: Option[]; unselected: Option[] };
+    original: { selected: TOption[]; unselected: TOption[] };
   }) => {
     // no-op by default
   };
 
   const dispatch = createEventDispatcher<{
     change: {
+      value: typeof value;
       selection: typeof $selection;
       indeterminate: typeof $indeterminateStore;
-      original: { selected: Option[]; unselected: Option[] };
+      original: { selected: TOption[]; unselected: TOption[] };
     };
     cancel: null;
   }>();
@@ -69,11 +68,12 @@
 
   // Partition options based on if they initially selected, which will be displayed at the top
   $: [selectedOptions, unselectedOptions] = partition(options, (x) =>
+    // @ts-ignore
     value.includes(get(x, valueProp))
   );
 
   // Filter by search text
-  function applyFilter(option: Option, searchText: string) {
+  function applyFilter(option: TOption, searchText: string) {
     if (searchText) {
       return get(option, labelProp).toLowerCase().includes(searchText.toLowerCase());
     } else {
@@ -90,11 +90,12 @@
   });
 
   $: isSelectionDirty = dirtyStore(selection);
+  // @ts-ignore
   $: indeterminateStore = uniqueStore(indeterminateSelected);
 
   function onChange() {
     const changeContext = {
-      value: $selection.selected,
+      value: $selection.selected as TValue[],
       selection: $selection,
       indeterminate: $indeterminateStore,
       original: { selected: selectedOptions, unselected: unselectedOptions },

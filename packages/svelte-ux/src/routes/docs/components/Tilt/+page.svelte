@@ -19,9 +19,9 @@
 
 <Preview>
   <div class="flex items-center justify-center content-center gap-6">
-    {#each images as image}
+    {#each images as image, i}
       <Tilt class="hover:scale-110 transition duration-500">
-        <img src={image} width="180px" class="transition ease-out" />
+        <img src={image} width="180px" class="transition ease-out" alt="example {i}" />
       </Tilt>
     {/each}
   </div>
@@ -31,9 +31,9 @@
 
 <Preview>
   <div class="flex items-center justify-center content-center gap-6">
-    {#each images as image}
+    {#each images as image, i}
       <Tilt class="hover:scale-110 transition duration-500" setBrightness>
-        <img src={image} width="180px" class="transition ease-out" />
+        <img src={image} width="180px" class="transition ease-out" alt="example {i}" />
       </Tilt>
     {/each}
   </div>
@@ -44,9 +44,9 @@
 <Preview>
   <Shine>
     <div class="flex items-center justify-center content-center gap-6">
-      {#each images as image}
+      {#each images as image, i}
         <Tilt class="hover:scale-110 transition duration-500">
-          <img src={image} width="180px" class="transition ease-out" />
+          <img src={image} width="180px" class="transition ease-out" alt="example {i}" />
         </Tilt>
       {/each}
     </div>
@@ -57,9 +57,9 @@
 
 <Preview>
   <div class="flex items-center justify-center content-center gap-6">
-    {#each images as image}
+    {#each images as image, i}
       <Tilt class="hover:scale-110 transition duration-500 [perspective:300px]">
-        <img src={image} width="180px" class="transition ease-out" />
+        <img src={image} width="180px" class="transition ease-out" alt="example {i}" />
       </Tilt>
     {/each}
   </div>
@@ -69,9 +69,9 @@
 
 <Preview>
   <div class="flex items-center justify-center content-center gap-6">
-    {#each images as image}
+    {#each images as image, i}
       <Tilt class="hover:scale-110 transition duration-500" maxRotation={40}>
-        <img src={image} width="180px" class="transition ease-out" />
+        <img src={image} width="180px" class="transition ease-out" alt="example {i}" />
       </Tilt>
     {/each}
   </div>
@@ -81,9 +81,9 @@
 
 <Preview>
   <div class="flex flex-wrap items-center justify-center content-center gap-6">
-    {#each images as image}
+    {#each images as image, i}
       <Tilt class="hover:scale-110 transition duration-500">
-        <img src={image} width="180px" class="transition ease-out" />
+        <img src={image} width="180px" class="transition ease-out" alt="example {i}" />
       </Tilt>
     {/each}
   </div>

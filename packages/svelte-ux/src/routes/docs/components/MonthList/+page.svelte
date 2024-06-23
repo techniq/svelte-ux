@@ -8,11 +8,11 @@
     endOfQuarter,
   } from 'date-fns';
 
-  import { MonthList } from 'svelte-ux';
+  import { MonthList, type SelectedDate } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let selected = null;
-  let selectedArr = [];
+  let selected: SelectedDate = null;
+  let selectedArr: Date[] = [];
   let selectedRange = { from: null, to: null };
   let selectedQuarter = { from: null, to: null };
 </script>
@@ -158,11 +158,11 @@
     on:dateChange={(e) => {
       const date = e.detail;
       const newSelectedRange = { ...selectedRange };
-      if (selectedRange.from === undefined) {
+      if (selectedRange.from === null) {
         newSelectedRange.from = date;
       } else if (isSameMonth(date, selectedRange.from)) {
-        newSelectedRange.from = undefined;
-      } else if (selectedRange.to === undefined) {
+        newSelectedRange.from = null;
+      } else if (selectedRange.to === null) {
         if (isAfter(date, selectedRange.from)) {
           newSelectedRange.to = date;
         } else {
@@ -170,10 +170,10 @@
           newSelectedRange.from = date;
         }
       } else if (isSameMonth(date, selectedRange.to)) {
-        newSelectedRange.to = undefined;
+        newSelectedRange.to = null;
       } else {
         newSelectedRange.from = date;
-        newSelectedRange.to = undefined;
+        newSelectedRange.to = null;
       }
       selectedRange = newSelectedRange;
     }}

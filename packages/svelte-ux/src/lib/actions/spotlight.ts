@@ -49,20 +49,25 @@ export const spotlight: Action<HTMLElement, SpotlightOptions> = (node, options) 
     'relative',
     'isolate',
 
-    options?.radius && '[--spotlight-radius:var(--default-spotlight-radius)]',
-    options?.borderWidth && '[--spotlight-border-width:var(--default-spotlight-border-width)]',
-    options?.borderColorStops &&
-      '[--spotlight-border-color-stops:var(--default-spotlight-border-color-stops)]',
-    options?.surfaceColorStops &&
-      '[--spotlight-surface-color-stops:var(--default-spotlight-surface-color-stops)]',
+    options?.radius ? '[--spotlight-radius:var(--default-spotlight-radius)]' : '',
+    options?.borderWidth ? '[--spotlight-border-width:var(--default-spotlight-border-width)]' : '',
+    options?.borderColorStops
+      ? '[--spotlight-border-color-stops:var(--default-spotlight-border-color-stops)]'
+      : '',
+    options?.surfaceColorStops
+      ? '[--spotlight-surface-color-stops:var(--default-spotlight-surface-color-stops)]'
+      : '',
 
-    options?.hover?.radius && 'hover:[--spotlight-radius:var(--hover-spotlight-radius)]',
-    options?.hover?.borderWidth &&
-      'hover:[--spotlight-border-width:var(--hover-spotlight-border-width)]',
-    options?.hover?.borderColorStops &&
-      'hover:[--spotlight-border-color-stops:var(--hover-spotlight-border-color-stops)]',
-    options?.hover?.surfaceColorStops &&
-      'hover:[--spotlight-surface-color-stops:var(--hover-spotlight-surface-color-stops)]',
+    options?.hover?.radius ? 'hover:[--spotlight-radius:var(--hover-spotlight-radius)]' : '',
+    options?.hover?.borderWidth
+      ? 'hover:[--spotlight-border-width:var(--hover-spotlight-border-width)]'
+      : '',
+    options?.hover?.borderColorStops
+      ? 'hover:[--spotlight-border-color-stops:var(--hover-spotlight-border-color-stops)]'
+      : '',
+    options?.hover?.surfaceColorStops
+      ? 'hover:[--spotlight-surface-color-stops:var(--hover-spotlight-surface-color-stops)]'
+      : '',
 
     // Spotlight applied as :after element with 2 background gradients.  padding-box for surface, and border-box for border
     'before:absolute',

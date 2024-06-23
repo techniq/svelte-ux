@@ -33,20 +33,12 @@ export const scrollIntoView: Action<HTMLElement, ScrollIntoViewOptions | undefin
   return { update };
 };
 
-type ScrollShadowOptions = {
-  top?: {
-    color?: string;
-  };
-  bottom?: {
-    color?: string;
-  };
-  left?: {
-    color?: string;
-  };
-  right?: {
-    color?: string;
-  };
-};
+type ScrollShadowOptions = Partial<
+  Record<
+    'top' | 'bottom' | 'left' | 'right',
+    { color?: string; offset?: number; blur?: number; spread?: number; scrollRatio?: number }
+  >
+>;
 
 export const scrollShadow: Action<HTMLElement, ScrollShadowOptions | undefined> = (
   node,

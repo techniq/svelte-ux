@@ -66,7 +66,7 @@
   $: end.set(scale(value[1]));
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
-    return function (e: MouseEvent) {
+    return function () {
       ignoreClickEvents = true;
 
       isMoving = true;
@@ -91,10 +91,12 @@
   }
 
   function onMove(which: 'start' | 'range' | 'end') {
-    return function (e: MouseEvent) {
+    return function (e: CustomEvent<{ dx: number }>) {
+      // @ts-ignore
       const parentEl = e.target.parentElement;
       const parentRect = parentEl.getBoundingClientRect();
 
+      // @ts-ignore
       const deltaPercent = e.detail.dx / parentRect.width;
       const deltaValue = (max - min) * deltaPercent;
 
@@ -136,7 +138,7 @@
   }
 
   function onMoveEnd(which: 'start' | 'range' | 'end') {
-    return function (e: MouseEvent) {
+    return function () {
       // Ignore immediate click events after a drag (also fired on mouse up)
       setTimeout(() => {
         ignoreClickEvents = false;
@@ -149,7 +151,7 @@
   }
 
   function onMouseEnter(which: 'start' | 'range' | 'end') {
-    return function (e: MouseEvent) {
+    return function () {
       if (isMoving === false) {
         switch (which) {
           case 'start':
@@ -191,19 +193,20 @@
 
   function onClick(e: MouseEvent) {
     // Focus for keyboard input
-    e.target.focus();
+    const target = e.target as HTMLDivElement;
+    target.focus();
 
     if (ignoreClickEvents) {
       return;
     }
 
     let sliderRect: DOMRect;
-    if (e.target.classList.contains('RangeSlider')) {
+    if (target.classList.contains('RangeSlider')) {
       // Root / track
-      sliderRect = e.target.getBoundingClientRect();
-    } else if (e.target.classList.contains('range')) {
+      sliderRect = target.getBoundingClientRect();
+    } else if (target.classList.contains('range')) {
       // Range selection
-      sliderRect = e.target.parentElement.getBoundingClientRect();
+      sliderRect = target.parentElement!.getBoundingClientRect();
     } else {
       // Ignore clicks on thumbs, etc
       return;
@@ -225,6 +228,7 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-role-has-required-aria-props -->
 <div
   class={cls(
     'RangeSlider',
@@ -234,12 +238,13 @@
     className
   )}
   style="--start: {$start}; --end: {$end};"
-  {disabled}
   tabindex={disabled ? -1 : 0}
   on:click={onClick}
   on:keydown={onKeyDown}
   {...$$restProps}
+  role="slider"
 >
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     on:mouseenter={onMouseEnter('range')}
     on:mouseleave={onMouseLeave('range')}
@@ -250,6 +255,7 @@
     class="range absolute top-0 bottom-0 bg-primary"
   />
 
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
     on:movestart={onMoveStart('range')}
@@ -271,6 +277,7 @@
     <Icon data={mdiDragHorizontal} class="text-primary-content" />
   </div>
 
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
     on:movestart={onMoveStart('start')}
@@ -290,6 +297,7 @@
     )}
   />
 
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
     on:movestart={onMoveStart('end')}

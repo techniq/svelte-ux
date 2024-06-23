@@ -80,6 +80,7 @@
   let:close
 >
   <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
   <menu
     class={cls('menu-items outline-none max-h-screen', settingsClasses.menu, classes.menu)}
     bind:this={menuItemsEl}

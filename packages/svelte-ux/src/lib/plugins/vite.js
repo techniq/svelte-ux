@@ -6,6 +6,10 @@ import qs from 'node:querystring';
 export function sveld() {
   return {
     name: 'vite-plugin-sveld',
+    /**
+     * @param {string} src
+     * @param {string} id
+     */
     async transform(src, id) {
       const query = qs.parse(id.split('?')[1]);
 

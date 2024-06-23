@@ -30,7 +30,10 @@
       <MultiSelectMenu
         {options}
         {value}
-        on:change={(e) => (value = e.detail.value)}
+        on:change={(e) => {
+          // @ts-ignore
+          value = e.detail.value;
+        }}
         {open}
         on:close={toggleOff}
       />
@@ -47,7 +50,10 @@
       <MultiSelectMenu
         {options}
         {value}
-        on:change={(e) => (value = e.detail.value)}
+        on:change={(e) => {
+          // @ts-ignore
+          value = e.detail.value;
+        }}
         {open}
         on:close={toggleOff}
         inlineSearch
@@ -66,7 +72,10 @@
       <MultiSelectMenu
         options={manyOptions}
         {value}
-        on:change={(e) => (value = e.detail.value)}
+        on:change={(e) => {
+          // @ts-ignore
+          value = e.detail.value;
+        }}
         {open}
         on:close={toggleOff}
         classes={{ menu: 'max-h-[360px] w-[360px]' }}
@@ -84,7 +93,10 @@
       <MultiSelectMenu
         options={manyOptions}
         {value}
-        on:change={(e) => (value = e.detail.value)}
+        on:change={(e) => {
+          // @ts-ignore
+          value = e.detail.value;
+        }}
         {open}
         on:close={toggleOff}
         classes={{ menu: 'max-h-[360px] w-[360px]' }}
@@ -103,7 +115,10 @@
       <MultiSelectMenu
         options={manyOptions}
         {value}
-        on:change={(e) => (value = e.detail.value)}
+        on:change={(e) => {
+          // @ts-ignore
+          value = e.detail.value;
+        }}
         {open}
         on:close={toggleOff}
         classes={{ menu: 'max-h-[360px] w-[360px]' }}
@@ -123,7 +138,10 @@
       <MultiSelectMenu
         {options}
         {value}
-        on:change={(e) => (value = e.detail.value)}
+        on:change={(e) => {
+          // @ts-ignore
+          value = e.detail.value;
+        }}
         {open}
         on:close={toggleOff}
         classes={{ menu: 'w-[360px]' }}
@@ -146,7 +164,10 @@
       <MultiSelectMenu
         {options}
         {value}
-        on:change={(e) => (value = e.detail.value)}
+        on:change={(e) => {
+          // @ts-ignore
+          value = e.detail.value;
+        }}
         {open}
         on:close={toggleOff}
         classes={{ menu: 'w-[360px]' }}

@@ -157,7 +157,8 @@ module.exports = {
   </p>
 
   <Code
-    source={`<script>
+    source={'<' +
+      `script>
   import { Button } from 'svelte-ux';
 </script>
 

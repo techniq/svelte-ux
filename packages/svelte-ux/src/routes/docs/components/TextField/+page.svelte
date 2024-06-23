@@ -215,6 +215,7 @@
       debounceEvent(node, {
         type: 'input',
         listener: (e) => {
+          // @ts-ignore
           console.log(e.target.value);
         },
         timeout: 500,
@@ -411,7 +412,14 @@
 <h2>Multiline with autoHeight</h2>
 
 <Preview>
-  <TextField label="Comment" multiline actions={(node) => [autoHeight(node)]} />
+  <TextField
+    label="Comment"
+    multiline
+    actions={(node) => {
+      // @ts-ignore
+      return [autoHeight(node)];
+    }}
+  />
 </Preview>
 
 <SectionDivider>Mask & Accept</SectionDivider>

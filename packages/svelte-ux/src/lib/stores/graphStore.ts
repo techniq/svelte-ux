@@ -20,7 +20,7 @@ const CONTEXT_KEY = Symbol();
 
 export function initGraphClient(config: ClientConfig) {
   setContext(CONTEXT_KEY, config);
-  initFetchClient(config.config);
+  initFetchClient(config.config ?? {});
 }
 
 export type QueryConfig = {

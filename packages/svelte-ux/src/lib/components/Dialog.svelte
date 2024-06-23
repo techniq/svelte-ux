@@ -106,6 +106,7 @@
       }
     }}
     use:portalAction={portal}
+    role="presentation"
   >
     <div
       class={cls(
@@ -123,6 +124,7 @@
       on:outroend
       bind:this={dialogEl}
       use:focusMove={{ restoreFocus: true }}
+      role="dialog"
     >
       {#if loading}
         <Overlay center class="rounded">

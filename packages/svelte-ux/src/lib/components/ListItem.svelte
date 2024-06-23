@@ -51,6 +51,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <li
   class={cls(
     'ListItem',
@@ -66,6 +67,7 @@
     $$props.class
   )}
   on:click
+  role="listitem"
 >
   {#if loading}
     <Overlay center class="rounded">
@@ -76,7 +78,10 @@
   <slot name="avatar">
     {#if icon != null}
       {#if avatar}
-        <Avatar class={cls(settingsClasses.avatar, classes.avatar)} {...avatar}>
+        <Avatar
+          class={cls(settingsClasses.avatar, classes.avatar)}
+          {...typeof avatar === 'object' ? avatar : {}}
+        >
           <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
         </Avatar>
       {:else}

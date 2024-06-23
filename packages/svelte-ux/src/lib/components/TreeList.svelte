@@ -1,14 +1,13 @@
 <script lang="ts">
+  import type { TreeNode } from '../utils/array.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  type Node = { id: number; name: string; level: number; children: Node[] };
-
-  export let nodes: Node[];
+  export let nodes: TreeNode[];
 
   export let classes: {
-    ul?: string | ((nodes: Node[]) => string);
-    li?: string | ((node: Node) => string);
+    ul?: string | ((nodes: TreeNode[]) => string);
+    li?: string | ((node: TreeNode) => string);
   } = {};
   const settingsClasses = getComponentClasses('TreeList');
 </script>

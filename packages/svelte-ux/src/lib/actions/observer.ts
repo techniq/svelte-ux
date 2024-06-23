@@ -15,7 +15,10 @@ export const resize: Action<HTMLElement> = (node) => {
   };
 };
 
-export const intersection: Action<HTMLElement, IntersectionObserverInit> = (node, options) => {
+export const intersection: Action<HTMLElement, IntersectionObserverInit | undefined> = (
+  node,
+  options = {}
+) => {
   // TODO: Support defininting `options.root = node.parentNode` easily (maybe querySelector() string?)
 
   let observer = new IntersectionObserver(

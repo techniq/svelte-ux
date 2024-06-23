@@ -12,6 +12,8 @@
     TweenedValue,
     tableOrderStore,
     tableCell,
+    type ColumnDef,
+    type FormatNumberStyle,
   } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
@@ -47,6 +49,11 @@
     });
   }
   let randomData = randomDataGen();
+
+  // Workaround to make Typescript happy
+  function columnFormatAsNumberFormat(format: ColumnDef['format']) {
+    return format as FormatNumberStyle;
+  }
 </script>
 
 <h1>Examples</h1>
@@ -289,6 +296,7 @@
       {
         name: 'name',
         align: 'left',
+        // @ts-ignore
         format: (value) => {
           // TODO: Docs currently do not support backticks (template literals)
           return (
@@ -405,8 +413,10 @@
               {:else}
                 <TweenedValue
                   {value}
-                  format={column.format}
-                  options={column.dataBackground?.tweened}
+                  format={columnFormatAsNumberFormat(column.format)}
+                  options={typeof column.dataBackground === 'object'
+                    ? column.dataBackground.tweened
+                    : undefined}
                 />
               {/if}
             </td>{/each}

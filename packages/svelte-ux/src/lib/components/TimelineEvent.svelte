@@ -7,10 +7,10 @@
   import { mdiCircle, mdiCircleMedium } from '@mdi/js';
 
   /** Value shown above (horizontal) or left (vertical).  If true, sets location of default slot */
-  export let start: string | boolean = false;
+  export let start: string | number | boolean = false;
 
   /** Value shown below (horizontal) or right (vertical).  If true, sets location of default slot */
-  export let end: string | boolean = false;
+  export let end: string | number | boolean = false;
 
   /** Icon to show on timeline */
   export let icon: ComponentProps<Icon>['data'] = undefined;

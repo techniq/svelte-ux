@@ -20,7 +20,7 @@
   import type { ScrollIntoViewOptions } from '../actions/scroll.js';
 
   const dispatch = createEventDispatcher<{
-    change: { value: any; option: MenuOption };
+    change: { value: any; option: MenuOption | null };
     inputChange: string;
   }>();
   const { classes: settingsClasses, defaults } = getComponentSettings('SelectField');
@@ -49,7 +49,6 @@
   export let rounded = false;
   export let dense = false;
   export let clearSearchOnOpen = true;
-  export let tabindex = 0;
   export let autofocus: ComponentProps<TextField>['autofocus'] = undefined;
   export let fieldActions: ComponentProps<TextField>['actions'] = autofocus
     ? (node) => [
@@ -334,14 +333,14 @@
   function selectValue(value: any) {
     logger.debug('selectValue', { value, options, filteredOptions });
 
-    const option = options?.find((option) => optionValue(option) === value);
+    const option = options?.find((option) => optionValue(option) === value) ?? null;
     return selectOption(option);
   }
 
   /**
    * Select option by object
    */
-  function selectOption(option: MenuOption) {
+  function selectOption(option: MenuOption | null) {
     logger.info('selectOption', { option });
 
     const previousValue = value;
@@ -522,17 +521,14 @@
           bind:menuOptionsEl
           {open}
           {loading}
-          {highlightIndex}
           {searchText}
           {filteredOptions}
           classes={{
             ...classes,
             root: cls(classes.options, inlineOptions ? 'border-t mt-1 px-1' : ''),
           }}
-          {optionText}
           {optionValue}
           {selectIndex}
-          {selectOption}
           {onKeyPress}
           {onKeyDown}
         >
@@ -583,17 +579,14 @@
         bind:menuOptionsEl
         {open}
         {loading}
-        {highlightIndex}
         {searchText}
         {filteredOptions}
         classes={{
           ...classes,
           root: cls(classes.options, inlineOptions ? 'border-t mt-1 px-1' : ''),
         }}
-        {optionText}
         {optionValue}
         {selectIndex}
-        {selectOption}
         {onKeyPress}
         {onKeyDown}
       >

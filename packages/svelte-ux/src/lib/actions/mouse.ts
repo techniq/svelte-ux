@@ -76,7 +76,7 @@ type MovableOptions = {
 /**
  * Track mouse position changes from mouse down on node to mouse up
  */
-export const movable: Action<HTMLElement, MovableOptions> = (node, options = {}) => {
+export const movable: Action<HTMLElement, MovableOptions | undefined> = (node, options = {}) => {
   let lastX = 0;
   let lastY = 0;
 
@@ -184,7 +184,7 @@ type MouseCoordsOptions = {
 };
 
 /** Set relative mouse coordinates as --x/--y CSS variables */
-export const mouseCoords: Action<HTMLElement, HTMLElement> = (node, target = node) => {
+export const mouseCoords: Action<HTMLElement, HTMLElement | undefined> = (node, target = node) => {
   function onMouseMove(e: MouseEvent) {
     // Mouse coordinates relative to node instead of viewport (`e.offsetX/Y` changes based on target/children)
     const rect = node.getBoundingClientRect();
@@ -209,7 +209,7 @@ export const mouseCoords: Action<HTMLElement, HTMLElement> = (node, target = nod
   node.addEventListener('mouseleave', onMouseLeave);
 
   return {
-    update(target: HTMLElement) {
+    update(target: HTMLElement | undefined) {
       target = target;
     },
     destroy() {

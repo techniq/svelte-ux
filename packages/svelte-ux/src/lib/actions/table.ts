@@ -150,6 +150,7 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
     if (column.dataBackground) {
       const extents = extent(tableData ?? [], (d) => getCellValue(column, d));
 
+      // @ts-ignore
       tracker.addAction(dataBackground, {
         value: context.cellValue,
         domain: tableData ? [min([0, extents[0]]), max([0, extents[1]])] : undefined,
@@ -174,7 +175,11 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
   };
 };
 
-function getClasses(classProp: ColumnDef['classes']['td'], context: ResolveContext): string[] {
+function getClasses(
+  // @ts-ignore
+  classProp: ColumnDef['classes']['td'],
+  context: ResolveContext
+): string[] {
   const resolvedClassProp = typeof classProp === 'function' ? classProp(context) : classProp;
 
   if (typeof resolvedClassProp === 'string') {
@@ -188,6 +193,7 @@ function getClasses(classProp: ColumnDef['classes']['td'], context: ResolveConte
 }
 
 function getStyleProperties(
+  // @ts-ignore
   styleProp: ColumnDef['style']['td'],
   context: ResolveContext
 ): string[][] {

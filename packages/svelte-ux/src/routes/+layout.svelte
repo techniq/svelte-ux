@@ -169,16 +169,19 @@
       const unsubscribePage = page.subscribe(($page) => {
         if (currentPath && currentPath !== $page.url.pathname) {
           // Page navigated away
+          // @ts-ignore - .capture() exists
           posthog.capture('$pageleave');
         }
 
         // Page entered
         currentPath = $page.url.pathname;
+        // @ts-ignore - .capture() exists
         posthog.capture('$pageview');
       });
 
       const handleBeforeUnload = () => {
         // Hard reloads or browser exit
+        // @ts-ignore - .capture() exists
         posthog.capture('$pageleave');
       };
       window.addEventListener('beforeunload', handleBeforeUnload);

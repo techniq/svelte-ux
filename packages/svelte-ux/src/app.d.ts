@@ -4,6 +4,22 @@
 declare namespace App {
   // interface Error {}
   // interface Locals {}
-  // interface PageData {}
+
+  interface PageData {
+    meta: {
+      title?: string;
+      description?: string;
+      source?: string;
+      pageSource?: string;
+      api?: SveldJson;
+      features?: string[];
+      related?: string[];
+      hideUsage?: boolean;
+      hideTableOfContents?: boolean;
+      status?: string;
+    };
+  }
+
+  // interface PageState {}
   // interface Platform {}
 }

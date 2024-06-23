@@ -1,13 +1,12 @@
 <script lang="ts">
   import { tweened } from 'svelte/motion';
-  import type { FormatType } from '../utils/format.js';
+  import type { FormatNumberStyle } from '../utils/format.js';
   import { getSettings } from './settings.js';
 
-  type T = $$Generic;
-  type TweenedOptions = Parameters<typeof tweened<T>>[1];
+  type TweenedOptions = Parameters<typeof tweened<number | null>>[1];
 
-  export let value: T | 0;
-  export let format: FormatType = 'none';
+  export let value: number | null;
+  export let format: FormatNumberStyle = 'none';
   export let options: TweenedOptions = undefined;
   export let disabled = false;
 

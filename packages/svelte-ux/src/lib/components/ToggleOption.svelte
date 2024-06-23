@@ -24,10 +24,10 @@
     crossfade,
     classes: classesContext,
     autoscroll,
-  } = getContext(groupKey);
+  } = getContext<any>(groupKey);
   const [send, receive] = crossfade;
 
-  let optionElement: HTMLElement = null;
+  let optionElement: HTMLElement | null = null;
   $: selected = $selectedOption === optionElement;
 
   onMount(() => {
@@ -38,7 +38,7 @@
     unregisterOption(optionElement, value);
   });
 
-  $: if (autoscroll && selected) {
+  $: if (autoscroll && selected && optionElement) {
     // TODO: Only scroll if needed / out of view
     scrollIntoView(optionElement);
   }

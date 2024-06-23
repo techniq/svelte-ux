@@ -3,7 +3,6 @@
   import 'prism-svelte';
 
   import { cls } from '../utils/styles.js';
-  import { getComponentClasses } from './theme.js';
   import CopyButton from './CopyButton.svelte';
 
   export let source: string | null = null;
@@ -17,11 +16,9 @@
     pre?: string;
     code?: string;
   } = {};
-
-  const settingsClasses = getComponentClasses('Code');
 </script>
 
-<div class={cls('Code', 'rounded', settingsClasses.root, classes.root, $$props.class)}>
+<div class={cls('Code', 'rounded', classes.root, $$props.class)}>
   {#if source}
     <div class="relative">
       <pre

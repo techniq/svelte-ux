@@ -89,13 +89,10 @@ export type Expiry = Date | { [prop: string]: Date | { [prop: string]: Date } };
 /**
  * Remove properties from object based on expiration
  */
-export function expireObject<TObject extends object>(
-  object: TObject,
-  expiry: Expiry
-): Partial<TObject> | null {
+export function expireObject<TObject>(object: TObject, expiry: Expiry): Partial<TObject> | null {
   const now = new Date();
 
-  if (expiry instanceof Date) {
+  if (expiry instanceof Date || typeof object !== 'object' || object == null) {
     // Expired
     if (expiry < now) {
       return null;

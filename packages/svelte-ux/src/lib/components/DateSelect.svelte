@@ -20,6 +20,7 @@
    */
   export let disabledDates: DisabledDate | undefined = undefined;
 
+  // @ts-ignore
   $: startOfMonth = selected?.[activeDate] ? startOfMonthFunc(selected[activeDate]) : undefined;
 </script>
 

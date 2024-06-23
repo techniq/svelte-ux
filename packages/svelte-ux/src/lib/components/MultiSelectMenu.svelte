@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="TOption, TValue extends string | number">
   import type { ComponentProps } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
@@ -9,11 +9,9 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  type Option = $$Generic;
-
-  export let options: Option[];
-  export let value: string[] = [];
-  export let indeterminateSelected: string[] = [];
+  export let options: TOption[];
+  export let value: TValue[] = [];
+  export let indeterminateSelected: typeof value = [];
   export let open = false;
   export let duration = 200;
   export let placement: Placement = 'bottom-start';
@@ -32,7 +30,7 @@
   export let classes: {
     root?: string;
     menu?: string;
-    multiSelect?: ComponentProps<MultiSelect<Option>>['classes'];
+    multiSelect?: ComponentProps<MultiSelect<TOption, TValue>>['classes'];
   } = {};
   const settingsClasses = getComponentClasses('MultiSelectMenu');
 

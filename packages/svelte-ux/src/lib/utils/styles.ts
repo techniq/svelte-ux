@@ -11,6 +11,7 @@ export function objectToString(styleObj: { [key: string]: string }) {
     .map(([key, value]) => {
       if (value) {
         // Convert camelCase into kaboob-case (ex.  (transformOrigin => transform-origin))
+        // @ts-ignore
         const propertyName = key.replace(/([A-Z])/g, '-$1').toLowerCase();
         return `${propertyName}: ${value};`;
       } else {

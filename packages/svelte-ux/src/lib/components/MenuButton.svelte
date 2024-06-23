@@ -29,6 +29,10 @@
   let open = false;
 
   $: restProps = { ...defaults, ...$$restProps };
+
+  function setValue(val: typeof value) {
+    value = val;
+  }
 </script>
 
 <Button
@@ -61,7 +65,7 @@
     }}
     {...menuProps}
   >
-    <slot {options} {selected} close={() => (open = false)} setValue={(val) => (value = val)}>
+    <slot {options} {selected} close={() => (open = false)} {setValue}>
       <menu class="group p-1">
         {#each options as option}
           <MenuItem

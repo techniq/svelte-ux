@@ -28,7 +28,7 @@ export type DataBackgroundOptions = {
    */
   baseline?: boolean;
 
-  tweened?: Parameters<typeof tweened>[1];
+  tweened?: Parameters<typeof tweened<number | null>>[1];
 };
 
 export const dataBackground: Action<HTMLElement, DataBackgroundOptions> = (node, options) => {

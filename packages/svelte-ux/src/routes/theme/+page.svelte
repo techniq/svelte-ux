@@ -121,8 +121,8 @@
   }
 
   $: showDarkTheme = $currentTheme.dark;
-  $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)?.theme;
-  $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)?.theme;
+  $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)!.theme;
+  $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)!.theme;
   $: previewTheme = (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as NestedColors;
 
   // Update site dark/light mode with preview for better experience (previewing and applying)
@@ -209,7 +209,7 @@
     {
       light: { 'color-scheme': 'light' },
       dark: { 'color-scheme': 'dark' },
-    }
+    } as Record<'light' | 'dark', Record<string, string | undefined>>
   );
 </script>
 
@@ -365,7 +365,10 @@
 
       <Switch
         checked={showDarkTheme}
-        on:change={(e) => (showDarkTheme = e.target.checked)}
+        on:change={(e) => {
+          // @ts-ignore
+          showDarkTheme = e.target?.checked;
+        }}
         let:checked
       >
         {#if checked}

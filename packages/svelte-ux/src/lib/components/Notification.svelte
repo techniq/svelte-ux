@@ -40,6 +40,7 @@
 </script>
 
 {#if open}
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
     class="Notification rounded-lg border bg-surface-100 shadow-lg z-10"
     transition:fly={{ duration: 200, easing: quadIn, x: 100 }}
