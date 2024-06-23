@@ -4,7 +4,12 @@
 
   import Button from './Button.svelte';
   import { getDateFuncsByPeriodType } from '../utils/date.js';
-  import { DateToken, PeriodType, type SelectedDate } from '../utils/date_types.js';
+  import {
+    DateToken,
+    PeriodType,
+    type CustomIntlDateTimeFormatOptions,
+    type SelectedDate,
+  } from '../utils/date_types.js';
   import { cls } from '../utils/styles.js';
   import { getComponentSettings, getSettings } from './settings.js';
 
@@ -18,7 +23,7 @@
   export let selected: SelectedDate;
   export let hidden: boolean = false;
   export let fade: boolean = false;
-  export let format = getCustomFormat(periodType);
+  export let format: CustomIntlDateTimeFormatOptions | undefined = getCustomFormat(periodType);
   export let variant = defaults.variant;
   let className: string | undefined = undefined;
   export { className as class };
