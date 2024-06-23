@@ -27,8 +27,8 @@
   import Icon from './Icon.svelte';
 
   type TimelineEventData = {
-    start?: string | boolean;
-    end?: string | boolean;
+    start?: string | number | boolean;
+    end?: string | number | boolean;
     icon?: ComponentProps<Icon>['data'];
     completed?: boolean;
   };

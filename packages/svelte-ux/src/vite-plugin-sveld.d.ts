@@ -16,51 +16,50 @@ declare module 'vite-plugin-sveld' {
 declare module '*.svelte?raw&sveld' {
   interface SveldProp {
     name: string;
-    kind: string;
+    kind: 'let' | 'const' | 'function';
+    constant: boolean;
     type?: string;
+    value?: any;
+    description?: string;
     isFunction: boolean;
     isFunctionDeclaration: boolean;
     isRequired: boolean;
-    constant: boolean;
     reactive: boolean;
   }
 
   interface SveldSlot {
-    name: string;
+    name?: string;
     default: boolean;
-    fallback: string;
-    slot_props: string;
+    fallback?: string;
+    slot_props?: string;
     description?: string;
   }
 
-  interface SveldEvent {
-    type: string;
+  interface ForwardedEvent {
+    type: 'forwarded';
     name: string;
-    element: string;
+    element: ComponentInlineElement | ComponentElement;
+  }
+
+  interface DispatchedEvent {
+    type: 'dispatched';
+    name: string;
+    detail?: any;
     description?: string;
   }
+
+  type SvelteEvent = ForwardedEvent | DispatchedEvent;
 
   interface SveldRestProps {
-    type: string;
+    type: 'InlineComponent' | 'Element';
     name: string;
   }
 
   interface SveldTypedefs {
     type: string;
     name: string;
+    description?: string;
     ts: string;
-  }
-
-  interface SveldModuleExport {
-    name: string;
-    kind: string;
-    type?: string;
-    value: string;
-    isFunction: boolean;
-    isFunctionDeclaration: boolean;
-    isRequired: boolean;
-    constant: boolean;
-    reactive: boolean;
   }
 
   interface SveldJson {
@@ -68,8 +67,8 @@ declare module '*.svelte?raw&sveld' {
     slots: SveldSlot[];
     events: SveldEvent[];
     typedefs: SveldTypedefs[];
-    rest_props: SveldRestProps[];
-    moduleExports: SveldModuleExport[];
+    rest_props: SveldRestProps;
+    moduleExports: SveldProp[];
     componentComment?: string;
     extends?: {
       interface: string;

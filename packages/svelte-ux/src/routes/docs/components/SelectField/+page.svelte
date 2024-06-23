@@ -248,7 +248,7 @@
             <div>{option.label}</div>
             <div class="text-sm text-surface-content/50">{option.value}</div>
           </div>
-          <div on:click|stopPropagation>
+          <div on:click|stopPropagation role="none">
             <Toggle let:on={open} let:toggle let:toggleOff>
               <Button
                 icon={mdiPencil}
@@ -276,7 +276,7 @@
 <Preview>
   <Toggle let:on={open} let:toggle>
     <SelectField {options}>
-      <div slot="prepend" on:click|stopPropagation class="flex items-center">
+      <div slot="prepend" on:click|stopPropagation class="flex items-center" role="none">
         <select
           class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
           style="text-align-last: center;"
@@ -299,7 +299,7 @@
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
     <SelectField {options}>
-      <span slot="append" on:click|stopPropagation>
+      <span slot="append" on:click|stopPropagation role="none">
         <Button icon={mdiPlus} class="text-surface-content/50 p-2" on:click={toggle} />
       </span>
     </SelectField>
@@ -344,7 +344,7 @@
 
 <Preview>
   <SelectField {options} bind:value>
-    <div slot="actions" class="p-2 border-t" on:click|stopPropagation let:hide>
+    <div slot="actions" class="p-2 border-t" on:click|stopPropagation let:hide role="none">
       <Toggle let:on={open} let:toggle>
         <Button icon={mdiPlus} color="primary" on:click={toggle}>New item</Button>
         <Form
@@ -415,7 +415,7 @@
 
 <Preview>
   <SelectField {options} icon={mdiMagnify} rounded>
-    <span slot="prepend" on:click|stopPropagation>
+    <span slot="prepend" on:click|stopPropagation role="none">
       <select
         class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
         style="text-align-last: center;"
@@ -480,6 +480,7 @@
   <form
     on:submit={(e) => {
       e.preventDefault();
+      // @ts-ignore
       const formData = new FormData(e.target);
       alert(formData.get('test'));
     }}

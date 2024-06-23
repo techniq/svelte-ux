@@ -3,9 +3,9 @@
   import type { FormatNumberStyle } from '../utils/format.js';
   import { getSettings } from './settings.js';
 
-  type SpringOptions = Parameters<typeof spring<number>>[1];
+  type SpringOptions = Parameters<typeof spring<number | null>>[1];
 
-  export let value: number;
+  export let value: number | null;
   export let format: FormatNumberStyle = 'none';
   export let options: SpringOptions = undefined;
   export let disabled = false;

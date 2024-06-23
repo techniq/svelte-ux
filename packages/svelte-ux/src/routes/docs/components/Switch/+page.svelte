@@ -21,6 +21,7 @@
 <h2>Label</h2>
 
 <Preview>
+  <!-- svelte-ignore a11y-label-has-associated-control -->
   <div class="grid gap-2">
     <label class="flex gap-2 items-center text-sm">
       Click me

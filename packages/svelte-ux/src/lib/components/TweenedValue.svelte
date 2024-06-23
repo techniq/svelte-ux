@@ -3,9 +3,9 @@
   import type { FormatNumberStyle } from '../utils/format.js';
   import { getSettings } from './settings.js';
 
-  type TweenedOptions = Parameters<typeof tweened<number>>[1];
+  type TweenedOptions = Parameters<typeof tweened<number | null>>[1];
 
-  export let value: number;
+  export let value: number | null;
   export let format: FormatNumberStyle = 'none';
   export let options: TweenedOptions = undefined;
   export let disabled = false;
