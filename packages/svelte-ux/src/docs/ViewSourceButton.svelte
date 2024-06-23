@@ -1,5 +1,7 @@
 <script lang="ts">
+  import type { ComponentProps } from 'svelte';
   import { mdiGithub } from '@mdi/js';
+
   import Button from '../lib/components/Button.svelte';
   import Code from '../lib/components/Code.svelte';
   import Dialog from '../lib/components/Dialog.svelte';
@@ -7,9 +9,9 @@
   import Tooltip from '../lib/components/Tooltip.svelte';
 
   export let label: string;
-  export let source: string;
-  export let href: string;
-  export let icon: string;
+  export let source: string | undefined = undefined;
+  export let href: string | undefined = undefined;
+  export let icon: ComponentProps<Button>['icon'];
 </script>
 
 {#if source}
