@@ -4,7 +4,7 @@
   import { groupKey } from './ToggleGroup.svelte';
 
   const panel = {};
-  const { registerPanel, unregisterPanel, selectedPanel } = getContext(groupKey);
+  const { registerPanel, unregisterPanel, selectedPanel } = getContext<any>(groupKey);
 
   registerPanel(panel);
 

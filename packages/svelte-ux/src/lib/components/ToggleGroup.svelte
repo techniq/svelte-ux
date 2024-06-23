@@ -97,7 +97,7 @@
       ),
     },
     none: {},
-  } satisfies Record<typeof variant, typeof classes>;
+  } as Record<typeof variant, typeof classes>;
 
   // Toss classes into a store so it can be reactively read from context
   const classesStore = writable(classes);
@@ -171,8 +171,9 @@
   const options: HTMLElement[] = [];
   const optionsByValue: Map<any, HTMLElement> = new Map();
   const panels: HTMLElement[] = [];
-  const selectedOption = writable(undefined);
-  const selectedPanel = writable(undefined);
+  const selectedOption = writable<HTMLElement | undefined>(undefined);
+  const selectedPanel = writable<HTMLElement | undefined>(undefined);
+  // @ts-ignore - not sure why `fade` is not type compatible for `fallback`
   const [send, receive] = crossfade({ fallback: fade });
   const dispatch = createEventDispatcher();
 

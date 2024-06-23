@@ -92,9 +92,11 @@
 
   function onMove(which: 'start' | 'range' | 'end') {
     return function (e: MouseEvent) {
+      // @ts-ignore
       const parentEl = e.target.parentElement;
       const parentRect = parentEl.getBoundingClientRect();
 
+      // @ts-ignore
       const deltaPercent = e.detail.dx / parentRect.width;
       const deltaValue = (max - min) * deltaPercent;
 
@@ -191,19 +193,20 @@
 
   function onClick(e: MouseEvent) {
     // Focus for keyboard input
-    e.target.focus();
+    const target = e.target as HTMLDivElement;
+    target.focus();
 
     if (ignoreClickEvents) {
       return;
     }
 
     let sliderRect: DOMRect;
-    if (e.target.classList.contains('RangeSlider')) {
+    if (target.classList.contains('RangeSlider')) {
       // Root / track
-      sliderRect = e.target.getBoundingClientRect();
-    } else if (e.target.classList.contains('range')) {
+      sliderRect = target.getBoundingClientRect();
+    } else if (target.classList.contains('range')) {
       // Range selection
-      sliderRect = e.target.parentElement.getBoundingClientRect();
+      sliderRect = target.parentElement!.getBoundingClientRect();
     } else {
       // Ignore clicks on thumbs, etc
       return;
@@ -235,7 +238,6 @@
     className
   )}
   style="--start: {$start}; --end: {$end};"
-  {disabled}
   tabindex={disabled ? -1 : 0}
   on:click={onClick}
   on:keydown={onKeyDown}

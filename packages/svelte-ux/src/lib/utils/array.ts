@@ -188,10 +188,12 @@ export function nestedFindByPredicate(
   return undefined;
 }
 
+export type TreeNode = { id: string; name: string; level: number; children: Node[] };
+
 /**
  * Given a flat array of objects with a `level` property, build a nested object with `children`
  */
-export function buildTree<T extends { level: number }>(arr: T[]) {
+export function buildTree<T extends Omit<TreeNode, 'children'>>(arr: T[]): TreeNode[] {
   var levels = [{}] as Array<T & { children?: any[] }>;
   arr.forEach((o) => {
     levels.length = o.level;
@@ -199,7 +201,7 @@ export function buildTree<T extends { level: number }>(arr: T[]) {
     levels[o.level - 1].children?.push(o);
     levels[o.level] = o;
   });
-  return levels[0].children;
+  return levels[0].children ?? [];
 }
 
 /**

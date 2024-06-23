@@ -20,7 +20,7 @@
   import type { ScrollIntoViewOptions } from '../actions/scroll.js';
 
   const dispatch = createEventDispatcher<{
-    change: { value: any; option: MenuOption };
+    change: { value: any; option: MenuOption | null };
     inputChange: string;
   }>();
   const { classes: settingsClasses, defaults } = getComponentSettings('SelectField');
@@ -333,14 +333,14 @@
   function selectValue(value: any) {
     logger.debug('selectValue', { value, options, filteredOptions });
 
-    const option = options?.find((option) => optionValue(option) === value);
+    const option = options?.find((option) => optionValue(option) === value) ?? null;
     return selectOption(option);
   }
 
   /**
    * Select option by object
    */
-  function selectOption(option: MenuOption) {
+  function selectOption(option: MenuOption | null) {
     logger.info('selectOption', { option });
 
     const previousValue = value;

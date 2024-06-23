@@ -4,9 +4,9 @@ export * from './table.js';
 export * from './typeHelpers.js';
 export * from './typeGuards.js';
 
-export type MenuOption = {
+export type MenuOption<T = any> = {
   label: string;
-  value: any;
+  value: T;
   icon?: string;
   group?: string;
 };

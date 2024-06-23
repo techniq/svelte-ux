@@ -21,7 +21,7 @@
 
   const dispatch = createEventDispatcher<{
     clear: null;
-    change: { value: typeof value; inputValue: InputValue; operator?: string };
+    change: { value: typeof value; inputValue: InputValue | null; operator?: string };
   }>();
 
   const { classes: settingsClasses, defaults } = getComponentSettings('TextField');
@@ -31,7 +31,7 @@
   export let label = '';
   export let labelPlacement: LabelPlacement =
     defaults.labelPlacement ?? fieldDefaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT;
-  export let value: InputValue | { [operator: string]: InputValue } = ''; // TODO: Can also include operator: { "operator": "value" }
+  export let value: InputValue | { [operator: string]: InputValue | null } | null = ''; // TODO: Can also include operator: { "operator": "value" }
   export let type:
     | 'text'
     | 'password'
@@ -138,7 +138,7 @@
       inputMode = 'text';
   }
 
-  let inputValue: InputValue = value == null ? '' : String(value);
+  let inputValue: InputValue | null = value == null ? '' : String(value);
   $: potentialInputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
   $: if (inputType !== 'number' || inputValue != potentialInputValue) {
     // Update the inputValue, but when the input type is number only do it if the values are actually different.
@@ -151,7 +151,7 @@
 
   let lastTimeoutId: ReturnType<typeof setTimeout>;
   function updateValue() {
-    let newValue;
+    let newValue: typeof value;
     const valueAsType = inputType === 'number' ? Number(inputValue) : inputValue;
     if (inputValue && operator) {
       // Add with operator if used
@@ -357,7 +357,7 @@
                 {autocomplete}
                 type={inputType}
                 inputmode={inputMode}
-                value={inputValue}
+                value={String(inputValue ?? '')}
                 {mask}
                 {replace}
                 {accept}

@@ -11,12 +11,14 @@
   export let minDate: Date | undefined = undefined;
   export let maxDate: Date | undefined = undefined;
 
+  let minYear: number;
   $: minYear =
     minYear ??
     (minDate
       ? minDate.getFullYear()
       : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
 
+  let maxYear: number;
   $: maxYear =
     maxYear ??
     (maxDate

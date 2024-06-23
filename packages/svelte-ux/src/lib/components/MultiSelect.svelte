@@ -69,6 +69,7 @@
 
   // Partition options based on if they initially selected, which will be displayed at the top
   $: [selectedOptions, unselectedOptions] = partition(options, (x) =>
+    // @ts-ignore
     value.includes(get(x, valueProp))
   );
 
@@ -90,6 +91,7 @@
   });
 
   $: isSelectionDirty = dirtyStore(selection);
+  // @ts-ignore
   $: indeterminateStore = uniqueStore(indeterminateSelected);
 
   function onChange() {

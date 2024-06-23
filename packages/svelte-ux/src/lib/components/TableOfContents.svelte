@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte';
   import { mdiCircleSmall } from '@mdi/js';
 
-  import { buildTree } from '../utils/array.js';
+  import { buildTree, type TreeNode } from '../utils/array.js';
   import { cls } from '../utils/styles.js';
   import TreeList from './TreeList.svelte';
   import Icon from './Icon.svelte';
@@ -16,23 +16,25 @@
   let className: string | undefined = undefined;
   export { className as class };
 
+  type HeadingNode = { id: string; name: string; level: number; element: HTMLElement };
+
   let activeHeadingId = '';
-  let headings = [];
-  let nodes = [];
+  let headings: HeadingNode[] = [];
+  let nodes: TreeNode[] = [];
 
   const settingsClasses = getComponentClasses('TableOfContents');
 
-  function onScroll(e) {
-    activeHeadingId = headings?.find(
-      (heading) => heading.element.offsetTop >= window.scrollY + scrollOffset
-    )?.id;
+  function onScroll(e: Event) {
+    activeHeadingId =
+      headings?.find((heading) => heading.element.offsetTop >= window.scrollY + scrollOffset)?.id ??
+      '';
   }
 
   onMount(() => {
     const el = document.querySelector(element);
 
     const selector = Array.from({ length: maxDepth }, (_, i) => 'h' + ++i).join(','); // h1,h2,...
-    headings = Array.from(el?.querySelectorAll(selector) ?? [], (el) => {
+    headings = Array.from(el?.querySelectorAll<HTMLElement>(selector) ?? [], (el) => {
       if (!el.hasAttribute('id')) {
         el.setAttribute('id', el.innerHTML.toLowerCase().replaceAll(' ', '-'));
       }

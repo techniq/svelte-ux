@@ -12,6 +12,7 @@
 <Switch
   checked={$currentTheme.dark}
   on:change={(e) => {
+    // @ts-ignore: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
     let newTheme = e.target?.checked ? 'dark' : 'light';
     currentTheme.setTheme(newTheme);
   }}
