@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.71.0
+
+### Minor Changes
+
+- Cleanup a11y and TS warnings/errors ([#409](https://github.com/techniq/svelte-ux/pull/409))
+
+- [ButtonGroup] Remove mouse/keyboard event handlers (a11y). Use wrapping container to stop event propagation ([#409](https://github.com/techniq/svelte-ux/pull/409))
+
 ## 0.70.1
 
 ### Patch Changes
