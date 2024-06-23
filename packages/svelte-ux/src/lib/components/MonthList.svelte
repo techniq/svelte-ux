@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ComponentProps } from 'svelte';
   import { isSameMonth, isWithinInterval, startOfMonth, endOfMonth } from 'date-fns';
 
   import { getMonths, PeriodType } from '../utils/date.js';
@@ -7,7 +8,7 @@
 
   export let year: number | undefined = undefined;
   export let selected: SelectedDate = undefined;
-  export let format: string | undefined = undefined;
+  export let format: ComponentProps<DateButton>['format'] = undefined;
   /**
    * Dates to disable (not selectable)
    */

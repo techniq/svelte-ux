@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { ComponentProps } from 'svelte';
   import {
     addYears,
     subYears,
@@ -17,7 +18,7 @@
   export let selected: SelectedDate = undefined;
   export let minDate: Date | undefined = undefined;
   export let maxDate: Date | undefined = undefined;
-  export let format: string | undefined = undefined;
+  export let format: ComponentProps<DateButton>['format'] = undefined;
 
   /**
    * Dates to disable (not selectable)
