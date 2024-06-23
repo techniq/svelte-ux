@@ -4,7 +4,7 @@
     DatePickerField,
     MenuField,
     DateToken,
-    FormatNumberStyle,
+    type FormatNumberStyle,
     PeriodType,
     settings,
   } from 'svelte-ux';

@@ -11,6 +11,7 @@ export {
   type FormatFunction,
   type FormatFunctionProperties,
   type FormatFunctions,
+  type FormatNumberStyle,
 } from './format.js';
 export * from './json.js';
 export * from './logger.js';
