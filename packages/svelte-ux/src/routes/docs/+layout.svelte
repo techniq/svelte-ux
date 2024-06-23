@@ -215,7 +215,7 @@
                             ? mdiGithub
                             : mdiLink}
                   <ListItem
-                    title={item.name}
+                    title={item.name.toString()}
                     {icon}
                     avatar={{ size: 'sm', class: 'text-xs text-white bg-primary' }}
                     on:click={() => {

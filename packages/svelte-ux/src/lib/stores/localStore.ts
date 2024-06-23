@@ -23,6 +23,7 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
       const decodedValue = parse(storedValue);
       if (options?.expiry) {
         // TODO: If object returned, merge with initialValue (sub-properties)?
+        // @ts-ignore
         value = expireObject<Value>(decodedValue.value, decodedValue.expiry) ?? initialValue;
         previousExpiry = decodedValue.expiry;
       } else {
@@ -42,7 +43,8 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
           : previousExpiry;
 
         const expiry = isFunction(options?.expiry)
-          ? options?.expiry(prunedPreviousExpiry) // Update expiry on write
+          ? // @ts-ignore
+            options?.expiry(prunedPreviousExpiry) // Update expiry on write
           : options?.expiry;
         previousExpiry = expiry;
 

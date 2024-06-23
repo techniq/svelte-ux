@@ -44,6 +44,7 @@
     use:debounceEvent={{
       type: 'input',
       listener: (e) => {
+        // @ts-ignore
         console.log(e.target.value);
       },
       timeout: 1000,

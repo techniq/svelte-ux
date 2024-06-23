@@ -1,11 +1,11 @@
-<script lang="ts">
+<script lang="ts" generics="TItem">
   import { mdiChevronRight } from '@mdi/js';
 
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let items: (string | number | null | undefined)[] = [];
+  export let items: TItem[] = [];
   export let divider: string | undefined = undefined;
   export let inline = false;
   let className: string | undefined = undefined;

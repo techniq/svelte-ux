@@ -158,11 +158,11 @@
     on:dateChange={(e) => {
       const date = e.detail;
       const newSelectedRange = { ...selectedRange };
-      if (selectedRange.from === undefined) {
+      if (selectedRange.from === null) {
         newSelectedRange.from = date;
       } else if (isSameMonth(date, selectedRange.from)) {
-        newSelectedRange.from = undefined;
-      } else if (selectedRange.to === undefined) {
+        newSelectedRange.from = null;
+      } else if (selectedRange.to === null) {
         if (isAfter(date, selectedRange.from)) {
           newSelectedRange.to = date;
         } else {
@@ -170,10 +170,10 @@
           newSelectedRange.from = date;
         }
       } else if (isSameMonth(date, selectedRange.to)) {
-        newSelectedRange.to = undefined;
+        newSelectedRange.to = null;
       } else {
         newSelectedRange.from = date;
-        newSelectedRange.to = undefined;
+        newSelectedRange.to = null;
       }
       selectedRange = newSelectedRange;
     }}

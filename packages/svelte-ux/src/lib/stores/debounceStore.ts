@@ -1,5 +1,4 @@
-import { derived, get } from 'svelte/store';
-import type { Stores } from '../types/typeHelpers.js';
+import { derived, get, type Stores } from 'svelte/store';
 
 function debounceStore<T extends Stores>(original: T, timeout = 300) {
   return derived(
@@ -11,6 +10,7 @@ function debounceStore<T extends Stores>(original: T, timeout = 300) {
         clearTimeout(timer);
       };
     },
+    // @ts-ignore
     get(original)
   );
 }

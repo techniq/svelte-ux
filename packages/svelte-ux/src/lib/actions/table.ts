@@ -175,7 +175,11 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
   };
 };
 
-function getClasses(classProp: ColumnDef['classes']['td'], context: ResolveContext): string[] {
+function getClasses(
+  // @ts-ignore
+  classProp: ColumnDef['classes']['td'],
+  context: ResolveContext
+): string[] {
   const resolvedClassProp = typeof classProp === 'function' ? classProp(context) : classProp;
 
   if (typeof resolvedClassProp === 'string') {
@@ -189,6 +193,7 @@ function getClasses(classProp: ColumnDef['classes']['td'], context: ResolveConte
 }
 
 function getStyleProperties(
+  // @ts-ignore
   styleProp: ColumnDef['style']['td'],
   context: ResolveContext
 ): string[][] {

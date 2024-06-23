@@ -8,14 +8,17 @@ declare namespace svelteHTML {
     'on:mutate'?: (event: CustomEvent<MutationRecord[]>) => void;
 
     // use:movable
-    'on:movestart'?: (event: MouseEvent) => void;
-    'on:move'?: (event: MouseEvent) => void;
-    'on:moveend'?: (event: MouseEvent) => void;
+    'on:movestart'?: (event: CustomEvent<{ x: number; y: number }>) => void;
+    'on:move'?: (event: CustomEvent<{ x: number; y: number; dx: number; dy: number }>) => void;
+    'on:moveend'?: (event: CustomEvent<{ x: number; y: number }>) => void;
 
     // use:popover
     'on:clickOutside'?: (event: CustomEvent) => void;
 
     // use:overflow
     'on:overflow'?: (event: CustomEvent<{ overflowX: number; overflowY: number }>) => void;
+
+    // use:longpress
+    'on:longpress'?: (event: CustomEvent) => void;
   }
 }

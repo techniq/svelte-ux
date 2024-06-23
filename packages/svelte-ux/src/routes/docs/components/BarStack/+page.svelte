@@ -122,13 +122,13 @@
       <div class="flex items-center gap-1 truncate py-1 px-2">
         <span class="text-sm font-semibold text-gray-900">
           <TweenedValue value={item.value / total} let:value options={{ duration }}>
-            {format(value, 'percent')}
+            {format(value ?? 0, 'percent')}
           </TweenedValue>
         </span>
 
         <span class="truncate text-xs text-gray-900">
           <TweenedValue value={item.value} let:value options={{ duration }}>
-            ({format(value, 'integer')})
+            ({format(value ?? 0, 'integer')})
           </TweenedValue>
         </span>
       </div>

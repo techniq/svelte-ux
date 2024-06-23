@@ -289,6 +289,7 @@
       {
         name: 'name',
         align: 'left',
+        // @ts-ignore
         format: (value) => {
           // TODO: Docs currently do not support backticks (template literals)
           return (

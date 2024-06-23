@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="TData">
   import { createEventDispatcher } from 'svelte';
 
   import { tableCell } from '../actions/table.js';
@@ -12,15 +12,13 @@
   import { getSettings } from './settings.js';
   import tableOrderStore from '../stores/tableOrderStore.js';
 
-  type T = $$Generic;
-
   const dispatch = createEventDispatcher<{
-    headerClick: { column: ColumnDef };
-    cellClick: { column: ColumnDef; rowData: T };
+    headerClick: { column: ColumnDef<TData> };
+    cellClick: { column: ColumnDef<TData>; rowData: TData };
   }>();
 
-  export let columns: ColumnDef[] = [];
-  export let data: T[] | null = [];
+  export let columns: ColumnDef<TData>[] = [];
+  export let data: TData[] | null = [];
 
   export let order: ReturnType<typeof tableOrderStore> | undefined = undefined;
 
@@ -73,7 +71,7 @@
     };
   });
 
-  $: getCellContent = (column: ColumnDef, rowData: T, rowIndex: number) => {
+  $: getCellContent = (column: ColumnDef<TData>, rowData: TData, rowIndex: number) => {
     let value = getCellValue(column, rowData, rowIndex);
     if (column.format) {
       if (typeof column.format === 'function') {

@@ -22,8 +22,6 @@
 
 <h1>Examples</h1>
 
-<!-- TODO: Add playground -->
-
 <h2>Default</h2>
 
 <Preview>
@@ -118,11 +116,11 @@
     on:dateChange={(e) => {
       const date = e.detail;
       const newSelectedRange = { ...selectedRange };
-      if (selectedRange.from === undefined) {
+      if (selectedRange.from === null) {
         newSelectedRange.from = date;
       } else if (isSameDay(date, selectedRange.from)) {
-        newSelectedRange.from = undefined;
-      } else if (selectedRange.to === undefined) {
+        newSelectedRange.from = null;
+      } else if (selectedRange.to === null) {
         if (isAfter(date, selectedRange.from)) {
           newSelectedRange.to = date;
         } else {
@@ -130,10 +128,10 @@
           newSelectedRange.from = date;
         }
       } else if (isSameDay(date, selectedRange.to)) {
-        newSelectedRange.to = undefined;
+        newSelectedRange.to = null;
       } else {
         newSelectedRange.from = date;
-        newSelectedRange.to = undefined;
+        newSelectedRange.to = null;
       }
       selectedRange = newSelectedRange;
     }}
@@ -162,11 +160,11 @@
         on:dateChange={(e) => {
           const date = e.detail;
           const newSelectedRange = { ...selectedMultiMonth };
-          if (selectedMultiMonth.from === undefined) {
+          if (selectedMultiMonth.from === null) {
             newSelectedRange.from = date;
           } else if (isSameDay(date, selectedMultiMonth.from)) {
-            newSelectedRange.from = undefined;
-          } else if (selectedMultiMonth.to === undefined) {
+            newSelectedRange.from = null;
+          } else if (selectedMultiMonth.to === null) {
             if (isAfter(date, selectedMultiMonth.from)) {
               newSelectedRange.to = date;
             } else {
@@ -174,10 +172,10 @@
               newSelectedRange.from = date;
             }
           } else if (isSameDay(date, selectedMultiMonth.to)) {
-            newSelectedRange.to = undefined;
+            newSelectedRange.to = null;
           } else {
             newSelectedRange.from = date;
-            newSelectedRange.to = undefined;
+            newSelectedRange.to = null;
           }
           selectedMultiMonth = newSelectedRange;
         }}
@@ -190,11 +188,11 @@
         on:dateChange={(e) => {
           const date = e.detail;
           const newSelectedRange = { ...selectedMultiMonth };
-          if (selectedMultiMonth.from === undefined) {
+          if (selectedMultiMonth.from === null) {
             newSelectedRange.from = date;
           } else if (isSameDay(date, selectedMultiMonth.from)) {
-            newSelectedRange.from = undefined;
-          } else if (selectedMultiMonth.to === undefined) {
+            newSelectedRange.from = null;
+          } else if (selectedMultiMonth.to === null) {
             if (isAfter(date, selectedMultiMonth.from)) {
               newSelectedRange.to = date;
             } else {
@@ -202,10 +200,10 @@
               newSelectedRange.from = date;
             }
           } else if (isSameDay(date, selectedMultiMonth.to)) {
-            newSelectedRange.to = undefined;
+            newSelectedRange.to = null;
           } else {
             newSelectedRange.from = date;
-            newSelectedRange.to = undefined;
+            newSelectedRange.to = null;
           }
           selectedMultiMonth = newSelectedRange;
         }}

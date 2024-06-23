@@ -66,7 +66,7 @@
   $: end.set(scale(value[1]));
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
-    return function (e: MouseEvent) {
+    return function () {
       ignoreClickEvents = true;
 
       isMoving = true;
@@ -91,7 +91,7 @@
   }
 
   function onMove(which: 'start' | 'range' | 'end') {
-    return function (e: MouseEvent) {
+    return function (e: CustomEvent<{ dx: number }>) {
       // @ts-ignore
       const parentEl = e.target.parentElement;
       const parentRect = parentEl.getBoundingClientRect();
@@ -138,7 +138,7 @@
   }
 
   function onMoveEnd(which: 'start' | 'range' | 'end') {
-    return function (e: MouseEvent) {
+    return function () {
       // Ignore immediate click events after a drag (also fired on mouse up)
       setTimeout(() => {
         ignoreClickEvents = false;
@@ -151,7 +151,7 @@
   }
 
   function onMouseEnter(which: 'start' | 'range' | 'end') {
-    return function (e: MouseEvent) {
+    return function () {
       if (isMoving === false) {
         switch (which) {
           case 'start':
