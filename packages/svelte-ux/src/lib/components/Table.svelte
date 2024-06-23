@@ -38,6 +38,8 @@
   // const settingsClasses = getComponentClasses('Table');
   const settingsClasses: typeof classes = {};
 
+  const { format } = getSettings();
+
   export let styles: {
     container?: string;
     wrapper?: string;
@@ -60,6 +62,7 @@
       };
     });
   });
+
   $: rowColumns = getRowColumns(columns).map((column) => {
     return {
       ...column,
@@ -70,13 +73,13 @@
     };
   });
 
-  const { format } = getSettings();
   $: getCellContent = (column: ColumnDef, rowData: T, rowIndex: number) => {
     let value = getCellValue(column, rowData, rowIndex);
     if (column.format) {
       if (typeof column.format === 'function') {
         return column.format(value, rowData, rowIndex);
       } else {
+        // @ts-ignore
         return $format(value, column.format);
       }
     } else {
