@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="TOption, TValue extends string | number">
   import { getComponentClasses } from './theme.js';
 
   import { type ComponentProps, createEventDispatcher } from 'svelte';
@@ -17,11 +17,9 @@
   import uniqueStore from '../stores/uniqueStore.js';
   import { cls } from '../utils/styles.js';
 
-  type Option = $$Generic;
-
-  export let options: Option[];
-  export let value: string[] | number[] = [];
-  export let indeterminateSelected: string[] | number[] = [];
+  export let options: TOption[];
+  export let value: TValue[] = [];
+  export let indeterminateSelected: typeof value = [];
   export let duration = 200;
   export let inlineSearch = false;
   export let autoFocusSearch = false;
@@ -50,16 +48,17 @@
   export let onApply = async (ctx: {
     selection: typeof $selection;
     indeterminate: typeof $indeterminateStore;
-    original: { selected: Option[]; unselected: Option[] };
+    original: { selected: TOption[]; unselected: TOption[] };
   }) => {
     // no-op by default
   };
 
   const dispatch = createEventDispatcher<{
     change: {
+      value: typeof value;
       selection: typeof $selection;
       indeterminate: typeof $indeterminateStore;
-      original: { selected: Option[]; unselected: Option[] };
+      original: { selected: TOption[]; unselected: TOption[] };
     };
     cancel: null;
   }>();
@@ -74,7 +73,7 @@
   );
 
   // Filter by search text
-  function applyFilter(option: Option, searchText: string) {
+  function applyFilter(option: TOption, searchText: string) {
     if (searchText) {
       return get(option, labelProp).toLowerCase().includes(searchText.toLowerCase());
     } else {
@@ -96,7 +95,7 @@
 
   function onChange() {
     const changeContext = {
-      value: $selection.selected,
+      value: $selection.selected as TValue[],
       selection: $selection,
       indeterminate: $indeterminateStore,
       original: { selected: selectedOptions, unselected: unselectedOptions },

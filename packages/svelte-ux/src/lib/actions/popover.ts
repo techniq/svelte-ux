@@ -71,7 +71,7 @@ export const popover: Action<Element | HTMLElement, PopoverOptions> = (node, opt
         left: `${x}px`,
         top: `${y}px`,
         ...(options?.matchWidth && {
-          width: `${anchorEl.offsetWidth}px`,
+          width: `${(anchorEl as HTMLElement).offsetWidth}px`,
         }),
       });
     });

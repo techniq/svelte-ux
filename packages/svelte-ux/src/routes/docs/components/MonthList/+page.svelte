@@ -8,11 +8,11 @@
     endOfQuarter,
   } from 'date-fns';
 
-  import { MonthList } from 'svelte-ux';
+  import { MonthList, type SelectedDate } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let selected = null;
-  let selectedArr = [];
+  let selected: SelectedDate = null;
+  let selectedArr: Date[] = [];
   let selectedRange = { from: null, to: null };
   let selectedQuarter = { from: null, to: null };
 </script>

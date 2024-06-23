@@ -5,7 +5,7 @@
   import { Button, Card, Collapse } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let group = undefined;
+  let group: any = undefined;
 
   let controlledOpen = [false, true, false, false, false];
 </script>

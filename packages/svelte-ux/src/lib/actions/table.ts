@@ -150,6 +150,7 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
     if (column.dataBackground) {
       const extents = extent(tableData ?? [], (d) => getCellValue(column, d));
 
+      // @ts-ignore
       tracker.addAction(dataBackground, {
         value: context.cellValue,
         domain: tableData ? [min([0, extents[0]]), max([0, extents[1]])] : undefined,

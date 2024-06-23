@@ -51,10 +51,10 @@ export default class DomTracker {
     const existingAction = this.changes.actions.get(action.name);
     if (existingAction) {
       // Action already created, call action's update() (if available)
-      existingAction.update?.(options);
+      existingAction.update?.(options as any);
     } else {
       // Add new action
-      this.changes.actions.set(action.name, action(this.node, options));
+      this.changes.actions.set(action.name, action(this.node, options as any));
     }
   }
 

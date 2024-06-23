@@ -5,7 +5,7 @@
   //   return (node: HTMLElement) => node.scrollIntoView(options);
   // }
   function scrollIntoView(node: HTMLElement) {
-    return (options: Parameters<typeof node.scrollIntoView>['0']) => node.scrollIntoView(options);
+    return (options?: Parameters<typeof node.scrollIntoView>['0']) => node.scrollIntoView(options);
   }
 </script>
 

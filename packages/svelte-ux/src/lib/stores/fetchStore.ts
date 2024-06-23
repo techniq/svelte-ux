@@ -36,7 +36,7 @@ export type FetchState = {
   loading: boolean | undefined;
   data: any;
   error: any;
-  request: { url: string; options: RequestInit };
+  request: { url: string; options: RequestInit } | undefined;
   response: any;
 };
 
@@ -47,7 +47,7 @@ export const defaultOptions: RequestInit = {
 };
 
 const DEFAULT_STATE = {
-  loading: null,
+  loading: undefined,
   data: undefined,
   error: undefined,
   request: undefined,
@@ -68,7 +68,7 @@ export default function fetchStore() {
   // Track first data load for `once`
   let loaded = false;
 
-  const promises = [];
+  const promises: Promise<any>[] = [];
 
   const fetchConfigStore = writable<{ url: string; config?: FetchConfig }>({
     url: '',
@@ -173,7 +173,7 @@ export default function fetchStore() {
   function doUpdate(
     currentState: FetchState,
     nextState: Partial<FetchState>,
-    currentPromise: Promise<any>,
+    currentPromise: Promise<any> | null,
     config?: FetchConfig
   ) {
     if (currentPromise) {
@@ -256,7 +256,7 @@ export default function fetchStore() {
   };
 }
 
-function addError(store: Writable<any[]>, error: any) {
+function addError(store: Writable<any[]> | undefined, error: any) {
   if (store) {
     store.update((current) => {
       const result = [...current];
