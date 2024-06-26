@@ -42,7 +42,7 @@
     data-checked={checked}
     class={cls(
       'switch',
-      'border rounded-full grid align-items p-[2px] transition-shadow',
+      'group border rounded-full grid align-items p-[2px] transition-shadow',
       {
         'w-6 h-4': size === 'sm',
         'w-8 h-5': size === 'md',
@@ -80,7 +80,8 @@
       data-checked={checked}
       class={cls(
         'toggle w-1/2 aspect-square h-full rounded-full transition-all duration-200 bg-surface-100 grid items-center justify-center transform',
-        checked && 'translate-x-full',
+        'group-active:w-[60%] aspect-auto',
+        checked && 'translate-x-full group-active:translate-x-[65%]',
         checked === null && 'border',
         settingsClasses.toggle,
         classes.toggle
