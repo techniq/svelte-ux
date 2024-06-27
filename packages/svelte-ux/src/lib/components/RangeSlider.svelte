@@ -252,7 +252,7 @@
       right: calc((1 - var(--end)) * 100%);
     "
     class="range absolute top-0 bottom-0 bg-primary"
-  />
+  ></div>
 
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
@@ -294,7 +294,7 @@
       (lastMoved === 'start' || lastMoved === 'range') &&
         'group-focus:outline group-focus:outline-primary/40'
     )}
-  />
+  ></div>
 
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
@@ -315,7 +315,7 @@
       (lastMoved === 'end' || lastMoved === 'range') &&
         'group-focus:outline group-focus:outline-primary/40'
     )}
-  />
+  ></div>
 
   {#if showStartValue && !disableTooltips}
     <output

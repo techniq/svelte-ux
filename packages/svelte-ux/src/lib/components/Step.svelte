@@ -49,7 +49,7 @@
       settingsClasses.line,
       classes.line
     )}
-  />
+  ></div>
 
   <span class={cls(settingsClasses.label, classes.label)}>
     <slot />

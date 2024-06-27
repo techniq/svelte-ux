@@ -99,7 +99,7 @@
     </svelte:fragment>
 
     <slot name="actions" slot="actions" let:selection {selection}>
-      <div />
+      <div></div>
     </slot>
   </MultiSelect>
 </Menu>

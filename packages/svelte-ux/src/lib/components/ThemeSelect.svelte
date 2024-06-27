@@ -115,8 +115,8 @@
             )}
           >
             <div class="grid gap-1">
-              <div class="w-4 h-4 rounded-full bg-primary" />
-              <div class="w-4 h-4 rounded-full bg-secondary" />
+              <div class="w-4 h-4 rounded-full bg-primary"></div>
+              <div class="w-4 h-4 rounded-full bg-secondary"></div>
             </div>
             {themeName}
           </MenuItem>

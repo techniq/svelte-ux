@@ -24,5 +24,5 @@
       }
     }}
     on:intersecting
-  />
+  ></div>
 {/if}

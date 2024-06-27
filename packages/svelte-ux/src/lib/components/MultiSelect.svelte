@@ -186,7 +186,7 @@
 
   {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
     <!-- separator between selected and deselected -->
-    <div class="border-b my-1 border-surface-content/10" />
+    <div class="border-b my-1 border-surface-content/10"></div>
   {/if}
 
   <!-- initially unselected options -->
@@ -247,10 +247,10 @@
   )}
 >
   <slot name="actions" selection={$selection} {searchText}>
-    <div />
+    <div></div>
   </slot>
 
-  <div />
+  <div></div>
 
   <div>
     <Button

@@ -69,7 +69,7 @@
       )}
       in:receive={{ key: 'indicator' }}
       out:send={{ key: 'indicator' }}
-    />
+    ></div>
   {/if}
 
   <div class={cls('option', $classesContext.option, settingsClasses.option, classes.option)}>

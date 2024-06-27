@@ -37,4 +37,5 @@
     settingsClasses.root,
     className
   )}
-/>
+>
+</progress>

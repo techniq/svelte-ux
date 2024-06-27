@@ -61,7 +61,7 @@
   {#each Array(5) as _, i}
     <Button on:click={() => (controlledOpen[i] = !controlledOpen[i])}>Toggle {i + 1}</Button>
   {/each}
-  <div />
+  <div></div>
 </Preview>
 
 <h2>Expansion Panel</h2>

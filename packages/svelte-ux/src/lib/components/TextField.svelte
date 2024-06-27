@@ -346,7 +346,7 @@
                   classes.input
                 )}
                 use:multi={textAreaMultiAction}
-              />
+              ></textarea>
             {:else}
               <Input
                 {id}

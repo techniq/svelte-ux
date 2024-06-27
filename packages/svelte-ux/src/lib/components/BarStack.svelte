@@ -50,7 +50,7 @@
             style={item.style}
           >
             <slot name="bar" {item} total={total ?? sum(data, (d) => d.value)}>
-              <div class="h-1" />
+              <div class="h-1"></div>
             </slot>
           </div>
         </slot>
