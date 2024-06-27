@@ -92,11 +92,10 @@
 
   function onMove(which: 'start' | 'range' | 'end') {
     return function (e: CustomEvent<{ dx: number }>) {
-      // @ts-ignore
+      // @ts-expect-error
       const parentEl = e.target.parentElement;
       const parentRect = parentEl.getBoundingClientRect();
 
-      // @ts-ignore
       const deltaPercent = e.detail.dx / parentRect.width;
       const deltaValue = (max - min) * deltaPercent;
 

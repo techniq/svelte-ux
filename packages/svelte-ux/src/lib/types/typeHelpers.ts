@@ -43,7 +43,7 @@ export type ObjectKey = string | number | symbol;
 // Get entries (array of [key, value] arrays) of object (strongly-typed)
 export function entries<K extends ObjectKey, V>(o: Record<K, V>): [K, V][];
 export function entries<K, V>(o: Map<K, V>): [K, V][];
-// @ts-ignore
+// @ts-expect-error
 export function entries<K extends ObjectKey | unknown, V>(o: Record<K, V> | Map<K, V>): [K, V][] {
   if (o instanceof Map) return Array.from(o.entries()) as unknown as [K, V][];
   return Object.entries(o) as unknown as [K, V][]; // TODO: Improve based on key/value pair - https://stackoverflow.com/questions/60141960/typescript-key-value-relation-preserving-object-entries-type

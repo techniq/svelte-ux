@@ -19,7 +19,7 @@
 <TextField
   value={formatColor(value, colorSpace)}
   on:change={(e) => {
-    // @ts-ignore
+    // @ts-expect-error
     value = formatColor(e.detail.inputValue, colorSpace);
     dispatch('change', { value });
   }}
@@ -31,7 +31,7 @@
       type="color"
       value={formatHex(value)}
       on:input={(e) => {
-        // @ts-ignore
+        // @ts-expect-error
         value = formatColor(e.target.value, colorSpace);
         dispatch('change', { value });
       }}

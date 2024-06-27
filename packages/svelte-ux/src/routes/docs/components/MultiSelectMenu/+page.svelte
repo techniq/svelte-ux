@@ -31,7 +31,7 @@
         {options}
         {value}
         on:change={(e) => {
-          // @ts-ignore
+          // @ts-expect-error
           value = e.detail.value;
         }}
         {open}
@@ -51,7 +51,7 @@
         {options}
         {value}
         on:change={(e) => {
-          // @ts-ignore
+          // @ts-expect-error
           value = e.detail.value;
         }}
         {open}
@@ -73,7 +73,7 @@
         options={manyOptions}
         {value}
         on:change={(e) => {
-          // @ts-ignore
+          // @ts-expect-error
           value = e.detail.value;
         }}
         {open}
@@ -94,7 +94,7 @@
         options={manyOptions}
         {value}
         on:change={(e) => {
-          // @ts-ignore
+          // @ts-expect-error
           value = e.detail.value;
         }}
         {open}
@@ -116,7 +116,7 @@
         options={manyOptions}
         {value}
         on:change={(e) => {
-          // @ts-ignore
+          // @ts-expect-error
           value = e.detail.value;
         }}
         {open}
@@ -139,7 +139,7 @@
         {options}
         {value}
         on:change={(e) => {
-          // @ts-ignore
+          // @ts-expect-error
           value = e.detail.value;
         }}
         {open}
@@ -165,7 +165,7 @@
         {options}
         {value}
         on:change={(e) => {
-          // @ts-ignore
+          // @ts-expect-error
           value = e.detail.value;
         }}
         {open}

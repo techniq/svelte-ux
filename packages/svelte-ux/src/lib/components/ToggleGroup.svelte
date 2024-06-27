@@ -173,7 +173,7 @@
   const panels: HTMLElement[] = [];
   const selectedOption = writable<HTMLElement | undefined>(undefined);
   const selectedPanel = writable<HTMLElement | undefined>(undefined);
-  // @ts-ignore - not sure why `fade` is not type compatible for `fallback`
+  // @ts-expect-error - not sure why `fade` is not type compatible for `fallback`
   const [send, receive] = crossfade({ fallback: fade });
   const dispatch = createEventDispatcher();
 

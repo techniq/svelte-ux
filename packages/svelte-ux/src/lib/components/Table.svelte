@@ -77,7 +77,7 @@
       if (typeof column.format === 'function') {
         return column.format(value, rowData, rowIndex);
       } else {
-        // @ts-ignore
+        // @ts-expect-error
         return $format(value, column.format);
       }
     } else {

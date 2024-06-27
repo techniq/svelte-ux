@@ -62,7 +62,7 @@
       : selected instanceof Array
         ? selected.some((d) => isSame(date, d))
         : selected instanceof Object
-          ? // @ts-ignore
+          ? // @ts-expect-error
             isSame(date, selected.from ?? selected.to)
           : false;
 
@@ -72,7 +72,7 @@
       : selected instanceof Array
         ? selected.some((d) => isSame(date, d))
         : selected instanceof Object
-          ? // @ts-ignore
+          ? // @ts-expect-error
             isSame(date, selected.to ?? selected.from)
           : false;
 

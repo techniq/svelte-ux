@@ -366,7 +366,7 @@
       <Switch
         checked={showDarkTheme}
         on:change={(e) => {
-          // @ts-ignore
+          // @ts-expect-error
           showDarkTheme = e.target?.checked;
         }}
         let:checked

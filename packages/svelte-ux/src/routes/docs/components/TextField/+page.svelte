@@ -215,7 +215,7 @@
       debounceEvent(node, {
         type: 'input',
         listener: (e) => {
-          // @ts-ignore
+          // @ts-expect-error
           console.log(e.target.value);
         },
         timeout: 500,
@@ -416,7 +416,7 @@
     label="Comment"
     multiline
     actions={(node) => {
-      // @ts-ignore
+      // @ts-expect-error
       return [autoHeight(node)];
     }}
   />

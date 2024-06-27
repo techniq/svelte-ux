@@ -63,8 +63,6 @@ export function isTouchEvent(event?: EventType): event is TouchEvent {
 export function isEvent(event?: EventType | Element): event is EventType {
   return (
     !!event &&
-    (event instanceof Event ||
-      // @ts-ignore
-      ('nativeEvent' in event && event.nativeEvent instanceof Event))
+    (event instanceof Event || ('nativeEvent' in event && event.nativeEvent instanceof Event))
   );
 }

@@ -150,7 +150,7 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
     if (column.dataBackground) {
       const extents = extent(tableData ?? [], (d) => getCellValue(column, d));
 
-      // @ts-ignore
+      // @ts-expect-error
       tracker.addAction(dataBackground, {
         value: context.cellValue,
         domain: tableData ? [min([0, extents[0]]), max([0, extents[1]])] : undefined,
@@ -176,7 +176,7 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
 };
 
 function getClasses(
-  // @ts-ignore
+  // @ts-expect-error
   classProp: ColumnDef['classes']['td'],
   context: ResolveContext
 ): string[] {
@@ -193,7 +193,7 @@ function getClasses(
 }
 
 function getStyleProperties(
-  // @ts-ignore
+  // @ts-expect-error
   styleProp: ColumnDef['style']['td'],
   context: ResolveContext
 ): string[][] {

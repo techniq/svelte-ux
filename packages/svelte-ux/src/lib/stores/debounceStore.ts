@@ -10,7 +10,7 @@ function debounceStore<T extends Stores>(original: T, timeout = 300) {
         clearTimeout(timer);
       };
     },
-    // @ts-ignore
+    // @ts-expect-error
     get(original)
   );
 }

@@ -296,7 +296,7 @@
       {
         name: 'name',
         align: 'left',
-        // @ts-ignore
+        // @ts-expect-error
         format: (value) => {
           // TODO: Docs currently do not support backticks (template literals)
           return (

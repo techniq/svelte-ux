@@ -480,7 +480,7 @@
   <form
     on:submit={(e) => {
       e.preventDefault();
-      // @ts-ignore
+      // @ts-expect-error
       const formData = new FormData(e.target);
       alert(formData.get('test'));
     }}

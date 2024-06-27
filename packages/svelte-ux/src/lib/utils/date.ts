@@ -707,7 +707,7 @@ export function formatDateWithLocale(
   }
 
   // Handle 'Invalid Date'
-  // @ts-ignore - Date is a number (see: https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript)
+  // @ts-expect-error - Date is a number (see: https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript)
   if (date == null || isNaN(date)) {
     return '';
   }

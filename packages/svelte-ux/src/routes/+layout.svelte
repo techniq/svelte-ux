@@ -137,7 +137,6 @@
 
   let mainEl: HTMLElement;
   afterNavigate(() => {
-    // @ts-ignore: `instant` not in spec, but supported by Chrome/Firefox - https://kilianvalkhof.com/2022/css-html/preventing-smooth-scrolling-with-javascript/
     mainEl.scrollTo({ top: 0, behavior: 'instant' });
   });
 
@@ -169,19 +168,19 @@
       const unsubscribePage = page.subscribe(($page) => {
         if (currentPath && currentPath !== $page.url.pathname) {
           // Page navigated away
-          // @ts-ignore - .capture() exists
+          // @ts-expect-error - .capture() exists
           posthog.capture('$pageleave');
         }
 
         // Page entered
         currentPath = $page.url.pathname;
-        // @ts-ignore - .capture() exists
+        // @ts-expect-error - .capture() exists
         posthog.capture('$pageview');
       });
 
       const handleBeforeUnload = () => {
         // Hard reloads or browser exit
-        // @ts-ignore - .capture() exists
+        // @ts-expect-error - .capture() exists
         posthog.capture('$pageleave');
       };
       window.addEventListener('beforeunload', handleBeforeUnload);

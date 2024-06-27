@@ -6,7 +6,7 @@ export function getWeekStartsOnFromIntl(locales?: string): DayOfWeek {
   }
 
   const locale = new Intl.Locale(locales);
-  // @ts-ignore
+  // @ts-expect-error
   const weekInfo = locale.weekInfo ?? locale.getWeekInfo?.();
   return (weekInfo?.firstDay ?? 0) % 7; // (in Intl, sunday is 7 not 0, so we need to mod 7)
 }

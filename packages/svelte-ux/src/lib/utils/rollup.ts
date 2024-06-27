@@ -22,7 +22,5 @@ export default function <T = any>(
     }
   });
 
-  // TODO: Improve types
-  // @ts-ignore
   return rollup(data, reduce, ...keyFuncs);
 }
