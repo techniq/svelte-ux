@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.71.1
+
+### Patch Changes
+
+- [Switch] Add active state (stretch toggle) ([`17df8ad63c03fa6c51739d95f69e0d387f4c020b`](https://github.com/techniq/svelte-ux/commit/17df8ad63c03fa6c51739d95f69e0d387f4c020b))
+
+- [MenuOption] Allow additional properties to be added (without Typescript complaining) ([`23e44f66a97927f19a115aacfc900227638f91a4`](https://github.com/techniq/svelte-ux/commit/23e44f66a97927f19a115aacfc900227638f91a4))
+
 ## 0.71.0
 
 ### Minor Changes
