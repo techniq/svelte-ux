@@ -15,10 +15,10 @@
 
   const settingsClasses = getComponentClasses('Form');
 
-  const [state, draft, errors] = formStore(initial, { schema });
+  const [_state, draft, errors] = formStore(initial, { schema });
   $: current = draft.current;
 
-  $: dispatch('change', $state);
+  $: dispatch('change', $_state);
 </script>
 
 <form
@@ -32,7 +32,7 @@
   {...$$restProps}
 >
   <slot
-    state={$state}
+    state={$_state}
     draft={$draft}
     errors={$errors}
     commit={draft.commit}
