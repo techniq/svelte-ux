@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.71.2
+
+### Patch Changes
+
+- Fix new Svelte 5 specific warning "Self-closing HTML tags for non-void elements are ambiguous" ([`58f3cf2d63b10dfeff607f16785d80fc284cb2c5`](https://github.com/techniq/svelte-ux/commit/58f3cf2d63b10dfeff607f16785d80fc284cb2c5))
+
+- [Button] Add `touch-action: manipulation` to disable double-tap ([`a85c73e1007f2c5be616feb9dfc79ff5fd028edb`](https://github.com/techniq/svelte-ux/commit/a85c73e1007f2c5be616feb9dfc79ff5fd028edb))
+
 ## 0.71.1
 
 ### Patch Changes
