@@ -56,6 +56,19 @@
     // no-op by default
   };
 
+  async function applyChange() {
+    applying = true;
+    const changeContext = {
+      value: $selection.selected,
+      selection: $selection,
+      indeterminate: $indeterminateStore,
+      original: { selected: selectedOptions, unselected: unselectedOptions },
+    };
+    await onApply(changeContext);
+    applying = false;
+    onChange();
+  }
+
   const dispatch = createEventDispatcher<{
     change: {
       value: typeof value;
@@ -251,16 +264,12 @@
 <div
   class={cls(
     'actions',
-    'grid grid-cols-[auto,1fr,auto] border-t border-surface-content/10 pt-2',
+    'flex items-center justify-end border-t border-surface-content/10 pt-2',
     settingsClasses.actions,
     classes.actions
   )}
 >
-  <slot name="actions" selection={$selection} {searchText}>
-    <div></div>
-  </slot>
-
-  <div></div>
+  <slot name="actions" selection={$selection} {searchText} />
 
   <div>
     <Button
@@ -281,18 +290,7 @@
       class="px-6"
       loading={applying}
       disabled={!$isSelectionDirty || applying}
-      on:click={async () => {
-        applying = true;
-        const changeContext = {
-          value: $selection.selected,
-          selection: $selection,
-          indeterminate: $indeterminateStore,
-          original: { selected: selectedOptions, unselected: unselectedOptions },
-        };
-        await onApply(changeContext);
-        applying = false;
-        onChange();
-      }}
+      on:click={() => applyChange()}
       {...applyButtonProps}
     >
       Apply
