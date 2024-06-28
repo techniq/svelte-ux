@@ -1,19 +1,18 @@
 <script lang="ts">
-  import { slide } from 'svelte/transition';
   import { mdiDotsVertical, mdiPlus } from '@mdi/js';
 
   import { Button, Drawer, Form, MultiSelect, MultiSelectOption, ToggleButton } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const options = [
-    { name: 'One', value: 1 },
-    { name: 'Two', value: 2 },
-    { name: 'Three', value: 3 },
-    { name: 'Four', value: 4 },
+    { label: 'One', value: 1 },
+    { label: 'Two', value: 2 },
+    { label: 'Three', value: 3 },
+    { label: 'Four', value: 4 },
   ];
 
   const manyOptions = Array.from({ length: 100 }).map((_, i) => ({
-    name: `${i + 1}`,
+    label: `${i + 1}`,
     value: i + 1,
   }));
 
