@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.71.3
+
+### Patch Changes
+
+- [MultiSelect] Add `mode` prop and support `immediate` to hide action buttons and immediate apply on selection change (`mode` defaults to existing `actions`) ([`346f2c177ee43fa22e1605a8741f5b2a7237c60d`](https://github.com/techniq/svelte-ux/commit/346f2c177ee43fa22e1605a8741f5b2a7237c60d))
+
+- [MultiSelect] Add `maintainOrder` prop to not separate selected above unselected ([`8e7d8aec2e14d0ec141df3c1cbd0edb166127370`](https://github.com/techniq/svelte-ux/commit/8e7d8aec2e14d0ec141df3c1cbd0edb166127370))
+
+- [Form] Rename `state` store variable from `formStore()` to not be considered a Svelte 5 $state rune ([`4337314de3ac6267fd37a91961defe96eb27522d`](https://github.com/techniq/svelte-ux/commit/4337314de3ac6267fd37a91961defe96eb27522d))
+
+- [MultiSelect] Simplify actions layout and justify end by default for extra actions (slot) ([`88e9626c9d725c692686ceb8d7c3c01b40b05508`](https://github.com/techniq/svelte-ux/commit/88e9626c9d725c692686ceb8d7c3c01b40b05508))
+
 ## 0.71.2
 
 ### Patch Changes
