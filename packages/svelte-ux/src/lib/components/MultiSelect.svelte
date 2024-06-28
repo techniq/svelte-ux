@@ -31,6 +31,9 @@
   /** Maximum number of options that can be selected  */
   export let max: number | undefined = undefined;
 
+  /** When enabled, will not separate selected from unselected options */
+  export let maintainOrder = false;
+
   export let labelProp = 'name';
   export let valueProp = 'value';
 
@@ -80,6 +83,7 @@
       return true;
     }
   }
+  $: filteredOptions = options.filter((x) => applyFilter(x, searchText));
   $: filteredSelectedOptions = selectedOptions.filter((x) => applyFilter(x, searchText));
   $: filteredUnselectedOptions = unselectedOptions.filter((x) => applyFilter(x, searchText));
 
@@ -144,8 +148,12 @@
 >
   <slot name="beforeOptions" selection={$selection} />
 
-  <!-- initially selected options -->
-  <InfiniteScroll items={filteredSelectedOptions} disabled={!infiniteScroll} let:visibleItems>
+  <!-- all options or initially selected options based on `maintainOrder` -->
+  <InfiniteScroll
+    items={maintainOrder ? filteredOptions : filteredSelectedOptions}
+    disabled={!infiniteScroll}
+    let:visibleItems
+  >
     {#each visibleItems as option (get(option, valueProp))}
       {@const label = get(option, labelProp)}
       {@const value = get(option, valueProp)}
@@ -184,56 +192,58 @@
     {/each}
   </InfiniteScroll>
 
-  {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
-    <!-- separator between selected and deselected -->
-    <div class="border-b my-1 border-surface-content/10"></div>
-  {/if}
+  {#if !maintainOrder}
+    {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
+      <!-- separator between selected and deselected -->
+      <div class="border-b my-1 border-surface-content/10"></div>
+    {/if}
 
-  <!-- initially unselected options -->
-  <InfiniteScroll items={filteredUnselectedOptions} disabled={!infiniteScroll} let:visibleItems>
-    {#each visibleItems as option (get(option, valueProp))}
-      {@const label = get(option, labelProp)}
-      {@const value = get(option, valueProp)}
-      {@const checked = $selection.isSelected(value)}
-      {@const indeterminate = $indeterminateStore.has(value)}
-      {@const disabled = $selection.isDisabled(value)}
-      {@const onChange = () => {
-        // TODO: Try to figure out how to keep underling Checkbox controlled so state goes `indeterminate` => `checked` => `unchecked`
-        // If partial/indeterminate, transition to fully selected, then deselect/select as usual
-        // if ($indeterminateStore.has(value)) {
-        //   indeterminateStore.delete(value);
-        // } else {
-        //   $selection.toggleSelected(value);
-        // }
+    <!-- initially unselected options -->
+    <InfiniteScroll items={filteredUnselectedOptions} disabled={!infiniteScroll} let:visibleItems>
+      {#each visibleItems as option (get(option, valueProp))}
+        {@const label = get(option, labelProp)}
+        {@const value = get(option, valueProp)}
+        {@const checked = $selection.isSelected(value)}
+        {@const indeterminate = $indeterminateStore.has(value)}
+        {@const disabled = $selection.isDisabled(value)}
+        {@const onChange = () => {
+          // TODO: Try to figure out how to keep underling Checkbox controlled so state goes `indeterminate` => `checked` => `unchecked`
+          // If partial/indeterminate, transition to fully selected, then deselect/select as usual
+          // if ($indeterminateStore.has(value)) {
+          //   indeterminateStore.delete(value);
+          // } else {
+          //   $selection.toggleSelected(value);
+          // }
 
-        // Clear indeterminate status and toggle `unchecked` (and will proceed to toggle `checked` => `unchecked` => etc)
-        indeterminateStore.delete(value);
-        $selection.toggleSelected(value);
-      }}
-      <div animate:flip={{ duration }}>
-        <slot
-          name="option"
-          {option}
-          {label}
-          {value}
-          {checked}
-          {indeterminate}
-          {disabled}
-          {onChange}
-        >
-          <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
+          // Clear indeterminate status and toggle `unchecked` (and will proceed to toggle `checked` => `unchecked` => etc)
+          indeterminateStore.delete(value);
+          $selection.toggleSelected(value);
+        }}
+        <div animate:flip={{ duration }}>
+          <slot
+            name="option"
+            {option}
             {label}
-          </MultiSelectOption>
-        </slot>
-      </div>
-    {:else}
-      {#if !filteredSelectedOptions.length}
-        <div class="text-surface-content/50 text-xs py-2 px-4 mb-1">
-          There are no matching items.
+            {value}
+            {checked}
+            {indeterminate}
+            {disabled}
+            {onChange}
+          >
+            <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
+              {label}
+            </MultiSelectOption>
+          </slot>
         </div>
-      {/if}
-    {/each}
-  </InfiniteScroll>
+      {:else}
+        {#if !filteredSelectedOptions.length}
+          <div class="text-surface-content/50 text-xs py-2 px-4 mb-1">
+            There are no matching items.
+          </div>
+        {/if}
+      {/each}
+    </InfiniteScroll>
+  {/if}
 
   <slot name="afterOptions" selection={$selection} />
 </div>
