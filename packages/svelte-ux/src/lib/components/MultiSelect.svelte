@@ -34,6 +34,9 @@
   /** When enabled, will not separate selected from unselected options */
   export let maintainOrder = false;
 
+  /** Determine if changes should be applied immediately or via actions */
+  export let mode: 'actions' | 'immediate' = 'actions';
+
   export let labelProp = 'name';
   export let valueProp = 'value';
 
@@ -47,6 +50,16 @@
     actions?: string;
   } = {};
   const settingsClasses = getComponentClasses('MultiSelect');
+
+  const dispatch = createEventDispatcher<{
+    change: {
+      value: typeof value;
+      selection: typeof $selection;
+      indeterminate: typeof $indeterminateStore;
+      original: { selected: TOption[]; unselected: TOption[] };
+    };
+    cancel: null;
+  }>();
 
   export let onApply = async (ctx: {
     selection: typeof $selection;
@@ -69,15 +82,9 @@
     onChange();
   }
 
-  const dispatch = createEventDispatcher<{
-    change: {
-      value: typeof value;
-      selection: typeof $selection;
-      indeterminate: typeof $indeterminateStore;
-      original: { selected: TOption[]; unselected: TOption[] };
-    };
-    cancel: null;
-  }>();
+  $: if (mode === 'immediate' && $selection) {
+    applyChange();
+  }
 
   export let searchText = '';
   let applying = false;
@@ -264,36 +271,39 @@
 <div
   class={cls(
     'actions',
-    'flex items-center justify-end border-t border-surface-content/10 pt-2',
+    'flex items-center justify-end',
+    mode === 'actions' && 'border-t border-surface-content/10 pt-2',
     settingsClasses.actions,
     classes.actions
   )}
 >
   <slot name="actions" selection={$selection} {searchText} />
 
-  <div>
-    <Button
-      class="px-6"
-      disabled={applying}
-      on:click={() => {
-        $selection.reset();
-        dispatch('cancel');
-      }}
-      {...cancelButtonProps}
-    >
-      Cancel
-    </Button>
+  {#if mode === 'actions'}
+    <div>
+      <Button
+        class="px-6"
+        disabled={applying}
+        on:click={() => {
+          $selection.reset();
+          dispatch('cancel');
+        }}
+        {...cancelButtonProps}
+      >
+        Cancel
+      </Button>
 
-    <Button
-      variant="fill"
-      color="primary"
-      class="px-6"
-      loading={applying}
-      disabled={!$isSelectionDirty || applying}
-      on:click={() => applyChange()}
-      {...applyButtonProps}
-    >
-      Apply
-    </Button>
-  </div>
+      <Button
+        variant="fill"
+        color="primary"
+        class="px-6"
+        loading={applying}
+        disabled={!$isSelectionDirty || applying}
+        on:click={() => applyChange()}
+        {...applyButtonProps}
+      >
+        Apply
+      </Button>
+    </div>
+  {/if}
 </div>

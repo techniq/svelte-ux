@@ -43,6 +43,19 @@
   <MultiSelect {options} {value} maintainOrder on:change={(e) => (value = e.detail.value)} />
 </Preview>
 
+<h2>Immediate apply changes (no actions)</h2>
+
+<Preview>
+  {value.length} selected
+  <MultiSelect
+    {options}
+    {value}
+    maintainOrder
+    mode="immediate"
+    on:change={(e) => (value = e.detail.value)}
+  />
+</Preview>
+
 <h2>max selected</h2>
 
 <Preview>
