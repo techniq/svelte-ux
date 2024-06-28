@@ -233,7 +233,10 @@
 
       <QuickSearch
         options={quickSearchOptions}
-        on:change={(e) => goto(e.detail.value)}
+        on:change={(e) => {
+          // @ts-expect-error
+          goto(e.detail.value);
+        }}
         classes={{ button: 'max-sm:-mr-3' }}
       />
 
