@@ -1,8 +1,7 @@
-<script lang="ts" generics="TOption, TValue extends string | number">
+<script lang="ts" generics="TValue">
   import { getComponentSettings } from './settings.js';
 
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
-  import { get } from 'lodash-es';
   import type { Placement } from '@floating-ui/dom';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
@@ -18,16 +17,16 @@
 
   const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 
+  type MultiSelectMenuProps = ComponentProps<MultiSelectMenu<TValue>>;
+
   // MultiSelectMenu props
-  export let options: TOption[];
-  export let value: TValue[] = [];
+  export let options: MultiSelectMenuProps['options'];
+  export let value: MultiSelectMenuProps['value'];
   export let indeterminateSelected: typeof value = [];
   /** Maximum number of options that can be selected  */
   export let max: number | undefined = undefined;
   export let placement: Placement = 'bottom-start';
   export let infiniteScroll = false;
-  export let labelProp = 'name'; // TODO: Default to 'label'
-  export let valueProp = 'value';
 
   // TextField props
   export let label = '';
@@ -41,12 +40,13 @@
   export let rounded = false;
   export let dense = false;
 
-  export let formatSelected: (ctx: { value: any[]; options: TOption[] }) => string = ({ value }) =>
-    `${value.length} selected`;
+  export let formatSelected: (ctx: { value: typeof value; options: typeof options }) => string = ({
+    value,
+  }) => `${value?.length} selected`;
 
   export let classes: {
     root?: string;
-    multiSelectMenu?: ComponentProps<MultiSelectMenu<TOption, TValue>>['classes'];
+    multiSelectMenu?: MultiSelectMenuProps['classes'];
     field?: string;
     actions?: string;
   } = {};
@@ -57,9 +57,7 @@
   let inputEl: HTMLInputElement | undefined;
   let menuOptionsEl: HTMLDivElement | undefined;
 
-  export let menuProps:
-    | Omit<ComponentProps<MultiSelectMenu<TOption, TValue>>, 'options'>
-    | undefined = undefined;
+  export let menuProps: Omit<MultiSelectMenuProps, 'options'> | undefined = undefined;
 
   const logger = new Logger('MultiSelectField');
 
@@ -67,7 +65,7 @@
 
   let searchText = '';
   $: if (!open) {
-    const selectedOptions = options.filter((o) => value.includes(get(o, valueProp)));
+    const selectedOptions = options.filter((o) => value?.includes(o.value));
     searchText = formatSelected({ value, options: selectedOptions });
   }
 
@@ -119,8 +117,9 @@
     }
   }
 
-  function onSelectChange(e: ComponentEvents<MultiSelectMenu<TOption, TValue>>['change']) {
+  function onSelectChange(e: ComponentEvents<MultiSelectMenu<TValue>>['change']) {
     logger.info('onSelectChange', e);
+    // @ts-expect-error
     value = e.detail.selection.selected;
     // TODO: Also dispatch `indeterminate: e.detail.indeterminate`?
     dispatch('change', { value });
@@ -169,7 +168,7 @@
         </span>
         <!-- {:else if readonly} -->
         <!-- Do not show chevron or clear buttons -->
-      {:else if value.length && clearable}
+      {:else if value?.length && clearable}
         <Button
           icon={mdiClose}
           class="text-surface-content/50 p-1"
@@ -204,8 +203,6 @@
     {max}
     {placement}
     {infiniteScroll}
-    {labelProp}
-    {valueProp}
     {searchText}
     classes={{ ...settingsClasses.multiSelectMenu, ...classes.multiSelectMenu }}
     matchWidth

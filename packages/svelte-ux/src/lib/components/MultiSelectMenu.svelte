@@ -1,4 +1,4 @@
-<script lang="ts" generics="TOption, TValue extends string | number">
+<script lang="ts" generics="TValue">
   import type { ComponentProps } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
@@ -9,8 +9,10 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let options: TOption[];
-  export let value: TValue[] = [];
+  type MultiSelectProps = ComponentProps<MultiSelect<TValue>>;
+
+  export let options: MultiSelectProps['options'];
+  export let value: MultiSelectProps['value'];
   export let indeterminateSelected: typeof value = [];
   export let open = false;
   export let duration = 200;
@@ -24,13 +26,10 @@
   /** Maximum number of options that can be selected  */
   export let max: number | undefined = undefined;
 
-  export let labelProp = 'name';
-  export let valueProp = 'value';
-
   export let classes: {
     root?: string;
     menu?: string;
-    multiSelect?: ComponentProps<MultiSelect<TOption, TValue>>['classes'];
+    multiSelect?: MultiSelectProps['classes'];
   } = {};
   const settingsClasses = getComponentClasses('MultiSelectMenu');
 
@@ -62,8 +61,6 @@
     {autoFocusSearch}
     {placeholder}
     {infiniteScroll}
-    {labelProp}
-    {valueProp}
     {searchText}
     classes={{
       search: 'p-2',

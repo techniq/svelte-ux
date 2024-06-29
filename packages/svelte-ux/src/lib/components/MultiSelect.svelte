@@ -1,4 +1,4 @@
-<script lang="ts" generics="TOption, TValue extends string | number">
+<script lang="ts" generics="TValue">
   import { getComponentClasses } from './theme.js';
 
   import { type ComponentProps, createEventDispatcher } from 'svelte';
@@ -12,12 +12,13 @@
   import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
 
+  import type { MenuOption } from '../types/index.js';
   import dirtyStore from '../stores/dirtyStore.js';
   import selectionStore from '../stores/selectionStore.js';
   import uniqueStore from '../stores/uniqueStore.js';
   import { cls } from '../utils/styles.js';
 
-  export let options: TOption[];
+  export let options: MenuOption<TValue>[];
   export let value: TValue[] = [];
   export let indeterminateSelected: typeof value = [];
   export let duration = 200;
@@ -37,9 +38,6 @@
   /** Determine if changes should be applied immediately or via actions */
   export let mode: 'actions' | 'immediate' = 'actions';
 
-  export let labelProp = 'name';
-  export let valueProp = 'value';
-
   export let cancelButtonProps: ComponentProps<Button> | undefined = undefined;
   export let applyButtonProps: ComponentProps<Button> | undefined = undefined;
 
@@ -56,7 +54,7 @@
       value: typeof value;
       selection: typeof $selection;
       indeterminate: typeof $indeterminateStore;
-      original: { selected: TOption[]; unselected: TOption[] };
+      original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
     };
     cancel: null;
   }>();
@@ -64,7 +62,7 @@
   export let onApply = async (ctx: {
     selection: typeof $selection;
     indeterminate: typeof $indeterminateStore;
-    original: { selected: TOption[]; unselected: TOption[] };
+    original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
   }) => {
     // no-op by default
   };
@@ -90,14 +88,12 @@
   let applying = false;
 
   // Partition options based on if they initially selected, which will be displayed at the top
-  $: [selectedOptions, unselectedOptions] = partition(options, (x) =>
-    value.includes(get(x, valueProp))
-  );
+  $: [selectedOptions, unselectedOptions] = partition(options, (x) => value.includes(x.value));
 
   // Filter by search text
-  function applyFilter(option: TOption, searchText: string) {
+  function applyFilter(option: MenuOption<TValue>, searchText: string) {
     if (searchText) {
-      return get(option, labelProp).toLowerCase().includes(searchText.toLowerCase());
+      return option.label.toLowerCase().includes(searchText.toLowerCase());
     } else {
       // show all if no search set
       return true;
@@ -108,7 +104,7 @@
   $: filteredUnselectedOptions = unselectedOptions.filter((x) => applyFilter(x, searchText));
 
   $: selection = selectionStore({
-    initial: selectedOptions.map((x) => get(x, valueProp)),
+    initial: selectedOptions.map((x) => x.value),
     max,
   });
 
@@ -174,9 +170,9 @@
     disabled={!infiniteScroll}
     let:visibleItems
   >
-    {#each visibleItems as option (get(option, valueProp))}
-      {@const label = get(option, labelProp)}
-      {@const value = get(option, valueProp)}
+    {#each visibleItems as option (option.value)}
+      {@const label = option.label}
+      {@const value = option.value}
       {@const checked = $selection.isSelected(value)}
       {@const indeterminate = $indeterminateStore.has(value)}
       {@const disabled = $selection.isDisabled(value)}
@@ -220,9 +216,9 @@
 
     <!-- initially unselected options -->
     <InfiniteScroll items={filteredUnselectedOptions} disabled={!infiniteScroll} let:visibleItems>
-      {#each visibleItems as option (get(option, valueProp))}
-        {@const label = get(option, labelProp)}
-        {@const value = get(option, valueProp)}
+      {#each visibleItems as option (option.value)}
+        {@const label = option.label}
+        {@const value = option.value}
         {@const checked = $selection.isSelected(value)}
         {@const indeterminate = $indeterminateStore.has(value)}
         {@const disabled = $selection.isDisabled(value)}

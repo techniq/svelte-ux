@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="TValue">
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
@@ -20,16 +20,14 @@
   import type { ScrollIntoViewOptions } from '../actions/scroll.js';
 
   const dispatch = createEventDispatcher<{
-    change: { value: any; option: MenuOption | null };
+    change: { value: typeof value; option: typeof selected };
     inputChange: string;
   }>();
   const { classes: settingsClasses, defaults } = getComponentSettings('SelectField');
 
   const logger = new Logger('SelectField');
 
-  export let options: MenuOption[] = [];
-  export let optionText = (option: any) => (option?.label as string) ?? '';
-  export let optionValue = (option: any) => option?.value ?? null;
+  export let options: MenuOption<TValue>[] = [];
 
   export let name = '';
   export let label = '';
@@ -89,12 +87,16 @@
   let searchText = '';
   $: logger.debug({ searchText });
 
-  export let value: any = undefined;
-  let prevValue: any = undefined;
-  export let selected: any = undefined;
-  let prevSelected: any = undefined;
+  export let value: TValue | null | undefined = undefined;
+  let prevValue: TValue | null | undefined = undefined;
+  export let selected: MenuOption<TValue> | null | undefined = undefined;
+  let prevSelected: MenuOption<TValue> | null | undefined = undefined;
 
-  function updateSelected(selected: any, value: any, options: any) {
+  function updateSelected(
+    selected: MenuOption<TValue> | null | undefined,
+    value: TValue | null | undefined,
+    options: MenuOption<TValue>[]
+  ) {
     logger.debug('updateSelected', {
       value,
       prevValue,
@@ -107,7 +109,7 @@
     if (loading === true) {
       // wait to apply any changes (initially could be loading selected option)
     } else {
-      if (selected !== undefined && optionValue(selected) !== optionValue(prevSelected)) {
+      if (selected !== undefined && selected?.value !== prevSelected?.value) {
         logger.info('selected changed', {
           value,
           prevValue,
@@ -117,7 +119,7 @@
         });
 
         // Capture for next change
-        prevValue = optionValue(selected);
+        prevValue = selected?.value;
         prevSelected = selectOption(selected);
       } else if (/*value !== undefined &&*/ value !== prevValue) {
         // Removed `value !== undefined` to clear searchText when value is set to undefined.  Might be a breaking change
@@ -153,8 +155,7 @@
     } else {
       const words = text?.toLowerCase().split(' ') ?? [];
       filteredOptions = options.filter((option) => {
-        const _optionText = optionText(option).toLowerCase();
-        return words.every((word) => _optionText.includes(word));
+        return words.every((word) => option.label.toLowerCase().includes(word));
       });
     }
   };
@@ -171,7 +172,7 @@
   $: if (open === false) {
     // Restore text if cleared but selection remains
     if (selected) {
-      searchText = optionText(selected);
+      searchText = selected.label;
     }
   }
 
@@ -182,7 +183,7 @@
     // Do not search if menu is not open / closing on selection
     search(searchText).then(() => {
       // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
-      const selectedIndex = filteredOptions.findIndex((o) => optionValue(o) === value);
+      const selectedIndex = filteredOptions.findIndex((o) => o.value === value);
       if (highlightIndex === -1) {
         // Highlight selected if none currently
         highlightIndex = selectedIndex === -1 ? 0 : selectedIndex;
@@ -330,24 +331,24 @@
   /**
    * Select option by value
    */
-  function selectValue(value: any) {
+  function selectValue(value: TValue | null | undefined) {
     logger.debug('selectValue', { value, options, filteredOptions });
 
-    const option = options?.find((option) => optionValue(option) === value) ?? null;
+    const option = options?.find((option) => option.value === value) ?? null;
     return selectOption(option);
   }
 
   /**
    * Select option by object
    */
-  function selectOption(option: MenuOption | null) {
+  function selectOption(option: MenuOption<TValue> | null) {
     logger.info('selectOption', { option });
 
     const previousValue = value;
 
-    value = optionValue(option);
+    value = option?.value;
     selected = option;
-    searchText = optionText(option);
+    searchText = option?.label ?? '';
 
     if (activeOptionIcon) {
       if (!selected?.icon) {
@@ -527,7 +528,6 @@
             ...classes,
             root: cls(classes.options, inlineOptions ? 'border-t mt-1 px-1' : ''),
           }}
-          {optionValue}
           {selectIndex}
           {onKeyPress}
           {onKeyDown}
@@ -552,7 +552,7 @@
                 aria-selected={option === selected ? 'true' : 'false'}
                 aria-disabled={option?.disabled ? 'true' : 'false'}
               >
-                {optionText(option)}
+                {option.label}
               </MenuItem>
             </slot>
           </svelte:fragment>
@@ -585,7 +585,6 @@
           ...classes,
           root: cls(classes.options, inlineOptions ? 'border-t mt-1 px-1' : ''),
         }}
-        {optionValue}
         {selectIndex}
         {onKeyPress}
         {onKeyDown}
@@ -610,7 +609,7 @@
               aria-selected={option === selected ? 'true' : 'false'}
               aria-disabled={option?.disabled ? 'true' : 'false'}
             >
-              {optionText(option)}
+              {option.label}
             </MenuItem>
           </slot>
         </svelte:fragment>

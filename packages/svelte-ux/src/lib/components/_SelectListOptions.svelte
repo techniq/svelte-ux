@@ -5,7 +5,6 @@
 
   const logger = new Logger('SelectListOptions');
 
-  export let optionValue: (option: any) => any;
   export let selectIndex: (index: number) => any;
   export let onKeyDown: (x: KeyboardEvent) => void;
   export let onKeyPress: (x: KeyboardEvent) => void;
@@ -69,7 +68,7 @@
     onKeyPress(e);
   }}
 >
-  {#each filteredOptions ?? [] as option, index (`${option.group}-${optionValue(option)}`)}
+  {#each filteredOptions ?? [] as option, index (`${option.group}-${option.value}`)}
     {@const previousOption = filteredOptions[index - 1]}
     {#if option.group && option.group !== previousOption?.group}
       <div

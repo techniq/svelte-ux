@@ -11,7 +11,7 @@
   import { autoFocus, selectOnFocus } from '../actions/input.js';
   import type { MenuOption } from '../types/index.js';
 
-  export let options: MenuOption[] = [];
+  export let options: MenuOption<string>[] = [];
 
   export let classes: {
     root?: string;
