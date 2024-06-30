@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.72.0
+
+### Minor Changes
+
+- [MultiSelect | MultiSelectField | MultiSelectMenu] Remove `labelProp` and `valueProp` props and expect common `label` and `value` props. Improve type safety ([#415](https://github.com/techniq/svelte-ux/pull/415))
+
+- [SelectField] Remove `optionText()` and `optionValue()` props and expect common `label` and `value` props. Improve type safety ([#415](https://github.com/techniq/svelte-ux/pull/415))
+
+### Patch Changes
+
+- [TableOfContents] Add `nodeClick` event ([`bd1c0f78550534ed947ccf56a2af7fb620cfadf1`](https://github.com/techniq/svelte-ux/commit/bd1c0f78550534ed947ccf56a2af7fb620cfadf1))
+
 ## 0.71.3
 
 ### Patch Changes
