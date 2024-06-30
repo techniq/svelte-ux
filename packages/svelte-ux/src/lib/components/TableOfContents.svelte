@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { createEventDispatcher, onDestroy, onMount } from 'svelte';
   import { mdiCircleSmall } from '@mdi/js';
 
   import { buildTree, type TreeNode } from '../utils/array.js';
@@ -17,6 +17,10 @@
   export { className as class };
 
   type HeadingNode = { id: string; name: string; level: number; element: HTMLElement };
+
+  const dispatch = createEventDispatcher<{
+    nodeClick: (typeof nodes)[number];
+  }>();
 
   let activeHeadingId = '';
   let headings: HeadingNode[] = [];
@@ -36,7 +40,7 @@
     const selector = Array.from({ length: maxDepth }, (_, i) => 'h' + ++i).join(','); // h1,h2,...
     headings = Array.from(el?.querySelectorAll<HTMLElement>(selector) ?? [], (el) => {
       if (!el.hasAttribute('id')) {
-        el.setAttribute('id', el.innerHTML.toLowerCase().replaceAll(' ', '-'));
+        el.setAttribute('id', el.innerText.toLowerCase().replace(/\s+/g, '_'));
       }
 
       return {
@@ -73,6 +77,7 @@
         node.level === 1 ? 'font-semibold' : 'text-sm',
         node.id && node.id === activeHeadingId && 'bg-surface-content/5'
       )}
+      on:click={() => dispatch('nodeClick', node)}
     >
       {#if node.level > 1}
         <Icon data={icon} class="-mx-1 text-surface-content/30" />
