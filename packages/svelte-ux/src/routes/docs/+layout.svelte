@@ -56,6 +56,13 @@
 
   onMount(() => {
     showTableOfContents = !hideTableOfContents && $xlScreen;
+
+    // Assign an `id` to every header element
+    const headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    headers.forEach((header) => {
+      const id = header.innerHTML.toLowerCase().replace(/\s+/g, '_'); // Lowercase and convert spaces to underscores
+      header.setAttribute('id', id);
+    });
   });
 
   function getRelated(r: string) {
