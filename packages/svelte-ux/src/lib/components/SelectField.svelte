@@ -6,7 +6,7 @@
 
   import { Logger } from '../utils/logger.js';
   import { autoFocus, selectOnFocus } from '../actions/input.js';
-  import { cls } from '../utils/styles.js';
+  import { cls, clsMerge, normalizeClasses } from '../utils/styles.js';
 
   import Button from './Button.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
@@ -427,12 +427,16 @@
     on:keydown={onKeyDown}
     on:keypress={onKeyPress}
     actions={fieldActions}
-    classes={{
-      container: inlineOptions
-        ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none'
-        : undefined,
-    }}
-    class={cls('h-full', settingsClasses.field, fieldClasses)}
+    classes={clsMerge(
+      normalizeClasses(settingsClasses.field),
+      {
+        root: 'h-full',
+        container: inlineOptions
+          ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none'
+          : undefined,
+      },
+      normalizeClasses(classes.field)
+    )}
     role="combobox"
     aria-expanded={open ? 'true' : 'false'}
     aria-autocomplete={!inlineOptions ? 'list' : undefined}
