@@ -155,8 +155,8 @@
     on:focus={onFocus}
     on:change={onSearchChange}
     classes={clsMerge(
-      normalizeClasses(settingsClasses.field),
       { root: 'h-full' },
+      normalizeClasses(settingsClasses.field),
       normalizeClasses(classes.field)
     )}
     {...restProps}
