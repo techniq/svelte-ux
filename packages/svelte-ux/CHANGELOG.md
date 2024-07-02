@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.72.1
+
+### Patch Changes
+
+- adds a function `normalizeClasses` to normalize classes when they can be a string or an object, essentially converting strings to objects ([#419](https://github.com/techniq/svelte-ux/pull/419))
+
+- adds a function `clsMerge` for merging groups of classes without needing to do more complex property-by-property merging ([#419](https://github.com/techniq/svelte-ux/pull/419))
+
+- passes the `classes` objects down to the `TextField` component from the `Select` and `MultiSelect` components ([#419](https://github.com/techniq/svelte-ux/pull/419))
+
+- fixes a TypeError caused by a faulty ReturnType from `entries()` and removes a related `@ts-expect-error` ([#419](https://github.com/techniq/svelte-ux/pull/419))
+
 ## 0.72.0
 
 ### Minor Changes
