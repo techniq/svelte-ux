@@ -428,13 +428,13 @@
     on:keypress={onKeyPress}
     actions={fieldActions}
     classes={clsMerge(
-      normalizeClasses(settingsClasses.field),
       {
         root: 'h-full',
         container: inlineOptions
           ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none'
           : undefined,
       },
+      normalizeClasses(settingsClasses.field),
       normalizeClasses(classes.field)
     )}
     role="combobox"
