@@ -11,7 +11,7 @@
   import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
 
-  import { cls } from '../utils/styles.js';
+  import { cls, clsMerge, normalizeClasses } from '../utils/styles.js';
   import { Logger } from '../utils/logger.js';
   import ProgressCircle from './ProgressCircle.svelte';
 
@@ -47,7 +47,7 @@
   export let classes: {
     root?: string;
     multiSelectMenu?: MultiSelectMenuProps['classes'];
-    field?: string;
+    field?: string | ComponentProps<TextField>['classes'];
     actions?: string;
   } = {};
 
@@ -154,7 +154,11 @@
     bind:inputEl
     on:focus={onFocus}
     on:change={onSearchChange}
-    class={cls('h-full', settingsClasses.field, classes.field)}
+    classes={clsMerge(
+      normalizeClasses(settingsClasses.field),
+      { root: 'h-full' },
+      normalizeClasses(classes.field),
+    )}
     {...restProps}
   >
     <slot slot="prepend" name="prepend" />
