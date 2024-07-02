@@ -157,7 +157,7 @@
     classes={clsMerge(
       normalizeClasses(settingsClasses.field),
       { root: 'h-full' },
-      normalizeClasses(classes.field),
+      normalizeClasses(classes.field)
     )}
     {...restProps}
   >

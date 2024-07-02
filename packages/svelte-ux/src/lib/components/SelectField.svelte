@@ -435,7 +435,7 @@
           ? 'border-none shadow-none hover:shadow-none group-focus-within:shadow-none'
           : undefined,
       },
-      normalizeClasses(classes.field),
+      normalizeClasses(classes.field)
     )}
     role="combobox"
     aria-expanded={open ? 'true' : 'false'}

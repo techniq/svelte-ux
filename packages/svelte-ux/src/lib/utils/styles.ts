@@ -42,19 +42,15 @@ const twMerge = extendTailwindMerge({
 
 type ClassFalsyValues = undefined | null | false;
 type AnyClassValue = ClassValue | ClassFalsyValues;
-type AnyClassCollection =
-  | Record<string | number | symbol, AnyClassValue>
-  | ClassFalsyValues;
+type AnyClassCollection = Record<string | number | symbol, AnyClassValue> | ClassFalsyValues;
 
 export const cls = (...inputs: AnyClassValue[]) => twMerge(clsx(...inputs));
 
 export const clsMerge = <T extends AnyClassCollection>(
   ...inputs: T[]
 ): Exclude<T, false | undefined> =>
-  mergeWith({}, ...inputs.filter(Boolean), (a: string, b: string) =>
-    twMerge(a, b)
-  );
+  mergeWith({}, ...inputs.filter(Boolean), (a: string, b: string) => twMerge(a, b));
 
 export const normalizeClasses = <T extends object>(classes: string | ClassFalsyValues | T): T => {
-  return classes && typeof classes === 'object' ? classes : { root: classes } as T;
-}
+  return classes && typeof classes === 'object' ? classes : ({ root: classes } as T);
+};
