@@ -188,7 +188,7 @@ export function nestedFindByPredicate(
   return undefined;
 }
 
-export type TreeNode = { id: string; name: string; level: number; children: Node[] };
+export type TreeNode = { id: string; name: string; level: number; children: TreeNode[] };
 
 /**
  * Given a flat array of objects with a `level` property, build a nested object with `children`
