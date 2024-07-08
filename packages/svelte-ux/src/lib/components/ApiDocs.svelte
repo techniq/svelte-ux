@@ -29,7 +29,7 @@
       Props
     </h2>
     <div>
-      {#each api.props as prop}
+      {#each api.props ?? [] as prop}
         <ListItem
           list="type"
           icon={mdiCodeBraces}
@@ -113,7 +113,7 @@
       Slots
     </h2>
     <div>
-      {#each api.slots as slot}
+      {#each api.slots ?? [] as slot}
         <ListItem
           list="type"
           icon={mdiGoogleCirclesGroup}
@@ -156,7 +156,7 @@
       Events
     </h2>
     <div>
-      {#each api.events as event}
+      {#each api.events ?? [] as event}
         <ListItem
           list="type"
           icon={mdiBullhorn}
@@ -193,7 +193,7 @@
       Module Exports
     </h2>
     <div>
-      {#each api.moduleExports as prop}
+      {#each api.moduleExports ?? [] as prop}
         <ListItem
           list="type"
           icon={mdiCodeBraces}
