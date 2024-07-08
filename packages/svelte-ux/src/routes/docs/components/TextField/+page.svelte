@@ -39,6 +39,7 @@
 
   let value = '';
   let numberValue = 1;
+  let multilineValue = 'one\ntwo\nthree';
 </script>
 
 <h1>Examples</h1>
@@ -415,11 +416,18 @@
   <TextField
     label="Comment"
     multiline
+    bind:value={multilineValue}
     actions={(node) => {
       // @ts-expect-error
       return [autoHeight(node)];
     }}
   />
+</Preview>
+
+<h2>Multiline with fixed height</h2>
+
+<Preview>
+  <TextField label="Comment" multiline classes={{ input: 'h-[100px]' }} />
 </Preview>
 
 <SectionDivider>Mask & Accept</SectionDivider>
