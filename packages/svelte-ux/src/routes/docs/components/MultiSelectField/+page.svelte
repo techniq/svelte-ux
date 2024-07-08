@@ -85,7 +85,7 @@
   <MultiSelectField
     {options}
     {value}
-    formatSelected={({ options }) => options.map((o) => o.name).join(', ') || 'None'}
+    formatSelected={({ options }) => options.map((o) => o.label).join(', ') || 'None'}
     on:change={(e) => (value = e.detail.value)}
   />
 </Preview>
