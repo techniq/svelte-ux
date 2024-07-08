@@ -1,6 +1,6 @@
-import { derived, get, type Stores } from 'svelte/store';
+import { derived, get, type Readable } from 'svelte/store';
 
-function debounceStore<T extends Stores>(original: T, timeout = 300) {
+function debounceStore<T extends Readable<any>>(original: T, timeout = 300) {
   return derived(
     original,
     ($original, set) => {
@@ -10,7 +10,6 @@ function debounceStore<T extends Stores>(original: T, timeout = 300) {
         clearTimeout(timer);
       };
     },
-    // @ts-expect-error
     get(original)
   );
 }
