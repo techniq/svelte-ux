@@ -68,7 +68,7 @@
     onKeyPress(e);
   }}
 >
-  {#each filteredOptions ?? [] as option, index (`${option.group}-${option.value}`)}
+  {#each filteredOptions ?? [] as option, index (JSON.stringify(option))}
     {@const previousOption = filteredOptions[index - 1]}
     {#if option.group && option.group !== previousOption?.group}
       <div
