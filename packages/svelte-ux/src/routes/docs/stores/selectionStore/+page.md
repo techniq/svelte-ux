@@ -54,7 +54,7 @@ const selection = selectionStore();
 <h2>Initial selection</h2>
 
 ```js
-const selection2 = selectionStore({ initial: [1, 2, 3] });
+const selection2 = selectionStore({ initial: [3, 4, 5] });
 ```
 
 <Preview>
