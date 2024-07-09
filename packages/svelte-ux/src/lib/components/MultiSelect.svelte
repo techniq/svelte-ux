@@ -268,7 +268,7 @@
   class={cls(
     'actions',
     'flex items-center justify-end',
-    mode === 'actions' && 'border-t border-surface-content/10 pt-2',
+    '[&:not(:has(>:first-child))]:hidden border-t border-surface-content/10 pt-2',
     settingsClasses.actions,
     classes.actions
   )}

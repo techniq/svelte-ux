@@ -22,6 +22,8 @@
   // MultiSelectMenu props
   export let options: MultiSelectMenuProps['options'];
   export let value: MultiSelectMenuProps['value'];
+  export let mode: MultiSelectMenuProps['mode'] | undefined = undefined;
+  export let maintainOrder: MultiSelectMenuProps['maintainOrder'] | undefined = undefined;
   export let indeterminateSelected: typeof value = [];
   /** Maximum number of options that can be selected  */
   export let max: number | undefined = undefined;
@@ -203,6 +205,8 @@
   <MultiSelectMenu
     {options}
     {value}
+    {mode}
+    {maintainOrder}
     {indeterminateSelected}
     {max}
     {placement}
@@ -237,8 +241,6 @@
       </slot>
     </svelte:fragment>
 
-    <slot name="actions" slot="actions" let:selection {selection}>
-      <div></div>
-    </slot>
+    <slot name="actions" slot="actions" let:selection {selection} />
   </MultiSelectMenu>
 </div>

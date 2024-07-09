@@ -42,7 +42,7 @@
   <MultiSelect {options} {value} maintainOrder on:change={(e) => (value = e.detail.value)} />
 </Preview>
 
-<h2>Immediate apply changes (no actions)</h2>
+<h2>Immediately apply changes (no actions)</h2>
 
 <Preview>
   {value.length} selected

@@ -13,6 +13,8 @@
 
   export let options: MultiSelectProps['options'];
   export let value: MultiSelectProps['value'];
+  export let mode: MultiSelectProps['mode'] | undefined = undefined;
+  export let maintainOrder: MultiSelectProps['maintainOrder'] | undefined = undefined;
   export let indeterminateSelected: typeof value = [];
   export let open = false;
   export let duration = 200;
@@ -53,6 +55,8 @@
   <MultiSelect
     {options}
     {value}
+    {mode}
+    {maintainOrder}
     {indeterminateSelected}
     {max}
     {open}
@@ -69,9 +73,9 @@
       ...settingsClasses.multiSelect,
       ...classes.multiSelect,
     }}
-    on:cancel={() => close()}
+    on:cancel={() => mode !== 'immediate' && close()}
     on:cancel
-    on:change={() => close()}
+    on:change={() => mode !== 'immediate' && close()}
     on:change
   >
     <slot name="beforeOptions" slot="beforeOptions" let:selection {selection} />
@@ -95,8 +99,6 @@
       </slot>
     </svelte:fragment>
 
-    <slot name="actions" slot="actions" let:selection {selection}>
-      <div></div>
-    </slot>
+    <slot name="actions" slot="actions" let:selection {selection} />
   </MultiSelect>
 </Menu>

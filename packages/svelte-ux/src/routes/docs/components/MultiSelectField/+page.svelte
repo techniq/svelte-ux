@@ -79,6 +79,34 @@
   />
 </Preview>
 
+<h2>Immediately apply changes (no actions)</h2>
+
+<Preview>
+  <MultiSelectField
+    {options}
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+    mode="immediate"
+    maintainOrder
+  />
+</Preview>
+
+<h2>Immediately apply changes (with custom action)</h2>
+
+<Preview>
+  <MultiSelectField
+    {options}
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+    mode="immediate"
+    maintainOrder
+  >
+    <div slot="actions">
+      <Button color="primary" icon={mdiPlus}>Add item</Button>
+    </div>
+  </MultiSelectField>
+</Preview>
+
 <h2>formatSelected</h2>
 
 <Preview>

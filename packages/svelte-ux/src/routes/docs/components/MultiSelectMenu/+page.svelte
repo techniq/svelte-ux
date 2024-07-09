@@ -129,6 +129,52 @@
   </span>
 </Preview>
 
+<h2>Immediately apply changes (no actions)</h2>
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        {options}
+        {value}
+        mode="immediate"
+        maintainOrder
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+      />
+    </ToggleButton>
+  </span>
+</Preview>
+
+<h2>Immediately apply changes (with custom action)</h2>
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        {options}
+        {value}
+        mode="immediate"
+        maintainOrder
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+      >
+        <div slot="actions">
+          <Button color="primary" icon={mdiPlus}>Add item</Button>
+        </div>
+      </MultiSelectMenu>
+    </ToggleButton>
+  </span>
+</Preview>
+
 <h2>actions slot</h2>
 
 <Preview>
