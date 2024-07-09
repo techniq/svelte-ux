@@ -1,12 +1,12 @@
 import type { Action } from 'svelte/action';
 
-export const resize: Action<Element> = (node) => {
+export const resize: Action<Element, ResizeObserverOptions | undefined> = (node, options) => {
   let observer = new ResizeObserver((entries, observer) => {
     entries.forEach((entry) => {
       node.dispatchEvent(new CustomEvent('resize', { detail: entry }));
     });
   });
-  observer.observe(node);
+  observer.observe(node, options);
 
   return {
     destroy() {
