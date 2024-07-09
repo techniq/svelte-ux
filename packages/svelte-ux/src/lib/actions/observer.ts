@@ -1,6 +1,6 @@
 import type { Action } from 'svelte/action';
 
-export const resize: Action<HTMLElement> = (node) => {
+export const resize: Action<Element> = (node) => {
   let observer = new ResizeObserver((entries, observer) => {
     entries.forEach((entry) => {
       node.dispatchEvent(new CustomEvent('resize', { detail: entry }));
@@ -15,7 +15,7 @@ export const resize: Action<HTMLElement> = (node) => {
   };
 };
 
-export const intersection: Action<HTMLElement, IntersectionObserverInit | undefined> = (
+export const intersection: Action<Element, IntersectionObserverInit | undefined> = (
   node,
   options = {}
 ) => {
@@ -42,7 +42,7 @@ export const intersection: Action<HTMLElement, IntersectionObserverInit | undefi
   };
 };
 
-export const mutate: Action<HTMLElement | SVGElement, MutationObserverInit> = (node, options) => {
+export const mutate: Action<Element, MutationObserverInit> = (node, options) => {
   let observer: MutationObserver | null = null;
 
   function update(options: MutationObserverInit | undefined) {
