@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.72.2
+
+### Patch Changes
+
+- Support passing `options` to resize action ([`c5de38c557dc5aaa5b81c7a12a01460ffb6e3c96`](https://github.com/techniq/svelte-ux/commit/c5de38c557dc5aaa5b81c7a12a01460ffb6e3c96))
+
+- Improve type definition for TreeNode to be recursive ([#423](https://github.com/techniq/svelte-ux/pull/423))
+
+- Relax node type (HTMLElement => Element) on observer actions (resize, intersection, mutate) to support SVGElement ([`7fb54a918c1dc08a6ba5912715782f89cb476b75`](https://github.com/techniq/svelte-ux/commit/7fb54a918c1dc08a6ba5912715782f89cb476b75))
+
+- [SelectField] Fix options with object value due to non-unique {#each} keys ([#425](https://github.com/techniq/svelte-ux/pull/425))
+
 ## 0.72.1
 
 ### Patch Changes
