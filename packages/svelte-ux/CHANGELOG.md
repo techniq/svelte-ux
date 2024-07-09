@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.72.3
+
+### Patch Changes
+
+- [MultiSelect(Field|Menu)] Improve actions with mode="immediate" ([`22f26e498d26469b38d839f28df1b2e4a58a16c9`](https://github.com/techniq/svelte-ux/commit/22f26e498d26469b38d839f28df1b2e4a58a16c9))
+
 ## 0.72.2
 
 ### Patch Changes
