@@ -40,6 +40,12 @@
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} disabled />
 </Preview>
 
+<h2>maintainOrder</h2>
+
+<Preview>
+  <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} maintainOrder />
+</Preview>
+
 <h2>max selected</h2>
 
 <Preview>
@@ -79,7 +85,7 @@
   />
 </Preview>
 
-<h2>Immediately apply changes (no actions)</h2>
+<h2>Immediately apply changes (no actions) w/ maintainOrder</h2>
 
 <Preview>
   <MultiSelectField
@@ -91,7 +97,7 @@
   />
 </Preview>
 
-<h2>Immediately apply changes (with custom action)</h2>
+<h2>Immediately apply changes (with custom action) w/ maintainOrder</h2>
 
 <Preview>
   <MultiSelectField

@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.72.4
+
+### Patch Changes
+
+- [format()] Allow only passing value and determine type based on value (integer, decimal, or Date) for quick/basic formatting ([`9fbdd6e9e56c342fcdd1f61ad46eb9b90e0d6ebd`](https://github.com/techniq/svelte-ux/commit/9fbdd6e9e56c342fcdd1f61ad46eb9b90e0d6ebd))
+
+- Add fallback text in `MultiSelect` when `maintainOrder` is active and no items match the search term ([#431](https://github.com/techniq/svelte-ux/pull/431))
+
+- Add `isStringDate()` util to determine if a string is a date ([`5efdbc3a4b72fc1425954b7d1c1b9d7979361631`](https://github.com/techniq/svelte-ux/commit/5efdbc3a4b72fc1425954b7d1c1b9d7979361631))
+
 ## 0.72.3
 
 ### Patch Changes
