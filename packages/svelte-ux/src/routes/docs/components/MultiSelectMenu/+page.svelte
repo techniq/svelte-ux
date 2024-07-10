@@ -63,6 +63,51 @@
   </span>
 </Preview>
 
+<h2>maintainOrder</h2>
+
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        {options}
+        {value}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+        maintainOrder
+        placeholder="Pick a number"
+      />
+    </ToggleButton>
+  </span>
+</Preview>
+
+<h2>maintainOrder w/ inlineSearch</h2>
+
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        {options}
+        {value}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+        inlineSearch
+        maintainOrder
+        placeholder="Pick a number"
+      />
+    </ToggleButton>
+  </span>
+</Preview>
+
 <h2>many options</h2>
 
 <Preview>
@@ -129,7 +174,7 @@
   </span>
 </Preview>
 
-<h2>Immediately apply changes (no actions)</h2>
+<h2>Immediately apply changes (no actions) w/ maintainOrder</h2>
 <Preview>
   <span>
     <ToggleButton let:on={open} let:toggleOff transition={false}>
@@ -150,7 +195,7 @@
   </span>
 </Preview>
 
-<h2>Immediately apply changes (with custom action)</h2>
+<h2>Immediately apply changes (with custom action) w/ maintainOrder</h2>
 <Preview>
   <span>
     <ToggleButton let:on={open} let:toggleOff transition={false}>

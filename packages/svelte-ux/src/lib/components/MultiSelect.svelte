@@ -205,6 +205,12 @@
           </MultiSelectOption>
         </slot>
       </div>
+    {:else}
+      {#if maintainOrder && !filteredOptions.length}
+        <div class="text-surface-content/50 text-xs py-2 px-4 mb-1">
+          There are no matching items.
+        </div>
+      {/if}
     {/each}
   </InfiniteScroll>
 

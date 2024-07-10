@@ -42,7 +42,7 @@
   <MultiSelect {options} {value} maintainOrder on:change={(e) => (value = e.detail.value)} />
 </Preview>
 
-<h2>Immediately apply changes (no actions)</h2>
+<h2>Immediately apply changes (no actions) w/ maintainOrder</h2>
 
 <Preview>
   {value.length} selected
@@ -53,6 +53,23 @@
     mode="immediate"
     on:change={(e) => (value = e.detail.value)}
   />
+</Preview>
+
+<h2>Immediately apply changes (with custom action) w/ maintainOrder</h2>
+
+<Preview>
+  {value.length} selected
+  <MultiSelect
+    {options}
+    {value}
+    maintainOrder
+    mode="immediate"
+    on:change={(e) => (value = e.detail.value)}
+  >
+    <div slot="actions">
+      <Button color="primary" icon={mdiPlus}>Add item</Button>
+    </div>
+  </MultiSelect>
 </Preview>
 
 <h2>max selected</h2>
