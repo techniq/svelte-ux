@@ -62,6 +62,7 @@ export function formatNumberWithLocale(
 
   const defaults = getFormatNumber(settings, style);
 
+  // @ts-expect-error: Determine how to access `NumberFormatOptionsStyleRegistry` and check instead of just `style !=== 'default' below)
   const formatter = Intl.NumberFormat(settings.locale, {
     // Let's always starts with all defaults
     ...defaults,

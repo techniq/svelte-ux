@@ -237,7 +237,6 @@ describe('formatNumber()', () => {
 
   it('dollar 0', () => {
     const actual = formatNumber(0, 'metric', {
-      style: 'metric',
       suffix: ' dollar',
     });
     expect(actual).equal('0 dollar');
