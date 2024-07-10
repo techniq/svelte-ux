@@ -63,6 +63,9 @@ export function formatWithLocale(
     return value;
   } else if (value == null) {
     return '';
+  } else {
+    // Provide some reasonable fallback for objects/etc (maybe use stringify() instead)
+    return `${value}`;
   }
 }
 
