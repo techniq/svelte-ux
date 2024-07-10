@@ -1,4 +1,9 @@
-import { formatDateWithLocale, getPeriodTypeNameWithLocale, getDayOfWeekName } from './date.js';
+import {
+  formatDateWithLocale,
+  getPeriodTypeNameWithLocale,
+  getDayOfWeekName,
+  isStringDate,
+} from './date.js';
 import { formatNumberWithLocale } from './number.js';
 import type { FormatNumberOptions, FormatNumberStyle } from './number.js';
 import { defaultLocale, type LocaleSettings } from './locale.js';
@@ -37,29 +42,28 @@ export function formatWithLocale(
   format?: FormatType,
   options?: FormatNumberOptions | FormatDateOptions
 ) {
-  let formattedValue: string | undefined;
-
-  if (format) {
-    if (typeof format === 'function') {
-      formattedValue = format(value);
-    } else if (format in PeriodType) {
-      formattedValue = formatDateWithLocale(
-        settings,
-        value,
-        format as PeriodType,
-        options as FormatDateOptions
-      );
-    } else if (typeof value === 'number') {
-      formattedValue = formatNumberWithLocale(
-        settings,
-        value,
-        format as FormatNumberStyle,
-        options as FormatNumberOptions
-      );
-    }
+  if (typeof format === 'function') {
+    return format(value);
+  } else if (value instanceof Date || isStringDate(value) || (format && format in PeriodType)) {
+    return formatDateWithLocale(
+      settings,
+      value,
+      (format ?? PeriodType.Day) as PeriodType,
+      options as FormatDateOptions
+    );
+  } else if (typeof value === 'number') {
+    return formatNumberWithLocale(
+      settings,
+      value,
+      format as FormatNumberStyle,
+      options as FormatNumberOptions
+    );
+  } else if (typeof value === 'string') {
+    // Keep original value if already string
+    return value;
+  } else if (value == null) {
+    return '';
   }
-
-  return formattedValue ?? ''; // return empty string so Svelte doesn't render `null` string;
 }
 
 export type FormatFunction = ((

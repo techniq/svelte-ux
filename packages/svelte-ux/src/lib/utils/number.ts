@@ -55,6 +55,11 @@ export function formatNumberWithLocale(
     return `${number}`;
   }
 
+  // Determine default style if not provided (undefined or null)
+  if (style == null) {
+    style = Number.isInteger(number) ? 'integer' : 'decimal';
+  }
+
   const defaults = getFormatNumber(settings, style);
 
   const formatter = Intl.NumberFormat(settings.locale, {
