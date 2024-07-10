@@ -865,3 +865,17 @@ export function randomDate(from: Date, to: Date) {
   const toTime = to.getTime();
   return new Date(fromTime + Math.random() * (toTime - fromTime));
 }
+
+// '1982-03-30'
+// '1982-03-30T11:25:59Z'
+// '1982-03-30T11:25:59-04:00'
+// '1982-03-30T11:25:59.123Z'
+// '1982-03-30T11:25:59.1234567Z'
+const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(.\d+|)(Z|(-|\+)\d{2}:\d{2}))?$/;
+
+/**
+ * Determine if string is UTC (yyyy-mm-ddThh:mm:ssZ) or Offset (yyyy-mm-ddThh:mm:ss-ZZ:ZZ) or Date-only (yyyy-mm-dd) date string
+ */
+export function isStringDate(value: string) {
+  return DATE_FORMAT.test(value);
+}

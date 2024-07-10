@@ -11,6 +11,7 @@ import {
   getDayOfWeek,
   hasDayOfWeek,
   replaceDayOfWeek,
+  isStringDate,
 } from './date.js';
 import { formatWithLocale } from './format.js';
 import { createLocaleSettings, defaultLocale } from './locale.js';
@@ -668,5 +669,27 @@ describe('replaceDayOfWeek()', () => {
       const val = replaceDayOfWeek(periodType, dayOfWeek);
       expect(val).toBe(expected);
     });
+  });
+});
+
+describe('isStringDate()', () => {
+  it('date only', () => {
+    expect(isStringDate('1982-03-30')).true;
+  });
+
+  it('date with time (UTC)', () => {
+    expect(isStringDate('1982-03-30T11:25:59Z')).true;
+  });
+
+  it('date with time (offset)', () => {
+    expect(isStringDate('1982-03-30T11:25:59-04:00')).true;
+  });
+
+  it('date with time and 3 digit milliseconds (UTC)', () => {
+    expect(isStringDate('1982-03-30T11:25:59.123Z')).true;
+  });
+
+  it('date with time with 7 digit milliseconds (UTC)', () => {
+    expect(isStringDate('1982-03-30T11:25:59.1234567Z')).true;
   });
 });
