@@ -217,7 +217,7 @@
   <svelte:fragment slot="nav">
     <NavMenu />
     <!-- Spacer -->
-    <div class="h-4" />
+    <div class="h-4"></div>
   </svelte:fragment>
 
   <AppBar {title}>
@@ -302,7 +302,7 @@
             window.open(e.detail.value, '_blank');
           }}
         >
-          <span slot="selection" class="hidden" />
+          <span slot="selection" class="hidden"></span>
         </MenuButton>
       {/if}
     </div>

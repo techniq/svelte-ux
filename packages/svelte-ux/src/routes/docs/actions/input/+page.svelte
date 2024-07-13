@@ -33,7 +33,7 @@
 <h2>autoHeight <small>Automatically resize textarea based on content</small></h2>
 
 <Preview>
-  <textarea value="Example text" use:autoHeight class="border" />
+  <textarea value="Example text" use:autoHeight class="border"></textarea>
 </Preview>
 
 <h2>debounceEvent <small>Debounce any event (input, change, etc)</small></h2>

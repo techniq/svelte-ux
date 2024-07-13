@@ -199,9 +199,9 @@
     <Button variant="outline" icon={mdiFilterVariant} class="p-3" />
     <div
       class="bg-danger rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center self-start justify-self-end border border-surface-100"
-    />
+    ></div>
     <div
       class="bg-success rounded-full h-4 w-4 text-xs flex items-center justify-center self-end justify-self-end border border-surface-100"
-    />
+    ></div>
   </Stack>
 </Preview>

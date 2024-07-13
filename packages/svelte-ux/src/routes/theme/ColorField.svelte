@@ -26,7 +26,7 @@
   {...$$restProps}
 >
   <div slot="prepend" class="grid grid-stack mr-3">
-    <div class="w-6 h-6 border rounded" style:background={value} />
+    <div class="w-6 h-6 border rounded" style:background={value}></div>
     <input
       type="color"
       value={formatHex(value)}
