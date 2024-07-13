@@ -80,7 +80,7 @@ importers:
         version: 1.29.0
       sveld:
         specifier: ^0.20.0
-        version: 0.20.0(postcss-load-config@6.0.1(postcss@8.4.38))(postcss@8.4.38)
+        version: 0.20.0(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)
       tailwind-merge:
         specifier: ^2.4.0
         version: 2.4.0
@@ -159,7 +159,7 @@ importers:
         version: 4.2.18
       svelte-check:
         specifier: ^3.8.4
-        version: 3.8.4(postcss-load-config@6.0.1(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)
+        version: 3.8.4(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)
       svelte2tsx:
         specifier: ^0.7.13
         version: 0.7.13(svelte@4.2.18)(typescript@5.5.3)
@@ -956,15 +956,6 @@ packages:
   date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
 
-  debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   debug@4.3.5:
     resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
     engines: {node: '>=6.0'}
@@ -1638,24 +1629,6 @@ packages:
       postcss:
         optional: true
       ts-node:
-        optional: true
-
-  postcss-load-config@6.0.1:
-    resolution: {integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      jiti: '>=1.21.0'
-      postcss: '>=8.0.9'
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      jiti:
-        optional: true
-      postcss:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
         optional: true
 
   postcss-nested@6.0.1:
@@ -2664,7 +2637,7 @@ snapshots:
   '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)))(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10))
-      debug: 4.3.4
+      debug: 4.3.5
       svelte: 4.2.18
       vite: 5.3.3(@types/node@20.14.10)
     transitivePeerDependencies:
@@ -2673,7 +2646,7 @@ snapshots:
   '@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10))':
     dependencies:
       '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)))(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10))
-      debug: 4.3.4
+      debug: 4.3.5
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.10
@@ -3024,10 +2997,6 @@ snapshots:
   dataloader@1.4.0: {}
 
   date-fns@3.6.0: {}
-
-  debug@4.3.4:
-    dependencies:
-      ms: 2.1.2
 
   debug@4.3.5:
     dependencies:
@@ -3654,13 +3623,6 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.38
 
-  postcss-load-config@6.0.1(postcss@8.4.38):
-    dependencies:
-      lilconfig: 3.1.2
-    optionalDependencies:
-      postcss: 8.4.38
-    optional: true
-
   postcss-nested@6.0.1(postcss@8.4.38):
     dependencies:
       postcss: 8.4.38
@@ -3925,7 +3887,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  sveld@0.20.0(postcss-load-config@6.0.1(postcss@8.4.38))(postcss@8.4.38):
+  sveld@0.20.0(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38):
     dependencies:
       '@rollup/plugin-node-resolve': 13.3.0(rollup@2.79.1)
       acorn: 8.11.3
@@ -3935,7 +3897,7 @@ snapshots:
       rollup: 2.79.1
       rollup-plugin-svelte: 7.2.0(rollup@2.79.1)(svelte@4.2.18)
       svelte: 4.2.18
-      svelte-preprocess: 5.1.4(postcss-load-config@6.0.1(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)(typescript@5.5.3)
+      svelte-preprocess: 5.1.4(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)(typescript@5.5.3)
       typescript: 5.5.3
     transitivePeerDependencies:
       - '@babel/core'
@@ -3948,14 +3910,14 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-check@3.8.4(postcss-load-config@6.0.1(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18):
+  svelte-check@3.8.4(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 3.6.0
       picocolors: 1.0.1
       sade: 1.8.1
       svelte: 4.2.18
-      svelte-preprocess: 5.1.4(postcss-load-config@6.0.1(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)(typescript@5.5.3)
+      svelte-preprocess: 5.1.4(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)(typescript@5.5.3)
       typescript: 5.5.3
     transitivePeerDependencies:
       - '@babel/core'
@@ -3972,7 +3934,7 @@ snapshots:
     dependencies:
       svelte: 4.2.18
 
-  svelte-preprocess@5.1.4(postcss-load-config@6.0.1(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)(typescript@5.5.3):
+  svelte-preprocess@5.1.4(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)(typescript@5.5.3):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
@@ -3982,7 +3944,7 @@ snapshots:
       svelte: 4.2.18
     optionalDependencies:
       postcss: 8.4.38
-      postcss-load-config: 6.0.1(postcss@8.4.38)
+      postcss-load-config: 4.0.2(postcss@8.4.38)
       typescript: 5.5.3
 
   svelte2tsx@0.7.13(svelte@4.2.18)(typescript@5.5.3):

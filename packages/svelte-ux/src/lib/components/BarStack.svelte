@@ -5,10 +5,6 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './index.js';
 
-  const dispatch = createEventDispatcher<{
-    itemClick: (typeof data)[number];
-  }>();
-
   export let data: {
     label: string;
     value: number;
@@ -26,6 +22,10 @@
     item?: string;
   } = {};
   const settingsClasses = getComponentClasses('BarStack');
+
+  const dispatch = createEventDispatcher<{
+    itemClick: (typeof data)[number];
+  }>();
 </script>
 
 <div class={cls('BarStack', 'flex gap-px', settingsClasses.root, classes.root, $$props.class)}>

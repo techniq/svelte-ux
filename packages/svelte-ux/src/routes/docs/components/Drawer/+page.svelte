@@ -190,7 +190,7 @@
 <h2>Custom portal target</h2>
 
 <Preview>
-  <div id="portal" />
+  <div id="portal"></div>
 
   <Toggle let:on={open} let:toggle let:toggleOff>
     <Drawer

@@ -103,15 +103,15 @@
           <div
             class="w-[30px] h-[30px] bg-sky-500 rounded-full"
             style:transform="rotate({(360 / 8) * i}deg) translateX(var(--orbit-radius))"
-          />
+          ></div>
         {/each}
 
         <!-- Moving dot -->
-        <div class="orbit w-[26px] h-[26px] bg-cyan-300 rounded-full" />
+        <div class="orbit w-[26px] h-[26px] bg-cyan-300 rounded-full"></div>
       </div>
     </Gooey>
     <!-- glow -->
-    <div class="orbit w-[26px] h-[26px] bg-cyan-300 rounded-full blur-lg" />
+    <div class="orbit w-[26px] h-[26px] bg-cyan-300 rounded-full blur-lg"></div>
   </div>
 </Preview>
 
@@ -134,18 +134,18 @@
       <div class="flex gap-8">
         <!-- Fixed dots -->
         {#each { length: 4 } as _, i}
-          <div class="w-[30px] h-[30px] bg-sky-500 rounded-full" />
+          <div class="w-[30px] h-[30px] bg-sky-500 rounded-full"></div>
         {/each}
 
         <!-- Moving dot -->
         <div class="scanning absolute top-[2px] left-0 w-full">
-          <div class=" w-[26px] h-[26px] bg-cyan-300 rounded-full" />
+          <div class=" w-[26px] h-[26px] bg-cyan-300 rounded-full"></div>
         </div>
       </div>
     </Gooey>
     <!-- glow -->
     <div class="scanning absolute top-[2px] left-0 w-full">
-      <div class="w-[26px] h-[26px] bg-cyan-300 rounded-full blur-lg" />
+      <div class="w-[26px] h-[26px] bg-cyan-300 rounded-full blur-lg"></div>
     </div>
   </div>
 </Preview>
@@ -172,7 +172,7 @@
           style:--orbit-radius="60px"
           style:--orbit-start="{35 * i}deg"
           style:background-color="hsl({180 + i * 5}, 80%, 50%)"
-        />
+        ></div>
       {/each}
     </div>
   </Gooey>
@@ -188,10 +188,10 @@
     <Gooey blur={gooeyBlur} alphaPixel={18} alphaShift={-7} class="h-full w-full">
       <div
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-blue-500 blur-md"
-      />
+      ></div>
       <div
         class="absolute left-[--x] top-[--y] -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-cyan-300 blur-md"
-      />
+      ></div>
     </Gooey>
   </div>
 </Preview>

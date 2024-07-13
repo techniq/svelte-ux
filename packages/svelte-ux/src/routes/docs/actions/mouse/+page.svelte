@@ -60,7 +60,7 @@
       style="transform:
         translate({$coords.x}px,{$coords.y}px)
         rotate({$coords.x * 0.2}deg)"
-    />
+    ></div>
   </div>
 </Preview>
 
@@ -87,7 +87,7 @@
       style="transform:
         translate({$coords.x}px,{$coords.y}px)
         rotate({$coords.x * 0.2}deg)"
-    />
+    ></div>
   </div>
 </Preview>
 
@@ -114,7 +114,7 @@
       style="transform:
         translate({$coords.x}px,{$coords.y}px)
         rotate({$coords.x * 0.2}deg)"
-    />
+    ></div>
   </div>
 </Preview>
 
@@ -142,6 +142,6 @@
         translate({$coords.x}px,{$coords.y}px)
         rotate({$coords.x * 0.2}deg)
       "
-    />
+    ></div>
   </div>
 </Preview>

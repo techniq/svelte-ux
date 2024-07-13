@@ -32,7 +32,7 @@
 <Preview>
   <Tabs>
     {#each { length: 5 } as _, i}
-      {@const v = ++i}
+      {@const v = i + 1}
       <Tab on:click={() => (value = v)} selected={value === v}>Tab {v}</Tab>
     {/each}
 
