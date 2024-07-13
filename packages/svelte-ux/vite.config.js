@@ -3,7 +3,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { sveld } from './src/lib/plugins/vite.js';
 
 export default defineConfig({
-  plugins: [sveltekit() /*, sveld()*/],
+  plugins: [sveltekit(), sveld()],
   test: {
     include: ['src/**/*.{test,spec}.{js,ts}'],
     deps: {
