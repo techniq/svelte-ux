@@ -17,7 +17,8 @@
   <div class="relative">
     <Toggle let:on={enabled} let:toggleOn let:toggleOff>
       <Button on:click={toggleOn} class="border mt-4">Move to body</Button>
-      <div use:portal={enabled} class="portal-content">
+      <!-- Explicit "target: document.body" only needed because ".PortalTarget" exists other examples -->
+      <div use:portal={{ enabled, target: document.body }} class="portal-content">
         <div>Portal content</div>
         {#if enabled}
           <Button on:click={toggleOff} class="border mt-4">Move back to parent</Button>
