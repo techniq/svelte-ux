@@ -19,7 +19,7 @@
       class="w-10 h-10 rounded"
       style:background-color="var(--background)"
       style:border="var(--border)"
-    />
+    ></div>
     <div class="grid grid-flow-col gap-2">
       <TextField label="Background" bind:value={background} />
       <TextField label="Border" bind:value={border} />

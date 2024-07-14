@@ -78,7 +78,7 @@
 
 <Preview>
   <BarStack {data} let:item let:total>
-    <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)} />
+    <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)}></div>
     <div class="truncate text-xs font-semibold text-surface-content">
       {item.label}
     </div>
@@ -97,7 +97,7 @@
       placement="bottom-start"
       offset={2}
     >
-      <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)} />
+      <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)}></div>
       <div class="truncate text-xs font-semibold text-surface-content">
         {item.label}
       </div>

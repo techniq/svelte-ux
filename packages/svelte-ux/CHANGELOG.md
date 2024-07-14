@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.73.0
+
+### Minor Changes
+
+- Improve Svelte 5 compatibility, especially with docs (enabling `svelte-check` to pass) ([#399](https://github.com/techniq/svelte-ux/pull/399))
+
+### Patch Changes
+
+- Update dependencies ([`9be6afada9e247c0ad5f758a7907798bceeb29a1`](https://github.com/techniq/svelte-ux/commit/9be6afada9e247c0ad5f758a7907798bceeb29a1))
+
 ## 0.72.4
 
 ### Patch Changes

@@ -24,7 +24,7 @@
       e.target.innerText = JSON.stringify(e.detail.contentRect, null, 2);
     }}
     class="resize overflow-auto whitespace-pre outline rounded"
-  />
+  ></div>
 </Preview>
 
 <h3>Full coordinates (using `getBoundingClientRect()`)</h3>
@@ -37,7 +37,7 @@
       e.target.innerText = JSON.stringify(e.target.getBoundingClientRect(), null, 2);
     }}
     class="resize overflow-auto whitespace-pre outline rounded"
-  />
+  ></div>
 </Preview>
 
 <h3>Setting CSS variable</h3>

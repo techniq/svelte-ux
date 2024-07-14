@@ -199,9 +199,9 @@
     <Button icon={mdiFilterVariant} class="col-span-full row-span-full border p-3" />
     <div
       class="col-span-full row-span-full self-start justify-self-end bg-danger rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center border border-surface-100"
-    />
+    ></div>
     <div
       class="col-span-full row-span-full self-end justify-self-end bg-success rounded-full h-4 w-4 text-xs flex items-center justify-center border border-surface-100"
-    />
+    ></div>
   </div>
 </Preview>
