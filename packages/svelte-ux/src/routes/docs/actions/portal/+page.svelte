@@ -1,15 +1,8 @@
 <script lang="ts">
-  import { Button, portal, type PortalOptions } from 'svelte-ux';
+  import { Button, portal, Toggle, type PortalOptions } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
-
-  let optionsBasic: PortalOptions = false;
-  let optionsAnscestor: PortalOptions = false;
-  let optionsSibling: PortalOptions = false;
-  let optionsCustom: PortalOptions = false;
-  let optionsDestroyable: PortalOptions = { target: undefined, enabled: false };
-  let destroy = false;
 </script>
 
 <h1>Usage</h1>
@@ -22,105 +15,104 @@
 
 <Preview>
   <div class="relative">
-    <Button on:click={() => (optionsBasic = true)} class="border mt-4">Move to body</Button>
-    <div use:portal={optionsBasic} class="portal-content">
-      <div>Portal content</div>
-      {#if optionsBasic}
-        <Button on:click={() => (optionsBasic = false)} class="border mt-4">
-          Move back to parent
-        </Button>
-      {/if}
-    </div>
+    <Toggle let:on={enabled} let:toggleOn let:toggleOff>
+      <Button on:click={toggleOn} class="border mt-4">Move to body</Button>
+      <div use:portal={enabled} class="portal-content">
+        <div>Portal content</div>
+        {#if enabled}
+          <Button on:click={toggleOff} class="border mt-4">Move back to parent</Button>
+        {/if}
+      </div>
+    </Toggle>
   </div>
 </Preview>
 
 <h2>first/sibling <code>.PortalTarget</code></h2>
 
 <Preview>
-  <div class="relative">
-    <Button on:click={() => (optionsSibling = true)} class="border mt-4">
-      Move to first <code>.PortalTarget</code>
-    </Button>
-    <div use:portal={optionsSibling} class="portal-content">
-      <div>Portal content</div>
-      {#if optionsSibling}
-        <Button on:click={() => (optionsSibling = false)} class="border mt-4">
-          Move back to parent
-        </Button>
-      {/if}
+  <Toggle let:on={enabled} let:toggleOn let:toggleOff>
+    <div class="relative">
+      <Button on:click={toggleOn} class="border mt-4">
+        Move to first <code>.PortalTarget</code>
+      </Button>
+      <div use:portal={enabled} class="portal-content">
+        <div>Portal content</div>
+        {#if enabled}
+          <Button on:click={toggleOff} class="border mt-4">Move back to parent</Button>
+        {/if}
+      </div>
     </div>
-  </div>
-  <div class="PortalTarget relative h-32 bg-surface-200 mt-4"></div>
+    <div class="PortalTarget relative h-32 bg-surface-200 mt-4"></div>
+  </Toggle>
 </Preview>
 
 <h2>anscestor <code>.PortalTarget</code></h2>
 <!-- This example has to come after the previous one, so the previous one doesn't find this .PortalTarget -->
 
 <Preview>
-  <div class="PortalTarget relative">
-    <div>
-      <Button on:click={() => (optionsAnscestor = true)} class="border mt-4">
-        Move to closest <code>.PortalTarget</code>
-      </Button>
-      <div use:portal={optionsAnscestor} class="portal-content">
-        <div>Portal content</div>
-        {#if optionsAnscestor}
-          <Button on:click={() => (optionsAnscestor = false)} class="border mt-4">
-            Move back to parent
-          </Button>
-        {/if}
+  <Toggle let:on={enabled} let:toggleOn let:toggleOff>
+    <div class="PortalTarget relative">
+      <div>
+        <Button on:click={toggleOn} class="border mt-4">
+          Move to closest <code>.PortalTarget</code>
+        </Button>
+        <div use:portal={enabled} class="portal-content">
+          <div>Portal content</div>
+          {#if enabled}
+            <Button on:click={toggleOff} class="border mt-4">Move back to parent</Button>
+          {/if}
+        </div>
       </div>
     </div>
-  </div>
+  </Toggle>
 </Preview>
 
 <h2>custom target</h2>
 
 <Preview>
-  <div class="relative">
-    <Button
-      on:click={() => (optionsCustom = { target: '.custom-portal-target' })}
-      class="border mt-4"
-    >
-      Move to <code>.custom-portal-target</code>
-    </Button>
-    <div use:portal={optionsCustom} class="portal-content">
-      <div>Portal content</div>
-      {#if optionsCustom}
-        <Button on:click={() => (optionsCustom = false)} class="border mt-4">
-          Move back to parent
-        </Button>
-      {/if}
+  <Toggle let:on={enabled} let:toggleOn let:toggleOff>
+    <div class="relative">
+      <Button on:click={toggleOn} class="border mt-4">
+        Move to <code>.custom-portal-target</code>
+      </Button>
+      <div use:portal={{ enabled, target: '.custom-portal-target' }} class="portal-content">
+        <div>Portal content</div>
+        {#if enabled}
+          <Button on:click={toggleOff} class="border mt-4">Move back to parent</Button>
+        {/if}
+      </div>
     </div>
-  </div>
-  <div class="custom-portal-target relative h-32 bg-surface-200 mt-4"></div>
+    <div class="custom-portal-target relative h-32 bg-surface-200 mt-4"></div>
+  </Toggle>
 </Preview>
 
 <h2>Destroyable</h2>
 
 <Preview>
-  {#if !destroy}
-    <div class="PortalTarget relative">
-      <div class="relative">
-        <Button
-          on:click={() => (optionsDestroyable = { target: '.destroyable-example-target' })}
-          class="border mt-4">Move to target</Button
-        >
-        <Button on:click={() => (destroy = true)} class="border mt-4">Destroy</Button>
-        <div use:portal={optionsDestroyable} class="portal-content">
-          <div>Portal content</div>
-          {#if optionsBasic}
-            <Button on:click={() => (optionsBasic = false)} class="border mt-4">
-              Move back to parent
-            </Button>
-          {/if}
+  <Toggle let:on={destroyed} let:toggleOn={destroy} let:toggleOff={restore}>
+    <Toggle let:on={enabled} let:toggleOn let:toggleOff>
+      {#if !destroyed}
+        <div class="PortalTarget relative">
+          <div class="relative">
+            <Button on:click={toggleOn} class="border mt-4">Move to target</Button>
+            <Button on:click={destroy} class="border mt-4">Destroy</Button>
+            <div
+              use:portal={{ enabled, target: '.destroyable-example-target' }}
+              class="portal-content"
+            >
+              <div>Portal content</div>
+              {#if enabled}
+                <Button on:click={toggleOff} class="border mt-4">Move back to parent</Button>
+              {/if}
+            </div>
+          </div>
+          <div class="destroyable-example-target relative h-32 bg-surface-200 mt-4"></div>
         </div>
-      </div>
-      <div class="destroyable-example-target relative h-32 bg-surface-200 mt-4"></div>
-    </div>
-  {:else}
-    <Button on:click={() => (destroy = false)} class="border mt-4">Recreate</Button>
-  {/if}
+      {:else}
+        <Button on:click={restore} class="border mt-4">Restore</Button>
+      {/if}
+    </Toggle>
+  </Toggle>
 </Preview>
 
 <style lang="postcss">
