@@ -54,9 +54,6 @@
                 // ignore clicks on group options
                 return false;
                 // @ts-expect-error
-              } else if (el.disabled) {
-                // ignore disabled items
-                return false;
               } else {
                 return true;
               }
