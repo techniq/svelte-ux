@@ -243,7 +243,7 @@
 <h2>option slot with icon (field icon updates based on selected option)</h2>
 
 <Preview>
-  <SelectField {options} bind:value activeOptionIcon={true}>
+  <SelectField options={optionsWithIcon} bind:value activeOptionIcon={true}>
     <svelte:fragment slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
@@ -252,7 +252,7 @@
           option.group ? 'px-4' : 'px-2'
         )}
         scrollIntoView={index === highlightIndex}
-        icon={{ data: option.icon, style: 'color: #0000FF;' }}
+        icon={{ data: option.icon, class: 'text-danger' }}
       >
         {option.label}
       </MenuItem>
