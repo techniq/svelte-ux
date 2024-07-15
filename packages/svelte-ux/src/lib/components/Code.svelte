@@ -18,7 +18,7 @@
   } = {};
 </script>
 
-<div class={cls('Code', 'rounded', classes.root, $$props.class)}>
+<div class={cls('Code', 'rounded', 'overflow-auto', classes.root, $$props.class)}>
   {#if source}
     <div class="relative">
       <pre
