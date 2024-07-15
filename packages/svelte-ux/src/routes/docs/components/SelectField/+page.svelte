@@ -221,7 +221,7 @@
 
 <Preview>
   <SelectField {options}>
-    <div slot="option" let:option let:index let:selected let:highlightIndex>
+    <svelte:fragment slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
           index === highlightIndex && 'bg-surface-content/5',
@@ -229,13 +229,14 @@
           option.group ? 'px-4' : 'px-2'
         )}
         scrollIntoView={index === highlightIndex}
+        disabled={index === 2}
       >
         <div>
           <div>{option.label}</div>
           <div class="text-sm text-text-surface-content/50">{option.value}</div>
         </div>
       </MenuItem>
-    </div>
+    </svelte:fragment>
   </SelectField>
 </Preview>
 
@@ -243,7 +244,7 @@
 
 <Preview>
   <SelectField {options} bind:value activeOptionIcon={true}>
-    <div slot="option" let:option let:index let:selected let:highlightIndex>
+    <svelte:fragment slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem
         class={cls(
           index === highlightIndex && 'bg-surface-content/5',
@@ -255,7 +256,7 @@
       >
         {option.label}
       </MenuItem>
-    </div>
+    </svelte:fragment>
   </SelectField>
 </Preview>
 

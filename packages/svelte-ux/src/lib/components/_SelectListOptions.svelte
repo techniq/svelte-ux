@@ -49,11 +49,22 @@
       // Find the index of the clicked on element (ignoring group headers)
       const optionIndex = slotEl
         ? [...menuOptionsEl.children]
-            .filter((el) => !el.classList.contains('group-header'))
+            .filter((el) => {
+              if (el.classList.contains('group-header')) {
+                // ignore clicks on group options
+                return false;
+                // @ts-expect-error
+              } else if (el.disabled) {
+                // ignore disabled items
+                return false;
+              } else {
+                return true;
+              }
+            })
             .indexOf(slotEl)
         : -1;
       logger.debug({ slotEl, optionIndex });
-      // ignore clicks on group options
+
       if (optionIndex !== -1) {
         selectIndex(optionIndex);
       }
