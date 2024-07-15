@@ -452,6 +452,7 @@
   class={_class}
   style={$$props.style ?? ''}
   {disabled}
+  aria-disabled={disabled ? 'true' : 'false'}
   use:multi={actions}
   on:click
   on:mouseover
