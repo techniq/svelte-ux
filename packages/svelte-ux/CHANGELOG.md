@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.73.2
+
+### Patch Changes
+
+- [Dialog / Drawer] Workaround Svelte 5 regression with portal'd content and conditional (https://github.com/sveltejs/svelte/issues/12440) ([`54d9d39ee7bdb712f6c2e85faea1701aae9fe3ba`](https://github.com/techniq/svelte-ux/commit/54d9d39ee7bdb712f6c2e85faea1701aae9fe3ba))
+
 ## 0.73.1
 
 ### Patch Changes
