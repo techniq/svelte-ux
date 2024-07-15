@@ -53,7 +53,6 @@
               if (el.classList.contains('group-header')) {
                 // ignore clicks on group options
                 return false;
-                // @ts-expect-error
               } else {
                 return true;
               }
