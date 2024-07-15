@@ -554,7 +554,7 @@
                 }}
                 role="option"
                 aria-selected={option === selected ? 'true' : 'false'}
-                aria-disabled={option?.disabled ? 'true' : 'false'}
+                disabled={option.disabled}
               >
                 {option.label}
               </MenuItem>
@@ -613,7 +613,7 @@
               }}
               role="option"
               aria-selected={option === selected ? 'true' : 'false'}
-              aria-disabled={option?.disabled ? 'true' : 'false'}
+              disabled={option.disabled}
             >
               {option.label}
             </MenuItem>

@@ -75,6 +75,7 @@
               value = option.value;
               dispatch('change', { option, value });
             }}
+            disabled={option.disabled}
           >
             {option.label}
           </MenuItem>

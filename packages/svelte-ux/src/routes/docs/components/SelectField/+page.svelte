@@ -31,6 +31,13 @@
     { label: 'Four', value: 4, icon: mdiAccount },
   ];
 
+  let optionsWithDisabled: MenuOption[] = [
+    { label: 'One', value: 1 },
+    { label: 'Two', value: 2 },
+    { label: 'Three', value: 3, disabled: true },
+    { label: 'Four', value: 4 },
+  ];
+
   const optionsWithGroup: MenuOption[] = [
     { label: 'One', value: 1, group: 'First' },
     { label: 'Two', value: 2, group: 'First' },
@@ -103,6 +110,15 @@
 
 <Preview>
   <SelectField {options} bind:value clearSearchOnOpen={false} />
+</Preview>
+
+<h2>Disabled options</h2>
+
+<Preview>
+  <SelectField
+    options={optionsWithDisabled}
+    on:change={(e) => console.log('on:change', e.detail)}
+  />
 </Preview>
 
 <h2>Grouped options</h2>

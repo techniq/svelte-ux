@@ -137,6 +137,7 @@
             selected={option.value === value}
             class={cls(option.group ? 'px-4' : 'px-2', settingsClasses.option, classes.option)}
             classes={classes.menuItem}
+            disabled={option.disabled}
             on:click={() => (value = option.value)}
           >
             {option.label}

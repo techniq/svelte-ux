@@ -9,6 +9,7 @@ export type MenuOption<T = any> = {
   value: T;
   icon?: string;
   group?: string;
+  disabled?: boolean;
 } & Record<string, any>;
 
 export type LabelPlacement = 'inset' | 'float' | 'top' | 'left';
