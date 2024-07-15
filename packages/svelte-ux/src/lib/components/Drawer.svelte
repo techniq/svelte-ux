@@ -33,6 +33,7 @@
   }
 </script>
 
+<!-- Separate `{#if}` block works around Svelte 5 regression: https://github.com/sveltejs/svelte/issues/12440  -->
 {#if open}
   <Backdrop
     on:click={(e) => {
@@ -48,7 +49,9 @@
     class={cls('z-50', settingsClasses.backdrop, classes.backdrop)}
     {portal}
   />
+{/if}
 
+{#if open}
   <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
   <div
     class={cls(

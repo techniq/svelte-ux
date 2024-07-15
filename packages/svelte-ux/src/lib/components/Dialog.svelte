@@ -64,6 +64,7 @@
   }
 </script>
 
+<!-- Separate `{#if}` block works around Svelte 5 regression: https://github.com/sveltejs/svelte/issues/12440  -->
 {#if open}
   <Backdrop
     on:click={() => {
@@ -80,7 +81,9 @@
     fadeParams={{ duration: 150 }}
     {portal}
   />
+{/if}
 
+{#if open}
   <div
     class={cls(
       'Dialog',
