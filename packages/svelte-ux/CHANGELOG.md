@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.73.1
+
+### Patch Changes
+
+- Support setting `disabled` for MenuOption (MenuButton, MenuField, SelectField) ([`19ca5a68645faaaad5e8fefcaf06b78bf5b3bbce`](https://github.com/techniq/svelte-ux/commit/19ca5a68645faaaad5e8fefcaf06b78bf5b3bbce))
+
+- [Button] Set `aria-disabled` when disabled ([`3f502f1730bca06f4e5e14090c764f88d8b34c0a`](https://github.com/techniq/svelte-ux/commit/3f502f1730bca06f4e5e14090c764f88d8b34c0a))
+
+- [SelectField] Fix handling of disabled options ([`295d5eb11a9fb5d46162ac65d60a0212c7d7cb68`](https://github.com/techniq/svelte-ux/commit/295d5eb11a9fb5d46162ac65d60a0212c7d7cb68))
+
 ## 0.73.0
 
 ### Minor Changes
