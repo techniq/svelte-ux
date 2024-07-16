@@ -32,10 +32,10 @@
   ];
 
   let optionsWithDisabled: MenuOption[] = [
-    { label: 'One', value: 1 },
+    { label: 'One', value: 1, disabled: true },
     { label: 'Two', value: 2 },
-    { label: 'Three', value: 3, disabled: true },
-    { label: 'Four', value: 4 },
+    { label: 'Three', value: 3 },
+    { label: 'Four', value: 4, disabled: true },
   ];
 
   const optionsWithGroup: MenuOption[] = [
@@ -229,7 +229,30 @@
           option.group ? 'px-4' : 'px-2'
         )}
         scrollIntoView={index === highlightIndex}
-        disabled={index === 2}
+        disabled={option.disabled}
+      >
+        <div>
+          <div>{option.label}</div>
+          <div class="text-sm text-text-surface-content/50">{option.value}</div>
+        </div>
+      </MenuItem>
+    </svelte:fragment>
+  </SelectField>
+</Preview>
+
+<h2>option slot with disabled</h2>
+
+<Preview>
+  <SelectField options={optionsWithDisabled}>
+    <svelte:fragment slot="option" let:option let:index let:selected let:highlightIndex>
+      <MenuItem
+        class={cls(
+          index === highlightIndex && 'bg-surface-content/5',
+          option === selected && 'font-semibold',
+          option.group ? 'px-4' : 'px-2'
+        )}
+        scrollIntoView={index === highlightIndex}
+        disabled={option.disabled}
       >
         <div>
           <div>{option.label}</div>

@@ -165,9 +165,33 @@
   let menuOptionsEl: HTMLDivElement;
   let selectFieldEl: HTMLButtonElement;
 
+  function nextOptionIndex(currentIndex: number) {
+    // Find next non-disabled option
+    let nextIndex = filteredOptions.findIndex((o, i) => i > currentIndex && !o.disabled);
+
+    if (nextIndex === -1) {
+      // Find first non-disabled (wrap to top)
+      nextIndex = filteredOptions.findIndex((o, i) => !o.disabled);
+    }
+
+    return nextIndex;
+  }
+
+  function prevOptionIndex(currentIndex: number) {
+    // Find prev non-disabled option
+    let prevIndex = filteredOptions.findLastIndex((o, i) => i < currentIndex && !o.disabled);
+
+    if (prevIndex === -1) {
+      // Find first non-disabled (wrap to top)
+      prevIndex = filteredOptions.findLastIndex((o, i) => !o.disabled);
+    }
+
+    return prevIndex;
+  }
+
   // UI state
   export let open = false;
-  let highlightIndex = 0;
+  let highlightIndex = -1;
 
   $: if (open === false) {
     // Restore text if cleared but selection remains
@@ -180,6 +204,10 @@
     // Capture current highlighted item (attempt to restore after searching)
     const prevHighlightedOption = filteredOptions[highlightIndex];
 
+    if (highlightIndex === -1 && menuOptionsEl) {
+      highlightIndex = nextOptionIndex(highlightIndex);
+    }
+
     // Do not search if menu is not open / closing on selection
     search(searchText).then(() => {
       // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
@@ -188,7 +216,7 @@
         // Highlight selected if none currently
         highlightIndex = selectedIndex === -1 ? 0 : selectedIndex;
       } else {
-        // Attempt to re-highlight previously highlighted item after search
+        // Attempt to re-highlight previously highlighted option after search
         const prevHighlightedOptionIndex = filteredOptions.findIndex(
           (o) => o === prevHighlightedOption
         );
@@ -197,8 +225,8 @@
           // Maintain previously highlight index after filter update (option still available)
           highlightIndex = prevHighlightedOptionIndex;
         } else {
-          // Highlight first item
-          highlightIndex = 0;
+          // Highlight first option
+          highlightIndex = nextOptionIndex(-1);
         }
       }
     });
@@ -239,8 +267,6 @@
   function onKeyDown(e: KeyboardEvent) {
     logger.debug('onKeyDown', { key: e.key });
 
-    // e.preventDefault();
-
     switch (e.key) {
       case 'Tab':
         if (e.shiftKey) {
@@ -250,22 +276,12 @@
 
       case 'ArrowDown':
         show();
-        if (highlightIndex < filteredOptions.length - 1) {
-          highlightIndex++;
-        } else {
-          // wrap to top
-          highlightIndex = 0;
-        }
+        highlightIndex = nextOptionIndex(highlightIndex);
         break;
 
       case 'ArrowUp':
         show();
-        if (highlightIndex > 0) {
-          highlightIndex--;
-        } else {
-          // wrap to bottom
-          highlightIndex = filteredOptions.length - 1;
-        }
+        highlightIndex = prevOptionIndex(highlightIndex);
         break;
 
       case 'Escape':
