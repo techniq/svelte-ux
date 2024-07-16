@@ -204,17 +204,13 @@
     // Capture current highlighted item (attempt to restore after searching)
     const prevHighlightedOption = filteredOptions[highlightIndex];
 
-    if (highlightIndex === -1 && menuOptionsEl) {
-      highlightIndex = nextOptionIndex(highlightIndex);
-    }
-
     // Do not search if menu is not open / closing on selection
     search(searchText).then(() => {
       // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
       const selectedIndex = filteredOptions.findIndex((o) => o.value === value);
       if (highlightIndex === -1) {
         // Highlight selected if none currently
-        highlightIndex = selectedIndex === -1 ? 0 : selectedIndex;
+        highlightIndex = selectedIndex === -1 ? nextOptionIndex(-1) : selectedIndex;
       } else {
         // Attempt to re-highlight previously highlighted option after search
         const prevHighlightedOptionIndex = filteredOptions.findIndex(
@@ -275,13 +271,17 @@
         break;
 
       case 'ArrowDown':
+        if (open) {
+          highlightIndex = nextOptionIndex(highlightIndex);
+        }
         show();
-        highlightIndex = nextOptionIndex(highlightIndex);
         break;
 
       case 'ArrowUp':
+        if (open) {
+          highlightIndex = prevOptionIndex(highlightIndex);
+        }
         show();
-        highlightIndex = prevOptionIndex(highlightIndex);
         break;
 
       case 'Escape':
