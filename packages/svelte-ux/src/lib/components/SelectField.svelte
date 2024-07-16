@@ -412,7 +412,6 @@
   }
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 <button
   type="button"
   aria-haspopup={!inlineOptions ? 'listbox' : undefined}
@@ -424,6 +423,7 @@
   )}
   bind:this={selectFieldEl}
   on:click={onClick}
+  tabindex="-1"
 >
   <TextField
     {label}
