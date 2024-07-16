@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.73.3
+
+### Patch Changes
+
+- [SelectField] Handle disabled options with keyboard navigation and initial highlighted option ([`fee78c68f4e5053e4357425fc998b166b14e9948`](https://github.com/techniq/svelte-ux/commit/fee78c68f4e5053e4357425fc998b166b14e9948))
+
+- [SelectField] Do not allow wrapping `button` container to be keyboard focusable ([`95447dbc335860290ceebdf9985779a051caa4e8`](https://github.com/techniq/svelte-ux/commit/95447dbc335860290ceebdf9985779a051caa4e8))
+
+- [SelectField] Only open menu with arrow keys (do not affect initial highlight index), aligning with aria guidelines. ([`e19e7ddff009e4e19abe8512ccd971d4f5e9b8a3`](https://github.com/techniq/svelte-ux/commit/e19e7ddff009e4e19abe8512ccd971d4f5e9b8a3))
+
 ## 0.73.2
 
 ### Patch Changes
