@@ -1,7 +1,15 @@
 <script lang="ts">
-  import { mdiDotsVertical, mdiPlus } from '@mdi/js';
+  import { mdiCheck, mdiDotsVertical, mdiPlus } from '@mdi/js';
 
-  import { Button, Drawer, Form, MultiSelect, MultiSelectOption, ToggleButton } from 'svelte-ux';
+  import {
+    Button,
+    Drawer,
+    Form,
+    Icon,
+    MultiSelect,
+    MultiSelectOption,
+    ToggleButton,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const options = [
@@ -158,7 +166,7 @@
   </div>
 </Preview>
 
-<h2>option slot</h2>
+<h2>option slot with MultiSelectOption custom actions</h2>
 
 <Preview>
   {value.length} selected
@@ -199,6 +207,34 @@
           </ToggleButton>
         </div>
       </MultiSelectOption>
+    </MultiSelect>
+  </div>
+</Preview>
+
+<h2>option slot with custom markup</h2>
+
+<Preview>
+  {value.length} selected
+  <div class="flex flex-col max-h-[360px] overflow-auto">
+    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)}>
+      <svelte:fragment
+        slot="option"
+        let:option
+        let:label
+        let:value
+        let:checked
+        let:indeterminate
+        let:onChange
+      >
+        <button
+          class="px-2 py-1 text-surface-content flex gap-1 w-full"
+          role="option"
+          on:click={onChange}
+        >
+          <Icon data={checked ? mdiCheck : ''} />
+          <div>{label}</div>
+        </button>
+      </svelte:fragment>
     </MultiSelect>
   </div>
 </Preview>
