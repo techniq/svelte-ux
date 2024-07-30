@@ -229,6 +229,7 @@
         <button
           class="px-2 py-1 text-surface-content flex gap-1 w-full"
           role="option"
+          aria-selected={checked}
           on:click={onChange}
         >
           <Icon data={checked ? mdiCheck : ''} />
