@@ -29,6 +29,7 @@
   export let max: number | undefined = undefined;
   export let placement: Placement = 'bottom-start';
   export let infiniteScroll = false;
+  export let optionProps: Partial<ComponentProps<MultiSelectOption>> | undefined = undefined;
 
   // TextField props
   export let label = '';
@@ -235,7 +236,13 @@
       let:onChange
     >
       <slot name="option" {option} {label} {value} {checked} {indeterminate} {disabled} {onChange}>
-        <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
+        <MultiSelectOption
+          {checked}
+          {indeterminate}
+          {disabled}
+          {...optionProps}
+          on:change={onChange}
+        >
           {label}
         </MultiSelectOption>
       </slot>

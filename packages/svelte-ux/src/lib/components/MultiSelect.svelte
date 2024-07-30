@@ -25,6 +25,7 @@
   export let inlineSearch = false;
   export let autoFocusSearch = false;
   export let placeholder = 'Search items';
+  export let optionProps: Partial<ComponentProps<MultiSelectOption>> | undefined = undefined;
 
   /** Wrap options in `InfiniteScroll` to amortize rendering of a large number of options */
   export let infiniteScroll = false;
@@ -202,7 +203,13 @@
           {disabled}
           {onChange}
         >
-          <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
+          <MultiSelectOption
+            {checked}
+            {indeterminate}
+            {disabled}
+            {...optionProps}
+            on:change={onChange}
+          >
             {label}
           </MultiSelectOption>
         </slot>
@@ -254,7 +261,13 @@
             {disabled}
             {onChange}
           >
-            <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
+            <MultiSelectOption
+              {checked}
+              {indeterminate}
+              {disabled}
+              {...optionProps}
+              on:change={onChange}
+            >
               {label}
             </MultiSelectOption>
           </slot>

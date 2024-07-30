@@ -27,6 +27,7 @@
   export let searchText = '';
   /** Maximum number of options that can be selected  */
   export let max: number | undefined = undefined;
+  export let optionProps: Partial<ComponentProps<MultiSelectOption>> | undefined = undefined;
 
   export let classes: {
     root?: string;
@@ -93,7 +94,13 @@
       let:onChange
     >
       <slot name="option" {option} {label} {value} {checked} {indeterminate} {disabled} {onChange}>
-        <MultiSelectOption {checked} {indeterminate} {disabled} on:change={onChange}>
+        <MultiSelectOption
+          {checked}
+          {indeterminate}
+          {disabled}
+          {...optionProps}
+          on:change={onChange}
+        >
           {label}
         </MultiSelectOption>
       </slot>
