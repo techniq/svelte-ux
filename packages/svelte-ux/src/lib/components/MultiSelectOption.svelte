@@ -25,6 +25,8 @@
     classes.root,
     $$props.class
   )}
+  role="option"
+  aria-selected={checked}
 >
   <Checkbox
     bind:checked

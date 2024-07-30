@@ -161,6 +161,8 @@
     classes.root,
     $$restProps.class
   )}
+  role="listbox"
+  aria-multiselectable="true"
 >
   <slot name="beforeOptions" selection={$selection} />
 
