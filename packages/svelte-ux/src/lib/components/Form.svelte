@@ -5,6 +5,7 @@
   import formStore from '../stores/formStore.js';
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
+  import changeStore from '../stores/changeStore.js';
 
   const dispatch = createEventDispatcher();
 
@@ -18,7 +19,8 @@
   const [_state, draft, errors] = formStore(initial, { schema });
   $: current = draft.current;
 
-  $: dispatch('change', $_state);
+  const changed = changeStore(_state, (value) => dispatch('change', value.current));
+  $changed; // must subscribe to store to get onChange callbacks
 </script>
 
 <form
