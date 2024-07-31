@@ -36,6 +36,30 @@
   <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} />
 </Preview>
 
+<h2>options variant: checkmark</h2>
+
+<Preview>
+  {value.length} selected
+  <MultiSelect
+    {options}
+    {value}
+    optionProps={{ variant: 'checkmark' }}
+    on:change={(e) => (value = e.detail.value)}
+  />
+</Preview>
+
+<h2>options variant: fill</h2>
+
+<Preview>
+  {value.length} selected
+  <MultiSelect
+    {options}
+    {value}
+    optionProps={{ variant: 'fill' }}
+    on:change={(e) => (value = e.detail.value)}
+  />
+</Preview>
+
 <h2>inlineSearch</h2>
 
 <Preview>

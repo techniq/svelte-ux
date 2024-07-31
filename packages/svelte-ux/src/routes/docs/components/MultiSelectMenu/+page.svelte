@@ -41,6 +41,57 @@
   </span>
 </Preview>
 
+<h2>options variants</h2>
+
+<Preview>
+  <div class="inline-grid gap-3">
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        {options}
+        {value}
+        optionProps={{ variant: 'checkbox' }}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+      />
+    </ToggleButton>
+
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        {options}
+        {value}
+        optionProps={{ variant: 'checkmark' }}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+      />
+    </ToggleButton>
+
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        {options}
+        {value}
+        optionProps={{ variant: 'fill' }}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+      />
+    </ToggleButton>
+  </div>
+</Preview>
+
 <h2>inlineSearch</h2>
 
 <Preview>
