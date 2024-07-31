@@ -92,34 +92,6 @@
   </div>
 </Preview>
 
-<!-- <h2>options variants</h2>
-
-<Preview>
-  <div class="grid gap-3">
-    <MultiSelectField
-      label="checkbox (default)"
-      {options}
-      {value}
-      optionProps={{ variant: 'checkbox' }}
-      on:change={(e) => (value = e.detail.value)}
-    />
-    <MultiSelectField
-      label="checkmark"
-      {options}
-      {value}
-      optionProps={{ variant: 'checkmark' }}
-      on:change={(e) => (value = e.detail.value)}
-    />
-    <MultiSelectField
-      label="fill"
-      {options}
-      {value}
-      optionProps={{ variant: 'fill' }}
-      on:change={(e) => (value = e.detail.value)}
-    />
-  </div>
-</Preview> -->
-
 <h2>inlineSearch</h2>
 
 <Preview>
