@@ -1,5 +1,21 @@
 # svelte-ux
 
+## 0.74.0
+
+### Minor Changes
+
+- [MultiSelectMenu] Add optionProps to easily set `variant` on MultiSelectOption ([#445](https://github.com/techniq/svelte-ux/pull/445))
+
+- [MultiSelectField] Add optionProps to easily set `variant` on MultiSelectOption ([#445](https://github.com/techniq/svelte-ux/pull/445))
+
+- [MultiSelectOption] Add variant support (checkbox (default), checkmark, and fill) ([#445](https://github.com/techniq/svelte-ux/pull/445))
+
+### Patch Changes
+
+- [MultiSelectOption] Add aria role and attributes ([`fc18db3a9d44c3bf9580eaed69996716b6b2d048`](https://github.com/techniq/svelte-ux/commit/fc18db3a9d44c3bf9580eaed69996716b6b2d048))
+
+- [MultiSelect] Add aria role and attributes ([`fc18db3a9d44c3bf9580eaed69996716b6b2d048`](https://github.com/techniq/svelte-ux/commit/fc18db3a9d44c3bf9580eaed69996716b6b2d048))
+
 ## 0.73.3
 
 ### Patch Changes
