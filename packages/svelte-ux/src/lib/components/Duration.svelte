@@ -20,8 +20,9 @@
 
   const settingsClasses = getComponentClasses('Duration');
 
-  function getDelay() {
-    const newDuration = getDuration(start, end ?? $timer, duration);
+  function getDelay(useTimer = true) {
+    const endTime = end ?? (useTimer ? $timer : null);
+    const newDuration = getDuration(start, endTime, duration);
 
     const unitsMoreThanSeconds = [
       newDuration?.years,
@@ -43,7 +44,8 @@
   }
 
   const timer = timerStore({
-    delay: getDelay(),
+    // Pass false to avoid referencing `timer` before it exists
+    delay: getDelay(false),
     disabled: end != null,
     onTick: () => {
       // Update delay based on display duration
