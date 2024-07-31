@@ -183,7 +183,7 @@
 <h2>Async options</h2>
 
 <Preview>
-  <SelectField bind:value options={optionsAsync} {loading} />
+  <SelectField value options={optionsAsync} {loading} />
   <Button
     on:click={() => {
       // simulate async loading of 2 seconds
