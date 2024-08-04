@@ -22,7 +22,7 @@
     "@changesets/cli": "^2.27.7",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@skeletonlabs/tw-plugin": "^0.4.0",
-    "@sveltejs/adapter-auto": "^3.2.2",
+    "@sveltejs/adapter-cloudflare": "^4.7.0",
     "@sveltejs/kit": "^2.5.18",
     "@sveltejs/package": "^2.3.2",
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
