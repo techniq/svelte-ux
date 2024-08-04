@@ -26,12 +26,7 @@
 
       if (e.target != actionsEl && actionsEl?.contains(e.target)) {
         // Close if action button clicked on (but not container).  Can be disabled with `e.stopPropagation()`
-        // console.log('clicked:actions', e.target, actionsEl);
         open = false;
-      } else if (notificationEl?.contains(e.target)) {
-        // console.log('clicked:within', e.target);
-      } else {
-        // console.log('clicked:other', e.target);
       }
     } catch (err) {
       console.error(err);

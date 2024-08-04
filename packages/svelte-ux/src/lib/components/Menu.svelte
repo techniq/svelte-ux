@@ -48,10 +48,7 @@
     try {
       if (e.target === menuItemsEl) {
         // Clicked within menu but outside of any items
-        // console.log('clicked:menuItems', e.target, menuEl);
       } else if (!explicitClose) {
-        //
-        // console.log('clicked:menuItem', e.target);
         open = false;
         dispatch('close', 'item');
       }
