@@ -34,7 +34,7 @@ jobs:
                   apiToken: ${{ secrets.CF_API_TOKEN }}
                   accountId: ${{ secrets.CF_ACCOUNT_ID }}
                   githubToken: ${{ secrets.GITHUB_TOKEN }}
-                  projectName: layerchart
+                  projectName: svelte-ux
                   directory: ./.svelte-kit/cloudflare
                   workingDirectory: packages/svelte-ux
                   deploymentName: Production
