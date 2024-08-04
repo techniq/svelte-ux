@@ -108,7 +108,6 @@
       const initialValue = value;
       value = clean(value).join('');
       if (value != initialValue) {
-        // console.log('change', { initialValue, value });
         dispatch('change', { value });
       }
     }

@@ -44,15 +44,10 @@
         // Dialog element not open and e.target no longer within trigger (ex. clear button pressed on TableSelectField)
       } else if (actionsEl.contains(e.target)) {
         // Close if action button clicked on (but not container).  Can be disabled with `e.stopPropagation()`
-        // console.log('clicked:actions', e.target, actionsEl);
         if (e.target != actionsEl && !e.target.hasAttribute('slot')) {
           open = false;
           dispatch('close-attempt');
         }
-      } else if (dialogEl.contains(e.target)) {
-        // console.log('clicked:within', e.target);
-      } else {
-        // console.log('clicked:other', e.target);
       }
     } catch (err) {
       console.error(err);
