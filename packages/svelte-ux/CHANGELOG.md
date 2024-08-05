@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.74.1
+
+### Patch Changes
+
+- Avoid uninitialized variable error in Duration component with Svelte 5 ([#447](https://github.com/techniq/svelte-ux/pull/447))
+
+- [movable] Fix `y` value in `move` event ([#453](https://github.com/techniq/svelte-ux/pull/453))
+
+- [Form] Workaround Svelte 5 dispatching `change` event immediately ([`f419435edbf4f0c004896e87e92b9f7ba770bcc9`](https://github.com/techniq/svelte-ux/commit/f419435edbf4f0c004896e87e92b9f7ba770bcc9))
+
 ## 0.74.0
 
 ### Minor Changes
