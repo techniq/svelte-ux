@@ -145,7 +145,7 @@ export const movable: Action<HTMLElement, MovableOptions | undefined> = (node, o
     if ((xEnabled && dx) || (yEnabled && dy)) {
       node.dispatchEvent(
         new CustomEvent('move', {
-          detail: { x: lastX, y: lastX, dx: xEnabled ? dx : 0, dy: yEnabled ? dy : 0 },
+          detail: { x: lastX, y: lastY, dx: xEnabled ? dx : 0, dy: yEnabled ? dy : 0 },
         })
       );
     } else {
