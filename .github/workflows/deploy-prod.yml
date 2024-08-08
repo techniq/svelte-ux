@@ -4,8 +4,7 @@ on:
     branches:
       - main
     paths:
-      - packages/create-svelte-ux/**
-      - packages/svelte/**
+      - packages/svelte-ux/**
 
 jobs:
   deploy-production:
