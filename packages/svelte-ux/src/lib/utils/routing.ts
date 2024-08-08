@@ -1,7 +1,5 @@
 // See: routify's helpers: https://github.com/roxiness/routify/blob/9a1b7f5f8fc950a344cf20f7cbaa760593ded8fb/runtime/helpers.js#L244-L268
 export function url(currentUrl: URL, path: string) {
-  // console.log({ $page, path });
-
   if (path == null) {
     return path;
   } else if (path.match(/^\.\.?\//)) {
