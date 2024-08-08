@@ -1,5 +1,11 @@
 # create-svelte-ux
 
+## 0.6.4
+
+### Patch Changes
+
+- Update dependencies. Remove node 18.x from CI workflows ([`8f0292d157a62ae5bca8b6a2537c1586001fa994`](https://github.com/techniq/svelte-ux/commit/8f0292d157a62ae5bca8b6a2537c1586001fa994))
+
 ## 0.6.3
 
 ### Patch Changes
