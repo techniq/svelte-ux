@@ -20,5 +20,5 @@
     "@svitejs/changesets-changelog-github-compact": "^1.1.0",
     "rimraf": "5.0.7"
   },
-  "packageManager": "pnpm@9.6.0"
+  "packageManager": "pnpm@9.7.0"
 }
