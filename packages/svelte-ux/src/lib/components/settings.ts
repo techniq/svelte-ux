@@ -101,8 +101,8 @@ function createShowDrawer() {
 }
 
 export function settings(settings: SettingsInput = {}): Settings {
-  const lightThemes = settings.themes ? settings.themes.light ?? [] : ['light'];
-  const darkThemes = settings.themes ? settings.themes.dark ?? [] : ['dark'];
+  const lightThemes = settings.themes ? (settings.themes.light ?? []) : ['light'];
+  const darkThemes = settings.themes ? (settings.themes.dark ?? []) : ['dark'];
 
   const currentTheme =
     // In some cases, `settings` is called again from inside a component. Don't create a new theme store in this case.

@@ -5,8 +5,8 @@
  */
 export function getScrollParent(node: HTMLElement): HTMLElement {
   const isElement = node instanceof HTMLElement;
-  const overflowX = isElement ? window?.getComputedStyle(node).overflowX ?? 'visible' : 'unknown';
-  const overflowY = isElement ? window?.getComputedStyle(node).overflowY ?? 'visible' : 'unknown';
+  const overflowX = isElement ? (window?.getComputedStyle(node).overflowX ?? 'visible') : 'unknown';
+  const overflowY = isElement ? (window?.getComputedStyle(node).overflowY ?? 'visible') : 'unknown';
   const isHorizontalScrollable =
     !['visible', 'hidden'].includes(overflowX) && node.scrollWidth > node.clientWidth;
   const isVerticalScrollable =
@@ -30,8 +30,8 @@ export function scrollIntoView(node: HTMLElement) {
   const removeScrollParentOffset = scrollParent != node.offsetParent; // ignore `position: absolute` parent, for example
 
   const nodeOffset = {
-    top: node.offsetTop - (removeScrollParentOffset ? scrollParent?.offsetTop ?? 0 : 0),
-    left: node.offsetLeft - (removeScrollParentOffset ? scrollParent?.offsetLeft ?? 0 : 0),
+    top: node.offsetTop - (removeScrollParentOffset ? (scrollParent?.offsetTop ?? 0) : 0),
+    left: node.offsetLeft - (removeScrollParentOffset ? (scrollParent?.offsetLeft ?? 0) : 0),
   };
 
   const optionCenter = {

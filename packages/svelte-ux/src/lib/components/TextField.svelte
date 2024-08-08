@@ -139,7 +139,7 @@
   }
 
   let inputValue: InputValue | null = value == null ? '' : String(value);
-  $: potentialInputValue = isLiteralObject(value) ? Object.values(value)[0] : value ?? null;
+  $: potentialInputValue = isLiteralObject(value) ? Object.values(value)[0] : (value ?? null);
   $: if (inputType !== 'number' || inputValue != potentialInputValue) {
     // Update the inputValue, but when the input type is number only do it if the values are actually different.
     // This avoids the cursor jumping around when backspacing numbers around a decimal point, since

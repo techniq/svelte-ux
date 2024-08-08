@@ -118,7 +118,7 @@ export function getComponents(): ComponentSettings {
 export function resolveComponentClasses<NAME extends ComponentName>(
   theme: ClassesProp<(typeof Components)[NAME]>
 ): ResolvedComponentClassesProp<NAME> {
-  return typeof theme === 'string' ? { root: theme } : theme ?? {};
+  return typeof theme === 'string' ? { root: theme } : (theme ?? {});
 }
 
 export function getComponentClasses<NAME extends ComponentName>(

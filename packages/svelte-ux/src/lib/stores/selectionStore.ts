@@ -84,7 +84,7 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
     const selectedArr = [...$selected.values()];
 
     return {
-      selected: single ? selectedArr[0] ?? null : selectedArr,
+      selected: single ? (selectedArr[0] ?? null) : selectedArr,
       toggleSelected,
       isSelected,
       isDisabled,

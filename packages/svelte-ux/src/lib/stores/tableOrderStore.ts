@@ -69,7 +69,7 @@ function createState(column: ColumnDef, props?: TableOrderProps, prevState?: Tab
 
   const direction =
     prevState?.by !== by
-      ? props?.initialDirection ?? 'asc'
+      ? (props?.initialDirection ?? 'asc')
       : prevState.direction === 'asc'
         ? 'desc'
         : 'asc';

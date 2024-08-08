@@ -41,10 +41,10 @@ export class Logger {
   log(level: LogLevel, ...message: any) {
     // TODO: Consider checking `env` for SSR support?
     const enabledLoggers = browser
-      ? localStorage
+      ? (localStorage
           .getItem('logger')
           ?.split(',')
-          .map((x) => x.split(':') as [string, LogLevel?]) ?? []
+          .map((x) => x.split(':') as [string, LogLevel?]) ?? [])
       : [];
 
     const enabledLogger = enabledLoggers.find((x) => x[0] === this.name);
