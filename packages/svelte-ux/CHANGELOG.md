@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.74.2
+
+### Patch Changes
+
+- [AppLayout] Fix height of nav clipping bottom ([`8b299ad73caa8c644d70304a4ff4d8869e20cd42`](https://github.com/techniq/svelte-ux/commit/8b299ad73caa8c644d70304a4ff4d8869e20cd42))
+
 ## 0.74.1
 
 ### Patch Changes
