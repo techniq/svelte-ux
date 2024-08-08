@@ -51,7 +51,7 @@
 
   <aside
     class={cls(
-      'fixed top-0 h-full w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
+      'fixed top-0 h-[calc(100%-var(--headerHeight))] w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
       temporaryDrawer
         ? 'fixed h-full z-50 elevation-10'
         : headerPosition === 'full'
