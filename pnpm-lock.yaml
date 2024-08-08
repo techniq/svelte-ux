@@ -17,6 +17,9 @@ importers:
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
+      wrangler:
+        specifier: ^3.69.1
+        version: 3.69.1(@cloudflare/workers-types@4.20240806.0)
 
   packages/create-svelte-ux:
     dependencies:
@@ -80,7 +83,7 @@ importers:
         version: 1.29.0
       sveld:
         specifier: ^0.20.0
-        version: 0.20.0(postcss-load-config@6.0.1(postcss@8.4.41))(postcss@8.4.41)
+        version: 0.20.0(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)
       tailwind-merge:
         specifier: ^2.4.0
         version: 2.4.0
@@ -159,7 +162,7 @@ importers:
         version: 4.2.18
       svelte-check:
         specifier: ^3.8.5
-        version: 3.8.5(postcss-load-config@6.0.1(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)
+        version: 3.8.5(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)
       svelte2tsx:
         specifier: ^0.7.15
         version: 0.7.15(svelte@4.2.18)(typescript@5.5.4)
@@ -1915,24 +1918,6 @@ packages:
       postcss:
         optional: true
       ts-node:
-        optional: true
-
-  postcss-load-config@6.0.1:
-    resolution: {integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      jiti: '>=1.21.0'
-      postcss: '>=8.0.9'
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      jiti:
-        optional: true
-      postcss:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
         optional: true
 
   postcss-nested@6.2.0:
@@ -4224,13 +4209,6 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.41
 
-  postcss-load-config@6.0.1(postcss@8.4.41):
-    dependencies:
-      lilconfig: 3.1.2
-    optionalDependencies:
-      postcss: 8.4.41
-    optional: true
-
   postcss-nested@6.2.0(postcss@8.4.41):
     dependencies:
       postcss: 8.4.41
@@ -4522,7 +4500,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  sveld@0.20.0(postcss-load-config@6.0.1(postcss@8.4.41))(postcss@8.4.41):
+  sveld@0.20.0(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41):
     dependencies:
       '@rollup/plugin-node-resolve': 13.3.0(rollup@2.79.1)
       acorn: 8.11.3
@@ -4532,7 +4510,7 @@ snapshots:
       rollup: 2.79.1
       rollup-plugin-svelte: 7.2.0(rollup@2.79.1)(svelte@4.2.18)
       svelte: 4.2.18
-      svelte-preprocess: 5.1.4(postcss-load-config@6.0.1(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4)
+      svelte-preprocess: 5.1.4(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4)
       typescript: 5.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -4545,14 +4523,14 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-check@3.8.5(postcss-load-config@6.0.1(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18):
+  svelte-check@3.8.5(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 3.6.0
       picocolors: 1.0.1
       sade: 1.8.1
       svelte: 4.2.18
-      svelte-preprocess: 5.1.4(postcss-load-config@6.0.1(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4)
+      svelte-preprocess: 5.1.4(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4)
       typescript: 5.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -4569,7 +4547,7 @@ snapshots:
     dependencies:
       svelte: 4.2.18
 
-  svelte-preprocess@5.1.4(postcss-load-config@6.0.1(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4):
+  svelte-preprocess@5.1.4(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
@@ -4579,7 +4557,7 @@ snapshots:
       svelte: 4.2.18
     optionalDependencies:
       postcss: 8.4.41
-      postcss-load-config: 6.0.1(postcss@8.4.41)
+      postcss-load-config: 4.0.2(postcss@8.4.41)
       typescript: 5.5.4
 
   svelte2tsx@0.7.15(svelte@4.2.18)(typescript@5.5.4):
