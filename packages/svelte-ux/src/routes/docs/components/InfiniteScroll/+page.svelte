@@ -32,3 +32,13 @@
     </InfiniteScroll>
   </div>
 </Preview>
+
+<h2>Viewport root (no overflown parent/ancestor)</h2>
+
+<Preview>
+  <InfiniteScroll {items} let:visibleItems>
+    {#each visibleItems as item}
+      <ListItem title={item.name} />
+    {/each}
+  </InfiniteScroll>
+</Preview>
