@@ -120,9 +120,9 @@
 <h2>Dialog in Dialog</h2>
 
 <Preview>
-  <Toggle let:on={open} let:toggle={toggleDelete}>
-    <Button icon={mdiTrashCan} on:click={toggleDelete} color="danger">Delete</Button>
-    <Dialog {open}>
+  <Toggle let:on={open} let:toggleOn={toggleDeleteOn} let:toggleOff={toggleDeleteOff}>
+    <Button icon={mdiTrashCan} on:click={toggleDeleteOn} color="danger">Delete</Button>
+    <Dialog {open} on:close={toggleDeleteOff}>
       <div slot="title">Delete this item ?</div>
       <div class="px-6 py-3">This will permanently delete the item</div>
       <div slot="actions">
@@ -148,7 +148,7 @@
                 on:click={(e) => {
                   console.log('Deleting item...');
                   toggleConfirm();
-                  toggleDelete();
+                  toggleDeleteOff();
                 }}
                 variant="fill"
                 color="danger"
