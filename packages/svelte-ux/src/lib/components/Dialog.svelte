@@ -14,7 +14,10 @@
   import Overlay from './Overlay.svelte';
   import { getComponentClasses } from './theme.js';
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{
+    'close-attempt': { open: boolean };
+    close: { open: boolean };
+  }>();
 
   export let open = false;
   export let portal: PortalOptions = true;
@@ -33,6 +36,18 @@
   let dialogEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
 
+  function attemptClose() {
+    if (!persistent) {
+      open = false;
+    }
+    dispatch('close-attempt', { open });
+  }
+
+  function close() {
+    open = false;
+    dispatch('close', { open });
+  }
+
   function onClick(e: MouseEvent) {
     try {
       // https://stackoverflow.com/questions/28900077/why-is-event-target-not-element-in-typescript
@@ -45,8 +60,7 @@
       } else if (actionsEl.contains(e.target)) {
         // Close if action button clicked on (but not container).  Can be disabled with `e.stopPropagation()`
         if (e.target != actionsEl && !e.target.hasAttribute('slot')) {
-          open = false;
-          dispatch('close-attempt');
+          attemptClose();
         }
       }
     } catch (err) {
@@ -55,7 +69,7 @@
   }
 
   $: if (open === false) {
-    dispatch('close', { open });
+    close();
   }
 </script>
 
@@ -63,10 +77,7 @@
 {#if open}
   <Backdrop
     on:click={() => {
-      if (!persistent) {
-        open = false;
-      }
-      dispatch('close-attempt');
+      attemptClose();
     }}
     on:mouseup={(e) => {
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
@@ -95,12 +106,7 @@
       if (e.key === 'Escape') {
         // Do not allow event to reach Popover's on:keydown
         e.stopPropagation();
-
-        if (!persistent) {
-          open = false;
-        }
-
-        dispatch('close-attempt');
+        attemptClose();
       }
     }}
     use:portalAction={portal}
@@ -130,17 +136,17 @@
         </Overlay>
       {/if}
 
-      <slot name="header">
+      <slot name="header" {close} {attemptClose}>
         {#if $$slots.title}
           <div
             class={cls('text-xl font-bold pt-4 pb-2 px-6', settingsClasses.title, classes.title)}
           >
-            <slot name="title" />
+            <slot name="title" {close} {attemptClose} />
           </div>
         {/if}
       </slot>
 
-      <slot />
+      <slot {close} {attemptClose} />
 
       {#if $$slots.actions}
         <div
@@ -151,7 +157,7 @@
           )}
           bind:this={actionsEl}
         >
-          <slot name="actions" />
+          <slot name="actions" {close} {attemptClose} />
         </div>
       {/if}
     </div>
