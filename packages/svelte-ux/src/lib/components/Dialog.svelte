@@ -14,7 +14,10 @@
   import Overlay from './Overlay.svelte';
   import { getComponentClasses } from './theme.js';
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{
+    close: { open: boolean };
+    open: null;
+  }>();
 
   export let open = false;
   export let portal: PortalOptions = true;
@@ -45,8 +48,7 @@
       } else if (actionsEl.contains(e.target)) {
         // Close if action button clicked on (but not container).  Can be disabled with `e.stopPropagation()`
         if (e.target != actionsEl && !e.target.hasAttribute('slot')) {
-          open = false;
-          dispatch('close-attempt');
+          close();
         }
       }
     } catch (err) {
@@ -54,7 +56,21 @@
     }
   }
 
-  $: if (open === false) {
+  function close(options?: { force?: boolean }) {
+    const force = options?.force ?? false;
+    if (open) {
+      if (!persistent || force) {
+        open = false;
+      } else {
+        // attempted close of persistent dialog
+        dispatch('close', { open });
+      }
+    }
+  }
+
+  $: if (open) {
+    dispatch('open');
+  } else {
     dispatch('close', { open });
   }
 </script>
@@ -62,12 +78,7 @@
 <!-- Separate `{#if}` block works around Svelte 5 regression: https://github.com/sveltejs/svelte/issues/12440  -->
 {#if open}
   <Backdrop
-    on:click={() => {
-      if (!persistent) {
-        open = false;
-      }
-      dispatch('close-attempt');
-    }}
+    on:click={() => close()}
     on:mouseup={(e) => {
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
@@ -95,12 +106,7 @@
       if (e.key === 'Escape') {
         // Do not allow event to reach Popover's on:keydown
         e.stopPropagation();
-
-        if (!persistent) {
-          open = false;
-        }
-
-        dispatch('close-attempt');
+        close();
       }
     }}
     use:portalAction={portal}
@@ -130,17 +136,17 @@
         </Overlay>
       {/if}
 
-      <slot name="header">
+      <slot name="header" {open} {close}>
         {#if $$slots.title}
           <div
             class={cls('text-xl font-bold pt-4 pb-2 px-6', settingsClasses.title, classes.title)}
           >
-            <slot name="title" />
+            <slot name="title" {open} {close} />
           </div>
         {/if}
       </slot>
 
-      <slot />
+      <slot {open} {close} />
 
       {#if $$slots.actions}
         <div
@@ -151,7 +157,7 @@
           )}
           bind:this={actionsEl}
         >
-          <slot name="actions" />
+          <slot name="actions" {open} {close} />
         </div>
       {/if}
     </div>

@@ -185,11 +185,53 @@
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
     <Button on:click={toggle}>Show Dialog</Button>
-    <Dialog {open} on:close={toggleOff} persistent>
+    <Dialog {open} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="primary">Yes</Button>
-        <Button>No</Button>
+        <Button variant="fill" color="primary" on:click={toggleOff}>Yes, close this dialog</Button>
+        <Button>No, keep this dialog open</Button>
+      </div>
+    </Dialog>
+  </Toggle>
+</Preview>
+
+<h2>With close slot prop</h2>
+
+<Preview>
+  <Toggle let:on={open} let:toggle let:toggleOff>
+    <Button on:click={toggle}>Show Dialog</Button>
+    <Dialog
+      {open}
+      persistent
+      let:close
+      on:close={({ detail }) => {
+        if (detail.open) {
+          alert(
+            "Attempted to close persistent Dialog without using 'force'\n\nUse 'close({ force: true })' instead of Use 'close()' to close.\n\nDialog will remain open."
+          );
+        } else {
+          alert(
+            "Persistent Dialog forced close via 'close({ force: true })'.\n\nDialog will close."
+          );
+          toggleOff();
+        }
+      }}
+    >
+      <div class="p-5">
+        <div class="mb-4">
+          The <span
+            class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded"
+            >close</span
+          > method is available on every slot.
+        </div>
+        <div class="grid gap-2">
+          <Button variant="fill" color="primary" on:click={() => close()}
+            >Attempt close: <code>close()</code></Button
+          >
+          <Button variant="fill" color="primary" on:click={() => close({ force: true })}
+            >Force close: <code>close({'{ force: true }'})</code></Button
+          >
+        </div>
       </div>
     </Dialog>
   </Toggle>
