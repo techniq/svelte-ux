@@ -13,7 +13,8 @@
 
   const dispatch = createEventDispatcher<{
     change: { open: boolean };
-    close: { open: boolean; reason: string };
+    close: { open: boolean };
+    open: null;
   }>();
 
   export let open = true;
@@ -31,15 +32,22 @@
 
   $: dispatch('change', { open });
 
-  function close(options?: { force?: boolean; reason?: string }) {
+  function close(options?: { force?: boolean }) {
     const force = options?.force ?? false;
-    const reason = options?.reason ?? 'unknown';
     if (open) {
       if (!persistent || force) {
         open = false;
+      } else {
+        // attempted close of persistent dialog
+        dispatch('close', { open });
       }
-      dispatch('close', { open, reason });
     }
+  }
+
+  $: if (open) {
+    dispatch('open');
+  } else {
+    dispatch('close', { open });
   }
 </script>
 

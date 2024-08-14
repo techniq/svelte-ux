@@ -15,7 +15,8 @@
   import { getComponentClasses } from './theme.js';
 
   const dispatch = createEventDispatcher<{
-    close: { open: boolean; reason: string };
+    close: { open: boolean };
+    open: null;
   }>();
 
   export let open = false;
@@ -34,17 +35,6 @@
 
   let dialogEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
-
-  function close(options?: { force?: boolean; reason?: string }) {
-    const force = options?.force ?? false;
-    const reason = options?.reason ?? 'unknown';
-    if (open) {
-      if (!persistent || force) {
-        open = false;
-      }
-      dispatch('close', { open, reason });
-    }
-  }
 
   function onClick(e: MouseEvent) {
     try {
@@ -66,8 +56,22 @@
     }
   }
 
-  $: if (open === false) {
-    close();
+  function close(options?: { force?: boolean }) {
+    const force = options?.force ?? false;
+    if (open) {
+      if (!persistent || force) {
+        open = false;
+      } else {
+        // attempted close of persistent dialog
+        dispatch('close', { open });
+      }
+    }
+  }
+
+  $: if (open) {
+    dispatch('open');
+  } else {
+    dispatch('close', { open });
   }
 </script>
 
