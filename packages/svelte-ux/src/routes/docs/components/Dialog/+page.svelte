@@ -7,6 +7,9 @@
   let open = false;
   let openAsync = false;
   let loading = false;
+
+  let close: (() => void);
+  let attemptClose: (() => void);
 </script>
 
 <h1>Examples</h1>
@@ -188,8 +191,43 @@
     <Dialog {open} on:close={toggleOff} persistent>
       <div slot="title">Are you sure you want to do that?</div>
       <div slot="actions">
-        <Button variant="fill" color="primary">Yes</Button>
-        <Button>No</Button>
+        <Button variant="fill" color="primary" on:click={toggleOff}>Yes, close this dialog</Button>
+        <Button>No, keep this dialog open</Button>
+      </div>
+    </Dialog>
+  </Toggle>
+</Preview>
+
+<h2>Dispatch closing actions via slot props</h2>
+
+<Preview>
+  <Toggle let:on={open} let:toggle let:toggleOff>
+    <Button on:click={toggle}>Show Dialog</Button>
+    <Dialog
+      {open}
+      on:close={toggleOff}
+      persistent
+      let:attemptClose
+      let:close
+      on:close-attempt={() => alert('attemptClose triggered!')}
+      on:close={() => alert('close triggered!')}
+    >
+      <div class="p-5">
+        <div class="mb-4">
+          <span class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded">close</span> and <span class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded">attemptClose</span> are available on every slot.
+        </div>
+        <div>
+          <Button
+            variant="fill"
+            color="primary"
+            on:click={attemptClose}
+          >Trigger attemptClose</Button>
+          <Button
+            variant="fill"
+            color="primary"
+            on:click={close}
+          >Trigger close</Button>
+      </div>
       </div>
     </Dialog>
   </Toggle>
