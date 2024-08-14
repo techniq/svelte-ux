@@ -37,15 +37,19 @@
   let actionsEl: HTMLDivElement;
 
   function attemptClose() {
-    if (!persistent) {
-      open = false;
+    if (open) {
+      if (!persistent) {
+        open = false;
+      }
+      dispatch('close-attempt', { open });
     }
-    dispatch('close-attempt', { open });
   }
 
   function close() {
-    open = false;
-    dispatch('close', { open });
+    if (open) {
+      open = false;
+      dispatch('close', { open });
+    }
   }
 
   function onClick(e: MouseEvent) {
