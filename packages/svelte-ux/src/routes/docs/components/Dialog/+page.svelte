@@ -108,7 +108,6 @@
           }}
           variant="fill"
           color="danger"
-          type="button"
         >
           Yes, delete item
         </Button>
