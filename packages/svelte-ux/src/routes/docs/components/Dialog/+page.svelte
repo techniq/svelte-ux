@@ -8,8 +8,8 @@
   let openAsync = false;
   let loading = false;
 
-  let close: (() => void);
-  let attemptClose: (() => void);
+  let close: () => void;
+  let attemptClose: () => void;
 </script>
 
 <h1>Examples</h1>
@@ -111,6 +111,7 @@
           }}
           variant="fill"
           color="danger"
+          type="button"
         >
           Yes, delete item
         </Button>
@@ -214,20 +215,20 @@
     >
       <div class="p-5">
         <div class="mb-4">
-          <span class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded">close</span> and <span class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded">attemptClose</span> are available on every slot.
+          <span class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded"
+            >close</span
+          >
+          and
+          <span class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded"
+            >attemptClose</span
+          > are available on every slot.
         </div>
         <div>
-          <Button
-            variant="fill"
-            color="primary"
-            on:click={attemptClose}
-          >Trigger attemptClose</Button>
-          <Button
-            variant="fill"
-            color="primary"
-            on:click={close}
-          >Trigger close</Button>
-      </div>
+          <Button variant="fill" color="primary" on:click={attemptClose}
+            >Trigger attemptClose</Button
+          >
+          <Button variant="fill" color="primary" on:click={close}>Trigger close</Button>
+        </div>
       </div>
     </Dialog>
   </Toggle>
