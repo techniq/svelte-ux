@@ -149,8 +149,14 @@
     <Toggle let:on={showDrawer} let:toggleOn={openDrawer} let:toggleOff={closeDrawer}>
       <Drawer
         open={showDrawer}
-        on:close-attempt={isChanged ? openConfirmation : closeDrawer}
         persistent={isChanged}
+        on:close={({ detail }) => {
+          if (detail.open) {
+            openConfirmation();
+          } else {
+            closeDrawer();
+          }
+        }}
         class="w-[400px]"
       >
         <div class="p-4">

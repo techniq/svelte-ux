@@ -11,7 +11,10 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{
+    change: { open: boolean };
+    close: { open: boolean; reason: string };
+  }>();
 
   export let open = true;
   export let portal: PortalOptions = true;
@@ -28,8 +31,15 @@
 
   $: dispatch('change', { open });
 
-  $: if (open === false) {
-    dispatch('close', { open });
+  function close(options?: { force?: boolean; reason?: string }) {
+    const force = options?.force ?? false;
+    const reason = options?.reason ?? 'unknown';
+    if (open) {
+      if (!persistent || force) {
+        open = false;
+      }
+      dispatch('close', { open, reason });
+    }
   }
 </script>
 
@@ -37,10 +47,7 @@
 {#if open}
   <Backdrop
     on:click={(e) => {
-      if (!persistent) {
-        open = false;
-      }
-      dispatch('close-attempt');
+      close();
     }}
     on:mouseup={(e) => {
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
@@ -87,11 +94,7 @@
         // Do not allow event to reach Popover's on:keydown
         e.stopPropagation();
 
-        if (!persistent) {
-          open = false;
-        }
-
-        dispatch('close-attempt');
+        close();
       }
     }}
     on:mouseup={(e) => {
@@ -108,7 +111,7 @@
       </Overlay>
     {/if}
 
-    <slot {open} />
+    <slot {open} {close} />
 
     {#if $$slots.actions}
       <div
@@ -118,7 +121,7 @@
           classes.actions
         )}
       >
-        <slot name="actions" />
+        <slot name="actions" {open} {close} />
       </div>
     {/if}
   </div>
