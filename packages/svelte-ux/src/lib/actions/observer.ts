@@ -1,3 +1,4 @@
+import { getScrollParent } from '$lib/utils/dom.js';
 import type { Action } from 'svelte/action';
 
 export const resize: Action<Element, ResizeObserverOptions | undefined> = (node, options) => {
@@ -15,23 +16,20 @@ export const resize: Action<Element, ResizeObserverOptions | undefined> = (node,
   };
 };
 
-export const intersection: Action<Element, IntersectionObserverInit | undefined> = (
+export const intersection: Action<HTMLElement, IntersectionObserverInit | undefined> = (
   node,
   options = {}
 ) => {
-  // TODO: Support defininting `options.root = node.parentNode` easily (maybe querySelector() string?)
+  const scrollParent = getScrollParent(node);
+  // Use viewport (null) if scrollParent = `<body>`
+  const root = scrollParent === document.body ? null : scrollParent;
 
   let observer = new IntersectionObserver(
     (entries, observer) => {
       const entry = entries[0];
       node.dispatchEvent(new CustomEvent('intersecting', { detail: entry }));
-      // if (entry.intersectionRatio > 0) {
-      //   node.dispatchEvent(new CustomEvent('visible', { detail: entry }));
-      // } else {
-      //   node.dispatchEvent(new CustomEvent('invisible', { detail: entry }));
-      // }
     },
-    { root: node.parentElement, ...options }
+    { root, ...options }
   );
   observer.observe(node);
 
