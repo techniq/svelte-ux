@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.74.4
+
+### Patch Changes
+
+- Refactor `close` method in `Dialog` and `Drawer` and expose as a slot prop across all props ([#464](https://github.com/techniq/svelte-ux/pull/464))
+
+- Remove `close-attempt` on `Dialog` and `Drawer` ([#464](https://github.com/techniq/svelte-ux/pull/464))
+
+- [intersection action] Use closest scrollable parent/ancestor for InterSectionObserver root or `null` to use viewport ([#463](https://github.com/techniq/svelte-ux/pull/463))
+
 ## 0.74.3
 
 ### Patch Changes
