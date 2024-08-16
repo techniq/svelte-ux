@@ -99,7 +99,12 @@
 
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Persistent Drawer...</MenuItem>
-          <Drawer {open} on:close={(e) => !e.detail.open && toggleOff()} class="w-[400px]" persistent>
+          <Drawer
+            {open}
+            on:close={(e) => !e.detail.open && toggleOff()}
+            class="w-[400px]"
+            persistent
+          >
             <div slot="actions">
               <Button on:click={toggleOff}>Close</Button>
             </div>
