@@ -150,8 +150,8 @@
       <Drawer
         open={showDrawer}
         persistent={isChanged}
-        on:close={({ detail }) => {
-          if (detail.open) {
+        on:close={(e) => {
+          if (e.detail.open) {
             openConfirmation();
           } else {
             closeDrawer();

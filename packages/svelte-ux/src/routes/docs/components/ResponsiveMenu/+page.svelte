@@ -80,7 +80,7 @@
 
         <Toggle let:on={open} let:toggle={toggleDialog} on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDialog}>Open Persistent Dialog...</MenuItem>
-          <Dialog {open} on:close={toggleDialog} persistent>
+          <Dialog {open} on:close={(e) => !e.detail.open && toggleDialog()} persistent>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
               <Button variant="fill" color="primary">Close</Button>
