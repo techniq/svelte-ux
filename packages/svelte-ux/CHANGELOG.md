@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.74.5
+
+### Patch Changes
+
+- Replace `open` property on `close` event with separate `close` and `closeAttempt` events in Dialogs and Drawers ([#468](https://github.com/techniq/svelte-ux/pull/468))
+
 ## 0.74.4
 
 ### Patch Changes
