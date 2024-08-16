@@ -205,9 +205,7 @@
       persistent
       let:close
       on:close={() => {
-        alert(
-          "Persistent Dialog forced close via 'close({ force: true })'.\n\nDialog will close."
-        );
+        alert("Persistent Dialog forced close via 'close({ force: true })'.\n\nDialog will close.");
         toggleOff();
       }}
       on:closeAttempt={() => {
