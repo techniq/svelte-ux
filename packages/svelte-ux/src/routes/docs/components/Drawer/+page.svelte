@@ -52,7 +52,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Drawer {open} on:close={toggleOff} persistent class="w-[400px]">
+    <Drawer {open} on:close={(e) => !e.detail.open && toggleOff()} persistent class="w-[400px]">
       <h1>Contents</h1>
       <div slot="actions">
         <Button on:click={toggleOff}>Close</Button>
