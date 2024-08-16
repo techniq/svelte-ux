@@ -72,7 +72,9 @@
           <Dialog {open} on:close={toggleDialog} persistent let:close>
             <div slot="title">Are you sure you want to do that?</div>
             <div slot="actions">
-              <Button variant="fill" color="primary" on:click={() => close({ force: true })}>Close</Button>
+              <Button variant="fill" color="primary" on:click={() => close({ force: true })}>
+                Close
+              </Button>
             </div>
           </Dialog>
         </Toggle>
