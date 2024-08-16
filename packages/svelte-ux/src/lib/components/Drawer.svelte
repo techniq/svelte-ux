@@ -13,7 +13,8 @@
 
   const dispatch = createEventDispatcher<{
     change: { open: boolean };
-    close: { open: boolean };
+    close: null;
+    closeAttempt: null;
     open: null;
   }>();
 
@@ -39,7 +40,7 @@
         open = false;
       } else {
         // attempted close of persistent dialog
-        dispatch('close', { open });
+        dispatch('closeAttempt');
       }
     }
   }
@@ -47,7 +48,7 @@
   $: if (open) {
     dispatch('open');
   } else {
-    dispatch('close', { open });
+    dispatch('close');
   }
 </script>
 

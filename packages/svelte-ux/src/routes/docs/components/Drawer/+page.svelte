@@ -150,13 +150,8 @@
       <Drawer
         open={showDrawer}
         persistent={isChanged}
-        on:close={({ detail }) => {
-          if (detail.open) {
-            openConfirmation();
-          } else {
-            closeDrawer();
-          }
-        }}
+        on:close={closeDrawer}
+        on:closeAttempt={openConfirmation}
         class="w-[400px]"
       >
         <div class="p-4">

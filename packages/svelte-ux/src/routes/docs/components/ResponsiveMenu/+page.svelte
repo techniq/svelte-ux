@@ -82,8 +82,10 @@
           <MenuItem on:click={toggleDialog}>Open Persistent Dialog...</MenuItem>
           <Dialog {open} on:close={toggleDialog} persistent>
             <div slot="title">Are you sure you want to do that?</div>
-            <div slot="actions">
-              <Button variant="fill" color="primary">Close</Button>
+            <div slot="actions" let:close>
+              <Button variant="fill" color="primary" on:click={() => close({ force: true })}>
+                Close
+              </Button>
             </div>
           </Dialog>
         </Toggle>
@@ -100,8 +102,8 @@
         <Toggle let:on={open} let:toggle={toggleDrawer} let:toggleOff on:toggleOff={closeMenu}>
           <MenuItem on:click={toggleDrawer}>Open Persistent Drawer...</MenuItem>
           <Drawer {open} on:close={toggleOff} class="w-[400px]" persistent>
-            <div slot="actions">
-              <Button on:click={toggleOff}>Close</Button>
+            <div slot="actions" let:close>
+              <Button on:click={() => close({ force: true })}>Close</Button>
             </div>
           </Drawer>
         </Toggle>
