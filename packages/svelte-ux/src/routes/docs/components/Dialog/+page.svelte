@@ -204,17 +204,16 @@
       {open}
       persistent
       let:close
-      on:close={({ detail }) => {
-        if (detail.open) {
-          alert(
-            "Attempted to close persistent Dialog without using 'force'\n\nUse 'close({ force: true })' instead of Use 'close()' to close.\n\nDialog will remain open."
-          );
-        } else {
-          alert(
-            "Persistent Dialog forced close via 'close({ force: true })'.\n\nDialog will close."
-          );
-          toggleOff();
-        }
+      on:close={() => {
+        alert(
+          "Persistent Dialog forced close via 'close({ force: true })'.\n\nDialog will close."
+        );
+        toggleOff();
+      }}
+      on:closeAttempt={() => {
+        alert(
+          "Attempted to close persistent Dialog without using 'force'\n\nUse 'close({ force: true })' instead of Use 'close()' to close.\n\nDialog will remain open."
+        );
       }}
     >
       <div class="p-5">
