@@ -13,6 +13,7 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
+  export let name = '';
   export let value = '';
   export let type: HTMLInputTypeAttribute = 'text';
   export let inputmode: HTMLInputAttributes['inputmode'] | undefined = undefined;
@@ -117,6 +118,7 @@
 <input
   {id}
   {type}
+  {name}
   {value}
   {min}
   {max}
