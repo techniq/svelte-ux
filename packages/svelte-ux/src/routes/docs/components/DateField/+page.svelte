@@ -102,3 +102,19 @@
   />
   value: {value}
 </Preview>
+
+<h2>within form</h2>
+
+<Preview>
+  <form
+    on:submit={(e) => {
+      e.preventDefault();
+      // @ts-expect-error
+      const formData = new FormData(e.target);
+      alert(formData.get('birth_date'));
+    }}
+  >
+    <DateField label="Birth date" name="birth_date" />
+    <Button type="submit">Submit</Button>
+  </form>
+</Preview>

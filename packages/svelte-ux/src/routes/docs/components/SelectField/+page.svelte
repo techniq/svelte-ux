@@ -527,7 +527,7 @@
   <SelectField {options} icon={mdiMagnify} bind:value inlineOptions={true} />
 </Preview>
 
-<h2>with form</h2>
+<h2>within form</h2>
 
 <Preview>
   <form

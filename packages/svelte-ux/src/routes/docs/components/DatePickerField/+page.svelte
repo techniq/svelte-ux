@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mdiCalendar } from '@mdi/js';
 
-  import { DatePickerField, PeriodType } from 'svelte-ux';
+  import { Button, DatePickerField, PeriodType } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   let value = new Date();
@@ -73,4 +73,20 @@
 
 <Preview>
   <DatePickerField label="Start Date" clearable />
+</Preview>
+
+<h2>within form</h2>
+
+<Preview>
+  <form
+    on:submit={(e) => {
+      e.preventDefault();
+      // @ts-expect-error
+      const formData = new FormData(e.target);
+      alert(formData.get('start_date'));
+    }}
+  >
+    <DatePickerField label="Start Date" name="start_date" clearable />
+    <Button type="submit">Submit</Button>
+  </form>
 </Preview>

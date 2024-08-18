@@ -13,6 +13,7 @@
   const { format: format_ux } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('DateField');
 
+  export let name = '';
   export let value: Date | null = null;
   export let format: string | undefined = undefined;
   export let mask: string | undefined = undefined;
@@ -86,6 +87,7 @@
 >
   <Input
     {required}
+    {name}
     value={value ? formatDate(value, actualFormat) : inputValue}
     mask={actualMask}
     {replace}
