@@ -81,6 +81,7 @@
   <form
     on:submit={(e) => {
       e.preventDefault();
+      // @ts-expect-error
       const formData = new FormData(e.target);
       alert(formData.get('start_date'));
     }}
