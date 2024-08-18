@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.74.6
+
+### Patch Changes
+
+- [DateField] Fix usage within <form> ([#470](https://github.com/techniq/svelte-ux/pull/470))
+
+- [DatePickerField] Add hidden input for use within <form> ([#470](https://github.com/techniq/svelte-ux/pull/470))
+
 ## 0.74.5
 
 ### Patch Changes
