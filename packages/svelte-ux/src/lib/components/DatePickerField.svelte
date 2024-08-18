@@ -18,6 +18,7 @@
   const dispatch = createEventDispatcher();
   const { classes: settingsClasses, defaults } = getComponentSettings('DatePickerField');
 
+  export let name = '';
   export let value: Date | null = null;
   export let periodType: PeriodType = PeriodType.Day;
   export let iconOnly: boolean = false;
@@ -88,6 +89,8 @@
     let:id
   >
     <span slot="prepend">
+      <input type="hidden" {name} {value} />
+
       {#if stepper}
         <Button
           icon={mdiChevronLeft}
