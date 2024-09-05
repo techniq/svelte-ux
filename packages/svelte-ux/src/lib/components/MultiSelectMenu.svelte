@@ -78,6 +78,7 @@
     on:cancel
     on:change={() => mode !== 'immediate' && close()}
     on:change
+    on:apply
   >
     <slot name="beforeOptions" slot="beforeOptions" let:selection {selection} />
     <slot name="afterOptions" slot="afterOptions" let:selection {selection} />
