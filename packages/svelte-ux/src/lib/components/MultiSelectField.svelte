@@ -62,6 +62,9 @@
 
   export let menuProps: Omit<MultiSelectMenuProps, 'options'> | undefined = undefined;
 
+  // Passthrough onApply event
+  export let onApply: MultiSelectMenuProps['onApply'] | undefined = undefined;
+
   const logger = new Logger('MultiSelectField');
 
   let open = false;
@@ -213,12 +216,12 @@
     {placement}
     {infiniteScroll}
     {searchText}
+    {onApply}
     classes={{ ...settingsClasses.multiSelectMenu, ...classes.multiSelectMenu }}
     matchWidth
     bind:open
     on:change={onSelectChange}
     on:close={hide}
-    on:apply
     bind:menuOptionsEl
     {...menuProps}
   >

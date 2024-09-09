@@ -57,16 +57,10 @@
       indeterminate: typeof $indeterminateStore;
       original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
     };
-    apply: {
-      value: typeof value;
-      selection: typeof $selection;
-      indeterminate: typeof $indeterminateStore;
-      original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
-    };
     cancel: null;
   }>();
 
-  export let onApply = async (ctx: {
+  const defaultOnApply = async (ctx: {
     value: typeof value;
     selection: typeof $selection;
     indeterminate: typeof $indeterminateStore;
@@ -74,6 +68,7 @@
   }) => {
     // no-op by default
   };
+  export let onApply: typeof defaultOnApply = defaultOnApply;
 
   async function applyChange() {
     applying = true;
@@ -84,7 +79,6 @@
       original: { selected: selectedOptions, unselected: unselectedOptions },
     };
     await onApply(changeContext);
-    dispatch('apply', changeContext);
     applying = false;
     onChange();
   }
