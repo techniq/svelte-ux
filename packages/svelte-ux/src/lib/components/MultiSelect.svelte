@@ -66,7 +66,7 @@
     cancel: null;
   }>();
 
-  const defaultOnApply = async (ctx: {
+  export let onApply = async (ctx: {
     value: typeof value;
     selection: typeof $selection;
     indeterminate: typeof $indeterminateStore;
@@ -74,7 +74,6 @@
   }) => {
     // no-op by default
   };
-  export let onApply: typeof defaultOnApply = defaultOnApply;
 
   async function applyChange() {
     applying = true;
