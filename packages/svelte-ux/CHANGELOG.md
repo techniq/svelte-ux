@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.74.7
+
+### Patch Changes
+
+- Dispatch `apply` event when applying from MultiSelect ([#476](https://github.com/techniq/svelte-ux/pull/476))
+
 ## 0.74.6
 
 ### Patch Changes

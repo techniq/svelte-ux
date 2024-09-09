@@ -57,6 +57,12 @@
       indeterminate: typeof $indeterminateStore;
       original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
     };
+    apply: {
+      value: typeof value;
+      selection: typeof $selection;
+      indeterminate: typeof $indeterminateStore;
+      original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
+    };
     cancel: null;
   }>();
 
@@ -79,6 +85,7 @@
       original: { selected: selectedOptions, unselected: unselectedOptions },
     };
     await onApply(changeContext);
+    dispatch('apply', changeContext);
     applying = false;
     onChange();
   }

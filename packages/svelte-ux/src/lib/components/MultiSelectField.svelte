@@ -222,6 +222,7 @@
     bind:open
     on:change={onSelectChange}
     on:close={hide}
+    on:apply
     bind:menuOptionsEl
     {...menuProps}
   >
