@@ -18,11 +18,11 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "@kitql/helpers": "^0.8.9",
+    "@kitql/helpers": "^0.8.10",
     "commander": "^12.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.1.0",
+    "@types/node": "^22.5.4",
     "prettier": "^3.3.3"
   },
   "files": [
