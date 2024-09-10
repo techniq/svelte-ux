@@ -37,6 +37,9 @@
   const settingsClasses = getComponentClasses('MultiSelectMenu');
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
+
+  // Passthrough onApply event
+  export let onApply: MultiSelectProps['onApply'] | undefined = undefined;
 </script>
 
 <Menu
@@ -67,6 +70,7 @@
     {placeholder}
     {infiniteScroll}
     {searchText}
+    {onApply}
     classes={{
       search: 'p-2',
       options: 'px-2',
