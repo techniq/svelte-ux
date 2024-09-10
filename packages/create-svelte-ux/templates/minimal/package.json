@@ -38,7 +38,7 @@
     "tslib": "^2.6.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.12",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.0"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
