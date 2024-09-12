@@ -92,6 +92,11 @@ export type FilterPropKeys<T, Match> = {
   [P in keyof T]: T[P] extends Match ? P : never;
 }[keyof T];
 
+// Value directly or promised, useful for async functions
+export type MaybePromise<T> = T | Promise<T>;
+// Function that may be synchronous or asynchronous
+export type MaybeAsync<T extends (...args: any[]) => any> = (...args: Parameters<T>) => MaybePromise<ReturnType<T>>;
+
 /**
  * @deprecated ComponentProps should be imported from 'svelte' instead of 'svelte-ux', as it is now included in the main 'svelte' package. This export may be removed in a future release.
  * @see https://svelte.dev/docs/svelte#types-componentprops
