@@ -16,7 +16,7 @@
   export let scrollIntoView: ScrollIntoViewOptions | boolean = false;
   export let disabled = false;
   export let selected = false;
-  export let tabIndex: number | undefined = undefined;
+  export let tabIndex: ComponentProps<Button>['tabIndex'] = undefined;
 
   export let classes: ButtonProps['classes'] & { selected?: string } = {
     root: 'text-sm gap-3',
