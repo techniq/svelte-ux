@@ -20,6 +20,7 @@
   export let icon: IconInput = undefined;
   export let iconOnly = icon !== undefined && !$$slots.default;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
+  export let tabIndex: number | undefined = undefined;
 
   export let loading: boolean = false;
   export let disabled: boolean = false;
@@ -448,10 +449,11 @@
   {href}
   {target}
   {type}
+  {disabled}
   {...$$restProps}
   class={_class}
   style={$$props.style ?? ''}
-  {disabled}
+  tabindex={tabIndex}
   aria-disabled={disabled ? 'true' : 'false'}
   use:multi={actions}
   on:click
