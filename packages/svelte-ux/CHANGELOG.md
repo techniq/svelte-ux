@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.74.9
+
+### Patch Changes
+
+- fix(TextField/Field): Expose `id` prop ([`e5445e5b95771576648fb5e26705d421a2edb3a5`](https://github.com/techniq/svelte-ux/commit/e5445e5b95771576648fb5e26705d421a2edb3a5))
+
+- Remove on:apply in favor of onApply ([#482](https://github.com/techniq/svelte-ux/pull/482))
+
 ## 0.74.8
 
 ### Patch Changes
