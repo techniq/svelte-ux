@@ -208,7 +208,7 @@
   $: hasPrefix = $$slots.prefix || type === 'currency';
   $: hasSuffix = $$slots.suffix || type === 'percent';
 
-  const id = uniqueId('textfield-');
+  export let id = uniqueId('textfield-');
   let labelEl: HTMLLabelElement | null = null;
 </script>
 

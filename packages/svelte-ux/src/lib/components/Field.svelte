@@ -53,7 +53,7 @@
   $: hasPrepend = $$slots.prepend || icon != null;
   $: hasAppend = $$slots.append || iconRight != null || clearable || error;
 
-  const id = uniqueId('field-');
+  export let id = uniqueId('field-');
   let labelEl: HTMLLabelElement | null = null;
 </script>
 
