@@ -64,8 +64,8 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
       date-fns:
-        specifier: ^3.6.0
-        version: 3.6.0
+        specifier: ^4.0.0
+        version: 4.0.0
       immer:
         specifier: ^10.1.1
         version: 10.1.1
@@ -83,7 +83,7 @@ importers:
         version: 1.29.0
       sveld:
         specifier: ^0.20.0
-        version: 0.20.0(postcss-load-config@6.0.1(postcss@8.4.45))(postcss@8.4.45)
+        version: 0.20.0(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.5.2
@@ -1172,6 +1172,9 @@ packages:
   date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
 
+  date-fns@4.0.0:
+    resolution: {integrity: sha512-6K33+I8fQ5otvHgLIvKK1xmMbLAh0pduyrx7dwMXKiGYeoWhmk6M3Zoak9n7bXHMJQlHq1yqmdGy1QxKddJjUA==}
+
   debug@4.3.6:
     resolution: {integrity: sha512-O/09Bd4Z1fBrU4VzkhFqVgpPzaGbw6Sm9FEkBT1A/YBXQFGuuSxa1dN2nxgxS34JmKXqYx8CZAwEVoJFImUXIg==}
     engines: {node: '>=6.0'}
@@ -1878,24 +1881,6 @@ packages:
       postcss:
         optional: true
       ts-node:
-        optional: true
-
-  postcss-load-config@6.0.1:
-    resolution: {integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      jiti: '>=1.21.0'
-      postcss: '>=8.0.9'
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      jiti:
-        optional: true
-      postcss:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
         optional: true
 
   postcss-nested@6.2.0:
@@ -3446,6 +3431,8 @@ snapshots:
 
   date-fns@3.6.0: {}
 
+  date-fns@4.0.0: {}
+
   debug@4.3.6:
     dependencies:
       ms: 2.1.2
@@ -4104,13 +4091,6 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.45
 
-  postcss-load-config@6.0.1(postcss@8.4.45):
-    dependencies:
-      lilconfig: 3.1.2
-    optionalDependencies:
-      postcss: 8.4.45
-    optional: true
-
   postcss-nested@6.2.0(postcss@8.4.45):
     dependencies:
       postcss: 8.4.45
@@ -4391,7 +4371,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  sveld@0.20.0(postcss-load-config@6.0.1(postcss@8.4.45))(postcss@8.4.45):
+  sveld@0.20.0(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45):
     dependencies:
       '@rollup/plugin-node-resolve': 13.3.0(rollup@2.79.1)
       acorn: 8.11.3
@@ -4401,7 +4381,7 @@ snapshots:
       rollup: 2.79.1
       rollup-plugin-svelte: 7.2.0(rollup@2.79.1)(svelte@4.2.19)
       svelte: 4.2.19
-      svelte-preprocess: 5.1.4(postcss-load-config@6.0.1(postcss@8.4.45))(postcss@8.4.45)(svelte@4.2.19)(typescript@5.6.2)
+      svelte-preprocess: 5.1.4(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(svelte@4.2.19)(typescript@5.6.2)
       typescript: 5.6.2
     transitivePeerDependencies:
       - '@babel/core'
@@ -4430,7 +4410,7 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-preprocess@5.1.4(postcss-load-config@6.0.1(postcss@8.4.45))(postcss@8.4.45)(svelte@4.2.19)(typescript@5.6.2):
+  svelte-preprocess@5.1.4(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(svelte@4.2.19)(typescript@5.6.2):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
@@ -4440,7 +4420,7 @@ snapshots:
       svelte: 4.2.19
     optionalDependencies:
       postcss: 8.4.45
-      postcss-load-config: 6.0.1(postcss@8.4.45)
+      postcss-load-config: 4.0.2(postcss@8.4.45)
       typescript: 5.6.2
 
   svelte2tsx@0.7.18(svelte@4.2.19)(typescript@5.6.2):

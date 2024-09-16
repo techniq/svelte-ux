@@ -60,7 +60,7 @@
     "culori": "^4.0.1",
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.0.0",
     "immer": "^10.1.1",
     "lodash-es": "^4.17.21",
     "prism-svelte": "^0.5.0",
