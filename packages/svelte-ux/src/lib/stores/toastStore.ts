@@ -3,20 +3,20 @@ import { get, writable } from 'svelte/store';
 const DEFAULT_TOAST_TIME_IN_MS = 3000;
 
 export type Toast = {
-  text: string,
-  timeAdded: Date
-}
+  text: string;
+  timeAdded: Date;
+};
 
 /**
  * Create a global store to save information on toast components
  */
 const toastStore = writable<Toast[]>([]);
 
-export function addToast(text: string, durationInMS=DEFAULT_TOAST_TIME_IN_MS) {
+export function addToast(text: string, durationInMS = DEFAULT_TOAST_TIME_IN_MS) {
   const timeAdded = new Date();
   const toast: Toast = {
     text,
-    timeAdded
+    timeAdded,
   };
   toastStore.set([...get(toastStore), toast]);
 
