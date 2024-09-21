@@ -52,6 +52,7 @@
       'ResponsiveMenu',
       'Notification',
       'Popover',
+      'Toast',
       'Tooltip',
     ],
     Feedback: ['Badge', 'Progress', 'ProgressCircle'],
