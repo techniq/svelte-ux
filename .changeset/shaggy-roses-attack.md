@@ -1,5 +1,5 @@
 ---
-'svelte-ux': minor
+'svelte-ux': patch
 ---
 
 Add toast components

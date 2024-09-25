@@ -4,17 +4,19 @@
   import { addToast } from '$lib/stores/toastStore.js';
 
   function addSimpleToast() {
-    addToast('This is a simple toast!');
+    addToast({text: 'This is a simple toast'});
   }
 
   function addLongerToast() {
-    addToast('This is a longer toast!', 10000);
+    addToast({text: 'This is a longer Toast'}, 300000);
   }
 </script>
 
 <h1>Examples</h1>
 
-<Toast />
+<Toast
+  placement='top'
+/>
 <h2>Add Simple Toast</h2>
 <Button variant="fill-outline" color="primary" on:click={addSimpleToast}>Click Me</Button>
 
