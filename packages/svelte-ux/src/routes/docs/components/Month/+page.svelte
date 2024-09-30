@@ -11,13 +11,14 @@
   } from 'date-fns';
 
   import { Month } from 'svelte-ux';
+  import type { DateRange } from '$lib/utils/dateRange.js';
   import Preview from '$lib/components/Preview.svelte';
 
   let selected: Date | null = null;
   let selectedArr: Date[] = [];
-  let selectedRange = { from: null, to: null };
-  let selectedWeek = { from: null, to: null };
-  let selectedMultiMonth = { from: null, to: null };
+  let selectedRange: DateRange = { from: null, to: null };
+  let selectedWeek: DateRange = { from: null, to: null };
+  let selectedMultiMonth: DateRange = { from: null, to: null };
 </script>
 
 <h1>Examples</h1>

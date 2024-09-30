@@ -9,12 +9,13 @@
   } from 'date-fns';
 
   import { MonthList, type SelectedDate } from 'svelte-ux';
+  import type { DateRange } from '$lib/utils/dateRange.js';
   import Preview from '$lib/components/Preview.svelte';
 
   let selected: SelectedDate = null;
   let selectedArr: Date[] = [];
-  let selectedRange = { from: null, to: null };
-  let selectedQuarter = { from: null, to: null };
+  let selectedRange: DateRange = { from: null, to: null };
+  let selectedQuarter: DateRange = { from: null, to: null };
 </script>
 
 <h1>Examples</h1>
