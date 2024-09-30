@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ThemeColors } from '../types/typeHelpers.js';
-  import { uniqueId } from '../utils/string.js';
-  import { cls } from '../utils/styles.js';
+  import { uniqueId } from '@layerstack/utils';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let id: string = uniqueId('switch-');

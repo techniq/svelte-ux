@@ -4,7 +4,7 @@
   import type tableOrderStore from '../stores/tableOrderStore.js';
   import type { ColumnDef } from '../types/table.js';
   import Icon from '../components/Icon.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   export let order: ReturnType<typeof tableOrderStore>;
   export let column: ColumnDef;

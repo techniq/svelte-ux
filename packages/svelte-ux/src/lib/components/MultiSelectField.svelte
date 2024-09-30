@@ -12,7 +12,7 @@
   import TextField from './TextField.svelte';
 
   import { cls, clsMerge, normalizeClasses } from '../utils/styles.js';
-  import { Logger } from '../utils/logger.js';
+  import { Logger } from '@layerstack/utils';
   import ProgressCircle from './ProgressCircle.svelte';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');

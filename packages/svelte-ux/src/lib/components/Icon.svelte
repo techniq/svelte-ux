@@ -4,9 +4,9 @@
 
 <script lang="ts">
   import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
+  import { cls } from '@layerstack/tailwind';
+  import { uniqueId } from '@layerstack/utils';
 
-  import { uniqueId } from '../utils/string.js';
-  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let size: string | number = '1.5em';

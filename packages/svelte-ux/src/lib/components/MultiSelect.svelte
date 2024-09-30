@@ -17,8 +17,8 @@
   import dirtyStore from '../stores/dirtyStore.js';
   import selectionStore from '../stores/selectionStore.js';
   import uniqueStore from '../stores/uniqueStore.js';
-  import { cls } from '../utils/styles.js';
-  import changeStore from '../stores/changeStore.js';
+  import { changeStore } from '@layerstack/svelte-stores';
+  import { cls } from '@layerstack/tailwind';
 
   export let options: MenuOption<TValue>[];
   export let value: TValue[] = [];

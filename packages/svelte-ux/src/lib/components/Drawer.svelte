@@ -8,7 +8,7 @@
 
   import { focusMove } from '../actions/focus.js';
   import { portal as portalAction, type PortalOptions } from '../actions/portal.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   const dispatch = createEventDispatcher<{

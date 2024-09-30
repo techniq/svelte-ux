@@ -4,7 +4,7 @@
 
   import formStore from '../stores/formStore.js';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import changeStore from '../stores/changeStore.js';
 
   const dispatch = createEventDispatcher();

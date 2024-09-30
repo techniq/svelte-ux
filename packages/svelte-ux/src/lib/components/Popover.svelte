@@ -3,7 +3,7 @@
   import type { OffsetOptions, Placement } from '@floating-ui/dom';
 
   import { popover, type PopoverOptions } from '../actions/popover.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let open = false;

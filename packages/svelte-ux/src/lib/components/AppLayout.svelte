@@ -1,9 +1,9 @@
 <script lang="ts">
   import { BROWSER } from 'esm-env';
-  import Backdrop from './Backdrop.svelte';
+  import { cls } from '@layerstack/tailwind';
+  import { mdScreen } from '@layerstack/svelte-stores';
 
-  import { mdScreen } from '../stores/matchMedia.js';
-  import { cls } from '../utils/styles.js';
+  import Backdrop from './Backdrop.svelte';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './index.js';
 

@@ -6,7 +6,7 @@
   import TextField from './TextField.svelte';
   import { selectOnFocus } from '../actions/input.js';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { step as stepUtil } from '../utils/number.js';
 
   export let value: number = 0;

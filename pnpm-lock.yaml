@@ -48,6 +48,21 @@ importers:
       '@fortawesome/fontawesome-common-types':
         specifier: ^6.6.0
         version: 6.6.0
+      '@layerstack/svelte-actions':
+        specifier: ^0.0.5
+        version: 0.0.5
+      '@layerstack/svelte-stores':
+        specifier: ^0.0.5
+        version: 0.0.5
+      '@layerstack/svelte-table':
+        specifier: ^0.0.5
+        version: 0.0.5
+      '@layerstack/tailwind':
+        specifier: ^0.0.7
+        version: 0.0.7
+      '@layerstack/utils':
+        specifier: ^0.0.5
+        version: 0.0.5
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -672,6 +687,21 @@ packages:
   '@kitql/helpers@0.8.10':
     resolution: {integrity: sha512-r9m0eQyjy3Z2sdeXA8wRGl2tgKtZ9puPuZ3vm9Cv3WMMWVmbKVzUJvF+4UucsHzT9xECFbO9lcQu7lIb774PPQ==}
     engines: {node: ^16.14 || >=18}
+
+  '@layerstack/svelte-actions@0.0.5':
+    resolution: {integrity: sha512-jqgRodLq4yvt8OQzOPkfRtM5ljl9hPZL/5dZ5cQEeJQ0xZV/CxZ4b5CVWHYxHNDca67ZM0/GrL9xCg4Fax95VQ==}
+
+  '@layerstack/svelte-stores@0.0.5':
+    resolution: {integrity: sha512-KiaX1wyxT3lYe+MYu1JrhkczM8zEwixSqocTj3PGTT/8fhRSJCGPO0SN0FTY9ehP2yDecj4z9c3n23GbZsX3Gg==}
+
+  '@layerstack/svelte-table@0.0.5':
+    resolution: {integrity: sha512-4fKDr42+mf3IYn4ui0QY01e+ylZ239LR84qeJXFPjQZyjGBFpr5HmVFJIdBS/Mo1gUElVWT9vBIz9RjoCc6TtQ==}
+
+  '@layerstack/tailwind@0.0.7':
+    resolution: {integrity: sha512-mMdE0vbw0NXi0/mkymJNR/YsADi9o8haQniacuuI/9Eg+TBlQvWFogmO8fJM7+15Eox8b7nG7npv5bi4Lsn2xA==}
+
+  '@layerstack/utils@0.0.5':
+    resolution: {integrity: sha512-Ew84WuCMC3q7Wq0Tb0rBEM/WK2RkkxRBF/RvNcnbaWcj5O+jO6VEZc657Jv73skkIJ4fkciT8FhSIcHoRkhdrQ==}
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -2867,6 +2897,51 @@ snapshots:
   '@kitql/helpers@0.8.10':
     dependencies:
       esm-env: 1.0.0
+
+  '@layerstack/svelte-actions@0.0.5':
+    dependencies:
+      '@floating-ui/dom': 1.6.11
+      '@layerstack/utils': 0.0.5
+      d3-array: 3.2.4
+      d3-scale: 4.0.2
+      date-fns: 4.1.0
+      lodash-es: 4.17.21
+
+  '@layerstack/svelte-stores@0.0.5':
+    dependencies:
+      '@layerstack/utils': 0.0.5
+      d3-array: 3.2.4
+      date-fns: 4.1.0
+      immer: 10.1.1
+      lodash-es: 4.17.21
+      zod: 3.23.8
+
+  '@layerstack/svelte-table@0.0.5':
+    dependencies:
+      '@layerstack/svelte-actions': 0.0.5
+      '@layerstack/utils': 0.0.5
+      d3-array: 3.2.4
+      date-fns: 4.1.0
+      lodash-es: 4.17.21
+
+  '@layerstack/tailwind@0.0.7':
+    dependencies:
+      '@layerstack/utils': 0.0.5
+      clsx: 2.1.1
+      culori: 4.0.1
+      d3-array: 3.2.4
+      date-fns: 4.1.0
+      lodash-es: 4.17.21
+      tailwind-merge: 2.5.2
+      tailwindcss: 3.4.13
+    transitivePeerDependencies:
+      - ts-node
+
+  '@layerstack/utils@0.0.5':
+    dependencies:
+      d3-array: 3.2.4
+      date-fns: 4.1.0
+      lodash-es: 4.17.21
 
   '@manypkg/find-root@1.1.0':
     dependencies:

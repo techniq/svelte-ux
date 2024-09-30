@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
   import { mdiChevronDown } from '@mdi/js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   import Icon from './Icon.svelte';
   import type { TransitionParams } from '../types/typeHelpers.js';

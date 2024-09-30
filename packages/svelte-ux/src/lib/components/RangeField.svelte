@@ -4,7 +4,7 @@
   import Field from './Field.svelte';
   import Button from './Button.svelte';
   import { getComponentSettings, getSettings } from './settings.js';
-  import type { FormatNumberStyle } from '../utils/format.js';
+  import type { FormatNumberStyle } from '@layerstack/utils';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('RangeField');
 
