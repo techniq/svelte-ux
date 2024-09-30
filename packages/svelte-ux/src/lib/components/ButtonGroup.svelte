@@ -22,7 +22,7 @@
 </script>
 
 <script lang="ts">
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('ButtonGroup');

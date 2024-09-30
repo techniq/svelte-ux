@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mdiContentCopy } from '@mdi/js';
 
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import Button from './Button.svelte';
   import { getComponentSettings } from './settings.js';
   import { slide } from 'svelte/transition';

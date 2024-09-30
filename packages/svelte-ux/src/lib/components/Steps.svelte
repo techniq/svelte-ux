@@ -18,7 +18,7 @@
 
 <script lang="ts">
   import Step from './Step.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   import Icon from './Icon.svelte';

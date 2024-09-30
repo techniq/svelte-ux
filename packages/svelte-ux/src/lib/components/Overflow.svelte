@@ -1,6 +1,6 @@
 <script lang="ts">
   import { overflow } from '../actions/layout.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   const settingsClasses = getComponentClasses('Overflow');

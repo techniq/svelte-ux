@@ -3,7 +3,7 @@
 
   import { groupKey } from './ToggleGroup.svelte';
   import { scrollIntoView } from '../utils/dom.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let value: any;

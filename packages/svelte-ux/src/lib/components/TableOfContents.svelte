@@ -4,7 +4,7 @@
   import { BROWSER } from 'esm-env';
 
   import { buildTree, type TreeNode } from '../utils/array.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import TreeList from './TreeList.svelte';
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';

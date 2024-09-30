@@ -2,7 +2,7 @@
   import Button from './Button.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getSettings } from './settings.js';
   const { locale } = getSettings();
 

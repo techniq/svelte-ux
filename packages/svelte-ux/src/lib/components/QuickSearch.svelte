@@ -6,7 +6,7 @@
   import Kbd from './Kbd.svelte';
   import SelectField from '../components/SelectField.svelte';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { smScreen } from '../stores/matchMedia.js';
   import { autoFocus, selectOnFocus } from '../actions/input.js';
   import type { MenuOption } from '../types/index.js';

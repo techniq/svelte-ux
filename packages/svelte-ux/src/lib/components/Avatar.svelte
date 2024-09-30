@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
 

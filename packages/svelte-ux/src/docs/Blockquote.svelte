@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mdiInformation } from '@mdi/js';
   import Icon from '../lib/components/Icon.svelte';
-  import { cls } from '$lib/utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 </script>
 
 <div

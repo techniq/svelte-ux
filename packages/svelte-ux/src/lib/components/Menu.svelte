@@ -5,7 +5,7 @@
   import type { Placement } from '@floating-ui/dom';
 
   import { focusMove } from '../actions/focus.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   import Popover from './Popover.svelte';
   import type { TransitionParams } from '../types/typeHelpers.js';

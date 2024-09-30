@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { TreeNode } from '../utils/array.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let nodes: TreeNode[];

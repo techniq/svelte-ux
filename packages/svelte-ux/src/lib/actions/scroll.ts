@@ -1,5 +1,5 @@
 import type { Action, ActionReturn } from 'svelte/action';
-import { isVisibleInScrollParent, scrollIntoView as scrollIntoViewUtil } from '../utils/dom.js';
+import { isVisibleInScrollParent, scrollIntoView as scrollIntoViewUtil } from '@layerstack/utils';
 import type { EventWithTarget } from '../types/typeHelpers.js';
 
 export type ScrollIntoViewOptions = {

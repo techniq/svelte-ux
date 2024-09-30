@@ -7,7 +7,7 @@
 
   import Button from './Button.svelte';
   import Code from './Code.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   export let code: string | null = null;
   export let language = 'svelte';

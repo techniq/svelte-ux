@@ -4,7 +4,7 @@
   import { isActive, url } from '../utils/routing.js';
   import Icon from './Icon.svelte';
   import { scrollIntoView } from '../actions/scroll.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
   import { mdScreen } from '../stores/matchMedia.js';
   import { getSettings } from './index.js';

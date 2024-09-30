@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
   import Button from './Button.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import {
     scrollIntoView as scrollIntoViewAction,
     type ScrollIntoViewOptions,

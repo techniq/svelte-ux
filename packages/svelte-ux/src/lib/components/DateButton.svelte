@@ -10,7 +10,7 @@
     type CustomIntlDateTimeFormatOptions,
     type SelectedDate,
   } from '../utils/date_types.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentSettings, getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();

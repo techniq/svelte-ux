@@ -1,10 +1,10 @@
 <script lang="ts">
   import { BROWSER } from 'esm-env';
   import { mdiMenu } from '@mdi/js';
+  import { cls } from '@layerstack/tailwind';
 
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
-  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './index.js';
 

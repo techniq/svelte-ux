@@ -7,7 +7,7 @@
   import { autoFocus } from '../actions/input.js';
   import { multi } from '../actions/multi.js';
   import type { Actions } from '../actions/multi.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { isLiteralObject } from '../utils/object.js';
   import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types/index.js';
   import { getComponentSettings } from './settings.js';

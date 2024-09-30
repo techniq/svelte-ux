@@ -3,7 +3,7 @@
   import { matchMediaWidth } from '../stores/matchMedia.js';
   import Drawer from './Drawer.svelte';
   import Menu from './Menu.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   export let open = true;
   export let screenWidth = 768; // md+

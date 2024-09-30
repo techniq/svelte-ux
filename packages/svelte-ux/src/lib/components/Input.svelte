@@ -10,7 +10,7 @@
 
   import { multi } from '../actions/multi.js';
   import type { Actions } from '../actions/multi.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let name = '';
