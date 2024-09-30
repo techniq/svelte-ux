@@ -1,8 +1,11 @@
+import type {
+  FlyParams,
+  SlideParams,
+  BlurParams,
+  FadeParams,
+  ScaleParams,
+} from 'svelte/transition';
 import type { ThemeColors } from './typeHelpers.js';
-
-export * from './table.js';
-export * from './typeHelpers.js';
-export * from './typeGuards.js';
 
 export type MenuOption<T = any> = {
   label: string;
@@ -27,3 +30,5 @@ export type ButtonVariant =
 export type ButtonColor = ThemeColors | 'default';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonRounded = boolean | 'full';
+
+export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;

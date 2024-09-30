@@ -1,6 +1,7 @@
 <script lang="ts">
   import { tweened } from 'svelte/motion';
-  import type { FormatNumberStyle } from '../utils/format.js';
+  import type { FormatNumberStyle } from '@layerstack/utils';
+
   import { getSettings } from './settings.js';
 
   type TweenedOptions = Parameters<typeof tweened<number | null>>[1];

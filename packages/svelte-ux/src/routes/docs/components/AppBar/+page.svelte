@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { AppBar, Button, ListItem, cls } from 'svelte-ux';
+  import { AppBar, Button, ListItem } from 'svelte-ux';
+  import { cls } from '@layerstack/tailwind';
+
   import { mdiRefresh, mdiChevronRight, mdiMicrosoftXboxControllerMenu } from '@mdi/js';
 
   import Preview from '$lib/components/Preview.svelte';

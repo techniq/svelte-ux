@@ -10,14 +10,11 @@
     Table,
     Toggle,
     TweenedValue,
-    tableOrderStore,
-    tableCell,
-    type ColumnDef,
-    type FormatNumberStyle,
   } from 'svelte-ux';
+  import { tableOrderStore, tableCell, type ColumnDef } from '@layerstack/svelte-table';
+  import { randomInteger, type FormatNumberStyle } from '@layerstack/utils';
 
   import Preview from '$lib/components/Preview.svelte';
-  import { randomInteger } from '$lib/utils/number.js';
 
   const order = tableOrderStore({ initialBy: 'calories', initialDirection: 'desc' });
 

@@ -2,8 +2,9 @@
   import { createEventDispatcher } from 'svelte';
   import type { OffsetOptions, Placement } from '@floating-ui/dom';
 
-  import { popover, type PopoverOptions } from '../actions/popover.js';
+  import { popover, type PopoverOptions } from '@layerstack/svelte-actions';
   import { cls } from '@layerstack/tailwind';
+
   import { getComponentClasses } from './theme.js';
 
   export let open = false;

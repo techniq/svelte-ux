@@ -30,10 +30,11 @@
   import { scaleLinear } from 'd3-scale';
   import { mdiDragHorizontal } from '@mdi/js';
 
-  import { movable } from '../actions/mouse.js';
-  import { decimalCount, round } from '../utils/number.js';
-  import Icon from './Icon.svelte';
+  import { decimalCount, round } from '@layerstack/utils/number';
+  import { movable } from '@layerstack/svelte-actions';
   import { cls } from '@layerstack/tailwind';
+
+  import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
 
   export let min = 0;

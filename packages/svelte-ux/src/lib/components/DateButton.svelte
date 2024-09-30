@@ -2,15 +2,16 @@
   import { createEventDispatcher } from 'svelte';
   import { isWithinInterval } from 'date-fns';
 
-  import Button from './Button.svelte';
-  import { getDateFuncsByPeriodType } from '../utils/date.js';
+  import { cls } from '@layerstack/tailwind';
   import {
     DateToken,
     PeriodType,
     type CustomIntlDateTimeFormatOptions,
     type SelectedDate,
-  } from '../utils/date_types.js';
-  import { cls } from '@layerstack/tailwind';
+    getDateFuncsByPeriodType,
+  } from '@layerstack/utils';
+
+  import Button from './Button.svelte';
   import { getComponentSettings, getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();

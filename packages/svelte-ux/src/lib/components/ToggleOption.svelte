@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount, onDestroy, getContext } from 'svelte';
+  import { scrollIntoView } from '@layerstack/utils';
+  import { cls } from '@layerstack/tailwind';
 
   import { groupKey } from './ToggleGroup.svelte';
-  import { scrollIntoView } from '../utils/dom.js';
-  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let value: any;

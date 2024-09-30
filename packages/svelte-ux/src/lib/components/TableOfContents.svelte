@@ -2,9 +2,9 @@
   import { createEventDispatcher, onDestroy, onMount } from 'svelte';
   import { mdiCircleSmall } from '@mdi/js';
   import { BROWSER } from 'esm-env';
-
-  import { buildTree, type TreeNode } from '../utils/array.js';
+  import { buildTree, type TreeNode } from '@layerstack/utils/array';
   import { cls } from '@layerstack/tailwind';
+
   import TreeList from './TreeList.svelte';
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';

@@ -11,7 +11,7 @@
   } from 'date-fns';
 
   import { Month } from 'svelte-ux';
-  import type { DateRange } from '$lib/utils/dateRange.js';
+  import type { DateRange } from '@layerstack/utils/dateRange';
   import Preview from '$lib/components/Preview.svelte';
 
   let selected: Date | null = null;

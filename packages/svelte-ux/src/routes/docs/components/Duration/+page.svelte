@@ -1,7 +1,9 @@
 <script lang="ts">
   import { subDays, subSeconds } from 'date-fns';
 
-  import { Duration, DurationUnits } from 'svelte-ux';
+  import { Duration } from 'svelte-ux';
+  import { DurationUnits } from '@layerstack/utils';
+
   import Preview from '$lib/components/Preview.svelte';
 </script>
 

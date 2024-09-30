@@ -2,8 +2,8 @@
   import { cls } from '@layerstack/tailwind';
   import { DurationUnits, getDuration, humanizeDuration } from '@layerstack/utils';
   import { type Duration } from '@layerstack/utils/duration';
+  import { timerStore } from '@layerstack/svelte-stores';
 
-  import timerStore from '../stores/timerStore.js';
   import { getComponentClasses } from './theme.js';
 
   export let start: Date | undefined = undefined;

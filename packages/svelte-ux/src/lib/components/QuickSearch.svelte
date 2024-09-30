@@ -1,14 +1,14 @@
 <script lang="ts">
   import { mdiMagnify } from '@mdi/js';
+  import { autoFocus, selectOnFocus } from '@layerstack/svelte-actions';
+  import { smScreen } from '@layerstack/svelte-stores';
+  import { cls } from '@layerstack/tailwind';
 
   import Button from '../components/Button.svelte';
   import Dialog from '../components/Dialog.svelte';
   import Kbd from './Kbd.svelte';
   import SelectField from '../components/SelectField.svelte';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '@layerstack/tailwind';
-  import { smScreen } from '../stores/matchMedia.js';
-  import { autoFocus, selectOnFocus } from '../actions/input.js';
   import type { MenuOption } from '../types/index.js';
 
   export let options: MenuOption<string>[] = [];

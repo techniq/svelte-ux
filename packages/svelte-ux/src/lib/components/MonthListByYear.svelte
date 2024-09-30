@@ -1,11 +1,10 @@
 <script lang="ts">
   import { addYears, subYears } from 'date-fns';
+  import { getMinSelectedDate, getMaxSelectedDate } from '@layerstack/utils/date';
+  import type { SelectedDate } from '@layerstack/utils';
 
   import Button from './Button.svelte';
   import MonthList from './MonthList.svelte';
-
-  import { getMinSelectedDate, getMaxSelectedDate } from '../utils/date.js';
-  import type { SelectedDate } from '../utils/date.js';
 
   export let selected: SelectedDate | undefined = undefined;
   export let minDate: Date | undefined = undefined;

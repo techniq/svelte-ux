@@ -15,11 +15,11 @@
     ThemeSwitch,
     Tooltip,
     settings,
-    lgScreen,
-    createLocaleSettings,
-    entries,
   } from 'svelte-ux';
   import { DEV } from 'esm-env';
+
+  import { entries, createLocaleSettings } from '@layerstack/utils';
+  import { lgScreen } from '@layerstack/svelte-stores';
 
   import NavMenu from './_NavMenu.svelte';
   import LanguageSelect from '$lib/components/LanguageSelect.svelte';

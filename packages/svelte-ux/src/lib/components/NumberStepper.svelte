@@ -1,13 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { mdiMinus, mdiPlus } from '@mdi/js';
+  import { cls } from '@layerstack/tailwind';
+  import { step as stepUtil } from '@layerstack/utils/number';
+  import { selectOnFocus } from '@layerstack/svelte-actions';
 
   import Button from './Button.svelte';
   import TextField from './TextField.svelte';
-  import { selectOnFocus } from '../actions/input.js';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '@layerstack/tailwind';
-  import { step as stepUtil } from '../utils/number.js';
 
   export let value: number = 0;
   export let min: number | undefined = undefined;

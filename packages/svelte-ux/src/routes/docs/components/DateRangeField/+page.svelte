@@ -2,7 +2,9 @@
   import { subDays } from 'date-fns';
   import { mdiCalendarRange } from '@mdi/js';
 
-  import { DateRangeField, PeriodType } from 'svelte-ux';
+  import { DateRangeField } from 'svelte-ux';
+  import { PeriodType } from '@layerstack/utils';
+
   import Preview from '$lib/components/Preview.svelte';
 
   let today = new Date();

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade, type FadeParams } from 'svelte/transition';
 
-  import { portal as portalAction, type PortalOptions } from '../actions/portal.js';
+  import { portal as portalAction, type PortalOptions } from '@layerstack/svelte-actions';
   import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
