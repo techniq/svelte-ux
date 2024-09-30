@@ -27,6 +27,7 @@
 </script>
 
 <a
+  {...$$restProps}
   href={url(currentUrl, path)}
   class={cls(
     'NavItem',
