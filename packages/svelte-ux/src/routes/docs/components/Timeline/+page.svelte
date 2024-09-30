@@ -8,7 +8,10 @@
     mdiTruck,
   } from '@mdi/js';
 
-  import { Icon, PeriodType, Timeline, TimelineEvent, cls, getSettings } from 'svelte-ux';
+  import { Icon, Timeline, TimelineEvent, getSettings } from 'svelte-ux';
+  import { cls } from '@layerstack/tailwind';
+  import { PeriodType } from '@layerstack/utils';
+
   import Preview from '$lib/components/Preview.svelte';
 
   const { format } = getSettings();

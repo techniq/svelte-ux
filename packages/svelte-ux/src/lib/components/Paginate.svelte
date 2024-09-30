@@ -1,5 +1,5 @@
 <script lang="ts">
-  import paginationStore from '../stores/paginationStore.js';
+  import { paginationStore } from '@layerstack/svelte-stores';
 
   type T = $$Generic;
 

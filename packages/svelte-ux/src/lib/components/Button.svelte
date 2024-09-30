@@ -1,11 +1,10 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
+  import { cls } from '@layerstack/tailwind';
+  import { multi, type Actions } from '@layerstack/svelte-actions';
 
   import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
-  import { cls } from '@layerstack/tailwind';
-  import { multi } from '../actions/multi.js';
-  import type { Actions } from '../actions/multi.js';
   import type { ButtonColor, ButtonRounded, ButtonSize, ButtonVariant } from '../types/index.js';
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData, type IconInput } from '../utils/icons.js';

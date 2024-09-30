@@ -5,7 +5,8 @@
   import {
     scrollIntoView as scrollIntoViewAction,
     type ScrollIntoViewOptions,
-  } from '../actions/scroll.js';
+  } from '@layerstack/svelte-actions';
+
   import { setButtonGroup } from './ButtonGroup.svelte';
   import { getComponentClasses } from './theme.js';
   import { settings, getSettings } from './settings.js';

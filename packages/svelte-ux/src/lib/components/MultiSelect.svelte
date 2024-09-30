@@ -1,11 +1,12 @@
 <script lang="ts" generics="TValue">
-  import { getComponentClasses } from './theme.js';
-
   import { type ComponentProps, createEventDispatcher } from 'svelte';
   import { flip } from 'svelte/animate';
-  import { get, partition } from 'lodash-es';
+  import { partition } from 'lodash-es';
 
   import { mdiMagnify } from '@mdi/js';
+
+  import { dirtyStore, selectionStore, uniqueStore } from '@layerstack/svelte-stores';
+  import { cls } from '@layerstack/tailwind';
 
   import Button from './Button.svelte';
   import InfiniteScroll from './InfiniteScroll.svelte';
@@ -13,10 +14,7 @@
   import TextField from './TextField.svelte';
 
   import type { MenuOption } from '../types/index.js';
-  import dirtyStore from '../stores/dirtyStore.js';
-  import selectionStore from '../stores/selectionStore.js';
-  import uniqueStore from '../stores/uniqueStore.js';
-  import { cls } from '@layerstack/tailwind';
+  import { getComponentClasses } from './theme.js';
 
   export let options: MenuOption<TValue>[];
   export let value: TValue[] = [];

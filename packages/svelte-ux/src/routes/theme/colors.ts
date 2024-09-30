@@ -1,4 +1,4 @@
-import { colorVariableValue, type SupportedColorSpace } from '$lib/styles/theme.js';
+import { colorVariableValue, type SupportedColorSpace } from '@layerstack/tailwind';
 import { formatHex } from 'culori';
 
 export function formatColor(value: string, colorSpace: SupportedColorSpace | 'hex') {

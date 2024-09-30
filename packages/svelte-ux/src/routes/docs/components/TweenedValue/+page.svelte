@@ -1,7 +1,9 @@
 <script lang="ts">
   import * as easings from 'svelte/easing';
 
-  import { Button, ButtonGroup, Kbd, TweenedValue, cls, getSettings } from 'svelte-ux';
+  import { Button, ButtonGroup, Kbd, TweenedValue, getSettings } from 'svelte-ux';
+  import { cls } from '@layerstack/tailwind';
+
   import Preview from '$lib/components/Preview.svelte';
 
   const { format } = getSettings();

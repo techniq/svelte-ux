@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
-
-  import { isActive, url } from '../utils/routing.js';
-  import Icon from './Icon.svelte';
-  import { scrollIntoView } from '../actions/scroll.js';
+  import { isActive, url } from '@layerstack/utils/routing';
+  import { scrollIntoView } from '@layerstack/svelte-actions';
+  import { mdScreen } from '@layerstack/svelte-stores';
   import { cls } from '@layerstack/tailwind';
+
+  import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
-  import { mdScreen } from '../stores/matchMedia.js';
   import { getSettings } from './index.js';
 
   export let currentUrl: URL;
