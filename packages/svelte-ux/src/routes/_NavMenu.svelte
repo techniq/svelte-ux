@@ -72,43 +72,6 @@
     Effects: ['Gooey', 'Shine'],
     Other: ['CopyButton'],
   };
-
-  const actions = [
-    'dataBackground',
-    'input',
-    'layout',
-    'mouse',
-    'multi',
-    'observer',
-    'popover',
-    'portal',
-    'scroll',
-    'spotlight',
-    'sticky',
-    'styleProps',
-    'table',
-  ];
-
-  const stores = [
-    'changeStore',
-    'debounceStore',
-    'dirtyStore',
-    'fetchStore',
-    'formStore',
-    'graphStore',
-    'localStore',
-    'mapStore',
-    'matchMedia',
-    'paginationStore',
-    'promiseStore',
-    'queryParamsStore',
-    'selectionStore',
-    'tableOrderStore',
-    'timerStore',
-    'uniqueStore',
-  ];
-
-  const utils = ['cls', 'duration', 'format', 'json', 'Logger', 'string'];
 </script>
 
 <NavItem text="Getting Started" icon={mdiHome} currentUrl={$page.url} path="/" />
@@ -129,16 +92,43 @@
 {/each}
 
 <h1>Actions</h1>
-{#each actions as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/actions/{item}" />
-{/each}
+<NavItem
+  text="@layerstack/svelte-actions"
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/svelte-actions"
+  target="_blank"
+/>
+<NavItem
+  text="@layerstack/svelte-table"
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/svelte-table/actions"
+  target="_blank"
+/>
 
 <h1>Stores</h1>
-{#each stores as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/stores/{item}" />
-{/each}
+<NavItem
+  text="@layerstack/svelte-stores"
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/svelte-stores"
+  target="_blank"
+/>
+<NavItem
+  text="@layerstack/svelte-table"
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/svelte-table/stores"
+  target="_blank"
+/>
 
 <h1>Utils</h1>
-{#each utils as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/utils/{item}" />
-{/each}
+<NavItem
+  text="@layerstack/tailwind"
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/tailwind"
+  target="_blank"
+/>
+<NavItem
+  text="@layerstack/utils"
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/utils"
+  target="_blank"
+/>
