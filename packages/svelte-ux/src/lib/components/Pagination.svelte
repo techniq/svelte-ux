@@ -1,9 +1,9 @@
 <script lang="ts">
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown, mdiPageFirst, mdiPageLast } from '@mdi/js';
 
-  import type paginationStore from '../stores/paginationStore.js';
+  import type { paginationStore } from '@layerstack/svelte-stores';
+  import type { StoresValues } from '@layerstack/svelte-stores/types';
   import { cls } from '@layerstack/tailwind';
-  import type { StoresValues } from '../types/typeHelpers.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';

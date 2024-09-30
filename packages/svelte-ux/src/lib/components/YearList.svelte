@@ -8,12 +8,11 @@
     startOfYear,
     endOfYear,
   } from 'date-fns';
+  import { type DisabledDate, type SelectedDate, PeriodType } from '@layerstack/utils';
+  import { getMinSelectedDate, getMaxSelectedDate } from '@layerstack/utils/date';
 
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
-
-  import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date.js';
-  import type { DisabledDate, SelectedDate } from '../utils/date.js';
 
   export let selected: SelectedDate = undefined;
   export let minDate: Date | undefined = undefined;

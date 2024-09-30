@@ -1,8 +1,8 @@
 <script lang="ts">
   import { NavItem } from 'svelte-ux';
+  import { entries } from '@layerstack/utils';
 
   import { page } from '$app/stores';
-  import { entries } from '$lib/types/typeHelpers.js';
   import { mdiCog, mdiFormatListBulleted, mdiHome, mdiPalette } from '@mdi/js';
 
   const components = {

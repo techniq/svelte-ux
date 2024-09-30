@@ -8,8 +8,7 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import type { HTMLInputAttributes, HTMLInputTypeAttribute } from 'svelte/elements';
 
-  import { multi } from '../actions/multi.js';
-  import type { Actions } from '../actions/multi.js';
+  import { multi, type Actions } from '@layerstack/svelte-actions';
   import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 

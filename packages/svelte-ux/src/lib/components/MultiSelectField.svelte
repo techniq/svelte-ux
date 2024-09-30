@@ -1,8 +1,8 @@
 <script lang="ts" generics="TValue">
-  import { getComponentSettings } from './settings.js';
-
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
+  import { cls, clsMerge, normalizeClasses } from '@layerstack/tailwind';
+  import { Logger } from '@layerstack/utils';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
 
@@ -10,10 +10,9 @@
   import MultiSelectMenu from './MultiSelectMenu.svelte';
   import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
-
-  import { cls, clsMerge, normalizeClasses } from '../utils/styles.js';
-  import { Logger } from '@layerstack/utils';
   import ProgressCircle from './ProgressCircle.svelte';
+
+  import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 

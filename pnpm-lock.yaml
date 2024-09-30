@@ -29,6 +29,21 @@ importers:
       '@kitql/helpers':
         specifier: ^0.8.10
         version: 0.8.10
+      '@layerstack/svelte-actions':
+        specifier: ^0.0.5
+        version: 0.0.5
+      '@layerstack/svelte-stores':
+        specifier: ^0.0.6
+        version: 0.0.6
+      '@layerstack/svelte-table':
+        specifier: ^0.0.6
+        version: 0.0.6
+      '@layerstack/tailwind':
+        specifier: ^0.0.7
+        version: 0.0.7
+      '@layerstack/utils':
+        specifier: ^0.0.5
+        version: 0.0.5
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -52,11 +67,11 @@ importers:
         specifier: ^0.0.5
         version: 0.0.5
       '@layerstack/svelte-stores':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.6
+        version: 0.0.6
       '@layerstack/svelte-table':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.6
+        version: 0.0.6
       '@layerstack/tailwind':
         specifier: ^0.0.7
         version: 0.0.7
@@ -691,11 +706,11 @@ packages:
   '@layerstack/svelte-actions@0.0.5':
     resolution: {integrity: sha512-jqgRodLq4yvt8OQzOPkfRtM5ljl9hPZL/5dZ5cQEeJQ0xZV/CxZ4b5CVWHYxHNDca67ZM0/GrL9xCg4Fax95VQ==}
 
-  '@layerstack/svelte-stores@0.0.5':
-    resolution: {integrity: sha512-KiaX1wyxT3lYe+MYu1JrhkczM8zEwixSqocTj3PGTT/8fhRSJCGPO0SN0FTY9ehP2yDecj4z9c3n23GbZsX3Gg==}
+  '@layerstack/svelte-stores@0.0.6':
+    resolution: {integrity: sha512-QCYU2QIOGNVcstkyJDkVHPDxBUX1/9Nb5bYt6JuhmFgSrfdYKx8DlZlax3jMEmjdu2htQRmj/qSZe+xK4HFngA==}
 
-  '@layerstack/svelte-table@0.0.5':
-    resolution: {integrity: sha512-4fKDr42+mf3IYn4ui0QY01e+ylZ239LR84qeJXFPjQZyjGBFpr5HmVFJIdBS/Mo1gUElVWT9vBIz9RjoCc6TtQ==}
+  '@layerstack/svelte-table@0.0.6':
+    resolution: {integrity: sha512-v1SD7kL5Qm07yQC6MLm8EYwM2GL1enyceNMA9EPn92MmlHncCmdvq6tRlvCZKMbMuvU/dLCNxLSiFfHyYxLihQ==}
 
   '@layerstack/tailwind@0.0.7':
     resolution: {integrity: sha512-mMdE0vbw0NXi0/mkymJNR/YsADi9o8haQniacuuI/9Eg+TBlQvWFogmO8fJM7+15Eox8b7nG7npv5bi4Lsn2xA==}
@@ -2907,7 +2922,7 @@ snapshots:
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/svelte-stores@0.0.5':
+  '@layerstack/svelte-stores@0.0.6':
     dependencies:
       '@layerstack/utils': 0.0.5
       d3-array: 3.2.4
@@ -2916,7 +2931,7 @@ snapshots:
       lodash-es: 4.17.21
       zod: 3.23.8
 
-  '@layerstack/svelte-table@0.0.5':
+  '@layerstack/svelte-table@0.0.6':
     dependencies:
       '@layerstack/svelte-actions': 0.0.5
       '@layerstack/utils': 0.0.5

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { overflow } from '../actions/layout.js';
+  import { overflow } from '@layerstack/svelte-actions';
   import { cls } from '@layerstack/tailwind';
+
   import { getComponentClasses } from './theme.js';
 
   const settingsClasses = getComponentClasses('Overflow');

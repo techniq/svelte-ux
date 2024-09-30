@@ -3,10 +3,9 @@
   import type { Placement } from '@floating-ui/dom';
 
   import { mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
-
+  import { cls, clsMerge, normalizeClasses } from '@layerstack/tailwind';
+  import { autoFocus, selectOnFocus, type ScrollIntoViewOptions } from '@layerstack/svelte-actions';
   import { Logger } from '@layerstack/utils';
-  import { autoFocus, selectOnFocus } from '../actions/input.js';
-  import { cls, clsMerge, normalizeClasses } from '../utils/styles.js';
 
   import Button from './Button.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
@@ -17,7 +16,6 @@
   import { getComponentSettings } from './settings.js';
   import type { IconInput } from '../utils/icons.js';
   import type { MenuOption } from '../types/index.js';
-  import type { ScrollIntoViewOptions } from '../actions/scroll.js';
 
   const dispatch = createEventDispatcher<{
     change: { value: typeof value; option: typeof selected };
