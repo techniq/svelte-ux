@@ -2,7 +2,7 @@
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown, mdiPageFirst, mdiPageLast } from '@mdi/js';
 
   import type paginationStore from '../stores/paginationStore.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import type { StoresValues } from '../types/typeHelpers.js';
 
   import Button from './Button.svelte';

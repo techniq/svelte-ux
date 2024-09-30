@@ -3,7 +3,7 @@
 
   import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { multi } from '../actions/multi.js';
   import type { Actions } from '../actions/multi.js';
   import type { ButtonColor, ButtonRounded, ButtonSize, ButtonVariant } from '../types/index.js';

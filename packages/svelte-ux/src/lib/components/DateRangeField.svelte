@@ -10,7 +10,7 @@
 
   import { PeriodType, getDateFuncsByPeriodType, type DisabledDate } from '../utils/date.js';
   import { getDateRangePresets, type DateRange as DateRangeType } from '../utils/dateRange.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentSettings, getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();

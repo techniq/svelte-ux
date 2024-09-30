@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { intersection } from '../actions/observer.js';
   import { getComponentClasses } from './theme.js';
 

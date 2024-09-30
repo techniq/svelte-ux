@@ -3,7 +3,7 @@
   import { parse as parseDate, format as formatDate } from 'date-fns';
   import { type DisabledDate } from '../utils/date_types.js';
   import { getComponentSettings, getSettings } from './settings.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   import Field from './Field.svelte';
 

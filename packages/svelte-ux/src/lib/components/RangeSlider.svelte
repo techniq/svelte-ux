@@ -33,7 +33,7 @@
   import { movable } from '../actions/mouse.js';
   import { decimalCount, round } from '../utils/number.js';
   import Icon from './Icon.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let min = 0;

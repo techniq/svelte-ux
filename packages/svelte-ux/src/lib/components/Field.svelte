@@ -3,7 +3,7 @@
   import { mdiClose, mdiInformationOutline } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types/index.js';
   import { getComponentSettings } from './settings.js';
 

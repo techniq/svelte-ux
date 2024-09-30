@@ -3,9 +3,9 @@
 
   import { tableCell } from '../actions/table.js';
   import type { ColumnDef } from '../types/table.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
-  import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '../utils/table.js';
+  import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '@layerstack/svelte-table';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
   import { getComponentClasses } from './theme.js';
