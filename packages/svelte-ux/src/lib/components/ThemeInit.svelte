@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createHeadSnippet } from '../styles/theme.js';
+  import { createHeadSnippet } from '@layerstack/tailwind';
   import { getSettings } from './settings.js';
 
   const darkThemes = getSettings().themes?.dark ?? [];

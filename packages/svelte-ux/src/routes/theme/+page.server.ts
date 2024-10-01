@@ -1,5 +1,4 @@
-import * as daisy from '$lib/styles/daisy.js';
-import * as skeleton from '$lib/styles/skeleton.js';
+import { daisy, skeleton } from '@layerstack/tailwind';
 
 export async function load() {
   return {
