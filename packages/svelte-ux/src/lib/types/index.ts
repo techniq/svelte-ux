@@ -5,7 +5,7 @@ import type {
   FadeParams,
   ScaleParams,
 } from 'svelte/transition';
-import type { ThemeColors } from './typeHelpers.js';
+import type { ThemeColors } from '@layerstack/tailwind';
 
 export type MenuOption<T = any> = {
   label: string;
