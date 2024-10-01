@@ -5,7 +5,7 @@
   import { cls } from '@layerstack/tailwind';
 
   import Icon from './Icon.svelte';
-  import type { TransitionParams } from '../types/typeHelpers.js';
+  import type { TransitionParams } from '../types/index.js';
   import { getComponentClasses } from './theme.js';
 
   /**
