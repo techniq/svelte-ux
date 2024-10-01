@@ -39,8 +39,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6
       '@layerstack/tailwind':
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.0.8
+        version: 0.0.8
       '@layerstack/utils':
         specifier: ^0.0.5
         version: 0.0.5
@@ -73,8 +73,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6
       '@layerstack/tailwind':
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.0.8
+        version: 0.0.8
       '@layerstack/utils':
         specifier: ^0.0.5
         version: 0.0.5
@@ -355,9 +355,6 @@ packages:
   '@cloudflare/workers-shared@0.6.0':
     resolution: {integrity: sha512-rfUCvb3hx4AsvdUZsxgk9lmgEnQehqV3jdtXLP/Xr0+P56n11T/0nXNMzmn7Nnv+IJFOV6X9NmFhuMz4sBPw7w==}
     engines: {node: '>=16.7.0'}
-
-  '@cloudflare/workers-types@4.20241011.0':
-    resolution: {integrity: sha512-emwBnuFB/2lS1z6NXAeBqrSL8Xwnr7YpgdLuchOmgu/igqBsLLNPBb4Qmgh3neFWUe9wbzQyx030836YF3c3Xw==}
 
   '@cloudflare/workers-types@4.20241018.0':
     resolution: {integrity: sha512-gGWumpaaqnjN/G6SI7CZQ13G4SpIUV+EM8QqvuN2D3cGDF6mKIm+ov7H4x7V/c+AdY90v0FCc8B5nmEEt90MvQ==}
@@ -712,8 +709,8 @@ packages:
   '@layerstack/svelte-table@0.0.6':
     resolution: {integrity: sha512-v1SD7kL5Qm07yQC6MLm8EYwM2GL1enyceNMA9EPn92MmlHncCmdvq6tRlvCZKMbMuvU/dLCNxLSiFfHyYxLihQ==}
 
-  '@layerstack/tailwind@0.0.7':
-    resolution: {integrity: sha512-mMdE0vbw0NXi0/mkymJNR/YsADi9o8haQniacuuI/9Eg+TBlQvWFogmO8fJM7+15Eox8b7nG7npv5bi4Lsn2xA==}
+  '@layerstack/tailwind@0.0.8':
+    resolution: {integrity: sha512-89f1yTL/GEgLT5AzzRLhj//kjx/E5l1Bn1risOO5f7X6U35+FJL0F3yZDa3EfJ6w44EP1vujpHtDBcWsl1RNUA==}
 
   '@layerstack/utils@0.0.5':
     resolution: {integrity: sha512-Ew84WuCMC3q7Wq0Tb0rBEM/WK2RkkxRBF/RvNcnbaWcj5O+jO6VEZc657Jv73skkIJ4fkciT8FhSIcHoRkhdrQ==}
@@ -2701,10 +2698,7 @@ snapshots:
       mime: 3.0.0
       zod: 3.23.8
 
-  '@cloudflare/workers-types@4.20241011.0': {}
-
-  '@cloudflare/workers-types@4.20241018.0':
-    optional: true
+  '@cloudflare/workers-types@4.20241018.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -2939,7 +2933,7 @@ snapshots:
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/tailwind@0.0.7':
+  '@layerstack/tailwind@0.0.8':
     dependencies:
       '@layerstack/utils': 0.0.5
       clsx: 2.1.1
@@ -2947,8 +2941,8 @@ snapshots:
       d3-array: 3.2.4
       date-fns: 4.1.0
       lodash-es: 4.17.21
-      tailwind-merge: 2.5.2
-      tailwindcss: 3.4.13
+      tailwind-merge: 2.5.4
+      tailwindcss: 3.4.14
     transitivePeerDependencies:
       - ts-node
 
@@ -3069,7 +3063,7 @@ snapshots:
 
   '@sveltejs/adapter-cloudflare@4.7.3(@sveltejs/kit@2.7.2(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.2)(vite@5.4.9(@types/node@22.7.7)))(svelte@5.0.2)(vite@5.4.9(@types/node@22.7.7)))(wrangler@3.81.0(@cloudflare/workers-types@4.20241018.0))':
     dependencies:
-      '@cloudflare/workers-types': 4.20241011.0
+      '@cloudflare/workers-types': 4.20241018.0
       '@sveltejs/kit': 2.7.2(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.2)(vite@5.4.9(@types/node@22.7.7)))(svelte@5.0.2)(vite@5.4.9(@types/node@22.7.7))
       esbuild: 0.21.5
       worktop: 0.8.0-next.18
