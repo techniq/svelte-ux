@@ -20,7 +20,6 @@
 
   import { entries, fromEntries } from '@layerstack/utils';
   import { styleProps } from '@layerstack/svelte-actions';
-
   import {
     getThemeNames,
     processThemeColors,
@@ -28,6 +27,7 @@
     type SupportedColorSpace,
     type NestedColors,
   } from '@layerstack/tailwind';
+
   import ColorField from './ColorField.svelte';
   import { formatColor } from './colors.js';
 
