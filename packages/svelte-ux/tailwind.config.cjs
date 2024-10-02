@@ -1,7 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 const colors = require('tailwindcss/colors');
 
-const svelteUx = require('@layerstack/tailwind/plugin');
+const layerstack = require('@layerstack/tailwind/plugin');
 
 module.exports = {
   content: ['./src/**/*.{html,svelte,md,ts,js}'],
@@ -48,7 +48,7 @@ module.exports = {
     },
   },
   plugins: [
-    svelteUx({ colorSpace: 'hsl' }),
+    layerstack({ colorSpace: 'hsl' }),
     require('@tailwindcss/typography'),
 
     plugin(function ({ addComponents }) {

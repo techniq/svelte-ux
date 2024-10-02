@@ -49,7 +49,7 @@
       <div>Update <code>tailwind.config.cjs</code></div>
       <Code
         source={`const colors = require('tailwindcss/colors');
-const svelteUx = require('svelte-ux/plugins/tailwind.cjs');
+const layerstack = require('@layerstack/tailwind/plugin');
 
 module.exports = {
   content: [
