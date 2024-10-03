@@ -1,17 +1,32 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { fly } from 'svelte/transition';
   import { quadIn } from 'svelte/easing';
+  import { cls } from '@layerstack/tailwind';
 
   import { mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
+  import Icon from './Icon.svelte';
 
   const dispatch = createEventDispatcher();
 
+  export let title: string | undefined = undefined;
+  export let description: string | undefined = undefined;
+  export let icon: string | undefined = undefined;
+  export let actions: Record<string, Function> = {};
+
   export let open: boolean = true;
-  export let actions: 'below' | 'right' | 'split' = 'below';
   export let closeIcon: boolean = false;
+  export let variant: 'inline' | 'below' | 'split' = 'inline';
+
+  export let classes: {
+    root?: string;
+    title?: string;
+    description?: string;
+    icon?: ComponentProps<Icon>['classes'];
+    actions?: string;
+  } = {};
 
   let notificationEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
@@ -37,42 +52,67 @@
 {#if open}
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
-    class="Notification rounded-lg border bg-surface-100 shadow-lg z-10"
+    class={cls(
+      'Notification rounded-lg border bg-surface-100 shadow-lg z-10',
+      classes.root,
+      $$props.class
+    )}
     transition:fly={{ duration: 200, easing: quadIn, x: 100 }}
     on:outroend={() => dispatch('close')}
     on:click={onClick}
     on:keypress
     bind:this={notificationEl}
   >
-    <div class="grid grid-flow-col">
-      <div class="grid grid-flow-col items-center gap-4 p-4">
-        {#if $$slots.icon}
-          <slot name="icon" />
+    <div class="flex">
+      <div class="flex-1 flex items-center gap-4 p-4">
+        {#if icon || $$slots.icon}
+          <slot name="icon">
+            <Icon
+              data={icon}
+              class={cls(variant === 'below' && 'self-start mt-0.5')}
+              classes={classes.icon}
+            />
+          </slot>
         {/if}
 
-        <div class="grid gap-1">
-          {#if $$slots.title}
-            <div class="font-medium">
-              <slot name="title" />
+        <div class="flex-1 grid gap-1">
+          {#if title || $$slots.title}
+            <div class={cls('font-medium', classes.title)}>
+              <slot name="title">
+                {title}
+              </slot>
             </div>
           {/if}
 
-          {#if $$slots.description}
-            <div class="text-sm text-surface-content/50">
-              <slot name="description" />
+          {#if description || $$slots.description}
+            <div class={cls('text-sm text-surface-content/50', classes.description)}>
+              <slot name="description">
+                {description}
+              </slot>
             </div>
           {/if}
 
-          {#if $$slots.actions && actions === 'below'}
-            <div bind:this={actionsEl} class="mt-2 -ml-4 -mb-2">
-              <slot name="actions" />
+          {#if (actions || $$slots.actions) && variant === 'below'}
+            <div bind:this={actionsEl} class={cls('mt-2 -ml-4 -mb-2', classes.actions)}>
+              <slot name="actions">
+                {#each Object.entries(actions) as [name, fn], i}
+                  <Button color={i === 0 ? 'primary' : 'default'} on:click={() => fn()}
+                    >{name}</Button
+                  >
+                {/each}
+              </slot>
             </div>
           {/if}
         </div>
 
-        {#if $$slots.actions && actions === 'right'}
-          <div bind:this={actionsEl} class="-my-2 ml-8 -mr-2">
-            <slot name="actions" />
+        {#if (actions || $$slots.actions) && variant === 'inline'}
+          <div bind:this={actionsEl} class={cls('-my-2 -mr-2', classes.actions)}>
+            <slot name="actions">
+              {#each Object.entries(actions) as [name, fn], i}
+                <Button color={i === 0 ? 'primary' : 'default'} on:click={() => fn()}>{name}</Button
+                >
+              {/each}
+            </slot>
           </div>
         {/if}
 
@@ -85,9 +125,17 @@
         {/if}
       </div>
 
-      {#if $$slots.actions && actions === 'split'}
-        <div bind:this={actionsEl}>
-          <slot name="actions" />
+      {#if (actions || $$slots.actions) && variant === 'split'}
+        <div bind:this={actionsEl} class={cls('grid border-l divide-y', classes.actions)}>
+          <slot name="actions">
+            {#each Object.entries(actions) as [name, fn], i}
+              <Button
+                color={i === 0 ? 'primary' : 'default'}
+                class="rounded-none"
+                on:click={() => fn()}>{name}</Button
+              >
+            {/each}
+          </slot>
         </div>
       {/if}
     </div>
