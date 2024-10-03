@@ -1,18 +1,21 @@
+import type { ButtonColor, ButtonRounded, ButtonVariant } from '$lib/types/index.js';
 import type { IconInput } from '$lib/utils/icons.js';
 import type { SvelteComponent } from 'svelte';
 import { get, writable } from 'svelte/store';
 
-const DEFAULT_TOAST_TIME_IN_MS = 3000;
-
 type ToastActionType = {
   children?: string | SvelteComponent,
-  classes?: string,
-  onClick: () => {}
+  icon?: IconInput,
+  variant?: ButtonVariant,
+  rounded?: ButtonRounded,
+  onClick: (event?: MouseEvent) => void,
+  color?: ButtonColor
 }
 
-type ToastContents = {
+export type ToastContents = {
   text: string;
   actions?: ToastActionType[];
+  actionPlacement?: 'below' | 'right' | 'split'
   icon?: IconInput;
   variant?: string // TODO:
 }
@@ -26,20 +29,38 @@ type Toast = {
  */
 const toastStore = writable<Toast[]>([]);
 
-export function addToast(toastConents: ToastContents, durationInMS = DEFAULT_TOAST_TIME_IN_MS) {
+export function removeToast(
+  toastToRemove: Toast
+){
+  const remainingToasts = [...get(toastStore)].filter((toast) => {
+    return toast.timeAdded != toastToRemove.timeAdded;
+  });
+  toastStore.set(remainingToasts);
+}
+
+export function addToast(
+  toastContents: ToastContents | string,
+  durationInMS?: number
+) {
   const timeAdded = new Date();
-  const toast: Toast = {
-    ...toastConents,
+
+  // allow toast contents to also just be a simple string for quick toasts
+  const contentsAreStringOnly = typeof toastContents == 'string';
+  const toast: Toast = contentsAreStringOnly ? {
+    text: toastContents,
+    timeAdded
+  } : {
+    ...toastContents,
     timeAdded,
+    actionPlacement: toastContents.actionPlacement || 'below'
   };
   toastStore.set([...get(toastStore), toast]);
 
-  setTimeout(() => {
-    const remainingToasts = [...get(toastStore)].filter((toast) => {
-      return toast.timeAdded != timeAdded;
-    });
-    toastStore.set(remainingToasts);
-  }, durationInMS);
+  if(durationInMS != undefined){
+    setTimeout(() => {
+      removeToast(toast);
+    }, durationInMS);
+  }
 }
 
 export default toastStore;
