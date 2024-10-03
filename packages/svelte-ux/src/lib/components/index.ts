@@ -91,6 +91,7 @@ export { default as ThemeInit } from './ThemeInit.svelte';
 export { default as Tilt } from './Tilt.svelte';
 export { default as Timeline } from './Timeline.svelte';
 export { default as TimelineEvent } from './TimelineEvent.svelte';
+export { default as Toast } from './Toast.svelte';
 export { default as Toggle } from './Toggle.svelte';
 export { default as ToggleButton } from './ToggleButton.svelte';
 export { default as ToggleGroup } from './ToggleGroup.svelte';

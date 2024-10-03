@@ -12,6 +12,7 @@
   export let open: boolean = true;
   export let actions: 'below' | 'right' | 'split' = 'below';
   export let closeIcon: boolean = false;
+  export let onClose: (event: MouseEvent) => void = () => {};
 
   let notificationEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
@@ -79,7 +80,10 @@
         {#if closeIcon}
           <Button
             icon={mdiClose}
-            on:click={() => (open = false)}
+            on:click={(e) => {
+              open = false;
+              onClose(e);
+            }}
             class="text-surface-content/25 self-start"
           />
         {/if}
