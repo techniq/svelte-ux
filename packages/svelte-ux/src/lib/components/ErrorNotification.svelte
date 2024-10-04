@@ -17,7 +17,7 @@
 </script>
 
 <Toggle let:on={open} let:toggle>
-  <Notification actions="below" closeIcon on:close>
+  <Notification actionsPlacement="below" closeIcon on:close>
     <div slot="icon" class="self-start">
       <Icon data={mdiAlertCircle} class="text-danger" />
     </div>
