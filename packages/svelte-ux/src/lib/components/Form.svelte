@@ -14,6 +14,12 @@
   let className: string | undefined = undefined;
   export { className as class };
 
+  /** Endpoint to submit form data */
+  export let action: string | undefined = undefined;
+
+  /** HTTP method to submit form.  If action defined, defaults to `post`, else is undefined and will prevent submitted (client-side only)*/
+  export let method: 'post' | 'get' | 'dialog' | undefined = action != null ? 'post' : undefined;
+
   const settingsClasses = getComponentClasses('Form');
 
   const [_state, draft, errors] = formStore(initial, { schema });
@@ -24,10 +30,17 @@
 </script>
 
 <form
-  on:submit|preventDefault={(e) => {
-    draft.commit();
+  {action}
+  {method}
+  on:submit={(e) => {
+    const result = draft.commit();
+    if (!result || method === undefined) {
+      // Prevent submitted to server if validation failed, or no server side action/method set
+      e.preventDefault();
+    }
   }}
-  on:reset|preventDefault={(e) => {
+  on:reset={(e) => {
+    e.preventDefault();
     draft.revert();
   }}
   class={cls(settingsClasses.root, className)}

@@ -75,10 +75,87 @@
   </Form>
 </Preview>
 
+<h2>Form submit with method</h2>
+
+<Preview>
+  <Form method="post" initial={data} on:change={(e) => (data = e.detail)} let:draft let:state>
+    <TextField
+      label="Name"
+      value={draft.name}
+      on:change={(e) => {
+        draft.name = e.detail.value;
+      }}
+    />
+    <Button type="submit">Apply</Button>
+    <Button type="reset">Cancel</Button>
+    <div class="mt-2">
+      <div>state: {JSON.stringify(state)}</div>
+    </div>
+  </Form>
+</Preview>
+
+<!-- <h2>Form submit with action</h2>
+
+<Preview>
+  <Form action="?/example" initial={data} on:change={(e) => (data = e.detail)} let:draft let:state>
+    <TextField
+      label="Name"
+      value={draft.name}
+      on:change={(e) => {
+        draft.name = e.detail.value;
+      }}
+    />
+    <Button type="submit">Apply</Button>
+    <Button type="reset">Cancel</Button>
+    <div class="mt-2">
+      <div>state: {JSON.stringify(state)}</div>
+    </div>
+  </Form>
+</Preview> -->
+
 <h2>zod schema</h2>
 
 <Preview>
   <Form
+    initial={schemaData}
+    {schema}
+    on:change={(e) => (schemaData = e.detail)}
+    let:draft
+    let:state
+    let:errors
+  >
+    <div class="grid gap-2">
+      <TextField
+        label="First Name"
+        value={draft.firstName}
+        on:change={(e) => {
+          draft.firstName = e.detail.value;
+        }}
+        error={errors.firstName}
+      />
+      <TextField
+        label="Last Name"
+        value={draft.lastName}
+        on:change={(e) => {
+          draft.lastName = e.detail.value;
+        }}
+        error={errors.lastName}
+      />
+    </div>
+    <Button type="submit">Apply</Button>
+    <Button type="reset">Cancel</Button>
+    <div class="mt-2">
+      <div>state: {JSON.stringify(state)}</div>
+      <div>errors: {JSON.stringify(errors)}</div>
+    </div>
+  </Form>
+</Preview>
+
+<h2>zod schema with server submit</h2>
+
+<Preview>
+  <Form
+    method="post"
     initial={schemaData}
     {schema}
     on:change={(e) => (schemaData = e.detail)}
