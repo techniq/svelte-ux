@@ -2,7 +2,8 @@
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { fly } from 'svelte/transition';
   import { quadIn } from 'svelte/easing';
-  import { cls, type ThemeColors } from '@layerstack/tailwind';
+  import type { ThemeColors } from '$lib/types/typeHelpers.js';
+  import { cls } from '$lib/utils/styles.js';
 
   import { mdiClose } from '@mdi/js';
 
