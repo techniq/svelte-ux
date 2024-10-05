@@ -1,5 +1,11 @@
 # create-svelte-ux
 
+## 0.6.5
+
+### Patch Changes
+
+- Update dependencies ([`1ae554b5a8211057484a9b8e95cc788f331baee8`](https://github.com/techniq/svelte-ux/commit/1ae554b5a8211057484a9b8e95cc788f331baee8))
+
 ## 0.6.4
 
 ### Patch Changes
