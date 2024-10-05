@@ -1,5 +1,21 @@
 # svelte-ux
 
+## 0.75.0
+
+### Minor Changes
+
+- feat(Notification): Add `variant` (default, fill) and `color` (theme) props ([#491](https://github.com/techniq/svelte-ux/pull/491))
+
+- feat(Notification): Simplify usage with title/description/icon/actions props ([#491](https://github.com/techniq/svelte-ux/pull/491))
+
+- breaking(Notification): Rename `variant` to `actionsPlacement` (and repurpose `variant`) ([#491](https://github.com/techniq/svelte-ux/pull/491))
+
+### Patch Changes
+
+- Update dependencies ([`1ae554b5a8211057484a9b8e95cc788f331baee8`](https://github.com/techniq/svelte-ux/commit/1ae554b5a8211057484a9b8e95cc788f331baee8))
+
+- fix(Form): Only prevent submitting to server if validation fails or no server action/method are defined ([#493](https://github.com/techniq/svelte-ux/pull/493))
+
 ## 0.74.9
 
 ### Patch Changes
