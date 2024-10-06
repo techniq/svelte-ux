@@ -2,7 +2,7 @@
   import type { ComponentProps } from 'svelte';
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getTimeline } from './Timeline.svelte';
   import { mdiCircle, mdiCircleMedium } from '@mdi/js';
 

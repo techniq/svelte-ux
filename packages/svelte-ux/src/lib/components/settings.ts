@@ -1,6 +1,18 @@
 import { getContext, setContext } from 'svelte';
 import { writable, derived, type Readable, type Writable } from 'svelte/store';
 
+import { buildFormatters, type FormatFunctions } from '@layerstack/utils/format';
+import { browser } from '@layerstack/utils/env';
+import {
+  getAllKnownLocales,
+  localeStore,
+  type LocaleSettings,
+  type LocaleStore,
+  type LocaleSettingsInput,
+} from '@layerstack/utils/locale';
+import { breakpoints } from '@layerstack/svelte-stores';
+import { createThemeStore, type ThemeStore } from '@layerstack/svelte-stores';
+
 import {
   type ComponentName,
   type ComponentSettings,
@@ -8,18 +20,7 @@ import {
   resolveComponentClasses,
   type ResolvedDefaultProps,
 } from './theme.js';
-import { createThemeStore, type ThemeStore } from '../stores/themeStore.js';
 import type { LabelPlacement } from '../types/index.js';
-import {
-  getAllKnownLocales,
-  localeStore,
-  type LocaleSettings,
-  type LocaleStore,
-  type LocaleSettingsInput,
-} from '$lib/utils/locale.js';
-import { buildFormatters, type FormatFunctions } from '../utils/format.js';
-import { breakpoints } from '../stores/matchMedia.js';
-import { browser } from '../utils/env.js';
 
 export interface DefaultProps {
   labelPlacement: LabelPlacement;

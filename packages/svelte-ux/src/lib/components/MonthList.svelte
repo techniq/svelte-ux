@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
   import { isSameMonth, isWithinInterval, startOfMonth, endOfMonth } from 'date-fns';
+  import { type DisabledDate, type SelectedDate, PeriodType } from '@layerstack/utils';
+  import { getMonths } from '@layerstack/utils/date';
 
-  import { getMonths, PeriodType } from '../utils/date.js';
-  import type { DisabledDate, SelectedDate } from '../utils/date.js';
   import DateButton from './DateButton.svelte';
 
   export let year: number | undefined = undefined;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Collapse from './Collapse.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   /**

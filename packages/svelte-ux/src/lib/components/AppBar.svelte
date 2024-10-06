@@ -1,10 +1,10 @@
 <script lang="ts">
   import { mdiMenu } from '@mdi/js';
+  import { browser } from '@layerstack/utils/env';
+  import { cls } from '@layerstack/tailwind';
 
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
-  import { browser } from '../utils/env.js';
-  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './index.js';
 

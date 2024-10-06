@@ -4,11 +4,11 @@
   import type { TransitionConfig } from 'svelte/transition';
   import type { Placement } from '@floating-ui/dom';
 
-  import { focusMove } from '../actions/focus.js';
-  import { cls } from '../utils/styles.js';
+  import { focusMove } from '@layerstack/svelte-actions/focus';
+  import { cls } from '@layerstack/tailwind';
 
   import Popover from './Popover.svelte';
-  import type { TransitionParams } from '../types/typeHelpers.js';
+  import type { TransitionParams } from '../types/index.js';
   import { getComponentSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();

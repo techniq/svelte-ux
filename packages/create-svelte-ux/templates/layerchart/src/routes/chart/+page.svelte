@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Area, Axis, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
-	import { PeriodType, format } from 'svelte-ux';
+	import { PeriodType, format } from '@layerstack/utils';
 	import { scaleTime } from 'd3-scale';
 
 	import { data } from './data';

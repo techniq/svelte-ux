@@ -5,7 +5,7 @@
   import ProgressCircle from './ProgressCircle.svelte';
   import Icon from './Icon.svelte';
   import Overlay from './Overlay.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let title: string | number | null = null;
