@@ -51,7 +51,6 @@ export default function formStore<T extends Objectish = any>(
           // Clear errors
           errorsStore.set({});
           // TODO: Consider using `result.data` in case there are defaults, etc?
-          return true;
         } else {
           const errors = {};
           for (const issue of result.error.issues) {
