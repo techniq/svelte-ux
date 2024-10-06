@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.75.1
+
+### Patch Changes
+
+- Fix form store updates when using zod schema ([#494](https://github.com/techniq/svelte-ux/pull/494))
+
 ## 0.75.0
 
 ### Minor Changes
