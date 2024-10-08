@@ -12,7 +12,7 @@
   import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
 
-  import type { MenuOption } from '../types/index.js';
+  import type { MaybeAsync, MenuOption } from '../types/index.js';
   import dirtyStore from '../stores/dirtyStore.js';
   import selectionStore from '../stores/selectionStore.js';
   import uniqueStore from '../stores/uniqueStore.js';
@@ -60,7 +60,7 @@
     cancel: null;
   }>();
 
-  export let onApply = async (ctx: {
+  let defaultOnApply = (ctx: {
     value: typeof value;
     selection: typeof $selection;
     indeterminate: typeof $indeterminateStore;
@@ -68,6 +68,7 @@
   }) => {
     // no-op by default
   };
+  export let onApply: MaybeAsync<typeof defaultOnApply> = defaultOnApply;
 
   async function applyChange() {
     applying = true;
