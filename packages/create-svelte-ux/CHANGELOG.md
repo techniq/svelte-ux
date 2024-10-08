@@ -1,5 +1,13 @@
 # create-svelte-ux
 
+## 0.6.6
+
+### Patch Changes
+
+- fix: Use svelte version from prompt options for `layerchart` template ([`fb2dbe8e54d0b9df61a99a0788a3d00ed9a77f80`](https://github.com/techniq/svelte-ux/commit/fb2dbe8e54d0b9df61a99a0788a3d00ed9a77f80))
+
+- fix: `layerchart` template (and use simplified AreaChart) ([`c8139939d5f2e3be8cf803676f65def0b4b7cc85`](https://github.com/techniq/svelte-ux/commit/c8139939d5f2e3be8cf803676f65def0b4b7cc85))
+
 ## 0.6.5
 
 ### Patch Changes
