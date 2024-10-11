@@ -233,7 +233,7 @@
       >
         <div>
           <div>{option.label}</div>
-          <div class="text-sm text-text-surface-content/50">{option.value}</div>
+          <div class="text-sm text-surface-content/50">{option.value}</div>
         </div>
       </MenuItem>
     </svelte:fragment>
@@ -256,7 +256,7 @@
       >
         <div>
           <div>{option.label}</div>
-          <div class="text-sm text-text-surface-content/50">{option.value}</div>
+          <div class="text-sm text-surface-content/50">{option.value}</div>
         </div>
       </MenuItem>
     </svelte:fragment>
