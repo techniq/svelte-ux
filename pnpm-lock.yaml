@@ -30,17 +30,17 @@ importers:
         specifier: ^6.7.2
         version: 6.7.2
       '@layerstack/svelte-actions':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.6
+        version: 0.0.6
       '@layerstack/svelte-stores':
         specifier: ^0.0.6
         version: 0.0.6
       '@layerstack/svelte-table':
-        specifier: ^0.0.6
-        version: 0.0.6
+        specifier: ^0.0.7
+        version: 0.0.7
       '@layerstack/tailwind':
-        specifier: ^0.0.8
-        version: 0.0.8
+        specifier: ^0.0.9
+        version: 0.0.9
       '@layerstack/utils':
         specifier: ^0.0.5
         version: 0.0.5
@@ -660,17 +660,17 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@layerstack/svelte-actions@0.0.5':
-    resolution: {integrity: sha512-jqgRodLq4yvt8OQzOPkfRtM5ljl9hPZL/5dZ5cQEeJQ0xZV/CxZ4b5CVWHYxHNDca67ZM0/GrL9xCg4Fax95VQ==}
+  '@layerstack/svelte-actions@0.0.6':
+    resolution: {integrity: sha512-0O4XRs9QhEjf3k/tBRKdMBpX474IqBRNlc0pHxltaMee8iBcv0WSKW/qPbMUDmEJTGZ09efYQVqp0Y8y/MwEAw==}
 
   '@layerstack/svelte-stores@0.0.6':
     resolution: {integrity: sha512-QCYU2QIOGNVcstkyJDkVHPDxBUX1/9Nb5bYt6JuhmFgSrfdYKx8DlZlax3jMEmjdu2htQRmj/qSZe+xK4HFngA==}
 
-  '@layerstack/svelte-table@0.0.6':
-    resolution: {integrity: sha512-v1SD7kL5Qm07yQC6MLm8EYwM2GL1enyceNMA9EPn92MmlHncCmdvq6tRlvCZKMbMuvU/dLCNxLSiFfHyYxLihQ==}
+  '@layerstack/svelte-table@0.0.7':
+    resolution: {integrity: sha512-C6PLvE5N8TG4euwSeTXAfaZPCCjmymc4biXM7OTgLlJ+Y1UbunZhnwqU4Ps8dVsbya2Phlwq/6yDs1wuxbuPmA==}
 
-  '@layerstack/tailwind@0.0.8':
-    resolution: {integrity: sha512-89f1yTL/GEgLT5AzzRLhj//kjx/E5l1Bn1risOO5f7X6U35+FJL0F3yZDa3EfJ6w44EP1vujpHtDBcWsl1RNUA==}
+  '@layerstack/tailwind@0.0.9':
+    resolution: {integrity: sha512-bmv4qEgmJWgAiUqznj7WSQ3vCEoA80iXztEuSO2jsS1nJ2/676VguAQ/6SGiWm2uoxgJ5BCPAP/AYOowZOkI8g==}
 
   '@layerstack/utils@0.0.5':
     resolution: {integrity: sha512-Ew84WuCMC3q7Wq0Tb0rBEM/WK2RkkxRBF/RvNcnbaWcj5O+jO6VEZc657Jv73skkIJ4fkciT8FhSIcHoRkhdrQ==}
@@ -2830,7 +2830,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@layerstack/svelte-actions@0.0.5':
+  '@layerstack/svelte-actions@0.0.6':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@layerstack/utils': 0.0.5
@@ -2848,15 +2848,15 @@ snapshots:
       lodash-es: 4.17.21
       zod: 3.24.1
 
-  '@layerstack/svelte-table@0.0.6':
+  '@layerstack/svelte-table@0.0.7':
     dependencies:
-      '@layerstack/svelte-actions': 0.0.5
+      '@layerstack/svelte-actions': 0.0.6
       '@layerstack/utils': 0.0.5
       d3-array: 3.2.4
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/tailwind@0.0.8':
+  '@layerstack/tailwind@0.0.9':
     dependencies:
       '@layerstack/utils': 0.0.5
       clsx: 2.1.1
