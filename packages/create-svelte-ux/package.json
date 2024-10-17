@@ -19,10 +19,10 @@
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "@kitql/helpers": "^0.8.10",
-    "@layerstack/svelte-actions": "^0.0.5",
+    "@layerstack/svelte-actions": "^0.0.6",
     "@layerstack/svelte-stores": "^0.0.6",
-    "@layerstack/svelte-table": "^0.0.6",
-    "@layerstack/tailwind": "^0.0.8",
+    "@layerstack/svelte-table": "^0.0.7",
+    "@layerstack/tailwind": "^0.0.9",
     "@layerstack/utils": "^0.0.5",
     "commander": "^12.1.0"
   },
