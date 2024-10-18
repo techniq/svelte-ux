@@ -163,7 +163,7 @@
   // Elements
   let inputEl: HTMLInputElement | null = null;
   let menuOptionsEl: HTMLDivElement;
-  let selectFieldEl: HTMLButtonElement;
+  let selectFieldEl: HTMLDivElement;
 
   function nextOptionIndex(currentIndex: number) {
     // Find next non-disabled option
@@ -412,8 +412,8 @@
   }
 </script>
 
-<button
-  type="button"
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div
   aria-haspopup={!inlineOptions ? 'listbox' : undefined}
   class={cls(
     'SelectField block w-full cursor-default text-left',
@@ -652,4 +652,4 @@
       </SelectListOptions>
     {/if}
   {/if}
-</button>
+</div>
