@@ -22,7 +22,7 @@
     "commander": "^12.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.7.5",
+    "@types/node": "^22.7.6",
     "prettier": "^3.3.3"
   },
   "files": [
