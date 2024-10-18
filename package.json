@@ -17,9 +17,9 @@
   },
   "devDependencies": {
     "@changesets/cli": "2.27.9",
-    "@svitejs/changesets-changelog-github-compact": "^1.1.0",
+    "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "rimraf": "6.0.1",
-    "wrangler": "^3.80.1"
+    "wrangler": "^3.81.0"
   },
   "packageManager": "pnpm@9.12.0"
 }
