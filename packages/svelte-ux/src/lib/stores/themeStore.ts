@@ -1,5 +1,5 @@
 import { writable, type Readable } from 'svelte/store';
-import { browser } from '../utils/env.js';
+import { BROWSER } from 'esm-env';
 
 /** Information about the currently chosen theme. */
 export class CurrentTheme {
@@ -35,7 +35,7 @@ export interface ThemeStoreOptions {
 export function createThemeStore(options: ThemeStoreOptions): ThemeStore {
   let store = writable<CurrentTheme>(new CurrentTheme(null, false));
 
-  if (!browser) {
+  if (!BROWSER) {
     // Stub out most of the store when running SSR.
     return {
       subscribe: store.subscribe,

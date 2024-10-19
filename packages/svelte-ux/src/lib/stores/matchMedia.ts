@@ -1,8 +1,8 @@
 import { readable, writable } from 'svelte/store';
-import { browser } from '../utils/env.js';
+import { BROWSER } from 'esm-env';
 
 export function matchMedia(queryString: string) {
-  if (browser) {
+  if (BROWSER) {
     const query = window.matchMedia(queryString);
     return readable(query.matches, (set) => {
       const listener = (e: MediaQueryListEvent | MediaQueryList) => set(e.matches);

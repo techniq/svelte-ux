@@ -1,4 +1,4 @@
-import { browser } from './env.js';
+import { BROWSER } from 'esm-env';
 
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'] as const;
 type LogLevel = (typeof logLevels)[number];
@@ -40,7 +40,7 @@ export class Logger {
 
   log(level: LogLevel, ...message: any) {
     // TODO: Consider checking `env` for SSR support?
-    const enabledLoggers = browser
+    const enabledLoggers = BROWSER
       ? (localStorage
           .getItem('logger')
           ?.split(',')

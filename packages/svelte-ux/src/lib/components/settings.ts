@@ -1,5 +1,6 @@
 import { getContext, setContext } from 'svelte';
 import { writable, derived, type Readable, type Writable } from 'svelte/store';
+import { BROWSER } from 'esm-env';
 
 import {
   type ComponentName,
@@ -19,7 +20,6 @@ import {
 } from '$lib/utils/locale.js';
 import { buildFormatters, type FormatFunctions } from '../utils/format.js';
 import { breakpoints } from '../stores/matchMedia.js';
-import { browser } from '../utils/env.js';
 
 export interface DefaultProps {
   labelPlacement: LabelPlacement;
@@ -97,7 +97,7 @@ function createLocaleStores(settings: SettingsInput) {
 }
 
 function createShowDrawer() {
-  return writable(browser ? window.innerWidth >= breakpoints.md : true);
+  return writable(BROWSER ? window.innerWidth >= breakpoints.md : true);
 }
 
 export function settings(settings: SettingsInput = {}): Settings {

@@ -19,11 +19,11 @@
     createLocaleSettings,
     entries,
   } from 'svelte-ux';
+  import { DEV } from 'esm-env';
 
   import NavMenu from './_NavMenu.svelte';
   import LanguageSelect from '$lib/components/LanguageSelect.svelte';
 
-  import { dev } from '$app/environment';
   import { afterNavigate, goto } from '$app/navigation';
   import { page } from '$app/stores';
 
@@ -164,7 +164,7 @@
     }, 0);
 
     // Posthog analytics
-    if (!dev) {
+    if (!DEV) {
       const unsubscribePage = page.subscribe(($page) => {
         if (currentPath && currentPath !== $page.url.pathname) {
           // Page navigated away
