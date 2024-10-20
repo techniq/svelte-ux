@@ -1,8 +1,8 @@
 <script lang="ts">
   import { spring, tweened } from 'svelte/motion';
-  import { elasticOut, backInOut, bounceOut } from 'svelte/easing';
-  import { cls } from '../utils/styles.js';
-  import { modulo } from '../utils/number.js';
+  import { cls } from '@layerstack/tailwind';
+  import { modulo } from '@layerstack/utils/number';
+
   import { getComponentClasses } from './theme.js';
 
   export let value = 0;

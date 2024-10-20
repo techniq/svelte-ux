@@ -1,7 +1,9 @@
 <script lang="ts">
   import { mdiAccount, mdiChevronRight } from '@mdi/js';
 
-  import { Button, Checkbox, ListItem, Radio, cls } from 'svelte-ux';
+  import { Button, Checkbox, ListItem, Radio } from 'svelte-ux';
+  import { cls } from '@layerstack/tailwind';
+
   import Preview from '$lib/components/Preview.svelte';
 
   let selectedId = 1;

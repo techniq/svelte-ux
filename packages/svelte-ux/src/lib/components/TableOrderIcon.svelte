@@ -1,10 +1,10 @@
 <script lang="ts">
   import { mdiArrowUp } from '@mdi/js';
 
-  import type tableOrderStore from '../stores/tableOrderStore.js';
-  import type { ColumnDef } from '../types/table.js';
+  import type { tableOrderStore, ColumnDef } from '@layerstack/svelte-table';
+  import { cls } from '@layerstack/tailwind';
+
   import Icon from '../components/Icon.svelte';
-  import { cls } from '../utils/styles.js';
 
   export let order: ReturnType<typeof tableOrderStore>;
   export let column: ColumnDef;

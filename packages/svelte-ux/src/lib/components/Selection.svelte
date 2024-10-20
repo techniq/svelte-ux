@@ -1,5 +1,5 @@
 <script lang="ts">
-  import selectionStore from '../stores/selectionStore.js';
+  import { selectionStore } from '@layerstack/svelte-stores';
 
   type T = $$Generic;
 

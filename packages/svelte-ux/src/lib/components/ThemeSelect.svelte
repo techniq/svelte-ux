@@ -11,7 +11,7 @@
   import MenuItem from './MenuItem.svelte';
   import Tooltip from './Tooltip.svelte';
 
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getSettings } from './settings.js';
 
   const { currentTheme, themes: allThemes } = getSettings();

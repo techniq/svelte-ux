@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Progress, cls } from 'svelte-ux';
+  import { Progress } from 'svelte-ux';
+  import { cls } from '@layerstack/tailwind';
+
   import Preview from '$lib/components/Preview.svelte';
 
   let value = 50;

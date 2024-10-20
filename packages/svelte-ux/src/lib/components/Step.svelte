@@ -4,7 +4,7 @@
   import Icon from './Icon.svelte';
   import { getSteps } from './Steps.svelte';
   import { getComponentClasses } from './theme.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   /** Override point content (by default uses an incrementing counter) */
   export let point: string | undefined = undefined;

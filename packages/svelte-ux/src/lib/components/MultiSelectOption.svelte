@@ -2,7 +2,7 @@
   import { createEventDispatcher, type ComponentProps } from 'svelte';
 
   import Checkbox from './Checkbox.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
   import Button from './Button.svelte';
   import { mdiCheck } from '@mdi/js';
