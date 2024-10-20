@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Notification, toTitleCase } from 'svelte-ux';
-  import { colors } from '$lib/styles/theme.js';
+  import { Notification } from 'svelte-ux';
+  import { colors } from '@layerstack/tailwind';
+  import { toTitleCase } from '@layerstack/utils';
 
   import {
     mdiInbox,
