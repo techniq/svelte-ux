@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.75.3
+
+### Patch Changes
+
+- fix(Drawer|Dialog): No longer stop mouseup event propgation, which fixes closing Menu by clicking outside (within Dialog/Drawer) ([#499](https://github.com/techniq/svelte-ux/pull/499))
+
 ## 0.75.2
 
 ### Patch Changes
