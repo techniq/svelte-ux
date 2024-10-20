@@ -99,10 +99,6 @@
       classes.root
     )}
     on:click={onClick}
-    on:mouseup={(e) => {
-      // Do not allow event to reach Popover's on:mouseup (clickOutside)
-      e.stopPropagation();
-    }}
     on:keydown={(e) => {
       if (e.key === 'Escape') {
         // Do not allow event to reach Popover's on:keydown
