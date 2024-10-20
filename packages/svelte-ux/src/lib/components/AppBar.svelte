@@ -1,9 +1,9 @@
 <script lang="ts">
+  import { BROWSER } from 'esm-env';
   import { mdiMenu } from '@mdi/js';
 
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
-  import { browser } from '../utils/env.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './index.js';
@@ -23,7 +23,7 @@
 
   $: titleString = Array.isArray(title) ? title.filter((x) => x).join(' › ') : title.toString();
 
-  $: if (browser && head) {
+  $: if (BROWSER && head) {
     // Appears to be needed for some reactive updates
     document.title = titleString;
   }

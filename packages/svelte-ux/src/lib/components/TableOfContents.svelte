@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from 'svelte';
   import { mdiCircleSmall } from '@mdi/js';
+  import { BROWSER } from 'esm-env';
 
   import { buildTree, type TreeNode } from '../utils/array.js';
   import { cls } from '../utils/styles.js';
@@ -9,7 +10,7 @@
   import { getComponentClasses } from './theme.js';
 
   export let element = 'main';
-  export let scrollContainer = window;
+  export let scrollContainer = BROWSER ? window : null;
   export let scrollOffset = 0;
   export let maxDepth = 6;
   export let icon = mdiCircleSmall;
@@ -52,13 +53,13 @@
     });
     nodes = buildTree(headings);
 
-    scrollContainer.addEventListener('scroll', onScroll, { passive: true });
+    scrollContainer?.addEventListener('scroll', onScroll, { passive: true });
     // set first heading until scrolled
     activeHeadingId = headings[0]?.id;
   });
 
   onDestroy(() => {
-    scrollContainer.removeEventListener('scroll', onScroll);
+    scrollContainer?.removeEventListener('scroll', onScroll);
   });
 </script>
 

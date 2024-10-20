@@ -1,10 +1,10 @@
 <script lang="ts">
+  import { BROWSER } from 'esm-env';
   import Backdrop from './Backdrop.svelte';
 
   import { mdScreen } from '../stores/matchMedia.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
-  import { browser } from '../utils/env.js';
   import { getSettings } from './index.js';
 
   export let navWidth = 240;
@@ -21,7 +21,7 @@
 
   const settingsClasses = getComponentClasses('AppLayout');
   const { showDrawer } = getSettings();
-  $: temporaryDrawer = browser ? !$mdScreen : false;
+  $: temporaryDrawer = BROWSER ? !$mdScreen : false;
 </script>
 
 <div
@@ -52,6 +52,7 @@
   <aside
     class={cls(
       'fixed top-0 h-[calc(100%-var(--headerHeight))] w-[var(--drawerWidth)] transition-all duration-500 overflow-hidden',
+      !BROWSER && 'max-md:hidden', // hide drawer during SSR on <md viewports (which is same result once hydrated)
       temporaryDrawer
         ? 'fixed h-full z-50 elevation-10'
         : headerPosition === 'full'

@@ -1,10 +1,10 @@
 import { writable } from 'svelte/store';
 import { isFunction } from 'lodash-es';
+import { BROWSER } from 'esm-env';
 
 import { parse, stringify } from '../utils/json.js';
 import { expireObject } from '../utils/object.js';
 import type { Expiry } from '../utils/object.js';
-import { browser } from '../utils/env.js';
 
 type LocalStoreOptions<Value> = {
   expiry?: Expiry | ((previousExpiry: Expiry | undefined | null) => Expiry);
@@ -18,7 +18,7 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
   if (options?.override != null) {
     value = options?.override;
   } else {
-    const storedValue = browser ? localStorage.getItem(key) : null;
+    const storedValue = BROWSER ? localStorage.getItem(key) : null;
     if (storedValue !== null) {
       const decodedValue = parse(storedValue);
       if (options?.expiry) {
@@ -34,7 +34,7 @@ function localStore<Value>(key: string, initialValue: Value, options?: LocalStor
 
   const store = writable<Value>(value);
 
-  if (browser) {
+  if (BROWSER) {
     store.subscribe((val) => {
       if (options?.expiry) {
         // Remove all expired expiry

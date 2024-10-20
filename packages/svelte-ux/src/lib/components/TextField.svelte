@@ -44,7 +44,7 @@
   export let placeholder: string | undefined = undefined;
   export let error: string | string[] | boolean | undefined = '';
   export let hint = '';
-  export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
+  export let autocomplete: HTMLTextAreaElement['autocomplete'] = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
   export let multiline = false;
   export let required = false;
   export let disabled = false;
