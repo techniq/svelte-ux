@@ -106,10 +106,6 @@
         close();
       }
     }}
-    on:mouseup={(e) => {
-      // Do not allow event to reach Popover's on:mouseup (clickOutside)
-      e.stopPropagation();
-    }}
     use:portalAction={portal}
     use:focusMove={{ restoreFocus: true }}
     role="dialog"
