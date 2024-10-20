@@ -126,7 +126,7 @@
       <div slot="title">Delete this item ?</div>
       <div class="px-6 py-3">This will permanently delete the item</div>
       <div slot="actions">
-        <Toggle let:on={openSecond} let:toggle={toggleConfirm}>
+        <Toggle let:on={openSecond} let:toggle={toggleConfirm} let:toggleOff={toggleConfirmOff}>
           <Button
             icon={mdiTrashCan}
             on:click={(e) => {
@@ -138,7 +138,7 @@
           >
             Yes
           </Button>
-          <Dialog open={openSecond} on:close={toggleConfirm}>
+          <Dialog open={openSecond} on:close={toggleConfirmOff}>
             <div slot="title">Are you <b>REALLY</b> sure?</div>
             <div class="px-6 py-3">
               This will permanently delete the item and can not be undone.
@@ -147,7 +147,7 @@
               <Button
                 on:click={(e) => {
                   console.log('Deleting item...');
-                  toggleConfirm();
+                  toggleConfirmOff();
                   toggleDeleteOff();
                 }}
                 variant="fill"
