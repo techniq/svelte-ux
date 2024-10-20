@@ -1,5 +1,17 @@
 # svelte-ux
 
+## 0.75.2
+
+### Patch Changes
+
+- fix(TableOfContents): Fix ssr support ([#436](https://github.com/techniq/svelte-ux/pull/436))
+
+- fix(AppLayout): Fix SSR drawer layout on mobile. Resolves #22 ([#436](https://github.com/techniq/svelte-ux/pull/436))
+
+- docs: Use Svelte 5 ([`1df58be`](https://github.com/techniq/svelte-ux/commit/1df58be5816b59d4b6216eee737dd408f2be7e2c))
+
+- fix(SelectField): Fix Svelte 5 SSR compatibility ([#436](https://github.com/techniq/svelte-ux/pull/436))
+
 ## 0.75.1
 
 ### Patch Changes
