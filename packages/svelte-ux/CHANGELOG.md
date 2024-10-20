@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- docs: Use Svelte 5 ([`1df58be`](https://github.com/techniq/svelte-ux/commit/1df58be5816b59d4b6216eee737dd408f2be7e2c))
+- docs: Use Svelte 5 ([#436](https://github.com/techniq/svelte-ux/pull/436))
 
 - fix(TableOfContents): Fix ssr support ([#436](https://github.com/techniq/svelte-ux/pull/436))
 
