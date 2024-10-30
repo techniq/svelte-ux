@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AppBar, AppLayout, Card, Button, NavItem, Tooltip, settings } from 'svelte-ux';
+	import { AppBar, AppLayout, Button, NavItem, Tooltip, settings } from 'svelte-ux';
 
 	import { page } from '$app/stores';
 	import '../app.postcss';
