@@ -44,8 +44,8 @@
 
     if (e.target instanceof HTMLElement) {
       // Find slot parent of click target option, fallback to `e.target` if slot is not overridden
-      // Use `.options > ` in case slot is nested (ex. GraphQLSelect with slot)
-      const slotEl = e.target.closest('.options > [slot=option]') ?? e.target;
+      // Use `.options > *` in case slot is nested (ex. `<svelte:fragment slot="option">` vs `<div slot="option">`)
+      const slotEl = e.target.closest('.options > *') ?? e.target;
       // Find the index of the clicked on element (ignoring group headers)
       const optionIndex = slotEl
         ? [...menuOptionsEl.children]
