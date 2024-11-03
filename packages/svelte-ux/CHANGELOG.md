@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.75.4
+
+### Patch Changes
+
+- fix(MultiSelect): Resolve infinite loop when using `mode="immediate"` and Svelte 5 ([#508](https://github.com/techniq/svelte-ux/pull/508))
+
 ## 0.75.3
 
 ### Patch Changes
