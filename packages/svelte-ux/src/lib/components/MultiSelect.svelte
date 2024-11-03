@@ -3,7 +3,8 @@
 
   import { type ComponentProps, createEventDispatcher } from 'svelte';
   import { flip } from 'svelte/animate';
-  import { get, partition } from 'lodash-es';
+  import { get } from 'svelte/store';
+  import { partition, isEqual } from 'lodash-es';
 
   import { mdiMagnify } from '@mdi/js';
 
@@ -17,6 +18,7 @@
   import selectionStore from '../stores/selectionStore.js';
   import uniqueStore from '../stores/uniqueStore.js';
   import { cls } from '../utils/styles.js';
+  import changeStore from '../stores/changeStore.js';
 
   export let options: MenuOption<TValue>[];
   export let value: TValue[] = [];
@@ -82,15 +84,11 @@
     onChange();
   }
 
-  $: if (mode === 'immediate' && $selection) {
-    applyChange();
-  }
-
   export let searchText = '';
   let applying = false;
 
   // Partition options based on if they initially selected, which will be displayed at the top
-  $: [selectedOptions, unselectedOptions] = partition(options, (x) => value.includes(x.value));
+  $: [selectedOptions, unselectedOptions] = partition(options, (o) => value.includes(o.value));
 
   // Filter by search text
   function applyFilter(option: MenuOption<TValue>, searchText: string) {
@@ -105,10 +103,15 @@
   $: filteredSelectedOptions = selectedOptions.filter((x) => applyFilter(x, searchText));
   $: filteredUnselectedOptions = unselectedOptions.filter((x) => applyFilter(x, searchText));
 
-  $: selection = selectionStore({
-    initial: selectedOptions.map((x) => x.value),
-    max,
-  });
+  const selection = selectionStore({ max });
+  // Only "subscribe" to value changes (not `$selection`) to fix correct `value` / topological ordering.  Should be simplified with Svelte 5
+  $: get(selection).setSelected(value);
+
+  // Immediately apply only if changed
+  const changed = changeStore(selection);
+  $: if (mode === 'immediate' && !isEqual($selection.selected, $changed.previous?.selected)) {
+    applyChange();
+  }
 
   $: isSelectionDirty = dirtyStore(selection);
   $: indeterminateStore = uniqueStore(indeterminateSelected);
