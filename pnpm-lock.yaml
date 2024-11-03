@@ -30,14 +30,14 @@ importers:
         specifier: ^6.7.2
         version: 6.7.2
       '@layerstack/svelte-actions':
-        specifier: ^0.0.6
-        version: 0.0.6
-      '@layerstack/svelte-stores':
-        specifier: ^0.0.6
-        version: 0.0.6
-      '@layerstack/svelte-table':
         specifier: ^0.0.7
         version: 0.0.7
+      '@layerstack/svelte-stores':
+        specifier: ^0.0.7
+        version: 0.0.7
+      '@layerstack/svelte-table':
+        specifier: ^0.0.8
+        version: 0.0.8
       '@layerstack/tailwind':
         specifier: ^0.0.9
         version: 0.0.9
@@ -660,14 +660,14 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@layerstack/svelte-actions@0.0.6':
-    resolution: {integrity: sha512-0O4XRs9QhEjf3k/tBRKdMBpX474IqBRNlc0pHxltaMee8iBcv0WSKW/qPbMUDmEJTGZ09efYQVqp0Y8y/MwEAw==}
+  '@layerstack/svelte-actions@0.0.7':
+    resolution: {integrity: sha512-PYG4oocNQxuUKQkhQvrB+nh4SGGzVr2KlqGS8wivXC4lF78BpOnsZfLxv657oVBBE+u3Cx6q9NRq/AG1A7ZiIw==}
 
-  '@layerstack/svelte-stores@0.0.6':
-    resolution: {integrity: sha512-QCYU2QIOGNVcstkyJDkVHPDxBUX1/9Nb5bYt6JuhmFgSrfdYKx8DlZlax3jMEmjdu2htQRmj/qSZe+xK4HFngA==}
+  '@layerstack/svelte-stores@0.0.7':
+    resolution: {integrity: sha512-w9PXG+AR/qk3Zo7oOeCQ71Y5YPTRwT3OXSCEli9iz6yBQTUs1xpc+FZl2/ViqW0qJ+3dypvbP6cFE50yWabzeA==}
 
-  '@layerstack/svelte-table@0.0.7':
-    resolution: {integrity: sha512-C6PLvE5N8TG4euwSeTXAfaZPCCjmymc4biXM7OTgLlJ+Y1UbunZhnwqU4Ps8dVsbya2Phlwq/6yDs1wuxbuPmA==}
+  '@layerstack/svelte-table@0.0.8':
+    resolution: {integrity: sha512-CcV8jJVciQFsdEptq5lknbDrJNyOVbjVdvSorTCIUq+12nowYQV68V1maJoj9dh7h/dZxtXaQjmEDAI5uOudig==}
 
   '@layerstack/tailwind@0.0.9':
     resolution: {integrity: sha512-bmv4qEgmJWgAiUqznj7WSQ3vCEoA80iXztEuSO2jsS1nJ2/676VguAQ/6SGiWm2uoxgJ5BCPAP/AYOowZOkI8g==}
@@ -2830,7 +2830,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@layerstack/svelte-actions@0.0.6':
+  '@layerstack/svelte-actions@0.0.7':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@layerstack/utils': 0.0.5
@@ -2839,7 +2839,7 @@ snapshots:
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/svelte-stores@0.0.6':
+  '@layerstack/svelte-stores@0.0.7':
     dependencies:
       '@layerstack/utils': 0.0.5
       d3-array: 3.2.4
@@ -2848,9 +2848,9 @@ snapshots:
       lodash-es: 4.17.21
       zod: 3.24.1
 
-  '@layerstack/svelte-table@0.0.7':
+  '@layerstack/svelte-table@0.0.8':
     dependencies:
-      '@layerstack/svelte-actions': 0.0.6
+      '@layerstack/svelte-actions': 0.0.7
       '@layerstack/utils': 0.0.5
       d3-array: 3.2.4
       date-fns: 4.1.0
