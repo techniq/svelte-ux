@@ -22,12 +22,14 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
   const max = props.max;
 
   return derived([selected, all], ([$selected, $all]) => {
-    function isSelected(value: T) {
-      return $selected.has(value);
-    }
-
-    function isDisabled(value: T) {
-      return !isSelected(value) && isMaxSelected();
+    function setSelected(values: T[]) {
+      selected.update(($selected) => {
+        if (max == null || values.length < max) {
+          return new Set(values);
+        } else {
+          return $selected;
+        }
+      });
     }
 
     function toggleSelected(value: T) {
@@ -49,6 +51,22 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
       });
     }
 
+    function toggleAll() {
+      let values: T[];
+      if (isAllSelected()) {
+        // Deselect all (within current `all`, for example page/filtered result)
+        values = [...$selected].filter((v) => !$all.includes(v));
+      } else {
+        // Select all (`new Set()` will dedupe)
+        values = [...$selected, ...$all];
+      }
+      selected.set(new Set(values));
+    }
+
+    function isSelected(value: T) {
+      return $selected.has(value);
+    }
+
     function isAllSelected() {
       return $all.every((v) => $selected.has(v));
     }
@@ -61,16 +79,8 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
       return max != null ? $selected.size >= max : false;
     }
 
-    function toggleAll() {
-      let values: T[];
-      if (isAllSelected()) {
-        // Deselect all (within current `all`, for example page/filtered result)
-        values = [...$selected].filter((v) => !$all.includes(v));
-      } else {
-        // Select all (`new Set()` will dedupe)
-        values = [...$selected, ...$all];
-      }
-      selected.set(new Set(values));
+    function isDisabled(value: T) {
+      return !isSelected(value) && isMaxSelected();
     }
 
     function clear() {
@@ -85,6 +95,7 @@ export default function selectionStore<T>(props: SelectionProps<T> = {}) {
 
     return {
       selected: single ? (selectedArr[0] ?? null) : selectedArr,
+      setSelected,
       toggleSelected,
       isSelected,
       isDisabled,
