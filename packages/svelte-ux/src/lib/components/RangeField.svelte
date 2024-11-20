@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 
   import Field from './Field.svelte';
@@ -17,6 +18,9 @@
   export let format: FormatNumberStyle = 'none';
 
   $: restProps = { ...defaults, ...$$restProps };
+
+  const dispatch = createEventDispatcher<{ change: { value: number } }>();
+  $: dispatch('change', { value });
 </script>
 
 <Field let:id classes={{ input: 'my-1' }} {...restProps}>
@@ -29,7 +33,7 @@
     />
   </span>
 
-  <input type="range" bind:value {min} {max} {step} {id} on:change class="h-6 w-full" />
+  <input type="range" bind:value {min} {max} {step} {id} class="h-6 w-full" />
 
   <!-- Stack on top to account for min/max value width -->
   <span class="ml-2 text-sm text-surface-content/50 tabular-nums text-right inline-grid">

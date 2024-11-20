@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-feat(RangeField): Forward `change` event from underlying `<input type="range">`
+feat(RangeField): Add `change` event
