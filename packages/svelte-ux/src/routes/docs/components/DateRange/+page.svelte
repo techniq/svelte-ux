@@ -1,7 +1,9 @@
 <script lang="ts">
   import { endOfMonth, startOfDay, startOfMonth, startOfYear } from 'date-fns';
 
-  import { DateRange, PeriodType, getDateFuncsByPeriodType, getSettings } from 'svelte-ux';
+  import { DateRange, getSettings } from 'svelte-ux';
+  import { PeriodType, getDateFuncsByPeriodType } from '@layerstack/utils';
+
   import Preview from '$lib/components/Preview.svelte';
 
   const { localeSettings } = getSettings();

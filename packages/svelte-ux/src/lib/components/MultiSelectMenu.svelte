@@ -6,7 +6,7 @@
   import MultiSelect from './MultiSelect.svelte';
   import MultiSelectOption from './MultiSelectOption.svelte';
 
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   type MultiSelectProps = ComponentProps<MultiSelect<TValue>>;

@@ -7,9 +7,9 @@
   import { writable } from 'svelte/store';
   import { crossfade, fade } from 'svelte/transition';
 
-  import { cls } from '../utils/styles.js';
-  import { uniqueId } from '../utils/string.js';
-  import { Logger } from '../utils/logger.js';
+  import { cls } from '@layerstack/tailwind';
+  import { uniqueId } from '@layerstack/utils';
+  import { Logger } from '@layerstack/utils';
   import { getComponentClasses } from './theme.js';
 
   export let name = uniqueId('group-');

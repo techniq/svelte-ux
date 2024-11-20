@@ -5,9 +5,9 @@
   import { scale } from 'svelte/transition';
   import { quadIn } from 'svelte/easing';
 
-  import { focusMove } from '../actions/focus.js';
-  import { portal as portalAction, type PortalOptions } from '../actions/portal.js';
-  import { cls } from '../utils/styles.js';
+  import { focusMove } from '@layerstack/svelte-actions/focus';
+  import { portal as portalAction, type PortalOptions } from '@layerstack/svelte-actions';
+  import { cls } from '@layerstack/tailwind';
 
   import Backdrop from './Backdrop.svelte';
   import ProgressCircle from './ProgressCircle.svelte';

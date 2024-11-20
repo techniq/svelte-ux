@@ -1,11 +1,11 @@
-import * as daisy from '$lib/styles/daisy.js';
-import * as skeleton from '$lib/styles/skeleton.js';
+import { themes as daisyThemes } from '@layerstack/tailwind/daisy';
+import { themes as skeletonThemes } from '@layerstack/tailwind/skeleton';
 
 export async function load() {
   return {
     themes: {
-      daisy: daisy.themes,
-      skeleton: skeleton.themes,
+      daisy: daisyThemes,
+      skeleton: skeletonThemes,
     },
   };
 }

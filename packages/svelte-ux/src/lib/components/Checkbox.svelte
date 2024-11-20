@@ -1,9 +1,9 @@
 <script lang="ts">
   import { mdiCheck, mdiMinus } from '@mdi/js';
+  import { cls } from '@layerstack/tailwind';
+  import { uniqueId } from '@layerstack/utils';
 
   import Icon from './Icon.svelte';
-  import { uniqueId } from '../utils/string.js';
-  import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
   export let id = uniqueId('checkbox-');

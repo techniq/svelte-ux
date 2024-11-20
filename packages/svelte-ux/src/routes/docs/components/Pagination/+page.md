@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { Button, Pagination, paginationStore } from 'svelte-ux';
+	import { Button, Pagination } from 'svelte-ux';
+	import { paginationStore } from '@layerstack/svelte-stores';
+
 	import Preview from '$lib/components/Preview.svelte';
 
 	const pagination = paginationStore();

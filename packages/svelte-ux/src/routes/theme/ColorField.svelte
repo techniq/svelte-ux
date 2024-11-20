@@ -3,8 +3,9 @@
   import { formatHex } from 'culori';
 
   import { TextField } from 'svelte-ux';
+  import { type SupportedColorSpace } from '@layerstack/tailwind';
+
   import { formatColor } from './colors.js';
-  import { type SupportedColorSpace } from '$lib/styles/theme.js';
 
   const dispatch = createEventDispatcher<{
     change: { value: string | undefined };

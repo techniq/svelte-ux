@@ -2,10 +2,10 @@
   import { createEventDispatcher } from 'svelte';
   import type { Schema } from 'zod';
 
-  import formStore from '../stores/formStore.js';
+  import { formStore, changeStore } from '@layerstack/svelte-stores';
+  import { cls } from '@layerstack/tailwind';
+
   import { getComponentClasses } from './theme.js';
-  import { cls } from '../utils/styles.js';
-  import changeStore from '../stores/changeStore.js';
 
   const dispatch = createEventDispatcher();
 

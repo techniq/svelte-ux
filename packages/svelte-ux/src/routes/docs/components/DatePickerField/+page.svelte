@@ -1,7 +1,9 @@
 <script lang="ts">
   import { mdiCalendar } from '@mdi/js';
 
-  import { Button, DatePickerField, PeriodType } from 'svelte-ux';
+  import { Button, DatePickerField } from 'svelte-ux';
+  import { PeriodType } from '@layerstack/utils';
+
   import Preview from '$lib/components/Preview.svelte';
 
   let value = new Date();
