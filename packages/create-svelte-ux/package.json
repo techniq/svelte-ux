@@ -17,12 +17,12 @@
     "format": "prettier --ignore-path .prettierignore --write ."
   },
   "dependencies": {
-    "@clack/prompts": "^0.7.0",
+    "@clack/prompts": "^0.8.2",
     "@kitql/helpers": "^0.8.10",
     "commander": "^12.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.7.7",
+    "@types/node": "^22.9.1",
     "prettier": "^3.3.3"
   },
   "files": [
