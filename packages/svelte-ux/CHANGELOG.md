@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.75.5
+
+### Patch Changes
+
+- fix(SelectField): Properly handle option selection with option slot defined using `<svelte:fragment slot="option">` or `<div slot="option">` ([#512](https://github.com/techniq/svelte-ux/pull/512))
+
+- Update dependencies ([`29cc311`](https://github.com/techniq/svelte-ux/commit/29cc3113ff52a2cfda709eba542607293d43e608))
+
+- feat(RangeField): Add `change` event ([`3c04e5e`](https://github.com/techniq/svelte-ux/commit/3c04e5e99ab282ed942c37c71135547f5d00fae2))
+
 ## 0.75.4
 
 ### Patch Changes
