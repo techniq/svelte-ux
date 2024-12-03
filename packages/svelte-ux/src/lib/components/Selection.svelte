@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import selectionStore from '../stores/selectionStore.js';
 
   type T = $$Generic;
@@ -10,6 +11,10 @@
 
   const selection = selectionStore({ initial, all, single, max });
   $: $selection.all.set(all);
+
+  const dispatch = createEventDispatcher();
+
+  $: dispatch('change', { value: $selection.selected });
 </script>
 
 <!-- TODO: `<slot {...$selection} />` does not play well with sveld -->

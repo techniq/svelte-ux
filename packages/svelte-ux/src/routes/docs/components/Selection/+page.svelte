@@ -127,3 +127,23 @@
     selected: {JSON.stringify(selected)}
   </Selection>
 </Preview>
+
+<h2>change event</h2>
+
+<Preview>
+  <Selection
+    let:selected
+    let:isSelected
+    let:toggleSelected
+    on:change={(e) => console.log(e.detail)}
+  >
+    {#each data as d}
+      <div>
+        <Checkbox checked={isSelected(d.id)} on:change={() => toggleSelected(d.id)}>
+          {d.id}
+        </Checkbox>
+      </div>
+    {/each}
+    selected: {JSON.stringify(selected)}
+  </Selection>
+</Preview>
