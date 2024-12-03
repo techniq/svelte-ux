@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.76.0
+
+### Minor Changes
+
+- feat(Selection): Add `change` event. Resolves #520 ([`ad00d1e`](https://github.com/techniq/svelte-ux/commit/ad00d1e3dd43a01f205444a659efea2df11b3edb))
+
 ## 0.75.5
 
 ### Patch Changes
