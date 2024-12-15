@@ -12,9 +12,7 @@
 
   export let classes: {
     icon?: string;
-  } & ComponentProps<Switch>["classes"] = {};
-
-
+  } & ComponentProps<Switch>['classes'] = {};
 </script>
 
 <Switch
@@ -34,18 +32,12 @@
     <Icon
       data={mdiWeatherNight}
       size=".8rem"
-      class={cls(
-        "row-[1] col-[1] text-primary opacity-0 dark:opacity-100",
-        classes.icon,
-      )}
+      class={cls('row-[1] col-[1] text-primary opacity-0 dark:opacity-100', classes.icon)}
     />
     <Icon
       data={mdiWhiteBalanceSunny}
       size=".8rem"
-      class={cls(
-        "row-[1] col-[1] text-primary opacity-100 dark:opacity-0",
-        classes.icon,
-      )}
+      class={cls('row-[1] col-[1] text-primary opacity-100 dark:opacity-0', classes.icon)}
     />
   </div>
 </Switch>

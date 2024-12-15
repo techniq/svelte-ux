@@ -14,5 +14,5 @@
 <h2>Custom Icon Color</h2>
 
 <Preview>
-  <ThemeSwitch classes={{icon: 'text-yellow-500'}} />
+  <ThemeSwitch classes={{ icon: 'text-yellow-500' }} />
 </Preview>
