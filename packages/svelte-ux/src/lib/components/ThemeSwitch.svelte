@@ -5,8 +5,16 @@
   import Icon from './Icon.svelte';
 
   import { getSettings } from './settings.js';
+  import { cls } from '../utils/index.js';
+  import type { ComponentProps } from 'svelte';
 
   const { currentTheme } = getSettings();
+
+  export let classes: {
+    icon?: string;
+  } & ComponentProps<Switch>["classes"] = {};
+
+
 </script>
 
 <Switch
@@ -26,12 +34,18 @@
     <Icon
       data={mdiWeatherNight}
       size=".8rem"
-      class="row-[1] col-[1] text-primary opacity-0 dark:opacity-100"
+      class={cls(
+        "row-[1] col-[1] text-primary opacity-0 dark:opacity-100",
+        classes.icon,
+      )}
     />
     <Icon
       data={mdiWhiteBalanceSunny}
       size=".8rem"
-      class="row-[1] col-[1] text-primary opacity-100 dark:opacity-0"
+      class={cls(
+        "row-[1] col-[1] text-primary opacity-100 dark:opacity-0",
+        classes.icon,
+      )}
     />
   </div>
 </Switch>
