@@ -11,8 +11,8 @@
   <ThemeSwitch />
 </Preview>
 
-<h2>Custom Icon Color</h2>
+<h2>Customize Switch</h2>
 
 <Preview>
-  <ThemeSwitch classes={{ icon: 'text-yellow-500' }} />
+  <ThemeSwitch classes={{ icon: 'text-yellow-100', switch: 'bg-secondary w-20', toggle: 'bg-accent' }} />
 </Preview>
