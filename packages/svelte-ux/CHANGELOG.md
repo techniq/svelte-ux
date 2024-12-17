@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.77.0
+
+### Minor Changes
+
+- Allow custom styling of ThemeSwitch component ([#525](https://github.com/techniq/svelte-ux/pull/525))
+
 ## 0.76.0
 
 ### Minor Changes
