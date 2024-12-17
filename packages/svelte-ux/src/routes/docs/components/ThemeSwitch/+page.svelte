@@ -14,5 +14,7 @@
 <h2>Customize Switch</h2>
 
 <Preview>
-  <ThemeSwitch classes={{ icon: 'text-primary-content', switch: 'bg-secondary w-20', toggle: 'bg-accent' }} />
+  <ThemeSwitch
+    classes={{ icon: 'text-primary-content', switch: 'bg-secondary w-20', toggle: 'bg-accent' }}
+  />
 </Preview>
