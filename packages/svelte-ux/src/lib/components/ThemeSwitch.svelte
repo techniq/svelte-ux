@@ -4,14 +4,15 @@
   import Switch from './Switch.svelte';
   import Icon from './Icon.svelte';
 
-  import { getComponentSettings, getSettings } from './settings.js';
+  import { getSettings } from './settings.js';
   import { cls } from '../utils/index.js';
   import type { ComponentProps } from 'svelte';
   import { clsMerge } from '$lib/utils/styles.js';
+  import { getComponentClasses } from '$lib/components/theme.js';
 
   const { currentTheme } = getSettings();
 
-  const { classes: settingsClasses } = getComponentSettings('ThemeSwitch');
+  const { icon: iconClasses, ...otherClasses } = getComponentClasses('ThemeSwitch');
 
   export let classes: {
     icon?: string;
@@ -30,7 +31,7 @@
       switch: 'dark:bg-primary dark:border-primary',
       toggle: 'translate-x-0 dark:translate-x-full',
     },
-    settingsClasses.root,
+    otherClasses,
     classes
   )}
   {...$$restProps}
@@ -41,7 +42,7 @@
       size=".8rem"
       class={cls(
         'row-[1] col-[1] text-primary opacity-0 dark:opacity-100',
-        settingsClasses.icon,
+        iconClasses,
         classes.icon
       )}
     />
@@ -50,7 +51,7 @@
       size=".8rem"
       class={cls(
         'row-[1] col-[1] text-primary opacity-100 dark:opacity-0',
-        settingsClasses.icon,
+        iconClasses,
         classes.icon
       )}
     />
