@@ -165,6 +165,10 @@ export function resolveComponentSettings<NAME extends ComponentName>(
   return output;
 }
 
+/**
+ * Returns default component props and classes for a given component.
+ * @param name component name
+ */
 export function getComponentSettings<NAME extends ComponentName>(
   name: NAME
 ): ResolvedComponentSettings<NAME> {

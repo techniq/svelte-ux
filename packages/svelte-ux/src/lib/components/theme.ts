@@ -121,6 +121,11 @@ export function resolveComponentClasses<NAME extends ComponentName>(
   return typeof theme === 'string' ? { root: theme } : (theme ?? {});
 }
 
+/**
+ * Returns default component classes for a given component. See {@link resolveComponentSettings}
+ * to get both default props and classes.
+ * @param name component name
+ */
 export function getComponentClasses<NAME extends ComponentName>(
   name: NAME
 ): ResolvedComponentClasses[NAME] {
