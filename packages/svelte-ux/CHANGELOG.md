@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.77.1
+
+### Patch Changes
+
+- Bump dependencies ([`f55562d`](https://github.com/techniq/svelte-ux/commit/f55562d719e465f0a4d832684c1724769c1138be))
+
 ## 0.77.0
 
 ### Minor Changes
