@@ -1,31 +1,54 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+  import type { HTMLInputAttributes } from 'svelte/elements';
   import { mdiCheckboxBlankCircle } from '@mdi/js';
-
   import Icon from './Icon.svelte';
   import { uniqueId } from '../utils/string.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let id = uniqueId('radio-');
-  export let name = '';
-  export let value: any = undefined;
-  export let group: any = undefined;
-  export let checked = false;
-  export let required = false;
-  export let disabled = false;
-  export let fullWidth = false;
-  export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+  interface Props {
+    id?: string;
+    name?: string;
+    value?: any;
+    group?: any;
+    checked?: boolean;
+    required?: boolean;
+    disabled?: boolean;
+    fullWidth?: boolean;
+    size?: 'xs' | 'sm' | 'md' | 'lg';
+    classes?: {
+      root?: string;
+      input?: string;
+      radio?: string;
+      label?: string;
+      icon?: string;
+    };
+    class?: string;
+    onchange?: HTMLInputAttributes['onchange'];
+    children?: Snippet;
+  }
 
-  export let classes: {
-    root?: string;
-    input?: string;
-    radio?: string;
-    label?: string;
-    icon?: string;
-  } = {};
+  let {
+    id = uniqueId('radio-'),
+    name = '',
+    value,
+    group = $bindable(),
+    checked = $bindable(false),
+    required = false,
+    disabled = false,
+    fullWidth = false,
+    size = 'sm',
+    classes = {},
+    class: className,
+    onchange,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Radio');
 
-  $: checked = group !== undefined ? group === value : checked;
+  $effect(() => {
+    checked = group !== undefined ? group === value : checked;
+  });
 </script>
 
 <div
@@ -35,7 +58,7 @@
     'items-center',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <input
@@ -43,7 +66,7 @@
     {name}
     type="radio"
     bind:group
-    on:change
+    {onchange}
     {value}
     class={cls('input', 'peer appearance-none absolute', settingsClasses.input, classes.input)}
     {required}
@@ -86,7 +109,7 @@
     />
   </label>
 
-  {#if $$slots.default}
+  {#if children}
     <label
       for={id}
       class={cls(
@@ -103,7 +126,7 @@
         classes.label
       )}
     >
-      <slot />
+      {@render children()}
     </label>
   {/if}
 </div>

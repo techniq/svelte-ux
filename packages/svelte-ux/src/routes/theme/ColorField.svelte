@@ -1,41 +1,47 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import { type ComponentProps } from 'svelte';
   import { formatHex } from 'culori';
 
   import { TextField } from 'svelte-ux';
   import { formatColor } from './colors.js';
   import { type SupportedColorSpace } from '$lib/styles/theme.js';
 
-  const dispatch = createEventDispatcher<{
-    change: { value: string | undefined };
-  }>();
+  interface Props {
+    value: string;
+    colorSpace?: SupportedColorSpace | 'hex';
+    onChange?: (value?: string) => void;
+  }
 
-  type $$Props = ComponentProps<TextField> & { value: string };
-
-  export let value: string;
-  export let colorSpace: SupportedColorSpace | 'hex' = 'rgb';
+  let {
+    value = $bindable(),
+    colorSpace = 'rgb',
+    onChange,
+    ...restProps
+  }: Props & Omit<ComponentProps<typeof TextField>, keyof Props> = $props();
 </script>
 
 <TextField
   value={formatColor(value, colorSpace)}
-  on:change={(e) => {
+  onChange={({inputValue}) => {
     // @ts-expect-error
-    value = formatColor(e.detail.inputValue, colorSpace);
-    dispatch('change', { value });
+    value = formatColor(inputValue, colorSpace);
+    onChange?.(value);
   }}
-  {...$$restProps}
+  {...restProps}
 >
-  <div slot="prepend" class="grid grid-stack mr-3">
-    <div class="w-6 h-6 border rounded" style:background={value}></div>
-    <input
-      type="color"
-      value={formatHex(value)}
-      on:input={(e) => {
-        // @ts-expect-error
-        value = formatColor(e.target.value, colorSpace);
-        dispatch('change', { value });
-      }}
-      class="w-6 h-6 rounded opacity-0 cursor-pointer"
-    />
-  </div>
+  {#snippet prepend()}
+    <div class="grid grid-stack mr-3">
+      <div class="w-6 h-6 border rounded" style:background={value}></div>
+      <input
+        type="color"
+        value={formatHex(value)}
+        oninput={(e) => {
+          // @ts-expect-error
+          value = formatColor(e.target.value, colorSpace);
+          onChange?.(value);
+        }}
+        class="w-6 h-6 rounded opacity-0 cursor-pointer"
+      />
+    </div>
+  {/snippet}
 </TextField>

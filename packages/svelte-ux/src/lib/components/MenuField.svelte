@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js';
 
   import { cls } from '../utils/styles.js';
@@ -14,28 +14,61 @@
 
   const { classes: settingsClasses, defaults } = getComponentSettings('MenuField');
 
-  export let options: MenuOption[] = [];
-  export let value: any = null;
-  export let menuProps: ComponentProps<Menu> | undefined = {
-    autoPlacement: true,
-    resize: true,
-  };
-  export let menuIcon = mdiMenuDown;
-  /** If true, show left/right buttons to step through options */
-  export let stepper = false;
-
-  export let classes: ComponentProps<Field>['classes'] & {
-    option?: string;
-    menuItem?: ComponentProps<MenuItem>['classes'];
+  let open = $state(false);
+  interface Props {
+    options?: MenuOption[];
+    value?: any;
+    menuProps?: ComponentProps<typeof Menu>;
     menuIcon?: string;
-    group?: string;
-  } = {};
+    /** If true, show left/right buttons to step through options */
+    stepper?: boolean;
+    classes?: ComponentProps<typeof Field>['classes'] & {
+      option?: string;
+      menuItem?: ComponentProps<typeof MenuItem>['classes'];
+      menuIcon?: string;
+      group?: string;
+    };
+    selected?: MenuOption;
+    onChange?: (value?: any, option?: MenuOption) => void;
+    selection?: Snippet;
+    prepend?: Snippet;
+    append?: Snippet;
+    children?: Snippet<
+      [
+        {
+          options: MenuOption[];
+          selected?: MenuOption;
+          close: () => boolean;
+          setValue: (value: any) => void;
+        },
+      ]
+    >;
+  }
 
-  let open = false;
-  export let selected: any = undefined;
-  $: selected = options?.find((x) => x.value === value);
+  let {
+    options = [],
+    value = $bindable(),
+    menuProps = {
+      autoPlacement: true,
+      resize: true,
+    },
+    menuIcon = mdiMenuDown,
+    stepper = false,
+    classes = {},
+    selected = $bindable(),
+    selection,
+    onChange,
+    prepend,
+    append,
+    children,
+    ...rest
+  }: Props & Omit<ComponentProps<typeof Field>, keyof Props> = $props();
 
-  $: previous = () => {
+  $effect(() => {
+    selected = options?.find((x) => x.value === value);
+  });
+
+  let previous = $derived(() => {
     const index = options.findIndex((o) => o.value === value);
     if (index === 0 || index === -1) {
       // If first item, or no selected value yet, return last item
@@ -44,9 +77,9 @@
       // Previous item
       return options[index - 1].value;
     }
-  };
+  });
 
-  $: next = () => {
+  let next = $derived(() => {
     const index = options.findIndex((x) => x.value === value);
     if (index === options.length - 1) {
       // First value
@@ -55,95 +88,115 @@
       // Next value
       return options[index + 1].value;
     }
-  };
+  });
 
-  const dispatch = createEventDispatcher<{ change: { value: any; option: MenuOption } }>();
-  $: dispatch('change', { value, option: selected });
+  $effect(() => {
+    onChange?.(value, selected);
+  });
 
   function setValue(val: any): void {
     value = val;
   }
 
-  $: restProps = { ...defaults, ...$$restProps };
+  let restProps = $derived({ ...defaults, ...rest });
 </script>
 
 <Field
   class="cursor-pointer"
   {...restProps}
-  classes={{ input: 'overflow-hidden', ...$$props.classes }}
-  on:click={() => (open = !open)}
+  classes={{ input: 'overflow-hidden', ...classes }}
+  onclick={() => (open = !open)}
 >
-  <slot name="selection">
+  {#if selection}
+    {@render selection()}
+  {:else}
     <div class="truncate text-sm">
       {selected?.label ?? 'No selection'}
     </div>
-  </slot>
+  {/if}
 
-  <span slot="prepend">
-    {#if stepper}
-      <Button icon={mdiChevronLeft} on:click={() => (value = previous())} class="mr-2" size="sm" />
-    {/if}
-    <slot name="prepend" />
-  </span>
+  {#snippet prepend()}
+    <span>
+      {#if stepper}
+        <Button
+          icon={mdiChevronLeft}
+          onclick={() => (value = previous())}
+          class="mr-2"
+          size="sm"
+        />
+      {/if}
+      {@render prepend?.()}
+    </span>
+  {/snippet}
 
-  <span slot="append" class="flex items-center">
-    <slot name="append" />
+  {#snippet append()}
+    <span class="flex items-center">
+      {@render append?.()}
 
-    <Icon
-      path={menuIcon}
-      class={cls(
-        'text-surface-content/50 mr-1 transform transition-all duration-300',
-        {
-          '-rotate-180': open,
-        },
-        settingsClasses.menuIcon,
-        classes.menuIcon
-      )}
-      on:click={() => (open = !open)}
-    />
+      <Icon
+        path={menuIcon}
+        class={cls(
+          'text-surface-content/50 mr-1 transform transition-all duration-300',
+          {
+            '-rotate-180': open,
+          },
+          settingsClasses.menuIcon,
+          classes.menuIcon
+        )}
+        onclick={() => (open = !open)}
+      />
 
-    {#if stepper}
-      <Button icon={mdiChevronRight} on:click={() => (value = next())} class="mr-2" size="sm" />
-    {/if}
-  </span>
+      {#if stepper}
+        <Button icon={mdiChevronRight} onclick={() => (value = next())} class="mr-2" size="sm" />
+      {/if}
+    </span>
+  {/snippet}
 
-  <Menu
-    slot="root"
-    {open}
-    on:close={() => {
-      open = false;
-    }}
-    matchWidth
-    {...menuProps}
-  >
-    <slot {options} {selected} close={() => (open = false)} {setValue}>
-      <menu class="group p-1">
-        {#each options as option, index (`${option.group}-${option.value}`)}
-          {@const previousOption = options[index - 1]}
-          {#if option.group && option.group !== previousOption?.group}
-            <div
-              class={cls(
-                'group-header text-xs leading-8 tracking-widest text-surface-content/50 px-2',
-                settingsClasses.group,
-                classes.group
-              )}
+  {#snippet root()}
+    <Menu
+      {open}
+      onClose={() => {
+        open = false;
+      }}
+      matchWidth
+      {...menuProps}
+    >
+      {#if children}
+        {@render children({
+          options,
+          selected,
+          close: () => (open = false),
+          setValue,
+        })}
+      {:else}
+        <menu class="group p-1">
+          {#each options as option, index (`${option.group}-${option.value}`)}
+            {@const previousOption = options[index - 1]}
+            {#if option.group && option.group !== previousOption?.group}
+              <div
+                class={cls(
+                  'group-header text-xs leading-8 tracking-widest text-surface-content/50 px-2',
+                  settingsClasses.group,
+                  classes.group
+                )}
+              >
+                {option.group}
+              </div>
+            {/if}
+
+            <MenuItem
+              icon={option.icon}
+              selected={option.value === value}
+              class={cls(option.group ? 'px-4' : 'px-2', settingsClasses.option, classes.option)}
+              classes={classes.menuItem}
+              disabled={option.disabled}
+              onclick={() => (value = option.value)}
             >
-              {option.group}
-            </div>
-          {/if}
-
-          <MenuItem
-            icon={option.icon}
-            selected={option.value === value}
-            class={cls(option.group ? 'px-4' : 'px-2', settingsClasses.option, classes.option)}
-            classes={classes.menuItem}
-            disabled={option.disabled}
-            on:click={() => (value = option.value)}
-          >
-            {option.label}
-          </MenuItem>
-        {/each}
-      </menu>
-    </slot>
-  </Menu>
+              {option.label}
+            </MenuItem>
+          {/each}
+        </menu>
+      {/if}
+    </Menu>
+  {/snippet}
 </Field>

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
+  import type { ComponentProps, Snippet } from 'svelte';
 
   import ProgressCircle from './ProgressCircle.svelte';
   import Header from './Header.svelte';
@@ -7,19 +8,35 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let title: string | string[] | null = null;
-  export let subheading: string | string[] | null = null;
-  export let loading: boolean | null = null;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    title?: string | string[] | null;
+    subheading?: string | string[] | null;
+    loading?: boolean | null;
+    classes?: {
+      root?: string;
+      header?: ComponentProps<typeof Header>['classes'];
+      headerContainer?: string;
+      content?: string;
+      actions?: string;
+    };
+    header?: Snippet;
+    children?: Snippet;
+    contents?: Snippet;
+    actions?: Snippet;
+  }
 
-  export let classes: {
-    root?: string;
-    header?: ComponentProps<Header>['classes'];
-    headerContainer?: string;
-    content?: string;
-    actions?: string;
-  } = {};
+  let {
+    title,
+    subheading,
+    loading,
+    class: className,
+    classes = {},
+    header,
+    children,
+    contents,
+    actions,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements["div"], keyof Props> = $props();
 
   const settingsClasses = getComponentClasses('Card');
 </script>
@@ -32,7 +49,7 @@
 -->
 
 <div
-  {...$$restProps}
+  {...restProps}
   class={cls(
     'Card',
     'relative z-0 bg-surface-100 border rounded elevation-1 flex flex-col justify-between',
@@ -47,25 +64,27 @@
     </Overlay>
   {/if}
 
-  {#if title || subheading || $$slots.header}
+  {#if title || subheading || header}
     <div class={cls('p-4', classes.headerContainer)}>
-      <slot name="header">
+      {#if header}
+        {@render header()}
+      {:else}
         <Header {title} {subheading} classes={classes.header} />
-      </slot>
+      {/if}
     </div>
   {/if}
 
-  <slot />
+  {@render children?.()}
 
-  {#if $$slots.contents}
+  {#if contents}
     <div class={cls('px-4 flex-1', classes.content)}>
-      <slot name="contents" />
+      {@render contents()}
     </div>
   {/if}
 
-  {#if $$slots.actions}
+  {#if actions}
     <div class={cls('py-2 px-1', classes.actions)}>
-      <slot name="actions" />
+      {@render actions()}
     </div>
   {/if}
 </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
   import { getComponentSettings } from './settings.js';
   import { mdiMenuDown } from '@mdi/js';
 
@@ -11,40 +11,67 @@
   import MenuItem from './MenuItem.svelte';
   import type { MenuOption } from '../types/index.js';
 
-  const dispatch = createEventDispatcher<{ change: { value: any; option: MenuOption } }>();
   const { classes: settingsClasses, defaults } = getComponentSettings('MenuButton');
 
-  export let options: MenuOption[] = [];
-  export let value: any = null;
-  export let menuProps: ComponentProps<Menu> = { placement: 'bottom-start' };
-  export let menuIcon: string | null = mdiMenuDown;
-  $: selected = options?.find((x) => x.value === value);
+  interface Props {
+    options?: MenuOption[];
+    value?: any;
+    menuProps?: ComponentProps<typeof Menu>;
+    menuIcon?: string | null;
+    classes?: {
+      root?: string;
+      label?: string;
+      icon?: string;
+    };
+    class?: string;
+    onChange?: ({ option, value }: { option: MenuOption; value: any }) => void;
+    selection?: Snippet<[{ value?: MenuOption }]>;
+    children?: Snippet<
+      [
+        {
+          options: MenuOption[];
+          selected?: MenuOption;
+          close: () => boolean;
+          setValue: (value: any) => void;
+        },
+      ]
+    >;
+  }
 
-  export let classes: {
-    root?: string;
-    label?: string;
-    icon?: string;
-  } = {};
+  let {
+    options = [],
+    value = $bindable(null),
+    menuProps = { placement: 'bottom-start' },
+    menuIcon = mdiMenuDown,
+    classes = {},
+    class: className,
+    onChange,
+    selection,
+    children,
+    ...rest
+  }: Props & Omit<ComponentProps<typeof Button>, keyof Props> = $props();
 
-  let open = false;
-
-  $: restProps = { ...defaults, ...$$restProps };
+  let open = $state(false);
 
   function setValue(val: typeof value) {
     value = val;
   }
+  let selected = $derived(options?.find((x) => x.value === value));
+  let restProps = $derived({ ...defaults, ...rest });
 </script>
 
 <Button
-  on:click={() => (open = !open)}
+  onclick={() => (open = !open)}
   {...restProps}
-  class={cls('MenuButton', settingsClasses.root, classes.root, $$props.class)}
+  class={cls('MenuButton', settingsClasses.root, classes.root, className)}
 >
-  <slot name="selection" value={selected}>
+  {#if selection}
+    {@render selection({ value: selected })}
+  {:else}
     <span class={cls('truncate', settingsClasses.label, classes.label)}>
       {selected?.label ?? 'No selection'}
     </span>
-  </slot>
+  {/if}
 
   {#if menuIcon}
     <Icon
@@ -60,20 +87,27 @@
 
   <Menu
     {open}
-    on:close={() => {
+    onClose={() => {
       open = false;
     }}
     {...menuProps}
   >
-    <slot {options} {selected} close={() => (open = false)} {setValue}>
+    {#if children}
+      {@render children({
+        options,
+        selected,
+        close: () => (open = false),
+        setValue,
+      })}
+    {:else}
       <menu class="group p-1">
         {#each options as option}
           <MenuItem
             icon={option.icon}
             selected={option.value === value}
-            on:click={() => {
+            onclick={() => {
               value = option.value;
-              dispatch('change', { option, value });
+              onChange?.({ option, value });
             }}
             disabled={option.disabled}
           >
@@ -81,6 +115,6 @@
           </MenuItem>
         {/each}
       </menu>
-    </slot>
+    {/if}
   </Menu>
 </Button>

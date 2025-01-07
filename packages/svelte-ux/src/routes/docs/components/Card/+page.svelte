@@ -41,11 +41,13 @@
 
 <Preview>
   <Card>
-    <Header title="Title" subheading="Subheading" slot="header">
-      <div slot="avatar">
-        <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
-      </div>
-    </Header>
+    {#snippet header()}
+      <Header title="Title" subheading="Subheading">
+        <div slot="avatar">
+          <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
+        </div>
+      </Header>
+    {/snippet}
   </Card>
 </Preview>
 
@@ -53,11 +55,13 @@
 
 <Preview>
   <Card>
-    <Header title="Title" subheading="Subheading" slot="header">
-      <div slot="actions">
-        <Button icon={mdiDotsVertical} class="w-12 h-12" />
-      </div>
-    </Header>
+    {#snippet header()}
+      <Header title="Title" subheading="Subheading">
+        <div slot="actions">
+          <Button icon={mdiDotsVertical} class="w-12 h-12" />
+        </div>
+      </Header>
+    {/snippet}
   </Card>
 </Preview>
 
@@ -65,14 +69,16 @@
 
 <Preview>
   <Card>
-    <Header title="Title" subheading="Subheading" slot="header">
-      <div slot="avatar">
-        <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
-      </div>
-      <div slot="actions">
-        <Button icon={mdiDotsVertical} class="w-12 h-12" />
-      </div>
-    </Header>
+    {#snippet header()}
+      <Header title="Title" subheading="Subheading">
+        <div slot="avatar">
+          <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
+        </div>
+        <div slot="actions">
+          <Button icon={mdiDotsVertical} class="w-12 h-12" />
+        </div>
+      </Header>
+    {/snippet}
   </Card>
 </Preview>
 
@@ -80,7 +86,9 @@
 
 <Preview>
   <Card title="Title" subheading="Subheading">
-    <div slot="contents">Contents</div>
+    {#snippet contents()}
+      <div>Contents</div>
+    {/snippet}
   </Card>
 </Preview>
 
@@ -88,10 +96,12 @@
 
 <Preview>
   <Card title="Title" subheading="Subheading">
-    <div slot="actions">
-      <Button>Action 1</Button>
-      <Button>Action 2</Button>
-    </div>
+    {#snippet actions()}
+      <div>
+        <Button>Action 1</Button>
+        <Button>Action 2</Button>
+      </div>
+    {/snippet}
   </Card>
 </Preview>
 
@@ -100,16 +110,22 @@
 <Preview>
   <div class="grid grid-cols-3 gap-3">
     <Card title="Title" subheading="with actions">
-      <div slot="actions">
-        <Button>Action 1</Button>
-        <Button>Action 2</Button>
-      </div>
+      {#snippet actions()}
+        <div>
+          <Button>Action 1</Button>
+          <Button>Action 2</Button>
+        </div>
+      {/snippet}
     </Card>
     <Card title="Title" subheading="with content">
-      <div slot="contents" class="bg-danger/10">Contents</div>
+      {#snippet contents()}
+        <div class="bg-danger/10">Contents</div>
+      {/snippet}
     </Card>
     <Card title="Title" subheading="with tall content">
-      <div slot="contents" class="bg-danger/10 h-40">Contents</div>
+      {#snippet contents()}
+        <div class="bg-danger/10 h-40">Contents</div>
+      {/snippet}
     </Card>
   </div>
 </Preview>

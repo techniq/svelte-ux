@@ -1,14 +1,21 @@
 <script lang="ts">
+  import TreeList from './TreeList.svelte';
   import type { TreeNode } from '../utils/array.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import type { Snippet } from 'svelte';
 
-  export let nodes: TreeNode[];
+  interface Props {
+    nodes: TreeNode[];
+    classes?: {
+      ul?: string | ((nodes: TreeNode[]) => string);
+      li?: string | ((node: TreeNode) => string);
+    };
+    class?: string;
+    children?: Snippet<[{ node: TreeNode }]>;
+  }
 
-  export let classes: {
-    ul?: string | ((nodes: TreeNode[]) => string);
-    li?: string | ((node: TreeNode) => string);
-  } = {};
+  let { nodes, classes = {}, class: className, children }: Props = $props();
   const settingsClasses = getComponentClasses('TreeList');
 </script>
 
@@ -17,7 +24,7 @@
     'TreeList',
     typeof settingsClasses.ul === 'string' ? settingsClasses.ul : settingsClasses.ul?.(nodes),
     typeof classes.ul === 'string' ? classes.ul : classes.ul?.(nodes),
-    $$props.class
+    className
   )}
 >
   {#each nodes ?? [] as node}
@@ -27,11 +34,13 @@
         typeof classes.li === 'string' ? classes.li : classes.li?.(node)
       )}
     >
-      <slot {node} />
+      {@render children?.({ node })}
       {#if node.children}
-        <svelte:self nodes={node.children} {classes} let:node>
-          <slot {node} />
-        </svelte:self>
+        <TreeList nodes={node.children} {classes}>
+          {#snippet children({ node })}
+            {@render children?.({ node })}
+          {/snippet}
+        </TreeList>
       {/if}
     </li>
   {/each}

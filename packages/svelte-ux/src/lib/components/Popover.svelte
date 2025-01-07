@@ -1,54 +1,64 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import type { Snippet } from 'svelte';
   import type { OffsetOptions, Placement } from '@floating-ui/dom';
 
   import { popover, type PopoverOptions } from '../actions/popover.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let open = false;
-  export let placement: Placement | undefined = undefined;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    open?: boolean;
+    placement?: Placement;
+    class?: string;
+    style?: string;
+    /**
+     * Place popover based on which side of the viewport has more space
+     */
+    autoPlacement?: boolean;
+    /**
+     * Provide element to anchor.  If not provided, uses direct parent of Popover
+     */
+    anchorEl?: Element | HTMLElement;
+    /**
+     * Offset between anchor and popover
+     */
+    offset?: OffsetOptions;
+    /**
+     * Shift popover if within threshold of window
+     */
+    padding?: number;
+    /**
+     * Set width of popover element the same as anchor element
+     */
+    matchWidth?: boolean;
+    /**
+     * Set max-height of popover element to the remaining height from anchor element to bottom of viewport
+     */
+    resize?: PopoverOptions['resize'];
+    onClose?: (value: string) => void;
+    children?: Snippet<[{ close: () => void }]>;
+  }
 
-  export let style: string | undefined = undefined;
+  let {
+    open = $bindable(false),
+    placement,
+    class: className,
+    style,
+    autoPlacement = false,
+    anchorEl,
+    offset = 0,
+    padding = 4,
+    matchWidth = false,
+    resize = false,
+    onClose,
+    children,
+  }: Props = $props();
 
-  /**
-   * Place popover based on which side of the viewport has more space
-   */
-  export let autoPlacement = false;
-
-  /**
-   * Provide element to anchor.  If not provided, uses direct parent of Popover
-   */
-  export let anchorEl: Element | HTMLElement | undefined = undefined;
-
-  /**
-   * Offset between anchor and popover
-   */
-  export let offset: OffsetOptions = 0;
-
-  /**
-   * Shift popover if within threshold of window
-   */
-  export let padding = 4;
-
-  /**
-   * Set width of popover element the same as anchor element
-   */
-  export let matchWidth = false;
-
-  /**
-   * Set max-height of popover element to the remaining height from anchor element to bottom of viewport
-   */
-  export let resize: PopoverOptions['resize'] = false;
-
-  const dispatch = createEventDispatcher();
   const settingsClasses = getComponentClasses('Popover');
 
   function close(reason: string = 'unknown') {
     if (open) {
-      dispatch('close', reason);
+      onClose?.(reason);
       open = false;
     }
   }
@@ -61,7 +71,7 @@
   }
 </script>
 
-<svelte:window on:keydown={onKeydown} />
+<svelte:window onkeydown={onKeydown} />
 
 {#if open}
   <!-- @ts-expect-error -->
@@ -70,11 +80,11 @@
     {style}
     tabindex="-1"
     use:popover={{ anchorEl, placement, autoPlacement, offset, padding, matchWidth, resize }}
-    on:clickOutside={(e) => {
+    onclickOutside={(e) => {
       e.stopPropagation();
       close('clickOutside');
     }}
   >
-    <slot close={() => close()} />
+    {@render children?.({ close: () => close() })}
   </div>
 {/if}

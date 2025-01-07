@@ -6,71 +6,96 @@
   import Icon from './Icon.svelte';
   import Notification from './Notification.svelte';
   import Toggle from './Toggle.svelte';
+  import type { ComponentProps } from 'svelte';
 
-  export let title: string;
-  export let description: string;
+  interface Props {
+    title: string;
+    description: string;
+    message?: string;
+    stackTrace?: string;
+    onClose: ComponentProps<typeof Notification>['onClose'];
+  }
 
-  export let message: string = '';
-  export let stackTrace: string = '';
+  let {
+    title: titleString,
+    description: descriptionString,
+    message = '',
+    stackTrace = '',
+    onClose,
+  }: Props = $props();
 
-  $: hasDetails = message || stackTrace;
+  let hasDetails = $derived(message || stackTrace);
 </script>
 
-<Toggle let:on={open} let:toggle>
-  <Notification actionsPlacement="below" closeIcon on:close>
-    <div slot="icon" class="self-start">
-      <Icon data={mdiAlertCircle} class="text-danger" />
-    </div>
-    <div slot="title">{title}</div>
-
-    <div slot="description" class="max-w-3xl max-h-64 overflow-auto whitespace-pre">
-      {#if description}
-        <div class="grid gap-2">
-          {#each description.split('\n') as line}
-            <div>{line}</div>
-          {/each}
+<Toggle>
+  {#snippet children({ on: open, toggle })}
+    <Notification actionsPlacement="below" closeIcon {onClose}>
+      {#snippet icon()}
+        <div class="self-start">
+          <Icon data={mdiAlertCircle} class="text-danger" />
         </div>
-      {/if}
-    </div>
+      {/snippet}
+      {#snippet title()}
+        <div>{titleString}</div>
+      {/snippet}
 
-    <div slot="actions">
-      {#if hasDetails}
-        <Button
-          on:click={(e) => {
-            e.stopPropagation();
-            toggle();
-          }}
-          class="primary"
-        >
-          View Details
-        </Button>
-      {/if}
-      <Button color={hasDetails ? 'default' : 'primary'}>Dismiss</Button>
-    </div>
-  </Notification>
+      {#snippet description()}
+        <div class="max-w-3xl max-h-64 overflow-auto whitespace-pre">
+          {#if descriptionString}
+            <div class="grid gap-2">
+              {#each descriptionString.split('\n') as line}
+                <div>{line}</div>
+              {/each}
+            </div>
+          {/if}
+        </div>
+      {/snippet}
 
-  <Dialog {open} style="max-width: 90vw">
-    <div slot="title">
-      {#if message}
-        {#each message.split('\n') as msg}
-          <div>{msg}</div>
-        {/each}
-      {/if}
-    </div>
-
-    <div class="grid gap-4 p-6">
-      {#if stackTrace}
+      {#snippet actions()}
         <div>
-          <div class="text-xs text-surface-content/50 mb-1">Stacktrace:</div>
-          <pre class="bg-gray-100 border rounded p-2 text-xs">
-            {stackTrace ?? '<Empty>'}
-          </pre>
+          {#if hasDetails}
+            <Button
+              onclick={(e) => {
+                e.stopPropagation();
+                toggle();
+              }}
+              class="primary"
+            >
+              View Details
+            </Button>
+          {/if}
+          <Button color={hasDetails ? 'default' : 'primary'}>Dismiss</Button>
         </div>
-      {/if}
-    </div>
+      {/snippet}
+    </Notification>
 
-    <div slot="actions">
-      <Button color="primary" on:click={toggle}>Close</Button>
-    </div>
-  </Dialog>
+    <Dialog {open} style="max-width: 90vw">
+      {#snippet title()}
+        <div>
+          {#if message}
+            {#each message.split('\n') as msg}
+              <div>{msg}</div>
+            {/each}
+          {/if}
+        </div>
+      {/snippet}
+
+      <div class="grid gap-4 p-6">
+        {#if stackTrace}
+          <div>
+            <div class="text-xs text-surface-content/50 mb-1">Stacktrace:</div>
+            <pre class="bg-gray-100 border rounded p-2 text-xs">
+              {stackTrace ?? '<Empty>'}
+            </pre>
+          </div>
+        {/if}
+      </div>
+
+      {#snippet actions()}
+        <div>
+          <Button color="primary" onclick={toggle}>Close</Button>
+        </div>
+      {/snippet}
+    </Dialog>
+  {/snippet}
 </Toggle>

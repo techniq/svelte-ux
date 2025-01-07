@@ -15,36 +15,53 @@
   import { getMinSelectedDate, getMaxSelectedDate, PeriodType } from '../utils/date.js';
   import type { DisabledDate, SelectedDate } from '../utils/date.js';
 
-  export let selected: SelectedDate = undefined;
-  export let minDate: Date | undefined = undefined;
-  export let maxDate: Date | undefined = undefined;
-  export let format: ComponentProps<DateButton>['format'] = undefined;
+  interface Props {
+    selected?: SelectedDate;
+    minDate?: Date;
+    maxDate?: Date;
+    format?: ComponentProps<typeof DateButton>['format'];
+    onDateChange?: ComponentProps<typeof DateButton>['onDateChange'];
+    /**
+     * Dates to disable (not selectable)
+     */
+    disabledDates?: DisabledDate;
+  }
 
-  /**
-   * Dates to disable (not selectable)
-   */
-  export let disabledDates: DisabledDate | undefined = undefined;
+  let {
+    selected = $bindable(),
+    minDate,
+    maxDate,
+    format,
+    onDateChange,
+    disabledDates,
+  }: Props = $props();
 
-  let minYear: number;
-  $: minYear =
-    minYear ??
-    (minDate
-      ? minDate.getFullYear()
-      : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
+  let minYear = $state<number>();
+  $effect(() => {
+    minYear =
+      minYear ??
+      (minDate
+        ? minDate.getFullYear()
+        : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
+  });
 
-  let maxYear: number;
-  $: maxYear =
-    maxYear ??
-    (maxDate
-      ? maxDate.getFullYear()
-      : addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+  let maxYear = $state<number>();
+  $effect(() => {
+    maxYear =
+      maxYear ??
+      (maxDate
+        ? maxDate.getFullYear()
+        : addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+  });
 
-  $: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i) ?? [];
+  let years = $derived(
+    Array.from({ length: maxYear! - minYear! + 1 }, (_, i) => minYear! + i) ?? []
+  );
 
   // TODO: Scroll into view not typically centered
-  $: selectedYear = (getMinSelectedDate(selected) || new Date()).getFullYear();
+  let selectedYear = $derived((getMinSelectedDate(selected) || new Date()).getFullYear());
 
-  $: isDateDisabled = (date: Date) => {
+  let isDateDisabled = $derived((date: Date) => {
     return disabledDates instanceof Function
       ? disabledDates(date)
       : disabledDates instanceof Date
@@ -57,11 +74,11 @@
                 end: endOfYear(disabledDates.to || disabledDates.from),
               })
             : false;
-  };
+  });
 </script>
 
 <div class="grid">
-  <Button on:click={() => (minYear -= 1)} class="border-b">More</Button>
+  <Button onclick={() => (minYear = minYear! - 1)} class="border-b">More</Button>
 
   <div class="grid p-2">
     {#each years.map((year) => new Date(year, 0, 1)) as year (year.valueOf())}
@@ -71,10 +88,10 @@
         bind:selected
         disabled={isDateDisabled(year)}
         {format}
-        on:dateChange
+        {onDateChange}
       />
     {/each}
   </div>
 
-  <Button on:click={() => (maxYear += 1)} class="border-t">More</Button>
+  <Button onclick={() => (maxYear = maxYear! + 1)} class="border-t">More</Button>
 </div>

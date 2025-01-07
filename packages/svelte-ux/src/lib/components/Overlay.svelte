@@ -1,21 +1,28 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { fade } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
 
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let center = false;
-  export let transition = [fade, { duration: 100 }] as [
-    (node: Element, options: any) => TransitionConfig,
-    object,
-  ];
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    center?: boolean;
+    transition?: [(node: Element, options: any) => TransitionConfig, object];
+    class?: string;
+    children?: Snippet;
+  }
+
+  let {
+    center = false,
+    transition = [fade, { duration: 100 }],
+    class: className,
+    children,
+  }: Props = $props();
 
   const settingsClasses = getComponentClasses('Overlay');
 
-  $: [transitionFn, transitionConfig] = transition;
+  let [transitionFn, transitionConfig] = $derived(transition);
 </script>
 
 <div
@@ -28,5 +35,5 @@
   )}
   transition:transitionFn={transitionConfig}
 >
-  <slot />
+  {@render children?.()}
 </div>

@@ -1,25 +1,45 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+  import type { HTMLInputAttributes } from 'svelte/elements';
   import type { ThemeColors } from '../types/typeHelpers.js';
   import { uniqueId } from '../utils/string.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let id: string = uniqueId('switch-');
-  export let name = '';
-  export let value: any = undefined;
-  export let checked: boolean | null = false;
-  export let required = false;
-  export let disabled = false;
-  export let size: 'sm' | 'md' | 'lg' = 'lg';
+  interface Props {
+    id?: string;
+    name?: string;
+    value?: any;
+    checked?: boolean | null;
+    required?: boolean;
+    disabled?: boolean;
+    size?: 'sm' | 'md' | 'lg';
+    color?: ThemeColors;
+    classes?: {
+      root?: string;
+      input?: string;
+      switch?: string;
+      toggle?: string;
+    };
+    class?: string;
+    onchange?: HTMLInputAttributes['onchange'];
+    children?: Snippet<[{ checked: boolean | null; value: any }]>;
+  }
 
-  export let color: ThemeColors = 'primary';
-
-  export let classes: {
-    root?: string;
-    input?: string;
-    switch?: string;
-    toggle?: string;
-  } = {};
+  let {
+    id = uniqueId('switch-'),
+    name = '',
+    value,
+    checked = $bindable(false),
+    required = false,
+    disabled = false,
+    size = 'lg',
+    color = 'primary',
+    classes = {},
+    class: className,
+    onchange,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Switch');
 </script>
 
@@ -30,7 +50,7 @@
     {name}
     type="checkbox"
     bind:checked
-    on:change
+    {onchange}
     {value}
     class={cls('peer appearance-none block h-0', settingsClasses.input, classes.input)}
     {required}
@@ -73,7 +93,7 @@
       disabled ? 'opacity-50' : 'cursor-pointer peer-focus-visible:ring-2 ring-offset-1',
       settingsClasses.switch,
       classes.switch,
-      $$props.class
+      className
     )}
   >
     <div
@@ -87,7 +107,7 @@
         classes.toggle
       )}
     >
-      <slot {checked} {value} />
+      {@render children?.({ checked, value })}
     </div>
   </label>
 </div>

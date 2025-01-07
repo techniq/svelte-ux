@@ -1,15 +1,34 @@
-<script lang="ts">
+<script lang="ts" generics="T">
+  import type { Snippet } from 'svelte';
   import paginationStore from '../stores/paginationStore.js';
 
-  type T = $$Generic;
+  interface Props {
+    data: T[];
+    perPage?: number;
+    children?: Snippet<
+      [
+        {
+          pagination: ReturnType<typeof paginationStore>;
+          pageData: T[];
+          current: typeof $pagination;
+        },
+      ]
+    >;
+  }
 
-  export let data: T[];
-  export let perPage = 10;
+  let { data, perPage = 10, children }: Props = $props();
 
   const pagination = paginationStore({ perPage });
-  $: pagination.setPerPage(perPage);
-  $: pagination.setTotal(data.length);
-  $: pageData = $pagination.slice(data);
+
+  $effect(() => {
+    pagination.setPerPage(perPage);
+  });
+
+  $effect(() => {
+    pagination.setTotal(data.length);
+  });
+
+  let pageData = $derived($pagination.slice(data));
 </script>
 
-<slot {pagination} {pageData} current={$pagination} />
+{@render children?.({ pagination, pageData, current: $pagination })}

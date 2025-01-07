@@ -1,26 +1,37 @@
 <script lang="ts">
-  import type { SVGAttributes } from 'svelte/elements';
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements, SVGAttributes } from 'svelte/elements';
 
   import { uniqueId } from '../utils/string.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  /** Apply gaussian blur.  Required unless blurring externally (`filter: blur()`, etc) */
-  export let blur: number | undefined = undefined;
+  interface Props {
+    /** Apply gaussian blur.  Required unless blurring externally (`filter: blur()`, etc) */
+    blur?: number;
+    /** `a4` of feColorMatrix.  See https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feColorMatrix for details  */
+    alphaPixel?: number;
+    /** `a5` of feColorMatrix.  See https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feColorMatrix for details  */
+    alphaShift?: number;
+    composite?: SVGAttributes<SVGFECompositeElement>['operator'];
+    /** @type {{root?: string, icon?: string, loading?: string}} */
+    classes?: {
+      root?: string;
+      svg?: string;
+    };
+    children?: Snippet;
+  }
 
-  /** `a4` of feColorMatrix.  See https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feColorMatrix for details  */
-  export let alphaPixel = 255;
-
-  /** `a5` of feColorMatrix.  See https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feColorMatrix for details  */
-  export let alphaShift = -140;
-
-  export let composite: SVGAttributes<SVGFECompositeElement>['operator'] = undefined;
-
-  /** @type {{root?: string, icon?: string, loading?: string}} */
-  export let classes: {
-    root?: string;
-    svg?: string;
-  } = {};
+  let {
+    blur = undefined,
+    alphaPixel = 255,
+    alphaShift = -140,
+    composite = undefined,
+    classes = {},
+    class: className,
+    children,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements['div'], keyof Props> = $props();
   const settingsClasses = getComponentClasses('Gooey');
 
   const filterId = uniqueId('filter-');
@@ -50,8 +61,8 @@
 
 <div
   style:filter="url(#{filterId})"
-  {...$$restProps}
-  class={cls('inline-block', settingsClasses.root, classes?.root, $$props.class)}
+  {...restProps}
+  class={cls('inline-block', settingsClasses.root, classes?.root, className)}
 >
-  <slot />
+  {@render children?.()}
 </div>

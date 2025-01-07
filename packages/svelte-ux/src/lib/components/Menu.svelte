@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
   import { slide } from 'svelte/transition';
   import type { TransitionConfig } from 'svelte/transition';
   import type { Placement } from '@floating-ui/dom';
@@ -11,38 +11,50 @@
   import type { TransitionParams } from '../types/typeHelpers.js';
   import { getComponentSettings } from './settings.js';
 
-  const dispatch = createEventDispatcher();
-
-  export let open = false;
-  export let offset = 4;
-
-  export let matchWidth: boolean = false;
-  export let placement: Placement = matchWidth ? 'bottom-start' : 'bottom';
-  export let autoPlacement = false;
-  export let resize: ComponentProps<Popover>['resize'] = false;
-  export let disableTransition = false;
-  export let transition:
-    | ((node: HTMLElement, params: TransitionParams) => TransitionConfig)
-    | undefined = undefined;
-  export let transitionParams: TransitionParams | undefined = undefined;
-  export let explicitClose = false;
-  export let moveFocus = true;
-
-  export let classes: {
-    root?: string;
-    menu?: string;
-  } = {};
   const { classes: settingsClasses, defaults } = getComponentSettings('Menu');
 
-  $: resolvedTransition =
-    transition ??
-    defaults.transition ??
-    (disableTransition
-      ? (node: HTMLElement, params: TransitionParams) => ({}) as TransitionConfig
-      : slide);
-  $: resolvedTransitionParams = transitionParams ?? defaults.transitionParams ?? {};
+  interface Props {
+    open?: boolean;
+    offset?: number;
+    matchWidth?: boolean;
+    placement?: Placement;
+    autoPlacement?: boolean;
+    resize?: ComponentProps<typeof Popover>['resize'];
+    disableTransition?: boolean;
+    transition?: (node: HTMLElement, params: TransitionParams) => TransitionConfig;
+    transitionParams?: TransitionParams;
+    explicitClose?: boolean;
+    moveFocus?: boolean;
+    classes?: {
+      root?: string;
+      menu?: string;
+    };
+    menuItemsEl?: HTMLMenuElement;
+    class?: string;
+    style?: string;
+    onClose?: (value: string) => void;
+    children?: Snippet<[{ close: () => void }]>;
+  }
 
-  export let menuItemsEl: HTMLMenuElement | undefined = undefined;
+  let {
+    open = $bindable(false),
+    offset = 4,
+    matchWidth = false,
+    placement = matchWidth ? 'bottom-start' : 'bottom',
+    autoPlacement = false,
+    resize = false,
+    disableTransition = false,
+    transition,
+    transitionParams,
+    explicitClose = false,
+    moveFocus = true,
+    classes = {},
+    menuItemsEl = $bindable(),
+    class: className,
+    style,
+    onClose,
+    children: childrenRender,
+  }: Props = $props();
 
   function onClick(e: MouseEvent) {
     try {
@@ -50,12 +62,20 @@
         // Clicked within menu but outside of any items
       } else if (!explicitClose) {
         open = false;
-        dispatch('close', 'item');
+        onClose?.('item');
       }
     } catch (err) {
       console.error(err);
     }
   }
+  let resolvedTransition = $derived(
+    transition ??
+      defaults.transition ??
+      (disableTransition
+        ? (node: HTMLElement, params: TransitionParams) => ({}) as TransitionConfig
+        : slide)
+  );
+  let resolvedTransitionParams = $derived(transitionParams ?? defaults.transitionParams ?? {});
 </script>
 
 <Popover
@@ -70,25 +90,26 @@
     'bg-surface-100 rounded shadow border overflow-auto',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
-  style={$$props.style}
-  on:close
-  let:close
+  {style}
+  {onClose}
 >
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-  <menu
-    class={cls('menu-items outline-none max-h-screen', settingsClasses.menu, classes.menu)}
-    bind:this={menuItemsEl}
-    on:click={onClick}
-    on:mouseup={(e) => {
-      // Do not allow event to reach Popover's on:mouseup (clickOutside)
-      e.stopPropagation();
-    }}
-    transition:resolvedTransition={resolvedTransitionParams}
-    use:focusMove={{ disabled: !moveFocus }}
-  >
-    <slot {close} />
-  </menu>
+  {#snippet children({ close })}
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <menu
+      class={cls('menu-items outline-none max-h-screen', settingsClasses.menu, classes.menu)}
+      bind:this={menuItemsEl}
+      onclick={onClick}
+      onmouseup={(e) => {
+        // Do not allow event to reach Popover's on:mouseup (clickOutside)
+        e.stopPropagation();
+      }}
+      transition:resolvedTransition={resolvedTransitionParams}
+      use:focusMove={{ disabled: !moveFocus }}
+    >
+      {@render childrenRender?.({ close })}
+    </menu>
+  {/snippet}
 </Popover>

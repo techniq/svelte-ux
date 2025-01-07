@@ -1,7 +1,7 @@
 <script lang="ts" generics="TValue">
   import { getComponentClasses } from './theme.js';
 
-  import { type ComponentProps, createEventDispatcher } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
   import { flip } from 'svelte/animate';
   import { get } from 'svelte/store';
   import { partition, isEqual } from 'lodash-es';
@@ -20,56 +20,7 @@
   import { cls } from '../utils/styles.js';
   import changeStore from '../stores/changeStore.js';
 
-  export let options: MenuOption<TValue>[];
-  export let value: TValue[] = [];
-  export let indeterminateSelected: typeof value = [];
-  export let duration = 200;
-  export let inlineSearch = false;
-  export let autoFocusSearch = false;
-  export let placeholder = 'Search items';
-  export let optionProps: Partial<ComponentProps<MultiSelectOption>> | undefined = undefined;
-
-  /** Wrap options in `InfiniteScroll` to amortize rendering of a large number of options */
-  export let infiniteScroll = false;
-
-  /** Maximum number of options that can be selected  */
-  export let max: number | undefined = undefined;
-
-  /** When enabled, will not separate selected from unselected options */
-  export let maintainOrder = false;
-
-  /** Determine if changes should be applied immediately or via actions */
-  export let mode: 'actions' | 'immediate' = 'actions';
-
-  export let cancelButtonProps: ComponentProps<Button> | undefined = undefined;
-  export let applyButtonProps: ComponentProps<Button> | undefined = undefined;
-
-  export let classes: {
-    root?: string;
-    search?: string;
-    options?: string;
-    actions?: string;
-  } = {};
   const settingsClasses = getComponentClasses('MultiSelect');
-
-  const dispatch = createEventDispatcher<{
-    change: {
-      value: typeof value;
-      selection: typeof $selection;
-      indeterminate: typeof $indeterminateStore;
-      original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
-    };
-    cancel: null;
-  }>();
-
-  export let onApply = async (ctx: {
-    value: typeof value;
-    selection: typeof $selection;
-    indeterminate: typeof $indeterminateStore;
-    original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
-  }) => {
-    // no-op by default
-  };
 
   async function applyChange() {
     applying = true;
@@ -84,11 +35,103 @@
     onChange();
   }
 
-  export let searchText = '';
-  let applying = false;
+  interface Props {
+    options: MenuOption<TValue>[];
+    value?: TValue[];
+    indeterminateSelected?: typeof value;
+    duration?: number;
+    inlineSearch?: boolean;
+    autoFocusSearch?: boolean;
+    placeholder?: string;
+    optionProps?: Partial<ComponentProps<typeof MultiSelectOption>>;
+    /** Wrap options in `InfiniteScroll` to amortize rendering of a large number of options */
+    infiniteScroll?: boolean;
+    /** Maximum number of options that can be selected  */
+    max?: number;
+    /** When enabled, will not separate selected from unselected options */
+    maintainOrder?: boolean;
+    /** Determine if changes should be applied immediately or via actions */
+    mode?: 'actions' | 'immediate';
+    cancelButtonProps?: ComponentProps<typeof Button>;
+    applyButtonProps?: ComponentProps<typeof Button>;
+    classes?: {
+      root?: string;
+      search?: string;
+      options?: string;
+      actions?: string;
+    };
+    class?: string;
+    onApply?: any;
+    searchText?: string;
+    onCancel: () => void;
+    onChange: ({
+      value,
+      selection,
+      indeterminate,
+      original,
+    }: {
+      value: TValue[];
+      selection: typeof $selection;
+      indeterminate: typeof $indeterminateStore;
+      original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
+    }) => void;
+    beforeOptions?: Snippet<[{ selection: typeof $selection }]>;
+    option?: Snippet<
+      [
+        {
+          option: MenuOption<TValue>;
+          label: string;
+          value: TValue;
+          checked: boolean;
+          indeterminate: boolean;
+          disabled: boolean;
+          onChange: () => void;
+        },
+      ]
+    >;
+    afterOptions?: Snippet<[{ selection: typeof $selection }]>;
+    actions?: Snippet<[{ selection: typeof $selection; searchText: string }]>;
+  }
+
+  let {
+    options,
+    value = [],
+    indeterminateSelected = [],
+    duration = 200,
+    inlineSearch = false,
+    autoFocusSearch = false,
+    placeholder = 'Search items',
+    optionProps,
+    infiniteScroll = false,
+    max,
+    maintainOrder = false,
+    mode = 'actions',
+    cancelButtonProps,
+    applyButtonProps,
+    classes = {},
+    class: className,
+    onApply = async (ctx: {
+      value: typeof value;
+      selection: typeof $selection;
+      indeterminate: typeof $indeterminateStore;
+      original: { selected: MenuOption<TValue>[]; unselected: MenuOption<TValue>[] };
+    }) => {
+      // no-op by default
+    },
+    searchText = $bindable(''),
+    onCancel,
+    onChange: _onChange,
+    beforeOptions,
+    option,
+    afterOptions,
+    actions,
+  }: Props = $props();
+  let applying = $state(false);
 
   // Partition options based on if they initially selected, which will be displayed at the top
-  $: [selectedOptions, unselectedOptions] = partition(options, (o) => value.includes(o.value));
+  let [selectedOptions, unselectedOptions] = $derived(
+    partition(options, (o) => value.includes(o.value))
+  );
 
   // Filter by search text
   function applyFilter(option: MenuOption<TValue>, searchText: string) {
@@ -99,22 +142,28 @@
       return true;
     }
   }
-  $: filteredOptions = options.filter((x) => applyFilter(x, searchText));
-  $: filteredSelectedOptions = selectedOptions.filter((x) => applyFilter(x, searchText));
-  $: filteredUnselectedOptions = unselectedOptions.filter((x) => applyFilter(x, searchText));
+  let filteredOptions = $derived(options.filter((x) => applyFilter(x, searchText)));
+  let filteredSelectedOptions = $derived(selectedOptions.filter((x) => applyFilter(x, searchText)));
+  let filteredUnselectedOptions = $derived(
+    unselectedOptions.filter((x) => applyFilter(x, searchText))
+  );
 
   const selection = selectionStore({ max });
   // Only "subscribe" to value changes (not `$selection`) to fix correct `value` / topological ordering.  Should be simplified with Svelte 5
-  $: get(selection).setSelected(value);
+  $effect(() => {
+    get(selection).setSelected(value);
+  });
 
   // Immediately apply only if changed
   const changed = changeStore(selection);
-  $: if (mode === 'immediate' && !isEqual($selection.selected, $changed.previous?.selected)) {
-    applyChange();
-  }
+  $effect(() => {
+    if (mode === 'immediate' && !isEqual($selection.selected, $changed.previous?.selected)) {
+      applyChange();
+    }
+  });
 
-  $: isSelectionDirty = dirtyStore(selection);
-  $: indeterminateStore = uniqueStore(indeterminateSelected);
+  let isSelectionDirty = $derived(dirtyStore(selection));
+  let indeterminateStore = $derived(uniqueStore(indeterminateSelected));
 
   function onChange() {
     const changeContext = {
@@ -123,7 +172,7 @@
       indeterminate: $indeterminateStore,
       original: { selected: selectedOptions, unselected: unselectedOptions },
     };
-    dispatch('change', changeContext);
+    _onChange?.(changeContext);
     searchText = '';
     // Store will be recreated when `selectedOptions` is updated, but just in case
     // `setTimeout` is used to delay the disabling the Apply button 1 event loop, otherwise if `type="submit" will not react the `<form on:submit>` - https://svelte.dev/repl/0875574693e14fa9a4348075b1788d0a?version=3.58.0
@@ -164,80 +213,22 @@
     classes.options,
     settingsClasses.root,
     classes.root,
-    $$restProps.class
+    className
   )}
   role="listbox"
   aria-multiselectable="true"
 >
-  <slot name="beforeOptions" selection={$selection} />
+  {@render beforeOptions?.({ selection: $selection })}
 
   <!-- all options or initially selected options based on `maintainOrder` -->
   <InfiniteScroll
     items={maintainOrder ? filteredOptions : filteredSelectedOptions}
     disabled={!infiniteScroll}
-    let:visibleItems
   >
-    {#each visibleItems as option (option.value)}
-      {@const label = option.label}
-      {@const value = option.value}
-      {@const checked = $selection.isSelected(value)}
-      {@const indeterminate = $indeterminateStore.has(value)}
-      {@const disabled = $selection.isDisabled(value)}
-      {@const onChange = () => {
-        // TODO: Try to figure out how to keep underling Checkbox controlled so state goes `indeterminate` => `checked` => `unchecked`
-        // If partial/indeterminate, transition to fully selected, then deselect/select as usual
-        // if ($indeterminateStore.has(value)) {
-        //   indeterminateStore.delete(value);
-        // } else {
-        //   $selection.toggleSelected(value);
-        // }
-
-        // Clear indeterminate status and toggle `unchecked` (and will proceed to toggle `checked` => `unchecked` => etc)
-        indeterminateStore.delete(value);
-        $selection.toggleSelected(value);
-      }}
-      <div animate:flip={{ duration }}>
-        <slot
-          name="option"
-          {option}
-          {label}
-          {value}
-          {checked}
-          {indeterminate}
-          {disabled}
-          {onChange}
-        >
-          <MultiSelectOption
-            {checked}
-            {indeterminate}
-            {disabled}
-            {...optionProps}
-            on:change={onChange}
-          >
-            {label}
-          </MultiSelectOption>
-        </slot>
-      </div>
-    {:else}
-      {#if maintainOrder && !filteredOptions.length}
-        <div class="text-surface-content/50 text-xs py-2 px-4 mb-1">
-          There are no matching items.
-        </div>
-      {/if}
-    {/each}
-  </InfiniteScroll>
-
-  {#if !maintainOrder}
-    {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
-      <!-- separator between selected and deselected -->
-      <div class="border-b my-1 border-surface-content/10"></div>
-    {/if}
-
-    <!-- initially unselected options -->
-    <InfiniteScroll items={filteredUnselectedOptions} disabled={!infiniteScroll} let:visibleItems>
-      {#each visibleItems as option (option.value)}
-        {@const label = option.label}
-        {@const value = option.value}
+    {#snippet children({ visibleItems })}
+      {#each visibleItems as visibleItem (visibleItem.value)}
+        {@const label = visibleItem.label}
+        {@const value = visibleItem.value}
         {@const checked = $selection.isSelected(value)}
         {@const indeterminate = $indeterminateStore.has(value)}
         {@const disabled = $selection.isDisabled(value)}
@@ -255,38 +246,89 @@
           $selection.toggleSelected(value);
         }}
         <div animate:flip={{ duration }}>
-          <slot
-            name="option"
-            {option}
-            {label}
-            {value}
-            {checked}
-            {indeterminate}
-            {disabled}
-            {onChange}
-          >
-            <MultiSelectOption
-              {checked}
-              {indeterminate}
-              {disabled}
-              {...optionProps}
-              on:change={onChange}
-            >
+          {#if option}
+            {@render option({
+              option: visibleItem,
+              label,
+              value,
+              checked,
+              indeterminate,
+              disabled,
+              onChange,
+            })}
+          {:else}
+            <MultiSelectOption {checked} {indeterminate} {disabled} {...optionProps} {onChange}>
               {label}
             </MultiSelectOption>
-          </slot>
+          {/if}
         </div>
       {:else}
-        {#if !filteredSelectedOptions.length}
+        {#if maintainOrder && !filteredOptions.length}
           <div class="text-surface-content/50 text-xs py-2 px-4 mb-1">
             There are no matching items.
           </div>
         {/if}
       {/each}
+    {/snippet}
+  </InfiniteScroll>
+
+  {#if !maintainOrder}
+    {#if filteredSelectedOptions.length && filteredUnselectedOptions.length}
+      <!-- separator between selected and deselected -->
+      <div class="border-b my-1 border-surface-content/10"></div>
+    {/if}
+
+    <!-- initially unselected options -->
+    <InfiniteScroll items={filteredUnselectedOptions} disabled={!infiniteScroll}>
+      {#snippet children({ visibleItems })}
+        {#each visibleItems as visibleItem (visibleItem.value)}
+          {@const label = visibleItem.label}
+          {@const value = visibleItem.value}
+          {@const checked = $selection.isSelected(value)}
+          {@const indeterminate = $indeterminateStore.has(value)}
+          {@const disabled = $selection.isDisabled(value)}
+          {@const onChange = () => {
+            // TODO: Try to figure out how to keep underling Checkbox controlled so state goes `indeterminate` => `checked` => `unchecked`
+            // If partial/indeterminate, transition to fully selected, then deselect/select as usual
+            // if ($indeterminateStore.has(value)) {
+            //   indeterminateStore.delete(value);
+            // } else {
+            //   $selection.toggleSelected(value);
+            // }
+
+            // Clear indeterminate status and toggle `unchecked` (and will proceed to toggle `checked` => `unchecked` => etc)
+            indeterminateStore.delete(value);
+            $selection.toggleSelected(value);
+          }}
+          <div animate:flip={{ duration }}>
+            {#if option}
+              {@render option({
+                option: visibleItem,
+                label,
+                value,
+                checked,
+                indeterminate,
+                disabled,
+                onChange,
+              })}
+            {:else}
+              <MultiSelectOption {checked} {indeterminate} {disabled} {...optionProps} {onChange}>
+                {label}
+              </MultiSelectOption>
+            {/if}
+          </div>
+        {:else}
+          {#if !filteredSelectedOptions.length}
+            <div class="text-surface-content/50 text-xs py-2 px-4 mb-1">
+              There are no matching items.
+            </div>
+          {/if}
+        {/each}
+      {/snippet}
     </InfiniteScroll>
   {/if}
 
-  <slot name="afterOptions" selection={$selection} />
+  {@render afterOptions?.({ selection: $selection })}
 </div>
 
 <div
@@ -298,16 +340,16 @@
     classes.actions
   )}
 >
-  <slot name="actions" selection={$selection} {searchText} />
+  {@render actions?.({ selection: $selection, searchText })}
 
   {#if mode === 'actions'}
     <div>
       <Button
         class="px-6"
         disabled={applying}
-        on:click={() => {
+        onclick={() => {
           $selection.reset();
-          dispatch('cancel');
+          onCancel?.();
         }}
         {...cancelButtonProps}
       >
@@ -320,7 +362,7 @@
         class="px-6"
         loading={applying}
         disabled={!$isSelectionDirty || applying}
-        on:click={() => applyChange()}
+        onclick={() => applyChange()}
         {...applyButtonProps}
       >
         Apply

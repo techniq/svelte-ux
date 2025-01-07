@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { mdiCheck, mdiMinus } from '@mdi/js';
 
   import Icon from './Icon.svelte';
@@ -6,31 +7,49 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let id = uniqueId('checkbox-');
-  export let name = '';
-  export let value: any = undefined;
-  export let checked = false;
-  export let group: any[] | null = null;
-  export let indeterminate = false;
-  export let required = false;
-  export let disabled = false;
-  export let fullWidth = false;
-  export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
-  export let circle = false;
+  interface Props {
+    id?: any;
+    name?: string;
+    value?: any;
+    checked?: boolean;
+    group?: any[] | null;
+    indeterminate?: boolean;
+    required?: boolean;
+    disabled?: boolean;
+    fullWidth?: boolean;
+    size?: 'xs' | 'sm' | 'md' | 'lg';
+    circle?: boolean;
+    classes?: {
+      root?: string;
+      input?: string;
+      checkbox?: string;
+      label?: string;
+      icon?: string;
+    };
+    class?: string;
+    onChange?: () => void;
+    children?: Snippet;
+  }
 
-  export let classes: {
-    root?: string;
-    input?: string;
-    checkbox?: string;
-    label?: string;
-    icon?: string;
-  } = {};
+  let {
+    id = uniqueId('checkbox-'),
+    name = '',
+    value = undefined,
+    checked = $bindable(false),
+    group = $bindable(null),
+    indeterminate = $bindable(false),
+    required = false,
+    disabled = false,
+    fullWidth = false,
+    size = 'sm',
+    circle = false,
+    classes = {},
+    class: className,
+    onChange: _onChange,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Checkbox');
 
-  // Update when group changes.  Separate function to break reactivity loop
-  $: if (group !== null) {
-    groupCheck();
-  }
   function groupCheck() {
     checked = group?.includes(value) ?? false;
   }
@@ -48,6 +67,12 @@
       }
     }
   }
+  // Update when group changes.  Separate function to break reactivity loop
+  $effect(() => {
+    if (group !== null) {
+      groupCheck();
+    }
+  });
 </script>
 
 <div
@@ -57,7 +82,7 @@
     'items-center',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <input
@@ -65,8 +90,10 @@
     {name}
     type="checkbox"
     bind:checked
-    on:change={onChange}
-    on:change
+    onchange={() => {
+      onChange();
+      _onChange?.();
+    }}
     {value}
     class={cls('input', 'peer appearance-none absolute', settingsClasses.input, classes.input)}
     {required}
@@ -109,7 +136,7 @@
     />
   </label>
 
-  {#if $$slots.default}
+  {#if children}
     <label
       for={id}
       class={cls(
@@ -126,7 +153,7 @@
         classes.label
       )}
     >
-      <slot />
+      {@render children?.()}
     </label>
   {/if}
 </div>

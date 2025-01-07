@@ -4,20 +4,32 @@
   import Icon from './Icon.svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import type { SvelteHTMLElements } from 'svelte/elements';
+  import type { Snippet } from 'svelte';
 
-  export let items: TItem[] = [];
-  export let divider: string | undefined = undefined;
-  export let inline = false;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    items?: TItem[];
+    divider?: string | Snippet;
+    inline?: boolean;
+    item?: Snippet<[{ item: TItem }]>;
+  }
+
+  let {
+    items = [],
+    divider,
+    inline = false,
+    class: className,
+    item,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements['div'], keyof Props> = $props();
 
   const settingsClasses = getComponentClasses('Breadcrumb');
 
-  $: displayItems = items?.filter((x) => x != null) ?? [];
+  let displayItems = $derived(items?.filter((x) => x != null) ?? []);
 </script>
 
 <div
-  {...$$restProps}
+  {...restProps}
   class={cls(
     'Breadcrumb',
     inline ? 'inline-flex' : 'flex',
@@ -26,19 +38,21 @@
     className
   )}
 >
-  {#each displayItems as item, index}
-    <slot name="item" {item}>
-      <div class="item">{item}</div>
-    </slot>
+  {#each displayItems as displayItem, index}
+    {#if item}
+      {@render item({ item: displayItem })}
+    {:else}
+      <div class="item">{displayItem}</div>
+    {/if}
 
     {#if index < displayItems.length - 1}
-      <slot name="divider">
-        {#if divider}
-          <div class="divider opacity-25">{divider}</div>
-        {:else}
-          <Icon data={mdiChevronRight} class="divider opacity-25" />
-        {/if}
-      </slot>
+      {#if typeof divider === 'function'}
+        {@render divider()}
+      {:else if divider}
+        <div class="divider opacity-25">{divider}</div>
+      {:else}
+        <Icon data={mdiChevronRight} class="divider opacity-25" />
+      {/if}
     {/if}
   {/each}
 </div>

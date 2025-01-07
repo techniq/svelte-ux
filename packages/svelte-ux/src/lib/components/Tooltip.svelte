@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
   let lastShown: Date | null = null;
 </script>
 
@@ -9,31 +9,49 @@
   import Popover from './Popover.svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import type { ComponentProps, Snippet } from 'svelte';
 
-  export let title = '';
-  export let open = false;
-  export let offset: OffsetOptions = 0;
-  export let delay = 500;
-  export let underline = false;
-  export let cursor = false;
-  export let enabled = true;
+  interface Props {
+    title?: string | Snippet;
+    open?: boolean;
+    offset?: OffsetOptions;
+    delay?: number;
+    underline?: boolean;
+    cursor?: boolean;
+    enabled?: boolean;
+    // Popover props
+    placement?: Placement;
+    autoPlacement?: boolean;
+    matchWidth?: boolean;
+    classes?: {
+      root?: string;
+      popover?: string;
+      title?: string;
+      content?: string;
+    };
+    children?: Snippet;
+  }
 
-  // Popover props
-  export let placement: Placement = 'bottom';
-  export let autoPlacement = false;
-  export let matchWidth: boolean = false;
+  let {
+    title = '',
+    open = $bindable(false),
+    offset = 0,
+    delay = 500,
+    underline = false,
+    cursor = false,
+    enabled = true,
+    placement = 'bottom',
+    autoPlacement = false,
+    matchWidth = false,
+    classes = {},
+    class: className,
+    children,
+    ...restProps
+  }: Props & Omit<ComponentProps<typeof Popover>, keyof Props> = $props();
 
-  export let classes: {
-    root?: string;
-    popover?: string;
-    title?: string;
-    content?: string;
-  } = {};
   const settingsClasses = getComponentClasses('Tooltip');
 
-  $: hasTitle = title || $$slots.title;
-
-  let containerEl: HTMLDivElement;
+  let containerEl = $state() as HTMLDivElement;
 
   let timeoutId: ReturnType<typeof setTimeout>;
 
@@ -74,7 +92,7 @@
   }
 </script>
 
-{#if enabled && (title || $$slots.title)}
+{#if enabled && title}
   <Popover
     anchorEl={containerEl?.firstElementChild ?? undefined}
     {placement}
@@ -83,9 +101,11 @@
     {matchWidth}
     {open}
     class={cls('Tooltip pointer-events-none', settingsClasses.popover, classes.popover)}
-    {...$$restProps}
+    {...restProps}
   >
-    <slot name="title">
+    {#if typeof title === 'function'}
+      {@render title()}
+    {:else}
       <div
         class={cls(
           'text-xs text-surface-100 bg-surface-content px-2 py-1 rounded whitespace-nowrap',
@@ -100,34 +120,34 @@
       >
         {title}
       </div>
-    </slot>
+    {/if}
   </Popover>
 {/if}
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class={cls('contents', settingsClasses.content, classes.content)}
-  on:mouseenter={showTooltip}
-  on:mouseleave={hideTooltip}
-  on:focusin={onFocusIn}
-  on:focusout={hideTooltip}
-  on:click={hideTooltip}
+  onmouseenter={showTooltip}
+  onmouseleave={hideTooltip}
+  onfocusin={onFocusIn}
+  onfocusout={hideTooltip}
+  onclick={hideTooltip}
   bind:this={containerEl}
 >
-  {#if $$props.class || underline || cursor}
+  {#if className || underline || cursor}
     <span
       class={cls(
-        hasTitle && underline && 'border-b border-dotted',
-        hasTitle && cursor && 'cursor-help',
+        title && underline && 'border-b border-dotted',
+        title && cursor && 'cursor-help',
         settingsClasses.root,
         classes.root,
-        $$props.class
+        className
       )}
     >
-      <slot />
+      {@render children?.()}
     </span>
   {:else}
-    <slot />
+    {@render children?.()}
   {/if}
 </div>

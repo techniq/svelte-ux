@@ -16,7 +16,7 @@
     }}
   >
     <Toggle let:on={open} let:toggle let:toggleOff>
-      <Button on:click={toggle} variant="outline" color="primary">
+      <Button onclick={toggle} variant="outline" color="primary">
         Click me
         <Menu {open} on:close={toggleOff}>
           <MenuItem>Refresh</MenuItem>

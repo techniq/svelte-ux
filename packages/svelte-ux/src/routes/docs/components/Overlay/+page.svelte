@@ -40,14 +40,14 @@
     <div class="relative">
       {#if show}
         <Overlay center>
-          <Button on:click={toggle} class="border">Close Overlay</Button>
+          <Button onclick={toggle} class="border">Close Overlay</Button>
         </Overlay>
       {/if}
       <div>Some content</div>
       <div>Some content</div>
       <div>Some content</div>
       <div>Some content</div>
-      <Button on:click={toggle} class="border mt-4">Show Overlay</Button>
+      <Button onclick={toggle} class="border mt-4">Show Overlay</Button>
     </div>
   </Toggle>
 </Preview>

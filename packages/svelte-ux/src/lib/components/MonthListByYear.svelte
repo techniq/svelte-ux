@@ -6,33 +6,43 @@
 
   import { getMinSelectedDate, getMaxSelectedDate } from '../utils/date.js';
   import type { SelectedDate } from '../utils/date.js';
+  import type { ComponentProps } from 'svelte';
 
-  export let selected: SelectedDate | undefined = undefined;
-  export let minDate: Date | undefined = undefined;
-  export let maxDate: Date | undefined = undefined;
+  interface Props {
+    selected?: SelectedDate;
+    minDate?: Date;
+    maxDate?: Date;
+    onDateChange?: ComponentProps<typeof MonthList>['onDateChange'];
+  }
 
-  let minYear: number;
-  $: minYear =
-    minYear ??
-    (minDate
-      ? minDate.getFullYear()
-      : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
+  let { selected, minDate, maxDate, onDateChange }: Props = $props();
 
-  let maxYear: number;
-  $: maxYear =
-    maxYear ??
-    (maxDate
-      ? maxDate.getFullYear()
-      : addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+  let minYear = $state<number>();
+  $effect(() => {
+    minYear =
+      minYear ??
+      (minDate
+        ? minDate.getFullYear()
+        : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
+  });
 
-  $: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
+  let maxYear = $state<number>();
+  $effect(() => {
+    maxYear =
+      maxYear ??
+      (maxDate
+        ? maxDate.getFullYear()
+        : addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+  });
+
+  let years = $derived(Array.from({ length: maxYear! - minYear! + 1 }, (_, i) => minYear! + i));
 
   // TODO: Scroll into view not typically centered
-  $: selectedYear = (getMinSelectedDate(selected) || new Date()).getFullYear();
+  let selectedYear = $derived((getMinSelectedDate(selected) || new Date()).getFullYear());
 </script>
 
 <div class="grid divide-y">
-  <Button on:click={() => (minYear -= 10)}>More</Button>
+  <Button onclick={() => (minYear = minYear! - 10)}>More</Button>
 
   {#each years ?? [] as year (year)}
     <div class="grid grid-cols-[auto,1fr] items-center gap-2 p-2">
@@ -40,10 +50,10 @@
         {year}
       </div>
       <div class="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-y-4">
-        <MonthList {year} {selected} on:dateChange />
+        <MonthList {year} {selected} {onDateChange} />
       </div>
     </div>
   {/each}
 
-  <Button on:click={() => (maxYear += 10)}>More</Button>
+  <Button onclick={() => (maxYear = maxYear! + 10)}>More</Button>
 </div>

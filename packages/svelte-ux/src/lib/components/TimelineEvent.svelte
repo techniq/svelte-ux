@@ -1,38 +1,54 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
+  import type { ComponentProps, Snippet } from 'svelte';
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
   import { getTimeline } from './Timeline.svelte';
-  import { mdiCircle, mdiCircleMedium } from '@mdi/js';
+  import { mdiCircle } from '@mdi/js';
 
-  /** Value shown above (horizontal) or left (vertical).  If true, sets location of default slot */
-  export let start: string | number | boolean = false;
+  interface Props {
+    /** Value shown above (horizontal) or left (vertical).  If true, sets location of default slot */
+    start?: string | number | boolean | Snippet;
+    /** Value shown below (horizontal) or right (vertical).  If true, sets location of default slot */
+    end?: string | number | boolean | Snippet;
+    /** Icon to show on timeline */
+    icon?: ComponentProps<typeof Icon>['data'];
+    /** If completed, will color icon and line leading up to event */
+    completed?: boolean;
+    classes?: {
+      root?: string;
+      start?: string;
+      end?: string;
+      point?: string;
+      icon?: string;
+      line?: string;
+    };
+    class?: string;
+    children?: Snippet;
+    point?: Snippet;
+  }
 
-  /** Value shown below (horizontal) or right (vertical).  If true, sets location of default slot */
-  export let end: string | number | boolean = false;
-
-  /** Icon to show on timeline */
-  export let icon: ComponentProps<Icon>['data'] = undefined;
-
-  /** If completed, will color icon and line leading up to event */
-  export let completed = false;
-
-  export let classes: {
-    root?: string;
-    start?: string;
-    end?: string;
-    point?: string;
-    icon?: string;
-    line?: string;
-  } = {};
+  let {
+    start = false,
+    end = false,
+    icon = $bindable(),
+    completed = false,
+    classes = {},
+    class: className,
+    point,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('TimelineEvent');
 
   const timelineContext = getTimeline();
-  $: vertical = timelineContext?.vertical ?? false;
-  $: compact = timelineContext?.compact ?? false;
-  $: icon = icon ?? timelineContext?.icon ?? undefined;
-  $: snapPoint = timelineContext?.snapPoint ?? false;
+  let vertical = $derived(timelineContext?.vertical ?? false);
+  let compact = $derived(timelineContext?.compact ?? false);
+
+  $effect(() => {
+    icon = icon ?? timelineContext?.icon ?? undefined;
+  });
+
+  let snapPoint = $derived(timelineContext?.snapPoint ?? false);
 </script>
 
 <li
@@ -53,7 +69,7 @@
       'timelineevent-completed [&_hr:last-child]:has-[~li.timelineevent-completed]:bg-[--color-completed]',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <hr
@@ -70,7 +86,7 @@
     )}
   />
 
-  {#if start || $$slots.start}
+  {#if start}
     <div
       class={cls(
         'start',
@@ -86,16 +102,20 @@
         classes.start
       )}
     >
-      <slot>
-        <slot name="start">
-          {start}
-        </slot>
-      </slot>
+      {#if children}
+        {@render children()}
+      {:else if typeof start === 'function'}
+        {@render start()}
+      {:else}
+        {start}
+      {/if}
     </div>
   {/if}
 
   <div class={cls('point', 'col-start-2 row-start-2 grid', settingsClasses.point, classes.point)}>
-    <slot name="point">
+    {#if point}
+      {@render point()}
+    {:else}
       <Icon
         data={icon ?? mdiCircle}
         size={icon ? '1rem' : '.5rem'}
@@ -106,10 +126,10 @@
           classes.icon
         )}
       />
-    </slot>
+    {/if}
   </div>
 
-  {#if end || $$slots.end}
+  {#if end}
     <div
       class={cls(
         'end',
@@ -120,11 +140,13 @@
         classes.end
       )}
     >
-      <slot>
-        <slot name="end">
-          {end}
-        </slot>
-      </slot>
+      {#if children}
+        {@render children()}
+      {:else if typeof end === 'function'}
+        {@render end()}
+      {:else}
+        {end}
+      {/if}
     </div>
   {/if}
 

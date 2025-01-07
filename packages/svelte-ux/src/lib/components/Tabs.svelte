@@ -1,23 +1,35 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
+  import type { ComponentProps, Snippet } from 'svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import Tab from './Tab.svelte';
 
-  export let value: any = undefined;
-  export let placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
+  interface Props {
+    value?: any;
+    placement?: 'top' | 'bottom' | 'left' | 'right';
+    options?: { label: string; value: any }[];
+    classes?: {
+      root?: string;
+      tabs?: string;
+      tab?: ComponentProps<typeof Tab>['classes'];
+      content?: string;
+    };
+    class?: string;
+    children?: Snippet;
+    content?: Snippet<[{ value: any }]>;
+  }
 
-  $: vertical = placement === 'left' || placement === 'right';
-
-  export let options: { label: string; value: any }[] = [];
-
-  export let classes: {
-    root?: string;
-    tabs?: string;
-    tab?: ComponentProps<Tab>['classes'];
-    content?: string;
-  } = {};
+  let {
+    value = $bindable(),
+    placement = 'top',
+    options = [],
+    classes = {},
+    class: className,
+    children,
+    content,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Tabs');
+  let vertical = $derived(placement === 'left' || placement === 'right');
 </script>
 
 <div
@@ -33,7 +45,7 @@
     }[placement],
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <div
@@ -50,18 +62,20 @@
       classes.tabs
     )}
   >
-    <slot>
+    {#if children}
+      {@render children()}
+    {:else}
       {#each options as tab (tab.value)}
         <Tab
           {placement}
           selected={value === tab.value}
-          on:click={() => (value = tab.value)}
+          onclick={() => (value = tab.value)}
           classes={{ ...settingsClasses.tab, ...classes.tab }}
         >
           {tab.label}
         </Tab>
       {/each}
-    </slot>
+    {/if}
   </div>
 
   <div
@@ -77,6 +91,6 @@
       classes.content
     )}
   >
-    <slot name="content" {value} />
+    {@render content?.({ value })}
   </div>
 </div>

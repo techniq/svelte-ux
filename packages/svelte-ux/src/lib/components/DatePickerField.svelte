@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
   import { mdiCalendar, mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
@@ -14,66 +13,96 @@
   } from '../utils/date.js';
   import DateSelect from './DateSelect.svelte';
   import { getComponentSettings, getSettings } from './settings.js';
+  import type { ComponentProps } from 'svelte';
+  import type { LabelPlacement } from '$lib/types/index.js';
 
-  const dispatch = createEventDispatcher();
-  const { classes: settingsClasses, defaults } = getComponentSettings('DatePickerField');
+  const { defaults } = getComponentSettings('DatePickerField');
 
-  export let name = '';
-  export let value: Date | null = null;
-  export let periodType: PeriodType = PeriodType.Day;
-  export let iconOnly: boolean = false;
-  export let stepper: boolean = false;
+  interface Props {
+    name?: string;
+    value?: Date | null;
+    periodType?: PeriodType;
+    iconOnly?: boolean;
+    stepper?: boolean;
+    // Field props
+    label?: string | null;
+    labelPlacement?: LabelPlacement;
+    error?: string;
+    hint?: string;
+    disabled?: boolean;
+    clearable?: boolean;
+    base?: boolean;
+    rounded?: boolean;
+    dense?: boolean;
+    icon?: string | null;
+    center?: boolean;
+    /**
+     * Dates to disable (not selectable)
+     */
+    disabledDates?: DisabledDate;
+    onChange?: (value?: Date | null) => void;
+    onClear?: () => void;
+  }
 
-  // Field props
-  export let label: string | null = null;
-  export let labelPlacement = defaults.labelPlacement;
-  // export let value = '';
-  export let error = '';
-  export let hint = '';
-  export let disabled = false;
-  export let clearable = false;
-  export let base = false;
-  export let rounded = false;
-  export let dense = false;
-  export let icon: string | null = null;
-  export let center = false;
-
-  /**
-   * Dates to disable (not selectable)
-   */
-  export let disabledDates: DisabledDate | undefined = undefined;
+  let {
+    name = '',
+    value = $bindable(),
+    periodType = PeriodType.Day,
+    iconOnly = false,
+    stepper = false,
+    label,
+    labelPlacement = defaults.labelPlacement,
+    error = '',
+    hint = '',
+    disabled = false,
+    clearable = false,
+    base = false,
+    rounded = false,
+    dense = false,
+    icon,
+    center = false,
+    disabledDates,
+    onChange,
+    onClear,
+    ...restProps
+  }: Props & Omit<ComponentProps<typeof Button>, keyof Props> = $props();
 
   const { format, localeSettings } = getSettings();
-  $: dictionary = $format.settings.dictionary;
+  let dictionary = $derived($format.settings.dictionary);
 
-  let open: boolean = false;
+  let open: boolean = $state(false);
 
   // let format: string = 'EEE, MMM d';
   // Show "Day of Week", "Year", etc based on perioType (see DayStepper, MonthStepper)
-  let primaryFormat: string | string[] = '';
-  let secondaryFormat: string | string[] = '';
+  let primaryFormat: string | string[] = $state('');
+  let secondaryFormat: string | string[] = $state('');
 
-  $: switch (periodType) {
-    case PeriodType.Month:
-      primaryFormat = DateToken.Month_long;
-      secondaryFormat = DateToken.Year_numeric;
-      break;
-    case PeriodType.Day:
-    default:
-      primaryFormat = [
-        DateToken.Month_long,
-        DateToken.DayOfMonth_withOrdinal,
-        DateToken.Year_numeric,
-      ];
+  $effect(() => {
+    switch (periodType) {
+      case PeriodType.Month:
+        primaryFormat = DateToken.Month_long;
+        secondaryFormat = DateToken.Year_numeric;
+        break;
+      case PeriodType.Day:
+      default:
+        primaryFormat = [
+          DateToken.Month_long,
+          DateToken.DayOfMonth_withOrdinal,
+          DateToken.Year_numeric,
+        ];
 
-      secondaryFormat = DateToken.DayOfWeek_long;
-  }
+        secondaryFormat = DateToken.DayOfWeek_long;
+    }
+  });
 
-  $: currentValue = value;
+  let currentValue = $state<Date | null>();
+  $effect(() => {
+    currentValue = value;
+  });
 </script>
 
 {#if iconOnly}
-  <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
+  <Button icon={mdiCalendar} onclick={() => (open = true)} {...restProps} />
 {:else}
   <Field
     label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat })}
@@ -86,63 +115,67 @@
     {rounded}
     {dense}
     {center}
-    let:id
   >
-    <span slot="prepend">
-      <input type="hidden" {name} {value} />
+    {#snippet prepend()}
+      <span>
+        <input type="hidden" {name} {value} />
 
-      {#if stepper}
-        <Button
-          icon={mdiChevronLeft}
-          class="p-2"
-          on:click={() => {
-            if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
-              value = add(value, -1);
-              dispatch('change', value);
-            }
-          }}
-        />
-      {/if}
-    </span>
+        {#if stepper}
+          <Button
+            icon={mdiChevronLeft}
+            class="p-2"
+            onclick={() => {
+              if (value && periodType) {
+                const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
+                value = add(value, -1);
+                onChange?.(value);
+              }
+            }}
+          />
+        {/if}
+      </span>
+    {/snippet}
 
-    <button
-      type="button"
-      class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-none"
-      style="text-align: inherit"
-      on:click={() => (open = true)}
-      {id}
-    >
-      {$format(value, PeriodType.Day, { custom: primaryFormat })}
-    </button>
+    {#snippet children({ id })}
+      <button
+        type="button"
+        class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-none"
+        style="text-align: inherit"
+        onclick={() => (open = true)}
+        {id}
+      >
+        {$format(value, PeriodType.Day, { custom: primaryFormat })}
+      </button>
+    {/snippet}
+    {#snippet append()}
+      <div>
+        {#if clearable && value}
+          <Button
+            icon={mdiClose}
+            class="text-surface-content/50 p-1"
+            onclick={() => {
+              value = null;
+              onClear?.();
+              onChange?.(value);
+            }}
+          />
+        {/if}
 
-    <div slot="append">
-      {#if clearable && value}
-        <Button
-          icon={mdiClose}
-          class="text-surface-content/50 p-1"
-          on:click={() => {
-            value = null;
-            dispatch('clear');
-            dispatch('change', value);
-          }}
-        />
-      {/if}
-
-      {#if stepper}
-        <Button
-          icon={mdiChevronRight}
-          class="p-2"
-          on:click={() => {
-            if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
-              value = add(value, 1);
-              dispatch('change', value);
-            }
-          }}
-        />
-      {/if}
-    </div>
+        {#if stepper}
+          <Button
+            icon={mdiChevronRight}
+            class="p-2"
+            onclick={() => {
+              if (value && periodType) {
+                const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
+                value = add(value, 1);
+                onChange?.(value);
+              }
+            }}
+          />
+        {/if}
+      </div>
+    {/snippet}
   </Field>
 {/if}
 
@@ -170,22 +203,24 @@
     />
   </div>
 
-  <div slot="actions" class="flex items-center gap-2">
-    <Button
-      icon={mdiCheck}
-      on:click={() => {
-        open = false;
-        value = currentValue;
-        dispatch('change', value);
-      }}
-      variant="fill"
-      color="primary">{dictionary.Ok}</Button
-    >
-    <Button
-      on:click={() => {
-        open = false;
-        currentValue = value;
-      }}>{dictionary.Cancel}</Button
-    >
-  </div>
+  {#snippet actions()}
+    <div class="flex items-center gap-2">
+      <Button
+        icon={mdiCheck}
+        onclick={() => {
+          open = false;
+          value = currentValue;
+          onChange?.(value);
+        }}
+        variant="fill"
+        color="primary">{dictionary.Ok}</Button
+      >
+      <Button
+        onclick={() => {
+          open = false;
+          currentValue = value;
+        }}>{dictionary.Cancel}</Button
+      >
+    </div>
+  {/snippet}
 </Dialog>

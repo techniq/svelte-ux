@@ -1,5 +1,5 @@
 <script lang="ts" generics="TValue">
-  import type { ComponentProps } from 'svelte';
+  import type { ComponentProps, Snippet } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
   import Menu from './Menu.svelte';
@@ -9,107 +9,146 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  type MultiSelectProps = ComponentProps<MultiSelect<TValue>>;
+  type MultiSelectProps = ComponentProps<typeof MultiSelect<TValue>>;
 
-  export let options: MultiSelectProps['options'];
-  export let value: MultiSelectProps['value'];
-  export let mode: MultiSelectProps['mode'] | undefined = undefined;
-  export let maintainOrder: MultiSelectProps['maintainOrder'] | undefined = undefined;
-  export let indeterminateSelected: typeof value = [];
-  export let open = false;
-  export let duration = 200;
-  export let placement: Placement = 'bottom-start';
-  export let autoPlacement = true;
-  export let inlineSearch = false;
-  export let autoFocusSearch = inlineSearch;
-  export let placeholder: string | undefined = undefined;
-  export let infiniteScroll = false;
-  export let searchText = '';
-  /** Maximum number of options that can be selected  */
-  export let max: number | undefined = undefined;
-  export let optionProps: Partial<ComponentProps<MultiSelectOption>> | undefined = undefined;
-
-  export let classes: {
-    root?: string;
-    menu?: string;
-    multiSelect?: MultiSelectProps['classes'];
-  } = {};
   const settingsClasses = getComponentClasses('MultiSelectMenu');
 
-  export let menuItemsEl: HTMLMenuElement | undefined = undefined;
+  interface Props {
+    options: MultiSelectProps['options'];
+    value: MultiSelectProps['value'];
+    mode?: MultiSelectProps['mode'];
+    maintainOrder?: MultiSelectProps['maintainOrder'];
+    indeterminateSelected?: typeof value;
+    open?: boolean;
+    duration?: number;
+    placement?: Placement;
+    autoPlacement?: boolean;
+    inlineSearch?: boolean;
+    autoFocusSearch?: boolean;
+    placeholder?: string;
+    infiniteScroll?: boolean;
+    searchText?: string;
+    /** Maximum number of options that can be selected  */
+    max?: number;
+    optionProps?: Partial<ComponentProps<typeof MultiSelectOption>>;
+    classes?: {
+      root?: string;
+      menu?: string;
+      multiSelect?: MultiSelectProps['classes'];
+    };
+    menuItemsEl?: HTMLMenuElement;
+    // Passthrough onApply event
+    onApply?: MultiSelectProps['onApply'];
+    onChange?: MultiSelectProps['onChange'];
+    onCancel?: MultiSelectProps['onCancel'];
+    beforeOptions?: MultiSelectProps["beforeOptions"];
+    afterOptions?: MultiSelectProps["afterOptions"];
+    option?: MultiSelectProps["option"];
+    actions?: MultiSelectProps["actions"];
+  }
 
-  // Passthrough onApply event
-  export let onApply: MultiSelectProps['onApply'] | undefined = undefined;
+  let {
+    options,
+    value,
+    mode,
+    maintainOrder,
+    indeterminateSelected = [],
+    open = $bindable(false),
+    duration = 200,
+    placement = 'bottom-start',
+    autoPlacement = true,
+    inlineSearch = false,
+    autoFocusSearch = inlineSearch,
+    placeholder,
+    infiniteScroll = false,
+    searchText = '',
+    max,
+    optionProps,
+    classes = {},
+    class: className,
+    menuItemsEl = $bindable(),
+    onApply,
+    onCancel,
+    onChange,
+    beforeOptions: beforeOptionsRender,
+    afterOptions: afterOptionsRender,
+    option: optionRender,
+    actions: actionsRender,
+    ...restProps
+  }: Props & Omit<ComponentProps<typeof Menu>, keyof Props> = $props();
 </script>
 
 <Menu
   bind:open
-  on:close
   explicitClose
   {placement}
   {autoPlacement}
-  let:close
-  {...$$restProps}
+  {...restProps}
   classes={{
-    root: cls('MultiSelectMenu', settingsClasses.root, classes.root, $$restProps.class),
+    root: cls('MultiSelectMenu', settingsClasses.root, classes.root, className),
     menu: cls('flex flex-col', settingsClasses.menu, classes.menu),
   }}
   bind:menuItemsEl
 >
-  <MultiSelect
-    {options}
-    {value}
-    {mode}
-    {maintainOrder}
-    {indeterminateSelected}
-    {max}
-    {open}
-    {duration}
-    {inlineSearch}
-    {autoFocusSearch}
-    {placeholder}
-    {infiniteScroll}
-    {searchText}
-    {onApply}
-    classes={{
-      search: 'p-2',
-      options: 'px-2',
-      actions: 'p-2',
-      ...settingsClasses.multiSelect,
-      ...classes.multiSelect,
-    }}
-    on:cancel={() => mode !== 'immediate' && close()}
-    on:cancel
-    on:change={() => mode !== 'immediate' && close()}
-    on:change
-  >
-    <slot name="beforeOptions" slot="beforeOptions" let:selection {selection} />
-    <slot name="afterOptions" slot="afterOptions" let:selection {selection} />
-
-    <!-- TODO: If only `<slot name="option" slot="option" />` just worked  -->
-    <svelte:fragment
-      slot="option"
-      let:option
-      let:label
-      let:value
-      let:checked
-      let:indeterminate
-      let:disabled
-      let:onChange
+  {#snippet children({ close })}
+    <MultiSelect
+      {options}
+      {value}
+      {mode}
+      {maintainOrder}
+      {indeterminateSelected}
+      {max}
+      {duration}
+      {inlineSearch}
+      {autoFocusSearch}
+      {placeholder}
+      {infiniteScroll}
+      {searchText}
+      {onApply}
+      classes={{
+        search: 'p-2',
+        options: 'px-2',
+        actions: 'p-2',
+        ...settingsClasses.multiSelect,
+        ...classes.multiSelect,
+      }}
+      onCancel={() => {
+        mode !== 'immediate' && close();
+        onCancel?.();
+      }}
+      onChange={(value) => {
+        mode !== 'immediate' && close();
+        onChange?.(value);
+      }}
     >
-      <slot name="option" {option} {label} {value} {checked} {indeterminate} {disabled} {onChange}>
-        <MultiSelectOption
-          {checked}
-          {indeterminate}
-          {disabled}
-          {...optionProps}
-          on:change={onChange}
-        >
-          {label}
-        </MultiSelectOption>
-      </slot>
-    </svelte:fragment>
+      {#snippet beforeOptions({ selection })}
+        {@render beforeOptionsRender?.({ selection })}
+      {/snippet}
+      {#snippet afterOptions({ selection })}
+        {@render afterOptionsRender?.({ selection })}
+      {/snippet}
 
-    <slot name="actions" slot="actions" let:selection {selection} />
-  </MultiSelect>
+      {#snippet option({ option, label, value, checked, indeterminate, disabled, onChange })}
+        {#if optionRender}
+          {@render optionRender({
+            option,
+            label,
+            value,
+            checked,
+            indeterminate,
+            disabled,
+            onChange,
+          })}
+        {:else}
+          <MultiSelectOption {checked} {indeterminate} {disabled} {...optionProps} {onChange}>
+            {label}
+          </MultiSelectOption>
+        {/if}
+      {/snippet}
+
+      {#snippet actions({ selection, searchText })}
+        {@render actionsRender?.({ selection, searchText })}
+      {/snippet}
+    </MultiSelect>
+  {/snippet}
 </Menu>

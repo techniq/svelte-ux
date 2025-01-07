@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
 
   import Checkbox from './Checkbox.svelte';
   import { cls } from '../utils/styles.js';
@@ -7,19 +7,34 @@
   import Button from './Button.svelte';
   import { mdiCheck } from '@mdi/js';
 
-  export let checked: boolean;
-  export let indeterminate = false;
-  export let disabled = false;
-  export let variant: 'checkbox' | 'checkmark' | 'fill' = 'checkbox';
+  interface Props {
+    checked: boolean;
+    indeterminate?: boolean;
+    disabled?: boolean;
+    variant?: 'checkbox' | 'checkmark' | 'fill';
+    classes?: {
+      root?: string;
+      checkbox?: ComponentProps<typeof Checkbox>['classes'];
+      container?: string;
+    };
+    class?: string;
+    onChange?: () => void;
+    children?: Snippet;
+    actions?: Snippet;
+  }
 
-  export let classes: {
-    root?: string;
-    checkbox?: ComponentProps<Checkbox>['classes'];
-    container?: string;
-  } = {};
+  let {
+    checked = $bindable(),
+    indeterminate = $bindable(false),
+    disabled = false,
+    variant = 'checkbox',
+    classes = {},
+    class: className,
+    onChange,
+    children,
+    actions,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('MultiSelectOption');
-
-  const dispatch = createEventDispatcher<{ change: null }>();
 </script>
 
 <div
@@ -28,7 +43,7 @@
     'grid grid-cols-[1fr,auto]',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   role="option"
   aria-selected={checked}
@@ -37,7 +52,7 @@
     <Checkbox
       bind:checked
       bind:indeterminate
-      on:change={() => dispatch('change')}
+      {onChange}
       {disabled}
       classes={{
         root: 'px-2 rounded hover:bg-surface-content/5',
@@ -54,7 +69,7 @@
           classes.container
         )}
       >
-        <slot />
+        {@render children?.()}
       </div>
     </Checkbox>
   {:else if variant === 'checkmark'}
@@ -67,9 +82,9 @@
         settingsClasses.container,
         classes.container
       )}
-      on:click={() => dispatch('change')}
+      onclick={() => onChange?.()}
     >
-      <slot />
+      {@render children?.()}
     </Button>
   {:else if variant === 'fill'}
     <Button
@@ -82,10 +97,10 @@
       )}
       variant={checked ? 'fill-light' : 'default'}
       color={checked ? 'primary' : 'default'}
-      on:click={() => dispatch('change')}
+      onclick={() => onChange?.()}
     >
-      <slot />
+      {@render children?.()}
     </Button>
   {/if}
-  <slot name="actions" />
+  {@render actions?.()}
 </div>

@@ -1,5 +1,5 @@
 <script lang="ts" generics="TValue">
-  import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
   import { mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
@@ -19,77 +19,13 @@
   import type { MenuOption } from '../types/index.js';
   import type { ScrollIntoViewOptions } from '../actions/scroll.js';
 
-  const dispatch = createEventDispatcher<{
-    change: { value: typeof value; option: typeof selected };
-    inputChange: string;
-  }>();
   const { classes: settingsClasses, defaults } = getComponentSettings('SelectField');
 
   const logger = new Logger('SelectField');
 
-  export let options: MenuOption<TValue>[] = [];
+  let searchText = $state('');
 
-  export let name = '';
-  export let label = '';
-  export let placeholder = '';
-  export let labelPlacement = defaults.labelPlacement;
-  export let loading: boolean = false;
-  export let required = false;
-  export let disabled: boolean = false;
-  export let readonly: boolean = false;
-  export let icon: IconInput = undefined;
-  export let inlineOptions = false;
-  export let toggleIcon: IconInput = !inlineOptions ? mdiChevronDown : null;
-  export let closeIcon: IconInput = mdiClose;
-  export let activeOptionIcon: boolean = false;
-  export let clearable = true;
-  export let base = false;
-  export let rounded = false;
-  export let dense = false;
-  export let clearSearchOnOpen = true;
-  export let autofocus: ComponentProps<TextField>['autofocus'] = undefined;
-  export let fieldActions: ComponentProps<TextField>['actions'] = autofocus
-    ? (node) => [
-        autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined),
-        selectOnFocus(node),
-      ]
-    : undefined;
-
-  /** If true, show left/right buttons to step through options */
-  export let stepper = false;
-
-  let originalIcon = icon;
-
-  export let scrollIntoView: Partial<ScrollIntoViewOptions> = {};
-
-  export let classes: {
-    root?: string;
-    field?: string | ComponentProps<TextField>['classes'];
-    options?: string;
-    option?: string;
-    selected?: string;
-    group?: string;
-    empty?: string;
-  } = {};
-
-  let fieldClasses: ComponentProps<TextField>['classes'];
-  $: fieldClasses = typeof classes.field === 'string' ? { root: classes.field } : classes.field;
-
-  // Menu props
-  export let placement: Placement = 'bottom-start';
-  export let autoPlacement = true;
-  export let matchWidth = true;
-  export let resize = true;
-  export let disableTransition = false;
-  export let menuProps: ComponentProps<Menu> | undefined = undefined;
-
-  $: filteredOptions = options ?? [];
-  let searchText = '';
-  $: logger.debug({ searchText });
-
-  export let value: TValue | null | undefined = undefined;
   let prevValue: TValue | null | undefined = undefined;
-  export let selected: MenuOption<TValue> | null | undefined = undefined;
   let prevSelected: MenuOption<TValue> | null | undefined = undefined;
 
   function updateSelected(
@@ -143,27 +79,11 @@
       }
     }
   }
-  // Reactively call anytime `selected`, `value`, or `options` change
-  $: updateSelected(selected, value, options);
-
-  export let search = async (text: string) => {
-    logger.debug('search', { text, open });
-
-    if (text === '') {
-      // Reset options
-      filteredOptions = options;
-    } else {
-      const words = text?.toLowerCase().split(' ') ?? [];
-      filteredOptions = options.filter((option) => {
-        return words.every((word) => option.label.toLowerCase().includes(word));
-      });
-    }
-  };
 
   // Elements
-  let inputEl: HTMLInputElement | null = null;
-  let menuOptionsEl: HTMLDivElement;
-  let selectFieldEl: HTMLDivElement;
+  let inputEl = $state<HTMLInputElement | null>(null);
+  let menuOptionsEl = $state() as HTMLDivElement;
+  let selectFieldEl = $state() as HTMLDivElement;
 
   function nextOptionIndex(currentIndex: number) {
     // Find next non-disabled option
@@ -189,52 +109,150 @@
     return prevIndex;
   }
 
-  // UI state
-  export let open = false;
-  let highlightIndex = -1;
-
-  $: if (open === false) {
-    // Restore text if cleared but selection remains
-    if (selected) {
-      searchText = selected.label;
-    }
+  interface Props {
+    options?: MenuOption<TValue>[];
+    name?: string;
+    label?: string;
+    placeholder?: string;
+    labelPlacement?: any;
+    loading?: boolean;
+    required?: boolean;
+    disabled?: boolean;
+    readonly?: boolean;
+    icon?: IconInput;
+    inlineOptions?: boolean;
+    toggleIcon?: IconInput;
+    closeIcon?: IconInput;
+    activeOptionIcon?: boolean;
+    clearable?: boolean;
+    base?: boolean;
+    rounded?: boolean;
+    dense?: boolean;
+    clearSearchOnOpen?: boolean;
+    autofocus?: ComponentProps<typeof TextField>['autofocus'];
+    fieldActions?: ComponentProps<typeof TextField>['actions'];
+    /** If true, show left/right buttons to step through options */
+    stepper?: boolean;
+    scrollIntoView?: Partial<ScrollIntoViewOptions>;
+    classes?: {
+      root?: string;
+      field?: string | ComponentProps<typeof TextField>['classes'];
+      options?: string;
+      option?: string;
+      selected?: string;
+      group?: string;
+      empty?: string;
+    };
+    // Menu props
+    placement?: Placement;
+    autoPlacement?: boolean;
+    matchWidth?: boolean;
+    resize?: boolean;
+    disableTransition?: boolean;
+    menuProps?: ComponentProps<typeof Menu>;
+    value?: TValue | null;
+    selected?: MenuOption<TValue> | null;
+    search?: (text: string) => Promise<void>;
+    // UI state
+    open?: boolean;
+    class?: string;
+    onChange?: ({
+      value,
+      option,
+    }: {
+      value?: TValue | null;
+      option?: MenuOption<TValue> | null;
+    }) => void;
+    onInputChange?: (value: string) => void;
+    prepend?: Snippet;
+    append?: Snippet;
+    option?: Snippet<
+      [
+        {
+          option: any;
+          index: number;
+          selected?: MenuOption<TValue> | null;
+          value?: TValue | null;
+          highlightIndex: number;
+        },
+      ]
+    >;
+    empty?: Snippet<[{ loading: boolean }]>;
+    actions?: Snippet<[{ hide: (reason?: string) => void }]>;
   }
 
-  $: if (open) {
-    // Capture current highlighted item (attempt to restore after searching)
-    const prevHighlightedOption = filteredOptions[highlightIndex];
+  let {
+    options = [],
+    name = '',
+    label = '',
+    placeholder = '',
+    labelPlacement = defaults.labelPlacement,
+    loading = false,
+    required = false,
+    disabled = false,
+    readonly = false,
+    icon = $bindable(),
+    inlineOptions = false,
+    toggleIcon = !inlineOptions ? mdiChevronDown : null,
+    closeIcon = mdiClose,
+    activeOptionIcon = false,
+    clearable = true,
+    base = false,
+    rounded = false,
+    dense = false,
+    clearSearchOnOpen = true,
+    autofocus,
+    fieldActions = autofocus
+      ? (node) => [
+          autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined),
+          selectOnFocus(node),
+        ]
+      : undefined,
+    stepper = false,
+    scrollIntoView = {},
+    classes = {},
+    placement = 'bottom-start',
+    autoPlacement = true,
+    matchWidth = true,
+    resize = true,
+    disableTransition = false,
+    menuProps,
+    value = $bindable(),
+    selected = $bindable(),
+    search = async (text: string) => {
+      logger.debug('search', { text, open });
 
-    // Do not search if menu is not open / closing on selection
-    search(searchText).then(() => {
-      // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
-      const selectedIndex = filteredOptions.findIndex((o) => o.value === value);
-      if (highlightIndex === -1) {
-        // Highlight selected if none currently
-        highlightIndex = selectedIndex === -1 ? nextOptionIndex(-1) : selectedIndex;
+      if (text === '') {
+        // Reset options
+        filteredOptions = options;
       } else {
-        // Attempt to re-highlight previously highlighted option after search
-        const prevHighlightedOptionIndex = filteredOptions.findIndex(
-          (o) => o === prevHighlightedOption
-        );
-
-        if (prevHighlightedOptionIndex !== -1) {
-          // Maintain previously highlight index after filter update (option still available)
-          highlightIndex = prevHighlightedOptionIndex;
-        } else {
-          // Highlight first option
-          highlightIndex = nextOptionIndex(-1);
-        }
+        const words = text?.toLowerCase().split(' ') ?? [];
+        filteredOptions = options.filter((option) => {
+          return words.every((word) => option.label.toLowerCase().includes(word));
+        });
       }
-    });
-  }
+    },
+    open = $bindable(false),
+    class: className,
+    onChange: _onChange,
+    onInputChange,
+    prepend: prependRender,
+    append: appendRender,
+    option: optionRender,
+    empty: emptyRender,
+    actions,
+    ...restProps
+  }: Props & Omit<ComponentProps<typeof TextField>, keyof Props> = $props();
+  let originalIcon = icon;
+  let highlightIndex = $state(-1);
 
-  function onChange(e: ComponentEvents<TextField>['change']) {
+  const onChange: ComponentProps<typeof TextField>['onChange'] = ({ inputValue }) => {
     logger.debug('onChange');
 
-    searchText = e.detail.inputValue as string;
-    dispatch('inputChange', searchText);
+    searchText = inputValue as string;
+    onInputChange?.(searchText);
     show();
-  }
+  };
 
   function onFocus() {
     logger.debug('onFocus');
@@ -375,7 +393,7 @@
     }
 
     if (value != previousValue) {
-      dispatch('change', { option, value });
+      _onChange?.({ option, value });
     }
 
     hide('selectOption');
@@ -383,7 +401,61 @@
     return option;
   }
 
-  $: previous = () => {
+  function clear() {
+    logger.info('clear');
+    selectOption(null);
+    filteredOptions = options;
+  }
+
+  let filteredOptions = $state() as MenuOption<TValue>[];
+  $effect(() => {
+    filteredOptions = options ?? [];
+  });
+  $effect(() => {
+    if (open === false) {
+      // Restore text if cleared but selection remains
+      if (selected) {
+        searchText = selected.label;
+      }
+    }
+  });
+  $effect(() => {
+    logger.debug({ searchText });
+  });
+  // Reactively call anytime `selected`, `value`, or `options` change
+  $effect(() => {
+    updateSelected(selected, value, options);
+  });
+  $effect(() => {
+    if (open) {
+      // Capture current highlighted item (attempt to restore after searching)
+      const prevHighlightedOption = filteredOptions[highlightIndex];
+
+      // Do not search if menu is not open / closing on selection
+      search(searchText).then(() => {
+        // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
+        const selectedIndex = filteredOptions.findIndex((o) => o.value === value);
+        if (highlightIndex === -1) {
+          // Highlight selected if none currently
+          highlightIndex = selectedIndex === -1 ? nextOptionIndex(-1) : selectedIndex;
+        } else {
+          // Attempt to re-highlight previously highlighted option after search
+          const prevHighlightedOptionIndex = filteredOptions.findIndex(
+            (o) => o === prevHighlightedOption
+          );
+
+          if (prevHighlightedOptionIndex !== -1) {
+            // Maintain previously highlight index after filter update (option still available)
+            highlightIndex = prevHighlightedOptionIndex;
+          } else {
+            // Highlight first option
+            highlightIndex = nextOptionIndex(-1);
+          }
+        }
+      });
+    }
+  });
+  let previous = $derived(() => {
     const index = options.findIndex((o) => o.value === value);
     if (index === 0 || index === -1) {
       // If first item, or no selected value yet, return last item
@@ -392,9 +464,8 @@
       // Previous item
       return options[index - 1].value;
     }
-  };
-
-  $: next = () => {
+  });
+  let next = $derived(() => {
     const index = options.findIndex((x) => x.value === value);
     if (index === options.length - 1) {
       // First value
@@ -403,13 +474,7 @@
       // Next value
       return options[index + 1].value;
     }
-  };
-
-  function clear() {
-    logger.info('clear');
-    selectOption(null);
-    filteredOptions = options;
-  }
+  });
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -420,10 +485,10 @@
     'SelectField block w-full cursor-default text-left',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   bind:this={selectFieldEl}
-  on:click={onClick}
+  onclick={onClick}
   tabindex="-1"
 >
   <TextField
@@ -438,11 +503,11 @@
     {disabled}
     bind:inputEl
     bind:value={searchText}
-    on:change={onChange}
-    on:focus={onFocus}
-    on:blur={onBlur}
-    on:keydown={onKeyDown}
-    on:keypress={onKeyPress}
+    {onChange}
+    onfocus={onFocus}
+    onblur={onBlur}
+    onkeydown={onKeyDown}
+    onkeypress={onKeyPress}
     actions={fieldActions}
     classes={clsMerge(
       {
@@ -455,73 +520,75 @@
       normalizeClasses(classes.field)
     )}
     role="combobox"
-    aria-expanded={open ? 'true' : 'false'}
-    aria-autocomplete={!inlineOptions ? 'list' : undefined}
-    {...$$restProps}
+    {...restProps}
   >
-    <span slot="prepend" class="flex items-center">
-      <input type="hidden" {name} {value} />
+    {#snippet prepend()}
+      <span class="flex items-center">
+        <input type="hidden" {name} {value} />
 
-      {#if stepper}
-        <Button
-          icon={mdiChevronLeft}
-          on:click={(e) => {
-            e.stopPropagation();
-            logger.debug('step left clicked');
-            selectValue(previous());
-          }}
-          class="mr-2"
-          size="sm"
-        />
-      {/if}
-      <slot name="prepend" />
-    </span>
+        {#if stepper}
+          <Button
+            icon={mdiChevronLeft}
+            onclick={(e) => {
+              e.stopPropagation();
+              logger.debug('step left clicked');
+              selectValue(previous());
+            }}
+            class="mr-2"
+            size="sm"
+          />
+        {/if}
+        {@render prependRender?.()}
+      </span>
+    {/snippet}
 
-    <span slot="append" class="flex items-center">
-      <slot name="append" />
+    {#snippet append()}
+      <span class="flex items-center">
+        {@render appendRender?.()}
 
-      {#if loading}
-        <span class="inline-block w-[29px] h-[28px] text-center">
-          <ProgressCircle size={16} width={2} class="text-surface-content/50" />
-        </span>
-      {:else if readonly}
-        <!-- Do not show chevron or clear buttons -->
-      {:else if value && clearable}
-        <Button
-          icon={closeIcon}
-          class="text-surface-content/50 p-1"
-          on:click={(e) => {
-            e.stopPropagation();
-            logger.debug('closeIcon clicked');
-            clear();
-          }}
-        />
-      {:else if toggleIcon}
-        <Button
-          icon={toggleIcon}
-          class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
-          tabindex="-1"
-          on:click={(e) => {
-            e.stopPropagation();
-            logger.debug('toggleIcon clicked');
-            open ? hide() : show();
-          }}
-        />
-      {/if}
+        {#if loading}
+          <span class="inline-block w-[29px] h-[28px] text-center">
+            <ProgressCircle size={16} width={2} class="text-surface-content/50" />
+          </span>
+        {:else if readonly}
+          <!-- Do not show chevron or clear buttons -->
+        {:else if value && clearable}
+          <Button
+            icon={closeIcon}
+            class="text-surface-content/50 p-1"
+            onclick={(e) => {
+              e.stopPropagation();
+              logger.debug('closeIcon clicked');
+              clear();
+            }}
+          />
+        {:else if toggleIcon}
+          <Button
+            icon={toggleIcon}
+            class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
+            tabindex={-1}
+            onclick={(e) => {
+              e.stopPropagation();
+              logger.debug('toggleIcon clicked');
+              open ? hide() : show();
+            }}
+          />
+        {/if}
 
-      {#if stepper}
-        <Button
-          icon={mdiChevronRight}
-          on:click={(e) => {
-            e.stopPropagation();
-            logger.debug('step right clicked');
-            selectValue(next());
-          }}
-          class="mr-2"
-          size="sm"
-        />
-      {/if}
-    </span>
+        {#if stepper}
+          <Button
+            icon={mdiChevronRight}
+            onclick={(e) => {
+              e.stopPropagation();
+              logger.debug('step right clicked');
+              selectValue(next());
+            }}
+            class="mr-2"
+            size="sm"
+          />
+        {/if}
+      </span>
+    {/snippet}
   </TextField>
 
   <!-- Improve initial open display, still needs work when switching from No options found (options.length === 0) -->
@@ -535,7 +602,7 @@
         {disableTransition}
         moveFocus={false}
         bind:open
-        on:close={() => hide('menu on:close')}
+        onClose={() => hide('menu on:close')}
         {...menuProps}
       >
         <!-- TODO: Rework into hierarchy of snippets in v2.0 -->
@@ -553,8 +620,16 @@
           {onKeyPress}
           {onKeyDown}
         >
-          <svelte:fragment slot="option" let:option let:index>
-            <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
+          {#snippet option({ option, index })}
+            {#if optionRender}
+              {@render optionRender({
+                option,
+                index,
+                selected,
+                value,
+                highlightIndex,
+              })}
+            {:else}
               <MenuItem
                 icon={option.icon}
                 class={cls(
@@ -575,11 +650,13 @@
               >
                 {option.label}
               </MenuItem>
-            </slot>
-          </svelte:fragment>
+            {/if}
+          {/snippet}
 
-          <svelte:fragment slot="empty" let:loading>
-            <slot name="empty" {loading}>
+          {#snippet empty({ loading })}
+            {#if emptyRender}
+              {@render emptyRender({ loading })}
+            {:else}
               <div
                 class={cls(
                   'p-3 text-surface-content/5/50 italic text-sm',
@@ -589,11 +666,11 @@
               >
                 {loading ? 'Loading...' : 'No options found'}
               </div>
-            </slot>
-          </svelte:fragment>
+            {/if}
+          {/snippet}
         </SelectListOptions>
 
-        <slot name="actions" {hide} />
+        {@render actions?.({ hide })}
       </Menu>
     {:else}
       <!-- TODO: Rework into hierarchy of snippets in v2.0. -->
@@ -612,8 +689,10 @@
         {onKeyPress}
         {onKeyDown}
       >
-        <svelte:fragment slot="option" let:option let:index>
-          <slot name="option" {option} {index} {selected} {value} {highlightIndex}>
+        {#snippet option({ option, index })}
+          {#if optionRender}
+            {@render optionRender({ option, index, selected, value, highlightIndex })}
+          {:else}
             <MenuItem
               icon={option.icon}
               class={cls(
@@ -634,11 +713,13 @@
             >
               {option.label}
             </MenuItem>
-          </slot>
-        </svelte:fragment>
+          {/if}
+        {/snippet}
 
-        <svelte:fragment slot="empty" let:loading>
-          <slot name="empty" {loading}>
+        {#snippet empty({ loading })}
+          {#if emptyRender}
+            {@render emptyRender({ loading })}
+          {:else}
             <div
               class={cls(
                 'p-3 text-surface-content/5/50 italic text-sm',
@@ -648,8 +729,8 @@
             >
               {loading ? 'Loading...' : 'No options found'}
             </div>
-          </slot>
-        </svelte:fragment>
+          {/if}
+        {/snippet}
       </SelectListOptions>
     {/if}
   {/if}

@@ -1,21 +1,33 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { tweened } from 'svelte/motion';
   import type { FormatNumberStyle } from '../utils/format.js';
   import { getSettings } from './settings.js';
 
   type TweenedOptions = Parameters<typeof tweened<number | null>>[1];
 
-  export let value: number | null;
-  export let format: FormatNumberStyle = 'none';
-  export let options: TweenedOptions = undefined;
-  export let disabled = false;
+  interface Props {
+    value: number | null;
+    format?: FormatNumberStyle;
+    options?: TweenedOptions;
+    disabled?: boolean;
+    children?: Snippet<[{ value: number | null }]>;
+  }
+
+  let { value, format = 'none', options = undefined, disabled = false, children }: Props = $props();
 
   const { format: formatUtil } = getSettings();
   const tweenedValue = tweened(value, options);
-  $: $tweenedValue = value ?? 0;
-  $: displayValue = disabled || value == null ? value : $tweenedValue;
+
+  $effect(() => {
+    $tweenedValue = value ?? 0;
+  });
+
+  let displayValue = $derived(disabled || value == null ? value : $tweenedValue);
 </script>
 
-<slot value={displayValue}>
+{#if children}
+  {@render children({ value: displayValue })}
+{:else}
   {$formatUtil(displayValue, format)}
-</slot>
+{/if}

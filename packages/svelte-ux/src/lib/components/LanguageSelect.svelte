@@ -6,7 +6,7 @@
   import { getSettings } from './settings.js';
   const { locale } = getSettings();
 
-  let open = false;
+  let open = $state(false);
 
   type Language = {
     name: string;
@@ -14,21 +14,31 @@
     flag: string;
   };
 
-  export let languagesDemo: Language[] = [
-    { name: 'English', code: 'en', flag: '🇺🇸' },
-    { name: 'Français', code: 'fr', flag: '🇫🇷' },
-    // add more for the demo
-  ];
-  $: languageSelected = languagesDemo.find((c) => c.code === $locale)!;
+  interface Props {
+    languagesDemo?: Language[];
+  }
+
+  let {
+    languagesDemo = [
+      { name: 'English', code: 'en', flag: '🇺🇸' },
+      { name: 'Français', code: 'fr', flag: '🇫🇷' },
+      // add more for the demo
+    ],
+  }: Props = $props();
+  let languageSelected = $state() as Language;
+
+  $effect(() => {
+    languageSelected = languagesDemo.find((c) => c.code === $locale)!;
+  });
 </script>
 
-<Button on:click={() => (open = !open)} class="font-mono font-semibold" iconOnly={true}>
+<Button onclick={() => (open = !open)} class="font-mono font-semibold" iconOnly={true}>
   {languageSelected.code}
-  <Menu bind:open on:close={() => (open = false)} offset={4} explicitClose resize>
+  <Menu bind:open onClose={() => (open = false)} offset={4} explicitClose resize>
     <div class="grid gap-2 p-2 border-b border-surface-content/10">
       {#each languagesDemo as language}
         <MenuItem
-          on:click={() => {
+          onclick={() => {
             languageSelected = language;
             locale.set(language.code);
           }}

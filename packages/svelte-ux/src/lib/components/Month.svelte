@@ -21,42 +21,52 @@
   import DateButton from './DateButton.svelte';
   import { getSettings } from './settings.js';
   import MonthListByYear from './MonthListByYear.svelte';
-
-  export let selected: SelectedDate = undefined;
-
-  export let startOfMonth =
-    (selected instanceof Date && startOfMonthFunc(selected)) ||
-    (selected instanceof Array && selected.length && startOfMonthFunc(selected[0])) ||
-    (selected &&
-      hasKeyOf<{ from: Date }>(selected, 'from') &&
-      selected.from &&
-      startOfMonthFunc(selected.from)) ||
-    startOfMonthFunc(new Date());
+  import type { ComponentProps } from 'svelte';
 
   const { format } = getSettings();
-  $: dateFormat = $format.settings.formats.dates;
-
-  $: endOfMonth = endOfMonthFunc(startOfMonth);
-  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, dateFormat.weekStartsOn);
-
-  /**
-   * Hide controls and date.  Useful to control externally
-   */
-  export let hideControls = false;
-
-  /**
-   * Show days before and after selected month
-   */
-  export let showOutsideDays: boolean | undefined = undefined;
 
   type DisabledDate = ((date: Date) => boolean) | Date | Date[] | { from: Date; to: Date };
 
-  /**
-   * Dates to disable (not selectable)
-   */
-  export let disabledDates: DisabledDate | undefined = undefined;
+  interface Props {
+    selected?: SelectedDate;
+    startOfMonth?: any;
+    /**
+     * Hide controls and date.  Useful to control externally
+     */
+    hideControls?: boolean;
+    /**
+     * Show days before and after selected month
+     */
+    showOutsideDays?: boolean;
+    /**
+     * Dates to disable (not selectable)
+     */
+    disabledDates?: DisabledDate;
+    onDateChange?: ComponentProps<typeof DateButton>['onDateChange'];
+  }
 
-  $: isDateDisabled = (date: Date) => {
+  let {
+    selected = $bindable(),
+    startOfMonth = $bindable(
+      (selected instanceof Date && startOfMonthFunc(selected)) ||
+        (selected instanceof Array && selected.length && startOfMonthFunc(selected[0])) ||
+        (selected &&
+          hasKeyOf<{ from: Date }>(selected, 'from') &&
+          selected.from &&
+          startOfMonthFunc(selected.from)) ||
+        startOfMonthFunc(new Date())
+    ),
+    hideControls = false,
+    showOutsideDays,
+    disabledDates,
+    onDateChange,
+  }: Props = $props();
+
+  let showMonthSelect = $state(false);
+  let dateFormat = $derived($format.settings.formats.dates);
+  let endOfMonth = $derived(endOfMonthFunc(startOfMonth));
+  let monthDaysByWeek = $derived(getMonthDaysByWeek(startOfMonth, dateFormat.weekStartsOn));
+  let isDateDisabled = $derived((date: Date) => {
     return disabledDates instanceof Function
       ? disabledDates(date)
       : disabledDates instanceof Date
@@ -69,25 +79,21 @@
                 end: endOfDayFunc(disabledDates.to || disabledDates.from),
               })
             : false;
-  };
-
-  $: isDayHidden = (day: Date) => {
+  });
+  let isDayHidden = $derived((day: Date) => {
     const isCurrentMonth = isWithinInterval(day, {
       start: startOfMonth,
       end: endOfMonth,
     });
     return !isCurrentMonth && !showOutsideDays;
-  };
-
-  $: isDayFaded = (day: Date) => {
+  });
+  let isDayFaded = $derived((day: Date) => {
     const isCurrentMonth = isWithinInterval(day, {
       start: startOfMonth,
       end: endOfMonth,
     });
     return !isCurrentMonth && showOutsideDays;
-  };
-
-  let showMonthSelect = false;
+  });
 </script>
 
 {#if showMonthSelect}
@@ -106,11 +112,11 @@
       <Button
         icon={mdiChevronLeft}
         class="p-2"
-        on:click={() => (startOfMonth = addMonths(startOfMonth, -1))}
+        onclick={() => (startOfMonth = addMonths(startOfMonth, -1))}
       />
 
       <div class="flex flex-1 items-center justify-center">
-        <Button on:click={() => (showMonthSelect = true)}>
+        <Button onclick={() => (showMonthSelect = true)}>
           {$format(startOfMonth, PeriodType.MonthYear)}
         </Button>
       </div>
@@ -118,7 +124,7 @@
       <Button
         icon={mdiChevronRight}
         class="p-2"
-        on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
+        onclick={() => (startOfMonth = addMonths(startOfMonth, 1))}
       />
     </div>
   {/if}
@@ -143,7 +149,7 @@
           hidden={isDayHidden(day)}
           fade={isDayFaded(day)}
           disabled={isDateDisabled(day)}
-          on:dateChange
+          {onDateChange}
         />
       {/each}
     {/each}

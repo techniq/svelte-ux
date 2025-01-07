@@ -2,6 +2,13 @@
   import { mdiInformation } from '@mdi/js';
   import Icon from '../lib/components/Icon.svelte';
   import { cls } from '$lib/utils/styles.js';
+  import type { Snippet } from 'svelte';
+
+  interface Props {
+    children?: Snippet;
+  }
+
+  let { children }: Props = $props();
 </script>
 
 <div
@@ -11,5 +18,5 @@
   )}
 >
   <Icon data={mdiInformation} class="text-primary" />
-  <slot />
+  {@render children?.()}
 </div>

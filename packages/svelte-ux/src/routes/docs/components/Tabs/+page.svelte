@@ -21,9 +21,9 @@
 
 <Preview>
   <Tabs {options} bind:value>
-    <svelte:fragment slot="content" let:value>
+    {#snippet content({ value })}
       Page {value}
-    </svelte:fragment>
+    {/snippet}
   </Tabs>
 </Preview>
 
@@ -33,12 +33,12 @@
   <Tabs>
     {#each { length: 5 } as _, i}
       {@const v = i + 1}
-      <Tab on:click={() => (value = v)} selected={value === v}>Tab {v}</Tab>
+      <Tab onclick={() => (value = v)} selected={value === v}>Tab {v}</Tab>
     {/each}
 
-    <svelte:fragment slot="content">
+    {#snippet content()}
       Page {value}
-    </svelte:fragment>
+    {/snippet}
   </Tabs>
 </Preview>
 
@@ -47,27 +47,27 @@
 <Preview>
   <div class="grid grid-cols-2 gap-4">
     <Tabs {options} placement="top" bind:value>
-      <svelte:fragment slot="content" let:value>
+      {#snippet content({ value })}
         Page {value}
-      </svelte:fragment>
+      {/snippet}
     </Tabs>
 
     <Tabs {options} placement="bottom" bind:value>
-      <svelte:fragment slot="content" let:value>
+      {#snippet content({ value })}
         Page {value}
-      </svelte:fragment>
+      {/snippet}
     </Tabs>
 
     <Tabs {options} placement="left" bind:value>
-      <svelte:fragment slot="content" let:value>
+      {#snippet content({ value })}
         Page {value}
-      </svelte:fragment>
+      {/snippet}
     </Tabs>
 
     <Tabs {options} placement="right" bind:value>
-      <svelte:fragment slot="content" let:value>
+      {#snippet content({ value })}
         Page {value}
-      </svelte:fragment>
+      {/snippet}
     </Tabs>
   </div>
 </Preview>
@@ -82,9 +82,9 @@
       bind:value
       classes={{ content: 'border px-4 py-2 rounded-b rounded-tr', tab: { root: 'rounded-t' } }}
     >
-      <svelte:fragment slot="content" let:value>
+      {#snippet content({ value })}
         Page {value}
-      </svelte:fragment>
+      {/snippet}
     </Tabs>
 
     <Tabs
@@ -93,9 +93,9 @@
       bind:value
       classes={{ content: 'border px-4 py-2  rounded-t rounded-br', tab: { root: 'rounded-b' } }}
     >
-      <svelte:fragment slot="content" let:value>
+      {#snippet content({ value })}
         Page {value}
-      </svelte:fragment>
+      {/snippet}
     </Tabs>
 
     <Tabs
@@ -104,9 +104,9 @@
       bind:value
       classes={{ content: 'border px-4 py-2  rounded-r', tab: { root: 'rounded-l' } }}
     >
-      <svelte:fragment slot="content" let:value>
+      {#snippet content({ value })}
         Page {value}
-      </svelte:fragment>
+      {/snippet}
     </Tabs>
 
     <Tabs
@@ -115,9 +115,9 @@
       bind:value
       classes={{ content: 'border px-4 py-2 rounded-l', tab: { root: 'rounded-r' } }}
     >
-      <svelte:fragment slot="content" let:value>
+      {#snippet content({ value })}
         Page {value}
-      </svelte:fragment>
+      {/snippet}
     </Tabs>
   </div>
 </Preview>
@@ -125,15 +125,15 @@
 <h2>add / remove</h2>
 
 <Preview>
-  <Tabs {options} {value} on:change={(e) => (value = e.detail.value)}>
+  <Tabs {options} {value}>
     {#each options as option (option.value)}
-      <Tab on:click={() => (value = option.value)} selected={value === option.value}>
+      <Tab onclick={() => (value = option.value)} selected={value === option.value}>
         {option.label}
 
         <Icon
           data={mdiClose}
           class="rounded-full p-0.5 hover:bg-surface-content/5"
-          on:click={(e) => {
+          onclick={(e) => {
             e.stopPropagation();
             options = options.filter((o) => o.value !== option.value);
           }}
@@ -142,7 +142,7 @@
     {/each}
 
     <Tab
-      on:click={() => {
+      onclick={() => {
         const newValue = max(options, (d) => d.value) ?? 0 + 1;
         options = [...options, { label: 'New ' + newValue, value: newValue }];
       }}
@@ -150,8 +150,8 @@
       <Icon data={mdiPlus} class="rounded-full p-0.5 hover:bg-surface-content/5" />
     </Tab>
 
-    <svelte:fragment slot="content">
+    {#snippet content({ value })}
       Page {value}
-    </svelte:fragment>
+    {/snippet}
   </Tabs>
 </Preview>

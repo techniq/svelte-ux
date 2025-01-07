@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { fly } from 'svelte/transition';
 
   import Backdrop from './Backdrop.svelte';
@@ -10,28 +9,59 @@
   import { portal as portalAction, type PortalOptions } from '../actions/portal.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
 
-  const dispatch = createEventDispatcher<{
-    change: { open: boolean };
-    close: null;
-    closeAttempt: null;
-    open: null;
-  }>();
+  interface Props {
+    open?: boolean;
+    portal?: PortalOptions;
+    persistent?: boolean;
+    loading?: boolean | null;
+    placement?: 'top' | 'bottom' | 'left' | 'right';
+    classes?: {
+      root?: string;
+      backdrop?: string;
+      actions?: string;
+    };
+    class?: string;
+    style?: string;
+    onintrostart?: SvelteHTMLElements['div']['onintrostart'];
+    onoutrostart?: SvelteHTMLElements['div']['onoutrostart'];
+    onintroend?: SvelteHTMLElements['div']['onintroend'];
+    onoutroend?: SvelteHTMLElements['div']['onoutroend'];
+    onChange?: (open: boolean) => void;
+    onClose?: () => void;
+    onCloseAttempt?: () => void;
+    onOpen?: () => void;
+    children?: Snippet<[{ open: boolean, close: typeof close }]>;
+    actions?: Snippet<[{ open: boolean, close: typeof close }]>;
+  }
 
-  export let open = true;
-  export let portal: PortalOptions = true;
-  export let persistent = false;
-  export let loading: boolean | null = null;
-  export let placement: 'top' | 'bottom' | 'left' | 'right' = 'right';
-
-  export let classes: {
-    root?: string;
-    backdrop?: string;
-    actions?: string;
-  } = {};
+  let {
+    open = $bindable(true),
+    portal = true,
+    persistent = false,
+    loading,
+    placement = 'right',
+    classes = {},
+    class: className,
+    style,
+    onintroend,
+    onintrostart,
+    onoutroend,
+    onoutrostart,
+    onChange,
+    onClose,
+    onCloseAttempt,
+    onOpen,
+    children,
+    actions,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Drawer');
 
-  $: dispatch('change', { open });
+  $effect(() => {
+    onChange?.(open);
+  });
 
   function close(options?: { force?: boolean }) {
     const force = options?.force ?? false;
@@ -40,25 +70,27 @@
         open = false;
       } else {
         // attempted close of persistent dialog
-        dispatch('closeAttempt');
+        onCloseAttempt?.();
       }
     }
   }
 
-  $: if (open) {
-    dispatch('open');
-  } else {
-    dispatch('close');
-  }
+  $effect(() => {
+    if (open) {
+      onOpen?.();
+    } else {
+      onClose?.();
+    }
+  });
 </script>
 
 <!-- Separate `{#if}` block works around Svelte 5 regression: https://github.com/sveltejs/svelte/issues/12440  -->
 {#if open}
   <Backdrop
-    on:click={(e) => {
+    onClick={(e) => {
       close();
     }}
-    on:mouseup={(e) => {
+    onMouseUp={(e) => {
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
     }}
@@ -68,7 +100,7 @@
 {/if}
 
 {#if open}
-  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+  <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <div
     class={cls(
       'Drawer',
@@ -83,9 +115,9 @@
       },
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
-    style={$$props.style}
+    {style}
     in:fly|global={{
       x: placement === 'left' ? '-100%' : placement === 'right' ? '100%' : 0,
       y: placement === 'top' ? '-100%' : placement === 'bottom' ? '100%' : 0,
@@ -94,11 +126,11 @@
       x: placement === 'left' ? '-100%' : placement === 'right' ? '100%' : 0,
       y: placement === 'top' ? '-100%' : placement === 'bottom' ? '100%' : 0,
     }}
-    on:introstart
-    on:outrostart
-    on:introend
-    on:outroend
-    on:keydown={(e) => {
+    {onintrostart}
+    {onoutrostart}
+    {onintroend}
+    {onoutroend}
+    onkeydown={(e) => {
       if (e.key === 'Escape') {
         // Do not allow event to reach Popover's on:keydown
         e.stopPropagation();
@@ -116,9 +148,9 @@
       </Overlay>
     {/if}
 
-    <slot {open} {close} />
+    {@render children?.({ open, close })}
 
-    {#if $$slots.actions}
+    {#if actions}
       <div
         class={cls(
           'actions fixed bottom-0 w-full flex justify-center bg-surface-content/5 p-1 border-t',
@@ -126,7 +158,7 @@
           classes.actions
         )}
       >
-        <slot name="actions" {open} {close} />
+        {@render actions?.({ open, close })}
       </div>
     {/if}
   </div>

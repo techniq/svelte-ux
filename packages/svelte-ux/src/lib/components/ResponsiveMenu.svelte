@@ -1,15 +1,29 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
+  import type { ComponentProps, Snippet } from 'svelte';
   import { matchMediaWidth } from '../stores/matchMedia.js';
   import Drawer from './Drawer.svelte';
   import Menu from './Menu.svelte';
   import { cls } from '../utils/styles.js';
 
-  export let open = true;
-  export let screenWidth = 768; // md+
+  interface Props {
+    open?: boolean;
+    screenWidth?: number; // md+
+    menuProps?: ComponentProps<typeof Menu>;
+    drawerProps?: ComponentProps<typeof Drawer>;
+    class?: string;
+    onClose?: () => void;
+    children?: Snippet<[{ open: boolean }]>;
+  }
 
-  export let menuProps: ComponentProps<Menu> | undefined = undefined;
-  export let drawerProps: ComponentProps<Drawer> | undefined = undefined;
+  let {
+    open = $bindable(true),
+    screenWidth = 768,
+    menuProps,
+    drawerProps,
+    class: className,
+    onClose,
+    children,
+  }: Props = $props();
 
   const isLargeScreen = matchMediaWidth(screenWidth);
 </script>
@@ -18,21 +32,21 @@
   <!-- Default explicitClose={true} to match Drawer behavior -->
   <Menu
     bind:open
-    on:close
+    {onClose}
     explicitClose
     {...menuProps}
-    class={cls('ResponsiveMenu', $$props.class, menuProps?.class)}
+    class={cls('ResponsiveMenu', className, menuProps?.class)}
   >
-    <slot {open} />
+    {@render children?.({ open })}
   </Menu>
 {:else}
   <Drawer
     bind:open
     placement="bottom"
-    on:close
+    {onClose}
     {...drawerProps}
-    class={cls('ResponsiveMenu', $$props.class, drawerProps?.class)}
+    class={cls('ResponsiveMenu', className, drawerProps?.class)}
   >
-    <slot {open} />
+    {@render children?.({ open })}
   </Drawer>
 {/if}

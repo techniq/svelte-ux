@@ -25,6 +25,7 @@
       - [ ] Change range color / gradient
       - [ ] Show min/max scale (opt in as prop).  Show above, below, option?
   */
+  import type { SvelteHTMLElements } from 'svelte/elements';
   import { spring } from 'svelte/motion';
   import { fly } from 'svelte/transition';
   import { scaleLinear } from 'd3-scale';
@@ -36,34 +37,48 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let min = 0;
-  export let max = 100;
-  export let step = 1;
-  export let value = [min, max];
-  export let disabled = false;
-  export let disableTooltips = false;
+  interface Props {
+    min?: number;
+    max?: number;
+    step?: number;
+    value?: any;
+    disabled?: boolean;
+    disableTooltips?: boolean;
+  }
 
-  let className: string | undefined = undefined;
-  export { className as class };
+  let {
+    min = 0,
+    max = 100,
+    step = 1,
+    value = $bindable([min, max]),
+    disabled = false,
+    disableTooltips = false,
+    class: className,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements['div'], keyof Props> = $props();
 
   const settingsClasses = getComponentClasses('RangeSlider');
 
-  $: stepPercent = step / (max - min);
-  $: stepDecimals = decimalCount(step);
+  let stepPercent = $derived(step / (max - min));
+  let stepDecimals = $derived(decimalCount(step));
 
-  $: scale = scaleLinear().domain([min, max]).range([0, 1]).clamp(true);
+  let scale = $derived(scaleLinear().domain([min, max]).range([0, 1]).clamp(true));
 
   let isMoving = false;
-  let lastMoved: 'start' | 'range' | 'end' = 'range';
-  let showStartValue = false;
-  let showEndValue = false;
+  let lastMoved: 'start' | 'range' | 'end' = $state('range');
+  let showStartValue = $state(false);
+  let showEndValue = $state(false);
   let ignoreClickEvents = false;
 
   const start = spring(0);
-  $: start.set(scale(value[0]));
+  $effect(() => {
+    start.set(scale(value[0]));
+  });
 
   const end = spring(0);
-  $: end.set(scale(value[1]));
+  $effect(() => {
+    end.set(scale(value[1]));
+  });
 
   function onMoveStart(which: 'start' | 'range' | 'end') {
     return function () {
@@ -226,8 +241,8 @@
   }
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<!-- svelte-ignore a11y-role-has-required-aria-props -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_role_has_required_aria_props -->
 <div
   class={cls(
     'RangeSlider',
@@ -238,15 +253,15 @@
   )}
   style="--start: {$start}; --end: {$end};"
   tabindex={disabled ? -1 : 0}
-  on:click={onClick}
-  on:keydown={onKeyDown}
-  {...$$restProps}
+  onclick={onClick}
+  onkeydown={onKeyDown}
+  {...restProps}
   role="slider"
 >
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
-    on:mouseenter={onMouseEnter('range')}
-    on:mouseleave={onMouseLeave('range')}
+    onmouseenter={onMouseEnter('range')}
+    onmouseleave={onMouseLeave('range')}
     style="
       left:  calc(var(--start) * 100%);
       right: calc((1 - var(--end)) * 100%);
@@ -254,15 +269,15 @@
     class="range absolute top-0 bottom-0 bg-primary"
   ></div>
 
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
-    on:movestart={onMoveStart('range')}
-    on:move={onMove('range')}
-    on:moveend={onMoveEnd('range')}
-    on:mouseenter={onMouseEnter('range')}
-    on:mouseleave={onMouseLeave('range')}
-    on:dblclick={() => (value = [min, max])}
+    onmovestart={onMoveStart('range')}
+    onmove={onMove('range')}
+    onmoveend={onMoveEnd('range')}
+    onmouseenter={onMouseEnter('range')}
+    onmouseleave={onMouseLeave('range')}
+    ondblclick={() => (value = [min, max])}
     style="left: calc((((var(--end) - var(--start)) / 2 ) + var(--start)) * 100%);"
     class={cls(
       'range-thumb',
@@ -276,15 +291,15 @@
     <Icon data={mdiDragHorizontal} class="text-primary-content" />
   </div>
 
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
-    on:movestart={onMoveStart('start')}
-    on:move={onMove('start')}
-    on:moveend={onMoveEnd('start')}
-    on:mouseenter={onMouseEnter('start')}
-    on:mouseleave={onMouseLeave('start')}
-    on:dblclick={() => (value = [min, value[1]])}
+    onmovestart={onMoveStart('start')}
+    onmove={onMove('start')}
+    onmoveend={onMoveEnd('start')}
+    onmouseenter={onMouseEnter('start')}
+    onmouseleave={onMouseLeave('start')}
+    ondblclick={() => (value = [min, value[1]])}
     style="left: calc(var(--start) * 100%);"
     class={cls(
       'thumb',
@@ -296,15 +311,15 @@
     )}
   ></div>
 
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     use:movable={{ axis: 'x', stepPercent }}
-    on:movestart={onMoveStart('end')}
-    on:move={onMove('end')}
-    on:moveend={onMoveEnd('end')}
-    on:mouseenter={onMouseEnter('end')}
-    on:mouseleave={onMouseLeave('end')}
-    on:dblclick={() => (value = [value[0], max])}
+    onmovestart={onMoveStart('end')}
+    onmove={onMove('end')}
+    onmoveend={onMoveEnd('end')}
+    onmouseenter={onMouseEnter('end')}
+    onmouseleave={onMouseLeave('end')}
+    ondblclick={() => (value = [value[0], max])}
     style="left: calc(var(--end) * 100%);"
     class={cls(
       'thumb',

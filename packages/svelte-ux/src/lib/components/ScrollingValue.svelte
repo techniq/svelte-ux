@@ -1,28 +1,44 @@
 <script lang="ts">
-  import { spring, tweened } from 'svelte/motion';
-  import { elasticOut, backInOut, bounceOut } from 'svelte/easing';
+  import type { Snippet } from 'svelte';
+  import { spring } from 'svelte/motion';
   import { cls } from '../utils/styles.js';
   import { modulo } from '../utils/number.js';
   import { getComponentClasses } from './theme.js';
 
-  export let value = 0;
-  export let single = false;
-  export let format: (value: number) => string | number = (value) => value;
-  export let axis: 'x' | 'y' = 'y';
+  interface Props {
+    value?: number;
+    single?: boolean;
+    format?: (value: number) => string | number;
+    axis?: 'x' | 'y';
+    classes?: {
+      root?: string;
+      value?: string;
+    };
+    class?: string;
+    children?: Snippet<[{ value: number }]>;
+  }
 
-  export let classes: {
-    root?: string;
-    value?: string;
-  } = {};
+  let {
+    value = 0,
+    single = false,
+    format = (value) => value,
+    axis = 'y',
+    classes = {},
+    class: className,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('ScrollingValue');
 
   const displayValue = spring();
   // 	const displayValue = tweened(value, { duration: 1000, easing: bounceOut });
-  $: $displayValue = value;
-  $: offset = modulo($displayValue, 1);
+  $effect(() => {
+    $displayValue = value;
+  });
 
-  $: nextDisplayValue = Math.floor(single && $displayValue >= 9 ? 0 : $displayValue + 1);
-  $: currentDisplayValue = Math.floor($displayValue);
+  let offset = $derived(modulo($displayValue, 1));
+
+  let nextDisplayValue = $derived(Math.floor(single && $displayValue >= 9 ? 0 : $displayValue + 1));
+  let currentDisplayValue = $derived(Math.floor($displayValue));
 </script>
 
 <div
@@ -31,7 +47,7 @@
     'inline-grid overflow-hidden',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <div
@@ -40,9 +56,11 @@
       ? `translateX(${100 + 100 * -offset}%)`
       : `translateY(${-100 + 100 * offset}%)`}
   >
-    <slot value={nextDisplayValue}>
+    {#if children}
+      {@render children({ value: nextDisplayValue })}
+    {:else}
       {format(nextDisplayValue)}
-    </slot>
+    {/if}
   </div>
   <div
     class={cls('col-span-full row-span-full', settingsClasses.value, classes.value)}
@@ -50,8 +68,10 @@
       ? `translateX(${100 * -offset}%)`
       : `translateY(${100 * offset}%)`}
   >
-    <slot value={currentDisplayValue}>
+    {#if children}
+      {@render children({ value: currentDisplayValue })}
+    {:else}
       {format(currentDisplayValue)}
-    </slot>
+    {/if}
   </div>
 </div>

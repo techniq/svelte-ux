@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
   let cache = new Map<string, Promise<string>>();
 </script>
 
@@ -8,99 +8,131 @@
   import { uniqueId } from '../utils/string.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import type { Snippet } from 'svelte';
+  import type { DOMAttributes } from 'svelte/elements';
 
-  export let size: string | number = '1.5em';
-  export let width = size;
-  export let height = size;
-  export let viewBox = '0 0 24 24';
-  export let path: string | string[] = '';
-  export let data: IconDefinition | string | null | undefined = undefined;
-  export let svg: string | undefined = undefined;
-  export let svgUrl: string | undefined = undefined;
-
-  // Accessibility
-  export let title: string | undefined = undefined;
-  export let desc: string | undefined = undefined;
-  export let titleId: string | undefined = title ? uniqueId('title-') : '';
-  export let descId: string | undefined = desc ? uniqueId('desc-') : '';
-  $: isLabelled = title || desc;
-
-  export let classes: {
-    root?: string;
+  interface Props {
+    size?: string | number;
+    width?: string | number;
+    height?: string | number;
+    viewBox?: string;
     path?: string | string[];
-  } = {};
+    data?: IconDefinition | string | null;
+    svg?: string;
+    svgUrl?: string;
+    // Accessibility
+    title?: string;
+    desc?: string;
+    titleId?: string;
+    descId?: string;
+    classes?: {
+      root?: string;
+      path?: string | string[];
+    };
+    class?: string;
+    style?: string;
+    onclick?: DOMAttributes<Element>["onclick"];
+    children?: Snippet;
+  }
+
+  let {
+    size = '1.5em',
+    width = $bindable(size),
+    height = $bindable(size),
+    viewBox = $bindable('0 0 24 24'),
+    path = $bindable(''),
+    data,
+    svg = $bindable(),
+    svgUrl = $bindable(),
+    title,
+    desc,
+    titleId = title ? uniqueId('title-') : '',
+    descId = desc ? uniqueId('desc-') : '',
+    classes = {},
+    class: className,
+    style,
+    onclick,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Icon');
 
-  $: if (typeof data === 'object' && data && 'icon' in data) {
-    // Font Awesome
-    const [_width, _height, _ligatures, _unicode, _path] = data.icon;
-    viewBox = `0 0 ${_width} ${_height}`;
-    path = _path;
-    width = '1.0rem';
-    height = '1.0rem';
-  } else if (typeof data === 'string') {
-    // Also conveniently accept `path`, `svg`, or `svgUrl` as `data`
-    const dataStr = data.toLowerCase();
-    if (dataStr.includes('<svg')) {
-      svg = data;
-    } else if (dataStr.includes('http')) {
-      svgUrl = data;
-    } else {
-      path = data;
+  let isLabelled = $derived(title || desc);
+  $effect(() => {
+    if (typeof data === 'object' && data && 'icon' in data) {
+      // Font Awesome
+      const [_width, _height, _ligatures, _unicode, _path] = data.icon;
+      viewBox = `0 0 ${_width} ${_height}`;
+      path = _path;
+      width = '1.0rem';
+      height = '1.0rem';
+    } else if (typeof data === 'string') {
+      // Also conveniently accept `path`, `svg`, or `svgUrl` as `data`
+      const dataStr = data.toLowerCase();
+      if (dataStr.includes('<svg')) {
+        svg = data;
+      } else if (dataStr.includes('http')) {
+        svgUrl = data;
+      } else {
+        path = data;
+      }
     }
-  }
-
-  // If the SVG includes the font awesome license comment, use `1.0em
-  $: if (svg?.includes('fontawesome.com')) {
-    width = '1.0rem';
-    height = '1.0rem';
-  }
-
-  $: if (svgUrl) {
-    let promise;
-    if (cache.has(svgUrl)) {
-      cache.get(svgUrl)?.then((text) => (svg = text));
-    } else {
-      promise = fetch(svgUrl)
-        .then((resp) => resp.text())
-        .catch(() => {
-          // Failed request, remove promise so fetched again
-          if (svgUrl && typeof svgUrl === 'string') {
-            cache.delete(svgUrl);
-          }
-          // TODO: Consider showing error icon
-          // throw e;
-          return '';
+  });
+  $effect(() => {
+    if (svgUrl) {
+      let promise;
+      if (cache.has(svgUrl)) {
+        cache.get(svgUrl)?.then((text) => (svg = text));
+      } else {
+        promise = fetch(svgUrl)
+          .then((resp) => resp.text())
+          .catch(() => {
+            // Failed request, remove promise so fetched again
+            if (svgUrl && typeof svgUrl === 'string') {
+              cache.delete(svgUrl);
+            }
+            // TODO: Consider showing error icon
+            // throw e;
+            return '';
+          });
+        cache.set(svgUrl, promise);
+        promise.then((text) => {
+          svg = text;
         });
-      cache.set(svgUrl, promise);
-      promise.then((text) => {
-        svg = text;
-      });
+      }
     }
-  }
+  });
+  // If the SVG includes the font awesome license comment, use `1.0em
+  $effect(() => {
+    if (svg?.includes('fontawesome.com')) {
+      width = '1.0rem';
+      height = '1.0rem';
+    }
+  });
 </script>
 
-{#if svg || svgUrl || $$slots.default}
+{#if svg || svgUrl || children}
   <span
     class={cls(
       'Icon',
       'icon-container inline-block flex-shrink-0 align-middle fill-current',
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
-    style={$$props.style}
+    {style}
     style:width
     style:height
     style:--width={width}
     style:--height={height}
     role={isLabelled ? 'img' : 'presentation'}
     aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
-    on:click
+    {onclick}
   >
-    <slot>
+    {#if children}
+      {@render children()}
+    {:else}
       {@html svg ?? ''}
-    </slot>
+    {/if}
   </span>
 {:else}
   <svg
@@ -112,12 +144,12 @@
       'inline-block flex-shrink-0 fill-current',
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
-    style={$$props.style}
+    {style}
     role={isLabelled ? 'img' : 'presentation'}
     aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
-    on:click
+    {onclick}
   >
     {#if title}
       <title id={titleId}>{title}</title>

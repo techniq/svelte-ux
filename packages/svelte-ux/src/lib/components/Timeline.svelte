@@ -1,10 +1,10 @@
-<script lang="ts" context="module">
-  import { type ComponentProps, setContext, getContext } from 'svelte';
+<script lang="ts" module>
+  import { type ComponentProps, setContext, getContext, type Snippet } from 'svelte';
 
   type TimelineContext = {
     vertical: boolean;
     compact: boolean;
-    icon: ComponentProps<Icon>['icon'];
+    icon: ComponentProps<typeof Icon>['data'];
     snapPoint: boolean;
   };
 
@@ -29,28 +29,38 @@
   type TimelineEventData = {
     start?: string | number | boolean;
     end?: string | number | boolean;
-    icon?: ComponentProps<Icon>['data'];
+    icon?: ComponentProps<typeof Icon>['data'];
     completed?: boolean;
   };
 
-  export let data: TimelineEventData[] = [];
+  interface Props {
+    data?: TimelineEventData[];
+    /** Align vertically (default: horizontal) */
+    vertical?: boolean;
+    /** Place timeline on left and all start/end events on same/end side  */
+    compact?: boolean;
+    /** Common icon for all events */
+    icon?: ComponentProps<typeof TimelineEvent>['icon'];
+    /** Snap point to start */
+    snapPoint?: boolean;
+    classes?: {
+      root?: string;
+      event?: ComponentProps<typeof TimelineEvent>['classes'];
+    };
+    class?: string;
+    children?: Snippet<[{ data: TimelineEventData[] }]>;
+  }
 
-  /** Align vertically (default: horizontal) */
-  export let vertical: boolean = false;
-
-  /** Place timeline on left and all start/end events on same/end side  */
-  export let compact: boolean = false;
-
-  /** Common icon for all events */
-  export let icon: ComponentProps<TimelineEvent>['icon'] = undefined;
-
-  /** Snap point to start */
-  export let snapPoint = false;
-
-  export let classes: {
-    root?: string;
-    event?: ComponentProps<TimelineEvent>['classes'];
-  } = {};
+  let {
+    data = [],
+    vertical = false,
+    compact = false,
+    icon,
+    snapPoint = false,
+    classes = {},
+    class: className,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Timeline');
 
   setTimeline({
@@ -68,12 +78,14 @@
     vertical && 'flex-col timeline-vertical',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
-  <slot {data}>
+  {#if children}
+    {@render children({ data })}
+  {:else}
     {#each data as item}
       <TimelineEvent classes={classes.event} {...item} />
     {/each}
-  </slot>
+  {/if}
 </ul>

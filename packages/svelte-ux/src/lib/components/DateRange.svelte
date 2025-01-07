@@ -23,52 +23,44 @@
   import { mdScreen } from '../stores/matchMedia.js';
   import { getSettings } from './settings.js';
 
-  export let selected: DateRange | null = { from: null, to: null, periodType: null };
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    selected?: DateRange | null;
+    class?: string;
+    /** Period types to show */
+    periodTypes?: PeriodType[];
+    getPeriodTypePresets?: typeof getDateRangePresets;
+    /**
+     * Dates to disable (not selectable)
+     */
+    disabledDates?: DisabledDate;
+  }
 
-  /** Period types to show */
-  export let periodTypes: PeriodType[] = [
-    PeriodType.Day,
-    PeriodType.Week,
-    PeriodType.BiWeek1,
-    // PeriodType.BiWeek2Sun,
-    PeriodType.Month,
-    PeriodType.Quarter,
-    PeriodType.CalendarYear,
-    PeriodType.FiscalYearOctober,
-  ];
-  export let getPeriodTypePresets = getDateRangePresets;
-
-  /**
-   * Dates to disable (not selectable)
-   */
-  export let disabledDates: DisabledDate | undefined = undefined;
+  let {
+    selected = $bindable(),
+    class: className,
+    periodTypes = [
+      PeriodType.Day,
+      PeriodType.Week,
+      PeriodType.BiWeek1,
+      // PeriodType.BiWeek2Sun,
+      PeriodType.Month,
+      PeriodType.Quarter,
+      PeriodType.CalendarYear,
+      PeriodType.FiscalYearOctober,
+    ],
+    getPeriodTypePresets = getDateRangePresets,
+    disabledDates,
+  }: Props = $props();
 
   const settingsClasses = getComponentClasses('DateRange');
   const { format, localeSettings } = getSettings();
 
-  let selectedPeriodType = selected?.periodType ?? periodTypes[0];
-  let selectedPreset: string | null = null;
-  let selectedDayOfWeek: DayOfWeek =
-    $format.settings.formats.dates.weekStartsOn ?? DayOfWeek.Sunday;
-  let activeDate: 'from' | 'to' = 'from';
-
-  $: periodTypeOptions = periodTypes.map((pt) => {
-    const value = adjustPeriodType(pt);
-    return {
-      label: $format.getPeriodTypeName(value),
-      value,
-    };
-  });
-
-  $: presetOptions = getPeriodTypePresets($localeSettings, selectedPeriodType).map((preset) => {
-    return {
-      label: preset.label,
-      value: getDateRangeStr(preset.value),
-      preset,
-    };
-  });
+  let selectedPeriodType = $state(selected?.periodType ?? periodTypes[0]);
+  let selectedPreset: string | null = $state(null);
+  let selectedDayOfWeek: DayOfWeek = $state(
+    $format.settings.formats.dates.weekStartsOn ?? DayOfWeek.Sunday
+  );
+  let activeDate: 'from' | 'to' = $state('from');
 
   /** Get date range (without period type) as string */
   function getDateRangeStr(range: DateRange) {
@@ -124,8 +116,33 @@
     }
   }
 
+  function adjustPeriodType(periodType: PeriodType) {
+    // Adjust value for currently selected day of week, if needed
+    return missingDayOfWeek(periodType)
+      ? replaceDayOfWeek(periodType, selectedDayOfWeek) || periodType
+      : periodType;
+  }
+
+  let periodTypeOptions = $derived(
+    periodTypes.map((pt) => {
+      const value = adjustPeriodType(pt);
+      return {
+        label: $format.getPeriodTypeName(value),
+        value,
+      };
+    })
+  );
+  let presetOptions = $derived(
+    getPeriodTypePresets($localeSettings, selectedPeriodType).map((preset) => {
+      return {
+        label: preset.label,
+        value: getDateRangeStr(preset.value),
+        preset,
+      };
+    })
+  );
   // Update selection after changing `selectedDayOfWeek`
-  $: {
+  $effect(() => {
     if (hasDayOfWeek(selectedPeriodType)) {
       const newPeriodType = replaceDayOfWeek(selectedPeriodType, selectedDayOfWeek);
 
@@ -159,18 +176,10 @@
       // @ts-expect-error (null / undefined issue...)
       selected = newSelected;
     }
-  }
-
-  function adjustPeriodType(periodType: PeriodType) {
-    // Adjust value for currently selected day of week, if needed
-    return missingDayOfWeek(periodType)
-      ? replaceDayOfWeek(periodType, selectedDayOfWeek) || periodType
-      : periodType;
-  }
-
-  $: showPeriodTypes = periodTypeOptions.length > 1;
-  $: showPresets = presetOptions.length > 0;
-  $: showSidebar = showPeriodTypes || showPresets;
+  });
+  let showPeriodTypes = $derived(periodTypeOptions.length > 1);
+  let showPresets = $derived(presetOptions.length > 0);
+  let showSidebar = $derived(showPeriodTypes || showPresets);
 </script>
 
 <div
@@ -238,7 +247,7 @@
             <div class="text-xs text-surface-content/50 uppercase mb-1">Type</div>
             <ToggleGroup
               bind:value={selectedPeriodType}
-              on:change={(e) => onPeriodTypeChange(e.detail.value)}
+              onChange={(value) => onPeriodTypeChange(value)}
               variant="outline"
               inset
               vertical
@@ -255,7 +264,7 @@
             label="Type"
             bind:value={selectedPeriodType}
             options={periodTypeOptions}
-            on:change={(e) => onPeriodTypeChange(e.detail.value)}
+            onChange={({ value }) => onPeriodTypeChange(value)}
           />
         {/if}
       {/if}
@@ -269,7 +278,7 @@
                 {#each presetOptions as option}
                   <ToggleOption
                     value={option.value}
-                    on:click={() => {
+                    onclick={() => {
                       onPresetChange(option.value);
                     }}
                   >
@@ -283,8 +292,8 @@
               label="Presets"
               bind:value={selectedPreset}
               options={presetOptions}
-              on:change={(e) => {
-                onPresetChange(e.detail.value);
+              onChange={({ value }) => {
+                onPresetChange(value);
               }}
             />
           {/if}

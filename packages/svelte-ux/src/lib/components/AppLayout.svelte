@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { BROWSER } from 'esm-env';
   import Backdrop from './Backdrop.svelte';
 
@@ -7,21 +8,34 @@
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './index.js';
 
-  export let navWidth = 240;
-  export let headerHeight = 64;
+  interface Props {
+    navWidth?: number;
+    headerHeight?: number;
+    /** Control whether header should be full width (deafult) or nav should be full height */
+    headerPosition?: 'full' | 'inset';
+    classes?: {
+      root?: string;
+      aside?: string;
+      nav?: string;
+    };
+    class?: string;
+    children?: Snippet;
+    nav?: Snippet;
+  }
 
-  /** Control whether header should be full width (deafult) or nav should be full height */
-  export let headerPosition: 'full' | 'inset' = 'full';
-
-  export let classes: {
-    root?: string;
-    aside?: string;
-    nav?: string;
-  } = {};
+  let {
+    navWidth = 240,
+    headerHeight = 64,
+    headerPosition = 'full',
+    classes = {},
+    class: className,
+    children,
+    nav,
+  }: Props = $props();
 
   const settingsClasses = getComponentClasses('AppLayout');
   const { showDrawer } = getSettings();
-  $: temporaryDrawer = BROWSER ? !$mdScreen : false;
+  let temporaryDrawer = $derived(BROWSER ? !$mdScreen : false);
 </script>
 
 <div
@@ -39,14 +53,14 @@
     '[:where(&_[id])]:scroll-m-[var(--headerHeight)]',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
-  <slot />
+  {@render children?.()}
 
   <!-- Render backdrop first to fix stacking order with <aside> nav -->
   {#if $showDrawer && temporaryDrawer}
-    <Backdrop on:click={() => ($showDrawer = false)} class="z-50" />
+    <Backdrop onClick={() => ($showDrawer = false)} class="z-50" />
   {/if}
 
   <aside
@@ -69,7 +83,7 @@
         classes.nav
       )}
     >
-      <slot name="nav" />
+      {@render nav?.()}
     </nav>
   </aside>
 </div>

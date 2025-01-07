@@ -1,30 +1,27 @@
-<script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+<script lang="ts" generics="T">
+  import type { Snippet } from 'svelte';
   import selectionStore from '../stores/selectionStore.js';
 
-  type T = $$Generic;
+  interface Props {
+    initial?: T[];
+    all?: T[];
+    single?: boolean;
+    max?: number;
+    onChange?: (value: typeof $selection.selected) => void;
+    children?: Snippet<[typeof $selection]>;
+  }
 
-  export let initial: T[] = [];
-  export let all: T[] = [];
-  export let single = false;
-  export let max: number | undefined = undefined;
+  let { initial = [], all = [], single = false, max, onChange, children }: Props = $props();
 
   const selection = selectionStore({ initial, all, single, max });
-  $: $selection.all.set(all);
 
-  const dispatch = createEventDispatcher();
+  $effect(() => {
+    $selection.all.set(all);
+  });
 
-  $: dispatch('change', { value: $selection.selected });
+  $effect(() => {
+    onChange?.($selection.selected);
+  });
 </script>
 
-<!-- TODO: `<slot {...$selection} />` does not play well with sveld -->
-<slot
-  selected={$selection.selected}
-  isSelected={$selection.isSelected}
-  isDisabled={$selection.isDisabled}
-  toggleAll={$selection.toggleAll}
-  toggleSelected={$selection.toggleSelected}
-  isAllSelected={$selection.isAllSelected}
-  isAnySelected={$selection.isAnySelected}
-  clear={$selection.clear}
-/>
+{@render children?.({ ...$selection })}

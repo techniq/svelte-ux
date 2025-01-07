@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   import { fade, slide } from 'svelte/transition';
   import { flatGroup } from 'd3-array';
 
@@ -36,11 +36,17 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
 
-  $: [type, name] = $page.url.pathname.split('/').slice(2) ?? [];
-  $: title = $page.data.meta?.title ?? name;
-  $: pageUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
-  $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
-  $: ({
+  interface Props {
+    children?: Snippet;
+  }
+
+  let { children }: Props = $props();
+
+  let [type, name] = $derived($page.url.pathname.split('/').slice(2) ?? []);
+  let title = $derived($page.data.meta?.title ?? name);
+  let pageUrl = $derived(`src/routes/docs/${type}/${name}/+page.svelte?plain=1`);
+  let sourceUrl = $derived(`src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`);
+  let {
     description,
     features,
     related,
@@ -50,9 +56,12 @@
     pageSource,
     api,
     status,
-  } = $page.data.meta ?? {});
+  } = $derived($page.data.meta ?? {});
 
-  $: showTableOfContents = $xlScreen;
+  let showTableOfContents = $state<boolean>();
+  $effect(() => {
+    showTableOfContents = $xlScreen;
+  });
 
   onMount(() => {
     showTableOfContents = !hideTableOfContents && $xlScreen;
@@ -161,7 +170,9 @@
         bind:open={showTableOfContents}
         classes={{ dialog: 'w-[420px] max-w-[95vw] max-h-[95dvh]' }}
       >
-        <div slot="title">On this page</div>
+        {#snippet title()}
+          <div>On this page</div>
+        {/snippet}
         <Button
           icon={mdiClose}
           class="absolute top-1 right-1"
@@ -202,7 +213,7 @@
         {/key}
       {/if}
 
-      <slot />
+      {@render children?.()}
 
       {#if related}
         <h1 id="related">Related</h1>
@@ -235,9 +246,11 @@
                       list="group"
                       class="hover:bg-surface-200 cursor-pointer"
                     >
-                      <div slot="actions">
-                        <Icon data={mdiChevronRight} class="text-surface-content/50" />
-                      </div>
+                      {#snippet actions()}
+                        <div>
+                          <Icon data={mdiChevronRight} class="text-surface-content/50" />
+                        </div>
+                      {/snippet}
                     </ListItem>
                   </a>
                 {/each}

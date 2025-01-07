@@ -4,13 +4,36 @@
   import { portal as portalAction, type PortalOptions } from '../actions/portal.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
 
-  export let blur: boolean = false;
-  export let portal: PortalOptions = false;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    blur?: boolean;
+    portal?: PortalOptions;
+    class?: string;
+    fadeParams?: FadeParams;
+    onKeyDown?: SvelteHTMLElements['div']['onkeydown'];
+    onKeyUp?: SvelteHTMLElements['div']['onkeyup'];
+    onKeyPress?: SvelteHTMLElements['div']['onkeypress'];
+    onClick?: SvelteHTMLElements['div']['onclick'];
+    onMouseDown?: SvelteHTMLElements['div']['onmousedown'];
+    onMouseUp?: SvelteHTMLElements['div']['onmouseup'];
+    children?: Snippet;
+  }
 
-  export let fadeParams: FadeParams = { duration: 300 };
+  let {
+    blur = false,
+    portal = false,
+    class: className,
+    fadeParams = { duration: 300 },
+    onKeyDown,
+    onKeyUp,
+    onKeyPress,
+    onClick,
+    onMouseDown,
+    onMouseUp,
+    children,
+  }: Props = $props();
 
   const settingsClasses = getComponentClasses('Backdrop');
 </script>
@@ -23,16 +46,16 @@
     settingsClasses.root,
     className
   )}
-  on:keydown
-  on:keyup
-  on:keypress
-  on:click
-  on:mousedown
-  on:mouseup
+  onkeydown={onKeyDown}
+  onkeyup={onKeyUp}
+  onkeypress={onKeyPress}
+  onclick={onClick}
+  onmousedown={onMouseDown}
+  onmouseup={onMouseUp}
   in:fade|global={fadeParams}
   out:fade={fadeParams}
   use:portalAction={portal}
   role="none"
 >
-  <slot />
+  {@render children?.()}
 </div>

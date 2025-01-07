@@ -1,12 +1,17 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { cls } from '../utils/styles.js';
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
 
-  export let size: 'sm' | 'md' | 'lg' | 'unset' = 'md';
-  export let icon: string | undefined = undefined;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    size?: 'sm' | 'md' | 'lg' | 'unset';
+    icon?: string;
+    class?: string;
+    children?: Snippet;
+  }
+
+  let { size = 'md', icon, class: className, children }: Props = $props();
 
   const settingsClasses = getComponentClasses('Avatar');
 </script>
@@ -25,9 +30,9 @@
     className
   )}
 >
-  <slot>
-    {#if icon}
-      <Icon data={icon} />
-    {/if}
-  </slot>
+  {#if children}
+    {@render children()}
+  {:else if icon}
+    <Icon data={icon} />
+  {/if}
 </div>

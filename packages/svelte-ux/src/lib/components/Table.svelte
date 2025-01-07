@@ -1,6 +1,4 @@
 <script lang="ts" generics="TData">
-  import { createEventDispatcher } from 'svelte';
-
   import { tableCell } from '../actions/table.js';
   import type { ColumnDef } from '../types/table.js';
   import { cls } from '../utils/styles.js';
@@ -8,49 +6,88 @@
   import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '../utils/table.js';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
-  import { getComponentClasses } from './theme.js';
   import { getSettings } from './settings.js';
   import tableOrderStore from '../stores/tableOrderStore.js';
+  import type { Snippet } from 'svelte';
 
-  const dispatch = createEventDispatcher<{
-    headerClick: { column: ColumnDef<TData> };
-    cellClick: { column: ColumnDef<TData>; rowData: TData };
-  }>();
-
-  export let columns: ColumnDef<TData>[] = [];
-  export let data: TData[] | null = [];
-
-  export let order: ReturnType<typeof tableOrderStore> | undefined = undefined;
-
-  export let classes: {
-    container?: string;
-    wrapper?: string;
-    table?: string;
-    thead?: string;
-    tbody?: string;
-    tr?: string;
-    th?: string;
-    td?: string;
-  } = {};
   // TODO: Figure out circular reference error
   // const settingsClasses = getComponentClasses('Table');
   const settingsClasses: typeof classes = {};
 
   const { format } = getSettings();
 
-  export let styles: {
-    container?: string;
-    wrapper?: string;
-    table?: string;
-    thead?: string;
-    tbody?: string;
-    tr?: string;
-    th?: string;
-    td?: string;
-  } = {};
+  interface Props {
+    columns?: ColumnDef<TData>[];
+    data?:
+      | TData[]
+      | Snippet<
+          [
+            {
+              data: TData | null;
+              columns: typeof rowColumns;
+              getCellValue: typeof getCellValue;
+              getCellContent: typeof getCellContent;
+            },
+          ]
+        >
+      | null;
+    order?: ReturnType<typeof tableOrderStore>;
+    classes?: {
+      container?: string;
+      wrapper?: string;
+      table?: string;
+      thead?: string;
+      tbody?: string;
+      tr?: string;
+      th?: string;
+      td?: string;
+    };
+    styles?: {
+      container?: string;
+      wrapper?: string;
+      table?: string;
+      thead?: string;
+      tbody?: string;
+      tr?: string;
+      th?: string;
+      td?: string;
+    };
+    class?: string;
+    onHeaderClick?: (column: ColumnDef<TData>) => void;
+    onCellClick?: ({ column, rowData }: { column: ColumnDef<TData>; rowData: TData }) => void;
+    headers?: Snippet<[{ headers: typeof headers; getCellHeader: (column: ColumnDef) => string }]>;
+    children?: Snippet;
+  }
 
-  $: headers = getHeaders(columns).map((headerRow) => {
-    return headerRow.map((column) => {
+  let {
+    columns = [],
+    data = [],
+    order,
+    classes = {},
+    styles = {},
+    class: className,
+    onHeaderClick,
+    onCellClick,
+    headers: headersRender,
+    children,
+  }: Props = $props();
+
+  let headers = $derived(
+    getHeaders(columns).map((headerRow) => {
+      return headerRow.map((column) => {
+        return {
+          ...column,
+          classes: {
+            th: cls(settingsClasses.th, classes.th, column.classes?.th),
+            td: cls(settingsClasses.td, classes.td, column.classes?.td),
+          },
+        };
+      });
+    })
+  );
+
+  let rowColumns = $derived(
+    getRowColumns(columns).map((column) => {
       return {
         ...column,
         classes: {
@@ -58,20 +95,10 @@
           td: cls(settingsClasses.td, classes.td, column.classes?.td),
         },
       };
-    });
-  });
+    })
+  );
 
-  $: rowColumns = getRowColumns(columns).map((column) => {
-    return {
-      ...column,
-      classes: {
-        th: cls(settingsClasses.th, classes.th, column.classes?.th),
-        td: cls(settingsClasses.td, classes.td, column.classes?.td),
-      },
-    };
-  });
-
-  $: getCellContent = (column: ColumnDef<TData>, rowData: TData, rowIndex: number) => {
+  let getCellContent = $derived((column: ColumnDef<TData>, rowData: TData, rowIndex: number) => {
     let value = getCellValue(column, rowData, rowIndex);
     if (column.format) {
       if (typeof column.format === 'function') {
@@ -83,18 +110,12 @@
     } else {
       return value;
     }
-  };
+  });
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
-  class={cls(
-    'Table',
-    'table-container',
-    settingsClasses.container,
-    classes.container,
-    $$props.class
-  )}
+  class={cls('Table', 'table-container', settingsClasses.container, classes.container, className)}
   style={styles.container}
 >
   <div
@@ -102,7 +123,9 @@
     style={styles.wrapper}
   >
     <table class={cls('w-full', settingsClasses.table, classes.table)} style={styles.table}>
-      <slot name="headers" {headers} {getCellHeader}>
+      {#if headersRender}
+        {@render headersRender({ headers, getCellHeader })}
+      {:else}
         <thead class={cls(settingsClasses.thead, classes.thead)} style={styles.thead}>
           {#each headers ?? [] as headerRow}
             <tr class={cls(settingsClasses.tr, classes.tr)} style={styles.tr}>
@@ -112,7 +135,7 @@
                   class="column-{column.name}"
                   class:whitespace-nowrap={order}
                   style={styles.th}
-                  on:click={(e) => dispatch('headerClick', { column })}
+                  onclick={() => onHeaderClick?.(column)}
                 >
                   {getCellHeader(column)}
                   {#if order}
@@ -123,11 +146,14 @@
             </tr>
           {/each}
         </thead>
-      </slot>
+      {/if}
 
-      <slot />
+      {@render children?.()}
 
-      <slot name="data" {data} columns={rowColumns} {getCellValue} {getCellContent}>
+      {#if typeof data === 'function'}
+        {@const _data = data as TData | null}
+        {@render data({ data: _data, columns: rowColumns, getCellValue, getCellContent })}
+      {:else}
         <tbody class={cls(settingsClasses.tbody, classes.tbody)} style={styles.tbody}>
           {#each data ?? [] as rowData, rowIndex}
             <tr class={cls(settingsClasses.tr, classes.tr)} style={styles.tr}>
@@ -136,7 +162,7 @@
                   use:tableCell={{ column, rowData, rowIndex, tableData: data }}
                   class="column-{column.name}"
                   style={styles.td}
-                  on:click={(e) => dispatch('cellClick', { column, rowData })}
+                  onclick={() => onCellClick?.({ column, rowData })}
                 >
                   {#if column.html}
                     {@html getCellContent(column, rowData, rowIndex)}
@@ -148,7 +174,7 @@
             </tr>
           {/each}
         </tbody>
-      </slot>
+      {/if}
     </table>
   </div>
 </div>

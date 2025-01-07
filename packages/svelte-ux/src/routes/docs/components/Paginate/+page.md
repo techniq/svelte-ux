@@ -13,11 +13,13 @@
   import { Paginate, Pagination } from 'svelte-ux';
 </script>
 
-<Paginate {data} let:pageData let:pagination>
-  {#each pageData as d}
-    <!-- render item -->
-  {/each}
-  <Pagination {pagination} />
+<Paginate {data}>
+  {#snippet children({ pageData, pagination })}
+    {#each pageData as d}
+      <!-- render item -->
+    {/each}
+    <Pagination {pagination} />
+  {/snippet}
 </Paginate>
 ```
 
@@ -26,13 +28,15 @@
 <h2>Default</h2>
 
 <Preview>
-	<Paginate {data} let:pageData let:pagination>
-		{#each pageData as d}
+	<Paginate {data}>
+		{#snippet children({ pageData, pagination })}
+		  {#each pageData as d}
 			<ListItem title={d.name} />
-		{/each}
-		{#if pageData.length > 0}
+		  {/each}
+		  {#if pageData.length > 0}
 			<Pagination {pagination} />
-		{/if}
+		  {/if}
+		{/snippet}
 	</Paginate>
 </Preview>
 
@@ -40,11 +44,13 @@
 
 <Preview>
 	<Paginate {data} perPage={5} let:pageData let:pagination>
-		{#each pageData as d}
+		{#snippet children({ pageData, pagination })}
+		  {#each pageData as d}
 			<ListItem title={d.name} />
-		{/each}
-		{#if pageData.length > 0}
+		  {/each}
+		  {#if pageData.length > 0}
 			<Pagination {pagination} />
-		{/if}
+		  {/if}
+		{/snippet}
 	</Paginate>
 </Preview>

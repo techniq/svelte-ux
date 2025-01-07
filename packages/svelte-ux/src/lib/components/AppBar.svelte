@@ -7,26 +7,46 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './index.js';
+  import type { Snippet } from 'svelte';
 
-  export let title: string | number | Array<string | number> = '';
-  export let menuIcon: string | null = mdiMenu;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    title?: string | number | Array<string | number> | Snippet;
+    menuIcon?: string | Snippet<[{ toggleMenu: () => void; isMenuOpen: boolean }]> | null;
+    class?: string;
+    /**
+     * Update head / document.title.  Set to false to disable
+     */
+    head?: boolean;
+    children?: Snippet;
+    actions?: Snippet;
+  }
 
-  /**
-   * Update head / document.title.  Set to false to disable
-   */
-  export let head = true;
+  let {
+    title = '',
+    menuIcon = mdiMenu,
+    class: className,
+    head = true,
+    children,
+    actions,
+  }: Props = $props();
 
   const { showDrawer } = getSettings();
   const settingsClasses = getComponentClasses('AppBar');
 
-  $: titleString = Array.isArray(title) ? title.filter((x) => x).join(' › ') : title.toString();
+  let titleString = $derived(
+    typeof title === 'function'
+      ? ''
+      : Array.isArray(title)
+        ? title.filter((x) => x).join(' › ')
+        : title.toString()
+  );
 
-  $: if (BROWSER && head) {
-    // Appears to be needed for some reactive updates
-    document.title = titleString;
-  }
+  $effect(() => {
+    if (BROWSER && head) {
+      // Appears to be needed for some reactive updates
+      document.title = titleString;
+    }
+  });
 
   function toggleMenu() {
     $showDrawer = !$showDrawer;
@@ -37,13 +57,15 @@
   class={cls('AppBar', 'px-4 flex items-center relative z-50', settingsClasses.root, className)}
 >
   {#if menuIcon}
-    <slot name="menuIcon" {toggleMenu} isMenuOpen={$showDrawer}>
-      <Button icon={menuIcon} on:click={toggleMenu} class="p-3" />
-    </slot>
+    {#if typeof menuIcon === 'function'}
+      {@render menuIcon({ toggleMenu, isMenuOpen: $showDrawer })}
+    {:else}
+      <Button icon={menuIcon} onclick={toggleMenu} class="p-3" />
+    {/if}
   {/if}
 
-  {#if $$slots.title}
-    <slot name="title" />
+  {#if typeof title === 'function'}
+    {@render title()}
   {:else}
     <div class="ml-2 text-lg font-medium">
       {#if typeof title === 'string' || typeof title === 'number'}
@@ -54,10 +76,10 @@
     </div>
   {/if}
 
-  <slot />
+  {@render children?.()}
 
   <div class="flex-1 grid justify-end">
-    <slot name="actions" />
+    {@render actions?.()}
   </div>
 </header>
 

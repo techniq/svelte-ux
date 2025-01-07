@@ -13,10 +13,12 @@
 
 <Preview>
   <div class="h-[400px] p-1 overflow-auto">
-    <InfiniteScroll {items} let:visibleItems>
-      {#each visibleItems as item}
-        <ListItem title={item.name} />
-      {/each}
+    <InfiniteScroll {items}>
+      {#snippet children(visibleItems)}
+        {#each visibleItems as item}
+          <ListItem title={item.name} />
+        {/each}
+      {/snippet}
     </InfiniteScroll>
   </div>
 </Preview>
@@ -25,10 +27,12 @@
 
 <Preview>
   <div class="h-[400px] p-1 overflow-auto">
-    <InfiniteScroll {items} perPage={5} let:visibleItems>
-      {#each visibleItems as item}
-        <ListItem title={item.name} />
-      {/each}
+    <InfiniteScroll {items} perPage={5}>
+      {#snippet children(visibleItems)}
+        {#each visibleItems as item}
+          <ListItem title={item.name} />
+        {/each}
+      {/snippet}
     </InfiniteScroll>
   </div>
 </Preview>
@@ -36,9 +40,11 @@
 <h2>Viewport root (no overflown parent/ancestor)</h2>
 
 <Preview>
-  <InfiniteScroll {items} let:visibleItems>
-    {#each visibleItems as item}
-      <ListItem title={item.name} />
-    {/each}
+  <InfiniteScroll {items}>
+    {#snippet children(visibleItems)}
+      {#each visibleItems as item}
+        <ListItem title={item.name} />
+      {/each}
+    {/snippet}
   </InfiniteScroll>
 </Preview>

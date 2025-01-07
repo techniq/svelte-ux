@@ -2,21 +2,8 @@
   import { cls } from '../utils/styles.js';
   import { intersection } from '../actions/observer.js';
   import { getComponentClasses } from './theme.js';
-
-  /**
-   * Placeholder height.  Should match closely to resulting height to reducing scroll bouncing
-   */
-  export let height: string | number;
-
-  /**
-   * Unmount item once no longer visible.  Captures rendered height before unmounting
-   */
-  export let unmount = false;
-
-  let className: string | undefined = undefined;
-  export { className as class };
-
-  let show = false;
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
 
   type Offset = {
     top?: string;
@@ -25,9 +12,32 @@
     right?: string;
   };
 
-  export let offset: Offset = {};
+  interface Props {
+    /**
+     * Placeholder height.  Should match closely to resulting height to reducing scroll bouncing
+     */
+    height: string | number;
+    /**
+     * Unmount item once no longer visible.  Captures rendered height before unmounting
+     */
+    unmount?: boolean;
+    offset?: Offset;
+    onintersecting?: svelteHTML.HTMLAttributes['onintersecting'];
+    children?: Snippet;
+  }
+
+  let {
+    height = $bindable(),
+    unmount = false,
+    class: className,
+    offset = {},
+    onintersecting,
+    children,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements['div'], keyof Props> = $props();
 
   const settingsClasses = getComponentClasses('Lazy');
+  let show = $state(false);
 </script>
 
 <div
@@ -36,20 +46,20 @@
       offset.left ?? '0px'
     }`,
   }}
-  on:intersecting={(e) => {
+  onintersecting={(e) => {
     if (e.detail.isIntersecting) {
       show = true;
     } else if (unmount) {
       height = e.detail.boundingClientRect.height;
       show = false;
     }
+    onintersecting?.(e);
   }}
-  on:intersecting
   style:min-height={typeof height === 'number' ? `${height}px` : height}
-  {...$$restProps}
+  {...restProps}
   class={cls('Lazy', settingsClasses.root, className)}
 >
   {#if show}
-    <slot />
+    {@render children?.()}
   {/if}
 </div>

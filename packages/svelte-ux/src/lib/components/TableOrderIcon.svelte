@@ -6,8 +6,12 @@
   import Icon from '../components/Icon.svelte';
   import { cls } from '../utils/styles.js';
 
-  export let order: ReturnType<typeof tableOrderStore>;
-  export let column: ColumnDef;
+  interface Props {
+    order: ReturnType<typeof tableOrderStore>;
+    column: ColumnDef;
+  }
+
+  let { order, column }: Props = $props();
 </script>
 
 {#if $order.by && ($order.by === column.value || $order.by === column.name || $order.by === column.orderBy)}

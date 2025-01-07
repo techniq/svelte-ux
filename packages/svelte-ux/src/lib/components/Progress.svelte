@@ -1,11 +1,19 @@
 <script lang="ts">
+  import type { HTMLProgressAttributes } from 'svelte/elements';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let value: number | null;
-  export let max: number | undefined = undefined;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    value: number | null;
+    max?: number;
+  }
+
+  let {
+    value = $bindable(),
+    max,
+    class: className,
+    ...restProps
+  }: Props & Omit<HTMLProgressAttributes, keyof Props> = $props();
 
   const settingsClasses = getComponentClasses('Progress');
 </script>
@@ -13,7 +21,7 @@
 <progress
   {value}
   {max}
-  {...$$restProps}
+  {...restProps}
   class={cls(
     'Progress',
     'h-2 w-full',

@@ -1,6 +1,12 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import type { AriaRole, HTMLInputAttributes } from 'svelte/elements';
+  import { type ComponentProps, type Snippet } from 'svelte';
+  import type {
+    AriaRole,
+    FocusEventHandler,
+    HTMLInputAttributes,
+    KeyboardEventHandler,
+    SvelteHTMLElements,
+  } from 'svelte/elements';
   import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
@@ -19,135 +25,156 @@
 
   type InputValue = string | number;
 
-  const dispatch = createEventDispatcher<{
-    clear: null;
-    change: { value: typeof value; inputValue: InputValue | null; operator?: string };
-  }>();
+  // const dispatch = createEventDispatcher<{
+  //   clear: null;
+  //   change: { value: typeof value; inputValue: InputValue | null; operator?: string };
+  // }>();
 
   const { classes: settingsClasses, defaults } = getComponentSettings('TextField');
   const { defaults: fieldDefaults } = getComponentSettings('Field');
 
-  export let name: string | undefined = undefined;
-  export let label = '';
-  export let labelPlacement: LabelPlacement =
-    defaults.labelPlacement ?? fieldDefaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT;
-  export let value: InputValue | { [operator: string]: InputValue | null } | null = ''; // TODO: Can also include operator: { "operator": "value" }
-  export let type:
-    | 'text'
-    | 'password'
-    | 'integer'
-    | 'decimal'
-    | 'currency'
-    | 'percent'
-    | 'search'
-    | 'email' = 'text';
-  export let placeholder: string | undefined = undefined;
-  export let error: string | string[] | boolean | undefined = '';
-  export let hint = '';
-  export let autocomplete: HTMLTextAreaElement['autocomplete'] = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
-  export let multiline = false;
-  export let required = false;
-  export let disabled = false;
-  export let clearable = false;
-  export let base = false;
-  export let rounded = false;
-  export let dense = false;
-  export let icon: IconInput = null;
-  export let iconRight: IconInput = null;
-  export let align: 'left' | 'center' | 'right' = 'left';
-  export let autofocus: boolean | Parameters<typeof autoFocus>[1] = false;
-  // TODO: Find way to conditionally set type based on `multiline` value
-  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = autofocus
-    ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined)]
-    : undefined;
-  export let operators: { label: string; value: string }[] | undefined = undefined;
-  export let inputEl: HTMLInputElement | null = null;
-  export let debounceChange: boolean | number = false;
-  export let classes: {
-    root?: string;
-    container?: string;
+  interface Props {
+    name?: string;
     label?: string;
-    input?: string;
-    error?: string;
-    prepend?: string;
-    append?: string;
-  } = {};
-
-  // Input props
-  export let mask: string | undefined = undefined;
-  export let replace: string | undefined = undefined;
-  export let accept: string | RegExp | undefined = undefined;
-  // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
-  export let autocapitalize: ComponentProps<Input>['autocapitalize'] = undefined;
-  export let role: AriaRole | undefined = undefined;
-
-  /**
-   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
-   */
-  export let min: number | undefined = undefined;
-  /**
-   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
-   */
-  export let max: number | undefined = undefined;
-  /**
-   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step
-   */
-  export let step: number | undefined = type === 'decimal' ? 0.1 : 1;
-
-  let inputType = 'text';
-  $: switch (type) {
-    case 'integer':
-    case 'decimal':
-    case 'currency':
-    case 'percent':
-      // TODO: typing '.' on iOS appears to clear input when using type="number"
-      inputType = 'number';
-      break;
-    case 'password':
-      inputType = 'password';
-      break;
-    case 'email':
-      inputType = 'email';
-      break;
-    case 'search':
-      inputType = 'search';
-      break;
-    case 'text':
-    default:
-      inputType = 'text';
+    labelPlacement?: LabelPlacement;
+    value?: InputValue | { [operator: string]: InputValue | null } | null; // TODO: Can also include operator: { "operator": "value" }
+    type?:
+      | 'text'
+      | 'password'
+      | 'integer'
+      | 'decimal'
+      | 'currency'
+      | 'percent'
+      | 'search'
+      | 'email';
+    placeholder?: string;
+    error?: string | string[] | boolean;
+    hint?: string;
+    autocomplete?: HTMLTextAreaElement['autocomplete']; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
+    multiline?: boolean;
+    required?: boolean;
+    disabled?: boolean;
+    clearable?: boolean;
+    base?: boolean;
+    rounded?: boolean;
+    dense?: boolean;
+    icon?: IconInput;
+    iconRight?: IconInput;
+    align?: 'left' | 'center' | 'right';
+    autofocus?: boolean | Parameters<typeof autoFocus>[1];
+    // TODO: Find way to conditionally set type based on `multiline` value
+    actions?: Actions<HTMLInputElement | HTMLTextAreaElement>;
+    operators?: { label: string; value: string }[];
+    inputEl?: HTMLInputElement | null;
+    debounceChange?: boolean | number;
+    classes?: {
+      root?: string;
+      container?: string;
+      label?: string;
+      input?: string;
+      error?: string;
+      prepend?: string;
+      append?: string;
+    };
+    // Input props
+    mask?: string;
+    replace?: string;
+    accept?: string | RegExp;
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize
+    autocapitalize?: ComponentProps<typeof Input>['autocapitalize'];
+    role?: AriaRole;
+    /**
+     * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
+     */
+    min?: number;
+    /**
+     * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
+     */
+    max?: number;
+    /**
+     * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step
+     */
+    step?: number;
+    class?: string;
+    onClear?: () => void;
+    onChange?: ({
+      value,
+      inputValue,
+      operator,
+    }: {
+      value: InputValue | { [operator: string]: InputValue | null } | null;
+      inputValue: InputValue | null;
+      operator?: string;
+    }) => void;
+    onfocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | null;
+    onblur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | null;
+    onkeydown?: KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | null;
+    onkeypress?: KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement> | null;
+    onclick?: SvelteHTMLElements['div']['onclick'];
+    prepend?: Snippet;
+    append?: Snippet;
+    prefix?: Snippet;
+    suffix?: Snippet;
+    id?: string;
   }
-  let inputMode: HTMLInputAttributes['inputmode'] = undefined;
-  $: switch (type) {
-    case 'integer':
-      inputMode = 'numeric';
-      break;
-    case 'decimal':
-    case 'currency':
-    case 'percent':
-      inputMode = 'decimal';
-      break;
-    case 'email':
-      inputMode = 'email';
-      break;
-    case 'search':
-      inputMode = 'search';
-      break;
-    case 'text':
-    case 'password':
-    default:
-      inputMode = 'text';
-  }
 
-  let inputValue: InputValue | null = value == null ? '' : String(value);
-  $: potentialInputValue = isLiteralObject(value) ? Object.values(value)[0] : (value ?? null);
-  $: if (inputType !== 'number' || inputValue != potentialInputValue) {
-    // Update the inputValue, but when the input type is number only do it if the values are actually different.
-    // This avoids the cursor jumping around when backspacing numbers around a decimal point, since
-    // e.g. "123" and "123." are both 123.
-    inputValue = potentialInputValue;
-  }
+  let {
+    name,
+    label = '',
+    labelPlacement = defaults.labelPlacement ??
+      fieldDefaults.labelPlacement ??
+      DEFAULT_LABEL_PLACEMENT,
+    value = $bindable(''),
+    type = 'text',
+    placeholder,
+    error = '',
+    hint = '',
+    autocomplete = 'off',
+    multiline = false,
+    required = false,
+    disabled = false,
+    clearable = false,
+    base = false,
+    rounded = false,
+    dense = false,
+    icon,
+    iconRight,
+    align = 'left',
+    autofocus = false,
+    actions = autofocus
+      ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined)]
+      : undefined,
+    operators,
+    inputEl = $bindable(null),
+    debounceChange = false,
+    classes = {},
+    mask,
+    replace,
+    accept,
+    autocapitalize,
+    role,
+    min,
+    max,
+    step = type === 'decimal' ? 0.1 : 1,
+    class: className,
+    onChange,
+    onClear,
+    onblur,
+    onfocus,
+    onkeydown,
+    onkeypress,
+    onclick,
+    prepend,
+    append,
+    prefix,
+    suffix,
+    id = uniqueId('textfield-'),
+  }: Props = $props();
 
-  $: operator = isLiteralObject(value) ? Object.keys(value)[0] : operators?.[0].value;
+  let inputType = $state('text');
+  let inputMode = $state<HTMLInputAttributes['inputmode']>();
+
+  let inputValue = $state<InputValue | null>(value == null ? '' : String(value));
 
   let lastTimeoutId: ReturnType<typeof setTimeout>;
   function updateValue() {
@@ -165,12 +192,12 @@
       clearTimeout(lastTimeoutId);
       lastTimeoutId = setTimeout(
         () => {
-          dispatch('change', { value, inputValue, operator });
+          onChange?.({ value, inputValue, operator });
         },
         debounceChange === true ? 300 : debounceChange
       );
     } else {
-      dispatch('change', { value, inputValue, operator });
+      onChange?.({ value, inputValue, operator });
     }
   }
 
@@ -199,17 +226,77 @@
     updateValue();
   }
 
-  $: hasInputValue = inputValue != null && inputValue !== '';
-  $: hasInsetLabel = ['inset', 'float'].includes(labelPlacement) && label !== '';
+  let labelEl: HTMLLabelElement | null = $state(null);
+  $effect(() => {
+    switch (type) {
+      case 'integer':
+      case 'decimal':
+      case 'currency':
+      case 'percent':
+        // TODO: typing '.' on iOS appears to clear input when using type="number"
+        inputType = 'number';
+        break;
+      case 'password':
+        inputType = 'password';
+        break;
+      case 'email':
+        inputType = 'email';
+        break;
+      case 'search':
+        inputType = 'search';
+        break;
+      case 'text':
+      default:
+        inputType = 'text';
+    }
+  });
+  $effect(() => {
+    switch (type) {
+      case 'integer':
+        inputMode = 'numeric';
+        break;
+      case 'decimal':
+      case 'currency':
+      case 'percent':
+        inputMode = 'decimal';
+        break;
+      case 'email':
+        inputMode = 'email';
+        break;
+      case 'search':
+        inputMode = 'search';
+        break;
+      case 'text':
+      case 'password':
+      default:
+        inputMode = 'text';
+    }
+  });
+  let potentialInputValue = $derived(
+    isLiteralObject(value) ? Object.values(value)[0] : (value ?? null)
+  );
+  $effect(() => {
+    if (inputType !== 'number' || inputValue != potentialInputValue) {
+      // Update the inputValue, but when the input type is number only do it if the values are actually different.
+      // This avoids the cursor jumping around when backspacing numbers around a decimal point, since
+      // e.g. "123" and "123." are both 123.
+      inputValue = potentialInputValue;
+    }
+  });
+  let operator = $state<string>();
 
-  $: hasPrepend = $$slots.prepend || !!icon;
-  $: hasAppend =
-    $$slots.append || iconRight != null || clearable || error || operators || type === 'password';
-  $: hasPrefix = $$slots.prefix || type === 'currency';
-  $: hasSuffix = $$slots.suffix || type === 'percent';
+  $effect(() => {
+    operator = isLiteralObject(value) ? Object.keys(value)[0] : operators?.[0].value;
+  });
 
-  export let id = uniqueId('textfield-');
-  let labelEl: HTMLLabelElement | null = null;
+  let hasInputValue = $derived(inputValue != null && inputValue !== '');
+  let hasInsetLabel = $derived(['inset', 'float'].includes(labelPlacement) && label !== '');
+  let hasPrepend = $derived(prepend || !!icon);
+  let hasAppend = $derived(
+    append || iconRight != null || clearable || error || operators || type === 'password'
+  );
+  let hasPrefix = $derived(prefix || type === 'currency');
+  let hasSuffix = $derived(suffix || type === 'percent');
 </script>
 
 <label
@@ -224,7 +311,7 @@
     !base && (rounded ? 'rounded-full' : 'rounded'),
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   bind:this={labelEl}
 >
@@ -271,7 +358,7 @@
               classes.prepend
             )}
           >
-            <slot name="prepend" />
+            {@render prepend?.()}
             {#if icon}
               <span class="mr-3">
                 <Icon data={asIconData(icon)} class="text-surface-content/50" />
@@ -280,8 +367,8 @@
           </div>
         {/if}
 
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div role={role === 'combobox' ? role : undefined} class="flex-grow inline-grid" on:click>
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
+        <div role={role === 'combobox' ? role : undefined} class="flex-grow inline-grid" {onclick}>
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <span
               class={cls(
@@ -311,7 +398,7 @@
               'group-focus-within:opacity-100'
             )}
           >
-            <slot name="prefix" />
+            {@render prefix?.()}
 
             {#if type === 'currency'}
               <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
@@ -327,11 +414,11 @@
                 {disabled}
                 value={inputValue}
                 {autocapitalize}
-                on:input={handleInput}
-                on:focus
-                on:blur
-                on:keydown
-                on:keypress
+                oninput={handleInput}
+                {onfocus}
+                {onblur}
+                {onkeydown}
+                {onkeypress}
                 class={cls(
                   'text-sm border-none w-full bg-transparent outline-none resize-none',
                   'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
@@ -367,11 +454,11 @@
                 {step}
                 {actions}
                 bind:inputEl
-                on:input={handleInput}
-                on:focus
-                on:blur
-                on:keydown
-                on:keypress
+                oninput={handleInput}
+                {onfocus}
+                {onblur}
+                {onkeydown}
+                {onkeypress}
                 class={cls(
                   'text-sm border-none w-full bg-transparent outline-none truncate',
                   'selection:bg-surface-content/30',
@@ -393,7 +480,7 @@
               <Icon data={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
             {/if}
 
-            <slot name="suffix" />
+            {@render suffix?.()}
           </div>
         </div>
 
@@ -410,11 +497,11 @@
                 icon={mdiClose}
                 {disabled}
                 class="text-surface-content/50 p-1"
-                on:click={() => {
+                onclick={() => {
                   inputValue = '';
                   operator = operators?.[0].value;
                   updateValue();
-                  dispatch('clear');
+                  onClear?.();
                   labelEl?.focus();
                 }}
               />
@@ -424,7 +511,7 @@
               <select
                 {disabled}
                 value={operator}
-                on:change={onSelectChange}
+                onchange={onSelectChange}
                 class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
                 style="text-align-last: center;"
               >
@@ -439,7 +526,7 @@
                 icon={mdiEye}
                 {disabled}
                 class="text-surface-content/50 p-2"
-                on:click={() => {
+                onclick={() => {
                   if (inputType === 'password') {
                     inputType = 'text';
                   } else {
@@ -449,7 +536,7 @@
               />
             {/if}
 
-            <slot name="append" />
+            {@render append?.()}
 
             {#if error}
               <Icon data={mdiInformationOutline} class="text-danger" />

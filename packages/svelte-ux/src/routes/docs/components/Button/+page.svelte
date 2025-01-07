@@ -23,7 +23,7 @@
 <h2>Basic</h2>
 
 <Preview>
-  <Button on:click={() => alert('Why did you do that?')}>Click me</Button>
+  <Button onclick={() => alert('Why did you do that?')}>Click me</Button>
 </Preview>
 
 <h2>Link</h2>
@@ -50,51 +50,51 @@
 
   <div class="mt-2">
     <Toggle let:on={loading} let:toggle>
-      <Button {loading} on:click={toggle}>Click me</Button>
+      <Button {loading} onclick={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="outline" color="primary" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="outline" color="primary" {loading} onclick={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="fill" color="primary" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="fill" color="primary" {loading} onclick={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="fill-light" color="primary" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="fill-light" color="primary" {loading} onclick={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="fill-outline" color="primary" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="fill-outline" color="primary" {loading} onclick={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button variant="text" color="primary" {loading} on:click={toggle}>Click me</Button>
+      <Button variant="text" color="primary" {loading} onclick={toggle}>Click me</Button>
     </Toggle>
   </div>
 
   <div class="mt-2">
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} {loading} on:click={toggle}>Click me</Button>
+      <Button icon={faUser} {loading} onclick={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="outline" color="primary" {loading} on:click={toggle}
+      <Button icon={faUser} variant="outline" color="primary" {loading} onclick={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill" color="primary" {loading} on:click={toggle}
+      <Button icon={faUser} variant="fill" color="primary" {loading} onclick={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill-light" color="primary" {loading} on:click={toggle}
+      <Button icon={faUser} variant="fill-light" color="primary" {loading} onclick={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill-outline" color="primary" {loading} on:click={toggle}
+      <Button icon={faUser} variant="fill-outline" color="primary" {loading} onclick={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="text" color="primary" {loading} on:click={toggle}
+      <Button icon={faUser} variant="text" color="primary" {loading} onclick={toggle}
         >Click me</Button
       >
     </Toggle>

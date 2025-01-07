@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
+  import type { ComponentProps, Snippet } from 'svelte';
 
   import Avatar from './Avatar.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
@@ -7,51 +7,67 @@
   import Overlay from './Overlay.svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import type { HTMLLiAttributes } from 'svelte/elements';
 
-  export let title: string | number | null = null;
-  export let subheading: string | number | null = null;
-  export let icon: string | null = null;
-
-  /**
-   * Wrap icon in Avatar
-   */
-  export let avatar: boolean | ComponentProps<Avatar> | null = null;
-
-  /**
-   * Controls how first, last, and gap between are calculated
-   *   - type: items are of the same type
-   *   - parent: items share a common parent
-   *   - group: closest element with 'group' class.  Useful for `animate:flip` or other wrapping element
-   */
-  export let list: 'type' | 'parent' | 'group' = 'parent';
-
-  /**
-   * Remove shadow (useful when using `ring`)
-   */
-  export let noShadow = false;
-
-  /**
-   * Remove background
-   */
-  export let noBackground = false;
-
-  export let classes: {
-    root?: string;
-    avatar?: string;
-    icon?: string;
-    title?: string;
-    subheading?: string;
-  } = {};
   const settingsClasses = getComponentClasses('ListItem');
 
-  /**
-   * Show loading overlay
-   */
-  export let loading: boolean | null = null;
+  interface Props {
+    title?: string | number | Snippet | null;
+    subheading?: string | number | Snippet | null;
+    icon?: string | null;
+    /**
+     * Wrap icon in Avatar
+     */
+    avatar?: boolean | ComponentProps<typeof Avatar> | Snippet | null;
+    /**
+     * Controls how first, last, and gap between are calculated
+     *   - type: items are of the same type
+     *   - parent: items share a common parent
+     *   - group: closest element with 'group' class.  Useful for `animate:flip` or other wrapping element
+     */
+    list?: 'type' | 'parent' | 'group';
+    /**
+     * Remove shadow (useful when using `ring`)
+     */
+    noShadow?: boolean;
+    /**
+     * Remove background
+     */
+    noBackground?: boolean;
+    classes?: {
+      root?: string;
+      avatar?: string;
+      icon?: string;
+      title?: string;
+      subheading?: string;
+    };
+    class?: string;
+    /**
+     * Show loading overlay
+     */
+    loading?: boolean | null;
+    onclick?: HTMLLiAttributes['onclick'];
+    actions?: Snippet;
+  }
+
+  let {
+    title,
+    subheading,
+    icon,
+    avatar,
+    list = 'parent',
+    noShadow = false,
+    noBackground = false,
+    classes = {},
+    class: className,
+    loading,
+    onclick,
+    actions,
+  }: Props = $props();
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <li
   class={cls(
     'ListItem',
@@ -64,9 +80,9 @@
     noBackground !== true && 'bg-surface-100',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
-  on:click
+  {onclick}
   role="listitem"
 >
   {#if loading}
@@ -75,42 +91,42 @@
     </Overlay>
   {/if}
 
-  <slot name="avatar">
-    {#if icon != null}
-      {#if avatar}
-        <Avatar
-          class={cls(settingsClasses.avatar, classes.avatar)}
-          {...typeof avatar === 'object' ? avatar : {}}
-        >
-          <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
-        </Avatar>
-      {:else}
+  {#if typeof avatar === "function"}
+    {@render avatar()}
+  {:else if icon != null}
+    {#if avatar}
+      <Avatar
+        class={cls(settingsClasses.avatar, classes.avatar)}
+        {...typeof avatar === 'object' ? avatar : {}}
+      >
         <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
-      {/if}
+      </Avatar>
+    {:else}
+      <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
     {/if}
-  </slot>
+  {/if}
 
   <div class="flex-grow">
-    <slot name="title">
-      {#if title != null}
-        <div class={cls(settingsClasses.title, classes.title)}>{title}</div>
-      {/if}
-    </slot>
+    {#if typeof title === "function"}
+      {@render title()}
+    {:else if title != null}
+      <div class={cls(settingsClasses.title, classes.title)}>{title}</div>
+    {/if}
 
-    <slot name="subheading">
-      {#if subheading != null}
-        <div
-          class={cls(
-            'text-sm text-surface-content/50',
-            settingsClasses.subheading,
-            classes.subheading
-          )}
-        >
-          {subheading}
-        </div>
-      {/if}
-    </slot>
+    {#if typeof subheading === "function"}
+      {@render subheading()}
+    {:else if subheading != null}
+      <div
+        class={cls(
+          'text-sm text-surface-content/50',
+          settingsClasses.subheading,
+          classes.subheading
+        )}
+      >
+        {subheading}
+      </div>
+    {/if}
   </div>
 
-  <slot name="actions" />
+  {@render actions?.()}
 </li>

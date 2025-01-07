@@ -1,52 +1,74 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  import { slide } from 'svelte/transition';
+  import { slide, type TransitionConfig } from 'svelte/transition';
   import { mdiChevronDown } from '@mdi/js';
   import { cls } from '../utils/styles.js';
 
   import Icon from './Icon.svelte';
   import type { TransitionParams } from '../types/typeHelpers.js';
   import { getComponentClasses } from './theme.js';
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
 
-  /**
-   * @slot {{ active: number }} trigger - Primary content to trigger the show/hide
-   */
-
-  const dispatch = createEventDispatcher();
-
-  export let name = '';
-  export let value: any = undefined;
-  export let group: any = undefined;
-  export let open = false;
-  export let popout = false;
-  export let disabled = false;
-  export let icon = mdiChevronDown;
-
-  export let transition = slide;
-  export let transitionParams: TransitionParams = {};
-
-  export let classes: {
-    root?: string;
-    trigger?: string;
-    icon?: string;
-    content?: string;
-  } = {};
   const settingsClasses = getComponentClasses('Collapse');
 
-  /**
-   * Controls how first, last, and gap between are calculated
-   *   - type: items are of the same type
-   *   - parent: items share a common parent
-   *   - group: closest element with 'group' class
-   */
-  export let list: 'type' | 'parent' | 'group' = 'parent';
+  interface Props {
+    name?: string;
+    value?: any;
+    group?: any;
+    open?: boolean;
+    popout?: boolean;
+    disabled?: boolean;
+    icon?: string | Snippet<[{ open: boolean }]>;
+    transition?: (node: HTMLElement, params: TransitionParams) => TransitionConfig;
+    transitionParams?: TransitionParams;
+    classes?: {
+      root?: string;
+      trigger?: string;
+      icon?: string;
+      content?: string;
+    };
+    /**
+     * Controls how first, last, and gap between are calculated
+     *   - type: items are of the same type
+     *   - parent: items share a common parent
+     *   - group: closest element with 'group' class
+     */
+    list?: 'type' | 'parent' | 'group';
+    onChange?: ({ open, name }: { open: boolean; name: string }) => void;
+    trigger?: Snippet<[{ open: boolean }]>;
+    children?: Snippet<[{ open: boolean }]>;
+  }
 
-  $: open = group !== undefined ? group === value : open;
-  $: dispatch('change', { open, name });
+  let {
+    name = '',
+    value,
+    group = $bindable(),
+    open = $bindable(false),
+    popout = false,
+    disabled = false,
+    icon = mdiChevronDown,
+    transition = slide,
+    transitionParams = {},
+    classes = {},
+    class: className,
+    list = 'parent',
+    onChange,
+    trigger,
+    children,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements['div'], keyof Props> = $props();
+
+  $effect(() => {
+    open = group !== undefined ? group === value : open;
+  });
+
+  $effect(() => {
+    onChange?.({ open, name });
+  });
 </script>
 
 <div
-  {...$$restProps}
+  {...restProps}
   class={cls(
     'Collapse',
     popout && 'transition-all duration-all',
@@ -56,7 +78,7 @@
     popout && list === 'group' && 'group-first:mt-0 group-last:mb-0',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   aria-expanded={open}
 >
@@ -64,16 +86,20 @@
     type="button"
     class="flex items-center w-full text-left select-text focus:outline-none"
     {disabled}
-    on:click={() => {
+    onclick={() => {
       open = !open;
       group = group === value ? undefined : value;
     }}
   >
-    <slot name="trigger" {open}
-      ><span class={cls('flex-1', settingsClasses.trigger, classes.trigger)}>{name}</span></slot
-    >
+    {#if trigger}
+      {@render trigger({ open })}
+    {:else}
+      <span class={cls('flex-1', settingsClasses.trigger, classes.trigger)}>{name}</span>
+    {/if}
 
-    <slot name="icon" {open}>
+    {#if typeof icon === 'function'}
+      {@render icon({ open })}
+    {:else}
       <div
         data-open={open}
         style:--duration="{transitionParams.duration ?? 300}ms"
@@ -86,7 +112,7 @@
       >
         <Icon data={icon} />
       </div>
-    </slot>
+    {/if}
   </button>
 
   {#if open}
@@ -94,7 +120,7 @@
       transition:transition={transitionParams}
       class={cls(settingsClasses.content, classes.content)}
     >
-      <slot {open} />
+      {@render children?.({ open })}
     </div>
   {/if}
 </div>

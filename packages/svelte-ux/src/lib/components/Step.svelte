@@ -1,32 +1,42 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
+  import type { ComponentProps, Snippet } from 'svelte';
 
   import Icon from './Icon.svelte';
   import { getSteps } from './Steps.svelte';
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
 
-  /** Override point content (by default uses an incrementing counter) */
-  export let point: string | undefined = undefined;
+  interface Props {
+    /** Override point content (by default uses an incrementing counter) */
+    point?: string | Snippet;
+    /** Use icon instead of point content */
+    icon?: ComponentProps<typeof Icon>['data'];
+    /** If completed, will color content and line leading up to item */
+    completed?: boolean;
+    classes?: {
+      root?: string;
+      label?: string;
+      line?: string;
+      point?: string;
+      /** Apply classes to completed item point and line leading up to item */
+      completed?: string;
+    };
+    class?: string;
+    children?: Snippet;
+  }
 
-  /** Use icon instead of point content */
-  export let icon: ComponentProps<Icon>['data'] = undefined;
-
-  /** If completed, will color content and line leading up to item */
-  export let completed = false;
-
-  export let classes: {
-    root?: string;
-    label?: string;
-    line?: string;
-    point?: string;
-    /** Apply classes to completed item point and line leading up to item */
-    completed?: string;
-  } = {};
+  let {
+    point,
+    icon,
+    completed = false,
+    classes = {},
+    class: className,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Step');
 
   const stepsContext = getSteps();
-  $: vertical = stepsContext?.vertical ?? false;
+  let vertical = $derived(stepsContext?.vertical ?? false);
 </script>
 
 <li
@@ -38,7 +48,7 @@
       : 'grid-rows-[40px_1fr] min-w-16',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <div
@@ -52,25 +62,25 @@
   ></div>
 
   <span class={cls(settingsClasses.label, classes.label)}>
-    <slot />
+    {@render children?.()}
   </span>
 
   <div
     class={cls(
       'bg-surface-300 text-surface-content relative col-start-1 row-start-1 grid size-8 place-items-center place-self-center rounded-full [counter-increment:step]',
-      point == null && !$$slots.point && icon == null && 'before:content-[counter(step)]',
+      point == null && icon == null && 'before:content-[counter(step)]',
       completed &&
         (settingsClasses.completed ?? classes.completed ?? 'bg-primary text-primary-content'),
       settingsClasses.point,
       classes.point
     )}
   >
-    <slot name="point">
-      {#if icon}
-        <Icon data={icon} />
-      {:else}
-        {point ?? ''}
-      {/if}
-    </slot>
+    {#if typeof point === 'function'}
+      {@render point()}
+    {:else if icon}
+      <Icon data={icon} />
+    {:else}
+      {point ?? ''}
+    {/if}
   </div>
 </li>

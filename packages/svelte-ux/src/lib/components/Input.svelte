@@ -5,7 +5,7 @@
         - Set opacity to match TextField placeholder (30%)
         - Replace completed slots as spaces (for spacing)
   */
-  import { createEventDispatcher, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import type { HTMLInputAttributes, HTMLInputTypeAttribute } from 'svelte/elements';
 
   import { multi } from '../actions/multi.js';
@@ -13,52 +13,76 @@
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let name = '';
-  export let value = '';
-  export let type: HTMLInputTypeAttribute = 'text';
-  export let inputmode: HTMLInputAttributes['inputmode'] | undefined = undefined;
-  export let id: string | undefined = undefined;
-  export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = undefined;
-  export let inputEl: HTMLInputElement | null = null;
-  export let autocapitalize: HTMLInputAttributes['autocapitalize'] = undefined;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    name?: string;
+    value?: string;
+    type?: HTMLInputTypeAttribute;
+    inputmode?: HTMLInputAttributes['inputmode'];
+    id?: string;
+    actions?: Actions<HTMLInputElement | HTMLTextAreaElement>;
+    inputEl?: HTMLInputElement | null;
+    autocapitalize?: HTMLInputAttributes['autocapitalize'];
+    class?: string;
+    mask?: string;
+    replace?: string;
+    accept?: string | RegExp;
+    placeholder?: string;
+    required?: boolean;
+    disabled?: boolean;
+    /**
+     * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
+     */
+    min?: number;
+    /**
+     * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
+     */
+    max?: number;
+    /**
+     * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step
+     */
+    step?: number;
+    onChange?: (value: string) => void;
+    onBlur?: (event: FocusEvent) => void;
+  }
 
-  export let mask = '';
-  export let replace = '_';
-  export let accept: string | RegExp = '\\d';
-  let placeholderProp: string | undefined = undefined;
-  export { placeholderProp as placeholder };
-  export let required = false;
-  export let disabled = false;
+  let {
+    name = '',
+    value = $bindable(''),
+    type = 'text',
+    inputmode,
+    id,
+    actions,
+    inputEl = $bindable(null),
+    autocapitalize,
+    class: className,
+    mask = '',
+    replace = '_',
+    accept = '\\d',
+    placeholder: placeholderProp,
+    required = false,
+    disabled = false,
+    min,
+    max,
+    step,
+    onChange,
+    onBlur,
+    ...restProps
+  }: Props & Omit<HTMLInputAttributes, keyof Props> = $props();
 
-  /**
-   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
-   */
-  export let min: number | undefined = undefined;
-  /**
-   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
-   */
-  export let max: number | undefined = undefined;
-  /**
-   * see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#step
-   */
-  export let step: number | undefined = undefined;
-
-  $: placeholder = placeholderProp ?? mask;
+  let placeholder = $derived(placeholderProp ?? mask);
 
   const settingsClasses = getComponentClasses('Input');
 
-  let isFocused = false;
+  let isFocused = $state(false);
 
-  const dispatch = createEventDispatcher();
+  let backspace = $state(false);
 
-  let backspace = false;
-
-  $: replaceSet = new Set(replace); // Set of characters to replace
-  $: prev = ((j) => Array.from(mask ?? '', (c, i) => (replaceSet.has(c) ? (j = i + 1) : j)))(0);
-  $: firstPlaceholderPos = [...(mask ?? '')].findIndex((c) => replaceSet.has(c));
-  $: acceptRegEx = accept instanceof RegExp ? accept : new RegExp(accept, 'g');
+  let replaceSet = $derived(new Set(replace)); // Set of characters to replace
+  let prev = $derived(
+    ((j) => Array.from(mask ?? '', (c, i) => (replaceSet.has(c) ? (j = i + 1) : j)))(0)
+  );
+  let firstPlaceholderPos = $derived([...(mask ?? '')].findIndex((c) => replaceSet.has(c)));
+  let acceptRegEx = $derived(accept instanceof RegExp ? accept : new RegExp(accept, 'g'));
 
   function clean(inputValue: string) {
     // Get only accepted characters (no mask)
@@ -82,7 +106,7 @@
   function onInput(e: Event & { currentTarget: HTMLInputElement }) {
     const el = e.currentTarget;
     applyMask(el, mask);
-    dispatch('change', { value });
+    onChange?.(value);
   }
 
   function applyMask(el: HTMLInputElement, mask: string) {
@@ -101,7 +125,9 @@
     }
   }
 
-  $: if (inputEl) applyMask(inputEl, mask);
+  $effect(() => {
+    if (inputEl) applyMask(inputEl, mask);
+  });
 
   onMount(() => {
     // Format on initial to handle partial values as well as different (but compatible) formats (ex. phone numbers)
@@ -109,7 +135,7 @@
       const initialValue = value;
       value = clean(value).join('');
       if (value != initialValue) {
-        dispatch('change', { value });
+        onChange?.(value);
       }
     }
   });
@@ -129,17 +155,19 @@
   {disabled}
   {autocapitalize}
   bind:this={inputEl}
-  on:keydown={(e) => (backspace = e.key === 'Backspace')}
-  on:keydown
-  on:keyup
-  on:keypress
-  on:input={onInput}
-  on:input
-  on:focus={(e) => {
-    isFocused = true;
+  onkeydown={(e) => {
+    backspace = e.key === 'Backspace';
+    restProps['onkeydown']?.(e);
   }}
-  on:focus
-  on:blur={(e) => {
+  oninput={(e) => {
+    onInput(e);
+    restProps['oninput']?.(e);
+  }}
+  onfocus={(e) => {
+    isFocused = true;
+    restProps['onfocus']?.(e);
+  }}
+  onblur={(e) => {
     isFocused = false;
 
     // TODO: Consider clearing value if any mask is still shown?
@@ -147,11 +175,11 @@
     if (value === mask) {
       value = '';
     }
-    dispatch('blur', e);
+    onBlur?.(e);
+    restProps['onblur']?.(e);
   }}
-  on:blur
   use:multi={actions}
-  {...$$restProps}
+  {...restProps}
   class={cls(
     'Input',
     'text-sm w-full outline-none bg-transparent placeholder-surface/50 selection:bg-surface-content/10',

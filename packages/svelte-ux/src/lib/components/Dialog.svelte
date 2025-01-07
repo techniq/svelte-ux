@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   // https://twitter.com/SvelteSociety/status/1306310173393186816
   // https://svelte.dev/repl/033e824fad0a4e34907666e7196caec4?version=3.25.1
   import { scale } from 'svelte/transition';
@@ -13,29 +12,60 @@
   import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
   import { getComponentClasses } from './theme.js';
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
 
-  const dispatch = createEventDispatcher<{
-    close: null;
-    closeAttempt: null;
-    open: null;
-  }>();
+  interface Props {
+    open?: boolean;
+    portal?: PortalOptions;
+    persistent?: boolean;
+    loading?: boolean | null;
+    classes?: {
+      root?: string;
+      dialog?: string;
+      title?: string;
+      actions?: string;
+      backdrop?: string;
+    };
+    class?: string;
+    style?: string;
+    onintrostart?: SvelteHTMLElements['div']['onintrostart'];
+    onoutrostart?: SvelteHTMLElements['div']['onoutrostart'];
+    onintroend?: SvelteHTMLElements['div']['onintroend'];
+    onoutroend?: SvelteHTMLElements['div']['onoutroend'];
+    onClose?: () => void;
+    onCloseAttempt?: () => void;
+    onOpen?: () => void;
+    header?: Snippet<[any]>;
+    title?: Snippet<[any]>;
+    children?: Snippet<[any]>;
+    actions?: Snippet<[any]>;
+  }
 
-  export let open = false;
-  export let portal: PortalOptions = true;
-  export let persistent = false;
-  export let loading: boolean | null = null;
-
-  export let classes: {
-    root?: string;
-    dialog?: string;
-    title?: string;
-    actions?: string;
-    backdrop?: string;
-  } = {};
+  let {
+    open = $bindable(false),
+    portal = true,
+    persistent = false,
+    loading,
+    classes = {},
+    class: className,
+    style,
+    onintroend,
+    onintrostart,
+    onoutroend,
+    onoutrostart,
+    onClose,
+    onCloseAttempt,
+    onOpen,
+    header,
+    title,
+    children,
+    actions,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Dialog');
 
-  let dialogEl: HTMLDivElement;
-  let actionsEl: HTMLDivElement;
+  let dialogEl = $state<HTMLDivElement>();
+  let actionsEl = $state<HTMLDivElement>();
 
   function onClick(e: MouseEvent) {
     try {
@@ -64,23 +94,25 @@
         open = false;
       } else {
         // attempted close of persistent dialog
-        dispatch('closeAttempt');
+        onCloseAttempt?.();
       }
     }
   }
 
-  $: if (open) {
-    dispatch('open');
-  } else {
-    dispatch('close');
-  }
+  $effect(() => {
+    if (open) {
+      onOpen?.();
+    } else {
+      onClose?.();
+    }
+  });
 </script>
 
 <!-- Separate `{#if}` block works around Svelte 5 regression: https://github.com/sveltejs/svelte/issues/12440  -->
 {#if open}
   <Backdrop
-    on:click={() => close()}
-    on:mouseup={(e) => {
+    onClick={() => close()}
+    onMouseUp={(e) => {
       // Do not allow event to reach Popover's on:mouseup (clickOutside)
       e.stopPropagation();
     }}
@@ -98,8 +130,8 @@
       settingsClasses.root,
       classes.root
     )}
-    on:click={onClick}
-    on:keydown={(e) => {
+    onclick={onClick}
+    onkeydown={(e) => {
       if (e.key === 'Escape') {
         // Do not allow event to reach Popover's on:keydown
         e.stopPropagation();
@@ -114,15 +146,15 @@
         'dialog rounded bg-surface-100 elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
         settingsClasses.dialog,
         classes.dialog,
-        $$props.class
+        className
       )}
-      style={$$props.style}
+      {style}
       in:scale|global={{ duration: 150, easing: quadIn }}
       out:scale={{ duration: 150, easing: quadIn }}
-      on:introstart
-      on:outrostart
-      on:introend
-      on:outroend
+      {onintrostart}
+      {onoutrostart}
+      {onintroend}
+      {onoutroend}
       bind:this={dialogEl}
       use:focusMove={{ restoreFocus: true }}
       role="dialog"
@@ -133,19 +165,17 @@
         </Overlay>
       {/if}
 
-      <slot name="header" {open} {close}>
-        {#if $$slots.title}
-          <div
-            class={cls('text-xl font-bold pt-4 pb-2 px-6', settingsClasses.title, classes.title)}
-          >
-            <slot name="title" {open} {close} />
-          </div>
-        {/if}
-      </slot>
+      {#if header}
+        {@render header({ open, close })}
+      {:else if title}
+        <div class={cls('text-xl font-bold pt-4 pb-2 px-6', settingsClasses.title, classes.title)}>
+          {@render title?.({ open, close })}
+        </div>
+      {/if}
 
-      <slot {open} {close} />
+      {@render children?.({ open, close })}
 
-      {#if $$slots.actions}
+      {#if actions}
         <div
           class={cls(
             'actions flex w-full justify-end p-2 bg-surface-content/5 border-t',
@@ -154,7 +184,7 @@
           )}
           bind:this={actionsEl}
         >
-          <slot name="actions" {open} {close} />
+          {@render actions?.({ open, close })}
         </div>
       {/if}
     </div>

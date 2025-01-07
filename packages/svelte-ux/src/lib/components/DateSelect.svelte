@@ -10,24 +10,37 @@
   import Month from './Month.svelte';
   import MonthListByYear from './MonthListByYear.svelte';
   import YearList from './YearList.svelte';
+  import type { ComponentProps } from 'svelte';
 
-  export let selected: SelectedDate = null;
-  export let periodType: PeriodType = PeriodType.Day;
-  export let activeDate: 'from' | 'to' = 'from';
+  interface Props {
+    selected?: SelectedDate;
+    periodType?: PeriodType;
+    activeDate?: 'from' | 'to';
+    /**
+     * Dates to disable (not selectable)
+     */
+    disabledDates?: DisabledDate;
+    onDateChange?: ComponentProps<typeof YearList>['onDateChange'];
+  }
 
-  /**
-   * Dates to disable (not selectable)
-   */
-  export let disabledDates: DisabledDate | undefined = undefined;
+  let {
+    selected = $bindable(),
+    periodType = PeriodType.Day,
+    activeDate = 'from',
+    disabledDates,
+    onDateChange,
+  }: Props = $props();
 
-  // @ts-expect-error
-  $: startOfMonth = selected?.[activeDate] ? startOfMonthFunc(selected[activeDate]) : undefined;
+  let startOfMonth = $derived(
+    // @ts-expect-error
+    selected?.[activeDate] ? startOfMonthFunc(selected[activeDate]) : undefined
+  );
 </script>
 
 {#if periodType === PeriodType.Month || periodType === PeriodType.Quarter}
   <MonthListByYear {selected} on:dateChange />
 {:else if periodType === PeriodType.CalendarYear}
-  <YearList {selected} {disabledDates} on:dateChange />
+  <YearList {selected} {disabledDates} {onDateChange} />
 {:else if periodType === PeriodType.FiscalYearOctober}
   <!-- dateFuncs={{
         startOfYear: startOfFiscalYear,
@@ -35,8 +48,8 @@
         isSameYear: isSameFiscalYear,
         getYear: getFiscalYear,
       }} -->
-  <YearList {selected} {disabledDates} on:dateChange />
+  <YearList {selected} {disabledDates} {onDateChange} />
 {:else}
   <!-- Day, Week, etc -->
-  <Month {selected} {disabledDates} {startOfMonth} on:dateChange />
+  <Month {selected} {disabledDates} {startOfMonth} {onDateChange} />
 {/if}

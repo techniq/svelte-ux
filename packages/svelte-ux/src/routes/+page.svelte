@@ -3,7 +3,7 @@
 
   import Code from '$lib/components/Code.svelte';
 
-  let selectedTab = 'cli';
+  let selectedTab = $state('cli');
 </script>
 
 <div class="prose max-w-none bg-surface-100 rounded border p-4 mt-4 m-2">

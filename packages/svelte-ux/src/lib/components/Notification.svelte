@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
   import { fly } from 'svelte/transition';
   import { quadIn } from 'svelte/easing';
   import type { ThemeColors } from '$lib/types/typeHelpers.js';
@@ -9,31 +9,48 @@
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
 
-  const dispatch = createEventDispatcher();
+  interface Props {
+    title?: string | Snippet;
+    description?: string | Snippet;
+    icon?: string | Snippet;
+    actions?: Record<string, Function> | Snippet;
+    color?: ThemeColors;
+    variant?: 'default' | 'fill';
+    actionsPlacement?: 'inline' | 'below' | 'split';
+    open?: boolean;
+    closeIcon?: boolean;
+    classes?: {
+      root?: string;
+      title?: string;
+      description?: string;
+      icon?: ComponentProps<typeof Icon>['classes'];
+      actions?: string;
+    };
+    class?: string;
+    onClose?: () => void;
+    onkeypress?: SvelteHTMLElements['div']['onkeypress'];
+  }
 
-  export let title: string | undefined = undefined;
-  export let description: string | undefined = undefined;
-  export let icon: string | undefined = undefined;
-  export let actions: Record<string, Function> = {};
+  let {
+    title,
+    description,
+    icon,
+    actions = {},
+    color = 'primary',
+    variant = 'default',
+    actionsPlacement = 'inline',
+    open = $bindable(true),
+    closeIcon = false,
+    classes = {},
+    class: className,
+    onClose,
+    onkeypress,
+  }: Props = $props();
 
-  export let color: ThemeColors = 'primary';
-  export let variant: 'default' | 'fill' = 'default';
-  export let actionsPlacement: 'inline' | 'below' | 'split' = 'inline';
-
-  export let open: boolean = true;
-  export let closeIcon: boolean = false;
-
-  export let classes: {
-    root?: string;
-    title?: string;
-    description?: string;
-    icon?: ComponentProps<Icon>['classes'];
-    actions?: string;
-  } = {};
-
-  let notificationEl: HTMLDivElement;
-  let actionsEl: HTMLDivElement;
+  let notificationEl = $state<HTMLDivElement>();
+  let actionsEl = $state<HTMLDivElement>();
 
   function onClick(e: MouseEvent) {
     try {
@@ -54,7 +71,7 @@
 </script>
 
 {#if open}
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     class={cls(
       'Notification rounded-lg border bg-surface-100 shadow-lg z-10',
@@ -72,18 +89,20 @@
         default: {},
       }[variant],
       classes.root,
-      $$props.class
+      className
     )}
     transition:fly={{ duration: 200, easing: quadIn, x: 100 }}
-    on:outroend={() => dispatch('close')}
-    on:click={onClick}
-    on:keypress
+    onoutroend={() => onClose?.()}
+    onclick={onClick}
+    {onkeypress}
     bind:this={notificationEl}
   >
     <div class="flex">
       <div class="flex-1 flex items-center gap-4 p-4">
-        {#if icon || $$slots.icon}
-          <slot name="icon">
+        {#if icon}
+          {#if typeof icon === 'function'}
+            {@render icon()}
+          {:else}
             <Icon
               data={icon}
               class={cls(
@@ -102,19 +121,21 @@
               )}
               classes={classes.icon}
             />
-          </slot>
+          {/if}
         {/if}
 
         <div class="flex-1 grid gap-1">
-          {#if title || $$slots.title}
+          {#if title}
             <div class={cls('font-medium', classes.title)}>
-              <slot name="title">
+              {#if typeof title === 'function'}
+                {@render title()}
+              {:else}
                 {title}
-              </slot>
+              {/if}
             </div>
           {/if}
 
-          {#if description || $$slots.description}
+          {#if description}
             <div
               class={cls(
                 'text-sm',
@@ -134,15 +155,19 @@
                 classes.description
               )}
             >
-              <slot name="description">
+              {#if typeof description === 'function'}
+                {@render description()}
+              {:else}
                 {description}
-              </slot>
+              {/if}
             </div>
           {/if}
 
-          {#if (actions || $$slots.actions) && actionsPlacement === 'below'}
+          {#if actions && actionsPlacement === 'below'}
             <div bind:this={actionsEl} class={cls('mt-2 -ml-4 -mb-2', classes.actions)}>
-              <slot name="actions">
+              {#if typeof actions === 'function'}
+                {@render actions()}
+              {:else}
                 {#each Object.entries(actions) as [name, fn], i}
                   <Button
                     color={i === 0 && variant === 'default' ? 'primary' : 'default'}
@@ -160,35 +185,37 @@
                           danger: 'text-danger',
                         }[color]
                     )}
-                    on:click={() => fn()}
+                    onclick={() => fn()}
                   >
                     {name}
                   </Button>
                 {/each}
-              </slot>
+              {/if}
             </div>
           {/if}
         </div>
 
-        {#if (actions || $$slots.actions) && actionsPlacement === 'inline'}
+        {#if actions && actionsPlacement === 'inline'}
           <div bind:this={actionsEl} class={cls('-my-2 -mr-2', classes.actions)}>
-            <slot name="actions">
+            {#if typeof actions === 'function'}
+              {@render actions()}
+            {:else}
               {#each Object.entries(actions) as [name, fn], i}
                 <Button
                   color={i === 0 && variant === 'default' ? 'primary' : 'default'}
-                  on:click={() => fn()}
+                  onclick={() => fn()}
                 >
                   {name}
                 </Button>
               {/each}
-            </slot>
+            {/if}
           </div>
         {/if}
 
         {#if closeIcon}
           <Button
             icon={mdiClose}
-            on:click={() => (open = false)}
+            onclick={() => (open = false)}
             class={cls(
               'self-start',
               {
@@ -209,7 +236,7 @@
         {/if}
       </div>
 
-      {#if (actions || $$slots.actions) && actionsPlacement === 'split'}
+      {#if actions && actionsPlacement === 'split'}
         <div
           bind:this={actionsEl}
           class={cls(
@@ -230,16 +257,18 @@
             classes.actions
           )}
         >
-          <slot name="actions">
+          {#if typeof actions === 'function'}
+            {@render actions()}
+          {:else}
             {#each Object.entries(actions) as [name, fn], i}
               <Button
                 class={cls('rounded-none', variant === 'default' && i === 0 && 'text-primary')}
-                on:click={() => fn()}
+                onclick={() => fn()}
               >
                 {name}
               </Button>
             {/each}
-          </slot>
+          {/if}
         </div>
       {/if}
     </div>

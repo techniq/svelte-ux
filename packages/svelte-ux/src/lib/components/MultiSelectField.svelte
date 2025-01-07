@@ -1,7 +1,7 @@
 <script lang="ts" generics="TValue">
   import { getComponentSettings } from './settings.js';
 
-  import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
   import { mdiChevronDown, mdiClose } from '@mdi/js';
@@ -17,63 +17,100 @@
 
   const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 
-  type MultiSelectMenuProps = ComponentProps<MultiSelectMenu<TValue>>;
-
-  // MultiSelectMenu props
-  export let options: MultiSelectMenuProps['options'];
-  export let value: MultiSelectMenuProps['value'];
-  export let mode: MultiSelectMenuProps['mode'] | undefined = undefined;
-  export let maintainOrder: MultiSelectMenuProps['maintainOrder'] | undefined = undefined;
-  export let indeterminateSelected: typeof value = [];
-  /** Maximum number of options that can be selected  */
-  export let max: number | undefined = undefined;
-  export let placement: Placement = 'bottom-start';
-  export let infiniteScroll = false;
-  export let optionProps: Partial<ComponentProps<MultiSelectOption>> | undefined = undefined;
-
-  // TextField props
-  export let label = '';
-  export let placeholder = '';
-  export let loading: boolean = false;
-  export let disabled: boolean = false;
-  // export let readonly: boolean = false;
-  export let icon: string | null = null;
-  export let clearable = true;
-  export let base = false;
-  export let rounded = false;
-  export let dense = false;
-
-  export let formatSelected: (ctx: { value: typeof value; options: typeof options }) => string = ({
-    value,
-  }) => `${value?.length} selected`;
-
-  export let classes: {
-    root?: string;
-    multiSelectMenu?: MultiSelectMenuProps['classes'];
-    field?: string | ComponentProps<TextField>['classes'];
-    actions?: string;
-  } = {};
-
-  const dispatch = createEventDispatcher<{ change: { value: typeof value } }>();
+  type MultiSelectMenuProps = ComponentProps<typeof MultiSelectMenu<TValue>>;
 
   // Elements
-  let inputEl: HTMLInputElement | undefined;
-  let menuOptionsEl: HTMLDivElement | undefined;
+  let inputEl = $state<HTMLInputElement>();
+  let menuOptionsEl = $state<HTMLDivElement>();
 
-  export let menuProps: Omit<MultiSelectMenuProps, 'options'> | undefined = undefined;
+  interface Props {
+    // MultiSelectMenu props
+    options: MultiSelectMenuProps['options'];
+    value: MultiSelectMenuProps['value'];
+    mode?: MultiSelectMenuProps['mode'];
+    maintainOrder?: MultiSelectMenuProps['maintainOrder'];
+    indeterminateSelected?: typeof value;
+    /** Maximum number of options that can be selected  */
+    max?: number;
+    placement?: Placement;
+    infiniteScroll?: boolean;
+    optionProps?: Partial<ComponentProps<typeof MultiSelectOption>>;
+    // TextField props
+    label?: string;
+    placeholder?: string;
+    loading?: boolean;
+    disabled?: boolean;
+    // export let readonly: boolean = false;
+    icon?: string | null;
+    clearable?: boolean;
+    base?: boolean;
+    rounded?: boolean;
+    dense?: boolean;
+    formatSelected?: (ctx: { value: typeof value; options: typeof options }) => string;
+    classes?: {
+      root?: string;
+      multiSelectMenu?: MultiSelectMenuProps['classes'];
+      field?: string | ComponentProps<typeof TextField>['classes'];
+      actions?: string;
+    };
+    menuProps?: Omit<MultiSelectMenuProps, 'options'>;
+    // Passthrough onApply event
+    onApply?: MultiSelectMenuProps['onApply'];
+    onChange?: (value: MultiSelectMenuProps['value']) => void;
+    prepend?: Snippet;
+    append?: Snippet;
+    beforeOptions?: Snippet<[any]>;
+    afterOptions?: Snippet<[any]>;
+    option?: Snippet<[any]>;
+    actions?: Snippet<[any]>;
+  }
 
-  // Passthrough onApply event
-  export let onApply: MultiSelectMenuProps['onApply'] | undefined = undefined;
+  let {
+    options,
+    value = $bindable(),
+    mode,
+    maintainOrder,
+    indeterminateSelected = [],
+    max,
+    placement = 'bottom-start',
+    infiniteScroll = false,
+    optionProps,
+    label = '',
+    placeholder = '',
+    loading = false,
+    disabled = false,
+    icon,
+    clearable = true,
+    base = false,
+    rounded = false,
+    dense = false,
+    formatSelected = ({ value }) => `${value?.length} selected`,
+    classes = {},
+    class: className,
+    menuProps,
+    onApply,
+    onChange,
+    prepend: prependRender,
+    append: appendRender,
+    beforeOptions: beforeOptionsRender,
+    afterOptions: afterOptionsRender,
+    option: optionRender,
+    actions: actionsRender,
+    ...rest
+  }: Props & Omit<ComponentProps<typeof TextField>, keyof Props> = $props();
 
   const logger = new Logger('MultiSelectField');
 
-  let open = false;
+  let open = $state(false);
 
-  let searchText = '';
-  $: if (!open) {
-    const selectedOptions = options.filter((o) => value?.includes(o.value));
-    searchText = formatSelected({ value, options: selectedOptions });
-  }
+  let searchText = $state('');
+
+  $effect(() => {
+    if (!open) {
+      const selectedOptions = options.filter((o) => value?.includes(o.value));
+      searchText = formatSelected({ value, options: selectedOptions });
+    }
+  });
 
   function show() {
     logger.debug('show');
@@ -91,12 +128,11 @@
     open = false;
   }
 
-  function onSearchChange(e: ComponentEvents<TextField>['change']) {
-    logger.debug('onChange');
-
-    searchText = e.detail.inputValue as string;
+  const onSearchChange: ComponentProps<typeof TextField>['onChange'] = ({ inputValue }) => {
+    logger.debug('onSearchChange');
+    searchText = inputValue as string;
     // dispatch('inputChange', searchText);
-  }
+  };
 
   function onClick() {
     logger.debug('onClick');
@@ -123,28 +159,28 @@
     }
   }
 
-  function onSelectChange(e: ComponentEvents<MultiSelectMenu<TValue>>['change']) {
-    logger.info('onSelectChange', e);
+  const onSelectChange: ComponentProps<typeof MultiSelectMenu>["onChange"] = (v) => {
+    logger.info('onSelectChange', v);
     // @ts-expect-error
-    value = e.detail.selection.selected;
+    value = v.selection.selected;
     // TODO: Also dispatch `indeterminate: e.detail.indeterminate`?
-    dispatch('change', { value });
+    onChange?.(value);
   }
 
   function clear() {
     logger.info('clear');
     value = [];
-    dispatch('change', { value });
+    onChange?.(value);
   }
 
-  $: restProps = { ...defaults, ...$$restProps };
+  let restProps = $derived({ ...defaults, ...rest });
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-  class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, $$props.class)}
-  on:click={onClick}
+  class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, className)}
+  onclick={onClick}
 >
   <!-- TODO: Setup blur without jank on open or issues when clicking within menu -->
   <!-- on:blur={onBlur} -->
@@ -158,8 +194,8 @@
     {disabled}
     value={searchText}
     bind:inputEl
-    on:focus={onFocus}
-    on:change={onSearchChange}
+    onfocus={onFocus}
+    onChange={onSearchChange}
     classes={clsMerge(
       { root: 'h-full' },
       normalizeClasses(settingsClasses.field),
@@ -167,43 +203,47 @@
     )}
     {...restProps}
   >
-    <slot slot="prepend" name="prepend" />
+    {#snippet prepend()}
+      {@render prependRender?.()}
+    {/snippet}
 
-    <span slot="append" class="flex items-center">
-      <slot name="append" />
+    {#snippet append()}
+      <span class="flex items-center">
+        {@render appendRender?.()}
 
-      {#if loading}
-        <span class="inline-block w-[29px] h-[28px] text-center">
-          <ProgressCircle size={16} width={2} class="text-surface-content/50" />
-        </span>
-        <!-- {:else if readonly} -->
-        <!-- Do not show chevron or clear buttons -->
-      {:else if value?.length && clearable}
-        <Button
-          icon={mdiClose}
-          class="text-surface-content/50 p-1"
-          on:click={(e) => {
-            e.stopPropagation();
-            clear();
-            hide();
-          }}
-        />
-      {:else}
-        <Button
-          icon={mdiChevronDown}
-          class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
-          tabindex="-1"
-          on:click={(e) => {
-            e.stopPropagation();
-            if (open) {
+        {#if loading}
+          <span class="inline-block w-[29px] h-[28px] text-center">
+            <ProgressCircle size={16} width={2} class="text-surface-content/50" />
+          </span>
+          <!-- {:else if readonly} -->
+          <!-- Do not show chevron or clear buttons -->
+        {:else if value?.length && clearable}
+          <Button
+            icon={mdiClose}
+            class="text-surface-content/50 p-1"
+            onclick={(e) => {
+              e.stopPropagation();
+              clear();
               hide();
-            } else {
-              show();
-            }
-          }}
-        />
-      {/if}
-    </span>
+            }}
+          />
+        {:else}
+          <Button
+            icon={mdiChevronDown}
+            class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
+            tabindex={-1}
+            onclick={(e) => {
+              e.stopPropagation();
+              if (open) {
+                hide();
+              } else {
+                show();
+              }
+            }}
+          />
+        {/if}
+      </span>
+    {/snippet}
   </TextField>
 
   <MultiSelectMenu
@@ -220,38 +260,38 @@
     classes={{ ...settingsClasses.multiSelectMenu, ...classes.multiSelectMenu }}
     matchWidth
     bind:open
-    on:change={onSelectChange}
-    on:close={hide}
-    bind:menuOptionsEl
+    onChange={onSelectChange}
+    onClose={hide}
     {...menuProps}
   >
-    <slot name="beforeOptions" slot="beforeOptions" let:selection {selection} />
-    <slot name="afterOptions" slot="afterOptions" let:selection {selection} />
+    {#snippet beforeOptions({ selection })}
+      {@render beforeOptionsRender?.({ selection })}
+    {/snippet}
+    {#snippet afterOptions({ selection })}
+      {@render afterOptionsRender?.({ selection })}
+    {/snippet}
 
     <!-- TODO: If only `<slot name="option" slot="option" />` just worked  -->
-    <svelte:fragment
-      slot="option"
-      let:option
-      let:label
-      let:value
-      let:checked
-      let:indeterminate
-      let:disabled
-      let:onChange
-    >
-      <slot name="option" {option} {label} {value} {checked} {indeterminate} {disabled} {onChange}>
-        <MultiSelectOption
-          {checked}
-          {indeterminate}
-          {disabled}
-          {...optionProps}
-          on:change={onChange}
-        >
+    {#snippet option({ option, label, value, checked, indeterminate, disabled, onChange })}
+      {#if optionRender}
+        {@render optionRender({
+          option,
+          label,
+          value,
+          checked,
+          indeterminate,
+          disabled,
+          onChange,
+        })}
+      {:else}
+        <MultiSelectOption {checked} {indeterminate} {disabled} {...optionProps} {onChange}>
           {label}
         </MultiSelectOption>
-      </slot>
-    </svelte:fragment>
+      {/if}
+    {/snippet}
 
-    <slot name="actions" slot="actions" let:selection {selection} />
+    {#snippet actions({ selection })}
+      {@render actionsRender?.({ selection })}
+    {/snippet}
   </MultiSelectMenu>
 </div>

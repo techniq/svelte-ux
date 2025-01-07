@@ -1,18 +1,31 @@
 <script lang="ts">
-  import { onMount, onDestroy, getContext } from 'svelte';
+  import { onMount, onDestroy, getContext, type Snippet } from 'svelte';
 
   import { groupKey } from './ToggleGroup.svelte';
   import { scrollIntoView } from '../utils/dom.js';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  import type { HTMLInputAttributes, HTMLLabelAttributes } from 'svelte/elements';
 
-  export let value: any;
+  interface Props {
+    value: any;
+    classes?: {
+      root?: string;
+      option?: string;
+      indicator?: string;
+    };
+    onclick?: HTMLInputAttributes['onclick'];
+    children?: Snippet<[{ selected: boolean }]>;
+  }
 
-  export let classes: {
-    root?: string;
-    option?: string;
-    indicator?: string;
-  } = {};
+  let {
+    value,
+    classes = {},
+    class: className,
+    onclick,
+    children,
+    ...restProps
+  }: Props & Omit<HTMLLabelAttributes, keyof Props> = $props();
   const settingsClasses = getComponentClasses('ToggleOption');
 
   const {
@@ -27,8 +40,8 @@
   } = getContext<any>(groupKey);
   const [send, receive] = crossfade;
 
-  let optionElement: HTMLElement | null = null;
-  $: selected = $selectedOption === optionElement;
+  let optionElement: HTMLElement | null = $state(null);
+  let selected = $derived($selectedOption === optionElement);
 
   onMount(() => {
     registerOption(optionElement, value);
@@ -38,16 +51,18 @@
     unregisterOption(optionElement, value);
   });
 
-  $: if (autoscroll && selected && optionElement) {
-    // TODO: Only scroll if needed / out of view
-    scrollIntoView(optionElement);
-  }
+  $effect(() => {
+    if (autoscroll && selected && optionElement) {
+      // TODO: Only scroll if needed / out of view
+      scrollIntoView(optionElement);
+    }
+  });
 </script>
 
 <label
   class:selected
   bind:this={optionElement}
-  {...$$restProps}
+  {...restProps}
   class={cls(
     'ToggleOption',
     'label',
@@ -55,7 +70,7 @@
     $classesContext.label,
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <!-- Stack indicator under option -->
@@ -73,7 +88,7 @@
   {/if}
 
   <div class={cls('option', $classesContext.option, settingsClasses.option, classes.option)}>
-    <slot {selected} />
+    {@render children?.({ selected })}
   </div>
 
   <input
@@ -81,8 +96,10 @@
     type="radio"
     class="appearance-none absolute"
     checked={selected}
-    on:click={() => selectOption(optionElement, value)}
-    on:click
+    onclick={(e) => {
+      selectOption(optionElement, value);
+      onclick?.(e);
+    }}
   />
 </label>
 

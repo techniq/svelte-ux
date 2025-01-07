@@ -31,7 +31,7 @@
   import ColorField from './ColorField.svelte';
   import { formatColor } from './colors.js';
 
-  export let data;
+  let { data } = $props();
 
   type ThemeMenuOption = MenuOption & {
     themeName: string;
@@ -40,12 +40,12 @@
 
   const { currentTheme } = getSettings();
 
-  let selectedLightThemeValue: string;
-  let selectedDarkThemeValue: string;
+  let selectedLightThemeValue = $state() as string;
+  let selectedDarkThemeValue = $state() as string;
 
-  let showOptionalColors = false;
+  let showOptionalColors = $state(false);
 
-  let colorSpace: SupportedColorSpace = 'hsl';
+  let colorSpace: SupportedColorSpace = $state('hsl');
 
   // Needs to always match app since using tailwind classes
   const themeColorSpace: SupportedColorSpace = 'hsl';
@@ -53,80 +53,10 @@
   const daisyThemeNames = getThemeNames(data.themes.daisy);
   const skeletonThemeNames = getThemeNames(data.themes.skeleton);
 
-  let customLightTheme: Record<string, string> = {};
-  let customDarkTheme: Record<string, string> = {};
+  let customLightTheme: Record<string, string> = $state({});
+  let customDarkTheme: Record<string, string> = $state({});
 
-  let applyToSiteImmediately = false;
-
-  $: lightThemes = [
-    {
-      label: 'Custom',
-      value: 'custom',
-      themeName: 'custom',
-      theme: customLightTheme,
-    },
-    ...daisyThemeNames.light.map((themeName) => {
-      return {
-        label: themeName === 'light' ? 'light (daisy)' : themeName,
-        value: themeName === 'light' ? 'daisy-light' : themeName,
-        group: 'Daisy',
-        themeName,
-        theme: data.themes.daisy[themeName],
-      };
-    }),
-    ...skeletonThemeNames.light.map((themeName) => {
-      return {
-        label: themeName === 'light' ? 'light (skeleton)' : themeName,
-        value: themeName === 'light' ? 'skeleton-light' : themeName,
-        group: 'Skeleton',
-        themeName,
-        theme: data.themes.skeleton[themeName],
-      };
-    }),
-  ] as ThemeMenuOption[];
-
-  $: darkThemes = [
-    {
-      label: 'Custom',
-      value: 'custom',
-      themeName: 'custom',
-      theme: customDarkTheme,
-    },
-    ...daisyThemeNames.dark.map((themeName) => {
-      return {
-        label: themeName === 'dark' ? 'dark (daisy)' : themeName,
-        value: themeName === 'dark' ? 'daisy-dark' : themeName,
-        group: 'Daisy',
-        themeName,
-        theme: data.themes.daisy[themeName],
-      };
-    }),
-    ...skeletonThemeNames.dark.map((themeName) => {
-      return {
-        label: themeName === 'dark' ? 'dark (skeleton)' : themeName,
-        value: themeName === 'dark' ? 'skeleton-dark' : themeName,
-        group: 'Skeleton',
-        themeName,
-        theme: data.themes.skeleton[themeName],
-      };
-    }),
-  ] as ThemeMenuOption[];
-
-  // Set initial theme selections (skip custom)
-  $: if (selectedLightThemeValue === undefined) {
-    selectedLightThemeValue = lightThemes[1].value;
-  }
-  $: if (selectedDarkThemeValue === undefined) {
-    selectedDarkThemeValue = darkThemes[1].value;
-  }
-
-  $: showDarkTheme = $currentTheme.dark;
-  $: selectedLightTheme = lightThemes.find((d) => d.value === selectedLightThemeValue)!.theme;
-  $: selectedDarkTheme = darkThemes.find((d) => d.value === selectedDarkThemeValue)!.theme;
-  $: previewTheme = (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as NestedColors;
-
-  // Update site dark/light mode with preview for better experience (previewing and applying)
-  $: currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');
+  let applyToSiteImmediately = $state(false);
 
   // Break cyclical dependency with lightThemes => customLightTheme -> selectedLightTheme -> lightThemes
   function updateLightTheme() {
@@ -142,7 +72,6 @@
       applySelectedThemeToSite();
     }
   }
-  $: selectedLightTheme && updateLightTheme();
 
   // Break cyclical dependency with darkThemes => customDarkTheme -> selectedDarkTheme -> darkThemes
   function updateDarkTheme() {
@@ -157,10 +86,6 @@
     if (applyToSiteImmediately) {
       applySelectedThemeToSite();
     }
-  }
-  $: selectedDarkTheme && updateDarkTheme();
-  $: if (applyToSiteImmediately) {
-    applySelectedThemeToSite();
   }
 
   function applySelectedThemeToSite() {
@@ -196,20 +121,113 @@
     { key: 'surface-300', label: 'Surface 300', optional: true },
   ];
 
-  $: currentThemeSettings = themeKeys.reduce(
-    (acc, { key }) => {
-      if (customDarkTheme[key]) {
-        acc.dark[key] = formatColor(customDarkTheme[key], colorSpace);
-      }
-      if (customLightTheme[key]) {
-        acc.light[key] = formatColor(customLightTheme[key], colorSpace);
-      }
-      return acc;
-    },
+  let lightThemes = $derived([
     {
-      light: { 'color-scheme': 'light' },
-      dark: { 'color-scheme': 'dark' },
-    } as Record<'light' | 'dark', Record<string, string | undefined>>
+      label: 'Custom',
+      value: 'custom',
+      themeName: 'custom',
+      theme: customLightTheme,
+    },
+    ...daisyThemeNames.light.map((themeName) => {
+      return {
+        label: themeName === 'light' ? 'light (daisy)' : themeName,
+        value: themeName === 'light' ? 'daisy-light' : themeName,
+        group: 'Daisy',
+        themeName,
+        theme: data.themes.daisy[themeName],
+      };
+    }),
+    ...skeletonThemeNames.light.map((themeName) => {
+      return {
+        label: themeName === 'light' ? 'light (skeleton)' : themeName,
+        value: themeName === 'light' ? 'skeleton-light' : themeName,
+        group: 'Skeleton',
+        themeName,
+        theme: data.themes.skeleton[themeName],
+      };
+    }),
+  ] as ThemeMenuOption[]);
+  let darkThemes = $derived([
+    {
+      label: 'Custom',
+      value: 'custom',
+      themeName: 'custom',
+      theme: customDarkTheme,
+    },
+    ...daisyThemeNames.dark.map((themeName) => {
+      return {
+        label: themeName === 'dark' ? 'dark (daisy)' : themeName,
+        value: themeName === 'dark' ? 'daisy-dark' : themeName,
+        group: 'Daisy',
+        themeName,
+        theme: data.themes.daisy[themeName],
+      };
+    }),
+    ...skeletonThemeNames.dark.map((themeName) => {
+      return {
+        label: themeName === 'dark' ? 'dark (skeleton)' : themeName,
+        value: themeName === 'dark' ? 'skeleton-dark' : themeName,
+        group: 'Skeleton',
+        themeName,
+        theme: data.themes.skeleton[themeName],
+      };
+    }),
+  ] as ThemeMenuOption[]);
+  // Set initial theme selections (skip custom)
+  $effect(() => {
+    if (selectedLightThemeValue === undefined) {
+      selectedLightThemeValue = lightThemes[1].value;
+    }
+  });
+  $effect(() => {
+    if (selectedDarkThemeValue === undefined) {
+      selectedDarkThemeValue = darkThemes[1].value;
+    }
+  });
+  let showDarkTheme = $state<boolean>();
+  $effect(() => {
+    showDarkTheme = $currentTheme.dark;
+  });
+  let selectedLightTheme = $derived(
+    lightThemes.find((d) => d.value === selectedLightThemeValue)!.theme
+  );
+  let selectedDarkTheme = $derived(
+    darkThemes.find((d) => d.value === selectedDarkThemeValue)!.theme
+  );
+  let previewTheme = $derived(
+    (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as NestedColors
+  );
+  // Update site dark/light mode with preview for better experience (previewing and applying)
+  $effect(() => {
+    currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');
+  });
+  $effect(() => {
+    selectedLightTheme && updateLightTheme();
+  });
+  $effect(() => {
+    selectedDarkTheme && updateDarkTheme();
+  });
+  $effect(() => {
+    if (applyToSiteImmediately) {
+      applySelectedThemeToSite();
+    }
+  });
+  let currentThemeSettings = $derived(
+    themeKeys.reduce(
+      (acc, { key }) => {
+        if (customDarkTheme[key]) {
+          acc.dark[key] = formatColor(customDarkTheme[key], colorSpace);
+        }
+        if (customLightTheme[key]) {
+          acc.light[key] = formatColor(customLightTheme[key], colorSpace);
+        }
+        return acc;
+      },
+      {
+        light: { 'color-scheme': 'light' },
+        dark: { 'color-scheme': 'dark' },
+      } as Record<'light' | 'dark', Record<string, string | undefined>>
+    )
   );
 </script>
 
@@ -222,7 +240,7 @@
       clearable={false}
       toggleIcon={null}
       stepper
-      on:change={() => (showDarkTheme = false)}
+      onChange={() => (showDarkTheme = false)}
     />
     <SelectField
       label="Dark theme"
@@ -231,7 +249,7 @@
       clearable={false}
       toggleIcon={null}
       stepper
-      on:change={() => (showDarkTheme = true)}
+      onChange={() => (showDarkTheme = true)}
     />
 
     <MenuField
@@ -256,63 +274,65 @@
         <CopyButton value={JSON.stringify(currentThemeSettings, null, 2)} />
       </Tooltip>
 
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="grid">
-          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
-          <Menu {open} on:close={toggleOff} placement="bottom-start">
-            <MenuItem
-              on:click={() => {
-                const value = JSON.stringify(
-                  { light: selectedLightTheme, dark: selectedDarkTheme },
-                  null,
-                  2
-                );
-                navigator.clipboard.writeText(value);
-              }}
-            >
-              Copy Full Theme
-            </MenuItem>
-            <MenuItem
-              on:click={() => {
-                const allThemes = {
-                  ...data.themes.daisy,
-                  ...fromEntries(
-                    entries(data.themes.skeleton).map(([themeName, value]) => {
-                      return [
-                        themeName === 'light'
-                          ? 'skeleton-light'
-                          : themeName === 'dark'
-                            ? 'skeleton-dark'
-                            : themeName,
-                        value,
-                      ];
-                    })
-                  ),
-                };
-                const clipboardData = JSON.stringify(allThemes, null, 2);
-                navigator.clipboard.writeText(clipboardData);
-              }}
-            >
-              Copy All themes
-            </MenuItem>
-            <MenuItem
-              on:click={() => {
-                const clipboardData = JSON.stringify(data.themes.daisy, null, 2);
-                navigator.clipboard.writeText(clipboardData);
-              }}
-            >
-              Copy Daisy themes
-            </MenuItem>
-            <MenuItem
-              on:click={() => {
-                const clipboardData = JSON.stringify(data.themes.skeleton, null, 2);
-                navigator.clipboard.writeText(clipboardData);
-              }}
-            >
-              Copy Skeleton themes
-            </MenuItem>
-          </Menu>
-        </div>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="grid">
+            <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
+            <Menu {open} onClose={toggleOff} placement="bottom-start">
+              <MenuItem
+                on:click={() => {
+                  const value = JSON.stringify(
+                    { light: selectedLightTheme, dark: selectedDarkTheme },
+                    null,
+                    2
+                  );
+                  navigator.clipboard.writeText(value);
+                }}
+              >
+                Copy Full Theme
+              </MenuItem>
+              <MenuItem
+                on:click={() => {
+                  const allThemes = {
+                    ...data.themes.daisy,
+                    ...fromEntries(
+                      entries(data.themes.skeleton).map(([themeName, value]) => {
+                        return [
+                          themeName === 'light'
+                            ? 'skeleton-light'
+                            : themeName === 'dark'
+                              ? 'skeleton-dark'
+                              : themeName,
+                          value,
+                        ];
+                      })
+                    ),
+                  };
+                  const clipboardData = JSON.stringify(allThemes, null, 2);
+                  navigator.clipboard.writeText(clipboardData);
+                }}
+              >
+                Copy All themes
+              </MenuItem>
+              <MenuItem
+                on:click={() => {
+                  const clipboardData = JSON.stringify(data.themes.daisy, null, 2);
+                  navigator.clipboard.writeText(clipboardData);
+                }}
+              >
+                Copy Daisy themes
+              </MenuItem>
+              <MenuItem
+                on:click={() => {
+                  const clipboardData = JSON.stringify(data.themes.skeleton, null, 2);
+                  navigator.clipboard.writeText(clipboardData);
+                }}
+              >
+                Copy Skeleton themes
+              </MenuItem>
+            </Menu>
+          </div>
+        {/snippet}
       </Toggle>
     </ButtonGroup>
   </div>
@@ -325,7 +345,7 @@
           <ColorField
             label={optional ? `${label} (optional)` : label}
             bind:value={customLightTheme[key]}
-            on:change={() => {
+            onChange={() => {
               selectedLightThemeValue = 'custom';
               showDarkTheme = false;
             }}
@@ -342,7 +362,7 @@
           <ColorField
             label={optional ? `${label} (optional)` : label}
             bind:value={customDarkTheme[key]}
-            on:change={() => {
+            onChange={() => {
               selectedDarkThemeValue = 'custom';
               showDarkTheme = true;
             }}
@@ -365,17 +385,18 @@
 
       <Switch
         checked={showDarkTheme}
-        on:change={(e) => {
+        onchange={(e) => {
           // @ts-expect-error
           showDarkTheme = e.target?.checked;
         }}
-        let:checked
       >
-        {#if checked}
-          <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
-        {:else}
-          <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
-        {/if}
+        {#snippet children({ checked })}
+          {#if checked}
+            <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
+          {:else}
+            <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
+          {/if}
+        {/snippet}
       </Switch>
     </div>
 

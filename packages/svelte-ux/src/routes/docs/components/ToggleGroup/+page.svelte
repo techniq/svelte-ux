@@ -12,17 +12,17 @@
   const missedValue = {};
   const callsValue = {};
 
-  let selected = 1;
-  let selectedStr: string | undefined | null = 'all';
-  let selectedObj: object | undefined | null = missedValue;
+  let selected = $state(1);
+  let selectedStr: string | undefined | null = $state('all');
+  let selectedObj: object | undefined | null = $state(missedValue);
 
-  let variant: ComponentProps<ToggleGroup>['variant'] = 'default';
-  let size: ComponentProps<ToggleGroup>['size'] = 'md';
-  let rounded: ComponentProps<ToggleGroup>['rounded'] = true;
-  let inset: ComponentProps<ToggleGroup>['inset'] = false;
-  let gap: ComponentProps<ToggleGroup>['gap'] = false;
-  let vertical: ComponentProps<ToggleGroup>['vertical'] = false;
-  let showPanes = false;
+  let variant: ComponentProps<typeof ToggleGroup>['variant'] = $state('default');
+  let size: ComponentProps<typeof ToggleGroup>['size'] = $state('md');
+  let rounded: ComponentProps<typeof ToggleGroup>['rounded'] = $state(true);
+  let inset: ComponentProps<typeof ToggleGroup>['inset'] = $state(false);
+  let gap: ComponentProps<typeof ToggleGroup>['gap'] = $state(false);
+  let vertical: ComponentProps<typeof ToggleGroup>['vertical'] = $state(false);
+  let showPanes = $state(false);
 
   const variants = [
     'default',
@@ -44,7 +44,7 @@
         <ToggleOption value="missed">Missed</ToggleOption>
         <ToggleOption value="calls">Calls</ToggleOption>
 
-        <svelte:fragment slot="panes">
+        {#snippet panes()}
           {#if showPanes}
             <div class="mt-2 p-4 bg-surface-content/5 rounded border">
               <TogglePanel>All panel</TogglePanel>
@@ -52,7 +52,7 @@
               <TogglePanel>Calls panel</TogglePanel>
             </div>
           {/if}
-        </svelte:fragment>
+        {/snippet}
       </ToggleGroup>
     </Preview>
   </div>
@@ -218,10 +218,10 @@
 
 <div class="mt-4">
   Select:
-  <Button on:click={() => (selectedStr = 'all')}>All</Button>
-  <Button on:click={() => (selectedStr = 'missed')}>Missed</Button>
-  <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
-  <Button on:click={() => (selectedStr = null)}>Clear</Button>
+  <Button onclick={() => (selectedStr = 'all')}>All</Button>
+  <Button onclick={() => (selectedStr = 'missed')}>Missed</Button>
+  <Button onclick={() => (selectedStr = 'calls')}>Calls</Button>
+  <Button onclick={() => (selectedStr = null)}>Clear</Button>
 </div>
 
 <h2>Controlled with null option</h2>
@@ -237,10 +237,10 @@
 
 <div class="mt-4">
   Select:
-  <Button on:click={() => (selectedStr = null)}>None</Button>
-  <Button on:click={() => (selectedStr = 'all')}>All</Button>
-  <Button on:click={() => (selectedStr = 'missed')}>Missed</Button>
-  <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
+  <Button onclick={() => (selectedStr = null)}>None</Button>
+  <Button onclick={() => (selectedStr = 'all')}>All</Button>
+  <Button onclick={() => (selectedStr = 'missed')}>Missed</Button>
+  <Button onclick={() => (selectedStr = 'calls')}>Calls</Button>
 </div>
 
 <h2>Controlled with undefined option</h2>
@@ -256,10 +256,10 @@
 
 <div class="mt-4">
   Select:
-  <Button on:click={() => (selectedStr = undefined)}>None</Button>
-  <Button on:click={() => (selectedStr = 'all')}>All</Button>
-  <Button on:click={() => (selectedStr = 'missed')}>Missed</Button>
-  <Button on:click={() => (selectedStr = 'calls')}>Calls</Button>
+  <Button onclick={() => (selectedStr = undefined)}>None</Button>
+  <Button onclick={() => (selectedStr = 'all')}>All</Button>
+  <Button onclick={() => (selectedStr = 'missed')}>Missed</Button>
+  <Button onclick={() => (selectedStr = 'calls')}>Calls</Button>
 </div>
 
 <h2>Controlled (object value)</h2>
@@ -274,10 +274,10 @@
 
 <div class="mt-4">
   Select:
-  <Button on:click={() => (selectedObj = allValue)}>All</Button>
-  <Button on:click={() => (selectedObj = missedValue)}>Missed</Button>
-  <Button on:click={() => (selectedObj = callsValue)}>Calls</Button>
-  <Button on:click={() => (selectedObj = null)}>Clear</Button>
+  <Button onclick={() => (selectedObj = allValue)}>All</Button>
+  <Button onclick={() => (selectedObj = missedValue)}>Missed</Button>
+  <Button onclick={() => (selectedObj = callsValue)}>Calls</Button>
+  <Button onclick={() => (selectedObj = null)}>Clear</Button>
 </div>
 
 <h2>Overflow scrollIntoView</h2>
@@ -303,16 +303,16 @@
 
 <div class="mt-4">
   Select:
-  <Button on:click={() => (selected = 1)}>1</Button>
-  <Button on:click={() => (selected = 2)}>2</Button>
-  <Button on:click={() => (selected = 3)}>3</Button>
-  <Button on:click={() => (selected = 4)}>4</Button>
-  <Button on:click={() => (selected = 5)}>5</Button>
-  <Button on:click={() => (selected = 6)}>6</Button>
-  <Button on:click={() => (selected = 7)}>7</Button>
-  <Button on:click={() => (selected = 8)}>8</Button>
-  <Button on:click={() => (selected = 9)}>9</Button>
-  <Button on:click={() => (selected = 10)}>10</Button>
+  <Button onclick={() => (selected = 1)}>1</Button>
+  <Button onclick={() => (selected = 2)}>2</Button>
+  <Button onclick={() => (selected = 3)}>3</Button>
+  <Button onclick={() => (selected = 4)}>4</Button>
+  <Button onclick={() => (selected = 5)}>5</Button>
+  <Button onclick={() => (selected = 6)}>6</Button>
+  <Button onclick={() => (selected = 7)}>7</Button>
+  <Button onclick={() => (selected = 8)}>8</Button>
+  <Button onclick={() => (selected = 9)}>9</Button>
+  <Button onclick={() => (selected = 10)}>10</Button>
 </div>
 
 <h1>ToggleGroup API</h1>

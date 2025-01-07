@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { mdiClose, mdiInformationOutline } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
@@ -9,52 +8,81 @@
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
-
-  const dispatch = createEventDispatcher<{
-    clear: null;
-  }>();
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Field');
 
-  export let label = '';
-  export let labelPlacement: LabelPlacement = defaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT;
-  export let value: any = null;
-  export let placeholder = '';
-  export let error: string | string[] | boolean | undefined = '';
-  export let hint = '';
-  // export let autocomplete = 'off'; // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
-  // export let multiline = false;
-  export let disabled = false;
-  export let clearable = false;
-  export let base = false;
-  export let rounded = false;
-  export let dense = false;
-  export let icon: string | null = null;
-  export let iconRight: string | null = null;
-  // export let align: 'left' | 'center' | 'right' = 'left';
-  // export let actions: Actions = undefined;
-  // export let inputEl: HTMLInputElement | null = null;
-  export let center = false;
-  export let classes: {
-    root?: string;
-    container?: string;
+  interface Props {
     label?: string;
-    input?: string;
-    error?: string;
-    prepend?: string;
-    append?: string;
-  } = {};
+    labelPlacement?: LabelPlacement;
+    value?: any;
+    placeholder?: string;
+    error?: string | string[] | boolean | undefined;
+    hint?: string;
+    disabled?: boolean;
+    clearable?: boolean;
+    base?: boolean;
+    rounded?: boolean;
+    dense?: boolean;
+    icon?: string | null;
+    iconRight?: string | null;
+    center?: boolean;
+    classes?: {
+      root?: string;
+      container?: string;
+      label?: string;
+      input?: string;
+      error?: string;
+      prepend?: string;
+      append?: string;
+    };
+    class?: string;
+    onClear?: () => void;
+    onclick?: SvelteHTMLElements['div']['onclick'];
+    prepend?: Snippet;
+    append?: Snippet;
+    id?: string;
+    prefix?: Snippet;
+    children?: Snippet<[{ id: string }]>;
+    suffix?: Snippet;
+    root?: Snippet;
+  }
 
-  $: hasValue = Array.isArray(value)
-    ? value.length > 0
-    : !!value /* anything truthy such as object, non-empty string, etc */;
-  $: hasInsetLabel = ['inset', 'float'].includes(labelPlacement) && label !== '';
-
-  $: hasPrepend = $$slots.prepend || icon != null;
-  $: hasAppend = $$slots.append || iconRight != null || clearable || error;
-
-  export let id = uniqueId('field-');
-  let labelEl: HTMLLabelElement | null = null;
+  let {
+    label = '',
+    labelPlacement = defaults.labelPlacement ?? DEFAULT_LABEL_PLACEMENT,
+    value = $bindable(),
+    placeholder = '',
+    error = '',
+    hint = '',
+    disabled = false,
+    clearable = false,
+    base = false,
+    rounded = false,
+    dense = false,
+    icon,
+    iconRight,
+    center = false,
+    classes = {},
+    class: className,
+    onClear,
+    onclick,
+    prepend,
+    append,
+    id = uniqueId('field-'),
+    prefix,
+    children,
+    suffix,
+    root,
+  }: Props = $props();
+  let labelEl: HTMLLabelElement | null = $state(null);
+  let hasValue = $derived(
+    Array.isArray(value) ? value.length > 0 : !!value
+  ); /* anything truthy such as object, non-empty string, etc */
+  let hasInsetLabel = $derived(['inset', 'float'].includes(labelPlacement) && label !== '');
+  let hasPrepend = $derived(prepend || icon != null);
+  let hasAppend = $derived(append || iconRight != null || clearable || error);
 </script>
 
 <label
@@ -69,7 +97,7 @@
     !base && (rounded ? 'rounded-full' : 'rounded'),
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   bind:this={labelEl}
 >
@@ -115,19 +143,19 @@
               classes.prepend
             )}
           >
-            <slot name="prepend" />
+            {@render prepend?.()}
 
             {#if icon}
-              <span class={cls('mr-3', rounded && !$$slots.prepend && 'ml-3')}>
+              <span class={cls('mr-3', rounded && !prepend && 'ml-3')}>
                 <Icon data={icon} class="text-surface-content/50" />
               </span>
             {/if}
           </div>
         {/if}
 
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <div class="flex-grow inline-grid" on:click>
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
+        <div class="flex-grow inline-grid" {onclick}>
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <span
               class={cls(
@@ -155,21 +183,21 @@
               classes.input
             )}
           >
-            <slot name="prefix" />
+            {@render prefix?.()}
 
-            <slot {id}>
-              {#if value}
-                {value}
-              {:else if placeholder}
-                <span class="text-surface-content/50">
-                  {placeholder}
-                </span>
-              {:else}
-                &nbsp
-              {/if}
-            </slot>
+            {#if children}
+              {@render children({ id })}
+            {:else if value}
+              {value}
+            {:else if placeholder}
+              <span class="text-surface-content/50">
+                {placeholder}
+              </span>
+            {:else}
+              &nbsp
+            {/if}
 
-            <slot name="suffix" />
+            {@render suffix?.()}
           </div>
         </div>
 
@@ -186,15 +214,15 @@
                 icon={mdiClose}
                 {disabled}
                 class="text-surface-content/50 p-1"
-                on:click={() => {
+                onclick={() => {
                   value = Array.isArray(value) ? [] : typeof value === 'string' ? '' : null;
-                  dispatch('clear');
+                  onClear?.();
                   labelEl?.focus();
                 }}
               />
             {/if}
 
-            <slot name="append" />
+            {@render append?.()}
 
             {#if error}
               <Icon data={mdiInformationOutline} class="text-danger" />
@@ -218,7 +246,7 @@
     </div>
   </div>
 
-  <slot name="root" />
+  {@render root?.()}
 </label>
 
 <style lang="postcss">
