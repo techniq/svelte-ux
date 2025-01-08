@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { subDays, subMonths } from 'date-fns';
-
 	import { Switch, timerStore } from 'svelte-ux';
 	import Preview from '$lib/components/Preview.svelte';
 
   const dateTimer = timerStore({ initial: new Date(), onTick: () => new Date() })
-  $: ({ isRunning: isDateRunning } = dateTimer);
+  let { isRunning: isDateRunning } = $derived(dateTimer);
 
   const tickTimer = timerStore({ initial: 0, onTick: (value) => value + 1 })
-  $: ({ isRunning: isTickRunning } = tickTimer);
+  let { isRunning: isTickRunning } = $derived(tickTimer);
 </script>
 
 <h1>Usage</h1>
@@ -31,7 +29,7 @@ const timer = timerStore<T>({ initial?: T, onTick?: (value: T) => {...}, delay?:
 
 <Preview>
   <div>{$dateTimer}</div>
-  <Switch checked={$isDateRunning} on:change={e => e.target.checked ? dateTimer.start() : dateTimer.stop()} />
+  <Switch checked={$isDateRunning} onchange={e => e.target?.checked ? dateTimer.start() : dateTimer.stop()} />
 </Preview>
 
 <h2>Tick count</h2>
@@ -44,5 +42,5 @@ const timer = timerStore<T>({ initial?: T, onTick?: (value: T) => {...}, delay?:
 
 <Preview>
   <div>{$tickTimer}</div>
-  <Switch checked={$isTickRunning} on:change={e => e.target.checked ? tickTimer.start() : tickTimer.stop()} />
+  <Switch checked={$isTickRunning} onchange={e => e.target?.checked ? tickTimer.start() : tickTimer.stop()} />
 </Preview>

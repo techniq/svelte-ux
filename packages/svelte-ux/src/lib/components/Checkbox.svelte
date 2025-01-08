@@ -34,7 +34,7 @@
   let {
     id = uniqueId('checkbox-'),
     name = '',
-    value = undefined,
+    value,
     checked = $bindable(false),
     group = $bindable(null),
     indeterminate = $bindable(false),

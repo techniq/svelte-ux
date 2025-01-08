@@ -1,5 +1,5 @@
 <script lang="ts" generics="T">
-  import type { Snippet } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   import selectionStore from '../stores/selectionStore.js';
 
   interface Props {
@@ -13,9 +13,9 @@
 
   let { initial = [], all = [], single = false, max, onChange, children }: Props = $props();
 
-  const selection = selectionStore({ initial, all, single, max });
+  const selection = $derived(selectionStore({ initial, all, single, max }));
 
-  $effect(() => {
+  onMount(() => {
     $selection.all.set(all);
   });
 

@@ -12,10 +12,10 @@
   import type { DateRange } from '$lib/utils/dateRange.js';
   import Preview from '$lib/components/Preview.svelte';
 
-  let selected: SelectedDate = null;
-  let selectedArr: Date[] = [];
-  let selectedRange: DateRange = { from: null, to: null };
-  let selectedQuarter: DateRange = { from: null, to: null };
+  let selected: SelectedDate = $state(null);
+  let selectedArr: Date[] = $state([]);
+  let selectedRange: DateRange = $state({ from: null, to: null });
+  let selectedQuarter: DateRange = $state({ from: null, to: null });
 </script>
 
 <h1>Examples</h1>
@@ -129,8 +129,8 @@
 <Preview>
   <MonthList
     {selected}
-    on:dateChange={(e) => {
-      selected = e.detail;
+    onDateChange={(value) => {
+      selected = value;
     }}
   />
 </Preview>
@@ -140,8 +140,8 @@
 <Preview>
   <MonthList
     selected={selectedArr}
-    on:dateChange={(e) => {
-      const date = e.detail;
+    onDateChange={(value) => {
+      const date = value;
       if (selectedArr.some((d) => isSameMonth(d, date))) {
         selectedArr = selectedArr.filter((d) => !isSameMonth(d, date));
       } else {
@@ -156,8 +156,8 @@
 <Preview>
   <MonthList
     selected={selectedRange}
-    on:dateChange={(e) => {
-      const date = e.detail;
+    onDateChange={(value) => {
+      const date = value;
       const newSelectedRange = { ...selectedRange };
       if (selectedRange.from === null) {
         newSelectedRange.from = date;
@@ -187,8 +187,8 @@
   <div class="grid grid-cols-6">
     <MonthList
       selected={selectedQuarter}
-      on:dateChange={(e) => {
-        const date = e.detail;
+      onDateChange={(value) => {
+        const date = value;
         selectedQuarter = {
           from: startOfQuarter(date),
           to: endOfQuarter(date),

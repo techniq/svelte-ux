@@ -63,8 +63,8 @@
     class?: string;
     onApply?: any;
     searchText?: string;
-    onCancel: () => void;
-    onChange: ({
+    onCancel?: () => void;
+    onChange?: ({
       value,
       selection,
       indeterminate,

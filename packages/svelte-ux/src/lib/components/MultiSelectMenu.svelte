@@ -15,7 +15,7 @@
 
   interface Props {
     options: MultiSelectProps['options'];
-    value: MultiSelectProps['value'];
+    value?: MultiSelectProps['value'];
     mode?: MultiSelectProps['mode'];
     maintainOrder?: MultiSelectProps['maintainOrder'];
     indeterminateSelected?: typeof value;

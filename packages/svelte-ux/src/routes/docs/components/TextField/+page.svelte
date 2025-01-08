@@ -37,9 +37,9 @@
     { label: 'contains', value: 'contains' },
   ];
 
-  let value = '';
-  let numberValue = 1;
-  let multilineValue = 'one\ntwo\nthree';
+  let value = $state('');
+  let numberValue = $state(1);
+  let multilineValue = $state('one\ntwo\nthree');
 </script>
 
 <h1>Examples</h1>
@@ -195,15 +195,15 @@
 <h2>on:change event</h2>
 
 <Preview>
-  <TextField label="Name" on:change={(e) => console.log(e.detail)} />
+  <TextField label="Name" onChange={(value) => console.log(value)} />
 </Preview>
 
 <h2>debounceChange</h2>
 
 <Preview>
   <div class="grid gap-2">
-    <TextField label="Name" on:change={(e) => console.log(e.detail)} debounceChange />
-    <TextField label="Name" on:change={(e) => console.log(e.detail)} debounceChange={1000} />
+    <TextField label="Name" onChange={(value) => console.log(value)} debounceChange />
+    <TextField label="Name" onChange={(value) => console.log(value)} debounceChange={1000} />
   </div>
 </Preview>
 
@@ -233,15 +233,15 @@
 
 <Preview>
   <div class="grid grid-cols-3 gap-2">
-    <TextField label="default" on:change={(e) => console.log(e.detail)} />
-    <TextField label="text" type="text" on:change={(e) => console.log(e.detail)} />
-    <TextField label="password" type="password" on:change={(e) => console.log(e.detail)} />
-    <TextField label="integer" type="integer" on:change={(e) => console.log(e.detail)} />
-    <TextField label="decimal" type="decimal" on:change={(e) => console.log(e.detail)} />
-    <TextField label="currency" type="currency" on:change={(e) => console.log(e.detail)} />
-    <TextField label="percent" type="percent" on:change={(e) => console.log(e.detail)} />
-    <TextField label="email" type="email" on:change={(e) => console.log(e.detail)} />
-    <TextField label="search" type="search" on:change={(e) => console.log(e.detail)} />
+    <TextField label="default" onChange={(value) => console.log(value)} />
+    <TextField label="text" type="text" onChange={(value) => console.log(value)} />
+    <TextField label="password" type="password" onChange={(value) => console.log(value)} />
+    <TextField label="integer" type="integer" onChange={(value) => console.log(value)} />
+    <TextField label="decimal" type="decimal" onChange={(value) => console.log(value)} />
+    <TextField label="currency" type="currency" onChange={(value) => console.log(value)} />
+    <TextField label="percent" type="percent" onChange={(value) => console.log(value)} />
+    <TextField label="email" type="email" onChange={(value) => console.log(value)} />
+    <TextField label="search" type="search" onChange={(value) => console.log(value)} />
   </div>
 </Preview>
 
@@ -252,9 +252,11 @@
     <div class="text-lg font-semibold mt-8 ml-2">Prepend</div>
     <Preview>
       <TextField label="User Search">
-        <div slot="prepend">
-          <Icon data={mdiAccountSearch} class="text-surface-content/50 mr-2" />
-        </div>
+        {#snippet prepend()}
+                <div >
+            <Icon data={mdiAccountSearch} class="text-surface-content/50 mr-2" />
+          </div>
+              {/snippet}
       </TextField>
     </Preview>
   </div>
@@ -263,20 +265,22 @@
     <div class="text-lg font-semibold mt-8 ml-2">Prepend with select</div>
     <Preview>
       <TextField label="Start Date">
-        <div slot="prepend">
-          <select
-            class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
-            style="text-align-last: center;"
-          >
-            <!-- <option /> -->
-            <option>{'='}</option>
-            <option>{'!='}</option>
-            <option>{'>'}</option>
-            <option>{'>='}</option>
-            <option>{'<'}</option>
-            <option>{'<='}</option>
-          </select>
-        </div>
+        {#snippet prepend()}
+                <div >
+            <select
+              class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
+              style="text-align-last: center;"
+            >
+              <!-- <option /> -->
+              <option>{'='}</option>
+              <option>{'!='}</option>
+              <option>{'>'}</option>
+              <option>{'>='}</option>
+              <option>{'<'}</option>
+              <option>{'<='}</option>
+            </select>
+          </div>
+              {/snippet}
       </TextField>
     </Preview>
   </div>
@@ -286,9 +290,11 @@
 
 <Preview>
   <TextField label="Name">
-    <span slot="append">
-      <Button icon={mdiRefresh} class="text-surface-content/50 p-2" />
-    </span>
+    {#snippet append()}
+        <span >
+        <Button icon={mdiRefresh} class="text-surface-content/50 p-2" />
+      </span>
+      {/snippet}
   </TextField>
 </Preview>
 
@@ -296,9 +302,11 @@
 
 <Preview>
   <TextField label="Amount">
-    <div slot="prefix">
-      <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
-    </div>
+    {#snippet prefix()}
+        <div >
+        <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+      </div>
+      {/snippet}
   </TextField>
 </Preview>
 
@@ -307,7 +315,9 @@
     <div class="text-lg font-semibold mt-8 ml-2">Suffix</div>
     <Preview>
       <TextField label="Weight">
-        <div slot="suffix" class="text-surface-content/50">lbs</div>
+        {#snippet suffix()}
+                <div  class="text-surface-content/50">lbs</div>
+              {/snippet}
       </TextField>
     </Preview>
   </div>
@@ -316,9 +326,11 @@
     <div class="text-lg font-semibold mt-8 ml-2">Suffix with align right</div>
     <Preview>
       <TextField label="Ratio" align="right">
-        <div slot="suffix">
-          <Icon data={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
-        </div>
+        {#snippet suffix()}
+                <div >
+            <Icon data={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
+          </div>
+              {/snippet}
       </TextField>
     </Preview>
   </div>
@@ -346,9 +358,11 @@
 
 <Preview>
   <TextField label="Search" clearable>
-    <span slot="append">
-      <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
-    </span>
+    {#snippet append()}
+        <span >
+        <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
+      </span>
+      {/snippet}
   </TextField>
 </Preview>
 
@@ -368,16 +382,24 @@
 
 <Preview>
   <TextField label="Transfer amount">
-    <div slot="prepend">
-      <Icon data={mdiCreditCardOutline} class="text-surface-content/50 mr-2" />
-    </div>
-    <div slot="append">
-      <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
-    </div>
-    <div slot="prefix">
-      <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
-    </div>
-    <div slot="suffix" class="text-surface-content/50">usd</div>
+    {#snippet prepend()}
+        <div >
+        <Icon data={mdiCreditCardOutline} class="text-surface-content/50 mr-2" />
+      </div>
+      {/snippet}
+    {#snippet append()}
+        <div >
+        <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
+      </div>
+      {/snippet}
+    {#snippet prefix()}
+        <div >
+        <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+      </div>
+      {/snippet}
+    {#snippet suffix()}
+        <div  class="text-surface-content/50">usd</div>
+      {/snippet}
   </TextField>
 </Preview>
 
@@ -385,14 +407,18 @@
 
 <Preview>
   <TextField label="Date Range">
-    <div slot="prepend">
-      <Button icon={mdiChevronLeft} class="text-surface-content/50 p-2" />
-      <Icon data={mdiCalendar} class="text-surface-content/50 mr-2" />
-    </div>
-    <div slot="append">
-      <Icon data={mdiRefresh} class="text-surface-content/50 mr-2" />
-      <Button icon={mdiChevronRight} class="text-surface-content/50 p-2" />
-    </div>
+    {#snippet prepend()}
+        <div >
+        <Button icon={mdiChevronLeft} class="text-surface-content/50 p-2" />
+        <Icon data={mdiCalendar} class="text-surface-content/50 mr-2" />
+      </div>
+      {/snippet}
+    {#snippet append()}
+        <div >
+        <Icon data={mdiRefresh} class="text-surface-content/50 mr-2" />
+        <Button icon={mdiChevronRight} class="text-surface-content/50 p-2" />
+      </div>
+      {/snippet}
   </TextField>
 </Preview>
 
@@ -473,10 +499,14 @@
 
 <Preview>
   <TextField icon={mdiInformationOutline}>
-    <div slot="prefix" class="text-surface-content/50">http://</div>
-    <div slot="append">
-      <Button icon={mdiStarOutline} class="text-surface-content/50 p-2" />
-    </div>
+    {#snippet prefix()}
+        <div  class="text-surface-content/50">http://</div>
+      {/snippet}
+    {#snippet append()}
+        <div >
+        <Button icon={mdiStarOutline} class="text-surface-content/50 p-2" />
+      </div>
+      {/snippet}
   </TextField>
 </Preview>
 
@@ -484,12 +514,16 @@
 
 <Preview>
   <TextField type="integer" bind:value={numberValue} align="center" class="w-24">
-    <div slot="prepend" class="flex">
-      <Button icon={mdiMinus} on:click={() => (numberValue -= 1)} size="sm" />
-    </div>
-    <div slot="append" class="flex">
-      <Button icon={mdiPlus} on:click={() => (numberValue += 1)} size="sm" />
-    </div>
+    {#snippet prepend()}
+        <div  class="flex">
+        <Button icon={mdiMinus} onclick={() => (numberValue -= 1)} size="sm" />
+      </div>
+      {/snippet}
+    {#snippet append()}
+        <div  class="flex">
+        <Button icon={mdiPlus} onclick={() => (numberValue += 1)} size="sm" />
+      </div>
+      {/snippet}
   </TextField>
 </Preview>
 

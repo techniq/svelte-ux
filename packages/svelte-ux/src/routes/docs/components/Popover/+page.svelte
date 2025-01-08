@@ -2,7 +2,7 @@
   import { Button, Popover, Toggle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let open = false;
+  let open = $state(false);
 </script>
 
 <h1>Examples</h1>
@@ -16,7 +16,7 @@
     <Popover bind:open>
       <div class="p-2 bg-surface-100 border shadow">Example contents</div>
     </Popover>
-    <Button on:click={() => (open = !open)}>Click me</Button>
+    <Button onclick={() => (open = !open)}>Click me</Button>
   </div>
 </Preview>
 
@@ -25,125 +25,149 @@
 <Preview>
   <div class="mx-20">
     <div class="grid grid-cols-5">
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-2 text-right">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="top-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Top Start</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-2 text-right">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="top-start">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Top Start</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-3 text-center">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="top">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Top</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-3 text-center">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="top">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Top</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-4 text-left">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="top-end">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Top End</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-4 text-left">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="top-end">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Top End</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-1 text-right">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="left-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Left Start</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-1 text-right">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="left-start">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Left Start</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-5 text-left">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="right-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Right Start</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-5 text-left">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="right-start">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Right Start</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-1 text-right">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="left">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Left</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-1 text-right">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="left">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Left</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-5 text-left">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="right">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Right</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-5 text-left">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="right">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Right</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-1 text-right">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="left-end">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Left End</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-1 text-right">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="left-end">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Left End</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-5 text-left">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="right-end">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Right End</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-5 text-left">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="right-end">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Right End</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-2 text-right">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="bottom-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Bottom Start</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-2 text-right">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="bottom-start">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Bottom Start</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-3 text-center">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="bottom">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Bottom</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-3 text-center">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="bottom">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Bottom</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
-      <Toggle let:on={open} let:toggle let:toggleOff>
-        <div class="col-start-4 text-left">
-          <div class="inline-block">
-            <Popover {open} on:close={toggleOff} placement="bottom-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
-            </Popover>
-            <Button on:click={toggle}>Bottom End</Button>
+      <Toggle>
+        {#snippet children({ on: open, toggle, toggleOff })}
+          <div class="col-start-4 text-left">
+            <div class="inline-block">
+              <Popover {open} onClose={toggleOff} placement="bottom-start">
+                <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              </Popover>
+              <Button onclick={toggle}>Bottom End</Button>
+            </div>
           </div>
-        </div>
+        {/snippet}
       </Toggle>
     </div>
   </div>

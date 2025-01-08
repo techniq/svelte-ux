@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Button, Pagination, paginationStore } from 'svelte-ux';
-	import Preview from '$lib/components/Preview.svelte';
+  import { Button, Pagination, paginationStore as _paginationStore } from 'svelte-ux';
+  import Preview from '$lib/components/Preview.svelte';
 
-	const pagination = paginationStore();
-	pagination.setTotal(100);
+  const paginationStore = _paginationStore();
+  paginationStore.setTotal(100);
 </script>
 
 <h1>Usage</h1>
@@ -16,7 +16,7 @@
   pagination.setTotal(100);
 </script>
 
-<Pagination {pagination} />
+<Pagination {paginationStore} />
 ```
 
 <h1>Examples</h1>
@@ -24,49 +24,76 @@
 <h2>Default</h2>
 
 <Preview>
-	<Pagination {pagination} />
+  <Pagination {paginationStore} />
 </Preview>
 
 <h2>First/Last page</h2>
 
 <Preview>
-	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']} />
+  <Pagination
+    {paginationStore}
+    show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']}
+  />
 </Preview>
 
 <h2>Center pagination</h2>
 
 <Preview>
-	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']} classes={{ pagination: 'flex-1 text-center' }} />
+  <Pagination
+    {paginationStore}
+    show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']}
+    classes={{ pagination: 'flex-1 text-center' }}
+  />
 </Preview>
 
 <h2>format</h2>
 
 <Preview>
-	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']} classes={{ pagination: 'flex-1 text-center' }} format={pagination => 'Page ' + pagination.page + ' of ' + pagination.totalPages} />
+  <Pagination
+    {paginationStore}
+    show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']}
+    classes={{ pagination: 'flex-1 text-center' }}
+    format={(pagination) => 'Page ' + pagination.page + ' of ' + pagination.totalPages}
+  />
 </Preview>
 
 <h2>Pagination slot</h2>
 
 <Preview>
-	<Pagination {pagination} show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']}>
-		<div slot="pagination" class="text-sm flex-1 text-center" let:pagination>
-			Page {pagination.page} of {pagination.totalPages}
-		</div>
-	</Pagination>
+  <Pagination
+    {paginationStore}
+    show={['firstPage', 'prevPage', 'pagination', 'nextPage', 'lastPage']}
+  >
+    {#snippet pagination({ pagination })}
+      <div class="text-sm flex-1 text-center">
+        Page {pagination.page} of {pagination.totalPages}
+      </div>
+    {/snippet}
+  </Pagination>
 </Preview>
 
 <h2>Table pagination</h2>
 
 <Preview>
-	<Pagination {pagination} show={['perPage', 'pagination', 'prevPage', 'nextPage']} classes={{ perPage: 'flex-1 text-right', pagination: 'px-8' }} />
+  <Pagination
+    {paginationStore}
+    show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+    classes={{ perPage: 'flex-1 text-right', pagination: 'px-8' }}
+  />
 </Preview>
 
 <h2>Table pagination with actions slot</h2>
 
 <Preview>
-	<Pagination {pagination} show={['actions', 'perPage', 'pagination', 'prevPage', 'nextPage']} classes={{ perPage: 'flex-1 text-right', pagination: 'px-8' }}>
-		<div slot="actions">
-			<Button variant="fill" color="primary">Click me</Button>
-		</div>
-	</Pagination>
+  <Pagination
+    {paginationStore}
+    show={['actions', 'perPage', 'pagination', 'prevPage', 'nextPage']}
+    classes={{ perPage: 'flex-1 text-right', pagination: 'px-8' }}
+  >
+    {#snippet actions()}
+      <div>
+        <Button variant="fill" color="primary">Click me</Button>
+      </div>
+    {/snippet}
+  </Pagination>
 </Preview>

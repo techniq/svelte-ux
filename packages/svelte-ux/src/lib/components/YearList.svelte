@@ -36,7 +36,7 @@
     disabledDates,
   }: Props = $props();
 
-  let minYear = $state<number>();
+  let minYear = $state() as number;
   $effect(() => {
     minYear =
       minYear ??
@@ -45,7 +45,7 @@
         : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
   });
 
-  let maxYear = $state<number>();
+  let maxYear = $state() as number;
   $effect(() => {
     maxYear =
       maxYear ??
@@ -55,7 +55,7 @@
   });
 
   let years = $derived(
-    Array.from({ length: maxYear! - minYear! + 1 }, (_, i) => minYear! + i) ?? []
+    Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i) ?? []
   );
 
   // TODO: Scroll into view not typically centered
@@ -78,7 +78,7 @@
 </script>
 
 <div class="grid">
-  <Button onclick={() => (minYear = minYear! - 1)} class="border-b">More</Button>
+  <Button onclick={() => (minYear -= 1)} class="border-b">More</Button>
 
   <div class="grid p-2">
     {#each years.map((year) => new Date(year, 0, 1)) as year (year.valueOf())}
@@ -93,5 +93,5 @@
     {/each}
   </div>
 
-  <Button onclick={() => (maxYear = maxYear! + 1)} class="border-t">More</Button>
+  <Button onclick={() => (maxYear += 1)} class="border-t">More</Button>
 </div>

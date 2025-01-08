@@ -8,7 +8,7 @@
 <State initial={selected}>
   {#snippet children({ value, set })}
     {#each items as item}
-      <Button on:click={set(item)}>
+      <Button onclick={() => set(item)}>
         {item.name}
       </Button>
     {/each}

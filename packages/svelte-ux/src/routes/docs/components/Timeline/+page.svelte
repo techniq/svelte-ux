@@ -191,9 +191,11 @@
       <TimelineEvent icon={mdiCheckCircle} start={i % 2 === 0} end={i % 2 !== 0}>
         <div class="font-semibold px-2">{item.end}</div>
 
-        <div slot="point" class="border rounded-full px-2 text-xs">
-          {item.start}
-        </div>
+        {#snippet point()}
+                <div  class="border rounded-full px-2 text-xs">
+            {item.start}
+          </div>
+              {/snippet}
       </TimelineEvent>
     {/each}
   </Timeline>

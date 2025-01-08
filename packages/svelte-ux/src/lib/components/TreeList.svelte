@@ -15,7 +15,7 @@
     children?: Snippet<[{ node: TreeNode }]>;
   }
 
-  let { nodes, classes = {}, class: className, children }: Props = $props();
+  let { nodes, classes = {}, class: className, children: childrenRender }: Props = $props();
   const settingsClasses = getComponentClasses('TreeList');
 </script>
 
@@ -34,11 +34,11 @@
         typeof classes.li === 'string' ? classes.li : classes.li?.(node)
       )}
     >
-      {@render children?.({ node })}
+      {@render childrenRender?.({ node })}
       {#if node.children}
         <TreeList nodes={node.children} {classes}>
           {#snippet children({ node })}
-            {@render children?.({ node })}
+            {@render childrenRender?.({ node })}
           {/snippet}
         </TreeList>
       {/if}

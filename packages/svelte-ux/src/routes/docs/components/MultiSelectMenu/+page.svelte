@@ -16,7 +16,7 @@
     value: i + 1,
   }));
 
-  let value = [3];
+  let value = $state([3]);
 </script>
 
 <h1>Examples</h1>
@@ -25,18 +25,19 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+        />
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -45,49 +46,52 @@
 
 <Preview>
   <div class="inline-grid gap-3">
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        optionProps={{ variant: 'checkbox' }}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          optionProps={{ variant: 'checkbox' }}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+        />
+      {/snippet}
     </ToggleButton>
 
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        optionProps={{ variant: 'checkmark' }}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          optionProps={{ variant: 'checkmark' }}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+        />
+      {/snippet}
     </ToggleButton>
 
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        optionProps={{ variant: 'fill' }}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          optionProps={{ variant: 'fill' }}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+        />
+      {/snippet}
     </ToggleButton>
   </div>
 </Preview>
@@ -96,20 +100,21 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-        inlineSearch
-        placeholder="Pick a number"
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+          inlineSearch
+          placeholder="Pick a number"
+        />
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -118,20 +123,21 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-        maintainOrder
-        placeholder="Pick a number"
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+          maintainOrder
+          placeholder="Pick a number"
+        />
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -140,21 +146,22 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-        inlineSearch
-        maintainOrder
-        placeholder="Pick a number"
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+          inlineSearch
+          maintainOrder
+          placeholder="Pick a number"
+        />
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -163,19 +170,20 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        options={manyOptions}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-        classes={{ menu: 'max-h-[360px] w-[360px]' }}
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          options={manyOptions}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+          classes={{ menu: 'max-h-[360px] w-[360px]' }}
+        />
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -184,20 +192,21 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        options={manyOptions}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-        classes={{ menu: 'max-h-[360px] w-[360px]' }}
-        inlineSearch
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          options={manyOptions}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+          classes={{ menu: 'max-h-[360px] w-[360px]' }}
+          inlineSearch
+        />
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -206,21 +215,22 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        options={manyOptions}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-        classes={{ menu: 'max-h-[360px] w-[360px]' }}
-        inlineSearch
-        infiniteScroll
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          options={manyOptions}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+          classes={{ menu: 'max-h-[360px] w-[360px]' }}
+          inlineSearch
+          infiniteScroll
+        />
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -228,20 +238,21 @@
 <h2>Immediately apply changes (no actions) w/ maintainOrder</h2>
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        mode="immediate"
-        maintainOrder
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-      />
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          mode="immediate"
+          maintainOrder
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+        />
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -249,24 +260,27 @@
 <h2>Immediately apply changes (with custom action) w/ maintainOrder</h2>
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        mode="immediate"
-        maintainOrder
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-      >
-        <div slot="actions">
-          <Button color="primary" icon={mdiPlus}>Add item</Button>
-        </div>
-      </MultiSelectMenu>
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          mode="immediate"
+          maintainOrder
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+        >
+          {#snippet actions()}
+            <div>
+              <Button color="primary" icon={mdiPlus}>Add item</Button>
+            </div>
+          {/snippet}
+        </MultiSelectMenu>
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -275,24 +289,27 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-        classes={{ menu: 'w-[360px]' }}
-        inlineSearch
-      >
-        <div slot="actions">
-          <Button color="primary" icon={mdiPlus}>Add item</Button>
-        </div>
-      </MultiSelectMenu>
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
+          }}
+          {open}
+          onClose={toggleOff}
+          classes={{ menu: 'w-[360px]' }}
+          inlineSearch
+        >
+          {#snippet actions()}
+            <div>
+              <Button color="primary" icon={mdiPlus}>Add item</Button>
+            </div>
+          {/snippet}
+        </MultiSelectMenu>
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>
@@ -301,38 +318,34 @@
 
 <Preview>
   <span>
-    <ToggleButton let:on={open} let:toggleOff transition={false}>
-      {value.length} selected
-      <MultiSelectMenu
-        {options}
-        {value}
-        on:change={(e) => {
-          // @ts-expect-error
-          value = e.detail.value;
-        }}
-        {open}
-        on:close={toggleOff}
-        classes={{ menu: 'w-[360px]' }}
-        inlineSearch
-      >
-        <MultiSelectOption
-          slot="option"
-          let:option
-          let:label
-          let:value
-          let:checked
-          let:indeterminate
-          let:onChange
-          {checked}
-          {indeterminate}
-          on:change={onChange}
-          classes={{
-            root: 'py-1',
+    <ToggleButton transition={false}>
+      {#snippet children({ on: open, toggleOff })}
+        {value.length} selected
+        <MultiSelectMenu
+          {options}
+          {value}
+          onChange={({ value: _value }) => {
+            value = _value;
           }}
+          {open}
+          onClose={toggleOff}
+          classes={{ menu: 'w-[360px]' }}
+          inlineSearch
         >
-          <span class="uppercase text-danger">{label}</span>
-        </MultiSelectOption>
-      </MultiSelectMenu>
+          {#snippet option({ option, label, value, checked, indeterminate, onChange })}
+            <MultiSelectOption
+              {checked}
+              {indeterminate}
+              {onChange}
+              classes={{
+                root: 'py-1',
+              }}
+            >
+              <span class="uppercase text-danger">{label}</span>
+            </MultiSelectOption>
+          {/snippet}
+        </MultiSelectMenu>
+      {/snippet}
     </ToggleButton>
   </span>
 </Preview>

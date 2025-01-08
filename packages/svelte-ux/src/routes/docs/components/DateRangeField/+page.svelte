@@ -6,11 +6,11 @@
   import Preview from '$lib/components/Preview.svelte';
 
   let today = new Date();
-  let value = {
+  let value = $state({
     from: subDays(today, 3),
     to: today,
     periodType: PeriodType.Day,
-  };
+  });
 </script>
 
 <h1>Examples</h1>

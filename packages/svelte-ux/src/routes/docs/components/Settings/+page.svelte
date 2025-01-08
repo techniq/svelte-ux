@@ -15,17 +15,19 @@
       MenuItem: { classes: 'font-bold' },
     }}
   >
-    <Toggle let:on={open} let:toggle let:toggleOff>
-      <Button onclick={toggle} variant="outline" color="primary">
-        Click me
-        <Menu {open} on:close={toggleOff}>
-          <MenuItem>Refresh</MenuItem>
-          <MenuItem>Settings</MenuItem>
-          <MenuItem>Help</MenuItem>
-          <MenuItem>Sign In</MenuItem>
-          <MenuItem disabled>Disabled</MenuItem>
-        </Menu>
-      </Button>
-    </Toggle>
+    <Toggle   >
+      {#snippet children({ on: open, toggle, toggleOff })}
+            <Button onclick={toggle} variant="outline" color="primary">
+          Click me
+          <Menu {open} onClose={toggleOff}>
+            <MenuItem>Refresh</MenuItem>
+            <MenuItem>Settings</MenuItem>
+            <MenuItem>Help</MenuItem>
+            <MenuItem>Sign In</MenuItem>
+            <MenuItem disabled>Disabled</MenuItem>
+          </Menu>
+        </Button>
+                {/snippet}
+        </Toggle>
   </Settings>
 </Preview>

@@ -48,7 +48,7 @@
       };
     });
   }
-  let randomData = randomDataGen();
+  let randomData = $state(randomDataGen());
 
   // Workaround to make Typescript happy
   function columnFormatAsNumberFormat(format: ColumnDef['format']) {
@@ -95,42 +95,44 @@
 <h2>Pagination</h2>
 
 <Preview>
-  <Paginate {data} perPage={5} let:pageData let:pagination>
-    <Table
-      data={pageData}
-      columns={[
-        {
-          name: 'name',
-          align: 'left',
-        },
-        {
-          name: 'calories',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'fat',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'carbs',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'protein',
-          align: 'right',
-          format: 'integer',
-        },
-      ]}
-    />
-    <Pagination
-      {pagination}
-      perPageOptions={[5, 10, 25, 100]}
-      show={['perPage', 'pagination', 'prevPage', 'nextPage']}
-      classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
-    />
+  <Paginate {data} perPage={5}>
+    {#snippet children({ pageData, pagination })}
+      <Table
+        data={pageData}
+        columns={[
+          {
+            name: 'name',
+            align: 'left',
+          },
+          {
+            name: 'calories',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'fat',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'carbs',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'protein',
+            align: 'right',
+            format: 'integer',
+          },
+        ]}
+      />
+      <Pagination
+        paginationStore={pagination}
+        perPageOptions={[5, 10, 25, 100]}
+        show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+        classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+      />
+    {/snippet}
   </Paginate>
 </Preview>
 
@@ -173,47 +175,49 @@
 <h2>Order + Pagination</h2>
 
 <Preview>
-  <Paginate data={data.sort($order.handler)} perPage={5} let:pageData let:pagination>
-    <Table
-      data={pageData}
-      columns={[
-        {
-          name: 'name',
-          align: 'left',
-        },
-        {
-          name: 'calories',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'fat',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'carbs',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'protein',
-          align: 'right',
-          format: 'integer',
-        },
-      ]}
-      {order}
-      on:headerClick={(e) => {
-        //Switch back to page 1 when sorting
-        pagination.setPage(1);
-      }}
-    />
-    <Pagination
-      {pagination}
-      perPageOptions={[5, 10, 25, 100]}
-      show={['perPage', 'pagination', 'prevPage', 'nextPage']}
-      classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
-    />
+  <Paginate data={data.sort($order.handler)} perPage={5}>
+    {#snippet children({ pageData, pagination })}
+      <Table
+        data={pageData}
+        columns={[
+          {
+            name: 'name',
+            align: 'left',
+          },
+          {
+            name: 'calories',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'fat',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'carbs',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'protein',
+            align: 'right',
+            format: 'integer',
+          },
+        ]}
+        {order}
+        onHeaderClick={() => {
+          //Switch back to page 1 when sorting
+          pagination.setPage(1);
+        }}
+      />
+      <Pagination
+        paginationStore={pagination}
+        perPageOptions={[5, 10, 25, 100]}
+        show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+        classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+      />
+    {/snippet}
   </Paginate>
 </Preview>
 
@@ -221,7 +225,7 @@
 
 <Preview>
   <Button
-    on:click={() => (randomData = randomDataGen())}
+    onclick={() => (randomData = randomDataGen())}
     variant="outline"
     color="primary"
     class="mb-1"
@@ -337,7 +341,7 @@
 
 <Preview>
   <Button
-    on:click={() => (randomData = randomDataGen())}
+    onclick={() => (randomData = randomDataGen())}
     variant="outline"
     color="primary"
     class="mb-1"
@@ -345,7 +349,6 @@
     Randomize
   </Button>
   <Table
-    data={randomData}
     columns={[
       {
         name: 'name',
@@ -401,28 +404,30 @@
       },
     ]}
   >
-    <tbody slot="data" let:columns let:data let:getCellValue>
-      {#each data ?? [] as rowData, rowIndex}
-        <tr class="tabular-nums">
-          {#each columns as column (column.name)}
-            {@const value = getCellValue(column, rowData, rowIndex)}
+    {#snippet data({ columns, data: _data, getCellValue })}
+      <tbody>
+        {#each data ?? [] as rowData, rowIndex}
+          <tr class="tabular-nums">
+            {#each columns as column (column.name)}
+              {@const value = getCellValue(column, rowData, rowIndex)}
 
-            <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
-              {#if column.name === 'name'}
-                {value}
-              {:else}
-                <TweenedValue
+              <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+                {#if column.name === 'name'}
                   {value}
-                  format={columnFormatAsNumberFormat(column.format)}
-                  options={typeof column.dataBackground === 'object'
-                    ? column.dataBackground.tweened
-                    : undefined}
-                />
-              {/if}
-            </td>{/each}
-        </tr>
-      {/each}
-    </tbody>
+                {:else}
+                  <TweenedValue
+                    {value}
+                    format={columnFormatAsNumberFormat(column.format)}
+                    options={typeof column.dataBackground === 'object'
+                      ? column.dataBackground.tweened
+                      : undefined}
+                  />
+                {/if}
+              </td>{/each}
+          </tr>
+        {/each}
+      </tbody>
+    {/snippet}
   </Table>
 </Preview>
 
@@ -430,7 +435,6 @@
 
 <Preview>
   <Table
-    {data}
     columns={[
       {
         name: 'name',
@@ -463,30 +467,34 @@
       },
     ]}
   >
-    <tbody slot="data" let:columns let:data let:getCellValue let:getCellContent>
-      {#each data ?? [] as rowData, rowIndex}
-        <tr class="tabular-nums">
-          {#each columns as column (column.name)}
-            {@const value = getCellValue(column, rowData, rowIndex)}
-            {@const content = getCellContent(column, rowData, rowIndex)}
+    {#snippet data({ columns, data, getCellValue, getCellContent })}
+      <tbody>
+        {#each data ?? [] as rowData, rowIndex}
+          <tr class="tabular-nums">
+            {#each columns as column (column.name)}
+              {@const value = getCellValue(column, rowData, rowIndex)}
+              {@const content = getCellContent(column, rowData, rowIndex)}
 
-            <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
-              {#if column.name === 'actions'}
-                <Toggle let:on={open} let:toggle let:toggleOff>
-                  <Button icon={mdiDotsVertical} iconOnly size="sm" on:click={toggle}>
-                    <Menu {open} on:close={toggleOff} placement="bottom-end">
-                      <MenuItem>Edit</MenuItem>
-                      <MenuItem class="text-danger">Delete</MenuItem>
-                    </Menu>
-                  </Button>
-                </Toggle>
-              {:else}
-                {content}
-              {/if}
-            </td>
-          {/each}
-        </tr>
-      {/each}
-    </tbody>
+              <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+                {#if column.name === 'actions'}
+                  <Toggle>
+                    {#snippet children({ on: open, toggle, toggleOff })}
+                      <Button icon={mdiDotsVertical} iconOnly size="sm" onclick={toggle}>
+                        <Menu {open} onClose={toggleOff} placement="bottom-end">
+                          <MenuItem>Edit</MenuItem>
+                          <MenuItem class="text-danger">Delete</MenuItem>
+                        </Menu>
+                      </Button>
+                    {/snippet}
+                  </Toggle>
+                {:else}
+                  {content}
+                {/if}
+              </td>
+            {/each}
+          </tr>
+        {/each}
+      </tbody>
+    {/snippet}
   </Table>
 </Preview>

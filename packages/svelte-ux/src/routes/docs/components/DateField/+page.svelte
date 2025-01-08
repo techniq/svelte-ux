@@ -7,7 +7,7 @@
 
   const { localeSettings } = getSettings();
 
-  let value: Date;
+  let value = $state<Date | null>();
 </script>
 
 <h1>Examples</h1>
@@ -18,7 +18,7 @@
   <DateField
     label="Birth date"
     {value}
-    on:change={(e) => (value = e.detail.value)}
+    onChange={(_value) => (value = _value)}
     picker
     clearable
   />
@@ -29,16 +29,16 @@
 
 <Preview>
   <DateField {value} />
-  <Button on:click={() => (value = new Date())}>
+  <Button onclick={() => (value = new Date())}>
     {$localeSettings.dictionary.Date.PeriodDay.Current}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), -1))}>
+  <Button onclick={() => (value = addDays(new Date(), -1))}>
     {$localeSettings.dictionary.Date.PeriodDay.Last}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), -7))}>
+  <Button onclick={() => (value = addDays(new Date(), -7))}>
     {$localeSettings.dictionary.Date.PeriodWeek.Last}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), 7))}>
+  <Button onclick={() => (value = addDays(new Date(), 7))}>
     <!-- TODO: Add to dictionary -->
     Next week
   </Button>
@@ -47,13 +47,13 @@
 <h2>Picker</h2>
 
 <Preview>
-  <DateField {value} on:change={(e) => (value = e.detail.value)} picker />
+  <DateField {value} onChange={(_value) => (value = _value)} picker />
 </Preview>
 
 <h2>Clearable</h2>
 
 <Preview>
-  <DateField {value} on:change={(e) => (value = e.detail.value)} clearable />
+  <DateField {value} onChange={(_value) => (value = _value)} clearable />
 </Preview>
 
 <h2>Label</h2>
@@ -86,7 +86,7 @@
 <h2>on:change event</h2>
 
 <Preview>
-  <DateField label="Birth date" on:change={(e) => console.log(e.detail)} />
+  <DateField label="Birth date" onChange={(_value) => console.log(_value)} />
 </Preview>
 
 <h2>Custom format (ignore Intl settings)</h2>
@@ -95,7 +95,7 @@
   <DateField
     label="Birth date"
     {value}
-    on:change={(e) => (value = e.detail.value)}
+    onChange={(_value) => (value = _value)}
     picker
     clearable
     format="dd/MM/yyyy"
@@ -107,7 +107,7 @@
 
 <Preview>
   <form
-    on:submit={(e) => {
+    onsubmit={(e) => {
       e.preventDefault();
       // @ts-expect-error
       const formData = new FormData(e.target);

@@ -2,7 +2,7 @@
   import { Button, Overflow, Tooltip } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let overflowItems = 1;
+  let overflowItems = $state(1);
   const text = 'This is really long text used to demonstrate overflow.';
 </script>
 

@@ -4,7 +4,7 @@
   import { MonthListByYear } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let selected = new Date('1982-03-30');
+  let selected = $state(new Date('1982-03-30'));
 </script>
 
 <h1>Examples</h1>
@@ -20,8 +20,8 @@
 <Preview>
   <MonthListByYear
     {selected}
-    on:dateChange={(e) => {
-      selected = e.detail;
+    onDateChange={(value) => {
+      selected = value;
     }}
   />
 </Preview>
@@ -34,8 +34,8 @@
       minDate={subYears(selected, 10)}
       maxDate={addYears(selected, 10)}
       {selected}
-      on:dateChange={(e) => {
-        selected = e.detail;
+      onDateChange={(value) => {
+        selected = value;
       }}
     />
   </div>

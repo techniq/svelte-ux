@@ -85,6 +85,6 @@
       close('clickOutside');
     }}
   >
-    {@render children?.({ close: () => close() })}
+    {@render children?.({ close })}
   </div>
 {/if}

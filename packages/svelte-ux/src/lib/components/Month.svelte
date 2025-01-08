@@ -100,8 +100,8 @@
   <div class="max-h-[350px] overflow-auto">
     <MonthListByYear
       selected={startOfMonth}
-      on:dateChange={(e) => {
-        startOfMonth = e.detail;
+      onDateChange={(value) => {
+        startOfMonth = value;
         showMonthSelect = false;
       }}
     />

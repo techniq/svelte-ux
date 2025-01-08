@@ -5,13 +5,13 @@
   import Code from '$lib/components/Code.svelte';
   import Preview from '$lib/components/Preview.svelte';
 
-  let filterItems = false;
+  let filterItems = $state(false);
 
   const itemCount = 30;
-  $: items = Array.from({ length: itemCount })
+  let items = $derived(Array.from({ length: itemCount })
     .map((_, i) => `Item: ${i}`)
-    .filter((_, i) => (filterItems ? i > 25 : true));
-  let scrolledIndex = 0;
+    .filter((_, i) => (filterItems ? i > 25 : true)));
+  let scrolledIndex = $state(0);
 </script>
 
 <h1>Usage</h1>
@@ -147,7 +147,7 @@
 </Preview>
 
 <div>
-  <Button variant="fill" color="primary" on:click={() => (filterItems = !filterItems)}
+  <Button variant="fill" color="primary" onclick={() => (filterItems = !filterItems)}
     >Toggle filter</Button
   >
 </div>

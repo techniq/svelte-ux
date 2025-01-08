@@ -1,7 +1,7 @@
 <script lang="ts">
   import { writable } from 'svelte/store';
 
-  import { Button, Pagination, TextField, changeStore, paginationStore  } from 'svelte-ux';
+  import { Pagination, TextField, changeStore, paginationStore  } from 'svelte-ux';
 
 	import Preview from '$lib/components/Preview.svelte';
 
@@ -33,6 +33,6 @@
 
 <h2>Pagination</h2>
 <Preview>
-  <Pagination {pagination} />
+  <Pagination paginationStore={pagination} />
   <pre>{JSON.stringify($paginationChanged, null, 2)}</pre>
 </Preview>

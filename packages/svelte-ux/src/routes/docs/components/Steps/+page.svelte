@@ -205,24 +205,26 @@
 <h2>Pagination integration</h2>
 
 <Preview>
-  <Paginate data={range(4)} perPage={1} let:pagination let:current>
-    <div class="inline-grid gap-5">
-      <Steps>
-        <Step completed={current.page >= 1}>Register</Step>
-        <Step completed={current.page >= 2}>Choose plan</Step>
-        <Step completed={current.page >= 3}>Purchase</Step>
-        <Step completed={current.page >= 4}>Receive product</Step>
-      </Steps>
+  <Paginate data={range(4)} perPage={1}  >
+    {#snippet children({ pagination, current })}
+        <div class="inline-grid gap-5">
+        <Steps>
+          <Step completed={current.page >= 1}>Register</Step>
+          <Step completed={current.page >= 2}>Choose plan</Step>
+          <Step completed={current.page >= 3}>Purchase</Step>
+          <Step completed={current.page >= 4}>Receive product</Step>
+        </Steps>
 
-      <div>
-        <Button on:click={pagination.prevPage} disabled={current.isFirst}>Previous</Button>
-        <Button
-          on:click={pagination.nextPage}
-          color="primary"
-          variant="fill"
-          disabled={current.isLast}>Next</Button
-        >
+        <div>
+          <Button onclick={pagination.prevPage} disabled={current.isFirst}>Previous</Button>
+          <Button
+            onclick={pagination.nextPage}
+            color="primary"
+            variant="fill"
+            disabled={current.isLast}>Next</Button
+          >
+        </div>
       </div>
-    </div>
-  </Paginate>
+          {/snippet}
+    </Paginate>
 </Preview>

@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy, onMount } from 'svelte';
+  import {
+    onDestroy,
+    onMount,
+    type ComponentProps,
+    type Snippet,
+  } from 'svelte';
   import { mdiCircleSmall } from '@mdi/js';
   import { BROWSER } from 'esm-env';
 
@@ -15,9 +20,9 @@
     scrollOffset?: number;
     maxDepth?: number;
     icon?: any;
-    class?: string | undefined;
-    children?: import('svelte').Snippet<[any]>;
-    [key: string]: any;
+    class?: string;
+    onNodeClick?: (value: (typeof nodes)[number]) => void;
+    children?: Snippet<[{ node: TreeNode; activeHeadingId: string }]>;
   }
 
   let {
@@ -26,16 +31,13 @@
     scrollOffset = 0,
     maxDepth = 6,
     icon = mdiCircleSmall,
-    class: className = undefined,
-    children,
-    ...rest
-  }: Props = $props();
+    class: className,
+    onNodeClick,
+    children: childrenRender,
+    ...restProps
+  }: Props & Omit<Omit<ComponentProps<typeof TreeList>, 'nodes'>, keyof Props> = $props();
 
   type HeadingNode = { id: string; name: string; level: number; element: HTMLElement };
-
-  const dispatch = createEventDispatcher<{
-    nodeClick: (typeof nodes)[number];
-  }>();
 
   let activeHeadingId = $state('');
   let headings: HeadingNode[] = [];
@@ -75,19 +77,17 @@
   onDestroy(() => {
     scrollContainer?.removeEventListener('scroll', onScroll);
   });
-
-  const children_render = $derived(children);
 </script>
 
 <TreeList
   {nodes}
   classes={{ li: (node) => cls(node.level === 1 ? 'mb-2' : node.level > 2 ? 'ml-3' : '') }}
-  {...rest}
+  {...restProps}
   class={cls('TableOfContents', settingsClasses.root, className)}
 >
   {#snippet children({ node })}
-    {#if children_render}
-      {@render children_render({ node, activeHeadingId })}
+    {#if childrenRender}
+      {@render childrenRender({ node, activeHeadingId })}
     {:else}
       <a
         href="#{node.id}"
@@ -96,7 +96,7 @@
           node.level === 1 ? 'font-semibold' : 'text-sm',
           node.id && node.id === activeHeadingId && 'bg-surface-content/5'
         )}
-        onclick={() => dispatch('nodeClick', node)}
+        onclick={() => onNodeClick?.(node)}
       >
         {#if node.level > 1}
           <Icon data={icon} class="-mx-1 text-surface-content/30" />

@@ -36,10 +36,10 @@
     onClose?: () => void;
     onCloseAttempt?: () => void;
     onOpen?: () => void;
-    header?: Snippet<[any]>;
-    title?: Snippet<[any]>;
-    children?: Snippet<[any]>;
-    actions?: Snippet<[any]>;
+    header?: Snippet<[{ open: boolean, close: typeof close }]>;
+    title?: Snippet<[{ open: boolean, close: typeof close }]>;
+    children?: Snippet<[{ open: boolean, close: typeof close }]>;
+    actions?: Snippet<[{ open: boolean, close: typeof close }]>;
   }
 
   let {
@@ -113,7 +113,7 @@
   <Backdrop
     onClick={() => close()}
     onMouseUp={(e) => {
-      // Do not allow event to reach Popover's on:mouseup (clickOutside)
+      // Do not allow event to reach Popover's onmouseup (clickOutside)
       e.stopPropagation();
     }}
     class={cls('z-50', settingsClasses.backdrop, classes.backdrop)}
@@ -133,7 +133,7 @@
     onclick={onClick}
     onkeydown={(e) => {
       if (e.key === 'Escape') {
-        // Do not allow event to reach Popover's on:keydown
+        // Do not allow event to reach Popover's onkeydown
         e.stopPropagation();
         close();
       }

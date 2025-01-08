@@ -59,10 +59,10 @@
     onChange?: (value: MultiSelectMenuProps['value']) => void;
     prepend?: Snippet;
     append?: Snippet;
-    beforeOptions?: Snippet<[any]>;
-    afterOptions?: Snippet<[any]>;
-    option?: Snippet<[any]>;
-    actions?: Snippet<[any]>;
+    beforeOptions?: MultiSelectMenuProps["beforeOptions"];
+    afterOptions?: MultiSelectMenuProps["afterOptions"];
+    option?: MultiSelectMenuProps["option"];
+    actions?: MultiSelectMenuProps["actions"];
   }
 
   let {
@@ -271,7 +271,6 @@
       {@render afterOptionsRender?.({ selection })}
     {/snippet}
 
-    <!-- TODO: If only `<slot name="option" slot="option" />` just worked  -->
     {#snippet option({ option, label, value, checked, indeterminate, disabled, onChange })}
       {#if optionRender}
         {@render optionRender({
@@ -290,8 +289,8 @@
       {/if}
     {/snippet}
 
-    {#snippet actions({ selection })}
-      {@render actionsRender?.({ selection })}
+    {#snippet actions({ selection, searchText })}
+      {@render actionsRender?.({ selection, searchText })}
     {/snippet}
   </MultiSelectMenu>
 </div>

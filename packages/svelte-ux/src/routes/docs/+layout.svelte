@@ -149,7 +149,7 @@
       {#if !hideTableOfContents}
         <Button
           icon={mdiChevronDown}
-          on:click={() => {
+          onclick={() => {
             showTableOfContents = !showTableOfContents;
           }}
           variant="fill-light"
@@ -177,12 +177,12 @@
           icon={mdiClose}
           class="absolute top-1 right-1"
           size="sm"
-          on:click={() => (showTableOfContents = false)}
+          onclick={() => (showTableOfContents = false)}
         />
         <TableOfContents
           icon={mdiChevronRight}
           class="px-4 py-2"
-          on:nodeClick={(e) => {
+          onNodeClick={(e) => {
             showTableOfContents = false;
           }}
         />

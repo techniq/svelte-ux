@@ -3,9 +3,9 @@
 
   interface Props {
     on?: boolean;
-    toggle?: (value: boolean) => void;
-    toggleOn?: () => void;
-    toggleOff?: () => void;
+    onToggle?: (value: boolean) => void;
+    onToggleOn?: () => void;
+    onToggleOff?: () => void;
     children?: Snippet<
       [{ on: boolean; toggle: () => void; toggleOn: () => void; toggleOff: () => void }]
     >;
@@ -13,30 +13,30 @@
 
   let {
     on = $bindable(false),
-    toggle: _toggle,
-    toggleOn: _toggleOn,
-    toggleOff: _toggleOff,
+    onToggle,
+    onToggleOn,
+    onToggleOff,
     children,
   }: Props = $props();
 
   function toggle() {
     on = !on;
-    _toggle?.(on);
+    onToggle?.(on);
     if (on) {
-      _toggleOn?.();
+      onToggleOn?.();
     } else {
-      _toggleOff?.();
+      onToggleOff?.();
     }
   }
   function toggleOn() {
     on = true;
-    _toggle?.(on);
-    _toggleOn?.();
+    onToggle?.(on);
+    onToggleOn?.();
   }
   function toggleOff() {
     on = false;
-    _toggle?.(on);
-    _toggleOff?.();
+    onToggle?.(on);
+    onToggleOff?.();
   }
 </script>
 

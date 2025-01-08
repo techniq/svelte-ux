@@ -44,7 +44,7 @@
   let vertical = $derived(timelineContext?.vertical ?? false);
   let compact = $derived(timelineContext?.compact ?? false);
 
-  $effect(() => {
+  $effect.pre(() => {
     icon = icon ?? timelineContext?.icon ?? undefined;
   });
 

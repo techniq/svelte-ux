@@ -58,8 +58,8 @@
     selected = $bindable(),
     selection,
     onChange,
-    prepend,
-    append,
+    prepend: prependRender,
+    append: appendRender,
     children,
     ...rest
   }: Props & Omit<ComponentProps<typeof Field>, keyof Props> = $props();
@@ -125,13 +125,13 @@
           size="sm"
         />
       {/if}
-      {@render prepend?.()}
+      {@render prependRender?.()}
     </span>
   {/snippet}
 
   {#snippet append()}
     <span class="flex items-center">
-      {@render append?.()}
+      {@render appendRender?.()}
 
       <Icon
         path={menuIcon}

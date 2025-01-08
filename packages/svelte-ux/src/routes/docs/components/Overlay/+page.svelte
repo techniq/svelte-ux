@@ -36,18 +36,20 @@
 <h2>Prompt</h2>
 
 <Preview>
-  <Toggle let:on={show} let:toggle>
-    <div class="relative">
-      {#if show}
-        <Overlay center>
-          <Button onclick={toggle} class="border">Close Overlay</Button>
-        </Overlay>
-      {/if}
-      <div>Some content</div>
-      <div>Some content</div>
-      <div>Some content</div>
-      <div>Some content</div>
-      <Button onclick={toggle} class="border mt-4">Show Overlay</Button>
-    </div>
-  </Toggle>
+  <Toggle  >
+    {#snippet children({ on: show, toggle })}
+        <div class="relative">
+        {#if show}
+          <Overlay center>
+            <Button onclick={toggle} class="border">Close Overlay</Button>
+          </Overlay>
+        {/if}
+        <div>Some content</div>
+        <div>Some content</div>
+        <div>Some content</div>
+        <div>Some content</div>
+        <Button onclick={toggle} class="border mt-4">Show Overlay</Button>
+      </div>
+          {/snippet}
+    </Toggle>
 </Preview>

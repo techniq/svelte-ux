@@ -38,7 +38,7 @@
 </script>
 
 {#if periodType === PeriodType.Month || periodType === PeriodType.Quarter}
-  <MonthListByYear {selected} on:dateChange />
+  <MonthListByYear {selected} {onDateChange} />
 {:else if periodType === PeriodType.CalendarYear}
   <YearList {selected} {disabledDates} {onDateChange} />
 {:else if periodType === PeriodType.FiscalYearOctober}

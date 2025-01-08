@@ -174,44 +174,54 @@
     }),
   ] as ThemeMenuOption[]);
   // Set initial theme selections (skip custom)
-  $effect(() => {
+  $effect.pre(() => {
     if (selectedLightThemeValue === undefined) {
       selectedLightThemeValue = lightThemes[1].value;
     }
   });
-  $effect(() => {
+
+  $effect.pre(() => {
     if (selectedDarkThemeValue === undefined) {
       selectedDarkThemeValue = darkThemes[1].value;
     }
   });
+
   let showDarkTheme = $state<boolean>();
   $effect(() => {
     showDarkTheme = $currentTheme.dark;
   });
+
   let selectedLightTheme = $derived(
     lightThemes.find((d) => d.value === selectedLightThemeValue)!.theme
   );
+
   let selectedDarkTheme = $derived(
     darkThemes.find((d) => d.value === selectedDarkThemeValue)!.theme
   );
+
   let previewTheme = $derived(
     (showDarkTheme ? selectedDarkTheme : selectedLightTheme) as NestedColors
   );
+
   // Update site dark/light mode with preview for better experience (previewing and applying)
   $effect(() => {
     currentTheme.setTheme(showDarkTheme ? 'dark' : 'light');
   });
+
   $effect(() => {
     selectedLightTheme && updateLightTheme();
   });
+
   $effect(() => {
     selectedDarkTheme && updateDarkTheme();
   });
+
   $effect(() => {
     if (applyToSiteImmediately) {
       applySelectedThemeToSite();
     }
   });
+
   let currentThemeSettings = $derived(
     themeKeys.reduce(
       (acc, { key }) => {
@@ -277,10 +287,10 @@
       <Toggle>
         {#snippet children({ on: open, toggle, toggleOff })}
           <div class="grid">
-            <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
+            <Button icon={mdiChevronDown} onclick={toggle} rounded class="px-1" />
             <Menu {open} onClose={toggleOff} placement="bottom-start">
               <MenuItem
-                on:click={() => {
+                onclick={() => {
                   const value = JSON.stringify(
                     { light: selectedLightTheme, dark: selectedDarkTheme },
                     null,
@@ -292,7 +302,7 @@
                 Copy Full Theme
               </MenuItem>
               <MenuItem
-                on:click={() => {
+                onclick={() => {
                   const allThemes = {
                     ...data.themes.daisy,
                     ...fromEntries(
@@ -315,7 +325,7 @@
                 Copy All themes
               </MenuItem>
               <MenuItem
-                on:click={() => {
+                onclick={() => {
                   const clipboardData = JSON.stringify(data.themes.daisy, null, 2);
                   navigator.clipboard.writeText(clipboardData);
                 }}
@@ -323,7 +333,7 @@
                 Copy Daisy themes
               </MenuItem>
               <MenuItem
-                on:click={() => {
+                onclick={() => {
                   const clipboardData = JSON.stringify(data.themes.skeleton, null, 2);
                   navigator.clipboard.writeText(clipboardData);
                 }}
@@ -373,7 +383,7 @@
     </div>
 
     <div>
-      <Button color="primary" size="sm" on:click={() => (showOptionalColors = !showOptionalColors)}>
+      <Button color="primary" size="sm" onclick={() => (showOptionalColors = !showOptionalColors)}>
         {showOptionalColors ? 'Hide' : 'Show'} optional colors
       </Button>
     </div>

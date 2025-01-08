@@ -407,7 +407,7 @@
     filteredOptions = options;
   }
 
-  let filteredOptions = $state() as MenuOption<TValue>[];
+  let filteredOptions = $state.raw() as MenuOption<TValue>[];
   $effect(() => {
     filteredOptions = options ?? [];
   });
@@ -602,7 +602,7 @@
         {disableTransition}
         moveFocus={false}
         bind:open
-        onClose={() => hide('menu on:close')}
+        onClose={() => hide('menu onClose')}
         {...menuProps}
       >
         <!-- TODO: Rework into hierarchy of snippets in v2.0 -->

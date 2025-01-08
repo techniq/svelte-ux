@@ -13,7 +13,7 @@
   } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let size: 'sm' | 'md' | 'lg' = 'md';
+  let size: 'sm' | 'md' | 'lg' = $state('md');
 
   const variants = ['default', 'outline', 'fill', 'fill-light', 'fill-outline', 'text'] as const;
 </script>
@@ -49,54 +49,78 @@
   <Button variant="text" color="primary" loading>Loading...</Button>
 
   <div class="mt-2">
-    <Toggle let:on={loading} let:toggle>
-      <Button {loading} onclick={toggle}>Click me</Button>
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button {loading} onclick={toggle}>Click me</Button>
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button variant="outline" color="primary" {loading} onclick={toggle}>Click me</Button>
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button variant="outline" color="primary" {loading} onclick={toggle}>Click me</Button>
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button variant="fill" color="primary" {loading} onclick={toggle}>Click me</Button>
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button variant="fill" color="primary" {loading} onclick={toggle}>Click me</Button>
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button variant="fill-light" color="primary" {loading} onclick={toggle}>Click me</Button>
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button variant="fill-light" color="primary" {loading} onclick={toggle}>Click me</Button>
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button variant="fill-outline" color="primary" {loading} onclick={toggle}>Click me</Button>
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button variant="fill-outline" color="primary" {loading} onclick={toggle}>Click me</Button>
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button variant="text" color="primary" {loading} onclick={toggle}>Click me</Button>
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button variant="text" color="primary" {loading} onclick={toggle}>Click me</Button>
+      {/snippet}
     </Toggle>
   </div>
 
   <div class="mt-2">
-    <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} {loading} onclick={toggle}>Click me</Button>
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button icon={faUser} {loading} onclick={toggle}>Click me</Button>
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="outline" color="primary" {loading} onclick={toggle}
-        >Click me</Button
-      >
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button icon={faUser} variant="outline" color="primary" {loading} onclick={toggle}
+          >Click me</Button
+        >
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill" color="primary" {loading} onclick={toggle}
-        >Click me</Button
-      >
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button icon={faUser} variant="fill" color="primary" {loading} onclick={toggle}
+          >Click me</Button
+        >
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill-light" color="primary" {loading} onclick={toggle}
-        >Click me</Button
-      >
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button icon={faUser} variant="fill-light" color="primary" {loading} onclick={toggle}
+          >Click me</Button
+        >
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill-outline" color="primary" {loading} onclick={toggle}
-        >Click me</Button
-      >
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button icon={faUser} variant="fill-outline" color="primary" {loading} onclick={toggle}
+          >Click me</Button
+        >
+      {/snippet}
     </Toggle>
-    <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="text" color="primary" {loading} onclick={toggle}
-        >Click me</Button
-      >
+    <Toggle>
+      {#snippet children({ on: loading, toggle })}
+        <Button icon={faUser} variant="text" color="primary" {loading} onclick={toggle}
+          >Click me</Button
+        >
+      {/snippet}
     </Toggle>
   </div>
 </Preview>

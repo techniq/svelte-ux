@@ -18,8 +18,8 @@
   } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = 0;
-  let axis: 'x' | 'y' = 'x';
+  let value = $state(0);
+  let axis: 'x' | 'y' = $state('x');
 
   const timer = timerStore({
     initial: 60,
@@ -33,7 +33,7 @@
     },
     disabled: true,
   });
-  $: ({ isRunning } = timer);
+  let { isRunning } = $derived(timer);
 
   function onKeyDown(e: KeyboardEvent) {
     const step = e.shiftKey ? 10 : e.altKey ? 100 : 1;
@@ -61,19 +61,19 @@
   const firstOfMonth = startOfMonth(new Date());
 </script>
 
-<svelte:window on:keydown={onKeyDown} />
+<svelte:window onkeydown={onKeyDown} />
 
 <h1>Examples</h1>
 
 <div class="grid grid-cols-[1fr,140px] items-center gap-6">
   <ButtonGroup variant="fill-light" class="grid grid-flow-col ml-2">
-    <Button on:click={() => (value -= 100)}>-100</Button>
-    <Button on:click={() => (value -= 10)}>-10</Button>
-    <Button on:click={() => (value -= 1)}>-1</Button>
-    <Button on:click={() => (value = 0)}>0</Button>
-    <Button on:click={() => (value += 1)}>+1</Button>
-    <Button on:click={() => (value += 10)}>+10</Button>
-    <Button on:click={() => (value += 100)}>+100</Button>
+    <Button onclick={() => (value -= 100)}>-100</Button>
+    <Button onclick={() => (value -= 10)}>-10</Button>
+    <Button onclick={() => (value -= 1)}>-1</Button>
+    <Button onclick={() => (value = 0)}>0</Button>
+    <Button onclick={() => (value += 1)}>+1</Button>
+    <Button onclick={() => (value += 10)}>+10</Button>
+    <Button onclick={() => (value += 100)}>+100</Button>
   </ButtonGroup>
 
   <Field label="axis" labelPlacement="left">
@@ -139,10 +139,12 @@
 <Preview>
   <Field label="Value">
     <ScrollingValue bind:value axis="y" class="w-full" />
-    <div slot="append">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
-    </div>
+    {#snippet append()}
+      <div>
+        <Button icon={mdiMinus} onclick={() => (value -= 1)} size="sm" />
+        <Button icon={mdiPlus} onclick={() => (value += 1)} size="sm" />
+      </div>
+    {/snippet}
   </Field>
 </Preview>
 
@@ -151,13 +153,17 @@
 
 <Preview>
   <Field class="w-36">
-    <div slot="prepend">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
-    </div>
+    {#snippet prepend()}
+      <div>
+        <Button icon={mdiMinus} onclick={() => (value -= 1)} size="sm" />
+      </div>
+    {/snippet}
     <ScrollingValue bind:value {axis} classes={{ root: 'w-full', value: 'w-full text-center' }} />
-    <div slot="append">
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
-    </div>
+    {#snippet append()}
+      <div>
+        <Button icon={mdiPlus} onclick={() => (value += 1)} size="sm" />
+      </div>
+    {/snippet}
   </Field>
 </Preview>
 
@@ -166,7 +172,7 @@
 <Preview>
   <div class="flex gap-4">
     <ButtonGroup variant="outline">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button icon={mdiMinus} onclick={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
           bind:value
@@ -174,11 +180,11 @@
           classes={{ root: 'w-full', value: 'w-full text-center' }}
         />
       </Button>
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+      <Button icon={mdiPlus} onclick={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
     <ButtonGroup variant="fill-light">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button icon={mdiMinus} onclick={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
           bind:value
@@ -186,11 +192,11 @@
           classes={{ root: 'w-full', value: 'w-full text-center' }}
         />
       </Button>
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+      <Button icon={mdiPlus} onclick={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
     <ButtonGroup color="primary" variant="fill-light">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button icon={mdiMinus} onclick={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
           bind:value
@@ -198,11 +204,11 @@
           classes={{ root: 'w-full', value: 'w-full text-center' }}
         />
       </Button>
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+      <Button icon={mdiPlus} onclick={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
     <ButtonGroup color="primary" variant="fill-outline">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button icon={mdiMinus} onclick={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
           bind:value
@@ -210,7 +216,7 @@
           classes={{ root: 'w-full', value: 'w-full text-center' }}
         />
       </Button>
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+      <Button icon={mdiPlus} onclick={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
   </div>
 </Preview>
@@ -221,13 +227,15 @@
   {@const startOfMonth = addMonths(firstOfMonth, value)}
   <div class="grid w-96">
     <div class="grid grid-cols-[auto,1fr,auto] items-center justify-items-center">
-      <Button icon={mdiChevronLeft} class="p-2" on:click={() => (value -= 1)} />
+      <Button icon={mdiChevronLeft} class="p-2" onclick={() => (value -= 1)} />
       <div>{$format(startOfMonth, PeriodType.Month)}</div>
-      <Button icon={mdiChevronRight} class="p-2" on:click={() => (value += 1)} />
+      <Button icon={mdiChevronRight} class="p-2" onclick={() => (value += 1)} />
     </div>
-    <ScrollingValue {value} {axis} let:value>
-      {@const startOfMonth = addMonths(firstOfMonth, value)}
-      <Month {startOfMonth} hideControls />
+    <ScrollingValue {value} {axis}>
+      {#snippet children({ value })}
+        {@const startOfMonth = addMonths(firstOfMonth, value)}
+        <Month {startOfMonth} hideControls />
+      {/snippet}
     </ScrollingValue>
   </div>
 </Preview>
@@ -237,10 +245,10 @@
 <Preview>
   <ScrollingValue value={$timer ?? 0} {axis} class="text-6xl tabular-nums" />
   <ButtonGroup variant="fill-light" class="ml-3">
-    <Button on:click={timer.start} disabled={$isRunning}>Start</Button>
-    <Button on:click={timer.stop} disabled={!$isRunning}>Stop</Button>
+    <Button onclick={timer.start} disabled={$isRunning}>Start</Button>
+    <Button onclick={timer.stop} disabled={!$isRunning}>Stop</Button>
   </ButtonGroup>
-  <Button on:click={timer.reset}>Reset</Button>
+  <Button onclick={timer.reset}>Reset</Button>
 </Preview>
 
 <h2>Debug</h2>
@@ -252,12 +260,12 @@
     classes={{ value: 'text-6xl first:bg-danger/50 last:bg-success-500/50' }}
   />
   <div class="grid grid-flow-col">
-    <Button on:click={() => (value -= 100)}>-100</Button>
-    <Button on:click={() => (value -= 10)}>-10</Button>
-    <Button on:click={() => (value -= 1)}>-1</Button>
-    <Button on:click={() => (value = 0)}>0</Button>
-    <Button on:click={() => (value += 1)}>+1</Button>
-    <Button on:click={() => (value += 10)}>+10</Button>
-    <Button on:click={() => (value += 100)}>+100</Button>
+    <Button onclick={() => (value -= 100)}>-100</Button>
+    <Button onclick={() => (value -= 10)}>-10</Button>
+    <Button onclick={() => (value -= 1)}>-1</Button>
+    <Button onclick={() => (value = 0)}>0</Button>
+    <Button onclick={() => (value += 1)}>+1</Button>
+    <Button onclick={() => (value += 10)}>+10</Button>
+    <Button onclick={() => (value += 100)}>+100</Button>
   </div>
 </Preview>

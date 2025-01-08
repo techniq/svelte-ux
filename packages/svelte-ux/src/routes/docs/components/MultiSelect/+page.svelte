@@ -24,7 +24,7 @@
     value: i + 1,
   }));
 
-  let value = [3];
+  let value = $state([3]);
 </script>
 
 <h1>Examples</h1>
@@ -33,7 +33,7 @@
 
 <Preview>
   {value.length} selected
-  <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} />
+  <MultiSelect {options} {value} onChange={({ value: _value }) => (value = _value)} />
 </Preview>
 
 <h2>options variant: checkmark</h2>
@@ -44,7 +44,7 @@
     {options}
     {value}
     optionProps={{ variant: 'checkmark' }}
-    on:change={(e) => (value = e.detail.value)}
+    onChange={({ value: _value }) => (value = _value)}
   />
 </Preview>
 
@@ -56,7 +56,7 @@
     {options}
     {value}
     optionProps={{ variant: 'fill' }}
-    on:change={(e) => (value = e.detail.value)}
+    onChange={({ value: _value }) => (value = _value)}
   />
 </Preview>
 
@@ -64,14 +64,14 @@
 
 <Preview>
   {value.length} selected
-  <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch />
+  <MultiSelect {options} {value} onChange={({ value: _value }) => (value = _value)} inlineSearch />
 </Preview>
 
 <h2>maintainOrder</h2>
 
 <Preview>
   {value.length} selected
-  <MultiSelect {options} {value} maintainOrder on:change={(e) => (value = e.detail.value)} />
+  <MultiSelect {options} {value} maintainOrder onChange={({ value: _value }) => (value = _value)} />
 </Preview>
 
 <h2>Immediately apply changes (no actions) w/ maintainOrder</h2>
@@ -83,7 +83,7 @@
     {value}
     maintainOrder
     mode="immediate"
-    on:change={(e) => (value = e.detail.value)}
+    onChange={({ value: _value }) => (value = _value)}
   />
 </Preview>
 
@@ -96,11 +96,13 @@
     {value}
     maintainOrder
     mode="immediate"
-    on:change={(e) => (value = e.detail.value)}
+    onChange={({ value: _value }) => (value = _value)}
   >
-    <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
-    </div>
+    {#snippet actions()}
+      <div>
+        <Button color="primary" icon={mdiPlus}>Add item</Button>
+      </div>
+    {/snippet}
   </MultiSelect>
 </Preview>
 
@@ -108,19 +110,19 @@
 
 <Preview>
   {value.length} selected
-  <MultiSelect {options} {value} max={2} on:change={(e) => (value = e.detail.value)} />
+  <MultiSelect {options} {value} max={2} onChange={({ value: _value }) => (value = _value)} />
 </Preview>
 
 <h2>max selected with warning</h2>
 
 <Preview>
   {value.length} selected
-  <MultiSelect {options} {value} max={2} on:change={(e) => (value = e.detail.value)}>
-    <svelte:fragment slot="actions" let:selection>
+  <MultiSelect {options} {value} max={2} onChange={({ value: _value }) => (value = _value)}>
+    {#snippet actions({ selection })}
       {#if selection.isMaxSelected()}
         <div class="text-danger-600 text-sm font-semibold px-2">Maximum selection reached</div>
       {/if}
-    </svelte:fragment>
+    {/snippet}
   </MultiSelect>
 </Preview>
 
@@ -129,7 +131,7 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect options={manyOptions} {value} on:change={(e) => (value = e.detail.value)} />
+    <MultiSelect options={manyOptions} {value} onChange={({ value: _value }) => (value = _value)} />
   </div>
 </Preview>
 
@@ -141,7 +143,7 @@
     <MultiSelect
       options={manyOptions}
       {value}
-      on:change={(e) => (value = e.detail.value)}
+      onChange={({ value: _value }) => (value = _value)}
       inlineSearch
     />
   </div>
@@ -155,7 +157,7 @@
     <MultiSelect
       options={manyOptions}
       {value}
-      on:change={(e) => (value = e.detail.value)}
+      onChange={({ value: _value }) => (value = _value)}
       inlineSearch
       infiniteScroll
     />
@@ -167,10 +169,12 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch>
-      <div slot="actions">
-        <Button color="primary" icon={mdiPlus}>Add item</Button>
-      </div>
+    <MultiSelect {options} {value} onChange={({ value: _value }) => (value = _value)} inlineSearch>
+      {#snippet actions()}
+        <div>
+          <Button color="primary" icon={mdiPlus}>Add item</Button>
+        </div>
+      {/snippet}
     </MultiSelect>
   </div>
 </Preview>
@@ -180,12 +184,14 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch max={2}>
-      <div slot="actions" let:selection class="flex items-center">
-        {#if selection.isMaxSelected()}
-          <div class="text-sm text-danger">Maximum selection reached</div>
-        {/if}
-      </div>
+    <MultiSelect {options} {value} onChange={({ value: _value }) => (value = _value)} inlineSearch max={2}>
+      {#snippet actions({ selection })}
+        <div class="flex items-center">
+          {#if selection.isMaxSelected()}
+            <div class="text-sm text-danger">Maximum selection reached</div>
+          {/if}
+        </div>
+      {/snippet}
     </MultiSelect>
   </div>
 </Preview>
@@ -195,42 +201,30 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch>
-      <MultiSelectOption
-        slot="option"
-        let:option
-        let:label
-        let:value
-        let:checked
-        let:indeterminate
-        let:onChange
-        {checked}
-        {indeterminate}
-        on:change={onChange}
-      >
-        <div class="uppercase">{label}</div>
-        <div class="text-xs text-surface-content/50">value: {value}</div>
+    <MultiSelect {options} {value} onChange={({ value: _value }) => (value = _value)} inlineSearch>
+      {#snippet option({ option, label, value, checked, indeterminate, onChange })}
+        <MultiSelectOption {checked} {indeterminate} {onChange}>
+          <div class="uppercase">{label}</div>
+          <div class="text-xs text-surface-content/50">value: {value}</div>
 
-        <div slot="actions" class="flex items-center">
-          <ToggleButton icon={mdiDotsVertical} iconOnly class="text-surface-content/50">
-            <Drawer
-              slot="toggle"
-              let:on={open}
-              {open}
-              on:close={toggleOff}
-              class="w-[400px]"
-              let:toggleOff
-            >
-              <h1>Edit: {label}</h1>
-              <div
-                class="fixed bottom-0 w-full flex justify-center bg-surface-content/5 border-t p-1"
-              >
-                <Button on:click={toggleOff}>Close</Button>
-              </div>
-            </Drawer>
-          </ToggleButton>
-        </div>
-      </MultiSelectOption>
+          {#snippet actions()}
+            <div class="flex items-center">
+              <ToggleButton icon={mdiDotsVertical} iconOnly class="text-surface-content/50">
+                {#snippet toggle({ on: open, toggleOff })}
+                  <Drawer {open} onClose={toggleOff} class="w-[400px]">
+                    <h1>Edit: {label}</h1>
+                    <div
+                      class="fixed bottom-0 w-full flex justify-center bg-surface-content/5 border-t p-1"
+                    >
+                      <Button onclick={toggleOff}>Close</Button>
+                    </div>
+                  </Drawer>
+                {/snippet}
+              </ToggleButton>
+            </div>
+          {/snippet}
+        </MultiSelectOption>
+      {/snippet}
     </MultiSelect>
   </div>
 </Preview>
@@ -240,26 +234,18 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)}>
-      <svelte:fragment
-        slot="option"
-        let:option
-        let:label
-        let:value
-        let:checked
-        let:indeterminate
-        let:onChange
-      >
+    <MultiSelect {options} {value} onChange={({ value: _value }) => (value = _value)}>
+      {#snippet option({ option, label, value, checked, indeterminate, onChange })}
         <button
           class="px-2 py-1 text-surface-content flex gap-1 w-full"
           role="option"
           aria-selected={checked}
-          on:click={onChange}
+          onclick={onChange}
         >
           <Icon data={checked ? mdiCheck : ''} />
           <div>{label}</div>
         </button>
-      </svelte:fragment>
+      {/snippet}
     </MultiSelect>
   </div>
 </Preview>
@@ -267,15 +253,16 @@
 <h2>Form integration</h2>
 
 <Preview>
-  <Form initial={{ value }} on:change={(e) => (value = e.detail.value)} let:draft let:state>
-    {state.value.length} selected
-    <MultiSelect
-      {options}
-      value={draft.value}
-      {draft}
-      on:change={(e) => (draft.value = e.detail.value)}
-      cancelButtonProps={{ type: 'reset' }}
-      applyButtonProps={{ type: 'submit' }}
-    />
+  <Form initial={{ value }} onChange={({ value: _value }) => (value = _value)}>
+    {#snippet children({ draft, state })}
+      {state.value.length} selected
+      <MultiSelect
+        {options}
+        value={draft.value}
+        onChange={({ value: _value }) => (draft.value = _value)}
+        cancelButtonProps={{ type: 'reset' }}
+        applyButtonProps={{ type: 'submit' }}
+      />
+    {/snippet}
   </Form>
 </Preview>

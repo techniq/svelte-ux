@@ -57,7 +57,8 @@
   const settingsClasses = getComponentClasses('Icon');
 
   let isLabelled = $derived(title || desc);
-  $effect(() => {
+  
+  $effect.pre(() => {
     if (typeof data === 'object' && data && 'icon' in data) {
       // Font Awesome
       const [_width, _height, _ligatures, _unicode, _path] = data.icon;

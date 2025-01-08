@@ -18,7 +18,7 @@
 
   import { randomInteger } from '$lib/utils/number.js';
 
-  const originalDomain: [number, number] = [-100, 100];
+  const originalDomain: [number, number] = $state([-100, 100]);
 
   function getValues() {
     return Array.from({ length: 20 }).map(() =>
@@ -26,18 +26,18 @@
     );
   }
 
-  let values = getValues();
-  let domainSelected = 'original'; // 'derived'
-  let sorted = false;
-  let inset: [number, number] = [0, 0];
-  let baseline = false;
-  let duration = 300;
+  let values = $state(getValues());
+  let domainSelected = $state('original'); // 'derived'
+  let sorted = $state(false);
+  let inset: [number, number] = $state([0, 0]);
+  let baseline = $state(false);
+  let duration = $state(300);
 
   // Use original domain (ex. -100 => 100) or derive based on data
-  $: domain =
-    domainSelected === 'original'
+  let domain =
+    $derived(domainSelected === 'original'
       ? originalDomain
-      : ([Math.min(...values), Math.max(...values)] as [number, number]);
+      : ([Math.min(...values), Math.max(...values)] as [number, number]));
 </script>
 
 <h1>Usage</h1>
@@ -53,17 +53,21 @@
       </ToggleGroup>
     </Field>
 
-    <Field label="Sorted" let:id classes={{ container: 'h-full items-center', input: 'mt-3' }}>
-      <Switch bind:checked={sorted} {id} />
-    </Field>
+    <Field label="Sorted"  classes={{ container: 'h-full items-center', input: 'mt-3' }}>
+      {#snippet children({ id })}
+            <Switch bind:checked={sorted} {id} />
+                {/snippet}
+        </Field>
 
     <Field
       label="Show baseline"
-      let:id
+      
       classes={{ container: 'h-full items-center', input: 'mt-3' }}
     >
-      <Switch bind:checked={baseline} {id} />
-    </Field>
+      {#snippet children({ id })}
+            <Switch bind:checked={baseline} {id} />
+                {/snippet}
+        </Field>
   </div>
 
   <div class="grid grid-cols-[1fr,1fr] gap-2">
@@ -92,7 +96,7 @@
     </div>
   </Field>
 
-  <Button on:click={() => (values = getValues())} variant="fill" color="primary">Update data</Button
+  <Button onclick={() => (values = getValues())} variant="fill" color="primary">Update data</Button
   >
 </div>
 

@@ -14,7 +14,7 @@
 <Preview>
   <div class="h-[400px] p-1 overflow-auto">
     <InfiniteScroll {items}>
-      {#snippet children(visibleItems)}
+      {#snippet children({ visibleItems })}
         {#each visibleItems as item}
           <ListItem title={item.name} />
         {/each}
@@ -28,7 +28,7 @@
 <Preview>
   <div class="h-[400px] p-1 overflow-auto">
     <InfiniteScroll {items} perPage={5}>
-      {#snippet children(visibleItems)}
+      {#snippet children({ visibleItems })}
         {#each visibleItems as item}
           <ListItem title={item.name} />
         {/each}
@@ -41,7 +41,7 @@
 
 <Preview>
   <InfiniteScroll {items}>
-    {#snippet children(visibleItems)}
+    {#snippet children({ visibleItems })}
       {#each visibleItems as item}
         <ListItem title={item.name} />
       {/each}

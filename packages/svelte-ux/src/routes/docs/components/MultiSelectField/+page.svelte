@@ -17,7 +17,7 @@
     value: i + 1,
   }));
 
-  let value: number[] | undefined = [3];
+  let value: number[] | undefined = $state([3]);
 </script>
 
 <h1>Examples</h1>
@@ -25,13 +25,13 @@
 <h2>basic</h2>
 
 <Preview>
-  <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} />
+  <MultiSelectField {options} {value} onChange={(_value) => (value = _value)} />
 </Preview>
 
 <h2>label</h2>
 
 <Preview>
-  <MultiSelectField label="Numbers" {options} {value} on:change={(e) => (value = e.detail.value)} />
+  <MultiSelectField label="Numbers" {options} {value} onChange={(_value) => (value = _value)} />
 </Preview>
 
 <h2>options variants</h2>
@@ -43,21 +43,21 @@
       {options}
       {value}
       optionProps={{ variant: 'checkbox' }}
-      on:change={(e) => (value = e.detail.value)}
+      onChange={(_value) => (value = _value)}
     />
     <MultiSelectField
       label="checkmark"
       {options}
       {value}
       optionProps={{ variant: 'checkmark' }}
-      on:change={(e) => (value = e.detail.value)}
+      onChange={(_value) => (value = _value)}
     />
     <MultiSelectField
       label="fill"
       {options}
       {value}
       optionProps={{ variant: 'fill' }}
-      on:change={(e) => (value = e.detail.value)}
+      onChange={(_value) => (value = _value)}
     />
   </div>
 </Preview>
@@ -65,26 +65,26 @@
 <h2>disabled</h2>
 
 <Preview>
-  <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} disabled />
+  <MultiSelectField {options} {value} onChange={(_value) => (value = _value)} disabled />
 </Preview>
 
 <h2>maintainOrder</h2>
 
 <Preview>
-  <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} maintainOrder />
+  <MultiSelectField {options} {value} onChange={(_value) => (value = _value)} maintainOrder />
 </Preview>
 
 <h2>max selected</h2>
 
 <Preview>
-  <MultiSelectField {options} {value} max={2} on:change={(e) => (value = e.detail.value)} />
+  <MultiSelectField {options} {value} max={2} onChange={(_value) => (value = _value)} />
 </Preview>
 
 <h2>max selected with warning</h2>
 
 <Preview>
-  <MultiSelectField {options} {value} max={2} on:change={(e) => (value = e.detail.value)}>
-    <svelte:fragment slot="beforeOptions" let:selection>
+  <MultiSelectField {options} {value} max={2} onChange={(_value) => (value = _value)}>
+    {#snippet beforeOptions({ selection })}
       {#if selection.isMaxSelected()}
         <div
           class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded mb-1"
@@ -93,7 +93,7 @@
           Maximum selection reached
         </div>
       {/if}
-    </svelte:fragment>
+    {/snippet}
   </MultiSelectField>
 </Preview>
 
@@ -103,7 +103,7 @@
   <MultiSelectField
     options={manyOptions}
     {value}
-    on:change={(e) => (value = e.detail.value)}
+    onChange={(_value) => (value = _value)}
     classes={{
       multiSelectMenu: {
         menu: 'max-h-[360px]',
@@ -119,7 +119,7 @@
   <MultiSelectField
     {options}
     {value}
-    on:change={(e) => (value = e.detail.value)}
+    onChange={(_value) => (value = _value)}
     mode="immediate"
     maintainOrder
   />
@@ -131,13 +131,15 @@
   <MultiSelectField
     {options}
     {value}
-    on:change={(e) => (value = e.detail.value)}
+    onChange={(_value) => (value = _value)}
     mode="immediate"
     maintainOrder
   >
-    <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
-    </div>
+    {#snippet actions()}
+      <div>
+        <Button color="primary" icon={mdiPlus}>Add item</Button>
+      </div>
+    {/snippet}
   </MultiSelectField>
 </Preview>
 
@@ -148,65 +150,66 @@
     {options}
     {value}
     formatSelected={({ options }) => options.map((o) => o.label).join(', ') || 'None'}
-    on:change={(e) => (value = e.detail.value)}
+    onChange={(_value) => (value = _value)}
   />
 </Preview>
 
 <h2>actions slot</h2>
 
 <Preview>
-  <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)}>
-    <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
-    </div>
+  <MultiSelectField {options} {value} onChange={(_value) => (value = _value)}>
+    {#snippet actions()}
+      <div>
+        <Button color="primary" icon={mdiPlus}>Add item</Button>
+      </div>
+    {/snippet}
   </MultiSelectField>
 </Preview>
 
 <h2>actions slot with max warning</h2>
 
 <Preview>
-  <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} max={2}>
-    <div slot="actions" let:selection class="flex items-center">
-      {#if selection.isMaxSelected()}
-        <div class="text-sm text-danger">Maximum selection reached</div>
-      {/if}
-    </div>
+  <MultiSelectField {options} {value} onChange={(_value) => (value = _value)} max={2}>
+    {#snippet actions({ selection })}
+      <div class="flex items-center">
+        {#if selection.isMaxSelected()}
+          <div class="text-sm text-danger">Maximum selection reached</div>
+        {/if}
+      </div>
+    {/snippet}
   </MultiSelectField>
 </Preview>
 
 <h2>within Drawer</h2>
 
 <Preview>
-  <ToggleButton let:on={open}>
-    Open Drawer
-    <Drawer slot="toggle" let:toggleOff {open} on:close={toggleOff} class="w-[400px]">
-      <div class="p-4">
-        <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)} />
-      </div>
-      <div slot="actions">
-        <Button on:click={toggleOff}>Close</Button>
-      </div>
-    </Drawer>
+  <ToggleButton>
+    {#snippet children()}
+      Open Drawer
+    {/snippet}
+    {#snippet toggle({ on: open, toggleOff })}
+      <Drawer {open} onClose={toggleOff} class="w-[400px]">
+        <div class="p-4">
+          <MultiSelectField {options} {value} onChange={(_value) => (value = _value)} />
+        </div>
+        {#snippet actions()}
+          <div>
+            <Button onclick={toggleOff}>Close</Button>
+          </div>
+        {/snippet}
+      </Drawer>
+    {/snippet}
   </ToggleButton>
 </Preview>
 
 <h2>option slot</h2>
 
 <Preview>
-  <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)}>
-    <MultiSelectOption
-      slot="option"
-      let:option
-      let:label
-      let:value
-      let:checked
-      let:indeterminate
-      let:onChange
-      {checked}
-      {indeterminate}
-      on:change={onChange}
-    >
-      <span class="uppercase text-danger">{label}</span>
-    </MultiSelectOption>
+  <MultiSelectField {options} {value} onChange={(_value) => (value = _value)}>
+    {#snippet option({ option, label, value, checked, indeterminate, onChange })}
+      <MultiSelectOption {checked} {indeterminate} {onChange}>
+        <span class="uppercase text-danger">{label}</span>
+      </MultiSelectOption>
+    {/snippet}
   </MultiSelectField>
 </Preview>

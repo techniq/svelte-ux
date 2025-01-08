@@ -4,8 +4,8 @@
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
 
-  let background = '#ddd';
-  let border = '1px solid #aaa';
+  let background = $state('#ddd');
+  let border = $state('1px solid #aaa');
 </script>
 
 <h1>Usage</h1>

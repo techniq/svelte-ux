@@ -5,14 +5,14 @@
   import { Icon, Tab, Tabs } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let options = [
+  let options = $state([
     { label: 'One', value: 1 },
     { label: 'Two', value: 2 },
     { label: 'Three', value: 3 },
     { label: 'Four', value: 4 },
-  ];
+  ]);
 
-  let value = 1;
+  let value = $state(1);
 </script>
 
 <h1>Examples</h1>

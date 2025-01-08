@@ -91,7 +91,7 @@
       close();
     }}
     onMouseUp={(e) => {
-      // Do not allow event to reach Popover's on:mouseup (clickOutside)
+      // Do not allow event to reach Popover's onmouseup (clickOutside)
       e.stopPropagation();
     }}
     class={cls('z-50', settingsClasses.backdrop, classes.backdrop)}
@@ -132,7 +132,7 @@
     {onoutroend}
     onkeydown={(e) => {
       if (e.key === 'Escape') {
-        // Do not allow event to reach Popover's on:keydown
+        // Do not allow event to reach Popover's onkeydown
         e.stopPropagation();
 
         close();

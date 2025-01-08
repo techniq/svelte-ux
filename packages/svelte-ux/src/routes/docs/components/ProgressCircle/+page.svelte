@@ -2,13 +2,13 @@
   import { ProgressCircle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = 50;
-  let size = 40;
-  let width = 4;
-  let rotate = 0;
-  let track = false;
-  let indeterminate = true;
-  let label = false;
+  let value = $state(50);
+  let size = $state(40);
+  let width = $state(4);
+  let rotate = $state(0);
+  let track = $state(false);
+  let indeterminate = $state(true);
+  let label = $state(false);
 </script>
 
 <h1>Examples</h1>

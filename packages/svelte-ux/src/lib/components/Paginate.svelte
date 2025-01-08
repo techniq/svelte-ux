@@ -20,11 +20,11 @@
 
   const pagination = paginationStore({ perPage });
 
-  $effect(() => {
+  $effect.pre(() => {
     pagination.setPerPage(perPage);
   });
 
-  $effect(() => {
+  $effect.pre(() => {
     pagination.setTotal(data.length);
   });
 

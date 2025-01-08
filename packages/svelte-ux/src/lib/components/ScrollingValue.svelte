@@ -19,7 +19,7 @@
   }
 
   let {
-    value = 0,
+    value = $bindable(0),
     single = false,
     format = (value) => value,
     axis = 'y',

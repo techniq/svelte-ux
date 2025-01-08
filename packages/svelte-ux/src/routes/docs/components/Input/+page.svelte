@@ -2,7 +2,7 @@
   import { Field, Input, SectionDivider } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = 'test';
+  let value = $state('test');
 </script>
 
 <h1>Examples</h1>
@@ -76,15 +76,17 @@
 <h2>Change event</h2>
 
 <Preview>
-  <Input mask="mm/dd/yyyy" replace="dmyh" on:change={(e) => console.log(e.detail)} />
+  <Input mask="mm/dd/yyyy" replace="dmyh" onChange={(value) => console.log(value)} />
 </Preview>
 
 <h2>With Field</h2>
 
 <Preview>
-  <Field label="Birth Date" let:id>
-    <Input {id} mask="mm/dd/yyyy" replace="dmyh" />
-  </Field>
+  <Field label="Birth Date" >
+    {#snippet children({ id })}
+        <Input {id} mask="mm/dd/yyyy" replace="dmyh" />
+          {/snippet}
+    </Field>
 </Preview>
 
 <h2>Placeholder</h2>

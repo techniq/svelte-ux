@@ -25,11 +25,6 @@
 
   type InputValue = string | number;
 
-  // const dispatch = createEventDispatcher<{
-  //   clear: null;
-  //   change: { value: typeof value; inputValue: InputValue | null; operator?: string };
-  // }>();
-
   const { classes: settingsClasses, defaults } = getComponentSettings('TextField');
   const { defaults: fieldDefaults } = getComponentSettings('Field');
 

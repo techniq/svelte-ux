@@ -324,7 +324,7 @@
       periodType={selectedPeriodType}
       {activeDate}
       {disabledDates}
-      on:dateChange={(e) => onDateChange(e.detail)}
+      {onDateChange}
     />
   </div>
 </div>

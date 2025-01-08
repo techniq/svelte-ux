@@ -199,7 +199,7 @@
       bind:selected={currentValue}
       {periodType}
       {disabledDates}
-      on:dateChange={(e) => (currentValue = e.detail)}
+      onDateChange={(_value) => (currentValue = _value)}
     />
   </div>
 

@@ -103,7 +103,7 @@
       bind:this={menuItemsEl}
       onclick={onClick}
       onmouseup={(e) => {
-        // Do not allow event to reach Popover's on:mouseup (clickOutside)
+        // Do not allow event to reach Popover's onmouseup (clickOutside)
         e.stopPropagation();
       }}
       transition:resolvedTransition={resolvedTransitionParams}

@@ -43,9 +43,11 @@
   <Card>
     {#snippet header()}
       <Header title="Title" subheading="Subheading">
-        <div slot="avatar">
-          <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
-        </div>
+        {#snippet avatar()}
+          <div>
+            <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
+          </div>
+        {/snippet}
       </Header>
     {/snippet}
   </Card>
@@ -57,9 +59,11 @@
   <Card>
     {#snippet header()}
       <Header title="Title" subheading="Subheading">
-        <div slot="actions">
-          <Button icon={mdiDotsVertical} class="w-12 h-12" />
-        </div>
+        {#snippet actions()}
+          <div>
+            <Button icon={mdiDotsVertical} class="w-12 h-12" />
+          </div>
+        {/snippet}
       </Header>
     {/snippet}
   </Card>
@@ -71,12 +75,16 @@
   <Card>
     {#snippet header()}
       <Header title="Title" subheading="Subheading">
-        <div slot="avatar">
-          <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
-        </div>
-        <div slot="actions">
-          <Button icon={mdiDotsVertical} class="w-12 h-12" />
-        </div>
+        {#snippet avatar()}
+          <div>
+            <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
+          </div>
+        {/snippet}
+        {#snippet actions()}
+          <div>
+            <Button icon={mdiDotsVertical} class="w-12 h-12" />
+          </div>
+        {/snippet}
       </Header>
     {/snippet}
   </Card>

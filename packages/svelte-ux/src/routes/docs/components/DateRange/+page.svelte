@@ -6,11 +6,11 @@
 
   const { localeSettings } = getSettings();
 
-  let selected = {
+  let selected = $state({
     from: new Date('1982-03-01T00:00:00'),
     to: new Date('1982-03-31T23:59:59'),
     periodType: 30,
-  };
+  });
   // $: console.log({ selected });
 </script>
 

@@ -2,7 +2,7 @@
   import { ThemeSelect } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  export let data;
+  let { data } = $props();
 </script>
 
 <h1>Examples</h1>

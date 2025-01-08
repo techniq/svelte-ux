@@ -20,8 +20,8 @@
 <Preview>
   <YearList
     {selected}
-    onDateChange={(date) => {
-      selected = date;
+    onDateChange={(value) => {
+      selected = value;
     }}
   />
 </Preview>
@@ -34,8 +34,8 @@
       minDate={subYears(selected, 10)}
       maxDate={addYears(selected, 10)}
       {selected}
-      onDateChange={(date) => {
-        selected = date;
+      onDateChange={(value) => {
+        selected = value;
       }}
     />
   </div>

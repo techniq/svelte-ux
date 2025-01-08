@@ -4,7 +4,7 @@
 
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = 1;
+  let value = $state(1);
 </script>
 
 <h1>Examples</h1>

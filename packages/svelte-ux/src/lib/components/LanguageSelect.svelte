@@ -25,9 +25,9 @@
       // add more for the demo
     ],
   }: Props = $props();
-  let languageSelected = $state() as Language;
+  let languageSelected = $state.raw() as Language;
 
-  $effect(() => {
+  $effect.pre(() => {
     languageSelected = languagesDemo.find((c) => c.code === $locale)!;
   });
 </script>
