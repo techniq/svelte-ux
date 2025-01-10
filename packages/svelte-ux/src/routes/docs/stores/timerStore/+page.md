@@ -3,10 +3,10 @@
 	import Preview from '$lib/components/Preview.svelte';
 
   const dateTimer = timerStore({ initial: new Date(), onTick: () => new Date() })
-  let { isRunning: isDateRunning } = $derived(dateTimer);
+  let { isRunning: isDateRunning } = dateTimer;
 
   const tickTimer = timerStore({ initial: 0, onTick: (value) => value + 1 })
-  let { isRunning: isTickRunning } = $derived(tickTimer);
+  let { isRunning: isTickRunning } = tickTimer;
 </script>
 
 <h1>Usage</h1>
