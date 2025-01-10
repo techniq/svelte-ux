@@ -1,26 +1,45 @@
 <script lang="ts">
-  export let columns = 0;
-  export let gap = 0;
-  export let columnGap = gap;
-  export let rowGap = gap;
-  export let autoFlow: 'row' | 'column' = 'row';
-  export let autoColumns: string | null = null;
-  export let template: string | null = null;
-  export let templateColumns: string | null = null;
-  export let templateRows: string | null = null;
-  export let stack: boolean = false;
-  export let inline: boolean = false;
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
 
-  export let items: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'initial' = 'initial';
+  interface Props {
+    columns?: number;
+    gap?: number;
+    columnGap?: number;
+    rowGap?: number;
+    autoFlow?: 'row' | 'column';
+    autoColumns?: string | null;
+    template?: string | null;
+    templateColumns?: string | null;
+    templateRows?: string | null;
+    stack?: boolean;
+    inline?: boolean;
+    items?: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'initial';
+    justify?: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'initial';
+    justifyItems?: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'initial';
+    content?: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'initial';
+    children?: Snippet;
+  }
 
-  export let justify: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'initial' =
-    'initial';
-
-  export let justifyItems: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'initial' =
-    'initial';
-
-  export let content: 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'initial' =
-    'initial';
+  let {
+    columns = 0,
+    gap = 0,
+    columnGap = gap,
+    rowGap = gap,
+    autoFlow = 'row',
+    autoColumns,
+    template,
+    templateColumns,
+    templateRows,
+    stack = false,
+    inline = false,
+    items = 'initial',
+    justify = 'initial',
+    justifyItems = 'initial',
+    content = 'initial',
+    children,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements['div'], keyof Props> = $props();
 
   // TODO: place-items overrides/conflicts with align-items
   // export let place:
@@ -32,13 +51,14 @@
   //   | 'evenly'
   //   | 'initial' = 'initial';
 
-  $: templateColumnsResolved =
+  let templateColumnsResolved = $derived(
     templateColumns ??
-    template ??
-    (autoColumns ? `repeat(auto-fill, minmax(${autoColumns}, 1fr))` : `repeat(${columns}, 1fr)`);
+      template ??
+      (autoColumns ? `repeat(auto-fill, minmax(${autoColumns}, 1fr))` : `repeat(${columns}, 1fr)`)
+  );
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="Grid"
   class:grid={!inline}
@@ -54,10 +74,9 @@
   style:--justify={justify}
   style:--justifyItems={justifyItems}
   style:--content={content}
-  on:click
-  {...$$restProps}
+  {...restProps}
 >
-  <slot />
+  {@render children?.()}
 </div>
 
 <style lang="postcss">

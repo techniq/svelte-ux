@@ -18,7 +18,7 @@
 <Preview showCode>
   <div
     use:resize
-    on:resize={(e) => {
+    onresize={(e) => {
       console.log(e.detail);
       // @ts-expect-error
       e.target.innerText = JSON.stringify(e.detail.contentRect, null, 2);
@@ -32,7 +32,7 @@
 <Preview showCode>
   <div
     use:resize
-    on:resize={(e) => {
+    onresize={(e) => {
       // @ts-expect-error
       e.target.innerText = JSON.stringify(e.target.getBoundingClientRect(), null, 2);
     }}
@@ -45,7 +45,7 @@
 <Preview showCode>
   <div
     use:resize
-    on:resize={(e) => {
+    onresize={(e) => {
       // @ts-expect-error
       e.target.style.setProperty('--color', e.detail.contentRect.width % 255);
     }}
@@ -67,7 +67,7 @@
     {/each}
     <div
       use:intersection={{ threshold: 1 }}
-      on:intersecting={(e) => {
+      onintersecting={(e) => {
         if (e.detail.isIntersecting) {
           // @ts-expect-error
           e.target.classList.add('bg-danger');
@@ -89,44 +89,46 @@
 <h3>Show header on scroll away</h3>
 
 <Preview showCode>
-  <Toggle let:on={showHeader} let:toggleOn let:toggleOff>
-    <div class="relative overflow-hidden">
-      {#if showHeader}
-        <div
-          class="absolute top-0 left-0 bg-primary text-primary-content p-4 w-full"
-          transition:fly={{ y: '-100%', opacity: 1 }}
-        >
-          Header
-        </div>
-      {/if}
-      <div class="h-[200px] overflow-auto">
-        {#each { length: 10 } as _}
-          <div>Scroll down</div>
-        {/each}
-        <div
-          use:intersection={{ threshold: 1 }}
-          on:intersecting={(e) => {
-            if (e.detail.isIntersecting) {
-              // Visible
-              toggleOff();
-            } else {
-              if (e.detail.boundingClientRect.top < (e.detail.rootBounds?.top ?? 0)) {
-                // Scrolled off top
-                toggleOn();
+  <Toggle   >
+    {#snippet children({ on: showHeader, toggleOn, toggleOff })}
+        <div class="relative overflow-hidden">
+        {#if showHeader}
+          <div
+            class="absolute top-0 left-0 bg-primary text-primary-content p-4 w-full"
+            transition:fly={{ y: '-100%', opacity: 1 }}
+          >
+            Header
+          </div>
+        {/if}
+        <div class="h-[200px] overflow-auto">
+          {#each { length: 10 } as _}
+            <div>Scroll down</div>
+          {/each}
+          <div
+            use:intersection={{ threshold: 1 }}
+            onintersecting={(e) => {
+              if (e.detail.isIntersecting) {
+                // Visible
+                toggleOff();
               } else {
-                // Scrolled off bottom
+                if (e.detail.boundingClientRect.top < (e.detail.rootBounds?.top ?? 0)) {
+                  // Scrolled off top
+                  toggleOn();
+                } else {
+                  // Scrolled off bottom
+                }
               }
-            }
-          }}
-        >
-          Watch me scroll away
+            }}
+          >
+            Watch me scroll away
+          </div>
+          {#each { length: 10 } as _}
+            <div>Scroll up</div>
+          {/each}
         </div>
-        {#each { length: 10 } as _}
-          <div>Scroll up</div>
-        {/each}
       </div>
-    </div>
-  </Toggle>
+          {/snippet}
+    </Toggle>
 </Preview>
 
 <h2>use:mutate</h2>

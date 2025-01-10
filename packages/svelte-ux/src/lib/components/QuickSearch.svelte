@@ -10,16 +10,22 @@
   import { smScreen } from '../stores/matchMedia.js';
   import { autoFocus, selectOnFocus } from '../actions/input.js';
   import type { MenuOption } from '../types/index.js';
+  import type { ComponentProps } from 'svelte';
 
-  export let options: MenuOption<string>[] = [];
+  interface Props {
+    options?: MenuOption<string>[];
+    classes?: {
+      root?: string;
+      button?: string;
+    };
+    class?: string;
+    onChange?: ComponentProps<typeof SelectField>['onChange'];
+  }
 
-  export let classes: {
-    root?: string;
-    button?: string;
-  } = {};
+  let { options = [], classes = {}, class: className, onChange }: Props = $props();
   const settingsClasses = getComponentClasses('QuickSearch');
 
-  let open = false;
+  let open = $state(false);
 
   let fieldActions = (node: any) => [autoFocus(node), selectOnFocus(node)];
 
@@ -39,12 +45,12 @@
   }
 </script>
 
-<svelte:window on:keydown={onKeyDown} />
+<svelte:window onkeydown={onKeyDown} />
 
 <Button
   icon={mdiMagnify}
   iconOnly={!$smScreen}
-  on:click={() => (open = true)}
+  onclick={() => (open = true)}
   class={cls(
     'sm:bg-black/10 sm:hover:bg-black/20 rounded-full sm:w-56 justify-start',
     settingsClasses.button,
@@ -58,7 +64,7 @@
 <Dialog
   bind:open
   classes={{
-    root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, $$props.class),
+    root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, className),
     backdrop: 'backdrop-blur-sm',
   }}
 >
@@ -68,8 +74,10 @@
     inlineOptions={true}
     {options}
     {fieldActions}
-    on:change
-    on:change={() => (open = false)}
+    onChange={(value) => {
+      open = false;
+      onChange?.(value);
+    }}
     classes={{
       root: 'w-[420px] max-w-[95vw] py-1',
       field: {

@@ -9,14 +9,25 @@
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
 
-  export let start: Date | undefined = undefined;
-  export let end: Date | undefined = undefined;
-  export let duration: Partial<Duration> | undefined = undefined;
-  export let minUnits: DurationUnits = DurationUnits.Millisecond;
-  export let totalUnits: number = 99;
-  export let variant: 'short' | 'long' = 'short';
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    start?: Date;
+    end?: Date;
+    duration?: Partial<Duration>;
+    minUnits?: DurationUnits;
+    totalUnits?: number;
+    variant?: 'short' | 'long';
+    class?: string;
+  }
+
+  let {
+    start,
+    end,
+    duration,
+    minUnits = DurationUnits.Millisecond,
+    totalUnits = 99,
+    variant = 'short',
+    class: className,
+  }: Props = $props();
 
   const settingsClasses = getComponentClasses('Duration');
 
@@ -56,14 +67,16 @@
     },
   });
 
-  $: displayDuration = humanizeDuration({
-    start,
-    end: end ?? $timer,
-    duration,
-    minUnits,
-    totalUnits,
-    variant,
-  });
+  let displayDuration = $derived(
+    humanizeDuration({
+      start,
+      end: end ?? $timer,
+      duration,
+      minUnits,
+      totalUnits,
+      variant,
+    })
+  );
 </script>
 
 <span class={cls('Duration', settingsClasses.root, className)}>{displayDuration}</span>

@@ -1,12 +1,23 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
+  interface Props {
+    children?: Snippet;
+  }
+
+  let {
+    class: className,
+    children,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements['div'], keyof Props> = $props();
 
   const settingsClasses = getComponentClasses('EmptyMessage');
 </script>
 
 <div
-  {...$$restProps}
+  {...restProps}
   class={cls(
     'EmptyMessage',
     'grid place-items-center',
@@ -14,8 +25,8 @@
     'text-surface-content/50 text-xs tracking-wider',
     'border border-surface-100/80 rounded',
     settingsClasses.root,
-    $$props.class
+    className
   )}
 >
-  <slot />
+  {@render children?.()}
 </div>

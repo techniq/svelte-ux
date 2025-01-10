@@ -1,34 +1,37 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { sum } from 'd3-array';
 
+  import type { Snippet } from 'svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './index.js';
 
-  export let data: {
-    label: string;
-    value: number;
-    color?: string;
-    style?: string;
+  interface Props {
+    data: {
+      label: string;
+      value: number;
+      color?: string;
+      style?: string;
+      classes?: {
+        root?: string;
+        bar?: string;
+      };
+    }[];
+    total?: number;
     classes?: {
       root?: string;
-      bar?: string;
+      item?: string;
     };
-  }[];
-  export let total: number | undefined = undefined;
+    class?: string;
+    onItemClick?: (value: (typeof data)[number]) => void;
+    bar?: Snippet<[{ item: (typeof data)[number]; total: number }]>;
+    children?: Snippet<[{ item: (typeof data)[number]; total: number }]>;
+  }
 
-  export let classes: {
-    root?: string;
-    item?: string;
-  } = {};
+  let { data, total, classes = {}, class: className, onItemClick, children, bar }: Props = $props();
   const settingsClasses = getComponentClasses('BarStack');
-
-  const dispatch = createEventDispatcher<{
-    itemClick: (typeof data)[number];
-  }>();
 </script>
 
-<div class={cls('BarStack', 'flex gap-px', settingsClasses.root, classes.root, $$props.class)}>
+<div class={cls('BarStack', 'flex gap-px', settingsClasses.root, classes.root, className)}>
   {#each data as item}
     {@const valuePercent = item.value / (total ?? sum(data, (d) => d.value))}
     <!-- Hide empty -->
@@ -41,19 +44,23 @@
           classes.item,
           item.classes?.root
         )}
-        on:click={() => dispatch('itemClick', item)}
+        onclick={() => onItemClick?.(item)}
       >
-        <slot {item} total={total ?? sum(data, (d) => d.value)}>
+        {#if children}
+          {@render children({ item, total: total ?? sum(data, (d) => d.value) })}
+        {:else}
           <div
             class={cls('group-first:rounded-l group-last:rounded-r', item.classes?.bar)}
             style:background-color={item.color}
             style={item.style}
           >
-            <slot name="bar" {item} total={total ?? sum(data, (d) => d.value)}>
+            {#if bar}
+              {@render bar({ item, total: total ?? sum(data, (d) => d.value) })}
+            {:else}
               <div class="h-1"></div>
-            </slot>
+            {/if}
           </div>
-        </slot>
+        {/if}
       </button>
     {/if}
   {/each}

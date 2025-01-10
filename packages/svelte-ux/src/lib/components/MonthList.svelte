@@ -6,15 +6,20 @@
   import type { DisabledDate, SelectedDate } from '../utils/date.js';
   import DateButton from './DateButton.svelte';
 
-  export let year: number | undefined = undefined;
-  export let selected: SelectedDate = undefined;
-  export let format: ComponentProps<DateButton>['format'] = undefined;
-  /**
-   * Dates to disable (not selectable)
-   */
-  export let disabledDates: DisabledDate | undefined = undefined;
+  interface Props {
+    year?: number;
+    selected?: SelectedDate;
+    format?: ComponentProps<typeof DateButton>['format'];
+    /**
+     * Dates to disable (not selectable)
+     */
+    disabledDates?: DisabledDate;
+    onDateChange?: ComponentProps<typeof DateButton>['onDateChange'];
+  }
 
-  $: isDateDisabled = (date: Date) => {
+  let { year, selected, format, disabledDates, onDateChange }: Props = $props();
+
+  let isDateDisabled = $derived((date: Date) => {
     return disabledDates instanceof Function
       ? disabledDates(date)
       : disabledDates instanceof Date
@@ -27,7 +32,7 @@
                 end: endOfMonth(disabledDates.to || disabledDates.from),
               })
             : false;
-  };
+  });
 </script>
 
 <!-- TODO: `bind:selected` not working -->
@@ -38,6 +43,6 @@
     {selected}
     disabled={isDateDisabled(month)}
     {format}
-    on:dateChange
+    {onDateChange}
   />
 {/each}

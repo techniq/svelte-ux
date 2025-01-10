@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown, mdiPageFirst, mdiPageLast } from '@mdi/js';
 
-  import type paginationStore from '../stores/paginationStore.js';
+  import type { default as paginationStoreType } from '../stores/paginationStore.js';
   import { cls } from '../utils/styles.js';
   import type { StoresValues } from '../types/typeHelpers.js';
 
@@ -13,15 +13,9 @@
   import Tooltip from './Tooltip.svelte';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './settings.js';
+  import type { Snippet } from 'svelte';
 
-  type Pagination = ReturnType<typeof paginationStore>;
-
-  export let pagination: Pagination;
-  export let perPageOptions = [10, 25, 50, 100, 1000];
-  export let hideSinglePage = false;
-  export let format: (pagination: StoresValues<Pagination>) => string = (pagination) => {
-    return `${pagination.from.toLocaleString()}-${pagination.to.toLocaleString()} of ${pagination.total.toLocaleString()}`;
-  };
+  type Pagination = ReturnType<typeof paginationStoreType>;
 
   type ShowComponent =
     | 'prevPage'
@@ -32,40 +26,62 @@
     | 'perPage'
     | 'actions';
 
-  /** Determine which actions to show and order */
-  export let show: ShowComponent[] = ['prevPage', 'pagination', 'nextPage'];
+  interface Props {
+    paginationStore: Pagination;
+    perPageOptions?: any;
+    hideSinglePage?: boolean;
+    format?: (pagination: StoresValues<Pagination>) => string;
+    /** Determine which actions to show and order */
+    show?: ShowComponent[];
+    classes?: {
+      root?: string;
+      buttons?: string;
+      pagination?: string;
+      perPage?: string;
+    };
+    class?: string;
+    actions?: Snippet;
+    pagination?: Snippet<[{ pagination: typeof $paginationStore }]>;
+  }
 
-  export let classes: {
-    root?: string;
-    buttons?: string;
-    pagination?: string;
-    perPage?: string;
-  } = {};
+  let {
+    paginationStore,
+    perPageOptions = [10, 25, 50, 100, 1000],
+    hideSinglePage = false,
+    format = (pagination) => {
+      return `${pagination.from.toLocaleString()}-${pagination.to.toLocaleString()} of ${pagination.total.toLocaleString()}`;
+    },
+    show = ['prevPage', 'pagination', 'nextPage'],
+    classes = {},
+    class: className,
+    actions,
+    pagination,
+  }: Props = $props();
   const { format: formatValue } = getSettings();
   const settingsClasses = getComponentClasses('Pagination');
 </script>
 
-{#if $pagination.totalPages > 1 || !hideSinglePage}
+{#if $paginationStore.totalPages > 1 || !hideSinglePage}
   <div
     class={cls(
       'Pagination',
       'flex items-center gap-1',
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
   >
     {#each show as component}
       {#if component === 'actions'}
-        <slot name="actions" />
+        {@render actions?.()}
       {/if}
 
       {#if component === 'firstPage'}
         <Tooltip title="First page" offset={2}>
           <Button
             icon={mdiPageFirst}
-            on:click={pagination.firstPage}
-            disabled={$pagination.isFirst}
+            onclick={paginationStore.firstPage}
+            disabled={$paginationStore.isFirst}
             aria-label="First Page"
             class={cls('p-2', settingsClasses.buttons, classes.buttons)}
           />
@@ -76,8 +92,8 @@
         <Tooltip title="Previous page" offset={2}>
           <Button
             icon={mdiChevronLeft}
-            on:click={pagination.prevPage}
-            disabled={$pagination.isFirst}
+            onclick={paginationStore.prevPage}
+            disabled={$paginationStore.isFirst}
             aria-label="Previous Page"
             class={cls('p-2', settingsClasses.buttons, classes.buttons)}
           />
@@ -88,8 +104,8 @@
         <Tooltip title="Next page" offset={2}>
           <Button
             icon={mdiChevronRight}
-            on:click={pagination.nextPage}
-            disabled={$pagination.isLast}
+            onclick={paginationStore.nextPage}
+            disabled={$paginationStore.isLast}
             aria-label="Next Page"
             class={cls('p-2', settingsClasses.buttons, classes.buttons)}
           />
@@ -100,8 +116,8 @@
         <Tooltip title="Last page" offset={2}>
           <Button
             icon={mdiPageLast}
-            on:click={pagination.lastPage}
-            disabled={$pagination.isLast}
+            onclick={paginationStore.lastPage}
+            disabled={$paginationStore.isLast}
             aria-label="Last Page"
             class={cls('p-2', settingsClasses.buttons, classes.buttons)}
           />
@@ -111,41 +127,45 @@
       {#if component === 'perPage'}
         <div class={cls('text-sm text-center', settingsClasses.perPage, classes.perPage)}>
           Per page:
-          <Toggle let:on={open} let:toggle let:toggleOff>
-            <span>
-              <Button on:click={toggle}>
-                {$pagination.perPage}
-                <Icon data={mdiMenuDown} />
-              </Button>
+          <Toggle>
+            {#snippet children({ on: open, toggle, toggleOff })}
+              <span>
+                <Button onclick={toggle}>
+                  {$paginationStore.perPage}
+                  <Icon data={mdiMenuDown} />
+                </Button>
 
-              <Menu
-                {open}
-                on:close={toggleOff}
-                autoPlacement
-                offset={12}
-                classes={{ menu: 'group p-1' }}
-              >
-                {#each perPageOptions ?? [] as option}
-                  <MenuItem
-                    class="justify-end"
-                    selected={$pagination.perPage === option}
-                    on:click={() => pagination.setPerPage(option)}
-                  >
-                    {$formatValue(option, 'integer')}
-                  </MenuItem>
-                {/each}
-              </Menu>
-            </span>
+                <Menu
+                  {open}
+                  onClose={toggleOff}
+                  autoPlacement
+                  offset={12}
+                  classes={{ menu: 'group p-1' }}
+                >
+                  {#each perPageOptions ?? [] as option}
+                    <MenuItem
+                      class="justify-end"
+                      selected={$paginationStore.perPage === option}
+                      onclick={() => paginationStore.setPerPage(option)}
+                    >
+                      {$formatValue(option, 'integer')}
+                    </MenuItem>
+                  {/each}
+                </Menu>
+              </span>
+            {/snippet}
           </Toggle>
         </div>
       {/if}
 
       {#if component === 'pagination'}
-        <slot name="pagination" pagination={$pagination}>
+        {#if pagination}
+          {@render pagination({ pagination: $paginationStore })}
+        {:else}
           <div class={cls('text-sm tabular-nums', settingsClasses.pagination, classes.pagination)}>
-            {format($pagination)}
+            {format($paginationStore)}
           </div>
-        </slot>
+        {/if}
       {/if}
     {/each}
   </div>

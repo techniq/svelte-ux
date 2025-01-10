@@ -2,7 +2,7 @@
   import { Radio } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let group: number | undefined = undefined;
+  let group: number | undefined = $state(undefined);
 </script>
 
 <h1>Examples</h1>

@@ -28,7 +28,7 @@
     });
   }
 
-  let randomData = randomDataGen();
+  let randomData = $state(randomDataGen());
 
   let duration = 300;
 </script>
@@ -57,51 +57,52 @@
 
 <Preview>
   <BarStack {data}>
-    <div
-      slot="bar"
-      class="flex items-center gap-2 truncate py-1 px-2 text-gray-900"
-      let:item
-      let:total
-    >
-      <span class="text-sm font-semibold">
-        {format(item.value / total, 'percent')}
-      </span>
+    {#snippet bar({ item, total })}
+      <div class="flex items-center gap-2 truncate py-1 px-2 text-gray-900">
+        <span class="text-sm font-semibold">
+          {format(item.value / total, 'percent')}
+        </span>
 
-      <span class="text-xs truncate">
-        ({format(item.value, 'integer')})
-      </span>
-    </div>
+        <span class="text-xs truncate">
+          ({format(item.value, 'integer')})
+        </span>
+      </div>
+    {/snippet}
   </BarStack>
 </Preview>
 
 <h2>Label using default slot</h2>
 
 <Preview>
-  <BarStack {data} let:item let:total>
-    <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)}></div>
-    <div class="truncate text-xs font-semibold text-surface-content">
-      {item.label}
-    </div>
+  <BarStack {data}>
+    {#snippet children({ item, total })}
+      <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)}></div>
+      <div class="truncate text-xs font-semibold text-surface-content">
+        {item.label}
+      </div>
+    {/snippet}
   </BarStack>
 </Preview>
 
 <h2>Label with Tooltip</h2>
 
 <Preview>
-  <BarStack {data} let:item let:total>
-    <Tooltip
-      title="{item.label}: {format(item.value / total, 'percent')} ({format(
-        item.value,
-        'integer'
-      )})"
-      placement="bottom-start"
-      offset={2}
-    >
-      <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)}></div>
-      <div class="truncate text-xs font-semibold text-surface-content">
-        {item.label}
-      </div>
-    </Tooltip>
+  <BarStack {data}>
+    {#snippet children({ item, total })}
+      <Tooltip
+        title="{item.label}: {format(item.value / total, 'percent')} ({format(
+          item.value,
+          'integer'
+        )})"
+        placement="bottom-start"
+        offset={2}
+      >
+        <div class={cls('h-1 group-first:rounded-l group-last:rounded-r', item.classes?.bar)}></div>
+        <div class="truncate text-xs font-semibold text-surface-content">
+          {item.label}
+        </div>
+      </Tooltip>
+    {/snippet}
   </BarStack>
 </Preview>
 
@@ -109,7 +110,7 @@
 
 <Preview>
   <Button
-    on:click={() => (randomData = randomDataGen())}
+    onclick={() => (randomData = randomDataGen())}
     variant="outline"
     color="primary"
     class="mb-2"
@@ -117,24 +118,30 @@
   >
     Randomize
   </Button>
-  <BarStack data={randomData} let:item let:total>
-    <div class={cls('group-first:rounded-l group-last:rounded-r', item.classes?.bar)}>
-      <div class="flex items-center gap-1 truncate py-1 px-2">
-        <span class="text-sm font-semibold text-gray-900">
-          <TweenedValue value={item.value / total} let:value options={{ duration }}>
-            {format(value ?? 0, 'percent')}
-          </TweenedValue>
-        </span>
+  <BarStack data={randomData}>
+    {#snippet children({ item, total })}
+      <div class={cls('group-first:rounded-l group-last:rounded-r', item.classes?.bar)}>
+        <div class="flex items-center gap-1 truncate py-1 px-2">
+          <span class="text-sm font-semibold text-gray-900">
+            <TweenedValue value={item.value / total} options={{ duration }}>
+              {#snippet children({ value })}
+                {format(value ?? 0, 'percent')}
+              {/snippet}
+            </TweenedValue>
+          </span>
 
-        <span class="truncate text-xs text-gray-900">
-          <TweenedValue value={item.value} let:value options={{ duration }}>
-            ({format(value ?? 0, 'integer')})
-          </TweenedValue>
-        </span>
+          <span class="truncate text-xs text-gray-900">
+            <TweenedValue value={item.value} options={{ duration }}
+              >{#snippet children({ value })}
+                ({format(value ?? 0, 'integer')})
+              {/snippet}
+            </TweenedValue>
+          </span>
+        </div>
       </div>
-    </div>
-    <div class="truncate text-xs font-semibold text-surface-content">
-      {item.label}
-    </div>
+      <div class="truncate text-xs font-semibold text-surface-content">
+        {item.label}
+      </div>
+    {/snippet}
   </BarStack>
 </Preview>

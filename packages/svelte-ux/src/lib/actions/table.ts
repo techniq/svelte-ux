@@ -39,9 +39,7 @@ export const tableCell: Action<HTMLElement, TableCellOptions> = (node, options) 
         tracker.addClass('cursor-pointer');
 
         if (order) {
-          tracker.addEventListener('click', () =>
-            order.onHeaderClick(new CustomEvent('headerClick', { detail: { column } }))
-          );
+          tracker.addEventListener('click', () => order.onHeaderClick(column));
         }
       }
     }

@@ -2,7 +2,7 @@
   import { RangeField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = 10;
+  let value = $state(10);
 </script>
 
 <h1>Examples</h1>
@@ -29,7 +29,7 @@
 <h2>on:change</h2>
 
 <Preview>
-  <RangeField on:change={(e) => console.log(e.detail.value)} />
+  <RangeField onChange={(value) => console.log(value)} />
 </Preview>
 
 <h2>min / max</h2>

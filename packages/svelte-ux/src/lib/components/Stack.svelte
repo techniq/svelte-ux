@@ -1,25 +1,32 @@
 <script lang="ts">
+  import type { ComponentProps, Snippet } from 'svelte';
   import Grid from './Grid.svelte';
 
-  export let vertical: boolean | undefined = undefined;
-  export let horizontal: boolean | undefined = undefined;
-  export let stack: boolean | undefined = undefined;
-  export let template: string | undefined = undefined;
+  interface Props {
+    vertical?: boolean;
+    horizontal?: boolean;
+    stack?: boolean;
+    template?: string;
+    children?: Snippet;
+  }
+
+  let {
+    vertical,
+    horizontal,
+    stack,
+    template,
+    children,
+    ...restProps
+  }: Props & Omit<ComponentProps<typeof Grid>, keyof Props> = $props();
 </script>
 
 {#if vertical}
-  <Grid autoFlow="row" templateColumns="initial" templateRows={template} on:click {...$$restProps}>
-    <slot />
+  <Grid autoFlow="row" templateColumns="initial" templateRows={template} {...restProps}>
+    {@render children?.()}
   </Grid>
 {:else if horizontal}
-  <Grid
-    autoFlow="column"
-    templateColumns={template}
-    templateRows="initial"
-    on:click
-    {...$$restProps}
-  >
-    <slot />
+  <Grid autoFlow="column" templateColumns={template} templateRows="initial" {...restProps}>
+    {@render children?.()}
   </Grid>
 {:else if stack}
   <Grid
@@ -28,9 +35,8 @@
     justifyItems="center"
     templateColumns="initial"
     templateRows="initial"
-    on:click
-    {...$$props}
+    {...restProps}
   >
-    <slot />
+    {@render children?.()}
   </Grid>
 {/if}

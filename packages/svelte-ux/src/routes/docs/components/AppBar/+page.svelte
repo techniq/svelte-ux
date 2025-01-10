@@ -28,10 +28,12 @@
 <h2>Title as slot</h2>
 
 <Preview>
-  <AppBar title="Example (shown in window title)">
-    <div slot="title">
-      <ListItem title="Example" subheading="Subheading" />
-    </div>
+  <AppBar>
+    {#snippet title()}
+      <div>
+        <ListItem title="Example" subheading="Subheading" />
+      </div>
+    {/snippet}
   </AppBar>
 </Preview>
 
@@ -39,9 +41,11 @@
 
 <Preview>
   <AppBar title="Example">
-    <div slot="actions">
-      <Button icon={mdiRefresh} class="p-2 hover:bg-surface-100/10" />
-    </div>
+    {#snippet actions()}
+      <div>
+        <Button icon={mdiRefresh} class="p-2 hover:bg-surface-100/10" />
+      </div>
+    {/snippet}
   </AppBar>
 </Preview>
 
@@ -64,13 +68,13 @@
 
 <Preview>
   <AppBar title="Example">
-    <svelte:fragment slot="menuIcon" let:toggleMenu let:isMenuOpen>
+    {#snippet menuIcon({ toggleMenu, isMenuOpen })}
       <Button
         icon={mdiChevronRight}
-        on:click={toggleMenu}
+        onclick={toggleMenu}
         class={cls('p-3 transition-transform', isMenuOpen && 'rotate-180')}
       />
-    </svelte:fragment>
+    {/snippet}
   </AppBar>
 </Preview>
 

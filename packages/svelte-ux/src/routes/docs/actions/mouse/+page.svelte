@@ -5,15 +5,15 @@
   import Preview from '$lib/components/Preview.svelte';
   import Code from '$lib/components/Code.svelte';
 
-  let longpressed = false;
+  let longpressed = $state(false);
 
-  const coords = spring(
+  const coords = $state(spring(
     { x: 0, y: 0 },
     {
       stiffness: 0.2,
       damping: 0.4,
     }
-  );
+  ));
 </script>
 
 <h1>Usage</h1>
@@ -28,7 +28,7 @@
   <button
     class="border rounded p-2 text-sm hover:bg-surface-content/5"
     use:longpress={1000}
-    on:longpress={() => (longpressed = !longpressed)}
+    onlongpress={() => (longpressed = !longpressed)}
   >
     Click and hold
   </button>
@@ -44,15 +44,15 @@
     <div
       class="w-10 h-10 bg-danger rounded cursor-move"
       use:movable
-      on:movestart={() => {
+      onmovestart={() => {
         coords.stiffness = 1;
         coords.damping = 1;
       }}
-      on:move={(e) => {
+      onmove={(e) => {
         $coords.x += e.detail.dx;
         $coords.y += e.detail.dy;
       }}
-      on:moveend={() => {
+      onmoveend={() => {
         coords.stiffness = 0.2;
         coords.damping = 0.4;
         coords.set({ x: 0, y: 0 });
@@ -71,15 +71,15 @@
     <div
       class="w-10 h-10 bg-danger rounded cursor-move"
       use:movable={{ step: 25 }}
-      on:movestart={() => {
+      onmovestart={() => {
         coords.stiffness = 1;
         coords.damping = 1;
       }}
-      on:move={(e) => {
+      onmove={(e) => {
         $coords.x += e.detail.dx;
         $coords.y += e.detail.dy;
       }}
-      on:moveend={() => {
+      onmoveend={() => {
         coords.stiffness = 0.2;
         coords.damping = 0.4;
         coords.set({ x: 0, y: 0 });
@@ -98,15 +98,15 @@
     <div
       class="w-10 h-10 bg-danger rounded cursor-move"
       use:movable={{ stepPercent: 0.1 }}
-      on:movestart={() => {
+      onmovestart={() => {
         coords.stiffness = 1;
         coords.damping = 1;
       }}
-      on:move={(e) => {
+      onmove={(e) => {
         $coords.x += e.detail.dx;
         $coords.y += e.detail.dy;
       }}
-      on:moveend={() => {
+      onmoveend={() => {
         coords.stiffness = 0.2;
         coords.damping = 0.4;
         coords.set({ x: 0, y: 0 });
@@ -125,15 +125,15 @@
     <div
       class="w-10 h-10 bg-danger rounded cursor-move"
       use:movable={{ axis: 'x' }}
-      on:movestart={() => {
+      onmovestart={() => {
         coords.stiffness = 1;
         coords.damping = 1;
       }}
-      on:move={(e) => {
+      onmove={(e) => {
         $coords.x += e.detail.dx;
         $coords.y += e.detail.dy;
       }}
-      on:moveend={() => {
+      onmoveend={() => {
         coords.stiffness = 0.2;
         coords.damping = 0.4;
         coords.set({ x: 0, y: 0 });

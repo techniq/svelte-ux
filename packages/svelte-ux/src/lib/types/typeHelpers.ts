@@ -1,7 +1,6 @@
 // https://basarat.gitbooks.io/typescript/docs/types/never.html#use-case-exhaustive-checks
 
 import type { colors } from '../styles/theme.js';
-import type { ComponentProps as SvelteComponentProps, SvelteComponent } from 'svelte';
 import type { derived, Readable } from 'svelte/store';
 import type {
   FlyParams,
@@ -91,21 +90,6 @@ export type RecursivePartial<T> = {
 export type FilterPropKeys<T, Match> = {
   [P in keyof T]: T[P] extends Match ? P : never;
 }[keyof T];
-
-/**
- * @deprecated ComponentProps should be imported from 'svelte' instead of 'svelte-ux', as it is now included in the main 'svelte' package. This export may be removed in a future release.
- * @see https://svelte.dev/docs/svelte#types-componentprops
- * @example
- * ```ts
- * import { ComponentProps } from 'svelte';
- * import MyComponent from './MyComponent.svelte';
- *
- * type MyComponentProps = ComponentProps<typeof MyComponent>;
- * ```
- */
-export type ComponentProps<T extends SvelteComponent> = SvelteComponentProps<T>;
-export type ComponentEvents<T> = T extends SvelteComponent<any, infer E, any> ? E : never;
-export type ComponentSlots<T> = T extends SvelteComponent<any, any, infer S> ? S : never;
 
 // Export until `Stores` and `StoresValues` are exported from svelte -  https://github.com/sveltejs/svelte/blob/master/src/runtime/store/index.ts#L111-L112
 export type Stores = Parameters<typeof derived>[0];

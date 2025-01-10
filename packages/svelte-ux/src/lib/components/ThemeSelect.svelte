@@ -16,17 +16,24 @@
 
   const { currentTheme, themes: allThemes } = getSettings();
 
-  /** The list of dark themes to chose from, if not the list provided to `settings`. */
-  export let darkThemes = allThemes?.dark ?? ['dark'];
-  /** The list of light themes to chose from, if not the list provided to `settings`. */
-  export let lightThemes = allThemes?.light ?? ['light'];
+  interface Props {
+    /** The list of dark themes to chose from, if not the list provided to `settings`. */
+    darkThemes?: string[];
+    /** The list of light themes to chose from, if not the list provided to `settings`. */
+    lightThemes?: string[];
+    /** Add keyboard shorts to quickly toggle color scheme and cycle themes */
+    keyboardShortcuts?: boolean;
+  }
 
-  /** Add keyboard shorts to quickly toggle color scheme and cycle themes */
-  export let keyboardShortcuts = false;
+  let {
+    darkThemes = allThemes?.dark ?? ['dark'],
+    lightThemes = allThemes?.light ?? ['light'],
+    keyboardShortcuts = false,
+  }: Props = $props();
 
-  let open = false;
+  let open = $state(false);
 
-  $: themes = $currentTheme.dark ? darkThemes : lightThemes;
+  let themes = $derived($currentTheme.dark ? darkThemes : lightThemes);
 
   function onKeyDown(e: KeyboardEvent) {
     if (e.ctrlKey && e.code === 'KeyT') {
@@ -45,7 +52,7 @@
 </script>
 
 {#if darkThemes.length > 1 || lightThemes.length > 1}
-  <Button iconOnly on:click={() => (open = !open)}>
+  <Button iconOnly onclick={() => (open = !open)}>
     <div class="grid grid-cols-1 grid-rows-1 overflow-hidden">
       <Icon
         data={mdiWhiteBalanceSunny}
@@ -59,7 +66,7 @@
 
     <Menu
       bind:open
-      on:close={() => (open = false)}
+      onClose={() => (open = false)}
       explicitClose
       resize="height"
       classes={{ root: 'w-[400px] max-w-[95vw]' }}
@@ -77,7 +84,7 @@
                 color="primary"
                 size="sm"
                 class="mr-1"
-                on:click={() => {
+                onclick={() => {
                   currentTheme.setTheme('system');
                 }}
               />
@@ -88,26 +95,27 @@
         <Switch
           id="switch-color-scheme"
           checked={$currentTheme.dark}
-          on:change={(e) => {
+          onchange={(e) => {
             // @ts-expect-error: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
             let newTheme = e.target?.checked ? 'dark' : 'light';
             currentTheme.setTheme(newTheme);
           }}
           class="my-1"
-          let:checked
         >
-          {#if checked}
-            <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
-          {:else}
-            <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
-          {/if}
+          {#snippet children({ checked })}
+            {#if checked}
+              <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
+            {:else}
+              <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
+            {/if}
+          {/snippet}
         </Switch>
       </label>
 
       <div class="grid grid-cols-2 gap-2 p-2">
         {#each themes as themeName}
           <MenuItem
-            on:click={() => currentTheme.setTheme(themeName)}
+            onclick={() => currentTheme.setTheme(themeName)}
             data-theme={themeName}
             class={cls(
               'bg-surface-100 text-surface-content font-semibold border shadow',
@@ -141,7 +149,7 @@
     </Menu>
   </Button>
 {:else}
-  <Button iconOnly on:click={() => (open = !open)}>
+  <Button iconOnly onclick={() => (open = !open)}>
     <div class="grid grid-stack overflow-hidden">
       <Icon
         data={mdiWhiteBalanceSunny}
@@ -153,11 +161,11 @@
       />
     </div>
 
-    <Menu bind:open on:close={() => (open = false)} classes={{ menu: 'p-1' }}>
+    <Menu bind:open onClose={() => (open = false)} classes={{ menu: 'p-1' }}>
       <MenuItem
         icon={mdiWhiteBalanceSunny}
         selected={$currentTheme.theme === 'light'}
-        on:click={() => currentTheme.setTheme('light')}
+        onclick={() => currentTheme.setTheme('light')}
       >
         Light
       </MenuItem>
@@ -165,7 +173,7 @@
       <MenuItem
         icon={mdiWeatherNight}
         selected={$currentTheme.theme === 'dark'}
-        on:click={() => currentTheme.setTheme('dark')}
+        onclick={() => currentTheme.setTheme('dark')}
       >
         Dark
       </MenuItem>
@@ -173,7 +181,7 @@
       <MenuItem
         icon={mdiMonitor}
         selected={$currentTheme.theme == null}
-        on:click={() => currentTheme.setTheme('system')}
+        onclick={() => currentTheme.setTheme('system')}
       >
         System
       </MenuItem>
@@ -181,4 +189,4 @@
   </Button>
 {/if}
 
-<svelte:window on:keydown={keyboardShortcuts ? onKeyDown : undefined} />
+<svelte:window onkeydown={keyboardShortcuts ? onKeyDown : undefined} />

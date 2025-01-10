@@ -19,7 +19,7 @@
 
   import Preview from '$lib/components/Preview.svelte';
 
-  let group: string[] = [];
+  let group: string[] = $state([]);
 </script>
 
 <h1>Examples</h1>
@@ -63,9 +63,11 @@
 <h2>Switch</h2>
 
 <Preview>
-  <Field label="Is Active" let:id>
-    <Switch {id} />
-  </Field>
+  <Field label="Is Active" >
+    {#snippet children({ id })}
+        <Switch {id} />
+          {/snippet}
+    </Field>
 </Preview>
 
 <h2>Checkbox</h2>
@@ -163,55 +165,67 @@
 <h2>Button</h2>
 
 <Preview>
-  <Field label="Action" let:id>
-    <Button {id} on:click={() => console.log('clicked')}>Click me</Button>
-  </Field>
+  <Field label="Action" >
+    {#snippet children({ id })}
+        <Button {id} onclick={() => console.log('clicked')}>Click me</Button>
+          {/snippet}
+    </Field>
 </Preview>
 
 <h2>Date input</h2>
 
 <Preview>
-  <Field label="Date of Birth" let:id>
-    <input {id} type="date" class="text-sm w-full outline-none bg-surface-100" />
-  </Field>
+  <Field label="Date of Birth" >
+    {#snippet children({ id })}
+        <input {id} type="date" class="text-sm w-full outline-none bg-surface-100" />
+          {/snippet}
+    </Field>
 </Preview>
 
 <h2>input type="number"</h2>
 
 <Preview>
-  <Field label="Number" let:id>
-    <input
-      {id}
-      type="number"
-      min={0}
-      max={10}
-      step={1}
-      class="w-full outline-none bg-surface-100"
-    />
-  </Field>
+  <Field label="Number" >
+    {#snippet children({ id })}
+        <input
+        {id}
+        type="number"
+        min={0}
+        max={10}
+        step={1}
+        class="w-full outline-none bg-surface-100"
+      />
+          {/snippet}
+    </Field>
 </Preview>
 
 <h2>Input</h2>
 
 <Preview>
-  <Field label="Phone number" let:id>
-    <Input {id} mask="+1 (___) ___-____" replace="_" />
-  </Field>
+  <Field label="Phone number" >
+    {#snippet children({ id })}
+        <Input {id} mask="+1 (___) ___-____" replace="_" />
+          {/snippet}
+    </Field>
 </Preview>
 
 <h2>Select</h2>
 
 <Preview>
-  <Field label="Position" let:id>
-    <select {id} class="text-sm w-full outline-none appearance-none cursor-pointer bg-surface-100">
-      <option value={1}>First</option>
-      <option value={2}>Second</option>
-      <option value={3}>Third</option>
-      <option value={4}>Fourth</option>
-    </select>
-    <span slot="append">
-      <Icon data={mdiChevronDown} />
-    </span>
+  <Field label="Position" >
+    {#snippet children({ id })}
+        <select {id} class="text-sm w-full outline-none appearance-none cursor-pointer bg-surface-100">
+        <option value={1}>First</option>
+        <option value={2}>Second</option>
+        <option value={3}>Third</option>
+        <option value={4}>Fourth</option>
+      </select>
+      {/snippet}
+      {#snippet append()}
+        <span >
+        <Icon data={mdiChevronDown} />
+      </span>
+      {/snippet}
   </Field>
 </Preview>
 

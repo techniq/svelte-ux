@@ -21,7 +21,7 @@
 
   const order = tableOrderStore({ initialBy: 'calories', initialDirection: 'desc' });
 
-  const data = [
+  const tableData = [
     { id: 1, name: 'Cupcake', calories: 305, fat: 3.7, carbs: 67, protein: 4.3 },
     { id: 2, name: 'Donut', calories: 452, fat: 25.0, carbs: 51, protein: 4.9 },
     { id: 3, name: 'Eclair', calories: 262, fat: 16.0, carbs: 24, protein: 6.0 },
@@ -38,7 +38,7 @@
   ];
 
   function randomDataGen() {
-    return data.map((d) => {
+    return tableData.map((d) => {
       return {
         ...d,
         calories: randomInteger(300, 900),
@@ -48,7 +48,7 @@
       };
     });
   }
-  let randomData = randomDataGen();
+  let randomData = $state(randomDataGen());
 
   // Workaround to make Typescript happy
   function columnFormatAsNumberFormat(format: ColumnDef['format']) {
@@ -62,7 +62,7 @@
 
 <Preview>
   <Table
-    {data}
+    {tableData}
     columns={[
       {
         name: 'name',
@@ -95,42 +95,44 @@
 <h2>Pagination</h2>
 
 <Preview>
-  <Paginate {data} perPage={5} let:pageData let:pagination>
-    <Table
-      data={pageData}
-      columns={[
-        {
-          name: 'name',
-          align: 'left',
-        },
-        {
-          name: 'calories',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'fat',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'carbs',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'protein',
-          align: 'right',
-          format: 'integer',
-        },
-      ]}
-    />
-    <Pagination
-      {pagination}
-      perPageOptions={[5, 10, 25, 100]}
-      show={['perPage', 'pagination', 'prevPage', 'nextPage']}
-      classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
-    />
+  <Paginate data={tableData} perPage={5}>
+    {#snippet children({ pageData, pagination })}
+      <Table
+        tableData={pageData}
+        columns={[
+          {
+            name: 'name',
+            align: 'left',
+          },
+          {
+            name: 'calories',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'fat',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'carbs',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'protein',
+            align: 'right',
+            format: 'integer',
+          },
+        ]}
+      />
+      <Pagination
+        paginationStore={pagination}
+        perPageOptions={[5, 10, 25, 100]}
+        show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+        classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+      />
+    {/snippet}
   </Paginate>
 </Preview>
 
@@ -138,7 +140,7 @@
 
 <Preview>
   <Table
-    data={[...data].sort($order.handler)}
+    tableData={[...tableData].sort($order.handler)}
     columns={[
       {
         name: 'name',
@@ -173,47 +175,49 @@
 <h2>Order + Pagination</h2>
 
 <Preview>
-  <Paginate data={data.sort($order.handler)} perPage={5} let:pageData let:pagination>
-    <Table
-      data={pageData}
-      columns={[
-        {
-          name: 'name',
-          align: 'left',
-        },
-        {
-          name: 'calories',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'fat',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'carbs',
-          align: 'right',
-          format: 'integer',
-        },
-        {
-          name: 'protein',
-          align: 'right',
-          format: 'integer',
-        },
-      ]}
-      {order}
-      on:headerClick={(e) => {
-        //Switch back to page 1 when sorting
-        pagination.setPage(1);
-      }}
-    />
-    <Pagination
-      {pagination}
-      perPageOptions={[5, 10, 25, 100]}
-      show={['perPage', 'pagination', 'prevPage', 'nextPage']}
-      classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
-    />
+  <Paginate data={tableData.sort($order.handler)} perPage={5}>
+    {#snippet children({ pageData, pagination })}
+      <Table
+        tableData={pageData}
+        columns={[
+          {
+            name: 'name',
+            align: 'left',
+          },
+          {
+            name: 'calories',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'fat',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'carbs',
+            align: 'right',
+            format: 'integer',
+          },
+          {
+            name: 'protein',
+            align: 'right',
+            format: 'integer',
+          },
+        ]}
+        {order}
+        onHeaderClick={() => {
+          //Switch back to page 1 when sorting
+          pagination.setPage(1);
+        }}
+      />
+      <Pagination
+        paginationStore={pagination}
+        perPageOptions={[5, 10, 25, 100]}
+        show={['perPage', 'pagination', 'prevPage', 'nextPage']}
+        classes={{ root: 'border-t py-1 mt-2', perPage: 'flex-1 text-right', pagination: 'px-8' }}
+      />
+    {/snippet}
   </Paginate>
 </Preview>
 
@@ -221,7 +225,7 @@
 
 <Preview>
   <Button
-    on:click={() => (randomData = randomDataGen())}
+    onclick={() => (randomData = randomDataGen())}
     variant="outline"
     color="primary"
     class="mb-1"
@@ -229,7 +233,7 @@
     Randomize
   </Button>
   <Table
-    data={randomData}
+    tableData={randomData}
     columns={[
       {
         name: 'name',
@@ -291,7 +295,7 @@
 
 <Preview>
   <Table
-    {data}
+    {tableData}
     columns={[
       {
         name: 'name',
@@ -337,7 +341,7 @@
 
 <Preview>
   <Button
-    on:click={() => (randomData = randomDataGen())}
+    onclick={() => (randomData = randomDataGen())}
     variant="outline"
     color="primary"
     class="mb-1"
@@ -345,7 +349,7 @@
     Randomize
   </Button>
   <Table
-    data={randomData}
+    tableData={randomData}
     columns={[
       {
         name: 'name',
@@ -401,28 +405,29 @@
       },
     ]}
   >
-    <tbody slot="data" let:columns let:data let:getCellValue>
-      {#each data ?? [] as rowData, rowIndex}
-        <tr class="tabular-nums">
-          {#each columns as column (column.name)}
-            {@const value = getCellValue(column, rowData, rowIndex)}
-
-            <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
-              {#if column.name === 'name'}
-                {value}
-              {:else}
-                <TweenedValue
+    {#snippet data({ columns, data, getCellValue })}
+      <tbody>
+        {#each data ?? [] as rowData, rowIndex}
+          <tr class="tabular-nums">
+            {#each columns as column (column.name)}
+              {@const value = getCellValue(column, rowData, rowIndex)}
+              <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+                {#if column.name === 'name'}
                   {value}
-                  format={columnFormatAsNumberFormat(column.format)}
-                  options={typeof column.dataBackground === 'object'
-                    ? column.dataBackground.tweened
-                    : undefined}
-                />
-              {/if}
-            </td>{/each}
-        </tr>
-      {/each}
-    </tbody>
+                {:else}
+                  <TweenedValue
+                    {value}
+                    format={columnFormatAsNumberFormat(column.format)}
+                    options={typeof column.dataBackground === 'object'
+                      ? column.dataBackground.tweened
+                      : undefined}
+                  />
+                {/if}
+              </td>{/each}
+          </tr>
+        {/each}
+      </tbody>
+    {/snippet}
   </Table>
 </Preview>
 
@@ -430,7 +435,7 @@
 
 <Preview>
   <Table
-    {data}
+    {tableData}
     columns={[
       {
         name: 'name',
@@ -463,30 +468,34 @@
       },
     ]}
   >
-    <tbody slot="data" let:columns let:data let:getCellValue let:getCellContent>
-      {#each data ?? [] as rowData, rowIndex}
-        <tr class="tabular-nums">
-          {#each columns as column (column.name)}
-            {@const value = getCellValue(column, rowData, rowIndex)}
-            {@const content = getCellContent(column, rowData, rowIndex)}
+    {#snippet data({ columns, data, getCellValue, getCellContent })}
+      <tbody>
+        {#each data ?? [] as rowData, rowIndex}
+          <tr class="tabular-nums">
+            {#each columns as column (column.name)}
+              {@const value = getCellValue(column, rowData, rowIndex)}
+              {@const content = getCellContent(column, rowData, rowIndex)}
 
-            <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
-              {#if column.name === 'actions'}
-                <Toggle let:on={open} let:toggle let:toggleOff>
-                  <Button icon={mdiDotsVertical} iconOnly size="sm" on:click={toggle}>
-                    <Menu {open} on:close={toggleOff} placement="bottom-end">
-                      <MenuItem>Edit</MenuItem>
-                      <MenuItem class="text-danger">Delete</MenuItem>
-                    </Menu>
-                  </Button>
-                </Toggle>
-              {:else}
-                {content}
-              {/if}
-            </td>
-          {/each}
-        </tr>
-      {/each}
-    </tbody>
+              <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
+                {#if column.name === 'actions'}
+                  <Toggle>
+                    {#snippet children({ on: open, toggle, toggleOff })}
+                      <Button icon={mdiDotsVertical} iconOnly size="sm" onclick={toggle}>
+                        <Menu {open} onClose={toggleOff} placement="bottom-end">
+                          <MenuItem>Edit</MenuItem>
+                          <MenuItem class="text-danger">Delete</MenuItem>
+                        </Menu>
+                      </Button>
+                    {/snippet}
+                  </Toggle>
+                {:else}
+                  {content}
+                {/if}
+              </td>
+            {/each}
+          </tr>
+        {/each}
+      </tbody>
+    {/snippet}
   </Table>
 </Preview>

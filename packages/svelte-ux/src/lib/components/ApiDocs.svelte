@@ -12,7 +12,11 @@
   import ListItem from './ListItem.svelte';
   import Tooltip from './Tooltip.svelte';
 
-  export let api: SveldJson;
+  interface Props {
+    api: SveldJson;
+  }
+
+  let { api }: Props = $props();
 
   function parseSlotProps(slot_props: string) {
     return slot_props
@@ -35,41 +39,47 @@
           icon={mdiCodeBraces}
           avatar={{ size: 'sm', class: 'text-xs text-white bg-blue-500' }}
         >
-          <div slot="title">{prop.name}</div>
+          {#snippet title()}
+            <div>{prop.name}</div>
+          {/snippet}
 
-          <div slot="subheading" class="text-surface-content/50 text-xs">
-            {#if prop.description}
-              <span class="whitespace-pre-line">
-                {prop.description}
-              </span>
-            {/if}
-          </div>
+          {#snippet subheading()}
+            <div class="text-surface-content/50 text-xs">
+              {#if prop.description}
+                <span class="whitespace-pre-line">
+                  {prop.description}
+                </span>
+              {/if}
+            </div>
+          {/snippet}
 
-          <div slot="actions" class="flex flex-wrap justify-end gap-1">
-            {#if prop.isRequired}
-              <div
-                class="inline-block border bg-danger/10 border-danger text-danger-600 px-2 rounded-full text-xs"
-              >
-                Required
-              </div>
-            {/if}
+          {#snippet actions()}
+            <div class="flex flex-wrap justify-end gap-1">
+              {#if prop.isRequired}
+                <div
+                  class="inline-block border bg-danger/10 border-danger text-danger-600 px-2 rounded-full text-xs"
+                >
+                  Required
+                </div>
+              {/if}
 
-            <Tooltip title="default" offset={2}>
-              <div
-                class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
-              >
-                {prop.value}
-              </div>
-            </Tooltip>
+              <Tooltip title="default" offset={2}>
+                <div
+                  class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
+                >
+                  {prop.value}
+                </div>
+              </Tooltip>
 
-            <Tooltip title="type" offset={2}>
-              <div
-                class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
-              >
-                {prop.type ?? 'unknown'}
-              </div>
-            </Tooltip>
-          </div>
+              <Tooltip title="type" offset={2}>
+                <div
+                  class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+                >
+                  {prop.type ?? 'unknown'}
+                </div>
+              </Tooltip>
+            </div>
+          {/snippet}
         </ListItem>
       {:else}
         <EmptyMessage>No props</EmptyMessage>
@@ -119,31 +129,37 @@
           icon={mdiGoogleCirclesGroup}
           avatar={{ size: 'sm', class: 'text-xs text-white bg-purple-500' }}
         >
-          <div slot="title">
-            {#if slot.default}
-              <i>default</i>
-            {:else}
-              {slot.name}
-            {/if}
-          </div>
+          {#snippet title()}
+            <div>
+              {#if slot.default}
+                <i>default</i>
+              {:else}
+                {slot.name}
+              {/if}
+            </div>
+          {/snippet}
 
-          <div slot="subheading" class="text-surface-content/50 text-xs">
-            {slot.description ?? ''}
-          </div>
+          {#snippet subheading()}
+            <div class="text-surface-content/50 text-xs">
+              {slot.description ?? ''}
+            </div>
+          {/snippet}
 
-          <div slot="actions" class="flex flex-wrap justify-end gap-1">
-            {#if slot.slot_props != '{}'}
-              {#each parseSlotProps(slot.slot_props ?? '') as { key, value }}
-                <Tooltip title="slot prop" offset={2}>
-                  <div
-                    class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
-                  >
-                    {key}: {value}
-                  </div>
-                </Tooltip>
-              {/each}
-            {/if}
-          </div>
+          {#snippet actions()}
+            <div class="flex flex-wrap justify-end gap-1">
+              {#if slot.slot_props != '{}'}
+                {#each parseSlotProps(slot.slot_props ?? '') as { key, value }}
+                  <Tooltip title="slot prop" offset={2}>
+                    <div
+                      class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+                    >
+                      {key}: {value}
+                    </div>
+                  </Tooltip>
+                {/each}
+              {/if}
+            </div>
+          {/snippet}
         </ListItem>
       {:else}
         <EmptyMessage>No slots</EmptyMessage>
@@ -162,22 +178,26 @@
           icon={mdiBullhorn}
           avatar={{ size: 'sm', class: 'text-xs text-white bg-success-500' }}
         >
-          <div slot="title">{event.name}</div>
+          {#snippet title()}
+            <div>{event.name}</div>
+          {/snippet}
 
-          <div slot="actions" class="flex flex-wrap justify-end gap-1">
-            {#if event.element != null}
+          {#snippet actions()}
+            <div class="flex flex-wrap justify-end gap-1">
+              {#if event.element != null}
+                <div
+                  class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+                >
+                  {event.element}
+                </div>
+              {/if}
               <div
-                class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs"
+                class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
               >
-                {event.element}
+                {event.type}
               </div>
-            {/if}
-            <div
-              class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs"
-            >
-              {event.type}
             </div>
-          </div>
+          {/snippet}
         </ListItem>
       {:else}
         <EmptyMessage>No events</EmptyMessage>
@@ -199,41 +219,47 @@
           icon={mdiCodeBraces}
           avatar={{ size: 'sm', class: 'text-xs text-white bg-blue-500' }}
         >
-          <div slot="title">{prop.name}</div>
+          {#snippet title()}
+            <div>{prop.name}</div>
+          {/snippet}
 
-          <div slot="subheading" class="text-surface-content/50 text-xs">
-            {#if prop.description}
-              <span class="whitespace-pre-line">
-                {prop.description}
-              </span>
-            {/if}
-          </div>
+          {#snippet subheading()}
+            <div class="text-surface-content/50 text-xs">
+              {#if prop.description}
+                <span class="whitespace-pre-line">
+                  {prop.description}
+                </span>
+              {/if}
+            </div>
+          {/snippet}
 
-          <div slot="actions" class="flex flex-wrap justify-end gap-1">
-            {#if prop.isRequired}
-              <div
-                class="inline-block border bg-danger/10 border-danger text-danger-600 px-2 rounded-full text-xs"
-              >
-                Required
-              </div>
-            {/if}
+          {#snippet actions()}
+            <div class="flex flex-wrap justify-end gap-1">
+              {#if prop.isRequired}
+                <div
+                  class="inline-block border bg-danger/10 border-danger text-danger-600 px-2 rounded-full text-xs"
+                >
+                  Required
+                </div>
+              {/if}
 
-            <Tooltip title="value" offset={2}>
-              <div
-                class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
-              >
-                {prop.value}
-              </div>
-            </Tooltip>
+              <Tooltip title="value" offset={2}>
+                <div
+                  class="inline-block border bg-gray-500/5 border-gray-500 text-gray-600 px-2 rounded-full text-xs cursor-help"
+                >
+                  {prop.value}
+                </div>
+              </Tooltip>
 
-            <Tooltip title="type" offset={2}>
-              <div
-                class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
-              >
-                {prop.type ?? 'unknown'}
-              </div>
-            </Tooltip>
-          </div>
+              <Tooltip title="type" offset={2}>
+                <div
+                  class="inline-block border bg-orange-500/10 border-orange-500 text-orange-600 px-2 rounded-full text-xs cursor-help"
+                >
+                  {prop.type ?? 'unknown'}
+                </div>
+              </Tooltip>
+            </div>
+          {/snippet}
         </ListItem>
       {:else}
         <EmptyMessage>No exports</EmptyMessage>

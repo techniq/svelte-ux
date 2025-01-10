@@ -5,9 +5,9 @@
   import Code from '$lib/components/Code.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
 
-  let overflowX = 0;
-  let overflowY = 0;
-  let overflowItems = 1;
+  let overflowX = $state(0);
+  let overflowY = $state(0);
+  let overflowItems = $state(1);
 </script>
 
 <h1>Usage</h1>
@@ -41,9 +41,9 @@
 
 <Preview>
   <div class="mb-2">
-    <Button on:click={() => (overflowItems += 1)} variant="fill" color="primary">+ item</Button>
+    <Button onclick={() => (overflowItems += 1)} variant="fill" color="primary">+ item</Button>
     <Button
-      on:click={() => (overflowItems -= overflowItems > 1 ? 1 : 0)}
+      onclick={() => (overflowItems -= overflowItems > 1 ? 1 : 0)}
       variant="fill"
       color="primary">- item</Button
     >
@@ -51,7 +51,7 @@
   <div
     class="w-1/2 h-[100px] border rounded-lg bg-surface-100 whitespace-nowrap truncate p-4 resize overflow-auto"
     use:overflow
-    on:overflow={(e) => {
+    onoverflow={(e) => {
       overflowX = e.detail.overflowX;
       overflowY = e.detail.overflowY;
     }}

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import Prism from 'prismjs';
   import 'prism-svelte';
   import { mdiCodeTags } from '@mdi/js';
@@ -9,15 +10,28 @@
   import Code from './Code.svelte';
   import { cls } from '../utils/styles.js';
 
-  export let code: string | null = null;
-  export let language = 'svelte';
-  export let highlightedCode = code ? Prism.highlight(code, Prism.languages.svelte, language) : '';
-  export let showCode = false;
+  interface Props {
+    code?: string | null;
+    language?: string;
+    highlightedCode?: string;
+    showCode?: boolean;
+    class?: string;
+    children?: Snippet;
+  }
+
+  let {
+    code,
+    language = 'svelte',
+    highlightedCode = code ? Prism.highlight(code, Prism.languages.svelte, language) : '',
+    showCode = $bindable(false),
+    class: className,
+    children,
+  }: Props = $props();
 </script>
 
-<div class={cls('Preview border rounded bg-surface-100', $$props.class)}>
+<div class={cls('Preview border rounded bg-surface-100', className)}>
   <div class="p-4">
-    <slot />
+    {@render children?.()}
   </div>
 
   {#if code && showCode}
@@ -31,7 +45,7 @@
   <Button
     icon={mdiCodeTags}
     class=" text-surface-content/70 py-1"
-    on:click={() => (showCode = !showCode)}
+    onclick={() => (showCode = !showCode)}
   >
     {showCode ? 'Hide' : 'Show'} Code
   </Button>

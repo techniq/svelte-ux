@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import { type ComponentProps } from 'svelte';
   import { parse as parseDate, format as formatDate } from 'date-fns';
   import { type DisabledDate } from '../utils/date_types.js';
   import { getComponentSettings, getSettings } from './settings.js';
@@ -13,54 +13,79 @@
   const { format: format_ux } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('DateField');
 
-  export let name = '';
-  export let value: Date | null = null;
-  export let format: string | undefined = undefined;
-  export let mask: string | undefined = undefined;
-  export let replace = 'dmyh';
-  export let picker = false;
+  interface Props {
+    name?: string;
+    value?: Date | null;
+    format?: string;
+    mask?: string;
+    replace?: string;
+    picker?: boolean;
+    /**
+     * Dates to disable (not selectable)
+     */
+    disabledDates?: DisabledDate;
+    classes?: {
+      root?: string;
+      field?: ComponentProps<typeof Field>['classes'];
+    };
+    // Field props
+    label?: string;
+    labelPlacement?: any;
+    error?: string;
+    hint?: string;
+    required?: boolean;
+    disabled?: boolean;
+    clearable?: boolean;
+    base?: boolean;
+    rounded?: boolean;
+    dense?: boolean;
+    icon?: string | null;
+    class?: string;
+    onChange?: (value?: Date | null) => void;
+  }
 
-  /**
-   * Dates to disable (not selectable)
-   */
-  export let disabledDates: DisabledDate | undefined = undefined;
+  let {
+    name = '',
+    value = $bindable(),
+    format,
+    mask,
+    replace = 'dmyh',
+    picker = false,
+    disabledDates,
+    classes = {},
+    label = '',
+    labelPlacement = defaults.labelPlacement,
+    error = '',
+    hint = '',
+    required = false,
+    disabled = false,
+    clearable = false,
+    base = false,
+    rounded = false,
+    dense = false,
+    icon,
+    class: className,
+    onChange,
+    ...rest
+  }: Props & Omit<ComponentProps<typeof Field>, keyof Props> = $props();
 
-  $: actualFormat = format ?? $format_ux.settings.formats.dates.baseParsing ?? 'MM/dd/yyyy';
-  $: actualMask = mask ?? actualFormat.toLowerCase();
+  let inputValue = $state<string>('');
 
-  export let classes: {
-    root?: string;
-    field?: ComponentProps<Field>['classes'];
-  } = {};
-
-  // Field props
-  export let label = '';
-  export let labelPlacement = defaults.labelPlacement;
-  export let error = '';
-  export let hint = '';
-  export let required = false;
-  export let disabled = false;
-  export let clearable = false;
-  export let base = false;
-  export let rounded = false;
-  export let dense = false;
-  export let icon: string | null = null;
-
-  let inputValue: string | undefined = '';
-
-  const dispatch = createEventDispatcher();
-
-  function onInputChange(e: any) {
-    inputValue = e.detail.value;
+  function onInputChange(_value: string) {
+    inputValue = _value;
     const lastValue = value;
     const parsedValue = parseDate(inputValue ?? '', actualFormat, new Date());
     value = isNaN(parsedValue.valueOf()) ? null : parsedValue;
     if (value != lastValue) {
-      dispatch('change', { value });
+      onChange?.(value);
     }
   }
 
-  $: restProps = { ...defaults, ...$$restProps };
+  let actualFormat = $derived(
+    format ?? $format_ux.settings.formats.dates.baseParsing ?? 'MM/dd/yyyy'
+  );
+  let actualMask = $derived(mask ?? actualFormat.toLowerCase());
+  let restProps = $derived({ ...defaults, ...rest });
 </script>
 
 <Field
@@ -76,36 +101,39 @@
   {dense}
   {clearable}
   {labelPlacement}
-  on:clear={() => {
+  onClear={() => {
     value = null;
     inputValue = '';
-    dispatch('change', { value });
+    onChange?.(value);
   }}
   classes={classes.field}
-  class={cls('DateField', settingsClasses.root, classes.root, $$props.class)}
-  let:id
+  class={cls('DateField', settingsClasses.root, classes.root, className)}
 >
-  <Input
-    {required}
-    {name}
-    value={value ? formatDate(value, actualFormat) : inputValue}
-    mask={actualMask}
-    {replace}
-    {id}
-    on:change={onInputChange}
-  />
-  <span slot="append">
-    {#if picker}
-      <DatePickerField
-        iconOnly
-        {value}
-        {disabledDates}
-        on:change={(e) => {
-          value = e.detail;
-          dispatch('change', { value });
-        }}
-        class="p-1 text-surface-content/50"
-      />
-    {/if}
-  </span>
+  {#snippet children({ id })}
+    <Input
+      {required}
+      {name}
+      value={value ? formatDate(value, actualFormat) : inputValue}
+      mask={actualMask}
+      {replace}
+      {id}
+      onChange={onInputChange}
+    />
+  {/snippet}
+  {#snippet append()}
+    <span>
+      {#if picker}
+        <DatePickerField
+          iconOnly
+          {value}
+          {disabledDates}
+          onChange={(_value) => {
+            value = _value;
+            onChange?.(value);
+          }}
+          class="p-1 text-surface-content/50"
+        />
+      {/if}
+    </span>
+  {/snippet}
 </Field>

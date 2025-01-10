@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { isWithinInterval } from 'date-fns';
 
   import Button from './Button.svelte';
@@ -13,20 +12,33 @@
   import { cls } from '../utils/styles.js';
   import { getComponentSettings, getSettings } from './settings.js';
 
-  const dispatch = createEventDispatcher();
-
   const { classes: settingsClasses, defaults } = getComponentSettings('DateButton');
 
-  export let date: Date;
-  export let periodType: PeriodType;
-  export let disabled: boolean = false;
-  export let selected: SelectedDate;
-  export let hidden: boolean = false;
-  export let fade: boolean = false;
-  export let format: CustomIntlDateTimeFormatOptions | undefined = getCustomFormat(periodType);
-  export let variant = defaults.variant;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    date: Date;
+    periodType: PeriodType;
+    disabled?: boolean;
+    selected: SelectedDate;
+    hidden?: boolean;
+    fade?: boolean;
+    format?: CustomIntlDateTimeFormatOptions;
+    variant?: any;
+    class?: string;
+    onDateChange?: (value: Date) => void;
+  }
+
+  let {
+    date,
+    periodType,
+    disabled = false,
+    selected = $bindable(),
+    hidden = false,
+    fade = false,
+    format = getCustomFormat(periodType),
+    variant = defaults.variant,
+    class: className,
+    onDateChange,
+  }: Props = $props();
 
   const { format: format_ux, localeSettings } = getSettings();
 
@@ -42,7 +54,7 @@
 
   const { start, end, isSame } = getDateFuncsByPeriodType($localeSettings, periodType);
 
-  $: isSelected =
+  let isSelected = $derived(
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
@@ -54,9 +66,10 @@
                 end: end(selected.to ?? selected.from),
               })
             : false
-          : false;
+          : false
+  );
 
-  $: isSelectedStart =
+  let isSelectedStart = $derived(
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
@@ -64,9 +77,10 @@
         : selected instanceof Object
           ? // @ts-expect-error
             isSame(date, selected.from ?? selected.to)
-          : false;
+          : false
+  );
 
-  $: isSelectedEnd =
+  let isSelectedEnd = $derived(
     selected instanceof Date
       ? isSame(date, selected)
       : selected instanceof Array
@@ -74,12 +88,14 @@
         : selected instanceof Object
           ? // @ts-expect-error
             isSame(date, selected.to ?? selected.from)
-          : false;
+          : false
+  );
 
-  $: isCurrent = isSame(date, new Date());
+  let isCurrent = $derived(isSame(date, new Date()));
 
-  $: isVerticalSelection =
-    periodType === PeriodType.CalendarYear || periodType === PeriodType.FiscalYearOctober;
+  let isVerticalSelection = $derived(
+    periodType === PeriodType.CalendarYear || periodType === PeriodType.FiscalYearOctober
+  );
 </script>
 
 <div
@@ -107,10 +123,10 @@
     variant={isSelected ? 'fill' : (variant ?? 'default')}
     color={isSelected || isCurrent ? 'primary' : 'default'}
     {disabled}
-    on:click={() => {
+    onclick={() => {
       // Do not set selected date as this is causing issues with controlled selected (ex. date ranges, arrays, etc) / changing from date to { from: ..., to: ... }
       // selected = date;
-      dispatch('dateChange', date);
+      onDateChange?.(date);
     }}
   >
     {$format_ux(date, periodType, { custom: format })}

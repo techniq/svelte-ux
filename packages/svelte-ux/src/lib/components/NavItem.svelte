@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
+  import type { ComponentProps, Snippet } from 'svelte';
 
   import { isActive, url } from '../utils/routing.js';
   import Icon from './Icon.svelte';
@@ -8,22 +8,40 @@
   import { getComponentClasses } from './theme.js';
   import { mdScreen } from '../stores/matchMedia.js';
   import { getSettings } from './index.js';
+  import type { HTMLAnchorAttributes } from 'svelte/elements';
 
-  export let currentUrl: URL;
-  export let path: string;
-  export let text: string = '';
-  export let icon: string | null = null;
+  interface Props {
+    currentUrl: URL;
+    path: string;
+    text?: string;
+    icon?: string | null;
+    classes?: {
+      root?: string;
+      active?: string;
+      icon?: ComponentProps<typeof Icon>['classes'];
+    };
+    class?: string;
+    onclick?: HTMLAnchorAttributes['onclick'];
+    avatar?: Snippet;
+    children?: Snippet;
+  }
 
-  export let classes: {
-    root?: string;
-    active?: string;
-    icon?: ComponentProps<Icon>['classes'];
-  } = {};
+  let {
+    currentUrl,
+    path,
+    text = '',
+    icon,
+    classes = {},
+    class: className,
+    onclick,
+    avatar,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('NavItem');
 
   const { showDrawer } = getSettings();
 
-  $: isPathActive = path ? isActive(currentUrl, path) : false;
+  let isPathActive = $derived(path ? isActive(currentUrl, path) : false);
 </script>
 
 <a
@@ -34,23 +52,23 @@
     settingsClasses.root,
     isPathActive && ['is-active', settingsClasses.active, classes.active],
     classes.root,
-    $$props.class
+    className
   )}
   use:scrollIntoView={{
     condition: isPathActive,
     onlyIfNeeded: true,
     delay: 500,
   }}
-  on:click
-  on:click={() => {
+  onclick={(e) => {
+    onclick?.(e);
     // Close if use temporary drawer
     if (!$mdScreen) {
       $showDrawer = false;
     }
   }}
 >
-  {#if $$slots.avatar}
-    <slot name="avatar" />
+  {#if avatar}
+    {@render avatar()}
   {/if}
 
   {#if icon}
@@ -63,5 +81,5 @@
 
   {text}
 
-  <slot />
+  {@render children?.()}
 </a>

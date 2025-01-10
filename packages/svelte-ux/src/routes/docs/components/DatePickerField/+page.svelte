@@ -4,7 +4,7 @@
   import { Button, DatePickerField, PeriodType } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = new Date();
+  let value = $state(new Date());
 </script>
 
 <h1>Examples</h1>
@@ -79,7 +79,7 @@
 
 <Preview>
   <form
-    on:submit={(e) => {
+    onsubmit={(e) => {
       e.preventDefault();
       // @ts-expect-error
       const formData = new FormData(e.target);

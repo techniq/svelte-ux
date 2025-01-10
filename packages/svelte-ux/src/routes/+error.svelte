@@ -1,7 +1,9 @@
 <script lang="ts">
   import { page } from '$app/stores';
 
-  $: console.error($page.error);
+  $effect(() => {
+    console.error($page.error);
+  });
 </script>
 
 <div class="p-4">

@@ -1,29 +1,43 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { type Snippet } from 'svelte';
 
-  const dispatch = createEventDispatcher();
+  interface Props {
+    on?: boolean;
+    onToggle?: (value: boolean) => void;
+    onToggleOn?: () => void;
+    onToggleOff?: () => void;
+    children?: Snippet<
+      [{ on: boolean; toggle: () => void; toggleOn: () => void; toggleOff: () => void }]
+    >;
+  }
 
-  export let on = false;
+  let {
+    on = $bindable(false),
+    onToggle,
+    onToggleOn,
+    onToggleOff,
+    children,
+  }: Props = $props();
 
   function toggle() {
     on = !on;
-    dispatch('toggle', on);
+    onToggle?.(on);
     if (on) {
-      dispatch('toggleOn');
+      onToggleOn?.();
     } else {
-      dispatch('toggleOff');
+      onToggleOff?.();
     }
   }
   function toggleOn() {
     on = true;
-    dispatch('toggle', on);
-    dispatch('toggleOn');
+    onToggle?.(on);
+    onToggleOn?.();
   }
   function toggleOff() {
     on = false;
-    dispatch('toggle', on);
-    dispatch('toggleOff');
+    onToggle?.(on);
+    onToggleOff?.();
   }
 </script>
 
-<slot {on} {toggle} {toggleOn} {toggleOff} />
+{@render children?.({ on, toggle, toggleOn, toggleOff })}

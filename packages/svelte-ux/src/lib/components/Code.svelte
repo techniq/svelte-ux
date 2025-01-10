@@ -5,20 +5,30 @@
   import { cls } from '../utils/styles.js';
   import CopyButton from './CopyButton.svelte';
 
-  export let source: string | null = null;
-  export let language = 'svelte';
-  export let highlightedSource = source
-    ? Prism.highlight(source, Prism.languages[language] ?? Prism.languages.text, language)
-    : '';
+  interface Props {
+    source?: string | null;
+    language?: string;
+    highlightedSource?: string;
+    classes?: {
+      root?: string;
+      pre?: string;
+      code?: string;
+    };
+    class?: string;
+  }
 
-  export let classes: {
-    root?: string;
-    pre?: string;
-    code?: string;
-  } = {};
+  let {
+    source,
+    language = 'svelte',
+    highlightedSource = source
+      ? Prism.highlight(source, Prism.languages[language] ?? Prism.languages.text, language)
+      : '',
+    classes = {},
+    class: className,
+  }: Props = $props();
 </script>
 
-<div class={cls('Code', 'rounded', 'overflow-auto', classes.root, $$props.class)}>
+<div class={cls('Code', 'rounded', 'overflow-auto', classes.root, className)}>
   {#if source}
     <div class="relative">
       <pre

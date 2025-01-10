@@ -7,7 +7,11 @@
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
 
-  export let gooeyBlur = 5;
+  interface Props {
+    gooeyBlur?: number;
+  }
+
+  let { gooeyBlur = $bindable(5) }: Props = $props();
 
   const indexTimer = timerStore({
     initial: 0,

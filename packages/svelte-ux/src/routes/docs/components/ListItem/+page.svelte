@@ -4,7 +4,7 @@
   import { Button, Checkbox, ListItem, Radio, cls } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let selectedId = 1;
+  let selectedId = $state(1);
   const choices = [
     {
       id: 1,
@@ -71,9 +71,11 @@
 
 <Preview>
   <ListItem title="Title">
-    <div slot="actions">
-      <Button icon={mdiChevronRight} class="p-2 text-surface-content/50" />
-    </div>
+    {#snippet actions()}
+        <div >
+        <Button icon={mdiChevronRight} class="p-2 text-surface-content/50" />
+      </div>
+      {/snippet}
   </ListItem>
 </Preview>
 
@@ -105,16 +107,18 @@
       <ListItem
         title={choice.name}
         subheading={choice.description}
-        on:click={() => (selectedId = choice.id)}
+        onclick={() => (selectedId = choice.id)}
         class={cls(
           'cursor-pointer',
           'hover:bg-primary/5',
           selectedId == choice.id ? 'bg-primary/5' : ''
         )}
       >
-        <div slot="avatar" class="contents">
-          <Radio checked={selectedId === choice.id} />
-        </div>
+        {#snippet avatar()}
+                <div  class="contents">
+            <Radio checked={selectedId === choice.id} />
+          </div>
+              {/snippet}
       </ListItem>
     {/each}
   </div>
@@ -131,7 +135,7 @@
         <ListItem
           title={choice.name}
           subheading={choice.description}
-          on:click={() => (selectedId = choice.id)}
+          onclick={() => (selectedId = choice.id)}
           class={cls(
             'px-8 py-4',
             'cursor-pointer ring ring-inset ring-primary transition-shadow duration-100',
@@ -154,7 +158,7 @@
         <ListItem
           title={choice.name}
           subheading={choice.description}
-          on:click={() => (selectedId = choice.id)}
+          onclick={() => (selectedId = choice.id)}
           class={cls(
             'px-8 py-4',
             'cursor-pointer transition-shadow duration-100',
@@ -164,9 +168,11 @@
           noBackground
           noShadow
         >
-          <div slot="actions">
-            <Checkbox circle dense checked={selectedId == choice.id} />
-          </div>
+          {#snippet actions()}
+                    <div >
+              <Checkbox circle checked={selectedId == choice.id} />
+            </div>
+                  {/snippet}
         </ListItem>
       </div>
     {/each}

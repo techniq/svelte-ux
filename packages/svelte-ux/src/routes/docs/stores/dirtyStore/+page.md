@@ -25,5 +25,5 @@
 <Preview>
   <TextField bind:value={$value} />
   <div>isDirty: {$isDirty}</div>
-  <Button on:click={() => isDirty.reset()}>Reset</Button>
+  <Button onclick={() => isDirty.reset()}>Reset</Button>
 </Preview>

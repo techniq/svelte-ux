@@ -2,8 +2,8 @@
   import { Button, Checkbox, SectionDivider } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let checked = true;
-  let group = [2];
+  let checked = $state(true);
+  let group = $state([2]);
 </script>
 
 <h1>Examples</h1>
@@ -20,8 +20,8 @@
 <Preview>
   <Checkbox bind:checked />
   <div class="text-sm">
-    set: <Button size="sm" on:click={() => (checked = true)}>true</Button>
-    <Button size="sm" on:click={() => (checked = false)}>false</Button>
+    set: <Button size="sm" onclick={() => (checked = true)}>true</Button>
+    <Button size="sm" onclick={() => (checked = false)}>false</Button>
   </div>
 </Preview>
 
@@ -34,8 +34,8 @@
   <Checkbox bind:group value={4} disabled>Four (disabled)</Checkbox>
   <div>{JSON.stringify(group)}</div>
   <div class="text-sm">
-    <Button size="sm" on:click={() => (group = [])}>clear</Button>
-    <Button size="sm" on:click={() => (group = [1, 2, 3, 4])}>select all</Button>
+    <Button size="sm" onclick={() => (group = [])}>clear</Button>
+    <Button size="sm" onclick={() => (group = [1, 2, 3, 4])}>select all</Button>
   </div>
 </Preview>
 

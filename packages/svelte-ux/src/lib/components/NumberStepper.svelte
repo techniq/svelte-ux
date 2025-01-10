@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { mdiMinus, mdiPlus } from '@mdi/js';
 
   import Button from './Button.svelte';
@@ -8,19 +7,32 @@
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
   import { step as stepUtil } from '../utils/number.js';
+  import type { ComponentProps } from 'svelte';
 
-  export let value: number = 0;
-  export let min: number | undefined = undefined;
-  export let max: number | undefined = undefined;
-  export let step = 1;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    value?: number;
+    min?: number;
+    max?: number;
+    step?: number;
+    class?: string;
+    onChange?: (value: number) => void;
+  }
+
+  let {
+    value = $bindable(0),
+    min,
+    max,
+    step = 1,
+    class: className,
+    onChange,
+    ...restProps
+  }: Props & Omit<ComponentProps<typeof TextField>, keyof Props> = $props();
 
   const settingsClasses = getComponentClasses('NumberStepper');
 
-  const dispatch = createEventDispatcher();
-
-  $: dispatch('change', { value });
+  $effect(() => {
+    onChange?.(value);
+  });
 </script>
 
 <TextField
@@ -32,22 +44,26 @@
   align="center"
   class={cls('NumberStepper w-24', settingsClasses.root, className)}
   actions={(node) => [selectOnFocus(node)]}
-  {...$$restProps}
+  {...restProps}
 >
-  <div slot="prepend">
-    <Button
-      icon={mdiMinus}
-      on:click={() => (value = stepUtil(value, -step))}
-      size="sm"
-      disabled={min != null && value <= min}
-    />
-  </div>
-  <div slot="append">
-    <Button
-      icon={mdiPlus}
-      on:click={() => (value = stepUtil(value, step))}
-      size="sm"
-      disabled={max != null && value >= max}
-    />
-  </div>
+  {#snippet prepend()}
+    <div>
+      <Button
+        icon={mdiMinus}
+        onclick={() => (value = stepUtil(value, -step))}
+        size="sm"
+        disabled={min != null && value <= min}
+      />
+    </div>
+  {/snippet}
+  {#snippet append()}
+    <div>
+      <Button
+        icon={mdiPlus}
+        onclick={() => (value = stepUtil(value, step))}
+        size="sm"
+        disabled={max != null && value >= max}
+      />
+    </div>
+  {/snippet}
 </TextField>

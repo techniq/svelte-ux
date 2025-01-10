@@ -1,13 +1,27 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { cls } from '../utils/styles.js';
 
-  // keys
-  export let control = false;
-  export let option = false;
-  export let shift = false;
-  export let command = false;
+  interface Props {
+    // keys
+    control?: boolean;
+    option?: boolean;
+    shift?: boolean;
+    command?: boolean;
+    variant?: 'filled' | 'none';
+    class?: string;
+    children?: Snippet;
+  }
 
-  export let variant: 'filled' | 'none' = 'filled';
+  let {
+    control = false,
+    option = false,
+    shift = false,
+    command = false,
+    variant = 'filled',
+    class: className,
+    children,
+  }: Props = $props();
 </script>
 
 <kbd
@@ -15,7 +29,7 @@
     'font-sans inline-flex gap-1',
     variant === 'filled' &&
       'border border-b-2 text-surface-content bg-surface-200 rounded py-1 px-1',
-    $$props.class
+    className
   )}
 >
   {#if control}
@@ -34,5 +48,5 @@
     <abbr title="Command" class="no-underline">⌘</abbr>
   {/if}
 
-  <slot />
+  {@render children?.()}
 </kbd>

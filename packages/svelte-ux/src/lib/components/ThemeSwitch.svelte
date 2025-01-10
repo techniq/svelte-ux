@@ -14,14 +14,18 @@
 
   const { icon: iconClasses, ...otherClasses } = getComponentClasses('ThemeSwitch');
 
-  export let classes: {
-    icon?: string;
-  } & ComponentProps<Switch>['classes'] = {};
+  interface Props {
+    classes?: {
+      icon?: string;
+    } & ComponentProps<typeof Switch>['classes'];
+  }
+
+  let { classes = {}, ...restProps }: Props & ComponentProps<typeof Switch> = $props();
 </script>
 
 <Switch
   checked={$currentTheme.dark}
-  on:change={(e) => {
+  onchange={(e) => {
     // @ts-expect-error: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
     let newTheme = e.target?.checked ? 'dark' : 'light';
     currentTheme.setTheme(newTheme);
@@ -34,7 +38,7 @@
     otherClasses,
     classes
   )}
-  {...$$restProps}
+  {...restProps}
 >
   <div class="grid grid-cols-1 grid-rows-1">
     <Icon

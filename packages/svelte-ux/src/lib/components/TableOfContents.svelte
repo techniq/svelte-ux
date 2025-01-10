@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy, onMount } from 'svelte';
+  import {
+    onDestroy,
+    onMount,
+    type ComponentProps,
+    type Snippet,
+  } from 'svelte';
   import { mdiCircleSmall } from '@mdi/js';
   import { BROWSER } from 'esm-env';
 
@@ -9,23 +14,34 @@
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
 
-  export let element = 'main';
-  export let scrollContainer = BROWSER ? window : null;
-  export let scrollOffset = 0;
-  export let maxDepth = 6;
-  export let icon = mdiCircleSmall;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    element?: string;
+    scrollContainer?: any;
+    scrollOffset?: number;
+    maxDepth?: number;
+    icon?: any;
+    class?: string;
+    onNodeClick?: (value: (typeof nodes)[number]) => void;
+    children?: Snippet<[{ node: TreeNode; activeHeadingId: string }]>;
+  }
+
+  let {
+    element = 'main',
+    scrollContainer = BROWSER ? window : null,
+    scrollOffset = 0,
+    maxDepth = 6,
+    icon = mdiCircleSmall,
+    class: className,
+    onNodeClick,
+    children: childrenRender,
+    ...restProps
+  }: Props & Omit<Omit<ComponentProps<typeof TreeList>, 'nodes'>, keyof Props> = $props();
 
   type HeadingNode = { id: string; name: string; level: number; element: HTMLElement };
 
-  const dispatch = createEventDispatcher<{
-    nodeClick: (typeof nodes)[number];
-  }>();
-
-  let activeHeadingId = '';
+  let activeHeadingId = $state('');
   let headings: HeadingNode[] = [];
-  let nodes: TreeNode[] = [];
+  let nodes: TreeNode[] = $state([]);
 
   const settingsClasses = getComponentClasses('TableOfContents');
 
@@ -66,24 +82,27 @@
 <TreeList
   {nodes}
   classes={{ li: (node) => cls(node.level === 1 ? 'mb-2' : node.level > 2 ? 'ml-3' : '') }}
-  {...$$restProps}
+  {...restProps}
   class={cls('TableOfContents', settingsClasses.root, className)}
-  let:node
 >
-  <slot {node} {activeHeadingId}>
-    <a
-      href="#{node.id}"
-      class={cls(
-        'flex gap-1 px-2 rounded-lg hover:bg-surface-content/5 ',
-        node.level === 1 ? 'font-semibold' : 'text-sm',
-        node.id && node.id === activeHeadingId && 'bg-surface-content/5'
-      )}
-      on:click={() => dispatch('nodeClick', node)}
-    >
-      {#if node.level > 1}
-        <Icon data={icon} class="-mx-1 text-surface-content/30" />
-      {/if}
-      {@html node.name}
-    </a>
-  </slot>
+  {#snippet children({ node })}
+    {#if childrenRender}
+      {@render childrenRender({ node, activeHeadingId })}
+    {:else}
+      <a
+        href="#{node.id}"
+        class={cls(
+          'flex gap-1 px-2 rounded-lg hover:bg-surface-content/5 ',
+          node.level === 1 ? 'font-semibold' : 'text-sm',
+          node.id && node.id === activeHeadingId && 'bg-surface-content/5'
+        )}
+        onclick={() => onNodeClick?.(node)}
+      >
+        {#if node.level > 1}
+          <Icon data={icon} class="-mx-1 text-surface-content/30" />
+        {/if}
+        {@html node.name}
+      </a>
+    {/if}
+  {/snippet}
 </TreeList>

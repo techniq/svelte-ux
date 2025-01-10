@@ -1,17 +1,31 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+  import type { HTMLButtonAttributes } from 'svelte/elements';
   import { slide } from 'svelte/transition';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let selected: boolean = false;
-  export let placement: 'top' | 'bottom' | 'left' | 'right' = 'top';
+  interface Props {
+    selected?: boolean;
+    placement?: 'top' | 'bottom' | 'left' | 'right';
+    classes?: {
+      root?: string;
+    };
+    class?: string;
+    onclick?: HTMLButtonAttributes['onclick'];
+    children?: Snippet;
+  }
 
-  $: vertical = placement === 'left' || placement === 'right';
-
-  export let classes: {
-    root?: string;
-  } = {};
+  let {
+    selected = false,
+    placement = 'top',
+    classes = {},
+    class: className,
+    onclick,
+    children,
+  }: Props = $props();
   const settingsClasses = getComponentClasses('Tab');
+  let vertical = $derived(placement === 'left' || placement === 'right');
 </script>
 
 <button
@@ -31,10 +45,10 @@
       : 'bg-surface-200 text-surface-content/50 hover:text-surface-content hover:bg-surface-100',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
-  on:click
+  {onclick}
   transition:slide={{ axis: vertical ? 'y' : 'x' }}
 >
-  <slot />
+  {@render children?.()}
 </button>

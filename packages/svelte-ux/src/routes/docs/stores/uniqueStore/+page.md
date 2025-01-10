@@ -31,7 +31,7 @@ const store = uniqueStore();
 <Preview>
 	{#each data as d}
 		<div>
-			<Checkbox checked={$selected.has(d.id)} on:change={() => selected.toggle(d.id)}>
+			<Checkbox checked={$selected.has(d.id)} onchange={() => selected.toggle(d.id)}>
 				{d.id}
 			</Checkbox>
 		</div>

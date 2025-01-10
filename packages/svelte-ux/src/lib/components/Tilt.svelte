@@ -1,25 +1,35 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { cls } from '../utils/styles.js';
   import { scaleLinear } from 'd3-scale';
   import { getComponentClasses } from './theme.js';
 
-  export let maxRotation = 20;
-  export let setBrightness = false;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    maxRotation?: number;
+    setBrightness?: boolean;
+    class?: string;
+    children?: Snippet;
+  }
+
+  let {
+    maxRotation = 20,
+    setBrightness = false,
+    class: className,
+    children,
+  }: Props = $props();
 
   const settingsClasses = getComponentClasses('Tilt');
 
-  let width = 0;
-  let height = 0;
+  let width = $state(0);
+  let height = $state(0);
 
-  let rotateX = 0;
-  let rotateY = 0;
-  let brightness = 1;
+  let rotateX = $state(0);
+  let rotateY = $state(0);
+  let brightness = $state(1);
 
-  $: scaleX = scaleLinear().domain([0, height]).range([-maxRotation, maxRotation]);
-  $: scaleY = scaleLinear().domain([0, width]).range([maxRotation, -maxRotation]);
-  $: scaleBrightness = scaleLinear().domain([0, height]).range([2.0, 1.0]);
+  let scaleX = $derived(scaleLinear().domain([0, height]).range([-maxRotation, maxRotation]));
+  let scaleY = $derived(scaleLinear().domain([0, width]).range([maxRotation, -maxRotation]));
+  let scaleBrightness = $derived(scaleLinear().domain([0, height]).range([2.0, 1.0]));
 
   function onMouseMove(e: MouseEvent) {
     const mouseX = e.offsetX;
@@ -39,7 +49,7 @@
   }
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   style:--rotateX="{rotateX}deg"
   style:--rotateY="{rotateY}deg"
@@ -53,8 +63,8 @@
   )}
   bind:clientWidth={width}
   bind:clientHeight={height}
-  on:mousemove={onMouseMove}
-  on:mouseleave={onMouseLeave}
+  onmousemove={onMouseMove}
+  onmouseleave={onMouseLeave}
 >
-  <slot />
+  {@render children?.()}
 </div>

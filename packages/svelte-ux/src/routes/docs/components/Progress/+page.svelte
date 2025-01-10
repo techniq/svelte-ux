@@ -2,7 +2,7 @@
   import { Progress, cls } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = 50;
+  let value = $state(50);
 </script>
 
 <h1>Examples</h1>

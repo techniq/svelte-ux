@@ -12,7 +12,9 @@
 <Preview>
   {#each Array(5) as _, i}
     <ExpansionPanel>
-      <div slot="trigger" class="flex-1 p-3">Item {i + 1}</div>
+      {#snippet trigger()}
+            <div  class="flex-1 p-3">Item {i + 1}</div>
+          {/snippet}
       <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
         omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
@@ -27,11 +29,15 @@
 <Preview>
   {#each Array(5) as _, i}
     <ExpansionPanel classes={{ toggle: 'bg-surface-200 border-t' }}>
-      <div slot="trigger" class="flex-1 p-3">Item {i + 1}</div>
-      <div slot="actions" class="p-2">
-        <Button>Action 1</Button>
-        <Button>Action 2</Button>
-      </div>
+      {#snippet trigger()}
+            <div  class="flex-1 p-3">Item {i + 1}</div>
+          {/snippet}
+      {#snippet actions()}
+            <div  class="p-2">
+          <Button>Action 1</Button>
+          <Button>Action 2</Button>
+        </div>
+          {/snippet}
       <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
         omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
@@ -46,7 +52,9 @@
 <Preview>
   {#each Array(5) as _, i}
     <ExpansionPanel disabled={i % 2 > 0}>
-      <div slot="trigger" class="flex-1 p-3">Item {i + 1}</div>
+      {#snippet trigger()}
+            <div  class="flex-1 p-3">Item {i + 1}</div>
+          {/snippet}
       <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
         omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
@@ -61,15 +69,17 @@
 <Preview>
   {#each Array(5) as _, i}
     <ExpansionPanel>
-      <ListItem
-        slot="trigger"
-        title="Item {i + 1}"
-        subheading="List Item"
-        icon={mdiAccount}
-        avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
-        class="flex-1"
-        noShadow
-      />
+      {#snippet trigger()}
+            <ListItem
+          
+          title="Item {i + 1}"
+          subheading="List Item"
+          icon={mdiAccount}
+          avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
+          class="flex-1"
+          noShadow
+        />
+          {/snippet}
       <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
         omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
@@ -85,15 +95,17 @@
 
 <Preview>
   <ExpansionPanel>
-    <ListItem
-      slot="trigger"
-      title="Item 1"
-      subheading="Expansion Panel"
-      icon={mdiAccount}
-      avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
-      class="flex-1"
-      noShadow
-    />
+    {#snippet trigger()}
+        <ListItem
+        
+        title="Item 1"
+        subheading="Expansion Panel"
+        icon={mdiAccount}
+        avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
+        class="flex-1"
+        noShadow
+      />
+      {/snippet}
     <div>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
       omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
@@ -107,15 +119,17 @@
     avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
   <ExpansionPanel>
-    <ListItem
-      slot="trigger"
-      title="Item 3"
-      subheading="Expansion Panel"
-      icon={mdiAccount}
-      avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
-      class="flex-1"
-      noShadow
-    />
+    {#snippet trigger()}
+        <ListItem
+        
+        title="Item 3"
+        subheading="Expansion Panel"
+        icon={mdiAccount}
+        avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
+        class="flex-1"
+        noShadow
+      />
+      {/snippet}
     <div>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
       omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
@@ -136,15 +150,17 @@
     avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
   <ExpansionPanel>
-    <ListItem
-      slot="trigger"
-      title="Item 2"
-      subheading="Expansion Panel"
-      icon={mdiAccount}
-      avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
-      class="flex-1"
-      noShadow
-    />
+    {#snippet trigger()}
+        <ListItem
+        
+        title="Item 2"
+        subheading="Expansion Panel"
+        icon={mdiAccount}
+        avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
+        class="flex-1"
+        noShadow
+      />
+      {/snippet}
     <div>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
       omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!

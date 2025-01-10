@@ -34,7 +34,7 @@
 <h2>Label</h2>
 
 <Preview>
-  <MenuButton label="View" {options} />
+  <MenuButton {options} />
 </Preview>
 
 <h2>Value</h2>
@@ -59,13 +59,15 @@
 
 <Preview>
   <MenuButton options={optionsWithIcons}>
-    <svelte:fragment slot="selection" let:value>
-      {#if value}
-        <Icon data={value?.icon ?? mdiChevronDown} /> {value.label}
-      {:else}
-        No selection
-      {/if}
-    </svelte:fragment>
+    {#snippet selection({ value })}
+      
+        {#if value}
+          <Icon data={value?.icon ?? mdiChevronDown} /> {value.label}
+        {:else}
+          No selection
+        {/if}
+      
+      {/snippet}
   </MenuButton>
 </Preview>
 
@@ -73,9 +75,11 @@
 
 <Preview>
   <MenuButton options={optionsWithIcons} menuIcon={null}>
-    <svelte:fragment slot="selection" let:value>
-      <Icon data={value?.icon ?? mdiChevronDown} />
-    </svelte:fragment>
+    {#snippet selection({ value })}
+      
+        <Icon data={value?.icon ?? mdiChevronDown} />
+      
+      {/snippet}
   </MenuButton>
 </Preview>
 
@@ -109,38 +113,42 @@
   <MenuButton
     {options}
     menuProps={{ placement: 'bottom-start', explicitClose: true }}
-    let:options
-    let:setValue
-    let:close
+    
+    
+    
   >
-    <div class="p-2">
-      <TextField icon={mdiMagnify} placeholder="Search" />
-    </div>
-    <menu>
-      {#each options as option}
-        <MenuItem
-          on:click={() => {
-            setValue(option.value);
-            close();
-          }}
-        >
-          {option.label}
-        </MenuItem>
-      {/each}
-    </menu>
-  </MenuButton>
+    {#snippet children({ options, setValue, close })}
+        <div class="p-2">
+        <TextField icon={mdiMagnify} placeholder="Search" />
+      </div>
+      <menu>
+        {#each options as option}
+          <MenuItem
+            onclick={() => {
+              setValue(option.value);
+              close();
+            }}
+          >
+            {option.label}
+          </MenuItem>
+        {/each}
+      </menu>
+          {/snippet}
+    </MenuButton>
 </Preview>
 
 <h2>options slot</h2>
 
 <Preview>
-  <MenuButton {options} let:options let:setValue>
-    <menu class="w-24">
-      {#each options as option}
-        <MenuItem on:click={() => setValue(option.value)}>
-          {option.label}
-        </MenuItem>
-      {/each}
-    </menu>
-  </MenuButton>
+  <MenuButton {options}  >
+    {#snippet children({ options, setValue })}
+        <menu class="w-24">
+        {#each options as option}
+          <MenuItem onclick={() => setValue(option.value)}>
+            {option.label}
+          </MenuItem>
+        {/each}
+      </menu>
+          {/snippet}
+    </MenuButton>
 </Preview>

@@ -1,21 +1,33 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { spring } from 'svelte/motion';
   import type { FormatNumberStyle } from '../utils/format.js';
   import { getSettings } from './settings.js';
 
   type SpringOptions = Parameters<typeof spring<number | null>>[1];
 
-  export let value: number | null;
-  export let format: FormatNumberStyle = 'none';
-  export let options: SpringOptions = undefined;
-  export let disabled = false;
+  interface Props {
+    value: number | null;
+    format?: FormatNumberStyle;
+    options?: SpringOptions;
+    disabled?: boolean;
+    children?: Snippet<[{ value: number | null }]>;
+  }
+
+  let { value, format = 'none', options, disabled = false, children }: Props = $props();
 
   const { format: formatUtil } = getSettings();
   const springValue = spring(value, options);
-  $: $springValue = value ?? 0;
-  $: displayValue = disabled || value == null ? value : $springValue;
+
+  $effect(() => {
+    $springValue = value ?? 0;
+  });
+
+  let displayValue = $derived(disabled || value == null ? value : $springValue);
 </script>
 
-<slot value={displayValue}>
+{#if children}
+  {@render children({ value: displayValue })}
+{:else}
   {$formatUtil(displayValue, format)}
-</slot>
+{/if}

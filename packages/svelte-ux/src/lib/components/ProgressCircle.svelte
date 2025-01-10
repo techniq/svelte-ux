@@ -1,29 +1,46 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+  import type { SvelteHTMLElements } from 'svelte/elements';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let value: number | null = null;
-  export let rotate = 0;
-  export let size = 40;
-  export let width = 4;
-  export let track = false;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    value?: number | null;
+    rotate?: number;
+    size?: number;
+    width?: number;
+    track?: boolean;
+    class?: string;
+    style?: string;
+    children?: Snippet;
+  }
+
+  let {
+    value,
+    rotate = 0,
+    size = 40,
+    width = 4,
+    track = false,
+    class: className,
+    style,
+    children,
+    ...restProps
+  }: Props & Omit<SvelteHTMLElements["div"], keyof Props> = $props();
 
   const settingsClasses = getComponentClasses('ProgressCircle');
 
   const radius = 20;
 
-  $: indeterminate = value == null;
-  $: circumference = 2 * Math.PI * radius;
-  $: strokeDashArray = Math.round(circumference * 1000) / 1000;
-  $: strokeDashOffset = ((100 - (value ?? 0)) / 100) * circumference + 'px';
-  $: viewBoxSize = radius / (1 - width / size);
-  $: strokeWidth = (width / size) * viewBoxSize * 2;
+  let indeterminate = $derived(value == null);
+  let circumference = $derived(2 * Math.PI * radius);
+  let strokeDashArray = $derived(Math.round(circumference * 1000) / 1000);
+  let strokeDashOffset = $derived(((100 - (value ?? 0)) / 100) * circumference + 'px');
+  let viewBoxSize = $derived(radius / (1 - width / size));
+  let strokeWidth = $derived((width / size) * viewBoxSize * 2);
 </script>
 
 <div
-  {...$$props}
+  {...restProps}
   class={cls(
     'ProgressCircular',
     'relative inline-flex justify-center items-center align-middle',
@@ -31,7 +48,7 @@
     className
   )}
   class:indeterminate
-  style="height: {size}px; width: {size}px; {$$props.style}"
+  style="height: {size}px; width: {size}px; {style}"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +83,7 @@
     />
   </svg>
   <div class="info">
-    <slot />
+    {@render children?.()}
   </div>
 </div>
 

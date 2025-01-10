@@ -8,13 +8,15 @@
 <h2>Basic</h2>
 
 <Preview>
-  <ScrollContainer class="scroll-mt-6 scroll-mb-6" let:scrollIntoView>
-    <Button variant="fill" color="primary" on:click={() => scrollIntoView({ block: 'end' })}
-      >Scroll to bottom</Button
-    >
-    {#each { length: 100 } as _, i}
-      <div>Item: {i + 1}</div>
-    {/each}
-    <Button variant="fill" color="primary" on:click={() => scrollIntoView()}>Scroll to top</Button>
+  <ScrollContainer class="scroll-mt-6 scroll-mb-6">
+    {#snippet children({ scrollIntoView })}
+      <Button variant="fill" color="primary" onclick={() => scrollIntoView({ block: 'end' })}
+        >Scroll to bottom</Button
+      >
+      {#each { length: 100 } as _, i}
+        <div>Item: {i + 1}</div>
+      {/each}
+      <Button variant="fill" color="primary" onclick={() => scrollIntoView()}>Scroll to top</Button>
+    {/snippet}
   </ScrollContainer>
 </Preview>

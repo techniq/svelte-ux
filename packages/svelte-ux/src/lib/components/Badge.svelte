@@ -1,27 +1,41 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { cls } from '../utils/styles.js';
   import { getComponentClasses } from './theme.js';
 
-  export let value = $$slots.value ? 1 : 0;
-  export let small = false;
-  export let circle = false;
-  export let dot = false;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    value?: number | Snippet;
+    small?: boolean;
+    circle?: boolean;
+    dot?: boolean;
+    class?: string;
+    placement?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+    children?: Snippet;
+  }
 
-  export let placement: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' = 'top-right';
+  let {
+    value,
+    small = false,
+    circle = false,
+    dot = false,
+    class: className,
+    placement = 'top-right',
+    children,
+  }: Props = $props();
+
+  let valueIsSnippet = $derived(typeof value === 'function');
 
   const settingsClasses = getComponentClasses('Badge');
 </script>
 
 <div class="inline-grid grid-stack">
-  <slot />
+  {@render children?.()}
   <div
     class={cls(
       'Badge',
       'rounded-full flex items-center justify-center transform transition-transform',
 
-      !$$slots.value && 'bg-primary text-primary-content',
+      !valueIsSnippet && 'bg-primary text-primary-content',
 
       {
         'self-start': placement.startsWith('top'),
@@ -77,10 +91,11 @@
       className
     )}
   >
-    <slot name="value">
-      {#if !dot}
-        {value || ''}
-      {/if}
-    </slot>
+    {#if valueIsSnippet}
+      {/* @ts-ignore */ null}
+      {@render value()}
+    {:else if !dot}
+      {value || ''}
+    {/if}
   </div>
 </div>

@@ -1,11 +1,18 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { TableOfContents } from 'svelte-ux';
+  
+  interface Props {
+    children?: Snippet;
+  }
+
+  let { children }: Props = $props();
 </script>
 
 <div class="grid grid-cols-[1fr,auto] gap-6 pt-2 pb-4">
   <div class="bg-surface-100 p-4 m-2 rounded shadow-lg border overflow-auto">
     <div class="prose max-w-none">
-      <slot />
+      {@render children?.()}
     </div>
   </div>
 

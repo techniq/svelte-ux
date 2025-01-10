@@ -14,12 +14,12 @@
 
   const { locale, format } = settings({});
 
-  let value = 1234.56;
-  let style: FormatNumberStyle = 'decimal';
-  let currency: Intl.NumberFormatOptions['currency'] | undefined = 'USD';
-  let notation: Intl.NumberFormatOptions['notation'] = 'standard';
+  let value = $state(1234.56);
+  let style: FormatNumberStyle = $state('decimal');
+  let currency: Intl.NumberFormatOptions['currency'] | undefined = $state('USD');
+  let notation: Intl.NumberFormatOptions['notation'] = $state('standard');
 
-  let myDate = new Date('1982-03-30T07:11:00');
+  let myDate = $state(new Date('1982-03-30T07:11:00'));
 
   const locales = ['en', 'de', 'fr', 'it', 'es', 'jp', 'zh'];
 </script>
@@ -84,7 +84,7 @@
 <h2>Playground dates</h2>
 
 <div class="grid grid-cols-xs gap-2 mb-2">
-  <DatePickerField format="dd/MM/yyyy" label="date" bind:value={myDate}></DatePickerField>
+  <DatePickerField label="date" bind:value={myDate}></DatePickerField>
 
   <MenuField
     label="locale"

@@ -1,5 +1,5 @@
-<script lang="ts" context="module">
-  import { type ComponentProps, setContext, getContext } from 'svelte';
+<script lang="ts" module>
+  import { type ComponentProps, setContext, getContext, type Snippet } from 'svelte';
 
   type StepsContext = {
     vertical: boolean;
@@ -26,19 +26,23 @@
   type StepData = {
     label: string;
     content?: string;
-    icon?: ComponentProps<Icon>['data'];
+    icon?: ComponentProps<typeof Icon>['data'];
     completed?: boolean;
   };
 
-  export let data: StepData[] = [];
+  interface Props {
+    data?: StepData[];
+    /** Align vertically (default: horizontal) */
+    vertical?: boolean;
+    classes?: {
+      root?: string;
+      item?: ComponentProps<typeof Step>['classes'];
+    };
+    class?: string;
+    children?: Snippet<[{ data: StepData[] }]>;
+  }
 
-  /** Align vertically (default: horizontal) */
-  export let vertical: boolean = false;
-
-  export let classes: {
-    root?: string;
-    item?: ComponentProps<Step>['classes'];
-  } = {};
+  let { data = [], vertical = false, classes = {}, class: className, children }: Props = $props();
   const settingsClasses = getComponentClasses('Steps');
 
   setSteps({
@@ -53,14 +57,16 @@
     vertical ? 'grid-flow-row' : 'grid-flow-col',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
-  <slot {data}>
+  {#if children}
+    {@render children({ data })}
+  {:else}
     {#each data as item}
       <Step classes={classes.item} {...item}>
         {item.label}
       </Step>
     {/each}
-  </slot>
+  {/if}
 </ul>

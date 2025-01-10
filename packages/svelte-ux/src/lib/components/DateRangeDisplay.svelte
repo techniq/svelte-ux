@@ -1,34 +1,41 @@
 <script lang="ts">
-  import { PeriodType, getDateFuncsByPeriodType, type FormatDateOptions } from '../utils/date.js';
+  import { PeriodType, getDateFuncsByPeriodType } from '../utils/date.js';
   import type { DateRange } from '../utils/dateRange.js';
   import { getSettings } from './settings.js';
 
-  export let value: DateRange | null | undefined;
+  interface Props {
+    value?: DateRange | null;
+  }
+
+  let { value }: Props = $props();
 
   const { format: format_ux, localeSettings } = getSettings();
 
-  let showToValue = false;
-  $: if (value?.to) {
-    if (value?.from && value?.periodType) {
-      const { isSame } = getDateFuncsByPeriodType($localeSettings, value.periodType);
+  let showToValue = $state(false);
 
-      switch (value.periodType) {
-        case PeriodType.Day:
-        case PeriodType.Month:
-        case PeriodType.CalendarYear:
-        case PeriodType.FiscalYearOctober:
-          showToValue = !isSame(value.from, value.to);
-          break;
-        default:
-          // Always show "to" value for week and quarter
-          showToValue = true;
+  $effect(() => {
+    if (value?.to) {
+      if (value?.from && value?.periodType) {
+        const { isSame } = getDateFuncsByPeriodType($localeSettings, value.periodType);
+
+        switch (value.periodType) {
+          case PeriodType.Day:
+          case PeriodType.Month:
+          case PeriodType.CalendarYear:
+          case PeriodType.FiscalYearOctober:
+            showToValue = !isSame(value.from, value.to);
+            break;
+          default:
+            // Always show "to" value for week and quarter
+            showToValue = true;
+        }
+      } else {
+        showToValue = true;
       }
-    } else {
-      showToValue = true;
     }
-  }
+  });
 
-  const getPeriodType = (value: DateRange | null | undefined) => {
+  const getPeriodType = (value?: DateRange | null) => {
     let periodType = value?.periodType ?? PeriodType.Day;
     // Override periodTypes that show ranges for individual values
     switch (periodType) {

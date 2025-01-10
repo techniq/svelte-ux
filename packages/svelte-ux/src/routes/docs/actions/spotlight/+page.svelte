@@ -5,7 +5,7 @@
   import Preview from '$lib/components/Preview.svelte';
 
   const itemCount = 12;
-  $: items = Array.from({ length: itemCount }).map((_, i) => `Item ${i + 1}`);
+  let items = $derived(Array.from({ length: itemCount }).map((_, i) => `Item ${i + 1}`));
 </script>
 
 <h1>Usage</h1>
@@ -13,7 +13,7 @@
 <Code source={`import { spotlight } from 'svelte-ux';`} language="javascript" />
 
 <svelte:window
-  on:mousemove={(e) => {
+  onmousemove={(e) => {
     const body = window.document.body;
     body.style.setProperty('--x', e.clientX + 'px');
     body.style.setProperty('--y', e.clientY + 'px');

@@ -70,5 +70,5 @@
 <h2>With Alternate Notification</h2>
 
 <Preview>
-  <CopyButton value="Stop copying me!" on:click={() => alert('Copied!')} message={null} />
+  <CopyButton value="Stop copying me!" onClick={() => alert('Copied!')} message={null} />
 </Preview>

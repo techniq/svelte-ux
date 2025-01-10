@@ -4,7 +4,7 @@
 
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = 1;
+  let value = $state(1);
 </script>
 
 <h1>Examples</h1>
@@ -70,11 +70,13 @@
 <h2>Value slot</h2>
 
 <Preview>
-  <Badge {value} circle>
+  <Badge circle>
     <Button icon={mdiFilterVariant} variant="outline" class="p-3" />
-    <div slot="value" class="bg-success text-success-content rounded-full">
-      <Icon data={mdiPlus} />
-    </div>
+    {#snippet value()}
+      <div class="bg-success text-success-content rounded-full">
+        <Icon data={mdiPlus} />
+      </div>
+    {/snippet}
   </Badge>
 </Preview>
 

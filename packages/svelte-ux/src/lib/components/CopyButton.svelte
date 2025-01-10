@@ -5,33 +5,44 @@
   import Button from './Button.svelte';
   import { getComponentSettings } from './settings.js';
   import { slide } from 'svelte/transition';
-  import { createEventDispatcher } from 'svelte';
-  let className: string | undefined = undefined;
-  export { className as class };
-
-  const dispatch = createEventDispatcher<{ click: void }>();
+  import type { ComponentProps } from 'svelte';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('CopyButton');
 
-  export let value: string | (() => string);
-  export let message: string | null = 'Copied!';
-
-  let showMessage = false;
-  $: if (showMessage) {
-    setTimeout(() => (showMessage = false), 3000);
+  interface Props {
+    class?: string;
+    value: string | (() => string);
+    message?: string | null;
+    onClick?: () => void;
   }
 
-  $: restProps = { ...defaults, ...$$restProps };
+  let {
+    class: className,
+    value,
+    message = 'Copied!',
+    onClick,
+    ...rest
+  }: Props & Omit<ComponentProps<typeof Button>, keyof Props> = $props();
+
+  let showMessage = $state(false);
+
+  $effect(() => {
+    if (showMessage) {
+      setTimeout(() => (showMessage = false), 3000);
+    }
+  });
+
+  let restProps = $derived({ ...defaults, ...rest });
 </script>
 
 <Button
   icon={mdiContentCopy}
   {...restProps}
   class={cls('CopyButton', settingsClasses.root, className)}
-  on:click={() => {
+  onclick={() => {
     let copyValue = typeof value === 'function' ? value() : value;
     navigator.clipboard.writeText(copyValue);
-    dispatch('click');
+    onClick?.();
     if (message) {
       showMessage = true;
     }

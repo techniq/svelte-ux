@@ -4,7 +4,7 @@
   import { Button, Icon, Switch } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let checked: boolean | null = null;
+  let checked: boolean | null = $state(null);
 </script>
 
 <h1>Examples</h1>
@@ -21,7 +21,7 @@
 <h2>Label</h2>
 
 <Preview>
-  <!-- svelte-ignore a11y-label-has-associated-control -->
+  <!-- svelte-ignore a11y_label_has_associated_control -->
   <div class="grid gap-2">
     <label class="flex gap-2 items-center text-sm">
       Click me
@@ -38,17 +38,21 @@
 
 <Preview>
   <div class="grid gap-2">
-    <Switch let:checked>
-      {#if checked}
-        <Icon data={mdiCheck} class="text-primary" size=".8em" />
-      {/if}
+    <Switch>
+      {#snippet children({ checked })}
+        {#if checked}
+          <Icon data={mdiCheck} class="text-primary" size=".8em" />
+        {/if}
+      {/snippet}
     </Switch>
-    <Switch let:checked>
-      {#if checked}
-        <Icon data={mdiCheck} class="text-primary" size=".8em" />
-      {:else}
-        <Icon data={mdiClose} class="text-surface-content" size=".8em" />
-      {/if}
+    <Switch>
+      {#snippet children({ checked })}
+        {#if checked}
+          <Icon data={mdiCheck} class="text-primary" size=".8em" />
+        {:else}
+          <Icon data={mdiClose} class="text-surface-content" size=".8em" />
+        {/if}
+      {/snippet}
     </Switch>
   </div>
 </Preview>
@@ -69,7 +73,7 @@
 
 <Preview>
   <Switch bind:checked />
-  <Button on:click={() => (checked = null)} size="sm">reset</Button>
+  <Button onclick={() => (checked = null)} size="sm">reset</Button>
 </Preview>
 
 <h2>Size</h2>

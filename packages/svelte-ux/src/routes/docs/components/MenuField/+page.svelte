@@ -80,46 +80,52 @@
 <h2>explicitClose</h2>
 
 <Preview>
-  <MenuField {options} menuProps={{ explicitClose: true }} let:options let:setValue let:close>
-    <div class="p-2">
-      <TextField icon={mdiMagnify} placeholder="Search" />
-    </div>
-    <menu>
-      {#each options as option}
-        <MenuItem
-          on:click={() => {
-            setValue(option.value);
-            close();
-          }}
-        >
-          {option.label}
-        </MenuItem>
-      {/each}
-    </menu>
-  </MenuField>
+  <MenuField {options} menuProps={{ explicitClose: true }}   >
+    {#snippet children({ options, setValue, close })}
+        <div class="p-2">
+        <TextField icon={mdiMagnify} placeholder="Search" />
+      </div>
+      <menu>
+        {#each options as option}
+          <MenuItem
+            onclick={() => {
+              setValue(option.value);
+              close();
+            }}
+          >
+            {option.label}
+          </MenuItem>
+        {/each}
+      </menu>
+          {/snippet}
+    </MenuField>
 </Preview>
 
 <h2>options slot</h2>
 
 <Preview>
-  <MenuField {options} let:options let:setValue>
-    <menu>
-      {#each options as option}
-        <MenuItem on:click={() => setValue(option.value)}>
-          {option.label}
-        </MenuItem>
-      {/each}
-    </menu>
-  </MenuField>
+  <MenuField {options}  >
+    {#snippet children({ options, setValue })}
+        <menu>
+        {#each options as option}
+          <MenuItem onclick={() => setValue(option.value)}>
+            {option.label}
+          </MenuItem>
+        {/each}
+      </menu>
+          {/snippet}
+    </MenuField>
 </Preview>
 
 <h2>append slot</h2>
 
 <Preview>
   <MenuField {options}>
-    <div slot="append">
-      <Button icon={mdiRefresh} class="p-2 text-surface-content/50" />
-    </div>
+    {#snippet append()}
+        <div >
+        <Button icon={mdiRefresh} class="p-2 text-surface-content/50" />
+      </div>
+      {/snippet}
   </MenuField>
 </Preview>
 

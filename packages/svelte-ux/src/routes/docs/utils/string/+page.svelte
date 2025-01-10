@@ -4,8 +4,8 @@
   import Code from '$lib/components/Code.svelte';
 
   let str = 'This is very long text that will be truncated';
-  let totalChars = 20;
-  let endChars = 5;
+  let totalChars = $state(20);
+  let endChars = $state(5);
 </script>
 
 <h1>Usage</h1>

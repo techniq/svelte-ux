@@ -1,9 +1,13 @@
-<script lang="ts">
+<script lang="ts" generics="T">
+  import type { Snippet } from 'svelte';
   import type { Readable } from 'svelte/store';
 
-  type T = $$Generic;
+  interface Props {
+    store: Readable<T>;
+    children?: Snippet<[{ value: T }]>;
+  }
 
-  export let store: Readable<T>;
+  let { store, children }: Props = $props();
 </script>
 
-<slot value={$store} />
+{@render children?.({ value: $store })}

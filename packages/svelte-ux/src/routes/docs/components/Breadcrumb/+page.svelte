@@ -41,7 +41,9 @@
 
 <Preview>
   <Breadcrumb {items} class="gap-2">
-    <Icon slot="divider" path={mdiArrowRight} class="text-surface-content/25" />
+    {#snippet divider()}
+        <Icon  path={mdiArrowRight} class="text-surface-content/25" />
+      {/snippet}
   </Breadcrumb>
 </Preview>
 
@@ -51,10 +53,12 @@
 
 <Preview>
   <Breadcrumb items={labeledItems} class="gap-2">
-    <span slot="item" let:item>
-      <div class="text-surface-content/50 text-xs uppercase">{item.label}</div>
-      <div>{item.value}</div>
-    </span>
+    {#snippet item({ item })}
+        <span  >
+        <div class="text-surface-content/50 text-xs uppercase">{item.label}</div>
+        <div>{item.value}</div>
+      </span>
+      {/snippet}
   </Breadcrumb>
 </Preview>
 
@@ -64,12 +68,14 @@
 
 <Preview>
   <Breadcrumb items={labeledItems}>
-    <Button slot="item" let:item>
-      <div>
-        <div class="text-surface-content/50 text-xs uppercase">{item.label}</div>
-        <div>{item.value}</div>
-      </div>
-    </Button>
+    {#snippet item({ item })}
+        <Button  >
+        <div>
+          <div class="text-surface-content/50 text-xs uppercase">{item.label}</div>
+          <div>{item.value}</div>
+        </div>
+      </Button>
+      {/snippet}
   </Breadcrumb>
 </Preview>
 
@@ -77,11 +83,15 @@
 
 <Preview>
   <Breadcrumb items={labeledItems} class="gap-2">
-    <span slot="item" let:item>
-      <span class="text-surface-content/50 text-sm font-extrabold">{item.label}:</span>
-      <span class="text-surface-content/50 text-sm">{item.value}</span>
-    </span>
-    <DividerDot slot="divider" class="text-surface-content/50" />
+    {#snippet item({ item })}
+        <span  >
+        <span class="text-surface-content/50 text-sm font-extrabold">{item.label}:</span>
+        <span class="text-surface-content/50 text-sm">{item.value}</span>
+      </span>
+      {/snippet}
+    {#snippet divider()}
+        <DividerDot  class="text-surface-content/50" />
+      {/snippet}
   </Breadcrumb>
 </Preview>
 
@@ -120,7 +130,9 @@
 <Preview>
   <div class="w-[300px] border">
     <Breadcrumb items={['Example', 'of', 'really really really long text']} class="flex-nowrap">
-      <span slot="item" class="last:truncate" let:item title={item}>{item}</span>
+      {#snippet item({ item })}
+            <span  class="last:truncate"  title={item}>{item}</span>
+          {/snippet}
     </Breadcrumb>
   </div>
 </Preview>

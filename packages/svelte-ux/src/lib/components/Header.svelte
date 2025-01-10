@@ -1,19 +1,24 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { cls } from '../utils/styles.js';
   import Breadcrumb from './Breadcrumb.svelte';
   import { getComponentClasses } from './theme.js';
 
-  export let title: string | string[] | null = null;
-  export let subheading: string | string[] | null = null;
-  let className: string | undefined = undefined;
-  export { className as class };
+  interface Props {
+    title?: string | string[] | Snippet | null;
+    subheading?: string | string[] | Snippet | null;
+    class?: string;
+    classes?: {
+      root?: string;
+      container?: string;
+      title?: string;
+      subheading?: string;
+    };
+    avatar?: Snippet;
+    actions?: Snippet;
+  }
 
-  export let classes: {
-    root?: string;
-    container?: string;
-    title?: string;
-    subheading?: string;
-  } = {};
+  let { title, subheading, class: className, classes = {}, avatar, actions }: Props = $props();
 
   const settingsClasses = getComponentClasses('Header');
 </script>
@@ -21,32 +26,32 @@
 <div
   class={cls('Header', 'flex items-center gap-4', settingsClasses.root, classes.root, className)}
 >
-  <slot name="avatar" />
+  {@render avatar?.()}
 
   <div class={cls('flex-1', classes.container)}>
-    <slot name="title">
-      {#if title}
-        {#if Array.isArray(title)}
-          <Breadcrumb items={title} class="text-lg" />
-        {:else}
-          <div class={cls('text-lg', classes.title)}>{title}</div>
-        {/if}
+    {#if typeof title === 'function'}
+      {@render title()}
+    {:else if title}
+      {#if Array.isArray(title)}
+        <Breadcrumb items={title} class="text-lg" />
+      {:else}
+        <div class={cls('text-lg', classes.title)}>{title}</div>
       {/if}
-    </slot>
+    {/if}
 
-    <slot name="subheading">
-      {#if subheading}
-        {#if Array.isArray(subheading)}
-          <Breadcrumb
-            items={subheading}
-            class={cls('text-sm text-surface-content/50', classes.subheading)}
-          />
-        {:else}
-          <div class={cls('text-sm text-surface-content/50', classes.subheading)}>{subheading}</div>
-        {/if}
+    {#if typeof subheading === 'function'}
+      {@render subheading()}
+    {:else if subheading}
+      {#if Array.isArray(subheading)}
+        <Breadcrumb
+          items={subheading}
+          class={cls('text-sm text-surface-content/50', classes.subheading)}
+        />
+      {:else}
+        <div class={cls('text-sm text-surface-content/50', classes.subheading)}>{subheading}</div>
       {/if}
-    </slot>
+    {/if}
   </div>
 
-  <slot name="actions" />
+  {@render actions?.()}
 </div>

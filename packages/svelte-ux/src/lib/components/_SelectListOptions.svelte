@@ -2,30 +2,45 @@
   import { Logger } from '../utils/logger.js';
   import { getComponentClasses } from './theme.js';
   import { cls } from '../utils/styles.js';
+  import type { Snippet } from 'svelte';
 
   const logger = new Logger('SelectListOptions');
 
-  export let selectIndex: (index: number) => any;
-  export let onKeyDown: (x: KeyboardEvent) => void;
-  export let onKeyPress: (x: KeyboardEvent) => void;
-
-  export let open: boolean;
-  export let loading: boolean;
-  export let filteredOptions: any[];
-
-  export let searchText: string;
-
-  export let classes: {
-    root?: string;
-    option?: string;
-    selected?: string;
-    group?: string;
-    empty?: string;
-  } = {};
-
   const settingsClasses = getComponentClasses('SelectField');
 
-  export let menuOptionsEl: HTMLDivElement;
+  interface Props {
+    selectIndex: (index: number) => any;
+    onKeyDown: (x: KeyboardEvent) => void;
+    onKeyPress: (x: KeyboardEvent) => void;
+    open: boolean;
+    loading: boolean;
+    filteredOptions: any[];
+    searchText: string;
+    classes?: {
+      root?: string;
+      option?: string;
+      selected?: string;
+      group?: string;
+      empty?: string;
+    };
+    menuOptionsEl: HTMLDivElement;
+    option?: Snippet<[{ option: any; index: number }]>;
+    empty?: Snippet<[{ loading: boolean; searchText: string }]>;
+  }
+
+  let {
+    selectIndex,
+    onKeyDown,
+    onKeyPress,
+    open,
+    loading,
+    filteredOptions,
+    searchText,
+    classes = {},
+    menuOptionsEl = $bindable(),
+    option,
+    empty,
+  }: Props = $props();
 </script>
 
 <div
@@ -39,7 +54,8 @@
   )}
   class:opacity-50={loading}
   bind:this={menuOptionsEl}
-  on:click|stopPropagation={(e) => {
+  onclick={(e) => {
+    e.stopPropagation();
     logger.debug('options container clicked');
 
     if (e.target instanceof HTMLElement) {
@@ -66,18 +82,18 @@
       }
     }
   }}
-  on:keydown={(e) => {
+  onkeydown={(e) => {
     logger.debug('keydown: calling given onKeyDown...');
     onKeyDown(e);
   }}
-  on:keypress={(e) => {
+  onkeypress={(e) => {
     logger.debug('keypress: calling given onKeyPress...');
     onKeyPress(e);
   }}
 >
-  {#each filteredOptions ?? [] as option, index (JSON.stringify(option))}
+  {#each filteredOptions ?? [] as filteredOption, index (JSON.stringify(filteredOption))}
     {@const previousOption = filteredOptions[index - 1]}
-    {#if option.group && option.group !== previousOption?.group}
+    {#if filteredOption.group && filteredOption.group !== previousOption?.group}
       <div
         class={cls(
           'group-header text-xs leading-8 tracking-widest text-surface-content/50 px-2',
@@ -85,12 +101,12 @@
           classes.group
         )}
       >
-        {option.group}
+        {filteredOption.group}
       </div>
     {/if}
 
-    <slot name="option" {option} {index} />
+    {@render option?.({ option: filteredOption, index })}
   {:else}
-    <slot name="empty" {loading} {searchText} />
+    {@render empty?.({ loading, searchText })}
   {/each}
 </div>

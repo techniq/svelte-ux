@@ -1,13 +1,18 @@
-<script lang="ts">
-  type T = $$Generic;
+<script lang="ts" generics="T">
+  import type { Snippet } from 'svelte';
 
-  export let initial: T | null = null;
+  interface Props {
+    initial?: T | null;
+    children?: Snippet<[{ value?: T | null; set: (value: T) => void }]>;
+  }
 
-  let value = initial;
+  let { initial, children }: Props = $props();
+
+  let value = $state(initial);
 
   function set(newValue: T) {
     value = newValue;
   }
 </script>
 
-<slot {value} {set} />
+{@render children?.({ value, set })}

@@ -2,7 +2,7 @@
   import { RangeSlider } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = [25, 75];
+  let value = $state([25, 75]);
 </script>
 
 <h1>Examples</h1>

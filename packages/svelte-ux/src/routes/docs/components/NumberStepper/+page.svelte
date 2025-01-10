@@ -2,7 +2,7 @@
   import { NumberStepper } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let value = 10;
+  let value = $state(10);
 </script>
 
 <h1>Examples</h1>
@@ -23,7 +23,7 @@
 <h2>on:change</h2>
 
 <Preview>
-  <NumberStepper on:change={(e) => console.log(e.detail.value)} />
+  <NumberStepper onChange={(value) => console.log(value)} />
 </Preview>
 
 <h2>dense</h2>

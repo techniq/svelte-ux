@@ -5,9 +5,9 @@
   import { Button, Card, Collapse } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  let group: any = undefined;
+  let group: any = $state();
 
-  let controlledOpen = [false, true, false, false, false];
+  let controlledOpen = $state([false, true, false, false, false]);
 </script>
 
 <h1>Examples</h1>
@@ -59,7 +59,7 @@
     {/each}
   </Card>
   {#each Array(5) as _, i}
-    <Button on:click={() => (controlledOpen[i] = !controlledOpen[i])}>Toggle {i + 1}</Button>
+    <Button onclick={() => (controlledOpen[i] = !controlledOpen[i])}>Toggle {i + 1}</Button>
   {/each}
   <div></div>
 </Preview>
@@ -70,7 +70,9 @@
   <Card class="divide-y">
     {#each Array(5) as _, i}
       <Collapse>
-        <div slot="trigger" class="flex-1 px-3 py-3">Item {i + 1}</div>
+        {#snippet trigger()}
+          <div class="flex-1 px-3 py-3">Item {i + 1}</div>
+        {/snippet}
         <div class="px-3 pb-3 border-t">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
           omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
@@ -91,7 +93,9 @@
       popout
       class="bg-surface-100 elevation-1 border-t first:border-t-0 first:rounded-t last:rounded-b"
     >
-      <div slot="trigger" class="flex-1 px-3 py-3">Item {i + 1}</div>
+      {#snippet trigger()}
+        <div class="flex-1 px-3 py-3">Item {i + 1}</div>
+      {/snippet}
       <div class="px-3 pb-3 bg-surface-200 border-t">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
         omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!

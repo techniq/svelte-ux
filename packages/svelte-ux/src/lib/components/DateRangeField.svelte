@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentProps } from 'svelte';
+  import { type ComponentProps, type Snippet } from 'svelte';
   import { mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
 
   import Button from './Button.svelte';
@@ -13,9 +13,8 @@
   import { cls } from '../utils/styles.js';
   import { getComponentSettings, getSettings } from './settings.js';
 
-  const dispatch = createEventDispatcher();
   const { format, localeSettings } = getSettings();
-  const { classes: settingsClasses, defaults } = getComponentSettings('DateRangeField');
+  const { defaults } = getComponentSettings('DateRangeField');
 
   const _defaultValue: DateRangeType = {
     from: null,
@@ -23,48 +22,74 @@
     periodType: null,
   };
 
-  export let value: DateRangeType = _defaultValue;
-  export let stepper: boolean = false;
-  export let center: boolean = false;
-  export let periodTypes: PeriodType[] = [
-    PeriodType.Day,
-    PeriodType.Week,
-    PeriodType.BiWeek1,
-    // PeriodType.BiWeek2,
-    PeriodType.Month,
-    PeriodType.Quarter,
-    PeriodType.CalendarYear,
-    PeriodType.FiscalYearOctober,
-  ];
-  export let getPeriodTypePresets = getDateRangePresets;
+  interface Props {
+    value?: DateRangeType;
+    stepper?: boolean;
+    center?: boolean;
+    periodTypes?: PeriodType[];
+    getPeriodTypePresets?: typeof getDateRangePresets;
+    /**
+     * Dates to disable (not selectable)
+     */
+    disabledDates?: DisabledDate;
+    classes?: {
+      field?: ComponentProps<typeof Field>['classes'];
+      dialog?: ComponentProps<typeof Dialog>['classes'];
+    };
+    // Field props
+    label?: string | null;
+    error?: string;
+    hint?: string;
+    disabled?: boolean;
+    clearable?: boolean;
+    base?: boolean;
+    rounded?: boolean;
+    dense?: boolean;
+    icon?: string | null;
+    onChange?: (value?: DateRangeType) => void;
+    onClear?: () => void;
+    prepend?: Snippet;
+    append?: Snippet;
+  }
 
-  /**
-   * Dates to disable (not selectable)
-   */
-  export let disabledDates: DisabledDate | undefined = undefined;
+  let {
+    value = $bindable(_defaultValue),
+    stepper = false,
+    center = false,
+    periodTypes = [
+      PeriodType.Day,
+      PeriodType.Week,
+      PeriodType.BiWeek1,
+      // PeriodType.BiWeek2,
+      PeriodType.Month,
+      PeriodType.Quarter,
+      PeriodType.CalendarYear,
+      PeriodType.FiscalYearOctober,
+    ],
+    getPeriodTypePresets = getDateRangePresets,
+    disabledDates,
+    classes = {},
+    label,
+    error = '',
+    hint = '',
+    disabled = false,
+    clearable = false,
+    base = false,
+    rounded = false,
+    dense = false,
+    icon,
+    onChange,
+    onClear,
+    prepend: prependRender,
+    append: appendRender,
+    ...rest
+  }: Props & Omit<ComponentProps<typeof Field>, keyof Props> = $props();
 
-  export let classes: {
-    field?: ComponentProps<Field>['classes'];
-    dialog?: ComponentProps<Dialog>['classes'];
-  } = {};
+  let open: boolean = $state(false);
 
-  // Field props
-  export let label: string | null = null;
-  // export let value = '';
-  export let error = '';
-  export let hint = '';
-  export let disabled = false;
-  export let clearable = false;
-  export let base = false;
-  export let rounded = false;
-  export let dense = false;
-  export let icon: string | null = null;
+  let currentValue = $state(value);
 
-  let open: boolean = false;
-
-  let currentValue = value;
-
-  $: restProps = { ...defaults, ...$$restProps };
+  let restProps = $derived({ ...defaults, ...rest });
 </script>
 
 <Field
@@ -78,84 +103,88 @@
   {dense}
   {center}
   classes={classes.field}
-  let:id
   {...restProps}
 >
-  <span slot="prepend" class="flex items-center">
-    <slot name="prepend" />
+  {#snippet prepend()}
+    <span class="flex items-center">
+      {@render prependRender?.()}
 
-    {#if stepper}
-      <Button
-        icon={mdiChevronLeft}
-        class="p-2"
-        on:click={() => {
-          if (value && value.from && value.to && value.periodType) {
-            const { difference, start, end, add } = getDateFuncsByPeriodType(
-              $localeSettings,
-              value.periodType
-            );
-            const offset = difference(value.from, value.to) - 1;
-            value = {
-              from: start(add(value.from, offset)),
-              to: end(add(value.to, offset)),
-              periodType: value.periodType,
-            };
-            dispatch('change', value);
-          }
-        }}
-      />
-    {/if}
-  </span>
+      {#if stepper}
+        <Button
+          icon={mdiChevronLeft}
+          class="p-2"
+          onclick={() => {
+            if (value && value.from && value.to && value.periodType) {
+              const { difference, start, end, add } = getDateFuncsByPeriodType(
+                $localeSettings,
+                value.periodType
+              );
+              const offset = difference(value.from, value.to) - 1;
+              value = {
+                from: start(add(value.from, offset)),
+                to: end(add(value.to, offset)),
+                periodType: value.periodType,
+              };
+              onChange?.(value);
+            }
+          }}
+        />
+      {/if}
+    </span>
+  {/snippet}
 
-  <button
-    type="button"
-    class={cls(
-      'text-sm whitespace-nowrap w-full focus:outline-none',
-      center ? 'text-center' : 'text-left'
-    )}
-    on:click={() => (open = true)}
-    {id}
-  >
-    <DateRangeDisplay {value} />
-  </button>
+  {#snippet children({ id })}
+    <button
+      type="button"
+      class={cls(
+        'text-sm whitespace-nowrap w-full focus:outline-none',
+        center ? 'text-center' : 'text-left'
+      )}
+      onclick={() => (open = true)}
+      {id}
+    >
+      <DateRangeDisplay {value} />
+    </button>
+  {/snippet}
+  {#snippet append()}
+    <div class="flex items-center">
+      {#if clearable && (value?.periodType || value?.from || value?.to)}
+        <Button
+          icon={mdiClose}
+          class="text-surface-content/50 p-1"
+          onclick={() => {
+            value = _defaultValue;
+            onClear?.();
+            onChange?.(value);
+          }}
+        />
+      {/if}
 
-  <div slot="append" class="flex items-center">
-    {#if clearable && (value?.periodType || value?.from || value?.to)}
-      <Button
-        icon={mdiClose}
-        class="text-surface-content/50 p-1"
-        on:click={() => {
-          value = _defaultValue;
-          dispatch('clear');
-          dispatch('change', value);
-        }}
-      />
-    {/if}
+      {@render appendRender?.()}
 
-    <slot name="append" />
-
-    {#if stepper}
-      <Button
-        icon={mdiChevronRight}
-        class="p-2"
-        on:click={() => {
-          if (value && value.from && value.to && value.periodType) {
-            const { difference, start, end, add } = getDateFuncsByPeriodType(
-              $localeSettings,
-              value.periodType
-            );
-            const offset = difference(value.to, value.from) + 1;
-            value = {
-              from: start(add(value.from, offset)),
-              to: end(add(value.to, offset)),
-              periodType: value.periodType,
-            };
-            dispatch('change', value);
-          }
-        }}
-      />
-    {/if}
-  </div>
+      {#if stepper}
+        <Button
+          icon={mdiChevronRight}
+          class="p-2"
+          onclick={() => {
+            if (value && value.from && value.to && value.periodType) {
+              const { difference, start, end, add } = getDateFuncsByPeriodType(
+                $localeSettings,
+                value.periodType
+              );
+              const offset = difference(value.to, value.from) + 1;
+              value = {
+                from: start(add(value.from, offset)),
+                to: end(add(value.to, offset)),
+                periodType: value.periodType,
+              };
+              onChange?.(value);
+            }
+          }}
+        />
+      {/if}
+    </div>
+  {/snippet}
 </Field>
 
 <Dialog
@@ -184,27 +213,29 @@
     />
   </div>
 
-  <div slot="actions" class="flex items-center gap-2">
-    <Button
-      icon={mdiCheck}
-      on:click={() => {
-        open = false;
-        value = currentValue;
-        dispatch('change', value);
-      }}
-      color="primary"
-      variant="fill"
-    >
-      {$localeSettings.dictionary.Ok}
-    </Button>
+  {#snippet actions()}
+    <div class="flex items-center gap-2">
+      <Button
+        icon={mdiCheck}
+        onclick={() => {
+          open = false;
+          value = currentValue;
+          onChange?.(value);
+        }}
+        color="primary"
+        variant="fill"
+      >
+        {$localeSettings.dictionary.Ok}
+      </Button>
 
-    <Button
-      on:click={() => {
-        open = false;
-        currentValue = value;
-      }}
-    >
-      {$localeSettings.dictionary.Cancel}
-    </Button>
-  </div>
+      <Button
+        onclick={() => {
+          open = false;
+          currentValue = value;
+        }}
+      >
+        {$localeSettings.dictionary.Cancel}
+      </Button>
+    </div>
+  {/snippet}
 </Dialog>
