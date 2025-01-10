@@ -21,7 +21,7 @@
 
   const order = tableOrderStore({ initialBy: 'calories', initialDirection: 'desc' });
 
-  const data = [
+  const tableData = [
     { id: 1, name: 'Cupcake', calories: 305, fat: 3.7, carbs: 67, protein: 4.3 },
     { id: 2, name: 'Donut', calories: 452, fat: 25.0, carbs: 51, protein: 4.9 },
     { id: 3, name: 'Eclair', calories: 262, fat: 16.0, carbs: 24, protein: 6.0 },
@@ -38,7 +38,7 @@
   ];
 
   function randomDataGen() {
-    return data.map((d) => {
+    return tableData.map((d) => {
       return {
         ...d,
         calories: randomInteger(300, 900),
@@ -62,7 +62,7 @@
 
 <Preview>
   <Table
-    {data}
+    {tableData}
     columns={[
       {
         name: 'name',
@@ -95,10 +95,10 @@
 <h2>Pagination</h2>
 
 <Preview>
-  <Paginate {data} perPage={5}>
+  <Paginate data={tableData} perPage={5}>
     {#snippet children({ pageData, pagination })}
       <Table
-        data={pageData}
+        tableData={pageData}
         columns={[
           {
             name: 'name',
@@ -140,7 +140,7 @@
 
 <Preview>
   <Table
-    data={[...data].sort($order.handler)}
+    tableData={[...tableData].sort($order.handler)}
     columns={[
       {
         name: 'name',
@@ -175,10 +175,10 @@
 <h2>Order + Pagination</h2>
 
 <Preview>
-  <Paginate data={data.sort($order.handler)} perPage={5}>
+  <Paginate data={tableData.sort($order.handler)} perPage={5}>
     {#snippet children({ pageData, pagination })}
       <Table
-        data={pageData}
+        tableData={pageData}
         columns={[
           {
             name: 'name',
@@ -233,7 +233,7 @@
     Randomize
   </Button>
   <Table
-    data={randomData}
+    tableData={randomData}
     columns={[
       {
         name: 'name',
@@ -295,7 +295,7 @@
 
 <Preview>
   <Table
-    {data}
+    {tableData}
     columns={[
       {
         name: 'name',
@@ -349,6 +349,7 @@
     Randomize
   </Button>
   <Table
+    tableData={randomData}
     columns={[
       {
         name: 'name',
@@ -404,13 +405,12 @@
       },
     ]}
   >
-    {#snippet data({ columns, data: _data, getCellValue })}
+    {#snippet data({ columns, data, getCellValue })}
       <tbody>
         {#each data ?? [] as rowData, rowIndex}
           <tr class="tabular-nums">
             {#each columns as column (column.name)}
               {@const value = getCellValue(column, rowData, rowIndex)}
-
               <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
                 {#if column.name === 'name'}
                   {value}
@@ -435,6 +435,7 @@
 
 <Preview>
   <Table
+    {tableData}
     columns={[
       {
         name: 'name',

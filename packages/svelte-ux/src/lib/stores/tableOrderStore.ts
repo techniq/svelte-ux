@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { ComponentEvents } from 'svelte';
+import type { ComponentProps } from 'svelte';
 import { isFunction } from 'lodash-es';
 import { index } from 'd3-array';
 
@@ -40,9 +40,7 @@ export default function tableOrderStore(props?: TableOrderProps) {
 
   const state = writable(initialState);
 
-  function onHeaderClick(e: ComponentEvents<Table<unknown>>['headerClick']) {
-    const column = e.detail.column;
-
+  const onHeaderClick: ComponentProps<typeof Table>['onHeaderClick'] = (column) => {
     if (column.orderBy === false) {
       // ignore
       return;
@@ -51,7 +49,7 @@ export default function tableOrderStore(props?: TableOrderProps) {
     state.update((prevState) => {
       return createState(column, props, prevState);
     });
-  }
+  };
 
   return {
     ...state,

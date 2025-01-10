@@ -12,5 +12,6 @@ export function asIconData(v: IconInput): IconData {
 function isIconComponentProps(v: IconInput): v is ComponentProps<typeof Icon> {
   // `iconName` is a required property of `IconDefinition`, the only other object that `IconInput` supports.
   // If it is undefined, then only ComponentProps<Icon> is viable.
+  // @ts-ignore
   return isLiteralObject(v) && typeof v['iconName'] === 'undefined';
 }

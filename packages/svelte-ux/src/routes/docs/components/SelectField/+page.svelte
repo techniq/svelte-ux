@@ -301,7 +301,7 @@
               <div>{option.label}</div>
               <div class="text-sm text-surface-content/50">{option.value}</div>
             </div>
-            <div onclick={stopPropagation(bubble('click'))} role="none">
+            <div onclick={(e) => e.stopPropagation()} role="none">
               <Toggle>
                 {#snippet children({ on: open, toggle, toggleOff })}
                   <Button
@@ -336,7 +336,7 @@
     {#snippet children({ on: open, toggle })}
       <SelectField {options}>
         {#snippet prepend()}
-          <div onclick={stopPropagation(bubble('click'))} class="flex items-center" role="none">
+          <div onclick={(e) => e.stopPropagation()} class="flex items-center" role="none">
             <select
               class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
               style="text-align-last: center;"
@@ -363,7 +363,7 @@
     {#snippet children({ on: open, toggle, toggleOff })}
       <SelectField {options}>
         {#snippet append()}
-          <span onclick={stopPropagation(bubble('click'))} role="none">
+          <span onclick={(e) => e.stopPropagation()} role="none">
             <Button icon={mdiPlus} class="text-surface-content/50 p-2" onclick={toggle} />
           </span>
         {/snippet}
@@ -414,7 +414,7 @@
 <Preview>
   <SelectField {options} bind:value>
     {#snippet actions({ hide })}
-      <div class="p-2 border-t" onclick={stopPropagation(bubble('click'))} role="none">
+      <div class="p-2 border-t" onclick={(e) => e.stopPropagation()} role="none">
         <Toggle>
           {#snippet children({ on: open, toggle })}
             <Button icon={mdiPlus} color="primary" onclick={toggle}>New item</Button>
@@ -491,7 +491,7 @@
 <Preview>
   <SelectField {options} icon={mdiMagnify} rounded>
     {#snippet prepend()}
-      <span onclick={stopPropagation(bubble('click'))} role="none">
+      <span onclick={(e) => e.stopPropagation()} role="none">
         <select
           class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
           style="text-align-last: center;"

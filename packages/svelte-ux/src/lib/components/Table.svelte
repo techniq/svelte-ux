@@ -18,19 +18,7 @@
 
   interface Props {
     columns?: ColumnDef<TData>[];
-    data?:
-      | TData[]
-      | Snippet<
-          [
-            {
-              data: TData | null;
-              columns: typeof rowColumns;
-              getCellValue: typeof getCellValue;
-              getCellContent: typeof getCellContent;
-            },
-          ]
-        >
-      | null;
+    tableData?: TData[] | null;
     order?: ReturnType<typeof tableOrderStore>;
     classes?: {
       container?: string;
@@ -56,12 +44,22 @@
     onHeaderClick?: (column: ColumnDef<TData>) => void;
     onCellClick?: ({ column, rowData }: { column: ColumnDef<TData>; rowData: TData }) => void;
     headers?: Snippet<[{ headers: typeof headers; getCellHeader: (column: ColumnDef) => string }]>;
+    data?: Snippet<
+      [
+        {
+          data: TData[] | null;
+          columns: typeof rowColumns;
+          getCellValue: typeof getCellValue;
+          getCellContent: typeof getCellContent;
+        },
+      ]
+    >;
     children?: Snippet;
   }
 
   let {
     columns = [],
-    data = [],
+    tableData = [],
     order,
     classes = {},
     styles = {},
@@ -69,6 +67,7 @@
     onHeaderClick,
     onCellClick,
     headers: headersRender,
+    data,
     children,
   }: Props = $props();
 
@@ -150,16 +149,15 @@
 
       {@render children?.()}
 
-      {#if typeof data === 'function'}
-        {@const _data = data as TData | null}
-        {@render data({ data: _data, columns: rowColumns, getCellValue, getCellContent })}
+      {#if data}
+        {@render data({ data: tableData, columns: rowColumns, getCellValue, getCellContent })}
       {:else}
         <tbody class={cls(settingsClasses.tbody, classes.tbody)} style={styles.tbody}>
-          {#each data ?? [] as rowData, rowIndex}
+          {#each tableData ?? [] as rowData, rowIndex}
             <tr class={cls(settingsClasses.tr, classes.tr)} style={styles.tr}>
               {#each rowColumns ?? [] as column}
                 <td
-                  use:tableCell={{ column, rowData, rowIndex, tableData: data }}
+                  use:tableCell={{ column, rowData, rowIndex, tableData }}
                   class="column-{column.name}"
                   style={styles.td}
                   onclick={() => onCellClick?.({ column, rowData })}
