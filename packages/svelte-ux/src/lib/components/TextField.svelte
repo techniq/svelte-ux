@@ -327,7 +327,7 @@
                 {disabled}
                 value={inputValue}
                 {autocapitalize}
-                bind:inputEl
+                bind:this=inputEl
                 on:input={handleInput}
                 on:focus
                 on:blur
