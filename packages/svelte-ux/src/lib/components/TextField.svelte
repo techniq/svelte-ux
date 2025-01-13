@@ -367,7 +367,7 @@
                 {max}
                 {step}
                 {actions}
-                bind:inputEl
+                bind:inputEl={null, (el) => (inputEl = el ?? null)}
                 on:input={handleInput}
                 on:focus
                 on:blur
