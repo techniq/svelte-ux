@@ -61,7 +61,7 @@
     ? (node) => [autoFocus(node, typeof autofocus === 'object' ? autofocus : undefined)]
     : undefined;
   export let operators: { label: string; value: string }[] | undefined = undefined;
-  export let inputEl: HTMLInputElement | null = null;
+  export let inputEl: HTMLInputElement | HTMLTextAreaElement | null = null;
   export let debounceChange: boolean | number = false;
   export let classes: {
     root?: string;
@@ -327,6 +327,7 @@
                 {disabled}
                 value={inputValue}
                 {autocapitalize}
+                bind:inputEl
                 on:input={handleInput}
                 on:focus
                 on:blur
