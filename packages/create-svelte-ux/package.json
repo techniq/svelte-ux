@@ -19,7 +19,7 @@
   "dependencies": {
     "@clack/prompts": "^0.8.2",
     "@kitql/helpers": "^0.8.10",
-    "commander": "^12.1.0"
+    "commander": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.6",
