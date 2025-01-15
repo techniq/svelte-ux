@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 0.77.1
+
+### Patch Changes
+
+- Update dependencies ([`c9f7a27`](https://github.com/techniq/svelte-ux/commit/c9f7a279a2432b311c0f199774038f51f1bb2afe))
+
+- feat(TextField): Add `bind:inputEl` support when using `multiline` (textarea) ([`d51c505`](https://github.com/techniq/svelte-ux/commit/d51c505c90cfdd440962322c094568ecdbd900df))
+
+- Bump dependencies ([`f55562d`](https://github.com/techniq/svelte-ux/commit/f55562d719e465f0a4d832684c1724769c1138be))
+
 ## 0.77.0
 
 ### Minor Changes
