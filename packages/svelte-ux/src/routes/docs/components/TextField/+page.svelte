@@ -20,6 +20,7 @@
 
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
+  import Toggle from '$lib/components/Toggle.svelte';
 
   const numberOperators = [
     { label: '=', value: 'equal' },
@@ -40,6 +41,8 @@
   let value = '';
   let numberValue = 1;
   let multilineValue = 'one\ntwo\nthree';
+
+  let inputEl: HTMLInputElement | HTMLTextAreaElement | null = null;
 </script>
 
 <h1>Examples</h1>
@@ -223,6 +226,18 @@
       }),
     ]}
   />
+</Preview>
+
+<h2>bind:inputEl</h2>
+
+<Preview>
+  <div class="grid gap-2 justify-start">
+    <Button on:click={() => inputEl?.focus()}>Manually Focus</Button>
+    <Toggle let:on={multiline} let:toggle>
+      <Button on:click={toggle}>{multiline ? 'To single line' : 'To multiline'}</Button>
+      <TextField label="Name" {multiline} bind:inputEl />
+    </Toggle>
+  </div>
 </Preview>
 
 <SectionDivider>Type</SectionDivider>
