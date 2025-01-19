@@ -3,7 +3,7 @@
 
   import Code from '$lib/components/Code.svelte';
 
-  let selectedTab = 'cli';
+  let selectedTab = 'svelte-cli';
 </script>
 
 <div class="prose max-w-none bg-surface-100 rounded border p-4 mt-4 m-2">
@@ -15,42 +15,25 @@
     variant="underline"
     classes={{ options: 'justify-start h-10 mb-3' }}
   >
-    <ToggleOption value="cli">CLI</ToggleOption>
-    <ToggleOption value="svelte-add">Svelte Add</ToggleOption>
+    <ToggleOption value="svelte-cli">Svelte CLI</ToggleOption>
     <ToggleOption value="manual">Manual Install</ToggleOption>
   </ToggleGroup>
 
   <div class="grid gap-3">
-    {#if selectedTab === 'cli'}
+    {#if selectedTab === 'svelte-cli'}
       <div>
-        Start a new SvelteKit project preconfigured with Tailwind and Svelte UX using the
-        <code>create-svelte-ux</code> CLI
+        Start a new project SvelteKit project with <a
+          href="https://svelte.dev/docs/cli/overview"
+          target="_blank">sv</a
+        > cli
       </div>
+      <Code source={`npm sv create`} language="sh" />
 
-      <Code source={`npm create svelte-ux@latest`} language="sh" />
-
-      <div>
-        There are a few templates to choose from, including one which includes <a
-          href="https://www.layerchart.com"
-          target="_blank">LayerChart</a
-        >
-      </div>
-    {:else if selectedTab === 'svelte-add'}
-      <div>Start a new project SvelteKit project</div>
-      <Code source={`npm create svelte@latest`} language="sh" />
+      <div>Select Tailwind during setup OR run</div>
+      <Code source={`npx sv add tailwindcss`} language="sh" />
 
       <div>Add Svelte UX package</div>
       <Code source={`npm install svelte-ux`} language="sh" />
-
-      <div>
-        Add and setup Tailwind using <a
-          href="https://github.com/svelte-add/tailwindcss"
-          target="_blank"
-        >
-          svelte-add
-        </a>
-      </div>
-      <Code source={`npx svelte-add@latest tailwindcss`} language="sh" />
     {:else if selectedTab === 'manual'}
       <div>
         Follow the Tailwind <a href="https://tailwindcss.com/docs/guides/sveltekit" target="_blank">
@@ -62,7 +45,7 @@
       <Code source={`npm install svelte-ux`} language="sh" />
     {/if}
 
-    {#if selectedTab === 'svelte-add' || selectedTab === 'manual'}
+    {#if selectedTab === 'svelte-cli' || selectedTab === 'manual'}
       <div>Update <code>tailwind.config.cjs</code></div>
       <Code
         source={`const colors = require('tailwindcss/colors');
