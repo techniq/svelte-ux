@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.90.0
+
+### Minor Changes
+
+- Migrate to @layerstack/\* packages ([#489](https://github.com/techniq/svelte-ux/pull/489))
+
+- breaking: Replace tailwind plugin `svelte-ux/plugins/tailwind.cjs` with `@layerstack/tailwind/plugin` ([#489](https://github.com/techniq/svelte-ux/pull/489))
+
 ## 0.77.1
 
 ### Patch Changes
