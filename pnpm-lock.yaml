@@ -30,20 +30,20 @@ importers:
         specifier: ^6.7.2
         version: 6.7.2
       '@layerstack/svelte-actions':
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.0.11
+        version: 0.0.11
       '@layerstack/svelte-stores':
-        specifier: ^0.0.7
-        version: 0.0.7
-      '@layerstack/svelte-table':
-        specifier: ^0.0.8
-        version: 0.0.8
-      '@layerstack/tailwind':
         specifier: ^0.0.9
         version: 0.0.9
+      '@layerstack/svelte-table':
+        specifier: ^0.0.12
+        version: 0.0.12
+      '@layerstack/tailwind':
+        specifier: ^0.0.11
+        version: 0.0.11
       '@layerstack/utils':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.7
+        version: 0.0.7
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -660,20 +660,20 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@layerstack/svelte-actions@0.0.7':
-    resolution: {integrity: sha512-PYG4oocNQxuUKQkhQvrB+nh4SGGzVr2KlqGS8wivXC4lF78BpOnsZfLxv657oVBBE+u3Cx6q9NRq/AG1A7ZiIw==}
+  '@layerstack/svelte-actions@0.0.11':
+    resolution: {integrity: sha512-sfplFX8rOBW74xjDCAY7QzHilvUGjFQTkfQXxUO6e68cKCHmxsSuTCtFbHRCfIUJCQ31gAbeY1xpWKnlVfgZ9g==}
 
-  '@layerstack/svelte-stores@0.0.7':
-    resolution: {integrity: sha512-w9PXG+AR/qk3Zo7oOeCQ71Y5YPTRwT3OXSCEli9iz6yBQTUs1xpc+FZl2/ViqW0qJ+3dypvbP6cFE50yWabzeA==}
+  '@layerstack/svelte-stores@0.0.9':
+    resolution: {integrity: sha512-5yyi7eV/2hOraw7wQgEObVR4s2/4T3G/GjGaZLR9BQH8mnsLuXw1n3k6rFT8NxiRvpEjWJ9l9ILOGc/XzFJb3g==}
 
-  '@layerstack/svelte-table@0.0.8':
-    resolution: {integrity: sha512-CcV8jJVciQFsdEptq5lknbDrJNyOVbjVdvSorTCIUq+12nowYQV68V1maJoj9dh7h/dZxtXaQjmEDAI5uOudig==}
+  '@layerstack/svelte-table@0.0.12':
+    resolution: {integrity: sha512-hOGvQ8+Jri21W1vlGiThyXSq1BkaMzdjEp+vK1Q1/uW02YBRDBnjMcq628Ag32a1JElj/NG6TYs5VOF9AM1GPQ==}
 
-  '@layerstack/tailwind@0.0.9':
-    resolution: {integrity: sha512-bmv4qEgmJWgAiUqznj7WSQ3vCEoA80iXztEuSO2jsS1nJ2/676VguAQ/6SGiWm2uoxgJ5BCPAP/AYOowZOkI8g==}
+  '@layerstack/tailwind@0.0.11':
+    resolution: {integrity: sha512-dHvJM5xpVisPrM6NClSCNPqB/u+pSwemWzkKeb911/8pLUuyr+7HceTpv5AZMyE/I5A2RxoTa5mTZokmvEqPnQ==}
 
-  '@layerstack/utils@0.0.5':
-    resolution: {integrity: sha512-Ew84WuCMC3q7Wq0Tb0rBEM/WK2RkkxRBF/RvNcnbaWcj5O+jO6VEZc657Jv73skkIJ4fkciT8FhSIcHoRkhdrQ==}
+  '@layerstack/utils@0.0.7':
+    resolution: {integrity: sha512-7R9AOw/J3TkvSCuQXajK28d7AKuvsEgMQlXBSvAr9tcxSrb9hzraX47uD4uEmEAIB9IiKaG4IUx2FmGiJ3WlTQ==}
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -2830,35 +2830,35 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@layerstack/svelte-actions@0.0.7':
+  '@layerstack/svelte-actions@0.0.11':
     dependencies:
       '@floating-ui/dom': 1.6.13
-      '@layerstack/utils': 0.0.5
+      '@layerstack/utils': 0.0.7
       d3-array: 3.2.4
       d3-scale: 4.0.2
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/svelte-stores@0.0.7':
+  '@layerstack/svelte-stores@0.0.9':
     dependencies:
-      '@layerstack/utils': 0.0.5
+      '@layerstack/utils': 0.0.7
       d3-array: 3.2.4
       date-fns: 4.1.0
       immer: 10.1.1
       lodash-es: 4.17.21
       zod: 3.24.1
 
-  '@layerstack/svelte-table@0.0.8':
+  '@layerstack/svelte-table@0.0.12':
     dependencies:
-      '@layerstack/svelte-actions': 0.0.7
-      '@layerstack/utils': 0.0.5
+      '@layerstack/svelte-actions': 0.0.11
+      '@layerstack/utils': 0.0.7
       d3-array: 3.2.4
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/tailwind@0.0.9':
+  '@layerstack/tailwind@0.0.11':
     dependencies:
-      '@layerstack/utils': 0.0.5
+      '@layerstack/utils': 0.0.7
       clsx: 2.1.1
       culori: 4.0.1
       d3-array: 3.2.4
@@ -2869,7 +2869,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  '@layerstack/utils@0.0.5':
+  '@layerstack/utils@0.0.7':
     dependencies:
       d3-array: 3.2.4
       date-fns: 4.1.0
