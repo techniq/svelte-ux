@@ -1,9 +1,9 @@
 <script lang="ts">
   import { NavItem } from 'svelte-ux';
+  import { entries } from '@layerstack/utils';
 
   import { page } from '$app/stores';
-  import { entries } from '$lib/types/typeHelpers.js';
-  import { mdiCog, mdiFormatListBulleted, mdiHome, mdiPalette } from '@mdi/js';
+  import { mdiCog, mdiFormatListBulleted, mdiHome, mdiPalette, mdiOpenInNew } from '@mdi/js';
 
   const components = {
     App: ['AppBar', 'AppLayout', 'NavItem', 'Settings', 'ThemeInit', 'ThemeSelect', 'ThemeSwitch'],
@@ -72,43 +72,6 @@
     Effects: ['Gooey', 'Shine'],
     Other: ['CopyButton'],
   };
-
-  const actions = [
-    'dataBackground',
-    'input',
-    'layout',
-    'mouse',
-    'multi',
-    'observer',
-    'popover',
-    'portal',
-    'scroll',
-    'spotlight',
-    'sticky',
-    'styleProps',
-    'table',
-  ];
-
-  const stores = [
-    'changeStore',
-    'debounceStore',
-    'dirtyStore',
-    'fetchStore',
-    'formStore',
-    'graphStore',
-    'localStore',
-    'mapStore',
-    'matchMedia',
-    'paginationStore',
-    'promiseStore',
-    'queryParamsStore',
-    'selectionStore',
-    'tableOrderStore',
-    'timerStore',
-    'uniqueStore',
-  ];
-
-  const utils = ['cls', 'duration', 'format', 'json', 'Logger', 'string'];
 </script>
 
 <NavItem text="Getting Started" icon={mdiHome} currentUrl={$page.url} path="/" />
@@ -128,17 +91,59 @@
   {/each}
 {/each}
 
+<h1>Charts</h1>
+<NavItem
+  text="LayerChart"
+  icon={mdiOpenInNew}
+  currentUrl={$page.url}
+  path="https://www.layerchart.com"
+  target="_blank"
+/>
+
 <h1>Actions</h1>
-{#each actions as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/actions/{item}" />
-{/each}
+<NavItem
+  text="@layerstack/svelte-actions"
+  icon={mdiOpenInNew}
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/svelte-actions"
+  target="_blank"
+/>
+<NavItem
+  text="@layerstack/svelte-table"
+  icon={mdiOpenInNew}
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/svelte-table/actions"
+  target="_blank"
+/>
 
 <h1>Stores</h1>
-{#each stores as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/stores/{item}" />
-{/each}
+<NavItem
+  text="@layerstack/svelte-stores"
+  icon={mdiOpenInNew}
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/svelte-stores"
+  target="_blank"
+/>
+<NavItem
+  text="@layerstack/svelte-table"
+  icon={mdiOpenInNew}
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/svelte-table/stores"
+  target="_blank"
+/>
 
 <h1>Utils</h1>
-{#each utils as item}
-  <NavItem text={item} currentUrl={$page.url} path="/docs/utils/{item}" />
-{/each}
+<NavItem
+  text="@layerstack/tailwind"
+  icon={mdiOpenInNew}
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/tailwind"
+  target="_blank"
+/>
+<NavItem
+  text="@layerstack/utils"
+  icon={mdiOpenInNew}
+  currentUrl={$page.url}
+  path="https://www.layerstack.dev/docs/utils"
+  target="_blank"
+/>

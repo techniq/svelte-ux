@@ -55,6 +55,11 @@
   "dependencies": {
     "@floating-ui/dom": "^1.6.13",
     "@fortawesome/fontawesome-common-types": "^6.7.2",
+    "@layerstack/svelte-actions": "^0.0.11",
+    "@layerstack/svelte-stores": "^0.0.9",
+    "@layerstack/svelte-table": "^0.0.12",
+    "@layerstack/tailwind": "^0.0.11",
+    "@layerstack/utils": "^0.0.7",
     "@mdi/js": "^7.4.47",
     "clsx": "^2.1.1",
     "culori": "^4.0.1",
@@ -84,8 +89,7 @@
       "types": "./dist/utils/*.d.ts",
       "svelte": "./dist/utils/*.js"
     },
-    "./plugins/*": "./dist/plugins/*",
-    "./styles/*": "./dist/styles/*"
+    "./plugins/*": "./dist/plugins/*"
   },
   "files": [
     "dist"

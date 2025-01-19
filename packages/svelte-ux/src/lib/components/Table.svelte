@@ -1,16 +1,20 @@
 <script lang="ts" generics="TData">
   import { createEventDispatcher } from 'svelte';
 
-  import { tableCell } from '../actions/table.js';
-  import type { ColumnDef } from '../types/table.js';
-  import { cls } from '../utils/styles.js';
-
-  import { getCellValue, getCellHeader, getHeaders, getRowColumns } from '../utils/table.js';
+  import { cls } from '@layerstack/tailwind';
+  import {
+    tableCell,
+    type ColumnDef,
+    getCellValue,
+    getCellHeader,
+    getHeaders,
+    getRowColumns,
+    tableOrderStore,
+  } from '@layerstack/svelte-table';
 
   import TableOrderIcon from './TableOrderIcon.svelte';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './settings.js';
-  import tableOrderStore from '../stores/tableOrderStore.js';
 
   const dispatch = createEventDispatcher<{
     headerClick: { column: ColumnDef<TData> };

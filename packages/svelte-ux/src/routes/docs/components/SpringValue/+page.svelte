@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Button, ButtonGroup, Kbd, SpringValue, cls, getSettings } from 'svelte-ux';
+  import { Button, ButtonGroup, Kbd, SpringValue, getSettings } from 'svelte-ux';
+  import { cls } from '@layerstack/tailwind';
+
   import Preview from '$lib/components/Preview.svelte';
 
   const { format } = getSettings();

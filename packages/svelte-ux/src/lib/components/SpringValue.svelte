@@ -1,6 +1,7 @@
 <script lang="ts">
   import { spring } from 'svelte/motion';
-  import type { FormatNumberStyle } from '../utils/format.js';
+  import type { FormatNumberStyle } from '@layerstack/utils';
+
   import { getSettings } from './settings.js';
 
   type SpringOptions = Parameters<typeof spring<number | null>>[1];

@@ -2,7 +2,7 @@
   import Prism from 'prismjs';
   import 'prism-svelte';
 
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import CopyButton from './CopyButton.svelte';
 
   export let source: string | null = null;

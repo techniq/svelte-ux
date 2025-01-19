@@ -23,12 +23,13 @@
     Icon,
     ListItem,
     TableOfContents,
-    toTitleCase,
-    cls,
-    xlScreen,
     settings,
     getSettings,
   } from 'svelte-ux';
+
+  import { toTitleCase } from '@layerstack/utils';
+  import { cls } from '@layerstack/tailwind';
+  import { xlScreen } from '@layerstack/svelte-stores';
 
   import Code from '$lib/components/Code.svelte';
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';

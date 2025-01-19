@@ -3,7 +3,7 @@
   import { getComponentSettings } from './settings.js';
   import { mdiMenuDown } from '@mdi/js';
 
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';

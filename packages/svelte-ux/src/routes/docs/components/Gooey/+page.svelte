@@ -2,7 +2,10 @@
   import { blur } from 'svelte/transition';
   import { circIn, circOut } from 'svelte/easing';
 
-  import { Gooey, RangeField, cls, mouseCoords, timerStore } from 'svelte-ux';
+  import { Gooey, RangeField } from 'svelte-ux';
+  import { cls } from '@layerstack/tailwind';
+  import { mouseCoords } from '@layerstack/svelte-actions';
+  import { timerStore } from '@layerstack/svelte-stores';
 
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';

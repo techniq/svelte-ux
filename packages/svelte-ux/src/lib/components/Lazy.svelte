@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { cls } from '../utils/styles.js';
-  import { intersection } from '../actions/observer.js';
+  import { cls } from '@layerstack/tailwind';
+  import { intersection } from '@layerstack/svelte-actions';
+
   import { getComponentClasses } from './theme.js';
 
   /**

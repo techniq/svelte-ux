@@ -1,11 +1,12 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
   import Button from './Button.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import {
     scrollIntoView as scrollIntoViewAction,
     type ScrollIntoViewOptions,
-  } from '../actions/scroll.js';
+  } from '@layerstack/svelte-actions';
+
   import { setButtonGroup } from './ButtonGroup.svelte';
   import { getComponentClasses } from './theme.js';
   import { settings, getSettings } from './settings.js';

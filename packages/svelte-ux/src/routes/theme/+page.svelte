@@ -14,20 +14,20 @@
     Switch,
     Toggle,
     Tooltip,
-    entries,
-    fromEntries,
     getSettings,
-    styleProps,
     type MenuOption,
   } from 'svelte-ux';
 
+  import { entries, fromEntries } from '@layerstack/utils';
+  import { styleProps } from '@layerstack/svelte-actions';
   import {
     getThemeNames,
     processThemeColors,
     themeStylesString,
     type SupportedColorSpace,
     type NestedColors,
-  } from '$lib/styles/theme.js';
+  } from '@layerstack/tailwind';
+
   import ColorField from './ColorField.svelte';
   import { formatColor } from './colors.js';
 

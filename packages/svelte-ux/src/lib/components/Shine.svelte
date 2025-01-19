@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { uniqueId } from '../utils/string.js';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
+  import { uniqueId } from '@layerstack/utils';
+
   import { getComponentClasses } from './theme.js';
 
   /** Color of light */

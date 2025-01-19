@@ -6,9 +6,9 @@
   import ProgressCircle from './ProgressCircle.svelte';
   import Overlay from './Overlay.svelte';
 
-  import { focusMove } from '../actions/focus.js';
-  import { portal as portalAction, type PortalOptions } from '../actions/portal.js';
-  import { cls } from '../utils/styles.js';
+  import { focusMove } from '@layerstack/svelte-actions/focus';
+  import { portal as portalAction, type PortalOptions } from '@layerstack/svelte-actions';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   const dispatch = createEventDispatcher<{

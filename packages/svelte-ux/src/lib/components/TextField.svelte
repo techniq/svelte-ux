@@ -3,12 +3,10 @@
   import type { AriaRole, HTMLInputAttributes } from 'svelte/elements';
   import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
+  import { cls } from '@layerstack/tailwind';
+  import { isLiteralObject } from '@layerstack/utils/object';
+  import { autoFocus, multi, type Actions } from '@layerstack/svelte-actions';
 
-  import { autoFocus } from '../actions/input.js';
-  import { multi } from '../actions/multi.js';
-  import type { Actions } from '../actions/multi.js';
-  import { cls } from '../utils/styles.js';
-  import { isLiteralObject } from '../utils/object.js';
   import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types/index.js';
   import { getComponentSettings } from './settings.js';
 

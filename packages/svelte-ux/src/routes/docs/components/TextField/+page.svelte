@@ -16,7 +16,8 @@
     mdiPlus,
   } from '@mdi/js';
 
-  import { Button, Icon, SectionDivider, TextField, autoHeight, debounceEvent } from 'svelte-ux';
+  import { Button, Icon, SectionDivider, TextField } from 'svelte-ux';
+  import { autoHeight, debounceEvent } from '@layerstack/svelte-actions';
 
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';

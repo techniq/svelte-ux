@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { intersection } from '../actions/observer.js';
+  import { intersection } from '@layerstack/svelte-actions';
 
   type T = $$Generic;
 

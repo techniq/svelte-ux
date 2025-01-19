@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import TimelineEvent from './TimelineEvent.svelte';
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   import Icon from './Icon.svelte';

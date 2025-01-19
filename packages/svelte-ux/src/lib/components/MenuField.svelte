@@ -2,7 +2,7 @@
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js';
 
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
 
   import Field from './Field.svelte';
   import Icon from './Icon.svelte';

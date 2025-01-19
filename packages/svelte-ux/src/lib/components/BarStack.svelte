@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { sum } from 'd3-array';
 
-  import { cls } from '../utils/styles.js';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './index.js';
 
   export let data: {

@@ -2,8 +2,8 @@
   import { mdiCheckboxBlankCircle } from '@mdi/js';
 
   import Icon from './Icon.svelte';
-  import { uniqueId } from '../utils/string.js';
-  import { cls } from '../utils/styles.js';
+  import { uniqueId } from '@layerstack/utils';
+  import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let id = uniqueId('radio-');
