@@ -1,6 +1,6 @@
 # svelte-ux
 
-## 0.78.0
+## 0.90.0
 
 ### Minor Changes
 
