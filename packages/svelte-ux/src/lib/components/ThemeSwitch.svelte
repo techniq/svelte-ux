@@ -1,13 +1,12 @@
 <script lang="ts">
+  import type { ComponentProps } from 'svelte';
   import { mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
+  import { cls, clsMerge } from '@layerstack/tailwind';
 
   import Switch from './Switch.svelte';
   import Icon from './Icon.svelte';
 
   import { getSettings } from './settings.js';
-  import { cls } from '../utils/index.js';
-  import type { ComponentProps } from 'svelte';
-  import { clsMerge } from '$lib/utils/styles.js';
   import { getComponentClasses } from '$lib/components/theme.js';
 
   const { currentTheme } = getSettings();
