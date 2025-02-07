@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.90.1
+
+### Patch Changes
+
+- Resolve bug causing negative counts in pagination when there are fewer items than the per page count ([#541](https://github.com/techniq/svelte-ux/pull/541))
+
 ## 0.90.0
 
 ### Minor Changes
