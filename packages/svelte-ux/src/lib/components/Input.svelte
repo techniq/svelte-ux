@@ -84,7 +84,7 @@
     dispatch('change', { value });
   }
 
-  function applyMask(el: HTMLInputElement, mask: string) {
+  function applyMask(el: HTMLInputElement | HTMLTextAreaElement, mask: string) {
     if (mask) {
       // For selection (including just cursor position), ...
       const [i, j] = [el.selectionStart, el.selectionEnd].map((i) => {
