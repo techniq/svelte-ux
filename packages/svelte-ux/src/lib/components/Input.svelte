@@ -18,7 +18,7 @@
   export let inputmode: HTMLInputAttributes['inputmode'] | undefined = undefined;
   export let id: string | undefined = undefined;
   export let actions: Actions<HTMLInputElement | HTMLTextAreaElement> | undefined = undefined;
-  export let inputEl: HTMLInputElement | null = null;
+  export let inputEl: HTMLInputElement | HTMLTextAreaElement | null = null;
   export let autocapitalize: HTMLInputAttributes['autocapitalize'] = undefined;
   let className: string | undefined = undefined;
   export { className as class };
