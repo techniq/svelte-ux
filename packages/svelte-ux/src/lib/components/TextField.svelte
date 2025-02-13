@@ -60,12 +60,6 @@
     : undefined;
   export let operators: { label: string; value: string }[] | undefined = undefined;
   export let inputEl: HTMLInputElement | HTMLTextAreaElement | null = null;
-  // this is a workaround because Input only accepts an HTMLInputElement, not a TextAreaElement
-  const inputHolder = {
-    set input(value: HTMLInputElement | null) {
-      inputEl = value;
-    },
-  };
   export let debounceChange: boolean | number = false;
   export let classes: {
     root?: string;
@@ -371,7 +365,7 @@
                 {max}
                 {step}
                 {actions}
-                bind:inputEl={inputHolder.input}
+                bind:inputEl
                 on:input={handleInput}
                 on:focus
                 on:blur
