@@ -42,8 +42,8 @@ importers:
         specifier: ^0.0.11
         version: 0.0.11
       '@layerstack/utils':
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.1.0
+        version: 0.1.0
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -674,6 +674,9 @@ packages:
 
   '@layerstack/utils@0.0.7':
     resolution: {integrity: sha512-7R9AOw/J3TkvSCuQXajK28d7AKuvsEgMQlXBSvAr9tcxSrb9hzraX47uD4uEmEAIB9IiKaG4IUx2FmGiJ3WlTQ==}
+
+  '@layerstack/utils@0.1.0':
+    resolution: {integrity: sha512-iO/uRz5p+sIBGD3uvMlqpMR6RiPm+uuolmRk7PYEaRq1FCQ7yHNEslPhq6lKMjZy0hZIvzkbjVzZwf0k6fcw8A==}
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -2869,6 +2872,12 @@ snapshots:
       - ts-node
 
   '@layerstack/utils@0.0.7':
+    dependencies:
+      d3-array: 3.2.4
+      date-fns: 4.1.0
+      lodash-es: 4.17.21
+
+  '@layerstack/utils@0.1.0':
     dependencies:
       d3-array: 3.2.4
       date-fns: 4.1.0
