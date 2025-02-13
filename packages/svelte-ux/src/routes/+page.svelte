@@ -84,7 +84,7 @@ module.exports = {
   },
 
   plugins: [
-    svelteUx,  // uses hsl() color space by default. To use oklch(), use: svelteUx({ colorSpace: 'oklch' }),
+    layerstack,  // uses hsl() color space by default. To use oklch(), use: layerstack({ colorSpace: 'oklch' }),
   ]
 };`}
         language="js"

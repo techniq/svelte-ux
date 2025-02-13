@@ -53,7 +53,7 @@ const layerstack = require('@layerstack/tailwind/plugin');
 
 module.exports = {
   // ...
-  plugins: [svelteUx({ colorSpace: 'oklch' })],
+  plugins: [layerstack({ colorSpace: 'oklch' })],
 };
 ```
 
