@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.90.2
+
+### Patch Changes
+
+- fix(TextField): Remove `inputHolder.input` object property setter workaround for Input/textarea `bind:this` type differences as solution to fix Vite dev server freezing ([#549](https://github.com/techniq/svelte-ux/pull/549))
+
+- Update dependencies and remove unused (moved to layerstack packages) ([`94b9737`](https://github.com/techniq/svelte-ux/commit/94b97376897dd62baa1a4755951d6bb3f578015f))
+
 ## 0.90.1
 
 ### Patch Changes
