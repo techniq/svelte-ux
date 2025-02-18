@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.90.3
+
+### Patch Changes
+
+- fix: Update `@layerstack/tailwind` to fix hydration warnings when using SSR ([`cf5ee00`](https://github.com/techniq/svelte-ux/commit/cf5ee008edc5b6df7d8e0b82b23cbb51703d318d))
+
 ## 0.90.2
 
 ### Patch Changes
