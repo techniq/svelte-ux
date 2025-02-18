@@ -39,8 +39,8 @@ importers:
         specifier: ^0.0.13
         version: 0.0.13
       '@layerstack/tailwind':
-        specifier: ^0.0.12
-        version: 0.0.12
+        specifier: ^0.0.13
+        version: 0.0.13
       '@layerstack/utils':
         specifier: ^0.1.0
         version: 0.1.0
@@ -768,8 +768,8 @@ packages:
   '@layerstack/svelte-table@0.0.13':
     resolution: {integrity: sha512-kMeGUfpv2AkbxGYu12HJCIXtfNOYfN8/YNhAq2hqeYGmYyQGFGbW6ILKpbHnMoHWyXvjo+Ljcyym2UUfkrAq1Q==}
 
-  '@layerstack/tailwind@0.0.12':
-    resolution: {integrity: sha512-CM1cLS6RBsOSn4X40ubpau3DRz2mYRCXYb4svPta25rV0m6Ndlx34tNheRSXfvZwsC0DCobH+tykiru1/8P71w==}
+  '@layerstack/tailwind@0.0.13':
+    resolution: {integrity: sha512-CYiRwozVONbtD7XGsFxwFkIKGKubVkzhd+XWb0jpBvmACRbM5hlz+xJXxCYoAmtf60ln8g/kbRb1FLYTUOo94w==}
 
   '@layerstack/utils@0.1.0':
     resolution: {integrity: sha512-iO/uRz5p+sIBGD3uvMlqpMR6RiPm+uuolmRk7PYEaRq1FCQ7yHNEslPhq6lKMjZy0hZIvzkbjVzZwf0k6fcw8A==}
@@ -3055,7 +3055,7 @@ snapshots:
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/tailwind@0.0.12':
+  '@layerstack/tailwind@0.0.13':
     dependencies:
       '@layerstack/utils': 0.1.0
       clsx: 2.1.1
