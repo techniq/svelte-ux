@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 0.90.4
+
+### Patch Changes
+
+- fix(QuickSearch): Update `svelte-actions` with upstream `autoFocus` fix for Firefox/Safari timing issue ([`254970a`](https://github.com/techniq/svelte-ux/commit/254970a6b31b78c447ac9f7466b5855d6deb0189))
+
+- fix(SelectField|MenuItem): Restore `scrollIntoView` for highlighted item due to reactivity regression. Resolves #553 ([`4aa6ea2`](https://github.com/techniq/svelte-ux/commit/4aa6ea2e308bdf9152f4070f404dd53affbe38b5))
+
 ## 0.90.3
 
 ### Patch Changes
