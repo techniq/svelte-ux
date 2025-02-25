@@ -36,6 +36,9 @@
 
   // Clear theme to not expose to Button
   settings({ ...getSettings(), components: {} });
+
+  // Needs variable to restore reactivity.
+  $: actions = (node: HTMLElement) => [scrollIntoViewAction(node, scrollOptions)];
 </script>
 
 <Button
@@ -43,7 +46,7 @@
   {icon}
   {classes}
   fullWidth
-  actions={(node) => [scrollIntoViewAction(node, scrollOptions)]}
+  {actions}
   {disabled}
   {...$$restProps}
   class={cls(
