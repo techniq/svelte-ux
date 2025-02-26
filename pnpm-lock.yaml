@@ -104,7 +104,7 @@ importers:
         version: 5.0.3(svelte@5.20.0)(vite@6.1.0(@types/node@22.13.5)(jiti@2.4.2)(yaml@2.7.0))
       '@tailwindcss/typography':
         specifier: ^0.5.16
-        version: 0.5.16(tailwindcss@3.4.17)
+        version: 0.5.16(tailwindcss@4.0.9)
       '@types/culori':
         specifier: ^2.1.1
         version: 2.1.1
@@ -157,8 +157,8 @@ importers:
         specifier: ^0.7.34
         version: 0.7.34(svelte@5.20.0)(typescript@5.7.3)
       tailwindcss:
-        specifier: ^3.4.17
-        version: 3.4.17
+        specifier: ^4.0.0
+        version: 4.0.9
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -2317,6 +2317,9 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
+  tailwindcss@4.0.9:
+    resolution: {integrity: sha512-12laZu+fv1ONDRoNR9ipTOpUD7RN9essRVkX36sjxuRUInpN7hIiHN4lBd/SIFjbISvnXzp8h/hXzmU8SQQYhw==}
+
   term-size@2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
     engines: {node: '>=8'}
@@ -3324,13 +3327,13 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@tailwindcss/typography@0.5.16(tailwindcss@3.4.17)':
+  '@tailwindcss/typography@0.5.16(tailwindcss@4.0.9)':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.17
+      tailwindcss: 4.0.9
 
   '@types/cookie@0.6.0': {}
 
@@ -4695,6 +4698,8 @@ snapshots:
       sucrase: 3.35.0
     transitivePeerDependencies:
       - ts-node
+
+  tailwindcss@4.0.9: {}
 
   term-size@2.2.1: {}
 
