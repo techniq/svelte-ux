@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 0.90.5
+
+### Patch Changes
+
+- Use Tailwind 3 and 4 compatibility CSS variable custom value ([#557](https://github.com/techniq/svelte-ux/pull/557))
+
 ## 0.90.4
 
 ### Patch Changes

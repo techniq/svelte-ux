@@ -346,7 +346,7 @@
             }[item.status]
           ),
           line: 'w-0.5',
-          icon: cls('size-5 rounded-full p-0.5 text-surface-100 bg-[--color-completed]'),
+          icon: cls('size-5 rounded-full p-0.5 text-surface-100 bg-[var(--color-completed)]'),
         }}
       >
         <div class="-mt-1 mb-5 mx-2">

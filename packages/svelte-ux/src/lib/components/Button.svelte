@@ -421,19 +421,19 @@
     // text color
     ['default', 'outline', 'fill', 'fill-outline', 'fill-light', 'text'].includes(
       variant ?? 'none'
-    ) && 'text-[--text-color]',
+    ) && 'text-[var(--text-color)]',
 
     // background color
     ['default', 'outline', 'fill', 'fill-outline', 'fill-light'].includes(variant ?? 'none') &&
-      'bg-[--bg-color] ',
+      'bg-[var(--bg-color)] ',
 
     // border color
-    ['outline', 'fill-outline'].includes(variant ?? 'none') && 'border-[--border-color]',
+    ['outline', 'fill-outline'].includes(variant ?? 'none') && 'border-[var(--border-color)]',
 
     // ring color
     ['default', 'outline', 'fill', 'fill-outline', 'fill-light', 'text'].includes(
       variant ?? 'none'
-    ) && 'ring-[--ring-color]',
+    ) && 'ring-[var(--ring-color)]',
 
     settingsClasses.root,
     classes?.root,
