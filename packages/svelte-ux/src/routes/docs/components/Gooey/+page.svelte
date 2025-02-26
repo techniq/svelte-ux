@@ -193,7 +193,7 @@
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-blue-500 blur-md"
       ></div>
       <div
-        class="absolute left-[--x] top-[--y] -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-cyan-300 blur-md"
+        class="absolute left-[var(--x)] top-[var(--y)] -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-cyan-300 blur-md"
       ></div>
     </Gooey>
   </div>

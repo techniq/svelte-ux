@@ -50,7 +50,7 @@
     compact && vertical ? 'grid-cols-[0_auto_minmax(0,1fr)] grid-rows-[0_auto_minmax(0,1fr)]' : '',
     vertical && 'justify-items-center',
     completed &&
-      'timelineevent-completed [&_hr:last-child]:has-[~li.timelineevent-completed]:bg-[--color-completed]',
+      'timelineevent-completed [&_hr:last-child]:has-[~li.timelineevent-completed]:bg-[var(--color-completed)]',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -64,7 +64,7 @@
         ? 'w-1 h-full col-start-2 row-start-1 rounded-b'
         : 'w-full h-1 col-start-1 row-start-2 rounded-r',
       !icon && 'rounded-none',
-      completed && 'bg-[--color-completed]',
+      completed && 'bg-[var(--color-completed)]',
       settingsClasses.line,
       classes.line
     )}
@@ -101,7 +101,7 @@
         size={icon ? '1rem' : '.5rem'}
         class={cls(
           'icon',
-          completed && 'text-[--color-completed]',
+          completed && 'text-[var(--color-completed)]',
           settingsClasses.icon,
           classes.icon
         )}
