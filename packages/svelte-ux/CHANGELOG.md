@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.0
+
+### Major Changes
+
+Version 1.0 (Svelte 3-5 and Tailwind 3 compatible)
+
 ## 0.90.5
 
 ### Patch Changes
