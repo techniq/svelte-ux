@@ -20,13 +20,13 @@
 
     // bar color
     '[--color:theme(colors.primary)]',
-    '[&::-webkit-progress-value]:bg-[--color]',
-    '[&::-moz-progress-bar]:bg-[--color]',
+    '[&::-webkit-progress-value]:bg-[var(--color)]',
+    '[&::-moz-progress-bar]:bg-[var(--color)]',
 
     // track color
     '[--track-color:theme(colors.surface-200)]',
-    '[&::-webkit-progress-bar]:bg-[--track-color]',
-    'bg-[--track-color]',
+    '[&::-webkit-progress-bar]:bg-[var(--track-color)]',
+    'bg-[var(--track-color)]',
 
     // rounded
     '[&::-webkit-progress-value]:rounded-full',
