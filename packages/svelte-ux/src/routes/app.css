@@ -16,11 +16,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: color-mix(
-      in oklab,
-      hsl(var(--color-surface-content) / 1) 20%,
-      transparent
-    );
+    border-color: color-mix(in oklab, hsl(var(--color-surface-content) / 1) 20%, transparent);
   }
 }
 
