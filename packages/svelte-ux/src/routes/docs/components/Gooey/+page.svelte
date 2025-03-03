@@ -69,7 +69,13 @@
 
 <div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Rounded text background</h2>
-  <RangeField label="blur-sm: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
+  <RangeField
+    label="blur-sm: "
+    labelPlacement="left"
+    bind:value={gooeyBlur}
+    max={13}
+    class="mb-1"
+  />
 </div>
 
 <Preview class="bg-primary">
@@ -94,7 +100,13 @@
 
 <div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Orbiting glowing dot</h2>
-  <RangeField label="blur-sm: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
+  <RangeField
+    label="blur-sm: "
+    labelPlacement="left"
+    bind:value={gooeyBlur}
+    max={13}
+    class="mb-1"
+  />
 </div>
 
 <Preview class="bg-gradient-radial from-neutral-600 to-neutral-800">
@@ -128,7 +140,13 @@
 
 <div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Scanning glowing dot</h2>
-  <RangeField label="blur-sm: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
+  <RangeField
+    label="blur-sm: "
+    labelPlacement="left"
+    bind:value={gooeyBlur}
+    max={13}
+    class="mb-1"
+  />
 </div>
 
 <Preview class="bg-gradient-radial from-neutral-600 to-neutral-800 text-center">
@@ -163,7 +181,13 @@
 
 <div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Converging dots</h2>
-  <RangeField label="blur-sm: " labelPlacement="left" bind:value={gooeyBlur} max={10} class="mb-1" />
+  <RangeField
+    label="blur-sm: "
+    labelPlacement="left"
+    bind:value={gooeyBlur}
+    max={10}
+    class="mb-1"
+  />
 </div>
 
 <Preview class="text-center">
@@ -183,7 +207,13 @@
 
 <div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Gooey mouse</h2>
-  <RangeField label="blur-sm: " labelPlacement="left" bind:value={gooeyBlur} max={10} class="mb-1" />
+  <RangeField
+    label="blur-sm: "
+    labelPlacement="left"
+    bind:value={gooeyBlur}
+    max={10}
+    class="mb-1"
+  />
 </div>
 
 <Preview class="relative overflow-hidden">

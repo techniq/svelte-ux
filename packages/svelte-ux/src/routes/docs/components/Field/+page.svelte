@@ -203,7 +203,10 @@
 
 <Preview>
   <Field label="Position" let:id>
-    <select {id} class="text-sm w-full outline-hidden appearance-none cursor-pointer bg-surface-100">
+    <select
+      {id}
+      class="text-sm w-full outline-hidden appearance-none cursor-pointer bg-surface-100"
+    >
       <option value={1}>First</option>
       <option value={2}>Second</option>
       <option value={3}>Third</option>
