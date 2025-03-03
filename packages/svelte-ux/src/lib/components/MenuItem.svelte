@@ -51,7 +51,7 @@
   {...$$restProps}
   class={cls(
     'MenuItem',
-    'text-left items-center p-2 hover:bg-surface-content/5 rounded duration-75',
+    'text-left items-center p-2 hover:bg-surface-content/5 rounded-sm duration-75',
     selected && classes?.selected,
     settingsClasses.root,
     classes?.root,

@@ -30,7 +30,7 @@
   export let variant: ComponentProps<Button>['variant'] = defaults.variant;
   export let size: ComponentProps<Button>['size'] | undefined = defaults.size;
   export let color: ComponentProps<Button>['color'] | undefined = defaults.color;
-  export let rounded: ComponentProps<Button>['rounded'] | undefined = defaults.rounded;
+  export let rounded: ComponentProps<Button>['rounded-sm'] | undefined = defaults.rounded;
   export let disabled: boolean = false;
   let className: string | undefined = undefined;
   export { className as class };

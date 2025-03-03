@@ -121,10 +121,10 @@ Semantic and state colors have a default color (ex. `bg-primary`), shades `50`-`
 
 <Preview>
   <div class="grid grid-cols-2 gap-2">
-    <div class="bg-primary text-primary-content px-2 rounded">primary example</div>
-    <div class="bg-secondary text-secondary-content px-2 rounded">secondary example</div>
-    <div class="bg-success text-success-content px-2 rounded">Success example</div>
-    <div class="bg-danger text-danger-content px-2 rounded">danger example</div>
+    <div class="bg-primary text-primary-content px-2 rounded-sm">primary example</div>
+    <div class="bg-secondary text-secondary-content px-2 rounded-sm">secondary example</div>
+    <div class="bg-success text-success-content px-2 rounded-sm">Success example</div>
+    <div class="bg-danger text-danger-content px-2 rounded-sm">danger example</div>
   </div>
 </Preview>
 
@@ -132,9 +132,9 @@ Surface colors are defined as `100` (lightest), `200` (medium), and `300` (darke
 
 <Preview>
   <div class="grid grid-cols-3 gap-2">
-    <div class="bg-surface-100 text-surface-content px-2 rounded">surface-100 example</div>
-    <div class="bg-surface-200 text-surface-content px-2 rounded">surface-200 example</div>
-    <div class="bg-surface-300 text-surface-content px-2 rounded">surface-300 example</div>
+    <div class="bg-surface-100 text-surface-content px-2 rounded-sm">surface-100 example</div>
+    <div class="bg-surface-200 text-surface-content px-2 rounded-sm">surface-200 example</div>
+    <div class="bg-surface-300 text-surface-content px-2 rounded-sm">surface-300 example</div>
   </div>
 </Preview>
 
@@ -147,8 +147,8 @@ Colors can be referenced using Tailwind classes such as `bg-primary`, `text-prim
 You can also reference the colors using `theme()`, which is helpful to set CSS variables.
 
 ```html
-<div class="[--text-color:theme(colors.primary)]" />
-<div class="[--text-color:theme(colors.primary/50%)]" />
+<div class="[--text-color:var(--color-primary)]" />
+<div class="[--text-color:var(--color-primary)]/50" />
 
 <style>
   div {
@@ -238,7 +238,7 @@ These are typically setup within your root `+layout.svelte`.
 To easily change the active theme, [ThemeSelect](/docs/components/ThemeSelect) and [ThemeSwitch](/docs/components/ThemeSwitch) are provided. `ThemeSwitch` can be used to simply toggle between `light` and `dark` themes, and `ThemeSelect` supports selecting a theme when additional light and/or dark themes are defined.
 
 <Preview>
-  <div class="grid grid-cols-[auto,1fr] gap-3 items-center justify-items-start">
+  <div class="grid grid-cols-[auto_1fr] gap-3 items-center justify-items-start">
     <div class="font-semibold text-sm">ThemeSwitch</div>
     <ThemeSwitch />
     <div class="font-semibold text-sm">ThemeSelect</div>

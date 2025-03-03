@@ -113,7 +113,7 @@
   <button
     type="button"
     class={cls(
-      'text-sm whitespace-nowrap w-full focus:outline-none',
+      'text-sm whitespace-nowrap w-full focus:outline-hidden',
       center ? 'text-center' : 'text-left'
     )}
     on:click={() => (open = true)}
@@ -164,7 +164,7 @@
 <Dialog
   classes={{
     ...classes.dialog,
-    dialog: cls('max-h-[90vh] grid grid-rows-[auto,1fr,auto]', classes.dialog?.dialog),
+    dialog: cls('max-h-[90vh] grid grid-rows-[auto_1fr_auto]', classes.dialog?.dialog),
   }}
   bind:open
 >
