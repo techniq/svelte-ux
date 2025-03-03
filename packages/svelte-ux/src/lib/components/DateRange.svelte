@@ -173,7 +173,7 @@
   class={cls(
     'DateRange grid gap-2',
     'w-[min(90vw,384px)]',
-    showSidebar && 'md:w-[640px] md:grid-cols-[2fr,3fr]',
+    showSidebar && 'md:w-[640px] md:grid-cols-[2fr_3fr]',
     settingsClasses.root,
     className
   )}
@@ -305,7 +305,7 @@
     </div>
   {/if}
 
-  <div class="bg-surface-100 border rounded overflow-auto">
+  <div class="bg-surface-100 border rounded-sm overflow-auto">
     <DateSelect
       {selected}
       periodType={selectedPeriodType}

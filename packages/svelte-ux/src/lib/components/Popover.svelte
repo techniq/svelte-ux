@@ -67,7 +67,7 @@
 {#if open}
   <!-- @ts-expect-error -->
   <div
-    class={cls('Popover absolute z-50 outline-none', settingsClasses.root, className)}
+    class={cls('Popover absolute z-50 outline-hidden', settingsClasses.root, className)}
     {style}
     tabindex="-1"
     use:popover={{ anchorEl, placement, autoPlacement, offset, padding, matchWidth, resize }}

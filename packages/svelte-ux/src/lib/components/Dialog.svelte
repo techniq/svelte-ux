@@ -111,7 +111,7 @@
   >
     <div
       class={cls(
-        'dialog rounded bg-surface-100 elevation-4 overflow-y-auto pointer-events-auto relative outline-none',
+        'dialog rounded-sm bg-surface-100 elevation-4 overflow-y-auto pointer-events-auto relative outline-hidden',
         settingsClasses.dialog,
         classes.dialog,
         $$props.class
@@ -128,7 +128,7 @@
       role="dialog"
     >
       {#if loading}
-        <Overlay center class="rounded">
+        <Overlay center class="rounded-sm">
           <ProgressCircle />
         </Overlay>
       {/if}

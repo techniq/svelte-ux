@@ -29,7 +29,7 @@
   <Tooltip>
     <div
       slot="title"
-      class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 bg-surface-content text-surface-100 px-4 py-2 text-xs rounded shadow"
+      class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 bg-surface-content text-surface-100 px-4 py-2 text-xs rounded-sm shadow-sm"
     >
       <div class="col-span-2 justify-self-center text-sm font-semibold">Tue, March 30</div>
       <div class="text-surface-100/50 justify-self-end">Actual:</div>

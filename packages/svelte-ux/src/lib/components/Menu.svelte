@@ -67,7 +67,7 @@
   {open}
   class={cls(
     'Menu',
-    'bg-surface-100 rounded shadow border overflow-auto',
+    'bg-surface-100 rounded-sm shadow-sm border overflow-auto',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -79,7 +79,7 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
   <menu
-    class={cls('menu-items outline-none max-h-screen', settingsClasses.menu, classes.menu)}
+    class={cls('menu-items outline-hidden max-h-screen', settingsClasses.menu, classes.menu)}
     bind:this={menuItemsEl}
     on:click={onClick}
     on:mouseup={(e) => {

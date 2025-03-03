@@ -221,7 +221,7 @@
       <div class="p-5">
         <div class="mb-4">
           The <span
-            class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded"
+            class="font-mono bg-primary-700/20 text-primary-500 font-medium px-1 py-0.5 rounded-sm"
             >close</span
           > method is available on every slot.
         </div>

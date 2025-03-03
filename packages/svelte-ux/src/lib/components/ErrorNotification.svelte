@@ -62,7 +62,7 @@
       {#if stackTrace}
         <div>
           <div class="text-xs text-surface-content/50 mb-1">Stacktrace:</div>
-          <pre class="bg-gray-100 border rounded p-2 text-xs">
+          <pre class="bg-gray-100 border rounded-sm p-2 text-xs">
             {stackTrace ?? '<Empty>'}
           </pre>
         </div>

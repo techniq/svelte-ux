@@ -27,7 +27,7 @@
   {...$$restProps}
 >
   <div slot="prepend" class="grid grid-stack mr-3">
-    <div class="w-6 h-6 border rounded" style:background={value}></div>
+    <div class="w-6 h-6 border rounded-sm" style:background={value}></div>
     <input
       type="color"
       value={formatHex(value)}
@@ -36,7 +36,7 @@
         value = formatColor(e.target.value, colorSpace);
         dispatch('change', { value });
       }}
-      class="w-6 h-6 rounded opacity-0 cursor-pointer"
+      class="w-6 h-6 rounded-sm opacity-0 cursor-pointer"
     />
   </div>
 </TextField>

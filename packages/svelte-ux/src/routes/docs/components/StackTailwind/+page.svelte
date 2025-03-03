@@ -71,7 +71,7 @@
 <h2>Template</h2>
 
 <Preview>
-  <div class="grid grid-flow-col grid-cols-[auto,1fr,auto] gap-2">
+  <div class="grid grid-flow-col grid-cols-[auto_1fr_auto] gap-2">
     <div class="border">item</div>
     <div class="border">item</div>
     <div class="border">item</div>
@@ -144,7 +144,7 @@
 <h2>Template</h2>
 
 <Preview>
-  <div class="grid grid-rows-[auto,1fr,auto] gap-2 h-64">
+  <div class="grid grid-rows-[auto_1fr_auto] gap-2 h-64">
     <div class="border">item</div>
     <div class="border">item</div>
     <div class="border">item</div>

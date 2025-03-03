@@ -29,11 +29,11 @@
 <svg class={cls('fixed inset-0 pointer-events-none', settingsClasses.svg, classes?.svg)}>
   <filter id={filterId}>
     {#if blur}
-      <feGaussianBlur in="SourceGraphic" stdDeviation={blur} result="blur" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation={blur-sm} result="blur-sm" />
     {/if}
 
     <feColorMatrix
-      in="blur"
+      in="blur-sm"
       type="matrix"
       values="1 0 0 0 0
               0 1 0 0 0

@@ -38,7 +38,7 @@
 >
   <div
     class={cls(
-      'flex gap-1 overflow-auto z-[1]',
+      'flex gap-1 overflow-auto z-1',
       vertical && 'flex-col',
       {
         top: '-mb-px',
