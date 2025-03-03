@@ -525,6 +525,8 @@
 </main>
 
 <style lang="postcss">
+  @reference "../app.css";
+
   .swatch {
     @apply rounded-lg overflow-hidden border;
   }
