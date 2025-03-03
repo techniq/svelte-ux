@@ -232,7 +232,7 @@
 <div
   class={cls(
     'RangeSlider',
-    'group relative h-2 bg-surface-content/10 rounded-full select-none outline-none',
+    'group relative h-2 bg-surface-content/10 rounded-full select-none outline-hidden',
     disabled && ' pointer-events-none opacity-50',
     settingsClasses.root,
     className
@@ -321,7 +321,7 @@
   {#if showStartValue && !disableTooltips}
     <output
       style="left: calc(var(--start) * 100%);"
-      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow"
+      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow-sm"
       transition:fly={{ y: 4, duration: 300 }}
     >
       {value[0]}
@@ -331,7 +331,7 @@
   {#if showEndValue && !disableTooltips}
     <output
       style="left: calc(var(--end) * 100%);"
-      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow"
+      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow-sm"
       transition:fly={{ y: 4, duration: 300 }}
     >
       {value[1]}

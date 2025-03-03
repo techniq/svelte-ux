@@ -57,7 +57,7 @@
   {#if icon}
     <Icon
       data={icon}
-      class={cls('mr-3 flex-shrink-0', settingsClasses.icon)}
+      class={cls('mr-3 shrink-0', settingsClasses.icon)}
       classes={classes.icon}
     />
   {/if}

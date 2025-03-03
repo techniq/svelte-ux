@@ -35,14 +35,14 @@
   {...$$restProps}
   class={cls(
     'Card',
-    'relative z-0 bg-surface-100 border rounded elevation-1 flex flex-col justify-between',
+    'relative z-0 bg-surface-100 border rounded-sm elevation-1 flex flex-col justify-between',
     settingsClasses.root,
     classes.root,
     className
   )}
 >
   {#if loading}
-    <Overlay center class="rounded">
+    <Overlay center class="rounded-sm">
       <ProgressCircle />
     </Overlay>
   {/if}
