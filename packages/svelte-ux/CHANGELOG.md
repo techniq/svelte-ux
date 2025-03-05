@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.1
+
+### Patch Changes
+
+- fix: Do not register default light and dark themes when `settings()` context is not available. Fix interop with other frameworks (shadcn-svelte, Skeleton, etc)
+
 ## 1.0.0
 
 ### Major Changes
