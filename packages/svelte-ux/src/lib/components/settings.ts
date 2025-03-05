@@ -134,7 +134,7 @@ let FALLBACK_SETTINGS: Settings | null = null;
 
 function getFallbackSettings() {
   FALLBACK_SETTINGS = FALLBACK_SETTINGS ?? {
-    currentTheme: createThemeStore({ light: ['light'], dark: ['dark'] }),
+    currentTheme: createThemeStore({ light: [], dark: [] }),
     componentSettingsCache: {},
     showDrawer: createShowDrawer(),
     ...createLocaleStores({}),
