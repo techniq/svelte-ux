@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.2
+
+### Patch Changes
+
+- fix: Update `@layerstack/svelte-stores` with improved `themeStore` when not using `settings()` context
+
 ## 1.0.1
 
 ### Patch Changes
