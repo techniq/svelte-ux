@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 
-@config '../../tailwind.config.cjs';
+@import '@layerstack/tailwind/theme.css';
+@import '@layerstack/tailwind/themes/all.css';
+@import '@layerstack/tailwind/utils.css';
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -16,7 +18,8 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: color-mix(in oklab, hsl(var(--color-surface-content) / 1) 20%, transparent);
+    border-color: color-mix(in oklab, var(--color-surface-content) 20%, transparent);
+    outline-color: color-mix(in oklab, var(--color-surface-content) 20%, transparent);
   }
 }
 

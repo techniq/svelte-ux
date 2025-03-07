@@ -57,7 +57,7 @@
     "@layerstack/svelte-actions": "^1.0.0",
     "@layerstack/svelte-stores": "^1.0.1",
     "@layerstack/svelte-table": "^1.0.0",
-    "@layerstack/tailwind": "^1.0.0",
+    "@layerstack/tailwind": "https://pkg.pr.new/@layerstack/tailwind@32",
     "@layerstack/utils": "^1.0.0",
     "@mdi/js": "^7.4.47",
     "culori": "^4.0.1",
