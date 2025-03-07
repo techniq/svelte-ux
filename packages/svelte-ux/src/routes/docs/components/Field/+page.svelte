@@ -130,7 +130,7 @@
     </div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup variant="outline" inset rounded="full" size="sm" class="w-full">
+        <ToggleGroup variant="outline" inset rounded-sm="full" size="sm" class="w-full">
           <ToggleOption value="yes">Yes</ToggleOption>
           <ToggleOption value="no">No</ToggleOption>
           <ToggleOption value="all">All</ToggleOption>
@@ -144,7 +144,7 @@
     <div class="text-xs font-semibold text-surface-content/50 mb-1 ml-2">with icons</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup variant="outline" inset rounded="full">
+        <ToggleGroup variant="outline" inset rounded-sm="full">
           <ToggleOption value="yes">
             <Icon data={mdiAccount} />
           </ToggleOption>
@@ -172,7 +172,7 @@
 
 <Preview>
   <Field label="Date of Birth" let:id>
-    <input {id} type="date" class="text-sm w-full outline-none bg-surface-100" />
+    <input {id} type="date" class="text-sm w-full outline-hidden bg-surface-100" />
   </Field>
 </Preview>
 
@@ -186,7 +186,7 @@
       min={0}
       max={10}
       step={1}
-      class="w-full outline-none bg-surface-100"
+      class="w-full outline-hidden bg-surface-100"
     />
   </Field>
 </Preview>
@@ -203,7 +203,10 @@
 
 <Preview>
   <Field label="Position" let:id>
-    <select {id} class="text-sm w-full outline-none appearance-none cursor-pointer bg-surface-100">
+    <select
+      {id}
+      class="text-sm w-full outline-hidden appearance-none cursor-pointer bg-surface-100"
+    >
       <option value={1}>First</option>
       <option value={2}>Second</option>
       <option value={3}>Third</option>

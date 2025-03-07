@@ -118,7 +118,7 @@
     ) {
       hide();
     } else {
-      logger.debug('ignoring blur');
+      logger.debug('ignoring blur-sm');
     }
   }
 

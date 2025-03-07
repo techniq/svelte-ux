@@ -15,8 +15,8 @@
 
 <h2>Demo</h2>
 
-<div class="border rounded bg-surface-100">
-  <div class="grid grid-cols-[1fr,auto] items-center justify-items-center gap-4">
+<div class="border rounded-sm bg-surface-100">
+  <div class="grid grid-cols-[1fr_auto] items-center justify-items-center gap-4">
     <ProgressCircle value={indeterminate ? null : value} {size} {width} {rotate} {track}>
       {#if label}
         <span class="text-surface-content/50 text-xs">
@@ -176,10 +176,10 @@
 
 <Preview>
   <div class="flex gap-4">
-    <ProgressCircle class="text-blue-500 [--track-color:theme(colors.blue.500/10%)]" track />
-    <ProgressCircle class="text-danger [--track-color:theme(colors.danger/10%)]" track />
-    <ProgressCircle class="text-info [--track-color:theme(colors.info/10%)]" track />
-    <ProgressCircle class="text-success [--track-color:theme(colors.success/10%)]" track />
-    <ProgressCircle class="text-warning [--track-color:theme(colors.warning/10%)]" track />
+    <ProgressCircle class="text-blue-500 [--track-color:var(--color-blue-500)]/10" track />
+    <ProgressCircle class="text-danger [--track-color:var(--color-danger)]/10" track />
+    <ProgressCircle class="text-info [--track-color:var(--color-info)]/10" track />
+    <ProgressCircle class="text-success [--track-color:var(--color-success)]/10" track />
+    <ProgressCircle class="text-warning [--track-color:var(--color-warning)]/10" track />
   </div>
 </Preview>
