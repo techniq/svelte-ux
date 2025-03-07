@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import { mdiChevronDown, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
 
   import {
@@ -539,4 +539,4 @@
   .shade span {
     @apply bg-black/10 rounded px-2 text-white;
   }
-</style>
+</style> -->
