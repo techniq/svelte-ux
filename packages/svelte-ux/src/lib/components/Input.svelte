@@ -146,14 +146,14 @@
     if (value === mask) {
       value = '';
     }
-    dispatch('blur', e);
+    dispatch('blur-sm', e);
   }}
   on:blur
   use:multi={actions}
   {...$$restProps}
   class={cls(
     'Input',
-    'text-sm w-full outline-none bg-transparent placeholder-surface/50 selection:bg-surface-content/10',
+    'text-sm w-full outline-hidden bg-transparent placeholder-surface/50 selection:bg-surface-content/10',
     mask && (mask == placeholder || isFocused || value) && 'font-mono',
     settingsClasses.root,
     className

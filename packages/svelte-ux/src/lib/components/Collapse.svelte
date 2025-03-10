@@ -62,7 +62,7 @@
 >
   <button
     type="button"
-    class="flex items-center w-full text-left select-text focus:outline-none"
+    class="flex items-center w-full text-left select-text focus:outline-hidden"
     {disabled}
     on:click={() => {
       open = !open;

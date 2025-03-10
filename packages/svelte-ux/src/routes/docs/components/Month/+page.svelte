@@ -154,7 +154,7 @@
 <h2>Selected state w/ multi-month</h2>
 
 <Preview>
-  <div class="grid grid-cols-[1fr,1fr] gap-10">
+  <div class="grid grid-cols-[1fr_1fr] gap-10">
     <div>
       <Month
         selected={selectedMultiMonth}

@@ -19,12 +19,12 @@
     'h-2 w-full',
 
     // bar color
-    '[--color:theme(colors.primary)]',
+    '[--color:var(--color-primary)]',
     '[&::-webkit-progress-value]:bg-[var(--color)]',
     '[&::-moz-progress-bar]:bg-[var(--color)]',
 
     // track color
-    '[--track-color:theme(colors.surface-200)]',
+    '[--track-color:var(--color-surface-200)]',
     '[&::-webkit-progress-bar]:bg-[var(--track-color)]',
     'bg-[var(--track-color)]',
 

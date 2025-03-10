@@ -87,7 +87,7 @@
     <svelte:fragment slot="beforeOptions" let:selection>
       {#if selection.isMaxSelected()}
         <div
-          class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded mb-1"
+          class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded-sm mb-1"
           transition:slide
         >
           Maximum selection reached

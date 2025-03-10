@@ -41,7 +41,7 @@
 
 <Preview class="bg-neutral-700">
   <Shine depth={3} lightColor="#FF0000">
-    <div class="text-[9rem] leading-[9rem] grayscale-[100] brightness-50">👻 💀 🧪</div>
+    <div class="text-[9rem] leading-[9rem] grayscale-100 brightness-50">👻 💀 🧪</div>
   </Shine>
 </Preview>
 

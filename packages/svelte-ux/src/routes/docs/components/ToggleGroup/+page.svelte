@@ -18,7 +18,7 @@
 
   let variant: ComponentProps<ToggleGroup>['variant'] = 'default';
   let size: ComponentProps<ToggleGroup>['size'] = 'md';
-  let rounded: ComponentProps<ToggleGroup>['rounded'] = true;
+  let rounded: ComponentProps<ToggleGroup>['rounded-sm'] = true;
   let inset: ComponentProps<ToggleGroup>['inset'] = false;
   let gap: ComponentProps<ToggleGroup>['gap'] = false;
   let vertical: ComponentProps<ToggleGroup>['vertical'] = false;
@@ -46,7 +46,7 @@
 
         <svelte:fragment slot="panes">
           {#if showPanes}
-            <div class="mt-2 p-4 bg-surface-content/5 rounded border">
+            <div class="mt-2 p-4 bg-surface-content/5 rounded-sm border">
               <TogglePanel>All panel</TogglePanel>
               <TogglePanel>Missed panel</TogglePanel>
               <TogglePanel>Calls panel</TogglePanel>
@@ -75,9 +75,9 @@
     </Field>
 
     <Field label="Rounded" classes={{ container: 'h-full', input: 'flex gap-3 md:grid md:gap-1' }}>
-      <Radio name="rounded" value={false} bind:group={rounded}>false</Radio>
-      <Radio name="rounded" value={true} bind:group={rounded}>true</Radio>
-      <Radio name="rounded" value="full" bind:group={rounded}>full</Radio>
+      <Radio name="rounded-sm" value={false} bind:group={rounded}>false</Radio>
+      <Radio name="rounded-sm" value={true} bind:group={rounded}>true</Radio>
+      <Radio name="rounded-sm" value="full" bind:group={rounded}>full</Radio>
     </Field>
 
     <Field label="Gap" classes={{ container: 'h-full', input: 'flex gap-3 md:grid md:gap-1' }}>

@@ -27,7 +27,7 @@
 
 <h1>Examples</h1>
 
-<div class="grid grid-cols-[1fr,auto] items-center gap-2">
+<div class="grid grid-cols-[1fr_auto] items-center gap-2">
   <h2>Material Design icons</h2>
 
   <ButtonGroup variant="fill-light" color="primary" size="sm">
@@ -58,7 +58,7 @@
   </Icon>
 </Preview>
 
-<div class="grid grid-cols-[1fr,auto] items-center gap-2">
+<div class="grid grid-cols-[1fr_auto] items-center gap-2">
   <h2>Font Awesome icons</h2>
   <ButtonGroup variant="fill-light" color="primary" size="sm">
     <Button
@@ -76,7 +76,7 @@
   <Icon data={faUser} />
 </Preview>
 
-<div class="grid grid-cols-[1fr,auto] items-center gap-2">
+<div class="grid grid-cols-[1fr_auto] items-center gap-2">
   <h2>Material Symbols font</h2>
 
   <ButtonGroup variant="fill-light" color="primary" size="sm">
