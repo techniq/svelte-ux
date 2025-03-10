@@ -33,7 +33,7 @@
     "@types/prismjs": "^1.26.5",
     "@vitest/coverage-v8": "^3.0.7",
     "autoprefixer": "^10.4.20",
-    "daisyui": "^4.12.24",
+    "daisyui": "^5.0.0",
     "marked": "^15.0.7",
     "mdsvex": "^0.12.3",
     "posthog-js": "^1.223.4",
