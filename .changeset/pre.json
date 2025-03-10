@@ -4,5 +4,7 @@
   "initialVersions": {
     "svelte-ux": "1.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "ready-planets-deny"
+  ]
 }
