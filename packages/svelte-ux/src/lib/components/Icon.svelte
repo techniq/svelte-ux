@@ -84,7 +84,7 @@
   <span
     class={cls(
       'Icon',
-      'icon-container inline-block flex-shrink-0 align-middle fill-current',
+      'icon-container inline-block shrink-0 align-middle fill-current',
       settingsClasses.root,
       classes.root,
       $$props.class
@@ -109,7 +109,7 @@
     {viewBox}
     class={cls(
       'Icon',
-      'inline-block flex-shrink-0 fill-current',
+      'inline-block shrink-0 fill-current',
       settingsClasses.root,
       classes.root,
       $$props.class

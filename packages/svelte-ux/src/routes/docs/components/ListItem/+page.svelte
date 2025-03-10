@@ -102,7 +102,7 @@
 <h3>example 1</h3>
 
 <Preview>
-  <div class="rounded border">
+  <div class="rounded-sm border">
     {#each choices as choice}
       <ListItem
         title={choice.name}
@@ -129,14 +129,14 @@
 <Preview>
   <div class="grid gap-4">
     {#each choices as choice}
-      <div class="elevation-1 rounded">
+      <div class="elevation-1 rounded-sm">
         <ListItem
           title={choice.name}
           subheading={choice.description}
           on:click={() => (selectedId = choice.id)}
           class={cls(
             'px-8 py-4',
-            'cursor-pointer ring ring-inset ring-primary transition-shadow duration-100',
+            'cursor-pointer ring-3 ring-inset ring-primary transition-shadow duration-100',
             'hover:bg-primary/5',
             selectedId == choice.id ? 'ring-1 bg-primary/5' : 'ring-0'
           )}

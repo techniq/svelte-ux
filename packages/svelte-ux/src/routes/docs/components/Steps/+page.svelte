@@ -131,12 +131,12 @@
 
 <Preview>
   <div class="inline-grid gap-2 justify-items-center">
-    <Steps data={stepsWithIcon} classes={{ item: { line: 'h-1 w-1/2 rounded' } }} />
+    <Steps data={stepsWithIcon} classes={{ item: { line: 'h-1 w-1/2 rounded-sm' } }} />
     <div>or</div>
     <Steps
       data={stepsWithIcon}
       classes={{
-        item: { label: 'z-[1]', point: 'outline outline-[20px] outline-surface-100', line: 'h-1' },
+        item: { label: 'z-1', point: 'outline outline-[20px] outline-surface-100', line: 'h-1' },
       }}
     />
   </div>
@@ -181,7 +181,7 @@
     classes={{
       item: {
         point: 'size-10',
-        completed: 'bg-gradient-to-br from-primary to-secondary text-primary-content',
+        completed: 'bg-linear-to-br from-primary to-secondary text-primary-content',
       },
     }}
   />
@@ -196,7 +196,7 @@
     classes={{
       item: {
         point: 'size-10',
-        completed: 'bg-gradient-to-br from-primary to-secondary text-primary-content',
+        completed: 'bg-linear-to-br from-primary to-secondary text-primary-content',
       },
     }}
   />
