@@ -30,26 +30,26 @@
 <h2>Color</h2>
 
 <Preview>
-  <Progress value={0.5} class="[--color:theme(colors.success)]" />
-  <Progress value={0.7} class="[--color:theme(colors.warning)]" />
-  <Progress value={0.9} class="[--color:theme(colors.danger)]" />
+  <Progress value={0.5} class="[--color:var(--color-success)]" />
+  <Progress value={0.7} class="[--color:var(--color-warning)]" />
+  <Progress value={0.9} class="[--color:var(--color-danger)]" />
 </Preview>
 
 <h2>Track color</h2>
 
 <Preview>
-  <Progress value={0.5} class="[--track-color:theme(colors.primary/5%)]" />
+  <Progress value={0.5} class="[--track-color:var(--color-primary)]/5" />
   <Progress
     value={0.5}
-    class="[--color:theme(colors.success)] [--track-color:theme(colors.success/5%)]"
+    class="[--color:var(--color-success)] [--track-color:var(--color-success)]/5"
   />
   <Progress
     value={0.7}
-    class="[--color:theme(colors.warning)] [--track-color:theme(colors.warning/5%)]"
+    class="[--color:var(--color-warning)] [--track-color:var(--color-warning)]/5"
   />
   <Progress
     value={0.9}
-    class="[--color:theme(colors.danger)] [--track-color:theme(colors.danger/5%)]"
+    class="[--color:var(--color-danger)] [--track-color:var(--color-danger)]/5"
   />
 </Preview>
 
@@ -60,10 +60,10 @@
     bind:value
     class={cls(
       value > 90
-        ? '[--color:theme(colors.danger)]'
+        ? '[--color:var(--color-danger)]'
         : value > 50
-          ? '[--color:theme(colors.warning)]'
-          : '[--color:theme(colors.success)]'
+          ? '[--color:var(--color-warning)]'
+          : '[--color:var(--color-success)]'
     )}
     max={100}
   />

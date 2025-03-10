@@ -59,7 +59,7 @@
   bind:open
   classes={{
     root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, $$props.class),
-    backdrop: 'backdrop-blur-sm',
+    backdrop: 'backdrop-blur-xs',
   }}
 >
   <SelectField

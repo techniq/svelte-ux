@@ -296,7 +296,7 @@
         )}
         scrollIntoView={index === highlightIndex}
       >
-        <div class="grid grid-cols-[1fr,auto] items-center w-full">
+        <div class="grid grid-cols-[1fr_auto] items-center w-full">
           <div>
             <div>{option.label}</div>
             <div class="text-sm text-surface-content/50">{option.value}</div>
@@ -305,7 +305,7 @@
             <Toggle let:on={open} let:toggle let:toggleOff>
               <Button
                 icon={mdiPencil}
-                class="p-1 text-xs text-surface-content/50 z-[9999]"
+                class="p-1 text-xs text-surface-content/50 z-9999"
                 on:click={toggle}
               />
               <Drawer {open} on:close={toggleOff} class="w-[400px]">

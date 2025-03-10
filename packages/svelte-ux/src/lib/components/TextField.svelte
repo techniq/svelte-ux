@@ -217,9 +217,9 @@
     'TextField',
     'group flex gap-1',
     labelPlacement !== 'left' ? 'flex-col' : 'items-center',
-    error ? '[--color:theme(colors.danger)]' : '[--color:theme(colors.primary)]',
+    error ? '[--color:var(--color-danger)]' : '[--color:var(--color-primary)]',
     disabled && 'opacity-50 pointer-events-none',
-    !base && (rounded ? 'rounded-full' : 'rounded'),
+    !base && (rounded ? 'rounded-full' : 'rounded-sm'),
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -231,7 +231,7 @@
       class={cls(
         'label',
         'block text-sm font-medium',
-        'truncate group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+        'truncate group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-focus-within:group-hover:text-(--color) cursor-pointer',
         error ? 'text-danger/80' : 'text-surface-content/50',
         `placement-${labelPlacement}`,
         settingsClasses.label,
@@ -246,15 +246,15 @@
     <div
       class={cls(
         'border py-0 transition-shadow',
-        disabled ? '' : 'hover:shadow',
+        disabled ? '' : 'hover:shadow-sm',
         disabled ? '' : error ? 'hover:border-danger' : 'hover:border-surface-content',
         {
           'px-2': !rounded,
           'px-6': rounded && !hasPrepend, // TODO: `hasPrepend` always true for SelectField, etc.  See: https://github.com/sveltejs/svelte/issues/6059
         },
-        !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
+        !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded-sm'],
         error && 'border-danger',
-        'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
+        'group-focus-within:shadow-md group-focus-within:border-[var(--color)]!',
         settingsClasses.container,
         classes.container
       )}
@@ -279,12 +279,12 @@
         {/if}
 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div role={role === 'combobox' ? role : undefined} class="flex-grow inline-grid" on:click>
+        <div role={role === 'combobox' ? role : undefined} class="grow inline-grid" on:click>
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <span
               class={cls(
                 'label',
-                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+                'col-span-full row-span-full z-1 flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-focus-within:group-hover:text-(--color) cursor-pointer',
                 error ? 'text-danger/80' : 'text-surface-content/50',
                 `placement-${labelPlacement}`,
                 (labelPlacement === 'inset' || hasInputValue) && 'shrink',
@@ -332,10 +332,11 @@
                 on:keydown
                 on:keypress
                 class={cls(
-                  'text-sm border-none w-full bg-transparent outline-none resize-none',
-                  'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
+                  'text-sm border-none w-full bg-transparent outline-hidden resize-none',
+                  'placeholder-surface-content/0 group-focus-within:placeholder-surface-content/50',
                   error && 'placeholder-danger',
-                  (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-50',
+                  (labelPlacement !== 'float' || !hasInsetLabel) &&
+                    'placeholder-surface-content/50',
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
@@ -372,11 +373,12 @@
                 on:keydown
                 on:keypress
                 class={cls(
-                  'text-sm border-none w-full bg-transparent outline-none truncate',
+                  'text-sm border-none w-full bg-transparent outline-hidden truncate',
                   'selection:bg-surface-content/30',
-                  'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
+                  'placeholder-surface-content/0 group-focus-within:placeholder-surface-content/50',
                   error && 'placeholder-danger',
-                  (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-50',
+                  (labelPlacement !== 'float' || !hasInsetLabel) &&
+                    'placeholder-surface-content/50',
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
@@ -424,7 +426,7 @@
                 {disabled}
                 value={operator}
                 on:change={onSelectChange}
-                class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
+                class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-2 text-sm outline-hidden focus:border-opacity-50 focus:shadow-md"
                 style="text-align-last: center;"
               >
                 {#each operators ?? [] as { label, value }}

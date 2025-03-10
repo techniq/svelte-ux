@@ -34,7 +34,7 @@
   <Button on:click={() => (minYear -= 10)}>More</Button>
 
   {#each years ?? [] as year (year)}
-    <div class="grid grid-cols-[auto,1fr] items-center gap-2 p-2">
+    <div class="grid grid-cols-[auto_1fr] items-center gap-2 p-2">
       <div class="text-xl font-bold">
         {year}
       </div>
