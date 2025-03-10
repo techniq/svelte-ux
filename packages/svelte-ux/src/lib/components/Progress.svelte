@@ -11,7 +11,7 @@
 </script>
 
 <progress
-  {value}
+  value={value ?? 0}
   {max}
   {...$$restProps}
   class={cls(
