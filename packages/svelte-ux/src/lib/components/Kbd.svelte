@@ -14,7 +14,7 @@
   class={cls(
     'font-sans inline-flex gap-1',
     variant === 'filled' &&
-      'border border-b-2 text-surface-content bg-surface-200 rounded py-1 px-1',
+      'border border-b-2 text-surface-content bg-surface-200 rounded-sm py-1 px-1',
     $$props.class
   )}
 >

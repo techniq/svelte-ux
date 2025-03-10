@@ -85,7 +85,7 @@
 <h2>Color</h2>
 
 <Preview>
-  <div class="inline-grid grid-cols-[auto,auto] gap-2">
+  <div class="inline-grid grid-cols-[auto_auto] gap-2">
     <Switch color="primary" />
     <Switch checked color="primary" />
     <Switch color="secondary" />

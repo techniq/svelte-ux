@@ -15,7 +15,7 @@
   export let showCode = false;
 </script>
 
-<div class={cls('Preview border rounded bg-surface-100', $$props.class)}>
+<div class={cls('Preview border rounded-sm bg-surface-100', $$props.class)}>
   <div class="p-4">
     <slot />
   </div>

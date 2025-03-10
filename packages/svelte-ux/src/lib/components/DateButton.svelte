@@ -90,9 +90,9 @@
     'inline-flex items-center justify-center',
     isSelectedStart
       ? '[--tw-gradient-from:transparent]'
-      : '[--tw-gradient-from:theme(colors.primary)]',
-    isSelectedEnd ? '[--tw-gradient-to:transparent]' : '[--tw-gradient-to:theme(colors.primary)]',
-    isSelected && (isVerticalSelection ? 'bg-gradient-to-b' : 'bg-gradient-to-r'),
+      : '[--tw-gradient-from:var(--color-primary)]',
+    isSelectedEnd ? '[--tw-gradient-to:transparent]' : '[--tw-gradient-to:var(--color-primary)]',
+    isSelected && (isVerticalSelection ? 'bg-linear-to-b' : 'bg-linear-to-r'),
     hidden && 'opacity-0 pointer-events-none',
     settingsClasses.root,
     className
