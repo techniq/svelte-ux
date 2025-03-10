@@ -254,7 +254,7 @@
         },
         !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded-sm'],
         error && 'border-danger',
-        'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
+        'group-focus-within:shadow-md group-focus-within:border-[var(--color)]!',
         settingsClasses.container,
         classes.container
       )}
@@ -333,9 +333,10 @@
                 on:keypress
                 class={cls(
                   'text-sm border-none w-full bg-transparent outline-hidden resize-none',
-                  'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
+                  'placeholder-surface-content/0 group-focus-within:placeholder-surface-content/50',
                   error && 'placeholder-danger',
-                  (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-50',
+                  (labelPlacement !== 'float' || !hasInsetLabel) &&
+                    'placeholder-surface-content/50',
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
@@ -374,9 +375,10 @@
                 class={cls(
                   'text-sm border-none w-full bg-transparent outline-hidden truncate',
                   'selection:bg-surface-content/30',
-                  'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
+                  'placeholder-surface-content/0 group-focus-within:placeholder-surface-content/50',
                   error && 'placeholder-danger',
-                  (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-50',
+                  (labelPlacement !== 'float' || !hasInsetLabel) &&
+                    'placeholder-surface-content/50',
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
