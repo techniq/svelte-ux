@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.1
+
+### Patch Changes
+
+- fix: Use `next` releases for all `@layerstack/*` packages ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- docs: Update @layerstack/tailwind to `2.0.0-next.1`, fixing styling of tailwind typography when deployed ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.0
 
 ### Major Changes
