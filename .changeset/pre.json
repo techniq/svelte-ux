@@ -4,5 +4,8 @@
   "initialVersions": {
     "svelte-ux": "1.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "easy-adults-march",
+    "ready-planets-deny"
+  ]
 }
