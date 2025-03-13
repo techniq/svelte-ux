@@ -30,19 +30,19 @@ importers:
         specifier: ^6.7.2
         version: 6.7.2
       '@layerstack/svelte-actions':
-        specifier: next
+        specifier: 1.0.1-next.0
         version: 1.0.1-next.0
       '@layerstack/svelte-stores':
-        specifier: next
+        specifier: 1.0.2-next.0
         version: 1.0.2-next.0
       '@layerstack/svelte-table':
-        specifier: next
+        specifier: 1.0.1-next.0
         version: 1.0.1-next.0
       '@layerstack/tailwind':
-        specifier: next
-        version: 2.0.0-next.1
+        specifier: 2.0.0-next.2
+        version: 2.0.0-next.2
       '@layerstack/utils':
-        specifier: next
+        specifier: 1.1.0-next.0
         version: 1.1.0-next.0
       '@mdi/js':
         specifier: ^7.4.47
@@ -921,8 +921,8 @@ packages:
   '@layerstack/svelte-table@1.0.1-next.0':
     resolution: {integrity: sha512-ykoibfHRfMz7LPXy8+xOvF8p793wvh7mcPwaS+QxphG3j5oGqMAkRNyP/UUubZnmPS/ye5T9Xp5IB1hBaWNrPw==}
 
-  '@layerstack/tailwind@2.0.0-next.1':
-    resolution: {integrity: sha512-gaO8RNvJCeqdQvZfeWnkqKKbT9CdOFxAOnqvM9pDF1IHymNOMbAjh82RB3RwRF6RHSGbITvxuqb2TmJcMY+gOw==}
+  '@layerstack/tailwind@2.0.0-next.2':
+    resolution: {integrity: sha512-ApSF+4CqczFS7rqPJ7aEOaloEPageatc1je/K6cj7nO8IPZJqynGBkQ5sJ0M5DrGDJr7x9qmfLE842oCszh6ZA==}
 
   '@layerstack/utils@1.1.0-next.0':
     resolution: {integrity: sha512-xDUHUhI8CALTYvpTlJ9P0Eo8qKIoga9w1px6GFY7aSccKjLStOFjdCFCyLe0L/EUHDODpcP1o8Vl/HaBiHP6hg==}
@@ -3267,7 +3267,7 @@ snapshots:
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/tailwind@2.0.0-next.1':
+  '@layerstack/tailwind@2.0.0-next.2':
     dependencies:
       '@layerstack/utils': 1.1.0-next.0
       clsx: 2.1.1
