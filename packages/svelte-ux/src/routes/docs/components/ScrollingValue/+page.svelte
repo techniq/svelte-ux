@@ -65,7 +65,7 @@
 
 <h1>Examples</h1>
 
-<div class="grid grid-cols-[1fr,140px] items-center gap-6">
+<div class="grid grid-cols-[1fr_140px] items-center gap-6">
   <ButtonGroup variant="fill-light" class="grid grid-flow-col ml-2">
     <Button on:click={() => (value -= 100)}>-100</Button>
     <Button on:click={() => (value -= 10)}>-10</Button>
@@ -127,7 +127,7 @@
       }}
       classes={{
         value:
-          'font-bold text-transparent bg-clip-text bg-gradient-to-b from-success-200 via-cyan-400 to-blue-500',
+          'font-bold text-transparent bg-clip-text bg-linear-to-b from-success-200 via-cyan-400 to-blue-500',
       }}
     />
   </span>
@@ -220,7 +220,7 @@
 <Preview>
   {@const startOfMonth = addMonths(firstOfMonth, value)}
   <div class="grid w-96">
-    <div class="grid grid-cols-[auto,1fr,auto] items-center justify-items-center">
+    <div class="grid grid-cols-[auto_1fr_auto] items-center justify-items-center">
       <Button icon={mdiChevronLeft} class="p-2" on:click={() => (value -= 1)} />
       <div>{$format(startOfMonth, PeriodType.Month)}</div>
       <Button icon={mdiChevronRight} class="p-2" on:click={() => (value += 1)} />

@@ -33,7 +33,7 @@
             locale.set(language.code);
           }}
           class={cls(
-            'bg-surface-100 text-surface-content font-semibold border shadow',
+            'bg-surface-100 text-surface-content font-semibold border shadow-sm',
             languageSelected === language && 'ring-2 ring-surface-content'
           )}
         >
@@ -42,7 +42,7 @@
       {/each}
     </div>
 
-    <div class="p-2 grid grid-cols-[auto,1fr] gap-2 items-center text-xs">
+    <div class="p-2 grid grid-cols-[auto_1fr] gap-2 items-center text-xs">
       <span class="font-medium">Affects date & number formats</span>
     </div>
   </Menu>

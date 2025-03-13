@@ -46,8 +46,8 @@
   style:--brightness={brightness}
   class={cls(
     'Tilt [perspective:600px]',
-    '[&>*]:[transform:rotateX(var(--rotateX))_rotateY(var(--rotateY))]',
-    '[&>*]:brightness-[var(--brightness)]',
+    '*:[transform:rotateX(var(--rotateX))_rotateY(var(--rotateY))]',
+    '*:brightness-(--brightness)',
     settingsClasses.root,
     className
   )}

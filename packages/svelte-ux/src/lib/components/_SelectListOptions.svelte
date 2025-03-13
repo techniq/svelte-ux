@@ -33,7 +33,7 @@
   tabindex="-1"
   aria-expanded={open ? 'true' : 'false'}
   class={cls(
-    '_SelectListOptions options group p-1 focus:outline-none',
+    '_SelectListOptions options group p-1 focus:outline-hidden',
     settingsClasses.options,
     classes.root
   )}

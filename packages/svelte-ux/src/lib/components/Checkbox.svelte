@@ -77,7 +77,7 @@
     class={cls(
       'checkbox',
       'inline-grid place-items-center border-2',
-      circle ? 'rounded-full' : 'rounded',
+      circle ? 'rounded-full' : 'rounded-sm',
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
         'peer-hover:border-primary peer-focus-visible:border-primary peer-focus-visible:ring-2 ring-primary/60 ring-offset-1',
