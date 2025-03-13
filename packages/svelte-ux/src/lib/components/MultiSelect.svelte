@@ -90,9 +90,9 @@
   // Filter by search text
   function applyFilter(option: MenuOption<TValue>, searchText: string) {
     const words = searchText?.toLowerCase().split(' ') ?? [];
-    const formattedSearchLabel = Array.isArray(option.searchLabel)
-      ? option.searchLabel.join(' ')
-      : option.searchLabel;
+    const formattedSearchLabel = String(
+      Array.isArray(option.searchLabel) ? option.searchLabel.join(' ') : option.searchLabel
+    );
     if (searchText) {
       return words.every((word) =>
         (formattedSearchLabel ?? option.label).toLowerCase().includes(word)
