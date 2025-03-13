@@ -243,6 +243,9 @@
 <h2>option slot with searchLabel</h2>
 
 <Preview>
+  <div class="mb-4 text-surface-content text-sm">
+    Options can be searched by their values ({options.map((o) => o.value).join(', ')})
+  </div>
   <SelectField options={options.map((o) => ({ ...o, searchLabel: [o.label, o.value] }))}>
     <svelte:fragment slot="option" let:option let:index let:selected let:highlightIndex>
       <MenuItem

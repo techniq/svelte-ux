@@ -13,7 +13,7 @@ export type MenuOption<T = any> = {
   icon?: string;
   group?: string;
   disabled?: boolean;
-  searchLabel?: string | string[];
+  searchLabel?: string | number | Array<string | number>;
 } & Record<string, any>;
 
 export type LabelPlacement = 'inset' | 'float' | 'top' | 'left';

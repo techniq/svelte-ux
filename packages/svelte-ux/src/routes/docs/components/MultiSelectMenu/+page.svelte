@@ -117,6 +117,9 @@
 <h2>inlineSearch with searchLabel</h2>
 
 <Preview>
+  <div class="mb-4 text-surface-content text-sm">
+    Options can be searched by their values ({options.map((o) => o.value).join(', ')})
+  </div>
   <span>
     <ToggleButton let:on={open} let:toggleOff transition={false}>
       {value.length} selected
@@ -137,9 +140,6 @@
       />
     </ToggleButton>
   </span>
-  <small class="mb-4">
-    Options can be searched by their values ({options.map((o) => o.value).join(', ')})
-  </small>
 </Preview>
 
 <h2>maintainOrder</h2>
