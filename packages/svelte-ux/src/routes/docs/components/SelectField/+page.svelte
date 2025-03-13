@@ -240,6 +240,29 @@
   </SelectField>
 </Preview>
 
+<h2>option slot with searchLabel</h2>
+
+<Preview>
+  <SelectField options={options.map((o) => ({ ...o, searchLabel: [o.label, o.value] }))}>
+    <svelte:fragment slot="option" let:option let:index let:selected let:highlightIndex>
+      <MenuItem
+        class={cls(
+          index === highlightIndex && 'bg-surface-content/5',
+          option === selected && 'font-semibold',
+          option.group ? 'px-4' : 'px-2'
+        )}
+        scrollIntoView={index === highlightIndex}
+        disabled={option.disabled}
+      >
+        <div>
+          <div>{option.label}</div>
+          <div class="text-sm text-surface-content/50">{option.value}</div>
+        </div>
+      </MenuItem>
+    </svelte:fragment>
+  </SelectField>
+</Preview>
+
 <h2>option slot with disabled</h2>
 
 <Preview>

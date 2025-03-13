@@ -114,6 +114,34 @@
   </span>
 </Preview>
 
+<h2>inlineSearch with searchLabel</h2>
+
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        options={options.map((o) => ({
+          ...o,
+          searchLabel: [o.label, String(o.value)],
+        }))}
+        {value}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+        inlineSearch
+        placeholder="Pick a number"
+      />
+    </ToggleButton>
+  </span>
+  <small class="mb-4">
+    Options can be searched by their values ({options.map((o) => o.value).join(', ')})
+  </small>
+</Preview>
+
 <h2>maintainOrder</h2>
 
 <Preview>

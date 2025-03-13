@@ -153,7 +153,12 @@
     } else {
       const words = text?.toLowerCase().split(' ') ?? [];
       filteredOptions = options.filter((option) => {
-        return words.every((word) => option.label.toLowerCase().includes(word));
+        const formattedSearchLabel = Array.isArray(option.searchLabel)
+          ? option.searchLabel.join(' ')
+          : option.searchLabel;
+        return words.every((word) =>
+          (formattedSearchLabel ?? option.label).toLowerCase().includes(word)
+        );
       });
     }
   };
