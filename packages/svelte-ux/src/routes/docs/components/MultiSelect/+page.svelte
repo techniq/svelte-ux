@@ -74,7 +74,12 @@
     Options can be searched by their values ({options.map((o) => o.value).join(', ')})
   </div>
   {value.length} selected
-  <MultiSelect options={options.map((o) => ({ ...o, searchLabel: [o.label, String(o.value)] }))} {value} on:change={(e) => (value = e.detail.value)} inlineSearch />
+  <MultiSelect
+    options={options.map((o) => ({ ...o, searchLabel: [o.label, String(o.value)] }))}
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+    inlineSearch
+  />
 </Preview>
 
 <h2>maintainOrder</h2>
