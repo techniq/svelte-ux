@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Switch from `@tailwindcss/postcss` to `@tailwindcss/vite`. Update all non-major packages
+
 ## 2.0.0-next.1
 
 ### Patch Changes
