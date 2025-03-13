@@ -147,15 +147,16 @@
   export let search = async (text: string) => {
     logger.debug('search', { text, open });
 
+    text = text.trim();
     if (text === '') {
       // Reset options
       filteredOptions = options;
     } else {
       const words = text?.toLowerCase().split(' ') ?? [];
       filteredOptions = options.filter((option) => {
-        const formattedSearchLabel = Array.isArray(option.searchLabel)
-          ? option.searchLabel.join(' ')
-          : option.searchLabel;
+        const formattedSearchLabel = String(
+          Array.isArray(option.searchLabel) ? option.searchLabel.join(' ') : option.searchLabel
+        );
         return words.every((word) =>
           (formattedSearchLabel ?? option.label).toLowerCase().includes(word)
         );
