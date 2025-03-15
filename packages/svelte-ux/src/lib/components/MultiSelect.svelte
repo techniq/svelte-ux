@@ -8,6 +8,7 @@
 
   import { dirtyStore, selectionStore, uniqueStore, changeStore } from '@layerstack/svelte-stores';
   import { cls } from '@layerstack/tailwind';
+  import { Logger } from '@layerstack/utils';
 
   import Button from './Button.svelte';
   import InfiniteScroll from './InfiniteScroll.svelte';
@@ -17,11 +18,12 @@
   import type { MenuOption } from '../types/index.js';
   import { getComponentClasses } from './theme.js';
 
+  const logger = new Logger('MultiSelect');
+
   export let options: MenuOption<TValue>[];
   export let value: TValue[] = [];
   export let indeterminateSelected: typeof value = [];
   export let duration = 200;
-  export let inlineSearch = false;
   export let autoFocusSearch = false;
   export let placeholder = 'Search items';
   export let optionProps: Partial<ComponentProps<MultiSelectOption>> | undefined = undefined;
@@ -88,17 +90,39 @@
   $: [selectedOptions, unselectedOptions] = partition(options, (o) => value.includes(o.value));
 
   // Filter by search text
-  function applyFilter(option: MenuOption<TValue>, searchText: string) {
-    if (searchText) {
-      return option.label.toLowerCase().includes(searchText.toLowerCase());
+  let defaultSearch = async (text: string, options: MenuOption<TValue>[]) => {
+    logger.debug('search', { text, open });
+
+    if (text === '' || options.length === 0) {
+      // Reset options
+      return options;
     } else {
-      // show all if no search set
-      return true;
+      const words = text?.toLowerCase().split(' ') ?? [];
+      return options.filter((option) => {
+        const label = option.label.toLowerCase();
+        return words.every((word) => label.includes(word));
+      });
+    }
+  };
+  let customSearch: typeof defaultSearch | boolean = false;
+  export { customSearch as search };
+  $: search = typeof customSearch === 'boolean' ? defaultSearch : customSearch;
+  $: usingSearch = customSearch !== false;
+
+  let filteredOptions: MenuOption<TValue>[] = [...(options ?? [])];
+  let filteredSelectedOptions: MenuOption<TValue>[] = [...(selectedOptions ?? [])];
+  let filteredUnselectedOptions: MenuOption<TValue>[] = [...(unselectedOptions ?? [])];
+  async function updateFilteredOptions() {
+    if (usingSearch) {
+      [filteredOptions, filteredSelectedOptions, filteredUnselectedOptions] = await Promise.all([
+        search(searchText, options ?? []),
+        search(searchText, selectedOptions ?? []),
+        search(searchText, unselectedOptions ?? []),
+      ]);
     }
   }
-  $: filteredOptions = options.filter((x) => applyFilter(x, searchText));
-  $: filteredSelectedOptions = selectedOptions.filter((x) => applyFilter(x, searchText));
-  $: filteredUnselectedOptions = unselectedOptions.filter((x) => applyFilter(x, searchText));
+  // Re-filter options when `searchText` changes
+  $: searchText, updateFilteredOptions();
 
   const selection = selectionStore({ max });
   // Only "subscribe" to value changes (not `$selection`) to fix correct `value` / topological ordering.  Should be simplified with Svelte 5
@@ -135,7 +159,7 @@
   }
 </script>
 
-{#if inlineSearch}
+{#if usingSearch}
   <div
     class={cls(
       'search',

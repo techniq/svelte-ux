@@ -92,7 +92,7 @@
   </div>
 </Preview>
 
-<h2>inlineSearch</h2>
+<h2>search</h2>
 
 <Preview>
   <span>
@@ -107,7 +107,7 @@
         }}
         {open}
         on:close={toggleOff}
-        inlineSearch
+        search
         placeholder="Pick a number"
       />
     </ToggleButton>
@@ -136,7 +136,7 @@
   </span>
 </Preview>
 
-<h2>maintainOrder w/ inlineSearch</h2>
+<h2>maintainOrder w/ search</h2>
 
 <Preview>
   <span>
@@ -151,7 +151,7 @@
         }}
         {open}
         on:close={toggleOff}
-        inlineSearch
+        search
         maintainOrder
         placeholder="Pick a number"
       />
@@ -180,7 +180,7 @@
   </span>
 </Preview>
 
-<h2>many options w/ inlineSearch</h2>
+<h2>many options w/ search</h2>
 
 <Preview>
   <span>
@@ -196,7 +196,7 @@
         {open}
         on:close={toggleOff}
         classes={{ menu: 'max-h-[360px] w-[360px]' }}
-        inlineSearch
+        search
       />
     </ToggleButton>
   </span>
@@ -218,7 +218,7 @@
         {open}
         on:close={toggleOff}
         classes={{ menu: 'max-h-[360px] w-[360px]' }}
-        inlineSearch
+        search
         infiniteScroll
       />
     </ToggleButton>
@@ -287,7 +287,7 @@
         {open}
         on:close={toggleOff}
         classes={{ menu: 'w-[360px]' }}
-        inlineSearch
+        search
       >
         <div slot="actions">
           <Button color="primary" icon={mdiPlus}>Add item</Button>
@@ -313,7 +313,7 @@
         {open}
         on:close={toggleOff}
         classes={{ menu: 'w-[360px]' }}
-        inlineSearch
+        search
       >
         <MultiSelectOption
           slot="option"
@@ -331,6 +331,66 @@
           }}
         >
           <span class="uppercase text-danger">{label}</span>
+        </MultiSelectOption>
+      </MultiSelectMenu>
+    </ToggleButton>
+  </span>
+</Preview>
+
+<h2>option slot with custom search</h2>
+
+<Preview>
+  <div class="mb-4 text-surface-content text-sm">
+    Options can be searched by their values ({options.map((o) => o.value).join(', ')})
+  </div>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        {options}
+        {value}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+        classes={{ menu: 'w-[360px]' }}
+        search={async (text, options) => {
+          text = text?.trim();
+          if (!text || options.length === 0) {
+            return options;
+          } else {
+            const words = text?.toLowerCase().split(' ') ?? [];
+            return options.filter((option) => {
+              const searchableText = [option.label, option.value].join(' ').toLowerCase();
+              return words.every((word) => searchableText.includes(word));
+            });
+          }
+        }}
+      >
+        <MultiSelectOption
+          slot="option"
+          let:option
+          let:label
+          let:value
+          let:checked
+          let:indeterminate
+          let:onChange
+          {checked}
+          {indeterminate}
+          on:change={onChange}
+          classes={{
+            root: 'py-1',
+            container: 'flex items-center gap-1',
+          }}
+        >
+          <span
+            class="grid place-items-center size-6 text-xs rounded-full bg-surface-content/15 text-surface-content/75"
+          >
+            {value}
+          </span>
+          {label}
         </MultiSelectOption>
       </MultiSelectMenu>
     </ToggleButton>
