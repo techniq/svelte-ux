@@ -21,7 +21,7 @@
   export let placement: Placement = 'bottom-start';
   export let autoPlacement = true;
   export let search: MultiSelectProps['search'] = false;
-  export let autoFocusSearch = search;
+  export let autoFocusSearch = Boolean(search);
   export let placeholder: string | undefined = undefined;
   export let infiniteScroll = false;
   export let searchText = '';

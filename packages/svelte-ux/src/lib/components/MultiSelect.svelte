@@ -107,16 +107,19 @@
   let customSearch: typeof defaultSearch | boolean = false;
   export { customSearch as search };
   $: search = typeof customSearch === 'boolean' ? defaultSearch : customSearch;
+  $: usingSearch = customSearch !== false;
 
   let filteredOptions: MenuOption<TValue>[] = [...(options ?? [])];
   let filteredSelectedOptions: MenuOption<TValue>[] = [...(selectedOptions ?? [])];
   let filteredUnselectedOptions: MenuOption<TValue>[] = [...(unselectedOptions ?? [])];
   async function updateFilteredOptions() {
-    [filteredOptions, filteredSelectedOptions, filteredUnselectedOptions] = await Promise.all([
-      search(searchText, options ?? []),
-      search(searchText, selectedOptions ?? []),
-      search(searchText, unselectedOptions ?? []),
-    ]);
+    if (usingSearch) {
+      [filteredOptions, filteredSelectedOptions, filteredUnselectedOptions] = await Promise.all([
+        search(searchText, options ?? []),
+        search(searchText, selectedOptions ?? []),
+        search(searchText, unselectedOptions ?? []),
+      ]);
+    }
   }
   // Re-filter options when `searchText` changes
   $: searchText, updateFilteredOptions();
@@ -156,7 +159,7 @@
   }
 </script>
 
-{#if search}
+{#if customSearch}
   <div
     class={cls(
       'search',
