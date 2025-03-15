@@ -144,22 +144,18 @@
   // Reactively call anytime `selected`, `value`, or `options` change
   $: updateSelected(selected, value, options);
 
-  export let search = async (text: string) => {
+  // Filter by search text
+  export let search = async (text: string, options: MenuOption<TValue>[]) => {
     logger.debug('search', { text, open });
 
-    text = text.trim();
-    if (text === '') {
+    if (text === '' || options.length === 0) {
       // Reset options
-      filteredOptions = options;
+      return options;
     } else {
       const words = text?.toLowerCase().split(' ') ?? [];
-      filteredOptions = options.filter((option) => {
-        const formattedSearchLabel = String(
-          Array.isArray(option.searchLabel) ? option.searchLabel.join(' ') : option.searchLabel
-        );
-        return words.every((word) =>
-          (formattedSearchLabel ?? option.label).toLowerCase().includes(word)
-        );
+      return options.filter((option) => {
+        const label = option.label.toLowerCase();
+        return words.every((word) => label.includes(word));
       });
     }
   };
@@ -204,32 +200,42 @@
     }
   }
 
+  let previousSearchText = '';
+  // Do not search if menu is not open / closing on selection
   $: if (open) {
     // Capture current highlighted item (attempt to restore after searching)
     const prevHighlightedOption = filteredOptions[highlightIndex];
 
     // Do not search if menu is not open / closing on selection
-    search(searchText).then(() => {
-      // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
-      const selectedIndex = filteredOptions.findIndex((o) => o.value === value);
-      if (highlightIndex === -1) {
-        // Highlight selected if none currently
-        highlightIndex = selectedIndex === -1 ? nextOptionIndex(-1) : selectedIndex;
-      } else {
-        // Attempt to re-highlight previously highlighted option after search
-        const prevHighlightedOptionIndex = filteredOptions.findIndex(
-          (o) => o === prevHighlightedOption
-        );
-
-        if (prevHighlightedOptionIndex !== -1) {
-          // Maintain previously highlight index after filter update (option still available)
-          highlightIndex = prevHighlightedOptionIndex;
+    if (searchText.trim() && previousSearchText !== searchText) {
+      previousSearchText = searchText;
+      search(searchText, options ?? []).then((options) => {
+        // Update filtered options with new results
+        filteredOptions = options;
+        // TODO: Find a way for scrollIntoView to still highlight after the menu height transition finishes
+        const selectedIndex = options.findIndex((o) => o.value === value);
+        if (highlightIndex === -1) {
+          // Highlight selected if none currently
+          highlightIndex = selectedIndex === -1 ? nextOptionIndex(-1) : selectedIndex;
         } else {
-          // Highlight first option
-          highlightIndex = nextOptionIndex(-1);
+          // Attempt to re-highlight previously highlighted option after search
+          const prevHighlightedOptionIndex = options.findIndex(
+            (o) => o === prevHighlightedOption
+          );
+
+          if (prevHighlightedOptionIndex !== -1) {
+            // Maintain previously highlight index after filter update (option still available)
+            highlightIndex = prevHighlightedOptionIndex;
+          } else {
+            // Highlight first option
+            highlightIndex = nextOptionIndex(-1);
+          }
         }
-      }
-    });
+      });
+    } else if (searchText.trim() === '') {
+      // Restore options if cleared (show all options)
+      filteredOptions = options;
+    }
   }
 
   function onChange(e: ComponentEvents<TextField>['change']) {

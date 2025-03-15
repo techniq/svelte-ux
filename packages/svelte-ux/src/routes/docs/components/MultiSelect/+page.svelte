@@ -60,26 +60,11 @@
   />
 </Preview>
 
-<h2>inlineSearch</h2>
+<h2>search</h2>
 
 <Preview>
   {value.length} selected
-  <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch />
-</Preview>
-
-<h2>inlineSearch with searchLabel</h2>
-
-<Preview>
-  <div class="mb-4 text-surface-content text-sm">
-    Options can be searched by their values ({options.map((o) => o.value).join(', ')})
-  </div>
-  {value.length} selected
-  <MultiSelect
-    options={options.map((o) => ({ ...o, searchLabel: [o.label, String(o.value)] }))}
-    {value}
-    on:change={(e) => (value = e.detail.value)}
-    inlineSearch
-  />
+  <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} search />
 </Preview>
 
 <h2>maintainOrder</h2>
@@ -148,7 +133,7 @@
   </div>
 </Preview>
 
-<h2>many options w/ inlineSearch</h2>
+<h2>many options w/ search</h2>
 
 <Preview>
   {value.length} selected
@@ -157,7 +142,7 @@
       options={manyOptions}
       {value}
       on:change={(e) => (value = e.detail.value)}
-      inlineSearch
+      search
     />
   </div>
 </Preview>
@@ -171,7 +156,7 @@
       options={manyOptions}
       {value}
       on:change={(e) => (value = e.detail.value)}
-      inlineSearch
+      search
       infiniteScroll
     />
   </div>
@@ -182,7 +167,7 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch>
+    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} search>
       <div slot="actions">
         <Button color="primary" icon={mdiPlus}>Add item</Button>
       </div>
@@ -195,7 +180,7 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch max={2}>
+    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} search max={2}>
       <div slot="actions" let:selection class="flex items-center">
         {#if selection.isMaxSelected()}
           <div class="text-sm text-danger">Maximum selection reached</div>
@@ -210,7 +195,7 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} inlineSearch>
+    <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} search>
       <MultiSelectOption
         slot="option"
         let:option
@@ -277,6 +262,54 @@
       </svelte:fragment>
     </MultiSelect>
   </div>
+</Preview>
+
+<h2>option slot with custom search</h2>
+
+<Preview>
+  <div class="mb-4 text-surface-content text-sm">
+    Options can be searched by their values ({options.map((o) => o.value).join(', ')})
+  </div>
+  {value.length} selected
+  <MultiSelect
+    {options}
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+    search={async (text, options) => {
+      text = text?.trim();
+      if (!text || options.length === 0) {
+        return options;
+      } else {
+        const words = text?.toLowerCase().split(' ') ?? [];
+        return options.filter((option) => {
+          const searchableText = ([option.label, option.value].join(' ')).toLowerCase();
+          return words.every((word) => searchableText.includes(word));
+        });
+      }
+    }}
+  >
+    <MultiSelectOption
+      slot="option"
+      let:label
+      let:value
+      let:checked
+      let:indeterminate
+      let:disabled
+      let:onChange
+      {checked}
+      {indeterminate}
+      {disabled}
+      on:change={onChange}
+      classes={{
+        container: 'flex items-center gap-1',
+      }}
+    >
+      <span class="grid place-items-center size-6 text-xs rounded-full bg-surface-content/15 text-surface-content/75">
+        {value}
+      </span>
+      {label}
+    </MultiSelectOption>
+  </MultiSelect>
 </Preview>
 
 <h2>Form integration</h2>
