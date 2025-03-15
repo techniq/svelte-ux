@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Add support for overriding searchable text in SelectField and MultiSelect components with new searchLabel property on the MenuOption type
+Unify and enhance search functionality of SelectField and MultiSelect components, enabling new custom search capability in MultiSelect.
