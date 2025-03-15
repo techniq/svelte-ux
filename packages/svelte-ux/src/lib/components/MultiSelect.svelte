@@ -159,7 +159,7 @@
   }
 </script>
 
-{#if customSearch}
+{#if usingSearch}
   <div
     class={cls(
       'search',
