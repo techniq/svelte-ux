@@ -363,7 +363,7 @@
           } else {
             const words = text?.toLowerCase().split(' ') ?? [];
             return options.filter((option) => {
-              const searchableText = ([option.label, option.value].join(' ')).toLowerCase();
+              const searchableText = [option.label, option.value].join(' ').toLowerCase();
               return words.every((word) => searchableText.includes(word));
             });
           }
@@ -385,7 +385,9 @@
             container: 'flex items-center gap-1',
           }}
         >
-          <span class="grid place-items-center size-6 text-xs rounded-full bg-surface-content/15 text-surface-content/75">
+          <span
+            class="grid place-items-center size-6 text-xs rounded-full bg-surface-content/15 text-surface-content/75"
+          >
             {value}
           </span>
           {label}

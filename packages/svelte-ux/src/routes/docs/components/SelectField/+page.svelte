@@ -340,7 +340,7 @@
       } else {
         const words = text?.toLowerCase().split(' ') ?? [];
         return options.filter((option) => {
-          const searchableText = ([option.label, option.value].join(' ')).toLowerCase();
+          const searchableText = [option.label, option.value].join(' ').toLowerCase();
           return words.every((word) => searchableText.includes(word));
         });
       }

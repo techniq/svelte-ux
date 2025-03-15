@@ -219,9 +219,7 @@
           highlightIndex = selectedIndex === -1 ? nextOptionIndex(-1) : selectedIndex;
         } else {
           // Attempt to re-highlight previously highlighted option after search
-          const prevHighlightedOptionIndex = options.findIndex(
-            (o) => o === prevHighlightedOption
-          );
+          const prevHighlightedOptionIndex = options.findIndex((o) => o === prevHighlightedOption);
 
           if (prevHighlightedOptionIndex !== -1) {
             // Maintain previously highlight index after filter update (option still available)

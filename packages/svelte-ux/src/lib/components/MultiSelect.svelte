@@ -112,18 +112,14 @@
   let filteredSelectedOptions: MenuOption<TValue>[] = [...(selectedOptions ?? [])];
   let filteredUnselectedOptions: MenuOption<TValue>[] = [...(unselectedOptions ?? [])];
   async function updateFilteredOptions() {
-    [
-      filteredOptions,
-      filteredSelectedOptions,
-      filteredUnselectedOptions,
-    ] = await Promise.all([
+    [filteredOptions, filteredSelectedOptions, filteredUnselectedOptions] = await Promise.all([
       search(searchText, options ?? []),
       search(searchText, selectedOptions ?? []),
       search(searchText, unselectedOptions ?? []),
     ]);
   }
   // Re-filter options when `searchText` changes
-  $: (searchText, updateFilteredOptions());
+  $: searchText, updateFilteredOptions();
 
   const selection = selectionStore({ max });
   // Only "subscribe" to value changes (not `$selection`) to fix correct `value` / topological ordering.  Should be simplified with Svelte 5
