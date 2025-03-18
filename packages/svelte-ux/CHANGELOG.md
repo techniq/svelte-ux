@@ -1,5 +1,29 @@
 # svelte-ux
 
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Switch from `@tailwindcss/postcss` to `@tailwindcss/vite`. Update all non-major packages
+
+## 2.0.0-next.1
+
+### Patch Changes
+
+- fix: Use `next` releases for all `@layerstack/*` packages ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- docs: Update @layerstack/tailwind to `2.0.0-next.1`, fixing styling of tailwind typography when deployed ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.0
+
+### Major Changes
+
+- Tailwind 4 support ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+### Patch Changes
+
+- fix(Progress): Fix `TypeError: Failed to set the 'value' property on 'HTMLProgressElement': The provided double value is non-finite.` ([`6c2efa2`](https://github.com/techniq/svelte-ux/commit/6c2efa2d6d5b1a7ccf2b99c1826bc1232c51d2cc))
+
 ## 1.0.3
 
 ### Patch Changes

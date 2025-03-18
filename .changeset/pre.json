@@ -1,0 +1,13 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "svelte-ux": "1.0.0"
+  },
+  "changesets": [
+    "fair-bugs-carry",
+    "green-maps-bathe",
+    "ready-planets-deny",
+    "witty-spies-divide"
+  ]
+}

@@ -72,7 +72,7 @@
   <div
     class={cls(
       'Drawer',
-      'bg-surface-100 fixed overflow-auto transform z-50 outline-none',
+      'bg-surface-100 fixed overflow-auto transform z-50 outline-hidden',
       {
         'h-full': ['left', 'right'].includes(placement),
         'w-full': ['top', 'bottom'].includes(placement),
@@ -111,7 +111,7 @@
     role="dialog"
   >
     {#if loading}
-      <Overlay center class="rounded">
+      <Overlay center class="rounded-sm">
         <ProgressCircle />
       </Overlay>
     {/if}

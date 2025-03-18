@@ -14,7 +14,7 @@
 <div
   class={cls(
     'Avatar',
-    'rounded-full inline-flex items-center justify-center flex-shrink-0',
+    'rounded-full inline-flex items-center justify-center shrink-0',
     {
       sm: 'w-6 h-6',
       md: 'w-10 h-10',

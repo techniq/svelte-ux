@@ -102,7 +102,7 @@
 <h3>inherit</h3>
 
 <Preview>
-  <div class="bg-primary text-primary-content p-2 rounded">
+  <div class="bg-primary text-primary-content p-2 rounded-sm">
     <Breadcrumb {items} />
   </div>
 </Preview>
