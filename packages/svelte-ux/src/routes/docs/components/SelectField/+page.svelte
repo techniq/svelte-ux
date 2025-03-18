@@ -8,6 +8,7 @@
     Form,
     MenuItem,
     SelectField,
+    State,
     TextField,
     Toggle,
     type MenuOption,
@@ -324,6 +325,49 @@
   </SelectField>
 </Preview>
 
+<h2>option slot with custom search</h2>
+
+<Preview>
+  <div class="mb-4 text-surface-content text-sm">
+    Options can be searched by their values ({options.map((o) => o.value).join(', ')})
+  </div>
+  <SelectField
+    {options}
+    search={async (text, options) => {
+      text = text?.trim();
+      if (!text || options.length === 0) {
+        return options;
+      } else {
+        const words = text?.toLowerCase().split(' ') ?? [];
+        return options.filter((option) => {
+          const searchableText = [option.label, option.value].join(' ').toLowerCase();
+          return words.every((word) => searchableText.includes(word));
+        });
+      }
+    }}
+  >
+    <MenuItem
+      slot="option"
+      let:option
+      let:index
+      let:selected
+      let:highlightIndex
+      class={cls(
+        index === highlightIndex && 'bg-surface-content/5',
+        option === selected && 'font-semibold',
+        option.group ? 'px-4' : 'px-2'
+      )}
+      scrollIntoView={index === highlightIndex}
+      disabled={option.disabled}
+    >
+      <div>
+        <div>{option.label}</div>
+        <div class="text-sm text-surface-content/50">{option.value}</div>
+      </div>
+    </MenuItem>
+  </SelectField>
+</Preview>
+
 <h2>Prepend slot</h2>
 
 <Preview>
@@ -485,17 +529,23 @@
   </SelectField>
 </Preview>
 
-<h2>Search</h2>
+<h2>Custom search (case sensitive)</h2>
 
 <Preview>
-  <SelectField
-    {options}
-    search={async () => {
-      console.log('search override...');
-      await delay(1000);
-      console.log('search override done');
-    }}
-  />
+  <State initial={false} let:value={loading} let:set={setLoading}>
+    {loading ? 'Loading...' : 'Search'}
+    <SelectField
+      {options}
+      search={async (text, options) => {
+        setLoading(true);
+        console.log('search override...');
+        await delay(1000);
+        console.log('search override done');
+        setLoading(false);
+        return options.filter((option) => option.label.includes(text));
+      }}
+    />
+  </State>
 </Preview>
 
 <h2>Placement</h2>
