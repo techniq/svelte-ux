@@ -20,8 +20,8 @@
   export let duration = 200;
   export let placement: Placement = 'bottom-start';
   export let autoPlacement = true;
-  export let inlineSearch = false;
-  export let autoFocusSearch = inlineSearch;
+  export let search: MultiSelectProps['search'] = false;
+  export let autoFocusSearch = Boolean(search);
   export let placeholder: string | undefined = undefined;
   export let infiniteScroll = false;
   export let searchText = '';
@@ -65,7 +65,7 @@
     {max}
     {open}
     {duration}
-    {inlineSearch}
+    {search}
     {autoFocusSearch}
     {placeholder}
     {infiniteScroll}
