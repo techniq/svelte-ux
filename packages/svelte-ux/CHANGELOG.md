@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.4
+
+### Patch Changes
+
+- fix(SelectField|MultiSelect): Unify and enhance search functionality, enabling new custom search capability in MultiSelect.
+
 ## 1.0.3
 
 ### Patch Changes
