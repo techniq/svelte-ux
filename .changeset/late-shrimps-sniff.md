@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Unify and enhance search functionality of SelectField and MultiSelect components, enabling new custom search capability in MultiSelect.
+fix(SelectField|MultiSelect): Unify and enhance search functionality, enabling new custom search capability in MultiSelect.
