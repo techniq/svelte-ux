@@ -30,6 +30,12 @@
 
 - fix(Progress): Fix `TypeError: Failed to set the 'value' property on 'HTMLProgressElement': The provided double value is non-finite.` ([`6c2efa2`](https://github.com/techniq/svelte-ux/commit/6c2efa2d6d5b1a7ccf2b99c1826bc1232c51d2cc))
 
+## 1.0.4
+
+### Patch Changes
+
+- fix(SelectField|MultiSelect): Unify and enhance search functionality, enabling new custom search capability in MultiSelect.
+
 ## 1.0.3
 
 ### Patch Changes
