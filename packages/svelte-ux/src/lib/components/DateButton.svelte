@@ -84,15 +84,13 @@
 </script>
 
 <div
-  style="--tw-gradient-stops: var(--tw-gradient-from) 50%, var(--tw-gradient-to) 50%"
   class={cls(
     'DateButton',
     'inline-flex items-center justify-center',
-    isSelectedStart
-      ? '[--tw-gradient-from:transparent]'
-      : '[--tw-gradient-from:var(--color-primary)]',
-    isSelectedEnd ? '[--tw-gradient-to:transparent]' : '[--tw-gradient-to:var(--color-primary)]',
-    isSelected && (isVerticalSelection ? 'bg-linear-to-b' : 'bg-linear-to-r'),
+    isSelectedStart ? 'from-transparent' : 'from-primary',
+    isSelectedEnd ? 'to-transparent' : 'to-primary',
+    isSelected &&
+      (isVerticalSelection ? 'bg-linear-to-b from-50% to-50%' : 'bg-linear-to-r from-50% to-50%'),
     hidden && 'opacity-0 pointer-events-none',
     settingsClasses.root,
     className

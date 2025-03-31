@@ -64,7 +64,7 @@
   {offset}
   {matchWidth}
   {resize}
-  {open}
+  bind:open
   class={cls(
     'Menu',
     'bg-surface-100 rounded-sm shadow-sm border overflow-auto',

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { subDays } from 'date-fns';
+  import { subDays, subMonths, subYears } from 'date-fns';
   import { mdiCalendarRange } from '@mdi/js';
 
   import { DateRangeField } from 'svelte-ux';
@@ -54,6 +54,37 @@
 
 <Preview>
   <DateRangeField bind:value periodTypes={[PeriodType.Day]} getPeriodTypePresets={() => []} />
+</Preview>
+
+<h2>Quick Presets</h2>
+
+<Preview>
+  <DateRangeField
+    bind:value
+    quickPresets={[
+      { label: 'Today', value: { from: today, to: today, periodType: PeriodType.Day } },
+      {
+        label: 'Yesterday',
+        value: { from: subDays(today, 1), to: subDays(today, 1), periodType: PeriodType.Day },
+      },
+      {
+        label: 'Last 7 days',
+        value: { from: subDays(today, 7), to: today, periodType: PeriodType.Day },
+      },
+      {
+        label: 'Last 30 days',
+        value: { from: subDays(today, 30), to: today, periodType: PeriodType.Day },
+      },
+      {
+        label: 'Last 6 months',
+        value: { from: subMonths(today, 6), to: today, periodType: PeriodType.Month },
+      },
+      {
+        label: 'Last year',
+        value: { from: subYears(today, 1), to: today, periodType: PeriodType.CalendarYear },
+      },
+    ]}
+  />
 </Preview>
 
 <h2>Icon</h2>
