@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-feat(DateRange): Add `quickPresets` support
+feat(DateRangeField): Add `quickPresets` support
