@@ -1,5 +1,15 @@
 # svelte-ux
 
+## 2.0.0-next.4
+
+### Patch Changes
+
+- fix(Menu): Support `bind:open` (underlying Popover) ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
+- feat(DateRangeField): Add `quickPresets` support ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
+- fix(DateRange): Fix selection gradient ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
 ## 2.0.0-next.3
 
 ### Patch Changes
