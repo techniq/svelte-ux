@@ -19,7 +19,7 @@
   class={cls(
     'Backdrop',
     'fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-surface-content/50 dark:bg-surface-300/70',
-    blur && 'backdrop-blur-sm',
+    blur && 'backdrop-blur-xs',
     settingsClasses.root,
     className
   )}

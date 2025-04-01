@@ -155,7 +155,7 @@
         class="w-[400px]"
       >
         <div class="p-4">
-          <div class="grid grid-cols-[1fr,auto] items-center">
+          <div class="grid grid-cols-[1fr_auto] items-center">
             Changed
             <Switch bind:checked={isChanged} />
           </div>

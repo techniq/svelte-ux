@@ -262,9 +262,9 @@
       !selectFieldEl?.contains(fe.relatedTarget) && // click within <SelectField> (ex. toggleIcon)
       fe.relatedTarget !== selectFieldEl // click on SelectField itself
     ) {
-      hide('blur');
+      hide('blur-sm');
     } else {
-      logger.debug('ignoring blur');
+      logger.debug('ignoring blur-sm');
     }
   }
 

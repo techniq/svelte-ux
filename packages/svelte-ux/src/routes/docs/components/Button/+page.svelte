@@ -101,7 +101,7 @@
   </div>
 </Preview>
 
-<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+<div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Variants, Color & Size</h2>
   <Field label="size: " labelPlacement="left" class="mb-1">
     <ToggleGroup bind:value={size} size="sm">
@@ -135,10 +135,10 @@
           </div>
           <div>
             <!-- TODO: CSS variables for each variant -->
-            <!-- <Button {variant} {size} class="[--bg-color:theme(colors.blue.500)] [--text-color:white]">
+            <!-- <Button {variant} {size} class="[--bg-color:var(--color-blue-500)] [--text-color:white]">
               Color Variables
             </Button>
-            <Button {variant} {size} class="[--bg-color:theme(colors.emerald.500)] [--text-color:white]">
+            <Button {variant} {size} class="[--bg-color:var(--color-emerald-500)] [--text-color:white]">
               Color Variables
             </Button> -->
           </div>
@@ -167,25 +167,25 @@
     <div>
       <Button variant="outline" color="primary">default</Button>
       <Button variant="outline" color="primary" rounded>rounded</Button>
-      <Button variant="outline" color="primary" rounded="full">full</Button>
+      <Button variant="outline" color="primary" rounded-sm="full">full</Button>
       <Button variant="outline" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill" color="primary">default</Button>
       <Button variant="fill" color="primary" rounded>rounded</Button>
-      <Button variant="fill" color="primary" rounded="full">full</Button>
+      <Button variant="fill" color="primary" rounded-sm="full">full</Button>
       <Button variant="fill" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill-light" color="primary">default</Button>
       <Button variant="fill-light" color="primary" rounded>rounded</Button>
-      <Button variant="fill-light" color="primary" rounded="full">full</Button>
+      <Button variant="fill-light" color="primary" rounded-sm="full">full</Button>
       <Button variant="fill-light" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill-outline" color="primary">default</Button>
       <Button variant="fill-outline" color="primary" rounded>rounded</Button>
-      <Button variant="fill-outline" color="primary" rounded="full">full</Button>
+      <Button variant="fill-outline" color="primary" rounded-sm="full">full</Button>
       <Button variant="fill-outline" color="primary" rounded={false}>false</Button>
     </div>
   </div>
