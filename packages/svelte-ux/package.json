@@ -21,9 +21,9 @@
   "devDependencies": {
     "@changesets/cli": "^2.27.8",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@sveltejs/adapter-cloudflare": "^4.9.0",
-    "@sveltejs/kit": "^2.19.0",
-    "@sveltejs/package": "^2.3.10",
+    "@sveltejs/adapter-cloudflare": "^7.0.3",
+    "@sveltejs/kit": "^2.21.0",
+    "@sveltejs/package": "^2.3.11",
     "@sveltejs/vite-plugin-svelte": "5.0.3",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.0.14",
