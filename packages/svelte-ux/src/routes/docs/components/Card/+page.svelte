@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mdiDotsVertical } from '@mdi/js';
 
-  import { Avatar, Button, Card, Header } from 'svelte-ux';
+  import { Avatar, Button, Card, Header, Settings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 </script>
 
@@ -125,3 +125,17 @@
 <Preview>
   <Card class="elevation-none">Contents</Card>
 </Preview>
+
+<h2>Settings</h2>
+
+<Settings
+  components={{
+    Card: {
+      classes: { headerContainer: 'bg-surface-300 border-b', header: { title: 'text-3xl' } },
+    },
+  }}
+>
+  <Card title="Title" subheading="Subheading">
+    <div slot="contents">Contents</div>
+  </Card>
+</Settings>
