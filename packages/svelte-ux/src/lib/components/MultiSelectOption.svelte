@@ -25,7 +25,7 @@
 <div
   class={cls(
     'MultiSelectOption',
-    'grid grid-cols-[1fr,auto]',
+    'grid grid-cols-[1fr_auto]',
     settingsClasses.root,
     classes.root,
     $$props.class
@@ -40,7 +40,7 @@
       on:change={() => dispatch('change')}
       {disabled}
       classes={{
-        root: 'px-2 rounded hover:bg-surface-content/5',
+        root: 'px-2 rounded-sm hover:bg-surface-content/5',
         label: 'py-2',
         ...settingsClasses.checkbox,
         ...classes.checkbox,

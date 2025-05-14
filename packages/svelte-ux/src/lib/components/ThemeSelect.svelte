@@ -66,7 +66,7 @@
     >
       <label
         for="switch-color-scheme"
-        class="grid grid-cols-[1fr,auto,auto] items-center p-2 border-b border-surface-content/10 mb-1 text-sm font-medium sticky top-0 bg-surface-100"
+        class="grid grid-cols-[1fr_auto_auto] items-center p-2 border-b border-surface-content/10 mb-1 text-sm font-medium sticky top-0 bg-surface-100"
       >
         Mode
         {#if $currentTheme.theme}
@@ -110,7 +110,7 @@
             on:click={() => currentTheme.setTheme(themeName)}
             data-theme={themeName}
             class={cls(
-              'bg-surface-100 text-surface-content font-semibold border shadow',
+              'bg-surface-100 text-surface-content font-semibold border shadow-sm',
               $currentTheme.resolvedTheme === themeName && 'ring-2 ring-surface-content'
             )}
           >
@@ -125,7 +125,7 @@
 
       {#if keyboardShortcuts}
         <div
-          class="p-2 grid grid-cols-[auto,1fr] gap-2 items-center text-xs sticky bottom-0 bg-surface-100 border-t border-surface-content/10"
+          class="p-2 grid grid-cols-[auto_1fr] gap-2 items-center text-xs sticky bottom-0 bg-surface-100 border-t border-surface-content/10"
         >
           <span class="font-medium">Toggle scheme:</span>
           <span>
