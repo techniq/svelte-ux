@@ -109,8 +109,8 @@ importers:
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
       '@types/culori':
-        specifier: ^2.1.1
-        version: 2.1.1
+        specifier: ^4.0.0
+        version: 4.0.0
       '@types/d3-array':
         specifier: ^3.2.1
         version: 3.2.1
@@ -990,8 +990,8 @@ packages:
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
 
-  '@types/culori@2.1.1':
-    resolution: {integrity: sha512-NzLYD0vNHLxTdPp8+RlvGbR2NfOZkwxcYGFwxNtm+WH2NuUNV8785zv1h0sulFQ5aFQ9n/jNDUuJeo3Bh7+oFA==}
+  '@types/culori@4.0.0':
+    resolution: {integrity: sha512-aFljQwjb++sl6TAyEXeHTiK/fk9epZOQ+nMmadjnAvzZFIvNoQ0x8XQYfcOaRTBwmDUPUlghhZCJ66MTcqQAsg==}
 
   '@types/d3-array@3.2.1':
     resolution: {integrity: sha512-Y2Jn2idRrLzUfAKV2LyRImR+y4oa2AntrgID95SHJxuMUrkNXmanDSed71sRNZysveJVt1hLLemQZIady0FpEg==}
@@ -3280,7 +3280,7 @@ snapshots:
 
   '@types/cookie@0.6.0': {}
 
-  '@types/culori@2.1.1': {}
+  '@types/culori@4.0.0': {}
 
   '@types/d3-array@3.2.1': {}
 
