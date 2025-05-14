@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.5
+
+### Patch Changes
+
+- fix(Card): Support passing classes from settings() to underlying header, content, and actions components ([#590](https://github.com/techniq/svelte-ux/pull/590))
+
 ## 1.0.4
 
 ### Patch Changes
