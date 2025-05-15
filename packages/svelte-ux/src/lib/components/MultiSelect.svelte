@@ -110,8 +110,8 @@
   $: usingSearch = customSearch !== false;
 
   let filteredOptions: MenuOption<TValue>[] = [...(options ?? [])];
-  let filteredSelectedOptions: MenuOption<TValue>[] = [...(selectedOptions ?? [])];
-  let filteredUnselectedOptions: MenuOption<TValue>[] = [...(unselectedOptions ?? [])];
+  $: filteredSelectedOptions = [...(selectedOptions ?? [])];
+  $: filteredUnselectedOptions = [...(unselectedOptions ?? [])];
   async function updateFilteredOptions() {
     if (usingSearch) {
       [filteredOptions, filteredSelectedOptions, filteredUnselectedOptions] = await Promise.all([
