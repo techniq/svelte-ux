@@ -109,7 +109,7 @@
   $: search = typeof customSearch === 'boolean' ? defaultSearch : customSearch;
   $: usingSearch = customSearch !== false;
 
-  let filteredOptions: MenuOption<TValue>[] = [...(options ?? [])];
+  $: filteredOptions = [...(options ?? [])];
   $: filteredSelectedOptions = [...(selectedOptions ?? [])];
   $: filteredUnselectedOptions = [...(unselectedOptions ?? [])];
   async function updateFilteredOptions() {
