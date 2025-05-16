@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.6
+
+### Patch Changes
+
+- fix(MultiSelect): Fix reactivity scope for `filteredSelectedOptions` and `filteredUnselectedOptions`. Issue #594 ([#595](https://github.com/techniq/svelte-ux/pull/595))
+
 ## 1.0.5
 
 ### Patch Changes
