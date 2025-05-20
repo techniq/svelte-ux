@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.5
+
+### Patch Changes
+
+- fix(Duration): Update Duration component to new `@layerstack/utils` `Duration` class ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- Update dependencies ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.4
 
 ### Patch Changes
