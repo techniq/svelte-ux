@@ -1,7 +1,6 @@
 <script lang="ts">
   import { cls } from '@layerstack/tailwind';
-  import { DurationUnits, getDuration, humanizeDuration } from '@layerstack/utils';
-  import { type Duration } from '@layerstack/utils/duration';
+  import { Duration, DurationUnits } from '@layerstack/utils';
   import { timerStore } from '@layerstack/svelte-stores';
 
   import { getComponentClasses } from './theme.js';
@@ -19,7 +18,7 @@
 
   function getDelay(useTimer = true) {
     const endTime = end ?? (useTimer ? $timer : null);
-    const newDuration = getDuration(start, endTime, duration);
+    const newDuration = new Duration({ start, end: endTime, duration });
 
     const unitsMoreThanSeconds = [
       newDuration?.years,
@@ -53,10 +52,7 @@
     },
   });
 
-  $: displayDuration = humanizeDuration({
-    start,
-    end: end ?? $timer,
-    duration,
+  $: displayDuration = new Duration({ start, end: end ?? $timer, duration }).format({
     minUnits,
     totalUnits,
     variant,
