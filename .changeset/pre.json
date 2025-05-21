@@ -5,8 +5,10 @@
     "svelte-ux": "1.0.0"
   },
   "changesets": [
+    "cuddly-coins-tease",
     "fair-bugs-carry",
     "green-maps-bathe",
+    "loose-baths-make",
     "major-turkeys-ask",
     "nice-onions-sell",
     "ready-planets-deny",
