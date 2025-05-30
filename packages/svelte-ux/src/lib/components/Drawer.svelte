@@ -109,6 +109,7 @@
     use:portalAction={portal}
     use:focusMove={{ restoreFocus: true }}
     role="dialog"
+    tabindex="-1"
   >
     {#if loading}
       <Overlay center class="rounded-sm">
