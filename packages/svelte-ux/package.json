@@ -26,8 +26,8 @@
     "@sveltejs/package": "^2.3.11",
     "@sveltejs/vite-plugin-svelte": "5.0.3",
     "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.7",
-    "@types/culori": "^2.1.1",
+    "@tailwindcss/vite": "^4.1.8",
+    "@types/culori": "^4.0.0",
     "@types/d3-array": "^3.2.1",
     "@types/d3-scale": "^4.0.9",
     "@types/lodash-es": "^4.17.12",
@@ -35,14 +35,14 @@
     "@vitest/coverage-v8": "^3.1.4",
     "marked": "^15.0.7",
     "mdsvex": "^0.12.3",
-    "posthog-js": "^1.245.0",
+    "posthog-js": "^1.248.1",
     "prettier": "^3.5.3",
     "prettier-plugin-svelte": "^3.4.0",
     "rehype-slug": "^6.0.0",
-    "svelte": "5.32.1",
+    "svelte": "5.33.10",
     "svelte-check": "^4.2.1",
     "svelte2tsx": "^0.7.39",
-    "tailwindcss": "^4.1.7",
+    "tailwindcss": "^4.1.8",
     "tslib": "^2.8.1",
     "typescript": "^5.8.2",
     "unist-util-visit": "^5.0.0",
@@ -70,7 +70,7 @@
     "prism-themes": "^1.9.0",
     "prismjs": "^1.30.0",
     "sveld": "^0.22.1",
-    "zod": "^3.25.7"
+    "zod": "^3.25.41"
   },
   "peerDependencies": {
     "svelte": "^3.56.0 || ^4.0.0 || ^5.0.0"
