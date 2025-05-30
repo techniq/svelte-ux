@@ -8,7 +8,7 @@
 
   export let year: number | undefined = undefined;
   export let selected: SelectedDate = undefined;
-  export let format: ComponentProps<DateButton>['format'] = undefined;
+  export let format: ComponentProps<DateButton>['format'] = 'MMM'; // Use short month by default.  TODO: Change to `variant`
   /**
    * Dates to disable (not selectable)
    */
