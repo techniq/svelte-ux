@@ -48,6 +48,12 @@
 
 - fix(Progress): Fix `TypeError: Failed to set the 'value' property on 'HTMLProgressElement': The provided double value is non-finite.` ([`6c2efa2`](https://github.com/techniq/svelte-ux/commit/6c2efa2d6d5b1a7ccf2b99c1826bc1232c51d2cc))
 
+## 1.0.6
+
+### Patch Changes
+
+- fix(MultiSelect): Fix reactivity scope for `filteredSelectedOptions` and `filteredUnselectedOptions`. Issue #594 ([#595](https://github.com/techniq/svelte-ux/pull/595))
+
 ## 1.0.5
 
 ### Patch Changes
