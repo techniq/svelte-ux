@@ -122,7 +122,7 @@
     {#if $$slots.actions}
       <div
         class={cls(
-          'actions fixed bottom-0 w-full flex justify-center bg-surface-content/5 p-1 border-t',
+          'actions absolute bottom-0 w-full flex justify-center bg-surface-content/5 p-1 border-t',
           settingsClasses.actions,
           classes.actions
         )}
