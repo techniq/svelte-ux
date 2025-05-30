@@ -33,9 +33,9 @@
     'NavItem',
     'flex items-center',
     settingsClasses.root,
-    isPathActive && ['is-active', settingsClasses.active, classes.active],
     classes.root,
-    $$props.class
+    $$props.class,
+    isPathActive && ['is-active', settingsClasses.active, classes.active]
   )}
   use:scrollIntoView={{
     condition: isPathActive,
