@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.7
+
+### Patch Changes
+
+- fix(Drawer): Fix display of action buttons ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.6
 
 ### Patch Changes
