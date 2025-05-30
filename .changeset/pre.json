@@ -5,12 +5,15 @@
     "svelte-ux": "1.0.0"
   },
   "changesets": [
+    "clear-regions-listen",
     "cuddly-coins-tease",
     "fair-bugs-carry",
+    "four-bears-join",
     "green-maps-bathe",
     "loose-baths-make",
     "major-turkeys-ask",
     "nice-onions-sell",
+    "open-hats-arrive",
     "ready-planets-deny",
     "wide-months-rescue",
     "witty-spies-divide"
