@@ -4,7 +4,7 @@
   import ProgressCircle from './ProgressCircle.svelte';
   import Header from './Header.svelte';
   import Overlay from './Overlay.svelte';
-  import { cls } from '@layerstack/tailwind';
+  import { cls, clsMerge } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
   export let title: string | string[] | null = null;
@@ -48,9 +48,9 @@
   {/if}
 
   {#if title || subheading || $$slots.header}
-    <div class={cls('p-4', classes.headerContainer)}>
+    <div class={cls('p-4', settingsClasses.headerContainer, classes.headerContainer)}>
       <slot name="header">
-        <Header {title} {subheading} classes={classes.header} />
+        <Header {title} {subheading} classes={clsMerge(settingsClasses.header, classes.header)} />
       </slot>
     </div>
   {/if}
@@ -58,13 +58,13 @@
   <slot />
 
   {#if $$slots.contents}
-    <div class={cls('px-4 flex-1', classes.content)}>
+    <div class={cls('px-4 flex-1', settingsClasses.content, classes.content)}>
       <slot name="contents" />
     </div>
   {/if}
 
   {#if $$slots.actions}
-    <div class={cls('py-2 px-1', classes.actions)}>
+    <div class={cls('py-2 px-1', settingsClasses.actions, classes.actions)}>
       <slot name="actions" />
     </div>
   {/if}
