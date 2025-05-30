@@ -6,7 +6,7 @@
 
 - fix(MultiSelect): Fix reactivity scope for filteredSelectedOptions and filteredUnselectedOptions. Issue #594 ([#571](https://github.com/techniq/svelte-ux/pull/571))
 
-- fix: Update deps include @layerstack/utils with improved format ([#571](https://github.com/techniq/svelte-ux/pull/571))
+- fix: Update deps including @layerstack/utils with improved format ([#571](https://github.com/techniq/svelte-ux/pull/571))
 
 - fix(DateRangeField): Include year when displaying month selection ([#571](https://github.com/techniq/svelte-ux/pull/571))
 
