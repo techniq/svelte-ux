@@ -1,15 +1,14 @@
 <script lang="ts">
-  import { subDays, subMonths, subYears } from 'date-fns';
-  import { mdiCalendarRange } from '@mdi/js';
-
   import { DateRangeField } from 'svelte-ux';
-  import { PeriodType } from '@layerstack/utils';
+  import { intervalOffset, PeriodType } from '@layerstack/utils';
+
+  import { mdiCalendarRange } from '@mdi/js';
 
   import Preview from '$lib/components/Preview.svelte';
 
   let today = new Date();
   let value = {
-    from: subDays(today, 3),
+    from: intervalOffset('day', today, -3),
     to: today,
     periodType: PeriodType.Day,
   };
@@ -65,23 +64,35 @@
       { label: 'Today', value: { from: today, to: today, periodType: PeriodType.Day } },
       {
         label: 'Yesterday',
-        value: { from: subDays(today, 1), to: subDays(today, 1), periodType: PeriodType.Day },
+        value: {
+          from: intervalOffset('day', today, -1),
+          to: intervalOffset('day', today, -1),
+          periodType: PeriodType.Day,
+        },
       },
       {
         label: 'Last 7 days',
-        value: { from: subDays(today, 7), to: today, periodType: PeriodType.Day },
+        value: { from: intervalOffset('day', today, -7), to: today, periodType: PeriodType.Day },
       },
       {
         label: 'Last 30 days',
-        value: { from: subDays(today, 30), to: today, periodType: PeriodType.Day },
+        value: { from: intervalOffset('day', today, -30), to: today, periodType: PeriodType.Day },
       },
       {
         label: 'Last 6 months',
-        value: { from: subMonths(today, 6), to: today, periodType: PeriodType.Month },
+        value: {
+          from: intervalOffset('month', today, -6),
+          to: today,
+          periodType: PeriodType.Month,
+        },
       },
       {
         label: 'Last year',
-        value: { from: subYears(today, 1), to: today, periodType: PeriodType.CalendarYear },
+        value: {
+          from: intervalOffset('year', today, -1),
+          to: today,
+          periodType: PeriodType.CalendarYear,
+        },
       },
     ]}
   />

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { isWithinInterval } from 'date-fns';
 
   import { cls } from '@layerstack/tailwind';
   import {
@@ -9,6 +8,7 @@
     type CustomIntlDateTimeFormatOptions,
     type SelectedDate,
     getDateFuncsByPeriodType,
+    isDateWithin,
   } from '@layerstack/utils';
 
   import Button from './Button.svelte';
@@ -50,7 +50,7 @@
         ? selected.some((d) => isSame(date, d))
         : selected instanceof Object
           ? selected.from
-            ? isWithinInterval(date, {
+            ? isDateWithin(date, {
                 start: start(selected.from),
                 end: end(selected.to ?? selected.from),
               })

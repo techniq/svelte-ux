@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mdiChevronLeft, mdiChevronRight, mdiMinus, mdiPlus } from '@mdi/js';
-  import { addMonths, startOfMonth } from 'date-fns';
+  import { intervalOffset, startOfInterval } from '@layerstack/utils';
 
   import {
     Button,
@@ -58,7 +58,7 @@
     onTick: (value) => (value ?? 0) + 1,
   });
 
-  const firstOfMonth = startOfMonth(new Date());
+  const firstOfMonth = startOfInterval('month', new Date());
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
@@ -218,7 +218,7 @@
 <h2>Slot</h2>
 
 <Preview>
-  {@const startOfMonth = addMonths(firstOfMonth, value)}
+  {@const startOfMonth = intervalOffset('month', firstOfMonth, value)}
   <div class="grid w-96">
     <div class="grid grid-cols-[auto_1fr_auto] items-center justify-items-center">
       <Button icon={mdiChevronLeft} class="p-2" on:click={() => (value -= 1)} />
@@ -226,7 +226,7 @@
       <Button icon={mdiChevronRight} class="p-2" on:click={() => (value += 1)} />
     </div>
     <ScrollingValue {value} {axis} let:value>
-      {@const startOfMonth = addMonths(firstOfMonth, value)}
+      {@const startOfMonth = intervalOffset('month', firstOfMonth, value)}
       <Month {startOfMonth} hideControls />
     </ScrollingValue>
   </div>
