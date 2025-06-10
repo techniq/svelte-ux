@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.8
+
+### Patch Changes
+
+- fix(NavItem): Apply active classes after base classes ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- refactor: Replace `date-fns` usage with new `@layerstack/utils` date utils (based on d3-time) to reduce bundle size ([#602](https://github.com/techniq/svelte-ux/pull/602))
+
 ## 2.0.0-next.7
 
 ### Patch Changes
