@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { addYears, subYears } from 'date-fns';
   import { getMinSelectedDate, getMaxSelectedDate } from '@layerstack/utils/date';
-  import type { SelectedDate } from '@layerstack/utils';
+  import { intervalOffset, type SelectedDate } from '@layerstack/utils';
 
   import Button from './Button.svelte';
   import MonthList from './MonthList.svelte';
@@ -15,14 +14,14 @@
     minYear ??
     (minDate
       ? minDate.getFullYear()
-      : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
+      : intervalOffset('year', getMinSelectedDate(selected) || new Date(), -2).getFullYear());
 
   let maxYear: number;
   $: maxYear =
     maxYear ??
     (maxDate
       ? maxDate.getFullYear()
-      : addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+      : intervalOffset('year', getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
 
   $: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
 
