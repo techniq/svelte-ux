@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import { parse as parseDate, format as formatDate } from 'date-fns';
-  import { type DisabledDate } from '@layerstack/utils';
+  import { formatDate, parseDate, type DisabledDate } from '@layerstack/utils';
   import { cls } from '@layerstack/tailwind';
 
   import { getComponentSettings, getSettings } from './settings.js';
@@ -54,7 +53,7 @@
   function onInputChange(e: any) {
     inputValue = e.detail.value;
     const lastValue = value;
-    const parsedValue = parseDate(inputValue ?? '', actualFormat, new Date());
+    const parsedValue = parseDate(inputValue ?? '', actualFormat);
     value = isNaN(parsedValue.valueOf()) ? null : parsedValue;
     if (value != lastValue) {
       dispatch('change', { value });

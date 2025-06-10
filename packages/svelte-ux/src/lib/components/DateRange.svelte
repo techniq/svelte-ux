@@ -74,7 +74,7 @@
   }
 
   function onDateChange(date: Date) {
-    // Apply date-fns function based on type and from/to.
+    // Apply date function based on type and from/to.
     let newSelected = { ...selected, periodType: selectedPeriodType };
 
     const { start, end } = getDateFuncsByPeriodType($localeSettings, selectedPeriodType);

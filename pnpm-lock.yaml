@@ -33,20 +33,20 @@ importers:
         specifier: ^6.7.2
         version: 6.7.2
       '@layerstack/svelte-actions':
-        specifier: 1.0.1-next.10
-        version: 1.0.1-next.10
+        specifier: 1.0.1-next.11
+        version: 1.0.1-next.11
       '@layerstack/svelte-stores':
-        specifier: 1.0.2-next.10
-        version: 1.0.2-next.10
+        specifier: 1.0.2-next.11
+        version: 1.0.2-next.11
       '@layerstack/svelte-table':
-        specifier: 1.0.1-next.10
-        version: 1.0.1-next.10
+        specifier: 1.0.1-next.11
+        version: 1.0.1-next.11
       '@layerstack/tailwind':
-        specifier: 2.0.0-next.12
-        version: 2.0.0-next.12
+        specifier: 2.0.0-next.13
+        version: 2.0.0-next.13
       '@layerstack/utils':
-        specifier: 2.0.0-next.10
-        version: 2.0.0-next.10
+        specifier: 2.0.0-next.11
+        version: 2.0.0-next.11
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -59,9 +59,6 @@ importers:
       d3-scale:
         specifier: ^4.0.2
         version: 4.0.2
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
       esm-env:
         specifier: ^1.2.2
         version: 1.2.2
@@ -626,20 +623,20 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@layerstack/svelte-actions@1.0.1-next.10':
-    resolution: {integrity: sha512-rJm3OhqGVMl+QjpZSXPyzN3freL1mXdLH8BHyYVZecEF4qFQ45hWMtZINJa+2bv/QDdJRHN6mjypkozKYrIzdQ==}
+  '@layerstack/svelte-actions@1.0.1-next.11':
+    resolution: {integrity: sha512-ciwDvfWXQ9TdfmwFLaEqzGL0eUdQJV4Zm+n4g6OOgB/s+2WQ2fHUUspyhpGFvSV8KD08NuUXOygjI0bi7HJWgQ==}
 
-  '@layerstack/svelte-stores@1.0.2-next.10':
-    resolution: {integrity: sha512-aMkUq5Ch5APyDk9ZhYh5f+KHIiM7J43o4yQZnUqbfNQcv27/UvjTHHvx2FODTbqd21cmeQpKQcU1XOmDcbSPwA==}
+  '@layerstack/svelte-stores@1.0.2-next.11':
+    resolution: {integrity: sha512-Oki9J/Or3xSv1ekBRvK4DcXti/s0E2a7zV1m4eFLnVDmgTCadATE6QxTIS3/SIrgldWpv1874ZXxTNOKpW88vg==}
 
-  '@layerstack/svelte-table@1.0.1-next.10':
-    resolution: {integrity: sha512-9SaJvCLdZDu3nODLW//KpW3F8HMvMBboDp/QFcrr709mN+hiap3QxectkLjVDH6zzSGr4VWRM095s6RX/8/+9g==}
+  '@layerstack/svelte-table@1.0.1-next.11':
+    resolution: {integrity: sha512-rmWgLEFBm3w4UTwtmZ91IG+xsC4VnSCNHu9dqEjhwJtm18DjC3W0x9td5ncevXokdL7Qk4Zk0avxaYjfE3Roiw==}
 
-  '@layerstack/tailwind@2.0.0-next.12':
-    resolution: {integrity: sha512-0UdgHbNMx6A8De6iaNk47AfWidw8T5Sm/HW+Snz+PqMyAkRqqBOIQqy8aNvNFgOhzgb5vzWCqr/jFGy5yCZfwg==}
+  '@layerstack/tailwind@2.0.0-next.13':
+    resolution: {integrity: sha512-gCIdr5tsbEcrmncOeMJb0egPG7rl1v2bPLrCduHytAzyj7/jo+YHvIgSSF5FZESK53Dj0W0xGBmXU7tvbjPmEg==}
 
-  '@layerstack/utils@2.0.0-next.10':
-    resolution: {integrity: sha512-dsYpoIo9w+tAyTY55rq4BuQpjYRhmGgCZwr+gkRxADzpnyn/e2XK6ZROEu5cqTHukM3GZymLdfjgsIvUIySZyA==}
+  '@layerstack/utils@2.0.0-next.11':
+    resolution: {integrity: sha512-Bkww/IfUghga0ah82P/MOSHRVE7Np4VeAl2lUXNqkCwp1M3H690CFb4twKEEsBNUTIYoTCThrM7LuepTx5Hj8g==}
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -1206,9 +1203,6 @@ packages:
 
   dataloader@1.4.0:
     resolution: {integrity: sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==}
-
-  date-fns@4.1.0:
-    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
 
   debug@4.4.0:
     resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
@@ -2790,32 +2784,32 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@layerstack/svelte-actions@1.0.1-next.10':
+  '@layerstack/svelte-actions@1.0.1-next.11':
     dependencies:
       '@floating-ui/dom': 1.7.0
-      '@layerstack/utils': 2.0.0-next.10
+      '@layerstack/utils': 2.0.0-next.11
       d3-array: 3.2.4
       d3-scale: 4.0.2
       lodash-es: 4.17.21
 
-  '@layerstack/svelte-stores@1.0.2-next.10':
+  '@layerstack/svelte-stores@1.0.2-next.11':
     dependencies:
-      '@layerstack/utils': 2.0.0-next.10
+      '@layerstack/utils': 2.0.0-next.11
       d3-array: 3.2.4
       immer: 10.1.1
       lodash-es: 4.17.21
       zod: 3.25.41
 
-  '@layerstack/svelte-table@1.0.1-next.10':
+  '@layerstack/svelte-table@1.0.1-next.11':
     dependencies:
-      '@layerstack/svelte-actions': 1.0.1-next.10
-      '@layerstack/utils': 2.0.0-next.10
+      '@layerstack/svelte-actions': 1.0.1-next.11
+      '@layerstack/utils': 2.0.0-next.11
       d3-array: 3.2.4
       lodash-es: 4.17.21
 
-  '@layerstack/tailwind@2.0.0-next.12':
+  '@layerstack/tailwind@2.0.0-next.13':
     dependencies:
-      '@layerstack/utils': 2.0.0-next.10
+      '@layerstack/utils': 2.0.0-next.11
       clsx: 2.1.1
       culori: 4.0.1
       d3-array: 3.2.4
@@ -2823,10 +2817,11 @@ snapshots:
       tailwind-merge: 3.3.0
       tailwindcss: 4.1.8
 
-  '@layerstack/utils@2.0.0-next.10':
+  '@layerstack/utils@2.0.0-next.11':
     dependencies:
       d3-array: 3.2.4
       d3-time: 3.1.0
+      d3-time-format: 4.1.0
       lodash-es: 4.17.21
 
   '@manypkg/find-root@1.1.0':
@@ -3354,8 +3349,6 @@ snapshots:
   data-uri-to-buffer@2.0.2: {}
 
   dataloader@1.4.0: {}
-
-  date-fns@4.1.0: {}
 
   debug@4.4.0:
     dependencies:
