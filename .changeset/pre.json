@@ -5,6 +5,7 @@
     "svelte-ux": "1.0.0"
   },
   "changesets": [
+    "breezy-bushes-admire",
     "clear-regions-listen",
     "cuddly-coins-tease",
     "cuddly-snakes-tie",

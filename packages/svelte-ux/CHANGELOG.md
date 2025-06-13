@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.9
+
+### Patch Changes
+
+- fix: Move `culori` and `@fortawesome/fontawesome-common-types` to `devDependenies` ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.8
 
 ### Patch Changes
