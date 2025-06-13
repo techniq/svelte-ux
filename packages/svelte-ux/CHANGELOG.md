@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.11
+
+### Patch Changes
+
+- chore: Update @layerstack/tailwind with better theme generation and runtime separation ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.10
 
 ### Patch Changes
