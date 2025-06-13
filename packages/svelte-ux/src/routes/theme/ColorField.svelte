@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { formatHex } from 'culori';
 
@@ -39,4 +39,4 @@
       class="w-6 h-6 rounded-sm opacity-0 cursor-pointer"
     />
   </div>
-</TextField>
+</TextField> -->
