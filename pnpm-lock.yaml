@@ -39,8 +39,8 @@ importers:
         specifier: 1.0.1-next.12
         version: 1.0.1-next.12
       '@layerstack/tailwind':
-        specifier: 2.0.0-next.14
-        version: 2.0.0-next.14
+        specifier: 2.0.0-next.15
+        version: 2.0.0-next.15
       '@layerstack/utils':
         specifier: 2.0.0-next.12
         version: 2.0.0-next.12
@@ -632,8 +632,8 @@ packages:
   '@layerstack/svelte-table@1.0.1-next.12':
     resolution: {integrity: sha512-u5zFdXQWlEJTGXNf52ku6hjyxmjp6ge6GwkW+oecqknY8v0b9d1MfrEw3dGJ4Ap88I0aBIdufmOkd0TTEwiCkQ==}
 
-  '@layerstack/tailwind@2.0.0-next.14':
-    resolution: {integrity: sha512-lpFN98P86Ab3VtSVwNcFvwyHriHOEiz6mcNpItEm/KV9pqYZxDguPE5l+ydk4ylRlNkFUyHhC1X85pz8C0eERQ==}
+  '@layerstack/tailwind@2.0.0-next.15':
+    resolution: {integrity: sha512-7tqKE3OV7/ybeDOORX++USYYCBJa7IgTya2czFpzbgXGo7CQDVyuv+0J1DggjRcEqhhXQA4MUhgnhcRaZvHxWg==}
 
   '@layerstack/utils@2.0.0-next.12':
     resolution: {integrity: sha512-fhGZUlSr3N+D44BYm37WKMGSEFyZBW+dwIqtGU8Cl54mR4TLQ/UwyGhdpgIHyH/x/8q1abE0fP0Dn6ZsrDE3BA==}
@@ -2828,7 +2828,7 @@ snapshots:
       d3-array: 3.2.4
       lodash-es: 4.17.21
 
-  '@layerstack/tailwind@2.0.0-next.14':
+  '@layerstack/tailwind@2.0.0-next.15':
     dependencies:
       '@layerstack/utils': 2.0.0-next.12
       clsx: 2.1.1

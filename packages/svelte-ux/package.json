@@ -57,7 +57,7 @@
     "@layerstack/svelte-actions": "1.0.1-next.12",
     "@layerstack/svelte-stores": "1.0.2-next.12",
     "@layerstack/svelte-table": "1.0.1-next.12",
-    "@layerstack/tailwind": "2.0.0-next.14",
+    "@layerstack/tailwind": "2.0.0-next.15",
     "@layerstack/utils": "2.0.0-next.12",
     "@mdi/js": "^7.4.47",
     "d3-array": "^3.2.4",
