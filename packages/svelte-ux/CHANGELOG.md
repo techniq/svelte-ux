@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.10
+
+### Patch Changes
+
+- chore: Update deps ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.9
 
 ### Patch Changes
