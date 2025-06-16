@@ -9,9 +9,15 @@
   <h2>Installation</h2>
   <div class="grid gap-3">
     <div>
-      Install <b>Tailwind v3</b> by following the <a href="https://v3.tailwindcss.com/docs/guides/sveltekit" target="_blank">official guide</a>.
+      Svelte UX 1.0.0 requires Tailwind 3. For new projects, Svelte CLI <code>sv</code> installs
+      Tailwind 4 which can not be used. Instead you will need to follow the
+      <a href="https://v3.tailwindcss.com/docs/guides/sveltekit" target="_blank">official guide</a>
+      to setup your project.
       <br />
-      (SvelteKit installs Tailwind v4 by default. For v4 support, see <a href="https://next.svelte-ux.techniq.dev/" target="_blank">here</a>.)
+      The upcoming Svelte UX 2.0.0 release has been updated to Tailwind 4 and can be previewed
+      <a href="https://next.svelte-ux.techniq.dev/" target="_blank">here</a>.
+      <br />
+      Svelte UX 1.0.0 supports Svelte 3-5, while 2.0.0 will require Svelte 5.
     </div>
     <div>Add Svelte UX package</div>
     <Code source={`npm install svelte-ux`} language="sh" />
