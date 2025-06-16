@@ -78,17 +78,18 @@
   <ul class="list-disc pl-6 space-y-1 my-1 text-sm text-surface-content">
     <li>
       The line <code>@import '@layerstack/tailwind/themes/basic.css';</code> in the CSS example
-      above provides basic light and dark theme support. If you require multiple light/dark
-      themes, or want to use pre-built themes like Skeleton or Daisy UI (which is what the
-      Svelte UX <a
+      above provides basic light and dark theme support. If you require multiple light/dark themes,
+      or want to use pre-built themes like Skeleton or Daisy UI (which is what the Svelte UX
+      <a
         href="https://github.com/techniq/svelte-ux/blob/next/packages/svelte-ux/src/routes/app.css"
         target="_blank">docs</a
-      > use), you should replace this line with
+      >
+      use), you should replace this line with
       <code>@import '@layerstack/tailwind/themes/all.css';</code>.
     </li>
     <li>
-      @layerstack/tailwind (the theme system used by Svelte UX) was migrated to be css-only. You
-      can see the source on the next branch <a
+      @layerstack/tailwind (the theme system used by Svelte UX) was migrated to be css-only. You can
+      see the source on the next branch <a
         href="https://github.com/techniq/layerstack/tree/next/packages/tailwind/src/lib/css"
         target="_blank">here</a
       >
