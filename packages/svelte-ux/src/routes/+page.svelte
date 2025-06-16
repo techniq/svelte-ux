@@ -33,7 +33,7 @@
       <Code source={`npx sv add tailwindcss`} language="sh" />
 
       <div>Add Svelte UX package</div>
-      <Code source={`npm install svelte-ux`} language="sh" />
+      <Code source={`npm install svelte-ux@next`} language="sh" />
     {:else if selectedTab === 'manual'}
       <div>
         Follow the Tailwind <a href="https://tailwindcss.com/docs/guides/sveltekit" target="_blank">
@@ -42,93 +42,57 @@
       </div>
 
       <div>Add Svelte UX package</div>
-      <Code source={`npm install svelte-ux`} language="sh" />
+      <Code source={`npm install svelte-ux@next`} language="sh" />
     {/if}
 
     {#if selectedTab === 'svelte-cli' || selectedTab === 'manual'}
-      <div>Update <code>tailwind.config.cjs</code></div>
+      <div>Update <code>app.css</code></div>
       <Code
-        source={`const colors = require('tailwindcss/colors');
-const layerstack = require('@layerstack/tailwind/plugin');
+        source={`@import 'tailwindcss';
+@import '@layerstack/tailwind/core.css';
+@import '@layerstack/tailwind/utils.css';
+@import '@layerstack/tailwind/themes/basic.css'; // Note: Theme choice explained below
 
-module.exports = {
-  content: [
-    './src/**/*.{html,svelte}', 
-    './node_modules/svelte-ux/**/*.{svelte,js}'
-  ],
+@source '../../node_modules/svelte-ux/dist';
+@source '../../node_modules/@layerchart/dist'; 
 
-  // See customization docs: https://svelte-ux.techniq.dev/customization
-  ux: {
-    themes: {
-      light: {
-        primary: colors['orange']['500'],
-        'primary-content': 'white',
-        secondary: colors['blue']['500'],
-        'surface-100': 'white',
-        'surface-200': colors['gray']['100'],
-        'surface-300': colors['gray']['300'],
-        'surface-content': colors['gray']['900'],
-        'color-scheme': 'light'
-      },
-      dark: {
-        primary: colors['orange']['500'],
-        'primary-content': 'white',
-        secondary: colors['blue']['500'],
-        'surface-100': colors['zinc']['800'],
-        'surface-200': colors['zinc']['900'],
-        'surface-300': colors['zinc']['950'],
-        'surface-content': colors['zinc']['100'],
-        'color-scheme': 'dark'
-      },
-    },
-  },
+// You can customize your theme as you see fit using CSS variables. Dark mode is targeted using with .dark class on :root/<html>
+:root {
+  --color-primary: var(--color-purple-700);
+  --color-secondary: var(--color-orange-500);
 
-  plugins: [
-    layerstack,  // uses hsl() color space by default. To use oklch(), use: layerstack({ colorSpace: 'oklch' }),
-  ]
-};`}
-        language="js"
+  &.dark {
+    --color-primary: var(--color-purple-400);
+    --color-surface-100: var(--color-zinc-900);
+    --color-surface-200: var(--color-zinc-950);
+    --color-surface-300: var(--color-black);
+  }
+}
+`}
+        language="css"
       />
     {/if}
   </div>
 
-  <p>A few notes regarding the <code>tailwind.config.cjs</code></p>
-
-  <ul>
+  <strong class="block mt-3 mb-1 text-surface-content">Theme setup:</strong>
+  <ul class="list-disc pl-6 space-y-1 my-1 text-sm text-surface-content">
     <li>
-      <code>{`./node_modules/svelte-ux/**/*.{(svelte, js)}`}</code> adds the library classes via
-      <a href="https://tailwindcss.com/docs/content-configuration">JIT</a>
+      The line <code>@import '@layerstack/tailwind/themes/basic.css';</code> in the CSS example
+      above provides basic light and dark theme support. If you require multiple light/dark themes,
+      or want to use pre-built themes like Skeleton or Daisy UI (which is what the Svelte UX
+      <a
+        href="https://github.com/techniq/svelte-ux/blob/next/packages/svelte-ux/src/routes/app.css"
+        target="_blank">docs</a
+      >
+      use), you should replace this line with
+      <code>@import '@layerstack/tailwind/themes/all.css';</code>.
     </li>
     <li>
-      <code>ux.themes</code> is used to configure the theme colors. See
-      <a href="/customization">customization</a> for more details.
-    </li>
-    <li>
-      Tailwind plugin injects the theme color variables, sets border, outline, ring, and typograpy
-      defauls based on the theme, and adds additional utility classes including:
-      <ul>
-        <li>
-          <code>elevation-#</code> for
-          <a
-            class="text-primary font-medium"
-            href="https://www.joshwcomeau.com/css/designing-shadows/"
-            rel="nofollow">realistic shadows</a
-          >
-          using multiple shadow layers, unlike the current Tailwind
-          <a
-            class="text-primary font-medium"
-            href="https://tailwindcss.com/docs/box-shadow"
-            rel="nofollow">shadows</a
-          >
-          which have at most 2 layers.
-        </li>
-        <li>
-          <code>grid-stack</code> to easily stack grid children
-        </li>
-        <li>
-          <code>scrollbar-none</code> to hide the scrollbar
-        </li>
-      </ul>
+      @layerstack/tailwind (the theme system used by Svelte UX) was migrated to be css-only. You can
+      see the source on the next branch <a
+        href="https://github.com/techniq/layerstack/tree/next/packages/tailwind/src/lib/css"
+        target="_blank">here</a
+      >
     </li>
   </ul>
 
