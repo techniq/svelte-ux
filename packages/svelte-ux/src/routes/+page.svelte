@@ -85,9 +85,9 @@ Dark mode is targeted using with .dark class on :root/<html>
       or want to use pre-built themes like Skeleton or Daisy UI (which is what the Svelte UX
       <a
         href="https://github.com/techniq/svelte-ux/blob/next/packages/svelte-ux/src/routes/app.css"
-        target="_blank">docs</a
+        target="_blank">documentation</a
       >
-      use), you should replace this line with
+      uses), you should replace this line with
       <code>@import '@layerstack/tailwind/themes/all.css';</code>.
     </li>
     <li>
