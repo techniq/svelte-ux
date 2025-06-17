@@ -51,12 +51,15 @@
         source={`@import 'tailwindcss';
 @import '@layerstack/tailwind/core.css';
 @import '@layerstack/tailwind/utils.css';
-@import '@layerstack/tailwind/themes/basic.css'; // Note: Theme choice explained below
+@import '@layerstack/tailwind/themes/basic.css'; /* Note: Theme choice explained below */
 
 @source '../../node_modules/svelte-ux/dist';
-@source '../../node_modules/@layerchart/dist'; 
+@source '../../node_modules/layerchart/dist';  /* if using LayerChart */
 
-// You can customize your theme as you see fit using CSS variables. Dark mode is targeted using with .dark class on :root/<html>
+/*
+You can customize your theme as you see fit using CSS variables.
+Dark mode is targeted using with .dark class on :root/<html>
+*/
 :root {
   --color-primary: var(--color-purple-700);
   --color-secondary: var(--color-orange-500);
