@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.12
+
+### Patch Changes
+
+- feat(TableOfContents): Simplify base styling and provide greater control via `classes`, `props`, `itemIndent` and `linkIndent` props and `link` slot. ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- feat(TreeList): Support passing `props` to underlying ul/li elements. Add `data-level` attribute to li for CSS targeting ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.11
 
 ### Patch Changes
