@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.13
+
+### Patch Changes
+
+- fix(TableOfContents): Fix `classes` and `props` types ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.12
 
 ### Patch Changes
