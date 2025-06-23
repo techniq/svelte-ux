@@ -29,11 +29,11 @@
 
   export let classes: {
     a?: string | ((node: TreeNode) => string);
-  } & ComponentProps<typeof TreeList>['classes'] = {};
+  } & ComponentProps<TreeList>['classes'] = {};
 
   export let props: {
     a?: HTMLAttributes<HTMLAnchorElement> | ((node: TreeNode) => HTMLAttributes<HTMLAnchorElement>);
-  } & ComponentProps<typeof TreeList>['props'] = {};
+  } & ComponentProps<TreeList>['props'] = {};
 
   type HeadingNode = { id: string; name: string; level: number; element: HTMLElement };
 
