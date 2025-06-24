@@ -229,6 +229,7 @@
     className
   )}
   bind:this={labelEl}
+  {...$$restProps}
 >
   {#if label && ['top', 'left'].includes(labelPlacement)}
     <span

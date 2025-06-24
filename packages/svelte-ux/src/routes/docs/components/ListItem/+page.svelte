@@ -167,7 +167,7 @@
           noShadow
         >
           <div slot="actions">
-            <Checkbox circle dense checked={selectedId == choice.id} />
+            <Checkbox circle checked={selectedId == choice.id} />
           </div>
         </ListItem>
       </div>
