@@ -13,9 +13,12 @@
   export let language = 'svelte';
   export let highlightedCode = code ? Prism.highlight(code, Prism.languages.svelte, language) : '';
   export let showCode = false;
+
+  let className: string | undefined = undefined;
+  export { className as class };
 </script>
 
-<div class={cls('Preview border rounded-sm bg-surface-100', $$props.class)}>
+<div class={cls('Preview border rounded-sm bg-surface-100', className)}>
   <div class="p-4">
     <slot />
   </div>

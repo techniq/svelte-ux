@@ -30,6 +30,9 @@
   export let inset: boolean = false;
   export let vertical: boolean = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     options?: string;
@@ -247,7 +250,7 @@
 </script>
 
 <div
-  class={cls('ToggleGroup', `variant-${variant}`, $classesStore.root, $$props.class)}
+  class={cls('ToggleGroup', `variant-${variant}`, $classesStore.root, className)}
   {...$$restProps}
 >
   <!-- TODO: Figure out why fieldset and class="overflow-auto" doesn't work  -->

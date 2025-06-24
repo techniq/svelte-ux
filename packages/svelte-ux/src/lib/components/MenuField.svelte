@@ -70,7 +70,7 @@
 <Field
   class="cursor-pointer"
   {...restProps}
-  classes={{ input: 'overflow-hidden', ...$$props.classes }}
+  classes={{ input: 'overflow-hidden', ...classes }}
   on:click={() => (open = !open)}
 >
   <slot name="selection">

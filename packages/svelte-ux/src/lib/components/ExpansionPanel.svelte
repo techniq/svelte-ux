@@ -17,6 +17,9 @@
   export let disabled = false;
   $: enabled = $$slots.default && !disabled;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     toggle?: string;
@@ -36,7 +39,7 @@
       list === 'group' && 'group-first:border-t-0 group-first:rounded-t group-last:rounded-b',
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     ),
     icon: cls('text-surface-content/30 px-2', !enabled && 'hidden'),
   }}

@@ -27,6 +27,9 @@
   export let size: ButtonSize | undefined = undefined; // default in reactive groupContext below
   export let color: ButtonColor | undefined = undefined; // default in reactive groupContext below
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
     root?: string;
@@ -437,7 +440,7 @@
 
     settingsClasses.root,
     classes?.root,
-    $$props.class
+    className
   );
 </script>
 
@@ -449,7 +452,6 @@
   {type}
   {...$$restProps}
   class={_class}
-  style={$$props.style ?? ''}
   {disabled}
   aria-disabled={disabled ? 'true' : 'false'}
   use:multi={actions}

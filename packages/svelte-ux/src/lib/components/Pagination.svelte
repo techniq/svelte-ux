@@ -35,6 +35,9 @@
   /** Determine which actions to show and order */
   export let show: ShowComponent[] = ['prevPage', 'pagination', 'nextPage'];
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     buttons?: string;
@@ -52,7 +55,7 @@
       'flex items-center gap-1',
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
   >
     {#each show as component}

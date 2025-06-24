@@ -13,6 +13,9 @@
 
   export let color: ThemeColors = 'primary';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     input?: string;
@@ -72,7 +75,7 @@
       disabled ? 'opacity-50' : 'cursor-pointer peer-focus-visible:ring-2 ring-offset-1',
       settingsClasses.switch,
       classes.switch,
-      $$props.class
+      className
     )}
   >
     <div

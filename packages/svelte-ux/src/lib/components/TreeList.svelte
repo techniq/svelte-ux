@@ -14,6 +14,9 @@
     li?: HTMLAttributes<HTMLLIElement> | ((node: TreeNode) => HTMLAttributes<HTMLLIElement>);
   } = {};
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     ul?: string | ((nodes: TreeNode[]) => string);
     li?: string | ((node: TreeNode) => string);
@@ -27,7 +30,7 @@
     'TreeList',
     typeof settingsClasses.ul === 'string' ? settingsClasses.ul : settingsClasses.ul?.(nodes),
     typeof classes.ul === 'string' ? classes.ul : classes.ul?.(nodes),
-    $$props.class
+    className
   )}
 >
   {#each nodes ?? [] as node}

@@ -46,6 +46,9 @@
     value,
   }) => `${value?.length} selected`;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     multiSelectMenu?: MultiSelectMenuProps['classes'];
@@ -142,7 +145,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-  class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, $$props.class)}
+  class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, className)}
   on:click={onClick}
 >
   <!-- TODO: Setup blur without jank on open or issues when clicking within menu -->

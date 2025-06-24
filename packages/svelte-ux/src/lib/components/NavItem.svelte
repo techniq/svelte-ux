@@ -14,6 +14,9 @@
   export let text: string = '';
   export let icon: string | null = null;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     active?: string;
@@ -34,7 +37,7 @@
     'flex items-center',
     settingsClasses.root,
     classes.root,
-    $$props.class,
+    className,
     isPathActive && ['is-active', settingsClasses.active, classes.active]
   )}
   use:scrollIntoView={{

@@ -24,6 +24,9 @@
   export let loading: boolean | null = null;
   export let placement: 'top' | 'bottom' | 'left' | 'right' = 'right';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     backdrop?: string;
@@ -83,9 +86,8 @@
       },
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
-    style={$$props.style}
     in:fly|global={{
       x: placement === 'left' ? '-100%' : placement === 'right' ? '100%' : 0,
       y: placement === 'top' ? '-100%' : placement === 'bottom' ? '100%' : 0,
@@ -110,6 +112,7 @@
     use:focusMove={{ restoreFocus: true }}
     role="dialog"
     tabindex="-1"
+    {...$$restProps}
   >
     {#if loading}
       <Overlay center class="rounded-sm">

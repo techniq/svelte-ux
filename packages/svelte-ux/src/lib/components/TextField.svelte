@@ -61,6 +61,10 @@
   export let operators: { label: string; value: string }[] | undefined = undefined;
   export let inputEl: HTMLInputElement | HTMLTextAreaElement | null = null;
   export let debounceChange: boolean | number = false;
+
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     container?: string;
@@ -222,7 +226,7 @@
     !base && (rounded ? 'rounded-full' : 'rounded-sm'),
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   bind:this={labelEl}
 >

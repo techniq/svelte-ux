@@ -23,7 +23,7 @@
 </script>
 
 <div
-  {...$$props}
+  {...$$restProps}
   class={cls(
     'ProgressCircular',
     'relative inline-flex justify-center items-center align-middle',
@@ -31,7 +31,8 @@
     className
   )}
   class:indeterminate
-  style="height: {size}px; width: {size}px; {$$props.style}"
+  style:height="{size}px"
+  style:width="{size}px"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"

@@ -13,6 +13,9 @@
 
   export let options: MenuOption<string>[] = [];
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     button?: string;
@@ -58,7 +61,7 @@
 <Dialog
   bind:open
   classes={{
-    root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, $$props.class),
+    root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, className),
     backdrop: 'backdrop-blur-xs',
   }}
 >

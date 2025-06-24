@@ -13,6 +13,9 @@
   /** Control whether header should be full width (deafult) or nav should be full height */
   export let headerPosition: 'full' | 'inset' = 'full';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     aside?: string;
@@ -39,7 +42,7 @@
     '[:where(&_[id])]:scroll-m-[var(--headerHeight)]',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <slot />

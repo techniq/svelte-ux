@@ -11,6 +11,9 @@
     ? Prism.highlight(source, Prism.languages[language] ?? Prism.languages.text, language)
     : '';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     pre?: string;
@@ -18,7 +21,7 @@
   } = {};
 </script>
 
-<div class={cls('Code', 'rounded-sm', 'overflow-auto', classes.root, $$props.class)}>
+<div class={cls('Code', 'rounded-sm', 'overflow-auto', classes.root, className)}>
   {#if source}
     <div class="relative">
       <pre

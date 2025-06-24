@@ -35,6 +35,9 @@
    */
   export let noBackground = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     avatar?: string;
@@ -64,7 +67,7 @@
     noBackground !== true && 'bg-surface-100',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   on:click
   role="listitem"

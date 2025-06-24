@@ -18,6 +18,9 @@
   /** If completed, will color icon and line leading up to event */
   export let completed = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     start?: string;
@@ -53,7 +56,7 @@
       'timelineevent-completed has-[~li.timelineevent-completed]:[&_hr:last-child]:bg-(--color-completed)',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <hr

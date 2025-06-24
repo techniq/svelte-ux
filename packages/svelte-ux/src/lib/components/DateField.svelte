@@ -46,6 +46,9 @@
   export let dense = false;
   export let icon: string | null = null;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   let inputValue: string | undefined = '';
 
   const dispatch = createEventDispatcher();
@@ -82,7 +85,7 @@
     dispatch('change', { value });
   }}
   classes={classes.field}
-  class={cls('DateField', settingsClasses.root, classes.root, $$props.class)}
+  class={cls('DateField', settingsClasses.root, classes.root, className)}
   let:id
 >
   <Input

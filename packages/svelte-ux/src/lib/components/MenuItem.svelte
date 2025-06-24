@@ -18,6 +18,9 @@
   export let disabled = false;
   export let selected = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: ButtonProps['classes'] & { selected?: string } = {
     root: 'text-sm gap-3',
     icon: 'text-surface-content/50',
@@ -55,7 +58,7 @@
     selected && classes?.selected,
     settingsClasses.root,
     classes?.root,
-    $$props.class
+    className
   )}
   on:click
   on:mouseover
