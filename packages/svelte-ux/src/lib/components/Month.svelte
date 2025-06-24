@@ -1,15 +1,13 @@
 <script lang="ts">
   import {
-    startOfDay as startOfDayFunc,
-    endOfDay as endOfDayFunc,
-    startOfMonth as startOfMonthFunc,
-    endOfMonth as endOfMonthFunc,
-    addMonths,
-    isSameDay,
-    isWithinInterval,
-  } from 'date-fns';
-  import { type SelectedDate, PeriodType, hasKeyOf } from '@layerstack/utils';
-  import { getMonthDaysByWeek } from '@layerstack/utils/date';
+    type SelectedDate,
+    PeriodType,
+    hasKeyOf,
+    startOfInterval,
+    endOfInterval,
+    intervalOffset,
+  } from '@layerstack/utils';
+  import { getMonthDaysByWeek, isDateWithin, isSameInterval } from '@layerstack/utils/date';
 
   import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 
@@ -21,18 +19,18 @@
   export let selected: SelectedDate = undefined;
 
   export let startOfMonth =
-    (selected instanceof Date && startOfMonthFunc(selected)) ||
-    (selected instanceof Array && selected.length && startOfMonthFunc(selected[0])) ||
+    (selected instanceof Date && startOfInterval('month', selected)) ||
+    (selected instanceof Array && selected.length && startOfInterval('month', selected[0])) ||
     (selected &&
       hasKeyOf<{ from: Date }>(selected, 'from') &&
       selected.from &&
-      startOfMonthFunc(selected.from)) ||
-    startOfMonthFunc(new Date());
+      startOfInterval('month', selected.from)) ||
+    startOfInterval('month', new Date());
 
   const { format } = getSettings();
   $: dateFormat = $format.settings.formats.dates;
 
-  $: endOfMonth = endOfMonthFunc(startOfMonth);
+  $: endOfMonth = endOfInterval('month', startOfMonth);
   $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, dateFormat.weekStartsOn);
 
   /**
@@ -56,19 +54,19 @@
     return disabledDates instanceof Function
       ? disabledDates(date)
       : disabledDates instanceof Date
-        ? isSameDay(date, disabledDates)
+        ? isSameInterval('day', date, disabledDates)
         : disabledDates instanceof Array
-          ? disabledDates.some((d) => isSameDay(date, d))
+          ? disabledDates.some((d) => isSameInterval('day', date, d))
           : disabledDates instanceof Object
-            ? isWithinInterval(date, {
-                start: startOfDayFunc(disabledDates.from),
-                end: endOfDayFunc(disabledDates.to || disabledDates.from),
+            ? isDateWithin(date, {
+                start: startOfInterval('day', disabledDates.from),
+                end: endOfInterval('day', disabledDates.to || disabledDates.from),
               })
             : false;
   };
 
   $: isDayHidden = (day: Date) => {
-    const isCurrentMonth = isWithinInterval(day, {
+    const isCurrentMonth = isDateWithin(day, {
       start: startOfMonth,
       end: endOfMonth,
     });
@@ -76,7 +74,7 @@
   };
 
   $: isDayFaded = (day: Date) => {
-    const isCurrentMonth = isWithinInterval(day, {
+    const isCurrentMonth = isDateWithin(day, {
       start: startOfMonth,
       end: endOfMonth,
     });
@@ -102,7 +100,7 @@
       <Button
         icon={mdiChevronLeft}
         class="p-2"
-        on:click={() => (startOfMonth = addMonths(startOfMonth, -1))}
+        on:click={() => (startOfMonth = intervalOffset('month', startOfMonth, -1))}
       />
 
       <div class="flex flex-1 items-center justify-center">
@@ -114,7 +112,7 @@
       <Button
         icon={mdiChevronRight}
         class="p-2"
-        on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
+        on:click={() => (startOfMonth = intervalOffset('month', startOfMonth, 1))}
       />
     </div>
   {/if}

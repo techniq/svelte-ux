@@ -8,6 +8,9 @@
 
   export let value: any;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     option?: string;
@@ -55,7 +58,7 @@
     $classesContext.label,
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <!-- Stack indicator under option -->

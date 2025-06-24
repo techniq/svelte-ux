@@ -20,6 +20,9 @@
   export let menuIcon: string | null = mdiMenuDown;
   $: selected = options?.find((x) => x.value === value);
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     label?: string;
@@ -38,7 +41,7 @@
 <Button
   on:click={() => (open = !open)}
   {...restProps}
-  class={cls('MenuButton', settingsClasses.root, classes.root, $$props.class)}
+  class={cls('MenuButton', settingsClasses.root, classes.root, className)}
 >
   <slot name="selection" value={selected}>
     <span class={cls('truncate', settingsClasses.label, classes.label)}>

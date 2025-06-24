@@ -16,6 +16,9 @@
   export let fullWidth = false;
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     input?: string;
@@ -35,7 +38,7 @@
     'items-center',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <input

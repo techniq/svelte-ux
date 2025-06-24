@@ -17,6 +17,9 @@
   }[];
   export let total: number | undefined = undefined;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     item?: string;
@@ -28,7 +31,7 @@
   }>();
 </script>
 
-<div class={cls('BarStack', 'flex gap-px', settingsClasses.root, classes.root, $$props.class)}>
+<div class={cls('BarStack', 'flex gap-px', settingsClasses.root, classes.root, className)}>
   {#each data as item}
     {@const valuePercent = item.value / (total ?? sum(data, (d) => d.value))}
     <!-- Hide empty -->

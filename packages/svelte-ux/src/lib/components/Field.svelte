@@ -35,6 +35,10 @@
   // export let actions: Actions = undefined;
   // export let inputEl: HTMLInputElement | null = null;
   export let center = false;
+
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     container?: string;
@@ -64,12 +68,12 @@
     'Field',
     'group flex gap-1',
     labelPlacement !== 'left' ? 'flex-col' : 'items-center',
-    error ? '[--color:theme(colors.danger)]' : '[--color:theme(colors.primary)]',
+    error ? '[--color:var(--color-danger)]' : '[--color:var(--color-primary)]',
     disabled && 'opacity-50 pointer-events-none',
-    !base && (rounded ? 'rounded-full' : 'rounded'),
+    !base && (rounded ? 'rounded-full' : 'rounded-sm'),
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   bind:this={labelEl}
 >
@@ -78,7 +82,7 @@
       class={cls(
         'label',
         'block text-sm font-medium',
-        'truncate group-hover:text-surface-content/70 group-focus-within:text-primary group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+        'truncate group-hover:text-surface-content/70 group-focus-within:text-primary group-focus-within:group-hover:text-(--color) cursor-pointer',
         error ? 'text-danger/80' : 'text-surface-content/50',
         `placement-${labelPlacement}`,
         settingsClasses.label,
@@ -93,13 +97,13 @@
     <div
       class={cls(
         'border py-0 transition-shadow',
-        disabled ? '' : 'hover:shadow',
+        disabled ? '' : 'hover:shadow-sm',
         disabled ? '' : error ? 'hover:border-danger' : 'hover:border-surface-content',
         {
           'px-2': !rounded,
           'px-6': rounded && !hasPrepend,
         },
-        !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
+        !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded-sm'],
         error && 'border-danger',
         'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
         settingsClasses.container,
@@ -127,12 +131,12 @@
 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <div class="flex-grow inline-grid" on:click>
+        <div class="grow inline-grid" on:click>
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <span
               class={cls(
                 'label',
-                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+                'col-span-full row-span-full z-1 flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-focus-within:group-hover:text-(--color) cursor-pointer',
                 center && 'justify-center',
                 error ? 'text-danger/80' : 'text-surface-content/50',
                 `placement-${labelPlacement}`,

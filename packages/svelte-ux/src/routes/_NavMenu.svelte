@@ -76,7 +76,7 @@
 
 <NavItem text="Getting Started" icon={mdiHome} currentUrl={$page.url} path="/" />
 <NavItem text="Customization" icon={mdiCog} currentUrl={$page.url} path="/customization" />
-<NavItem text="Theme" icon={mdiPalette} currentUrl={$page.url} path="/theme" />
+<!-- <NavItem text="Theme" icon={mdiPalette} currentUrl={$page.url} path="/theme" /> -->
 <NavItem text="Changelog" icon={mdiFormatListBulleted} currentUrl={$page.url} path="/changelog" />
 
 <h1>Components</h1>

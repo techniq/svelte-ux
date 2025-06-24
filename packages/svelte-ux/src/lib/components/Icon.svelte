@@ -25,6 +25,9 @@
   export let descId: string | undefined = desc ? uniqueId('desc-') : '';
   $: isLabelled = title || desc;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     path?: string | string[];
@@ -84,12 +87,11 @@
   <span
     class={cls(
       'Icon',
-      'icon-container inline-block flex-shrink-0 align-middle fill-current',
+      'icon-container inline-block shrink-0 align-middle fill-current',
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
-    style={$$props.style}
     style:width
     style:height
     style:--width={width}
@@ -97,6 +99,7 @@
     role={isLabelled ? 'img' : 'presentation'}
     aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
     on:click
+    {...$$restProps}
   >
     <slot>
       {@html svg ?? ''}
@@ -109,15 +112,15 @@
     {viewBox}
     class={cls(
       'Icon',
-      'inline-block flex-shrink-0 fill-current',
+      'inline-block shrink-0 fill-current',
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
-    style={$$props.style}
     role={isLabelled ? 'img' : 'presentation'}
     aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
     on:click
+    {...$$restProps}
   >
     {#if title}
       <title id={titleId}>{title}</title>

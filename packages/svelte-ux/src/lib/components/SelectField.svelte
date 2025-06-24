@@ -60,6 +60,9 @@
 
   export let scrollIntoView: Partial<ScrollIntoViewOptions> = {};
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     field?: string | ComponentProps<TextField>['classes'];
@@ -262,9 +265,9 @@
       !selectFieldEl?.contains(fe.relatedTarget) && // click within <SelectField> (ex. toggleIcon)
       fe.relatedTarget !== selectFieldEl // click on SelectField itself
     ) {
-      hide('blur');
+      hide('blur-sm');
     } else {
-      logger.debug('ignoring blur');
+      logger.debug('ignoring blur-sm');
     }
   }
 
@@ -428,7 +431,7 @@
     'SelectField block w-full cursor-default text-left',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   bind:this={selectFieldEl}
   on:click={onClick}

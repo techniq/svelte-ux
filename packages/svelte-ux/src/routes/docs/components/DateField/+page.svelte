@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { addDays } from 'date-fns';
-  import { mdiCalendarStart, mdiCalendarEnd } from '@mdi/js';
-
   import { Button, DateField, getSettings } from 'svelte-ux';
+  import { mdiCalendarStart, mdiCalendarEnd } from '@mdi/js';
+  import { intervalOffset } from '@layerstack/utils';
+
   import Preview from '$lib/components/Preview.svelte';
 
   const { localeSettings } = getSettings();
@@ -32,13 +32,13 @@
   <Button on:click={() => (value = new Date())}>
     {$localeSettings.dictionary.Date.PeriodDay.Current}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), -1))}>
+  <Button on:click={() => (value = intervalOffset('day', new Date(), -1))}>
     {$localeSettings.dictionary.Date.PeriodDay.Last}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), -7))}>
+  <Button on:click={() => (value = intervalOffset('day', new Date(), -7))}>
     {$localeSettings.dictionary.Date.PeriodWeek.Last}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), 7))}>
+  <Button on:click={() => (value = intervalOffset('day', new Date(), 7))}>
     <!-- TODO: Add to dictionary -->
     Next week
   </Button>

@@ -12,6 +12,9 @@
   export let disabled = false;
   export let variant: 'checkbox' | 'checkmark' | 'fill' = 'checkbox';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     checkbox?: ComponentProps<Checkbox>['classes'];
@@ -25,10 +28,10 @@
 <div
   class={cls(
     'MultiSelectOption',
-    'grid grid-cols-[1fr,auto]',
+    'grid grid-cols-[1fr_auto]',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   role="option"
   aria-selected={checked}
@@ -40,7 +43,7 @@
       on:change={() => dispatch('change')}
       {disabled}
       classes={{
-        root: 'px-2 rounded hover:bg-surface-content/5',
+        root: 'px-2 rounded-sm hover:bg-surface-content/5',
         label: 'py-2',
         ...settingsClasses.checkbox,
         ...classes.checkbox,

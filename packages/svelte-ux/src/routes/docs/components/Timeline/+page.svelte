@@ -262,7 +262,7 @@
     vertical
     classes={{
       event: {
-        root: 'grid-cols-[40px,auto,1fr]',
+        root: 'grid-cols-[40px_auto_1fr]',
         start: 'text-sm font-semibold mr-1',
         end: 'border rounded-lg text-sm p-2 m-1',
         icon: 'size-5',
@@ -340,9 +340,9 @@
         classes={{
           root: cls(
             {
-              completed: '[--color-completed:theme(colors.success)]',
-              failed: '[--color-completed:theme(colors.danger)]',
-              'in-progress': '[--color-completed:theme(colors.info)]',
+              completed: '[--color-completed:var(--color-success)]',
+              failed: '[--color-completed:var(--color-danger)]',
+              'in-progress': '[--color-completed:var(--color-info)]',
             }[item.status]
           ),
           line: 'w-0.5',

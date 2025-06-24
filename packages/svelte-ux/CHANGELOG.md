@@ -1,5 +1,109 @@
 # svelte-ux
 
+## 2.0.0-next.13
+
+### Patch Changes
+
+- fix(TableOfContents): Fix `classes` and `props` types ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.12
+
+### Patch Changes
+
+- feat(TableOfContents): Simplify base styling and provide greater control via `classes`, `props`, `itemIndent` and `linkIndent` props and `link` slot. ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- feat(TreeList): Support passing `props` to underlying ul/li elements. Add `data-level` attribute to li for CSS targeting ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.11
+
+### Patch Changes
+
+- chore: Update @layerstack/tailwind with better theme generation and runtime separation ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.10
+
+### Patch Changes
+
+- chore: Update deps ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.9
+
+### Patch Changes
+
+- fix: Move `culori` and `@fortawesome/fontawesome-common-types` to `devDependenies` ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.8
+
+### Patch Changes
+
+- fix(NavItem): Apply active classes after base classes ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- refactor: Replace `date-fns` usage with new `@layerstack/utils` date utils (based on d3-time) to reduce bundle size ([#602](https://github.com/techniq/svelte-ux/pull/602))
+
+## 2.0.0-next.7
+
+### Patch Changes
+
+- fix(Drawer): Fix display of action buttons ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.6
+
+### Patch Changes
+
+- fix(MultiSelect): Fix reactivity scope for filteredSelectedOptions and filteredUnselectedOptions. Issue #594 ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix: Update deps including @layerstack/utils with improved format ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix(DateRangeField): Include year when displaying month selection ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.5
+
+### Patch Changes
+
+- fix(Duration): Update Duration component to new `@layerstack/utils` `Duration` class ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- Update dependencies ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.4
+
+### Patch Changes
+
+- fix(Menu): Support `bind:open` (underlying Popover) ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
+- feat(DateRangeField): Add `quickPresets` support ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
+- fix(DateRange): Fix selection gradient ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
+## 2.0.0-next.3
+
+### Patch Changes
+
+- fix(SelectField|MultiSelect): Unify and enhance search functionality, enabling new custom search capability in MultiSelect.
+
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Switch from `@tailwindcss/postcss` to `@tailwindcss/vite`. Update all non-major packages
+
+## 2.0.0-next.1
+
+### Patch Changes
+
+- fix: Use `next` releases for all `@layerstack/*` packages ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- docs: Update @layerstack/tailwind to `2.0.0-next.1`, fixing styling of tailwind typography when deployed ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.0
+
+### Major Changes
+
+- Tailwind 4 support ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+### Patch Changes
+
+- fix(Progress): Fix `TypeError: Failed to set the 'value' property on 'HTMLProgressElement': The provided double value is non-finite.` ([`6c2efa2`](https://github.com/techniq/svelte-ux/commit/6c2efa2d6d5b1a7ccf2b99c1826bc1232c51d2cc))
+
 ## 1.0.6
 
 ### Patch Changes

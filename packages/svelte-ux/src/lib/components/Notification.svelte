@@ -23,6 +23,9 @@
   export let open: boolean = true;
   export let closeIcon: boolean = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     title?: string;
@@ -71,7 +74,7 @@
         default: {},
       }[variant],
       classes.root,
-      $$props.class
+      className
     )}
     transition:fly={{ duration: 200, easing: quadIn, x: 100 }}
     on:outroend={() => dispatch('close')}

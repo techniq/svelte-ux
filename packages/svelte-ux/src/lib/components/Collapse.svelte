@@ -25,6 +25,9 @@
   export let transition = slide;
   export let transitionParams: TransitionParams = {};
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     trigger?: string;
@@ -56,13 +59,13 @@
     popout && list === 'group' && 'group-first:mt-0 group-last:mb-0',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   aria-expanded={open}
 >
   <button
     type="button"
-    class="flex items-center w-full text-left select-text focus:outline-none"
+    class="flex items-center w-full text-left select-text focus:outline-hidden"
     {disabled}
     on:click={() => {
       open = !open;

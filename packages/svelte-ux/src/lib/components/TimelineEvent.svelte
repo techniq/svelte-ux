@@ -18,6 +18,9 @@
   /** If completed, will color icon and line leading up to event */
   export let completed = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     start?: string;
@@ -41,7 +44,7 @@
     'relative grid shrink-0 items-center',
     'grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]',
     'grid-rows-[minmax(0,1fr)_auto_minmax(0,1fr)]',
-    '[--color-completed:theme(colors.primary)]',
+    '[--color-completed:var(--color-primary)]',
     snapPoint
       ? vertical
         ? 'grid-rows-[0.25rem_auto_minmax(0,1fr)]'
@@ -50,10 +53,10 @@
     compact && vertical ? 'grid-cols-[0_auto_minmax(0,1fr)] grid-rows-[0_auto_minmax(0,1fr)]' : '',
     vertical && 'justify-items-center',
     completed &&
-      'timelineevent-completed [&_hr:last-child]:has-[~li.timelineevent-completed]:bg-[var(--color-completed)]',
+      'timelineevent-completed has-[~li.timelineevent-completed]:[&_hr:last-child]:bg-(--color-completed)',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <hr

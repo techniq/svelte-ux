@@ -18,6 +18,9 @@
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
   export let circle = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     input?: string;
@@ -57,7 +60,7 @@
     'items-center',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <input
@@ -77,7 +80,7 @@
     class={cls(
       'checkbox',
       'inline-grid place-items-center border-2',
-      circle ? 'rounded-full' : 'rounded',
+      circle ? 'rounded-full' : 'rounded-sm',
       'peer-disabled:opacity-50 transition-shadow duration-300',
       !disabled &&
         'peer-hover:border-primary peer-focus-visible:border-primary peer-focus-visible:ring-2 ring-primary/60 ring-offset-1',

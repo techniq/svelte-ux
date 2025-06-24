@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import { parse as parseDate, format as formatDate } from 'date-fns';
-  import { type DisabledDate } from '@layerstack/utils';
+  import { formatDate, parseDate, type DisabledDate } from '@layerstack/utils';
   import { cls } from '@layerstack/tailwind';
 
   import { getComponentSettings, getSettings } from './settings.js';
@@ -47,6 +46,9 @@
   export let dense = false;
   export let icon: string | null = null;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   let inputValue: string | undefined = '';
 
   const dispatch = createEventDispatcher();
@@ -54,7 +56,7 @@
   function onInputChange(e: any) {
     inputValue = e.detail.value;
     const lastValue = value;
-    const parsedValue = parseDate(inputValue ?? '', actualFormat, new Date());
+    const parsedValue = parseDate(inputValue ?? '', actualFormat);
     value = isNaN(parsedValue.valueOf()) ? null : parsedValue;
     if (value != lastValue) {
       dispatch('change', { value });
@@ -83,7 +85,7 @@
     dispatch('change', { value });
   }}
   classes={classes.field}
-  class={cls('DateField', settingsClasses.root, classes.root, $$props.class)}
+  class={cls('DateField', settingsClasses.root, classes.root, className)}
   let:id
 >
   <Input

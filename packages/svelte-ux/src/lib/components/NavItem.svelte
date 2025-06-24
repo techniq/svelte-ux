@@ -14,6 +14,9 @@
   export let text: string = '';
   export let icon: string | null = null;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     active?: string;
@@ -33,9 +36,9 @@
     'NavItem',
     'flex items-center',
     settingsClasses.root,
-    isPathActive && ['is-active', settingsClasses.active, classes.active],
     classes.root,
-    $$props.class
+    className,
+    isPathActive && ['is-active', settingsClasses.active, classes.active]
   )}
   use:scrollIntoView={{
     condition: isPathActive,
@@ -55,11 +58,7 @@
   {/if}
 
   {#if icon}
-    <Icon
-      data={icon}
-      class={cls('mr-3 flex-shrink-0', settingsClasses.icon)}
-      classes={classes.icon}
-    />
+    <Icon data={icon} class={cls('mr-3 shrink-0', settingsClasses.icon)} classes={classes.icon} />
   {/if}
 
   {text}

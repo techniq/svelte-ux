@@ -13,6 +13,9 @@
   /** Control whether header should be full width (deafult) or nav should be full height */
   export let headerPosition: 'full' | 'inset' = 'full';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     aside?: string;
@@ -34,12 +37,12 @@
     headerPosition === 'full' || temporaryDrawer
       ? '[&>header]:w-full'
       : '[&>header]:w-[calc(100%-var(--drawerWidth))] [&>header]:left-[var(--drawerWidth)] [&>header]:duration-500',
-    '[&>main]:md:ml-[var(--drawerWidth)] [&>main]:mt-[var(--headerHeight)] [&>main]:transition-[margin] [&>main]:duration-500',
+    'md:[&>main]:ml-(--drawerWidth) [&>main]:mt-[var(--headerHeight)] [&>main]:transition-[margin] [&>main]:duration-500',
     /* Fix scrolling offset for headings (h1, ...) or other elements with an id set (`<a href="#id">`) */
     '[:where(&_[id])]:scroll-m-[var(--headerHeight)]',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <slot />

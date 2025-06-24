@@ -26,7 +26,7 @@
   export let list: 'type' | 'parent' | 'group' = 'parent';
 
   /**
-   * Remove shadow (useful when using `ring`)
+   * Remove shadow (useful when using `ring-3`)
    */
   export let noShadow = false;
 
@@ -34,6 +34,9 @@
    * Remove background
    */
   export let noBackground = false;
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let classes: {
     root?: string;
@@ -64,13 +67,13 @@
     noBackground !== true && 'bg-surface-100',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   on:click
   role="listitem"
 >
   {#if loading}
-    <Overlay center class="rounded">
+    <Overlay center class="rounded-sm">
       <ProgressCircle />
     </Overlay>
   {/if}
@@ -90,7 +93,7 @@
     {/if}
   </slot>
 
-  <div class="flex-grow">
+  <div class="grow">
     <slot name="title">
       {#if title != null}
         <div class={cls(settingsClasses.title, classes.title)}>{title}</div>

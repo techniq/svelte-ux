@@ -1,12 +1,11 @@
 <script lang="ts">
   import {
-    addMonths,
-    subMonths,
-    isSameMonth,
-    isAfter,
-    startOfQuarter,
-    endOfQuarter,
-  } from 'date-fns';
+    endOfInterval,
+    intervalOffset,
+    isDateAfter,
+    isSameInterval,
+    startOfInterval,
+  } from '@layerstack/utils';
 
   import { MonthList } from 'svelte-ux';
   import { type SelectedDate } from '@layerstack/utils';
@@ -83,7 +82,13 @@
 <h2>Disabled months w/ array</h2>
 
 <Preview>
-  <MonthList disabledDates={[subMonths(new Date(), 2), new Date(), addMonths(new Date(), 2)]} />
+  <MonthList
+    disabledDates={[
+      intervalOffset('month', new Date(), -2),
+      new Date(),
+      intervalOffset('month', new Date(), 2),
+    ]}
+  />
 </Preview>
 
 <h2>Disabled months w/ range</h2>
@@ -91,8 +96,8 @@
 <Preview>
   <MonthList
     disabledDates={{
-      from: subMonths(new Date(), 2),
-      to: addMonths(new Date(), 2),
+      from: intervalOffset('month', new Date(), -2),
+      to: intervalOffset('month', new Date(), 2),
     }}
   />
 </Preview>
@@ -100,7 +105,7 @@
 <h2>Disabled months w/ function</h2>
 
 <Preview>
-  <MonthList disabledDates={(date) => isAfter(date, new Date())} />
+  <MonthList disabledDates={(date) => isDateAfter(date, new Date())} />
 </Preview>
 
 <h2>Selected w/ single</h2>
@@ -112,7 +117,13 @@
 <h2>Selected w/ array</h2>
 
 <Preview>
-  <MonthList selected={[subMonths(new Date(), 2), new Date(), addMonths(new Date(), 2)]} />
+  <MonthList
+    selected={[
+      intervalOffset('month', new Date(), -2),
+      new Date(),
+      intervalOffset('month', new Date(), 2),
+    ]}
+  />
 </Preview>
 
 <h2>Selected w/ range</h2>
@@ -120,8 +131,8 @@
 <Preview>
   <MonthList
     selected={{
-      from: subMonths(new Date(), 2),
-      to: addMonths(new Date(), 2),
+      from: intervalOffset('month', new Date(), -2),
+      to: intervalOffset('month', new Date(), 2),
     }}
   />
 </Preview>
@@ -144,8 +155,8 @@
     selected={selectedArr}
     on:dateChange={(e) => {
       const date = e.detail;
-      if (selectedArr.some((d) => isSameMonth(d, date))) {
-        selectedArr = selectedArr.filter((d) => !isSameMonth(d, date));
+      if (selectedArr.some((d) => isSameInterval('month', d, date))) {
+        selectedArr = selectedArr.filter((d) => !isSameInterval('month', d, date));
       } else {
         selectedArr = [...selectedArr, date];
       }
@@ -163,16 +174,16 @@
       const newSelectedRange = { ...selectedRange };
       if (selectedRange.from === null) {
         newSelectedRange.from = date;
-      } else if (isSameMonth(date, selectedRange.from)) {
+      } else if (isSameInterval('month', date, selectedRange.from)) {
         newSelectedRange.from = null;
       } else if (selectedRange.to === null) {
-        if (isAfter(date, selectedRange.from)) {
+        if (isDateAfter(date, selectedRange.from)) {
           newSelectedRange.to = date;
         } else {
           newSelectedRange.to = selectedRange.from;
           newSelectedRange.from = date;
         }
-      } else if (isSameMonth(date, selectedRange.to)) {
+      } else if (isSameInterval('month', date, selectedRange.to)) {
         newSelectedRange.to = null;
       } else {
         newSelectedRange.from = date;
@@ -192,8 +203,8 @@
       on:dateChange={(e) => {
         const date = e.detail;
         selectedQuarter = {
-          from: startOfQuarter(date),
-          to: endOfQuarter(date),
+          from: startOfInterval('quarter', date),
+          to: endOfInterval('quarter', date),
         };
       }}
     />

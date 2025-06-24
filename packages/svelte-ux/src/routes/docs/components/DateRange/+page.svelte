@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { endOfMonth, startOfDay, startOfMonth, startOfYear } from 'date-fns';
-
+  import { startOfInterval, endOfInterval } from '@layerstack/utils';
   import { DateRange, getSettings } from 'svelte-ux';
   import { PeriodType, getDateFuncsByPeriodType } from '@layerstack/utils';
 
@@ -64,13 +63,13 @@
       const { start, end, add } = getDateFuncsByPeriodType($localeSettings, fnPeriodType);
 
       if (fnPeriodType === PeriodType.Day) {
-        const today = startOfDay(new Date());
+        const today = startOfInterval('day', new Date());
         const yesterday = start(add(today, -1));
         return [
           {
             label: 'Month to date',
             value: {
-              from: startOfMonth(today),
+              from: startOfInterval('month', today),
               to: end(today),
               periodType: fnPeriodType,
             },
@@ -78,7 +77,7 @@
           {
             label: 'Year to date',
             value: {
-              from: startOfYear(today),
+              from: startOfInterval('year', today),
               to: end(today),
               periodType: fnPeriodType,
             },
@@ -125,7 +124,7 @@
           },
         ];
       } else if (fnPeriodType === PeriodType.Month) {
-        const today = endOfMonth(new Date());
+        const today = endOfInterval('month', new Date());
         const lastMonth = start(add(today, -1));
 
         return [

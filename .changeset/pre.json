@@ -1,0 +1,30 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "svelte-ux": "1.0.0"
+  },
+  "changesets": [
+    "breezy-bushes-admire",
+    "bright-crabs-play",
+    "clear-regions-listen",
+    "cool-teams-judge",
+    "cuddly-coins-tease",
+    "cuddly-snakes-tie",
+    "dirty-pets-switch",
+    "fair-bugs-carry",
+    "four-bears-join",
+    "funny-days-crash",
+    "green-maps-bathe",
+    "loose-baths-make",
+    "loud-bees-juggle",
+    "major-turkeys-ask",
+    "nice-lamps-sing",
+    "nice-onions-sell",
+    "open-hats-arrive",
+    "ready-planets-deny",
+    "violet-books-sneeze",
+    "wide-months-rescue",
+    "witty-spies-divide"
+  ]
+}

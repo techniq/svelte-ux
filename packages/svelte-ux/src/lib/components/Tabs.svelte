@@ -11,6 +11,9 @@
 
   export let options: { label: string; value: any }[] = [];
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     tabs?: string;
@@ -33,12 +36,12 @@
     }[placement],
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <div
     class={cls(
-      'flex gap-1 overflow-auto z-[1]',
+      'flex gap-1 overflow-auto z-1',
       vertical && 'flex-col',
       {
         top: '-mb-px',
