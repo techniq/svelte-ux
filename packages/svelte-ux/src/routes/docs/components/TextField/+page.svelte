@@ -1,27 +1,20 @@
 <script lang="ts">
   import {
-    mdiCurrencyUsd,
-    mdiPercent,
     mdiAccountSearch,
     mdiCreditCardOutline,
     mdiArrowRight,
     mdiRefresh,
-    mdiMagnify,
     mdiStarOutline,
-    mdiInformationOutline,
-    mdiChevronLeft,
-    mdiChevronRight,
-    mdiCalendar,
-    mdiMinus,
-    mdiPlus,
   } from '@mdi/js';
 
-  import { Button, Icon, SectionDivider, TextField } from 'svelte-ux';
+  import { Button, getSettings, Icon, SectionDivider, TextField } from 'svelte-ux';
   import { autoHeight, debounceEvent } from '@layerstack/svelte-actions';
 
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
+
+  const { icons } = getSettings();
 
   const numberOperators = [
     { label: '=', value: 'equal' },
@@ -313,7 +306,7 @@
 <Preview>
   <TextField label="Amount">
     <div slot="prefix">
-      <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+      <icons.currency class="size-4 text-surface-content/50 -mt-1" />
     </div>
   </TextField>
 </Preview>
@@ -333,7 +326,7 @@
     <Preview>
       <TextField label="Ratio" align="right">
         <div slot="suffix">
-          <Icon data={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
+          <icons.percent class="size-4 text-surface-content/50 -mt-1 ml-1" />
         </div>
       </TextField>
     </Preview>
@@ -343,13 +336,13 @@
 <h2>Icon with convienent prepend</h2>
 
 <Preview>
-  <TextField label="Search" icon={mdiMagnify} />
+  <TextField label="Search" icon={icons.search} />
 </Preview>
 
 <h2>Icon with convienent append</h2>
 
 <Preview>
-  <TextField label="Search" iconRight={mdiMagnify} />
+  <TextField label="Search" iconRight={icons.search} />
 </Preview>
 
 <h2>Clearable with convienent append</h2>
@@ -391,7 +384,7 @@
       <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
     </div>
     <div slot="prefix">
-      <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+      <icons.currency class="text-surface-content/50 -mt-1" />
     </div>
     <div slot="suffix" class="text-surface-content/50">usd</div>
   </TextField>
@@ -401,13 +394,13 @@
 
 <Preview>
   <TextField label="Date Range">
-    <div slot="prepend">
-      <Button icon={mdiChevronLeft} class="text-surface-content/50 p-2" />
-      <Icon data={mdiCalendar} class="text-surface-content/50 mr-2" />
+    <div slot="prepend" class="flex items-center">
+      <Button icon={icons.chevronLeft} class="text-surface-content/50 p-2" />
+      <icons.calendar class="text-surface-content/50 mr-2" />
     </div>
-    <div slot="append">
+    <div slot="append" class="flex items-center">
       <Icon data={mdiRefresh} class="text-surface-content/50 mr-2" />
-      <Button icon={mdiChevronRight} class="text-surface-content/50 p-2" />
+      <Button icon={icons.chevronRight} class="text-surface-content/50 p-2" />
     </div>
   </TextField>
 </Preview>
@@ -480,7 +473,7 @@
 <h2>Rounded with icon</h2>
 
 <Preview>
-  <TextField label="Search" rounded icon={mdiMagnify} />
+  <TextField label="Search" rounded icon={icons.search} />
 </Preview>
 
 <SectionDivider>Examples</SectionDivider>
@@ -488,7 +481,7 @@
 <h2>Address bar</h2>
 
 <Preview>
-  <TextField icon={mdiInformationOutline}>
+  <TextField icon={icons.info}>
     <div slot="prefix" class="text-surface-content/50">http://</div>
     <div slot="append">
       <Button icon={mdiStarOutline} class="text-surface-content/50 p-2" />
@@ -501,10 +494,10 @@
 <Preview>
   <TextField type="integer" bind:value={numberValue} align="center" class="w-24">
     <div slot="prepend" class="flex">
-      <Button icon={mdiMinus} on:click={() => (numberValue -= 1)} size="sm" />
+      <Button icon={icons.minus} on:click={() => (numberValue -= 1)} size="sm" />
     </div>
     <div slot="append" class="flex">
-      <Button icon={mdiPlus} on:click={() => (numberValue += 1)} size="sm" />
+      <Button icon={icons.plus} on:click={() => (numberValue += 1)} size="sm" />
     </div>
   </TextField>
 </Preview>

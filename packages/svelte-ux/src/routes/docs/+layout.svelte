@@ -4,19 +4,14 @@
 
   // TODO: Replace with Lucide
   import {
-    mdiCheckCircle,
-    mdiChevronRight,
     mdiCodeBraces,
+    mdiCheckCircle,
     mdiDatabaseOutline,
     mdiFileDocumentEditOutline,
     mdiGithub,
     mdiLink,
   } from '@mdi/js';
 
-  import LucideCode from '~icons/lucide/code.svelte';
-  import LucideChevronRight from '~icons/lucide/chevron-right.svelte';
-  import LucideChevronDown from '~icons/lucide/chevron-down.svelte';
-  import LucideX from '~icons/lucide/x.svelte';
   import LucideAlignLeft from '~icons/lucide/align-left.svelte';
 
   import {
@@ -85,8 +80,11 @@
     }
   }
 
+  const layoutSettings = getSettings();
+  $: ({ icons } = layoutSettings);
+
   // Clear root layout theme so doesn't show on doc examples
-  settings({ ...getSettings(), components: {} });
+  settings({ ...layoutSettings, components: {} });
 </script>
 
 <div
@@ -95,7 +93,7 @@
   {#if title}
     <div>
       <div class="inline-block text-xs font-bold text-surface-content/50 capitalize">Docs</div>
-      <LucideChevronRight class="inline-block size-4 divider opacity-25" />
+      <icons.chevronRight class="inline-block size-4 divider opacity-25" />
       <div class="inline-block text-xs font-bold text-primary capitalize">
         {type}
       </div>
@@ -129,7 +127,7 @@
         href={sourceUrl
           ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${sourceUrl}`
           : ''}
-        icon={LucideCode}
+        icon={icons.code}
       />
 
       <ViewSourceButton
@@ -143,7 +141,7 @@
 
       {#if !hideTableOfContents}
         <Button
-          icon={LucideChevronDown}
+          icon={icons.chevronDown}
           on:click={() => {
             showTableOfContents = !showTableOfContents;
           }}
@@ -167,7 +165,7 @@
       >
         <div slot="title">On this page</div>
         <Button
-          icon={LucideX}
+          icon={icons.close}
           class="absolute top-1 right-1"
           size="sm"
           on:click={() => (showTableOfContents = false)}
@@ -232,7 +230,7 @@
                 {#each items as item}
                   {@const icon =
                     item.type === 'components'
-                      ? LucideCode
+                      ? icons.code
                       : item.type === 'stores'
                         ? mdiDatabaseOutline
                         : item.type === 'actions'
@@ -249,7 +247,7 @@
                       class="hover:bg-surface-200 cursor-pointer"
                     >
                       <div slot="actions">
-                        <Icon data={mdiChevronRight} class="text-surface-content/50" />
+                        <icons.chevronRight class="text-surface-content/50" />
                       </div>
                     </ListItem>
                   </a>

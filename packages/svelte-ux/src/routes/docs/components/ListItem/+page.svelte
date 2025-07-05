@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { mdiAccount, mdiChevronRight } from '@mdi/js';
+  import { mdiAccount } from '@mdi/js';
 
-  import { Button, Checkbox, ListItem, Radio } from 'svelte-ux';
+  import { Button, Checkbox, getSettings, ListItem, Radio } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let selectedId = 1;
   const choices = [
@@ -74,7 +76,7 @@
 <Preview>
   <ListItem title="Title">
     <div slot="actions">
-      <Button icon={mdiChevronRight} class="p-2 text-surface-content/50" />
+      <Button icon={icons.chevronRight} class="p-2 text-surface-content/50" />
     </div>
   </ListItem>
 </Preview>

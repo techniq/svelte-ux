@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { AppBar, Button, ListItem } from 'svelte-ux';
+  import { AppBar, Button, getSettings, ListItem } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
 
-  import { mdiRefresh, mdiChevronRight, mdiMicrosoftXboxControllerMenu } from '@mdi/js';
+  import { mdiRefresh, mdiMicrosoftXboxControllerMenu } from '@mdi/js';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 </script>
 
 <h1>Examples</h1>
@@ -68,7 +70,7 @@
   <AppBar title="Example">
     <svelte:fragment slot="menuIcon" let:toggleMenu let:isMenuOpen>
       <Button
-        icon={mdiChevronRight}
+        icon={icons}
         on:click={toggleMenu}
         class={cls('p-3 transition-transform', isMenuOpen && 'rotate-180')}
       />

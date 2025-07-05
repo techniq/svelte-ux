@@ -35,6 +35,7 @@ import LucideCopy from '~icons/lucide/copy';
 import LucideDollarSign from '~icons/lucide/dollar-sign';
 import LucideEye from '~icons/lucide/eye';
 import LucideGripHorizontal from '~icons/lucide/grip-horizontal';
+import LucideHouse from '~icons/lucide/house';
 import LucideInfo from '~icons/lucide/info';
 import LucideCircleAlert from '~icons/lucide/circle-alert';
 import LucideMenu from '~icons/lucide/menu';
@@ -42,6 +43,7 @@ import LucideMinus from '~icons/lucide/minus';
 import LucidePercent from '~icons/lucide/percent';
 import LucidePlus from '~icons/lucide/plus';
 import LucideSearch from '~icons/lucide/search';
+import LucideTrash2 from '~icons/lucide/trash-2';
 import LucideUndo2 from '~icons/lucide/undo-2';
 import LucideX from '~icons/lucide/x';
 
@@ -64,6 +66,7 @@ export const DEFAULT_ICONS = {
   copy: LucideCopy,
   currency: LucideDollarSign,
   gripHorizontal: LucideGripHorizontal,
+  home: LucideHouse,
   info: LucideInfo,
   menu: LucideMenu,
   minus: LucideMinus,
@@ -71,6 +74,7 @@ export const DEFAULT_ICONS = {
   plus: LucidePlus,
   reveal: LucideEye,
   search: LucideSearch,
+  trash: LucideTrash2,
   undo: LucideUndo2,
 
   lightMode: LucideSun,

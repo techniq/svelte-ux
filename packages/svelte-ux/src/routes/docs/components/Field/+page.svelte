@@ -1,15 +1,11 @@
 <script lang="ts">
-  import {
-    mdiAccount,
-    mdiAccountMultipleOutline,
-    mdiAccountOutline,
-    mdiChevronDown,
-  } from '@mdi/js';
+  import { mdiAccount, mdiAccountMultipleOutline, mdiAccountOutline } from '@mdi/js';
 
   import {
     Button,
     Checkbox,
     Field,
+    getSettings,
     Icon,
     Input,
     Switch,
@@ -18,6 +14,8 @@
   } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let group: string[] = [];
 </script>
@@ -213,7 +211,7 @@
       <option value={4}>Fourth</option>
     </select>
     <span slot="append">
-      <Icon data={mdiChevronDown} />
+      <icons.chevronDown />
     </span>
   </Field>
 </Preview>

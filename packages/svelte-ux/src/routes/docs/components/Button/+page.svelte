@@ -244,7 +244,7 @@
 <!-- <h2>Pass props to Icon</h2>
 
 <Preview>
-  <Button icon={{ data: mdiTrashCan, size: '2rem', style: 'color: crimson' }} color="danger">
+  <Button icon={{ data: icons.trash, size: '2rem', style: 'color: crimson' }} color="danger">
     Delete
   </Button>
 </Preview> -->

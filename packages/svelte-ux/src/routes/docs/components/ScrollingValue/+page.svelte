@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { mdiChevronLeft, mdiChevronRight, mdiMinus, mdiPlus } from '@mdi/js';
   import { intervalOffset, startOfInterval } from '@layerstack/utils';
 
   import {
@@ -51,7 +50,7 @@
     }
   }
 
-  const { format } = getSettings();
+  const { format, icons } = getSettings();
   const indexTimer = timerStore({
     initial: 0,
     delay: 2000,
@@ -140,8 +139,8 @@
   <Field label="Value">
     <ScrollingValue bind:value axis="y" class="w-full" />
     <div slot="append">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
+      <Button icon={icons.minus} on:click={() => (value -= 1)} size="sm" />
+      <Button icon={icons.plus} on:click={() => (value += 1)} size="sm" />
     </div>
   </Field>
 </Preview>
@@ -152,11 +151,11 @@
 <Preview>
   <Field class="w-36">
     <div slot="prepend">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" />
+      <Button icon={icons.minus} on:click={() => (value -= 1)} size="sm" />
     </div>
     <ScrollingValue bind:value {axis} classes={{ root: 'w-full', value: 'w-full text-center' }} />
     <div slot="append">
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" />
+      <Button icon={icons.plus} on:click={() => (value += 1)} size="sm" />
     </div>
   </Field>
 </Preview>
@@ -166,7 +165,7 @@
 <Preview>
   <div class="flex gap-4">
     <ButtonGroup variant="outline">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button icon={icons.minus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
           bind:value
@@ -174,11 +173,11 @@
           classes={{ root: 'w-full', value: 'w-full text-center' }}
         />
       </Button>
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+      <Button icon={icons.plus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
     <ButtonGroup variant="fill-light">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button icon={icons.minus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
           bind:value
@@ -186,11 +185,11 @@
           classes={{ root: 'w-full', value: 'w-full text-center' }}
         />
       </Button>
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+      <Button icon={icons.plus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
     <ButtonGroup color="primary" variant="fill-light">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button icon={icons.minus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
           bind:value
@@ -198,11 +197,11 @@
           classes={{ root: 'w-full', value: 'w-full text-center' }}
         />
       </Button>
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+      <Button icon={icons.plus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
 
     <ButtonGroup color="primary" variant="fill-outline">
-      <Button icon={mdiMinus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
+      <Button icon={icons.minus} on:click={() => (value -= 1)} size="sm" iconOnly={false} />
       <Button class="w-20 pointer-events-none">
         <ScrollingValue
           bind:value
@@ -210,7 +209,7 @@
           classes={{ root: 'w-full', value: 'w-full text-center' }}
         />
       </Button>
-      <Button icon={mdiPlus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
+      <Button icon={icons.plus} on:click={() => (value += 1)} size="sm" iconOnly={false} />
     </ButtonGroup>
   </div>
 </Preview>
@@ -221,9 +220,9 @@
   {@const startOfMonth = intervalOffset('month', firstOfMonth, value)}
   <div class="grid w-96">
     <div class="grid grid-cols-[auto_1fr_auto] items-center justify-items-center">
-      <Button icon={mdiChevronLeft} class="p-2" on:click={() => (value -= 1)} />
+      <Button icon={icons.chevronLeft} class="p-2" on:click={() => (value -= 1)} />
       <div>{$format(startOfMonth, PeriodType.Month)}</div>
-      <Button icon={mdiChevronRight} class="p-2" on:click={() => (value += 1)} />
+      <Button icon={icons.chevronRight} class="p-2" on:click={() => (value += 1)} />
     </div>
     <ScrollingValue {value} {axis} let:value>
       {@const startOfMonth = intervalOffset('month', firstOfMonth, value)}

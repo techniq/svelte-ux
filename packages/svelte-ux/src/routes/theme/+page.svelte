@@ -1,5 +1,5 @@
 <!-- <script lang="ts">
-  import { mdiChevronDown, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
+  import { icons.chevronDown, icons.darkMode, icons.lightMode } from '@mdi/js';
 
   import {
     Button,
@@ -258,7 +258,7 @@
 
       <Toggle let:on={open} let:toggle let:toggleOff>
         <div class="grid">
-          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
+          <Button icon={icons.chevronDown} on:click={toggle} rounded class="px-1" />
           <Menu {open} on:close={toggleOff} placement="bottom-start">
             <MenuItem
               on:click={() => {
@@ -372,9 +372,9 @@
         let:checked
       >
         {#if checked}
-          <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
+          <Icon data={icons.darkMode} size=".8rem" class="text-primary" />
         {:else}
-          <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
+          <Icon data={icons.lightMode} size=".8rem" class="text-primary" />
         {/if}
       </Switch>
     </div>

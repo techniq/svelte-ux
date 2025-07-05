@@ -1,14 +1,10 @@
 <script lang="ts">
-  import {
-    mdiContentCopy,
-    mdiContentCut,
-    mdiContentPaste,
-    mdiMagnify,
-    mdiChevronDown,
-  } from '@mdi/js';
+  import { mdiContentCopy, mdiContentCut, mdiContentPaste } from '@mdi/js';
 
-  import { Icon, MenuButton, MenuItem, TextField } from 'svelte-ux';
+  import { getSettings, Icon, MenuButton, MenuItem, TextField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   const options = [
     { label: 'Cut', value: 'cut' },
@@ -46,7 +42,7 @@
 <h2>Icon</h2>
 
 <Preview>
-  <MenuButton {options} icon={mdiMagnify} />
+  <MenuButton {options} icon={icons.search} />
 </Preview>
 
 <h2>Option icons</h2>
@@ -61,7 +57,7 @@
   <MenuButton options={optionsWithIcons}>
     <svelte:fragment slot="selection" let:value>
       {#if value}
-        <Icon data={value?.icon ?? mdiChevronDown} /> {value.label}
+        <Icon data={value?.icon ?? icons.chevronDown} /> {value.label}
       {:else}
         No selection
       {/if}
@@ -74,7 +70,7 @@
 <Preview>
   <MenuButton options={optionsWithIcons} menuIcon={null}>
     <svelte:fragment slot="selection" let:value>
-      <Icon data={value?.icon ?? mdiChevronDown} />
+      <Icon data={value?.icon ?? icons.chevronDown} />
     </svelte:fragment>
   </MenuButton>
 </Preview>
@@ -114,7 +110,7 @@
     let:close
   >
     <div class="p-2">
-      <TextField icon={mdiMagnify} placeholder="Search" />
+      <TextField icon={icons.search} placeholder="Search" />
     </div>
     <menu>
       {#each options as option}
