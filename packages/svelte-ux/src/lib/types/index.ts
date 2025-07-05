@@ -1,3 +1,5 @@
+import type { Component, ComponentProps } from 'svelte';
+import type { SvelteHTMLElements } from 'svelte/elements';
 import type {
   FlyParams,
   SlideParams,
@@ -6,6 +8,8 @@ import type {
   ScaleParams,
 } from 'svelte/transition';
 import type { ThemeColors } from '@layerstack/tailwind';
+
+import Icon from '$lib/components/Icon.svelte';
 
 export type MenuOption<T = any> = {
   label: string;
@@ -32,3 +36,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonRounded = boolean | 'full';
 
 export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;
+
+export type IconData = ComponentProps<Icon>['data'];
+export type IconInput = IconData | ComponentProps<Icon>;
+export type IconComponent = Component<SvelteHTMLElements['svg']>;
+export type IconProp = IconComponent | IconInput;

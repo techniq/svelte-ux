@@ -5,9 +5,15 @@
 
   import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
-  import type { ButtonColor, ButtonRounded, ButtonSize, ButtonVariant } from '../types/index.js';
+  import type {
+    ButtonColor,
+    ButtonRounded,
+    ButtonSize,
+    ButtonVariant,
+    IconProp,
+  } from '../types/index.js';
   import { getButtonGroup } from './ButtonGroup.svelte';
-  import { asIconData, type IconInput } from '../utils/icons.js';
+  import { asIconData } from '../utils/icons.js';
   import { getComponentSettings } from './settings.js';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');
@@ -16,7 +22,7 @@
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
-  export let icon: IconInput = undefined;
+  export let icon: IconProp | undefined = undefined;
   export let iconOnly = icon !== undefined && !$$slots.default;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
 
@@ -467,7 +473,11 @@
     </span>
   {:else if icon}
     <span in:slide={{ axis: 'x', duration: 200 }}>
-      {#if typeof icon === 'string' || 'icon' in icon}
+      {#if typeof icon === 'function'}
+        <!-- Component, such as unplugin-icons -->
+        {@const Icon = icon}
+        <Icon />
+      {:else if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
         <Icon
           data={asIconData(icon)}

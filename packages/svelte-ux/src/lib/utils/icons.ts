@@ -2,9 +2,7 @@ import type { ComponentProps } from 'svelte';
 import { isLiteralObject } from '@layerstack/utils/object';
 
 import type { default as Icon } from '../components/Icon.svelte';
-
-export type IconInput = ComponentProps<Icon>['data'] | ComponentProps<Icon>;
-export type IconData = ComponentProps<Icon>['data'];
+import type { IconData, IconInput } from '$lib/types/index.js';
 
 export function asIconData(v: IconInput): IconData {
   return isIconComponentProps(v) ? v.data : v;

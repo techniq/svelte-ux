@@ -1,8 +1,8 @@
 <script lang="ts">
   import ThemeInit from './ThemeInit.svelte';
-  import { settings as setSettings, type SettingsInput } from './settings.js';
+  import { settings as setSettings, type SettingsOptions } from './settings.js';
 
-  type $$Props = SettingsInput & { themeInit?: boolean };
+  type $$Props = SettingsOptions & { themeInit?: boolean };
 
   /** Include the ThemeInit component to improve SSR compatibility. */
   export let themeInit = true;

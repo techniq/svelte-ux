@@ -1,11 +1,10 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
-  import { mdiChevronDown } from '@mdi/js';
   import { cls } from '@layerstack/tailwind';
 
-  import Icon from './Icon.svelte';
   import type { TransitionParams } from '../types/index.js';
+  import { getSettings } from './settings.js';
   import { getComponentClasses } from './theme.js';
 
   /**
@@ -20,7 +19,6 @@
   export let open = false;
   export let popout = false;
   export let disabled = false;
-  export let icon = mdiChevronDown;
 
   export let transition = slide;
   export let transitionParams: TransitionParams = {};
@@ -34,6 +32,7 @@
     icon?: string;
     content?: string;
   } = {};
+  const { icons } = getSettings();
   const settingsClasses = getComponentClasses('Collapse');
 
   /**
@@ -87,7 +86,7 @@
           classes.icon
         )}
       >
-        <Icon data={icon} />
+        <svelte:component this={icons.chevronDown} />
       </div>
     </slot>
   </button>

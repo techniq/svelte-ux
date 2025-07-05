@@ -22,11 +22,23 @@ import {
 } from './theme.js';
 import type { LabelPlacement } from '../types/index.js';
 
+import LucideChevronLeft from '~icons/lucide/chevron-left.svelte';
+import LucideChevronRight from '~icons/lucide/chevron-right.svelte';
+import LucideChevronDown from '~icons/lucide/chevron-down.svelte';
+import LucideX from '~icons/lucide/x';
+
+const DEFAULT_ICONS = {
+  chevronLeft: LucideChevronLeft,
+  chevronRight: LucideChevronRight,
+  chevronDown: LucideChevronDown,
+  close: LucideX,
+};
+
 export interface DefaultProps {
   labelPlacement: LabelPlacement;
 }
 
-export type SettingsInput = {
+export type SettingsOptions = {
   /** Force a specific locale setting. */
   forceLocale?: string;
   /** Use this locale in case we don't have locale info for the user's current locale as returned from Intl.
@@ -35,13 +47,17 @@ export type SettingsInput = {
   /** Format information for additional locales that are not built-in to svelte-ux. */
   localeFormats?: Record<string, LocaleSettingsInput>;
 
+  /** Component settings including defaults props and classes */
   components?: ComponentSettings;
+
   /** A list of the available themes */
   themes?: {
     light?: string[];
     dark?: string[];
   };
   currentTheme?: ThemeStore;
+
+  icons?: typeof DEFAULT_ICONS;
 
   /** The existing locale store, if calling settings when there is already an existing `Settings` object */
   locale?: LocaleStore;
@@ -51,7 +67,7 @@ export type SettingsInput = {
   format?: Readable<FormatFunctions>;
 };
 
-export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> {
+export interface Settings extends Omit<SettingsOptions, 'formats' | 'dictionary'> {
   /** The currently selected locale */
   locale: LocaleStore;
   /** The settings for the currently selected locale */
@@ -60,13 +76,14 @@ export interface Settings extends Omit<SettingsInput, 'formats' | 'dictionary'> 
   format: Readable<FormatFunctions>;
   currentTheme: ThemeStore;
   showDrawer: Writable<boolean>;
+  icons: typeof DEFAULT_ICONS;
 
   componentSettingsCache: Partial<Record<ComponentName, ResolvedComponentSettings<ComponentName>>>;
 }
 
 const settingsKey = Symbol();
 
-function createLocaleStores(settings: SettingsInput) {
+function createLocaleStores(settings: SettingsOptions) {
   if (settings.locale && settings.localeSettings && settings.format) {
     return {
       locale: settings.locale,
@@ -101,7 +118,7 @@ function createShowDrawer() {
   return writable(BROWSER ? window.innerWidth >= breakpoints.md : true);
 }
 
-export function settings(settings: SettingsInput = {}): Settings {
+export function settings(settings: SettingsOptions = {}): Settings {
   const lightThemes = settings.themes ? (settings.themes.light ?? []) : ['light'];
   const darkThemes = settings.themes ? (settings.themes.dark ?? []) : ['dark'];
 
@@ -126,6 +143,7 @@ export function settings(settings: SettingsInput = {}): Settings {
     currentTheme,
     componentSettingsCache: {},
     showDrawer,
+    icons: settings.icons ?? DEFAULT_ICONS,
     ...localeStores,
   });
 }
@@ -137,6 +155,7 @@ function getFallbackSettings() {
     currentTheme: createThemeStore({ light: [], dark: [] }),
     componentSettingsCache: {},
     showDrawer: createShowDrawer(),
+    icons: DEFAULT_ICONS,
     ...createLocaleStores({}),
   };
   return FALLBACK_SETTINGS;

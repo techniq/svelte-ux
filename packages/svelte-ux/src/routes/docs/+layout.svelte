@@ -1,22 +1,23 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { fade, slide } from 'svelte/transition';
   import { flatGroup } from 'd3-array';
 
+  // TODO: Replace with Lucide
   import {
     mdiCheckCircle,
-    mdiChevronDown,
     mdiChevronRight,
-    mdiClose,
     mdiCodeBraces,
-    mdiCodeTags,
     mdiDatabaseOutline,
     mdiFileDocumentEditOutline,
     mdiGithub,
     mdiLink,
   } from '@mdi/js';
-  // @ts-expect-error
-  import IconAlignLeft from '~icons/lucide/align-left';
+
+  import LucideCode from '~icons/lucide/code.svelte';
+  import LucideChevronRight from '~icons/lucide/chevron-right.svelte';
+  import LucideChevronDown from '~icons/lucide/chevron-down.svelte';
+  import LucideX from '~icons/lucide/x.svelte';
+  import LucideAlignLeft from '~icons/lucide/align-left.svelte';
 
   import {
     ApiDocs,
@@ -94,7 +95,7 @@
   {#if title}
     <div>
       <div class="inline-block text-xs font-bold text-surface-content/50 capitalize">Docs</div>
-      <Icon data={mdiChevronRight} class="divider opacity-25" />
+      <LucideChevronRight class="inline-block size-4 divider opacity-25" />
       <div class="inline-block text-xs font-bold text-primary capitalize">
         {type}
       </div>
@@ -128,7 +129,7 @@
         href={sourceUrl
           ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${sourceUrl}`
           : ''}
-        icon={mdiCodeTags}
+        icon={LucideCode}
       />
 
       <ViewSourceButton
@@ -142,7 +143,7 @@
 
       {#if !hideTableOfContents}
         <Button
-          icon={mdiChevronDown}
+          icon={LucideChevronDown}
           on:click={() => {
             showTableOfContents = !showTableOfContents;
           }}
@@ -166,7 +167,7 @@
       >
         <div slot="title">On this page</div>
         <Button
-          icon={mdiClose}
+          icon={LucideX}
           class="absolute top-1 right-1"
           size="sm"
           on:click={() => (showTableOfContents = false)}
@@ -231,7 +232,7 @@
                 {#each items as item}
                   {@const icon =
                     item.type === 'components'
-                      ? mdiCodeTags
+                      ? LucideCode
                       : item.type === 'stores'
                         ? mdiDatabaseOutline
                         : item.type === 'actions'
@@ -273,7 +274,7 @@
         <div
           class="flex gap-2 items-center text-xs font-medium uppercase pb-3 tracking-widest text-surface-content/50"
         >
-          <IconAlignLeft />
+          <LucideAlignLeft />
           On this page
         </div>
         <!-- Rebuild toc when page changes -->
