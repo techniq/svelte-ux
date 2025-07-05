@@ -104,9 +104,9 @@
         checked ? 'scale-100' : 'scale-0',
         {
           xs: 'size-3',
-          sm: 'size-4',
-          md: 'size-5',
-          lg: 'size-6',
+          sm: 'size-[14px]',
+          md: 'size-4',
+          lg: 'size-[18px]',
         }[size],
         settingsClasses.icon,
         classes.icon
