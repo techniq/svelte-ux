@@ -4,7 +4,7 @@
 
   import { cls } from '@layerstack/tailwind';
   import { type IconProp, type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types/index.js';
-  import { getComponentSettings, getSettings, settings } from './settings.js';
+  import { getComponentSettings, getSettings } from './settings.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
@@ -211,8 +211,14 @@
             {#if error}
               <icons.info class="text-danger" />
             {:else if iconRight}
-              <!-- TODO: update -->
-              <Icon data={iconRight} class="text-surface-content/50" />
+              {#if typeof iconRight === 'function'}
+                <!-- Component, such as unplugin-icons -->
+                {@const Icon = iconRight}
+                <Icon class="text-surface-content/50" />
+              {:else if typeof iconRight === 'string' || 'icon' in iconRight}
+                <!-- font path/url/etc or font-awesome IconDefinition -->
+                <Icon data={asIconData(iconRight)} class="text-surface-content/50" />
+              {/if}
             {/if}
           </div>
         {/if}

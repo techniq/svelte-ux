@@ -4,10 +4,9 @@
   import { quadIn } from 'svelte/easing';
   import { cls, type ThemeColors } from '@layerstack/tailwind';
 
-  import { mdiClose } from '@mdi/js';
-
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
+  import { getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();
 
@@ -33,6 +32,8 @@
     icon?: ComponentProps<Icon>['classes'];
     actions?: string;
   } = {};
+
+  const { icons } = getSettings();
 
   let notificationEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
@@ -189,7 +190,7 @@
 
         {#if closeIcon}
           <Button
-            icon={mdiClose}
+            icon={icons.close}
             on:click={() => (open = false)}
             class={cls(
               'self-start',

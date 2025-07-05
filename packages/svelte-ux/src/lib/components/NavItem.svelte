@@ -8,11 +8,13 @@
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './index.js';
+  import type { IconProp } from '$lib/types/index.js';
+  import { asIconData } from '$lib/utils/icons.js';
 
   export let currentUrl: URL;
   export let path: string;
   export let text: string = '';
-  export let icon: string | null = null;
+  export let icon: IconProp | undefined = undefined;
 
   let className: string | undefined = undefined;
   export { className as class };
@@ -58,7 +60,20 @@
   {/if}
 
   {#if icon}
-    <Icon data={icon} class={cls('mr-3 shrink-0', settingsClasses.icon)} classes={classes.icon} />
+    {#if typeof icon === 'function'}
+      <!-- Component, such as unplugin-icons -->
+      {@const Icon = icon}
+      <Icon class={cls('mr-3 shrink-0', settingsClasses.icon)} />
+    {:else if typeof icon === 'string' || 'icon' in icon}
+      <!-- font path/url/etc or font-awesome IconDefinition -->
+      <Icon
+        data={asIconData(icon)}
+        class={cls('mr-3 shrink-0', settingsClasses.icon)}
+        classes={classes.icon}
+      />
+    {:else}
+      <Icon class={cls('mr-3 shrink-0', settingsClasses.icon)} classes={classes.icon} {...icon} />
+    {/if}
   {/if}
 
   {text}

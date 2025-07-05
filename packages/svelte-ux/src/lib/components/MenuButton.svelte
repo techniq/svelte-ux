@@ -19,7 +19,7 @@
   export let options: MenuOption[] = [];
   export let value: any = null;
   export let menuProps: ComponentProps<Menu> = { placement: 'bottom-start' };
-  export let menuIcon: IconProp | null = icons.chevronDown;
+  export let menuIcon: IconProp | false | null = icons.chevronDown;
   $: selected = options?.find((x) => x.value === value);
 
   let className: string | undefined = undefined;

@@ -10,11 +10,12 @@ import type {
 import type { ThemeColors } from '@layerstack/tailwind';
 
 import Icon from '$lib/components/Icon.svelte';
+import MenuItem from '$lib/components/MenuItem.svelte';
 
 export type MenuOption<T = any> = {
   label: string;
   value: T;
-  icon?: string;
+  icon?: ComponentProps<MenuItem>['icon'];
   group?: string;
   disabled?: boolean;
 } & Record<string, any>;

@@ -22,6 +22,7 @@ import {
 } from './theme.js';
 import type { LabelPlacement } from '../types/index.js';
 
+import LucideArrowUp from '~icons/lucide/arrow-up';
 import LucideCalendar from '~icons/lucide/calendar.svelte';
 import LucideCheck from '~icons/lucide/check';
 import LucideChevronLeft from '~icons/lucide/chevron-left.svelte';
@@ -29,13 +30,28 @@ import LucideChevronRight from '~icons/lucide/chevron-right.svelte';
 import LucideChevronDown from '~icons/lucide/chevron-down.svelte';
 import LucideChevronFirst from '~icons/lucide/chevron-first.svelte';
 import LucideChevronLast from '~icons/lucide/chevron-last.svelte';
+import LucideCode from '~icons/lucide/code';
 import LucideCopy from '~icons/lucide/copy';
+import LucideDollarSign from '~icons/lucide/dollar-sign';
+import LucideEye from '~icons/lucide/eye';
+import LucideGripHorizontal from '~icons/lucide/grip-horizontal';
 import LucideInfo from '~icons/lucide/info';
+import LucideCircleAlert from '~icons/lucide/circle-alert';
 import LucideMenu from '~icons/lucide/menu';
 import LucideMinus from '~icons/lucide/minus';
+import LucidePercent from '~icons/lucide/percent';
+import LucidePlus from '~icons/lucide/plus';
+import LucideSearch from '~icons/lucide/search';
+import LucideUndo2 from '~icons/lucide/undo-2';
 import LucideX from '~icons/lucide/x';
 
+import LucideSun from '~icons/lucide/sun';
+import LucideMoon from '~icons/lucide/moon';
+import LucideMonitor from '~icons/lucide/monitor';
+
 export const DEFAULT_ICONS = {
+  alert: LucideCircleAlert,
+  arrowUp: LucideArrowUp,
   calendar: LucideCalendar,
   check: LucideCheck,
   chevronLeft: LucideChevronLeft,
@@ -44,10 +60,22 @@ export const DEFAULT_ICONS = {
   chevronFirst: LucideChevronFirst,
   chevronLast: LucideChevronLast,
   close: LucideX,
+  code: LucideCode,
   copy: LucideCopy,
+  currency: LucideDollarSign,
+  gripHorizontal: LucideGripHorizontal,
   info: LucideInfo,
   menu: LucideMenu,
   minus: LucideMinus,
+  percent: LucidePercent,
+  plus: LucidePlus,
+  reveal: LucideEye,
+  search: LucideSearch,
+  undo: LucideUndo2,
+
+  lightMode: LucideSun,
+  darkMode: LucideMoon,
+  monitor: LucideMonitor,
 };
 
 export interface DefaultProps {

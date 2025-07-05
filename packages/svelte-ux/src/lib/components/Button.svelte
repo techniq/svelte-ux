@@ -476,7 +476,7 @@
       {#if typeof icon === 'function'}
         <!-- Component, such as unplugin-icons -->
         {@const Icon = icon}
-        <Icon />
+        <Icon class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} />
       {:else if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
         <Icon

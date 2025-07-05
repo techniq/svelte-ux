@@ -4,7 +4,6 @@
   import { getComponentClasses } from './theme.js';
   import { cls } from '@layerstack/tailwind';
   import { getTimeline } from './Timeline.svelte';
-  import { mdiCircle, mdiCircleMedium } from '@mdi/js';
 
   /** Value shown above (horizontal) or left (vertical).  If true, sets location of default slot */
   export let start: string | number | boolean = false;
@@ -100,7 +99,7 @@
   <div class={cls('point', 'col-start-2 row-start-2 grid', settingsClasses.point, classes.point)}>
     <slot name="point">
       <Icon
-        data={icon ?? mdiCircle}
+        data={icon ?? 'M12 2A10 10 0 0 0 12 22A10 10 0 0 0 12 2Z'}
         size={icon ? '1rem' : '.5rem'}
         class={cls(
           'icon',

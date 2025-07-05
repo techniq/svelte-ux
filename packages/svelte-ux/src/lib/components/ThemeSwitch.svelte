@@ -1,16 +1,13 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
-  import { mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
   import { cls, clsMerge } from '@layerstack/tailwind';
 
   import Switch from './Switch.svelte';
-  import Icon from './Icon.svelte';
 
   import { getSettings } from './settings.js';
   import { getComponentClasses } from '$lib/components/theme.js';
 
-  const { currentTheme } = getSettings();
-
+  const { currentTheme, icons } = getSettings();
   const { icon: iconClasses, ...otherClasses } = getComponentClasses('ThemeSwitch');
 
   export let classes: {
@@ -36,20 +33,16 @@
   {...$$restProps}
 >
   <div class="grid grid-cols-1 grid-rows-1">
-    <Icon
-      data={mdiWeatherNight}
-      size=".8rem"
+    <icons.darkMode
       class={cls(
-        'row-[1] col-[1] text-primary opacity-0 dark:opacity-100',
+        'row-[1] col-[1] size-3 text-primary opacity-0 dark:opacity-100',
         iconClasses,
         classes.icon
       )}
     />
-    <Icon
-      data={mdiWhiteBalanceSunny}
-      size=".8rem"
+    <icons.lightMode
       class={cls(
-        'row-[1] col-[1] text-primary opacity-100 dark:opacity-0',
+        'row-[1] col-[1] size-3 text-primary opacity-100 dark:opacity-0',
         iconClasses,
         classes.icon
       )}

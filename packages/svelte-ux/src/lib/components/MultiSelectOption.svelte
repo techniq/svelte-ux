@@ -5,7 +5,7 @@
   import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
   import Button from './Button.svelte';
-  import { mdiCheck } from '@mdi/js';
+  import { getSettings } from './settings.js';
 
   export let checked: boolean;
   export let indeterminate = false;
@@ -21,6 +21,7 @@
     container?: string;
   } = {};
   const settingsClasses = getComponentClasses('MultiSelectOption');
+  const { icons } = getSettings();
 
   const dispatch = createEventDispatcher<{ change: null }>();
 </script>
@@ -62,7 +63,7 @@
     </Checkbox>
   {:else if variant === 'checkmark'}
     <Button
-      icon={checked ? mdiCheck : 'M0'}
+      icon={checked ? icons.check : 'M0'}
       {disabled}
       class={cls(
         'px-2 text-sm font-normal text-surface-content hover:bg-surface-content/5',
