@@ -22,16 +22,32 @@ import {
 } from './theme.js';
 import type { LabelPlacement } from '../types/index.js';
 
+import LucideCalendar from '~icons/lucide/calendar.svelte';
+import LucideCheck from '~icons/lucide/check';
 import LucideChevronLeft from '~icons/lucide/chevron-left.svelte';
 import LucideChevronRight from '~icons/lucide/chevron-right.svelte';
 import LucideChevronDown from '~icons/lucide/chevron-down.svelte';
+import LucideChevronFirst from '~icons/lucide/chevron-first.svelte';
+import LucideChevronLast from '~icons/lucide/chevron-last.svelte';
+import LucideCopy from '~icons/lucide/copy';
+import LucideInfo from '~icons/lucide/info';
+import LucideMenu from '~icons/lucide/menu';
+import LucideMinus from '~icons/lucide/minus';
 import LucideX from '~icons/lucide/x';
 
-const DEFAULT_ICONS = {
+export const DEFAULT_ICONS = {
+  calendar: LucideCalendar,
+  check: LucideCheck,
   chevronLeft: LucideChevronLeft,
   chevronRight: LucideChevronRight,
   chevronDown: LucideChevronDown,
+  chevronFirst: LucideChevronFirst,
+  chevronLast: LucideChevronLast,
   close: LucideX,
+  copy: LucideCopy,
+  info: LucideInfo,
+  menu: LucideMenu,
+  minus: LucideMinus,
 };
 
 export interface DefaultProps {

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import { mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
   import { PeriodType, getDateFuncsByPeriodType, type DisabledDate } from '@layerstack/utils';
   import {
     getDateRangePresets,
@@ -19,7 +18,7 @@
   import { getComponentSettings, getSettings } from './settings.js';
 
   const dispatch = createEventDispatcher();
-  const { format, localeSettings } = getSettings();
+  const { format, localeSettings, icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('DateRangeField');
 
   const _defaultValue: DateRangeType = {
@@ -97,7 +96,7 @@
 
     {#if stepper}
       <Button
-        icon={mdiChevronLeft}
+        icon={icons.chevronLeft}
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
@@ -139,7 +138,7 @@
   <div slot="append" class="flex items-center">
     {#if clearable && (value?.periodType || value?.from || value?.to)}
       <Button
-        icon={mdiClose}
+        icon={icons.close}
         class="text-surface-content/50 p-1"
         on:click={() => {
           value = _defaultValue;
@@ -153,7 +152,7 @@
 
     {#if stepper}
       <Button
-        icon={mdiChevronRight}
+        icon={icons.chevronRight}
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
@@ -228,7 +227,7 @@
 
   <div slot="actions" class="flex items-center gap-2">
     <Button
-      icon={mdiCheck}
+      icon={icons.check}
       on:click={() => {
         showDialog = false;
         value = currentValue;

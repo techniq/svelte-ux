@@ -1,19 +1,20 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { mdiClose, mdiInformationOutline } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
 
   import { cls } from '@layerstack/tailwind';
-  import { type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types/index.js';
-  import { getComponentSettings } from './settings.js';
+  import { type IconProp, type LabelPlacement, DEFAULT_LABEL_PLACEMENT } from '../types/index.js';
+  import { getComponentSettings, getSettings, settings } from './settings.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
+  import { asIconData } from '$lib/utils/icons.js';
 
   const dispatch = createEventDispatcher<{
     clear: null;
   }>();
 
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('Field');
 
   export let label = '';
@@ -29,8 +30,8 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: string | null = null;
-  export let iconRight: string | null = null;
+  export let icon: IconProp | null = null;
+  export let iconRight: IconProp | null = null;
   // export let align: 'left' | 'center' | 'right' = 'left';
   // export let actions: Actions = undefined;
   // export let inputEl: HTMLInputElement | null = null;
@@ -123,7 +124,14 @@
 
             {#if icon}
               <span class={cls('mr-3', rounded && !$$slots.prepend && 'ml-3')}>
-                <Icon data={icon} class="text-surface-content/50" />
+                {#if typeof icon === 'function'}
+                  <!-- Component, such as unplugin-icons -->
+                  {@const Icon = icon}
+                  <Icon class="text-surface-content/50" />
+                {:else if typeof icon === 'string' || 'icon' in icon}
+                  <!-- font path/url/etc or font-awesome IconDefinition -->
+                  <Icon data={asIconData(icon)} class="text-surface-content/50" />
+                {/if}
               </span>
             {/if}
           </div>
@@ -187,7 +195,7 @@
           >
             {#if clearable && hasValue}
               <Button
-                icon={mdiClose}
+                icon={icons.close}
                 {disabled}
                 class="text-surface-content/50 p-1"
                 on:click={() => {
@@ -201,8 +209,9 @@
             <slot name="append" />
 
             {#if error}
-              <Icon data={mdiInformationOutline} class="text-danger" />
+              <icons.info class="text-danger" />
             {:else if iconRight}
+              <!-- TODO: update -->
               <Icon data={iconRight} class="text-surface-content/50" />
             {/if}
           </div>

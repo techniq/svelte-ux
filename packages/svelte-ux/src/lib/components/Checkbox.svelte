@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { mdiCheck, mdiMinus } from '@mdi/js';
   import { cls } from '@layerstack/tailwind';
   import { uniqueId } from '@layerstack/utils';
 
-  import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
+  import { getSettings } from './settings.js';
 
   export let id = uniqueId('checkbox-');
   export let name = '';
@@ -28,6 +27,8 @@
     label?: string;
     icon?: string;
   } = {};
+
+  const { icons } = getSettings();
   const settingsClasses = getComponentClasses('Checkbox');
 
   // Update when group changes.  Separate function to break reactivity loop
@@ -51,6 +52,8 @@
       }
     }
   }
+
+  $: Icon = indeterminate ? icons.minus : icons.check;
 </script>
 
 <div
@@ -95,20 +98,19 @@
     )}
   >
     <Icon
-      path={indeterminate ? mdiMinus : mdiCheck}
       class={cls(
         'icon',
-        'pointer-events-none text-primary-content transition-transform',
+        'pointer-events-none text-primary-content transition-transform leading-none',
         checked ? 'scale-100' : 'scale-0',
+        {
+          xs: 'size-3',
+          sm: 'size-4',
+          md: 'size-5',
+          lg: 'size-6',
+        }[size],
         settingsClasses.icon,
         classes.icon
       )}
-      size={{
-        xs: '.75rem', // 12px
-        sm: '.875rem', // 14px
-        md: '1rem', // 16px
-        lg: '1.125rem', // 18px
-      }[size]}
     />
   </label>
 
@@ -120,10 +122,10 @@
         'flex-1',
         'pl-1 peer-disabled:opacity-50',
         {
-          xs: 'text-xs', // 12px
-          sm: 'text-sm', // 14px
-          md: 'text-md', // 16px
-          lg: 'text-lg', // 18px
+          xs: 'text-xs',
+          sm: 'text-sm',
+          md: 'text-md',
+          lg: 'text-lg',
         }[size],
         settingsClasses.label,
         classes.label

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import { getComponentSettings } from './settings.js';
-  import { mdiMenuDown } from '@mdi/js';
+  import { getSettings, getComponentSettings } from './settings.js';
 
   import { cls } from '@layerstack/tailwind';
 
@@ -9,15 +8,18 @@
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
-  import type { MenuOption } from '../types/index.js';
+  import type { IconProp, MenuOption } from '../types/index.js';
+  import { asIconData } from '$lib/utils/icons.js';
 
   const dispatch = createEventDispatcher<{ change: { value: any; option: MenuOption } }>();
+
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('MenuButton');
 
   export let options: MenuOption[] = [];
   export let value: any = null;
   export let menuProps: ComponentProps<Menu> = { placement: 'bottom-start' };
-  export let menuIcon: string | null = mdiMenuDown;
+  export let menuIcon: IconProp | null = icons.chevronDown;
   $: selected = options?.find((x) => x.value === value);
 
   let className: string | undefined = undefined;
@@ -50,15 +52,29 @@
   </slot>
 
   {#if menuIcon}
-    <Icon
-      path={menuIcon}
-      class={cls(
-        'opacity-50 transform transition-all -mr-2 duration-300',
-        open && '-rotate-180',
-        settingsClasses.icon,
-        classes.icon
-      )}
-    />
+    {#if typeof menuIcon === 'function'}
+      <!-- Component, such as unplugin-icons -->
+      {@const Icon = menuIcon}
+      <Icon
+        class={cls(
+          'opacity-50 transform transition-all -mr-2 duration-300',
+          open && '-rotate-180',
+          settingsClasses.icon,
+          classes.icon
+        )}
+      />
+    {:else if typeof menuIcon === 'string' || 'icon' in menuIcon}
+      <!-- font path/url/etc or font-awesome IconDefinition -->
+      <Icon
+        data={asIconData(menuIcon)}
+        class={cls(
+          'opacity-50 transform transition-all -mr-2 duration-300',
+          open && '-rotate-180',
+          settingsClasses.icon,
+          classes.icon
+        )}
+      />
+    {/if}
   {/if}
 
   <Menu

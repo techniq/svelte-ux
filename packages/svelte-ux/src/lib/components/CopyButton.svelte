@@ -1,9 +1,7 @@
 <script lang="ts">
-  import { mdiContentCopy } from '@mdi/js';
-
   import { cls } from '@layerstack/tailwind';
   import Button from './Button.svelte';
-  import { getComponentSettings } from './settings.js';
+  import { getComponentSettings, getSettings } from './settings.js';
   import { slide } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
   let className: string | undefined = undefined;
@@ -11,6 +9,7 @@
 
   const dispatch = createEventDispatcher<{ click: void }>();
 
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('CopyButton');
 
   export let value: string | (() => string);
@@ -25,7 +24,7 @@
 </script>
 
 <Button
-  icon={mdiContentCopy}
+  icon={icons.copy}
   {...restProps}
   class={cls('CopyButton', settingsClasses.root, className)}
   on:click={() => {

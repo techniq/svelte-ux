@@ -9,8 +9,6 @@
   } from '@layerstack/utils';
   import { getMonthDaysByWeek, isDateWithin, isSameInterval } from '@layerstack/utils/date';
 
-  import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
-
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
   import { getSettings } from './settings.js';
@@ -27,7 +25,7 @@
       startOfInterval('month', selected.from)) ||
     startOfInterval('month', new Date());
 
-  const { format } = getSettings();
+  const { format, icons } = getSettings();
   $: dateFormat = $format.settings.formats.dates;
 
   $: endOfMonth = endOfInterval('month', startOfMonth);
@@ -98,7 +96,7 @@
   {#if !hideControls}
     <div class="flex m-2">
       <Button
-        icon={mdiChevronLeft}
+        icon={icons.chevronLeft}
         class="p-2"
         on:click={() => (startOfMonth = intervalOffset('month', startOfMonth, -1))}
       />
@@ -110,7 +108,7 @@
       </div>
 
       <Button
-        icon={mdiChevronRight}
+        icon={icons.chevronRight}
         class="p-2"
         on:click={() => (startOfMonth = intervalOffset('month', startOfMonth, 1))}
       />
