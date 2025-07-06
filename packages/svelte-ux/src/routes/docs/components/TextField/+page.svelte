@@ -1,18 +1,14 @@
 <script lang="ts">
-  import {
-    mdiAccountSearch,
-    mdiCreditCardOutline,
-    mdiArrowRight,
-    mdiRefresh,
-    mdiStarOutline,
-  } from '@mdi/js';
-
   import { Button, getSettings, Icon, SectionDivider, TextField } from 'svelte-ux';
   import { autoHeight, debounceEvent } from '@layerstack/svelte-actions';
 
   import Preview from '$lib/components/Preview.svelte';
   import Blockquote from '$docs/Blockquote.svelte';
   import Toggle from '$lib/components/Toggle.svelte';
+
+  import LucideCreditCard from '~icons/lucide/credit-card';
+  import LucideStar from '~icons/lucide/star';
+  import LucideUserRoundSearch from '~icons/lucide/user-round-search';
 
   const { icons } = getSettings();
 
@@ -262,7 +258,7 @@
     <Preview>
       <TextField label="User Search">
         <div slot="prepend">
-          <Icon data={mdiAccountSearch} class="text-surface-content/50 mr-2" />
+          <Icon data={LucideUserRoundSearch} class="text-surface-content/50 mr-2" />
         </div>
       </TextField>
     </Preview>
@@ -296,7 +292,7 @@
 <Preview>
   <TextField label="Name">
     <span slot="append">
-      <Button icon={mdiRefresh} class="text-surface-content/50 p-2" />
+      <Button icon={icons.refresh} class="text-surface-content/50 p-2" />
     </span>
   </TextField>
 </Preview>
@@ -356,7 +352,7 @@
 <Preview>
   <TextField label="Search" clearable>
     <span slot="append">
-      <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
+      <Button icon={icons.arrowRight} class="text-surface-content/50 p-2" />
     </span>
   </TextField>
 </Preview>
@@ -378,13 +374,13 @@
 <Preview>
   <TextField label="Transfer amount">
     <div slot="prepend">
-      <Icon data={mdiCreditCardOutline} class="text-surface-content/50 mr-2" />
+      <Icon data={LucideCreditCard} class="text-surface-content/50 mr-2" />
     </div>
     <div slot="append">
-      <Button icon={mdiArrowRight} class="text-surface-content/50 p-2" />
+      <Button icon={icons.arrowRight} class="text-surface-content/50 p-2" />
     </div>
     <div slot="prefix">
-      <icons.currency class="text-surface-content/50 -mt-1" />
+      <icons.currency class="size-4 text-surface-content/50 -mt-1" />
     </div>
     <div slot="suffix" class="text-surface-content/50">usd</div>
   </TextField>
@@ -399,7 +395,7 @@
       <icons.calendar class="text-surface-content/50 mr-2" />
     </div>
     <div slot="append" class="flex items-center">
-      <Icon data={mdiRefresh} class="text-surface-content/50 mr-2" />
+      <Icon data={icons.refresh} class="text-surface-content/50 mr-2" />
       <Button icon={icons.chevronRight} class="text-surface-content/50 p-2" />
     </div>
   </TextField>
@@ -484,7 +480,7 @@
   <TextField icon={icons.info}>
     <div slot="prefix" class="text-surface-content/50">http://</div>
     <div slot="append">
-      <Button icon={mdiStarOutline} class="text-surface-content/50 p-2" />
+      <Button icon={LucideStar} class="text-surface-content/50 p-2" />
     </div>
   </TextField>
 </Preview>

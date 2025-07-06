@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { mdiContentCopy, mdiContentCut, mdiContentPaste } from '@mdi/js';
-
   import { getSettings, Icon, MenuButton, MenuItem, TextField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
@@ -13,9 +11,9 @@
   ];
 
   const optionsWithIcons = [
-    { label: 'Cut', value: 'cut', icon: mdiContentCut },
-    { label: 'Copy', value: 'copy', icon: mdiContentCopy },
-    { label: 'Paste', value: 'paste', icon: mdiContentPaste },
+    { label: 'Cut', value: 'cut', icon: icons.cut },
+    { label: 'Copy', value: 'copy', icon: icons.copy },
+    { label: 'Paste', value: 'paste', icon: icons.paste },
   ];
 </script>
 
@@ -70,6 +68,7 @@
 <Preview>
   <MenuButton options={optionsWithIcons} menuIcon={null}>
     <svelte:fragment slot="selection" let:value>
+      {console.log({ value })}
       <Icon data={value?.icon ?? icons.chevronDown} />
     </svelte:fragment>
   </MenuButton>

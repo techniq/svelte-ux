@@ -2,7 +2,7 @@
   import { AppBar, Button, getSettings, ListItem } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
 
-  import { mdiRefresh, mdiMicrosoftXboxControllerMenu } from '@mdi/js';
+  import { mdiMicrosoftXboxControllerMenu } from '@mdi/js';
 
   import Preview from '$lib/components/Preview.svelte';
 
@@ -44,7 +44,7 @@
 <Preview>
   <AppBar title="Example">
     <div slot="actions">
-      <Button icon={mdiRefresh} class="p-2 hover:bg-surface-100/10" />
+      <Button icon={icons.refresh} class="p-2 hover:bg-surface-100/10" />
     </div>
   </AppBar>
 </Preview>

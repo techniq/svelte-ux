@@ -3,6 +3,7 @@
   import { slide } from 'svelte/transition';
   import { cls } from '@layerstack/tailwind';
 
+  import Icon from './Icon.svelte';
   import type { TransitionParams } from '../types/index.js';
   import { getSettings } from './settings.js';
   import { getComponentClasses } from './theme.js';
@@ -13,12 +14,15 @@
 
   const dispatch = createEventDispatcher();
 
+  const { icons } = getSettings();
+
   export let name = '';
   export let value: any = undefined;
   export let group: any = undefined;
   export let open = false;
   export let popout = false;
   export let disabled = false;
+  export let icon = icons.chevronDown;
 
   export let transition = slide;
   export let transitionParams: TransitionParams = {};
@@ -32,7 +36,7 @@
     icon?: string;
     content?: string;
   } = {};
-  const { icons } = getSettings();
+
   const settingsClasses = getComponentClasses('Collapse');
 
   /**
@@ -86,7 +90,7 @@
           classes.icon
         )}
       >
-        <svelte:component this={icons.chevronDown} />
+        <Icon data={icon} />
       </div>
     </slot>
   </button>

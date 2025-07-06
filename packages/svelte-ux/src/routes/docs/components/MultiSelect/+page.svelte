@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { mdiCheck, mdiDotsVertical, mdiPlus } from '@mdi/js';
-
   import {
     Button,
     Drawer,
     Form,
+    getSettings,
     Icon,
     MultiSelect,
     MultiSelectOption,
     ToggleButton,
   } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   const options = [
     { label: 'One', value: 1 },
@@ -99,7 +100,7 @@
     on:change={(e) => (value = e.detail.value)}
   >
     <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
+      <Button color="primary" icon={icons.plus}>Add item</Button>
     </div>
   </MultiSelect>
 </Preview>
@@ -164,7 +165,7 @@
   <div class="flex flex-col max-h-[360px] overflow-auto">
     <MultiSelect {options} {value} on:change={(e) => (value = e.detail.value)} search>
       <div slot="actions">
-        <Button color="primary" icon={mdiPlus}>Add item</Button>
+        <Button color="primary" icon={icons.plus}>Add item</Button>
       </div>
     </MultiSelect>
   </div>
@@ -207,7 +208,7 @@
         <div class="text-xs text-surface-content/50">value: {value}</div>
 
         <div slot="actions" class="flex items-center">
-          <ToggleButton icon={mdiDotsVertical} iconOnly class="text-surface-content/50">
+          <ToggleButton icon={icons.ellipsisVertical} iconOnly class="text-surface-content/50">
             <Drawer
               slot="toggle"
               let:on={open}
@@ -251,7 +252,7 @@
           aria-selected={checked}
           on:click={onChange}
         >
-          <Icon data={checked ? mdiCheck : ''} />
+          <Icon data={checked ? icons.check : ''} />
           <div>{label}</div>
         </button>
       </svelte:fragment>

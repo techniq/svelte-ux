@@ -375,7 +375,7 @@ Any tailwind class such as colors (`text-*`, `bg-*`), padding/margins (`p-*`, `m
 Using `classes` enables easy access to internal elements
 
 ```svelte
-<Button icon={mdiMagnify} classes={{ icon: 'opacity-50' }}>Click me</Button>
+<Button icon={IconSearch} classes={{ icon: 'opacity-50' }}>Click me</Button>
 ```
 
 Internally, each component uses the `cls()` util which leverages [tailwind-merge](https://github.com/dcastil/tailwind-merge) for easy style overriding (see `class precedence` below).

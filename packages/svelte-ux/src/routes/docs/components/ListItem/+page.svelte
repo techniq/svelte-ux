@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { mdiAccount } from '@mdi/js';
-
   import { Button, Checkbox, getSettings, ListItem, Radio } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  import LucideUserRound from '~icons/lucide/user-round';
 
   const { icons } = getSettings();
 
@@ -51,13 +51,13 @@
 <h2>Icon</h2>
 
 <Preview>
-  <ListItem title="Title" icon={mdiAccount} />
+  <ListItem title="Title" icon={LucideUserRound} />
 </Preview>
 
 <h2>Icon with subheading</h2>
 
 <Preview>
-  <ListItem title="Title" subheading="Subheading" icon={mdiAccount} />
+  <ListItem title="Title" subheading="Subheading" icon={LucideUserRound} />
 </Preview>
 
 <h2>Icon with classes</h2>
@@ -66,7 +66,7 @@
   <ListItem
     title="Title"
     subheading="Subheading"
-    icon={mdiAccount}
+    icon={LucideUserRound}
     avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
 </Preview>

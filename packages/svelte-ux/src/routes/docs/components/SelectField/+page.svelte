@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { mdiMagnify, mdiPlus, mdiPencil, mdiAccount } from '@mdi/js';
-
   import {
     Button,
     Dialog,
     Drawer,
     Form,
+    getSettings,
     MenuItem,
     SelectField,
     State,
@@ -18,6 +17,8 @@
 
   import Preview from '$lib/components/Preview.svelte';
 
+  const { icons } = getSettings();
+
   let options: MenuOption[] = [
     { label: 'One', value: 1 },
     { label: 'Two', value: 2 },
@@ -26,10 +27,10 @@
   ];
 
   let optionsWithIcon: MenuOption[] = [
-    { label: 'One', value: 1, icon: mdiMagnify },
-    { label: 'Two', value: 2, icon: mdiPlus },
-    { label: 'Three', value: 3, icon: mdiPencil },
-    { label: 'Four', value: 4, icon: mdiAccount },
+    { label: 'One', value: 1, icon: icons.trash },
+    { label: 'Two', value: 2, icon: icons.code },
+    { label: 'Three', value: 3, icon: icons.calendar },
+    { label: 'Four', value: 4, icon: icons.home },
   ];
 
   let optionsWithDisabled: MenuOption[] = [
@@ -305,7 +306,7 @@
           <div on:click|stopPropagation role="none">
             <Toggle let:on={open} let:toggle let:toggleOff>
               <Button
-                icon={mdiPencil}
+                icon={icons.edit}
                 class="p-1 text-xs text-surface-content/50 z-9999"
                 on:click={toggle}
               />
@@ -397,7 +398,7 @@
   <Toggle let:on={open} let:toggle let:toggleOff>
     <SelectField {options}>
       <span slot="append" on:click|stopPropagation role="none">
-        <Button icon={mdiPlus} class="text-surface-content/50 p-2" on:click={toggle} />
+        <Button icon={icons.plus} class="text-surface-content/50 p-2" on:click={toggle} />
       </span>
     </SelectField>
     <Form
@@ -443,7 +444,7 @@
   <SelectField {options} bind:value>
     <div slot="actions" class="p-2 border-t" on:click|stopPropagation let:hide role="none">
       <Toggle let:on={open} let:toggle>
-        <Button icon={mdiPlus} color="primary" on:click={toggle}>New item</Button>
+        <Button icon={icons.plus} color="primary" on:click={toggle}>New item</Button>
         <Form
           initial={newOption()}
           on:change={(e) => {
@@ -493,7 +494,7 @@
 <h2>Icon</h2>
 
 <Preview>
-  <SelectField {options} icon={mdiMagnify} />
+  <SelectField {options} icon={icons.search} />
 </Preview>
 
 <h2>Rounded</h2>
@@ -505,13 +506,13 @@
 <h2>Rounded with icon</h2>
 
 <Preview>
-  <SelectField {options} icon={mdiMagnify} rounded />
+  <SelectField {options} icon={icons.search} rounded />
 </Preview>
 
 <h2>Rounded with append slot and icon</h2>
 
 <Preview>
-  <SelectField {options} icon={mdiMagnify} rounded>
+  <SelectField {options} icon={icons.search} rounded>
     <span slot="prepend" on:click|stopPropagation role="none">
       <select
         class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
@@ -574,7 +575,7 @@
 <h2>Inline options with icon (used by search bar dialog in top-right)</h2>
 
 <Preview>
-  <SelectField {options} icon={mdiMagnify} bind:value inlineOptions={true} />
+  <SelectField {options} icon={icons.search} bind:value inlineOptions={true} />
 </Preview>
 
 <h2>within form</h2>

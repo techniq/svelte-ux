@@ -23,6 +23,9 @@ import {
 import type { LabelPlacement } from '../types/index.js';
 
 import LucideArrowUp from '~icons/lucide/arrow-up';
+import LucideArrowDown from '~icons/lucide/arrow-down';
+import LucideArrowLeft from '~icons/lucide/arrow-left';
+import LucideArrowRight from '~icons/lucide/arrow-right';
 import LucideCalendar from '~icons/lucide/calendar.svelte';
 import LucideCheck from '~icons/lucide/check';
 import LucideChevronLeft from '~icons/lucide/chevron-left.svelte';
@@ -30,9 +33,12 @@ import LucideChevronRight from '~icons/lucide/chevron-right.svelte';
 import LucideChevronDown from '~icons/lucide/chevron-down.svelte';
 import LucideChevronFirst from '~icons/lucide/chevron-first.svelte';
 import LucideChevronLast from '~icons/lucide/chevron-last.svelte';
+import LucideClipboardPaste from '~icons/lucide/clipboard-paste';
 import LucideCode from '~icons/lucide/code';
 import LucideCopy from '~icons/lucide/copy';
 import LucideDollarSign from '~icons/lucide/dollar-sign';
+import LucideEllipsis from '~icons/lucide/ellipsis';
+import LucideEllipsisVertical from '~icons/lucide/ellipsis-vertical';
 import LucideEye from '~icons/lucide/eye';
 import LucideGripHorizontal from '~icons/lucide/grip-horizontal';
 import LucideHouse from '~icons/lucide/house';
@@ -41,7 +47,10 @@ import LucideCircleAlert from '~icons/lucide/circle-alert';
 import LucideMenu from '~icons/lucide/menu';
 import LucideMinus from '~icons/lucide/minus';
 import LucidePercent from '~icons/lucide/percent';
+import LucidePencil from '~icons/lucide/pencil';
 import LucidePlus from '~icons/lucide/plus';
+import LucideRefreshCw from '~icons/lucide/refresh-cw';
+import LucideScissors from '~icons/lucide/scissors';
 import LucideSearch from '~icons/lucide/search';
 import LucideTrash2 from '~icons/lucide/trash-2';
 import LucideUndo2 from '~icons/lucide/undo-2';
@@ -54,6 +63,9 @@ import LucideMonitor from '~icons/lucide/monitor';
 export const DEFAULT_ICONS = {
   alert: LucideCircleAlert,
   arrowUp: LucideArrowUp,
+  arrowDown: LucideArrowDown,
+  arrowLeft: LucideArrowLeft,
+  arrowRight: LucideArrowRight,
   calendar: LucideCalendar,
   check: LucideCheck,
   chevronLeft: LucideChevronLeft,
@@ -62,16 +74,22 @@ export const DEFAULT_ICONS = {
   chevronFirst: LucideChevronFirst,
   chevronLast: LucideChevronLast,
   close: LucideX,
+  cut: LucideScissors,
   code: LucideCode,
   copy: LucideCopy,
   currency: LucideDollarSign,
+  edit: LucidePencil,
+  ellipsis: LucideEllipsis,
+  ellipsisVertical: LucideEllipsisVertical,
   gripHorizontal: LucideGripHorizontal,
   home: LucideHouse,
   info: LucideInfo,
   menu: LucideMenu,
   minus: LucideMinus,
+  paste: LucideClipboardPaste,
   percent: LucidePercent,
   plus: LucidePlus,
+  refresh: LucideRefreshCw,
   reveal: LucideEye,
   search: LucideSearch,
   trash: LucideTrash2,

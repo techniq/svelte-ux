@@ -7,12 +7,13 @@
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import { getSettings } from './settings.js';
+  import type { IconProp } from '$lib/types/index.js';
 
   const dispatch = createEventDispatcher();
 
   export let title: string | undefined = undefined;
   export let description: string | undefined = undefined;
-  export let icon: string | undefined = undefined;
+  export let icon: IconProp | undefined = undefined;
   export let actions: Record<string, Function> = {};
 
   export let color: ThemeColors = 'primary';

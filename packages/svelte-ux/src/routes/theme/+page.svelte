@@ -1,6 +1,4 @@
 <!-- <script lang="ts">
-  import { icons.chevronDown, icons.darkMode, icons.lightMode } from '@mdi/js';
-
   import {
     Button,
     ButtonGroup,
