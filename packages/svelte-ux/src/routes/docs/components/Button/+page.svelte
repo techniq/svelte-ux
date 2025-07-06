@@ -178,25 +178,25 @@
     <div>
       <Button variant="outline" color="primary">default</Button>
       <Button variant="outline" color="primary" rounded>rounded</Button>
-      <Button variant="outline" color="primary" rounded-sm="full">full</Button>
+      <Button variant="outline" color="primary" rounded="full">full</Button>
       <Button variant="outline" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill" color="primary">default</Button>
       <Button variant="fill" color="primary" rounded>rounded</Button>
-      <Button variant="fill" color="primary" rounded-sm="full">full</Button>
+      <Button variant="fill" color="primary" rounded="full">full</Button>
       <Button variant="fill" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill-light" color="primary">default</Button>
       <Button variant="fill-light" color="primary" rounded>rounded</Button>
-      <Button variant="fill-light" color="primary" rounded-sm="full">full</Button>
+      <Button variant="fill-light" color="primary" rounded="full">full</Button>
       <Button variant="fill-light" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill-outline" color="primary">default</Button>
       <Button variant="fill-outline" color="primary" rounded>rounded</Button>
-      <Button variant="fill-outline" color="primary" rounded-sm="full">full</Button>
+      <Button variant="fill-outline" color="primary" rounded="full">full</Button>
       <Button variant="fill-outline" color="primary" rounded={false}>false</Button>
     </div>
   </div>

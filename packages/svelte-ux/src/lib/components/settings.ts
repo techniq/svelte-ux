@@ -26,6 +26,7 @@ import LucideArrowUp from '~icons/lucide/arrow-up';
 import LucideArrowDown from '~icons/lucide/arrow-down';
 import LucideArrowLeft from '~icons/lucide/arrow-left';
 import LucideArrowRight from '~icons/lucide/arrow-right';
+import LucideBraces from '~icons/lucide/braces';
 import LucideCalendar from '~icons/lucide/calendar.svelte';
 import LucideCheck from '~icons/lucide/check';
 import LucideChevronLeft from '~icons/lucide/chevron-left.svelte';
@@ -76,6 +77,7 @@ export const DEFAULT_ICONS = {
   close: LucideX,
   cut: LucideScissors,
   code: LucideCode,
+  codeBraces: LucideBraces,
   copy: LucideCopy,
   currency: LucideDollarSign,
   edit: LucidePencil,

@@ -16,6 +16,7 @@
   import MenuItem from './MenuItem.svelte';
 
   import { getComponentSettings, getSettings } from './settings.js';
+  import type { IconProp } from '$lib/types/index.js';
 
   const dispatch = createEventDispatcher();
   const { format, localeSettings, icons } = getSettings();
@@ -67,7 +68,7 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: string | null = null;
+  export let icon: IconProp | null = null;
 
   let showDialog = false;
   let showQuickPresetsMenu = false;

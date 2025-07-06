@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { mdiClockOutline, mdiMapMarker, mdiTruck } from '@mdi/js';
   import LucideCircleCheck from '~icons/lucide/circle-check';
+  import LucideClock from '~icons/lucide/clock';
+  import LucideMapPin from '~icons/lucide/map-pin';
+  import LucideTruck from '~icons/lucide/truck';
 
   import { Icon, Timeline, TimelineEvent, getSettings } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
@@ -324,7 +326,7 @@
     {#each customData as item, i}
       <TimelineEvent
         icon={{
-          'in-progress': mdiTruck,
+          'in-progress': LucideTruck,
           completed: icons.check,
           failed: icons.close,
         }[item.status]}
@@ -346,11 +348,11 @@
         <div class="-mt-1 mb-5 mx-2">
           <div class="font-bold">{item.title}</div>
           <div class="text-sm text-surface-content/70">
-            <Icon data={mdiMapMarker} size="1rem" />
+            <Icon data={LucideMapPin} size="1rem" />
             {item.location}
           </div>
           <div class="text-sm text-surface-content/70">
-            <Icon data={mdiClockOutline} size=".9rem" />
+            <Icon data={LucideClock} size=".9rem" />
             {$format(item.date, PeriodType.DayTime)}
           </div>
         </div>

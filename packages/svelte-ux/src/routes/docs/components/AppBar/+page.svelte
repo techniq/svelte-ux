@@ -2,7 +2,7 @@
   import { AppBar, Button, getSettings, ListItem } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
 
-  import { mdiMicrosoftXboxControllerMenu } from '@mdi/js';
+  import LucideLayoutGrid from '~icons/lucide/layout-grid';
 
   import Preview from '$lib/components/Preview.svelte';
 
@@ -61,7 +61,7 @@
 <h2>menuIcon prop</h2>
 
 <Preview>
-  <AppBar title="Example" menuIcon={mdiMicrosoftXboxControllerMenu} />
+  <AppBar title="Example" menuIcon={LucideLayoutGrid} />
 </Preview>
 
 <h2>menuIcon slot</h2>

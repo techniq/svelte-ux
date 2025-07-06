@@ -3,19 +3,27 @@
     mdiAccount,
     mdiCheck,
     mdiDecagramOutline,
-    mdiLoading,
-    mdiDownload,
-    mdiHeart,
-    mdiCircleMedium,
-    mdiArrowRight,
     mdiOpenInNew,
     mdiMenuUp,
     mdiMenuDown,
   } from '@mdi/js';
+
+  import LucideUser from '~icons/lucide/user.svelte';
+  import LucideUserRaw from '~icons/lucide/user.svelte?raw';
+  import LucideHeart from '~icons/lucide/heart';
+  import LucideCircleSmall from '~icons/lucide/circle-small';
+  import LucideDownload from '~icons/lucide/download';
+  import LucideRefreshCw from '~icons/lucide/refresh-cw';
+
+  const LucideUserSvg = LucideUserRaw as unknown as string;
+
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-  import { Button, ButtonGroup, Icon, Tooltip } from 'svelte-ux';
+  import { Button, ButtonGroup, getSettings, Icon, Tooltip } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+  import Blockquote from '$docs/Blockquote.svelte';
+
+  const { icons } = getSettings();
 </script>
 
 <svelte:head>
@@ -26,6 +34,58 @@
 </svelte:head>
 
 <h1>Examples</h1>
+
+<h2>Path data</h2>
+
+<Preview>
+  <Icon data="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2 M12 3a4 4 0 1 0 0 8 4 4 0 1 0 0-8" />
+  <Icon
+    data="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2 M12 3a4 4 0 1 0 0 8 4 4 0 1 0 0-8"
+    classes={{ path: 'fill-none stroke-current stroke-2' }}
+  />
+</Preview>
+
+<h2>Svg string</h2>
+
+<Preview>
+  <Icon svg={LucideUserSvg} />
+</Preview>
+
+<h2>Svg url</h2>
+
+<Preview>
+  <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" />
+</Preview>
+
+<h2>Svg element</h2>
+
+<Preview>
+  <Icon>
+    <svg viewBox="0 0 24 24" width="1.2em" height="1.2em">
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      >
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </g>
+    </svg>
+  </Icon>
+</Preview>
+
+<h2>Component</h2>
+
+<Preview>
+  <Icon data={LucideUser} />
+</Preview>
+
+<Blockquote
+  >Typically you will use the component directly, but it can be helpful when passing as a prop or
+  part of a structure, such as a menu item</Blockquote
+>
 
 <div class="grid grid-cols-[1fr_auto] items-center gap-2">
   <h2>Material Design icons</h2>
@@ -44,18 +104,6 @@
 
 <Preview>
   <Icon data={mdiAccount} />
-  <Icon
-    svg={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'}
-  />
-  <Icon svgUrl="https://api.iconify.design/mdi:account.svg" />
-  <Icon>
-    <svg width="32" height="32" viewBox="0 0 24 24">
-      <path
-        fill="currentColor"
-        d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"
-      />
-    </svg>
-  </Icon>
 </Preview>
 
 <div class="grid grid-cols-[1fr_auto] items-center gap-2">
@@ -113,33 +161,26 @@
 <h2>Sizes</h2>
 
 <Preview>
-  <Icon data={mdiAccount} size="8px" />
-  <Icon data={mdiAccount} size="1em" />
-  <Icon data={mdiAccount} size="1.5em" />
-  <Icon data={mdiAccount} size="2em" />
-  <Icon data={mdiAccount} size="2.5em" />
-  <Icon data={mdiAccount} size="3em" />
-  <Icon data={mdiAccount} size="64px" />
-  <Icon svgUrl="https://api.iconify.design/mdi:account.svg" size="64px" />
+  <Icon data={LucideUserSvg} size="8px" />
+  <Icon data={LucideUserSvg} size="1em" />
+  <Icon data={LucideUserSvg} size="1.5em" />
+  <Icon data={LucideUserSvg} size="2em" />
+  <Icon data={LucideUserSvg} size="2.5em" />
+  <Icon data={LucideUserSvg} size="3em" />
+  <Icon data={LucideUserSvg} size="64px" />
+  <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" size="64px" />
 </Preview>
 
 <h2>Color</h2>
 
 <Preview>
-  <Icon data={mdiAccount} class="text-danger" />
-  <Icon data={mdiAccount} class="text-primary" />
-  <Icon data={mdiAccount} class="text-success" />
-  <Icon data={mdiAccount} class="text-surface-content/50" />
-  <Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="text-danger" />
-  <Icon
-    svg={'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>'}
-    class="fill-primary"
-  />
-  <Icon
-    svgUrl="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/user.svg"
-    class="text-success"
-  />
-  <Icon data={mdiAccount} style="color:red" />
+  <Icon data={LucideUserSvg} class="text-danger" />
+  <Icon data={LucideUserSvg} class="text-primary" />
+  <Icon data={LucideUserSvg} class="text-success" />
+  <Icon data={LucideUserSvg} class="text-surface-content/50" />
+  <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" class="text-danger" />
+  <Icon svg={LucideUserSvg} class="text-primary" />
+  <Icon data={LucideUserSvg} style="color:red" />
 </Preview>
 
 <h2>Multiple paths</h2>
@@ -158,20 +199,20 @@
 <h2>Rotate / Scale / Flip</h2>
 
 <Preview>
-  <Icon data={mdiArrowRight} class="-rotate-45" />
-  <Icon data={mdiArrowRight} class="scale-75" />
-  <Icon data={mdiArrowRight} class="-scale-x-100" />
-  <Icon data={mdiAccount} class="-scale-y-100" />
-  <Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="-scale-y-100" />
+  <Icon data={icons.arrowRight} class="-rotate-45" />
+  <Icon data={icons.arrowRight} class="scale-75" />
+  <Icon data={icons.arrowRight} class="-scale-x-100" />
+  <Icon data={LucideUser} class="-scale-y-100" />
+  <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" class="-scale-y-100" />
 </Preview>
 
 <h2>Animation</h2>
 
 <Preview>
-  <Icon data={mdiLoading} class="animate-spin" />
-  <Icon data={mdiHeart} class="animate-pulse" />
-  <Icon data={mdiCircleMedium} class="animate-ping" />
-  <Icon data={mdiDownload} class="animate-bounce" />
+  <Icon data={LucideRefreshCw} class="animate-spin" />
+  <Icon data={LucideHeart} class="animate-pulse" />
+  <Icon data={LucideCircleSmall} class="animate-ping" />
+  <Icon data={LucideDownload} class="animate-bounce" />
 </Preview>
 
 <h2>with Tooltip</h2>

@@ -2,17 +2,12 @@
   import { onMount } from 'svelte';
   import { flatGroup } from 'd3-array';
 
-  // TODO: Replace with Lucide
-  import {
-    mdiCodeBraces,
-    mdiCheckCircle,
-    mdiDatabaseOutline,
-    mdiFileDocumentEditOutline,
-    mdiGithub,
-    mdiLink,
-  } from '@mdi/js';
-
   import LucideAlignLeft from '~icons/lucide/align-left.svelte';
+  import LucideCircleCheck from '~icons/lucide/circle-check.svelte';
+  import LucideDatabase from '~icons/lucide/database';
+  import LucideFilePenLine from '~icons/lucide/file-pen-line';
+  import LucideGithub from '~icons/lucide/github.svelte';
+  import LucideLink2 from '~icons/lucide/link-2';
 
   import {
     ApiDocs,
@@ -136,7 +131,7 @@
         href={pageUrl
           ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${pageUrl}`
           : ''}
-        icon={mdiFileDocumentEditOutline}
+        icon={LucideFilePenLine}
       />
 
       {#if !hideTableOfContents}
@@ -205,7 +200,7 @@
           <ul class="grid gap-2 pl-4 text-surface-content">
             {#each features as feature}
               <li class="grid grid-cols-[auto_1fr] gap-2">
-                <Icon data={mdiCheckCircle} class="text-success pt-1" />
+                <Icon data={LucideCircleCheck} class="text-success pt-1" />
                 <span>{@html feature}</span>
               </li>
             {/each}
@@ -232,12 +227,12 @@
                     item.type === 'components'
                       ? icons.code
                       : item.type === 'stores'
-                        ? mdiDatabaseOutline
+                        ? LucideDatabase
                         : item.type === 'actions'
-                          ? mdiCodeBraces
+                          ? icons.codeBraces
                           : item.type === 'github'
-                            ? mdiGithub
-                            : mdiLink}
+                            ? LucideGithub
+                            : LucideLink2}
                   <a href={item.url.toString()} class="group">
                     <ListItem
                       title={item.name.toString()}

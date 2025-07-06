@@ -9,6 +9,7 @@
 
   import Input from './Input.svelte';
   import DatePickerField from './DatePickerField.svelte';
+  import type { IconProp } from '$lib/types/index.js';
 
   const { format: format_ux } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('DateField');
@@ -44,7 +45,7 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: string | null = null;
+  export let icon: IconProp | null = null;
 
   let className: string | undefined = undefined;
   export { className as class };
