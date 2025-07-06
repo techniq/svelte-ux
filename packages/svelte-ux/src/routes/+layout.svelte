@@ -28,7 +28,7 @@
   import LanguageSelect from '$lib/components/LanguageSelect.svelte';
 
   import { afterNavigate, goto } from '$app/navigation';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 
   import './app.css';
 
@@ -168,23 +168,23 @@
 
     // Posthog analytics
     if (!DEV) {
-      const unsubscribePage = page.subscribe(($page) => {
-        if (currentPath && currentPath !== $page.url.pathname) {
+      const unsubscribePage = page.subscribe((page) => {
+        if (currentPath && currentPath !== page.url.pathname) {
           // Page navigated away
           // @ts-expect-error - .capture() exists
-          posthog.capture('$pageleave');
+          posthog.capture('pageleave');
         }
 
         // Page entered
-        currentPath = $page.url.pathname;
+        currentPath = page.url.pathname;
         // @ts-expect-error - .capture() exists
-        posthog.capture('$pageview');
+        posthog.capture('pageview');
       });
 
       const handleBeforeUnload = () => {
         // Hard reloads or browser exit
         // @ts-expect-error - .capture() exists
-        posthog.capture('$pageleave');
+        posthog.capture('pageleave');
       };
       window.addEventListener('beforeunload', handleBeforeUnload);
 
@@ -197,7 +197,7 @@
 </script>
 
 <svelte:head>
-  {#if $page.url.origin.includes('https')}
+  {#if page.url.origin.includes('https')}
     <script
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"
