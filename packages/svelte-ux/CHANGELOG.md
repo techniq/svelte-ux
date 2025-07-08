@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.14
+
+### Minor Changes
+
+- feat: Setup default icons on settings() for easy overriding. Change default to lucide (from mdi) ([#616](https://github.com/techniq/svelte-ux/pull/616))
+
+- feat: Support component icons (Unplugin icons, etc) ([#616](https://github.com/techniq/svelte-ux/pull/616))
+
 ## 2.0.0-next.13
 
 ### Patch Changes
