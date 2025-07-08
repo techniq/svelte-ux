@@ -39,6 +39,5 @@ export type ButtonRounded = boolean | 'full';
 export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;
 
 export type IconData = ComponentProps<Icon>['data'];
-export type IconInput = IconData | ComponentProps<Icon>;
 export type IconComponent = Component<SvelteHTMLElements['svg']>;
-export type IconProp = IconComponent | IconInput;
+export type IconProp = IconComponent | IconData;

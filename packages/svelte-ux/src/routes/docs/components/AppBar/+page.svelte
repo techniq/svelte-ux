@@ -70,7 +70,7 @@
   <AppBar title="Example">
     <svelte:fragment slot="menuIcon" let:toggleMenu let:isMenuOpen>
       <Button
-        icon={icons}
+        icon={icons.chevronRight}
         on:click={toggleMenu}
         class={cls('p-3 transition-transform', isMenuOpen && 'rotate-180')}
       />

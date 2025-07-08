@@ -14,7 +14,7 @@
   export let currentUrl: URL;
   export let path: string;
   export let text: string = '';
-  export let icon: IconProp | undefined = undefined;
+  export let icon: IconProp | ComponentProps<Icon> | undefined = undefined;
 
   let className: string | undefined = undefined;
   export { className as class };

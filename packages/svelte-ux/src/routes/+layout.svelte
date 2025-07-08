@@ -28,7 +28,7 @@
   import LanguageSelect from '$lib/components/LanguageSelect.svelte';
 
   import { afterNavigate, goto } from '$app/navigation';
-  import { page } from '$app/state';
+  import { page } from '$app/stores';
 
   import './app.css';
 
@@ -197,7 +197,7 @@
 </script>
 
 <svelte:head>
-  {#if page.url.origin.includes('https')}
+  {#if $page.url.origin.includes('https')}
     <script
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"

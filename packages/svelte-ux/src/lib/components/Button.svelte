@@ -15,6 +15,7 @@
   import { getButtonGroup } from './ButtonGroup.svelte';
   import { asIconData } from '../utils/icons.js';
   import { getComponentSettings } from './settings.js';
+  import type { ComponentProps } from 'svelte';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');
 
@@ -22,7 +23,7 @@
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
-  export let icon: IconProp | undefined = undefined;
+  export let icon: IconProp | ComponentProps<Icon> | undefined = undefined;
   export let iconOnly = icon !== undefined && !$$slots.default;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
 
