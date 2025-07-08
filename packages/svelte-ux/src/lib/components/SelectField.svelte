@@ -14,6 +14,7 @@
   import TextField from './TextField.svelte';
   import { getComponentSettings, getSettings } from './settings.js';
   import type { IconProp, MenuOption } from '../types/index.js';
+  import { asIconData } from '$lib/utils/icons.js';
 
   const dispatch = createEventDispatcher<{
     change: { value: typeof value; option: typeof selected };
@@ -381,7 +382,7 @@
       if (!selected?.icon) {
         icon = originalIcon;
       } else {
-        icon = selected.icon;
+        icon = asIconData(selected.icon);
       }
     }
 

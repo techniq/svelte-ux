@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getSettings, Icon, MenuButton, MenuItem, TextField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+  import { asIconData } from '$lib/utils/icons.js';
 
   const { icons } = getSettings();
 
@@ -55,7 +56,7 @@
   <MenuButton options={optionsWithIcons}>
     <svelte:fragment slot="selection" let:value>
       {#if value}
-        <Icon data={value?.icon ?? icons.chevronDown} /> {value.label}
+        <Icon data={asIconData(value?.icon) ?? icons.chevronDown} /> {value.label}
       {:else}
         No selection
       {/if}
@@ -68,7 +69,7 @@
 <Preview>
   <MenuButton options={optionsWithIcons} menuIcon={null}>
     <svelte:fragment slot="selection" let:value>
-      <Icon data={value?.icon ?? icons.chevronDown} />
+      <Icon data={asIconData(value?.icon) ?? icons.chevronDown} />
     </svelte:fragment>
   </MenuButton>
 </Preview>
