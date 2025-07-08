@@ -27,10 +27,10 @@
   import Code from '$lib/components/Code.svelte';
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';
 
-  import { page } from '$app/state';
+  import { page } from '$app/stores';
 
-  $: [type, name] = page.url.pathname.split('/').slice(2) ?? [];
-  $: title = page.data.meta?.title ?? name;
+  $: [type, name] = $page.url.pathname.split('/').slice(2) ?? [];
+  $: title = $page.data.meta?.title ?? name;
   $: pageUrl = `src/routes/docs/${type}/${name}/+page.svelte?plain=1`;
   $: sourceUrl = `src/lib/${type}/${name}.${type === 'components' ? 'svelte' : 'ts'}`;
   $: ({
@@ -43,7 +43,7 @@
     pageSource,
     api,
     status,
-  } = page.data.meta ?? {});
+  } = $page.data.meta ?? {});
 
   $: showTableOfContents = $xlScreen;
 
@@ -152,7 +152,7 @@
 
 <div class="px-4">
   {#if !$xlScreen}
-    {#key page.route.id}
+    {#key $page.route.id}
       <Dialog
         bind:open={showTableOfContents}
         classes={{ dialog: 'w-[420px] max-w-[95vw] max-h-[95dvh]' }}
@@ -187,14 +187,14 @@
   <div class="grid xl:grid-cols-[1fr_auto] gap-6 pb-4">
     <div class="overflow-auto p-1">
       {#if type === 'components' && !hideUsage}
-        {#key page.route.id}
+        {#key $page.route.id}
           <h1 id="usage">Usage</h1>
           <Code source={`import { ${name} } from 'svelte-ux';`} language="javascript" />
         {/key}
       {/if}
 
       {#if features}
-        {#key page.route.id}
+        {#key $page.route.id}
           <h1 id="features">Features</h1>
           <ul class="grid gap-2 pl-4 text-surface-content">
             {#each features as feature}
@@ -270,7 +270,7 @@
           On this page
         </div>
         <!-- Rebuild toc when page changes -->
-        {#key page.route.id}
+        {#key $page.route.id}
           <TableOfContents
             linkIndent={12}
             classes={{

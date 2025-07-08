@@ -2,7 +2,7 @@
   import { NavItem } from 'svelte-ux';
   import { entries } from '@layerstack/utils';
 
-  import { page } from '$app/state';
+  import { page } from '$app/stores';
 
   import LucideArrowUpRight from '~icons/lucide/arrow-up-right';
   import LucideHouse from '~icons/lucide/house';
@@ -78,19 +78,19 @@
   };
 </script>
 
-<NavItem text="Getting Started" icon={LucideHouse} currentUrl={page.url} path="/" />
-<NavItem text="Customization" icon={LucideSettings2} currentUrl={page.url} path="/customization" />
-<!-- <NavItem text="Theme" icon={mdiPalette} currentUrl={page.url} path="/theme" /> -->
-<NavItem text="Changelog" icon={LucideList} currentUrl={page.url} path="/changelog" />
+<NavItem text="Getting Started" icon={LucideHouse} currentUrl={$page.url} path="/" />
+<NavItem text="Customization" icon={LucideSettings2} currentUrl={$page.url} path="/customization" />
+<!-- <NavItem text="Theme" icon={mdiPalette} currentUrl={$page.url} path="/theme" /> -->
+<NavItem text="Changelog" icon={LucideList} currentUrl={$page.url} path="/changelog" />
 
 <h1>Components</h1>
 {#each entries(components) as [header, items]}
   <h2>{header}</h2>
   {#each items as item}
     {#if typeof item === 'object'}
-      <NavItem text={item.label} currentUrl={page.url} path="/docs/components/{item.value}" />
+      <NavItem text={item.label} currentUrl={$page.url} path="/docs/components/{item.value}" />
     {:else}
-      <NavItem text={item} currentUrl={page.url} path="/docs/components/{item}" />
+      <NavItem text={item} currentUrl={$page.url} path="/docs/components/{item}" />
     {/if}
   {/each}
 {/each}
@@ -99,7 +99,7 @@
 <NavItem
   text="LayerChart"
   icon={LucideArrowUpRight}
-  currentUrl={page.url}
+  currentUrl={$page.url}
   path="https://www.layerchart.com"
   target="_blank"
 />
@@ -108,14 +108,14 @@
 <NavItem
   text="@layerstack/svelte-actions"
   icon={LucideArrowUpRight}
-  currentUrl={page.url}
+  currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/svelte-actions"
   target="_blank"
 />
 <NavItem
   text="@layerstack/svelte-table"
   icon={LucideArrowUpRight}
-  currentUrl={page.url}
+  currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/svelte-table/actions"
   target="_blank"
 />
@@ -124,14 +124,14 @@
 <NavItem
   text="@layerstack/svelte-stores"
   icon={LucideArrowUpRight}
-  currentUrl={page.url}
+  currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/svelte-stores"
   target="_blank"
 />
 <NavItem
   text="@layerstack/svelte-table"
   icon={LucideArrowUpRight}
-  currentUrl={page.url}
+  currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/svelte-table/stores"
   target="_blank"
 />
@@ -140,14 +140,14 @@
 <NavItem
   text="@layerstack/tailwind"
   icon={LucideArrowUpRight}
-  currentUrl={page.url}
+  currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/tailwind"
   target="_blank"
 />
 <NavItem
   text="@layerstack/utils"
   icon={LucideArrowUpRight}
-  currentUrl={page.url}
+  currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/utils"
   target="_blank"
 />
