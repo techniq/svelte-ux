@@ -68,7 +68,6 @@
 <Preview>
   <MenuButton options={optionsWithIcons} menuIcon={null}>
     <svelte:fragment slot="selection" let:value>
-      {console.log({ value })}
       <Icon data={value?.icon ?? icons.chevronDown} />
     </svelte:fragment>
   </MenuButton>
