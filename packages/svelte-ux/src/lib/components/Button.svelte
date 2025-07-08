@@ -63,9 +63,9 @@
       'font-medium tracking-wider whitespace-nowrap',
       iconOnly
         ? {
-            sm: 'text-xs p-1',
-            md: 'text-sm p-2',
-            lg: 'text-base p-3',
+            sm: 'text-sm p-1',
+            md: 'text-base p-2',
+            lg: 'text-lg p-3',
           }[size!]
         : {
             sm: 'text-xs px-2 py-1',
