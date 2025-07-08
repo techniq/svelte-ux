@@ -2,7 +2,7 @@
   import { DateRangeField } from 'svelte-ux';
   import { intervalOffset, PeriodType } from '@layerstack/utils';
 
-  import { mdiCalendarRange } from '@mdi/js';
+  import LucideCalendarRange from '~icons/lucide/calendar-range';
 
   import Preview from '$lib/components/Preview.svelte';
 
@@ -101,7 +101,7 @@
 <h2>Icon</h2>
 
 <Preview>
-  <DateRangeField bind:value icon={mdiCalendarRange} />
+  <DateRangeField bind:value icon={LucideCalendarRange} />
 </Preview>
 
 <h2>Stepper</h2>
@@ -113,7 +113,7 @@
 <h2>Stepper w/ icon</h2>
 
 <Preview>
-  <DateRangeField bind:value stepper icon={mdiCalendarRange} />
+  <DateRangeField bind:value stepper icon={LucideCalendarRange} />
 </Preview>
 
 <h2>Stepper w/ rounded & centered</h2>

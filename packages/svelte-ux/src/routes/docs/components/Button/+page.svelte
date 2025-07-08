@@ -1,7 +1,4 @@
 <script lang="ts">
-  import { mdiHome, mdiMagnify, mdiMenu, mdiTrashCan } from '@mdi/js';
-  import { faUser } from '@fortawesome/free-solid-svg-icons';
-
   import {
     Button,
     Field,
@@ -12,6 +9,12 @@
     ToggleOption,
   } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  import LucideUserRound from '~icons/lucide/user-round';
+  import LucideHouse from '~icons/lucide/house';
+  import LucideSearch from '~icons/lucide/search';
+  import LucideMenu from '~icons/lucide/menu';
+  import LucideTrash2 from '~icons/lucide/trash-2';
 
   let size: 'sm' | 'md' | 'lg' = 'md';
 
@@ -71,30 +74,38 @@
 
   <div class="mt-2">
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} {loading} on:click={toggle}>Click me</Button>
+      <Button icon={LucideUserRound} {loading} on:click={toggle}>Click me</Button>
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="outline" color="primary" {loading} on:click={toggle}
+      <Button icon={LucideUserRound} variant="outline" color="primary" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill" color="primary" {loading} on:click={toggle}
+      <Button icon={LucideUserRound} variant="fill" color="primary" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill-light" color="primary" {loading} on:click={toggle}
-        >Click me</Button
+      <Button
+        icon={LucideUserRound}
+        variant="fill-light"
+        color="primary"
+        {loading}
+        on:click={toggle}>Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="fill-outline" color="primary" {loading} on:click={toggle}
-        >Click me</Button
+      <Button
+        icon={LucideUserRound}
+        variant="fill-outline"
+        color="primary"
+        {loading}
+        on:click={toggle}>Click me</Button
       >
     </Toggle>
     <Toggle let:on={loading} let:toggle>
-      <Button icon={faUser} variant="text" color="primary" {loading} on:click={toggle}
+      <Button icon={LucideUserRound} variant="text" color="primary" {loading} on:click={toggle}
         >Click me</Button
       >
     </Toggle>
@@ -167,25 +178,25 @@
     <div>
       <Button variant="outline" color="primary">default</Button>
       <Button variant="outline" color="primary" rounded>rounded</Button>
-      <Button variant="outline" color="primary" rounded-sm="full">full</Button>
+      <Button variant="outline" color="primary" rounded="full">full</Button>
       <Button variant="outline" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill" color="primary">default</Button>
       <Button variant="fill" color="primary" rounded>rounded</Button>
-      <Button variant="fill" color="primary" rounded-sm="full">full</Button>
+      <Button variant="fill" color="primary" rounded="full">full</Button>
       <Button variant="fill" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill-light" color="primary">default</Button>
       <Button variant="fill-light" color="primary" rounded>rounded</Button>
-      <Button variant="fill-light" color="primary" rounded-sm="full">full</Button>
+      <Button variant="fill-light" color="primary" rounded="full">full</Button>
       <Button variant="fill-light" color="primary" rounded={false}>false</Button>
     </div>
     <div>
       <Button variant="fill-outline" color="primary">default</Button>
       <Button variant="fill-outline" color="primary" rounded>rounded</Button>
-      <Button variant="fill-outline" color="primary" rounded-sm="full">full</Button>
+      <Button variant="fill-outline" color="primary" rounded="full">full</Button>
       <Button variant="fill-outline" color="primary" rounded={false}>false</Button>
     </div>
   </div>
@@ -222,26 +233,26 @@
 
 <Preview>
   <div class="flex items-center">
-    <Button icon={mdiTrashCan} color="danger">Delete</Button>
-    <Button icon={mdiMagnify} class="flex-row-reverse">Search</Button>
-    <Button icon={mdiHome} class="flex-col">Home</Button>
-    <Button icon={mdiHome} class="flex-col-reverse">Home</Button>
-    <Button icon={faUser}>Profile</Button>
+    <Button icon={LucideTrash2} color="danger">Delete</Button>
+    <Button icon={LucideSearch} class="flex-row-reverse">Search</Button>
+    <Button icon={LucideHouse} class="flex-col">Home</Button>
+    <Button icon={LucideHouse} class="flex-col-reverse">Home</Button>
+    <Button icon={LucideUserRound}>Profile</Button>
   </div>
 </Preview>
 
-<h2>Pass props to Icon</h2>
+<!-- <h2>Pass props to Icon</h2>
 
 <Preview>
-  <Button icon={{ data: mdiTrashCan, size: '2rem', style: 'color: crimson' }} color="danger">
+  <Button icon={{ data: icons.trash, size: '2rem', style: 'color: crimson' }} color="danger">
     Delete
   </Button>
-</Preview>
+</Preview> -->
 
 <h2>Pass class to Icon</h2>
 
 <Preview>
-  <Button icon={mdiTrashCan} classes={{ icon: 'text-danger-300 text-lg' }} color="danger">
+  <Button icon={LucideTrash2} classes={{ icon: 'text-danger-300 text-lg' }} color="danger">
     Delete
   </Button>
 </Preview>
@@ -251,21 +262,21 @@
 <h2>Icon-only button</h2>
 
 <Preview>
-  <Button icon={mdiMenu} />
+  <Button icon={LucideMenu} />
 </Preview>
 
 <h2>Icon-only size</h2>
 
 <Preview>
-  <Button icon={mdiMenu} size="sm" />
-  <Button icon={mdiMenu} size="md" />
-  <Button icon={mdiMenu} size="lg" />
+  <Button icon={LucideMenu} size="sm" />
+  <Button icon={LucideMenu} size="md" />
+  <Button icon={LucideMenu} size="lg" />
 </Preview>
 
 <h2>Icon-only button with custom padding</h2>
 
 <Preview>
-  <Button icon={mdiMenu} class="p-2" />
+  <Button icon={LucideMenu} class="p-2" />
 </Preview>
 
 <h2>Icon via url</h2>
@@ -287,27 +298,27 @@
 
 <Preview>
   <div>
-    <Button icon={mdiMenu} />
-    <Button icon={mdiMenu} color="primary" />
+    <Button icon={LucideMenu} />
+    <Button icon={LucideMenu} color="primary" />
   </div>
   <div>
-    <Button icon={mdiMenu} variant="outline" />
-    <Button icon={mdiMenu} variant="outline" color="primary" />
+    <Button icon={LucideMenu} variant="outline" />
+    <Button icon={LucideMenu} variant="outline" color="primary" />
   </div>
   <div>
-    <Button icon={mdiMenu} variant="fill" />
-    <Button icon={mdiMenu} variant="fill" color="primary" />
+    <Button icon={LucideMenu} variant="fill" />
+    <Button icon={LucideMenu} variant="fill" color="primary" />
   </div>
   <div>
-    <Button icon={mdiMenu} variant="fill-light" />
-    <Button icon={mdiMenu} variant="fill-light" color="primary" />
+    <Button icon={LucideMenu} variant="fill-light" />
+    <Button icon={LucideMenu} variant="fill-light" color="primary" />
   </div>
   <div>
-    <Button icon={mdiMenu} variant="fill-outline" />
-    <Button icon={mdiMenu} variant="fill-outline" color="primary" />
+    <Button icon={LucideMenu} variant="fill-outline" />
+    <Button icon={LucideMenu} variant="fill-outline" color="primary" />
   </div>
   <div>
-    <Button icon={mdiMenu} variant="text" />
-    <Button icon={mdiMenu} variant="text" color="primary" />
+    <Button icon={LucideMenu} variant="text" />
+    <Button icon={LucideMenu} variant="text" color="primary" />
   </div>
 </Preview>

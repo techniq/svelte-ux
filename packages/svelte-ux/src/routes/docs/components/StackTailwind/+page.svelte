@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiFilterVariant } from '@mdi/js';
+  import LucideListFilter from '~icons/lucide/list-filter';
 
   import { Button, SectionDivider } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
@@ -183,7 +183,7 @@
 
 <Preview>
   <div class="inline-grid">
-    <Button icon={mdiFilterVariant} class="col-span-full row-span-full border p-3" />
+    <Button icon={LucideListFilter} class="col-span-full row-span-full border p-3" />
     <div
       class="col-span-full row-span-full bg-danger rounded-full h-4 w-4 text-xs text-danger-content flex items-center justify-center self-start justify-self-end"
     >
@@ -196,7 +196,7 @@
 
 <Preview>
   <div class="inline-grid">
-    <Button icon={mdiFilterVariant} class="col-span-full row-span-full border p-3" />
+    <Button icon={LucideListFilter} class="col-span-full row-span-full border p-3" />
     <div
       class="col-span-full row-span-full self-start justify-self-end bg-danger rounded-full h-4 w-4 -mt-1 text-xs flex items-center justify-center border border-surface-100"
     ></div>

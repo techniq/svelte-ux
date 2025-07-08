@@ -11,6 +11,9 @@
     ? Prism.highlight(source, Prism.languages[language] ?? Prism.languages.text, language)
     : '';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     pre?: string;
@@ -18,7 +21,7 @@
   } = {};
 </script>
 
-<div class={cls('Code', 'rounded-sm', 'overflow-auto', classes.root, $$props.class)}>
+<div class={cls('Code', 'rounded-sm', 'overflow-auto', classes.root, className)}>
   {#if source}
     <div class="relative">
       <pre
@@ -27,7 +30,7 @@
           <code class={cls('language-{language}', classes.code)}>{@html highlightedSource}</code>
       </pre>
 
-      <div class="absolute top-0 right-0 p-2 z-10">
+      <div class="absolute top-1 right-0 p-2 z-10">
         <CopyButton
           value={source ?? ''}
           class="text-white/70 hover:bg-surface-100/20 py-1 backdrop-blur-md"

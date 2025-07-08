@@ -25,6 +25,9 @@
   export let persistent = false;
   export let loading: boolean | null = null;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     dialog?: string;
@@ -114,9 +117,8 @@
         'dialog rounded-sm bg-surface-100 elevation-4 overflow-y-auto pointer-events-auto relative outline-hidden',
         settingsClasses.dialog,
         classes.dialog,
-        $$props.class
+        className
       )}
-      style={$$props.style}
       in:scale|global={{ duration: 150, easing: quadIn }}
       out:scale={{ duration: 150, easing: quadIn }}
       on:introstart
@@ -126,6 +128,7 @@
       bind:this={dialogEl}
       use:focusMove={{ restoreFocus: true }}
       role="dialog"
+      {...$$restProps}
     >
       {#if loading}
         <Overlay center class="rounded-sm">

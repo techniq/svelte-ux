@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { Button, Breadcrumb, DividerDot, Icon } from 'svelte-ux';
-  import { mdiArrowRight } from '@mdi/js';
+  import { Button, Breadcrumb, DividerDot, Icon, getSettings } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let items = ['First', 'Second', 'Third'];
 
@@ -41,7 +42,7 @@
 
 <Preview>
   <Breadcrumb {items} class="gap-2">
-    <Icon slot="divider" path={mdiArrowRight} class="text-surface-content/25" />
+    <Icon slot="divider" data={icons.arrowRight} class="text-surface-content/25" />
   </Breadcrumb>
 </Preview>
 

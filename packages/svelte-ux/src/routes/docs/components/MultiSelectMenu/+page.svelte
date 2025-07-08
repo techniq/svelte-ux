@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { mdiPlus } from '@mdi/js';
-
-  import { Button, MultiSelectMenu, MultiSelectOption, ToggleButton } from 'svelte-ux';
+  import { Button, getSettings, MultiSelectMenu, MultiSelectOption, ToggleButton } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   const options = [
     { label: 'One', value: 1 },
@@ -264,7 +264,7 @@
         on:close={toggleOff}
       >
         <div slot="actions">
-          <Button color="primary" icon={mdiPlus}>Add item</Button>
+          <Button color="primary" icon={icons.plus}>Add item</Button>
         </div>
       </MultiSelectMenu>
     </ToggleButton>
@@ -290,7 +290,7 @@
         search
       >
         <div slot="actions">
-          <Button color="primary" icon={mdiPlus}>Add item</Button>
+          <Button color="primary" icon={icons.plus}>Add item</Button>
         </div>
       </MultiSelectMenu>
     </ToggleButton>

@@ -7,10 +7,12 @@
   import Overlay from './Overlay.svelte';
   import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
+  import type { IconProp } from '$lib/types/index.js';
+  import { asIconData } from '$lib/utils/icons.js';
 
   export let title: string | number | null = null;
   export let subheading: string | number | null = null;
-  export let icon: string | null = null;
+  export let icon: IconProp | null = null;
 
   /**
    * Wrap icon in Avatar
@@ -34,6 +36,9 @@
    * Remove background
    */
   export let noBackground = false;
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let classes: {
     root?: string;
@@ -64,7 +69,7 @@
     noBackground !== true && 'bg-surface-100',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   on:click
   role="listitem"
@@ -82,10 +87,20 @@
           class={cls(settingsClasses.avatar, classes.avatar)}
           {...typeof avatar === 'object' ? avatar : {}}
         >
-          <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
+          {#if typeof icon === 'function'}
+            <!-- Component, such as unplugin-icons -->
+            {@const Icon = icon}
+            <Icon class={cls(settingsClasses.icon, classes.icon)} />
+          {:else if typeof icon === 'string' || 'icon' in icon}
+            <Icon data={asIconData(icon)} class={cls(settingsClasses.icon, classes.icon)} />
+          {/if}
         </Avatar>
-      {:else}
-        <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
+      {:else if typeof icon === 'function'}
+        <!-- Component, such as unplugin-icons -->
+        {@const Icon = icon}
+        <Icon class={cls(settingsClasses.icon, classes.icon)} />
+      {:else if typeof icon === 'string' || 'icon' in icon}
+        <Icon data={asIconData(icon)} class={cls(settingsClasses.icon, classes.icon)} />
       {/if}
     {/if}
   </slot>

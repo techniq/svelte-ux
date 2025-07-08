@@ -3,34 +3,32 @@
   import { colors } from '@layerstack/tailwind';
   import { toTitleCase } from '@layerstack/utils';
 
-  import {
-    mdiInbox,
-    mdiCheckCircleOutline,
-    mdiInformationOutline,
-    mdiAlertOutline,
-    mdiAlertOctagonOutline,
-  } from '@mdi/js';
+  import LucideAlertTriangle from '~icons/lucide/alert-triangle';
+  import LucideCircleCheck from '~icons/lucide/circle-check';
+  import LucideInbox from '~icons/lucide/inbox';
+  import LucideInfo from '~icons/lucide/info';
+  import LucideOctagonAlert from '~icons/lucide/octagon-alert';
 
   import Preview from '$lib/components/Preview.svelte';
 
   function themeColorIcon(color: (typeof colors)[number]) {
     switch (color) {
       case 'accent':
-        return mdiInformationOutline;
+        return LucideInfo;
       case 'success':
-        return mdiCheckCircleOutline;
+        return LucideCircleCheck;
       case 'neutral':
-        return mdiInformationOutline;
+        return LucideInfo;
       case 'danger':
-        return mdiAlertOctagonOutline;
+        return LucideOctagonAlert;
       case 'primary':
-        return mdiInformationOutline;
+        return LucideInfo;
       case 'secondary':
-        return mdiInformationOutline;
+        return LucideInfo;
       case 'info':
-        return mdiInformationOutline;
+        return LucideInfo;
       case 'warning':
-        return mdiAlertOutline;
+        return LucideAlertTriangle;
     }
   }
 </script>
@@ -61,12 +59,7 @@
 
 <Preview>
   <div class="w-[400px]">
-    <Notification
-      title="Successfully Saved!"
-      icon={mdiCheckCircleOutline}
-      color="success"
-      closeIcon
-    />
+    <Notification title="Successfully Saved!" icon={LucideCircleCheck} color="success" closeIcon />
   </div>
 </Preview>
 
@@ -77,7 +70,7 @@
     <Notification
       title="Successfully Saved!"
       description="Anyone with a link can now view this file."
-      icon={mdiCheckCircleOutline}
+      icon={LucideCircleCheck}
       color="success"
       closeIcon
     />
@@ -99,7 +92,7 @@
     <Notification
       title="Discussion moved"
       description="Lorem ipsum dolor sit amet consectetur adipisicing elit oluptatum tenetur."
-      icon={mdiInbox}
+      icon={LucideInbox}
       actions={{ Undo: () => alert('Undo'), Dismiss: () => {} }}
       actionsPlacement="below"
       closeIcon

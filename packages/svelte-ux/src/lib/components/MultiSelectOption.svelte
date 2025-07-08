@@ -5,12 +5,15 @@
   import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
   import Button from './Button.svelte';
-  import { mdiCheck } from '@mdi/js';
+  import { getSettings } from './settings.js';
 
   export let checked: boolean;
   export let indeterminate = false;
   export let disabled = false;
   export let variant: 'checkbox' | 'checkmark' | 'fill' = 'checkbox';
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let classes: {
     root?: string;
@@ -18,6 +21,7 @@
     container?: string;
   } = {};
   const settingsClasses = getComponentClasses('MultiSelectOption');
+  const { icons } = getSettings();
 
   const dispatch = createEventDispatcher<{ change: null }>();
 </script>
@@ -28,7 +32,7 @@
     'grid grid-cols-[1fr_auto]',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   role="option"
   aria-selected={checked}
@@ -59,7 +63,7 @@
     </Checkbox>
   {:else if variant === 'checkmark'}
     <Button
-      icon={checked ? mdiCheck : 'M0'}
+      icon={checked ? icons.check : 'M0'}
       {disabled}
       class={cls(
         'px-2 text-sm font-normal text-surface-content hover:bg-surface-content/5',

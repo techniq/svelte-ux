@@ -5,10 +5,17 @@
 
   import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
-  import type { ButtonColor, ButtonRounded, ButtonSize, ButtonVariant } from '../types/index.js';
+  import type {
+    ButtonColor,
+    ButtonRounded,
+    ButtonSize,
+    ButtonVariant,
+    IconProp,
+  } from '../types/index.js';
   import { getButtonGroup } from './ButtonGroup.svelte';
-  import { asIconData, type IconInput } from '../utils/icons.js';
+  import { asIconData } from '../utils/icons.js';
   import { getComponentSettings } from './settings.js';
+  import type { ComponentProps } from 'svelte';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');
 
@@ -16,7 +23,7 @@
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
-  export let icon: IconInput = undefined;
+  export let icon: IconProp | ComponentProps<Icon> | undefined = undefined;
   export let iconOnly = icon !== undefined && !$$slots.default;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
 
@@ -26,6 +33,9 @@
   export let variant: ButtonVariant | undefined = undefined; // default in reactive groupContext below
   export let size: ButtonSize | undefined = undefined; // default in reactive groupContext below
   export let color: ButtonColor | undefined = undefined; // default in reactive groupContext below
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
@@ -53,9 +63,9 @@
       'font-medium tracking-wider whitespace-nowrap',
       iconOnly
         ? {
-            sm: 'text-xs p-1',
-            md: 'text-sm p-2',
-            lg: 'text-base p-3',
+            sm: 'text-sm p-1',
+            md: 'text-base p-2',
+            lg: 'text-lg p-3',
           }[size!]
         : {
             sm: 'text-xs px-2 py-1',
@@ -437,7 +447,7 @@
 
     settingsClasses.root,
     classes?.root,
-    $$props.class
+    className
   );
 </script>
 
@@ -449,7 +459,6 @@
   {type}
   {...$$restProps}
   class={_class}
-  style={$$props.style ?? ''}
   {disabled}
   aria-disabled={disabled ? 'true' : 'false'}
   use:multi={actions}
@@ -465,7 +474,11 @@
     </span>
   {:else if icon}
     <span in:slide={{ axis: 'x', duration: 200 }}>
-      {#if typeof icon === 'string' || 'icon' in icon}
+      {#if typeof icon === 'function'}
+        <!-- Component, such as unplugin-icons -->
+        {@const Icon = icon}
+        <Icon class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} />
+      {:else if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
         <Icon
           data={asIconData(icon)}

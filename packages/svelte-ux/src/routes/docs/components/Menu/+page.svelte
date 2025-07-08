@@ -1,8 +1,17 @@
 <script lang="ts">
-  import { mdiMagnify } from '@mdi/js';
-
-  import { Button, Dialog, Drawer, Menu, MenuItem, TextField, Toggle } from 'svelte-ux';
+  import {
+    Button,
+    Dialog,
+    Drawer,
+    getSettings,
+    Menu,
+    MenuItem,
+    TextField,
+    Toggle,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 </script>
 
 <h1>Examples</h1>
@@ -34,7 +43,7 @@
         <div class="p-2">
           <!-- Add autofocus delay to keep the opening transition smooth  -->
           <TextField
-            icon={mdiMagnify}
+            icon={icons.search}
             placeholder="Search"
             class="mb-2"
             autofocus={{ delay: 50 }}

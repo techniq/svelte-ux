@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { mdiDotsVertical } from '@mdi/js';
-
-  import { Avatar, Button, Card, Header, Settings } from 'svelte-ux';
+  import { Avatar, Button, Card, getSettings, Header, Settings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 </script>
 
 <h1>Examples</h1>
@@ -55,7 +55,7 @@
   <Card>
     <Header title="Title" subheading="Subheading" slot="header">
       <div slot="actions">
-        <Button icon={mdiDotsVertical} class="w-12 h-12" />
+        <Button icon={icons.ellipsisVertical} class="w-12 h-12" />
       </div>
     </Header>
   </Card>
@@ -70,7 +70,7 @@
         <Avatar class="bg-primary text-primary-content font-bold">A</Avatar>
       </div>
       <div slot="actions">
-        <Button icon={mdiDotsVertical} class="w-12 h-12" />
+        <Button icon={icons.ellipsisVertical} class="w-12 h-12" />
       </div>
     </Header>
   </Card>
