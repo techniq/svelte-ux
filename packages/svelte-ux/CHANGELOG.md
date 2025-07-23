@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Update dependencies ([#622](https://github.com/techniq/svelte-ux/pull/622))
+
 ## 2.0.0-next.14
 
 ### Minor Changes
