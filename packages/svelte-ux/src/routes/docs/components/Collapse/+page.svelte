@@ -3,7 +3,6 @@
 
   import { Button, Card, Collapse, getSettings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
-  import { sl } from 'zod/v4/locales';
 
   const { icons } = getSettings();
 

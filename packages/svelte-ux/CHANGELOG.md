@@ -1482,7 +1482,6 @@ Version 1.0 (Svelte 3-5 and Tailwind 3 compatible)
 - [Button] Rename "text" variant to "default" ([`4d61047`](https://github.com/techniq/svelte-ux/commit/4d6104746922808b84ff1d81b525205e53f7a930))
 
 - [ToggleGroup] Major overhaul of styling ([`ef5c2ee`](https://github.com/techniq/svelte-ux/commit/ef5c2ee9cf50a3025fcb335ff091fdf5c63f2241))
-
   - Support many variants based on accent color
   - Support style modifications including size, rounded (small/full), gap (small/px), and inset.
   - Rename `optionsContainer` to `label` and use label component.

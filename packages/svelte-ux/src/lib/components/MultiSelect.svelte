@@ -122,7 +122,7 @@
     }
   }
   // Re-filter options when `searchText` changes
-  $: searchText, updateFilteredOptions();
+  $: (searchText, updateFilteredOptions());
 
   const selection = selectionStore({ max });
   // Only "subscribe" to value changes (not `$selection`) to fix correct `value` / topological ordering.  Should be simplified with Svelte 5
