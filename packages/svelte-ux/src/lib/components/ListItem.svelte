@@ -89,16 +89,14 @@
         >
           {#if typeof icon === 'function'}
             <!-- Component, such as unplugin-icons -->
-            {@const Icon = icon}
-            <Icon class={cls(settingsClasses.icon, classes.icon)} />
+            <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
           {:else if typeof icon === 'string' || 'icon' in icon}
             <Icon data={asIconData(icon)} class={cls(settingsClasses.icon, classes.icon)} />
           {/if}
         </Avatar>
       {:else if typeof icon === 'function'}
         <!-- Component, such as unplugin-icons -->
-        {@const Icon = icon}
-        <Icon class={cls(settingsClasses.icon, classes.icon)} />
+        <Icon data={icon} class={cls(settingsClasses.icon, classes.icon)} />
       {:else if typeof icon === 'string' || 'icon' in icon}
         <Icon data={asIconData(icon)} class={cls(settingsClasses.icon, classes.icon)} />
       {/if}

@@ -302,7 +302,7 @@
 <Preview>
   <TextField label="Amount">
     <div slot="prefix">
-      <icons.currency class="size-4 text-surface-content/50 -mt-1" />
+      <Icon data={icons.currency} class="size-4 text-surface-content/50 -mt-1" />
     </div>
   </TextField>
 </Preview>
@@ -322,7 +322,7 @@
     <Preview>
       <TextField label="Ratio" align="right">
         <div slot="suffix">
-          <icons.percent class="size-4 text-surface-content/50 -mt-1 ml-1" />
+          <Icon data={icons.percent} class="size-4 text-surface-content/50 -mt-1 ml-1" />
         </div>
       </TextField>
     </Preview>
@@ -380,7 +380,7 @@
       <Button icon={icons.arrowRight} class="text-surface-content/50 p-2" />
     </div>
     <div slot="prefix">
-      <icons.currency class="size-4 text-surface-content/50 -mt-1" />
+      <Icon data={icons.currency} class="size-4 text-surface-content/50 -mt-1" />
     </div>
     <div slot="suffix" class="text-surface-content/50">usd</div>
   </TextField>
@@ -392,10 +392,10 @@
   <TextField label="Date Range">
     <div slot="prepend" class="flex items-center">
       <Button icon={icons.chevronLeft} class="text-surface-content/50 p-2" />
-      <icons.calendar class="text-surface-content/50 mr-2" />
+      <Icon data={icons.calendar} class="text-surface-content/50 mr-2" />
     </div>
-    <div slot="append" class="flex items-center">
-      <Icon data={icons.refresh} class="text-surface-content/50 mr-2" />
+    <div slot="append" class="flex items-center gap-1">
+      <Button icon={icons.refresh} class="text-surface-content/50" />
       <Button icon={icons.chevronRight} class="text-surface-content/50 p-2" />
     </div>
   </TextField>

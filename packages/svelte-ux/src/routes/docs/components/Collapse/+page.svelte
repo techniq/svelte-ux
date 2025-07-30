@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
 
-  import { Button, Card, Collapse, getSettings } from 'svelte-ux';
+  import { Button, Card, Collapse, getSettings, Icon } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const { icons } = getSettings();
@@ -181,9 +181,9 @@
       <Collapse name="Item {i + 1}">
         <svelte:fragment slot="icon" let:open>
           {#if open}
-            <icons.minus />
+            <Icon data={icons.minus} />
           {:else}
-            <icons.plus />
+            <Icon data={icons.plus} />
           {/if}
         </svelte:fragment>
         <div>

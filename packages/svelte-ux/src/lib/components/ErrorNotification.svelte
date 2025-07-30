@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from './Button.svelte';
   import Dialog from './Dialog.svelte';
+  import Icon from './Icon.svelte';
   import Notification from './Notification.svelte';
   import { getSettings } from './settings.js';
   import Toggle from './Toggle.svelte';
@@ -19,7 +20,7 @@
 <Toggle let:on={open} let:toggle>
   <Notification actionsPlacement="below" closeIcon on:close>
     <div slot="icon" class="self-start">
-      <icons.alert class="text-danger" />
+      <Icon data={icons.alert} class="text-danger" />
     </div>
     <div slot="title">{title}</div>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import LucideGroup from '~icons/lucide/group';
-  import LucideRadio from '~icons/lucide/radio';
+  import LucideGroup from '@lucide/svelte/icons/group';
+  import LucideRadio from '@lucide/svelte/icons/radio';
 
   import Button from './Button.svelte';
   import EmptyMessage from './EmptyMessage.svelte';

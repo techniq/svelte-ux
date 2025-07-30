@@ -2,6 +2,7 @@
   import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './settings.js';
+  import Icon from './Icon.svelte';
 
   export let items: TItem[] = [];
   export let divider: string | undefined = undefined;
@@ -35,8 +36,7 @@
         {#if divider}
           <div class="divider opacity-25">{divider}</div>
         {:else}
-          {@const Icon = icons.chevronRight}
-          <Icon class="divider opacity-25" />
+          <Icon data={icons.chevronRight} class="divider opacity-25" />
         {/if}
       </slot>
     {/if}

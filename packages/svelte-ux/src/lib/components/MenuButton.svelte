@@ -54,8 +54,8 @@
   {#if menuIcon}
     {#if typeof menuIcon === 'function'}
       <!-- Component, such as unplugin-icons -->
-      {@const Icon = menuIcon}
       <Icon
+        data={menuIcon}
         class={cls(
           'opacity-50 transform transition-all -mr-2 duration-300',
           open && '-rotate-180',

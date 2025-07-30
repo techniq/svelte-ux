@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, getSettings, Switch } from 'svelte-ux';
+  import { Button, getSettings, Icon, Switch } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const { icons } = getSettings();
@@ -40,14 +40,14 @@
   <div class="grid gap-2">
     <Switch let:checked>
       {#if checked}
-        <icons.check class="size-3 text-primary" />
+        <Icon data={icons.check} class="size-3 text-primary" />
       {/if}
     </Switch>
     <Switch let:checked>
       {#if checked}
-        <icons.check class="size-3 text-primary" />
+        <Icon data={icons.check} class="size-3 text-primary" />
       {:else}
-        <icons.close class="size-3 text-surface-content" />
+        <Icon data={icons.close} class="size-3 text-surface-content" />
       {/if}
     </Switch>
   </div>
@@ -60,7 +60,7 @@
     <Switch disabled />
     <Switch disabled checked />
     <Switch disabled>
-      <icons.check class="size-3 text-surface-content/50" />
+      <Icon data={icons.check} class="size-3 text-surface-content/50" />
     </Switch>
   </div>
 </Preview>

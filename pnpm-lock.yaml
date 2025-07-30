@@ -44,6 +44,9 @@ importers:
       '@layerstack/utils':
         specifier: 2.0.0-next.14
         version: 2.0.0-next.14
+      '@lucide/svelte':
+        specifier: ^0.534.0
+        version: 0.534.0(svelte@5.36.14)
       d3-array:
         specifier: ^3.2.4
         version: 3.2.4
@@ -646,6 +649,11 @@ packages:
 
   '@layerstack/utils@2.0.0-next.14':
     resolution: {integrity: sha512-1I2CS0Cwgs53W35qVg1eBdYhB/CiPvL3s0XE61b8jWkTHxgjBF65yYNgXjW74kv7WI7GsJcWMNBufPd0rnu9kA==}
+
+  '@lucide/svelte@0.534.0':
+    resolution: {integrity: sha512-XqlT0ibiEEoEGcmZLdk0RNtq1OW77OjqxXZjJE/23Wabl+2d9Pxg9AAx7+6WFv8BSf8K6im73vz3cZKYEgY9Mw==}
+    peerDependencies:
+      svelte: ^5
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -2941,6 +2949,10 @@ snapshots:
       d3-time: 3.1.0
       d3-time-format: 4.1.0
       lodash-es: 4.17.21
+
+  '@lucide/svelte@0.534.0(svelte@5.36.14)':
+    dependencies:
+      svelte: 5.36.14
 
   '@manypkg/find-root@1.1.0':
     dependencies:
