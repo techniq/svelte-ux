@@ -261,6 +261,7 @@
             href="https://discord.gg/697JhMPD3t"
             class="p-2"
             target="_blank"
+            size="lg"
           />
         </Tooltip>
 
@@ -270,6 +271,7 @@
             href="https://bsky.app/profile/techniq.dev"
             class="p-2"
             target="_blank"
+            size="lg"
           />
         </Tooltip>
 
