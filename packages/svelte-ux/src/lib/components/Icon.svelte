@@ -90,7 +90,7 @@
   <Icon
     class={cls(
       'Icon',
-      // 'icon-container _inline-block shrink-0 _align-middle _fill-current',
+      'icon-container inline-block shrink-0 align-middle',
       'size-[1.2em]', // default scale of unplugin-icons - https://github.com/unplugin/unplugin-icons?tab=readme-ov-file#options
       settingsClasses.root,
       classes.root,
