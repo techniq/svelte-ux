@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.16
+
+### Patch Changes
+
+- fix: Replace use of unplugin-icons `~icon/` imports with `@lucide/svelte` package for default icons to remove Vite configuration. Fixes #618 ([#625](https://github.com/techniq/svelte-ux/pull/625))
+
 ## 2.0.0-next.15
 
 ### Patch Changes
