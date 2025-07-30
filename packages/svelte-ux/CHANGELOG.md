@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.17
+
+### Patch Changes
+
+- fix(Icon): Restore adding `inline-block` by default ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.16
 
 ### Patch Changes
