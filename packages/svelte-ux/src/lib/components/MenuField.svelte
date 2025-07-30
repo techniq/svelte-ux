@@ -3,10 +3,11 @@
 
   import { cls } from '@layerstack/tailwind';
 
+  import Button from './Button.svelte';
   import Field from './Field.svelte';
+  import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
-  import Button from './Button.svelte';
   import type { MenuOption } from '../types/index.js';
   import { getComponentSettings, getSettings } from './settings.js';
 
@@ -92,7 +93,8 @@
   <span slot="append" class="flex items-center">
     <slot name="append" />
 
-    <icons.chevronDown
+    <Icon
+      data={icons.chevronDown}
       class={cls(
         'text-surface-content/50 mr-1 transform transition-all duration-300 pointer-events-none',
         {

@@ -9,6 +9,11 @@ import type {
 } from 'svelte/transition';
 import type { ThemeColors } from '@layerstack/tailwind';
 
+import LucideChevronDown from '@lucide/svelte/icons/chevron-down';
+
+// Unable to get `IconProps` from `@lucide/svelte`
+type LucideComponent = typeof LucideChevronDown;
+
 import Icon from '$lib/components/Icon.svelte';
 import MenuItem from '$lib/components/MenuItem.svelte';
 
@@ -39,5 +44,5 @@ export type ButtonRounded = boolean | 'full';
 export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;
 
 export type IconData = ComponentProps<Icon>['data'];
-export type IconComponent = Component<SvelteHTMLElements['svg']>;
+export type IconComponent = Component<SvelteHTMLElements['svg']> | LucideComponent;
 export type IconProp = IconComponent | IconData;

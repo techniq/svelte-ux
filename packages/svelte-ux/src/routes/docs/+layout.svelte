@@ -87,7 +87,7 @@
   {#if title}
     <div>
       <div class="inline-block text-xs font-bold text-surface-content/50 capitalize">Docs</div>
-      <icons.chevronRight class="inline-block size-4 divider opacity-25" />
+      <Icon data={icons.chevronRight} class="inline-block size-4 divider opacity-25" />
       <div class="inline-block text-xs font-bold text-primary capitalize">
         {type}
       </div>
@@ -241,7 +241,7 @@
                       class="hover:bg-surface-200 cursor-pointer"
                     >
                       <div slot="actions">
-                        <icons.chevronRight class="text-surface-content/50" />
+                        <Icon data={icons.chevronRight} class="text-surface-content/50" />
                       </div>
                     </ListItem>
                   </a>

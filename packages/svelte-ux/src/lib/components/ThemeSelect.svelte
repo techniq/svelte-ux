@@ -2,6 +2,7 @@
   import { fly } from 'svelte/transition';
 
   import Button from './Button.svelte';
+  import Icon from './Icon.svelte';
   import Kbd from './Kbd.svelte';
   import Menu from './Menu.svelte';
   import Switch from './Switch.svelte';
@@ -44,10 +45,12 @@
 {#if darkThemes.length > 1 || lightThemes.length > 1}
   <Button iconOnly on:click={() => (open = !open)}>
     <div class="grid grid-cols-1 grid-rows-1 overflow-hidden">
-      <icons.lightMode
+      <Icon
+        data={icons.lightMode}
         class="row-[1] col-[1] translate-x-0 dark:-translate-x-full transition-transform duration-300"
       />
-      <icons.darkMode
+      <Icon
+        data={icons.darkMode}
         class="row-[1] col-[1] translate-x-full dark:translate-x-0 transition-transform duration-300"
       />
     </div>
@@ -92,9 +95,9 @@
           let:checked
         >
           {#if checked}
-            <icons.darkMode class="size-3 text-primary" />
+            <Icon data={icons.darkMode} class="size-3 text-primary" />
           {:else}
-            <icons.lightMode class="size-3 text-primary" />
+            <Icon data={icons.lightMode} class="size-3 text-primary" />
           {/if}
         </Switch>
       </label>
@@ -138,10 +141,12 @@
 {:else}
   <Button iconOnly on:click={() => (open = !open)}>
     <div class="grid grid-stack overflow-hidden">
-      <icons.lightMode
+      <Icon
+        data={icons.lightMode}
         class="translate-x-0 dark:-translate-x-full transition-transform duration-300"
       />
-      <icons.darkMode
+      <Icon
+        data={icons.darkMode}
         class="translate-x-full dark:translate-x-0 transition-transform duration-300"
       />
     </div>

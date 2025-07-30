@@ -213,7 +213,7 @@
       <option value={4}>Fourth</option>
     </select>
     <span slot="append">
-      <icons.chevronDown />
+      <Icon data={icons.chevronDown} />
     </span>
   </Field>
 </Preview>

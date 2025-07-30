@@ -4,6 +4,7 @@
   import { cls } from '@layerstack/tailwind';
 
   import Button from './Button.svelte';
+  import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
   import Toggle from './Toggle.svelte';
@@ -115,7 +116,7 @@
             <span>
               <Button on:click={toggle}>
                 {$pagination.perPage}
-                <icons.chevronDown />
+                <Icon data={icons.chevronDown} />
               </Button>
 
               <Menu

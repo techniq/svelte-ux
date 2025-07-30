@@ -126,8 +126,7 @@
               <span class={cls('mr-3', rounded && !$$slots.prepend && 'ml-3')}>
                 {#if typeof icon === 'function'}
                   <!-- Component, such as unplugin-icons -->
-                  {@const Icon = icon}
-                  <Icon class="text-surface-content/50" />
+                  <Icon data={icon} class="text-surface-content/50" />
                 {:else if typeof icon === 'string' || 'icon' in icon}
                   <!-- font path/url/etc or font-awesome IconDefinition -->
                   <Icon data={asIconData(icon)} class="text-surface-content/50" />
@@ -209,12 +208,11 @@
             <slot name="append" />
 
             {#if error}
-              <icons.info class="text-danger" />
+              <Icon data={icons.info} class="text-danger" />
             {:else if iconRight}
               {#if typeof iconRight === 'function'}
                 <!-- Component, such as unplugin-icons -->
-                {@const Icon = iconRight}
-                <Icon class="text-surface-content/50" />
+                <Icon data={iconRight} class="text-surface-content/50" />
               {:else if typeof iconRight === 'string' || 'icon' in iconRight}
                 <!-- font path/url/etc or font-awesome IconDefinition -->
                 <Icon data={asIconData(iconRight)} class="text-surface-content/50" />

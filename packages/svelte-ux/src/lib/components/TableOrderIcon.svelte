@@ -3,6 +3,7 @@
   import { cls } from '@layerstack/tailwind';
 
   import { getSettings } from './settings.js';
+  import Icon from './Icon.svelte';
 
   export let order: ReturnType<typeof tableOrderStore>;
   export let column: ColumnDef;
@@ -12,7 +13,8 @@
 
 {#if $order.by && ($order.by === column.value || $order.by === column.name || $order.by === column.orderBy)}
   <span class="TableOrderIcon">
-    <icons.arrowUp
+    <Icon
+      data={icons.arrowUp}
       class={cls(
         'inline-block size-4 transition duration-100 transform',
         $order.direction === 'desc' && 'rotate-180'

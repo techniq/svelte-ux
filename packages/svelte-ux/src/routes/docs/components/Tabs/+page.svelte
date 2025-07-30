@@ -133,6 +133,7 @@
 
         <Button
           icon={icons.close}
+          size="sm"
           class="rounded-full p-0.5 hover:bg-surface-content/5"
           on:click={(e) => {
             e.stopPropagation();
@@ -148,7 +149,7 @@
         options = [...options, { label: 'New ' + newValue, value: newValue }];
       }}
     >
-      <icons.plus />
+      <Icon data={icons.plus} />
     </Tab>
 
     <svelte:fragment slot="content">

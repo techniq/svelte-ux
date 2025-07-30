@@ -2,6 +2,7 @@
   import type { ComponentProps } from 'svelte';
   import { cls, clsMerge } from '@layerstack/tailwind';
 
+  import Icon from './Icon.svelte';
   import Switch from './Switch.svelte';
 
   import { getSettings } from './settings.js';
@@ -32,20 +33,14 @@
   )}
   {...$$restProps}
 >
-  <div class="grid grid-cols-1 grid-rows-1">
-    <icons.darkMode
-      class={cls(
-        'row-[1] col-[1] size-3 text-primary opacity-0 dark:opacity-100',
-        iconClasses,
-        classes.icon
-      )}
+  <div class="grid grid-stack">
+    <Icon
+      data={icons.darkMode}
+      class={cls('size-3 text-primary opacity-0 dark:opacity-100', iconClasses, classes.icon)}
     />
-    <icons.lightMode
-      class={cls(
-        'row-[1] col-[1] size-3 text-primary opacity-100 dark:opacity-0',
-        iconClasses,
-        classes.icon
-      )}
+    <Icon
+      data={icons.lightMode}
+      class={cls('size-3 text-primary opacity-100 dark:opacity-0', iconClasses, classes.icon)}
     />
   </div>
 </Switch>

@@ -62,8 +62,7 @@
   {#if icon}
     {#if typeof icon === 'function'}
       <!-- Component, such as unplugin-icons -->
-      {@const Icon = icon}
-      <Icon class={cls('mr-3 shrink-0', settingsClasses.icon)} />
+      <Icon data={icon} class={cls('mr-3 shrink-0', settingsClasses.icon)} classes={classes.icon} />
     {:else if typeof icon === 'string' || 'icon' in icon}
       <!-- font path/url/etc or font-awesome IconDefinition -->
       <Icon

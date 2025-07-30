@@ -23,6 +23,7 @@
     "@fortawesome/fontawesome-common-types": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@iconify-json/lucide": "^1.2.58",
+    "@lucide/svelte": "^0.534.0",
     "@sveltejs/adapter-cloudflare": "^7.1.1",
     "@sveltejs/kit": "^2.25.2",
     "@sveltejs/package": "^2.4.0",

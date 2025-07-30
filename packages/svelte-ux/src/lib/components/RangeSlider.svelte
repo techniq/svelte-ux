@@ -275,7 +275,7 @@
       'transition-opacity'
     )}
   >
-    <icons.gripHorizontal class="size-4 text-primary-content" />
+    <Icon data={icons.gripHorizontal} class="size-4 text-primary-content" />
   </div>
 
   <!-- svelte-ignore a11y-no-static-element-interactions -->

@@ -476,8 +476,7 @@
     <span in:slide={{ axis: 'x', duration: 200 }}>
       {#if typeof icon === 'function'}
         <!-- Component, such as unplugin-icons -->
-        {@const Icon = icon}
-        <Icon class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} />
+        <Icon data={icon} class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} />
       {:else if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
         <Icon
@@ -485,6 +484,7 @@
           class={cls('pointer-events-none', settingsClasses.icon, classes.icon)}
         />
       {:else}
+        <!-- Icon props -->
         <Icon class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} {...icon} />
       {/if}
     </span>

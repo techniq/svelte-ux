@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Badge, Button, getSettings, NumberStepper } from 'svelte-ux';
+  import { Badge, Button, getSettings, Icon, NumberStepper } from 'svelte-ux';
 
   import LucideListFilter from '~icons/lucide/list-filter';
 
@@ -76,7 +76,7 @@
   <Badge {value} circle>
     <Button icon={LucideListFilter} variant="outline" class="p-3" />
     <div slot="value" class="bg-success text-success-content rounded-full">
-      <icons.plus />
+      <Icon data={icons.plus} />
     </div>
   </Badge>
 </Preview>
