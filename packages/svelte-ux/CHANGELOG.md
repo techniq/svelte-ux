@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.18
+
+### Patch Changes
+
+- Update deps ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- Fix(TableOfContent): No known conditions for "./elements" specifier in "svelte" package ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.17
 
 ### Patch Changes
