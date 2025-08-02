@@ -5,10 +5,17 @@
 
   import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
-  import type { ButtonColor, ButtonRounded, ButtonSize, ButtonVariant } from '../types/index.js';
+  import type {
+    ButtonColor,
+    ButtonRounded,
+    ButtonSize,
+    ButtonVariant,
+    IconProp,
+  } from '../types/index.js';
   import { getButtonGroup } from './ButtonGroup.svelte';
-  import { asIconData, type IconInput } from '../utils/icons.js';
+  import { asIconData } from '../utils/icons.js';
   import { getComponentSettings } from './settings.js';
+  import type { ComponentProps } from 'svelte';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');
 
@@ -16,7 +23,7 @@
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
-  export let icon: IconInput = undefined;
+  export let icon: IconProp | ComponentProps<Icon> | undefined = undefined;
   export let iconOnly = icon !== undefined && !$$slots.default;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
 
@@ -26,6 +33,9 @@
   export let variant: ButtonVariant | undefined = undefined; // default in reactive groupContext below
   export let size: ButtonSize | undefined = undefined; // default in reactive groupContext below
   export let color: ButtonColor | undefined = undefined; // default in reactive groupContext below
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
@@ -44,18 +54,18 @@
   $: _class = cls(
     'Button',
     'transition duration-200 ring-surface-content/60 touch-manipulation',
-    'focus:outline-none focus-visible:ring-1',
+    'focus:outline-hidden focus-visible:ring-1',
     fullWidth ? 'flex w-full' : 'inline-flex',
     loading ? 'gap-2' : 'gap-1',
-    variant === 'none' || !rounded ? '' : rounded === 'full' ? 'rounded-full' : 'rounded',
+    variant === 'none' || !rounded ? '' : rounded === 'full' ? 'rounded-full' : 'rounded-sm',
     variant !== 'none' && [
       'items-center justify-center',
       'font-medium tracking-wider whitespace-nowrap',
       iconOnly
         ? {
-            sm: 'text-xs p-1',
-            md: 'text-sm p-2',
-            lg: 'text-base p-3',
+            sm: 'text-sm p-1',
+            md: 'text-base p-2',
+            lg: 'text-lg p-3',
           }[size!]
         : {
             sm: 'text-xs px-2 py-1',
@@ -80,329 +90,329 @@
     {
       default: {
         default: [
-          'hover:[--bg-color:theme(colors.surface-content/10%)]',
-          // '[--text-color:theme(colors.surface-content)]', // inherit
-          '[--ring-color:theme(colors.surface-content/60%)]',
+          'hover:[--bg-color:var(--color-surface-content)]/10',
+          // '[--text-color:var(--color-surface-content)]', // inherit
+          '[--ring-color:var(--color-surface-content)]/60',
         ],
         primary: [
-          'hover:[--bg-color:theme(colors.primary/10%)]',
-          '[--text-color:theme(colors.primary)]',
-          '[--ring-color:theme(colors.primary/60%)]',
+          'hover:[--bg-color:var(--color-primary)]/10',
+          '[--text-color:var(--color-primary)]',
+          '[--ring-color:var(--color-primary)]/60',
         ],
         secondary: [
-          'hover:[--bg-color:theme(colors.secondary/10%)]',
-          '[--text-color:theme(colors.secondary)]',
-          '[--ring-color:theme(colors.secondary/60%)]',
+          'hover:[--bg-color:var(--color-secondary)]/10',
+          '[--text-color:var(--color-secondary)]',
+          '[--ring-color:var(--color-secondary)]/60',
         ],
         accent: [
-          'hover:[--bg-color:theme(colors.accent/10%)]',
-          '[--text-color:theme(colors.accent)]',
-          '[--ring-color:theme(colors.accent/60%)]',
+          'hover:[--bg-color:var(--color-accent)]/10',
+          '[--text-color:var(--color-accent)]',
+          '[--ring-color:var(--color-accent)]/60',
         ],
         neutral: [
-          'hover:[--bg-color:theme(colors.neutral/10%)]',
-          '[--text-color:theme(colors.neutral)]',
-          '[--ring-color:theme(colors.neutral/60%)]',
+          'hover:[--bg-color:var(--color-neutral)]/10',
+          '[--text-color:var(--color-neutral)]',
+          '[--ring-color:var(--color-neutral)]/60',
         ],
         info: [
-          'hover:[--bg-color:theme(colors.info/10%)]',
-          '[--text-color:theme(colors.info)]',
-          '[--ring-color:theme(colors.info/60%)]',
+          'hover:[--bg-color:var(--color-info)]/10',
+          '[--text-color:var(--color-info)]',
+          '[--ring-color:var(--color-info)]/60',
         ],
         success: [
-          'hover:[--bg-color:theme(colors.success/10%)]',
-          '[--text-color:theme(colors.success)]',
-          '[--ring-color:theme(colors.success/60%)]',
+          'hover:[--bg-color:var(--color-success)]/10',
+          '[--text-color:var(--color-success)]',
+          '[--ring-color:var(--color-success)]/60',
         ],
         warning: [
-          'hover:[--bg-color:theme(colors.warning/10%)]',
-          '[--text-color:theme(colors.warning)]',
-          '[--ring-color:theme(colors.warning/60%)]',
+          'hover:[--bg-color:var(--color-warning)]/10',
+          '[--text-color:var(--color-warning)]',
+          '[--ring-color:var(--color-warning)]/60',
         ],
         danger: [
-          'hover:[--bg-color:theme(colors.danger/10%)]',
-          '[--text-color:theme(colors.danger)]',
-          '[--ring-color:theme(colors.danger/60%)]',
+          'hover:[--bg-color:var(--color-danger)]/10',
+          '[--text-color:var(--color-danger)]',
+          '[--ring-color:var(--color-danger)]/60',
         ],
       },
       outline: {
         default: [
-          'hover:[--bg-color:theme(colors.surface-content/10%)]',
-          '[--border-color:theme(colors.surface-content)]',
-          '[--text-color:theme(colors.surface-content)]',
-          '[--ring-color:theme(colors.surface-content/60%)]',
+          'hover:[--bg-color:var(--color-surface-content)]/10',
+          '[--border-color:var(--color-surface-content)]',
+          '[--text-color:var(--color-surface-content)]',
+          '[--ring-color:var(--color-surface-content)]/60',
         ],
         primary: [
-          'hover:[--bg-color:theme(colors.primary/10%)]',
-          '[--border-color:theme(colors.primary)]',
-          '[--text-color:theme(colors.primary)]',
-          '[--ring-color:theme(colors.primary/60%)]',
+          'hover:[--bg-color:var(--color-primary)]/10',
+          '[--border-color:var(--color-primary)]',
+          '[--text-color:var(--color-primary)]',
+          '[--ring-color:var(--color-primary)]/60',
         ],
         secondary: [
-          'hover:[--bg-color:theme(colors.secondary/10%)]',
-          '[--border-color:theme(colors.secondary)]',
-          '[--text-color:theme(colors.secondary)]',
-          '[--ring-color:theme(colors.secondary/60%)]',
+          'hover:[--bg-color:var(--color-secondary)]/10',
+          '[--border-color:var(--color-secondary)]',
+          '[--text-color:var(--color-secondary)]',
+          '[--ring-color:var(--color-secondary)]/60',
         ],
         accent: [
-          'hover:[--bg-color:theme(colors.accent/10%)]',
-          '[--border-color:theme(colors.accent)]',
-          '[--text-color:theme(colors.accent)]',
-          '[--ring-color:theme(colors.accent/60%)]',
+          'hover:[--bg-color:var(--color-accent)]/10',
+          '[--border-color:var(--color-accent)]',
+          '[--text-color:var(--color-accent)]',
+          '[--ring-color:var(--color-accent)]/60',
         ],
         neutral: [
-          'hover:[--bg-color:theme(colors.neutral/10%)]',
-          '[--border-color:theme(colors.neutral)]',
-          '[--text-color:theme(colors.neutral)]',
-          '[--ring-color:theme(colors.neutral/60%)]',
+          'hover:[--bg-color:var(--color-neutral)]/10',
+          '[--border-color:var(--color-neutral)]',
+          '[--text-color:var(--color-neutral)]',
+          '[--ring-color:var(--color-neutral)]/60',
         ],
         info: [
-          'hover:[--bg-color:theme(colors.info/10%)]',
-          '[--border-color:theme(colors.info)]',
-          '[--text-color:theme(colors.info)]',
-          '[--ring-color:theme(colors.info/60%)]',
+          'hover:[--bg-color:var(--color-info)]/10',
+          '[--border-color:var(--color-info)]',
+          '[--text-color:var(--color-info)]',
+          '[--ring-color:var(--color-info)]/60',
         ],
         success: [
-          'hover:[--bg-color:theme(colors.success/10%)]',
-          '[--border-color:theme(colors.success)]',
-          '[--text-color:theme(colors.success)]',
-          '[--ring-color:theme(colors.success/60%)]',
+          'hover:[--bg-color:var(--color-success)]/10',
+          '[--border-color:var(--color-success)]',
+          '[--text-color:var(--color-success)]',
+          '[--ring-color:var(--color-success)]/60',
         ],
         warning: [
-          'hover:[--bg-color:theme(colors.warning/10%)]',
-          '[--border-color:theme(colors.warning)]',
-          '[--text-color:theme(colors.warning)]',
-          '[--ring-color:theme(colors.warning/60%)]',
+          'hover:[--bg-color:var(--color-warning)]/10',
+          '[--border-color:var(--color-warning)]',
+          '[--text-color:var(--color-warning)]',
+          '[--ring-color:var(--color-warning)]/60',
         ],
         danger: [
-          'hover:[--bg-color:theme(colors.danger/10%)]',
-          '[--border-color:theme(colors.danger)]',
-          '[--text-color:theme(colors.danger)]',
-          '[--ring-color:theme(colors.danger/60%)]',
+          'hover:[--bg-color:var(--color-danger)]/10',
+          '[--border-color:var(--color-danger)]',
+          '[--text-color:var(--color-danger)]',
+          '[--ring-color:var(--color-danger)]/60',
         ],
       },
       fill: {
         default: [
-          `[--bg-color:theme(colors.surface-content)]`,
-          'hover:[--bg-color:theme(colors.surface-content/80%)]',
-          '[--text-color:theme(colors.surface-200)]',
-          '[--ring-color:theme(colors.surface-content/60%)]',
+          `[--bg-color:var(--color-surface-content)]`,
+          'hover:[--bg-color:var(--color-surface-content)]/80',
+          '[--text-color:var(--color-surface-200)]',
+          '[--ring-color:var(--color-surface-content)]/60',
         ],
         primary: [
-          `[--bg-color:theme(colors.primary)]`,
-          'hover:[--bg-color:theme(colors.primary-600)]',
-          '[--text-color:theme(colors.primary-content)]',
-          '[--ring-color:theme(colors.primary/60%)]',
+          `[--bg-color:var(--color-primary)]`,
+          'hover:[--bg-color:var(--color-primary-600)]',
+          '[--text-color:var(--color-primary-content)]',
+          '[--ring-color:var(--color-primary)]/60',
         ],
         secondary: [
-          '[--bg-color:theme(colors.secondary)]',
-          'hover:[--bg-color:theme(colors.secondary-600)]',
-          '[--text-color:theme(colors.secondary-content)]',
-          '[--ring-color:theme(colors.secondary/60%)]',
+          '[--bg-color:var(--color-secondary)]',
+          'hover:[--bg-color:var(--color-secondary-600)]',
+          '[--text-color:var(--color-secondary-content)]',
+          '[--ring-color:var(--color-secondary)]/60',
         ],
         accent: [
-          '[--bg-color:theme(colors.accent)]',
-          'hover:[--bg-color:theme(colors.accent-600)]',
-          '[--text-color:theme(colors.accent-content)]',
-          '[--ring-color:theme(colors.accent/60%)]',
+          '[--bg-color:var(--color-accent)]',
+          'hover:[--bg-color:var(--color-accent-600)]',
+          '[--text-color:var(--color-accent-content)]',
+          '[--ring-color:var(--color-accent)]/60',
         ],
         neutral: [
-          '[--bg-color:theme(colors.neutral)]',
-          'hover:[--bg-color:theme(colors.neutral-600)]',
-          '[--text-color:theme(colors.neutral-content)]',
-          '[--ring-color:theme(colors.neutral/60%)]',
+          '[--bg-color:var(--color-neutral)]',
+          'hover:[--bg-color:var(--color-neutral-600)]',
+          '[--text-color:var(--color-neutral-content)]',
+          '[--ring-color:var(--color-neutral)]/60',
         ],
         info: [
-          `[--bg-color:theme(colors.info)]`,
-          'hover:[--bg-color:theme(colors.info-600)]',
-          '[--text-color:theme(colors.info-content)]',
-          '[--ring-color:theme(colors.info/60%)]',
+          `[--bg-color:var(--color-info)]`,
+          'hover:[--bg-color:var(--color-info-600)]',
+          '[--text-color:var(--color-info-content)]',
+          '[--ring-color:var(--color-info)]/60',
         ],
         success: [
-          `[--bg-color:theme(colors.success)]`,
-          'hover:[--bg-color:theme(colors.success-600)]',
-          '[--text-color:theme(colors.success-content)]',
-          '[--ring-color:theme(colors.success/60%)]',
+          `[--bg-color:var(--color-success)]`,
+          'hover:[--bg-color:var(--color-success-600)]',
+          '[--text-color:var(--color-success-content)]',
+          '[--ring-color:var(--color-success)]/60',
         ],
         warning: [
-          `[--bg-color:theme(colors.warning)]`,
-          'hover:[--bg-color:theme(colors.warning-600)]',
-          '[--text-color:theme(colors.warning-content)]',
-          '[--ring-color:theme(colors.warning/60%)]',
+          `[--bg-color:var(--color-warning)]`,
+          'hover:[--bg-color:var(--color-warning-600)]',
+          '[--text-color:var(--color-warning-content)]',
+          '[--ring-color:var(--color-warning)]/60',
         ],
         danger: [
-          `[--bg-color:theme(colors.danger)]`,
-          'hover:[--bg-color:theme(colors.danger-600)]',
-          '[--text-color:theme(colors.danger-content)]',
-          '[--ring-color:theme(colors.danger/60%)]',
+          `[--bg-color:var(--color-danger)]`,
+          'hover:[--bg-color:var(--color-danger-600)]',
+          '[--text-color:var(--color-danger-content)]',
+          '[--ring-color:var(--color-danger)]/60',
         ],
       },
       'fill-light': {
         default: [
-          '[--bg-color:theme(colors.surface-content/10%)]',
-          'hover:[--bg-color:theme(colors.surface-content/20%)]',
-          '[--text-color:theme(colors.surface-content)]',
-          '[--ring-color:theme(colors.surface-content/60%)]',
+          '[--bg-color:var(--color-surface-content)]/10',
+          'hover:[--bg-color:var(--color-surface-content)]/20',
+          '[--text-color:var(--color-surface-content)]',
+          '[--ring-color:var(--color-surface-content)]/60',
         ],
         primary: [
-          '[--bg-color:theme(colors.primary/10%)]',
-          'hover:[--bg-color:theme(colors.primary/20%)]',
-          '[--text-color:theme(colors.primary)]',
-          '[--ring-color:theme(colors.primary/60%)]',
+          '[--bg-color:var(--color-primary)]/10',
+          'hover:[--bg-color:var(--color-primary)]/20',
+          '[--text-color:var(--color-primary)]',
+          '[--ring-color:var(--color-primary)]/60',
         ],
         secondary: [
-          '[--bg-color:theme(colors.secondary/10%)]',
-          'hover:[--bg-color:theme(colors.secondary/20%)]',
-          '[--text-color:theme(colors.secondary)]',
-          '[--ring-color:theme(colors.secondary/60%)]',
+          '[--bg-color:var(--color-secondary)]/10',
+          'hover:[--bg-color:var(--color-secondary)]/20',
+          '[--text-color:var(--color-secondary)]',
+          '[--ring-color:var(--color-secondary)]/60',
         ],
         accent: [
-          '[--bg-color:theme(colors.accent/10%)]',
-          'hover:[--bg-color:theme(colors.accent/20%)]',
-          '[--text-color:theme(colors.accent)]',
-          '[--ring-color:theme(colors.secondary/60%)]',
+          '[--bg-color:var(--color-accent)]/10',
+          'hover:[--bg-color:var(--color-accent)]/20',
+          '[--text-color:var(--color-accent)]',
+          '[--ring-color:var(--color-secondary)]/60',
         ],
         neutral: [
-          '[--bg-color:theme(colors.neutral/10%)]',
-          'hover:[--bg-color:theme(colors.neutral/20%)]',
-          '[--text-color:theme(colors.neutral)]',
-          '[--ring-color:theme(colors.neutral/60%)]',
+          '[--bg-color:var(--color-neutral)]/10',
+          'hover:[--bg-color:var(--color-neutral)]/20',
+          '[--text-color:var(--color-neutral)]',
+          '[--ring-color:var(--color-neutral)]/60',
         ],
         info: [
-          '[--bg-color:theme(colors.info/10%)]',
-          'hover:[--bg-color:theme(colors.info/20%)]',
-          '[--text-color:theme(colors.info)]',
-          '[--ring-color:theme(colors.info/60%)]',
+          '[--bg-color:var(--color-info)]/10',
+          'hover:[--bg-color:var(--color-info)]/20',
+          '[--text-color:var(--color-info)]',
+          '[--ring-color:var(--color-info)]/60',
         ],
         success: [
-          '[--bg-color:theme(colors.success/10%)]',
-          'hover:[--bg-color:theme(colors.success/20%)]',
-          '[--text-color:theme(colors.success)]',
-          '[--ring-color:theme(colors.success/60%)]',
+          '[--bg-color:var(--color-success)]/10',
+          'hover:[--bg-color:var(--color-success)]/20',
+          '[--text-color:var(--color-success)]',
+          '[--ring-color:var(--color-success)]/60',
         ],
         warning: [
-          '[--bg-color:theme(colors.warning/10%)]',
-          'hover:[--bg-color:theme(colors.warning/20%)]',
-          '[--text-color:theme(colors.warning)]',
-          '[--ring-color:theme(colors.warning/60%)]',
+          '[--bg-color:var(--color-warning)]/10',
+          'hover:[--bg-color:var(--color-warning)]/20',
+          '[--text-color:var(--color-warning)]',
+          '[--ring-color:var(--color-warning)]/60',
         ],
         danger: [
-          '[--bg-color:theme(colors.danger/10%)]',
-          'hover:[--bg-color:theme(colors.danger/20%)]',
-          '[--text-color:theme(colors.danger)]',
-          '[--ring-color:theme(colors.danger/60%)]',
+          '[--bg-color:var(--color-danger)]/10',
+          'hover:[--bg-color:var(--color-danger)]/20',
+          '[--text-color:var(--color-danger)]',
+          '[--ring-color:var(--color-danger)]/60',
         ],
       },
       'fill-outline': {
         default: [
-          '[--bg-color:theme(colors.surface-content/10%)]',
-          'hover:[--bg-color:theme(colors.surface-content/20%)]',
-          '[--border-color:theme(colors.surface-content)]',
-          '[--text-color:theme(colors.surface-content)]',
-          '[--ring-color:theme(colors.surface-content/60%)]',
+          '[--bg-color:var(--color-surface-content)]/10',
+          'hover:[--bg-color:var(--color-surface-content)]/20',
+          '[--border-color:var(--color-surface-content)]',
+          '[--text-color:var(--color-surface-content)]',
+          '[--ring-color:var(--color-surface-content)]/60',
         ],
         primary: [
-          '[--bg-color:theme(colors.primary/10%)]',
-          'hover:[--bg-color:theme(colors.primary/20%)]',
-          '[--border-color:theme(colors.primary)]',
-          '[--text-color:theme(colors.primary)]',
-          '[--ring-color:theme(colors.primary/60%)]',
+          '[--bg-color:var(--color-primary)]/10',
+          'hover:[--bg-color:var(--color-primary)]/20',
+          '[--border-color:var(--color-primary)]',
+          '[--text-color:var(--color-primary)]',
+          '[--ring-color:var(--color-primary)]/60',
         ],
         secondary: [
-          '[--bg-color:theme(colors.secondary/10%)]',
-          'hover:[--bg-color:theme(colors.secondary/20%)]',
-          '[--border-color:theme(colors.secondary)]',
-          '[--text-color:theme(colors.secondary)]',
-          '[--ring-color:theme(colors.secondary/60%)]',
+          '[--bg-color:var(--color-secondary)]/10',
+          'hover:[--bg-color:var(--color-secondary)]/20',
+          '[--border-color:var(--color-secondary)]',
+          '[--text-color:var(--color-secondary)]',
+          '[--ring-color:var(--color-secondary)]/60',
         ],
         accent: [
-          '[--bg-color:theme(colors.accent/10%)]',
-          'hover:[--bg-color:theme(colors.accent/20%)]',
-          '[--border-color:theme(colors.accent)]',
-          '[--text-color:theme(colors.accent)]',
-          '[--ring-color:theme(colors.accent/60%)]',
+          '[--bg-color:var(--color-accent)]/10',
+          'hover:[--bg-color:var(--color-accent)]/20',
+          '[--border-color:var(--color-accent)]',
+          '[--text-color:var(--color-accent)]',
+          '[--ring-color:var(--color-accent)]/60',
         ],
         neutral: [
-          '[--bg-color:theme(colors.neutral/10%)]',
-          'hover:[--bg-color:theme(colors.neutral/20%)]',
-          '[--border-color:theme(colors.neutral)]',
-          '[--text-color:theme(colors.neutral)]',
-          '[--ring-color:theme(colors.neutral/60%)]',
+          '[--bg-color:var(--color-neutral)]/10',
+          'hover:[--bg-color:var(--color-neutral)]/20',
+          '[--border-color:var(--color-neutral)]',
+          '[--text-color:var(--color-neutral)]',
+          '[--ring-color:var(--color-neutral)]/60',
         ],
         info: [
-          '[--bg-color:theme(colors.info/10%)]',
-          'hover:[--bg-color:theme(colors.info/20%)]',
-          '[--border-color:theme(colors.info)]',
-          '[--text-color:theme(colors.info)]',
-          '[--ring-color:theme(colors.info/60%)]',
+          '[--bg-color:var(--color-info)]/10',
+          'hover:[--bg-color:var(--color-info)]/20',
+          '[--border-color:var(--color-info)]',
+          '[--text-color:var(--color-info)]',
+          '[--ring-color:var(--color-info)]/60',
         ],
         success: [
-          '[--bg-color:theme(colors.success/10%)]',
-          'hover:[--bg-color:theme(colors.success/20%)]',
-          '[--border-color:theme(colors.success)]',
-          '[--text-color:theme(colors.success)]',
-          '[--ring-color:theme(colors.success/60%)]',
+          '[--bg-color:var(--color-success)]/10',
+          'hover:[--bg-color:var(--color-success)]/20',
+          '[--border-color:var(--color-success)]',
+          '[--text-color:var(--color-success)]',
+          '[--ring-color:var(--color-success)]/60',
         ],
         warning: [
-          '[--bg-color:theme(colors.warning/10%)]',
-          'hover:[--bg-color:theme(colors.warning/20%)]',
-          '[--border-color:theme(colors.warning)]',
-          '[--text-color:theme(colors.warning)]',
-          '[--ring-color:theme(colors.warning/60%)]',
+          '[--bg-color:var(--color-warning)]/10',
+          'hover:[--bg-color:var(--color-warning)]/20',
+          '[--border-color:var(--color-warning)]',
+          '[--text-color:var(--color-warning)]',
+          '[--ring-color:var(--color-warning)]/60',
         ],
         danger: [
-          '[--bg-color:theme(colors.danger/10%)]',
-          'hover:[--bg-color:theme(colors.danger/20%)]',
-          '[--border-color:theme(colors.danger)]',
-          '[--text-color:theme(colors.danger)]',
-          '[--ring-color:theme(colors.danger/60%)]',
+          '[--bg-color:var(--color-danger)]/10',
+          'hover:[--bg-color:var(--color-danger)]/20',
+          '[--border-color:var(--color-danger)]',
+          '[--text-color:var(--color-danger)]',
+          '[--ring-color:var(--color-danger)]/60',
         ],
       },
       text: {
         default: [
-          '[--text-color:theme(colors.surface-content)]',
-          'hover:[--text-color:theme(colors.surface-content/80%)]',
-          '[--ring-color:theme(colors.surface-content/60%)]',
+          '[--text-color:var(--color-surface-content)]',
+          'hover:[--text-color:var(--color-surface-content)]/80',
+          '[--ring-color:var(--color-surface-content)]/60',
         ],
         primary: [
-          '[--text-color:theme(colors.primary)]',
-          'hover:[--text-color:theme(colors.primary-700)]',
-          '[--ring-color:theme(colors.primary/60%)]',
+          '[--text-color:var(--color-primary)]',
+          'hover:[--text-color:var(--color-primary-700)]',
+          '[--ring-color:var(--color-primary)]/60',
         ],
         secondary: [
-          '[--text-color:theme(colors.secondary)]',
-          'hover:[--text-color:theme(colors.secondary-700)]',
-          '[--ring-color:theme(colors.secondary/60%)]',
+          '[--text-color:var(--color-secondary)]',
+          'hover:[--text-color:var(--color-secondary-700)]',
+          '[--ring-color:var(--color-secondary)]/60',
         ],
         accent: [
-          '[--text-color:theme(colors.accent)]',
-          'hover:[--text-color:theme(colors.accent-700)]',
-          '[--ring-color:theme(colors.accent/60%)]',
+          '[--text-color:var(--color-accent)]',
+          'hover:[--text-color:var(--color-accent-700)]',
+          '[--ring-color:var(--color-accent)]/60',
         ],
         neutral: [
-          '[--text-color:theme(colors.neutral)]',
-          'hover:[--text-color:theme(colors.neutral-700)]',
-          '[--ring-color:theme(colors.neutral/60%)]',
+          '[--text-color:var(--color-neutral)]',
+          'hover:[--text-color:var(--color-neutral-700)]',
+          '[--ring-color:var(--color-neutral)]/60',
         ],
         info: [
-          '[--text-color:theme(colors.info)]',
-          'hover:[--text-color:theme(colors.info-700)]',
-          '[--ring-color:theme(colors.info/60%)]',
+          '[--text-color:var(--color-info)]',
+          'hover:[--text-color:var(--color-info-700)]',
+          '[--ring-color:var(--color-info)]/60',
         ],
         success: [
-          '[--text-color:theme(colors.success)]',
-          'hover:[--text-color:theme(colors.success-700)]',
-          '[--ring-color:theme(colors.success/60%)]',
+          '[--text-color:var(--color-success)]',
+          'hover:[--text-color:var(--color-success-700)]',
+          '[--ring-color:var(--color-success)]/60',
         ],
         warning: [
-          '[--text-color:theme(colors.warning)]',
-          'hover:[--text-color:theme(colors.warning-700)]',
-          '[--ring-color:theme(colors.warning/60%)]',
+          '[--text-color:var(--color-warning)]',
+          'hover:[--text-color:var(--color-warning-700)]',
+          '[--ring-color:var(--color-warning)]/60',
         ],
         danger: [
-          '[--text-color:theme(colors.danger)]',
-          'hover:[--text-color:theme(colors.danger-700)]',
-          '[--ring-color:theme(colors.danger/60%)]',
+          '[--text-color:var(--color-danger)]',
+          'hover:[--text-color:var(--color-danger-700)]',
+          '[--ring-color:var(--color-danger)]/60',
         ],
       },
       none: {
@@ -437,7 +447,7 @@
 
     settingsClasses.root,
     classes?.root,
-    $$props.class
+    className
   );
 </script>
 
@@ -449,7 +459,6 @@
   {type}
   {...$$restProps}
   class={_class}
-  style={$$props.style ?? ''}
   {disabled}
   aria-disabled={disabled ? 'true' : 'false'}
   use:multi={actions}
@@ -465,13 +474,17 @@
     </span>
   {:else if icon}
     <span in:slide={{ axis: 'x', duration: 200 }}>
-      {#if typeof icon === 'string' || 'icon' in icon}
+      {#if typeof icon === 'function'}
+        <!-- Component, such as unplugin-icons -->
+        <Icon data={icon} class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} />
+      {:else if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
         <Icon
           data={asIconData(icon)}
           class={cls('pointer-events-none', settingsClasses.icon, classes.icon)}
         />
       {:else}
+        <!-- Icon props -->
         <Icon class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} {...icon} />
       {/if}
     </span>

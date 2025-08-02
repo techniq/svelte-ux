@@ -1,21 +1,29 @@
 <script lang="ts">
-  import {
-    mdiAccount,
-    mdiCheck,
-    mdiDecagramOutline,
-    mdiLoading,
-    mdiDownload,
-    mdiHeart,
-    mdiCircleMedium,
-    mdiArrowRight,
-    mdiOpenInNew,
-    mdiMenuUp,
-    mdiMenuDown,
-  } from '@mdi/js';
+  import LucideArrowUpRight from '~icons/lucide/arrow-up-right';
+  import LucideCircleSmall from '~icons/lucide/circle-small';
+  import LucideDownload from '~icons/lucide/download';
+  import LucideHeart from '~icons/lucide/heart';
+  import LucideRefreshCw from '~icons/lucide/refresh-cw';
+  import LucideUser from '~icons/lucide/user.svelte';
+  import LucideUserRaw from '~icons/lucide/user.svelte?raw';
+
+  const LucideUserSvg = LucideUserRaw as unknown as string;
+
   import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-  import { Button, ButtonGroup, Icon, Tooltip } from 'svelte-ux';
+  import { Button, ButtonGroup, getSettings, Icon, Tooltip } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+  import Blockquote from '$docs/Blockquote.svelte';
+
+  const { icons } = getSettings();
+
+  // path examples
+  const userPath = 'M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2 M12 3a4 4 0 1 0 0 8 4 4 0 1 0 0-8';
+  const decagramOutline =
+    'm23 12l-2.44 2.78l.34 3.68l-3.61.82l-1.89 3.18L12 21l-3.4 1.47l-1.89-3.18l-3.61-.82l.34-3.69L1 12l2.44-2.79l-.34-3.68l3.61-.81L8.6 1.54L12 3l3.4-1.46l1.89 3.18l3.61.82l-.34 3.68zm-2.67 0L18.5 9.89l.24-2.79L16 6.5l-1.42-2.43L12 5.18L9.42 4.07L8 6.5l-2.74.59l.24 2.79L3.67 12l1.83 2.1l-.24 2.8l2.74.6l1.42 2.43L12 18.81l2.58 1.11L16 17.5l2.74-.61l-.24-2.79z';
+  const check = 'M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59z';
+  const menuDown = 'm7 10l5 5l5-5z';
+  const menuUp = 'm7 15l5-5l5 5z';
 </script>
 
 <svelte:head>
@@ -27,45 +35,50 @@
 
 <h1>Examples</h1>
 
-<div class="grid grid-cols-[1fr,auto] items-center gap-2">
-  <h2>Material Design icons</h2>
-
-  <ButtonGroup variant="fill-light" color="primary" size="sm">
-    <Button
-      href="https://pictogrammers.com/library/mdi/"
-      target="_blank"
-      class="flex-row-reverse"
-      icon={mdiOpenInNew}
-    >
-      Icons
-    </Button>
-  </ButtonGroup>
-</div>
+<h2>Path data</h2>
 
 <Preview>
-  <Icon data={mdiAccount} />
-  <Icon
-    svg={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'}
-  />
-  <Icon svgUrl="https://api.iconify.design/mdi:account.svg" />
-  <Icon>
-    <svg width="32" height="32" viewBox="0 0 24 24">
-      <path
-        fill="currentColor"
-        d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"
-      />
-    </svg>
-  </Icon>
+  <Icon data={userPath} />
+  <Icon data={userPath} classes={{ path: 'fill-none stroke-current stroke-2' }} />
 </Preview>
 
-<div class="grid grid-cols-[1fr,auto] items-center gap-2">
+<h2>Svg string</h2>
+
+<Preview>
+  <Icon svg={LucideUserSvg} />
+</Preview>
+
+<h2>Svg url</h2>
+
+<Preview>
+  <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" />
+</Preview>
+
+<h2>Svg element</h2>
+
+<Preview>
+  <Icon>{@html LucideUserSvg}</Icon>
+</Preview>
+
+<h2>Component</h2>
+
+<Preview>
+  <Icon data={LucideUser} />
+</Preview>
+
+<Blockquote
+  >Typically you will use the component directly, but it can be helpful when passing as a prop or
+  part of a structure, such as a menu item</Blockquote
+>
+
+<div class="grid grid-cols-[1fr_auto] items-center gap-2">
   <h2>Font Awesome icons</h2>
   <ButtonGroup variant="fill-light" color="primary" size="sm">
     <Button
       href="https://fontawesome.com/icons"
       target="_blank"
       class="flex-row-reverse"
-      icon={mdiOpenInNew}
+      icon={LucideArrowUpRight}
     >
       Icons
     </Button>
@@ -76,7 +89,7 @@
   <Icon data={faUser} />
 </Preview>
 
-<div class="grid grid-cols-[1fr,auto] items-center gap-2">
+<div class="grid grid-cols-[1fr_auto] items-center gap-2">
   <h2>Material Symbols font</h2>
 
   <ButtonGroup variant="fill-light" color="primary" size="sm">
@@ -84,7 +97,7 @@
       href="https://fonts.google.com/icons"
       target="_blank"
       class="flex-row-reverse"
-      icon={mdiOpenInNew}
+      icon={LucideArrowUpRight}
     >
       Icons
     </Button>
@@ -92,7 +105,7 @@
       href="https://developers.google.com/fonts/docs/material_symbols"
       target="_blank"
       class="flex-row-reverse"
-      icon={mdiOpenInNew}
+      icon={LucideArrowUpRight}
     >
       Docs
     </Button>
@@ -113,44 +126,37 @@
 <h2>Sizes</h2>
 
 <Preview>
-  <Icon data={mdiAccount} size="8px" />
-  <Icon data={mdiAccount} size="1em" />
-  <Icon data={mdiAccount} size="1.5em" />
-  <Icon data={mdiAccount} size="2em" />
-  <Icon data={mdiAccount} size="2.5em" />
-  <Icon data={mdiAccount} size="3em" />
-  <Icon data={mdiAccount} size="64px" />
-  <Icon svgUrl="https://api.iconify.design/mdi:account.svg" size="64px" />
+  <Icon data={LucideUserSvg} size="8px" />
+  <Icon data={LucideUserSvg} size="1em" />
+  <Icon data={LucideUserSvg} size="1.5em" />
+  <Icon data={LucideUserSvg} size="2em" />
+  <Icon data={LucideUserSvg} size="2.5em" />
+  <Icon data={LucideUserSvg} size="3em" />
+  <Icon data={LucideUserSvg} size="64px" />
+  <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" size="64px" />
 </Preview>
 
 <h2>Color</h2>
 
 <Preview>
-  <Icon data={mdiAccount} class="text-danger" />
-  <Icon data={mdiAccount} class="text-primary" />
-  <Icon data={mdiAccount} class="text-success" />
-  <Icon data={mdiAccount} class="text-surface-content/50" />
-  <Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="text-danger" />
-  <Icon
-    svg={'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>'}
-    class="fill-primary"
-  />
-  <Icon
-    svgUrl="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/user.svg"
-    class="text-success"
-  />
-  <Icon data={mdiAccount} style="color:red" />
+  <Icon data={LucideUserSvg} class="text-danger" />
+  <Icon data={LucideUserSvg} class="text-primary" />
+  <Icon data={LucideUserSvg} class="text-success" />
+  <Icon data={LucideUserSvg} class="text-surface-content/50" />
+  <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" class="text-danger" />
+  <Icon svg={LucideUserSvg} class="text-primary" />
+  <Icon data={LucideUserSvg} style="color:red" />
 </Preview>
 
 <h2>Multiple paths</h2>
 
 <Preview>
   <Icon
-    path={[mdiDecagramOutline, mdiCheck]}
+    path={[decagramOutline, check]}
     classes={{ path: ['', 'text-primary scale-50 origin-center'] }}
   />
   <Icon
-    path={[mdiMenuUp, mdiMenuDown]}
+    path={[menuUp, menuDown]}
     classes={{ path: ['translate-y-[-4px]', 'translate-y-[4px] text-primary'] }}
   />
 </Preview>
@@ -158,44 +164,35 @@
 <h2>Rotate / Scale / Flip</h2>
 
 <Preview>
-  <Icon data={mdiArrowRight} class="-rotate-45" />
-  <Icon data={mdiArrowRight} class="scale-75" />
-  <Icon data={mdiArrowRight} class="-scale-x-100" />
-  <Icon data={mdiAccount} class="-scale-y-100" />
-  <Icon svgUrl="https://api.iconify.design/mdi:account.svg" class="-scale-y-100" />
+  <Icon data={icons.arrowRight} class="-rotate-45" />
+  <Icon data={icons.arrowRight} class="scale-75" />
+  <Icon data={icons.arrowRight} class="-scale-x-100" />
+  <Icon data={LucideUser} class="-scale-y-100" />
+  <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" class="-scale-y-100" />
 </Preview>
 
 <h2>Animation</h2>
 
 <Preview>
-  <Icon data={mdiLoading} class="animate-spin" />
-  <Icon data={mdiHeart} class="animate-pulse" />
-  <Icon data={mdiCircleMedium} class="animate-ping" />
-  <Icon data={mdiDownload} class="animate-bounce" />
+  <Icon data={LucideRefreshCw} class="animate-spin" />
+  <Icon data={LucideHeart} class="animate-pulse" />
+  <Icon data={LucideCircleSmall} class="animate-ping" />
+  <Icon data={LucideDownload} class="animate-bounce" />
 </Preview>
 
 <h2>with Tooltip</h2>
 
 <Preview>
-  <Tooltip title="User">
-    <Icon data={mdiAccount} />
+  <Tooltip title="User" offset={2}>
+    <Icon data={userPath} />
   </Tooltip>
-  <Tooltip title="User">
-    <Icon svgUrl="https://api.iconify.design/mdi:account.svg" />
+  <Tooltip title="User" offset={2}>
+    <Icon svgUrl="https://api.iconify.design/lucide:user-round.svg" />
   </Tooltip>
-  <Tooltip title="User">
-    <Icon
-      svg={'<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>'}
-    />
+  <Tooltip title="User" offset={2}>
+    <Icon svg={LucideUserSvg} />
   </Tooltip>
-  <Tooltip title="User">
-    <Icon>
-      <svg width="32" height="32" viewBox="0 0 24 24">
-        <path
-          fill="currentColor"
-          d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"
-        />
-      </svg>
-    </Icon>
+  <Tooltip title="User" offset={2}>
+    <Icon>{@html LucideUserSvg}</Icon>
   </Tooltip>
 </Preview>

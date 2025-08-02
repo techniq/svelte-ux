@@ -1,21 +1,24 @@
 <script lang="ts">
-  import { mdiArrowUp } from '@mdi/js';
-
   import type { tableOrderStore, ColumnDef } from '@layerstack/svelte-table';
   import { cls } from '@layerstack/tailwind';
 
-  import Icon from '../components/Icon.svelte';
+  import { getSettings } from './settings.js';
+  import Icon from './Icon.svelte';
 
   export let order: ReturnType<typeof tableOrderStore>;
   export let column: ColumnDef;
+
+  const { icons } = getSettings();
 </script>
 
 {#if $order.by && ($order.by === column.value || $order.by === column.name || $order.by === column.orderBy)}
   <span class="TableOrderIcon">
     <Icon
-      data={mdiArrowUp}
-      size="1rem"
-      class={cls('transition duration-100 transform', $order.direction === 'desc' && 'rotate-180')}
+      data={icons.arrowUp}
+      class={cls(
+        'inline-block size-4 transition duration-100 transform',
+        $order.direction === 'desc' && 'rotate-180'
+      )}
     />
   </span>
 {/if}

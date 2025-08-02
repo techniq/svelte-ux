@@ -1,14 +1,15 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
   import {
-    addYears,
-    subYears,
-    isSameYear,
-    isWithinInterval,
-    startOfYear,
-    endOfYear,
-  } from 'date-fns';
-  import { type DisabledDate, type SelectedDate, PeriodType } from '@layerstack/utils';
+    type DisabledDate,
+    type SelectedDate,
+    PeriodType,
+    intervalOffset,
+    isSameInterval,
+    startOfInterval,
+    endOfInterval,
+    isDateWithin,
+  } from '@layerstack/utils';
   import { getMinSelectedDate, getMaxSelectedDate } from '@layerstack/utils/date';
 
   import Button from './Button.svelte';
@@ -29,14 +30,14 @@
     minYear ??
     (minDate
       ? minDate.getFullYear()
-      : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
+      : intervalOffset('year', getMinSelectedDate(selected) || new Date(), -2).getFullYear());
 
   let maxYear: number;
   $: maxYear =
     maxYear ??
     (maxDate
       ? maxDate.getFullYear()
-      : addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+      : intervalOffset('year', getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
 
   $: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i) ?? [];
 
@@ -47,13 +48,13 @@
     return disabledDates instanceof Function
       ? disabledDates(date)
       : disabledDates instanceof Date
-        ? isSameYear(date, disabledDates)
+        ? isSameInterval('year', date, disabledDates)
         : disabledDates instanceof Array
-          ? disabledDates.some((d) => isSameYear(date, d))
+          ? disabledDates.some((d) => isSameInterval('year', date, d))
           : disabledDates instanceof Object
-            ? isWithinInterval(date, {
-                start: startOfYear(disabledDates.from),
-                end: endOfYear(disabledDates.to || disabledDates.from),
+            ? isDateWithin(date, {
+                start: startOfInterval('year', disabledDates.from),
+                end: endOfInterval('year', disabledDates.to || disabledDates.from),
               })
             : false;
   };

@@ -1,9 +1,19 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
-  import { mdiChevronDown } from '@mdi/js';
 
-  import { Button, ButtonGroup, Dialog, Drawer, Menu, MenuItem, ToggleButton } from 'svelte-ux';
+  import {
+    Button,
+    ButtonGroup,
+    Dialog,
+    Drawer,
+    getSettings,
+    Menu,
+    MenuItem,
+    ToggleButton,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 </script>
 
 <h1>Examples</h1>
@@ -83,7 +93,7 @@
     <ToggleButton
       let:on={open}
       let:toggleOff
-      icon={mdiChevronDown}
+      icon={icons.chevronDown}
       iconOnly
       rounded
       class="px-1"

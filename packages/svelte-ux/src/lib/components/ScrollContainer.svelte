@@ -7,8 +7,11 @@
   function scrollIntoView(node: HTMLElement) {
     return (options?: Parameters<typeof node.scrollIntoView>['0']) => node.scrollIntoView(options);
   }
+
+  let className: string | undefined = undefined;
+  export { className as class };
 </script>
 
-<div bind:this={node} class={$$props.class} style={$$props.style}>
+<div bind:this={node} class={className} {...$$restProps}>
   <slot scrollIntoView={scrollIntoView(node)} />
 </div>

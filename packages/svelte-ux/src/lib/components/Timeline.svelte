@@ -17,6 +17,9 @@
   export function getTimeline() {
     return getContext<TimelineContext | undefined>(timelineKey);
   }
+
+  let className: string | undefined = undefined;
+  export { className as class };
 </script>
 
 <script lang="ts">
@@ -47,6 +50,9 @@
   /** Snap point to start */
   export let snapPoint = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     event?: ComponentProps<TimelineEvent>['classes'];
@@ -68,7 +74,7 @@
     vertical && 'flex-col timeline-vertical',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <slot {data}>

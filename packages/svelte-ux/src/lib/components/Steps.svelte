@@ -35,6 +35,9 @@
   /** Align vertically (default: horizontal) */
   export let vertical: boolean = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     item?: ComponentProps<Step>['classes'];
@@ -53,7 +56,7 @@
     vertical ? 'grid-flow-row' : 'grid-flow-col',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <slot {data}>

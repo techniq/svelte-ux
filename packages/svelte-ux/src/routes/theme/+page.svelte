@@ -1,6 +1,4 @@
-<script lang="ts">
-  import { mdiChevronDown, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
-
+<!-- <script lang="ts">
   import {
     Button,
     ButtonGroup,
@@ -214,7 +212,7 @@
 </script>
 
 <main class="p-4 grid gap-5">
-  <div class="grid sm:grid-cols-[1fr,1fr,auto,auto,auto] gap-3">
+  <div class="grid sm:grid-cols-[1fr_1fr_auto_auto_auto] gap-3">
     <SelectField
       label="Light theme"
       options={lightThemes}
@@ -258,7 +256,7 @@
 
       <Toggle let:on={open} let:toggle let:toggleOff>
         <div class="grid">
-          <Button icon={mdiChevronDown} on:click={toggle} rounded class="px-1" />
+          <Button icon={icons.chevronDown} on:click={toggle} rounded class="px-1" />
           <Menu {open} on:close={toggleOff} placement="bottom-start">
             <MenuItem
               on:click={() => {
@@ -360,7 +358,7 @@
   </div>
 
   <div>
-    <div class="grid grid-cols-[1fr,auto] border-b pb-1 mb-2 font-semibold text-xl">
+    <div class="grid grid-cols-[1fr_auto] border-b pb-1 mb-2 font-semibold text-xl">
       Theme preview
 
       <Switch
@@ -372,15 +370,15 @@
         let:checked
       >
         {#if checked}
-          <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
+          <Icon data={icons.darkMode} size=".8rem" class="text-primary" />
         {:else}
-          <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
+          <Icon data={icons.lightMode} size=".8rem" class="text-primary" />
         {/if}
       </Switch>
     </div>
 
     <div
-      class="bg-surface-100 border rounded py-2 px-3"
+      class="bg-surface-100 border rounded-sm py-2 px-3"
       style:color={previewTheme?.['color-scheme'] === 'dark' ? 'white' : 'black'}
       use:styleProps={previewTheme ? processThemeColors(previewTheme, 'hsl') : {}}
     >
@@ -525,6 +523,8 @@
 </main>
 
 <style lang="postcss">
+  @reference "../app.css";
+
   .swatch {
     @apply rounded-lg overflow-hidden border;
   }
@@ -537,4 +537,4 @@
   .shade span {
     @apply bg-black/10 rounded px-2 text-white;
   }
-</style>
+</style> -->

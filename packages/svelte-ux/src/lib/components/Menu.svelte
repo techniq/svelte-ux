@@ -28,6 +28,9 @@
   export let explicitClose = false;
   export let moveFocus = true;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     menu?: string;
@@ -64,22 +67,22 @@
   {offset}
   {matchWidth}
   {resize}
-  {open}
+  bind:open
   class={cls(
     'Menu',
-    'bg-surface-100 rounded shadow border overflow-auto',
+    'bg-surface-100 rounded-sm shadow-sm border overflow-auto',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
-  style={$$props.style}
   on:close
   let:close
+  {...$$restProps}
 >
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
   <menu
-    class={cls('menu-items outline-none max-h-screen', settingsClasses.menu, classes.menu)}
+    class={cls('menu-items outline-hidden max-h-screen', settingsClasses.menu, classes.menu)}
     bind:this={menuItemsEl}
     on:click={onClick}
     on:mouseup={(e) => {

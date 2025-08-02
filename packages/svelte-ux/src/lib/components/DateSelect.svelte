@@ -3,8 +3,12 @@
     TODO:
       - [ ] Set max-height / overflow on MonthListByYear, YearList
   */
-  import { startOfMonth as startOfMonthFunc } from 'date-fns';
-  import { PeriodType, type DisabledDate, type SelectedDate } from '@layerstack/utils';
+  import {
+    PeriodType,
+    type DisabledDate,
+    type SelectedDate,
+    startOfInterval,
+  } from '@layerstack/utils';
 
   import Month from './Month.svelte';
   import MonthListByYear from './MonthListByYear.svelte';
@@ -20,7 +24,10 @@
   export let disabledDates: DisabledDate | undefined = undefined;
 
   // @ts-expect-error
-  $: startOfMonth = selected?.[activeDate] ? startOfMonthFunc(selected[activeDate]) : undefined;
+  $: startOfMonth = selected?.[activeDate]
+    ? // @ts-expect-error
+      startOfInterval('month', selected[activeDate])
+    : undefined;
 </script>
 
 {#if periodType === PeriodType.Month || periodType === PeriodType.Quarter}

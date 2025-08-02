@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { addDays } from 'date-fns';
-  import { mdiCalendarStart, mdiCalendarEnd } from '@mdi/js';
-
   import { Button, DateField, getSettings } from 'svelte-ux';
+  import { intervalOffset } from '@layerstack/utils';
+
+  import LucideCalendarArrowDown from '~icons/lucide/calendar-arrow-down';
+  import LucideCalendarArrowUp from '~icons/lucide/calendar-arrow-up';
+
   import Preview from '$lib/components/Preview.svelte';
 
   const { localeSettings } = getSettings();
@@ -32,13 +34,13 @@
   <Button on:click={() => (value = new Date())}>
     {$localeSettings.dictionary.Date.PeriodDay.Current}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), -1))}>
+  <Button on:click={() => (value = intervalOffset('day', new Date(), -1))}>
     {$localeSettings.dictionary.Date.PeriodDay.Last}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), -7))}>
+  <Button on:click={() => (value = intervalOffset('day', new Date(), -7))}>
     {$localeSettings.dictionary.Date.PeriodWeek.Last}
   </Button>
-  <Button on:click={() => (value = addDays(new Date(), 7))}>
+  <Button on:click={() => (value = intervalOffset('day', new Date(), 7))}>
     <!-- TODO: Add to dictionary -->
     Next week
   </Button>
@@ -66,8 +68,8 @@
 
 <Preview>
   <div class="grid gap-2">
-    <DateField label="Start date" icon={mdiCalendarStart} />
-    <DateField label="End date" icon={mdiCalendarEnd} />
+    <DateField label="Start date" icon={LucideCalendarArrowDown} />
+    <DateField label="End date" icon={LucideCalendarArrowUp} />
   </div>
 </Preview>
 

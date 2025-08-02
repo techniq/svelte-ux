@@ -67,7 +67,7 @@
   </Gooey>
 </Preview>
 
-<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+<div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Rounded text background</h2>
   <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
 </div>
@@ -76,7 +76,7 @@
   <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9} composite="atop">
     <div
       contenteditable="true"
-      class="inline bg-surface-100 box-decoration-clone text-xl leading-7 px-2 py-1 outline-none"
+      class="inline bg-surface-100 box-decoration-clone text-xl leading-7 px-2 py-1 outline-hidden"
     >
       This is an example of a simple headline<br />or text with rounded corners<br />using a gooey
       SVG filter.<br />You can edit me!
@@ -92,12 +92,12 @@
   <a href="https://codepen.io/ines" target="_blank">Ines Montani</a>
 </Blockquote>
 
-<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+<div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Orbiting glowing dot</h2>
   <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
 </div>
 
-<Preview class="bg-gradient-radial from-neutral-600 to-neutral-800">
+<Preview class="bg-radial from-neutral-600 to-neutral-800">
   <div class="grid grid-stack place-items-center" style:--orbit-radius="75px">
     <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9}>
       <div class="w-[300px] h-[300px] grid grid-stack place-items-center">
@@ -126,12 +126,12 @@
   <a href="https://codepen.io/hostsamurai" target="_blank">Lou</a>
 </Blockquote>
 
-<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+<div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Scanning glowing dot</h2>
   <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={13} class="mb-1" />
 </div>
 
-<Preview class="bg-gradient-radial from-neutral-600 to-neutral-800 text-center">
+<Preview class="bg-radial from-neutral-600 to-neutral-800 text-center">
   <div class="relative inline-block">
     <Gooey blur={gooeyBlur} alphaPixel={19} alphaShift={-9}>
       <div class="flex gap-8">
@@ -161,7 +161,7 @@
   <a href="https://codepen.io/hostsamurai" target="_blank">Lou</a>
 </Blockquote>
 
-<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+<div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Converging dots</h2>
   <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={10} class="mb-1" />
 </div>
@@ -181,7 +181,7 @@
   </Gooey>
 </Preview>
 
-<div class="grid grid-cols-[1fr,auto] gap-2 items-end">
+<div class="grid grid-cols-[1fr_auto] gap-2 items-end">
   <h2>Gooey mouse</h2>
   <RangeField label="blur: " labelPlacement="left" bind:value={gooeyBlur} max={10} class="mb-1" />
 </div>

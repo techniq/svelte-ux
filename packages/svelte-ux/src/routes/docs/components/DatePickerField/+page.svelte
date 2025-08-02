@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiCalendar } from '@mdi/js';
+  import LucideCalendar from '~icons/lucide/calendar.svelte';
 
   import { Button, DatePickerField } from 'svelte-ux';
   import { PeriodType } from '@layerstack/utils';
@@ -26,13 +26,13 @@
 <h2>Icon</h2>
 
 <Preview>
-  <DatePickerField icon={mdiCalendar} bind:value />
+  <DatePickerField icon={LucideCalendar} bind:value />
 </Preview>
 
 <h2>Label</h2>
 
 <Preview>
-  <DatePickerField label="Date of Birth" icon={mdiCalendar} bind:value />
+  <DatePickerField label="Date of Birth" icon={LucideCalendar} bind:value />
 </Preview>
 
 <h2>Stepper w/ default (day)</h2>

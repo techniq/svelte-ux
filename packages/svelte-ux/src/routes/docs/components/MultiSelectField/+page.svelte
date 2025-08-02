@@ -1,9 +1,17 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
-  import { mdiPlus } from '@mdi/js';
 
-  import { Button, Drawer, MultiSelectField, MultiSelectOption, ToggleButton } from 'svelte-ux';
+  import {
+    Button,
+    Drawer,
+    getSettings,
+    MultiSelectField,
+    MultiSelectOption,
+    ToggleButton,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   const options = [
     { label: 'One', value: 1 },
@@ -87,7 +95,7 @@
     <svelte:fragment slot="beforeOptions" let:selection>
       {#if selection.isMaxSelected()}
         <div
-          class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded mb-1"
+          class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded-sm mb-1"
           transition:slide
         >
           Maximum selection reached
@@ -136,7 +144,7 @@
     maintainOrder
   >
     <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
+      <Button color="primary" icon={icons.plus}>Add item</Button>
     </div>
   </MultiSelectField>
 </Preview>
@@ -157,7 +165,7 @@
 <Preview>
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)}>
     <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
+      <Button color="primary" icon={icons.plus}>Add item</Button>
     </div>
   </MultiSelectField>
 </Preview>

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 
   import Field from './Field.svelte';
   import Button from './Button.svelte';
@@ -9,7 +8,7 @@
 
   const { classes: settingsClasses, defaults } = getComponentSettings('RangeField');
 
-  const { format: formatUtil } = getSettings();
+  const { format: formatUtil, icons } = getSettings();
 
   export let value = 0;
   export let min = 0;
@@ -26,7 +25,7 @@
 <Field let:id classes={{ input: 'my-1' }} {...restProps}>
   <span slot="prepend">
     <Button
-      icon={mdiChevronLeft}
+      icon={icons.chevronLeft}
       on:click={() => (value -= value > min ? step : 0)}
       class="mr-2"
       size="sm"
@@ -44,7 +43,7 @@
 
   <span slot="append">
     <Button
-      icon={mdiChevronRight}
+      icon={icons.chevronRight}
       on:click={() => (value += value < max ? step : 0)}
       class="ml-2"
       size="sm"

@@ -1,9 +1,8 @@
 <script lang="ts" generics="TItem">
-  import { mdiChevronRight } from '@mdi/js';
-
-  import Icon from './Icon.svelte';
   import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
+  import { getSettings } from './settings.js';
+  import Icon from './Icon.svelte';
 
   export let items: TItem[] = [];
   export let divider: string | undefined = undefined;
@@ -11,6 +10,7 @@
   let className: string | undefined = undefined;
   export { className as class };
 
+  const { icons } = getSettings();
   const settingsClasses = getComponentClasses('Breadcrumb');
 
   $: displayItems = items?.filter((x) => x != null) ?? [];
@@ -36,7 +36,7 @@
         {#if divider}
           <div class="divider opacity-25">{divider}</div>
         {:else}
-          <Icon data={mdiChevronRight} class="divider opacity-25" />
+          <Icon data={icons.chevronRight} class="divider opacity-25" />
         {/if}
       </slot>
     {/if}

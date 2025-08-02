@@ -1,18 +1,14 @@
 <script lang="ts">
-  import {
-    addDays,
-    subDays,
-    isAfter,
-    isSameDay,
-    startOfWeek,
-    endOfWeek,
-    addMonths,
-    startOfMonth,
-  } from 'date-fns';
-
   import { Month } from 'svelte-ux';
   import type { DateRange } from '@layerstack/utils/dateRange';
   import Preview from '$lib/components/Preview.svelte';
+  import {
+    intervalOffset,
+    isDateAfter,
+    isSameInterval,
+    startOfInterval,
+    endOfInterval,
+  } from '@layerstack/utils';
 
   let selected: Date | null = null;
   let selectedArr: Date[] = [];
@@ -44,7 +40,13 @@
 <h2>Disabled days w/ array</h2>
 
 <Preview>
-  <Month disabledDates={[subDays(new Date(), 2), new Date(), addDays(new Date(), 2)]} />
+  <Month
+    disabledDates={[
+      intervalOffset('day', new Date(), -2),
+      new Date(),
+      intervalOffset('day', new Date(), 2),
+    ]}
+  />
 </Preview>
 
 <h2>Disabled days w/ range</h2>
@@ -52,8 +54,8 @@
 <Preview>
   <Month
     disabledDates={{
-      from: subDays(new Date(), 2),
-      to: addDays(new Date(), 2),
+      from: intervalOffset('day', new Date(), -2),
+      to: intervalOffset('day', new Date(), 2),
     }}
   />
 </Preview>
@@ -61,7 +63,7 @@
 <h2>Disabled days w/ function</h2>
 
 <Preview>
-  <Month disabledDates={(date) => isAfter(date, new Date())} />
+  <Month disabledDates={(date) => isDateAfter(date, new Date())} />
 </Preview>
 
 <h2>Selected w/ single</h2>
@@ -73,13 +75,24 @@
 <h2>Selected w/ array</h2>
 
 <Preview>
-  <Month selected={[subDays(new Date(), 2), new Date(), addDays(new Date(), 2)]} />
+  <Month
+    selected={[
+      intervalOffset('day', new Date(), -2),
+      new Date(),
+      intervalOffset('day', new Date(), 2),
+    ]}
+  />
 </Preview>
 
 <h2>Selected w/ range</h2>
 
 <Preview>
-  <Month selected={{ from: subDays(new Date(), 2), to: addDays(new Date(), 2) }} />
+  <Month
+    selected={{
+      from: intervalOffset('day', new Date(), -2),
+      to: intervalOffset('day', new Date(), 2),
+    }}
+  />
 </Preview>
 
 <h2>Selected state w/ single</h2>
@@ -100,8 +113,8 @@
     selected={selectedArr}
     on:dateChange={(e) => {
       const date = e.detail;
-      if (selectedArr.some((d) => isSameDay(d, date))) {
-        selectedArr = selectedArr.filter((d) => !isSameDay(d, date));
+      if (selectedArr.some((d) => isSameInterval('day', d, date))) {
+        selectedArr = selectedArr.filter((d) => !isSameInterval('day', d, date));
       } else {
         selectedArr = [...selectedArr, date];
       }
@@ -119,16 +132,16 @@
       const newSelectedRange = { ...selectedRange };
       if (selectedRange.from === null) {
         newSelectedRange.from = date;
-      } else if (isSameDay(date, selectedRange.from)) {
+      } else if (isSameInterval('day', date, selectedRange.from)) {
         newSelectedRange.from = null;
       } else if (selectedRange.to === null) {
-        if (isAfter(date, selectedRange.from)) {
+        if (isDateAfter(date, selectedRange.from)) {
           newSelectedRange.to = date;
         } else {
           newSelectedRange.to = selectedRange.from;
           newSelectedRange.from = date;
         }
-      } else if (isSameDay(date, selectedRange.to)) {
+      } else if (isSameInterval('day', date, selectedRange.to)) {
         newSelectedRange.to = null;
       } else {
         newSelectedRange.from = date;
@@ -146,7 +159,7 @@
     selected={selectedWeek}
     on:dateChange={(e) => {
       const date = e.detail;
-      selectedWeek = { from: startOfWeek(date), to: endOfWeek(date) };
+      selectedWeek = { from: startOfInterval('week', date), to: endOfInterval('week', date) };
     }}
   />
 </Preview>
@@ -154,7 +167,7 @@
 <h2>Selected state w/ multi-month</h2>
 
 <Preview>
-  <div class="grid grid-cols-[1fr,1fr] gap-10">
+  <div class="grid grid-cols-[1fr_1fr] gap-10">
     <div>
       <Month
         selected={selectedMultiMonth}
@@ -163,16 +176,16 @@
           const newSelectedRange = { ...selectedMultiMonth };
           if (selectedMultiMonth.from === null) {
             newSelectedRange.from = date;
-          } else if (isSameDay(date, selectedMultiMonth.from)) {
+          } else if (isSameInterval('day', date, selectedMultiMonth.from)) {
             newSelectedRange.from = null;
           } else if (selectedMultiMonth.to === null) {
-            if (isAfter(date, selectedMultiMonth.from)) {
+            if (isDateAfter(date, selectedMultiMonth.from)) {
               newSelectedRange.to = date;
             } else {
               newSelectedRange.to = selectedMultiMonth.from;
               newSelectedRange.from = date;
             }
-          } else if (isSameDay(date, selectedMultiMonth.to)) {
+          } else if (isSameInterval('day', date, selectedMultiMonth.to)) {
             newSelectedRange.to = null;
           } else {
             newSelectedRange.from = date;
@@ -185,22 +198,22 @@
     <div>
       <Month
         selected={selectedMultiMonth}
-        startOfMonth={startOfMonth(addMonths(new Date(), 1))}
+        startOfMonth={startOfInterval('month', intervalOffset('month', new Date(), 1))}
         on:dateChange={(e) => {
           const date = e.detail;
           const newSelectedRange = { ...selectedMultiMonth };
           if (selectedMultiMonth.from === null) {
             newSelectedRange.from = date;
-          } else if (isSameDay(date, selectedMultiMonth.from)) {
+          } else if (isSameInterval('day', date, selectedMultiMonth.from)) {
             newSelectedRange.from = null;
           } else if (selectedMultiMonth.to === null) {
-            if (isAfter(date, selectedMultiMonth.from)) {
+            if (isDateAfter(date, selectedMultiMonth.from)) {
               newSelectedRange.to = date;
             } else {
               newSelectedRange.to = selectedMultiMonth.from;
               newSelectedRange.from = date;
             }
-          } else if (isSameDay(date, selectedMultiMonth.to)) {
+          } else if (isSameInterval('day', date, selectedMultiMonth.to)) {
             newSelectedRange.to = null;
           } else {
             newSelectedRange.from = date;

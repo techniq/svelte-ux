@@ -22,6 +22,9 @@
   /** controls the focus for the light source. The bigger the value the brighter the light */
   export let specularExponent = 120;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
     root?: string;
@@ -78,7 +81,7 @@
 <div
   style:filter="url(#{filterId})"
   {...$$restProps}
-  class={cls('inline-block', settingsClasses.root, classes?.root, $$props.class)}
+  class={cls('inline-block', settingsClasses.root, classes?.root, className)}
   bind:this={wrapperEl}
 >
   <slot />

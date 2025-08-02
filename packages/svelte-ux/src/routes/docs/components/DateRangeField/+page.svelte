@@ -1,15 +1,14 @@
 <script lang="ts">
-  import { subDays } from 'date-fns';
-  import { mdiCalendarRange } from '@mdi/js';
-
   import { DateRangeField } from 'svelte-ux';
-  import { PeriodType } from '@layerstack/utils';
+  import { intervalOffset, PeriodType } from '@layerstack/utils';
+
+  import LucideCalendarRange from '~icons/lucide/calendar-range';
 
   import Preview from '$lib/components/Preview.svelte';
 
   let today = new Date();
   let value = {
-    from: subDays(today, 3),
+    from: intervalOffset('day', today, -3),
     to: today,
     periodType: PeriodType.Day,
   };
@@ -56,10 +55,53 @@
   <DateRangeField bind:value periodTypes={[PeriodType.Day]} getPeriodTypePresets={() => []} />
 </Preview>
 
+<h2>Quick Presets</h2>
+
+<Preview>
+  <DateRangeField
+    bind:value
+    quickPresets={[
+      { label: 'Today', value: { from: today, to: today, periodType: PeriodType.Day } },
+      {
+        label: 'Yesterday',
+        value: {
+          from: intervalOffset('day', today, -1),
+          to: intervalOffset('day', today, -1),
+          periodType: PeriodType.Day,
+        },
+      },
+      {
+        label: 'Last 7 days',
+        value: { from: intervalOffset('day', today, -7), to: today, periodType: PeriodType.Day },
+      },
+      {
+        label: 'Last 30 days',
+        value: { from: intervalOffset('day', today, -30), to: today, periodType: PeriodType.Day },
+      },
+      {
+        label: 'Last 6 months',
+        value: {
+          from: intervalOffset('month', today, -6),
+          to: today,
+          periodType: PeriodType.Month,
+        },
+      },
+      {
+        label: 'Last year',
+        value: {
+          from: intervalOffset('year', today, -1),
+          to: today,
+          periodType: PeriodType.CalendarYear,
+        },
+      },
+    ]}
+  />
+</Preview>
+
 <h2>Icon</h2>
 
 <Preview>
-  <DateRangeField bind:value icon={mdiCalendarRange} />
+  <DateRangeField bind:value icon={LucideCalendarRange} />
 </Preview>
 
 <h2>Stepper</h2>
@@ -71,7 +113,7 @@
 <h2>Stepper w/ icon</h2>
 
 <Preview>
-  <DateRangeField bind:value stepper icon={mdiCalendarRange} />
+  <DateRangeField bind:value stepper icon={LucideCalendarRange} />
 </Preview>
 
 <h2>Stepper w/ rounded & centered</h2>

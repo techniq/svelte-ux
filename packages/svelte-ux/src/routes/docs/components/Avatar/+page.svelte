@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Avatar, Icon } from 'svelte-ux';
-  import { mdiAccount } from '@mdi/js';
+  import LucideUserRound from '~icons/lucide/user-round';
 
   import Preview from '$lib/components/Preview.svelte';
 </script>
@@ -36,13 +36,13 @@
 <h2>Icon (prop)</h2>
 
 <Preview>
-  <Avatar class="bg-primary text-primary-content" icon={mdiAccount} />
+  <Avatar class="bg-primary text-primary-content" icon={LucideUserRound} />
 </Preview>
 
 <h2>Icon (slot)</h2>
 
 <Preview>
   <Avatar class="bg-primary">
-    <Icon data={mdiAccount} class="text-primary-content" />
+    <Icon data={LucideUserRound} class="text-primary-content" />
   </Avatar>
 </Preview>

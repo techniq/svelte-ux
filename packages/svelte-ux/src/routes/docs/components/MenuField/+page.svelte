@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { mdiContentCopy, mdiContentCut, mdiContentPaste, mdiMagnify, mdiRefresh } from '@mdi/js';
-
-  import { Button, MenuField, MenuItem, TextField } from 'svelte-ux';
+  import { Button, getSettings, MenuField, MenuItem, TextField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   const options = [
     { label: 'Cut', value: 'cut' },
@@ -11,9 +11,9 @@
   ];
 
   const optionsWithIcons = [
-    { label: 'Cut', value: 'cut', icon: mdiContentCut },
-    { label: 'Copy', value: 'copy', icon: mdiContentCopy },
-    { label: 'Paste', value: 'paste', icon: mdiContentPaste },
+    { label: 'Cut', value: 'cut', icon: icons.cut },
+    { label: 'Copy', value: 'copy', icon: icons.copy },
+    { label: 'Paste', value: 'paste', icon: icons.paste },
   ];
 
   const optionsWithGroup = [
@@ -56,7 +56,7 @@
 <h2>icon</h2>
 
 <Preview>
-  <MenuField {options} icon={mdiMagnify} />
+  <MenuField {options} icon={icons.search} />
 </Preview>
 
 <h2>option icons</h2>
@@ -82,7 +82,7 @@
 <Preview>
   <MenuField {options} menuProps={{ explicitClose: true }} let:options let:setValue let:close>
     <div class="p-2">
-      <TextField icon={mdiMagnify} placeholder="Search" />
+      <TextField icon={icons.search} placeholder="Search" />
     </div>
     <menu>
       {#each options as option}
@@ -118,7 +118,7 @@
 <Preview>
   <MenuField {options}>
     <div slot="append">
-      <Button icon={mdiRefresh} class="p-2 text-surface-content/50" />
+      <Button icon={icons.refresh} class="p-2 text-surface-content/50" />
     </div>
   </MenuField>
 </Preview>

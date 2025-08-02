@@ -1,5 +1,7 @@
 <script lang="ts">
   import { Card, TableOfContents } from 'svelte-ux';
+
+  import IconChevronRight from '~icons/lucide/chevron-right';
   import Preview from '$lib/components/Preview.svelte';
 </script>
 
@@ -46,4 +48,43 @@ Let's build some example TableOfContents for the following masterpiece:
 
 <Preview>
   <TableOfContents element="#epic-novel" maxDepth={2} />
+</Preview>
+
+<h2>List item indention</h2>
+
+<Preview>
+  <TableOfContents element="#epic-novel" itemIndent={12} />
+</Preview>
+
+<h2>List item indention with line</h2>
+
+<Preview>
+  <TableOfContents element="#epic-novel" itemIndent={12} classes={{ ul: 'border-l' }} />
+</Preview>
+
+<h2>Link indention with line</h2>
+
+<Preview>
+  <TableOfContents
+    element="#epic-novel"
+    linkIndent={12}
+    classes={{ a: 'border-l data-active:border-primary data-active:text-primary' }}
+  />
+</Preview>
+
+<h2>Bullet list</h2>
+
+<Preview>
+  <TableOfContents element="#epic-novel" itemIndent={12} classes={{ ul: 'list-disc' }} />
+</Preview>
+
+<h2>Link slot</h2>
+
+<Preview>
+  <TableOfContents element="#epic-novel" itemIndent={12}>
+    <div slot="link" class="flex items-center gap-1" let:node>
+      <IconChevronRight class="text-surface-content/50 -ml-4" />
+      {@html node.name}
+    </div>
+  </TableOfContents>
 </Preview>
