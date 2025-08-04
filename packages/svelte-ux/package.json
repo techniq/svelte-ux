@@ -34,7 +34,7 @@
     "@vitest/coverage-v8": "^3.0.7",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.24",
-    "marked": "^15.0.7",
+    "marked": "^16.0.0",
     "mdsvex": "^0.12.3",
     "posthog-js": "^1.223.4",
     "prettier": "^3.5.2",
