@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-feature(NumberStepper): Add slots to passthrough prefix and suffix to the NumberStepper component
+feat(NumberStepper): Add slots to passthrough prefix and suffix to the NumberStepper component
