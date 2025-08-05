@@ -34,6 +34,7 @@
   actions={(node) => [selectOnFocus(node)]}
   {...$$restProps}
 >
+
   <div slot="prepend">
     <Button
       icon={mdiMinus}
@@ -42,6 +43,8 @@
       disabled={min != null && value <= min}
     />
   </div>
+  <div slot="prefix"><slot name="prefix"/></div>
+  <div slot="suffix"><slot name="suffix"/></div>
   <div slot="append">
     <Button
       icon={mdiPlus}
