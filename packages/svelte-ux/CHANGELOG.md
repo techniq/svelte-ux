@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.7
+
+### Patch Changes
+
+- feat(NumberStepper): Add slots to passthrough prefix and suffix to the NumberStepper component ([#629](https://github.com/techniq/svelte-ux/pull/629))
+
 ## 1.0.6
 
 ### Patch Changes
