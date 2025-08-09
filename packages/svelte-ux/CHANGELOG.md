@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.19
+
+### Patch Changes
+
+- feat(SelectField|MultiSelect|MultiSelectField|MultiSelectMenu): Added (beforeOptions/afterOptions) slots. ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix(Drawer/Dialog): open/close events firing on mount and unrelated updates. Now events are emitted only on actual state transitions by tracking the previous open value, preventing unintended closes and focus jumps. (#632) ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.18
 
 ### Patch Changes
