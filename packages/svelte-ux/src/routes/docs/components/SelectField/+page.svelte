@@ -11,6 +11,8 @@
     State,
     TextField,
     Toggle,
+    ToggleGroup,
+    ToggleOption,
     type MenuOption,
   } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
@@ -69,6 +71,16 @@
   let loading = false;
 
   let value = 3;
+
+  let selectedStr: 'any' | 'even' | 'odds' = 'any';
+
+  // Filter options based on toggle selection
+  $: optionsFiltered =
+    selectedStr === 'even'
+      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
+      : selectedStr === 'odds'
+        ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
+        : options;
 </script>
 
 <h1>Examples</h1>
@@ -436,7 +448,6 @@
     </Form>
   </Toggle>
 </Preview>
-
 <h2>`actions` slot (menu)</h2>
 
 <Preview>
@@ -486,6 +497,43 @@
           </Dialog>
         </Form>
       </Toggle>
+    </div>
+  </SelectField>
+</Preview>
+
+<h2>`beforeOptions` slot (menu)</h2>
+
+<Preview>
+  <SelectField options={optionsFiltered} bind:value menuProps={{ explicitClose: true }}>
+    <div slot="beforeOptions" class="p-2 border-b" on:click|stopPropagation let:hide role="none">
+      <ToggleGroup
+        bind:value={selectedStr}
+        classes={{ options: 'justify-start h-10' }}
+        rounded="full"
+        inset
+      >
+        <ToggleOption value="any">Any</ToggleOption>
+        <ToggleOption value="even">Evens</ToggleOption>
+        <ToggleOption value="odds">Odds</ToggleOption>
+      </ToggleGroup>
+    </div>
+  </SelectField>
+</Preview>
+<h2>`afterOptions` slot (menu)</h2>
+
+<Preview>
+  <SelectField options={optionsFiltered} bind:value menuProps={{ explicitClose: true }}>
+    <div slot="afterOptions" class="p-2 border-t" on:click|stopPropagation let:hide role="none">
+      <ToggleGroup
+        bind:value={selectedStr}
+        classes={{ options: 'justify-start h-10' }}
+        rounded="full"
+        inset
+      >
+        <ToggleOption value="any">Any</ToggleOption>
+        <ToggleOption value="even">Evens</ToggleOption>
+        <ToggleOption value="odds">Odds</ToggleOption>
+      </ToggleGroup>
     </div>
   </SelectField>
 </Preview>

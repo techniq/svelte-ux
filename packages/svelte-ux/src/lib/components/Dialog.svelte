@@ -69,10 +69,14 @@
     }
   }
 
-  $: if (open) {
-    dispatch('open');
-  } else {
-    dispatch('close');
+  let _wasOpen = open;
+  $: if (open !== _wasOpen) {
+    if (open) {
+      dispatch('open');
+    } else if (_wasOpen) {
+      dispatch('close');
+    }
+    _wasOpen = open;
   }
 </script>
 
