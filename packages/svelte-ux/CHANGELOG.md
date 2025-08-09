@@ -138,6 +138,20 @@
 
 - fix(Progress): Fix `TypeError: Failed to set the 'value' property on 'HTMLProgressElement': The provided double value is non-finite.` ([`6c2efa2`](https://github.com/techniq/svelte-ux/commit/6c2efa2d6d5b1a7ccf2b99c1826bc1232c51d2cc))
 
+## 1.0.8
+
+### Patch Changes
+
+- Fixed (Drawer/Dialog) open/close events firing on mount and unrelated updates. Now events are emitted only on actual state transitions by tracking the previous open value, preventing unintended closes and focus jumps. ([#632](https://github.com/techniq/svelte-ux/pull/632))
+  Added (beforeOptions/afterOptions) slots to the (SelectField, MultiSelect, MultiSelectField, MultiSelectMenu) components.
+  Updated docs examples (beforeOptions/afterOptions).
+
+## 1.0.7
+
+### Patch Changes
+
+- feat(NumberStepper): Add slots to passthrough prefix and suffix to the NumberStepper component ([#629](https://github.com/techniq/svelte-ux/pull/629))
+
 ## 1.0.6
 
 ### Patch Changes
