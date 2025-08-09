@@ -2,7 +2,7 @@
   import { slide } from 'svelte/transition';
   import { mdiPlus } from '@mdi/js';
 
-  import { Button, Drawer, MultiSelectField, MultiSelectOption, ToggleButton } from 'svelte-ux';
+  import { Button, Drawer, MultiSelectField, MultiSelectOption, ToggleButton, ToggleGroup, ToggleOption } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const options = [
@@ -18,6 +18,15 @@
   }));
 
   let value: number[] | undefined = [3];
+
+  // Filters (Any/Evens/Odds) for demos below
+  let msfSelectedStr: 'any' | 'even' | 'odds' = 'any';
+  $: msfOptionsFiltered =
+    msfSelectedStr === 'even'
+      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
+      : msfSelectedStr === 'odds'
+      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
+      : options;
 </script>
 
 <h1>Examples</h1>
@@ -113,6 +122,8 @@
   />
 </Preview>
 
+
+
 <h2>Immediately apply changes (no actions) w/ maintainOrder</h2>
 
 <Preview>
@@ -173,6 +184,42 @@
     </div>
   </MultiSelectField>
 </Preview>
+
+
+
+<h2>beforeOptions slot</h2>
+
+<Preview>
+  <MultiSelectField options={msfOptionsFiltered} {value} on:change={(e) => (value = e.detail.value)}>
+    <svelte:fragment slot="beforeOptions">
+      <div class="p-2 border-b">
+        <ToggleGroup bind:value={msfSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+          <ToggleOption value="any">Any</ToggleOption>
+          <ToggleOption value="even">Evens</ToggleOption>
+          <ToggleOption value="odds">Odds</ToggleOption>
+        </ToggleGroup>
+      </div>
+    </svelte:fragment>
+  </MultiSelectField>
+  
+</Preview>
+
+<h2>afterOptions slot</h2>
+
+<Preview>
+  <MultiSelectField options={msfOptionsFiltered} {value} on:change={(e) => (value = e.detail.value)}>
+    <svelte:fragment slot="afterOptions">
+      <div class="p-2 border-t">
+        <ToggleGroup bind:value={msfSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+          <ToggleOption value="any">Any</ToggleOption>
+          <ToggleOption value="even">Evens</ToggleOption>
+          <ToggleOption value="odds">Odds</ToggleOption>
+        </ToggleGroup>
+      </div>
+    </svelte:fragment>
+  </MultiSelectField>
+</Preview>
+
 
 <h2>within Drawer</h2>
 

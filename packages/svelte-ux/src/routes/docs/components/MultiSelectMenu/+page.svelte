@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mdiPlus } from '@mdi/js';
 
-  import { Button, MultiSelectMenu, MultiSelectOption, ToggleButton } from 'svelte-ux';
+  import { Button, MultiSelectMenu, MultiSelectOption, ToggleButton, ToggleGroup, ToggleOption } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const options = [
@@ -17,6 +17,15 @@
   }));
 
   let value = [3];
+
+  // Filters (Any/Evens/Odds) for demos below
+  let msmSelectedStr: 'any' | 'even' | 'odds' = 'any';
+  $: msmOptionsFiltered =
+    msmSelectedStr === 'even'
+      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
+      : msmSelectedStr === 'odds'
+      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
+      : options;
 </script>
 
 <h1>Examples</h1>
@@ -91,7 +100,6 @@
     </ToggleButton>
   </div>
 </Preview>
-
 <h2>search</h2>
 
 <Preview>
@@ -296,6 +304,73 @@
     </ToggleButton>
   </span>
 </Preview>
+
+
+
+<h2>beforeOptions slot</h2>
+
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        options={msmOptionsFiltered}
+        {value}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+        classes={{ menu: 'w-[360px]' }}
+        search
+      >
+        <svelte:fragment slot="beforeOptions">
+          <div class="p-2 border-b">
+            <ToggleGroup bind:value={msmSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+              <ToggleOption value="any">Any</ToggleOption>
+              <ToggleOption value="even">Evens</ToggleOption>
+              <ToggleOption value="odds">Odds</ToggleOption>
+            </ToggleGroup>
+          </div>
+        </svelte:fragment>
+      </MultiSelectMenu>
+    </ToggleButton>
+  </span>
+</Preview>
+
+<h2>afterOptions slot</h2>
+
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        options={msmOptionsFiltered}
+        {value}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+        classes={{ menu: 'w-[360px]' }}
+        search
+      >
+        <svelte:fragment slot="afterOptions">
+          <div class="p-2 border-t">
+            <ToggleGroup bind:value={msmSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+              <ToggleOption value="any">Any</ToggleOption>
+              <ToggleOption value="even">Evens</ToggleOption>
+              <ToggleOption value="odds">Odds</ToggleOption>
+            </ToggleGroup>
+          </div>
+        </svelte:fragment>
+      </MultiSelectMenu>
+    </ToggleButton>
+  </span>
+</Preview>
+
 
 <h2>option slot</h2>
 
