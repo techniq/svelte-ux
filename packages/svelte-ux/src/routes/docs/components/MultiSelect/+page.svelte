@@ -34,8 +34,8 @@
     msSelectedStr === 'even'
       ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
       : msSelectedStr === 'odds'
-      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
-      : options;
+        ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
+        : options;
 </script>
 
 <h1>Examples</h1>
@@ -196,17 +196,25 @@
   </div>
 </Preview>
 
-
-
 <h2>beforeOptions slot</h2>
 
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect options={msOptionsFiltered} {value} on:change={(e) => (value = e.detail.value)} search>
+    <MultiSelect
+      options={msOptionsFiltered}
+      {value}
+      on:change={(e) => (value = e.detail.value)}
+      search
+    >
       <svelte:fragment slot="beforeOptions" let:selection>
         <div class="p-2 border-b">
-          <ToggleGroup bind:value={msSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+          <ToggleGroup
+            bind:value={msSelectedStr}
+            classes={{ options: 'justify-start h-10' }}
+            rounded="full"
+            inset
+          >
             <ToggleOption value="any">Any</ToggleOption>
             <ToggleOption value="even">Evens</ToggleOption>
             <ToggleOption value="odds">Odds</ToggleOption>
@@ -222,10 +230,20 @@
 <Preview>
   {value.length} selected
   <div class="flex flex-col max-h-[360px] overflow-auto">
-    <MultiSelect options={msOptionsFiltered} {value} on:change={(e) => (value = e.detail.value)} search>
+    <MultiSelect
+      options={msOptionsFiltered}
+      {value}
+      on:change={(e) => (value = e.detail.value)}
+      search
+    >
       <svelte:fragment slot="afterOptions" let:selection>
         <div class="p-2 border-t">
-          <ToggleGroup bind:value={msSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+          <ToggleGroup
+            bind:value={msSelectedStr}
+            classes={{ options: 'justify-start h-10' }}
+            rounded="full"
+            inset
+          >
             <ToggleOption value="any">Any</ToggleOption>
             <ToggleOption value="even">Evens</ToggleOption>
             <ToggleOption value="odds">Odds</ToggleOption>

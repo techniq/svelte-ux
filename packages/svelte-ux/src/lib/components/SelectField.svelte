@@ -79,7 +79,7 @@
   export let matchWidth = true;
   export let resize = true;
   export let disableTransition = false;
-    export let menuProps: ComponentProps<Menu> | undefined = undefined;
+  export let menuProps: ComponentProps<Menu> | undefined = undefined;
 
   $: filteredOptions = options ?? [];
   let searchText = '';
@@ -238,9 +238,9 @@
 
   function onChange(e: ComponentEvents<TextField>['change']) {
     logger.debug('onChange');
-  searchText = e.detail.inputValue as string;
-  dispatch('inputChange', searchText);
-  show();
+    searchText = e.detail.inputValue as string;
+    dispatch('inputChange', searchText);
+    show();
   }
 
   function onFocus() {
@@ -257,8 +257,10 @@
       fe.relatedTarget instanceof HTMLElement &&
       !menuOptionsEl?.contains(fe.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
       fe.relatedTarget !== menuOptionsEl?.offsetParent && // click on scroll bar
-  // Allow focus to move into auxiliary slot areas (beforeOptions, afterOptions, actions)
-  !fe.relatedTarget.closest('menu > [slot=actions], menu > [slot=beforeOptions], menu > [slot=afterOptions]') && // click on action / before / after item
+      // Allow focus to move into auxiliary slot areas (beforeOptions, afterOptions, actions)
+      !fe.relatedTarget.closest(
+        'menu > [slot=actions], menu > [slot=beforeOptions], menu > [slot=afterOptions]'
+      ) && // click on action / before / after item
       !selectFieldEl?.contains(fe.relatedTarget) && // click within <SelectField> (ex. toggleIcon)
       fe.relatedTarget !== selectFieldEl // click on SelectField itself
     ) {

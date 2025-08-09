@@ -1,7 +1,14 @@
 <script lang="ts">
   import { mdiPlus } from '@mdi/js';
 
-  import { Button, MultiSelectMenu, MultiSelectOption, ToggleButton, ToggleGroup, ToggleOption } from 'svelte-ux';
+  import {
+    Button,
+    MultiSelectMenu,
+    MultiSelectOption,
+    ToggleButton,
+    ToggleGroup,
+    ToggleOption,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const options = [
@@ -24,8 +31,8 @@
     msmSelectedStr === 'even'
       ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
       : msmSelectedStr === 'odds'
-      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
-      : options;
+        ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
+        : options;
 </script>
 
 <h1>Examples</h1>
@@ -305,8 +312,6 @@
   </span>
 </Preview>
 
-
-
 <h2>beforeOptions slot</h2>
 
 <Preview>
@@ -327,7 +332,12 @@
       >
         <svelte:fragment slot="beforeOptions">
           <div class="p-2 border-b">
-            <ToggleGroup bind:value={msmSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+            <ToggleGroup
+              bind:value={msmSelectedStr}
+              classes={{ options: 'justify-start h-10' }}
+              rounded="full"
+              inset
+            >
               <ToggleOption value="any">Any</ToggleOption>
               <ToggleOption value="even">Evens</ToggleOption>
               <ToggleOption value="odds">Odds</ToggleOption>
@@ -359,7 +369,12 @@
       >
         <svelte:fragment slot="afterOptions">
           <div class="p-2 border-t">
-            <ToggleGroup bind:value={msmSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+            <ToggleGroup
+              bind:value={msmSelectedStr}
+              classes={{ options: 'justify-start h-10' }}
+              rounded="full"
+              inset
+            >
               <ToggleOption value="any">Any</ToggleOption>
               <ToggleOption value="even">Evens</ToggleOption>
               <ToggleOption value="odds">Odds</ToggleOption>
@@ -370,7 +385,6 @@
     </ToggleButton>
   </span>
 </Preview>
-
 
 <h2>option slot</h2>
 

@@ -2,7 +2,15 @@
   import { slide } from 'svelte/transition';
   import { mdiPlus } from '@mdi/js';
 
-  import { Button, Drawer, MultiSelectField, MultiSelectOption, ToggleButton, ToggleGroup, ToggleOption } from 'svelte-ux';
+  import {
+    Button,
+    Drawer,
+    MultiSelectField,
+    MultiSelectOption,
+    ToggleButton,
+    ToggleGroup,
+    ToggleOption,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
   const options = [
@@ -25,8 +33,8 @@
     msfSelectedStr === 'even'
       ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
       : msfSelectedStr === 'odds'
-      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
-      : options;
+        ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
+        : options;
 </script>
 
 <h1>Examples</h1>
@@ -122,8 +130,6 @@
   />
 </Preview>
 
-
-
 <h2>Immediately apply changes (no actions) w/ maintainOrder</h2>
 
 <Preview>
@@ -185,15 +191,22 @@
   </MultiSelectField>
 </Preview>
 
-
-
 <h2>beforeOptions slot</h2>
 
 <Preview>
-  <MultiSelectField options={msfOptionsFiltered} {value} on:change={(e) => (value = e.detail.value)}>
+  <MultiSelectField
+    options={msfOptionsFiltered}
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+  >
     <svelte:fragment slot="beforeOptions">
       <div class="p-2 border-b">
-        <ToggleGroup bind:value={msfSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+        <ToggleGroup
+          bind:value={msfSelectedStr}
+          classes={{ options: 'justify-start h-10' }}
+          rounded="full"
+          inset
+        >
           <ToggleOption value="any">Any</ToggleOption>
           <ToggleOption value="even">Evens</ToggleOption>
           <ToggleOption value="odds">Odds</ToggleOption>
@@ -201,16 +214,24 @@
       </div>
     </svelte:fragment>
   </MultiSelectField>
-  
 </Preview>
 
 <h2>afterOptions slot</h2>
 
 <Preview>
-  <MultiSelectField options={msfOptionsFiltered} {value} on:change={(e) => (value = e.detail.value)}>
+  <MultiSelectField
+    options={msfOptionsFiltered}
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+  >
     <svelte:fragment slot="afterOptions">
       <div class="p-2 border-t">
-        <ToggleGroup bind:value={msfSelectedStr} classes={{ options: 'justify-start h-10' }} rounded="full" inset>
+        <ToggleGroup
+          bind:value={msfSelectedStr}
+          classes={{ options: 'justify-start h-10' }}
+          rounded="full"
+          inset
+        >
           <ToggleOption value="any">Any</ToggleOption>
           <ToggleOption value="even">Evens</ToggleOption>
           <ToggleOption value="odds">Odds</ToggleOption>
@@ -219,7 +240,6 @@
     </svelte:fragment>
   </MultiSelectField>
 </Preview>
-
 
 <h2>within Drawer</h2>
 

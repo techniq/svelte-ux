@@ -69,7 +69,6 @@
     }
   }
 
-
   let _wasOpen = open;
   $: if (open !== _wasOpen) {
     if (open) {
