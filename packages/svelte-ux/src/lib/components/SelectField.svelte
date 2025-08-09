@@ -238,7 +238,6 @@
 
   function onChange(e: ComponentEvents<TextField>['change']) {
     logger.debug('onChange');
-
     searchText = e.detail.inputValue as string;
     dispatch('inputChange', searchText);
     show();
@@ -258,7 +257,10 @@
       fe.relatedTarget instanceof HTMLElement &&
       !menuOptionsEl?.contains(fe.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
       fe.relatedTarget !== menuOptionsEl?.offsetParent && // click on scroll bar
-      !fe.relatedTarget.closest('menu > [slot=actions]') && // click on action item
+      // Allow focus to move into auxiliary slot areas (beforeOptions, afterOptions, actions)
+      !fe.relatedTarget.closest(
+        'menu > [slot=actions], menu > [slot=beforeOptions], menu > [slot=afterOptions]'
+      ) && // click on action / before / after item
       !selectFieldEl?.contains(fe.relatedTarget) && // click within <SelectField> (ex. toggleIcon)
       fe.relatedTarget !== selectFieldEl // click on SelectField itself
     ) {
@@ -546,6 +548,7 @@
         on:close={() => hide('menu on:close')}
         {...menuProps}
       >
+        <slot name="beforeOptions" {hide} />
         <!-- TODO: Rework into hierarchy of snippets in v2.0 -->
         <SelectListOptions
           bind:menuOptionsEl
@@ -601,6 +604,7 @@
           </svelte:fragment>
         </SelectListOptions>
 
+        <slot name="afterOptions" {hide} />
         <slot name="actions" {hide} />
       </Menu>
     {:else}
