@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Enhanced (MultiSelect/MultiSelectField/MultiSelectMenu) demo examples with functional item creation dialogs
+docs(MultiSelect/MultiSelectField/MultiSelectMenu): Enhanced demo examples with functional item creation dialogs

@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Fixed (SelectField) focus management when used within dialogs
+fix(SelectField): focus management when used within dialogs

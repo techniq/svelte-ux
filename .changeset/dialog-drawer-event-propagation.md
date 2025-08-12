@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Fixed (Dialog/Drawer) event propagation preventing outside click detection
+fix(Dialog/Drawer): event propagation preventing outside click detection

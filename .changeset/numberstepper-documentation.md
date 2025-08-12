@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Enhanced (NumberStepper) documentation with prefix/suffix slot examples
+docs(NumberStepper): demo example with prefix/suffix slot
