@@ -117,9 +117,9 @@
         });
 
         // Capture for next change
-  prevValue = selected?.value;
-  // Do not close menu when selection is updated reactively
-  prevSelected = selectOption(selected, false);
+        prevValue = selected?.value;
+        // Do not close menu when selection is updated reactively
+        prevSelected = selectOption(selected, false);
       } else if (/*value !== undefined &&*/ value !== prevValue) {
         // Removed `value !== undefined` to clear searchText when value is set to undefined.  Might be a breaking change
         logger.info('value changed', {
@@ -131,8 +131,8 @@
         });
 
         // Capture for next change
-  prevValue = value;
-  prevSelected = selectValue(value, false);
+        prevValue = value;
+        prevSelected = selectValue(value, false);
       } else {
         logger.info('neither selected or value changed (options only)');
         // Reselect value if menu is not open and options possibly changed (which could result in new display text for the select value)
@@ -421,8 +421,8 @@
 
   function clear() {
     logger.info('clear');
-  // Clearing should not close the menu🤞; keep it open if it already is
-  selectOption(null, false);
+    // Clearing should not close the menu🤞; keep it open if it already is
+    selectOption(null, false);
     filteredOptions = options;
   }
 </script>
