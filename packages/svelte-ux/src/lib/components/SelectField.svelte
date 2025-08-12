@@ -132,7 +132,6 @@
 
         // Capture for next change
   prevValue = value;
-  // Do not close menu when value is updated reactively
   prevSelected = selectValue(value, false);
       } else {
         logger.info('neither selected or value changed (options only)');
@@ -422,7 +421,7 @@
 
   function clear() {
     logger.info('clear');
-  // Clearing should not close the menu; keep it open if it already is
+  // Clearing should not close the menu🤞; keep it open if it already is
   selectOption(null, false);
     filteredOptions = options;
   }
