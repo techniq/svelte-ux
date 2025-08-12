@@ -255,6 +255,7 @@
     // Hide if focus not moved to menu (option clicked)
     if (
       fe.relatedTarget instanceof HTMLElement &&
+      !fe.relatedTarget.closest('[role="dialog"]') &&
       !menuOptionsEl?.contains(fe.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
       fe.relatedTarget !== menuOptionsEl?.offsetParent && // click on scroll bar
       // Allow focus to move into auxiliary slot areas (beforeOptions, afterOptions, actions)

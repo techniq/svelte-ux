@@ -103,6 +103,9 @@
       classes.root
     )}
     on:click={onClick}
+    on:mouseup={(e) => {
+      e.stopPropagation(); // Prevent mouseup from bubbling to outside click handlers (e.g., Popover/Menu clickOutside)
+    }}
     on:keydown={(e) => {
       if (e.key === 'Escape') {
         // Do not allow event to reach Popover's on:keydown
