@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Card, Icon, TableOfContents } from 'svelte-ux';
-  // @ts-expect-error
+  import { Card, TableOfContents } from 'svelte-ux';
+
   import IconChevronRight from '~icons/lucide/chevron-right';
   import Preview from '$lib/components/Preview.svelte';
 </script>

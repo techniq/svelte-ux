@@ -1,15 +1,13 @@
 <script lang="ts">
-  import {
-    mdiAccount,
-    mdiAccountMultipleOutline,
-    mdiAccountOutline,
-    mdiChevronDown,
-  } from '@mdi/js';
+  import LucideUserRoundCheck from '~icons/lucide/user-round-check';
+  import LucideUserRoundMinus from '~icons/lucide/user-round-minus';
+  import LucideUsers from '~icons/lucide/users';
 
   import {
     Button,
     Checkbox,
     Field,
+    getSettings,
     Icon,
     Input,
     Switch,
@@ -18,6 +16,8 @@
   } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let group: string[] = [];
 </script>
@@ -130,7 +130,7 @@
     </div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup variant="outline" inset rounded-sm="full" size="sm" class="w-full">
+        <ToggleGroup variant="outline" inset rounded="full" size="sm" class="w-full">
           <ToggleOption value="yes">Yes</ToggleOption>
           <ToggleOption value="no">No</ToggleOption>
           <ToggleOption value="all">All</ToggleOption>
@@ -144,15 +144,15 @@
     <div class="text-xs font-semibold text-surface-content/50 mb-1 ml-2">with icons</div>
     <Preview>
       <Field label="Is Active">
-        <ToggleGroup variant="outline" inset rounded-sm="full">
+        <ToggleGroup variant="outline" inset rounded="full">
           <ToggleOption value="yes">
-            <Icon data={mdiAccount} />
+            <Icon data={LucideUserRoundCheck} />
           </ToggleOption>
           <ToggleOption value="no">
-            <Icon data={mdiAccountOutline} />
+            <Icon data={LucideUserRoundMinus} />
           </ToggleOption>
           <ToggleOption value="all">
-            <Icon data={mdiAccountMultipleOutline} />
+            <Icon data={LucideUsers} />
           </ToggleOption>
         </ToggleGroup>
       </Field>
@@ -213,7 +213,7 @@
       <option value={4}>Fourth</option>
     </select>
     <span slot="append">
-      <Icon data={mdiChevronDown} />
+      <Icon data={icons.chevronDown} />
     </span>
   </Field>
 </Preview>

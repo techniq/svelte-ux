@@ -1,19 +1,18 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import type { AriaRole, HTMLInputAttributes } from 'svelte/elements';
-  import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
   import { cls } from '@layerstack/tailwind';
   import { isLiteralObject } from '@layerstack/utils/object';
   import { autoFocus, multi, type Actions } from '@layerstack/svelte-actions';
 
-  import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types/index.js';
-  import { getComponentSettings } from './settings.js';
+  import { DEFAULT_LABEL_PLACEMENT, type IconProp, type LabelPlacement } from '../types/index.js';
+  import { getComponentSettings, getSettings } from './settings.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import Input from './Input.svelte';
-  import { type IconInput, asIconData } from '../utils/icons.js';
+  import { asIconData } from '../utils/icons.js';
 
   type InputValue = string | number;
 
@@ -22,6 +21,7 @@
     change: { value: typeof value; inputValue: InputValue | null; operator?: string };
   }>();
 
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('TextField');
   const { defaults: fieldDefaults } = getComponentSettings('Field');
 
@@ -50,8 +50,8 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: IconInput = null;
-  export let iconRight: IconInput = null;
+  export let icon: IconProp = null;
+  export let iconRight: IconProp = null;
   export let align: 'left' | 'center' | 'right' = 'left';
   export let autofocus: boolean | Parameters<typeof autoFocus>[1] = false;
   // TODO: Find way to conditionally set type based on `multiline` value
@@ -277,7 +277,13 @@
             <slot name="prepend" />
             {#if icon}
               <span class="mr-3">
-                <Icon data={asIconData(icon)} class="text-surface-content/50" />
+                {#if typeof icon === 'function'}
+                  <!-- Component, such as unplugin-icons -->
+                  <Icon data={icon} class="text-surface-content/50" />
+                {:else if typeof icon === 'string' || 'icon' in icon}
+                  <!-- font path/url/etc or font-awesome IconDefinition -->
+                  <Icon data={asIconData(icon)} class="text-surface-content/50" />
+                {/if}
               </span>
             {/if}
           </div>
@@ -317,7 +323,7 @@
             <slot name="prefix" />
 
             {#if type === 'currency'}
-              <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+              <Icon data={icons.currency} class="size-4 text-surface-content/50 -mt-1" />
             {/if}
 
             {#if multiline}
@@ -396,7 +402,7 @@
             {/if}
 
             {#if type === 'percent'}
-              <Icon data={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
+              <Icon data={icons.percent} class="size-4 text-surface-content/50 -mt-1 ml-1" />
             {/if}
 
             <slot name="suffix" />
@@ -413,7 +419,7 @@
           >
             {#if clearable && hasInputValue}
               <Button
-                icon={mdiClose}
+                icon={icons.close}
                 {disabled}
                 class="text-surface-content/50 p-1"
                 on:click={() => {
@@ -442,7 +448,7 @@
 
             {#if type === 'password'}
               <Button
-                icon={mdiEye}
+                icon={icons.reveal}
                 {disabled}
                 class="text-surface-content/50 p-2"
                 on:click={() => {
@@ -458,9 +464,15 @@
             <slot name="append" />
 
             {#if error}
-              <Icon data={mdiInformationOutline} class="text-danger" />
+              <Icon data={icons.info} class="text-danger" />
             {:else if iconRight}
-              <Icon data={asIconData(iconRight)} class="text-surface-content/50" />
+              {#if typeof iconRight === 'function'}
+                <!-- Component, such as unplugin-icons -->
+                <Icon data={iconRight} class="text-surface-content/50" />
+              {:else if typeof iconRight === 'string' || 'icon' in iconRight}
+                <!-- font path/url/etc or font-awesome IconDefinition -->
+                <Icon data={asIconData(iconRight)} class="text-surface-content/50" />
+              {/if}
             {/if}
           </div>
         {/if}

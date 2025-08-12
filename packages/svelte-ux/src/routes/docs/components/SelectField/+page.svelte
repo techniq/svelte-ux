@@ -1,22 +1,25 @@
 <script lang="ts">
-  import { mdiMagnify, mdiPlus, mdiPencil, mdiAccount } from '@mdi/js';
-
   import {
     Button,
     Dialog,
     Drawer,
     Form,
+    getSettings,
     MenuItem,
     SelectField,
     State,
     TextField,
     Toggle,
+    ToggleGroup,
+    ToggleOption,
     type MenuOption,
   } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
   import { delay } from '@layerstack/utils';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let options: MenuOption[] = [
     { label: 'One', value: 1 },
@@ -26,10 +29,10 @@
   ];
 
   let optionsWithIcon: MenuOption[] = [
-    { label: 'One', value: 1, icon: mdiMagnify },
-    { label: 'Two', value: 2, icon: mdiPlus },
-    { label: 'Three', value: 3, icon: mdiPencil },
-    { label: 'Four', value: 4, icon: mdiAccount },
+    { label: 'One', value: 1, icon: icons.trash },
+    { label: 'Two', value: 2, icon: icons.code },
+    { label: 'Three', value: 3, icon: icons.calendar },
+    { label: 'Four', value: 4, icon: icons.home },
   ];
 
   let optionsWithDisabled: MenuOption[] = [
@@ -69,6 +72,18 @@
   let loading = false;
 
   let value = 3;
+
+  let selectedStr: 'any' | 'even' | 'odds' = 'any';
+
+  // Filter options based on toggle selection
+  $: optionsFiltered = options.filter((o) => {
+    if (selectedStr === 'even') {
+      return typeof o.value === 'number' && o.value % 2 === 0;
+    } else if (selectedStr === 'odds') {
+      return typeof o.value === 'number' && o.value % 2 !== 0;
+    }
+    return true;
+  });
 </script>
 
 <h1>Examples</h1>
@@ -305,7 +320,7 @@
           <div on:click|stopPropagation role="none">
             <Toggle let:on={open} let:toggle let:toggleOff>
               <Button
-                icon={mdiPencil}
+                icon={icons.edit}
                 class="p-1 text-xs text-surface-content/50 z-9999"
                 on:click={toggle}
               />
@@ -397,13 +412,22 @@
   <Toggle let:on={open} let:toggle let:toggleOff>
     <SelectField {options}>
       <span slot="append" on:click|stopPropagation role="none">
-        <Button icon={mdiPlus} class="text-surface-content/50 p-2" on:click={toggle} />
+        <Button icon={icons.plus} class="text-surface-content/50 p-2" on:click={toggle} />
       </span>
     </SelectField>
     <Form
       initial={newOption()}
       on:change={(e) => {
-        options = [e.detail, ...options];
+        // Convert value to number if it's a valid number, otherwise keep as string
+        const newOptionData = { ...e.detail };
+        if (
+          newOptionData.value !== null &&
+          newOptionData.value !== '' &&
+          !isNaN(Number(newOptionData.value))
+        ) {
+          newOptionData.value = Number(newOptionData.value);
+        }
+        options = [newOptionData, ...options];
       }}
       let:draft
       let:commit
@@ -437,17 +461,66 @@
   </Toggle>
 </Preview>
 
+<h2>`beforeOptions` slot</h2>
+
+<Preview>
+  <SelectField options={optionsFiltered} bind:value menuProps={{ explicitClose: true }}>
+    <div slot="beforeOptions" class="p-2 border-b" on:click|stopPropagation let:hide role="none">
+      <ToggleGroup
+        bind:value={selectedStr}
+        classes={{ options: 'justify-start h-10' }}
+        rounded="full"
+        inset
+      >
+        <ToggleOption value="any">Any</ToggleOption>
+        <ToggleOption value="even">Evens</ToggleOption>
+        <ToggleOption value="odds">Odds</ToggleOption>
+      </ToggleGroup>
+    </div>
+  </SelectField>
+</Preview>
+
+<h2>`afterOptions` slot</h2>
+
+<Preview>
+  <SelectField options={optionsFiltered} bind:value menuProps={{ explicitClose: true }}>
+    <div slot="afterOptions" class="p-2 border-t" on:click|stopPropagation let:hide role="none">
+      <ToggleGroup
+        bind:value={selectedStr}
+        classes={{ options: 'justify-start h-10' }}
+        rounded="full"
+        inset
+      >
+        <ToggleOption value="any">Any</ToggleOption>
+        <ToggleOption value="even">Evens</ToggleOption>
+        <ToggleOption value="odds">Odds</ToggleOption>
+      </ToggleGroup>
+    </div>
+  </SelectField>
+</Preview>
+
 <h2>`actions` slot (menu)</h2>
 
 <Preview>
   <SelectField {options} bind:value>
     <div slot="actions" class="p-2 border-t" on:click|stopPropagation let:hide role="none">
       <Toggle let:on={open} let:toggle>
-        <Button icon={mdiPlus} color="primary" on:click={toggle}>New item</Button>
+        <Button icon={icons.plus} color="primary" on:click={toggle}>New item</Button>
         <Form
           initial={newOption()}
           on:change={(e) => {
-            options = [e.detail, ...options];
+            // Convert value to number if it's a valid number, otherwise keep as string
+            const newOptionData = { ...e.detail };
+            if (
+              newOptionData.value !== null &&
+              newOptionData.value !== '' &&
+              !isNaN(Number(newOptionData.value))
+            ) {
+              newOptionData.value = Number(newOptionData.value);
+            }
+            options = [newOptionData, ...options];
+            // Auto-select the newly created option
+            value = newOptionData.value;
           }}
           let:draft
           let:current
@@ -458,7 +531,6 @@
             {open}
             on:close={() => {
               toggle();
-              hide();
             }}
           >
             <div slot="title">Create new option</div>
@@ -480,8 +552,20 @@
               />
             </div>
             <div slot="actions">
-              <Button on:click={() => commit()} color="primary">Add option</Button>
-              <Button on:click={() => revert()}>Cancel</Button>
+              <Button
+                on:click={() => {
+                  commit();
+                  toggle();
+                  hide();
+                }}
+                color="primary">Add option</Button
+              >
+              <Button
+                on:click={() => {
+                  revert();
+                  toggle();
+                }}>Cancel</Button
+              >
             </div>
           </Dialog>
         </Form>
@@ -493,7 +577,7 @@
 <h2>Icon</h2>
 
 <Preview>
-  <SelectField {options} icon={mdiMagnify} />
+  <SelectField {options} icon={icons.search} />
 </Preview>
 
 <h2>Rounded</h2>
@@ -505,13 +589,13 @@
 <h2>Rounded with icon</h2>
 
 <Preview>
-  <SelectField {options} icon={mdiMagnify} rounded />
+  <SelectField {options} icon={icons.search} rounded />
 </Preview>
 
 <h2>Rounded with append slot and icon</h2>
 
 <Preview>
-  <SelectField {options} icon={mdiMagnify} rounded>
+  <SelectField {options} icon={icons.search} rounded>
     <span slot="prepend" on:click|stopPropagation role="none">
       <select
         class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-4"
@@ -574,7 +658,7 @@
 <h2>Inline options with icon (used by search bar dialog in top-right)</h2>
 
 <Preview>
-  <SelectField {options} icon={mdiMagnify} bind:value inlineOptions={true} />
+  <SelectField {options} icon={icons.search} bind:value inlineOptions={true} />
 </Preview>
 
 <h2>within form</h2>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount, type ComponentProps } from 'svelte';
-  import { type HTMLAttributes } from 'svelte/elements';
+  import type { HTMLAttributes } from 'svelte/elements';
   import { BROWSER } from 'esm-env';
   import { buildTree, type TreeNode } from '@layerstack/utils/array';
   import { cls } from '@layerstack/tailwind';

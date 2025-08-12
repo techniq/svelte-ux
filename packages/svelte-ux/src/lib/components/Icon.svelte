@@ -8,13 +8,14 @@
   import { uniqueId } from '@layerstack/utils';
 
   import { getComponentClasses } from './theme.js';
+  import type { IconComponent } from '$lib/types/index.js';
 
-  export let size: string | number = '1.5em';
+  export let size: string | number = '1.2em'; // default scale of unplugin-icons - https://github.com/unplugin/unplugin-icons?tab=readme-ov-file#options
   export let width = size;
   export let height = size;
   export let viewBox = '0 0 24 24';
   export let path: string | string[] = '';
-  export let data: IconDefinition | string | null | undefined = undefined;
+  export let data: IconComponent | IconDefinition | string | null | undefined = undefined;
   export let svg: string | undefined = undefined;
   export let svgUrl: string | undefined = undefined;
 
@@ -83,7 +84,23 @@
   }
 </script>
 
-{#if svg || svgUrl || $$slots.default}
+{#if typeof data === 'function'}
+  <!-- Icon component -->
+  {@const Icon = data}
+  <Icon
+    class={cls(
+      'Icon',
+      'icon-container inline-block shrink-0 align-middle',
+      'size-[1.2em]', // default scale of unplugin-icons - https://github.com/unplugin/unplugin-icons?tab=readme-ov-file#options
+      settingsClasses.root,
+      classes.root,
+      className
+    )}
+    role={isLabelled ? 'img' : 'presentation'}
+    aria-labelledby={isLabelled ? `${titleId} ${descId}` : undefined}
+    {...$$restProps}
+  />
+{:else if svg || svgUrl || $$slots.default}
   <span
     class={cls(
       'Icon',

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { mdiTrashCan } from '@mdi/js';
-
-  import { Button, Tooltip } from 'svelte-ux';
+  import { Button, getSettings, Tooltip } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 </script>
 
 <h1>Examples</h1>
@@ -19,7 +19,7 @@
 
 <Preview>
   <Tooltip title="Click to remove">
-    <Button icon={mdiTrashCan} class="w-12 h-12" />
+    <Button icon={icons.trash} class="w-12 h-12" />
   </Tooltip>
 </Preview>
 

@@ -2,9 +2,10 @@
   import { cls } from '@layerstack/tailwind';
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
+  import type { IconProp } from '$lib/types/index.js';
 
   export let size: 'sm' | 'md' | 'lg' | 'unset' = 'md';
-  export let icon: string | undefined = undefined;
+  export let icon: IconProp | undefined = undefined;
   let className: string | undefined = undefined;
   export { className as class };
 

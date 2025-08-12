@@ -1,14 +1,14 @@
 <script lang="ts">
-  import {
-    mdiCheck,
-    mdiCreditCardOutline,
-    mdiListBoxOutline,
-    mdiTruckDeliveryOutline,
-  } from '@mdi/js';
   import { range } from 'd3-array';
 
-  import { Button, Paginate, Steps, Step } from 'svelte-ux';
+  import LucideClipboardList from '~icons/lucide/clipboard-list';
+  import LucideCreditCard from '~icons/lucide/credit-card';
+  import LucideTruck from '~icons/lucide/truck';
+
+  import { Button, Paginate, Steps, Step, getSettings } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   const steps = [
     { label: 'Register', completed: true },
@@ -25,10 +25,10 @@
   ];
 
   const stepsWithIcon = [
-    { label: 'Register', completed: true, icon: mdiCheck },
-    { label: 'Choose plan', completed: true, icon: mdiListBoxOutline },
-    { label: 'Purchase', completed: false, icon: mdiCreditCardOutline },
-    { label: 'Receive product', completed: false, icon: mdiTruckDeliveryOutline },
+    { label: 'Register', completed: true, icon: icons.check },
+    { label: 'Choose plan', completed: true, icon: LucideClipboardList },
+    { label: 'Purchase', completed: false, icon: LucideCreditCard },
+    { label: 'Receive product', completed: false, icon: LucideTruck },
   ];
 </script>
 
@@ -78,10 +78,10 @@
 
 <Preview>
   <Steps>
-    <Step icon={mdiCheck} completed>Register</Step>
-    <Step icon={mdiListBoxOutline} completed>Choose plan</Step>
-    <Step icon={mdiCreditCardOutline}>Purchase</Step>
-    <Step icon={mdiTruckDeliveryOutline}>Receive product</Step>
+    <Step icon={icons.check} completed>Register</Step>
+    <Step icon={LucideClipboardList} completed>Choose plan</Step>
+    <Step icon={LucideCreditCard}>Purchase</Step>
+    <Step icon={LucideTruck}>Receive product</Step>
   </Steps>
 </Preview>
 

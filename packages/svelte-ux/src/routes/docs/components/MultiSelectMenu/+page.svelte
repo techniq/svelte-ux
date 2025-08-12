@@ -1,15 +1,32 @@
 <script lang="ts">
-  import { mdiPlus } from '@mdi/js';
-
-  import { Button, MultiSelectMenu, MultiSelectOption, ToggleButton } from 'svelte-ux';
+  import {
+    Button,
+    Dialog,
+    Form,
+    MultiSelectMenu,
+    MultiSelectOption,
+    TextField,
+    Toggle,
+    ToggleButton,
+    ToggleGroup,
+    ToggleOption,
+    getSettings,
+    type MenuOption,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  const options = [
+  const { icons } = getSettings();
+
+  let options: MenuOption[] = [
     { label: 'One', value: 1 },
     { label: 'Two', value: 2 },
     { label: 'Three', value: 3 },
     { label: 'Four', value: 4 },
   ];
+
+  const newOption: () => MenuOption = () => {
+    return { label: '', value: null };
+  };
 
   const manyOptions = Array.from({ length: 100 }).map((_, i) => ({
     label: `${i + 1}`,
@@ -17,6 +34,15 @@
   }));
 
   let value = [3];
+
+  // Filters (Any/Evens/Odds) for demos below
+  let msmSelectedStr: 'any' | 'even' | 'odds' = 'any';
+  $: msmOptionsFiltered =
+    msmSelectedStr === 'even'
+      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
+      : msmSelectedStr === 'odds'
+        ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
+        : options;
 </script>
 
 <h1>Examples</h1>
@@ -91,7 +117,6 @@
     </ToggleButton>
   </div>
 </Preview>
-
 <h2>search</h2>
 
 <Preview>
@@ -264,8 +289,82 @@
         on:close={toggleOff}
       >
         <div slot="actions">
-          <Button color="primary" icon={mdiPlus}>Add item</Button>
+          <Button color="primary" icon={icons.plus}>Add item</Button>
         </div>
+      </MultiSelectMenu>
+    </ToggleButton>
+  </span>
+</Preview>
+
+<h2>beforeOptions slot</h2>
+
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        options={msmOptionsFiltered}
+        {value}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+        classes={{ menu: 'w-[360px]' }}
+        search
+      >
+        <svelte:fragment slot="beforeOptions">
+          <div class="p-2 border-b">
+            <ToggleGroup
+              bind:value={msmSelectedStr}
+              classes={{ options: 'justify-start h-10' }}
+              rounded="full"
+              inset
+            >
+              <ToggleOption value="any">Any</ToggleOption>
+              <ToggleOption value="even">Evens</ToggleOption>
+              <ToggleOption value="odds">Odds</ToggleOption>
+            </ToggleGroup>
+          </div>
+        </svelte:fragment>
+      </MultiSelectMenu>
+    </ToggleButton>
+  </span>
+</Preview>
+
+<h2>afterOptions slot</h2>
+
+<Preview>
+  <span>
+    <ToggleButton let:on={open} let:toggleOff transition={false}>
+      {value.length} selected
+      <MultiSelectMenu
+        options={msmOptionsFiltered}
+        {value}
+        on:change={(e) => {
+          // @ts-expect-error
+          value = e.detail.value;
+        }}
+        {open}
+        on:close={toggleOff}
+        classes={{ menu: 'w-[360px]' }}
+        search
+      >
+        <svelte:fragment slot="afterOptions">
+          <div class="p-2 border-t">
+            <ToggleGroup
+              bind:value={msmSelectedStr}
+              classes={{ options: 'justify-start h-10' }}
+              rounded="full"
+              inset
+            >
+              <ToggleOption value="any">Any</ToggleOption>
+              <ToggleOption value="even">Evens</ToggleOption>
+              <ToggleOption value="odds">Odds</ToggleOption>
+            </ToggleGroup>
+          </div>
+        </svelte:fragment>
       </MultiSelectMenu>
     </ToggleButton>
   </span>
@@ -289,8 +388,72 @@
         classes={{ menu: 'w-[360px]' }}
         search
       >
-        <div slot="actions">
-          <Button color="primary" icon={mdiPlus}>Add item</Button>
+        <div slot="actions" class="p-2" on:click|stopPropagation role="none">
+          <Toggle let:on={dialogOpen} let:toggle>
+            <Button icon={icons.plus} color="primary" on:click={toggle}>New item</Button>
+            <Form
+              initial={newOption()}
+              on:change={(e) => {
+                // Convert value to number if it's a valid number, otherwise keep as string
+                const newOptionData = { ...e.detail };
+                if (
+                  newOptionData.value !== null &&
+                  newOptionData.value !== '' &&
+                  !isNaN(Number(newOptionData.value))
+                ) {
+                  newOptionData.value = Number(newOptionData.value);
+                }
+                options = [newOptionData, ...options];
+                // Auto-select the newly created option
+                value = [...(value || []), newOptionData.value];
+              }}
+              let:draft
+              let:current
+              let:commit
+              let:revert
+            >
+              <Dialog
+                open={dialogOpen}
+                on:close={() => {
+                  toggle();
+                }}
+              >
+                <div slot="title">Create new option</div>
+                <div class="px-6 py-3 w-96 grid gap-2">
+                  <TextField
+                    label="Label"
+                    value={current.label}
+                    on:change={(e) => {
+                      draft.label = e.detail.value;
+                    }}
+                    autofocus
+                  />
+                  <TextField
+                    label="Value"
+                    value={draft.value}
+                    on:change={(e) => {
+                      draft.value = e.detail.value;
+                    }}
+                  />
+                </div>
+                <div slot="actions">
+                  <Button
+                    on:click={() => {
+                      commit();
+                      toggle();
+                    }}
+                    color="primary">Add option</Button
+                  >
+                  <Button
+                    on:click={() => {
+                      revert();
+                      toggle();
+                    }}>Cancel</Button
+                  >
+                </div>
+              </Dialog>
+            </Form>
+          </Toggle>
         </div>
       </MultiSelectMenu>
     </ToggleButton>

@@ -2,7 +2,6 @@
   import { createEventDispatcher, type ComponentProps, type ComponentEvents } from 'svelte';
   import type { Placement } from '@floating-ui/dom';
 
-  import { mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
   import { cls, clsMerge, normalizeClasses } from '@layerstack/tailwind';
   import { autoFocus, selectOnFocus, type ScrollIntoViewOptions } from '@layerstack/svelte-actions';
   import { Logger } from '@layerstack/utils';
@@ -13,14 +12,16 @@
   import MenuItem from './MenuItem.svelte';
   import SelectListOptions from './_SelectListOptions.svelte';
   import TextField from './TextField.svelte';
-  import { getComponentSettings } from './settings.js';
-  import type { IconInput } from '../utils/icons.js';
-  import type { MenuOption } from '../types/index.js';
+  import { getComponentSettings, getSettings } from './settings.js';
+  import type { IconProp, MenuOption } from '../types/index.js';
+  import { asIconData } from '$lib/utils/icons.js';
 
   const dispatch = createEventDispatcher<{
     change: { value: typeof value; option: typeof selected };
     inputChange: string;
   }>();
+
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('SelectField');
 
   const logger = new Logger('SelectField');
@@ -35,10 +36,10 @@
   export let required = false;
   export let disabled: boolean = false;
   export let readonly: boolean = false;
-  export let icon: IconInput = undefined;
+  export let icon: IconProp = undefined;
   export let inlineOptions = false;
-  export let toggleIcon: IconInput = !inlineOptions ? mdiChevronDown : null;
-  export let closeIcon: IconInput = mdiClose;
+  export let toggleIcon: IconProp = !inlineOptions ? icons.chevronDown : null;
+  export let closeIcon: IconProp = icons.close;
   export let activeOptionIcon: boolean = false;
   export let clearable = true;
   export let base = false;
@@ -121,7 +122,8 @@
 
         // Capture for next change
         prevValue = selected?.value;
-        prevSelected = selectOption(selected);
+        // Do not close menu when selection is updated reactively
+        prevSelected = selectOption(selected, false);
       } else if (/*value !== undefined &&*/ value !== prevValue) {
         // Removed `value !== undefined` to clear searchText when value is set to undefined.  Might be a breaking change
         logger.info('value changed', {
@@ -134,7 +136,7 @@
 
         // Capture for next change
         prevValue = value;
-        prevSelected = selectValue(value);
+        prevSelected = selectValue(value, false);
       } else {
         logger.info('neither selected or value changed (options only)');
         // Reselect value if menu is not open and options possibly changed (which could result in new display text for the select value)
@@ -241,7 +243,6 @@
 
   function onChange(e: ComponentEvents<TextField>['change']) {
     logger.debug('onChange');
-
     searchText = e.detail.inputValue as string;
     dispatch('inputChange', searchText);
     show();
@@ -259,9 +260,13 @@
     // Hide if focus not moved to menu (option clicked)
     if (
       fe.relatedTarget instanceof HTMLElement &&
+      !fe.relatedTarget.closest('[role="dialog"]') &&
       !menuOptionsEl?.contains(fe.relatedTarget) && // TODO: Oddly Safari does not set `relatedTarget` to the clicked on menu option (like Chrome and Firefox) but instead appears to take `tabindex` into consideration.  Currently resolves to `.options` after setting `tabindex="-1"
       fe.relatedTarget !== menuOptionsEl?.offsetParent && // click on scroll bar
-      !fe.relatedTarget.closest('menu > [slot=actions]') && // click on action item
+      // Allow focus to move into auxiliary slot areas (beforeOptions, afterOptions, actions)
+      !fe.relatedTarget.closest(
+        'menu > [slot=actions], menu > [slot=beforeOptions], menu > [slot=afterOptions]'
+      ) && // click on action / before / after item
       !selectFieldEl?.contains(fe.relatedTarget) && // click within <SelectField> (ex. toggleIcon)
       fe.relatedTarget !== selectFieldEl // click on SelectField itself
     ) {
@@ -358,17 +363,17 @@
   /**
    * Select option by value
    */
-  function selectValue(value: TValue | null | undefined) {
+  function selectValue(value: TValue | null | undefined, closeMenu: boolean = true) {
     logger.debug('selectValue', { value, options, filteredOptions });
 
     const option = options?.find((option) => option.value === value) ?? null;
-    return selectOption(option);
+    return selectOption(option, closeMenu);
   }
 
   /**
    * Select option by object
    */
-  function selectOption(option: MenuOption<TValue> | null) {
+  function selectOption(option: MenuOption<TValue> | null, closeMenu: boolean = true) {
     logger.info('selectOption', { option });
 
     const previousValue = value;
@@ -381,7 +386,7 @@
       if (!selected?.icon) {
         icon = originalIcon;
       } else {
-        icon = selected.icon;
+        icon = asIconData(selected.icon);
       }
     }
 
@@ -389,7 +394,9 @@
       dispatch('change', { option, value });
     }
 
-    hide('selectOption');
+    if (closeMenu) {
+      hide('selectOption');
+    }
 
     return option;
   }
@@ -418,7 +425,8 @@
 
   function clear() {
     logger.info('clear');
-    selectOption(null);
+    // Clearing should not close the menu🤞; keep it open if it already is
+    selectOption(null, false);
     filteredOptions = options;
   }
 </script>
@@ -475,7 +483,7 @@
 
       {#if stepper}
         <Button
-          icon={mdiChevronLeft}
+          icon={icons.chevronLeft}
           on:click={(e) => {
             e.stopPropagation();
             logger.debug('step left clicked');
@@ -522,7 +530,7 @@
 
       {#if stepper}
         <Button
-          icon={mdiChevronRight}
+          icon={icons.chevronRight}
           on:click={(e) => {
             e.stopPropagation();
             logger.debug('step right clicked');
@@ -549,6 +557,7 @@
         on:close={() => hide('menu on:close')}
         {...menuProps}
       >
+        <slot name="beforeOptions" {hide} />
         <!-- TODO: Rework into hierarchy of snippets in v2.0 -->
         <SelectListOptions
           bind:menuOptionsEl
@@ -604,6 +613,7 @@
           </svelte:fragment>
         </SelectListOptions>
 
+        <slot name="afterOptions" {hide} />
         <slot name="actions" {hide} />
       </Menu>
     {:else}

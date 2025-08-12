@@ -5,10 +5,17 @@
 
   import Icon from './Icon.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
-  import type { ButtonColor, ButtonRounded, ButtonSize, ButtonVariant } from '../types/index.js';
+  import type {
+    ButtonColor,
+    ButtonRounded,
+    ButtonSize,
+    ButtonVariant,
+    IconProp,
+  } from '../types/index.js';
   import { getButtonGroup } from './ButtonGroup.svelte';
-  import { asIconData, type IconInput } from '../utils/icons.js';
+  import { asIconData } from '../utils/icons.js';
   import { getComponentSettings } from './settings.js';
+  import type { ComponentProps } from 'svelte';
 
   const { classes: settingsClasses, defaults } = getComponentSettings('Button');
 
@@ -16,7 +23,7 @@
   export let href: string | undefined = undefined;
   export let target: string | undefined = undefined;
   export let fullWidth: boolean = false;
-  export let icon: IconInput = undefined;
+  export let icon: IconProp | ComponentProps<Icon> | undefined = undefined;
   export let iconOnly = icon !== undefined && !$$slots.default;
   export let actions: Actions<HTMLAnchorElement | HTMLButtonElement> | undefined = undefined;
 
@@ -56,9 +63,9 @@
       'font-medium tracking-wider whitespace-nowrap',
       iconOnly
         ? {
-            sm: 'text-xs p-1',
-            md: 'text-sm p-2',
-            lg: 'text-base p-3',
+            sm: 'text-sm p-1',
+            md: 'text-base p-2',
+            lg: 'text-lg p-3',
           }[size!]
         : {
             sm: 'text-xs px-2 py-1',
@@ -467,13 +474,17 @@
     </span>
   {:else if icon}
     <span in:slide={{ axis: 'x', duration: 200 }}>
-      {#if typeof icon === 'string' || 'icon' in icon}
+      {#if typeof icon === 'function'}
+        <!-- Component, such as unplugin-icons -->
+        <Icon data={icon} class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} />
+      {:else if typeof icon === 'string' || 'icon' in icon}
         <!-- font path/url/etc or font-awesome IconDefinition -->
         <Icon
           data={asIconData(icon)}
           class={cls('pointer-events-none', settingsClasses.icon, classes.icon)}
         />
       {:else}
+        <!-- Icon props -->
         <Icon class={cls('pointer-events-none', settingsClasses.icon, classes.icon)} {...icon} />
       {/if}
     </span>

@@ -1,5 +1,47 @@
 # svelte-ux
 
+## 2.0.0-next.19
+
+### Patch Changes
+
+- feat(SelectField|MultiSelect|MultiSelectField|MultiSelectMenu): Added (beforeOptions/afterOptions) slots. ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix(Drawer/Dialog): open/close events firing on mount and unrelated updates. Now events are emitted only on actual state transitions by tracking the previous open value, preventing unintended closes and focus jumps. (#632) ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.18
+
+### Patch Changes
+
+- Update deps ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- Fix(TableOfContent): No known conditions for "./elements" specifier in "svelte" package ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.17
+
+### Patch Changes
+
+- fix(Icon): Restore adding `inline-block` by default ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.16
+
+### Patch Changes
+
+- fix: Replace use of unplugin-icons `~icon/` imports with `@lucide/svelte` package for default icons to remove Vite configuration. Fixes #618 ([#625](https://github.com/techniq/svelte-ux/pull/625))
+
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Update dependencies ([#622](https://github.com/techniq/svelte-ux/pull/622))
+
+## 2.0.0-next.14
+
+### Minor Changes
+
+- feat: Setup default icons on settings() for easy overriding. Change default to lucide (from mdi) ([#616](https://github.com/techniq/svelte-ux/pull/616))
+
+- feat: Support component icons (Unplugin icons, etc) ([#616](https://github.com/techniq/svelte-ux/pull/616))
+
 ## 2.0.0-next.13
 
 ### Patch Changes
@@ -103,6 +145,20 @@
 ### Patch Changes
 
 - fix(Progress): Fix `TypeError: Failed to set the 'value' property on 'HTMLProgressElement': The provided double value is non-finite.` ([`6c2efa2`](https://github.com/techniq/svelte-ux/commit/6c2efa2d6d5b1a7ccf2b99c1826bc1232c51d2cc))
+
+## 1.0.8
+
+### Patch Changes
+
+- Fixed (Drawer/Dialog) open/close events firing on mount and unrelated updates. Now events are emitted only on actual state transitions by tracking the previous open value, preventing unintended closes and focus jumps. ([#632](https://github.com/techniq/svelte-ux/pull/632))
+  Added (beforeOptions/afterOptions) slots to the (SelectField, MultiSelect, MultiSelectField, MultiSelectMenu) components.
+  Updated docs examples (beforeOptions/afterOptions).
+
+## 1.0.7
+
+### Patch Changes
+
+- feat(NumberStepper): Add slots to passthrough prefix and suffix to the NumberStepper component ([#629](https://github.com/techniq/svelte-ux/pull/629))
 
 ## 1.0.6
 
@@ -1474,7 +1530,6 @@ Version 1.0 (Svelte 3-5 and Tailwind 3 compatible)
 - [Button] Rename "text" variant to "default" ([`4d61047`](https://github.com/techniq/svelte-ux/commit/4d6104746922808b84ff1d81b525205e53f7a930))
 
 - [ToggleGroup] Major overhaul of styling ([`ef5c2ee`](https://github.com/techniq/svelte-ux/commit/ef5c2ee9cf50a3025fcb335ff091fdf5c63f2241))
-
   - Support many variants based on accent color
   - Support style modifications including size, rounded (small/full), gap (small/px), and inset.
   - Rename `optionsContainer` to `label` and use label component.

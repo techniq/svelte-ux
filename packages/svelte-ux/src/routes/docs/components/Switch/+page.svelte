@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { mdiCheck, mdiClose } from '@mdi/js';
-
-  import { Button, Icon, Switch } from 'svelte-ux';
+  import { Button, getSettings, Icon, Switch } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let checked: boolean | null = null;
 </script>
@@ -40,14 +40,14 @@
   <div class="grid gap-2">
     <Switch let:checked>
       {#if checked}
-        <Icon data={mdiCheck} class="text-primary" size=".8em" />
+        <Icon data={icons.check} class="size-3 text-primary" />
       {/if}
     </Switch>
     <Switch let:checked>
       {#if checked}
-        <Icon data={mdiCheck} class="text-primary" size=".8em" />
+        <Icon data={icons.check} class="size-3 text-primary" />
       {:else}
-        <Icon data={mdiClose} class="text-surface-content" size=".8em" />
+        <Icon data={icons.close} class="size-3 text-surface-content" />
       {/if}
     </Switch>
   </div>
@@ -60,7 +60,7 @@
     <Switch disabled />
     <Switch disabled checked />
     <Switch disabled>
-      <Icon data={mdiCheck} class="text-surface-content/50" size=".8em" />
+      <Icon data={icons.check} class="size-3 text-surface-content/50" />
     </Switch>
   </div>
 </Preview>

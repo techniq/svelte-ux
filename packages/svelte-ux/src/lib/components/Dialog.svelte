@@ -72,10 +72,14 @@
     }
   }
 
-  $: if (open) {
-    dispatch('open');
-  } else {
-    dispatch('close');
+  let _wasOpen = open;
+  $: if (open !== _wasOpen) {
+    if (open) {
+      dispatch('open');
+    } else if (_wasOpen) {
+      dispatch('close');
+    }
+    _wasOpen = open;
   }
 </script>
 
@@ -102,6 +106,9 @@
       classes.root
     )}
     on:click={onClick}
+    on:mouseup={(e) => {
+      e.stopPropagation(); // Prevent mouseup from bubbling to outside click handlers (e.g., Popover/Menu clickOutside)
+    }}
     on:keydown={(e) => {
       if (e.key === 'Escape') {
         // Do not allow event to reach Popover's on:keydown

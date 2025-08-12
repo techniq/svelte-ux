@@ -1,12 +1,8 @@
 <script lang="ts">
-  import {
-    mdiCheck,
-    mdiCheckCircle,
-    mdiClockOutline,
-    mdiClose,
-    mdiMapMarker,
-    mdiTruck,
-  } from '@mdi/js';
+  import LucideCircleCheck from '~icons/lucide/circle-check';
+  import LucideClock from '~icons/lucide/clock';
+  import LucideMapPin from '~icons/lucide/map-pin';
+  import LucideTruck from '~icons/lucide/truck';
 
   import { Icon, Timeline, TimelineEvent, getSettings } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
@@ -14,7 +10,7 @@
 
   import Preview from '$lib/components/Preview.svelte';
 
-  const { format } = getSettings();
+  const { format, icons } = getSettings();
 
   const customData = [
     {
@@ -118,7 +114,7 @@
 <h2>Icon</h2>
 
 <Preview>
-  <Timeline data={appleHistory} icon={mdiCheckCircle} />
+  <Timeline data={appleHistory} icon={LucideCircleCheck} />
 </Preview>
 
 <h2>Icon with classes</h2>
@@ -126,7 +122,7 @@
 <Preview>
   <Timeline
     data={appleHistory}
-    icon={mdiCheckCircle}
+    icon={LucideCircleCheck}
     classes={{
       event: {
         start: 'text-sm font-semibold',
@@ -142,7 +138,7 @@
 <Preview>
   <Timeline
     data={appleHistoryAlternating}
-    icon={mdiCheckCircle}
+    icon={LucideCircleCheck}
     classes={{
       event: {
         start: 'border rounded-lg text-sm p-2',
@@ -158,7 +154,7 @@
 <Preview>
   <Timeline
     data={appleHistoryAlternating}
-    icon={mdiCheckCircle}
+    icon={LucideCircleCheck}
     snapPoint
     classes={{
       event: {
@@ -175,7 +171,7 @@
 <Preview>
   <Timeline
     data={appleHistoryAlternatingWithCompleted}
-    icon={mdiCheckCircle}
+    icon={LucideCircleCheck}
     classes={{
       event: {
         start: 'border rounded-lg text-sm p-2 m-1',
@@ -191,7 +187,7 @@
 <Preview>
   <Timeline>
     {#each appleHistory as item, i}
-      <TimelineEvent icon={mdiCheckCircle} start={i % 2 === 0} end={i % 2 !== 0}>
+      <TimelineEvent icon={LucideCircleCheck} start={i % 2 === 0} end={i % 2 !== 0}>
         <div class="font-semibold px-2">{item.end}</div>
 
         <div slot="point" class="border rounded-full px-2 text-xs">
@@ -207,7 +203,7 @@
 <Preview>
   <Timeline
     data={appleHistory}
-    icon={mdiCheckCircle}
+    icon={LucideCircleCheck}
     vertical
     classes={{
       event: {
@@ -224,7 +220,7 @@
 <Preview>
   <Timeline
     data={appleHistoryAlternating}
-    icon={mdiCheckCircle}
+    icon={LucideCircleCheck}
     vertical
     classes={{
       event: {
@@ -241,7 +237,7 @@
 <Preview>
   <Timeline
     data={appleHistoryAlternatingWithCompleted}
-    icon={mdiCheckCircle}
+    icon={LucideCircleCheck}
     vertical
     classes={{
       event: {
@@ -258,7 +254,7 @@
 <Preview>
   <Timeline
     data={appleHistory}
-    icon={mdiCheckCircle}
+    icon={LucideCircleCheck}
     vertical
     classes={{
       event: {
@@ -277,7 +273,7 @@
   <Timeline vertical snapPoint>
     {#each appleHistoryDetails as item, i}
       <TimelineEvent
-        icon={mdiCheckCircle}
+        icon={LucideCircleCheck}
         start={i % 2 === 0}
         end={i % 2 !== 0}
         classes={{
@@ -303,7 +299,7 @@
   <Timeline vertical compact snapPoint>
     {#each appleHistoryDetails as item, i}
       <TimelineEvent
-        icon={mdiCheckCircle}
+        icon={LucideCircleCheck}
         start={i % 2 === 0}
         end={i % 2 !== 0}
         classes={{
@@ -330,9 +326,9 @@
     {#each customData as item, i}
       <TimelineEvent
         icon={{
-          'in-progress': mdiTruck,
-          completed: mdiCheck,
-          failed: mdiClose,
+          'in-progress': LucideTruck,
+          completed: icons.check,
+          failed: icons.close,
         }[item.status]}
         start={i % 2 === 0}
         end={i % 2 !== 0}
@@ -352,11 +348,11 @@
         <div class="-mt-1 mb-5 mx-2">
           <div class="font-bold">{item.title}</div>
           <div class="text-sm text-surface-content/70">
-            <Icon data={mdiMapMarker} size="1rem" />
+            <Icon data={LucideMapPin} size="1rem" />
             {item.location}
           </div>
           <div class="text-sm text-surface-content/70">
-            <Icon data={mdiClockOutline} size=".9rem" />
+            <Icon data={LucideClock} size=".9rem" />
             {$format(item.date, PeriodType.DayTime)}
           </div>
         </div>

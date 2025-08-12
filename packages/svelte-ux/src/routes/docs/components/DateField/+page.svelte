@@ -1,7 +1,9 @@
 <script lang="ts">
   import { Button, DateField, getSettings } from 'svelte-ux';
-  import { mdiCalendarStart, mdiCalendarEnd } from '@mdi/js';
   import { intervalOffset } from '@layerstack/utils';
+
+  import LucideCalendarArrowDown from '~icons/lucide/calendar-arrow-down';
+  import LucideCalendarArrowUp from '~icons/lucide/calendar-arrow-up';
 
   import Preview from '$lib/components/Preview.svelte';
 
@@ -66,8 +68,8 @@
 
 <Preview>
   <div class="grid gap-2">
-    <DateField label="Start date" icon={mdiCalendarStart} />
-    <DateField label="End date" icon={mdiCalendarEnd} />
+    <DateField label="Start date" icon={LucideCalendarArrowDown} />
+    <DateField label="End date" icon={LucideCalendarArrowUp} />
   </div>
 </Preview>
 

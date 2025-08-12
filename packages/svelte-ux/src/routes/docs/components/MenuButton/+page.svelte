@@ -1,14 +1,9 @@
 <script lang="ts">
-  import {
-    mdiContentCopy,
-    mdiContentCut,
-    mdiContentPaste,
-    mdiMagnify,
-    mdiChevronDown,
-  } from '@mdi/js';
-
-  import { Icon, MenuButton, MenuItem, TextField } from 'svelte-ux';
+  import { getSettings, Icon, MenuButton, MenuItem, TextField } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+  import { asIconData } from '$lib/utils/icons.js';
+
+  const { icons } = getSettings();
 
   const options = [
     { label: 'Cut', value: 'cut' },
@@ -17,9 +12,9 @@
   ];
 
   const optionsWithIcons = [
-    { label: 'Cut', value: 'cut', icon: mdiContentCut },
-    { label: 'Copy', value: 'copy', icon: mdiContentCopy },
-    { label: 'Paste', value: 'paste', icon: mdiContentPaste },
+    { label: 'Cut', value: 'cut', icon: icons.cut },
+    { label: 'Copy', value: 'copy', icon: icons.copy },
+    { label: 'Paste', value: 'paste', icon: icons.paste },
   ];
 </script>
 
@@ -46,7 +41,7 @@
 <h2>Icon</h2>
 
 <Preview>
-  <MenuButton {options} icon={mdiMagnify} />
+  <MenuButton {options} icon={icons.search} />
 </Preview>
 
 <h2>Option icons</h2>
@@ -61,7 +56,7 @@
   <MenuButton options={optionsWithIcons}>
     <svelte:fragment slot="selection" let:value>
       {#if value}
-        <Icon data={value?.icon ?? mdiChevronDown} /> {value.label}
+        <Icon data={asIconData(value?.icon) ?? icons.chevronDown} /> {value.label}
       {:else}
         No selection
       {/if}
@@ -74,7 +69,7 @@
 <Preview>
   <MenuButton options={optionsWithIcons} menuIcon={null}>
     <svelte:fragment slot="selection" let:value>
-      <Icon data={value?.icon ?? mdiChevronDown} />
+      <Icon data={asIconData(value?.icon) ?? icons.chevronDown} />
     </svelte:fragment>
   </MenuButton>
 </Preview>
@@ -114,7 +109,7 @@
     let:close
   >
     <div class="p-2">
-      <TextField icon={mdiMagnify} placeholder="Search" />
+      <TextField icon={icons.search} placeholder="Search" />
     </div>
     <menu>
       {#each options as option}

@@ -1,20 +1,18 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
 
-  import { mdiMonitor, mdiUndoVariant, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
-
   import Button from './Button.svelte';
+  import Icon from './Icon.svelte';
   import Kbd from './Kbd.svelte';
   import Menu from './Menu.svelte';
   import Switch from './Switch.svelte';
-  import Icon from './Icon.svelte';
   import MenuItem from './MenuItem.svelte';
   import Tooltip from './Tooltip.svelte';
 
   import { cls } from '@layerstack/tailwind';
   import { getSettings } from './settings.js';
 
-  const { currentTheme, themes: allThemes } = getSettings();
+  const { currentTheme, themes: allThemes, icons } = getSettings();
 
   /** The list of dark themes to chose from, if not the list provided to `settings`. */
   export let darkThemes = allThemes?.dark ?? ['dark'];
@@ -48,11 +46,11 @@
   <Button iconOnly on:click={() => (open = !open)}>
     <div class="grid grid-cols-1 grid-rows-1 overflow-hidden">
       <Icon
-        data={mdiWhiteBalanceSunny}
+        data={icons.lightMode}
         class="row-[1] col-[1] translate-x-0 dark:-translate-x-full transition-transform duration-300"
       />
       <Icon
-        data={mdiWeatherNight}
+        data={icons.darkMode}
         class="row-[1] col-[1] translate-x-full dark:translate-x-0 transition-transform duration-300"
       />
     </div>
@@ -73,7 +71,7 @@
           <span transition:fly={{ x: 8 }}>
             <Tooltip title="Reset to System" offset={2}>
               <Button
-                icon={mdiUndoVariant}
+                icon={icons.undo}
                 color="primary"
                 size="sm"
                 class="mr-1"
@@ -97,9 +95,9 @@
           let:checked
         >
           {#if checked}
-            <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
+            <Icon data={icons.darkMode} class="size-3 text-primary" />
           {:else}
-            <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
+            <Icon data={icons.lightMode} class="size-3 text-primary" />
           {/if}
         </Switch>
       </label>
@@ -144,18 +142,18 @@
   <Button iconOnly on:click={() => (open = !open)}>
     <div class="grid grid-stack overflow-hidden">
       <Icon
-        data={mdiWhiteBalanceSunny}
+        data={icons.lightMode}
         class="translate-x-0 dark:-translate-x-full transition-transform duration-300"
       />
       <Icon
-        data={mdiWeatherNight}
+        data={icons.darkMode}
         class="translate-x-full dark:translate-x-0 transition-transform duration-300"
       />
     </div>
 
     <Menu bind:open on:close={() => (open = false)} classes={{ menu: 'p-1' }}>
       <MenuItem
-        icon={mdiWhiteBalanceSunny}
+        icon={icons.lightMode}
         selected={$currentTheme.theme === 'light'}
         on:click={() => currentTheme.setTheme('light')}
       >
@@ -163,7 +161,7 @@
       </MenuItem>
 
       <MenuItem
-        icon={mdiWeatherNight}
+        icon={icons.darkMode}
         selected={$currentTheme.theme === 'dark'}
         on:click={() => currentTheme.setTheme('dark')}
       >
@@ -171,7 +169,7 @@
       </MenuItem>
 
       <MenuItem
-        icon={mdiMonitor}
+        icon={icons.monitor}
         selected={$currentTheme.theme == null}
         on:click={() => currentTheme.setTheme('system')}
       >

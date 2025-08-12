@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { mdiTrashCan } from '@mdi/js';
-
-  import { Button, Dialog, TextField, Toggle } from 'svelte-ux';
+  import { Button, Dialog, getSettings, TextField, Toggle } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let open = false;
   let openAsync = false;
@@ -97,7 +97,7 @@
 
 <Preview>
   <Toggle let:on={open} let:toggle let:toggleOff>
-    <Button icon={mdiTrashCan} on:click={toggle} color="danger">Delete</Button>
+    <Button icon={icons.trash} on:click={toggle} color="danger">Delete</Button>
     <Dialog {open} on:close={toggleOff}>
       <div slot="title">Are you sure?</div>
       <div class="px-6 py-3">This will permanently delete the item and can not be undone.</div>
@@ -121,14 +121,14 @@
 
 <Preview>
   <Toggle let:on={open} let:toggleOn={toggleDeleteOn} let:toggleOff={toggleDeleteOff}>
-    <Button icon={mdiTrashCan} on:click={toggleDeleteOn} color="danger">Delete</Button>
+    <Button icon={icons.trash} on:click={toggleDeleteOn} color="danger">Delete</Button>
     <Dialog {open} on:close={toggleDeleteOff}>
       <div slot="title">Delete this item ?</div>
       <div class="px-6 py-3">This will permanently delete the item</div>
       <div slot="actions">
         <Toggle let:on={openSecond} let:toggle={toggleConfirm} let:toggleOff={toggleConfirmOff}>
           <Button
-            icon={mdiTrashCan}
+            icon={icons.trash}
             on:click={(e) => {
               e.stopPropagation();
               toggleConfirm();

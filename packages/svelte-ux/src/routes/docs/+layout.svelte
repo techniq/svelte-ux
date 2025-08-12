@@ -1,22 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { fade, slide } from 'svelte/transition';
   import { flatGroup } from 'd3-array';
 
-  import {
-    mdiCheckCircle,
-    mdiChevronDown,
-    mdiChevronRight,
-    mdiClose,
-    mdiCodeBraces,
-    mdiCodeTags,
-    mdiDatabaseOutline,
-    mdiFileDocumentEditOutline,
-    mdiGithub,
-    mdiLink,
-  } from '@mdi/js';
-  // @ts-expect-error
-  import IconAlignLeft from '~icons/lucide/align-left';
+  import LucideAlignLeft from '~icons/lucide/align-left.svelte';
+  import LucideCircleCheck from '~icons/lucide/circle-check.svelte';
+  import LucideDatabase from '~icons/lucide/database';
+  import LucideFilePenLine from '~icons/lucide/file-pen-line';
+  import LucideGithub from '~icons/lucide/github.svelte';
+  import LucideLink2 from '~icons/lucide/link-2';
 
   import {
     ApiDocs,
@@ -36,7 +27,6 @@
   import Code from '$lib/components/Code.svelte';
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';
 
-  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
 
   $: [type, name] = $page.url.pathname.split('/').slice(2) ?? [];
@@ -84,8 +74,11 @@
     }
   }
 
+  const layoutSettings = getSettings();
+  $: ({ icons } = layoutSettings);
+
   // Clear root layout theme so doesn't show on doc examples
-  settings({ ...getSettings(), components: {} });
+  settings({ ...layoutSettings, components: {} });
 </script>
 
 <div
@@ -94,7 +87,7 @@
   {#if title}
     <div>
       <div class="inline-block text-xs font-bold text-surface-content/50 capitalize">Docs</div>
-      <Icon data={mdiChevronRight} class="divider opacity-25" />
+      <Icon data={icons.chevronRight} class="inline-block size-4 divider opacity-25" />
       <div class="inline-block text-xs font-bold text-primary capitalize">
         {type}
       </div>
@@ -128,7 +121,7 @@
         href={sourceUrl
           ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${sourceUrl}`
           : ''}
-        icon={mdiCodeTags}
+        icon={icons.code}
       />
 
       <ViewSourceButton
@@ -137,12 +130,12 @@
         href={pageUrl
           ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${pageUrl}`
           : ''}
-        icon={mdiFileDocumentEditOutline}
+        icon={LucideFilePenLine}
       />
 
       {#if !hideTableOfContents}
         <Button
-          icon={mdiChevronDown}
+          icon={icons.chevronDown}
           on:click={() => {
             showTableOfContents = !showTableOfContents;
           }}
@@ -166,7 +159,7 @@
       >
         <div slot="title">On this page</div>
         <Button
-          icon={mdiClose}
+          icon={icons.close}
           class="absolute top-1 right-1"
           size="sm"
           on:click={() => (showTableOfContents = false)}
@@ -206,7 +199,7 @@
           <ul class="grid gap-2 pl-4 text-surface-content">
             {#each features as feature}
               <li class="grid grid-cols-[auto_1fr] gap-2">
-                <Icon data={mdiCheckCircle} class="text-success pt-1" />
+                <Icon data={LucideCircleCheck} class="text-success pt-1" />
                 <span>{@html feature}</span>
               </li>
             {/each}
@@ -231,14 +224,14 @@
                 {#each items as item}
                   {@const icon =
                     item.type === 'components'
-                      ? mdiCodeTags
+                      ? icons.code
                       : item.type === 'stores'
-                        ? mdiDatabaseOutline
+                        ? LucideDatabase
                         : item.type === 'actions'
-                          ? mdiCodeBraces
+                          ? icons.codeBraces
                           : item.type === 'github'
-                            ? mdiGithub
-                            : mdiLink}
+                            ? LucideGithub
+                            : LucideLink2}
                   <a href={item.url.toString()} class="group">
                     <ListItem
                       title={item.name.toString()}
@@ -248,7 +241,7 @@
                       class="hover:bg-surface-200 cursor-pointer"
                     >
                       <div slot="actions">
-                        <Icon data={mdiChevronRight} class="text-surface-content/50" />
+                        <Icon data={icons.chevronRight} class="text-surface-content/50" />
                       </div>
                     </ListItem>
                   </a>
@@ -273,7 +266,7 @@
         <div
           class="flex gap-2 items-center text-xs font-medium uppercase pb-3 tracking-widest text-surface-content/50"
         >
-          <IconAlignLeft />
+          <LucideAlignLeft />
           On this page
         </div>
         <!-- Rebuild toc when page changes -->

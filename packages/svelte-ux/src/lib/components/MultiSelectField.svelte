@@ -4,16 +4,15 @@
   import { cls, clsMerge, normalizeClasses } from '@layerstack/tailwind';
   import { Logger } from '@layerstack/utils';
 
-  import { mdiChevronDown, mdiClose } from '@mdi/js';
-
   import Button from './Button.svelte';
   import MultiSelectMenu from './MultiSelectMenu.svelte';
   import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
 
-  import { getComponentSettings } from './settings.js';
+  import { getComponentSettings, getSettings } from './settings.js';
 
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 
   type MultiSelectMenuProps = ComponentProps<MultiSelectMenu<TValue>>;
@@ -182,7 +181,7 @@
         <!-- Do not show chevron or clear buttons -->
       {:else if value?.length && clearable}
         <Button
-          icon={mdiClose}
+          icon={icons.close}
           class="text-surface-content/50 p-1"
           on:click={(e) => {
             e.stopPropagation();
@@ -192,7 +191,7 @@
         />
       {:else}
         <Button
-          icon={mdiChevronDown}
+          icon={icons.chevronDown}
           class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
           tabindex="-1"
           on:click={(e) => {

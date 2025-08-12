@@ -1,16 +1,35 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
-  import { mdiPlus } from '@mdi/js';
 
-  import { Button, Drawer, MultiSelectField, MultiSelectOption, ToggleButton } from 'svelte-ux';
+  import {
+    Button,
+    Dialog,
+    Drawer,
+    getSettings,
+    Form,
+    MultiSelectField,
+    MultiSelectOption,
+    TextField,
+    Toggle,
+    ToggleButton,
+    ToggleGroup,
+    ToggleOption,
+    type MenuOption,
+  } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
 
-  const options = [
+  const { icons } = getSettings();
+
+  let options: MenuOption[] = [
     { label: 'One', value: 1 },
     { label: 'Two', value: 2 },
     { label: 'Three', value: 3 },
     { label: 'Four', value: 4 },
   ];
+
+  const newOption: () => MenuOption = () => {
+    return { label: '', value: null };
+  };
 
   const manyOptions = Array.from({ length: 100 }).map((_, i) => ({
     label: `${i + 1}`,
@@ -18,6 +37,15 @@
   }));
 
   let value: number[] | undefined = [3];
+
+  // Filters (Any/Evens/Odds) for demos below
+  let msfSelectedStr: 'any' | 'even' | 'odds' = 'any';
+  $: msfOptionsFiltered =
+    msfSelectedStr === 'even'
+      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
+      : msfSelectedStr === 'odds'
+        ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
+        : options;
 </script>
 
 <h1>Examples</h1>
@@ -136,7 +164,7 @@
     maintainOrder
   >
     <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
+      <Button color="primary" icon={icons.plus}>Add item</Button>
     </div>
   </MultiSelectField>
 </Preview>
@@ -152,12 +180,126 @@
   />
 </Preview>
 
+<h2>beforeOptions slot</h2>
+
+<Preview>
+  <MultiSelectField
+    options={msfOptionsFiltered}
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+  >
+    <svelte:fragment slot="beforeOptions">
+      <div class="p-2 border-b">
+        <ToggleGroup
+          bind:value={msfSelectedStr}
+          classes={{ options: 'justify-start h-10' }}
+          rounded="full"
+          inset
+        >
+          <ToggleOption value="any">Any</ToggleOption>
+          <ToggleOption value="even">Evens</ToggleOption>
+          <ToggleOption value="odds">Odds</ToggleOption>
+        </ToggleGroup>
+      </div>
+    </svelte:fragment>
+  </MultiSelectField>
+</Preview>
+
+<h2>afterOptions slot</h2>
+
+<Preview>
+  <MultiSelectField
+    options={msfOptionsFiltered}
+    {value}
+    on:change={(e) => (value = e.detail.value)}
+  >
+    <svelte:fragment slot="afterOptions">
+      <div class="p-2 border-t">
+        <ToggleGroup
+          bind:value={msfSelectedStr}
+          classes={{ options: 'justify-start h-10' }}
+          rounded="full"
+          inset
+        >
+          <ToggleOption value="any">Any</ToggleOption>
+          <ToggleOption value="even">Evens</ToggleOption>
+          <ToggleOption value="odds">Odds</ToggleOption>
+        </ToggleGroup>
+      </div>
+    </svelte:fragment>
+  </MultiSelectField>
+</Preview>
+
 <h2>actions slot</h2>
 
 <Preview>
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)}>
-    <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
+    <div slot="actions" class="p-2" on:click|stopPropagation role="none">
+      <Toggle let:on={open} let:toggle>
+        <Button icon={icons.plus} color="primary" on:click={toggle}>New item</Button>
+        <Form
+          initial={newOption()}
+          on:change={(e) => {
+            // Convert value to number if it's a valid number, otherwise keep as string
+            const newOptionData = { ...e.detail };
+            if (
+              newOptionData.value !== null &&
+              newOptionData.value !== '' &&
+              !isNaN(Number(newOptionData.value))
+            ) {
+              newOptionData.value = Number(newOptionData.value);
+            }
+            options = [newOptionData, ...options];
+            // Auto-select the newly created option
+            value = [...(value || []), newOptionData.value];
+          }}
+          let:draft
+          let:current
+          let:commit
+          let:revert
+        >
+          <Dialog
+            {open}
+            on:close={() => {
+              toggle();
+            }}
+          >
+            <div slot="title">Create new option</div>
+            <div class="px-6 py-3 w-96 grid gap-2">
+              <TextField
+                label="Label"
+                value={current.label}
+                on:change={(e) => {
+                  draft.label = e.detail.value;
+                }}
+                autofocus
+              />
+              <TextField
+                label="Value"
+                value={draft.value}
+                on:change={(e) => {
+                  draft.value = e.detail.value;
+                }}
+              />
+            </div>
+            <div slot="actions">
+              <Button
+                on:click={() => {
+                  commit();
+                  toggle();
+                }}
+                color="primary">Add option</Button
+              >
+              <Button
+                on:click={() => {
+                  revert();
+                  toggle();
+                }}>Cancel</Button
+              >
+            </div>
+          </Dialog>
+        </Form>
+      </Toggle>
     </div>
   </MultiSelectField>
 </Preview>

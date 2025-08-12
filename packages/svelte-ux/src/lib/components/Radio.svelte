@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { mdiCheckboxBlankCircle } from '@mdi/js';
-
   import Icon from './Icon.svelte';
   import { uniqueId } from '@layerstack/utils';
   import { cls } from '@layerstack/tailwind';
@@ -71,7 +69,7 @@
     )}
   >
     <Icon
-      path={mdiCheckboxBlankCircle}
+      path="M12 2A10 10 0 0 0 12 22A10 10 0 0 0 12 2Z"
       class={cls(
         'icon',
         'pointer-events-none transition-transform',
