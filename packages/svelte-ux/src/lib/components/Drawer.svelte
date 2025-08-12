@@ -92,6 +92,9 @@
       classes.root,
       className
     )}
+    on:mouseup={(e) => {
+      e.stopPropagation(); // Prevent mouseup from bubbling to outside click handlers (e.g., Popover/Menu clickOutside)
+    }}
     in:fly|global={{
       x: placement === 'left' ? '-100%' : placement === 'right' ? '100%' : 0,
       y: placement === 'top' ? '-100%' : placement === 'bottom' ? '100%' : 0,

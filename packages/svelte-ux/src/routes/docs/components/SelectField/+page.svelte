@@ -76,12 +76,14 @@
   let selectedStr: 'any' | 'even' | 'odds' = 'any';
 
   // Filter options based on toggle selection
-  $: optionsFiltered =
-    selectedStr === 'even'
-      ? options.filter((o) => typeof o.value === 'number' && o.value % 2 === 0)
-      : selectedStr === 'odds'
-        ? options.filter((o) => typeof o.value === 'number' && o.value % 2 !== 0)
-        : options;
+  $: optionsFiltered = options.filter((o) => {
+    if (selectedStr === 'even') {
+      return typeof o.value === 'number' && o.value % 2 === 0;
+    } else if (selectedStr === 'odds') {
+      return typeof o.value === 'number' && o.value % 2 !== 0;
+    }
+    return true;
+  });
 </script>
 
 <h1>Examples</h1>
@@ -416,7 +418,16 @@
     <Form
       initial={newOption()}
       on:change={(e) => {
-        options = [e.detail, ...options];
+        // Convert value to number if it's a valid number, otherwise keep as string
+        const newOptionData = { ...e.detail };
+        if (
+          newOptionData.value !== null &&
+          newOptionData.value !== '' &&
+          !isNaN(Number(newOptionData.value))
+        ) {
+          newOptionData.value = Number(newOptionData.value);
+        }
+        options = [newOptionData, ...options];
       }}
       let:draft
       let:commit
@@ -449,6 +460,45 @@
     </Form>
   </Toggle>
 </Preview>
+
+<h2>`beforeOptions` slot</h2>
+
+<Preview>
+  <SelectField options={optionsFiltered} bind:value menuProps={{ explicitClose: true }}>
+    <div slot="beforeOptions" class="p-2 border-b" on:click|stopPropagation let:hide role="none">
+      <ToggleGroup
+        bind:value={selectedStr}
+        classes={{ options: 'justify-start h-10' }}
+        rounded="full"
+        inset
+      >
+        <ToggleOption value="any">Any</ToggleOption>
+        <ToggleOption value="even">Evens</ToggleOption>
+        <ToggleOption value="odds">Odds</ToggleOption>
+      </ToggleGroup>
+    </div>
+  </SelectField>
+</Preview>
+
+<h2>`afterOptions` slot</h2>
+
+<Preview>
+  <SelectField options={optionsFiltered} bind:value menuProps={{ explicitClose: true }}>
+    <div slot="afterOptions" class="p-2 border-t" on:click|stopPropagation let:hide role="none">
+      <ToggleGroup
+        bind:value={selectedStr}
+        classes={{ options: 'justify-start h-10' }}
+        rounded="full"
+        inset
+      >
+        <ToggleOption value="any">Any</ToggleOption>
+        <ToggleOption value="even">Evens</ToggleOption>
+        <ToggleOption value="odds">Odds</ToggleOption>
+      </ToggleGroup>
+    </div>
+  </SelectField>
+</Preview>
+
 <h2>`actions` slot (menu)</h2>
 
 <Preview>
@@ -459,7 +509,18 @@
         <Form
           initial={newOption()}
           on:change={(e) => {
-            options = [e.detail, ...options];
+            // Convert value to number if it's a valid number, otherwise keep as string
+            const newOptionData = { ...e.detail };
+            if (
+              newOptionData.value !== null &&
+              newOptionData.value !== '' &&
+              !isNaN(Number(newOptionData.value))
+            ) {
+              newOptionData.value = Number(newOptionData.value);
+            }
+            options = [newOptionData, ...options];
+            // Auto-select the newly created option
+            value = newOptionData.value;
           }}
           let:draft
           let:current
@@ -470,7 +531,6 @@
             {open}
             on:close={() => {
               toggle();
-              hide();
             }}
           >
             <div slot="title">Create new option</div>
@@ -492,49 +552,24 @@
               />
             </div>
             <div slot="actions">
-              <Button on:click={() => commit()} color="primary">Add option</Button>
-              <Button on:click={() => revert()}>Cancel</Button>
+              <Button
+                on:click={() => {
+                  commit();
+                  toggle();
+                  hide();
+                }}
+                color="primary">Add option</Button
+              >
+              <Button
+                on:click={() => {
+                  revert();
+                  toggle();
+                }}>Cancel</Button
+              >
             </div>
           </Dialog>
         </Form>
       </Toggle>
-    </div>
-  </SelectField>
-</Preview>
-
-<h2>`beforeOptions` slot (menu)</h2>
-
-<Preview>
-  <SelectField options={optionsFiltered} bind:value menuProps={{ explicitClose: true }}>
-    <div slot="beforeOptions" class="p-2 border-b" on:click|stopPropagation let:hide role="none">
-      <ToggleGroup
-        bind:value={selectedStr}
-        classes={{ options: 'justify-start h-10' }}
-        rounded="full"
-        inset
-      >
-        <ToggleOption value="any">Any</ToggleOption>
-        <ToggleOption value="even">Evens</ToggleOption>
-        <ToggleOption value="odds">Odds</ToggleOption>
-      </ToggleGroup>
-    </div>
-  </SelectField>
-</Preview>
-<h2>`afterOptions` slot (menu)</h2>
-
-<Preview>
-  <SelectField options={optionsFiltered} bind:value menuProps={{ explicitClose: true }}>
-    <div slot="afterOptions" class="p-2 border-t" on:click|stopPropagation let:hide role="none">
-      <ToggleGroup
-        bind:value={selectedStr}
-        classes={{ options: 'justify-start h-10' }}
-        rounded="full"
-        inset
-      >
-        <ToggleOption value="any">Any</ToggleOption>
-        <ToggleOption value="even">Evens</ToggleOption>
-        <ToggleOption value="odds">Odds</ToggleOption>
-      </ToggleGroup>
     </div>
   </SelectField>
 </Preview>

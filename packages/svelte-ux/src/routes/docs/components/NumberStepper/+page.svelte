@@ -7,7 +7,7 @@
 
 <h1>Examples</h1>
 
-<h2>basic</h2>
+<h2>Basic</h2>
 
 <Preview>
   <NumberStepper />
@@ -26,20 +26,36 @@
   <NumberStepper on:change={(e) => console.log(e.detail.value)} />
 </Preview>
 
-<h2>dense</h2>
+<h2>Dense</h2>
 
 <Preview>
   <NumberStepper dense />
 </Preview>
 
-<h2>min / max</h2>
+<h2>Min / Max</h2>
 
 <Preview>
   <NumberStepper min={0} max={10} />
 </Preview>
 
-<h2>step</h2>
+<h2>Step</h2>
 
 <Preview>
   <NumberStepper step={0.1} />
+</Preview>
+
+<h2>Prefix</h2>
+
+<Preview>
+  <NumberStepper class="w-28">
+    <span slot="prefix">$</span>
+  </NumberStepper>
+</Preview>
+
+<h2>Suffix</h2>
+
+<Preview>
+  <NumberStepper class="w-28">
+    <span slot="suffix">kg</span>
+  </NumberStepper>
 </Preview>
