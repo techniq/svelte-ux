@@ -19,9 +19,6 @@
   let className: string | undefined = undefined;
   export { className as class };
 
-  let className: string | undefined = undefined;
-  export { className as class };
-
   export let classes: {
     root?: string;
     active?: string;

@@ -50,9 +50,6 @@
   let className: string | undefined = undefined;
   export { className as class };
 
-  let className: string | undefined = undefined;
-  export { className as class };
-
   let inputValue: string | undefined = '';
 
   const dispatch = createEventDispatcher();
