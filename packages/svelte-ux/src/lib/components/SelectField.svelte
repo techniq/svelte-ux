@@ -118,7 +118,8 @@
 
         // Capture for next change
         prevValue = selected?.value;
-        prevSelected = selectOption(selected);
+        // Do not close menu when selection is updated reactively
+        prevSelected = selectOption(selected, false);
       } else if (/*value !== undefined &&*/ value !== prevValue) {
         // Removed `value !== undefined` to clear searchText when value is set to undefined.  Might be a breaking change
         logger.info('value changed', {
@@ -131,7 +132,7 @@
 
         // Capture for next change
         prevValue = value;
-        prevSelected = selectValue(value);
+        prevSelected = selectValue(value, false);
       } else {
         logger.info('neither selected or value changed (options only)');
         // Reselect value if menu is not open and options possibly changed (which could result in new display text for the select value)
@@ -358,17 +359,17 @@
   /**
    * Select option by value
    */
-  function selectValue(value: TValue | null | undefined) {
+  function selectValue(value: TValue | null | undefined, closeMenu: boolean = true) {
     logger.debug('selectValue', { value, options, filteredOptions });
 
     const option = options?.find((option) => option.value === value) ?? null;
-    return selectOption(option);
+    return selectOption(option, closeMenu);
   }
 
   /**
    * Select option by object
    */
-  function selectOption(option: MenuOption<TValue> | null) {
+  function selectOption(option: MenuOption<TValue> | null, closeMenu: boolean = true) {
     logger.info('selectOption', { option });
 
     const previousValue = value;
@@ -389,7 +390,9 @@
       dispatch('change', { option, value });
     }
 
-    hide('selectOption');
+    if (closeMenu) {
+      hide('selectOption');
+    }
 
     return option;
   }
@@ -418,7 +421,8 @@
 
   function clear() {
     logger.info('clear');
-    selectOption(null);
+    // Clearing should not close the menu🤞; keep it open if it already is
+    selectOption(null, false);
     filteredOptions = options;
   }
 </script>

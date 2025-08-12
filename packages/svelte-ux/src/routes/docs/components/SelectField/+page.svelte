@@ -75,18 +75,13 @@
   let selectedStr: 'any' | 'even' | 'odds' = 'any';
 
   // Filter options based on toggle selection
-  $: optionsFiltered = options.map((o) => {
-    const matches =
-      selectedStr === 'even'
-        ? typeof o.value === 'number' && o.value % 2 === 0
-        : selectedStr === 'odds'
-          ? typeof o.value === 'number' && o.value % 2 !== 0
-          : true;
-
-    return {
-      ...o,
-      disabled: (o.disabled ?? false) || !matches,
-    };
+  $: optionsFiltered = options.filter((o) => {
+    if (selectedStr === 'even') {
+      return typeof o.value === 'number' && o.value % 2 === 0;
+    } else if (selectedStr === 'odds') {
+      return typeof o.value === 'number' && o.value % 2 !== 0;
+    }
+    return true;
   });
 </script>
 
