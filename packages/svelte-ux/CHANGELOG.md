@@ -1,5 +1,23 @@
 # svelte-ux
 
+## 2.0.0-next.20
+
+### Patch Changes
+
+- Update dependencies ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix(Dialog/Drawer): event propagation preventing outside click detection ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
+- fix(SelectField): keep menu open on reactive updates; close only on selection or outside click ([#638](https://github.com/techniq/svelte-ux/pull/638))
+
+- docs(MultiSelect/MultiSelectField/MultiSelectMenu): Enhanced demo examples with functional item creation dialogs ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
+- docs(NumberStepper): demo example with prefix/suffix slot ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
+- docs(SelectField): demo filtering logic and form handling ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
+- fix(SelectField): focus management when used within dialogs ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
 ## 2.0.0-next.19
 
 ### Patch Changes
