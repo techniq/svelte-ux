@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.21
+
+### Patch Changes
+
+- fix(DateRangeField): Fix stepper offsets ([#649](https://github.com/techniq/svelte-ux/pull/649))
+
+- fix(DateRangeField): Reflect value changes (quick presets, stepper, etc) in dialog ([#649](https://github.com/techniq/svelte-ux/pull/649))
+
 ## 2.0.0-next.20
 
 ### Patch Changes
