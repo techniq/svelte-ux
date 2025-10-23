@@ -107,7 +107,7 @@
               $localeSettings,
               value.periodType
             );
-            const offset = difference(value.from, value.to) - 1;
+            const offset = -difference(value.from, value.to) - 1;
             value = {
               from: start(add(value.from, offset)),
               to: end(add(value.to, offset)),
@@ -163,7 +163,7 @@
               $localeSettings,
               value.periodType
             );
-            const offset = difference(value.to, value.from) + 1;
+            const offset = difference(value.from, value.to) + 1;
             value = {
               from: start(add(value.from, offset)),
               to: end(add(value.to, offset)),
