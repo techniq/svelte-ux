@@ -60,7 +60,6 @@
 
   // Field props
   export let label: string | null = null;
-  // export let value = '';
   export let error = '';
   export let hint = '';
   export let disabled = false;
@@ -74,6 +73,9 @@
   let showQuickPresetsMenu = false;
 
   let currentValue = value;
+
+  // Sync currentValue with value changes (quick preset changes)
+  $: currentValue = value;
 
   $: restProps = { ...defaults, ...$$restProps };
 </script>
