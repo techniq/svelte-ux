@@ -60,7 +60,6 @@
 
   // Field props
   export let label: string | null = null;
-  // export let value = '';
   export let error = '';
   export let hint = '';
   export let disabled = false;
@@ -74,6 +73,9 @@
   let showQuickPresetsMenu = false;
 
   let currentValue = value;
+
+  // Sync currentValue with value changes (quick preset changes)
+  $: currentValue = value;
 
   $: restProps = { ...defaults, ...$$restProps };
 </script>
@@ -105,7 +107,7 @@
               $localeSettings,
               value.periodType
             );
-            const offset = difference(value.from, value.to) - 1;
+            const offset = -difference(value.from, value.to) - 1;
             value = {
               from: start(add(value.from, offset)),
               to: end(add(value.to, offset)),
@@ -161,7 +163,7 @@
               $localeSettings,
               value.periodType
             );
-            const offset = difference(value.to, value.from) + 1;
+            const offset = difference(value.from, value.to) + 1;
             value = {
               from: start(add(value.from, offset)),
               to: end(add(value.to, offset)),
