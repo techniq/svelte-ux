@@ -133,8 +133,8 @@ importers:
         specifier: ^4.12.24
         version: 4.12.24(postcss@8.4.49)
       marked:
-        specifier: ^15.0.7
-        version: 15.0.7
+        specifier: ^16.0.0
+        version: 16.4.2
       mdsvex:
         specifier: ^0.12.3
         version: 0.12.3(svelte@5.20.4)
@@ -1722,9 +1722,9 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
-  marked@15.0.7:
-    resolution: {integrity: sha512-dgLIeKGLx5FwziAnsk4ONoGwHwGPJzselimvlVskE9XLN4Orv9u2VA3GWw/lYUqjfA0rUT/6fqKwfZJapP9BEg==}
-    engines: {node: '>= 18'}
+  marked@16.4.2:
+    resolution: {integrity: sha512-TI3V8YYWvkVf3KJe1dRkpnjs68JUPyEa5vjKrp1XEEJUAOaQc+Qj+L1qWbPd0SJuAdQkFU0h73sXXqwDYxsiDA==}
+    engines: {node: '>= 20'}
     hasBin: true
 
   mdn-data@2.0.30:
@@ -4014,7 +4014,7 @@ snapshots:
     dependencies:
       semver: 7.7.1
 
-  marked@15.0.7: {}
+  marked@16.4.2: {}
 
   mdn-data@2.0.30: {}
 
