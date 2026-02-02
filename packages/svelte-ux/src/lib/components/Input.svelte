@@ -140,12 +140,15 @@
   on:focus
   on:blur={(e) => {
     isFocused = false;
-
-    // TODO: Consider clearing value if any mask is still shown?
-    // TODO: Dispatch blur as well to allow DateField/etc to do the same if no value is set?
-    if (value === mask) {
-      value = '';
+    // Reset value if it contains remaining mask placeholders to ensure complete entries and data integrity
+    if (mask && value){
+      const partialMaskMatch = [...value].some(char => replaceSet.has(char))
+      if (partialMaskMatch){
+          value = '';
+          dispatch('change', { value });
+      }
     }
+    // Dispatch blur as well to allow DateField/etc to do the same if no value is set
     dispatch('blur', e);
   }}
   on:blur
