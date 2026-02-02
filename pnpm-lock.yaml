@@ -84,8 +84,8 @@ importers:
         specifier: ^0.22.1
         version: 0.22.1(postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.4.49)(yaml@2.7.0))(postcss@8.4.49)
       zod:
-        specifier: ^3.24.2
-        version: 3.24.2
+        specifier: ^4.0.0
+        version: 4.3.6
     devDependencies:
       '@changesets/cli':
         specifier: ^2.27.8
@@ -2550,6 +2550,9 @@ packages:
   zod@3.24.2:
     resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -4841,3 +4844,5 @@ snapshots:
   zod@3.22.3: {}
 
   zod@3.24.2: {}
+
+  zod@4.3.6: {}
