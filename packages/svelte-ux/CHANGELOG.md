@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.10
+
+### Patch Changes
+
+- Fix masked input not clearing partial values on blur ([#655](https://github.com/techniq/svelte-ux/pull/655))
+
 ## 1.0.9
 
 ### Patch Changes
