@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { mdiMagnify } from '@mdi/js';
   import { autoFocus, selectOnFocus } from '@layerstack/svelte-actions';
   import { smScreen } from '@layerstack/svelte-stores';
   import { cls } from '@layerstack/tailwind';
@@ -10,14 +9,19 @@
   import SelectField from '../components/SelectField.svelte';
   import { getComponentClasses } from './theme.js';
   import type { MenuOption } from '../types/index.js';
+  import { getSettings } from './settings.js';
 
   export let options: MenuOption<string>[] = [];
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let classes: {
     root?: string;
     button?: string;
   } = {};
   const settingsClasses = getComponentClasses('QuickSearch');
+  const { icons } = getSettings();
 
   let open = false;
 
@@ -42,7 +46,7 @@
 <svelte:window on:keydown={onKeyDown} />
 
 <Button
-  icon={mdiMagnify}
+  icon={icons.search}
   iconOnly={!$smScreen}
   on:click={() => (open = true)}
   class={cls(
@@ -58,12 +62,12 @@
 <Dialog
   bind:open
   classes={{
-    root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, $$props.class),
-    backdrop: 'backdrop-blur-sm',
+    root: cls('items-start mt-8 sm:mt-24', settingsClasses.root, classes.root, className),
+    backdrop: 'backdrop-blur-xs',
   }}
 >
   <SelectField
-    icon={mdiMagnify}
+    icon={icons.search}
     placeholder="Search..."
     inlineOptions={true}
     {options}

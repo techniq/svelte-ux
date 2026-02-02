@@ -8,14 +8,17 @@
   export let command = false;
 
   export let variant: 'filled' | 'none' = 'filled';
+
+  let className: string | undefined = undefined;
+  export { className as class };
 </script>
 
 <kbd
   class={cls(
     'font-sans inline-flex gap-1',
     variant === 'filled' &&
-      'border border-b-2 text-surface-content bg-surface-200 rounded py-1 px-1',
-    $$props.class
+      'border border-b-2 text-surface-content bg-surface-200 rounded-sm py-1 px-1',
+    className
   )}
 >
   {#if control}

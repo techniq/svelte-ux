@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { isAfter, isBefore, isSameDay } from 'date-fns';
   import { cls } from '@layerstack/tailwind';
   import { omit } from '@layerstack/utils/object';
   import { mdScreen } from '@layerstack/svelte-stores';
@@ -8,6 +7,9 @@
     DayOfWeek,
     getDateFuncsByPeriodType,
     type DisabledDate,
+    isDateAfter,
+    isDateBefore,
+    isSameInterval,
   } from '@layerstack/utils';
   import { getDateRangePresets, type DateRange } from '@layerstack/utils/dateRange';
   import { hasDayOfWeek, replaceDayOfWeek, missingDayOfWeek } from '@layerstack/utils/date';
@@ -72,7 +74,7 @@
   }
 
   function onDateChange(date: Date) {
-    // Apply date-fns function based on type and from/to.
+    // Apply date function based on type and from/to.
     let newSelected = { ...selected, periodType: selectedPeriodType };
 
     const { start, end } = getDateFuncsByPeriodType($localeSettings, selectedPeriodType);
@@ -81,12 +83,12 @@
 
     if (activeDate === 'from') {
       newSelected.from = start(date);
-      if (selected!.to != null && isAfter(date, selected!.to)) {
+      if (selected!.to != null && isDateAfter(date, selected!.to)) {
         newSelected.to = end(date);
       }
     } else {
       newSelected.to = end(date);
-      if (selected!.from != null && isBefore(date, selected!.from)) {
+      if (selected!.from != null && isDateBefore(date, selected!.from)) {
         newSelected.from = start(date);
         newActiveDate = 'to';
       }
@@ -134,9 +136,9 @@
         ].find(
           (x) =>
             x.value.from &&
-            isSameDay(x.value.from, selected!.from!) &&
+            isSameInterval('day', x.value.from, selected!.from!) &&
             x.value.to &&
-            isSameDay(x.value.to, selected!.to!)
+            isSameInterval('day', x.value.to, selected!.to!)
         );
 
         if (prevPeriodTypePreset && newPeriodType) {
@@ -173,7 +175,7 @@
   class={cls(
     'DateRange grid gap-2',
     'w-[min(90vw,384px)]',
-    showSidebar && 'md:w-[640px] md:grid-cols-[2fr,3fr]',
+    showSidebar && 'md:w-[640px] md:grid-cols-[2fr_3fr]',
     settingsClasses.root,
     className
   )}
@@ -305,7 +307,7 @@
     </div>
   {/if}
 
-  <div class="bg-surface-100 border rounded overflow-auto">
+  <div class="bg-surface-100 border rounded-sm overflow-auto">
     <DateSelect
       {selected}
       periodType={selectedPeriodType}

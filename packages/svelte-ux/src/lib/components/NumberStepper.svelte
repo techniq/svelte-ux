@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { mdiMinus, mdiPlus } from '@mdi/js';
   import { cls } from '@layerstack/tailwind';
   import { step as stepUtil } from '@layerstack/utils/number';
   import { selectOnFocus } from '@layerstack/svelte-actions';
@@ -8,6 +7,7 @@
   import Button from './Button.svelte';
   import TextField from './TextField.svelte';
   import { getComponentClasses } from './theme.js';
+  import { getSettings } from './settings.js';
 
   export let value: number = 0;
   export let min: number | undefined = undefined;
@@ -21,6 +21,8 @@
   const dispatch = createEventDispatcher();
 
   $: dispatch('change', { value });
+
+  const { icons } = getSettings();
 </script>
 
 <TextField
@@ -36,7 +38,7 @@
 >
   <div slot="prepend">
     <Button
-      icon={mdiMinus}
+      icon={icons.minus}
       on:click={() => (value = stepUtil(value, -step))}
       size="sm"
       disabled={min != null && value <= min}
@@ -46,7 +48,7 @@
   <div slot="suffix"><slot name="suffix" /></div>
   <div slot="append">
     <Button
-      icon={mdiPlus}
+      icon={icons.plus}
       on:click={() => (value = stepUtil(value, step))}
       size="sm"
       disabled={max != null && value >= max}

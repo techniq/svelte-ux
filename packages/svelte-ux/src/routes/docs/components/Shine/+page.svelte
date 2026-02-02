@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { mdiHome, mdiMagnify, mdiTrashCan } from '@mdi/js';
-
-  import { Button, Shine, Tilt } from 'svelte-ux';
+  import { Button, getSettings, Shine, Tilt } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   const images = [
     'https://nelsoncodepen.s3.eu-west-2.amazonaws.com/thb-250-plains.png',
@@ -41,7 +41,7 @@
 
 <Preview class="bg-neutral-700">
   <Shine depth={3} lightColor="#FF0000">
-    <div class="text-[9rem] leading-[9rem] grayscale-[100] brightness-50">👻 💀 🧪</div>
+    <div class="text-[9rem] leading-[9rem] grayscale-100 brightness-50">👻 💀 🧪</div>
   </Shine>
 </Preview>
 
@@ -51,12 +51,13 @@
   <Shine>
     <div class="flex items-center gap-2">
       <Button variant="fill" color="primary">Button</Button>
-      <Button icon={mdiTrashCan} variant="fill" color="danger">Delete</Button>
-      <Button icon={mdiMagnify} variant="fill" color="success" class="flex-row-reverse"
+      <Button icon={icons.trash} variant="fill" color="danger">Delete</Button>
+      <Button icon={icons.search} variant="fill" color="success" class="flex-row-reverse"
         >Search</Button
       >
-      <Button icon={mdiHome} variant="fill" color="primary" class="flex-col">Home</Button>
-      <Button icon={mdiHome} variant="fill" color="primary" class="flex-col-reverse">Home</Button>
+      <Button icon={icons.home} variant="fill" color="primary" class="flex-col">Home</Button>
+      <Button icon={icons.home} variant="fill" color="primary" class="flex-col-reverse">Home</Button
+      >
     </div>
   </Shine>
 </Preview>

@@ -10,6 +10,9 @@
   export let format: (value: number) => string | number = (value) => value;
   export let axis: 'x' | 'y' = 'y';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     value?: string;
@@ -31,7 +34,7 @@
     'inline-grid overflow-hidden',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <div

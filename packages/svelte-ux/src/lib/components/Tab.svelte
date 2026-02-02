@@ -8,6 +8,9 @@
 
   $: vertical = placement === 'left' || placement === 'right';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
   } = {};
@@ -31,7 +34,7 @@
       : 'bg-surface-200 text-surface-content/50 hover:text-surface-content hover:bg-surface-100',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   on:click
   transition:slide={{ axis: vertical ? 'y' : 'x' }}

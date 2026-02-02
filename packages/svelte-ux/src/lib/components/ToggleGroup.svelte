@@ -30,6 +30,9 @@
   export let inset: boolean = false;
   export let vertical: boolean = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     options?: string;
@@ -107,7 +110,7 @@
     options: cls(
       'grid overflow-auto',
       vertical ? 'grid-flow-row' : 'grid-flow-col',
-      rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
+      rounded === 'full' ? 'rounded-full' : rounded && 'rounded-sm',
       variant !== 'outline' && (gap === true ? 'gap-1' : gap === 'px' ? 'gap-px' : ''),
       inset ? 'p-[2px]' : '',
       variantClasses[variant].options,
@@ -123,19 +126,19 @@
         md: 'text-sm',
         lg: 'text-base',
       }[size],
-      rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
+      rounded === 'full' ? 'rounded-full' : rounded && 'rounded-sm',
       // If adding gap between options, round first and last outside edges for options and the indicator
       gap &&
         (vertical
           ? [
-              '[&:not(:first-child)]:rounded-t-none',
-              '[&:not(:last-child)]:rounded-b-none',
+              'not-first:rounded-t-none',
+              'not-last:rounded-b-none',
               '[&:not(:first-child)_.indicator]:rounded-t-none',
               '[&:not(:last-child)_.indicator]:rounded-b-none',
             ]
           : [
-              '[&:not(:first-child)]:rounded-l-none',
-              '[&:not(:last-child)]:rounded-r-none',
+              'not-first:rounded-l-none',
+              'not-last:rounded-r-none',
               '[&:not(:first-child)_.indicator]:rounded-l-none',
               '[&:not(:last-child)_.indicator]:rounded-r-none',
             ]),
@@ -159,7 +162,7 @@
 
     indicator: cls(
       'z-0',
-      rounded === 'full' ? 'rounded-full' : rounded && 'rounded',
+      rounded === 'full' ? 'rounded-full' : rounded && 'rounded-sm',
       variantClasses[variant].indicator,
       settingsClasses.indicator,
       classes.indicator
@@ -247,7 +250,7 @@
 </script>
 
 <div
-  class={cls('ToggleGroup', `variant-${variant}`, $classesStore.root, $$props.class)}
+  class={cls('ToggleGroup', `variant-${variant}`, $classesStore.root, className)}
   {...$$restProps}
 >
   <!-- TODO: Figure out why fieldset and class="overflow-auto" doesn't work  -->

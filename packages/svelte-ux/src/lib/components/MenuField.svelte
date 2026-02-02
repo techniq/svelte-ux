@@ -1,17 +1,17 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import { mdiChevronLeft, mdiChevronRight, mdiMenuDown } from '@mdi/js';
 
   import { cls } from '@layerstack/tailwind';
 
+  import Button from './Button.svelte';
   import Field from './Field.svelte';
   import Icon from './Icon.svelte';
   import Menu from './Menu.svelte';
   import MenuItem from './MenuItem.svelte';
-  import Button from './Button.svelte';
   import type { MenuOption } from '../types/index.js';
-  import { getComponentSettings } from './settings.js';
+  import { getComponentSettings, getSettings } from './settings.js';
 
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('MenuField');
 
   export let options: MenuOption[] = [];
@@ -20,7 +20,6 @@
     autoPlacement: true,
     resize: true,
   };
-  export let menuIcon = mdiMenuDown;
   /** If true, show left/right buttons to step through options */
   export let stepper = false;
 
@@ -70,7 +69,7 @@
 <Field
   class="cursor-pointer"
   {...restProps}
-  classes={{ input: 'overflow-hidden', ...$$props.classes }}
+  classes={{ input: 'overflow-hidden', ...classes }}
   on:click={() => (open = !open)}
 >
   <slot name="selection">
@@ -81,7 +80,12 @@
 
   <span slot="prepend">
     {#if stepper}
-      <Button icon={mdiChevronLeft} on:click={() => (value = previous())} class="mr-2" size="sm" />
+      <Button
+        icon={icons.chevronLeft}
+        on:click={() => (value = previous())}
+        class="mr-2"
+        size="sm"
+      />
     {/if}
     <slot name="prepend" />
   </span>
@@ -90,20 +94,19 @@
     <slot name="append" />
 
     <Icon
-      path={menuIcon}
+      data={icons.chevronDown}
       class={cls(
-        'text-surface-content/50 mr-1 transform transition-all duration-300',
+        'text-surface-content/50 mr-1 transform transition-all duration-300 pointer-events-none',
         {
           '-rotate-180': open,
         },
         settingsClasses.menuIcon,
         classes.menuIcon
       )}
-      on:click={() => (open = !open)}
     />
 
     {#if stepper}
-      <Button icon={mdiChevronRight} on:click={() => (value = next())} class="mr-2" size="sm" />
+      <Button icon={icons.chevronRight} on:click={() => (value = next())} class="mr-2" size="sm" />
     {/if}
   </span>
 

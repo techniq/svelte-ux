@@ -3,7 +3,11 @@
   import { entries } from '@layerstack/utils';
 
   import { page } from '$app/stores';
-  import { mdiCog, mdiFormatListBulleted, mdiHome, mdiPalette, mdiOpenInNew } from '@mdi/js';
+
+  import LucideArrowUpRight from '~icons/lucide/arrow-up-right';
+  import LucideHouse from '~icons/lucide/house';
+  import LucideList from '~icons/lucide/list';
+  import LucideSettings2 from '~icons/lucide/settings-2';
 
   const components = {
     App: ['AppBar', 'AppLayout', 'NavItem', 'Settings', 'ThemeInit', 'ThemeSelect', 'ThemeSwitch'],
@@ -74,10 +78,10 @@
   };
 </script>
 
-<NavItem text="Getting Started" icon={mdiHome} currentUrl={$page.url} path="/" />
-<NavItem text="Customization" icon={mdiCog} currentUrl={$page.url} path="/customization" />
-<NavItem text="Theme" icon={mdiPalette} currentUrl={$page.url} path="/theme" />
-<NavItem text="Changelog" icon={mdiFormatListBulleted} currentUrl={$page.url} path="/changelog" />
+<NavItem text="Getting Started" icon={LucideHouse} currentUrl={$page.url} path="/" />
+<NavItem text="Customization" icon={LucideSettings2} currentUrl={$page.url} path="/customization" />
+<!-- <NavItem text="Theme" icon={mdiPalette} currentUrl={$page.url} path="/theme" /> -->
+<NavItem text="Changelog" icon={LucideList} currentUrl={$page.url} path="/changelog" />
 
 <h1>Components</h1>
 {#each entries(components) as [header, items]}
@@ -94,7 +98,7 @@
 <h1>Charts</h1>
 <NavItem
   text="LayerChart"
-  icon={mdiOpenInNew}
+  icon={LucideArrowUpRight}
   currentUrl={$page.url}
   path="https://www.layerchart.com"
   target="_blank"
@@ -103,14 +107,14 @@
 <h1>Actions</h1>
 <NavItem
   text="@layerstack/svelte-actions"
-  icon={mdiOpenInNew}
+  icon={LucideArrowUpRight}
   currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/svelte-actions"
   target="_blank"
 />
 <NavItem
   text="@layerstack/svelte-table"
-  icon={mdiOpenInNew}
+  icon={LucideArrowUpRight}
   currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/svelte-table/actions"
   target="_blank"
@@ -119,14 +123,14 @@
 <h1>Stores</h1>
 <NavItem
   text="@layerstack/svelte-stores"
-  icon={mdiOpenInNew}
+  icon={LucideArrowUpRight}
   currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/svelte-stores"
   target="_blank"
 />
 <NavItem
   text="@layerstack/svelte-table"
-  icon={mdiOpenInNew}
+  icon={LucideArrowUpRight}
   currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/svelte-table/stores"
   target="_blank"
@@ -135,14 +139,14 @@
 <h1>Utils</h1>
 <NavItem
   text="@layerstack/tailwind"
-  icon={mdiOpenInNew}
+  icon={LucideArrowUpRight}
   currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/tailwind"
   target="_blank"
 />
 <NavItem
   text="@layerstack/utils"
-  icon={mdiOpenInNew}
+  icon={LucideArrowUpRight}
   currentUrl={$page.url}
   path="https://www.layerstack.dev/docs/utils"
   target="_blank"

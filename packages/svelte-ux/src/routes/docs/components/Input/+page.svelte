@@ -96,7 +96,7 @@
 <h2>bind:value</h2>
 
 <Preview>
-  <div class="grid grid-cols-[60px,auto]">
+  <div class="grid grid-cols-[60px_auto]">
     <span class="font-semibold">Input:</span>
     <Input bind:value />
 

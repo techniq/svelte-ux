@@ -26,6 +26,9 @@
 
   export let order: ReturnType<typeof tableOrderStore> | undefined = undefined;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     container?: string;
     wrapper?: string;
@@ -92,13 +95,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-  class={cls(
-    'Table',
-    'table-container',
-    settingsClasses.container,
-    classes.container,
-    $$props.class
-  )}
+  class={cls('Table', 'table-container', settingsClasses.container, classes.container, className)}
   style={styles.container}
 >
   <div

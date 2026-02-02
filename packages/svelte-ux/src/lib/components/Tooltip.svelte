@@ -23,6 +23,9 @@
   export let autoPlacement = false;
   export let matchWidth: boolean = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     popover?: string;
@@ -88,7 +91,7 @@
     <slot name="title">
       <div
         class={cls(
-          'text-xs text-surface-100 bg-surface-content px-2 py-1 rounded whitespace-nowrap',
+          'text-xs text-surface-100 bg-surface-content px-2 py-1 rounded-sm whitespace-nowrap',
           settingsClasses.title,
           classes.title
         )}
@@ -115,14 +118,14 @@
   on:click={hideTooltip}
   bind:this={containerEl}
 >
-  {#if $$props.class || underline || cursor}
+  {#if className || underline || cursor}
     <span
       class={cls(
         hasTitle && underline && 'border-b border-dotted',
         hasTitle && cursor && 'cursor-help',
         settingsClasses.root,
         classes.root,
-        $$props.class
+        className
       )}
     >
       <slot />

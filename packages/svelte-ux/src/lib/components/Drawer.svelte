@@ -24,6 +24,9 @@
   export let loading: boolean | null = null;
   export let placement: 'top' | 'bottom' | 'left' | 'right' = 'right';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     backdrop?: string;
@@ -76,7 +79,7 @@
   <div
     class={cls(
       'Drawer',
-      'bg-surface-100 fixed overflow-auto transform z-50 outline-none',
+      'bg-surface-100 fixed overflow-auto transform z-50 outline-hidden',
       {
         'h-full': ['left', 'right'].includes(placement),
         'w-full': ['top', 'bottom'].includes(placement),
@@ -87,9 +90,8 @@
       },
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
-    style={$$props.style}
     on:mouseup={(e) => {
       e.stopPropagation(); // Prevent mouseup from bubbling to outside click handlers (e.g., Popover/Menu clickOutside)
     }}
@@ -116,9 +118,11 @@
     use:portalAction={portal}
     use:focusMove={{ restoreFocus: true }}
     role="dialog"
+    tabindex="-1"
+    {...$$restProps}
   >
     {#if loading}
-      <Overlay center class="rounded">
+      <Overlay center class="rounded-sm">
         <ProgressCircle />
       </Overlay>
     {/if}
@@ -128,7 +132,7 @@
     {#if $$slots.actions}
       <div
         class={cls(
-          'actions fixed bottom-0 w-full flex justify-center bg-surface-content/5 p-1 border-t',
+          'actions absolute bottom-0 w-full flex justify-center bg-surface-content/5 p-1 border-t',
           settingsClasses.actions,
           classes.actions
         )}

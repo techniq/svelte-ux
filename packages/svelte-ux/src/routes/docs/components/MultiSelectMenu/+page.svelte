@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { mdiPlus } from '@mdi/js';
-
   import {
     Button,
     Dialog,
@@ -12,9 +10,12 @@
     ToggleButton,
     ToggleGroup,
     ToggleOption,
+    getSettings,
     type MenuOption,
   } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let options: MenuOption[] = [
     { label: 'One', value: 1 },
@@ -288,7 +289,7 @@
         on:close={toggleOff}
       >
         <div slot="actions">
-          <Button color="primary" icon={mdiPlus}>Add item</Button>
+          <Button color="primary" icon={icons.plus}>Add item</Button>
         </div>
       </MultiSelectMenu>
     </ToggleButton>
@@ -389,7 +390,7 @@
       >
         <div slot="actions" class="p-2" on:click|stopPropagation role="none">
           <Toggle let:on={dialogOpen} let:toggle>
-            <Button icon={mdiPlus} color="primary" on:click={toggle}>New item</Button>
+            <Button icon={icons.plus} color="primary" on:click={toggle}>New item</Button>
             <Form
               initial={newOption()}
               on:change={(e) => {

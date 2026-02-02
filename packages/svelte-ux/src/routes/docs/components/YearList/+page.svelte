@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { addYears, startOfYear, subYears } from 'date-fns';
+  import { intervalOffset, startOfInterval } from '@layerstack/utils';
 
   import { YearList } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
@@ -31,8 +31,8 @@
 <Preview>
   <div class="overflow-auto h-64">
     <YearList
-      minDate={subYears(selected, 10)}
-      maxDate={addYears(selected, 10)}
+      minDate={intervalOffset('year', selected, -10)}
+      maxDate={intervalOffset('year', selected, 10)}
       {selected}
       on:dateChange={(e) => {
         selected = e.detail;
@@ -44,5 +44,8 @@
 <h2>Min / Max date</h2>
 
 <Preview>
-  <YearList minDate={startOfYear(subYears(new Date(), 3))} maxDate={new Date()} />
+  <YearList
+    minDate={startOfInterval('year', intervalOffset('year', new Date(), -3))}
+    maxDate={new Date()}
+  />
 </Preview>

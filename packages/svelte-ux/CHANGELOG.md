@@ -1,5 +1,165 @@
 # svelte-ux
 
+## 2.0.0-next.21
+
+### Patch Changes
+
+- fix(DateRangeField): Fix stepper offsets ([#649](https://github.com/techniq/svelte-ux/pull/649))
+
+- fix(DateRangeField): Reflect value changes (quick presets, stepper, etc) in dialog ([#649](https://github.com/techniq/svelte-ux/pull/649))
+
+## 2.0.0-next.20
+
+### Patch Changes
+
+- Update dependencies ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.19
+
+### Patch Changes
+
+- feat(SelectField|MultiSelect|MultiSelectField|MultiSelectMenu): Added (beforeOptions/afterOptions) slots. ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix(Drawer/Dialog): open/close events firing on mount and unrelated updates. Now events are emitted only on actual state transitions by tracking the previous open value, preventing unintended closes and focus jumps. (#632) ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.18
+
+### Patch Changes
+
+- Update deps ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- Fix(TableOfContent): No known conditions for "./elements" specifier in "svelte" package ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.17
+
+### Patch Changes
+
+- fix(Icon): Restore adding `inline-block` by default ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.16
+
+### Patch Changes
+
+- fix: Replace use of unplugin-icons `~icon/` imports with `@lucide/svelte` package for default icons to remove Vite configuration. Fixes #618 ([#625](https://github.com/techniq/svelte-ux/pull/625))
+
+## 2.0.0-next.15
+
+### Patch Changes
+
+- Update dependencies ([#622](https://github.com/techniq/svelte-ux/pull/622))
+
+## 2.0.0-next.14
+
+### Minor Changes
+
+- feat: Setup default icons on settings() for easy overriding. Change default to lucide (from mdi) ([#616](https://github.com/techniq/svelte-ux/pull/616))
+
+- feat: Support component icons (Unplugin icons, etc) ([#616](https://github.com/techniq/svelte-ux/pull/616))
+
+## 2.0.0-next.13
+
+### Patch Changes
+
+- fix(TableOfContents): Fix `classes` and `props` types ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.12
+
+### Patch Changes
+
+- feat(TableOfContents): Simplify base styling and provide greater control via `classes`, `props`, `itemIndent` and `linkIndent` props and `link` slot. ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- feat(TreeList): Support passing `props` to underlying ul/li elements. Add `data-level` attribute to li for CSS targeting ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.11
+
+### Patch Changes
+
+- chore: Update @layerstack/tailwind with better theme generation and runtime separation ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.10
+
+### Patch Changes
+
+- chore: Update deps ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.9
+
+### Patch Changes
+
+- fix: Move `culori` and `@fortawesome/fontawesome-common-types` to `devDependenies` ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.8
+
+### Patch Changes
+
+- fix(NavItem): Apply active classes after base classes ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- refactor: Replace `date-fns` usage with new `@layerstack/utils` date utils (based on d3-time) to reduce bundle size ([#602](https://github.com/techniq/svelte-ux/pull/602))
+
+## 2.0.0-next.7
+
+### Patch Changes
+
+- fix(Drawer): Fix display of action buttons ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.6
+
+### Patch Changes
+
+- fix(MultiSelect): Fix reactivity scope for filteredSelectedOptions and filteredUnselectedOptions. Issue #594 ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix: Update deps including @layerstack/utils with improved format ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix(DateRangeField): Include year when displaying month selection ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.5
+
+### Patch Changes
+
+- fix(Duration): Update Duration component to new `@layerstack/utils` `Duration` class ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- Update dependencies ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.4
+
+### Patch Changes
+
+- fix(Menu): Support `bind:open` (underlying Popover) ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
+- feat(DateRangeField): Add `quickPresets` support ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
+- fix(DateRange): Fix selection gradient ([#584](https://github.com/techniq/svelte-ux/pull/584))
+
+## 2.0.0-next.3
+
+### Patch Changes
+
+- fix(SelectField|MultiSelect): Unify and enhance search functionality, enabling new custom search capability in MultiSelect.
+
+## 2.0.0-next.2
+
+### Patch Changes
+
+- Switch from `@tailwindcss/postcss` to `@tailwindcss/vite`. Update all non-major packages
+
+## 2.0.0-next.1
+
+### Patch Changes
+
+- fix: Use `next` releases for all `@layerstack/*` packages ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- docs: Update @layerstack/tailwind to `2.0.0-next.1`, fixing styling of tailwind typography when deployed ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+## 2.0.0-next.0
+
+### Major Changes
+
+- Tailwind 4 support ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+### Patch Changes
+
+- fix(Progress): Fix `TypeError: Failed to set the 'value' property on 'HTMLProgressElement': The provided double value is non-finite.` ([`6c2efa2`](https://github.com/techniq/svelte-ux/commit/6c2efa2d6d5b1a7ccf2b99c1826bc1232c51d2cc))
+
 ## 1.0.10
 
 ### Patch Changes
@@ -1406,7 +1566,6 @@ Version 1.0 (Svelte 3-5 and Tailwind 3 compatible)
 - [Button] Rename "text" variant to "default" ([`4d61047`](https://github.com/techniq/svelte-ux/commit/4d6104746922808b84ff1d81b525205e53f7a930))
 
 - [ToggleGroup] Major overhaul of styling ([`ef5c2ee`](https://github.com/techniq/svelte-ux/commit/ef5c2ee9cf50a3025fcb335ff091fdf5c63f2241))
-
   - Support many variants based on accent color
   - Support style modifications including size, rounded (small/full), gap (small/px), and inset.
   - Rename `optionsContainer` to `label` and use label component.

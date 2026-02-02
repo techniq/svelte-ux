@@ -1,19 +1,18 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import type { AriaRole, HTMLInputAttributes } from 'svelte/elements';
-  import { mdiClose, mdiCurrencyUsd, mdiEye, mdiInformationOutline, mdiPercent } from '@mdi/js';
   import { uniqueId } from 'lodash-es';
   import { cls } from '@layerstack/tailwind';
   import { isLiteralObject } from '@layerstack/utils/object';
   import { autoFocus, multi, type Actions } from '@layerstack/svelte-actions';
 
-  import { DEFAULT_LABEL_PLACEMENT, type LabelPlacement } from '../types/index.js';
-  import { getComponentSettings } from './settings.js';
+  import { DEFAULT_LABEL_PLACEMENT, type IconProp, type LabelPlacement } from '../types/index.js';
+  import { getComponentSettings, getSettings } from './settings.js';
 
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
   import Input from './Input.svelte';
-  import { type IconInput, asIconData } from '../utils/icons.js';
+  import { asIconData } from '../utils/icons.js';
 
   type InputValue = string | number;
 
@@ -22,6 +21,7 @@
     change: { value: typeof value; inputValue: InputValue | null; operator?: string };
   }>();
 
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('TextField');
   const { defaults: fieldDefaults } = getComponentSettings('Field');
 
@@ -50,8 +50,8 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: IconInput = null;
-  export let iconRight: IconInput = null;
+  export let icon: IconProp = null;
+  export let iconRight: IconProp = null;
   export let align: 'left' | 'center' | 'right' = 'left';
   export let autofocus: boolean | Parameters<typeof autoFocus>[1] = false;
   // TODO: Find way to conditionally set type based on `multiline` value
@@ -61,6 +61,10 @@
   export let operators: { label: string; value: string }[] | undefined = undefined;
   export let inputEl: HTMLInputElement | HTMLTextAreaElement | null = null;
   export let debounceChange: boolean | number = false;
+
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     container?: string;
@@ -217,21 +221,22 @@
     'TextField',
     'group flex gap-1',
     labelPlacement !== 'left' ? 'flex-col' : 'items-center',
-    error ? '[--color:theme(colors.danger)]' : '[--color:theme(colors.primary)]',
+    error ? '[--color:var(--color-danger)]' : '[--color:var(--color-primary)]',
     disabled && 'opacity-50 pointer-events-none',
-    !base && (rounded ? 'rounded-full' : 'rounded'),
+    !base && (rounded ? 'rounded-full' : 'rounded-sm'),
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
   bind:this={labelEl}
+  {...$$restProps}
 >
   {#if label && ['top', 'left'].includes(labelPlacement)}
     <span
       class={cls(
         'label',
         'block text-sm font-medium',
-        'truncate group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+        'truncate group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-focus-within:group-hover:text-(--color) cursor-pointer',
         error ? 'text-danger/80' : 'text-surface-content/50',
         `placement-${labelPlacement}`,
         settingsClasses.label,
@@ -246,15 +251,15 @@
     <div
       class={cls(
         'border py-0 transition-shadow',
-        disabled ? '' : 'hover:shadow',
+        disabled ? '' : 'hover:shadow-sm',
         disabled ? '' : error ? 'hover:border-danger' : 'hover:border-surface-content',
         {
           'px-2': !rounded,
           'px-6': rounded && !hasPrepend, // TODO: `hasPrepend` always true for SelectField, etc.  See: https://github.com/sveltejs/svelte/issues/6059
         },
-        !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded'],
+        !base && ['bg-surface-100', rounded ? 'rounded-full' : 'rounded-sm'],
         error && 'border-danger',
-        'group-focus-within:shadow-md group-focus-within:border-[var(--color)]',
+        'group-focus-within:shadow-md group-focus-within:border-[var(--color)]!',
         settingsClasses.container,
         classes.container
       )}
@@ -272,19 +277,25 @@
             <slot name="prepend" />
             {#if icon}
               <span class="mr-3">
-                <Icon data={asIconData(icon)} class="text-surface-content/50" />
+                {#if typeof icon === 'function'}
+                  <!-- Component, such as unplugin-icons -->
+                  <Icon data={icon} class="text-surface-content/50" />
+                {:else if typeof icon === 'string' || 'icon' in icon}
+                  <!-- font path/url/etc or font-awesome IconDefinition -->
+                  <Icon data={asIconData(icon)} class="text-surface-content/50" />
+                {/if}
               </span>
             {/if}
           </div>
         {/if}
 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div role={role === 'combobox' ? role : undefined} class="flex-grow inline-grid" on:click>
+        <div role={role === 'combobox' ? role : undefined} class="grow inline-grid" on:click>
           {#if label && ['inset', 'float'].includes(labelPlacement)}
             <span
               class={cls(
                 'label',
-                'col-span-full row-span-full z-[1] flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-hover:group-focus-within:text-[var(--color)] cursor-pointer',
+                'col-span-full row-span-full z-1 flex items-center h-full truncate origin-top-left transition-all duration-200 group-hover:text-surface-content/70 group-focus-within:text-[var(--color)] group-focus-within:group-hover:text-(--color) cursor-pointer',
                 error ? 'text-danger/80' : 'text-surface-content/50',
                 `placement-${labelPlacement}`,
                 (labelPlacement === 'inset' || hasInputValue) && 'shrink',
@@ -312,7 +323,7 @@
             <slot name="prefix" />
 
             {#if type === 'currency'}
-              <Icon data={mdiCurrencyUsd} size="1.1em" class="text-surface-content/50 -mt-1" />
+              <Icon data={icons.currency} class="size-4 text-surface-content/50 -mt-1" />
             {/if}
 
             {#if multiline}
@@ -332,10 +343,11 @@
                 on:keydown
                 on:keypress
                 class={cls(
-                  'text-sm border-none w-full bg-transparent outline-none resize-none',
-                  'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
+                  'text-sm border-none w-full bg-transparent outline-hidden resize-none',
+                  'placeholder-surface-content/0 group-focus-within:placeholder-surface-content/50',
                   error && 'placeholder-danger',
-                  (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-50',
+                  (labelPlacement !== 'float' || !hasInsetLabel) &&
+                    'placeholder-surface-content/50',
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
@@ -372,11 +384,12 @@
                 on:keydown
                 on:keypress
                 class={cls(
-                  'text-sm border-none w-full bg-transparent outline-none truncate',
+                  'text-sm border-none w-full bg-transparent outline-hidden truncate',
                   'selection:bg-surface-content/30',
-                  'placeholder-surface-content placeholder-opacity-0 group-focus-within:placeholder-opacity-50',
+                  'placeholder-surface-content/0 group-focus-within:placeholder-surface-content/50',
                   error && 'placeholder-danger',
-                  (labelPlacement !== 'float' || !hasInsetLabel) && 'placeholder-opacity-50',
+                  (labelPlacement !== 'float' || !hasInsetLabel) &&
+                    'placeholder-surface-content/50',
                   {
                     'text-left': align === 'left',
                     'text-center': align === 'center',
@@ -389,7 +402,7 @@
             {/if}
 
             {#if type === 'percent'}
-              <Icon data={mdiPercent} size="1.1em" class="text-surface-content/50 -mt-1 ml-1" />
+              <Icon data={icons.percent} class="size-4 text-surface-content/50 -mt-1 ml-1" />
             {/if}
 
             <slot name="suffix" />
@@ -406,7 +419,7 @@
           >
             {#if clearable && hasInputValue}
               <Button
-                icon={mdiClose}
+                icon={icons.close}
                 {disabled}
                 class="text-surface-content/50 p-1"
                 on:click={() => {
@@ -424,7 +437,7 @@
                 {disabled}
                 value={operator}
                 on:change={onSelectChange}
-                class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-2 text-sm outline-none focus:border-opacity-50 focus:shadow-md"
+                class="appearance-none bg-surface-content/5 border rounded-full mr-2 px-2 text-sm outline-hidden focus:border-opacity-50 focus:shadow-md"
                 style="text-align-last: center;"
               >
                 {#each operators ?? [] as { label, value }}
@@ -435,7 +448,7 @@
 
             {#if type === 'password'}
               <Button
-                icon={mdiEye}
+                icon={icons.reveal}
                 {disabled}
                 class="text-surface-content/50 p-2"
                 on:click={() => {
@@ -451,9 +464,15 @@
             <slot name="append" />
 
             {#if error}
-              <Icon data={mdiInformationOutline} class="text-danger" />
+              <Icon data={icons.info} class="text-danger" />
             {:else if iconRight}
-              <Icon data={asIconData(iconRight)} class="text-surface-content/50" />
+              {#if typeof iconRight === 'function'}
+                <!-- Component, such as unplugin-icons -->
+                <Icon data={iconRight} class="text-surface-content/50" />
+              {:else if typeof iconRight === 'string' || 'icon' in iconRight}
+                <!-- font path/url/etc or font-awesome IconDefinition -->
+                <Icon data={asIconData(iconRight)} class="text-surface-content/50" />
+              {/if}
             {/if}
           </div>
         {/if}

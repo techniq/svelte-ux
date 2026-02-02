@@ -1,20 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { fade, slide } from 'svelte/transition';
   import { flatGroup } from 'd3-array';
 
-  import {
-    mdiCheckCircle,
-    mdiChevronDown,
-    mdiChevronRight,
-    mdiClose,
-    mdiCodeBraces,
-    mdiCodeTags,
-    mdiDatabaseOutline,
-    mdiFileDocumentEditOutline,
-    mdiGithub,
-    mdiLink,
-  } from '@mdi/js';
+  import LucideAlignLeft from '~icons/lucide/align-left.svelte';
+  import LucideCircleCheck from '~icons/lucide/circle-check.svelte';
+  import LucideDatabase from '~icons/lucide/database';
+  import LucideFilePenLine from '~icons/lucide/file-pen-line';
+  import LucideGithub from '~icons/lucide/github.svelte';
+  import LucideLink2 from '~icons/lucide/link-2';
 
   import {
     ApiDocs,
@@ -34,7 +27,6 @@
   import Code from '$lib/components/Code.svelte';
   import ViewSourceButton from '$docs/ViewSourceButton.svelte';
 
-  import { goto } from '$app/navigation';
   import { page } from '$app/stores';
 
   $: [type, name] = $page.url.pathname.split('/').slice(2) ?? [];
@@ -82,17 +74,20 @@
     }
   }
 
+  const layoutSettings = getSettings();
+  $: ({ icons } = layoutSettings);
+
   // Clear root layout theme so doesn't show on doc examples
-  settings({ ...getSettings(), components: {} });
+  settings({ ...layoutSettings, components: {} });
 </script>
 
 <div
-  class="[@media(min-height:900px)]:sticky top-[var(--headerHeight)] z-[60] bg-surface-200/90 backdrop-blur px-5 py-4 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1)calc(100%-4px),rgba(0,0,0,0))]"
+  class="[@media(min-height:900px)]:sticky top-[var(--headerHeight)] z-60 bg-surface-200/90 backdrop-blur-sm px-5 py-4 [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1)calc(100%-4px),rgba(0,0,0,0))]"
 >
   {#if title}
     <div>
       <div class="inline-block text-xs font-bold text-surface-content/50 capitalize">Docs</div>
-      <Icon data={mdiChevronRight} class="divider opacity-25" />
+      <Icon data={icons.chevronRight} class="inline-block size-4 divider opacity-25" />
       <div class="inline-block text-xs font-bold text-primary capitalize">
         {type}
       </div>
@@ -103,7 +98,7 @@
       {#if status}
         <span
           class={cls(
-            'text-sm  px-2 rounded',
+            'text-sm  px-2 rounded-sm',
             status === 'beta' && 'bg-yellow-500/20 text-yellow-800',
             status === 'deprecated' && 'bg-danger/20 text-danger-900'
           )}
@@ -126,7 +121,7 @@
         href={sourceUrl
           ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${sourceUrl}`
           : ''}
-        icon={mdiCodeTags}
+        icon={icons.code}
       />
 
       <ViewSourceButton
@@ -135,12 +130,12 @@
         href={pageUrl
           ? `https://github.com/techniq/svelte-ux/blob/main/packages/svelte-ux/${pageUrl}`
           : ''}
-        icon={mdiFileDocumentEditOutline}
+        icon={LucideFilePenLine}
       />
 
       {#if !hideTableOfContents}
         <Button
-          icon={mdiChevronDown}
+          icon={icons.chevronDown}
           on:click={() => {
             showTableOfContents = !showTableOfContents;
           }}
@@ -164,14 +159,23 @@
       >
         <div slot="title">On this page</div>
         <Button
-          icon={mdiClose}
+          icon={icons.close}
           class="absolute top-1 right-1"
           size="sm"
           on:click={() => (showTableOfContents = false)}
         />
+
         <TableOfContents
-          icon={mdiChevronRight}
-          class="px-4 py-2"
+          linkIndent={12}
+          class="p-4"
+          classes={{
+            a: cls(
+              'border-l text-sm text-surface-content/50 py-[2px] hover:text-surface-content',
+              'data-active:border-primary data-active:text-primary',
+              'data-[level=1]:font-semibold'
+            ),
+          }}
+          scrollOffset={184}
           on:nodeClick={(e) => {
             showTableOfContents = false;
           }}
@@ -180,7 +184,7 @@
     {/key}
   {/if}
 
-  <div class="grid xl:grid-cols-[1fr,auto] gap-6 pb-4">
+  <div class="grid xl:grid-cols-[1fr_auto] gap-6 pb-4">
     <div class="overflow-auto p-1">
       {#if type === 'components' && !hideUsage}
         {#key $page.route.id}
@@ -194,8 +198,8 @@
           <h1 id="features">Features</h1>
           <ul class="grid gap-2 pl-4 text-surface-content">
             {#each features as feature}
-              <li class="grid grid-cols-[auto,1fr] gap-2">
-                <Icon data={mdiCheckCircle} class="text-success pt-1" />
+              <li class="grid grid-cols-[auto_1fr] gap-2">
+                <Icon data={LucideCircleCheck} class="text-success pt-1" />
                 <span>{@html feature}</span>
               </li>
             {/each}
@@ -220,14 +224,14 @@
                 {#each items as item}
                   {@const icon =
                     item.type === 'components'
-                      ? mdiCodeTags
+                      ? icons.code
                       : item.type === 'stores'
-                        ? mdiDatabaseOutline
+                        ? LucideDatabase
                         : item.type === 'actions'
-                          ? mdiCodeBraces
+                          ? icons.codeBraces
                           : item.type === 'github'
-                            ? mdiGithub
-                            : mdiLink}
+                            ? LucideGithub
+                            : LucideLink2}
                   <a href={item.url.toString()} class="group">
                     <ListItem
                       title={item.name.toString()}
@@ -237,7 +241,7 @@
                       class="hover:bg-surface-200 cursor-pointer"
                     >
                       <div slot="actions">
-                        <Icon data={mdiChevronRight} class="text-surface-content/50" />
+                        <Icon data={icons.chevronRight} class="text-surface-content/50" />
                       </div>
                     </ListItem>
                   </a>
@@ -257,14 +261,27 @@
 
     {#if showTableOfContents && $xlScreen}
       <div
-        class="w-[224px] sticky top-[calc(var(--headerHeight)+10px)] pr-2 max-h-[calc(100dvh-64px)] overflow-auto z-[60]"
+        class="w-[224px] sticky top-[calc(var(--headerHeight)+10px)] pr-2 max-h-[calc(100dvh-64px)] overflow-auto z-60"
       >
-        <div class="text-xs uppercase leading-8 tracking-widest text-surface-content/50">
+        <div
+          class="flex gap-2 items-center text-xs font-medium uppercase pb-3 tracking-widest text-surface-content/50"
+        >
+          <LucideAlignLeft />
           On this page
         </div>
         <!-- Rebuild toc when page changes -->
         {#key $page.route.id}
-          <TableOfContents icon={mdiChevronRight} class="border-l pl-3" scrollOffset={184} />
+          <TableOfContents
+            linkIndent={12}
+            classes={{
+              a: cls(
+                'border-l text-sm text-surface-content/50 py-[2px] hover:text-surface-content',
+                'data-active:border-primary data-active:text-primary',
+                'data-[level=1]:font-semibold'
+              ),
+            }}
+            scrollOffset={184}
+          />
         {/key}
       </div>
     {/if}

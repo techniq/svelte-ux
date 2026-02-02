@@ -9,8 +9,8 @@
   }
 </script>
 
-<div class="grid grid-cols-[1fr,auto] gap-6 pt-2 pb-4">
-  <div class="bg-surface-100 p-2 m-2 rounded shadow-lg border overflow-auto">
+<div class="grid grid-cols-[1fr_auto] gap-6 pt-2 pb-4">
+  <div class="bg-surface-100 p-2 m-2 rounded-sm shadow-lg border overflow-auto">
     <div class="prose px-4">
       {@html marked.parse(sanitize(changelog))}
     </div>
