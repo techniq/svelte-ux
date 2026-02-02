@@ -14,18 +14,6 @@
 
 - Update dependencies ([#571](https://github.com/techniq/svelte-ux/pull/571))
 
-- fix(Dialog/Drawer): event propagation preventing outside click detection ([#635](https://github.com/techniq/svelte-ux/pull/635))
-
-- fix(SelectField): keep menu open on reactive updates; close only on selection or outside click ([#638](https://github.com/techniq/svelte-ux/pull/638))
-
-- docs(MultiSelect/MultiSelectField/MultiSelectMenu): Enhanced demo examples with functional item creation dialogs ([#635](https://github.com/techniq/svelte-ux/pull/635))
-
-- docs(NumberStepper): demo example with prefix/suffix slot ([#635](https://github.com/techniq/svelte-ux/pull/635))
-
-- docs(SelectField): demo filtering logic and form handling ([#635](https://github.com/techniq/svelte-ux/pull/635))
-
-- fix(SelectField): focus management when used within dialogs ([#635](https://github.com/techniq/svelte-ux/pull/635))
-
 ## 2.0.0-next.19
 
 ### Patch Changes
@@ -171,6 +159,28 @@
 ### Patch Changes
 
 - fix(Progress): Fix `TypeError: Failed to set the 'value' property on 'HTMLProgressElement': The provided double value is non-finite.` ([`6c2efa2`](https://github.com/techniq/svelte-ux/commit/6c2efa2d6d5b1a7ccf2b99c1826bc1232c51d2cc))
+
+## 1.0.10
+
+### Patch Changes
+
+- Fix masked input not clearing partial values on blur ([#655](https://github.com/techniq/svelte-ux/pull/655))
+
+## 1.0.9
+
+### Patch Changes
+
+- fix(Dialog/Drawer): event propagation preventing outside click detection ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
+- fix(SelectField): keep menu open on reactive updates; close only on selection or outside click ([#638](https://github.com/techniq/svelte-ux/pull/638))
+
+- docs(MultiSelect/MultiSelectField/MultiSelectMenu): Enhanced demo examples with functional item creation dialogs ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
+- docs(NumberStepper): demo example with prefix/suffix slot ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
+- docs(SelectField): demo filtering logic and form handling ([#635](https://github.com/techniq/svelte-ux/pull/635))
+
+- fix(SelectField): focus management when used within dialogs ([#635](https://github.com/techniq/svelte-ux/pull/635))
 
 ## 1.0.8
 
