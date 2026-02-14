@@ -70,7 +70,7 @@
     "prism-svelte": "^0.5.0",
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0",
-    "sveld": "^0.22.1",
+    "sveld": "^0.26.0",
     "zod": "^3.24.2"
   },
   "peerDependencies": {
