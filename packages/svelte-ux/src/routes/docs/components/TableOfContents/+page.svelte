@@ -16,16 +16,16 @@ Let's build some example TableOfContents for the following masterpiece:
     <h3>New Beginnings</h3>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu ornare purus. Praesent auctor
     tellus leo, ac ornare nisi egestas eu. Nam tincidunt finibus pretium. Pellentesque habitant morbi
-    tristique senectus et netus et malesuada fames ac turpis egestas. Praesent dolor urna, congue at
-    convallis vel, accumsan ut ante.
+    tristique senectus et netus et malesuada fames ac turpis egestas. Praesent dolor urna, congue at convallis
+    vel, accumsan ut ante.
     <h4>A Brief Interlude</h4>
     Proin congue augue ex, eget laoreet nisi tempor ac. Sed a sapien convallis, mollis lectus quis, mollis
     lorem.
     <h3>The Journey</h3>
-    Donec nec rhoncus libero, ut euismod augue. Curabitur lacus dolor, pellentesque nec suscipit at,
-    faucibus id odio. Sed ullamcorper quam nibh, eget hendrerit metus viverra vel. Etiam elementum gravida
-    ipsum, eget vestibulum felis vulputate eget. Vivamus at volutpat sapien. Pellentesque lobortis aliquam
-    mauris, ac volutpat magna convallis et. Praesent hendrerit finibus dui in ullamcorper.
+    Donec nec rhoncus libero, ut euismod augue. Curabitur lacus dolor, pellentesque nec suscipit at, faucibus
+    id odio. Sed ullamcorper quam nibh, eget hendrerit metus viverra vel. Etiam elementum gravida ipsum,
+    eget vestibulum felis vulputate eget. Vivamus at volutpat sapien. Pellentesque lobortis aliquam mauris,
+    ac volutpat magna convallis et. Praesent hendrerit finibus dui in ullamcorper.
     <h2>Chapter 2</h2>
     <h2>Chapter 3</h2>
     Donec eget nulla non eros elementum rutrum eu sed nulla. Nam dignissim, neque in elementum vestibulum,
