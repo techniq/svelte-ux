@@ -20,7 +20,7 @@ import {
   resolveComponentClasses,
   type ResolvedDefaultProps,
 } from './theme.js';
-import type { LabelPlacement } from '../types/index.js';
+import type { IconComponent, LabelPlacement } from '../types/index.js';
 
 import LucideArrowUp from '@lucide/svelte/icons/arrow-up';
 import LucideArrowDown from '@lucide/svelte/icons/arrow-down';
@@ -61,7 +61,7 @@ import LucideSun from '@lucide/svelte/icons/sun';
 import LucideMoon from '@lucide/svelte/icons/moon';
 import LucideMonitor from '@lucide/svelte/icons/monitor';
 
-export const DEFAULT_ICONS = {
+export const DEFAULT_ICONS: Record<string, IconComponent> = {
   alert: LucideCircleAlert,
   arrowUp: LucideArrowUp,
   arrowDown: LucideArrowDown,

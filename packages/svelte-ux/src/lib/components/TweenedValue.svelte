@@ -4,7 +4,12 @@
 
   import { getSettings } from './settings.js';
 
-  type TweenedOptions = Parameters<typeof tweened<number | null>>[1];
+  type TweenedOptions = {
+    delay?: number;
+    duration?: number | ((from: number | null, to: number | null) => number);
+    easing?: (t: number) => number;
+    interpolate?: (a: number | null, b: number | null) => (t: number) => number | null;
+  };
 
   export let value: number | null;
   export let format: FormatNumberStyle = 'none';

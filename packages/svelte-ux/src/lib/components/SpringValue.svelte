@@ -4,7 +4,7 @@
 
   import { getSettings } from './settings.js';
 
-  type SpringOptions = Parameters<typeof spring<number | null>>[1];
+  type SpringOptions = { stiffness?: number; damping?: number; precision?: number };
 
   export let value: number | null;
   export let format: FormatNumberStyle = 'none';

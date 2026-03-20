@@ -4,7 +4,7 @@
   import { cls } from '@layerstack/tailwind';
 
   import Icon from './Icon.svelte';
-  import type { TransitionParams } from '../types/index.js';
+  import type { IconProp, TransitionParams } from '../types/index.js';
   import { getSettings } from './settings.js';
   import { getComponentClasses } from './theme.js';
 
@@ -22,7 +22,7 @@
   export let open = false;
   export let popout = false;
   export let disabled = false;
-  export let icon = icons.chevronDown;
+  export let icon: IconProp = icons.chevronDown;
 
   export let transition = slide;
   export let transitionParams: TransitionParams = {};
