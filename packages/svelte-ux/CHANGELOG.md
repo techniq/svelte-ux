@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.22
+
+### Patch Changes
+
+- chore: Update deps ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
+- fix(MenuField): Allow clicking on chevron down to open/close ([#571](https://github.com/techniq/svelte-ux/pull/571))
+
 ## 2.0.0-next.21
 
 ### Patch Changes
