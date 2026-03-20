@@ -13,7 +13,7 @@
 
   export let value: number | null;
   export let format: FormatNumberStyle = 'none';
-  export let options: TweenedOptions = undefined;
+  export let options: TweenedOptions | undefined = undefined;
   export let disabled = false;
 
   const { format: formatUtil } = getSettings();

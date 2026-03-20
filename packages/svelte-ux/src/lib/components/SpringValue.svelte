@@ -8,7 +8,7 @@
 
   export let value: number | null;
   export let format: FormatNumberStyle = 'none';
-  export let options: SpringOptions = undefined;
+  export let options: SpringOptions | undefined = undefined;
   export let disabled = false;
 
   const { format: formatUtil } = getSettings();
