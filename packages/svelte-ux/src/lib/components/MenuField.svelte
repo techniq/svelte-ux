@@ -93,17 +93,21 @@
   <span slot="append" class="flex items-center">
     <slot name="append" />
 
-    <Icon
-      data={icons.chevronDown}
-      class={cls(
-        'text-surface-content/50 mr-1 transform transition-all duration-300 pointer-events-none',
-        {
-          '-rotate-180': open,
-        },
-        settingsClasses.menuIcon,
-        classes.menuIcon
-      )}
-    />
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <span on:click|stopPropagation={() => (open = !open)}>
+      <Icon
+        data={icons.chevronDown}
+        class={cls(
+          'text-surface-content/50 mr-1 transform transition-all duration-300 pointer-events-none',
+          {
+            '-rotate-180': open,
+          },
+          settingsClasses.menuIcon,
+          classes.menuIcon
+        )}
+      />
+    </span>
 
     {#if stepper}
       <Button icon={icons.chevronRight} on:click={() => (value = next())} class="mr-2" size="sm" />
