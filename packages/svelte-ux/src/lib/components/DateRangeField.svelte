@@ -107,10 +107,11 @@
               $localeSettings,
               value.periodType
             );
-            const offset = -difference(value.from, value.to) - 1;
+            const periodCount = difference(value.from, value.to) + 1;
+            const from = start(add(value.from, -periodCount));
             value = {
-              from: start(add(value.from, offset)),
-              to: end(add(value.to, offset)),
+              from,
+              to: end(add(from, periodCount - 1)),
               periodType: value.periodType,
             };
             dispatch('change', value);
@@ -163,10 +164,11 @@
               $localeSettings,
               value.periodType
             );
-            const offset = difference(value.from, value.to) + 1;
+            const periodCount = difference(value.from, value.to) + 1;
+            const from = start(add(value.from, periodCount));
             value = {
-              from: start(add(value.from, offset)),
-              to: end(add(value.to, offset)),
+              from,
+              to: end(add(from, periodCount - 1)),
               periodType: value.periodType,
             };
             dispatch('change', value);
