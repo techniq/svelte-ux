@@ -47,13 +47,32 @@
 
   export let menuItemsEl: HTMLMenuElement | undefined = undefined;
 
+  // Internal state mirrors the incoming prop, but only when the parent value changes.
+  // This lets close update bound parents while avoiding stale local prop overrides
+  // from controlling the rendered popover in Svelte 5 legacy compat.
+  // TODO: Replace this with `$bindable` open state when Menu migrates to Svelte 5 runes.
+  let popoverOpen = open;
+  let previousExternalOpen = open;
+  $: externalOpen = $$props.open ?? false;
+  $: if (externalOpen !== previousExternalOpen) {
+    previousExternalOpen = externalOpen;
+    popoverOpen = externalOpen;
+  }
+
+  function close(reason: string = 'unknown') {
+    if (popoverOpen) {
+      popoverOpen = false;
+      open = false;
+      dispatch('close', reason);
+    }
+  }
+
   function onClick(e: MouseEvent) {
     try {
       if (e.target === menuItemsEl) {
         // Clicked within menu but outside of any items
       } else if (!explicitClose) {
-        open = false;
-        dispatch('close', 'item');
+        close('item');
       }
     } catch (err) {
       console.error(err);
@@ -67,7 +86,7 @@
   {offset}
   {matchWidth}
   {resize}
-  bind:open
+  bind:open={popoverOpen}
   class={cls(
     'Menu',
     'bg-surface-100 rounded-sm shadow-sm border overflow-auto',
@@ -75,8 +94,7 @@
     classes.root,
     className
   )}
-  on:close
-  let:close
+  on:close={(e) => close(e.detail)}
   {...$$restProps}
 >
   <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -92,6 +110,6 @@
     transition:resolvedTransition={resolvedTransitionParams}
     use:focusMove={{ disabled: !moveFocus }}
   >
-    <slot {close} />
+    <slot close={() => close()} />
   </menu>
 </Popover>
