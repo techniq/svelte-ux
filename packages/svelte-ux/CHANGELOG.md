@@ -1,5 +1,13 @@
 # svelte-ux
 
+## 2.0.0-next.23
+
+### Patch Changes
+
+- fix(DateRangeField): stepper overflow when stepping between months of different lengths (e.g. May → June) ([#666](https://github.com/techniq/svelte-ux/pull/666))
+
+- fix(Menu): allow menus to reopen after closing via click-outside in Svelte 5 compat mode, while preserving `bind:open` support. ([#668](https://github.com/techniq/svelte-ux/pull/668))
+
 ## 2.0.0-next.22
 
 ### Patch Changes
