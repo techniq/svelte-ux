@@ -1,7 +1,4 @@
 <script lang="ts">
-  import Prism from 'prismjs';
-  import 'prism-svelte';
-
   import { slide } from 'svelte/transition';
 
   import Button from './Button.svelte';
@@ -11,7 +8,6 @@
 
   export let code: string | null = null;
   export let language = 'svelte';
-  export let highlightedCode = code ? Prism.highlight(code, Prism.languages.svelte, language) : '';
   export let showCode = false;
 
   let className: string | undefined = undefined;
@@ -26,8 +22,8 @@
   </div>
 
   {#if code && showCode}
-    <div transition:slide class="bg-surface-200">
-      <Code source={code} highlightedSource={highlightedCode} classes={{ pre: 'rounded-t-none' }} />
+    <div transition:slide>
+      <Code source={code} {language} classes={{ root: 'rounded-t-none border-x-0 border-b-0' }} />
     </div>
   {/if}
 </div>

@@ -79,11 +79,58 @@ main small {
   @apply hidden;
 }
 
-/* Code/Preview backgrounds */
-pre[class*='language-'] {
-  @apply bg-surface-content;
+/* Syntax highlighting (shiki) — markdown code fences and the <Code>/<Preview> components.
+   shiki emits the light theme colors inline and stores the dark theme in CSS variables,
+   so swap to those variables under `html.dark`. Backgrounds use the surface palette
+   (surface-100 light / surface-300 dark) rather than shiki's own theme background. */
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
-.dark pre[class*='language-'] {
-  @apply bg-surface-300;
+/* Markdown code fences (the <Code> component supplies its own background, so exclude it) */
+.shiki:not(.Code *) {
+  @apply border rounded-sm;
+  background-color: var(--color-surface-100) !important;
+}
+
+html.dark .shiki:not(.Code *) {
+  background-color: var(--color-surface-300) !important;
+}
+
+/* The <Code>/<Preview> component supplies its own surface background, so keep shiki transparent there */
+.Code .shiki {
+  background-color: transparent !important;
+}
+
+/* Line highlighting (<Code highlight={...}>) */
+.shiki .line.highlighted {
+  background-color: rgb(101 117 133 / 0.16);
+  margin: 0 -1rem;
+  padding: 0 1rem;
+  display: inline-block;
+  width: calc(100% + 2rem);
+}
+
+html.dark .shiki .line.highlighted {
+  background-color: rgb(142 150 170 / 0.14);
+}
+
+/* Line numbers (<Code showLineNumbers>) */
+.show-line-numbers .shiki code {
+  counter-reset: line;
+}
+
+.show-line-numbers .shiki .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: rgb(115 138 148 / 0.4);
+  user-select: none;
 }

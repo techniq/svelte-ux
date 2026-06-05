@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import posthog from 'posthog-js';
-  import 'prism-themes/themes/prism-vsc-dark-plus.css';
 
   import LucideArrowUpRight from '~icons/lucide/arrow-up-right';
   import LucideEllipsisVertical from '~icons/lucide/ellipsis-vertical';
