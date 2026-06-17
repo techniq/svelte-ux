@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@layerstack/tailwind':
+        specifier: 2.0.0-next.22
+        version: 2.0.0-next.22
     devDependencies:
       '@changesets/cli':
         specifier: ^2.30.0
@@ -1034,6 +1038,7 @@ packages:
   '@svitejs/changesets-changelog-github-compact@1.2.0':
     resolution: {integrity: sha512-08eKiDAjj4zLug1taXSIJ0kGL5cawjVCyJkBb6EWSg5fEPX6L+Wtr0CH2If4j5KYylz85iaZiFlUItvgJvll5g==}
     engines: {node: ^14.13.1 || ^16.0.0 || >=18}
+    deprecated: unmaintained
 
   '@tailwindcss/node@4.2.2':
     resolution: {integrity: sha512-pXS+wJ2gZpVXqFaUEjojq7jzMpTGf8rU6ipJz5ovJV6PUGmlJ+jvIwGrzdHdQ80Sg+wmQxUFuoW1UAAwHNEdFA==}

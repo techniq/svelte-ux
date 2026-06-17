@@ -32,10 +32,12 @@
         // Pick next theme
         const currentIndex = themes.indexOf($currentTheme.resolvedTheme);
         let newTheme = themes[(currentIndex + 1) % themes.length];
+        $host().dispatchEvent(new CustomEvent('theme:set', { detail: newTheme }));
         currentTheme.setTheme(newTheme);
       } else {
         // Toggle light/dark
         let newTheme = $currentTheme.dark ? 'light' : 'dark';
+        $host().dispatchEvent(new CustomEvent('theme:set', { detail: newTheme }));
         currentTheme.setTheme(newTheme);
       }
     }
@@ -76,6 +78,7 @@
                 size="sm"
                 class="mr-1"
                 on:click={() => {
+                  $host().dispatchEvent(new CustomEvent('theme:set', { detail: 'system' }));
                   currentTheme.setTheme('system');
                 }}
               />
@@ -89,6 +92,7 @@
           on:change={(e) => {
             // @ts-expect-error: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
             let newTheme = e.target?.checked ? 'dark' : 'light';
+            $host().dispatchEvent(new CustomEvent('theme:set', { detail: newTheme }));
             currentTheme.setTheme(newTheme);
           }}
           class="my-1"
@@ -155,7 +159,10 @@
       <MenuItem
         icon={icons.lightMode}
         selected={$currentTheme.theme === 'light'}
-        on:click={() => currentTheme.setTheme('light')}
+        on:click={() => {
+          $host().dispatchEvent(new CustomEvent('theme:set', { detail: 'light' }));
+          currentTheme.setTheme('light');
+        }}
       >
         Light
       </MenuItem>
@@ -163,7 +170,10 @@
       <MenuItem
         icon={icons.darkMode}
         selected={$currentTheme.theme === 'dark'}
-        on:click={() => currentTheme.setTheme('dark')}
+        on:click={() => {
+          $host().dispatchEvent(new CustomEvent('theme:set', { detail: 'dark' }));
+          currentTheme.setTheme('dark');
+        }}
       >
         Dark
       </MenuItem>
@@ -171,7 +181,10 @@
       <MenuItem
         icon={icons.monitor}
         selected={$currentTheme.theme == null}
-        on:click={() => currentTheme.setTheme('system')}
+        on:click={() => {
+          $host().dispatchEvent(new CustomEvent('theme:set', { detail: 'system' }));
+          currentTheme.setTheme('system');
+        }}
       >
         System
       </MenuItem>
