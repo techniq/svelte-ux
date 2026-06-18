@@ -24,3 +24,9 @@
   <!-- Use docs themes for convenience of many themes -->
   <ThemeSelect lightThemes={data.themes.light} darkThemes={data.themes.dark} />
 </Preview>
+
+<h2>Change event</h2>
+
+<Preview>
+  <ThemeSelect on:themeSet={(e) => console.log(e.detail.theme)} />
+</Preview>
