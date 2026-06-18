@@ -18,3 +18,9 @@
     classes={{ icon: 'text-primary-content', switch: 'bg-secondary w-20', toggle: 'bg-accent' }}
   />
 </Preview>
+
+<h2>Change event</h2>
+
+<Preview>
+  <ThemeSwitch on:themeSet={(e) => console.log(e.detail.theme)} />
+</Preview>

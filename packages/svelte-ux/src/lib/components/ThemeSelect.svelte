@@ -35,12 +35,12 @@
         // Pick next theme
         const currentIndex = themes.indexOf($currentTheme.resolvedTheme);
         let newTheme = themes[(currentIndex + 1) % themes.length];
-        dispatch('themeSet', { detail: newTheme });
+        dispatch('themeSet', { theme: newTheme });
         currentTheme.setTheme(newTheme);
       } else {
         // Toggle light/dark
         let newTheme = $currentTheme.dark ? 'light' : 'dark';
-        dispatch('themeSet', { detail: newTheme });
+        dispatch('themeSet', { theme: newTheme });
         currentTheme.setTheme(newTheme);
       }
     }
@@ -81,7 +81,7 @@
                 size="sm"
                 class="mr-1"
                 on:click={() => {
-                  dispatch('themeSet', { detail: 'system' });
+                  dispatch('themeSet', { theme: 'system' });
                   currentTheme.setTheme('system');
                 }}
               />
@@ -95,7 +95,7 @@
           on:change={(e) => {
             // @ts-expect-error: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
             let newTheme = e.target?.checked ? 'dark' : 'light';
-            dispatch('themeSet', { detail: newTheme });
+            dispatch('themeSet', { theme: newTheme });
             currentTheme.setTheme(newTheme);
           }}
           class="my-1"
@@ -113,7 +113,7 @@
         {#each themes as themeName}
           <MenuItem
             on:click={() => {
-              dispatch('themeSet', { detail: themeName });
+              dispatch('themeSet', { theme: themeName });
               currentTheme.setTheme(themeName);
             }}
             data-theme={themeName}
@@ -166,7 +166,7 @@
         icon={icons.lightMode}
         selected={$currentTheme.theme === 'light'}
         on:click={() => {
-          dispatch('themeSet', { detail: 'light' });
+          dispatch('themeSet', { theme: 'light' });
           currentTheme.setTheme('light');
         }}
       >
@@ -177,7 +177,7 @@
         icon={icons.darkMode}
         selected={$currentTheme.theme === 'dark'}
         on:click={() => {
-          dispatch('themeSet', { detail: 'dark' });
+          dispatch('themeSet', { theme: 'dark' });
           currentTheme.setTheme('dark');
         }}
       >
@@ -188,7 +188,7 @@
         icon={icons.monitor}
         selected={$currentTheme.theme == null}
         on:click={() => {
-          dispatch('themeSet', { detail: 'system' });
+          dispatch('themeSet', { theme: 'system' });
           currentTheme.setTheme('system');
         }}
       >
