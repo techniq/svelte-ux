@@ -32,12 +32,12 @@
         // Pick next theme
         const currentIndex = themes.indexOf($currentTheme.resolvedTheme);
         let newTheme = themes[(currentIndex + 1) % themes.length];
-        $host().dispatchEvent(new CustomEvent('theme:set', { detail: newTheme }));
+        $host().dispatchEvent(new CustomEvent('themeSet', { detail: newTheme }));
         currentTheme.setTheme(newTheme);
       } else {
         // Toggle light/dark
         let newTheme = $currentTheme.dark ? 'light' : 'dark';
-        $host().dispatchEvent(new CustomEvent('theme:set', { detail: newTheme }));
+        $host().dispatchEvent(new CustomEvent('themeSet', { detail: newTheme }));
         currentTheme.setTheme(newTheme);
       }
     }
@@ -78,7 +78,7 @@
                 size="sm"
                 class="mr-1"
                 on:click={() => {
-                  $host().dispatchEvent(new CustomEvent('theme:set', { detail: 'system' }));
+                  $host().dispatchEvent(new CustomEvent('themeSet', { detail: 'system' }));
                   currentTheme.setTheme('system');
                 }}
               />
@@ -92,7 +92,7 @@
           on:change={(e) => {
             // @ts-expect-error: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
             let newTheme = e.target?.checked ? 'dark' : 'light';
-            $host().dispatchEvent(new CustomEvent('theme:set', { detail: newTheme }));
+            $host().dispatchEvent(new CustomEvent('themeSet', { detail: newTheme }));
             currentTheme.setTheme(newTheme);
           }}
           class="my-1"
@@ -160,7 +160,7 @@
         icon={icons.lightMode}
         selected={$currentTheme.theme === 'light'}
         on:click={() => {
-          $host().dispatchEvent(new CustomEvent('theme:set', { detail: 'light' }));
+          $host().dispatchEvent(new CustomEvent('themeSet', { detail: 'light' }));
           currentTheme.setTheme('light');
         }}
       >
@@ -171,7 +171,7 @@
         icon={icons.darkMode}
         selected={$currentTheme.theme === 'dark'}
         on:click={() => {
-          $host().dispatchEvent(new CustomEvent('theme:set', { detail: 'dark' }));
+          $host().dispatchEvent(new CustomEvent('themeSet', { detail: 'dark' }));
           currentTheme.setTheme('dark');
         }}
       >
@@ -182,7 +182,7 @@
         icon={icons.monitor}
         selected={$currentTheme.theme == null}
         on:click={() => {
-          $host().dispatchEvent(new CustomEvent('theme:set', { detail: 'system' }));
+          $host().dispatchEvent(new CustomEvent('themeSet', { detail: 'system' }));
           currentTheme.setTheme('system');
         }}
       >

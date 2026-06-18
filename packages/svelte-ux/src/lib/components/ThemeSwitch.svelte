@@ -21,7 +21,7 @@
   on:change={(e) => {
     // @ts-expect-error: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
     let newTheme = e.target?.checked ? 'dark' : 'light';
-    $host().dispatchEvent(new CustomEvent('theme:set', { detail: newTheme }));
+    $host().dispatchEvent(new CustomEvent('themeSet', { detail: newTheme }));
     currentTheme.setTheme(newTheme);
   }}
   classes={clsMerge(
