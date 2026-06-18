@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.24
+
+### Minor Changes
+
+- Add theme selection events ([#671](https://github.com/techniq/svelte-ux/pull/671))
+
 ## 2.0.0-next.23
 
 ### Patch Changes
