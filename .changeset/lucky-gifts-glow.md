@@ -2,4 +2,4 @@
 'svelte-ux': patch
 ---
 
-Replace event.detail.detail with event.detail.theme
+Use `theme` instead of `detail` for `themeSet` event property
