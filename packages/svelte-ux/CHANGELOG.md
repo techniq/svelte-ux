@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.25
+
+### Patch Changes
+
+- Use `theme` instead of `detail` for `themeSet` event property ([#673](https://github.com/techniq/svelte-ux/pull/673))
+
 ## 2.0.0-next.24
 
 ### Minor Changes
