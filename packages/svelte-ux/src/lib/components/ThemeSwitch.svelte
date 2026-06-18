@@ -11,6 +11,8 @@
   const { currentTheme, icons } = getSettings();
   const { icon: iconClasses, ...otherClasses } = getComponentClasses('ThemeSwitch');
 
+  const { ...props } = $props();
+
   export let classes: {
     icon?: string;
   } & ComponentProps<Switch>['classes'] = {};
@@ -32,7 +34,7 @@
     otherClasses,
     classes
   )}
-  {...$$restProps}
+  {...props}
 >
   <div class="grid grid-stack">
     <Icon
