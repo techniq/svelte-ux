@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import { cls, clsMerge } from '@layerstack/tailwind';
 
   import Icon from './Icon.svelte';
@@ -11,7 +12,7 @@
   const { currentTheme, icons } = getSettings();
   const { icon: iconClasses, ...otherClasses } = getComponentClasses('ThemeSwitch');
 
-  const { ...props } = $props();
+  const dispatch = createEventDispatcher();
 
   export let classes: {
     icon?: string;
@@ -23,7 +24,7 @@
   on:change={(e) => {
     // @ts-expect-error: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
     let newTheme = e.target?.checked ? 'dark' : 'light';
-    $host().dispatchEvent(new CustomEvent('themeSet', { detail: newTheme }));
+    dispatch('themeSet', { detail: newTheme });
     currentTheme.setTheme(newTheme);
   }}
   classes={clsMerge(
@@ -34,7 +35,7 @@
     otherClasses,
     classes
   )}
-  {...props}
+  {...$$restProps}
 >
   <div class="grid grid-stack">
     <Icon
