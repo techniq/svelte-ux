@@ -109,7 +109,10 @@
       <div class="grid grid-cols-2 gap-2 p-2">
         {#each themes as themeName}
           <MenuItem
-            on:click={() => currentTheme.setTheme(themeName)}
+            on:click={() => {
+              $host().dispatchEvent(new CustomEvent('themeSet', { detail: themeName }));
+              currentTheme.setTheme(themeName);
+            }}
             data-theme={themeName}
             class={cls(
               'bg-surface-100 text-surface-content font-semibold border shadow-sm',
