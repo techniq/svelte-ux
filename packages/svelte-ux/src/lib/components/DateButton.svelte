@@ -26,6 +26,8 @@
   export let fade: boolean = false;
   export let format: CustomIntlDateTimeFormatOptions | undefined = getCustomFormat(periodType);
   export let variant = defaults.variant;
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
   let className: string | undefined = undefined;
   export { className as class };
 
@@ -41,7 +43,7 @@
     }
   }
 
-  const { start, end, isSame } = getDateFuncsByPeriodType($localeSettings, periodType);
+  const { start, end, isSame } = getDateFuncsByPeriodType($localeSettings, periodType, { utc });
 
   $: isSelected =
     selected instanceof Date
@@ -112,6 +114,6 @@
       dispatch('dateChange', date);
     }}
   >
-    {$format_ux(date, periodType, { custom: format })}
+    {$format_ux(date, periodType, { custom: format, utc })}
   </Button>
 </div>

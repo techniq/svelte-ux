@@ -23,6 +23,8 @@
   export let periodType: PeriodType = PeriodType.Day;
   export let iconOnly: boolean = false;
   export let stepper: boolean = false;
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
 
   // Field props
   export let label: string | null = null;
@@ -97,7 +99,7 @@
           class="p-2"
           on:click={() => {
             if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
+              const { add } = getDateFuncsByPeriodType($localeSettings, periodType, { utc });
               value = add(value, -1);
               dispatch('change', value);
             }
@@ -113,7 +115,7 @@
       on:click={() => (open = true)}
       {id}
     >
-      {$format(value, PeriodType.Day, { custom: primaryFormat })}
+      {$format(value, PeriodType.Day, { custom: primaryFormat, utc })}
     </button>
 
     <div slot="append">
@@ -135,7 +137,7 @@
           class="p-2"
           on:click={() => {
             if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
+              const { add } = getDateFuncsByPeriodType($localeSettings, periodType, { utc });
               value = add(value, 1);
               dispatch('change', value);
             }
@@ -166,6 +168,7 @@
       bind:selected={currentValue}
       {periodType}
       {disabledDates}
+      {utc}
       on:dateChange={(e) => (currentValue = e.detail)}
     />
   </div>
