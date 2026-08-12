@@ -78,7 +78,7 @@
   <Button icon={icons.calendar} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
-    label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat })}
+    label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat, utc })}
     {labelPlacement}
     {icon}
     {error}
@@ -155,10 +155,10 @@
       transition:slide
     >
       <div class="text-sm opacity-50">
-        {$format(currentValue, PeriodType.Day, { custom: secondaryFormat })}
+        {$format(currentValue, PeriodType.Day, { custom: secondaryFormat, utc })}
       </div>
       <div class="text-3xl">
-        {$format(currentValue, PeriodType.Day, { custom: primaryFormat })}
+        {$format(currentValue, PeriodType.Day, { custom: primaryFormat, utc })}
       </div>
     </div>
   {/if}
