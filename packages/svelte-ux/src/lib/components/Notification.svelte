@@ -4,16 +4,16 @@
   import { quadIn } from 'svelte/easing';
   import { cls, type ThemeColors } from '@layerstack/tailwind';
 
-  import { mdiClose } from '@mdi/js';
-
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
+  import { getSettings } from './settings.js';
+  import type { IconProp } from '$lib/types/index.js';
 
   const dispatch = createEventDispatcher();
 
   export let title: string | undefined = undefined;
   export let description: string | undefined = undefined;
-  export let icon: string | undefined = undefined;
+  export let icon: IconProp | undefined = undefined;
   export let actions: Record<string, Function> = {};
 
   export let color: ThemeColors = 'primary';
@@ -23,6 +23,9 @@
   export let open: boolean = true;
   export let closeIcon: boolean = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     title?: string;
@@ -30,6 +33,8 @@
     icon?: ComponentProps<Icon>['classes'];
     actions?: string;
   } = {};
+
+  const { icons } = getSettings();
 
   let notificationEl: HTMLDivElement;
   let actionsEl: HTMLDivElement;
@@ -71,7 +76,7 @@
         default: {},
       }[variant],
       classes.root,
-      $$props.class
+      className
     )}
     transition:fly={{ duration: 200, easing: quadIn, x: 100 }}
     on:outroend={() => dispatch('close')}
@@ -186,7 +191,7 @@
 
         {#if closeIcon}
           <Button
-            icon={mdiClose}
+            icon={icons.close}
             on:click={() => (open = false)}
             class={cls(
               'self-start',

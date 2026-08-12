@@ -1,9 +1,10 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
-  import { mdiArrowRight } from '@mdi/js';
 
-  import { Button, Card, Collapse } from 'svelte-ux';
+  import { Button, Card, Collapse, getSettings, Icon } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let group: any = undefined;
 
@@ -140,7 +141,7 @@
     {#each Array(5) as _, i}
       <Collapse
         name="Item {i + 1}"
-        icon={mdiArrowRight}
+        icon={icons.arrowRight}
         classes={{ icon: 'data-[open=true]:rotate-90' }}
       >
         <div>
@@ -162,6 +163,29 @@
         name="Item {i + 1}"
         classes={{ icon: 'data-[open=true]:rotate-0 data-[open=true]:-scale-y-100' }}
       >
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
+          omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!
+          Inventore laborum rerum at id?
+        </div>
+      </Collapse>
+    {/each}
+  </Card>
+</Preview>
+
+<h2>Icon slot</h2>
+
+<Preview>
+  <Card>
+    {#each Array(5) as _, i}
+      <Collapse name="Item {i + 1}">
+        <svelte:fragment slot="icon" let:open>
+          {#if open}
+            <Icon data={icons.minus} />
+          {:else}
+            <Icon data={icons.plus} />
+          {/if}
+        </svelte:fragment>
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quod culpa et, dolores
           omnis, ipsum in perspiciatis porro ut nihil molestiae molestias tenetur delectus velit!

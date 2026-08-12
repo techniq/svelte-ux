@@ -39,12 +39,12 @@
 
 <Preview>
   <Overflow class="bg-gray-50 border p-2 relative" let:overflowX>
-    <Button icon={mdiChevronLeft} class="absolute top-1/2 left-0 -translate-y-1/2" size="sm" />
+    <Button icon={icons.chevronLeft} class="absolute top-1/2 left-0 -translate-y-1/2" size="sm" />
     <div class="flex gap-3 overflow-auto scrollbar-none">
       {#each { length: 20 } as _}
         <div class="border rounded-lg px-4 bg-surface-100">Item</div>
       {/each}
     </div>
-    <Button icon={mdiChevronRight} class="absolute top-1/2 right-0 -translate-y-1/2" size="sm" />
+    <Button icon={icons.chevronRight} class="absolute top-1/2 right-0 -translate-y-1/2" size="sm" />
   </Overflow>
 </Preview> -->

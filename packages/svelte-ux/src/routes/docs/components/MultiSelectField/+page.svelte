@@ -1,11 +1,11 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
-  import { mdiPlus } from '@mdi/js';
 
   import {
     Button,
     Dialog,
     Drawer,
+    getSettings,
     Form,
     MultiSelectField,
     MultiSelectOption,
@@ -17,6 +17,8 @@
     type MenuOption,
   } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let options: MenuOption[] = [
     { label: 'One', value: 1 },
@@ -113,7 +115,7 @@
     <svelte:fragment slot="beforeOptions" let:selection>
       {#if selection.isMaxSelected()}
         <div
-          class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded mb-1"
+          class="bg-danger/5 border-danger text-danger-600 border text-sm font-semibold p-2 rounded-sm mb-1"
           transition:slide
         >
           Maximum selection reached
@@ -162,7 +164,7 @@
     maintainOrder
   >
     <div slot="actions">
-      <Button color="primary" icon={mdiPlus}>Add item</Button>
+      <Button color="primary" icon={icons.plus}>Add item</Button>
     </div>
   </MultiSelectField>
 </Preview>
@@ -234,7 +236,7 @@
   <MultiSelectField {options} {value} on:change={(e) => (value = e.detail.value)}>
     <div slot="actions" class="p-2" on:click|stopPropagation role="none">
       <Toggle let:on={open} let:toggle>
-        <Button icon={mdiPlus} color="primary" on:click={toggle}>New item</Button>
+        <Button icon={icons.plus} color="primary" on:click={toggle}>New item</Button>
         <Form
           initial={newOption()}
           on:change={(e) => {
@@ -313,6 +315,7 @@
     </div>
   </MultiSelectField>
 </Preview>
+
 <h2>within Drawer</h2>
 
 <Preview>

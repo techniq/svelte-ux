@@ -1,14 +1,13 @@
 <script lang="ts">
   import {
-    addMonths,
-    subMonths,
-    isSameMonth,
-    isAfter,
-    startOfQuarter,
-    endOfQuarter,
-  } from 'date-fns';
+    endOfInterval,
+    intervalOffset,
+    isDateAfter,
+    isSameInterval,
+    startOfInterval,
+  } from '@layerstack/utils';
 
-  import { MonthList } from 'svelte-ux';
+  import { MonthList, Switch } from 'svelte-ux';
   import { type SelectedDate } from '@layerstack/utils';
   import { type DateRange } from '@layerstack/utils/dateRange';
 
@@ -18,6 +17,16 @@
   let selectedArr: Date[] = [];
   let selectedRange: DateRange = { from: null, to: null };
   let selectedQuarter: DateRange = { from: null, to: null };
+
+  let selectedUtc: Date | null = null;
+  let utcSelected = false;
+  let utcInstant = false;
+
+  // Instant which falls in a different month/year when read as local vs UTC (for timezones behind
+  // UTC.  Timezones ahead of UTC see the same with an instant late in the UTC day)
+  const yearBoundaryUtc = new Date('2026-01-01T00:00:00Z');
+
+  const iso = (date: Date | null) => date?.toISOString() ?? '(none)';
 </script>
 
 <h1>Examples</h1>
@@ -83,7 +92,13 @@
 <h2>Disabled months w/ array</h2>
 
 <Preview>
-  <MonthList disabledDates={[subMonths(new Date(), 2), new Date(), addMonths(new Date(), 2)]} />
+  <MonthList
+    disabledDates={[
+      intervalOffset('month', new Date(), -2),
+      new Date(),
+      intervalOffset('month', new Date(), 2),
+    ]}
+  />
 </Preview>
 
 <h2>Disabled months w/ range</h2>
@@ -91,8 +106,8 @@
 <Preview>
   <MonthList
     disabledDates={{
-      from: subMonths(new Date(), 2),
-      to: addMonths(new Date(), 2),
+      from: intervalOffset('month', new Date(), -2),
+      to: intervalOffset('month', new Date(), 2),
     }}
   />
 </Preview>
@@ -100,7 +115,7 @@
 <h2>Disabled months w/ function</h2>
 
 <Preview>
-  <MonthList disabledDates={(date) => isAfter(date, new Date())} />
+  <MonthList disabledDates={(date) => isDateAfter(date, new Date())} />
 </Preview>
 
 <h2>Selected w/ single</h2>
@@ -112,7 +127,13 @@
 <h2>Selected w/ array</h2>
 
 <Preview>
-  <MonthList selected={[subMonths(new Date(), 2), new Date(), addMonths(new Date(), 2)]} />
+  <MonthList
+    selected={[
+      intervalOffset('month', new Date(), -2),
+      new Date(),
+      intervalOffset('month', new Date(), 2),
+    ]}
+  />
 </Preview>
 
 <h2>Selected w/ range</h2>
@@ -120,8 +141,8 @@
 <Preview>
   <MonthList
     selected={{
-      from: subMonths(new Date(), 2),
-      to: addMonths(new Date(), 2),
+      from: intervalOffset('month', new Date(), -2),
+      to: intervalOffset('month', new Date(), 2),
     }}
   />
 </Preview>
@@ -144,8 +165,8 @@
     selected={selectedArr}
     on:dateChange={(e) => {
       const date = e.detail;
-      if (selectedArr.some((d) => isSameMonth(d, date))) {
-        selectedArr = selectedArr.filter((d) => !isSameMonth(d, date));
+      if (selectedArr.some((d) => isSameInterval('month', d, date))) {
+        selectedArr = selectedArr.filter((d) => !isSameInterval('month', d, date));
       } else {
         selectedArr = [...selectedArr, date];
       }
@@ -163,16 +184,16 @@
       const newSelectedRange = { ...selectedRange };
       if (selectedRange.from === null) {
         newSelectedRange.from = date;
-      } else if (isSameMonth(date, selectedRange.from)) {
+      } else if (isSameInterval('month', date, selectedRange.from)) {
         newSelectedRange.from = null;
       } else if (selectedRange.to === null) {
-        if (isAfter(date, selectedRange.from)) {
+        if (isDateAfter(date, selectedRange.from)) {
           newSelectedRange.to = date;
         } else {
           newSelectedRange.to = selectedRange.from;
           newSelectedRange.from = date;
         }
-      } else if (isSameMonth(date, selectedRange.to)) {
+      } else if (isSameInterval('month', date, selectedRange.to)) {
         newSelectedRange.to = null;
       } else {
         newSelectedRange.from = date;
@@ -192,10 +213,59 @@
       on:dateChange={(e) => {
         const date = e.detail;
         selectedQuarter = {
-          from: startOfQuarter(date),
-          to: endOfQuarter(date),
+          from: startOfInterval('quarter', date),
+          to: endOfInterval('quarter', date),
         };
       }}
     />
   </div>
+</Preview>
+
+<h2>UTC</h2>
+
+<h3>Selected state</h3>
+
+<div class="text-sm text-surface-content/60 mb-2">
+  With <code>utc</code>, the months are built from UTC boundaries and selections are dispatched as
+  the UTC start of month (<code>-01T00:00:00.000Z</code>) instead of the local one.
+</div>
+
+<Preview>
+  <label class="flex items-center gap-2 text-sm w-fit mb-3">
+    <Switch bind:checked={utcSelected} size="md" /> utc
+  </label>
+
+  <div class="grid grid-cols-3">
+    <MonthList
+      utc={utcSelected}
+      selected={selectedUtc}
+      on:dateChange={(e) => {
+        selectedUtc = e.detail;
+      }}
+    />
+  </div>
+
+  <div class="text-sm text-surface-content/50 mt-3">{iso(selectedUtc)}</div>
+</Preview>
+
+<h3>Selected w/ instant near a year boundary</h3>
+
+<div class="text-sm text-surface-content/60 mb-2">
+  <code>2026-01-01T00:00:00Z</code> is still Dec 2025 in timezones behind UTC (ex. Americas), so
+  with
+  <code>{'year={2026}'}</code> nothing is selected until <code>utc</code> is enabled. Timezones
+  ahead of UTC (ex. Europe/Asia) see the same with an instant late in the UTC day (ex.
+  <code>2026-12-31T23:00:00Z</code>).
+</div>
+
+<Preview>
+  <label class="flex items-center gap-2 text-sm w-fit mb-3">
+    <Switch bind:checked={utcInstant} size="md" /> utc
+  </label>
+
+  <div class="grid grid-cols-3">
+    <MonthList year={2026} utc={utcInstant} selected={yearBoundaryUtc} />
+  </div>
+
+  <div class="text-sm text-surface-content/50 mt-3">{iso(yearBoundaryUtc)}</div>
 </Preview>

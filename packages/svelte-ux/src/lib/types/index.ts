@@ -1,3 +1,5 @@
+import type { Component, ComponentProps } from 'svelte';
+import type { SvelteHTMLElements } from 'svelte/elements';
 import type {
   FlyParams,
   SlideParams,
@@ -7,10 +9,18 @@ import type {
 } from 'svelte/transition';
 import type { ThemeColors } from '@layerstack/tailwind';
 
+import LucideChevronDown from '@lucide/svelte/icons/chevron-down';
+
+// Unable to get `IconProps` from `@lucide/svelte`
+type LucideComponent = typeof LucideChevronDown;
+
+import Icon from '$lib/components/Icon.svelte';
+import MenuItem from '$lib/components/MenuItem.svelte';
+
 export type MenuOption<T = any> = {
   label: string;
   value: T;
-  icon?: string;
+  icon?: ComponentProps<MenuItem>['icon'];
   group?: string;
   disabled?: boolean;
 } & Record<string, any>;
@@ -32,3 +42,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonRounded = boolean | 'full';
 
 export type TransitionParams = BlurParams | FadeParams | FlyParams | SlideParams | ScaleParams;
+
+export type IconData = ComponentProps<Icon>['data'];
+export type IconComponent = Component<SvelteHTMLElements['svg']> | LucideComponent;
+export type IconProp = IconComponent | IconData;

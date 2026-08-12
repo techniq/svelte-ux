@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { mdiChevronLeft, mdiChevronRight, mdiMenuDown, mdiPageFirst, mdiPageLast } from '@mdi/js';
-
   import type { paginationStore } from '@layerstack/svelte-stores';
   import type { StoresValues } from '@layerstack/svelte-stores/types';
   import { cls } from '@layerstack/tailwind';
@@ -35,13 +33,16 @@
   /** Determine which actions to show and order */
   export let show: ShowComponent[] = ['prevPage', 'pagination', 'nextPage'];
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     buttons?: string;
     pagination?: string;
     perPage?: string;
   } = {};
-  const { format: formatValue } = getSettings();
+  const { format: formatValue, icons } = getSettings();
   const settingsClasses = getComponentClasses('Pagination');
 </script>
 
@@ -52,7 +53,7 @@
       'flex items-center gap-1',
       settingsClasses.root,
       classes.root,
-      $$props.class
+      className
     )}
   >
     {#each show as component}
@@ -63,7 +64,7 @@
       {#if component === 'firstPage'}
         <Tooltip title="First page" offset={2}>
           <Button
-            icon={mdiPageFirst}
+            icon={icons.chevronFirst}
             on:click={pagination.firstPage}
             disabled={$pagination.isFirst}
             aria-label="First Page"
@@ -75,7 +76,7 @@
       {#if component === 'prevPage'}
         <Tooltip title="Previous page" offset={2}>
           <Button
-            icon={mdiChevronLeft}
+            icon={icons.chevronLeft}
             on:click={pagination.prevPage}
             disabled={$pagination.isFirst}
             aria-label="Previous Page"
@@ -87,7 +88,7 @@
       {#if component === 'nextPage'}
         <Tooltip title="Next page" offset={2}>
           <Button
-            icon={mdiChevronRight}
+            icon={icons.chevronRight}
             on:click={pagination.nextPage}
             disabled={$pagination.isLast}
             aria-label="Next Page"
@@ -99,7 +100,7 @@
       {#if component === 'lastPage'}
         <Tooltip title="Last page" offset={2}>
           <Button
-            icon={mdiPageLast}
+            icon={icons.chevronLast}
             on:click={pagination.lastPage}
             disabled={$pagination.isLast}
             aria-label="Last Page"
@@ -115,7 +116,7 @@
             <span>
               <Button on:click={toggle}>
                 {$pagination.perPage}
-                <Icon data={mdiMenuDown} />
+                <Icon data={icons.chevronDown} />
               </Button>
 
               <Menu

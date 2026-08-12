@@ -1,14 +1,14 @@
 <script lang="ts">
   import { cls } from '@layerstack/tailwind';
-  import { DurationUnits, getDuration, humanizeDuration } from '@layerstack/utils';
-  import { type Duration } from '@layerstack/utils/duration';
+  import { Duration, DurationUnits } from '@layerstack/utils';
+  import type { DurationOption } from '@layerstack/utils/duration';
   import { timerStore } from '@layerstack/svelte-stores';
 
   import { getComponentClasses } from './theme.js';
 
   export let start: Date | undefined = undefined;
   export let end: Date | undefined = undefined;
-  export let duration: Partial<Duration> | undefined = undefined;
+  export let duration: DurationOption | undefined = undefined;
   export let minUnits: DurationUnits = DurationUnits.Millisecond;
   export let totalUnits: number = 99;
   export let variant: 'short' | 'long' = 'short';
@@ -19,7 +19,7 @@
 
   function getDelay(useTimer = true) {
     const endTime = end ?? (useTimer ? $timer : null);
-    const newDuration = getDuration(start, endTime, duration);
+    const newDuration = new Duration({ start, end: endTime, duration });
 
     const unitsMoreThanSeconds = [
       newDuration?.years,
@@ -53,10 +53,7 @@
     },
   });
 
-  $: displayDuration = humanizeDuration({
-    start,
-    end: end ?? $timer,
-    duration,
+  $: displayDuration = new Duration({ start, end: end ?? $timer, duration }).format({
     minUnits,
     totalUnits,
     variant,

@@ -29,7 +29,7 @@
     templateColumns="initial"
     templateRows="initial"
     on:click
-    {...$$props}
+    {...$$restProps}
   >
     <slot />
   </Grid>

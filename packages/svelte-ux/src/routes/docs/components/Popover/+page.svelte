@@ -14,7 +14,7 @@
 <Preview>
   <div class="inline-block">
     <Popover bind:open>
-      <div class="p-2 bg-surface-100 border shadow">Example contents</div>
+      <div class="p-2 bg-surface-100 border shadow-sm">Example contents</div>
     </Popover>
     <Button on:click={() => (open = !open)}>Click me</Button>
   </div>
@@ -29,7 +29,7 @@
         <div class="col-start-2 text-right">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="top-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Top Start</Button>
           </div>
@@ -39,7 +39,7 @@
         <div class="col-start-3 text-center">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="top">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Top</Button>
           </div>
@@ -49,7 +49,7 @@
         <div class="col-start-4 text-left">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="top-end">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Top End</Button>
           </div>
@@ -59,7 +59,7 @@
         <div class="col-start-1 text-right">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="left-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Left Start</Button>
           </div>
@@ -69,7 +69,7 @@
         <div class="col-start-5 text-left">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="right-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Right Start</Button>
           </div>
@@ -79,7 +79,7 @@
         <div class="col-start-1 text-right">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="left">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Left</Button>
           </div>
@@ -89,7 +89,7 @@
         <div class="col-start-5 text-left">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="right">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Right</Button>
           </div>
@@ -99,7 +99,7 @@
         <div class="col-start-1 text-right">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="left-end">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Left End</Button>
           </div>
@@ -109,7 +109,7 @@
         <div class="col-start-5 text-left">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="right-end">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Right End</Button>
           </div>
@@ -119,7 +119,7 @@
         <div class="col-start-2 text-right">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="bottom-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Bottom Start</Button>
           </div>
@@ -129,7 +129,7 @@
         <div class="col-start-3 text-center">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="bottom">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Bottom</Button>
           </div>
@@ -139,7 +139,7 @@
         <div class="col-start-4 text-left">
           <div class="inline-block">
             <Popover {open} on:close={toggleOff} placement="bottom-start">
-              <div class="px-4 py-8 bg-surface-100 border shadow">Contents</div>
+              <div class="px-4 py-8 bg-surface-100 border shadow-sm">Contents</div>
             </Popover>
             <Button on:click={toggle}>Bottom End</Button>
           </div>

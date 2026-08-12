@@ -1,18 +1,17 @@
 <script lang="ts">
-  import {
-    mdiBullhorn,
-    mdiCodeBraces,
-    mdiGoogleCirclesGroup,
-    mdiInformationOutline,
-  } from '@mdi/js';
+  import LucideGroup from '@lucide/svelte/icons/group';
+  import LucideRadio from '@lucide/svelte/icons/radio';
 
   import Button from './Button.svelte';
   import EmptyMessage from './EmptyMessage.svelte';
   import Icon from './Icon.svelte';
   import ListItem from './ListItem.svelte';
   import Tooltip from './Tooltip.svelte';
+  import { getSettings } from './settings.js';
 
   export let api: SveldJson;
+
+  const { icons } = getSettings();
 
   function parseSlotProps(slot_props: string) {
     return slot_props
@@ -32,7 +31,7 @@
       {#each api.props ?? [] as prop}
         <ListItem
           list="type"
-          icon={mdiCodeBraces}
+          icon={icons.codeBraces}
           avatar={{ size: 'sm', class: 'text-xs text-white bg-blue-500' }}
         >
           <div slot="title">{prop.name}</div>
@@ -78,7 +77,7 @@
 
     {#if api.rest_props}
       <div class="text-surface-content/50 text-xs flex gap-2 mt-2 ml-4 items-center">
-        <Icon data={mdiInformationOutline} />
+        <Icon data={icons.info} />
         <span>
           Remaining props are passed to underlying
           {#if api.rest_props.type === 'InlineComponent'}
@@ -116,7 +115,7 @@
       {#each api.slots ?? [] as slot}
         <ListItem
           list="type"
-          icon={mdiGoogleCirclesGroup}
+          icon={LucideGroup}
           avatar={{ size: 'sm', class: 'text-xs text-white bg-purple-500' }}
         >
           <div slot="title">
@@ -159,7 +158,7 @@
       {#each api.events ?? [] as event}
         <ListItem
           list="type"
-          icon={mdiBullhorn}
+          icon={LucideRadio}
           avatar={{ size: 'sm', class: 'text-xs text-white bg-success-500' }}
         >
           <div slot="title">{event.name}</div>
@@ -196,7 +195,7 @@
       {#each api.moduleExports ?? [] as prop}
         <ListItem
           list="type"
-          icon={mdiCodeBraces}
+          icon={icons.codeBraces}
           avatar={{ size: 'sm', class: 'text-xs text-white bg-blue-500' }}
         >
           <div slot="title">{prop.name}</div>

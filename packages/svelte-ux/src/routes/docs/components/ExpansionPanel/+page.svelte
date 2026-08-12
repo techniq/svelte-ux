@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { mdiAccount } from '@mdi/js';
-
   import { Button, ExpansionPanel, ListItem } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  import LucideUserRound from '~icons/lucide/user-round';
 </script>
 
 <h1>Examples</h1>
@@ -65,7 +65,7 @@
         slot="trigger"
         title="Item {i + 1}"
         subheading="List Item"
-        icon={mdiAccount}
+        icon={LucideUserRound}
         avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
         class="flex-1"
         noShadow
@@ -89,7 +89,7 @@
       slot="trigger"
       title="Item 1"
       subheading="Expansion Panel"
-      icon={mdiAccount}
+      icon={LucideUserRound}
       avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
       class="flex-1"
       noShadow
@@ -103,7 +103,7 @@
   <ListItem
     title="Item 2"
     subheading="List Item"
-    icon={mdiAccount}
+    icon={LucideUserRound}
     avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
   <ExpansionPanel>
@@ -111,7 +111,7 @@
       slot="trigger"
       title="Item 3"
       subheading="Expansion Panel"
-      icon={mdiAccount}
+      icon={LucideUserRound}
       avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
       class="flex-1"
       noShadow
@@ -132,7 +132,7 @@
   <ListItem
     title="Item 1"
     subheading="List Item"
-    icon={mdiAccount}
+    icon={LucideUserRound}
     avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
   <ExpansionPanel>
@@ -140,7 +140,7 @@
       slot="trigger"
       title="Item 2"
       subheading="Expansion Panel"
-      icon={mdiAccount}
+      icon={LucideUserRound}
       avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
       class="flex-1"
       noShadow
@@ -154,7 +154,7 @@
   <ListItem
     title="Item 3"
     subheading="List Item"
-    icon={mdiAccount}
+    icon={LucideUserRound}
     avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
 </Preview>

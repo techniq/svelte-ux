@@ -4,8 +4,6 @@
   import { get } from 'svelte/store';
   import { partition, isEqual } from 'lodash-es';
 
-  import { mdiMagnify } from '@mdi/js';
-
   import { dirtyStore, selectionStore, uniqueStore, changeStore } from '@layerstack/svelte-stores';
   import { cls } from '@layerstack/tailwind';
   import { Logger } from '@layerstack/utils';
@@ -17,6 +15,7 @@
 
   import type { MenuOption } from '../types/index.js';
   import { getComponentClasses } from './theme.js';
+  import { getSettings } from './settings.js';
 
   const logger = new Logger('MultiSelect');
 
@@ -50,6 +49,7 @@
     actions?: string;
   } = {};
   const settingsClasses = getComponentClasses('MultiSelect');
+  const { icons } = getSettings();
 
   const dispatch = createEventDispatcher<{
     change: {
@@ -122,7 +122,7 @@
     }
   }
   // Re-filter options when `searchText` changes
-  $: searchText, updateFilteredOptions();
+  $: (searchText, updateFilteredOptions());
 
   const selection = selectionStore({ max });
   // Only "subscribe" to value changes (not `$selection`) to fix correct `value` / topological ordering.  Should be simplified with Svelte 5
@@ -170,7 +170,7 @@
   >
     <TextField
       {placeholder}
-      iconRight={mdiMagnify}
+      iconRight={icons.search}
       bind:value={searchText}
       autofocus={{ delay: 100, disabled: !autoFocusSearch }}
     />

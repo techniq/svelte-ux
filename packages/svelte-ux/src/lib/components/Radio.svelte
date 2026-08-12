@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { mdiCheckboxBlankCircle } from '@mdi/js';
-
   import Icon from './Icon.svelte';
   import { uniqueId } from '@layerstack/utils';
   import { cls } from '@layerstack/tailwind';
@@ -15,6 +13,9 @@
   export let disabled = false;
   export let fullWidth = false;
   export let size: 'xs' | 'sm' | 'md' | 'lg' = 'sm';
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let classes: {
     root?: string;
@@ -35,7 +36,7 @@
     'items-center',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <input
@@ -68,7 +69,7 @@
     )}
   >
     <Icon
-      path={mdiCheckboxBlankCircle}
+      path="M12 2A10 10 0 0 0 12 22A10 10 0 0 0 12 2Z"
       class={cls(
         'icon',
         'pointer-events-none transition-transform',

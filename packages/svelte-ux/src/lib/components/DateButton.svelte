@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { isWithinInterval } from 'date-fns';
 
   import { cls } from '@layerstack/tailwind';
   import {
@@ -9,6 +8,7 @@
     type CustomIntlDateTimeFormatOptions,
     type SelectedDate,
     getDateFuncsByPeriodType,
+    isDateWithin,
   } from '@layerstack/utils';
 
   import Button from './Button.svelte';
@@ -26,6 +26,8 @@
   export let fade: boolean = false;
   export let format: CustomIntlDateTimeFormatOptions | undefined = getCustomFormat(periodType);
   export let variant = defaults.variant;
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
   let className: string | undefined = undefined;
   export { className as class };
 
@@ -41,7 +43,7 @@
     }
   }
 
-  const { start, end, isSame } = getDateFuncsByPeriodType($localeSettings, periodType);
+  const { start, end, isSame } = getDateFuncsByPeriodType($localeSettings, periodType, { utc });
 
   $: isSelected =
     selected instanceof Date
@@ -50,7 +52,7 @@
         ? selected.some((d) => isSame(date, d))
         : selected instanceof Object
           ? selected.from
-            ? isWithinInterval(date, {
+            ? isDateWithin(date, {
                 start: start(selected.from),
                 end: end(selected.to ?? selected.from),
               })
@@ -84,15 +86,13 @@
 </script>
 
 <div
-  style="--tw-gradient-stops: var(--tw-gradient-from) 50%, var(--tw-gradient-to) 50%"
   class={cls(
     'DateButton',
     'inline-flex items-center justify-center',
-    isSelectedStart
-      ? '[--tw-gradient-from:transparent]'
-      : '[--tw-gradient-from:theme(colors.primary)]',
-    isSelectedEnd ? '[--tw-gradient-to:transparent]' : '[--tw-gradient-to:theme(colors.primary)]',
-    isSelected && (isVerticalSelection ? 'bg-gradient-to-b' : 'bg-gradient-to-r'),
+    isSelectedStart ? 'from-transparent' : 'from-primary',
+    isSelectedEnd ? 'to-transparent' : 'to-primary',
+    isSelected &&
+      (isVerticalSelection ? 'bg-linear-to-b from-50% to-50%' : 'bg-linear-to-r from-50% to-50%'),
     hidden && 'opacity-0 pointer-events-none',
     settingsClasses.root,
     className
@@ -114,6 +114,6 @@
       dispatch('dateChange', date);
     }}
   >
-    {$format_ux(date, periodType, { custom: format })}
+    {$format_ux(date, periodType, { custom: format, utc })}
   </Button>
 </div>

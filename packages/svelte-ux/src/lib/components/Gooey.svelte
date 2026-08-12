@@ -16,6 +16,9 @@
 
   export let composite: SVGAttributes<SVGFECompositeElement>['operator'] = undefined;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   /** @type {{root?: string, icon?: string, loading?: string}} */
   export let classes: {
     root?: string;
@@ -29,7 +32,7 @@
 <svg class={cls('fixed inset-0 pointer-events-none', settingsClasses.svg, classes?.svg)}>
   <filter id={filterId}>
     {#if blur}
-      <feGaussianBlur in="SourceGraphic" stdDeviation={blur} result="blur" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation={blur} result="blur-sm" />
     {/if}
 
     <feColorMatrix
@@ -51,7 +54,7 @@
 <div
   style:filter="url(#{filterId})"
   {...$$restProps}
-  class={cls('inline-block', settingsClasses.root, classes?.root, $$props.class)}
+  class={cls('inline-block', settingsClasses.root, classes?.root, className)}
 >
   <slot />
 </div>

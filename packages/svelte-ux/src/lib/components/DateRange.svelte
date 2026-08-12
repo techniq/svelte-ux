@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { isAfter, isBefore, isSameDay } from 'date-fns';
   import { cls } from '@layerstack/tailwind';
   import { omit } from '@layerstack/utils/object';
   import { mdScreen } from '@layerstack/svelte-stores';
@@ -8,6 +7,9 @@
     DayOfWeek,
     getDateFuncsByPeriodType,
     type DisabledDate,
+    isDateAfter,
+    isDateBefore,
+    isSameInterval,
   } from '@layerstack/utils';
   import { getDateRangePresets, type DateRange } from '@layerstack/utils/dateRange';
   import { hasDayOfWeek, replaceDayOfWeek, missingDayOfWeek } from '@layerstack/utils/date';
@@ -36,10 +38,15 @@
   ];
   export let getPeriodTypePresets = getDateRangePresets;
 
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
+
   /**
    * Dates to disable (not selectable)
    */
   export let disabledDates: DisabledDate | undefined = undefined;
+
+  $: dayInterval = utc ? ('utcDay' as const) : ('day' as const);
 
   const settingsClasses = getComponentClasses('DateRange');
   const { format, localeSettings } = getSettings();
@@ -58,13 +65,15 @@
     };
   });
 
-  $: presetOptions = getPeriodTypePresets($localeSettings, selectedPeriodType).map((preset) => {
-    return {
-      label: preset.label,
-      value: getDateRangeStr(preset.value),
-      preset,
-    };
-  });
+  $: presetOptions = getPeriodTypePresets($localeSettings, selectedPeriodType, { utc }).map(
+    (preset) => {
+      return {
+        label: preset.label,
+        value: getDateRangeStr(preset.value),
+        preset,
+      };
+    }
+  );
 
   /** Get date range (without period type) as string */
   function getDateRangeStr(range: DateRange) {
@@ -72,21 +81,21 @@
   }
 
   function onDateChange(date: Date) {
-    // Apply date-fns function based on type and from/to.
+    // Apply date function based on type and from/to.
     let newSelected = { ...selected, periodType: selectedPeriodType };
 
-    const { start, end } = getDateFuncsByPeriodType($localeSettings, selectedPeriodType);
+    const { start, end } = getDateFuncsByPeriodType($localeSettings, selectedPeriodType, { utc });
 
     let newActiveDate: typeof activeDate = activeDate === 'from' ? 'to' : 'from';
 
     if (activeDate === 'from') {
       newSelected.from = start(date);
-      if (selected!.to != null && isAfter(date, selected!.to)) {
+      if (selected!.to != null && isDateAfter(date, selected!.to)) {
         newSelected.to = end(date);
       }
     } else {
       newSelected.to = end(date);
-      if (selected!.from != null && isBefore(date, selected!.from)) {
+      if (selected!.from != null && isDateBefore(date, selected!.from)) {
         newSelected.from = start(date);
         newActiveDate = 'to';
       }
@@ -100,7 +109,7 @@
 
   // Expand selection range to match period type (day => month, etc)
   function onPeriodTypeChange(periodType: PeriodType) {
-    const { start, end } = getDateFuncsByPeriodType($localeSettings, periodType);
+    const { start, end } = getDateFuncsByPeriodType($localeSettings, periodType, { utc });
     if (selected!.from) {
       selected!.from = start(selected!.from);
     }
@@ -130,18 +139,18 @@
       // Attempt to maintain selected preset if labels match
       if (selected?.from && selected?.to && selected.periodType) {
         const prevPeriodTypePreset = [
-          ...getPeriodTypePresets($localeSettings, selected.periodType),
+          ...getPeriodTypePresets($localeSettings, selected.periodType, { utc }),
         ].find(
           (x) =>
             x.value.from &&
-            isSameDay(x.value.from, selected!.from!) &&
+            isSameInterval(dayInterval, x.value.from, selected!.from!) &&
             x.value.to &&
-            isSameDay(x.value.to, selected!.to!)
+            isSameInterval(dayInterval, x.value.to, selected!.to!)
         );
 
         if (prevPeriodTypePreset && newPeriodType) {
           const newPeriodTypePreset = [
-            ...getPeriodTypePresets($localeSettings, newPeriodType),
+            ...getPeriodTypePresets($localeSettings, newPeriodType, { utc }),
           ].find((x) => x.label === prevPeriodTypePreset.label);
 
           if (newPeriodTypePreset) {
@@ -173,7 +182,7 @@
   class={cls(
     'DateRange grid gap-2',
     'w-[min(90vw,384px)]',
-    showSidebar && 'md:w-[640px] md:grid-cols-[2fr,3fr]',
+    showSidebar && 'md:w-[640px] md:grid-cols-[2fr_3fr]',
     settingsClasses.root,
     className
   )}
@@ -183,7 +192,7 @@
       <ToggleOption value="from" class="flex-1">
         <div class="text-xs text-surface-content/50">{$localeSettings.dictionary.Date.Start}</div>
         {#if selected?.from}
-          <div class="font-medium">{$format(selected.from, PeriodType.Day)}</div>
+          <div class="font-medium">{$format(selected.from, PeriodType.Day, { utc })}</div>
         {:else}
           <div class="italic">{$localeSettings.dictionary.Date.Empty}</div>
         {/if}
@@ -205,7 +214,7 @@
       <ToggleOption value="to" class="flex-1">
         <div class="text-xs text-surface-content/50">{$localeSettings.dictionary.Date.End}</div>
         {#if selected?.to}
-          <div class="font-medium">{$format(selected.to, PeriodType.Day)}</div>
+          <div class="font-medium">{$format(selected.to, PeriodType.Day, { utc })}</div>
         {:else}
           <div class="italic">{$localeSettings.dictionary.Date.Empty}</div>
         {/if}
@@ -305,12 +314,13 @@
     </div>
   {/if}
 
-  <div class="bg-surface-100 border rounded overflow-auto">
+  <div class="bg-surface-100 border rounded-sm overflow-auto">
     <DateSelect
       {selected}
       periodType={selectedPeriodType}
       {activeDate}
       {disabledDates}
+      {utc}
       on:dateChange={(e) => onDateChange(e.detail)}
     />
   </div>

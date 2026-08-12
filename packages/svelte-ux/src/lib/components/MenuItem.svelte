@@ -10,13 +10,18 @@
   import { setButtonGroup } from './ButtonGroup.svelte';
   import { getComponentClasses } from './theme.js';
   import { settings, getSettings } from './settings.js';
+  import type { IconProp } from '$lib/types/index.js';
+  import Icon from './Icon.svelte';
 
   type ButtonProps = ComponentProps<Button>;
 
-  export let icon: ButtonProps['icon'] = undefined;
+  export let icon: IconProp | ComponentProps<Icon> = undefined;
   export let scrollIntoView: ScrollIntoViewOptions | boolean = false;
   export let disabled = false;
   export let selected = false;
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let classes: ButtonProps['classes'] & { selected?: string } = {
     root: 'text-sm gap-3',
@@ -51,11 +56,11 @@
   {...$$restProps}
   class={cls(
     'MenuItem',
-    'text-left items-center p-2 hover:bg-surface-content/5 rounded duration-75',
+    'text-left items-center p-2 hover:bg-surface-content/5 rounded-sm duration-75',
     selected && classes?.selected,
     settingsClasses.root,
     classes?.root,
-    $$props.class
+    className
   )}
   on:click
   on:mouseover

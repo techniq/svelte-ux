@@ -72,7 +72,7 @@
 <h2>Template</h2>
 
 <Preview>
-  <div class="grid grid-cols-[auto,1fr,auto] gap-2">
+  <div class="grid grid-cols-[auto_1fr_auto] gap-2">
     <div class="border">item</div>
     <div class="border">item</div>
     <div class="border">item</div>

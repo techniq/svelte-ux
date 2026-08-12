@@ -15,6 +15,9 @@
   /** If completed, will color content and line leading up to item */
   export let completed = false;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   export let classes: {
     root?: string;
     label?: string;
@@ -38,7 +41,7 @@
       : 'grid-rows-[40px_1fr] min-w-16',
     settingsClasses.root,
     classes.root,
-    $$props.class
+    className
   )}
 >
   <div

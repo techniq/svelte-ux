@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { mdiAccount, mdiChevronRight } from '@mdi/js';
-
-  import { Button, Checkbox, ListItem, Radio } from 'svelte-ux';
+  import { Button, Checkbox, getSettings, ListItem, Radio } from 'svelte-ux';
   import { cls } from '@layerstack/tailwind';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  import LucideUserRound from '~icons/lucide/user-round';
+
+  const { icons } = getSettings();
 
   let selectedId = 1;
   const choices = [
@@ -49,13 +51,13 @@
 <h2>Icon</h2>
 
 <Preview>
-  <ListItem title="Title" icon={mdiAccount} />
+  <ListItem title="Title" icon={LucideUserRound} />
 </Preview>
 
 <h2>Icon with subheading</h2>
 
 <Preview>
-  <ListItem title="Title" subheading="Subheading" icon={mdiAccount} />
+  <ListItem title="Title" subheading="Subheading" icon={LucideUserRound} />
 </Preview>
 
 <h2>Icon with classes</h2>
@@ -64,7 +66,7 @@
   <ListItem
     title="Title"
     subheading="Subheading"
-    icon={mdiAccount}
+    icon={LucideUserRound}
     avatar={{ class: 'bg-surface-content/50 text-surface-100/90' }}
   />
 </Preview>
@@ -74,7 +76,7 @@
 <Preview>
   <ListItem title="Title">
     <div slot="actions">
-      <Button icon={mdiChevronRight} class="p-2 text-surface-content/50" />
+      <Button icon={icons.chevronRight} class="p-2 text-surface-content/50" />
     </div>
   </ListItem>
 </Preview>
@@ -102,7 +104,7 @@
 <h3>example 1</h3>
 
 <Preview>
-  <div class="rounded border">
+  <div class="rounded-sm border">
     {#each choices as choice}
       <ListItem
         title={choice.name}
@@ -129,14 +131,14 @@
 <Preview>
   <div class="grid gap-4">
     {#each choices as choice}
-      <div class="elevation-1 rounded">
+      <div class="elevation-1 rounded-sm">
         <ListItem
           title={choice.name}
           subheading={choice.description}
           on:click={() => (selectedId = choice.id)}
           class={cls(
             'px-8 py-4',
-            'cursor-pointer ring ring-inset ring-primary transition-shadow duration-100',
+            'cursor-pointer ring-3 ring-inset ring-primary transition-shadow duration-100',
             'hover:bg-primary/5',
             selectedId == choice.id ? 'ring-1 bg-primary/5' : 'ring-0'
           )}
@@ -167,7 +169,7 @@
           noShadow
         >
           <div slot="actions">
-            <Checkbox circle dense checked={selectedId == choice.id} />
+            <Checkbox circle checked={selectedId == choice.id} />
           </div>
         </ListItem>
       </div>

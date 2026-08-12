@@ -1,9 +1,10 @@
 <script lang="ts">
   import { max } from 'd3-array';
-  import { mdiClose, mdiPlus } from '@mdi/js';
 
-  import { Icon, Tab, Tabs } from 'svelte-ux';
+  import { Button, getSettings, Icon, Tab, Tabs } from 'svelte-ux';
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let options = [
     { label: 'One', value: 1 },
@@ -130,8 +131,9 @@
       <Tab on:click={() => (value = option.value)} selected={value === option.value}>
         {option.label}
 
-        <Icon
-          data={mdiClose}
+        <Button
+          icon={icons.close}
+          size="sm"
           class="rounded-full p-0.5 hover:bg-surface-content/5"
           on:click={(e) => {
             e.stopPropagation();
@@ -143,11 +145,11 @@
 
     <Tab
       on:click={() => {
-        const newValue = max(options, (d) => d.value) ?? 0 + 1;
+        const newValue = (max(options, (d) => d.value) ?? 0) + 1;
         options = [...options, { label: 'New ' + newValue, value: newValue }];
       }}
     >
-      <Icon data={mdiPlus} class="rounded-full p-0.5 hover:bg-surface-content/5" />
+      <Icon data={icons.plus} />
     </Tab>
 
     <svelte:fragment slot="content">

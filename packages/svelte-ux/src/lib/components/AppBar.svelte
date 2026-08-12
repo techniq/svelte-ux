@@ -1,15 +1,18 @@
 <script lang="ts">
   import { BROWSER } from 'esm-env';
-  import { mdiMenu } from '@mdi/js';
   import { cls } from '@layerstack/tailwind';
 
   import Breadcrumb from './Breadcrumb.svelte';
   import Button from './Button.svelte';
   import { getComponentClasses } from './theme.js';
   import { getSettings } from './index.js';
+  import type { IconProp } from '$lib/types/index.js';
+
+  const { showDrawer, icons } = getSettings();
+  const settingsClasses = getComponentClasses('AppBar');
 
   export let title: string | number | Array<string | number> = '';
-  export let menuIcon: string | null = mdiMenu;
+  export let menuIcon: IconProp | null = icons.menu;
   let className: string | undefined = undefined;
   export { className as class };
 
@@ -17,9 +20,6 @@
    * Update head / document.title.  Set to false to disable
    */
   export let head = true;
-
-  const { showDrawer } = getSettings();
-  const settingsClasses = getComponentClasses('AppBar');
 
   $: titleString = Array.isArray(title) ? title.filter((x) => x).join(' › ') : title.toString();
 

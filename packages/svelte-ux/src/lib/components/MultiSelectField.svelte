@@ -4,16 +4,15 @@
   import { cls, clsMerge, normalizeClasses } from '@layerstack/tailwind';
   import { Logger } from '@layerstack/utils';
 
-  import { mdiChevronDown, mdiClose } from '@mdi/js';
-
   import Button from './Button.svelte';
   import MultiSelectMenu from './MultiSelectMenu.svelte';
   import MultiSelectOption from './MultiSelectOption.svelte';
   import TextField from './TextField.svelte';
   import ProgressCircle from './ProgressCircle.svelte';
 
-  import { getComponentSettings } from './settings.js';
+  import { getComponentSettings, getSettings } from './settings.js';
 
+  const { icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('MultiSelectField');
 
   type MultiSelectMenuProps = ComponentProps<MultiSelectMenu<TValue>>;
@@ -45,6 +44,9 @@
   export let formatSelected: (ctx: { value: typeof value; options: typeof options }) => string = ({
     value,
   }) => `${value?.length} selected`;
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   export let classes: {
     root?: string;
@@ -118,7 +120,7 @@
     ) {
       hide();
     } else {
-      logger.debug('ignoring blur');
+      logger.debug('ignoring blur-sm');
     }
   }
 
@@ -142,7 +144,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-  class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, $$props.class)}
+  class={cls(disabled && 'pointer-events-none', settingsClasses.root, classes.root, className)}
   on:click={onClick}
 >
   <!-- TODO: Setup blur without jank on open or issues when clicking within menu -->
@@ -179,7 +181,7 @@
         <!-- Do not show chevron or clear buttons -->
       {:else if value?.length && clearable}
         <Button
-          icon={mdiClose}
+          icon={icons.close}
           class="text-surface-content/50 p-1"
           on:click={(e) => {
             e.stopPropagation();
@@ -189,7 +191,7 @@
         />
       {:else}
         <Button
-          icon={mdiChevronDown}
+          icon={icons.chevronDown}
           class="text-surface-content/50 p-1 transform {open ? 'rotate-180' : ''}"
           tabindex="-1"
           on:click={(e) => {

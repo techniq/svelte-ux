@@ -1,11 +1,9 @@
 import { format } from 'prettier';
 import typescriptPlugin from 'prettier/plugins/typescript';
 import sveltePlugin from 'prettier-plugin-svelte';
-import Prism from 'prismjs';
-import 'prism-svelte';
 
 /**
- *  Add `code` and `highlightedCode` props to <Preview> from slot contents
+ *  Add `code` prop to <Preview> from slot contents (highlighting is handled client-side by <Code> via shiki)
  */
 export function codePreview() {
   return {
@@ -27,15 +25,11 @@ export function codePreview() {
           parser: 'svelte',
           plugins: [typescriptPlugin, sveltePlugin],
         });
-        const highlightedCode = Prism.highlight(formattedCode, Prism.languages.svelte, 'svelte');
 
         if (!previewMatch.includes('code=')) {
           code = code.replace(
             previewMatch,
-            previewMatch.replace(
-              '<Preview',
-              `<Preview code={\`${formattedCode}\`} highlightedCode={\`${highlightedCode}\`}`
-            )
+            previewMatch.replace('<Preview', `<Preview code={\`${formattedCode}\`}`)
           );
         }
       }

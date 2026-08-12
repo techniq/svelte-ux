@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
-  import { mdiCalendar, mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
   import {
     DateToken,
     getDateFuncsByPeriodType,
@@ -14,15 +13,18 @@
   import Dialog from './Dialog.svelte';
   import DateSelect from './DateSelect.svelte';
   import { getComponentSettings, getSettings } from './settings.js';
+  import type { IconProp } from '$lib/types/index.js';
 
   const dispatch = createEventDispatcher();
-  const { classes: settingsClasses, defaults } = getComponentSettings('DatePickerField');
+  const { defaults } = getComponentSettings('DatePickerField');
 
   export let name = '';
   export let value: Date | null = null;
   export let periodType: PeriodType = PeriodType.Day;
   export let iconOnly: boolean = false;
   export let stepper: boolean = false;
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
 
   // Field props
   export let label: string | null = null;
@@ -35,7 +37,7 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: string | null = null;
+  export let icon: IconProp | undefined = undefined;
   export let center = false;
 
   /**
@@ -43,7 +45,7 @@
    */
   export let disabledDates: DisabledDate | undefined = undefined;
 
-  const { format, localeSettings } = getSettings();
+  const { format, localeSettings, icons } = getSettings();
   $: dictionary = $format.settings.dictionary;
 
   let open: boolean = false;
@@ -73,10 +75,10 @@
 </script>
 
 {#if iconOnly}
-  <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
+  <Button icon={icons.calendar} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
-    label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat })}
+    label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat, utc })}
     {labelPlacement}
     {icon}
     {error}
@@ -93,11 +95,11 @@
 
       {#if stepper}
         <Button
-          icon={mdiChevronLeft}
+          icon={icons.chevronLeft}
           class="p-2"
           on:click={() => {
             if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
+              const { add } = getDateFuncsByPeriodType($localeSettings, periodType, { utc });
               value = add(value, -1);
               dispatch('change', value);
             }
@@ -108,18 +110,18 @@
 
     <button
       type="button"
-      class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-none"
+      class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-hidden"
       style="text-align: inherit"
       on:click={() => (open = true)}
       {id}
     >
-      {$format(value, PeriodType.Day, { custom: primaryFormat })}
+      {$format(value, PeriodType.Day, { custom: primaryFormat, utc })}
     </button>
 
     <div slot="append">
       {#if clearable && value}
         <Button
-          icon={mdiClose}
+          icon={icons.close}
           class="text-surface-content/50 p-1"
           on:click={() => {
             value = null;
@@ -131,11 +133,11 @@
 
       {#if stepper}
         <Button
-          icon={mdiChevronRight}
+          icon={icons.chevronRight}
           class="p-2"
           on:click={() => {
             if (value && periodType) {
-              const { add } = getDateFuncsByPeriodType($localeSettings, periodType);
+              const { add } = getDateFuncsByPeriodType($localeSettings, periodType, { utc });
               value = add(value, 1);
               dispatch('change', value);
             }
@@ -153,10 +155,10 @@
       transition:slide
     >
       <div class="text-sm opacity-50">
-        {$format(currentValue, PeriodType.Day, { custom: secondaryFormat })}
+        {$format(currentValue, PeriodType.Day, { custom: secondaryFormat, utc })}
       </div>
       <div class="text-3xl">
-        {$format(currentValue, PeriodType.Day, { custom: primaryFormat })}
+        {$format(currentValue, PeriodType.Day, { custom: primaryFormat, utc })}
       </div>
     </div>
   {/if}
@@ -166,13 +168,14 @@
       bind:selected={currentValue}
       {periodType}
       {disabledDates}
+      {utc}
       on:dateChange={(e) => (currentValue = e.detail)}
     />
   </div>
 
   <div slot="actions" class="flex items-center gap-2">
     <Button
-      icon={mdiCheck}
+      icon={icons.check}
       on:click={() => {
         open = false;
         value = currentValue;

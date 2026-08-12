@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { addYears, subYears } from 'date-fns';
   import { getMinSelectedDate, getMaxSelectedDate } from '@layerstack/utils/date';
-  import type { SelectedDate } from '@layerstack/utils';
+  import { intervalOffset, type SelectedDate } from '@layerstack/utils';
 
   import Button from './Button.svelte';
   import MonthList from './MonthList.svelte';
@@ -9,37 +8,42 @@
   export let selected: SelectedDate | undefined = undefined;
   export let minDate: Date | undefined = undefined;
   export let maxDate: Date | undefined = undefined;
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
+
+  $: yearInterval = utc ? ('utcYear' as const) : ('year' as const);
+  $: getYear = (date: Date) => (utc ? date.getUTCFullYear() : date.getFullYear());
 
   let minYear: number;
   $: minYear =
     minYear ??
     (minDate
-      ? minDate.getFullYear()
-      : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
+      ? getYear(minDate)
+      : getYear(intervalOffset(yearInterval, getMinSelectedDate(selected) || new Date(), -2)));
 
   let maxYear: number;
   $: maxYear =
     maxYear ??
     (maxDate
-      ? maxDate.getFullYear()
-      : addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+      ? getYear(maxDate)
+      : getYear(intervalOffset(yearInterval, getMaxSelectedDate(selected) || new Date(), 2)));
 
   $: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
 
   // TODO: Scroll into view not typically centered
-  $: selectedYear = (getMinSelectedDate(selected) || new Date()).getFullYear();
+  $: selectedYear = getYear(getMinSelectedDate(selected) || new Date());
 </script>
 
 <div class="grid divide-y">
   <Button on:click={() => (minYear -= 10)}>More</Button>
 
   {#each years ?? [] as year (year)}
-    <div class="grid grid-cols-[auto,1fr] items-center gap-2 p-2">
+    <div class="grid grid-cols-[auto_1fr] items-center gap-2 p-2">
       <div class="text-xl font-bold">
         {year}
       </div>
       <div class="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-y-4">
-        <MonthList {year} {selected} on:dateChange />
+        <MonthList {year} {selected} {utc} on:dateChange />
       </div>
     </div>
   {/each}

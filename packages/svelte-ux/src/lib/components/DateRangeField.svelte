@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import { mdiCheck, mdiChevronLeft, mdiChevronRight, mdiClose } from '@mdi/js';
   import { PeriodType, getDateFuncsByPeriodType, type DisabledDate } from '@layerstack/utils';
   import {
     getDateRangePresets,
@@ -13,11 +12,14 @@
   import DateRangeDisplay from './DateRangeDisplay.svelte';
   import Dialog from './Dialog.svelte';
   import Field from './Field.svelte';
+  import Menu from './Menu.svelte';
+  import MenuItem from './MenuItem.svelte';
 
   import { getComponentSettings, getSettings } from './settings.js';
+  import type { IconProp } from '$lib/types/index.js';
 
   const dispatch = createEventDispatcher();
-  const { format, localeSettings } = getSettings();
+  const { format, localeSettings, icons } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('DateRangeField');
 
   const _defaultValue: DateRangeType = {
@@ -42,6 +44,19 @@
   export let getPeriodTypePresets = getDateRangePresets;
 
   /**
+   * Use UTC boundaries rather than local ones, for both period math and display.
+   *
+   * Use for values keyed on a UTC calendar date (ex. partition/`ds` ranges) so the field is
+   * unaffected by the viewer's timezone or by DST.
+   */
+  export let utc = false;
+
+  /**
+   * Quick presets to show in menu
+   */
+  export let quickPresets: { label: string; value: DateRangeType }[] = [];
+
+  /**
    * Dates to disable (not selectable)
    */
   export let disabledDates: DisabledDate | undefined = undefined;
@@ -53,7 +68,6 @@
 
   // Field props
   export let label: string | null = null;
-  // export let value = '';
   export let error = '';
   export let hint = '';
   export let disabled = false;
@@ -61,11 +75,15 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: string | null = null;
+  export let icon: IconProp | null = null;
 
-  let open: boolean = false;
+  let showDialog = false;
+  let showQuickPresetsMenu = false;
 
   let currentValue = value;
+
+  // Sync currentValue with value changes (quick preset changes)
+  $: currentValue = value;
 
   $: restProps = { ...defaults, ...$$restProps };
 </script>
@@ -89,18 +107,20 @@
 
     {#if stepper}
       <Button
-        icon={mdiChevronLeft}
+        icon={icons.chevronLeft}
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
             const { difference, start, end, add } = getDateFuncsByPeriodType(
               $localeSettings,
-              value.periodType
+              value.periodType,
+              { utc }
             );
-            const offset = difference(value.from, value.to) - 1;
+            const periodCount = difference(value.from, value.to) + 1;
+            const from = start(add(value.from, -periodCount));
             value = {
-              from: start(add(value.from, offset)),
-              to: end(add(value.to, offset)),
+              from,
+              to: end(add(from, periodCount - 1)),
               periodType: value.periodType,
             };
             dispatch('change', value);
@@ -113,19 +133,25 @@
   <button
     type="button"
     class={cls(
-      'text-sm whitespace-nowrap w-full focus:outline-none',
+      'text-sm whitespace-nowrap w-full focus:outline-hidden',
       center ? 'text-center' : 'text-left'
     )}
-    on:click={() => (open = true)}
+    on:click={() => {
+      if (quickPresets.length > 0) {
+        showQuickPresetsMenu = !showQuickPresetsMenu;
+      } else {
+        showDialog = true;
+      }
+    }}
     {id}
   >
-    <DateRangeDisplay {value} />
+    <DateRangeDisplay {value} {utc} />
   </button>
 
   <div slot="append" class="flex items-center">
     {#if clearable && (value?.periodType || value?.from || value?.to)}
       <Button
-        icon={mdiClose}
+        icon={icons.close}
         class="text-surface-content/50 p-1"
         on:click={() => {
           value = _defaultValue;
@@ -139,18 +165,20 @@
 
     {#if stepper}
       <Button
-        icon={mdiChevronRight}
+        icon={icons.chevronRight}
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
             const { difference, start, end, add } = getDateFuncsByPeriodType(
               $localeSettings,
-              value.periodType
+              value.periodType,
+              { utc }
             );
-            const offset = difference(value.to, value.from) + 1;
+            const periodCount = difference(value.from, value.to) + 1;
+            const from = start(add(value.from, periodCount));
             value = {
-              from: start(add(value.from, offset)),
-              to: end(add(value.to, offset)),
+              from,
+              to: end(add(from, periodCount - 1)),
               periodType: value.periodType,
             };
             dispatch('change', value);
@@ -159,21 +187,46 @@
       />
     {/if}
   </div>
+
+  <svelte:fragment slot="root">
+    <Menu classes={{ menu: 'p-1' }} bind:open={showQuickPresetsMenu} matchWidth>
+      {#each quickPresets as preset}
+        <MenuItem
+          on:click={() => {
+            value = preset.value;
+            dispatch('change', preset.value);
+          }}
+        >
+          {preset.label}
+        </MenuItem>
+      {/each}
+
+      <div class="h-px bg-surface-content/20 my-1"></div>
+
+      <MenuItem
+        on:click={() => {
+          showDialog = true;
+        }}
+      >
+        Custom...
+      </MenuItem>
+    </Menu>
+  </svelte:fragment>
 </Field>
 
 <Dialog
   classes={{
     ...classes.dialog,
-    dialog: cls('max-h-[90vh] grid grid-rows-[auto,1fr,auto]', classes.dialog?.dialog),
+    dialog: cls('max-h-[90vh] grid grid-rows-[auto_1fr_auto]', classes.dialog?.dialog),
   }}
-  bind:open
+  bind:open={showDialog}
 >
   <div class="flex flex-col justify-center bg-primary text-primary-content px-6 h-24">
     <div class="text-sm opacity-50">
       {currentValue.periodType ? $format.getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
     </div>
     <div class="text-xl sm:text-2xl">
-      <DateRangeDisplay value={currentValue} />
+      <DateRangeDisplay value={currentValue} {utc} />
     </div>
   </div>
 
@@ -183,15 +236,16 @@
       {periodTypes}
       {getPeriodTypePresets}
       {disabledDates}
+      {utc}
       class="h-full"
     />
   </div>
 
   <div slot="actions" class="flex items-center gap-2">
     <Button
-      icon={mdiCheck}
+      icon={icons.check}
       on:click={() => {
-        open = false;
+        showDialog = false;
         value = currentValue;
         dispatch('change', value);
       }}
@@ -203,7 +257,7 @@
 
     <Button
       on:click={() => {
-        open = false;
+        showDialog = false;
         currentValue = value;
       }}
     >

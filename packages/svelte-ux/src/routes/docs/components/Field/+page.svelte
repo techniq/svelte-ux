@@ -1,15 +1,13 @@
 <script lang="ts">
-  import {
-    mdiAccount,
-    mdiAccountMultipleOutline,
-    mdiAccountOutline,
-    mdiChevronDown,
-  } from '@mdi/js';
+  import LucideUserRoundCheck from '~icons/lucide/user-round-check';
+  import LucideUserRoundMinus from '~icons/lucide/user-round-minus';
+  import LucideUsers from '~icons/lucide/users';
 
   import {
     Button,
     Checkbox,
     Field,
+    getSettings,
     Icon,
     Input,
     Switch,
@@ -18,6 +16,8 @@
   } from 'svelte-ux';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   let group: string[] = [];
 </script>
@@ -146,13 +146,13 @@
       <Field label="Is Active">
         <ToggleGroup variant="outline" inset rounded="full">
           <ToggleOption value="yes">
-            <Icon data={mdiAccount} />
+            <Icon data={LucideUserRoundCheck} />
           </ToggleOption>
           <ToggleOption value="no">
-            <Icon data={mdiAccountOutline} />
+            <Icon data={LucideUserRoundMinus} />
           </ToggleOption>
           <ToggleOption value="all">
-            <Icon data={mdiAccountMultipleOutline} />
+            <Icon data={LucideUsers} />
           </ToggleOption>
         </ToggleGroup>
       </Field>
@@ -172,7 +172,7 @@
 
 <Preview>
   <Field label="Date of Birth" let:id>
-    <input {id} type="date" class="text-sm w-full outline-none bg-surface-100" />
+    <input {id} type="date" class="text-sm w-full outline-hidden bg-surface-100" />
   </Field>
 </Preview>
 
@@ -186,7 +186,7 @@
       min={0}
       max={10}
       step={1}
-      class="w-full outline-none bg-surface-100"
+      class="w-full outline-hidden bg-surface-100"
     />
   </Field>
 </Preview>
@@ -203,14 +203,17 @@
 
 <Preview>
   <Field label="Position" let:id>
-    <select {id} class="text-sm w-full outline-none appearance-none cursor-pointer bg-surface-100">
+    <select
+      {id}
+      class="text-sm w-full outline-hidden appearance-none cursor-pointer bg-surface-100"
+    >
       <option value={1}>First</option>
       <option value={2}>Second</option>
       <option value={3}>Third</option>
       <option value={4}>Fourth</option>
     </select>
     <span slot="append">
-      <Icon data={mdiChevronDown} />
+      <Icon data={icons.chevronDown} />
     </span>
   </Field>
 </Preview>

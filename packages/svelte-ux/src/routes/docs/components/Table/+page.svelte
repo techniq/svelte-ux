@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { mdiDotsVertical } from '@mdi/js';
-
   import {
     Button,
+    getSettings,
     Menu,
     MenuItem,
     Paginate,
@@ -15,6 +14,8 @@
   import { randomInteger, type FormatNumberStyle } from '@layerstack/utils';
 
   import Preview from '$lib/components/Preview.svelte';
+
+  const { icons } = getSettings();
 
   const order = tableOrderStore({ initialBy: 'calories', initialDirection: 'desc' });
 
@@ -470,7 +471,7 @@
             <td use:tableCell={{ column, rowData, rowIndex, tableData: data }}>
               {#if column.name === 'actions'}
                 <Toggle let:on={open} let:toggle let:toggleOff>
-                  <Button icon={mdiDotsVertical} iconOnly size="sm" on:click={toggle}>
+                  <Button icon={icons.ellipsisVertical} iconOnly size="sm" on:click={toggle}>
                     <Menu {open} on:close={toggleOff} placement="bottom-end">
                       <MenuItem>Edit</MenuItem>
                       <MenuItem class="text-danger">Delete</MenuItem>

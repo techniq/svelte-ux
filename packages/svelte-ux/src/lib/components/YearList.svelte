@@ -1,14 +1,15 @@
 <script lang="ts">
   import type { ComponentProps } from 'svelte';
   import {
-    addYears,
-    subYears,
-    isSameYear,
-    isWithinInterval,
-    startOfYear,
-    endOfYear,
-  } from 'date-fns';
-  import { type DisabledDate, type SelectedDate, PeriodType } from '@layerstack/utils';
+    type DisabledDate,
+    type SelectedDate,
+    PeriodType,
+    intervalOffset,
+    isSameInterval,
+    startOfInterval,
+    endOfInterval,
+    isDateWithin,
+  } from '@layerstack/utils';
   import { getMinSelectedDate, getMaxSelectedDate } from '@layerstack/utils/date';
 
   import Button from './Button.svelte';
@@ -18,42 +19,51 @@
   export let minDate: Date | undefined = undefined;
   export let maxDate: Date | undefined = undefined;
   export let format: ComponentProps<DateButton>['format'] = undefined;
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
 
   /**
    * Dates to disable (not selectable)
    */
   export let disabledDates: DisabledDate | undefined = undefined;
 
+  $: yearInterval = utc ? ('utcYear' as const) : ('year' as const);
+  $: getYear = (date: Date) => (utc ? date.getUTCFullYear() : date.getFullYear());
+
   let minYear: number;
   $: minYear =
     minYear ??
     (minDate
-      ? minDate.getFullYear()
-      : subYears(getMinSelectedDate(selected) || new Date(), 2).getFullYear());
+      ? getYear(minDate)
+      : getYear(intervalOffset(yearInterval, getMinSelectedDate(selected) || new Date(), -2)));
 
   let maxYear: number;
   $: maxYear =
     maxYear ??
     (maxDate
-      ? maxDate.getFullYear()
-      : addYears(getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+      ? getYear(maxDate)
+      : getYear(intervalOffset(yearInterval, getMaxSelectedDate(selected) || new Date(), 2)));
 
   $: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i) ?? [];
 
   // TODO: Scroll into view not typically centered
-  $: selectedYear = (getMinSelectedDate(selected) || new Date()).getFullYear();
+  $: selectedYear = getYear(getMinSelectedDate(selected) || new Date());
+
+  // In UTC mode the year starts have to be built from UTC fields, or flooring them with
+  // `utcYear` lands in the neighbouring year.
+  $: yearDates = years.map((year) => (utc ? new Date(Date.UTC(year, 0, 1)) : new Date(year, 0, 1)));
 
   $: isDateDisabled = (date: Date) => {
     return disabledDates instanceof Function
       ? disabledDates(date)
       : disabledDates instanceof Date
-        ? isSameYear(date, disabledDates)
+        ? isSameInterval(yearInterval, date, disabledDates)
         : disabledDates instanceof Array
-          ? disabledDates.some((d) => isSameYear(date, d))
+          ? disabledDates.some((d) => isSameInterval(yearInterval, date, d))
           : disabledDates instanceof Object
-            ? isWithinInterval(date, {
-                start: startOfYear(disabledDates.from),
-                end: endOfYear(disabledDates.to || disabledDates.from),
+            ? isDateWithin(date, {
+                start: startOfInterval(yearInterval, disabledDates.from),
+                end: endOfInterval(yearInterval, disabledDates.to || disabledDates.from),
               })
             : false;
   };
@@ -63,13 +73,14 @@
   <Button on:click={() => (minYear -= 1)} class="border-b">More</Button>
 
   <div class="grid p-2">
-    {#each years.map((year) => new Date(year, 0, 1)) as year (year.valueOf())}
+    {#each yearDates as year (year.valueOf())}
       <DateButton
         date={year}
         periodType={PeriodType.CalendarYear}
         bind:selected
         disabled={isDateDisabled(year)}
         {format}
+        {utc}
         on:dateChange
       />
     {/each}

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { endOfMonth, startOfDay, startOfMonth, startOfYear } from 'date-fns';
-
-  import { DateRange, getSettings } from 'svelte-ux';
+  import { startOfInterval, endOfInterval } from '@layerstack/utils';
+  import { DateRange, getSettings, Switch } from 'svelte-ux';
   import { PeriodType, getDateFuncsByPeriodType } from '@layerstack/utils';
+  import type { DateRange as DateRangeType } from '@layerstack/utils/dateRange';
 
   import Preview from '$lib/components/Preview.svelte';
 
@@ -14,6 +14,11 @@
     periodType: 30,
   };
   // $: console.log({ selected });
+
+  let selectedUtc: DateRangeType | null = { from: null, to: null, periodType: PeriodType.Day };
+  let utcSelected = false;
+
+  const iso = (date: Date | null | undefined) => date?.toISOString() ?? '(none)';
 </script>
 
 <h1>Examples</h1>
@@ -64,13 +69,13 @@
       const { start, end, add } = getDateFuncsByPeriodType($localeSettings, fnPeriodType);
 
       if (fnPeriodType === PeriodType.Day) {
-        const today = startOfDay(new Date());
+        const today = startOfInterval('day', new Date());
         const yesterday = start(add(today, -1));
         return [
           {
             label: 'Month to date',
             value: {
-              from: startOfMonth(today),
+              from: startOfInterval('month', today),
               to: end(today),
               periodType: fnPeriodType,
             },
@@ -78,7 +83,7 @@
           {
             label: 'Year to date',
             value: {
-              from: startOfYear(today),
+              from: startOfInterval('year', today),
               to: end(today),
               periodType: fnPeriodType,
             },
@@ -125,7 +130,7 @@
           },
         ];
       } else if (fnPeriodType === PeriodType.Month) {
-        const today = endOfMonth(new Date());
+        const today = endOfInterval('month', new Date());
         const lastMonth = start(add(today, -1));
 
         return [
@@ -175,4 +180,29 @@
       }
     }}
   />
+</Preview>
+
+<h2>UTC</h2>
+
+<div class="text-sm text-surface-content/60 mb-2">
+  With <code>utc</code>, period boundaries and presets are calculated on the UTC calendar, so a
+  selected day/month/year starts at <code>T00:00:00.000Z</code> and ends at
+  <code>T23:59:59.999Z</code> instead of the local equivalents. Pick a range, or apply a preset, and
+  compare with <code>utc</code> toggled.
+</div>
+
+<Preview>
+  <label class="flex items-center gap-2 text-sm w-fit mb-3">
+    <Switch bind:checked={utcSelected} size="md" /> utc
+  </label>
+
+  <!-- utc is read when the nested calendar is created, so re-create on toggle -->
+  {#key utcSelected}
+    <DateRange utc={utcSelected} bind:selected={selectedUtc} />
+  {/key}
+
+  <div class="text-sm text-surface-content/50 mt-3">
+    <div>from: {iso(selectedUtc?.from)}</div>
+    <div>to: {iso(selectedUtc?.to)}</div>
+  </div>
 </Preview>

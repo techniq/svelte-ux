@@ -28,7 +28,6 @@
   import { spring } from 'svelte/motion';
   import { fly } from 'svelte/transition';
   import { scaleLinear } from 'd3-scale';
-  import { mdiDragHorizontal } from '@mdi/js';
 
   import { decimalCount, round } from '@layerstack/utils/number';
   import { movable } from '@layerstack/svelte-actions';
@@ -36,6 +35,7 @@
 
   import Icon from './Icon.svelte';
   import { getComponentClasses } from './theme.js';
+  import { getSettings } from './settings.js';
 
   export let min = 0;
   export let max = 100;
@@ -47,6 +47,7 @@
   let className: string | undefined = undefined;
   export { className as class };
 
+  const { icons } = getSettings();
   const settingsClasses = getComponentClasses('RangeSlider');
 
   $: stepPercent = step / (max - min);
@@ -232,7 +233,7 @@
 <div
   class={cls(
     'RangeSlider',
-    'group relative h-2 bg-surface-content/10 rounded-full select-none outline-none',
+    'group relative h-2 bg-surface-content/10 rounded-full select-none outline-hidden',
     disabled && ' pointer-events-none opacity-50',
     settingsClasses.root,
     className
@@ -274,7 +275,7 @@
       'transition-opacity'
     )}
   >
-    <Icon data={mdiDragHorizontal} class="text-primary-content" />
+    <Icon data={icons.gripHorizontal} class="size-4 text-primary-content" />
   </div>
 
   <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -321,7 +322,7 @@
   {#if showStartValue && !disableTooltips}
     <output
       style="left: calc(var(--start) * 100%);"
-      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow"
+      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow-sm"
       transition:fly={{ y: 4, duration: 300 }}
     >
       {value[0]}
@@ -331,7 +332,7 @@
   {#if showEndValue && !disableTooltips}
     <output
       style="left: calc(var(--end) * 100%);"
-      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow"
+      class="value absolute top-1/2 -translate-x-1/2 -translate-y-[180%] text-xs text-primary-content bg-primary rounded-full px-2 shadow-sm"
       transition:fly={{ y: 4, duration: 300 }}
     >
       {value[1]}

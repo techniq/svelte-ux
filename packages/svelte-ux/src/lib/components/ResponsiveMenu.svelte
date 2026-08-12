@@ -13,6 +13,9 @@
   export let menuProps: ComponentProps<Menu> | undefined = undefined;
   export let drawerProps: ComponentProps<Drawer> | undefined = undefined;
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   const isLargeScreen = matchMediaWidth(screenWidth);
 </script>
 
@@ -23,7 +26,7 @@
     on:close
     explicitClose
     {...menuProps}
-    class={cls('ResponsiveMenu', $$props.class, menuProps?.class)}
+    class={cls('ResponsiveMenu', className, menuProps?.class)}
   >
     <slot {open} />
   </Menu>
@@ -33,7 +36,7 @@
     placement="bottom"
     on:close
     {...drawerProps}
-    class={cls('ResponsiveMenu', $$props.class, drawerProps?.class)}
+    class={cls('ResponsiveMenu', className, drawerProps?.class)}
   >
     <slot {open} />
   </Drawer>

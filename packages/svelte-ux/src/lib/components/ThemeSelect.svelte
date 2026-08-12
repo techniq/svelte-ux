@@ -1,20 +1,19 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
-
-  import { mdiMonitor, mdiUndoVariant, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
+  import { createEventDispatcher } from 'svelte';
 
   import Button from './Button.svelte';
+  import Icon from './Icon.svelte';
   import Kbd from './Kbd.svelte';
   import Menu from './Menu.svelte';
   import Switch from './Switch.svelte';
-  import Icon from './Icon.svelte';
   import MenuItem from './MenuItem.svelte';
   import Tooltip from './Tooltip.svelte';
 
   import { cls } from '@layerstack/tailwind';
   import { getSettings } from './settings.js';
 
-  const { currentTheme, themes: allThemes } = getSettings();
+  const { currentTheme, themes: allThemes, icons } = getSettings();
 
   /** The list of dark themes to chose from, if not the list provided to `settings`. */
   export let darkThemes = allThemes?.dark ?? ['dark'];
@@ -28,16 +27,20 @@
 
   $: themes = $currentTheme.dark ? darkThemes : lightThemes;
 
+  const dispatch = createEventDispatcher();
+
   function onKeyDown(e: KeyboardEvent) {
     if (e.ctrlKey && e.code === 'KeyT') {
       if (e.shiftKey) {
         // Pick next theme
         const currentIndex = themes.indexOf($currentTheme.resolvedTheme);
         let newTheme = themes[(currentIndex + 1) % themes.length];
+        dispatch('themeSet', { theme: newTheme });
         currentTheme.setTheme(newTheme);
       } else {
         // Toggle light/dark
         let newTheme = $currentTheme.dark ? 'light' : 'dark';
+        dispatch('themeSet', { theme: newTheme });
         currentTheme.setTheme(newTheme);
       }
     }
@@ -48,11 +51,11 @@
   <Button iconOnly on:click={() => (open = !open)}>
     <div class="grid grid-cols-1 grid-rows-1 overflow-hidden">
       <Icon
-        data={mdiWhiteBalanceSunny}
+        data={icons.lightMode}
         class="row-[1] col-[1] translate-x-0 dark:-translate-x-full transition-transform duration-300"
       />
       <Icon
-        data={mdiWeatherNight}
+        data={icons.darkMode}
         class="row-[1] col-[1] translate-x-full dark:translate-x-0 transition-transform duration-300"
       />
     </div>
@@ -66,18 +69,19 @@
     >
       <label
         for="switch-color-scheme"
-        class="grid grid-cols-[1fr,auto,auto] items-center p-2 border-b border-surface-content/10 mb-1 text-sm font-medium sticky top-0 bg-surface-100"
+        class="grid grid-cols-[1fr_auto_auto] items-center p-2 border-b border-surface-content/10 mb-1 text-sm font-medium sticky top-0 bg-surface-100"
       >
         Mode
         {#if $currentTheme.theme}
           <span transition:fly={{ x: 8 }}>
             <Tooltip title="Reset to System" offset={2}>
               <Button
-                icon={mdiUndoVariant}
+                icon={icons.undo}
                 color="primary"
                 size="sm"
                 class="mr-1"
                 on:click={() => {
+                  dispatch('themeSet', { theme: 'system' });
                   currentTheme.setTheme('system');
                 }}
               />
@@ -91,15 +95,16 @@
           on:change={(e) => {
             // @ts-expect-error: <input type="checkbox"> has `checked`, but difficult to type without dispatching custom event
             let newTheme = e.target?.checked ? 'dark' : 'light';
+            dispatch('themeSet', { theme: newTheme });
             currentTheme.setTheme(newTheme);
           }}
           class="my-1"
           let:checked
         >
           {#if checked}
-            <Icon data={mdiWeatherNight} size=".8rem" class="text-primary" />
+            <Icon data={icons.darkMode} class="size-3 text-primary" />
           {:else}
-            <Icon data={mdiWhiteBalanceSunny} size=".8rem" class="text-primary" />
+            <Icon data={icons.lightMode} class="size-3 text-primary" />
           {/if}
         </Switch>
       </label>
@@ -107,10 +112,13 @@
       <div class="grid grid-cols-2 gap-2 p-2">
         {#each themes as themeName}
           <MenuItem
-            on:click={() => currentTheme.setTheme(themeName)}
+            on:click={() => {
+              dispatch('themeSet', { theme: themeName });
+              currentTheme.setTheme(themeName);
+            }}
             data-theme={themeName}
             class={cls(
-              'bg-surface-100 text-surface-content font-semibold border shadow',
+              'bg-surface-100 text-surface-content font-semibold border shadow-sm',
               $currentTheme.resolvedTheme === themeName && 'ring-2 ring-surface-content'
             )}
           >
@@ -125,7 +133,7 @@
 
       {#if keyboardShortcuts}
         <div
-          class="p-2 grid grid-cols-[auto,1fr] gap-2 items-center text-xs sticky bottom-0 bg-surface-100 border-t border-surface-content/10"
+          class="p-2 grid grid-cols-[auto_1fr] gap-2 items-center text-xs sticky bottom-0 bg-surface-100 border-t border-surface-content/10"
         >
           <span class="font-medium">Toggle scheme:</span>
           <span>
@@ -144,36 +152,45 @@
   <Button iconOnly on:click={() => (open = !open)}>
     <div class="grid grid-stack overflow-hidden">
       <Icon
-        data={mdiWhiteBalanceSunny}
+        data={icons.lightMode}
         class="translate-x-0 dark:-translate-x-full transition-transform duration-300"
       />
       <Icon
-        data={mdiWeatherNight}
+        data={icons.darkMode}
         class="translate-x-full dark:translate-x-0 transition-transform duration-300"
       />
     </div>
 
     <Menu bind:open on:close={() => (open = false)} classes={{ menu: 'p-1' }}>
       <MenuItem
-        icon={mdiWhiteBalanceSunny}
+        icon={icons.lightMode}
         selected={$currentTheme.theme === 'light'}
-        on:click={() => currentTheme.setTheme('light')}
+        on:click={() => {
+          dispatch('themeSet', { theme: 'light' });
+          currentTheme.setTheme('light');
+        }}
       >
         Light
       </MenuItem>
 
       <MenuItem
-        icon={mdiWeatherNight}
+        icon={icons.darkMode}
         selected={$currentTheme.theme === 'dark'}
-        on:click={() => currentTheme.setTheme('dark')}
+        on:click={() => {
+          dispatch('themeSet', { theme: 'dark' });
+          currentTheme.setTheme('dark');
+        }}
       >
         Dark
       </MenuItem>
 
       <MenuItem
-        icon={mdiMonitor}
+        icon={icons.monitor}
         selected={$currentTheme.theme == null}
-        on:click={() => currentTheme.setTheme('system')}
+        on:click={() => {
+          dispatch('themeSet', { theme: 'system' });
+          currentTheme.setTheme('system');
+        }}
       >
         System
       </MenuItem>

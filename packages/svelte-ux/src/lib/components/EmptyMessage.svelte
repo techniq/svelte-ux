@@ -2,6 +2,9 @@
   import { cls } from '@layerstack/tailwind';
   import { getComponentClasses } from './theme.js';
 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   const settingsClasses = getComponentClasses('EmptyMessage');
 </script>
 
@@ -12,9 +15,9 @@
     'grid place-items-center',
     'p-1 bg-surface-300 _shadow-inner _ring-1 ring-surface-200/30',
     'text-surface-content/50 text-xs tracking-wider',
-    'border border-surface-100/80 rounded',
+    'border border-surface-100/80 rounded-sm',
     settingsClasses.root,
-    $$props.class
+    className
   )}
 >
   <slot />

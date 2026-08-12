@@ -33,7 +33,7 @@
 
 <h1>Examples</h1>
 
-<div class="grid grid-cols-[1fr,auto,auto] gap-2">
+<div class="grid grid-cols-[1fr_auto_auto] gap-2">
   <ButtonGroup variant="fill-light" class="grid grid-flow-col ml-2">
     <Button on:click={() => increment(-100)}>-100</Button>
     <Button on:click={() => increment(-10)}>-10</Button>

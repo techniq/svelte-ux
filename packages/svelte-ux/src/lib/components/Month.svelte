@@ -1,17 +1,13 @@
 <script lang="ts">
   import {
-    startOfDay as startOfDayFunc,
-    endOfDay as endOfDayFunc,
-    startOfMonth as startOfMonthFunc,
-    endOfMonth as endOfMonthFunc,
-    addMonths,
-    isSameDay,
-    isWithinInterval,
-  } from 'date-fns';
-  import { type SelectedDate, PeriodType, hasKeyOf } from '@layerstack/utils';
-  import { getMonthDaysByWeek } from '@layerstack/utils/date';
-
-  import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+    type SelectedDate,
+    PeriodType,
+    hasKeyOf,
+    startOfInterval,
+    endOfInterval,
+    intervalOffset,
+  } from '@layerstack/utils';
+  import { getMonthDaysByWeek, isDateWithin, isSameInterval } from '@layerstack/utils/date';
 
   import Button from './Button.svelte';
   import DateButton from './DateButton.svelte';
@@ -20,20 +16,30 @@
 
   export let selected: SelectedDate = undefined;
 
+  /**
+   * Use UTC boundaries rather than local ones, for both period math and display.
+   *
+   * Declared before `startOfMonth` so that prop's default value can read it.
+   */
+  export let utc = false;
+
+  const monthInterval = utc ? ('utcMonth' as const) : ('month' as const);
+  const dayInterval = utc ? ('utcDay' as const) : ('day' as const);
+
   export let startOfMonth =
-    (selected instanceof Date && startOfMonthFunc(selected)) ||
-    (selected instanceof Array && selected.length && startOfMonthFunc(selected[0])) ||
+    (selected instanceof Date && startOfInterval(monthInterval, selected)) ||
+    (selected instanceof Array && selected.length && startOfInterval(monthInterval, selected[0])) ||
     (selected &&
       hasKeyOf<{ from: Date }>(selected, 'from') &&
       selected.from &&
-      startOfMonthFunc(selected.from)) ||
-    startOfMonthFunc(new Date());
+      startOfInterval(monthInterval, selected.from)) ||
+    startOfInterval(monthInterval, new Date());
 
-  const { format } = getSettings();
+  const { format, icons } = getSettings();
   $: dateFormat = $format.settings.formats.dates;
 
-  $: endOfMonth = endOfMonthFunc(startOfMonth);
-  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, dateFormat.weekStartsOn);
+  $: endOfMonth = endOfInterval(monthInterval, startOfMonth);
+  $: monthDaysByWeek = getMonthDaysByWeek(startOfMonth, dateFormat.weekStartsOn, { utc });
 
   /**
    * Hide controls and date.  Useful to control externally
@@ -56,19 +62,19 @@
     return disabledDates instanceof Function
       ? disabledDates(date)
       : disabledDates instanceof Date
-        ? isSameDay(date, disabledDates)
+        ? isSameInterval(dayInterval, date, disabledDates)
         : disabledDates instanceof Array
-          ? disabledDates.some((d) => isSameDay(date, d))
+          ? disabledDates.some((d) => isSameInterval(dayInterval, date, d))
           : disabledDates instanceof Object
-            ? isWithinInterval(date, {
-                start: startOfDayFunc(disabledDates.from),
-                end: endOfDayFunc(disabledDates.to || disabledDates.from),
+            ? isDateWithin(date, {
+                start: startOfInterval(dayInterval, disabledDates.from),
+                end: endOfInterval(dayInterval, disabledDates.to || disabledDates.from),
               })
             : false;
   };
 
   $: isDayHidden = (day: Date) => {
-    const isCurrentMonth = isWithinInterval(day, {
+    const isCurrentMonth = isDateWithin(day, {
       start: startOfMonth,
       end: endOfMonth,
     });
@@ -76,7 +82,7 @@
   };
 
   $: isDayFaded = (day: Date) => {
-    const isCurrentMonth = isWithinInterval(day, {
+    const isCurrentMonth = isDateWithin(day, {
       start: startOfMonth,
       end: endOfMonth,
     });
@@ -90,6 +96,7 @@
   <div class="max-h-[350px] overflow-auto">
     <MonthListByYear
       selected={startOfMonth}
+      {utc}
       on:dateChange={(e) => {
         startOfMonth = e.detail;
         showMonthSelect = false;
@@ -100,21 +107,21 @@
   {#if !hideControls}
     <div class="flex m-2">
       <Button
-        icon={mdiChevronLeft}
+        icon={icons.chevronLeft}
         class="p-2"
-        on:click={() => (startOfMonth = addMonths(startOfMonth, -1))}
+        on:click={() => (startOfMonth = intervalOffset(monthInterval, startOfMonth, -1))}
       />
 
       <div class="flex flex-1 items-center justify-center">
         <Button on:click={() => (showMonthSelect = true)}>
-          {$format(startOfMonth, PeriodType.MonthYear)}
+          {$format(startOfMonth, PeriodType.MonthYear, { utc })}
         </Button>
       </div>
 
       <Button
-        icon={mdiChevronRight}
+        icon={icons.chevronRight}
         class="p-2"
-        on:click={() => (startOfMonth = addMonths(startOfMonth, 1))}
+        on:click={() => (startOfMonth = intervalOffset(monthInterval, startOfMonth, 1))}
       />
     </div>
   {/if}
@@ -123,7 +130,7 @@
     {#each monthDaysByWeek[0] ?? [] as day (day.getDate())}
       <div class="text-center">
         <span class="text-xs text-surface-content/50">
-          {$format(day, PeriodType.Day, { custom: 'eee' })}
+          {$format(day, PeriodType.Day, { custom: 'eee', utc })}
         </span>
       </div>
     {/each}
@@ -139,6 +146,7 @@
           hidden={isDayHidden(day)}
           fade={isDayFaded(day)}
           disabled={isDateDisabled(day)}
+          {utc}
           on:dateChange
         />
       {/each}

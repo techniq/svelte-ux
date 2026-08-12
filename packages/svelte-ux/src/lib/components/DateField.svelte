@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
-  import { parse as parseDate, format as formatDate } from 'date-fns';
-  import { type DisabledDate } from '@layerstack/utils';
+  import { formatDate, parseDate, type DisabledDate } from '@layerstack/utils';
+  import { localToUtcDate } from '@layerstack/utils/date';
   import { cls } from '@layerstack/tailwind';
 
   import { getComponentSettings, getSettings } from './settings.js';
@@ -10,6 +10,7 @@
 
   import Input from './Input.svelte';
   import DatePickerField from './DatePickerField.svelte';
+  import type { IconProp } from '$lib/types/index.js';
 
   const { format: format_ux } = getSettings();
   const { classes: settingsClasses, defaults } = getComponentSettings('DateField');
@@ -20,6 +21,13 @@
   export let mask: string | undefined = undefined;
   export let replace = 'dmyh';
   export let picker = false;
+
+  /**
+   * Use UTC boundaries rather than local ones, for both parsing and display.
+   *
+   * Entering `08/12/2026` produces `2026-08-12T00:00:00.000Z` instead of local midnight.
+   */
+  export let utc = false;
 
   /**
    * Dates to disable (not selectable)
@@ -45,7 +53,10 @@
   export let base = false;
   export let rounded = false;
   export let dense = false;
-  export let icon: string | null = null;
+  export let icon: IconProp | null = null;
+
+  let className: string | undefined = undefined;
+  export { className as class };
 
   let inputValue: string | undefined = '';
 
@@ -54,8 +65,9 @@
   function onInputChange(e: any) {
     inputValue = e.detail.value;
     const lastValue = value;
-    const parsedValue = parseDate(inputValue ?? '', actualFormat, new Date());
-    value = isNaN(parsedValue.valueOf()) ? null : parsedValue;
+    // `parseDate()` always builds a local date, so re-map the calendar fields onto UTC
+    const parsedValue = parseDate(inputValue ?? '', actualFormat);
+    value = isNaN(parsedValue.valueOf()) ? null : utc ? localToUtcDate(parsedValue) : parsedValue;
     if (value != lastValue) {
       dispatch('change', { value });
     }
@@ -83,13 +95,13 @@
     dispatch('change', { value });
   }}
   classes={classes.field}
-  class={cls('DateField', settingsClasses.root, classes.root, $$props.class)}
+  class={cls('DateField', settingsClasses.root, classes.root, className)}
   let:id
 >
   <Input
     {required}
     {name}
-    value={value ? formatDate(value, actualFormat) : inputValue}
+    value={value ? formatDate(value, actualFormat, { utc }) : inputValue}
     mask={actualMask}
     {replace}
     {id}
@@ -100,6 +112,7 @@
       <DatePickerField
         iconOnly
         {value}
+        {utc}
         {disabledDates}
         on:change={(e) => {
           value = e.detail;
