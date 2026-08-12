@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 2.0.0-next.26
+
+### Patch Changes
+
+- feat: Add `utc` prop to all Date components to operate in UTC instead of local time ([#675](https://github.com/techniq/svelte-ux/pull/675))
+
 ## 2.0.0-next.25
 
 ### Patch Changes
