@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, DateField, getSettings } from 'svelte-ux';
+  import { Button, DateField, getSettings, Switch } from 'svelte-ux';
   import { intervalOffset } from '@layerstack/utils';
 
   import LucideCalendarArrowDown from '~icons/lucide/calendar-arrow-down';
@@ -10,6 +10,11 @@
   const { localeSettings } = getSettings();
 
   let value: Date;
+
+  let valueUtc: Date | null = null;
+  let utcValue = false;
+
+  const iso = (date: Date | null) => date?.toISOString() ?? '(none)';
 </script>
 
 <h1>Examples</h1>
@@ -119,4 +124,32 @@
     <DateField label="Birth date" name="birth_date" />
     <Button type="submit">Submit</Button>
   </form>
+</Preview>
+
+<h2>UTC</h2>
+
+<div class="text-sm text-surface-content/60 mb-2">
+  With <code>utc</code>, the typed value is parsed onto the UTC calendar and displayed from it, so
+  <code>08/12/2026</code> produces <code>2026-08-12T00:00:00.000Z</code> instead of local midnight. The
+  picker uses the same calendar.
+</div>
+
+<Preview>
+  <label class="flex items-center gap-2 text-sm w-fit mb-3">
+    <Switch bind:checked={utcValue} size="md" /> utc
+  </label>
+
+  <!-- utc is read when the nested calendar is created, so re-create on toggle -->
+  {#key utcValue}
+    <DateField
+      label="Date"
+      utc={utcValue}
+      value={valueUtc}
+      on:change={(e) => (valueUtc = e.detail.value)}
+      picker
+      clearable
+    />
+  {/key}
+
+  <div class="text-sm text-surface-content/50 mt-3">{iso(valueUtc)}</div>
 </Preview>

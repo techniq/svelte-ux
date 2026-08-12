@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentProps } from 'svelte';
   import { formatDate, parseDate, type DisabledDate } from '@layerstack/utils';
+  import { localToUtcDate } from '@layerstack/utils/date';
   import { cls } from '@layerstack/tailwind';
 
   import { getComponentSettings, getSettings } from './settings.js';
@@ -20,6 +21,13 @@
   export let mask: string | undefined = undefined;
   export let replace = 'dmyh';
   export let picker = false;
+
+  /**
+   * Use UTC boundaries rather than local ones, for both parsing and display.
+   *
+   * Entering `08/12/2026` produces `2026-08-12T00:00:00.000Z` instead of local midnight.
+   */
+  export let utc = false;
 
   /**
    * Dates to disable (not selectable)
@@ -57,8 +65,9 @@
   function onInputChange(e: any) {
     inputValue = e.detail.value;
     const lastValue = value;
+    // `parseDate()` always builds a local date, so re-map the calendar fields onto UTC
     const parsedValue = parseDate(inputValue ?? '', actualFormat);
-    value = isNaN(parsedValue.valueOf()) ? null : parsedValue;
+    value = isNaN(parsedValue.valueOf()) ? null : utc ? localToUtcDate(parsedValue) : parsedValue;
     if (value != lastValue) {
       dispatch('change', { value });
     }
@@ -92,7 +101,7 @@
   <Input
     {required}
     {name}
-    value={value ? formatDate(value, actualFormat) : inputValue}
+    value={value ? formatDate(value, actualFormat, { utc }) : inputValue}
     mask={actualMask}
     {replace}
     {id}
@@ -103,6 +112,7 @@
       <DatePickerField
         iconOnly
         {value}
+        {utc}
         {disabledDates}
         on:change={(e) => {
           value = e.detail;

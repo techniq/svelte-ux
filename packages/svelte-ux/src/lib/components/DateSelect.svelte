@@ -17,6 +17,8 @@
   export let selected: SelectedDate = null;
   export let periodType: PeriodType = PeriodType.Day;
   export let activeDate: 'from' | 'to' = 'from';
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
 
   /**
    * Dates to disable (not selectable)
@@ -26,14 +28,14 @@
   // @ts-expect-error
   $: startOfMonth = selected?.[activeDate]
     ? // @ts-expect-error
-      startOfInterval('month', selected[activeDate])
+      startOfInterval(utc ? 'utcMonth' : 'month', selected[activeDate])
     : undefined;
 </script>
 
 {#if periodType === PeriodType.Month || periodType === PeriodType.Quarter}
-  <MonthListByYear {selected} on:dateChange />
+  <MonthListByYear {selected} {utc} on:dateChange />
 {:else if periodType === PeriodType.CalendarYear}
-  <YearList {selected} {disabledDates} on:dateChange />
+  <YearList {selected} {disabledDates} {utc} on:dateChange />
 {:else if periodType === PeriodType.FiscalYearOctober}
   <!-- dateFuncs={{
         startOfYear: startOfFiscalYear,
@@ -41,8 +43,8 @@
         isSameYear: isSameFiscalYear,
         getYear: getFiscalYear,
       }} -->
-  <YearList {selected} {disabledDates} on:dateChange />
+  <YearList {selected} {disabledDates} {utc} on:dateChange />
 {:else}
   <!-- Day, Week, etc -->
-  <Month {selected} {disabledDates} {startOfMonth} on:dateChange />
+  <Month {selected} {disabledDates} {startOfMonth} {utc} on:dateChange />
 {/if}

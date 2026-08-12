@@ -8,25 +8,30 @@
   export let selected: SelectedDate | undefined = undefined;
   export let minDate: Date | undefined = undefined;
   export let maxDate: Date | undefined = undefined;
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
+
+  $: yearInterval = utc ? ('utcYear' as const) : ('year' as const);
+  $: getYear = (date: Date) => (utc ? date.getUTCFullYear() : date.getFullYear());
 
   let minYear: number;
   $: minYear =
     minYear ??
     (minDate
-      ? minDate.getFullYear()
-      : intervalOffset('year', getMinSelectedDate(selected) || new Date(), -2).getFullYear());
+      ? getYear(minDate)
+      : getYear(intervalOffset(yearInterval, getMinSelectedDate(selected) || new Date(), -2)));
 
   let maxYear: number;
   $: maxYear =
     maxYear ??
     (maxDate
-      ? maxDate.getFullYear()
-      : intervalOffset('year', getMaxSelectedDate(selected) || new Date(), 2).getFullYear());
+      ? getYear(maxDate)
+      : getYear(intervalOffset(yearInterval, getMaxSelectedDate(selected) || new Date(), 2)));
 
   $: years = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
 
   // TODO: Scroll into view not typically centered
-  $: selectedYear = (getMinSelectedDate(selected) || new Date()).getFullYear();
+  $: selectedYear = getYear(getMinSelectedDate(selected) || new Date());
 </script>
 
 <div class="grid divide-y">
@@ -38,7 +43,7 @@
         {year}
       </div>
       <div class="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-y-4">
-        <MonthList {year} {selected} on:dateChange />
+        <MonthList {year} {selected} {utc} on:dateChange />
       </div>
     </div>
   {/each}

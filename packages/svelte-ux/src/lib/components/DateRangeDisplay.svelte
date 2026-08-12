@@ -4,13 +4,15 @@
   import { getSettings } from './settings.js';
 
   export let value: DateRange | null | undefined;
+  /** Use UTC boundaries rather than local ones, for both period math and display */
+  export let utc = false;
 
   const { format: format_ux, localeSettings } = getSettings();
 
   let showToValue = false;
   $: if (value?.to) {
     if (value?.from && value?.periodType) {
-      const { isSame } = getDateFuncsByPeriodType($localeSettings, value.periodType);
+      const { isSame } = getDateFuncsByPeriodType($localeSettings, value.periodType, { utc });
 
       switch (value.periodType) {
         case PeriodType.Day:
@@ -70,12 +72,12 @@
 </script>
 
 {#if value?.from}
-  {$format_ux(value.from, getPeriodType(value), { variant: 'long' })}
+  {$format_ux(value.from, getPeriodType(value), { variant: 'long', utc })}
 {:else}
   <div>&nbsp;</div>
 {/if}
 
 {#if value?.to && showToValue}
   <span> - </span>
-  {$format_ux(value.to, getPeriodType(value), { variant: 'long' })}
+  {$format_ux(value.to, getPeriodType(value), { variant: 'long', utc })}
 {/if}

@@ -42,8 +42,8 @@ importers:
         specifier: 2.0.0-next.22
         version: 2.0.0-next.22
       '@layerstack/utils':
-        specifier: 2.0.0-next.18
-        version: 2.0.0-next.18
+        specifier: 2.0.0-next.19
+        version: 2.0.0-next.19
       '@lucide/svelte':
         specifier: ^0.577.0
         version: 0.577.0(svelte@5.54.0)
@@ -687,6 +687,9 @@ packages:
 
   '@layerstack/utils@2.0.0-next.18':
     resolution: {integrity: sha512-EYILHpfBRYMMEahajInu9C2AXQom5IcAEdtCeucD3QIl/fdDgRbtzn6/8QW9ewumfyNZetdUvitOksmI1+gZYQ==}
+
+  '@layerstack/utils@2.0.0-next.19':
+    resolution: {integrity: sha512-HyXCEz9pge4rFWklrSgFr3YIwdE1gP8WM6GPetmnKPDfYLF1/oetRFKI9FqiE+dw4brnULGPKJsVhjM3vQfD4A==}
 
   '@lucide/svelte@0.577.0':
     resolution: {integrity: sha512-0P6mkySd2MapIEgq08tADPmcN4DHndC/02PWwaLkOerXlx5Sv9aT4BxyXLIY+eccr0g/nEyCYiJesqS61YdBZQ==}
@@ -3022,12 +3025,18 @@ snapshots:
 
   '@layerstack/tailwind@2.0.0-next.22':
     dependencies:
-      '@layerstack/utils': 2.0.0-next.18
+      '@layerstack/utils': 2.0.0-next.19
       clsx: 2.1.1
       d3-array: 3.2.4
       tailwind-merge: 3.3.0
 
   '@layerstack/utils@2.0.0-next.18':
+    dependencies:
+      d3-array: 3.2.4
+      d3-time: 3.1.0
+      d3-time-format: 4.1.0
+
+  '@layerstack/utils@2.0.0-next.19':
     dependencies:
       d3-array: 3.2.4
       d3-time: 3.1.0

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Month } from 'svelte-ux';
+  import { Month, Switch } from 'svelte-ux';
   import type { DateRange } from '@layerstack/utils/dateRange';
   import Preview from '$lib/components/Preview.svelte';
   import {
@@ -15,6 +15,17 @@
   let selectedRange: DateRange = { from: null, to: null };
   let selectedWeek: DateRange = { from: null, to: null };
   let selectedMultiMonth: DateRange = { from: null, to: null };
+
+  let selectedUtc: Date | null = null;
+  let utcSelected = false;
+  let utcInstant = false;
+  let utcDisabled = false;
+
+  // Instant which falls on a different calendar day when read as local vs UTC (for timezones behind
+  // UTC.  Timezones ahead of UTC see the same with an instant late in the UTC day)
+  const dayBoundaryUtc = new Date('2026-08-01T00:00:00Z');
+
+  const iso = (date: Date | null) => date?.toISOString() ?? '(none)';
 </script>
 
 <h1>Examples</h1>
@@ -224,4 +235,76 @@
       />
     </div>
   </div>
+</Preview>
+
+<h2>UTC</h2>
+
+<h3>Selected state</h3>
+
+<div class="text-sm text-surface-content/60 mb-2">
+  With <code>utc</code>, the grid is built from UTC day boundaries and selections are dispatched as
+  UTC midnight (<code>T00:00:00.000Z</code>) instead of local midnight. Toggle it and re-select the
+  same day to compare.
+</div>
+
+<Preview>
+  <label class="flex items-center gap-2 text-sm w-fit mb-3">
+    <Switch bind:checked={utcSelected} size="md" /> utc
+  </label>
+
+  <!-- utc is read when the component is created, so re-create it when toggled -->
+  {#key utcSelected}
+    <Month
+      utc={utcSelected}
+      selected={selectedUtc}
+      on:dateChange={(e) => {
+        selectedUtc = e.detail;
+      }}
+    />
+  {/key}
+
+  <div class="text-sm text-surface-content/50 mt-3">{iso(selectedUtc)}</div>
+</Preview>
+
+<h3>Selected w/ instant near a day boundary</h3>
+
+<div class="text-sm text-surface-content/60 mb-2">
+  <code>2026-08-01T00:00:00Z</code> is still Jul 31 in timezones behind UTC (ex. Americas), so
+  enabling <code>utc</code> changes both the highlighted day and the month shown. Timezones ahead of
+  UTC (ex. Europe/Asia) see the same with an instant late in the UTC day (ex.
+  <code>2026-08-31T23:00:00Z</code>).
+</div>
+
+<Preview>
+  <label class="flex items-center gap-2 text-sm w-fit mb-3">
+    <Switch bind:checked={utcInstant} size="md" /> utc
+  </label>
+
+  {#key utcInstant}
+    <Month utc={utcInstant} selected={dayBoundaryUtc} />
+  {/key}
+
+  <div class="text-sm text-surface-content/50 mt-3">{iso(dayBoundaryUtc)}</div>
+</Preview>
+
+<h3>Disabled dates</h3>
+
+<div class="text-sm text-surface-content/60 mb-2">
+  Disabled ranges are expanded to UTC day boundaries, so
+  <code>2026-08-01T00:00:00Z</code> - <code>2026-08-05T00:00:00Z</code> can cover a different set of days
+  than in local mode.
+</div>
+
+<Preview>
+  <label class="flex items-center gap-2 text-sm w-fit mb-3">
+    <Switch bind:checked={utcDisabled} size="md" /> utc
+  </label>
+
+  {#key utcDisabled}
+    <Month
+      utc={utcDisabled}
+      selected={dayBoundaryUtc}
+      disabledDates={{ from: dayBoundaryUtc, to: new Date('2026-08-05T00:00:00Z') }}
+    />
+  {/key}
 </Preview>

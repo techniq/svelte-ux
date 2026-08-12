@@ -44,6 +44,14 @@
   export let getPeriodTypePresets = getDateRangePresets;
 
   /**
+   * Use UTC boundaries rather than local ones, for both period math and display.
+   *
+   * Use for values keyed on a UTC calendar date (ex. partition/`ds` ranges) so the field is
+   * unaffected by the viewer's timezone or by DST.
+   */
+  export let utc = false;
+
+  /**
    * Quick presets to show in menu
    */
   export let quickPresets: { label: string; value: DateRangeType }[] = [];
@@ -105,7 +113,8 @@
           if (value && value.from && value.to && value.periodType) {
             const { difference, start, end, add } = getDateFuncsByPeriodType(
               $localeSettings,
-              value.periodType
+              value.periodType,
+              { utc }
             );
             const periodCount = difference(value.from, value.to) + 1;
             const from = start(add(value.from, -periodCount));
@@ -136,7 +145,7 @@
     }}
     {id}
   >
-    <DateRangeDisplay {value} />
+    <DateRangeDisplay {value} {utc} />
   </button>
 
   <div slot="append" class="flex items-center">
@@ -162,7 +171,8 @@
           if (value && value.from && value.to && value.periodType) {
             const { difference, start, end, add } = getDateFuncsByPeriodType(
               $localeSettings,
-              value.periodType
+              value.periodType,
+              { utc }
             );
             const periodCount = difference(value.from, value.to) + 1;
             const from = start(add(value.from, periodCount));
@@ -216,7 +226,7 @@
       {currentValue.periodType ? $format.getPeriodTypeName(currentValue.periodType) : ''}&nbsp;
     </div>
     <div class="text-xl sm:text-2xl">
-      <DateRangeDisplay value={currentValue} />
+      <DateRangeDisplay value={currentValue} {utc} />
     </div>
   </div>
 
@@ -226,6 +236,7 @@
       {periodTypes}
       {getPeriodTypePresets}
       {disabledDates}
+      {utc}
       class="h-full"
     />
   </div>
