@@ -74,6 +74,8 @@
 
   let selectedStr: 'any' | 'even' | 'odds' = 'any';
 
+  let searchText = '';
+
   // Filter options based on toggle selection
   $: optionsFiltered = options.filter((o) => {
     if (selectedStr === 'even') {
@@ -103,6 +105,17 @@
   <Button on:click={() => (value = 4)}>Pick 4</Button>
 </Preview>
 
+<h2>bind:searchText</h2>
+
+<Preview>
+  <SelectField {options} bind:searchText clearSearchOnOpen={false} />
+  <p>Search Value: {searchText}</p>
+  <Button on:click={() => (searchText = '1')}>Pick 1</Button>
+  <Button on:click={() => (searchText = '2')}>Pick 2</Button>
+  <Button on:click={() => (searchText = '3')}>Pick 3</Button>
+  <Button on:click={() => (searchText = '4')}>Pick 4</Button>
+</Preview>
+
 <h2>Error</h2>
 
 <Preview>
@@ -121,7 +134,7 @@
   <SelectField {options} bind:value clearable={false} />
 </Preview>
 
-<h2>clearSearchOnFocus=false</h2>
+<h2>clearSearchOnOpen=false</h2>
 
 <Preview>
   <SelectField {options} bind:value clearSearchOnOpen={false} />
@@ -177,7 +190,7 @@
 <h2>Many options</h2>
 
 <Preview>
-  <SelectField options={manyOptions} clearSearchOnOpen />
+  <SelectField options={manyOptions} />
 </Preview>
 
 <h2>Update options</h2>

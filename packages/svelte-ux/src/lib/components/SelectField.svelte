@@ -80,9 +80,9 @@
   export let resize = true;
   export let disableTransition = false;
   export let menuProps: ComponentProps<Menu> | undefined = undefined;
+  export let searchText: string = '';
 
   $: filteredOptions = options ?? [];
-  let searchText = '';
   $: logger.debug({ searchText });
 
   export let value: TValue | null | undefined = undefined;
