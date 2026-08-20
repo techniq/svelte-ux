@@ -1,5 +1,11 @@
 # svelte-ux
 
+## 1.0.11
+
+### Patch Changes
+
+- Added prop for searchText in SelectField component. Fixed clearSearchOnOpen title from clearSearchOnFocus on SelectField docs page. ([#677](https://github.com/techniq/svelte-ux/pull/677))
+
 ## 1.0.10
 
 ### Patch Changes
