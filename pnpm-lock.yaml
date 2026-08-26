@@ -70,7 +70,7 @@ importers:
         version: 10.1.1
       lodash-es:
         specifier: ^4.17.21
-        version: 4.17.21
+        version: 4.18.1
       prism-svelte:
         specifier: ^0.5.0
         version: 0.5.0
@@ -981,6 +981,7 @@ packages:
   '@svitejs/changesets-changelog-github-compact@1.2.0':
     resolution: {integrity: sha512-08eKiDAjj4zLug1taXSIJ0kGL5cawjVCyJkBb6EWSg5fEPX6L+Wtr0CH2If4j5KYylz85iaZiFlUItvgJvll5g==}
     engines: {node: ^14.13.1 || ^16.0.0 || >=18}
+    deprecated: unmaintained
 
   '@tailwindcss/typography@0.5.16':
     resolution: {integrity: sha512-0wDLwCVF5V3x3b1SGXPCDcdsbDHMBe+lkFzBRaHeLvNi+nrrnZ1lA18u+OTWO8iSWU2GxUOCvlXtDuqftc1oiA==}
@@ -1526,11 +1527,13 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@11.0.0:
     resolution: {integrity: sha512-9UiX/Bl6J2yaBbxKoEBRm4Cipxgok8kQYcOPEhScPwebu2I0HoQOuYdIO6S3hLuWoZgpDpwQZMzTFxgpkyT76g==}
     engines: {node: 20 || >=22}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   globby@11.1.0:
@@ -1684,8 +1687,8 @@ packages:
     resolution: {integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==}
     engines: {node: '>=8'}
 
-  lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+  lodash-es@4.18.1:
+    resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
 
   lodash.castarray@4.4.0:
     resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
@@ -3047,7 +3050,7 @@ snapshots:
       d3-array: 3.2.4
       d3-scale: 4.0.2
       date-fns: 4.1.0
-      lodash-es: 4.17.21
+      lodash-es: 4.18.1
 
   '@layerstack/svelte-stores@1.0.1':
     dependencies:
@@ -3055,7 +3058,7 @@ snapshots:
       d3-array: 3.2.4
       date-fns: 4.1.0
       immer: 10.1.1
-      lodash-es: 4.17.21
+      lodash-es: 4.18.1
       zod: 3.24.2
 
   '@layerstack/svelte-table@1.0.0':
@@ -3064,7 +3067,7 @@ snapshots:
       '@layerstack/utils': 1.0.0
       d3-array: 3.2.4
       date-fns: 4.1.0
-      lodash-es: 4.17.21
+      lodash-es: 4.18.1
 
   '@layerstack/tailwind@1.0.0':
     dependencies:
@@ -3073,7 +3076,7 @@ snapshots:
       culori: 4.0.1
       d3-array: 3.2.4
       date-fns: 4.1.0
-      lodash-es: 4.17.21
+      lodash-es: 4.18.1
       tailwind-merge: 2.6.0
       tailwindcss: 3.4.17
     transitivePeerDependencies:
@@ -3083,7 +3086,7 @@ snapshots:
     dependencies:
       d3-array: 3.2.4
       date-fns: 4.1.0
-      lodash-es: 4.17.21
+      lodash-es: 4.18.1
 
   '@manypkg/find-root@1.1.0':
     dependencies:
@@ -3980,7 +3983,7 @@ snapshots:
     dependencies:
       p-locate: 4.1.0
 
-  lodash-es@4.17.21: {}
+  lodash-es@4.18.1: {}
 
   lodash.castarray@4.4.0: {}
 
