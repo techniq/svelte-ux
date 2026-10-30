@@ -377,10 +377,24 @@
     logger.info('selectOption', { option });
 
     const previousValue = value;
+    const nextValue = option?.value;
+    const nextSearchText = option?.label ?? '';
 
-    value = option?.value;
-    selected = option;
-    searchText = option?.label ?? '';
+    // Only assign (bindable) props when they actually change. With `bind:value={obj.field}`,
+    // Svelte 5 treats every assignment as a mutation of `obj` (even with the same value), which
+    // re-runs every field bound to that object. Combined with re-selecting on each new `options`
+    // array, several selects bound into one object could update each other indefinitely
+    // (`effect_update_depth_exceeded`). Empty values ('', null, undefined) are treated as equal.
+    const valueChanged = !isSameValue(nextValue, previousValue);
+    if (valueChanged) {
+      value = nextValue;
+    }
+    if (selected !== option) {
+      selected = option;
+    }
+    if (searchText !== nextSearchText) {
+      searchText = nextSearchText;
+    }
 
     if (activeOptionIcon) {
       if (!selected?.icon) {
@@ -390,7 +404,7 @@
       }
     }
 
-    if (value != previousValue) {
+    if (valueChanged) {
       dispatch('change', { option, value });
     }
 
@@ -399,6 +413,11 @@
     }
 
     return option;
+  }
+
+  function isSameValue(a: TValue | null | undefined, b: TValue | null | undefined) {
+    const isEmpty = (v: unknown) => v == null || v === '';
+    return a === b || (isEmpty(a) && isEmpty(b));
   }
 
   $: previous = () => {
