@@ -67,6 +67,11 @@
 
   let currentValue = value;
 
+  $: if (disabled && open) {
+    open = false;
+    currentValue = value;
+  }
+
   $: restProps = { ...defaults, ...$$restProps };
 </script>
 
@@ -90,6 +95,7 @@
     {#if stepper}
       <Button
         icon={mdiChevronLeft}
+        {disabled}
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
@@ -116,7 +122,10 @@
       'text-sm whitespace-nowrap w-full focus:outline-none',
       center ? 'text-center' : 'text-left'
     )}
-    on:click={() => (open = true)}
+    {disabled}
+    on:click={() => {
+      if (!disabled) open = true;
+    }}
     {id}
   >
     <DateRangeDisplay {value} />
@@ -126,6 +135,7 @@
     {#if clearable && (value?.periodType || value?.from || value?.to)}
       <Button
         icon={mdiClose}
+        {disabled}
         class="text-surface-content/50 p-1"
         on:click={() => {
           value = _defaultValue;
@@ -140,6 +150,7 @@
     {#if stepper}
       <Button
         icon={mdiChevronRight}
+        {disabled}
         class="p-2"
         on:click={() => {
           if (value && value.from && value.to && value.periodType) {
@@ -190,7 +201,9 @@
   <div slot="actions" class="flex items-center gap-2">
     <Button
       icon={mdiCheck}
+      {disabled}
       on:click={() => {
+        if (disabled) return;
         open = false;
         value = currentValue;
         dispatch('change', value);
