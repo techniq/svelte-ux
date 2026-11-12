@@ -68,6 +68,8 @@
 
   let open = false;
 
+  $: if (disabled) open = false;
+
   let searchText = '';
   $: if (!open) {
     const selectedOptions = options.filter((o) => value?.includes(o.value));
@@ -75,6 +77,7 @@
   }
 
   function show() {
+    if (disabled) return;
     logger.debug('show');
 
     inputEl?.focus();
@@ -123,6 +126,7 @@
   }
 
   function onSelectChange(e: ComponentEvents<MultiSelectMenu<TValue>>['change']) {
+    if (disabled) return;
     logger.info('onSelectChange', e);
     // @ts-expect-error
     value = e.detail.selection.selected;
@@ -130,7 +134,14 @@
     dispatch('change', { value });
   }
 
+  const handleApply: NonNullable<typeof onApply> = async (context) => {
+    if (disabled) return;
+    const callback = menuProps && 'onApply' in menuProps ? menuProps.onApply : onApply;
+    await callback?.(context);
+  };
+
   function clear() {
+    if (disabled) return;
     logger.info('clear');
     value = [];
     dispatch('change', { value });
@@ -215,7 +226,6 @@
     {placement}
     {infiniteScroll}
     {searchText}
-    {onApply}
     classes={{ ...settingsClasses.multiSelectMenu, ...classes.multiSelectMenu }}
     matchWidth
     bind:open
@@ -223,6 +233,7 @@
     on:close={hide}
     bind:menuOptionsEl
     {...menuProps}
+    onApply={handleApply}
   >
     <slot name="beforeOptions" slot="beforeOptions" let:selection {selection} />
     <slot name="afterOptions" slot="afterOptions" let:selection {selection} />
