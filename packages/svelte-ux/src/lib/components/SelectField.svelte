@@ -194,6 +194,10 @@
   export let open = false;
   let highlightIndex = -1;
 
+  $: if (disabled && open) {
+    hide('disabled');
+  }
+
   $: if (open === false) {
     // Restore text if cleared but selection remains
     if (selected) {
@@ -347,6 +351,8 @@
    * Select option by index
    */
   function selectIndex(index: number) {
+    if (disabled) return;
+
     logger.debug('selectIndex', { index });
 
     const option = filteredOptions[index];
