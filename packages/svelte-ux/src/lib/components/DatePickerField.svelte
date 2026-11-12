@@ -70,10 +70,15 @@
   }
 
   $: currentValue = value;
+
+  $: if (disabled && open) {
+    open = false;
+    currentValue = value;
+  }
 </script>
 
 {#if iconOnly}
-  <Button icon={mdiCalendar} on:click={() => (open = true)} {...$$restProps} />
+  <Button icon={mdiCalendar} {disabled} on:click={() => (open = true)} {...$$restProps} />
 {:else}
   <Field
     label={label ?? $format(value, PeriodType.Day, { custom: secondaryFormat })}
@@ -110,6 +115,7 @@
       type="button"
       class="text-sm min-h-[1.25rem] whitespace-nowrap w-full focus:outline-none"
       style="text-align: inherit"
+      {disabled}
       on:click={() => (open = true)}
       {id}
     >
@@ -173,7 +179,10 @@
   <div slot="actions" class="flex items-center gap-2">
     <Button
       icon={mdiCheck}
+      {disabled}
       on:click={() => {
+        if (disabled) return;
+
         open = false;
         value = currentValue;
         dispatch('change', value);
